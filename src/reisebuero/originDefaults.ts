@@ -1,10 +1,15 @@
 import { nearestCommercialAirport } from '../services/flights/airportIata';
 import { getCachedUserProfile } from '../services/userProfileService';
 import { useGpsStore } from '../store/useGpsStore';
-import type { ReiseLedger } from './types';
+import type { ReiseLedger, ReiseTrip } from './types';
 import { entry, isAirportVisible } from './slotLedger';
+import { applyTimelineMustHavePrefs } from './timelineMustHavePrefs';
+import { applyShelfPrefsToLedger, hydrateShelfAsked } from './shelfAskedPrefs';
 
-export function applyOriginDefaults(ledger: ReiseLedger): ReiseLedger {
+export function applyOriginDefaults(
+  ledger: ReiseLedger,
+  opts?: { savedTrips?: ReiseTrip[]; skipTimelinePrefs?: boolean },
+): ReiseLedger {
   let next = { ...ledger };
   try {
     const profile = getCachedUserProfile();
@@ -42,10 +47,26 @@ export function applyOriginDefaults(ledger: ReiseLedger): ReiseLedger {
       if (ap) next.airportIata = entry(ap.iata, 'default');
     } else if (/hamburg/i.test(next.originCity?.value ?? '')) {
       next.airportIata = entry('HAM', 'default');
+    } else if (/prisdorf|pinneberg|elmshorn|uetersen|tornesch/i.test(next.originCity?.value ?? '')) {
+      // Dorf ohne Flughafen → nächster Hub für Suche, Chip bleibt „Start …“
+      next.airportIata = entry('HAM', 'default');
     }
   }
   if (!isAirportVisible(next)) {
     next = { ...next, airportIata: null };
+  }
+  if (!opts?.skipTimelinePrefs) {
+    try {
+      next = applyTimelineMustHavePrefs(next, { savedTrips: opts?.savedTrips });
+    } catch {
+      /* soft */
+    }
+  }
+  try {
+    void hydrateShelfAsked();
+    next = applyShelfPrefsToLedger(next).ledger;
+  } catch {
+    /* soft */
   }
   return next;
 }

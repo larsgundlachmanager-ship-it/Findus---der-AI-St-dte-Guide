@@ -1,6 +1,6 @@
 /**
  * Predictive nav trigger distances — Hands-Free time-based.
- * Finish speaking 2s before the maneuver (aligned with handsFreeNav/cueScheduler).
+ * Finish speaking ~5s before the maneuver (prefer early; aligned with speakStartDistance).
  */
 
 import type { TransportMode } from './navigationTypes';
@@ -13,7 +13,7 @@ import {
 
 export { isTurnManeuver, isAlleyRoadName, isHandsFreeSpeakTurn };
 
-export const FINISH_BEFORE_TURN_SEC = 2;
+export const FINISH_BEFORE_TURN_SEC = 5;
 /** Aktuellen Yorro-Satz ausreden lassen, bevor Navi spricht. */
 export const FINDUS_SENTENCE_YIELD_SEC = 3.2;
 /** Akustische Pause vor dem Navi-Einschub (500ms). */
@@ -46,7 +46,7 @@ function speakStartM(
   // Fertig 2 s vor dem Maneuver — Yield liegt in der Audio-Queue, nicht in Metern.
   const raw = (speechSec + FINISH_BEFORE_TURN_SEC) * speed;
   const ceil =
-    transportMode === 'bicycle' ? 220 : transportMode === 'jog' ? 110 : 80;
+    transportMode === 'bicycle' ? 220 : transportMode === 'jog' ? 130 : 120;
   return Math.max(8, Math.min(ceil, Math.round(raw)));
 }
 

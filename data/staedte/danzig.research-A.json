@@ -1,0 +1,362 @@
+{
+  "notes": [
+    "Verifizierte Hauptquellen: Stadtportal Gdańsk, Visit Gdańsk, Museum of Gdańsk, National Maritime Museum, European Solidarity Centre, Museum of the Second World War, National Museum in Gdańsk, PKP und polnisches Infrastrukturministerium.",
+    "Ergänzende institutionelle Quellen: UNESCO, polnische Denkmaldatenbank Zabytek.pl, Museum der Polnischen Armee und Stocznia Cesarska.",
+    "Öffnungszeiten, Eintritt, Turmzugänge, aktuelle Ausstellungen, Fahrpläne, Bootsverbindungen, Card-Leistungen und Baustellen stehen ausschließlich als LIVE-Hinweise."
+  ],
+  "city_history": "Gdańsk, deutsch Danzig, wuchs an der Weichselmündung zum führenden Hafen der polnischen Krone. Seit dem 14. Jahrhundert in der Hanse, verband die Stadt Getreidehandel und europäische Netzwerke mit großer Eigenständigkeit. 1793 kam sie zu Preußen. Von 1920 bis 1939 bestand die Freie Stadt Danzig unter dem Schutz des Völkerbundes; Polen besaß besondere Hafen-, Post- und Transit-Rechte. Der deutsche Angriff auf die Westerplatte am 1. September 1939 gehört zum Beginn des Zweiten Weltkriegs. 1945 wurde die schwer zerstörte Stadt polnisch; die deutsche Bevölkerung floh oder wurde vertrieben, polnische Neusiedler bauten das Zentrum wieder auf. Im Dezember 1970 erschossen Sicherheitskräfte protestierende Küstenarbeiter. Aus dem Streik der Leninwerft im August 1980 entstand Solidarność, die erste unabhängige Gewerkschaft im Ostblock und ein Motor des friedlichen Systemwechsels von 1989.",
+  "spots": [
+    {
+      "id": "danzig_st_marienkirche",
+      "name": "Marienkirche Danzig",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Marienkirche ist eine monumentale spätgotische Backsteinhallenkirche des Główne Miasto. Der Bau wuchs von 1343 bis 1502 und prägt mit seinem breiten Westturm die Stadtsilhouette.",
+      "deep_data_pool": [
+        {"text": "Der Grundstein der heutigen Kirche wurde 1343 gelegt. Über 159 Jahre erweiterten mehrere Bauphasen den zunächst kleineren Bau zu einer dreischiffigen Hallenkirche mit Querhaus und Kapellenkranz. Der lange Prozess erklärt Unregelmäßigkeiten besser als die Vorstellung eines einzigen, unverändert ausgeführten Entwurfs.", "tags": ["geschichte", "mittelalter", "bauphasen"]},
+        {"text": "Der Bau misst ungefähr 105 Meter in der Länge; sein Querhaus ist rund 66 Meter breit und die Gewölbe steigen etwa 30 Meter hoch. Visit Gdańsk bezeichnet ihn als größte Backsteinkirche der Welt. Diese Größe beruhte auf Wohlstand, Bevölkerungswachstum und Repräsentationswillen der spätmittelalterlichen Handelsstadt.", "tags": ["architektur", "backsteingotik", "dimension"]},
+        {"text": "Die Kirche war zunächst katholisch, wurde während der Reformation lutherisch und blieb es über Jahrhunderte. Nach 1945 ging sie wieder an die katholische Kirche über; seit 1965 trägt sie den Rang einer Basilica minor. Konfessionswechsel und Bevölkerungsbruch sind daher Teil ihrer Geschichte, nicht bloß Randnotizen.", "tags": ["religion", "reformation", "nachkrieg"]},
+        {"text": "Zu den bedeutenden Ausstattungsstücken zählen die astronomische Uhr von Hans Düringer aus den 1460er Jahren, das Sakramentshaus, zahlreiche Epitaphien und Kunstwerke aus der Danziger Bürgerkultur. Einzelne Objekte wurden im Krieg ausgelagert oder gingen verloren; heutiger Bestand und ursprüngliche Ausstattung sind nicht identisch.", "tags": ["kunst", "astronomische_uhr", "innenraum"]},
+        {"text": "Hans Memlings Triptychon Das Jüngste Gericht hing nach seiner Kaperung im 15. Jahrhundert lange in der Marienkirche. Das Original befindet sich heute im Nationalmuseum; in der Kirche ist eine Kopie zu sehen. Diese Unterscheidung verhindert die häufige falsche Behauptung, das berühmte Original stehe noch am historischen Ort.", "tags": ["memling", "quellenkritik", "quer"]},
+        {"text": "1945 brannten Dach und Turmhelm aus, Gewölbeteile stürzten ein und große Teile der Ausstattung wurden beschädigt. Der Wiederaufbau begann bald nach dem Krieg. Das heutige Innere verbindet gerettete Originale, rückgeführte Werke, Rekonstruktionen und bewusst sichtbare Spuren der Zerstörung.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "erhaltung"]},
+        {"text": "Visuell: Der blockhafte rote Backsteinbau überragt die dichten Gassen; der etwa 78 Meter hohe, flach abschließende Westturm wirkt eher wie ein massiver Stadtturm als wie ein schlanker Kirchturm. Große Spitzbogenfenster, Strebepfeiler und mehrere Portale gliedern die langen Fassaden.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Die Frauengasse führt unmittelbar vom östlichen Kirchenbereich zur Motława. Königliche Kapelle, Kaplica Królewska, steht als barocker Bau nahe der Kirche. Nationalmuseum und Marienkirche sind über Memlings Triptychon verbunden; Hauptstädtisches Rathaus und Langer Markt zeigen die weltliche Seite derselben Bürgerstadt.", "tags": ["quer", "stadtraum", "orientierung"]},
+        {"text": "LIVE: Gottesdienste, Turmaufstieg, Zahl der zu steigenden Stufen, Eintritt in einzelne Bereiche, Restaurierungen und zugängliche Portale aktuell bei der Basilika prüfen. Der Turm ist wetter-, saison- und betriebsabhängig; liturgische Nutzung hat Vorrang vor touristischer Besichtigung.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_langer_markt",
+      "name": "Langer Markt",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Długi Targ bildet mit der Langgasse die repräsentative Königliche Route des Główne Miasto. Rathaus, Artushof, Neptunbrunnen und Grünes Tor verdichten hier Handel und Stadtpolitik.",
+      "deep_data_pool": [
+        {"text": "Długi Targ ist kein isolierter Marktplatz, sondern die östliche Fortsetzung der Długa. Beide bilden die historische Längsachse zwischen Hohem Tor und Grünem Tor. Über diese Route zogen polnische Könige bei feierlichen Einzügen in die Stadt, weshalb sich der Name Königliche Route eingebürgert hat.", "tags": ["stadtgrundriss", "koenigliche_route", "geschichte"]},
+        {"text": "Im Mittelalter diente der Raum dem Markt und der öffentlichen Repräsentation. Wohlhabende Kaufleute und Amtsträger ließen schmale, tiefe Bürgerhäuser mit reich gestalteten Giebeln errichten. Die Fassaden konkurrierten um Aufmerksamkeit und übersetzten Handelsvermögen in Architektur.", "tags": ["handel", "buergerhaeuser", "architektur"]},
+        {"text": "Am westlichen Übergang steht das Hauptstädtische Rathaus; vor dem Artushof befindet sich der Neptunbrunnen. Das Grüne Tor schließt die Achse zur Motława. Diese Folge verbindet Rat, Kaufmannschaft, Stadtmythos und Hafen in wenigen hundert Metern und erklärt die politische Bedeutung des Ensembles.", "tags": ["ensemble", "stadtpolitik", "quer"]},
+        {"text": "Die Bezeichnung Langer Markt darf nicht mit der Altstadt im engeren historischen Sinn verwechselt werden. Der Platz gehört zum Główne Miasto, der Rechtstadt beziehungsweise Hauptstadt. Das Stare Miasto mit Altstädtischem Rathaus und Katharinenkirche liegt nördlich davon und hatte eine eigene Verwaltungsgeschichte.", "tags": ["begriffe", "hauptstadt", "quellenkritik"]},
+        {"text": "Im März 1945 wurde die Bebauung der Haupt- und Rechtstadt großflächig zerstört. Beim Wiederaufbau erhielten viele Häuser historische oder historisierende Fassaden, während Grundrisse und Innenräume häufig modern angepasst wurden. Das heutige Bild ist deshalb eine hochrangige Rekonstruktionsleistung, aber kein vollständig unverändertes Vorkriegsensemble.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "denkmalpflege"]},
+        {"text": "Fassaden wie Goldenes Haus, Ferberhaus oder Grünes Tor verweisen auf niederländisch beeinflusste Renaissance und Manierismus. Namen, Datierungen und Originalsubstanz unterscheiden sich jedoch von Haus zu Haus. Das Ensemble sollte nicht pauschal als mittelalterlich bezeichnet werden.", "tags": ["renaissance", "manierismus", "architektur"]},
+        {"text": "Visuell: Der langgestreckte Raum wird von hohen, schmalen Giebelhäusern gerahmt. Rathausspitze und Neptunbrunnen dominieren im Westen, die vier Durchgänge des Grünen Tors öffnen sich im Osten zur Motława. Pflaster, Außengastronomie und dichter Fußverkehr prägen die heutige Wahrnehmung.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hinter dem Grünen Tor beginnt die Lange Brücke an der Motława; nördlich führen Gassen zur Marienkirche und Frauengasse. Artushof, Neptunbrunnen und Rathaus sind eigenständige Orte mit eigenen Geschichten und Zugängen, obwohl sie räumlich wie eine einzige Kulisse wirken.", "tags": ["quer", "orientierung"]},
+        {"text": "LIVE: Märkte, Bühnen, Demonstrationen, Außengastronomie, Baustellen und Zugänge zu Rathaus, Artushof oder Grünem Tor aktuell prüfen. Der öffentliche Platz ist grundsätzlich frei begehbar, doch Großveranstaltungen und Sicherheitsmaßnahmen können Wege und Sichtachsen verändern.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der frühbarocke Neptunbrunnen vor dem Artushof entstand im frühen 17. Jahrhundert. Er verbindet Danzigs Selbstbild als Hafenstadt mit der repräsentativen Architektur des Langen Marktes.",
+      "deep_data_pool": [
+        {"text": "Die Stadt ließ den Brunnen zu Beginn des 17. Jahrhunderts für den repräsentativen Raum vor dem Artushof schaffen. Abraham van den Blocke entwarf wesentliche Teile der Anlage; die Bronzefigur wurde nach einem Modell Peter Husens und Johann Rogges gegossen. Mehrere Künstler und Gewerke wirkten somit am Gesamtwerk mit.", "tags": ["geschichte", "kunst", "entwurf"]},
+        {"text": "Neptun, der römische Gott des Meeres, steht mit Dreizack über dem Wasserbecken. In einer Hafen- und Handelsstadt war das Motiv ein lesbares Zeichen maritimer Macht. Die Figur blickt in Richtung der Häuser, die mit königlichen Aufenthalten verbunden wurden, und ist in die politische Bühne des Marktes eingebunden.", "tags": ["ikonografie", "hafenstadt", "stadtpolitik"]},
+        {"text": "Der Brunnen wurde 1634 in Betrieb genommen. Seine Wasserversorgung beruhte auf der städtischen Infrastruktur und war nicht mit einer modernen Dauerumwälzung gleichzusetzen. Betriebszeiten waren historisch begrenzt; technische Veränderungen und Reparaturen begleiteten die Anlage über Jahrhunderte.", "tags": ["technik", "wasserversorgung", "17_jahrhundert"]},
+        {"text": "Das schmiedeeiserne Gitter mit den Wappenmotiven entstand im 17. Jahrhundert und fasst die Brunnenanlage räumlich. Becken, Gitter, Figur und architektonischer Hintergrund bilden die heute bekannte Komposition; nicht jedes sichtbare Teil stammt aus exakt derselben Bauphase.", "tags": ["detail", "gitter", "bauphasen"]},
+        {"text": "Vor den Kämpfen von 1945 wurde die Neptunfigur demontiert und ausgelagert. Dadurch überstand sie die großflächige Zerstörung des Langen Marktes. Nach dem Krieg kehrte sie zurück, während die umliegenden Fassaden und Teile der Brunnenanlage restauriert oder rekonstruiert wurden.", "tags": ["zweiter_weltkrieg", "rettung", "wiederaufbau"]},
+        {"text": "Die populäre Verbindung des Brunnens mit dem Danziger Kräuterlikör Goldwasser gehört zur Legenden- und Vermarktungsgeschichte. Erzählungen, Neptun habe aus Ärger Goldmünzen zerschlagen und so die Goldflitter erzeugt, sind keine historische Erklärung für das Getränk und müssen als Legende gekennzeichnet bleiben.", "tags": ["legende", "quellenkritik", "stadtkultur"]},
+        {"text": "Visuell: Die dunkle Bronzefigur steht erhöht über einem hellen Steinbecken, den Dreizack schräg in der Hand. Dahinter bildet die reich gegliederte weiße Fassade des Artushofs den markanten Hintergrund; das Hauptstädtische Rathaus erhebt sich wenige Schritte westlich.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Artushof und Neptunbrunnen erzählen gemeinsam von Kaufmannschaft und maritimem Selbstbild. Der Lange Markt liefert den städtischen Bühnenraum, das Grüne Tor öffnet zum Hafen, und das Rathaus steht für die politische Verwaltung dieser Handelsmacht.", "tags": ["quer", "ensemble", "orientierung"]},
+        {"text": "LIVE: Wasserbetrieb, Restaurierung, Einhausung, Veranstaltungsflächen und unmittelbarer Zugang zum Gitter aktuell beim Museum of Gdańsk und der Stadt prüfen. Sichtbarkeit im Außenraum bedeutet nicht, dass der Brunnen jederzeit läuft oder ohne Absperrung erreichbar ist.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_krantor",
+      "name": "Krantor",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Krantor an der Motława verbindet Wassertor, Befestigung und Hafenkran. Seine heutige Grundform entstand 1442 bis 1444 und bewahrt Europas bekanntestes mittelalterliches Tretkran-Ensemble.",
+      "deep_data_pool": [
+        {"text": "Ein hölzerner Vorgänger ist 1367 schriftlich belegt und brannte 1442 ab. Zwischen 1442 und 1444 entstand die neue Anlage aus zwei massiven Backsteintürmen und einem hölzernen Mittelteil. Sie war zugleich Hafengerät, Wassertor der Szeroka-Straße und Bestandteil der Stadtverteidigung.", "tags": ["geschichte", "mittelalter", "wassertor"]},
+        {"text": "Im Inneren arbeiteten zwei Paare großer Treträder. Arbeiter liefen in den Rädern und setzten über Seile den Hubmechanismus in Bewegung. Das National Maritime Museum nennt bei einer Betriebsweise bis zu zwei Tonnen Last mit vier Männern; die rekonstruierte Gesamtmechanik veranschaulicht größere technische Kapazitäten je nach Konfiguration.", "tags": ["technik", "tretraeder", "hafenarbeit"]},
+        {"text": "Der Kran hob Waren aus Schiffsräumen, setzte Masten und unterstützte die Abfertigung im Hafen. Sein Höhepunkt lag um 1600, als Danzig der wichtigste Hafen der polnisch-litauischen Adelsrepublik war. Getreideexport und Importgüter machten die Motława zu einer dicht genutzten Arbeitszone.", "tags": ["handel", "goldenes_zeitalter", "schifffahrt"]},
+        {"text": "Die Stadt besaß die Anlage und ließ sie von einem Kranmeister verwalten. Damit war der Kran keine private Maschine eines einzelnen Kaufmanns, sondern regulierte Infrastruktur. Gebühren, Zugänge und Arbeitsteilung verbanden kommunale Kontrolle mit der täglichen Hafenökonomie.", "tags": ["stadtverwaltung", "arbeit", "wirtschaft"]},
+        {"text": "Mit moderneren Umschlagtechniken verlor der Kran seine ursprüngliche Bedeutung. Die Türme und der Mittelbau wurden unterschiedlich genutzt, bevor das Bauwerk zum historischen Wahrzeichen wurde. Seine heutige Bekanntheit übersteigt damit die Dauer seiner praktischen Spitzenfunktion.", "tags": ["industrialisierung", "nutzungswandel", "wahrzeichen"]},
+        {"text": "1945 verbrannte der hölzerne Teil vollständig; von den gemauerten Türmen blieben nach Museumsangaben etwa 60 Prozent erhalten. Ab 1956 begann die Rekonstruktion, 1962 wurde das Gebäude dem damaligen Schifffahrtsmuseum übergeben. Das Innere enthält daher mittelalterliches Mauerwerk und moderne Tragstrukturen.", "tags": ["zweiter_weltkrieg", "rekonstruktion", "museum"]},
+        {"text": "Visuell: Zwei halbrund vorspringende Backsteintürme fassen einen hohen, dunkel verschalten Holzkörper über der Uferlinie. Von der Motława wirkt der Mittelteil wie ein mächtiger Schnabel; landseitig führt die Szeroka-Straße direkt durch beziehungsweise an das Tor.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Gegenüber auf Ołowianka liegen weitere Häuser des National Maritime Museum. Die Lange Brücke erschließt die Uferseite; Frauengasse und Marientor liegen südlich. Gemeinsam zeigen Krantor, Speicherinsel und Motława die technische Infrastruktur hinter den prächtigen Kaufmannsfassaden.", "tags": ["quer", "hafenlandschaft", "orientierung"]},
+        {"text": "LIVE: Öffnungszeiten, Ausstellung, zugängliche Ebenen, Treppen, Aussicht, Kombitickets und mögliche technische Sperrungen aktuell beim National Maritime Museum prüfen. Der historische Mechanismus ist Museumsobjekt; aus seiner Rekonstruktion darf kein regelmäßiger Vorführbetrieb abgeleitet werden.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_frauengasse",
+      "name": "Frauengasse",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Mariacka verbindet Marienkirche und Motława auf weniger als 200 Metern. Beischläge, schmale Giebelhäuser, Wasserspeier und Bernsteingeschäfte prägen ihr rekonstruiertes Bild.",
+      "deep_data_pool": [
+        {"text": "Die Straße verläuft vom östlichen Bereich der Marienkirche zum Marientor an der Motława. Ihre kurze, nahezu geradlinige Achse verband Pfarrkirche und Hafen. Der deutsche Name Frauengasse und der polnische Name Mariacka beziehen sich beide auf Maria beziehungsweise die Marienkirche.", "tags": ["stadtgrundriss", "name", "orientierung"]},
+        {"text": "Charakteristisch sind die Beischläge, polnisch przedproża: erhöhte Terrassen vor den schmalen Bürgerhäusern, oft mit steinernen Brüstungen und Treppen. Sie vermittelten zwischen Wohnhaus und Straße, schützten Kellereingänge und dienten als halböffentliche Aufenthalts- und Repräsentationsflächen.", "tags": ["architektur", "beischlaege", "alltag"]},
+        {"text": "Steinerne Wasserspeier führen Regenwasser von den Fassaden zur Straße. Ihre Tier- und Fantasieformen gehören zur Bildsprache der Häuser, hatten aber zugleich eine technische Aufgabe. Rinnen, Treppen und Terrassen machen den Straßenraum plastischer als eine gewöhnliche Häuserzeile.", "tags": ["detail", "wasserspeier", "technik"]},
+        {"text": "Die Bewohner waren Kaufleute, Handwerker und andere Bürger der Hafenstadt. Hausbreite, Giebelhöhe und Schmuck zeigen den Wettbewerb um städtisches Ansehen. Das heutige romantische Bild darf die frühere Mischung aus Arbeit, Lagerung, Wohnen, Gerüchen und dichtem Verkehr zum Hafen nicht verdrängen.", "tags": ["sozialgeschichte", "handel", "stadtleben"]},
+        {"text": "Die Straße wurde 1945 fast vollständig zerstört. Beim Wiederaufbau nutzte man erhaltene Bauteile, historische Ansichten und geborgene Architekturfragmente; zugleich entstanden Innenräume für moderne Nutzungen. Die Mariacka ist deshalb ein Schlüsselbeispiel der Danziger Rekonstruktionspraxis.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "denkmalpflege"]},
+        {"text": "Heute konzentrieren sich hier Bernsteinläden, Galerien und Gastronomie. Bernstein passt zur regionalen Tradition, doch Herkunft, Alter und Echtheit eines konkreten Stücks sind Handelsfragen. Die bloße Lage in der Mariacka garantiert weder lokale Gewinnung noch historische Herstellung.", "tags": ["bernstein", "gegenwart", "quellenkritik"]},
+        {"text": "Visuell: Dunkles Pflaster, hohe schmale Giebel, steinerne Terrassen und Treppen bilden eine enge Perspektive. Am östlichen Ende rahmt das gotische Marientor den Blick zur Motława; westlich schließt die gewaltige Backsteinmasse der Marienkirche die Straße.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Durch das Marientor erreicht man Lange Brücke und Motława; über die Kirche gelangt man zum Netz der Hauptstadtgassen. Krantor und andere Wassertore erklären, dass diese malerische Achse Teil eines funktionalen Systems zwischen Stadt, Speichern und Hafen war.", "tags": ["quer", "wassertore", "hafen"]},
+        {"text": "LIVE: Öffnungen von Bernsteinläden, Galerien und Gastronomie, Dreharbeiten, Baustellen und Veranstaltungen aktuell prüfen. Kopfsteinpflaster, Stufen und schmale Durchgänge beeinflussen Barrierefreiheit; freien Zugang zu privaten Beischlägen oder Innenhöfen nie voraussetzen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_motlawa_lange_brucke",
+      "name": "Motława / Lange Brücke",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Długie Pobrzeże ist die historische Uferachse des Główne Miasto an der Motława. Wassertore, Krantor und die Speicherinsel machen Danzigs Hafenstruktur unmittelbar lesbar.",
+      "deep_data_pool": [
+        {"text": "Die Lange Brücke ist trotz ihres Namens keine einzelne Brücke, sondern die historische Uferpromenade Długie Pobrzeże. Hölzerne Landestege und Kaianlagen wuchsen vor den Wassertoren zusammen. Die Motława verband diesen inneren Hafen über Tote Weichsel und Weichselmündung mit der Ostsee.", "tags": ["name", "hafen", "stadtgrundriss"]},
+        {"text": "Mehrere Wassertore führten aus den Hauptstraßen direkt zum Kai: darunter Grünes Tor, Frauentor, Heilig-Geist-Tor und Krantor. Sie regelten Zugang, Verteidigung und Warenbewegung. Das Ufer war daher keine reine Promenade, sondern eine durch Tore organisierte Arbeitskante.", "tags": ["wassertore", "befestigung", "logistik"]},
+        {"text": "Auf der gegenüberliegenden Speicherinsel lagerten Kaufleute große Mengen Getreide und andere Waren. Die Trennung durch Wasser verringerte Brand- und Diebstahlrisiken, während Brücken und Fähren den Verkehr ermöglichten. Der Blick über die Motława zeigt somit Vorderseite der Stadt und Infrastruktur des Handels zugleich.", "tags": ["speicherinsel", "getreidehandel", "wirtschaft"]},
+        {"text": "Danzigs Hafen verlagerte sich mit größeren Schiffen und moderner Technik schrittweise flussabwärts. Der Motława-Abschnitt verlor seine Rolle als zentraler Güterumschlagplatz und wurde zum Kultur-, Gastronomie- und Tourismusraum. Krantor und Wassertore bewahren die ältere Funktion als bauliche Zeugnisse.", "tags": ["hafenentwicklung", "nutzungswandel", "industrialisierung"]},
+        {"text": "1945 wurden Uferbebauung, Tore und Speicher schwer getroffen. Wiederaufbau und spätere Neubebauung formten beide Flussseiten neu. Auf der Speicherinsel stehen heute Rekonstruktionen, moderne Gebäude und erhaltene historische Substanz nebeneinander; sie ist kein geschlossen originaler Altbestand.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "gegenwart"]},
+        {"text": "Ausflugsschiffe nutzen Anlegestellen an Motława und Fischmarkt für Hafenrundfahrten und Fahrten Richtung Westerplatte oder weiter. Anbieter, Abfahrtsorte und Routen wechseln saisonal. Historische städtische Wassertramlinien und private touristische Schiffe dürfen nicht pauschal als dasselbe Angebot behandelt werden.", "tags": ["schifffahrt", "boote", "quellenkritik"]},
+        {"text": "Visuell: Auf der Stadtseite folgen Giebelhäuser und gotische Wassertore einer langen Kaikante; das Krantor ragt dunkel zwischen Backsteintürmen vor. Gegenüber liegen Speicherinsel und Ołowianka. Fußgängerbrücken verändern die Perspektive und verbinden heute beide Ufer enger.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Grünes Tor verbindet den Kai mit dem Langen Markt, Marientor mit der Frauengasse, Krantor mit der Szeroka. Museumsschiff Sołdek und maritime Museumsgebäude liegen auf Ołowianka. Diese Querachsen erklären die Stadt besser als ein Spaziergang nur entlang des Wassers.", "tags": ["quer", "orientierung", "museumslandschaft"]},
+        {"text": "LIVE: Bootsfahrten, Westerplatte-Verbindungen, Abfahrtsstellen, Preise, Saison, Brückenöffnungen, Hochwasser, Baustellen und Ufersperrungen aktuell bei Betreiber und Stadt prüfen. Keine regelmäßige Verbindung oder feste Fahrtdauer aus dem stabilen Pack versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_artushof_danzig",
+      "name": "Artushof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Der Artushof war Versammlungs- und Repräsentationsort der Danziger Kaufmannschaft. Seine große Halle, Kunstwerke und der 10,64 Meter hohe Kachelofen spiegeln die städtische Elite.",
+      "deep_data_pool": [
+        {"text": "Artushöfe entstanden in mehreren Ostseestädten nach dem Ideal der Tafelrunde König Artus'. In Danzig ist ein Hof seit dem 14. Jahrhundert belegt. Bruderschaften wohlhabender Bürger und Kaufleute nutzten ihn für Zusammenkünfte, Festessen, Geschäfte und gesellschaftliche Repräsentation.", "tags": ["geschichte", "bruderschaften", "kaufmannschaft"]},
+        {"text": "Nach einem Brand im 15. Jahrhundert entstand die große spätgotische Halle neu. Die prächtige Fassade zum Langen Markt wurde später in Renaissance- und manieristischen Formen umgestaltet. Innenraum und Außenbild gehören daher verschiedenen Bau- und Ausstattungsphasen an.", "tags": ["architektur", "gotik", "renaissance"]},
+        {"text": "Der Hof war keine städtische Ritterburg. Der Artus-Mythos lieferte ein höfisch-ritterliches Modell für bürgerliche Gemeinschaft. Tatsächlich organisierten hier Kaufleute ihre sozialen Netzwerke, pflegten Rituale und stellten Wohlstand, Bildung und politische Nähe zur Stadtführung aus.", "tags": ["quellenkritik", "stadtkultur", "rituale"]},
+        {"text": "Das berühmteste Ausstattungsstück ist der 10,64 Meter hohe Renaissance-Kachelofen mit 530 reich geschmückten Kacheln. Porträts von Herrschern und weitere Bildmotive machten ihn zu einem politischen Bildprogramm. Seine enorme Höhe erklärt den Beinamen König aller Öfen.", "tags": ["kachelofen", "kunst", "ikonografie"]},
+        {"text": "Gemälde, Schiffsmodelle, Skulpturen, Rüstungen und mythologische Motive füllten die Halle. Originale, gerettete Stücke und Rekonstruktionen sind heute miteinander verbunden. Ein einzelnes Objekt sollte nur dann als sichtbar bezeichnet werden, wenn die aktuelle Ausstellung dies bestätigt.", "tags": ["sammlung", "innenraum", "erhaltung"]},
+        {"text": "Später diente der Artushof auch als Getreidebörse. Dieser Nutzungswandel passt zur Entwicklung des organisierten Handels: Aus dem geselligen Versammlungsraum wurde ein institutionalisierter Ort wirtschaftlicher Transaktionen, ohne dass seine repräsentative Bedeutung verschwand.", "tags": ["getreideboerse", "handel", "nutzungswandel"]},
+        {"text": "1945 wurde das Gebäude schwer beschädigt; zuvor ausgelagerte Ausstattung erleichterte die Wiederherstellung. Der Wiederaufbau rekonstruierte Raum und Fassade, doch das heutige Ensemble ist Ergebnis jahrzehntelanger Konservierung und Rückführung, nicht ungebrochener Erhaltung.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "denkmalpflege"]},
+        {"text": "Visuell: Die helle, reich ornamentierte Giebelfassade steht direkt hinter dem Neptunbrunnen. Hohe Fenster belichten die große Halle; schmale Nachbarhäuser betonen ihre Breite. Vom Platz sind Artushof, Altes Schöffenhaus und weitere Gebäudeteile als zusammenhängende Front wahrnehmbar.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, zugängliche Räume, Veranstaltungen, konservierungsbedingte Schließungen und tatsächlich ausgestellte Werke aktuell beim Museum of Gdańsk prüfen. Der Artushof kann für Zeremonien genutzt werden; freier Blick auf die Fassade bedeutet keinen freien Innenzugang.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_europaisches_zentrum_der_solidaritat",
+      "name": "Europäisches Solidarność-Zentrum",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das 2014 eröffnete ECS dokumentiert Solidarność und den demokratischen Umbruch in Europa. Sein cortenstahlverkleideter Bau steht zwischen Werfttor, Denkmal und BHP-Halle.",
+      "deep_data_pool": [
+        {"text": "Das Europäische Solidarność-Zentrum bewahrt und vermittelt die Geschichte der unabhängigen Gewerkschaft Solidarność, der demokratischen Opposition und der politischen Umbrüche in Polen und Europa. Museum, Archiv, Bibliothek, Forschung, Bildung und öffentlicher Debattenort sind institutionell miteinander verbunden.", "tags": ["auftrag", "solidarnosc", "demokratie"]},
+        {"text": "Der Neubau öffnete im August 2014 auf dem Gelände der ehemaligen Leninwerft. Ein internationaler Wettbewerb mit 58 Teams ging an Fort Architects aus Gdańsk. Wojciech Targowski, Piotr Mazur, Antoni Taraszkiewicz und Paweł Czarzasty gehörten zu den leitenden Entwerfern.", "tags": ["architektur", "eroeffnung", "fort_architects"]},
+        {"text": "Geneigte, mit wetterfestem Cortenstahl verkleidete Wände erinnern an Schiffsrümpfe und rostige Werftplatten. Die Form zitiert Industrie, ohne eine historische Halle nachzubauen. Im Inneren bildet ein bepflanzter Wintergarten einen bewussten Kontrast zur schweren äußeren Hülle.", "tags": ["cortenstahl", "symbolik", "visuell"]},
+        {"text": "Die Dauerausstellung umfasst auf knapp 3.000 Quadratmetern sieben Räume und nach ECS-Angaben rund 1.800 Exponate. Sie behandelt Streiks, Opposition, Kirche, Untergrundkultur, Kriegsrecht, Verhandlungen und den friedlichen Systemwechsel; individuelle Biografien stehen neben der politischen Chronologie.", "tags": ["dauerausstellung", "zeitgeschichte", "museum"]},
+        {"text": "Zentrales Original sind die Tafeln mit den 21 Forderungen des Streiks von 1980. Sie wurden am Werfttor ausgehängt und stehen im UNESCO-Register Memory of the World. Weitere Objekte wie Anna Walentynowicz' Kran und die durchschossene Jacke Ludwik Piernickis verbinden Arbeitswelt und staatliche Gewalt.", "tags": ["21_forderungen", "unesco_memory", "objekte"]},
+        {"text": "Die BHP-Halle, Tor Nummer 2 und das Denkmal für die 1970 getöteten Werftarbeiter liegen als historische Außenorte neben dem Zentrum. Der Gebäudekomplex ersetzt diese Schauplätze nicht, sondern interpretiert sie. Das Europäische Kulturerbe-Siegel würdigt das gemeinsame historische Ensemble.", "tags": ["europaeisches_kulturerbe", "werft", "quer"]},
+        {"text": "Solidarność entstand aus dem Auguststreik 1980, war die erste unabhängige Gewerkschaft im kommunistischen Machtbereich und wuchs zu einer breiten gesellschaftlichen Bewegung. Nach Verbot und Kriegsrecht wirkte sie im Untergrund weiter; Verhandlungen und Wahlen von 1989 öffneten den Weg zur demokratischen Regierung.", "tags": ["geschichte", "1980", "1989"]},
+        {"text": "Visuell: Fünf rostfarbene, schräg gestellte Baukörper wirken wie nebeneinanderliegende Schiffswände. Der hohe Wintergarten ist durch Glas sichtbar. Auf dem Platz ragen die drei Kreuze des Denkmals weit über den Neubau; Tor Nummer 2 liegt wenige Schritte entfernt.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, Sprachen der Audioguides, Wechselausstellungen, Bibliothekszugang, Dachterrasse, Veranstaltungen und Sicherheitsregeln aktuell beim ECS prüfen. Politische Veranstaltungen können einzelne Räume oder den Platz zeitweise verändern.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_museum_des_zweiten_weltkriegs",
+      "name": "Museum des Zweiten Weltkriegs",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das 2017 eröffnete Museum erzählt den Zweiten Weltkrieg aus polnischer, europäischer und globaler Perspektive. Der größte Teil der Hauptausstellung liegt 14 Meter unter der Erde.",
+      "deep_data_pool": [
+        {"text": "Das Museum steht am Władysław-Bartoszewski-Platz nahe der Motława, rund 200 Meter von der historischen Polnischen Post entfernt und auf dem Wasserweg etwa sieben Kilometer von Westerplatte. Der Standort bindet die globale Kriegserzählung bewusst an konkrete Danziger Beginnorte von 1939.", "tags": ["lage", "1939", "stadtraum"]},
+        {"text": "Die Institution wurde 2008 gegründet; das Gebäude öffnete 2017. Der Entwurf von Kwadrat aus Gdynia gliedert sich symbolisch in Vergangenheit unter der Erde, Gegenwart auf Platzniveau und Zukunft im schräg aufragenden Turm. Die Architektur ist selbst Teil der historischen Aussage.", "tags": ["gruendung", "architektur", "symbolik"]},
+        {"text": "Die Hauptausstellung umfasst mehr als 6.000 Quadratmeter und liegt etwa 14 Meter unter der Erde. Drei große Erzählblöcke behandeln Weg in den Krieg, Terror des Krieges und langen Schatten des Krieges. Politik und Militärgeschichte werden mit Erfahrungen gewöhnlicher Zivilisten verbunden.", "tags": ["hauptausstellung", "konzept", "zivilgeschichte"]},
+        {"text": "Die Darstellung beginnt nicht erst am 1. September 1939. Faschismus, Nationalsozialismus, Kommunismus, Versailler Ordnung, Expansion und Propaganda erklären Voraussetzungen; Besatzung, Holocaust, Vernichtungskrieg, Widerstand, Zwangsarbeit und Vertreibung zeigen die unterschiedlichen Formen der Gewalt.", "tags": ["kriegsgeschichte", "holocaust", "besatzung"]},
+        {"text": "Fast 3.000 Objekte und zahlreiche audiovisuelle Stationen verbinden persönliche Zeugnisse mit großen Zusammenhängen. Wohnungen, Straßenräume und Alltagsgegenstände werden szenografisch eingesetzt. Diese emotionale Gestaltung bleibt eine kuratierte Interpretation und darf nicht mit einem original erhaltenen Kriegsort verwechselt werden.", "tags": ["objekte", "szenografie", "quellenkritik"]},
+        {"text": "Die Ausstellungsgeschichte war politisch umstritten; nach der Eröffnung wurden Inhalte verändert, später erneut überarbeitet. Im Januar 2025 öffnete die Hauptausstellung nach Reparaturen und Ergänzungen wieder. Aussagen zu einzelnen Tafeln oder Exponaten sind deshalb grundsätzlich aktuell zu prüfen.", "tags": ["museumspolitik", "ausstellungsgeschichte", "gegenwart"]},
+        {"text": "Archäologische Grabungen dokumentierten das frühere Wiadrownia-Quartier. Ein historischer Pflasterstein wurde 2012 als Grundstein verwendet. Das Museum steht somit auf einem Stadtbereich, dessen Vorkriegsbebauung zerstört wurde, und verbindet materielle Stadtschichten mit der internationalen Erzählung.", "tags": ["archaeologie", "wiadrownia", "stadtgeschichte"]},
+        {"text": "Visuell: Ein keilförmig geneigter, rot verglaster Turm steigt aus einem weiten Platz auf. Der größte Museumsraum bleibt von außen unsichtbar, weil er unterirdisch liegt. Wasser, moderne Wohnbauten und die nahe historische Post rahmen den Ort.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Zeitfenster, Eintritt, aktuell zugängliche Ausstellungsteile, Kinderbereich, Audioguides und Sonderausstellungen direkt beim Museum prüfen. Für die große Hauptausstellung ausreichend Besuchszeit einplanen, aber keine feste Mindestdauer als stabilen Fakt versprechen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_bernsteinmuseum_danzig",
+      "name": "Bernsteinmuseum Danzig",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Bernsteinmuseum befindet sich seit 2021 in der mittelalterlichen Großen Mühle. Es erklärt Entstehung, Einschlüsse, Gewinnung und Verarbeitung des baltischen Bernsteins.",
+      "deep_data_pool": [
+        {"text": "Das Museum zeigt natürliche Bernsteinstücke, pflanzliche und tierische Einschlüsse sowie bearbeitete Objekte von Schmuck bis zu Gebrauchs- und Kunstgegenständen. Es verbindet Geologie, Naturkunde, Handwerk, Handel und Design, statt Bernstein nur als Souvenirmaterial zu präsentieren.", "tags": ["sammlung", "naturkunde", "kunsthandwerk"]},
+        {"text": "Baltischer Bernstein ist fossiles Harz, das vor vielen Millionen Jahren entstand und später durch geologische Prozesse in Ostseesedimente gelangte. Einschlüsse konservieren kleine Organismen oder Pflanzenteile. Nicht jeder Einschluss ist selten, und sein wissenschaftlicher Wert hängt von sicherer Bestimmung und Provenienz ab.", "tags": ["geologie", "inklusionen", "wissenschaft"]},
+        {"text": "Danzig entwickelte sich zu einem bedeutenden Zentrum der Bernsteinverarbeitung. Zünfte regelten Ausbildung und Handwerk; Werkstätten fertigten Schmuck, Rosenkränze, Kästchen und repräsentative Kunstkammerobjekte für europäische Auftraggeber. Rohstoffhandel und hochspezialisierte Arbeit begründeten den Ruf als Bernsteinmetropole.", "tags": ["geschichte", "zunft", "handel"]},
+        {"text": "Seit 2021 sitzt das Museum in der Großen Mühle am Radaunekanal. Der Deutsche Orden ließ den mächtigen Backsteinbau im 14. Jahrhundert errichten. Wasserräder trieben zahlreiche Mahlgänge; Speicher- und Produktionsfunktion machten die Mühle zu einer außergewöhnlich großen mittelalterlichen Industrieanlage.", "tags": ["grosse_muehle", "mittelalter", "technikgeschichte"]},
+        {"text": "Die Mühle wurde 1945 schwer zerstört und nach dem Krieg wiederaufgebaut. Vor der Museumsnutzung diente sie unter anderem als Einkaufszentrum. Die Umwandlung verbindet erhaltene beziehungsweise rekonstruierte Backsteinarchitektur mit modernen Ausstellungsebenen und macht Nutzungswechsel sichtbar.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "nutzungswandel"]},
+        {"text": "Das Bernsteinmuseum war zuvor im Stockturm und in der Peinkammer des Vortorkomplexes untergebracht. Der Umzug in die Große Mühle schuf mehr Ausstellungsfläche. Alte Onlineangaben und Reiseführer können daher noch fälschlich das Hohe Tor beziehungsweise den Vortorkomplex als aktuellen Museumsort nennen.", "tags": ["museumsgeschichte", "umzug", "quellenkritik"]},
+        {"text": "Fälschungen und Imitationen sind ein eigenes Thema: gepresster Bernstein, andere Harze, Kunststoffe und künstlich veränderte Einschlüsse können ähnlich aussehen. Museumserklärung ist keine Echtheitsgarantie für Ware aus einem beliebigen Laden; Kaufbelege und seriöse Prüfungen bleiben entscheidend.", "tags": ["echtheit", "handel", "verbraucherwissen"]},
+        {"text": "Visuell: Die langgestreckte rote Backsteinmühle besitzt ein steiles, von vielen kleinen Gauben gegliedertes Dach. Sie liegt auf einer Insel des Radaunekanals nahe Katharinenkirche und Altstädtischem Rathaus; Wasserläufe und Mühlenform unterscheiden sie klar von einem gewöhnlichen Museumshaus.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, Gdańsk-Card-Leistung, Sonderausstellungen, Laborangebote, zugängliche Ebenen und aktuelle Präsentation herausragender Stücke beim Museum of Gdańsk prüfen. Preise und einzelne Rekordobjekte nie ungeprüft als dauerhaft ausgestellt nennen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_nationalmuseum",
+      "name": "Nationalmuseum Danzig",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Abteilung für Alte Kunst des Nationalmuseums belegt ein ehemaliges Franziskanerkloster. Ihr Schlüsselwerk ist Hans Memlings Triptychon Das Jüngste Gericht.",
+      "deep_data_pool": [
+        {"text": "Das Haupthaus der Alten Kunst liegt im ehemaligen Franziskanerkloster neben der Dreifaltigkeitskirche. Der unregelmäßige Klosterkomplex entstand über mehrere Bauphasen und verband Kreuzgänge, Konvents- und Wirtschaftsräume. Gebäude und Sammlung erzählen deshalb zugleich Ordens-, Bildungs- und Museumsgeschichte.", "tags": ["franziskaner", "architektur", "kloster"]},
+        {"text": "Nach der Reformation nutzte das Akademische Gymnasium Teile der Anlage und entwickelte sich zu einer wichtigen Bildungsinstitution der Stadt. In napoleonischer Zeit dienten Räume als Lazarett und Lager; Beschuss von 1813 und spätere militärische Nutzung beschädigten den Komplex schwer.", "tags": ["gymnasium", "napoleonische_zeit", "nutzungswandel"]},
+        {"text": "Der Bildhauer Rudolf Freitag erhielt 1848 Räume für Atelier und Sammlung und setzte sich öffentlich für die Rettung des verfallenden Klosters ein. 1856 übergab das Militär den Bau der Stadt für Bildung und Kunst. Aus diesen Sammlungen entwickelte sich die Danziger Museumstradition am Ort.", "tags": ["rudolf_freitag", "museumsgeschichte", "19_jahrhundert"]},
+        {"text": "Hans Memlings Triptychon Das Jüngste Gericht entstand in Brügge für den Florentiner Bankier Angelo Tani. Der Danziger Kaperkapitän Paul Beneke erbeutete 1473 das Schiff mit dem Werk; Danziger Patrizier stifteten es der Marienkirche. Seine Ankunft ist damit eng mit Kaperkrieg und Handel verbunden.", "tags": ["memling", "kaperfahrt", "kunstgeschichte"]},
+        {"text": "Das geöffnete Triptychon zeigt Christus als Weltenrichter, darunter Erzengel Michael mit Waage, dazu Auferstehung, Erlöste und Verdammte. Die außerordentlich erhaltenen Farben und Details machen es zu einem Hauptwerk altniederländischer Malerei; sein Rang beruht auf Qualität und ungewöhnlicher Objektbiografie.", "tags": ["juengstes_gericht", "ikonografie", "malerei"]},
+        {"text": "Während des Zweiten Weltkriegs wurde das Triptychon ausgelagert, 1944 nach Thüringen gebracht, von der Roten Armee gefunden und in die Eremitage transportiert. 1956 kehrte es nach Polen zurück und kam schließlich in das damalige Pommersche Museum. In der Marienkirche befindet sich heute eine Kopie.", "tags": ["zweiter_weltkrieg", "provenienz", "rueckkehr"]},
+        {"text": "Die Sammlungen umfassen darüber hinaus Danziger und europäische Malerei, Skulptur, Kunsthandwerk und Möbel. Das Nationalmuseum besitzt mehrere Abteilungen an verschiedenen Standorten; Alte Kunst im Franziskanerkloster darf nicht mit Ethnografie in Oliwa oder moderner Kunst im Äbtepalast gleichgesetzt werden.", "tags": ["sammlung", "museumsstruktur", "quellenkritik"]},
+        {"text": "Visuell: Der niedrige, weitläufige Backsteinkomplex gruppiert sich um ehemalige Klosterhöfe unmittelbar an der großen Dreifaltigkeitskirche. Gotische Giebel, Kreuzgangbereiche und unregelmäßige Flügel unterscheiden ihn von den repräsentativen Bürgerhäusern der Königlichen Route.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Öffnungszeiten, Eintritt, aktuelle Präsentation des Memling-Triptychons, ausgeliehene Werke, Sonderausstellungen und zugängliche Klosterräume beim Nationalmuseum prüfen. Konservierung oder Leihverkehr können die Sichtbarkeit einzelner Werke verändern.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_danzig_hauptbahnhof",
+      "name": "Danzig Hauptbahnhof",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Gdańsk Główny wurde 1900 eröffnet. Der Bau im Stil der Danziger Neorenaissance verbindet roten Backstein, Sandstein, farbige Dächer und einen 48 Meter hohen Uhrturm.",
+      "deep_data_pool": [
+        {"text": "Der Hauptbahnhof wurde möglich, nachdem westliche und nördliche Festungswerke abgetragen werden durften. Das Empfangsgebäude entstand auf eingeebneten Wall- und Grabenflächen. Eisenbahn und Entfestigung veränderten damit gemeinsam den Stadtrand zwischen historischem Zentrum und neuen Quartieren.", "tags": ["stadtentwicklung", "festung", "eisenbahn"]},
+        {"text": "Planungen liefen seit den späten 1880er Jahren; gebaut wurde in den 1890er Jahren. Am 30. Oktober 1900 fand die offizielle Eröffnung statt. Alexander Rüdell, Paul Thoemer und Georg Cuny werden mit dem Entwurf verbunden. Der Bahnhof repräsentierte die Hauptstadt der preußischen Provinz Westpreußen.", "tags": ["baugeschichte", "eroeffnung", "architekten"]},
+        {"text": "Der Stil der Danziger Neorenaissance zitiert historische Bürger- und Amtsarchitektur: roter Backstein trifft auf helle Sandsteindetails, geschwungene Giebel und farbige Dachmuster. Der Bau ist historistisch, nicht ein erhaltenes Renaissancegebäude; seine Formen übersetzen lokale Tradition in moderne Verkehrsinfrastruktur.", "tags": ["neorenaissance", "historismus", "architektur"]},
+        {"text": "Der 48 Meter hohe Turm trägt Uhren und diente ursprünglich auch als Wasserturm für den Bahnbetrieb. Die etwa 18 Meter hohe Haupthalle, große Fenster und Wappen verliehen dem Empfangsgebäude monumentalen Charakter. Geflügelte Räder auf dem Dach symbolisierten die Eisenbahn.", "tags": ["uhrturm", "technik", "innenraum"]},
+        {"text": "Der Bahnhof wurde 1945 beschädigt und brannte nach Kriegsende; Wiederaufbau und spätere Umbauten veränderten Innenräume und Details. Dennoch blieb ein erheblicher Teil der historischen Substanz erhalten. Die Anlage dokumentiert daher Vorkriegsbau, Kriegsschäden, Nachkriegsnutzung und jüngste Restaurierung.", "tags": ["zweiter_weltkrieg", "wiederaufbau", "erhaltung"]},
+        {"text": "Bei einer umfassenden Modernisierung wurden Fassaden, Turm, farbige Dachdeckung, historische Raumordnung, Wappen, Fenster und nach Archivmaterial rekonstruierte Glasmalereien bearbeitet. Der modernisierte Bahnhof öffnete am 31. Juli 2023 wieder vollständig für Reisende und erhielt barriereärmere Zugänge.", "tags": ["restaurierung", "2023", "barrierefreiheit"]},
+        {"text": "Gdańsk Główny verknüpft Fern- und Regionalzüge mit der SKM-S-Bahn, Bussen und Straßenbahnen. Bahnsteige, Betreiber und Tarifsysteme sind nicht identisch. Besonders bei Fahrten im Dreistadtgebiet muss zwischen Stadtverkehr, SKM und Fernverkehr unterschieden werden.", "tags": ["mobilitaet", "skm", "orientierung"]},
+        {"text": "Visuell: Der lange rote Backsteinbau steht westlich der Altstadtachse; der schlanke Uhrturm mit kupferfarbenem Helm ist die wichtigste Landmarke. Gelb-grüne geometrische Dachziegel, Sandsteinportale und hohe Hallenfenster zeigen die restaurierte historistische Gestaltung.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Abfahrten, Gleise, Bauarbeiten, Schalter, Gepäckaufbewahrung, Barrierefreiheit einzelner Wege und Ticketgültigkeit aktuell bei PKP, SKM und ZTM prüfen. Historische Bahnhofsinformation ist keine Fahrplanauskunft; bei Umstiegen immer den konkreten Betreiber beachten.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_gdansk_stocznia",
+      "name": "Gdańsk Stocznia",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Die Danziger Werftlandschaft verbindet Industriearchitektur, Schiffbau und Demokratiegeschichte. Aus dem Streik der Leninwerft entstand 1980 die unabhängige Gewerkschaft Solidarność.",
+      "deep_data_pool": [
+        {"text": "Die industrielle Werftgeschichte reicht in die 1840er Jahre zur königlichen Korvettenwerft zurück. 1871 wurde sie Kaiserliche Werft. In den 1890er Jahren entstand daneben die Schichau-Werft. Hallen, Docks, Kräne, Gleise und Arbeiterbauten formten ein großflächiges Industriegebiet an der Toten Weichsel.", "tags": ["industrialisierung", "kaiserliche_werft", "schichau"]},
+        {"text": "Nach 1945 übernahm der polnische Staat die deutschen Anlagen. Aus Werft Nummer 1 und Werft Nummer 2 entstand 1947 die Danziger Werft. Der Erzfrachter Sołdek lief 1948 als erstes in Polen nach dem Krieg gebautes Hochseeschiff vom Stapel; er liegt heute als Museumsschiff an der Motława.", "tags": ["nachkrieg", "schiffbau", "soldek"]},
+        {"text": "1967 erhielt der Betrieb den Namen Leninwerft. Er war einer der größten Arbeitgeber und produzierte über Jahrzehnte mehr als tausend Schiffe verschiedener Typen. Werftarbeit verband spezialisierte Berufe, schwere körperliche Arbeit, staatliche Planwirtschaft und eine starke betriebliche Gemeinschaft.", "tags": ["leninwerft", "arbeit", "planwirtschaft"]},
+        {"text": "Im Dezember 1970 führten Preissteigerungen zu Streiks und Protesten an der Küste. Sicherheitskräfte schossen auch am Werfttor auf Arbeiter. Die Toten und Verletzten prägten das Gedächtnis der Belegschaft; die späteren Proteste von 1980 knüpften ausdrücklich an diese Erfahrung an.", "tags": ["dezember_1970", "protest", "staatliche_gewalt"]},
+        {"text": "Im August 1980 begann ein Streik nach der Entlassung der Kranführerin und Oppositionellen Anna Walentynowicz. Aus betrieblichen Forderungen wurde durch das überbetriebliche Streikkomitee ein landesweites Programm. Die 21 Forderungen verlangten unter anderem unabhängige Gewerkschaften und Streikrecht.", "tags": ["august_1980", "anna_walentynowicz", "21_forderungen"]},
+        {"text": "Am 31. August 1980 unterzeichneten Regierungsvertreter und Streikleitung in der BHP-Halle das Danziger Abkommen. Solidarność wurde zugelassen und gewann Millionen Mitglieder. Lech Wałęsa wurde zur bekanntesten Führungsperson, doch die Bewegung beruhte auf einer breiten Gruppe von Arbeiterinnen, Arbeitern und Oppositionellen.", "tags": ["danziger_abkommen", "solidarnosc", "lech_walesa"]},
+        {"text": "Nach 1989 geriet die Werft in wirtschaftliche Krisen; 1997 folgte der Konkurs. Teile produzieren weiter, andere wurden abgerissen, umgenutzt oder entwickelt. Historische Werft und heutige Stocznia Gdańska sind daher weder räumlich noch organisatorisch ein unveränderter Betrieb.", "tags": ["transformation", "konkurs", "nutzungswandel"]},
+        {"text": "Visuell: Weite Industrieflächen, Backsteinhallen, Stahlgerüste, Hafenbecken und hohe gelbe Kräne bestimmen das Gebiet. Tor Nummer 2, BHP-Halle, ehemalige Direktion und ECS bilden den historischen Kern; neue Büros, Kulturorte und Brachen zeigen den laufenden Stadtumbau.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Zugängliche Werftwege, Produktionsbereiche, Führungen, Baustellen, Kulturveranstaltungen und Eigentumsgrenzen aktuell prüfen. Aktive Industrieflächen und Baustellen sind keine frei begehbaren Denkmäler; historische Orte nur über freigegebene Wege erschließen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_westerplatte",
+      "name": "Westerplatte",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Auf Westerplatte verteidigte eine polnische Garnison vom 1. bis 7. September 1939 das Militärtransitdepot. Ruinen, Wachhaus und Denkmal bilden heute eine weitläufige Erinnerungslandschaft.",
+      "deep_data_pool": [
+        {"text": "Westerplatte war vor seiner militärischen Nutzung ein Ausflugs- und Kurort an der Weichselmündung. Nach dem Ersten Weltkrieg lag es im Gebiet der Freien Stadt Danzig. Der Völkerbund gestattete Polen hier ein Militärtransitdepot für den Umschlag von Waffen und Munition über den Danziger Hafen.", "tags": ["freie_stadt", "voelkerbund", "vorgeschichte"]},
+        {"text": "1926 nahm die Wojskowa Składnica Tranzytowa ihren Betrieb auf. Munitionsbecken, Lager, Bahnanschluss, Kasernen und Wachhäuser bildeten die Anlage. Polen durfte eine militärische Wache unterhalten; die tatsächliche Besatzungsstärke wurde vor 1939 verdeckt erhöht und Verteidigungsstellungen wurden ausgebaut.", "tags": ["militaerdepot", "1926", "befestigung"]},
+        {"text": "Am 1. September 1939 eröffnete das deutsche Linienschiff Schleswig-Holstein gegen 4.45 Uhr das Feuer. Deutsche Truppen griffen das Depot an. Der Beschuss von Westerplatte gehört zu den symbolischen Beginnereignissen des Zweiten Weltkriegs, war aber nicht die einzige deutsche Kriegshandlung in diesen frühen Stunden.", "tags": ["1_september_1939", "schleswig_holstein", "kriegsbeginn"]},
+        {"text": "Rund 200 polnische Verteidiger hielten sieben Tage stand, obwohl die ursprünglichen Planungen nur eine wesentlich kürzere Abwehr vorsahen. Artillerie, Infanterie, Sturzkampfbomber und Brandversuche trafen das Gelände. Wachhaus Nummer 5 wurde beim Luftangriff am 2. September zerstört.", "tags": ["verteidigung", "luftangriff", "militaergeschichte"]},
+        {"text": "Major Henryk Sucharski war Kommandant, Hauptmann Franciszek Dąbrowski sein Stellvertreter. Die genaue Rollenverteilung in Krisenmomenten ist Gegenstand historischer Debatten. Eine einfache Heldenerzählung sollte die Belastung, Verwundetenversorgung, Führungsdiskussionen und aussichtslose strategische Lage nicht verdecken.", "tags": ["sucharski", "dabrowski", "quellenkritik"]},
+        {"text": "Am 7. September kapitulierte die Garnison angesichts erschöpfter Kräfte, Verwundeter und fehlender Aussicht auf Entsatz. Fünfzehn polnische Soldaten waren nach Angaben des Museums der Polnischen Armee gefallen, etwa fünfzig verwundet. Unsichere oder stark schwankende deutsche Verlustzahlen sollten nicht als gesichert genannt werden.", "tags": ["kapitulation", "verluste", "quellenkritik"]},
+        {"text": "Das 1966 enthüllte Denkmal der Küstenverteidiger steht auf einem künstlichen Hügel. Erhaltene Ruinen der Kaserne, Wachhaus Nummer 1, Fundamente und Wege verteilen sich über ein großes Areal. Der Denkmalhügel ist nur ein Teil des historischen Depots und nicht der genaue Ort aller Kämpfe.", "tags": ["denkmal", "ruinen", "erinnerungsort"]},
+        {"text": "Visuell: Das hohe, aus Granitblöcken komponierte Denkmal erhebt sich nahe dem Hafenkanal. Zwischen Wald und offenen Flächen liegen verstreute Ruinen, Informationselemente und ehemalige Militärbauten. Die Distanzen sind größer, als ein einzelnes Denkmalfoto vermuten lässt.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Anreise per Bus oder Schiff, Fahrpläne, Besucherzentrum, Ausstellungen, Wachhauszugang, Baustellen und Wege aktuell beim Museum des Zweiten Weltkriegs, ZTM und Schiffsbetreiber prüfen. Für das weitläufige Gelände einen eigenen halben Tag erwägen, aber keine feste Besuchsdauer vorschreiben.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_denkmal_fur_die_gefallenen_werftarbeiter_1970",
+      "name": "Denkmal für die gefallenen Werftarbeiter 1970",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Drei 42 Meter hohe Stahlkreuze erinnern vor Tor 2 an die 1970 getöteten Küstenarbeiter. Das 1980 durchgesetzte Denkmal war selbst ein Erfolg der Solidarność-Bewegung.",
+      "deep_data_pool": [
+        {"text": "Im Dezember 1970 lösten staatlich verfügte Preiserhöhungen für Lebensmittel Proteste in mehreren polnischen Küstenstädten aus. In Gdańsk und Gdynia schossen Militär und Miliz auf Demonstrierende und Arbeiter. Die offizielle Erinnerung wurde zunächst unterdrückt; Familien und Belegschaften bewahrten sie weiter.", "tags": ["dezember_1970", "protest", "staatliche_gewalt"]},
+        {"text": "Am 16. Dezember wurden am Tor Nummer 2 der damaligen Leninwerft Arbeiter beschossen. Das Tor wurde zum improvisierten Gedenkort. Die Forderung nach einem öffentlichen Denkmal für die Opfer war zehn Jahre später Teil der 21 Forderungen des Auguststreiks von 1980.", "tags": ["tor_2", "gedenken", "21_forderungen"]},
+        {"text": "Nach dem Danziger Abkommen konnte das Denkmal in außergewöhnlich kurzer Zeit geplant und gebaut werden. Es wurde am 16. Dezember 1980, dem zehnten Jahrestag der Schüsse, enthüllt. Seine Errichtung vor dem kommunistischen Machtbruch zeigt, welche politische Kraft die neue Gewerkschaft zeitweise gewonnen hatte.", "tags": ["1980", "enthuellung", "solidarnosc"]},
+        {"text": "Die drei Kreuze sind jeweils etwa 42 Meter hoch und tragen Ankerformen. Kreuze verweisen auf Opfer und christliche Erinnerung, Anker auf Werft und Hafen. Die Dreizahl wird mit den Küstenstädten und der Gemeinschaft der Opfer verbunden, ohne jede spätere Deutung als alleinige Entwurfsabsicht auszugeben.", "tags": ["symbolik", "kreuze", "anker"]},
+        {"text": "Bronzereliefs am Sockel zeigen Szenen aus Arbeit und Protest. Inschriften und Zitate, darunter Worte aus einem Gedicht Czesław Miłosz', binden nationale Kultur und konkrete Arbeitergeschichte zusammen. Das Denkmal ist deshalb Skulptur, politischer Text und Versammlungsort zugleich.", "tags": ["reliefs", "inschriften", "kunst"]},
+        {"text": "Das Monument gehört mit Tor Nummer 2, BHP-Halle, historischen Werftbauten und ECS zum Europäischen Kulturerbe-Siegel. Das Siegel würdigt nicht nur Architektur, sondern die Bedeutung des Ortes für Arbeitnehmerrechte, Demokratie und die friedlichen Umbrüche Europas.", "tags": ["europaeisches_kulturerbe", "demokratie", "ensemble"]},
+        {"text": "Nach Verhängung des Kriegsrechts 1981 blieb der Platz ein sensibler Erinnerungsort. Blumen, Kerzen, Gottesdienste und Versammlungen verbanden private Trauer mit Opposition. Bis heute finden hier staatliche, gewerkschaftliche und gesellschaftliche Gedenkveranstaltungen statt.", "tags": ["kriegsrecht", "erinnerungskultur", "gegenwart"]},
+        {"text": "Visuell: Drei schlanke Stahlkreuze steigen eng nebeneinander auf; an ihren Querarmen hängen große Anker. Am Boden liegen Reliefwände und Tafeln. Das rostfarbene ECS steht unmittelbar dahinter, Tor Nummer 2 und die Werftflächen schließen seitlich an.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Gedenkfeiern, politische Versammlungen, Absperrungen, Baustellen und Zugang zum Platz aktuell bei Stadt und ECS prüfen. Der Außenraum ist grundsätzlich zugänglich, kann bei Jahrestagen oder Sicherheitslagen jedoch zeitweise anders geführt werden.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_hohes_tor",
+      "name": "Hohes Tor",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Hohe Tor markiert den westlichen Beginn der Königlichen Route. Der repräsentative Renaissancebau von 1588 ersetzte einen älteren Backsteinzugang der Hauptstadtbefestigung.",
+      "deep_data_pool": [
+        {"text": "Das Brama Wyżynna lag am westlichen Zugang zum Główne Miasto und war Teil der frühneuzeitlichen Befestigung. Ein älteres Backsteintor entstand im 16. Jahrhundert; 1588 erhielt die Außenseite ihre repräsentative steinerne Renaissancegestalt nach einem Entwurf Willem van den Blockes.", "tags": ["geschichte", "renaissance", "befestigung"]},
+        {"text": "Das Tor eröffnete die zeremonielle Route über Vortor, Langgasse und Langen Markt zum Grünen Tor. Bei königlichen Einzügen wurde die militärische Schwelle zur politischen Bühne. Der heutige Begriff Königliche Route beschreibt diese repräsentative Folge, nicht eine dauerhaft nur Königen vorbehaltene Straße.", "tags": ["koenigliche_route", "zeremoniell", "stadtpolitik"]},
+        {"text": "Die Fassade ist wie ein Triumphbogen gegliedert. Rustizierte Steinquader, Pilaster, Wappen und Inschriften verbinden Wehrhaftigkeit mit humanistischer Repräsentation. Die Architektur sollte Ankommenden die Ordnung und das Selbstbewusstsein der wohlhabenden Stadt vor Augen führen.", "tags": ["architektur", "ikonografie", "triumphbogen"]},
+        {"text": "Über den Durchfahrten erscheinen Wappen von Polen, Königlich-Preußen und Danzig. Sie verweisen auf die politische Einbindung der weitgehend autonomen Stadt in die polnische Krone. Wappenprogramm und Torlage machen die Balance zwischen städtischer Eigenständigkeit und königlicher Oberhoheit sichtbar.", "tags": ["wappen", "polnische_krone", "autonomie"]},
+        {"text": "Unmittelbar östlich folgt der Vortorkomplex aus Peinkammer und Stockturm. Diese Gebäude hatten Verteidigungs-, Gerichts- und Gefängnisfunktionen. Hohes Tor, Vortor und Goldenes Tor sind drei verschiedene Bauwerke; touristische Beschreibungen dürfen sie nicht zu einem einzigen Tor zusammenziehen.", "tags": ["vortorkomplex", "orientierung", "quellenkritik"]},
+        {"text": "Mit dem Abtragen der westlichen Festungsanlagen im 19. Jahrhundert verlor das Tor seine militärische Einbindung. Straßen und moderner Verkehr umflossen den freigestellten Bau. Gerade diese Isolierung erklärt, warum es heute eher wie ein Denkmal auf einer Verkehrsinsel als wie ein Stadttor wirkt.", "tags": ["entfestigung", "19_jahrhundert", "stadtumbau"]},
+        {"text": "Das Bauwerk überstand 1945 im Vergleich zu vielen Häusern der Hauptstadt relativ viel, wurde aber beschädigt und restauriert. Wappen und Fassadenteile erfuhren konservatorische Eingriffe. Erhaltene Substanz und Ergänzungen müssen auch hier zusammen gedacht werden.", "tags": ["zweiter_weltkrieg", "restaurierung", "erhaltung"]},
+        {"text": "Visuell: Die helle, blockhafte Steinfront besitzt drei rundbogige Durchgänge und eine reich mit Wappen geschmückte Attika. Hinter ihr stehen die dunkleren Backsteinbauten von Peinkammer und Stockturm; westlich verlaufen breite Straßen und Straßenbahngleise.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Nutzung der Innenräume, Touristinformation, Ausstellungen, Durchgänge, Baustellen und verkehrsbedingte Zugänge aktuell bei Visit Gdańsk und Stadt prüfen. Die historische Torfunktion sagt nichts über einen jederzeit offenen Innenraum aus.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    },
+    {
+      "id": "danzig_altstadtisches_rathaus",
+      "name": "Altstädtisches Rathaus",
+      "place_tier": 1,
+      "pack_role": "story",
+      "general_info": "Das Altstädtische Rathaus entstand 1587 bis 1595 für die Verwaltung des Stare Miasto. Der niederländisch geprägte Renaissancebau blieb 1945 weitgehend erhalten.",
+      "deep_data_pool": [
+        {"text": "Danzig bestand historisch aus mehreren Rechts- und Siedlungsbereichen. Das Stare Miasto nördlich der Radaune hatte eine eigene Verwaltung und brauchte ein eigenes Rathaus. Das Altstädtische Rathaus darf deshalb nicht mit dem größeren Hauptstädtischen Rathaus an Langgasse und Langem Markt verwechselt werden.", "tags": ["stadtverfassung", "altstadt", "quellenkritik"]},
+        {"text": "Der heutige Bau entstand von 1587 bis 1595. Als Entwerfer gilt Antoni van Obberghen, ein aus den Niederlanden stammender Architekt, der in Danzig wirkte. Backstein, helle Steinrahmungen, Volutengiebel und ein schlanker Dachreiter verbinden lokale Bautradition mit niederländischer Renaissance.", "tags": ["baugeschichte", "antoni_van_obberghen", "renaissance"]},
+        {"text": "Das Rathaus stand am Radaunekanal nahe der Großen Mühle und Katharinenkirche. Diese Lage verweist auf die wirtschaftliche Grundlage der Altstadt: Mühlen, Handwerk und Wassertechnik. Der Bau war Verwaltungszentrum eines anderen Stadtraums als die von Fernhandel geprägte repräsentative Hauptstadt.", "tags": ["radaunekanal", "stadtgrundriss", "wirtschaft"]},
+        {"text": "Johannes Hevelius, Brauer, Astronom und später Ratsherr der Altstadt, ist eng mit dem Viertel verbunden. Sein Wohn- und Observatoriumskomplex lag in der Nähe. Die Verbindung zum Rathaus ist politisch-biografisch; das Gebäude selbst war nicht sein Observatorium.", "tags": ["johannes_hevelius", "astronomie", "quellenkritik"]},
+        {"text": "Innenräume bewahren beziehungsweise zeigen historische Ausstattung wie Portale, Treppen und repräsentative Säle aus verschiedenen Zusammenhängen. Einzelne Stücke wurden aus anderen Danziger Bürgerhäusern übernommen. Die Innenausstattung ist daher nicht durchgehend am selben Ort entstanden.", "tags": ["innenraum", "ausstattung", "provenienz"]},
+        {"text": "Während der Zerstörungen von 1945 blieb das Rathaus im Vergleich zur Umgebung weitgehend erhalten. Dadurch besitzt es einen höheren Anteil historischer Bausubstanz als viele rekonstruierte Häuser der Hauptstadt. Reparaturen und Restaurierungen nach dem Krieg bleiben dennoch Teil seines heutigen Zustands.", "tags": ["zweiter_weltkrieg", "erhaltung", "restaurierung"]},
+        {"text": "Heute nutzt das Nadbałtyckie Centrum Kultury, das Baltische Kulturzentrum, das Gebäude. Aus dem früheren Verwaltungssitz wurde ein Ort für Ausstellungen, Konzerte, Debatten und internationale Kulturarbeit. Das Haus ist damit weiterhin öffentlich, aber kein klassisches Rathausmuseum mit ständig gleichen Räumen.", "tags": ["gegenwart", "kulturzentrum", "nutzungswandel"]},
+        {"text": "Visuell: Der kompakte rote Backsteinbau besitzt reich geschwungene Giebel, helle Steinbänder und einen kleinen Dachreiter. Er steht an der Korzenna nahe Radaunekanal, Großer Mühle und Katharinenkirche und wirkt deutlich kleiner als das Hauptstädtische Rathaus.", "tags": ["visuell", "wegweiser"]},
+        {"text": "LIVE: Veranstaltungen, Ausstellungen, Öffnungszeiten, zugängliche Säle und mögliche Vermietungen aktuell beim Baltischen Kulturzentrum prüfen. Kulturprogramm und Gebäudebesichtigung sind nicht identisch; von einer Veranstaltung nie auf freien Zugang zu allen historischen Innenräumen schließen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": []
+    }
+  ],
+  "new_places": [],
+  "offline_qa": [
+    {"q": "Welche Währung gilt in Gdańsk?", "a": "In Polen gilt der Złoty, Kürzel PLN und Zeichen zł; ein Złoty hat 100 Groszy. Polen gehört nicht zum Euro-Währungsgebiet.", "tags": ["geld", "alltag"]},
+    {"q": "Kann ich in Gdańsk mit Karte bezahlen?", "a": "Kartenzahlung ist in Polen weit verbreitet. Etwas Bargeld in Złoty bleibt für kleine Anbieter oder Ausfälle sinnvoll. LIVE: Akzeptanz und Gebühren vor Ort prüfen.", "tags": ["geld", "karte", "live_hint", "ephemeral"]},
+    {"q": "Was ist bei Geldautomaten zu beachten?", "a": "Wenn ein Automat eine Umrechnung anbietet, ist die Belastung in PLN meist transparenter als die Umrechnung des Automatenbetreibers. LIVE: Gebühren der eigenen Bank und des Automaten prüfen.", "tags": ["geld", "atm", "live_hint", "ephemeral"]},
+    {"q": "Was bietet die Gdańsk Tourist Card?", "a": "Die offizielle Tourist Card bündelt Eintritte und Rabatte; ein Nahverkehrsticket kann je nach aktuellem Angebot ergänzt werden. LIVE: Paket, Laufzeit, Partner, Preis und Aktivierung offiziell prüfen.", "tags": ["gdansk_card", "live_hint", "ephemeral"]},
+    {"q": "Sind Museum des Zweiten Weltkriegs, ECS und Bernsteinmuseum in der Gdańsk Card enthalten?", "a": "Diese Häuser wurden in offiziellen Card-Angeboten geführt. LIVE: Vor Kauf die aktuelle Partnerliste und den gewählten Tarif prüfen, weil Leistungen wechseln.", "tags": ["gdansk_card", "museen", "live_hint", "ephemeral"]},
+    {"q": "Wie funktioniert der Nahverkehr in Gdańsk?", "a": "ZTM betreibt Stadtbusse und Straßenbahnen; SKM verbindet die Dreistadt auf der Schiene. Tickets und Geltungsbereiche sind nicht automatisch austauschbar. LIVE: Verbindung und Tarif beim jeweiligen Betreiber prüfen.", "tags": ["nahverkehr", "skm", "live_hint", "ephemeral"]},
+    {"q": "Fahren Boote auf der Motława?", "a": "Von der Motława starten saisonal verschiedene private Rundfahrten und Verbindungen Richtung Hafen oder Westerplatte. LIVE: Betreiber, Anleger, Route, Wetter, Preis und Rückfahrt am selben Tag prüfen.", "tags": ["motlawa", "boote", "live_hint", "ephemeral"]},
+    {"q": "Ist die Wassertram dasselbe wie eine Hafenrundfahrt?", "a": "Nein. Historische beziehungsweise saisonale Linienangebote und private touristische Rundfahrten können verschiedene Betreiber, Tarife und Routen haben. LIVE: konkretes Angebot offiziell prüfen.", "tags": ["boote", "orientierung", "live_hint", "ephemeral"]},
+    {"q": "Reicht für Westerplatte ein kurzer Altstadtspaziergang?", "a": "Nein. Westerplatte liegt außerhalb des historischen Zentrums und ist selbst weitläufig. Für Hinweg, Ruinen, Wachhäuser und Denkmal sollte ein eigener Tagesabschnitt eingeplant werden.", "tags": ["westerplatte", "planung"]},
+    {"q": "Wie komme ich nach Westerplatte?", "a": "Busse und saisonale Schiffe sind typische Möglichkeiten. LIVE: aktuelle ZTM-Verbindung, Schiffsfahrplan, letzten Rückweg und Wetter prüfen; eine Bootsfahrt ist nicht ganzjährig garantiert.", "tags": ["westerplatte", "anreise", "live_hint", "ephemeral"]},
+    {"q": "Wo ist das Bernsteinmuseum?", "a": "Das Bernsteinmuseum befindet sich in der Großen Mühle, Wielkie Młyny 16. Ältere Reiseführer können noch den früheren Standort im Vortorkomplex nennen.", "tags": ["bernsteinmuseum", "orientierung"]},
+    {"q": "Ist Bernstein aus jedem Laden an der Frauengasse echt und lokal?", "a": "Nein. Die Lage eines Geschäfts beweist weder Echtheit noch Herkunft. Auf nachvollziehbare Beschreibung und Beleg achten; bei wertvollen Stücken eine fachkundige Prüfung erwägen.", "tags": ["bernstein", "einkaufen", "quellenkritik"]},
+    {"q": "Kann man den Turm der Marienkirche besteigen?", "a": "Ein Turmaufstieg wird angeboten, ist aber von Betrieb, Saison, Wetter und Restaurierung abhängig. LIVE: Öffnung, Eintritt und körperliche Anforderungen direkt bei der Basilika prüfen.", "tags": ["marienkirche", "aussicht", "live_hint", "ephemeral"]},
+    {"q": "Wo hängt Memlings Jüngstes Gericht?", "a": "Das Original befindet sich im Nationalmuseum, Abteilung Alte Kunst. In der Marienkirche hängt eine Kopie.", "tags": ["nationalmuseum", "memling", "kunst"]},
+    {"q": "Was sollte ich für das Europäische Solidarność-Zentrum wissen?", "a": "Das ECS erklärt Solidarność im ehemaligen Werftgebiet; Tor 2, Denkmal und BHP-Halle liegen als eigene historische Orte daneben. LIVE: Ausstellung, Audioguide, Dachzugang und Eintritt prüfen.", "tags": ["ecs", "solidarnosc", "live_hint", "ephemeral"]},
+    {"q": "Ist das Krantor nur von außen zu sehen?", "a": "Das Krantor ist eine Museumsabteilung mit rekonstruiertem Tretmechanismus. LIVE: Öffnung, zugängliche Ebenen, Treppen und Eintritt beim National Maritime Museum prüfen.", "tags": ["krantor", "museum", "live_hint", "ephemeral"]},
+    {"q": "Sind Altstadt und Rechtstadt dasselbe?", "a": "Nein. Die touristisch bekannte Königliche Route liegt überwiegend im Główne Miasto, der historischen Haupt- beziehungsweise Rechtstadt. Das Stare Miasto mit Altstädtischem Rathaus liegt nördlich davon.", "tags": ["stadtgrundriss", "begriffe"]},
+    {"q": "Wie viel Zeit braucht das Museum des Zweiten Weltkriegs?", "a": "Die Hauptausstellung ist sehr groß und inhaltlich dicht. Einen längeren Besuchsblock statt eines kurzen Zwischenstopps einplanen. LIVE: Zeitfenster, Schließtage und zugängliche Bereiche prüfen.", "tags": ["museum_zweiter_weltkrieg", "planung", "live_hint", "ephemeral"]},
+    {"q": "Ist das historische Zentrum original erhalten?", "a": "Große Teile wurden 1945 zerstört und danach aufwendig rekonstruiert. Erhaltene Fragmente, wiederverwendete Bauteile, Rekonstruktionen und moderne Innenstrukturen stehen nebeneinander.", "tags": ["wiederaufbau", "stadtgeschichte"]},
+    {"q": "Was ist Tor Nummer 2 der Werft?", "a": "Tor 2 war Hauptzugang der Leninwerft und zentraler Ort der Proteste von 1970 und des Streiks von 1980. Es liegt neben Solidarność-Platz und ECS.", "tags": ["werft", "solidarnosc", "orientierung"]}
+  ],
+  "city_facts_non_place": [
+    "Gdańsk ist Teil der Dreistadt Trójmiasto mit Sopot und Gdynia.",
+    "Die touristisch sogenannte Altstadt umfasst häufig Bereiche, die historisch Główne Miasto und Stare Miasto getrennt waren.",
+    "Polens gesetzliches Zahlungsmittel ist der Złoty, nicht der Euro.",
+    "LIVE: Nahverkehrstarife, Card-Leistungen, Bootsfahrpläne und Museumspreise stets aktuell prüfen."
+  ]
+}

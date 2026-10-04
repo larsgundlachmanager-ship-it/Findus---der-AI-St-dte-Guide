@@ -71,6 +71,21 @@ export function stripNavDestLeak(raw: string): string {
 }
 
 /**
+ * Generischer Drop-Pin / leerer Stopp — kein Karten-Chip, HUD nur „Ziel“.
+ * Echte Ortsnamen (Schule, Bahnhof, Adresse) bleiben.
+ */
+export function isGenericMapPointLabel(raw: string | null | undefined): boolean {
+  const t = String(raw || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+  if (!t || t.length < 2) return true;
+  return /^(punkt auf der karte|kartenpunkt|ziel|stopp|stop|hier|ort|stop\s*\d*|stopp\s*\d*|ziel\s*\d*)$/i.test(
+    t,
+  );
+}
+
+/**
  * Pack-Sub-POI „Ort · Haupteingang“ — für HUD/Karte den Ort zeigen.
  * Nur generische Eingangs-Suffixe; benannte Türen (Nord/Süd) bleiben.
  */
@@ -119,20 +134,39 @@ export function peekLastStreetNavQuery(): string | null {
 
 /**
  * Adresse in einem ganzen Satz („navigiert werden zum Heisterhoop 12“).
+ * Auch Multi-Wort ohne Suffix: „Kleiner Sand 50, Uetersen“.
  */
 export function extractStreetAddressFromUtterance(text: string): string | null {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t) return null;
-  const m =
-    t.match(
-      /\b([\wÄÖÜäöüß.\-]{3,}(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm|hof|hoop)\s+\d{1,4}[a-zA-Z]?(?:\s*(?:,\s*|\s+in\s+)[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,})?)\b/iu,
-    ) ||
-    t.match(
-      /\b([\wÄÖÜäöüß.\-]{3,}\s+\d{1,4}[a-zA-Z]?(?:\s*(?:,\s*|\s+in\s+)[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,})?)(?=\s|$|[.!?])/u,
-    );
-  if (!m?.[1]) return null;
-  const cand = stripNavJunkFromDest(m[1].trim());
-  return looksLikeStreetAddress(cand) ? cand : null;
+
+  const stripLead = (raw: string): string =>
+    stripNavJunkFromDest(raw)
+      .replace(
+        /^(?:(?:ich|möchte|moechte|will|muss|soll|bitte|jetzt|mal|bring|mich|führ|fuehr|nimm|nehm|navigier(?:e|en|t)?|werden|zum|zur|nach|zu|in|den|die|das|dem|der)\s+)+/iu,
+        '',
+      )
+      .trim();
+
+  // Klassische Straßen-Endung (+ optional 1–2 Wörter davor: „Kleiner Sand 50“)
+  const classic = t.match(
+    /\b((?:[\wÄÖÜäöüß.\-]+\s+){0,2}[\wÄÖÜäöüß.\-]*(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm|chaussee|hof|hoop|sand|kamp|stieg)\s+\d{1,4}[a-zA-Z]?(?:\s*(?:,\s*|\s+in\s+)[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,})?)\b/iu,
+  );
+  if (classic?.[1]) {
+    const cand = stripLead(classic[1]);
+    if (looksLikeStreetAddress(cand)) return cand;
+  }
+
+  // Ohne Suffix: rechteste …Name(+Wörter) + Hausnummer (+Stadt)
+  const loose =
+    /\b((?:[\wÄÖÜäöüß.\-]+\s+){0,3}[\wÄÖÜäöüß.\-]{3,}\s+\d{1,4}[a-zA-Z]?(?:\s*(?:,\s*|\s+in\s+)[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,})?)/gu;
+  let best: string | null = null;
+  let m: RegExpExecArray | null;
+  while ((m = loose.exec(t)) != null) {
+    const cand = stripLead(m[1]!);
+    if (looksLikeStreetAddress(cand)) best = cand;
+  }
+  return best;
 }
 
 export function looksLikeStreetAddress(q: string): boolean {
@@ -143,6 +177,7 @@ export function looksLikeStreetAddress(q: string): boolean {
     /^(?:unter|über|ueber|bis|ab|max(?:imal)?|um|ca\.?|circa|rund|etwa|mind(?:estens)?)\s+\d{1,4}\b/iu.test(
       t,
     ) ||
+    /\b(?:unter|über|ueber|bis|ab|max(?:imal)?)\s+\d{1,4}\b/iu.test(t) ||
     /\b\d{1,4}\s*(?:€|euro)\b/iu.test(t)
   ) {
     return false;
@@ -155,8 +190,16 @@ export function looksLikeStreetAddress(q: string): boolean {
   ) {
     return false;
   }
+  // Satzreste („ich möchte …“) — keine Adresse
+  if (
+    /\b(möchte|moechte|will|navigier|bring\s+mich|führ\s+mich|fuehr\s+mich)\b/iu.test(
+      t,
+    )
+  ) {
+    return false;
+  }
   const hasStreetSuffixNumber =
-    /\b[\wÄÖÜäöüß.\-]*(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm|chaussee|hof|hoop)\s+\d{1,4}[a-zA-Z]?\b/iu.test(
+    /\b[\wÄÖÜäöüß.\-]*(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm|chaussee|hof|hoop|sand|kamp|stieg)\s+\d{1,4}[a-zA-Z]?\b/iu.test(
       t,
     );
   // „Hotel 12 Apostel“, „Bus Linie 12“ — außer klassische Straßen-Endung
@@ -169,8 +212,9 @@ export function looksLikeStreetAddress(q: string): boolean {
     return false;
   }
   if (hasStreetSuffixNumber) return true;
-  // Name + standalone Hausnummer, optional Stadt
-  return /\b[\wÄÖÜäöüß.\-]{3,}\s+\d{1,4}[a-zA-Z]?(?:\s*,?\s*(?:in\s+)?[A-ZÄÖÜ][\wÄÖÜäöüß\-]*)?\s*$/u.test(
+  // Name (+ optional 1–3 weitere Wörter) + Hausnummer, optional Stadt
+  // „Kleiner Sand 50, Uetersen“ / „Am Markt 3“
+  return /\b[\wÄÖÜäöüß.\-]+(?:\s+[\wÄÖÜäöüß.\-]{1,24}){0,3}\s+\d{1,4}[a-zA-Z]?(?:\s*,?\s*(?:in\s+)?[A-ZÄÖÜ][\wÄÖÜäöüß\-]*)?\s*$/u.test(
     t,
   );
 }

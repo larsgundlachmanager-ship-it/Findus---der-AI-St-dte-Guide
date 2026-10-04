@@ -10,10 +10,10 @@ import { getSupabase, isSupabaseConfigured } from '../supabase';
 
 const LOCAL_PATH = `${FileSystem.documentDirectory}findus-voice-stats.json`;
 
-/** Startgewichte, bis echte Community-Daten da sind (Alina/Sebastian vorne). */
+/** Startgewichte, bis echte Community-Daten da sind (Sebastian/Alina vorne). */
 const SEED: Record<string, number> = {
-  alina: 120,
-  sebastian: 110,
+  sebastian: 120,
+  alina: 110,
   klaus: 40,
   leander: 35,
   lukas: 32,

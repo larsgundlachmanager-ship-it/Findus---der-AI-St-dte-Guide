@@ -72,7 +72,6 @@ const speech = destinationSwitchSpeech({
 });
 assert(/lars/i.test(speech), 'speech uses first name');
 assert(/athen/i.test(speech), 'speech names dest city');
-assert(/wechsel|wechsle/i.test(speech), 'asks to switch');
-assert(/hotel/i.test(speech), 'hotel intent in speech');
+assert(/herunterladen|datensatz/i.test(speech), 'asks to download pack');
 
 console.log('extractTravelCity.smoke.test.ts ok');

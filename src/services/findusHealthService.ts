@@ -84,9 +84,10 @@ export function evaluateFindusHealth(): FindusHealth {
   } else if (
     !store.isSimulationMode &&
     store.navActive &&
-    (store.gpsStatus === 'idle' ||
-      (store.lastGpsAtMs != null && Date.now() - store.lastGpsAtMs > 20_000))
+    store.lastGpsAtMs != null &&
+    Date.now() - store.lastGpsAtMs > 25_000
   ) {
+    // Nur wirklich alte Fixes — „idle“ allein am Nav-Start ≠ degraded (sonst HUD „langsamer“).
     issues.push({
       id: 'gps_stale',
       title: 'GPS liefert keine frischen Fixes',

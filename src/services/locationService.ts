@@ -15,7 +15,7 @@
  */
 
 import * as Location from 'expo-location';
-import type { LocationObject, LocationSubscription } from 'expo-location';
+import type { LocationObject, LocationSubscription, LocationTaskOptions } from 'expo-location';
 import { AppState, type AppStateStatus, Platform, Linking, Alert } from 'react-native';
 import {
   FINDUS_LOCATION_TASK,
@@ -40,6 +40,7 @@ import {
 import {
   gpsIntervalMsForSpeedMs,
   resolveEffectiveSpeedMs,
+  speedMsFromDisplacement,
 } from '../runtime/gpsCadence';
 import { noteSplashGpsLive } from './homeMap/splashReadyGate';
 
@@ -67,9 +68,16 @@ let subscription: LocationSubscription | null = null;
 let headingSubscription: LocationSubscription | null = null;
 let updateHandler: LocationUpdateHandler | null = null;
 let backgroundStarted = false;
+/** Letzter Fix für Displacement-Tempo (Zug: Sensor-Speed oft 0). */
+let lastCadenceFixRef: { lat: number; lng: number; at: number } | null = null;
 
 export function isLocationForegroundServiceActive(): boolean {
   return Platform.OS === 'android' && backgroundStarted;
+}
+
+/** True while locationService owns the foreground `watchPositionAsync`. */
+export function isForegroundLocationWatchActive(): boolean {
+  return subscription != null;
 }
 
 /** Auch nach JS-Reload: Android-FGS kann noch laufen, Flag ist frisch false. */
@@ -80,6 +88,92 @@ export async function isLocationForegroundServiceActiveAsync(): Promise<boolean>
     return await Location.hasStartedLocationUpdatesAsync(FINDUS_LOCATION_TASK);
   } catch {
     return false;
+  }
+}
+
+/**
+ * Persistente Android-FGS-Karte: einmal, ruhig, ohne Vollgelb-Colorize.
+ * (expo-location setzt colorized=true sobald notificationColor gesetzt ist → Heads-up-Spam.)
+ */
+const LIVE_NOTIF_TITLE = 'Yorro';
+const LIVE_NOTIF_BODY_DEFAULT =
+  'Standort aktiv — Tippen öffnet die App.';
+
+/** Optionaler Regen-Hinweis auf derselben Live-Karte (kein Extra-Push). */
+let liveRainHint: string | null = null;
+let lastAppliedLiveBody: string | null = null;
+/** Einmal pro Prozess: colorize-gelb der alten FGS-Karte still ablegen. */
+let quietStyleApplied = false;
+
+function liveNotificationBody(): string {
+  const hint = liveRainHint?.trim();
+  return hint && hint.length > 0 ? hint : LIVE_NOTIF_BODY_DEFAULT;
+}
+
+function foregroundServiceOptions(): {
+  notificationTitle: string;
+  notificationBody: string;
+  killServiceOnDestroy: boolean;
+} {
+  return {
+    notificationTitle: LIVE_NOTIF_TITLE,
+    notificationBody: liveNotificationBody(),
+    killServiceOnDestroy: true,
+  };
+}
+
+function backgroundTaskOptions(): LocationTaskOptions {
+  return {
+    accuracy:
+      streamProfile === 'throttled' || streamProfile === 'sleep'
+        ? Location.Accuracy.Balanced
+        : Location.Accuracy.BestForNavigation,
+    timeInterval: cadenceIntervalMs >= 8_000 ? cadenceIntervalMs : 1_000,
+    distanceInterval: cadenceIntervalMs >= 8_000 ? 8 : 1,
+    deferredUpdatesInterval:
+      cadenceIntervalMs >= 8_000 ? cadenceIntervalMs : 1_000,
+    showsBackgroundLocationIndicator: true,
+    pausesUpdatesAutomatically: false,
+    activityType: Location.ActivityType.Fitness,
+    foregroundService: foregroundServiceOptions(),
+  };
+}
+
+/**
+ * Live-Karten-Text aktualisieren (z. B. Regen) — ohne FGS zu stoppen.
+ * Gleicher Identifier/Service → Android updated still, kein neues Push-Pop.
+ */
+export async function updateLocationLiveNotification(opts: {
+  rainHint?: string | null;
+}): Promise<void> {
+  if (opts.rainHint !== undefined) {
+    const next = (opts.rainHint ?? '').trim() || null;
+    if (next === liveRainHint) return;
+    liveRainHint = next;
+  }
+  if (Platform.OS !== 'android') return;
+
+  const body = liveNotificationBody();
+  if (body === lastAppliedLiveBody && backgroundStarted) return;
+
+  try {
+    const started = await Location.hasStartedLocationUpdatesAsync(
+      FINDUS_LOCATION_TASK,
+    ).catch(() => false);
+    if (!started) {
+      lastAppliedLiveBody = null;
+      return;
+    }
+    // Kein stop/start — nur Options neu registrieren; FGS bleibt, Text updated.
+    await Location.startLocationUpdatesAsync(
+      FINDUS_LOCATION_TASK,
+      backgroundTaskOptions(),
+    );
+    backgroundStarted = true;
+    lastAppliedLiveBody = body;
+    quietStyleApplied = true;
+  } catch (err) {
+    console.warn('[location] live notification update failed:', err);
   }
 }
 
@@ -152,16 +246,41 @@ function emitUpdate(coords: {
       pushSpeedSample: (s: number | null | undefined) => number;
       getSmoothedSpeedMs: () => number;
     };
-    pushSpeedSample(coords.speedMs);
+    const prev = lastCadenceFixRef;
+    const nowMs = Date.now();
+    const displaceMs = prev
+      ? speedMsFromDisplacement(prev.lat, prev.lng, coords.lat, coords.lng, nowMs - prev.at)
+      : null;
+    lastCadenceFixRef = { lat: coords.lat, lng: coords.lng, at: nowMs };
+    pushSpeedSample(coords.speedMs ?? displaceMs);
     const effective = resolveEffectiveSpeedMs(
       coords.speedMs,
       getTrackSpeedMs(),
       getSmoothedSpeedMs(),
+      displaceMs,
     );
     coords.speedMs = effective;
     void setGpsWatchInterval(gpsIntervalMsForSpeedMs(effective));
   } catch {
     void setGpsWatchInterval(gpsIntervalMsForSpeedMs(coords.speedMs));
+  }
+  try {
+    const { noteGpsDeadReckonFix } = require('./navigation/gpsDeadReckoning') as {
+      noteGpsDeadReckonFix: (f: {
+        lat: number;
+        lng: number;
+        speedMs?: number | null;
+        courseDeg?: number | null;
+      }) => void;
+    };
+    noteGpsDeadReckonFix({
+      lat: coords.lat,
+      lng: coords.lng,
+      speedMs: coords.speedMs,
+      courseDeg: coords.headingDeg ?? null,
+    });
+  } catch {
+    /* soft */
   }
   void import('./mobility/paceProfile')
     .then(({ pushPaceSample, modeHintFromSessionTravel }) => {
@@ -206,13 +325,14 @@ function emitFromLocation(location: LocationObject): void {
 
 async function startHeadingWatch(): Promise<void> {
   await startFacingHeadingWatch();
-  // Android Maps-Kompass: Rotation-Vector. Expo magHeading würde dagegen arbeiten.
-  if (Platform.OS === 'android' && isNativeMapCompassActive()) return;
+  // SSOT: Native Maps-Kompass (Android RV / iOS) aktiv → kein Expo-magHeading parallel.
+  if (isNativeMapCompassActive()) return;
   if (headingSubscription) return;
   try {
     headingSubscription = await Location.watchHeadingAsync((h) => {
-      // Android-Genauigkeit kommt nur vom Rotation-Vector — Expo 0/1 nörgelt sonst dauernd.
-      if (Platform.OS !== 'android' && typeof h.accuracy === 'number') {
+      // Native kann nachträglich starten — dann Expo sofort stumm.
+      if (isNativeMapCompassActive()) return;
+      if (typeof h.accuracy === 'number') {
         noteHeadingAccuracy(h.accuracy);
       }
       const raw = headingFromExpoEvent(h);
@@ -689,32 +809,31 @@ async function startBackgroundUpdatesIfPossible(): Promise<void> {
     ).catch(() => false);
     if (started) {
       backgroundStarted = true;
+      // Text ggf. nachziehen (Regen) + einmal Colorize-Gelb ablegen — ohne stop/start-Loop
+      const body = liveNotificationBody();
+      if (!quietStyleApplied || body !== lastAppliedLiveBody) {
+        try {
+          await Location.startLocationUpdatesAsync(
+            FINDUS_LOCATION_TASK,
+            backgroundTaskOptions(),
+          );
+          lastAppliedLiveBody = body;
+          quietStyleApplied = true;
+        } catch {
+          /* soft — FGS läuft weiter */
+        }
+      }
       syncPersistentNotifications();
       return;
     }
 
-    await Location.startLocationUpdatesAsync(FINDUS_LOCATION_TASK, {
-      accuracy:
-        streamProfile === 'throttled'
-          ? Location.Accuracy.Balanced
-          : Location.Accuracy.BestForNavigation,
-      timeInterval: cadenceIntervalMs >= 8_000 ? cadenceIntervalMs : 1_000,
-      distanceInterval: cadenceIntervalMs >= 8_000 ? 8 : 1,
-      deferredUpdatesInterval:
-        cadenceIntervalMs >= 8_000 ? cadenceIntervalMs : 1_000,
-      showsBackgroundLocationIndicator: true,
-      pausesUpdatesAutomatically: false,
-      activityType: Location.ActivityType.Fitness,
-      foregroundService: {
-        notificationTitle: 'Yorro',
-        notificationBody:
-          'Standort für die Tour — tippen öffnet die App (Sprechen).',
-        notificationColor: '#C4A35A',
-        // Recents-Wisch / App beendet → FGS + Tracking stoppen (nicht bei Home/Lock)
-        killServiceOnDestroy: true,
-      },
-    });
+    await Location.startLocationUpdatesAsync(
+      FINDUS_LOCATION_TASK,
+      backgroundTaskOptions(),
+    );
     backgroundStarted = true;
+    lastAppliedLiveBody = liveNotificationBody();
+    quietStyleApplied = true;
     syncPersistentNotifications();
     if (__DEV__) {
       console.log(`[location] background updates started (${Platform.OS})`);
@@ -747,6 +866,8 @@ export async function stopWatchingLocation(opts?: {
       console.warn('[location] stop background failed:', err);
     }
     backgroundStarted = false;
+    lastAppliedLiveBody = null;
+    liveRainHint = null;
     syncPersistentNotifications();
   }
 
@@ -903,6 +1024,7 @@ async function restartWatcherForCadence(): Promise<void> {
   if (!subscription || !updateHandler) return;
   const handler = updateHandler;
   try {
+    // Nur Vordergrund-Watcher neu — FGS unberührt (sonst Notification an/aus).
     subscription.remove();
     subscription = null;
     subscription = await Location.watchPositionAsync(
@@ -912,20 +1034,6 @@ async function restartWatcherForCadence(): Promise<void> {
       },
     );
     updateHandler = handler;
-    if (backgroundStarted) {
-      try {
-        const started = await Location.hasStartedLocationUpdatesAsync(
-          FINDUS_LOCATION_TASK,
-        ).catch(() => false);
-        if (started) {
-          await Location.stopLocationUpdatesAsync(FINDUS_LOCATION_TASK);
-        }
-      } catch {
-        /* ignore */
-      }
-      backgroundStarted = false;
-      void startBackgroundUpdatesIfPossible();
-    }
     if (__DEV__) {
       console.log(
         `[location] GPS cadence → ${cadenceIntervalMs}ms (${streamProfile})`,

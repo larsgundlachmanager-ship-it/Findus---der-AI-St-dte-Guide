@@ -1,12 +1,26 @@
 import re
-import pathlib
 import sys
+from pathlib import Path
 
-path = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else ".cursor/live9/lisbon-retry-ui.xml")
-t = path.read_text(encoding="utf-8", errors="ignore")
-texts = [
-    m.group(1)
-    for m in re.finditer(r'text="([^"]{2,80})"', t)
-    if m.group(1).strip()
-]
-print("texts", texts[:50])
+xml = Path(sys.argv[1]).read_text(encoding="utf-8", errors="replace")
+# node attrs order varies — parse each node block roughly
+nodes = re.findall(r"<node [^>]+>", xml)
+print(f"nodes={len(nodes)}")
+for n in nodes:
+    text = re.search(r'text="([^"]*)"', n)
+    desc = re.search(r'content-desc="([^"]*)"', n)
+    bounds = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', n)
+    click = 'clickable="true"' in n
+    t = (text.group(1) if text else "").strip()
+    d = (desc.group(1) if desc else "").strip()
+    if not bounds:
+        continue
+    a, b, c, e = bounds.groups()
+    label = t or d
+    if not label:
+        continue
+    if len(label) > 90:
+        label = label[:87] + "..."
+    mark = "TAP" if click else "   "
+    safe = label.encode("ascii", "replace").decode("ascii")
+    print(f"{mark} {safe!r} @ ({a},{b})-({c},{e})")

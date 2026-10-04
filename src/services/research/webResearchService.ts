@@ -451,6 +451,11 @@ function buildFormPrefill(
   return null;
 }
 
+/** Prefill nie in Speech — Button still; Params intern. */
+function formPrefillSpeechAddon(_prefill: FormPrefillDraft): string {
+  return '';
+}
+
 function synthesizeSpeech(
   result: Omit<WebResearchResult, 'speechHint' | 'promptBlock'>,
   opts?: { celestial?: boolean },
@@ -513,7 +518,7 @@ function synthesizeSpeech(
     // Kein Meta-Prefix — Antwort-First
     let s = `${top.join('. ')}.`;
     if (result.formPrefill) {
-      s += ` Ich hab dir ${result.formPrefill.purpose} vorbereitet — du musst nur noch bestätigen.`;
+      s += formPrefillSpeechAddon(result.formPrefill);
     }
     if (result.failures.length) {
       s += ` Ein paar Quellen waren nicht voll lesbar.`;
@@ -553,7 +558,21 @@ export async function runWebResearch(
       shouldSkipHtmlWebResearch: (s: string) => boolean;
     };
     if (shouldSkipHtmlWebResearch(t) && urlsInText(t).length === 0) {
-      return null;
+      if (!opts?.force) return null;
+      try {
+        const { isQuickLookupQuery } = require('../concierge/celestialSkyQuery') as {
+          isQuickLookupQuery: (s: string) => boolean;
+        };
+        if (isQuickLookupQuery(t)) return null;
+      } catch {
+        /* soft */
+      }
+      if (
+        /\b(wetter|temperatur|anziehen|jacke|grad\b)\b/iu.test(t) &&
+        !/\b(webseite|website|pdf|flyer)\b/iu.test(t)
+      ) {
+        return null;
+      }
     }
   } catch {
     /* soft */
@@ -738,9 +757,7 @@ export async function runWebResearch(
       ? synthesizeSpeech(partial, { celestial: true })
       : conjunctive != null
         ? `Kurz recherchiert: ${conjunctive}${
-            formPrefill
-              ? ` Ich hab dir ${formPrefill.purpose} vorbereitet — du musst nur noch bestätigen.`
-              : ''
+            formPrefill ? formPrefillSpeechAddon(formPrefill) : ''
           }`
         : synthesizeSpeech(partial);
 

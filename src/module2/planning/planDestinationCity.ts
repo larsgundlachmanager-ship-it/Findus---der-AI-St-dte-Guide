@@ -48,8 +48,9 @@ export function isBreakfastWish(wish: {
   title: string;
   context: string;
 }): boolean {
+  // Nur Titel — Context ist oft der volle Utterance-Blob (würde Anreise→Frühstück verfälschen).
   return /\b(frühstück(?:en)?|fruehstueck(?:en)?|breakfast)\b/i.test(
-    `${wish.title} ${wish.context}`,
+    wish.title ?? '',
   );
 }
 

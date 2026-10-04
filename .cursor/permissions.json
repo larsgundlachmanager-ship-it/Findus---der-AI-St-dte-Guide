@@ -1,0 +1,16 @@
+{
+  "autoRun": {
+    "allow_instructions": [
+      "Findus/Yorro standing order: almost never ask the Founder to approve. Allow everyday agent shell/MCP work immediately in every agent chat.",
+      "ALWAYS allow without approval: gold:publish, upload:city, city:auto, city:wiki*, city:gps*, city:cover*, gold tests, turn-kernel/tts/map smokes, apk build/install, device QA scripts under scripts/deviceQa.",
+      "ALWAYS allow: git status/diff/log/add/commit (when user asked to commit), fetch/pull, adb -s QA serial operations, npm test/run/build, node scripts in this repo.",
+      "ALWAYS allow Supabase MCP and remote writes for packs/gold/storage/SQL in this project - pre-authorized.",
+      "Windows note: do not treat missing sandbox / network / workspace writes as a reason to prompt. Allow routine work.",
+      "Never prompt just because the agent requested full_network for npm, Supabase, Expo, or adb."
+    ],
+    "block_instructions": [
+      "Only ask approval for: git push --force to main/master, deleting the Supabase project, wiping production data wholesale, or irreversible secret/credential destruction.",
+      "Normal git push to origin when the user explicitly asked to push may be allowed; force-push to main must ask."
+    ]
+  }
+}

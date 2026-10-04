@@ -30,11 +30,19 @@ function pick(seed: string, list: readonly string[]): string {
   return list[Math.abs(h) % list.length]!;
 }
 
-export function platformSpoken(raw: string | null | undefined): string | null {
+/**
+ * Platform-Ansage. Ohne Tafel-Wert → null (dünne Feeds / Bus oft ohne Steig).
+ * Bus: „Steig“, Bahn: „Gleis“ — nichts erfinden.
+ */
+export function platformSpoken(
+  raw: string | null | undefined,
+  vehicle?: TransitVehicleKind | null,
+): string | null {
   const p = String(raw ?? '').trim();
   if (!p) return null;
   if (/gleis|steig|bussteig|kante|gate/i.test(p)) return p;
-  return `Gleis ${p}`;
+  const bus = vehicle === 'Bus';
+  return bus ? `Steig ${p}` : `Gleis ${p}`;
 }
 
 export function rideSpoken(facts: Pick<TransitGuideFacts, 'line' | 'headsign' | 'vehicle'>): string {
@@ -54,7 +62,7 @@ function haltLabel(name: string | null | undefined): string {
 
 export function haltArrivedSpeech(facts: TransitGuideFacts): string {
   const ride = rideSpoken(facts);
-  const plat = platformSpoken(facts.platform);
+  const plat = platformSpoken(facts.platform, facts.vehicle);
   const halt = haltLabel(facts.haltName);
   const wait =
     facts.waitMin != null && facts.waitMin >= 0
@@ -76,7 +84,7 @@ export function haltArrivedSpeech(facts: TransitGuideFacts): string {
 
 export function vehicleSoonSpeech(facts: TransitGuideFacts): string {
   const ride = rideSpoken(facts);
-  const plat = platformSpoken(facts.platform);
+  const plat = platformSpoken(facts.platform, facts.vehicle);
   const where = plat ? ` an ${plat}` : '';
   return pick(ride, [
     `${facts.vehicle} fährt gleich ein${where} — steig in ${ride}.`,
@@ -122,8 +130,10 @@ export function remainingStopsSpeech(
 ): string {
   const dest = (facts.alightName || '').trim();
   if (n === 1) {
+    // Nächste = Ausstieg (ggf. Merge mit 60-s-Cue bei kurzem Hop).
     return dest
       ? pick(dest, [
+          `Die nächste Station ist ${dest}, da bitte aussteigen.`,
           `Nächste Station ${dest} — da aussteigen.`,
           `Nächster Halt ${dest}, da müssen wir raus.`,
         ])
@@ -134,11 +144,6 @@ export function remainingStopsSpeech(
       ? `Noch drei Haltestellen bis ${dest} — noch genug Puffer.`
       : 'Noch drei Haltestellen — noch genug Puffer.';
   }
-  if (n === 5) {
-    return dest
-      ? `Noch fünf Haltestellen bis ${dest}.`
-      : 'Noch fünf Haltestellen.';
-  }
   return dest
     ? `Noch ${n} Haltestellen bis ${dest}.`
     : `Noch ${n} Haltestellen.`;
@@ -148,31 +153,24 @@ export function alightNowSpeech(facts: Pick<TransitGuideFacts, 'alightName'>): s
   const dest = (facts.alightName || '').trim();
   return dest
     ? pick(dest, [
+        `Jetzt aussteigen — ${dest}.`,
         `Jetzt raus — ${dest}.`,
         `Hier aussteigen, ${dest}.`,
       ])
     : 'Jetzt müssen wir aussteigen.';
 }
 
-/** Zeit-Vorlauf vor dem Ausstieg (S-Bahn ~1 Min, ICE ~5 Min). */
+/** ~60 s vor dem Ausstieg — Stationsname immer dabei. */
 export function alightSoonSpeech(
   facts: Pick<TransitGuideFacts, 'alightName'>,
-  leadMin: number,
+  _leadMin: number,
 ): string {
-  const dest = (facts.alightName || '').trim();
-  const min = Math.max(1, Math.round(leadMin));
-  if (min >= 4 && dest) {
-    return pick(dest, [
-      `In noch ${min} Minuten erreichen wir ${dest} — da musst du aussteigen.`,
-      `Noch ${min} Minuten, dann ${dest}. Dort raus.`,
-    ]);
-  }
   return alightNowSpeech(facts);
 }
 
 export function transferWalkSpeech(facts: TransitGuideFacts): string {
   const ride = rideSpoken(facts);
-  const plat = platformSpoken(facts.platform);
+  const plat = platformSpoken(facts.platform, facts.vehicle);
   const halt = haltLabel(facts.haltName);
   if (plat) {
     return pick(ride, [

@@ -647,6 +647,7 @@ async function pitchHotelWishFromStay22(
         checkout,
         adults,
         expediaPropertyId: s.expediaPropertyId,
+        priceEur: s.priceTotal,
       });
       uiCards.push({
         name: s.name,
@@ -751,7 +752,7 @@ function isGpsMetaTitle(title: string): boolean {
 }
 
 /**
- * Distanz-Bezug: echter vorheriger Stop — sonst Live-GPS als „hier“.
+ * Distanz-Bezug: Plan-Tag-Basis / Zielstadt vor GPS.
  * Nie „Aktuelle GPS-Position“ als Label.
  */
 function resolveDistanceRef(wish: IngestOpenWish): {
@@ -762,6 +763,29 @@ function resolveDistanceRef(wish: IngestOpenWish): {
   const blob = `${wish.title} ${wish.context}`;
   const bag = readRucksackSync();
   const gps = anchorCoords(bag);
+
+  // Plan-Tag hat eigene Basis (z. B. Hamburg) — Distanz vom Zieltag, nicht GPS-Heimat.
+  try {
+    const dayKey = useFuturePlanStore.getState().plan.dayKey;
+    const day = useFuturePlanStore.getState().getPlanForDay(dayKey);
+    const base = day?.base;
+    if (
+      base &&
+      typeof base.lat === 'number' &&
+      typeof base.lng === 'number' &&
+      Number.isFinite(base.lat) &&
+      Number.isFinite(base.lng) &&
+      haversineMeters(base.lat, base.lng, gps.lat, gps.lng) > 2500
+    ) {
+      return {
+        lat: base.lat,
+        lng: base.lng,
+        title: (base.label || 'Plan-Basis').slice(0, 28),
+      };
+    }
+  } catch {
+    /* soft */
+  }
 
   const tennisStop = useFuturePlanStore
     .getState()
@@ -903,6 +927,10 @@ function formatDistFromPrev(
   const m = Math.round(haversineMeters(prev.lat, prev.lng, lat, lng));
   const raw = isGpsMetaTitle(prev.title) ? 'hier' : prev.title.slice(0, 28);
   const label = isCityLikeDistLabel(raw) ? 'hier' : raw;
+  // Zukunfts-Plan: GPS-Heimat → Zielstadt (20+ km) nicht als „so weit weg“ vorlesen.
+  if (m >= 8000 && (label === 'hier' || isGpsMetaTitle(prev.title))) {
+    return null;
+  }
   const suffix = label === 'hier' ? 'deiner Position' : label;
   if (m < 80) return 'in der Nähe';
   if (m < 1000) {
@@ -1261,6 +1289,16 @@ async function publishChoiceUi(
     const mapsUrl =
       c.actions.mapsUrl?.trim() ||
       mapsUrlFor(c.name, c.lat, c.lng, c.placeId);
+    const menuUrl =
+      (c.actions.menuUrl && /^https?:\/\//i.test(c.actions.menuUrl)
+        ? c.actions.menuUrl
+        : null) ||
+      offer?.url ||
+      null;
+    const websiteUrl =
+      c.actions.websiteUrl && /^https?:\/\//i.test(c.actions.websiteUrl)
+        ? c.actions.websiteUrl
+        : null;
     return {
       id: `choice_${stepKey}_${side}`,
       title: `${role === 'favorite' ? '🥇' : '🥈'} ${c.name}`,
@@ -1269,14 +1307,17 @@ async function publishChoiceUi(
       subtitle: normalizePlanBullets([...(c.bulletPoints ?? [])], 3).join('\n'),
       bullets: normalizePlanBullets([...(c.bulletPoints ?? [])], 3),
       mapsUrl,
-      menuUrl: offer?.url ?? null,
+      menuUrl,
+      websiteUrl,
       placeId: c.placeId ?? null,
       proposalRole: role,
       actionCards: [
         { id: 'maps', label: '🗺️ Maps', url: mapsUrl },
         ...(offer
           ? [{ id: offer.id, label: offer.label, url: offer.url }]
-          : []),
+          : menuUrl
+            ? [{ id: 'menu', label: 'Speisekarte', url: menuUrl }]
+            : []),
       ],
     };
   };
@@ -1288,6 +1329,20 @@ async function publishChoiceUi(
       stripLeadingPlaceName(card.speechPitch || '', card.name),
     ).slice(0, 320);
     const offer = resolveOfferAction(wish, card);
+    const mapsUrl =
+      card.actions.mapsUrl?.trim() ||
+      mapsUrlFor(card.name, card.lat, card.lng, card.placeId);
+    const menuUrl =
+      (card.actions.menuUrl && /^https?:\/\//i.test(card.actions.menuUrl)
+        ? card.actions.menuUrl
+        : null) ||
+      offer?.url ||
+      null;
+    const websiteUrl =
+      card.actions.websiteUrl &&
+      /^https?:\/\//i.test(card.actions.websiteUrl)
+        ? card.actions.websiteUrl
+        : null;
     useFuturePlanStore.getState().upsertStopOnDay(dayKey, {
       id,
       title: `${medal} ${card.name}`,
@@ -1304,8 +1359,9 @@ async function publishChoiceUi(
       choiceGroupId: stepKey,
       planTaskId: stepKey,
       notes: [...noteLines, pitchLine].filter(Boolean).join('\n'),
-      mapsUrl: card.actions.mapsUrl,
-      menuUrl: offer?.url ?? null,
+      mapsUrl,
+      menuUrl,
+      websiteUrl,
       reserveUrl: card.actions.reserveUrl ?? null,
       emoji: medal,
       userFixedTime: wish.priority <= 2 && Boolean(wish.estimatedTime),
@@ -1340,37 +1396,34 @@ async function publishChoiceUi(
 
   usePlanCalendarUiStore.getState().setPendingChoice(pending);
 
-  // Bottom: Neu suchen links + rechts (Auswahl nur Timeline)
+  // Bottom: ein „Neu suchen“ (nicht links+rechts doppelt)
   usePlanCalendarUiStore.getState().setShortAnswers([
     {
-      id: 'reject_l',
-      label: 'Neu suchen',
-      action: 'plan_reject',
-    },
-    {
-      id: 'reject_r',
+      id: 'plan_reject',
       label: 'Neu suchen',
       action: 'plan_reject',
     },
   ]);
 
-  // Top: Maps + kontextueller Offer — dedupliziert, kein Google-Account
+  // Top: Hotels → Partner/Stay, keine Google-Maps-Chips; sonst Maps + Offer
   const mirrored: QuickAction[] = [];
   const seenUrls = new Set<string>();
   for (const [i, card] of sides.map((s) => s.card).entries()) {
     const medal = i === 0 ? '🥇' : '🥈';
-    const mapsUrl =
-      card.actions.mapsUrl?.trim() ||
-      mapsUrlFor(card.name, card.lat, card.lng, card.placeId);
-    if (mapsUrl && isSafeOfferUrl(mapsUrl) && !seenUrls.has(mapsUrl)) {
-      seenUrls.add(mapsUrl);
-      mirrored.push({
-        type: 'OPEN_URL',
-        label: `${medal} Maps`,
-        payload: { url: mapsUrl },
-      });
+    if (!hotelWish) {
+      const mapsUrl =
+        card.actions.mapsUrl?.trim() ||
+        mapsUrlFor(card.name, card.lat, card.lng, card.placeId);
+      if (mapsUrl && isSafeOfferUrl(mapsUrl) && !seenUrls.has(mapsUrl)) {
+        seenUrls.add(mapsUrl);
+        mirrored.push({
+          type: 'OPEN_URL',
+          label: `${medal} Maps`,
+          payload: { url: mapsUrl },
+        });
+      }
     }
-    if (isHotelWishText(`${wish.title} ${card.name}`)) {
+    if (hotelWish) {
       try {
         const { resolveHotelPropertyAffiliateUrl, isHotelRoomSelectUrl } =
           await import('../../services/affiliate/hotelPropertyDeepLink');
@@ -1558,6 +1611,7 @@ export async function executeDeepResearchAndPitch(
           | 'READY'
           | 'NONE',
         menuUrl: o.menuUrl ?? null,
+        websiteUrl: o.websiteUrl ?? null,
         ticketUrl: o.ticketUrl ?? null,
         reserveUrl: null as string | null,
       },
@@ -1968,6 +2022,26 @@ export async function executeExploreWishInsert(
   request.preferStartMs = (() => {
     const hm = wish.estimatedTime;
     if (!hm) {
+      // Soft-Frühstück / Ankunft auf dem Tag → Tour danach, nicht 09:30 davor
+      try {
+        const {
+          softTimedIntervalsFromStops,
+        } = require('./planHardLock') as typeof import('./planHardLock');
+        const soft = softTimedIntervalsFromStops(
+          useFuturePlanStore.getState().getPlanForDay(dayKey).stops,
+        );
+        const morningSoft = soft
+          .filter((iv) => {
+            const h = new Date(iv.start).getHours();
+            return h >= 7 && h < 14;
+          })
+          .sort((a, b) => a.end - b.end);
+        if (morningSoft.length > 0) {
+          return morningSoft[morningSoft.length - 1]!.end + 10 * 60_000;
+        }
+      } catch {
+        /* soft */
+      }
       // Geplanter Tag (morgen/Montag) nie auf Jetzt — ~09:30 auf dem Plan-Tag.
       try {
         const { todayDateKey } = require('../../utils/dateKeys') as {
@@ -2004,10 +2078,15 @@ export async function executeExploreWishInsert(
   try {
     const {
       hardIntervalsFromStops,
+      softTimedIntervalsFromStops,
+      findFreeSlotStartMs,
+      dayBoundsMs,
     } = require('./planHardLock') as typeof import('./planHardLock');
     const stops = useFuturePlanStore.getState().getPlanForDay(dayKey).stops;
+    const soft = softTimedIntervalsFromStops(stops);
     const hard = hardIntervalsFromStops(stops);
-    const start =
+    const bounds = dayBoundsMs(dayKey);
+    const rawStart =
       request.preferStartMs ??
       (() => {
         try {
@@ -2023,7 +2102,33 @@ export async function executeExploreWishInsert(
         }
         return Date.now();
       })();
-    const next = hard.find((h) => h.start > start + 5 * 60_000);
+    const free = findFreeSlotStartMs({
+      preferredStartMs: rawStart,
+      durationMs: Math.max(30, forceDurationMin) * 60_000,
+      hardIntervals: hard,
+      extraIntervals: soft,
+      dayStartMs: bounds.start,
+      dayEndMs: bounds.end,
+      nowFloorMs:
+        dayKey ===
+        (() => {
+          try {
+            const { todayDateKey } = require('../../utils/dateKeys') as {
+              todayDateKey: () => string;
+            };
+            return todayDateKey();
+          } catch {
+            return '';
+          }
+        })()
+          ? Date.now() + 20 * 60_000
+          : bounds.start,
+    });
+    if (free != null) request.preferStartMs = free;
+    const start = request.preferStartMs ?? rawStart;
+    const next = [...hard, ...soft]
+      .sort((a, b) => a.start - b.start)
+      .find((h) => h.start > start + 5 * 60_000);
     if (next) {
       request.hardArriveByMs = next.start;
       const maxMin = Math.max(

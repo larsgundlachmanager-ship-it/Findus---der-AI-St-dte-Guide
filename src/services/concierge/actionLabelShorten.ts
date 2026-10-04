@@ -4,6 +4,8 @@
  */
 
 export const ACTION_LABEL_MAX_CHARS = 22;
+/** Straße + Hausnr. dürfen etwas länger bleiben (dynamische Button-Breite). */
+export const ACTION_LABEL_MAX_STREET = 28;
 
 /**
  * Maps-Buttons: immer 🗺️ — kein Google-Logo, kein „MAP“-Text
@@ -274,6 +276,10 @@ export function shortenActionLabel(
 ): string {
   let t = (label || '').trim().replace(/\s+/g, ' ');
   if (!t) return t;
+  // "🗺️ Heisterhoop 12" — Hausnummer nicht wegstutzen
+  if (/\b\d{1,4}[a-zA-Z]?\b/.test(t) && charLen(t) <= ACTION_LABEL_MAX_STREET) {
+    max = Math.max(max, ACTION_LABEL_MAX_STREET);
+  }
 
   // Legacy „MAP Ortsname“ → 🗺️
   if (/^MAP\b/i.test(t)) {

@@ -1,0 +1,14 @@
+{
+  "at": "2026-09-07T09:52:24.618333+00:00",
+  "pass": 1,
+  "fail": 1,
+  "pending": 4,
+  "total": 6,
+  "failed_ids": [
+    "flug_morgen_ham"
+  ],
+  "pass_ids": [
+    "taxi_vorbestellen_morgen"
+  ],
+  "max_attempts": 4
+}

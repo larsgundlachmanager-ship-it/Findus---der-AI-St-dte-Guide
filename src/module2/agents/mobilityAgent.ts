@@ -114,7 +114,7 @@ function wantsAppendToRoute(text: string): boolean {
 }
 
 function wantsTransit(text: string): boolean {
-  return /\b(öpnv|oepnv|bus|bahn|zug|s-?bahn|tram|verbindung|öffentlich|oeffentlich)\b/i.test(
+  return /\b(öpnv|oepnv|bus|bahn|zug|s-?bahn|tram|verbindung|öffentlich(?:en)?(?:\s+verkehr(?:smittel)?)?|oeffentlich(?:en)?(?:\s+verkehr(?:smittel)?)?|verkehrsmittel)\b/i.test(
     text,
   );
 }
@@ -147,12 +147,25 @@ function wantsEtaOnly(text: string): boolean {
 }
 
 function extractDestName(text: string): string {
+  // Solo-Flug A→B / Ticket-Suche ist kein Navi-Ziel (sonst „nach Hamburg nach Split vom 27“)
+  try {
+    const { isSoloFlightAbSearch, isFlightTripQuery } = require('../../services/flights/flightTripIntent') as {
+      isSoloFlightAbSearch: (s: string) => boolean;
+      isFlightTripQuery: (s: string) => boolean;
+    };
+    if (isSoloFlightAbSearch(text) || isFlightTripQuery(text)) return '';
+  } catch {
+    /* soft */
+  }
   const m =
+    text.match(
+      /\bnach\s+([A-Za-zÄÖÜäöüß][\w\-ÄÖÜäöüß]*(?:\s+[A-Za-zÄÖÜäöüß][\w\-ÄÖÜäöüß]*){0,2}?)(?=\s+(?:von|bis|vom|zum|zur|fliegen|flüge|fluege|flieger|brauch|mit|zu\s+fu)|$|[.?!],)/i,
+    ) ||
     text.match(
       /\bnach\s+([A-Za-zÄÖÜäöüß][\w\-ÄÖÜäöüß]*(?:\s+[A-Za-zÄÖÜäöüß][\w\-ÄÖÜäöüß]*){0,2})(?=\s|$|[.?!]|,|brauch|mit|zu\s+fu)/i,
     ) ||
     text.match(
-      /\b(?:zu(?:m|r)?|nach)\s+(.+?)(?:\s*[.?!]|$)/i,
+      /\b(?:zu(?:m|r)?)\s+(.+?)(?:\s*[.?!]|$)/i,
     ) ||
     text.match(
       /navigier\w*\s+(?:mich\s+)?(?:zu(?:m|r)?\s+)?(.+)/i,
@@ -163,9 +176,9 @@ function extractDestName(text: string): string {
     text.match(
       /(?:füge?\s+|fuege?\s+)(?:bitte\s+)?(.+?)\s+(?:hinzu|in\s+)/i,
     );
-  let name = (m?.[1] ?? text)
+  let name = (m?.[1] ?? '')
     .replace(/\s+/g, ' ')
-    .replace(/\b(zu\s+mein(?:em|en)?\s+navi|bitte|brauch(?:e|st|en)?|wie\s+lange|mit\s+dem\s+(?:fahrrad|rad))\b/gi, '')
+    .replace(/\b(zu\s+mein(?:em|en)?\s+navi|bitte|brauch(?:e|st|en)?|wie\s+lange|mit\s+dem\s+(?:fahrrad|rad)|vom\s+\d|bis\s+\d)\b/gi, '')
     .trim();
   // Elphi / Elphi-Harmonie / STT „A Harmonie“ → Elbphilharmonie Hamburg
   try {
@@ -224,6 +237,78 @@ function shouldOfferTransit(opts: {
     return true;
   }
   return false;
+}
+
+/** Kurzstrecke: Bus/Bahn lohnt nicht — Fuß (+ optional Taxi) mit Weiterdenken. */
+function buildShortHopNoTransitResult(opts: {
+  destName: string;
+  lat: number;
+  lng: number;
+  walkMin: number;
+  distanceM: number;
+  navAlreadyActive?: boolean;
+}): import('../types').AgentResult {
+  const walk = Math.max(1, Math.round(opts.walkMin));
+  const dur =
+    (() => {
+      try {
+        return formatDurationMinutesDe(walk, 'speech');
+      } catch {
+        return `ungefähr ${walk} Minuten`;
+      }
+    })();
+  const place = opts.destName.trim() || 'dein Ziel';
+  const speech = opts.navAlreadyActive
+    ? `Nein — Bus oder Bahn lohnt sich hier nicht. Zu Fuß bist du am schnellsten, noch etwa ${dur}. Taxi oder Uber geht natürlich auch.`
+    : `Nein — Bus oder Bahn lohnt sich hier nicht. Zu Fuß bist du am schnellsten, etwa ${dur} nach ${place}. Taxi oder Uber geht natürlich auch.`;
+
+  const buttons: import('../types').Module2ActionButton[] = [];
+  if (!opts.navAlreadyActive) {
+    buttons.push({
+      id: 'start_walk_nav',
+      label: navButtonLabel(place, false),
+      payload: {
+        kind: 'navigate' as const,
+        lat: opts.lat,
+        lng: opts.lng,
+        label: place,
+      },
+    });
+  }
+  buttons.push({
+    id: 'taxi_uber',
+    label: shortenActionLabel('🚗 Uber'),
+    payload: {
+      kind: 'book_uber' as const,
+      destLat: opts.lat,
+      destLng: opts.lng,
+      destName: place,
+    },
+  });
+
+  return {
+    agent: 'mobility',
+    ok: true,
+    draftText: speech,
+    bullets: [
+      place,
+      `Fuß ~${walk} Min`,
+      opts.distanceM > 0 ? formatDistanceKmOrM(opts.distanceM) : '',
+    ]
+      .filter(Boolean)
+      .slice(0, 3),
+    buttons: buttons.slice(0, 3),
+    meta: {
+      transit: false,
+      transitNotWorthIt: true,
+      walkMinutes: walk,
+      distanceM: opts.distanceM,
+      destName: place,
+      destLat: opts.lat,
+      destLng: opts.lng,
+      autoStartNav: false,
+    },
+  };
 }
 
 /** Anker = letzter geplanter/aktiver Stopp, sonst GPS. */
@@ -416,21 +501,32 @@ export const mobilityAgent: Module2Agent = {
                 : `Noch ${durSpeech} (${km})`;
             const switchBike =
               bikeAsk && modeNow !== 'bike'
-                ? ' Soll ich die Navigation aufs Fahrrad umstellen?'
+                ? ' Ich stell die Navigation jetzt aufs Fahrrad um.'
                 : '';
-            const buttons =
-              bikeAsk && modeNow !== 'bike'
-                ? [
-                    {
-                      id: 'switch_bike_nav',
-                      label: 'Navigation auf Rad',
-                      payload: {
-                        kind: 'switch_nav_mode' as const,
-                        preferBike: true,
-                      },
-                    },
-                  ]
-                : [];
+            if (bikeAsk && modeNow !== 'bike') {
+              try {
+                const {
+                  trySwitchActiveNavTravelMode,
+                } = require('../../services/navigation/switchActiveNavTravelMode') as {
+                  trySwitchActiveNavTravelMode: (
+                    m: 'foot' | 'bike',
+                    txt?: string,
+                  ) => Promise<unknown>;
+                };
+                void trySwitchActiveNavTravelMode('bike', task.rewrittenText);
+              } catch {
+                try {
+                  forceBikeModeFromVoice();
+                } catch {
+                  /* soft */
+                }
+              }
+            }
+            const buttons: Array<{
+              id: string;
+              label: string;
+              payload: Record<string, unknown>;
+            }> = [];
             return {
               agent: 'mobility',
               ok: true,
@@ -447,7 +543,7 @@ export const mobilityAgent: Module2Agent = {
                 bike: bikeAsk,
                 distanceM: st.navDistanceM,
                 destName: destLabel,
-                switchNavToBike: Boolean(switchBike),
+                switchNavToBike: Boolean(bikeAsk && modeNow !== 'bike'),
               },
             };
           }
@@ -463,12 +559,59 @@ export const mobilityAgent: Module2Agent = {
     const shortCtx = getShortTerm();
     const pendingOffer = useFinnusStore.getState().pendingNavOffer;
     let destName = extractDestName(task.rewrittenText);
+    // Flug-Ticket-Suche A→B → Mobility lässt die Finger weg (kein ÖPNV „nach Hamburg nach Split“)
+    try {
+      const { isSoloFlightAbSearch, isFlightTripQuery } = require('../../services/flights/flightTripIntent') as {
+        isSoloFlightAbSearch: (s: string) => boolean;
+        isFlightTripQuery: (s: string) => boolean;
+      };
+      if (
+        isSoloFlightAbSearch(task.rewrittenText) ||
+        (isFlightTripQuery(task.rewrittenText) && !destName)
+      ) {
+        return {
+          agent: 'mobility',
+          ok: false,
+          draftText: '',
+          bullets: [],
+          buttons: [],
+          meta: { skip: 'flight_trip_not_nav' },
+        };
+      }
+    } catch {
+      /* soft */
+    }
     if (isWeakDestName(destName)) {
       destName =
         pendingOffer?.name ||
         shortCtx.lastPlaceName ||
         local?.name ||
         destName;
+    }
+    // Aktive Nav / „hinfahren“: Ziel aus laufender Route, nicht neu raten
+    try {
+      const { getActiveNavDestination } = require('../../services/navigation/navigationService') as {
+        getActiveNavDestination: () => {
+          name: string;
+          lat: number;
+          lng: number;
+        } | null;
+      };
+      const live = getActiveNavDestination();
+      const st = useFinnusStore.getState();
+      if (
+        live &&
+        st.navActive &&
+        (isWeakDestName(destName) ||
+          transitAsk ||
+          /\b(hin|dahin|dorthin|dort)\b/i.test(task.rewrittenText))
+      ) {
+        if (isWeakDestName(destName) && live.name?.trim()) {
+          destName = live.name.trim();
+        }
+      }
+    } catch {
+      /* soft */
     }
     let resolved = '';
     let lat: number | null = null;
@@ -544,6 +687,32 @@ export const mobilityAgent: Module2Agent = {
       lat = pendingOffer.lat;
       lng = pendingOffer.lng;
       resolved = pendingOffer.name;
+    }
+
+    // 3b) Laufende Navigation (ÖPNV-Nachfrage „hinfahren“)
+    if (lat == null || lng == null) {
+      try {
+        const { getActiveNavDestination } = require('../../services/navigation/navigationService') as {
+          getActiveNavDestination: () => {
+            name: string;
+            lat: number;
+            lng: number;
+          } | null;
+        };
+        const live = getActiveNavDestination();
+        if (
+          live &&
+          useFinnusStore.getState().navActive &&
+          Number.isFinite(live.lat) &&
+          Number.isFinite(live.lng)
+        ) {
+          lat = live.lat;
+          lng = live.lng;
+          resolved = live.name?.trim() || resolved || destName;
+        }
+      } catch {
+        /* soft */
+      }
     }
 
     // 4) Pack (aktive SQLite + gecachte Städte z. B. Hamburg) → OSM → Google
@@ -1046,18 +1215,61 @@ export const mobilityAgent: Module2Agent = {
     // ÖPNV-Verbindung + Störungs-/Bau-Check
     if (transitAsk) {
       try {
+        // Fuß-ETA zuerst: Kurzstrecken nicht mit Bus/Bahn zuspammen
+        const walkEta = await estimateTravelEtaRouted({
+          userLat: a.lat,
+          userLng: a.lng,
+          destLat: lat,
+          destLng: lng,
+          destName: resolved,
+          mode: 'walking',
+          skipObstacles: true,
+        });
+        let transitMinProbe: number | null = null;
+        try {
+          const probe = await planJourney({
+            from: { lat: a.lat, lng: a.lng },
+            to: { lat, lng },
+            travelMode: 'transit',
+            numItineraries: 1,
+            ...journeyPlanTimeOpts(task.rewrittenText),
+          });
+          const bestProbe = probe.itineraries[0];
+          if (bestProbe) {
+            transitMinProbe = Math.round(bestProbe.durationSec / 60);
+          }
+        } catch {
+          transitMinProbe = null;
+        }
+        if (
+          !shouldOfferTransit({
+            walkMin: walkEta.directWalkMinutes,
+            bikeMin: walkEta.bikeMinutes,
+            transitMin: transitMinProbe,
+          })
+        ) {
+          return buildShortHopNoTransitResult({
+            destName: resolved,
+            lat,
+            lng,
+            walkMin: walkEta.directWalkMinutes,
+            distanceM: walkEta.distanceM,
+            navAlreadyActive: useFinnusStore.getState().navActive === true,
+          });
+        }
+
         const { researchTransitDisruption } = await import(
           '../../services/research/transitDisruptionResearch'
         );
         const disruption = await researchTransitDisruption({
           userText: task.rewrittenText,
-          lat: anchor.lat,
-          lng: anchor.lng,
+          lat: a.lat,
+          lng: a.lng,
           cityHint: softCity,
         });
 
         const plan = await planJourney({
-          from: { lat: anchor.lat, lng: anchor.lng },
+          from: { lat: a.lat, lng: a.lng },
           to: { lat, lng },
           travelMode: 'transit',
           numItineraries: 3,
@@ -1109,7 +1321,18 @@ export const mobilityAgent: Module2Agent = {
                 },
               },
             },
-          ].slice(0, 4);
+            {
+              id: 'earlier_conn',
+              label: shortenActionLabel('Frühere Fahrt'),
+              payload: {
+                kind: 'ui' as const,
+                action: 'prompt',
+                data: {
+                  text: `Suche eine frühere ÖPNV-Verbindung zu ${resolved}`,
+                },
+              },
+            },
+          ].slice(0, 5);
 
           return {
             agent: 'mobility',

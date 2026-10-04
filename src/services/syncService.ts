@@ -15,6 +15,8 @@ import { scanCityDatasetSafe } from './scanner/cityScanner';
 import { scanPoiDatasetSafe } from './ai/poiDatasetScanner';
 import { syncDictionaryAfterCityDownload } from './sync/dictionarySyncService';
 import { isDeviceOffline } from './navigation/networkState';
+import { resolveFamilyCatalogPackId } from './cityProximityDecision';
+import { isSoftCityId } from './softWorkingCity';
 
 /** Verhindert parallele Syncs → SQLite „transaction within a transaction“. */
 let syncInFlight: Promise<{
@@ -73,8 +75,13 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
   }
 
   const profileCity = getCachedUserProfile()?.cityId;
-  const cityId =
+  let cityId =
     cityIdOverride || profileCity || env.cityId() || 'prisdorf';
+  // soft_* in Trojmiasto-Familie -> danzig Pack (nie soft_gdynia.json)
+  const familyPack = resolveFamilyCatalogPackId({ id: cityId });
+  if (familyPack && isSoftCityId(cityId)) {
+    cityId = familyPack;
+  }
   let remotePois: RemotePoi[] = [];
   let remoteFacts: RemoteFact[] = [];
   let source = 'storage';
@@ -87,6 +94,13 @@ async function runPoiSync(cityIdOverride?: string): Promise<{
     remotePois = mapped.pois;
     remoteFacts = mapped.facts;
   } catch (storageErr) {
+    if (isSoftCityId(cityId)) {
+      console.warn(
+        `[sync] Soft-Stadt "${cityId}" ohne Pack — kein Tabellen-Fallback`,
+        storageErr,
+      );
+      return { synced: false, poiCount: 0, reason: 'Soft-Stadt ohne Pack' };
+    }
     console.warn(
       `[sync] Storage-Pack "${cityId}" fehlgeschlagen, Fallback Tabellen:`,
       storageErr,

@@ -128,15 +128,46 @@ async function speakBridgeLineOnce(line: string): Promise<void> {
  */
 function isEmptyBridgeFloskel(line: string): boolean {
   const t = line.replace(/\s+/g, ' ').trim();
-  if (/^(ich schau mal|gute frage|alles klar|moment|mega plan|lass mich)[.!?]*$/iu.test(t)) {
+  if (
+    /^(ich schau mal|gute frage|spannende frage|alles klar|moment|mega plan|lass mich)[.!?]*$/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  // Meta-Warte-Status — Cover = nur Verstanden + Zusagen
+  if (
+    /\b(gleich\s+fertig|bin\s+gleich\s+soweit|gleich\s+soweit|bin\s+gleich\s+wieder\s+da|hang\s+tight|hang\s+on|kurz\s+geduld)\b/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  // Lob-/Meta-Opener ohne Inhalt
+  if (
+    /^(das\s+ist\s+(?:aber\s+)?(?:eine\s+)?spannende\s+frage|spannende\s+frage|was\s+für\s+eine\s+spannende\s+frage)[.!?]*$/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (/\b(spannende|tolle|gute)\s+frage\b/iu.test(t) && t.split(/\s+/).length <= 8) {
     return true;
   }
   const words = t.split(/\s+/).filter(Boolean);
-  if (words.length <= 4 && /\b(ich schau|gute frage|alles klar|moment|ich recherch)\b/iu.test(t)) {
+  if (
+    words.length <= 5 &&
+    /\b(ich schau|gute frage|spannende frage|alles klar|moment|ich recherch)\b/iu.test(t)
+  ) {
     return true;
   }
   return false;
 }
+
+export {
+  peekAnswerLeadBridge,
+  peekAnswerLeadBridgeOrCommit,
+} from './answerLeadBridge';
 
 function isTaxiRideUtterance(text: string): boolean {
   try {
@@ -378,8 +409,18 @@ export async function generateContextualBridge(opts: {
   const jobId = opts.jobId || stance.jobId;
   const jobHint = opts.jobHint || stance.jobHint;
 
+  let worldFact = false;
+  try {
+    const { isWorldFactUtterance } = require('../../module2/reboot/pipeline/worldFactGuard') as {
+      isWorldFactUtterance: (s: string) => boolean;
+    };
+    worldFact = isWorldFactUtterance(userText);
+  } catch {
+    worldFact = false;
+  }
+
   let memory = '';
-  if (!stance.isNewTopic) {
+  if (!stance.isNewTopic && !worldFact) {
     try {
       memory = formatUserMemoryForPrompt()?.slice(0, 500) ?? '';
     } catch {
@@ -444,50 +485,51 @@ export async function generateContextualBridge(opts: {
 
   const prompt = [
     'Du bist Yorro — warmer Reise-/Alltagsbegleiter auf Deutsch.',
-    'Schreib 1–2 kurze Sätze als BRIDGE (Call 1): Verstanden + Zuspruch/Zusagen — noch NICHT die Hauptantwort mit Optionen/Preisen/Minuten.',
-    'Das ist Beat 1 von 2: Call 2 kommt direkt danach mit den echten Fakten und setzt NAHTLOS an (ohne den Wunsch nochmal zu loben).',
-    'Kürze: starker Anfang reicht — nicht mit Extra-Sätzen auffüllen.',
+    'Schreib 1 kurzen Beat-1-Satz (Call 1). Call 2 kommt sofort danach und setzt NAHTLOS fort — wie ein Satz.',
+    'DEFAULT bei Instant/Trivia/Rechnung/Wetter/Nav: schon MIT DER ANTWORT ANFANGEN (halber Satz / Commit), damit Call 2 nur noch den finalen Fakt anhängt.',
+    'Bei langer Recherche (Hotel/Kino/Events/Compound): Verstanden + Zusagen, was du jetzt tust — noch keine erfundenen Venue-Namen/Preise/Minuten.',
+    'Kürze: starker Anfang reicht — kein Essay, kein Meta-Lob.',
     '',
     topicLage,
     familyLine,
     '',
     'PFLICHT:',
-    '- Zeig, dass du DEN Satz verstanden hast (Wunsch/Ort/Anlass spiegeln). Würdige die Idee oder sage klar, was du jetzt tust.',
+    '- Sofort auf DEN User-Satz eingehen — Wunsch spiegeln oder Antwort einleiten.',
+    '- Instant/Trivia/Rechnung/Hauptstadt: Antwort-Einstieg ohne finalen Faktwert — Peek-Struktur lernen und auf Varianten anpassen (Land→Hauptstadt, Person→Alter, Aufgabe→ergibt). Call 2 liefert Zahl/Name/Ergebnis.',
     '- Reagiere KONKRET auf DIESES Satz — nicht auf geparkte/tote Themen.',
     '- Isolation: Städte/Ziele aus dem aktuellen Satz DÜRFEN vorkommen. Tote Threads nicht.',
-    '- NUR der aktuelle User-Satz zählt. Kein Mittagessen/Wetter/Trivia aus dem Chat davor, wenn DER Satz Flug/Nav/neues Thema ist.',
+    '- NUR der aktuelle User-Satz zählt.',
     stance.destHint && !stance.isNewTopic
-      ? '- Offener Auftrag noch aktiv — wenn der User etwas dazwischen will, weben (auf dem Weg), nicht totstellen. Details nur aus dem User-Satz, keine Fragmente kleben.'
+      ? '- Offener Auftrag noch aktiv — wenn der User etwas dazwischen will, weben (auf dem Weg), nicht totstellen.'
       : '',
-    '- Keine Recherche-Ergebnisse spoilern (keine Minuten/Preise/Links/Venue-Namen erfinden).',
-    '- Flug: keine Pauschal-Vorlaufzeit (nicht „zwei Stunden vorher“). Security/Check-in kommen aus der Recherche.',
-    '- Wortlaut frei, organisch, an Persona/Kontext angepasst.',
-    '- Immer einen NEUEN, grammatisch runden Satz schreiben. Nie User-Wörter (Ziel, nach, wann, muss) vor eine Floskel kleben.',
+    '- Keine erfundenen Minuten/Preise/Links/Venue-Namen und keine vorgezogene Alters-/Einwohner-/Hauptstadt-Zahl.',
+    '- Flug: keine Pauschal-Vorlaufzeit. Wortlaut frei, organisch.',
     '',
     'VERBOTEN:',
-    '- Nur leere 0815-Floskeln („Ich schau mal“, „Gute Frage“, allein „Alles klar“, „Moment“, „Mega Plan“) ohne Bezug zum Wunsch.',
-    '- Schon die Call-2-Antwort: Restaurantnamen, Event-Titel, Gehminuten, Preise, Dual-Option-Pitch.',
-    '- „Ich suche dir Optionen / mehrere Vorschläge raus“ bei Wetter, Outfit oder reinen Faktenfragen.',
+    '- „Spannende Frage“, „tolle Frage“, „gute Frage“ allein, leere Würdigung, Meta-Warte („gleich fertig“, „kurz Geduld“).',
+    '- Stille / nichts sagen — immer einen hörbaren Antwort-Einstieg oder eine klare Zusage.',
+    '- Schon die komplette Call-2-Antwort mit finaler Zahl/Optionen/Preisen erfinden.',
+    '- „Ich suche dir Optionen“ bei Wetter/Outfit/Trivia.',
+    '- Weltwissen: NIE „wen meinst du?“; NIE GPS-Heimatstadt unterschieben.',
     '- Markdown, Emoji-Overkill, zweite Frage-Spirale.',
-    '- Taxi/Uber nur wenn DER Satz Taxi will. Essenswunsch: kein Taxi-Faden.',
-    '- Kleben: „[Ziel] klingt richtig gut“, „nach [Stadt] musst …“ als Satzanfang aus Parser-Fragmenten.',
     '',
     'Richtung (nur Ablauf, Wortlaut nie übernehmen):',
-    '- Essen-Suche klar → Idee gut — Optionen kommen gleich, ohne Namen zu erfinden.',
-    '- Wetter / Outfit / „wie vorbereitet sein“ → Wunsch verstanden + kurze Zusage zum Wettercheck; KEINE Options-Suche. Fakten kommen in Call 2.',
-    '- Essen + Wetter im selben Satz → Idee würdigen; Bridge endet bei Verstehen/Zusage — Wetter-Fakten und ggf. Orte erst Call 2, ohne in der Bridge „Optionen“ zu versprechen wenn Call 2 vor allem Wetter ist.',
-    '- Aktivität (SUP, Sport) + Wetter im Kontext → Entscheidung würdigen; Details/Preis erst Call 2.',
-    '- Navigation starten → knappe Zusage, dass die Navigation jetzt startet; ETA erst Call 2.',
-    '- Events heute Abend → Zusagen, den Eventkalender der genannten Stadt kurz zu durchstöbern; Programme erst Call 2.',
-    '- Genannter Spielplan/Team/Halle → Cover: Verstanden + Zusagen, dass du Termin/Spielplan checkst — kein Pitch-Opener, keine Lob-Floskel.',
-    '- Outfit/Kälte → Wir wollen nicht, dass du frierst.',
-    '- Taxi/Uber rufen → Zusagen, dass DIESE Fahrt jetzt organisiert wird. Nie die Taxizentrale als Ziel.',
-    '- Flug / Ankunft am Flughafen → Zusage auf den Rückwärts-Plan, keine Uhrzeiten und keine zwei Stunden erfinden.',
+    '- Rechnung → Einstieg „… ergibt“ ohne Ergebniszahl.',
+    '- Alter/Person → „X ist“ ohne Jahre.',
+    '- Hauptstadt / Was-ist-von → Land/Thema ansteuern, Satz offen — ohne Stadt-/Faktnamen.',
+    '- Wetter/Regen → „Zum Wetter/Regen:“ ohne Gradzahl.',
+    '- Nav → knappe Zusage mit Zielnamen; ETA erst Call 2.',
+    '- Essen-Suche → Idee gut — Optionen kommen gleich, ohne Namen erfinden.',
+    '- Trivia → Antwort einleiten — kein Recherche-Theater; gleiche Peek-Struktur auf alle Schnellfragen.',
+    '- Lange Recherche: Cover 1–2 Sätze Verstanden+Zusagen.',
     'Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an den aktuellen Kontext und die aktuelle Stadt an.',
     '',
     name ? `User-Vorname: ${name}` : '',
-    !stance.isNewTopic && city
+    !worldFact && !stance.isNewTopic && city
       ? `Stadt (nur Kontext, nicht als Home erzwingen): ${city}`
+      : '',
+    worldFact
+      ? 'Weltwissen-Turn: keine Heimatstadt, keine Memory-Orte, keine Klärfrage „wen meinst du?“.'
       : '',
     jobId ? `Interner Job (nur Ton-Hinweis): ${jobId}` : '',
     jobHint ? `Job-Hinweis: ${jobHint}` : '',
@@ -495,7 +537,7 @@ export async function generateContextualBridge(opts: {
     '',
     `User gerade: „${userText.slice(0, 280)}“`,
     '',
-    'Nur die Bridge-Sätze ausgeben, nichts sonst.',
+    'Nur den Beat-1-Satz ausgeben, nichts sonst.',
   ]
     .filter(Boolean)
     .join('\n');
@@ -582,9 +624,9 @@ export async function generateContextualBridge(opts: {
   }
 }
 
-/** Letzter Notnagel — kompletter Satz, keine User-Slots. */
+/** @deprecated Nie sprechen — still statt Floskel/Notfall-Satz. */
 export function emergencyBridgeLine(): string {
-  return 'Genau das setz ich jetzt um — die konkreten Zahlen kommen direkt hinterher.';
+  return '';
 }
 
 async function ensureBridgeLine(
@@ -627,8 +669,8 @@ async function ensureBridgeLine(
       line = await generateContextualBridge(opts);
     }
     if (!line) {
-      noteFallback('Bridge-LLM', 'Notfall-Satz ohne Slot-Kleben');
-      line = emergencyBridgeLine();
+      noteFallback('Bridge-LLM', 'kein Bridge-Satz');
+      return '';
     }
     rememberBridge(line);
     return line;

@@ -86,6 +86,42 @@ const halt = exclusiveHomeMapPlaces([
 ]);
 assert(halt.length === 2, 'Halt auf den Gleisen bleibt getrennt vom Nachbar-Gebäude');
 
+const bahnhofVsPraxis = exclusiveHomeMapPlaces([
+  {
+    id: 20,
+    lat: 53.6753,
+    lng: 9.7602,
+    color: red,
+    ring: [
+      [53.6752, 9.7601],
+      [53.6752, 9.7603],
+      [53.6754, 9.7603],
+      [53.6754, 9.7601],
+      [53.6752, 9.7601],
+    ],
+    amenityDot: true,
+    keepDot: true,
+    pointOnly: true,
+    icon: 'rail',
+  },
+  {
+    id: 21,
+    lat: 53.6753,
+    lng: 9.7602,
+    color: purple,
+    ring: [
+      [53.6752, 9.7601],
+      [53.6752, 9.7603],
+      [53.6754, 9.7603],
+      [53.6754, 9.7601],
+      [53.6752, 9.7601],
+    ],
+  },
+]);
+assert(bahnhofVsPraxis.length === 1, 'Bahnhof+Gebäude am selben Spot = ein Marker');
+assert(bahnhofVsPraxis[0].icon === 'rail', 'Bahn-Icon bleibt, Fill löscht es nicht');
+assert(bahnhofVsPraxis[0].ring == null, 'Transit ohne Ring');
+
 const stolen = exclusiveHomeMapPlaces([
   {
     id: 20,

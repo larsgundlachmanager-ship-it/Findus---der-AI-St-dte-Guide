@@ -67,6 +67,14 @@ async function commitChosenWalkOrBike(
     /* soft */
   }
   try {
+    try {
+      const { armSkipMobilityChoiceOnce } = require('../../services/navigation/navLeaveByFollowUp') as {
+        armSkipMobilityChoiceOnce: () => void;
+      };
+      armSkipMobilityChoiceOnce();
+    } catch {
+      /* soft */
+    }
     const { startHomeMapNavigation } = await import(
       '../../services/homeMap/homeMapNavStart'
     );
@@ -124,13 +132,20 @@ async function commitChosenTransit(
         Math.abs(remembered.destLng - target.lng) < 0.008
       ) {
         const { startJourneyNavigation } = require('../../services/navigation/startJourneyNavigation') as {
-          startJourneyNavigation: (o: typeof remembered) => Promise<{
+          startJourneyNavigation: (o: typeof remembered & {
+            replace?: boolean;
+            forceStart?: boolean;
+          }) => Promise<{
             ok: boolean;
             reply: string;
           }>;
         };
         takeRememberedJourney();
-        const jr = await startJourneyNavigation(remembered);
+        const jr = await startJourneyNavigation({
+          ...remembered,
+          replace: true,
+          forceStart: true,
+        });
         if (jr.ok) {
           try {
             const { useLivePitchStore } = require('./publishPitchUi') as {
@@ -167,15 +182,50 @@ async function commitChosenTransit(
       return { ok: false, message: 'GPS hängt kurz — ÖPNV kann ich so nicht planen.' };
     }
 
-    const { startTransitHandsFree } = await import(
+    const { planTransitHandsFreeDetailed } = await import(
       '../../services/navigation/handsFreeNav/transitBridge'
     );
-    const tr = await startTransitHandsFree({
+    const planned = await planTransitHandsFreeDetailed({
       from: { lat: fromLat, lng: fromLng },
       to: { lat: target.lat, lng: target.lng },
-      destName: target.name,
     });
-    if (tr.ok) {
+    if (!planned.itinerary) {
+      return {
+        ok: false,
+        message: 'Keine ÖPNV-Verbindung gefunden (Transitous/DB).',
+      };
+    }
+    try {
+      const { rememberJourneyForStart } = require('../../services/navigation/journeyStartCache') as {
+        rememberJourneyForStart: (o: {
+          itinerary: unknown;
+          destName: string;
+          destLat: number;
+          destLng: number;
+        }) => void;
+      };
+      rememberJourneyForStart({
+        itinerary: planned.itinerary,
+        destName: target.name,
+        destLat: target.lat,
+        destLng: target.lng,
+      });
+    } catch {
+      /* soft */
+    }
+    const { startJourneyNavigation } = await import(
+      '../../services/navigation/startJourneyNavigation'
+    );
+    const jr = await startJourneyNavigation({
+      itinerary: planned.itinerary,
+      destName: target.name,
+      destLat: target.lat,
+      destLng: target.lng,
+      tight: planned.tight,
+      replace: true,
+      forceStart: true,
+    });
+    if (jr.ok) {
       try {
         const { useLivePitchStore } = require('./publishPitchUi') as {
           useLivePitchStore: { getState: () => { clear: (force?: boolean) => void } };
@@ -184,11 +234,11 @@ async function commitChosenTransit(
       } catch {
         /* soft */
       }
-      return { ok: true, message: tr.message };
+      return { ok: true, message: jr.reply };
     }
     return {
       ok: false,
-      message: tr.message || 'Keine ÖPNV-Verbindung gefunden.',
+      message: jr.reply || 'Keine ÖPNV-Verbindung gefunden.',
     };
   } catch (err) {
     return {
@@ -235,6 +285,45 @@ export async function startPitchNavigation(
   store.setNavRouteLoading(true);
 
   try {
+    // Laufende Nav: neuer Ort = Zwischenstopp. Fuß/ÖPNV/Rad = Moduswechsel, kein Insert.
+    const navLive =
+      store.navActive === true ||
+      Boolean(
+        store.multiStopTour?.stops?.some(
+          (s: { done?: boolean }) => s && s.done !== true,
+        ),
+      );
+    const modeSwitch =
+      intent?.preferWalk === true ||
+      intent?.preferTransit === true ||
+      intent?.preferBike === true;
+    if (navLive && !modeSwitch) {
+      try {
+        const { addOptimizedTourStop, appendTourStop } = await import(
+          '../../services/navigation/multiStopTour'
+        );
+        const stop = {
+          poiId: -1,
+          name,
+          lat,
+          lng,
+          done: false as const,
+          priority: 'high' as const,
+          remindMinBefore: null,
+        };
+        const optimized = await addOptimizedTourStop(stop, { startNow: true });
+        if (optimized) {
+          return { ok: true, message: optimized.speechHint };
+        }
+        const appended = await appendTourStop(stop, { startNow: true });
+        if (appended) {
+          return { ok: true, message: appended.speechHint };
+        }
+      } catch {
+        /* soft — fall through */
+      }
+    }
+
     if (intent?.preferWalk) {
       return commitChosenWalkOrBike({ name, lat, lng }, 'foot');
     }
@@ -298,6 +387,27 @@ export async function startPitchNavigation(
       fromLat != null &&
       fromLng != null
     ) {
+      let preferFootOrBike = false;
+      try {
+        const { resolveActiveTravelMode } = require('../../services/navigation/travelModeContext') as {
+          resolveActiveTravelMode: () => {
+            mode: 'transit' | 'foot' | 'bike';
+            explicit: boolean;
+          };
+        };
+        const { mode, explicit } = resolveActiveTravelMode();
+        // Speech/Profil sagt Fuß/Rad → nie still auf ÖPNV umbiegen
+        if (explicit && mode === 'foot') {
+          return commitChosenWalkOrBike({ name, lat, lng }, 'foot');
+        }
+        if (explicit && mode === 'bike') {
+          return commitChosenWalkOrBike({ name, lat, lng }, 'bike');
+        }
+        preferFootOrBike = mode === 'foot' || mode === 'bike';
+      } catch {
+        /* soft */
+      }
+      if (!preferFootOrBike) {
       try {
         const { setPreferredTravelMode } = require('../../services/navigation/travelModeContext') as {
           setPreferredTravelMode: (m: 'transit' | 'foot' | 'bike' | null) => void;
@@ -322,6 +432,7 @@ export async function startPitchNavigation(
       } catch {
         /* fall through to walk + auto-ÖPNV */
       }
+      }
     }
 
     const { interruptAndNavigateToDiscovery } = await import(
@@ -329,7 +440,12 @@ export async function startPitchNavigation(
     );
     const ok = await interruptAndNavigateToDiscovery(
       { name, lat, lng },
-      { skipDestVerify: true, skipClosingGate: true },
+      {
+        skipClosingGate: true,
+        // Bei aktiver Nav: Insert; sonst frische Route
+        skipDestVerify: !navLive,
+        insertStop: navLive,
+      },
     );
     if (ok) {
       return { ok: true };

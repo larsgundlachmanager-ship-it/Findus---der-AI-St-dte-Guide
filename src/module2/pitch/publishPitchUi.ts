@@ -16,6 +16,7 @@ import {
 import { useFuturePlanStore } from '../timeline/futurePlanState';
 import type { PitchOptionCard, PitchResult, PitchUiLayout } from './types';
 import { selectPitchOption } from './pitchDeepAppend';
+import { humanizeBullets } from '../speech/draftToHumanSpeech';
 
 export type LivePitchState = {
   requestId: string | null;
@@ -72,7 +73,10 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
       requestId: r.requestId,
       layout: r.uiLayout,
       headline: headline || r.summary || 'Zwei Optionen',
-      options: r.options,
+      options: r.options.map((o) => ({
+        ...o,
+        bullets: humanizeBullets(o.bullets ?? [], 3),
+      })),
       softFail: r.softFail,
       loading: false,
       selectedOptionId: null,
@@ -80,6 +84,22 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
       pitchKind: meta?.pitchKind ?? null,
       pitchContext: meta?.pitchContext ?? null,
     });
+    // Pitch ersetzt Spickzettel: keine Stichpunkte parallel/unter der Auswahl
+    try {
+      const { useFinnusStore } = require('../../store/useFinnusStore') as {
+        useFinnusStore: {
+          getState: () => {
+            setActiveConciergeCard: (c: null) => void;
+            setPendingAffiliateOffer: (o: null) => void;
+          };
+        };
+      };
+      const st = useFinnusStore.getState();
+      st.setActiveConciergeCard(null);
+      st.setPendingAffiliateOffer(null);
+    } catch {
+      /* soft */
+    }
   },
   setLoading: (headline) => {
     const cur = get().requestId;
@@ -106,6 +126,126 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
       !id.startsWith('map_nav_mobility_')
     ) {
       try {
+        const { enqueueSpeech } = require('../speech/speechQueue') as {
+          enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
+        };
+        const noteInventory = () => {
+          try {
+            const { noteLastLiveInventory } = require('../context/shortTermContext') as {
+              noteLastLiveInventory: (o: {
+                kind: 'pitch_choice';
+                query: string;
+              }) => void;
+            };
+            noteLastLiveInventory({
+              kind: 'pitch_choice',
+              query: `${get().pitchContext || ''} ${chosen.name}`.trim().slice(0, 200),
+            });
+          } catch {
+            /* soft */
+          }
+        };
+
+        // Kino-Venue gewählt → sofort Programm laden (blauer Balken), kein Timing-Fork
+        if (
+          get().pitchKind === 'cinema' &&
+          !String(chosen.id).includes('_film_')
+        ) {
+          noteInventory();
+          set({
+            selectedOptionId: optionId,
+            options: [chosen],
+            headline: `Programm — ${chosen.name}`.slice(0, 56),
+            loading: true,
+          });
+          try {
+            const { useFinnusStore } = require('../../store/useFinnusStore') as {
+              useFinnusStore: {
+                getState: () => { setNavRouteLoading?: (v: boolean) => void };
+              };
+            };
+            useFinnusStore.getState().setNavRouteLoading?.(true);
+          } catch {
+            /* soft */
+          }
+          void import('./cinemaVenueProgramBrief')
+            .then(({ briefCinemaVenueAfterChoice }) =>
+              briefCinemaVenueAfterChoice({
+                venue: chosen,
+                userContext: get().pitchContext,
+              }),
+            )
+            .then((brief) => {
+              if (get().selectedOptionId !== optionId) return;
+              enqueueSpeech({
+                kind: 'main',
+                text: brief.speech,
+                turnId: `cinema_prog_${id}`,
+              });
+              set({
+                loading: false,
+                options: [
+                  {
+                    ...chosen,
+                    speechPitch: brief.speech,
+                    bullets: brief.bullets,
+                    actions: brief.actions,
+                    ticketUrl: brief.ticketUrl ?? chosen.ticketUrl,
+                    websiteUrl: brief.websiteUrl ?? chosen.websiteUrl,
+                  },
+                ],
+                headline: brief.headline,
+              });
+            })
+            .catch(() => {
+              if (get().selectedOptionId !== optionId) return;
+              set({ loading: false });
+            })
+            .finally(() => {
+              try {
+                const { useFinnusStore } = require('../../store/useFinnusStore') as {
+                  useFinnusStore: {
+                    getState: () => { setNavRouteLoading?: (v: boolean) => void };
+                  };
+                };
+                useFinnusStore.getState().setNavRouteLoading?.(false);
+              } catch {
+                /* soft */
+              }
+            });
+          return;
+        }
+
+        // Multi-Lane Fetch→Spot: kein Timing-Fork — Nav inkl. Follow-On läuft im Slot
+        if (
+          chosen.followOnStop &&
+          Number.isFinite(chosen.followOnStop.lat) &&
+          Number.isFinite(chosen.followOnStop.lng)
+        ) {
+          noteInventory();
+          const hint = String(
+            chosen.followOnStop.enjoyHint || chosen.followOnStop.name || '',
+          ).trim();
+          const speech = hint
+            ? `Super — dann holen wir bei ${chosen.name} etwas und danach geht’s weiter zum ${hint}.`
+            : `Super — dann zuerst zu ${chosen.name}, danach der nächste Stopp.`;
+          enqueueSpeech({
+            kind: 'main',
+            text: speech,
+            turnId: `pitch_ml_follow_${id}`,
+          });
+          set({
+            selectedOptionId: optionId,
+            options: [
+              {
+                ...chosen,
+                speechPitch: speech,
+              },
+            ],
+            headline: `Gute Wahl — ${chosen.name}`.slice(0, 56),
+          });
+          return;
+        }
         const { resolvePitchTimingMode, pitchTimingAskSpeech, pitchTimingAskActions, pitchTimingLaterSpeech, pitchTimingNowActions, pitchDiningForkSpeech, pitchDiningForkActions } =
           require('./pitchTimingFork') as {
             resolvePitchTimingMode: (o: {
@@ -120,19 +260,26 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
             pitchTimingNowActions: (o: PitchOptionCard) => import('../../types/concierge').QuickAction[];
             pitchDiningForkActions: (o: PitchOptionCard) => import('../../types/concierge').QuickAction[];
           };
-        const { enqueueSpeech } = require('../speech/speechQueue') as {
-          enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
-        };
         const mode = resolvePitchTimingMode({
           visitAtMs: get().visitAtMs,
           userText: get().pitchContext,
           pitchKind: get().pitchKind,
         });
         if (mode === 'dining_fork') {
+          noteInventory();
           const speech = pitchDiningForkSpeech(chosen.name);
+          let nextSoft: string | null = null;
+          try {
+            const { completeActiveAndPeekNatural } = require('../router/intentQueue') as {
+              completeActiveAndPeekNatural: () => { softBrief: string | null };
+            };
+            nextSoft = completeActiveAndPeekNatural().softBrief;
+          } catch {
+            nextSoft = null;
+          }
           enqueueSpeech({
             kind: 'main',
-            text: speech,
+            text: nextSoft ? `${speech} ${nextSoft}` : speech,
             turnId: `pitch_dining_${id}`,
           });
           set({
@@ -149,6 +296,7 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
           return;
         }
         if (mode === 'ask') {
+          noteInventory();
           enqueueSpeech({
             kind: 'main',
             text: pitchTimingAskSpeech(),
@@ -177,6 +325,9 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
               pitchContext?: string | null;
             }) => void;
           };
+          const { pitchTimingLaterActions } = require('./pitchTimingFork') as {
+            pitchTimingLaterActions: (o: PitchOptionCard) => import('../../types/concierge').QuickAction[];
+          };
           mirrorLivePitchChoiceToTimeline({
             requestId: id,
             option: chosen,
@@ -184,14 +335,37 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
             pitchKind: get().pitchKind,
             pitchContext: get().pitchContext,
           });
+          try {
+            const { requestOpenPlanCalendar, requestDayKey } = require('../timeline/planCalendarUiStore') as {
+              requestOpenPlanCalendar: () => void;
+              requestDayKey: (k: string) => void;
+            };
+            const { dateKeyFromMs } = require('../../utils/dateKeys') as {
+              dateKeyFromMs: (ms: number) => string;
+            };
+            const visit = get().visitAtMs;
+            if (visit != null && Number.isFinite(visit)) {
+              requestDayKey(dateKeyFromMs(visit));
+            }
+            requestOpenPlanCalendar();
+          } catch {
+            /* soft */
+          }
+          const laterSpeech = pitchTimingLaterSpeech(chosen.name);
           enqueueSpeech({
             kind: 'main',
-            text: pitchTimingLaterSpeech(chosen.name),
+            text: laterSpeech,
             turnId: `pitch_later_${id}`,
           });
           set({
             selectedOptionId: optionId,
-            options: [chosen],
+            options: [
+              {
+                ...chosen,
+                actions: pitchTimingLaterActions(chosen),
+                speechPitch: laterSpeech,
+              },
+            ],
             headline: `Eingetragen — ${chosen.name}`.slice(0, 56),
           });
           return;
@@ -242,9 +416,14 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
   },
   patchOption: (optionId, patch) =>
     set((s) => ({
-      options: s.options.map((o) =>
-        o.id === optionId ? { ...o, ...patch } : o,
-      ),
+      options: s.options.map((o) => {
+        if (o.id !== optionId) return o;
+        const next = { ...o, ...patch };
+        if (patch.bullets) {
+          next.bullets = humanizeBullets(patch.bullets, 3);
+        }
+        return next;
+      }),
     })),
   clear: (force?: boolean) => {
     const cur = get().requestId;
@@ -260,6 +439,25 @@ export const useLivePitchStore = create<LivePitchState>((set, get) => ({
       pitchKind: null,
       pitchContext: null,
     });
+    // Pitch-Auswahl ODER Stichpunkte — nie nach Pitch-Close die Card wieder aufpoppen
+    try {
+      const { useFinnusStore } = require('../../store/useFinnusStore') as {
+        useFinnusStore: {
+          getState: () => {
+            activeConciergeCard: unknown;
+            setActiveConciergeCard: (c: null) => void;
+            setPendingAffiliateOffer: (o: null) => void;
+          };
+        };
+      };
+      const st = useFinnusStore.getState();
+      if (st.activeConciergeCard) {
+        st.setActiveConciergeCard(null);
+        st.setPendingAffiliateOffer(null);
+      }
+    } catch {
+      /* soft */
+    }
   },
 }));
 
@@ -273,8 +471,8 @@ function toPlanCard(
     title: `${o.role === 'favorite' ? '🥇' : o.role === 'out_of_box' ? '✨' : '🥈'} ${o.name}`,
     lat: o.lat,
     lng: o.lng,
-    subtitle: (o.bullets ?? []).join('\n'),
-    bullets: o.bullets ?? [],
+    subtitle: humanizeBullets(o.bullets ?? [], 3).join('\n'),
+    bullets: humanizeBullets(o.bullets ?? [], 3),
     mapsUrl: o.mapsUrl,
     menuUrl: o.menuUrl ?? null,
     placeId: o.placeId ?? null,
@@ -349,7 +547,10 @@ export function publishPitchToTimeline(
 
   useFuturePlanStore.getState().ensureDay(dayKey);
   requestDayKey(dayKey);
-  requestOpenPlanCalendar();
+  // Ideal: Calendar nur bei explizitem openCalendar — nicht bei jedem Pitch
+  if ((opts as { openCalendar?: boolean }).openCalendar === true) {
+    requestOpenPlanCalendar();
+  }
   clearChoiceStopsOnDay(dayKey, opts.stepKey);
 
   const sides: Array<{
@@ -366,7 +567,7 @@ export function publishPitchToTimeline(
 
   for (const { card, side, medal } of sides) {
     const id = `choice_${opts.stepKey}_${side}`;
-    const noteLines = (card.bullets ?? []).slice(0, 3);
+    const noteLines = humanizeBullets(card.bullets ?? [], 3);
     useFuturePlanStore.getState().upsertStopOnDay(dayKey, {
       id,
       title: `${medal} ${card.name}`.slice(0, 48),
@@ -384,6 +585,7 @@ export function publishPitchToTimeline(
       notes: noteLines.join('\n'),
       mapsUrl: card.mapsUrl,
       menuUrl: card.menuUrl ?? null,
+      websiteUrl: card.websiteUrl ?? null,
       emoji: medal,
       userFixedTime: startMs != null,
     });
@@ -404,8 +606,7 @@ export function publishPitchToTimeline(
   }
   usePlanCalendarUiStore.getState().setMirroredActions(mirrored.slice(0, 6));
   usePlanCalendarUiStore.getState().setShortAnswers([
-    { id: 'reject_l', label: 'Neu suchen', action: 'plan_reject' },
-    { id: 'reject_r', label: 'Neu suchen', action: 'plan_reject' },
+    { id: 'plan_reject', label: 'Neu suchen', action: 'plan_reject' },
   ]);
   requestPlanScroll({ kind: 'choice', stepKey: opts.stepKey });
 }
@@ -431,15 +632,47 @@ export function publishPitchResult(
     anchorTimeMs?: number | null;
     pitchKind?: import('./types').PitchKind | null;
     pitchContext?: string | null;
+    /** Nur true wenn Call-1 uiRequirements.openCalendar — Default false */
+    openCalendar?: boolean;
   },
 ): void {
-  if (result.uiLayout === 'timeline_stack') {
-    publishPitchToTimeline(result, opts);
-  } else {
-    publishPitchToLive(result, opts.headline, {
-      visitAtMs: opts.anchorTimeMs ?? null,
-      pitchKind: opts.pitchKind ?? null,
-      pitchContext: opts.pitchContext ?? null,
+  // Dining/Pitch default live_split; Calendar nur bei explizitem uiRequirements-Flag
+  // Phase 8: Amenity single-place nie in Timeline spiegeln
+  let layout = result.uiLayout;
+  try {
+    const { isAmenitySinglePlacePitch } = require('./pitchAmenityUi') as {
+      isAmenitySinglePlacePitch: (o: {
+        kind?: string | null;
+        text?: string | null;
+      }) => boolean;
+    };
+    if (
+      isAmenitySinglePlacePitch({
+        kind: opts.pitchKind,
+        text: opts.pitchContext,
+      })
+    ) {
+      layout = 'live_split';
+    }
+  } catch {
+    /* soft */
+  }
+  const openCalendar =
+    opts.openCalendar === true && layout === 'timeline_stack';
+  if (layout === 'timeline_stack') {
+    publishPitchToTimeline(result, {
+      ...opts,
+      openCalendar,
     });
+  } else {
+    publishPitchToLive(
+      { ...result, uiLayout: 'live_split' },
+      opts.headline,
+      {
+        visitAtMs: opts.anchorTimeMs ?? null,
+        pitchKind: opts.pitchKind ?? null,
+        pitchContext: opts.pitchContext ?? null,
+      },
+    );
   }
 }

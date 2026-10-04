@@ -139,7 +139,7 @@ export function resolveMatrixPersona(
   personality?: string | null,
 ): MatrixPersona {
   const p = profile ?? getCachedUserProfile();
-  const voiceId = (p?.voiceId ?? 'alina') as VoiceId;
+  const voiceId = (p?.voiceId ?? 'sebastian') as VoiceId;
   if (VOICE_TO_MATRIX[voiceId]) return VOICE_TO_MATRIX[voiceId]!;
   if (personality && PERSONALITY_TO_MATRIX[personality]) {
     return PERSONALITY_TO_MATRIX[personality];

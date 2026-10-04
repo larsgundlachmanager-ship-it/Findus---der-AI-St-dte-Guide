@@ -89,6 +89,18 @@ export function canonicalizeLandmarkQuery(raw: string): {
     };
   }
 
+  // Tennisclub Prisdorf — STT oft „Priester“ / „Priesdorf“ / „prsidorf“ / „Tennisclub Priester“
+  if (
+    /\btennis(?:[-\s]?club|club|platz|anlage)?\b/iu.test(t) &&
+    /\b(prisdorf|prsidorf|prisodrf|priester|priesdorf|priestorf|tcp)\b/iu.test(t)
+  ) {
+    return {
+      query: 'Tennis-Club Prisdorf TCP',
+      preferredCityId: 'prisdorf',
+      matchedLandmark: true,
+    };
+  }
+
   return { query: t, preferredCityId: null, matchedLandmark: false };
 }
 
@@ -108,7 +120,7 @@ export function slugCityHint(hint: string | null | undefined): string | null {
   const h = (hint || '').trim().toLowerCase();
   if (!h) return null;
   if (/hamburg|hafen\s*city|hafencity/.test(h)) return 'hamburg';
-  if (/prisdorf/.test(h)) return 'prisdorf';
+  if (/prisdorf|priester|priesdorf|priestorf/.test(h)) return 'prisdorf';
   if (/lübeck|luebeck/.test(h)) return 'luebeck';
   if (/berlin/.test(h)) return 'berlin';
   if (/lissabon|lisbon/.test(h)) return 'lissabon';

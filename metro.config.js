@@ -44,6 +44,14 @@ config.resolver.blockList = new RegExp(
     '/__tests__/',
     // Legacy ONNX under src/assets/piper — native only, not Metro
     '/src/assets/piper/.*\\.onnx$',
+    // Stadt-Packs/Index nie per require() in die APK (remote Supabase)
+    '/data/staedte/',
+    // Cover-Master nur Upload-Pipeline — App lädt HTTPS cover_url
+    '/assets/onboarding/city-.*\\.png$',
+    '/assets/onboarding/.*-soft\\.png$',
+    // Dev-only Audio (nicht Voice-Preview)
+    '/src/assets/audio/samples/',
+    '/src/assets/audio/_female_audit/',
   ].join('|'),
 );
 

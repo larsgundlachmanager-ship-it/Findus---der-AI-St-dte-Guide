@@ -30,6 +30,7 @@ import type { PendingNavOffer } from './navigationTypes';
 import { suggestNearbyUnvisited } from '../research/poiDiscoveryResearch';
 import {
   addOptimizedTourStop,
+  appendTourStop,
   clearMultiStopTour,
   hasActiveTourQueue,
   weaveSpontaneousStop,
@@ -190,18 +191,21 @@ async function startNavOrWeaveIntoTour(opts: {
   }
 
   if (addStop) {
-    const added = await addOptimizedTourStop(
-      {
-        poiId: opts.poiId ?? -1,
-        name: opts.name,
-        lat: opts.lat,
-        lng: opts.lng,
-        done: false,
-        priority: 'high',
-        remindMinBefore: null,
-      },
-      { startNow: true },
-    );
+    // Wie Speech: Tour = SSOT → Live-Timeline-Spiegel in addOptimizedTourStop.
+    const stop = {
+      poiId: opts.poiId ?? -1,
+      name: opts.name,
+      lat: opts.lat,
+      lng: opts.lng,
+      done: false as const,
+      priority: 'high' as const,
+      remindMinBefore: null,
+    };
+    const optimized = await addOptimizedTourStop(stop, { startNow: true });
+    if (optimized) {
+      return { ok: true, weaveSpeech: optimized.speechHint };
+    }
+    const added = await appendTourStop(stop, { startNow: true });
     if (added) {
       return { ok: true, weaveSpeech: added.speechHint };
     }
@@ -438,12 +442,20 @@ export function spokenCityHint(_name: string, userQuery?: string): string | null
   }
 }
 
-function geocodeOptsForQuery(query: string): {
+function geocodeOptsForQuery(
+  query: string,
+  userQuery?: string | null,
+): {
   biasLat?: number;
   biasLng?: number;
   cityHint?: string | null;
+  userText?: string | null;
 } {
   const gps = biasFromStore();
+  const withUser = {
+    ...gps,
+    userText: userQuery || query || null,
+  };
   try {
     const { geocodeBiasForSpokenCity } = require('./fuzzyCityResolve') as {
       geocodeBiasForSpokenCity: (q: string) => {
@@ -453,11 +465,11 @@ function geocodeOptsForQuery(query: string): {
       } | null;
     };
     const spoken = geocodeBiasForSpokenCity(query);
-    if (spoken) return spoken;
+    if (spoken) return { ...spoken, userText: userQuery || query || null };
   } catch {
     /* GPS-Fallback */
   }
-  return gps;
+  return withUser;
 }
 
 function cleanName(name: string | null | undefined): string {
@@ -850,6 +862,18 @@ async function resolveAndStartNavigationInner(
     /* soft */
   }
   const rawQuery = String(input.userQuery || nameHint).trim();
+  try {
+    const { repairNavDestLabel } = require('./navDestFuzzyRepair') as {
+      repairNavDestLabel: (
+        raw: string,
+        o?: { userText?: string | null },
+      ) => string;
+    };
+    const repaired = repairNavDestLabel(nameHint, { userText: rawQuery });
+    if (repaired && repaired !== nameHint) nameHint = cleanName(repaired);
+  } catch {
+    /* soft */
+  }
   const addressMode = looksLikeStreetAddress(nameHint);
   // Explizite POI-ID behalten; bei Straße+Nr. keinen Name→POI-Pfad erzwingen
   let existingId = addressMode
@@ -1132,17 +1156,32 @@ async function resolveAndStartNavigationInner(
     // Online: Straße+Hausnummer → Geocode (street_address), nie Places-Establishment
     if (addressMode) {
       rememberStreetNavQuery(nameHint);
-      const bias = geocodeOptsForQuery(nameHint);
+      const bias = geocodeOptsForQuery(nameHint, rawQuery);
       const candidates = expandStreetAddressGeocodeQueries(nameHint, {
         profileCity: bias.cityHint,
         biasLat: bias.biasLat,
         biasLng: bias.biasLng,
       });
-      for (const cand of candidates) {
-        const geo = await geocodePlaceNameOsmFirst(cand, {
-          ...geocodeOptsForQuery(cand),
-          preferStreetAddress: true,
-        });
+      // Call-1 hat denselben Adress-Resolve bereits parallel zur Bridge gestartet.
+      // Diesen Request übernehmen statt Nominatim/Google ein zweites Mal anzustoßen.
+      let prefetchedGeo: Awaited<
+        ReturnType<typeof geocodePlaceNameOsmFirst>
+      > = null;
+      try {
+        const { awaitNavDestPrefetch } = await import('./navDestPrefetch');
+        prefetchedGeo = await awaitNavDestPrefetch(nameHint);
+      } catch {
+        prefetchedGeo = null;
+      }
+      for (let i = 0; i < candidates.length; i += 1) {
+        const cand = candidates[i]!;
+        const geo =
+          i === 0 && prefetchedGeo
+            ? prefetchedGeo
+            : await geocodePlaceNameOsmFirst(cand, {
+                ...geocodeOptsForQuery(cand, rawQuery),
+                preferStreetAddress: true,
+              });
         if (!geo) continue;
         const destName = geo.label || cand;
         const blocked = await runGate({
@@ -1191,7 +1230,7 @@ async function resolveAndStartNavigationInner(
     // Pack zuerst — aktuelle Stadt, dann andere gecachte Packs, dann Geocode
     try {
       const { resolvePlacePackOsmGoogle } = await import('./packPlaceResolve');
-      const biasPack = geocodeOptsForQuery(nameHint);
+      const biasPack = geocodeOptsForQuery(nameHint, rawQuery);
       const packHit = await resolvePlacePackOsmGoogle({
         query: nameHint,
         cityHint: biasPack.cityHint,
@@ -1243,7 +1282,7 @@ async function resolveAndStartNavigationInner(
     const { resolveDestinationWithEntrance } = await import(
       './resolveEntranceCoords'
     );
-    const bias = geocodeOptsForQuery(nameHint);
+    const bias = geocodeOptsForQuery(nameHint, rawQuery);
     const entrance = await resolveDestinationWithEntrance({
       name: nameHint,
       biasLat: bias?.biasLat,
@@ -1340,7 +1379,7 @@ async function resolveAndStartNavigationInner(
       }
     }
 
-    const geo = await geocodePlaceNameOsmFirst(nameHint, geocodeOptsForQuery(nameHint));
+    const geo = await geocodePlaceNameOsmFirst(nameHint, geocodeOptsForQuery(nameHint, rawQuery));
     if (geo) {
       const destName = geo.label || nameHint;
       const blocked = await runGate({

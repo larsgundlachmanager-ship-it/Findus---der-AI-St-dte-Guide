@@ -1,7 +1,10 @@
 # Installiert die neueste Release-APK (ohne Metro) auf dem verbundenen Gerät.
 # Daten bleiben erhalten (install -r). Stempel/Profil/DB bleiben.
+#
+# Default-Gerät = Nothing (Unterwegs). Live-QA läuft auf dem neuen Handy
+# (FINDUS_QA_SERIAL) — siehe .cursor/rules/findus-device-routing.mdc
 param(
-    [string]$Serial = '',
+    [string]$Serial = $(if ($env:FINDUS_TRAVEL_SERIAL) { $env:FINDUS_TRAVEL_SERIAL } else { '00143157P001105' }),
     [switch]$Build,
     [switch]$SkipFetch
 )
@@ -28,8 +31,11 @@ $devices = @(& adb devices | Select-String "`tdevice$" | ForEach-Object {
     ($_ -split "`t")[0].Trim()
 })
 if ($devices.Count -eq 0) { throw 'Kein Gerät verbunden.' }
+if ($Serial -and ($devices -notcontains $Serial)) {
+    throw "Travel/Nothing-Gerät $Serial nicht verbunden. Verbunden: $($devices -join ', ')"
+}
 if (-not $Serial) { $Serial = $devices[0] }
-Write-Host "Gerät: $Serial"
+Write-Host "Gerät (Unterwegs/Nothing): $Serial"
 
 if ($Build) {
     $fetch = if ($SkipFetch) { @('-SkipFetch') } else { @() }

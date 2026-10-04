@@ -1,10 +1,12 @@
-﻿/**
+/**
  * Stadtwechsel-Prompt — Cover + Fakten wie Stadt-Katalog, Yorro-Design.
  * Overlay statt RN-Modal (Android: Modal oft nur Fragmente / kein Inhalt).
  */
 
 import React, { useEffect, useRef, useState } from 'react';
 import {
+  Animated,
+  Easing,
   Image,
   Pressable,
   ScrollView,
@@ -33,6 +35,13 @@ import {
   type CitySwitchDecision,
 } from '../services/cityProximityService';
 import type { CityCatalogItem } from '../services/cityCatalogService';
+import {
+  CITY_WELCOME_FETCH_MS,
+  ensureCityWelcomeFacts,
+} from '../services/cityWelcomeFacts';
+
+/** Mindest-Sichtbarkeit Haken+Balken — sonst flackert der Button nur. */
+const WELCOME_UI_MIN_MS = 720;
 
 type Pending = {
   payload: CitySwitchPromptPayload;
@@ -117,9 +126,11 @@ function StatPill({ num, label }: { num: number; label: string }) {
 export function CitySwitchPromptHost() {
   const [pending, setPending] = useState<Pending | null>(null);
   const [acceptedFlash, setAcceptedFlash] = useState(false);
+  const [welcomeLoading, setWelcomeLoading] = useState(false);
   const acceptedRef = useRef(false);
   const pendingRef = useRef<Pending | null>(null);
   const dismissTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const progress = useRef(new Animated.Value(0)).current;
   pendingRef.current = pending;
 
   const clearDismissTimer = () => {
@@ -129,36 +140,97 @@ export function CitySwitchPromptHost() {
     }
   };
 
+  const runProgressAnim = () => {
+    progress.setValue(0);
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: Math.max(WELCOME_UI_MIN_MS, CITY_WELCOME_FETCH_MS - 200),
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: false,
+    }).start();
+  };
+
   const finish = (decision: CitySwitchDecision) => {
     const cur = pendingRef.current;
     if (!cur) return;
-    triggerHapticPulse(decision === 'accept' ? 'heavy' : 'single');
-    if (decision === 'accept') {
+    if (decision === 'dismiss') {
       if (acceptedRef.current) return;
-      acceptedRef.current = true;
-      setAcceptedFlash(true);
-      // Sofort freigeben → Download/Pack im Hintergrund; Karte nur kurz mit Haken.
-      cur.resolve('accept');
+      triggerHapticPulse('single');
       clearDismissTimer();
-      dismissTimerRef.current = setTimeout(() => {
-        acceptedRef.current = false;
-        pendingRef.current = null;
-        setPending(null);
-        setAcceptedFlash(false);
-        dismissTimerRef.current = null;
-      }, 180);
+      try {
+        cur.resolve('dismiss');
+      } catch {
+        /* soft */
+      }
+      acceptedRef.current = false;
+      pendingRef.current = null;
+      setPending(null);
+      setAcceptedFlash(false);
+      setWelcomeLoading(false);
+      progress.setValue(0);
       return;
     }
-    clearDismissTimer();
+
+    // Sofort: Feedback + Fullscreen weg — sonst blockiert das Overlay „Weiter“/Home.
+    if (acceptedRef.current) return;
+    acceptedRef.current = true;
+    triggerHapticPulse('heavy');
+    setAcceptedFlash(true);
+    setWelcomeLoading(true);
+    runProgressAnim();
+    const soft = Boolean(cur.payload.softTarget);
+    const cityId = cur.payload.nearest.id;
+    const cityName = cur.payload.nearest.name || cityId;
+    const startedAt = Date.now();
+
     try {
-      cur.resolve('dismiss');
+      const { beginCityCommitProgress } = require('../services/cityCommitProgress');
+      beginCityCommitProgress({ cityId, cityName });
     } catch {
       /* soft */
     }
-    acceptedRef.current = false;
+
+    // Fullscreen sofort schließen (Taps wieder frei). Progress läuft im Home-HUD.
+    clearDismissTimer();
     pendingRef.current = null;
     setPending(null);
-    setAcceptedFlash(false);
+
+    void (async () => {
+      // Nur Slim-Welcome (~1–3 KB). Voll-Pack erst NACH resolve (applyCitySwitch).
+      if (!soft && cityId) {
+        try {
+          await ensureCityWelcomeFacts(cityId, { allowFullPack: false });
+        } catch {
+          /* soft */
+        }
+      }
+      try {
+        const {
+          setCityCommitProgress,
+          endCityCommitProgress,
+        } = require('../services/cityCommitProgress');
+        setCityCommitProgress(0.92);
+        endCityCommitProgress();
+      } catch {
+        /* soft */
+      }
+      const wait = Math.min(
+        320,
+        Math.max(0, WELCOME_UI_MIN_MS - (Date.now() - startedAt)),
+      );
+      if (wait > 0) {
+        await new Promise<void>((r) => setTimeout(r, wait));
+      }
+      try {
+        cur.resolve('accept');
+      } catch {
+        /* soft */
+      }
+      acceptedRef.current = false;
+      setAcceptedFlash(false);
+      setWelcomeLoading(false);
+      progress.setValue(0);
+    })();
   };
 
   const finishRef = useRef(finish);
@@ -181,6 +253,7 @@ export function CitySwitchPromptHost() {
       pendingRef.current = null;
       setPending(null);
       setAcceptedFlash(false);
+      setWelcomeLoading(false);
     });
     registerCitySwitchAbort((d) => finishRef.current(d));
     return () => {
@@ -311,7 +384,7 @@ export function CitySwitchPromptHost() {
             </Pressable>
             <Pressable
               onPress={() => finish('accept')}
-              disabled={acceptedFlash}
+              disabled={acceptedFlash || welcomeLoading}
               style={styles.primary}
               hitSlop={16}
               accessibilityRole="button"
@@ -321,12 +394,24 @@ export function CitySwitchPromptHost() {
                   : `Auf ${nearest.name} wechseln`
               }
             >
-              {acceptedFlash ? (
-                <View style={styles.acceptedRow}>
-                  <Feather name="check" size={20} color={colors.bg} />
-                  <Text style={styles.primaryText} numberOfLines={1}>
-                    OK
-                  </Text>
+              {acceptedFlash || welcomeLoading ? (
+                <View style={styles.acceptedCol}>
+                  <View style={styles.acceptedRow}>
+                    <Feather name="check" size={22} color={colors.bg} />
+                  </View>
+                  <View style={styles.welcomeBarTrack}>
+                    <Animated.View
+                      style={[
+                        styles.welcomeBarFill,
+                        {
+                          width: progress.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: ['6%', '100%'],
+                          }),
+                        },
+                      ]}
+                    />
+                  </View>
                 </View>
               ) : (
                 <Text style={styles.primaryText}>
@@ -548,5 +633,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 6,
     paddingHorizontal: 8,
+  },
+  acceptedCol: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    minWidth: 88,
+    paddingVertical: 2,
+  },
+  welcomeBarTrack: {
+    width: 96,
+    height: 4,
+    borderRadius: 999,
+    backgroundColor: 'rgba(0,0,0,0.22)',
+    overflow: 'hidden',
+  },
+  welcomeBarFill: {
+    height: '100%',
+    borderRadius: 999,
+    backgroundColor: colors.bg,
   },
 });

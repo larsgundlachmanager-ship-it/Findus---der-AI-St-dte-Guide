@@ -18,6 +18,8 @@ export type QuickActionType =
   | 'BOOK_ESIM'
   | 'COMPLETE_SHOPPING_TASK'
   | 'SNOOZE_SHOPPING_TASK'
+  | 'OPEN_PACK_LIST'
+  | 'TOGGLE_PACK_ITEM'
   | 'SET_WAKE_ALARM'
   /** Countdown / Eieruhr */
   | 'SET_TIMER'
@@ -53,6 +55,8 @@ export type QuickActionPayload = {
   dropoffFormattedAddress?: string;
   /** Uber: gewünschte Abholzeit HH:mm → Reserve-Deep-Link mit pickup_formatted_time. */
   pickupTimeLabel?: string;
+  /** Uber: Abholtag YYYY-MM-DD (Zukunft/Schedule). */
+  pickupDateIso?: string;
   /** Stay22 Zielstadt / Adresse */
   destination?: string;
   /** Hotel: vorausgefüllte Daten (Stay22 / Expedia) */
@@ -73,6 +77,10 @@ export type QuickActionPayload = {
   module1DeepDive?: boolean;
   /** Shopping / Errand task id */
   taskId?: string;
+  /** Packliste id */
+  packListId?: string;
+  /** Packlisten-Item id */
+  packItemId?: string;
   /** Store place id that triggered the reminder */
   placeId?: string;
   /** Trigger offline compass navigation without API fetches */

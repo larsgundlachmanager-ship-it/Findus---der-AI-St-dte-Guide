@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-08-21T18:30:13.489Z",
+  "updated_at": "2026-09-21T08:40:54.842Z",
   "items": [
     {
       "id": "laboe",
@@ -455,6 +455,30 @@
       "applied_at": "2026-08-21T18:30:13.489Z",
       "updated_at": "2026-08-21T18:30:13.489Z",
       "asset": "assets/onboarding/city-kiel-soft.png",
+      "style": "findus_soft_photo_v1"
+    },
+    {
+      "id": "roenne",
+      "city_name": "Rønne",
+      "source": "data/staedte/pending-covers/roenne/source.jpg",
+      "status": "queued",
+      "note": "Hafen + Nikolaus-Kirche",
+      "queued_at": "2026-09-20T22:44:24.222Z",
+      "stylized": null,
+      "applied_at": null,
+      "updated_at": "2026-09-20T22:44:24.222Z"
+    },
+    {
+      "id": "bornholm",
+      "city_name": "Bornholm",
+      "source": "data/staedte/pending-covers/bornholm/source.jpg",
+      "status": "applied",
+      "note": "Hammershus Ruinen Insel-Cover",
+      "queued_at": "2026-09-21T08:36:00Z",
+      "stylized": "data/staedte/pending-covers/bornholm/stylized.png",
+      "applied_at": "2026-09-21T08:40:54.842Z",
+      "updated_at": "2026-09-21T08:40:54.842Z",
+      "asset": "assets/onboarding/city-bornholm-soft.png",
       "style": "findus_soft_photo_v1"
     }
   ]

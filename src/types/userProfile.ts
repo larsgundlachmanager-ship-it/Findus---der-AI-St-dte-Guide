@@ -374,6 +374,8 @@ export interface UserProfile {
   travelParty?: TravelParty | null;
   /** Primäre Mobilität (First-Class, überschreibt Experience-Swipes). */
   mobilityMode?: MobilityMode | null;
+  /** In-Stadt-Mobilität Mehrfach (Fuß/Rad/ÖPNV/Auto). */
+  cityMobilityModes?: MobilityMode[];
   /**
    * Wie reist du? (Mehrfach: Auto, Bahn, Flieger, Fahrrad, Wandern, Reisebus).
    */
@@ -521,7 +523,7 @@ export function createDefaultProfile(): UserProfile {
     version: 1,
     setupComplete: false,
     language: 'de',
-    voiceId: 'alina',
+    voiceId: 'sebastian',
     speechRate: 1,
     ttsProvider: 'cartesia',
     firstName: '',
@@ -562,6 +564,7 @@ export function createDefaultProfile(): UserProfile {
     audioConsentAt: null,
     travelParty: null,
     mobilityMode: null,
+    cityMobilityModes: [],
     travelModes: [],
     energyLevel: null,
     dietaryTags: [],
@@ -577,9 +580,9 @@ export function createDefaultProfile(): UserProfile {
     dataSaverMode: false,
     audioOutputMode: 'normal',
     isPremiumSubscriber: false,
-    coreRole: null,
-    vibeTone: null,
-    knowledgeStyle: null,
+    coreRole: 'classic_guide',
+    vibeTone: 'balanced',
+    knowledgeStyle: 'clear_essence',
     spleens: [],
     voicePinnedByUser: false,
     accountMode: null,
@@ -654,7 +657,7 @@ const LEGACY_VOICE_MAP: Record<string, VoiceId> = {
 };
 
 export function normalizeVoiceId(raw: string | undefined | null): VoiceId {
-  if (!raw) return 'alina';
+  if (!raw) return 'sebastian';
   if (VALID_VOICES.has(raw)) return raw as VoiceId;
-  return LEGACY_VOICE_MAP[raw] ?? 'alina';
+  return LEGACY_VOICE_MAP[raw] ?? 'sebastian';
 }

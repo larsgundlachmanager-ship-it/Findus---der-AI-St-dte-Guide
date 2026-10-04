@@ -463,6 +463,34 @@ export const CITY_SEARCH_META: Record<string, CitySearchMeta> = {
     country: 'Deutschland',
     aliases: ['Bremen'],
   },
+  danzig: {
+    region: 'Pommern / Trójmiasto',
+    country: 'Polen',
+    aliases: [
+      'Danzig',
+      'Gdańsk',
+      'Gdansk',
+      'Gdynia',
+      'Gdingen',
+      'Sopot',
+      'Zoppot',
+      'Trójmiasto',
+      'Trojmiasto',
+      'Tri-City',
+      'Poland',
+      'Polen',
+    ],
+  },
+  roenne: {
+    region: 'Bornholm',
+    country: 'Dänemark',
+    aliases: ['Rønne', 'Ronne', 'Roenne', 'Bornholm Rønne'],
+  },
+  bornholm: {
+    region: 'Insel / Ostsee',
+    country: 'Dänemark',
+    aliases: ['Bornholm', 'Bornholms', 'Born Holm'],
+  },
 
 };
 

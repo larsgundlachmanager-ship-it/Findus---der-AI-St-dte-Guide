@@ -1,7 +1,8 @@
 /**
  * Homescreen-Kompass: Tipp-Folge + Magnet-Bias (kein RN).
  *
- * GPS- und Kompass-Button: 1. Tipp = einmalig · 2. Tipp in 5 s = Follow-Lock.
+ * GPS: ein Tipp zentriert + Standort-Follow.
+ * Kompass: Norden oben → Blickrichtungs-Follow.
  * Beim Gehen: GPS-Kurs gleicht einen konstanten Magnet-Offset aus.
  */
 
@@ -17,6 +18,43 @@ export type HudLockAction = 'pulse' | 'lock' | 'unlock';
 export type HudLockTapResult = HudLockTapState & {
   action: HudLockAction;
 };
+
+export const GPS_RECENTER_CLOSE_ENOUGH_ZOOM = 15.5;
+export const GPS_RECENTER_STREET_ZOOM = 16;
+
+export type GpsRecenterTapState = HudLockTapState & {
+  stage?: 'centered' | 'zoomed';
+};
+
+export type GpsRecenterTapResult = GpsRecenterTapState & {
+  action: 'center' | 'zoom_in' | 'lock' | 'unlock';
+};
+
+export function gpsZoomIsCloseEnough(
+  currentZoom: number | null | undefined,
+  threshold = GPS_RECENTER_CLOSE_ENOUGH_ZOOM,
+): boolean {
+  return typeof currentZoom === 'number' &&
+    Number.isFinite(currentZoom) &&
+    currentZoom >= threshold;
+}
+
+/**
+ * GPS-Button: Position und Blickrichtung bleiben strikt getrennt.
+ * Ein Tipp zentriert + Fixierung. Nochmal bei Fix: aus.
+ * Straßenzoom macht snapGps, nicht die Tap-Stufe.
+ */
+export function nextGpsRecenterTap(
+  state: GpsRecenterTapState,
+  nowMs: number,
+  _currentZoom?: number | null,
+  _windowMs = HUD_LOCK_REARM_MS,
+): GpsRecenterTapResult {
+  if (state.locked) {
+    return { locked: false, lastTapAt: nowMs, stage: undefined, action: 'unlock' };
+  }
+  return { locked: true, lastTapAt: nowMs, stage: undefined, action: 'lock' };
+}
 
 /**
  * 1. Tipp → einmalig (GPS: zentrieren · Kompass: Norden oben).
@@ -49,7 +87,7 @@ export type CompassTapResult = {
   follow: boolean;
   armedForFollow: boolean;
   lastTapAt: number;
-  action: 'north' | 'follow';
+  action: 'north_up' | 'heading_lock' | 'unlock';
 };
 
 /** Karte gilt als „Norden oben“, solange Bearing unter diesem Wert bleibt. */
@@ -82,7 +120,12 @@ export function nextCompassTap(
     follow: next.locked,
     armedForFollow: next.action === 'pulse',
     lastTapAt: next.lastTapAt,
-    action: next.action === 'lock' ? 'follow' : 'north',
+    action:
+      next.action === 'lock'
+        ? 'heading_lock'
+        : next.action === 'unlock'
+          ? 'unlock'
+          : 'north_up',
   };
 }
 

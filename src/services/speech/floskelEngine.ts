@@ -8,9 +8,6 @@
  */
 
 import floskelLibrary from '../../assets/data/floskelLibrary.json';
-import { getCachedUserProfile } from '../userProfileService';
-import { getVoiceSettingsForTour } from '../ttsService';
-import { speakRuntimeText } from '../../runtime/speechModule';
 import {
   analyzeSmartRoute,
   type SmartIntentKind,
@@ -98,6 +95,17 @@ function detectFloskelCategory(userText: string): string {
     return 'hours';
   }
   if (/\b(telefon|nummer|anruf)\b/u.test(t)) return 'phone';
+
+  // Notfall VOR events/dining — Empathie-Cover, kein Event-Ack
+  if (
+    /\b(notfall|rettungsdienst|112|krankenhaus|unfall|notdienst|zahnschmerzen?|zahnarzt|apotheke|gebrochen|fu[sß]\s+gebrochen|gebrochenen?\s+fu[sß])\b/u.test(
+      t,
+    ) ||
+    /\b(arzt|klinik|chirurgie)\b/u.test(t)
+  ) {
+    return 'safety';
+  }
+
   if (/\b(party|nachtleben)\b/u.test(t)) return 'nightlife';
   // Outfit/Wetter VOR „heute Abend“→events — sonst falscher Ack + falsche Erwartung
   if (
@@ -120,10 +128,34 @@ function detectFloskelCategory(userText: string): string {
   ) {
     return 'activity_sport';
   }
-  if (/\b(was\s+geht|was\s+heute\b[\s\S]{0,48}?\bgeht|events?|veranstaltung|heute\s+abend|konzert)\b/u.test(t)) {
+
+  // Kino / Hotel / Essen / Diät VOR „heute Abend“→events (sonst falscher Event-Ack)
+  if (/\b(kino|film|vorstellung|kinoprogramm)\b/u.test(t)) return 'cinema';
+  if (/\b(hotel|unterkunft|übernacht|uebernacht)\b/u.test(t)) {
+    return 'accommodation_search';
+  }
+  if (/\b(vegetar\w*|vegan\w*|allerg\w*|gluten\w*|laktos\w*|ohne\s+fleisch|kein\s+fleisch)\b/u.test(t)) {
+    return 'food_allergy';
+  }
+  if (
+    /\b(essen|restaurant|hunger|imbiss|bistro|burger|pizza|amerikan|pizzeria|steak|angus|rind|fisch|speisen)\b/u.test(
+      t,
+    )
+  ) {
+    return 'dining';
+  }
+
+  // Events nur bei klarem Event-Wunsch — nicht allein wegen „heute Abend“ + Essen/Kino
+  if (
+    /\b(was\s+geht|was\s+heute\b[\s\S]{0,48}?\bgeht|events?|veranstaltung|konzert|festival|fest\b)\b/u.test(
+      t,
+    ) ||
+    (/\bheute\s+abend\b/u.test(t) &&
+      !/\b(essen|restaurant|steak|kino|film|hotel|vegetar|vegan)\b/u.test(t))
+  ) {
     return 'events';
   }
-  if (/\b(kino|film|vorstellung)\b/u.test(t)) return 'cinema';
+
   if (/\b(geschicht|denkmal|wahrzeichen|wer\s+(war|baute))\b/u.test(t)) {
     return 'history';
   }
@@ -134,26 +166,16 @@ function detectFloskelCategory(userText: string): string {
   if (/\b(leave.?by|losgehen|wann\s+muss\s+ich)\b/u.test(t)) return 'leave_by';
   if (/\b(wecker|aufsteh|weck\s+mich)\b/u.test(t)) return 'wake_alarm';
   if (/\b(flug|gate|abflug|flughafen)\b/u.test(t)) return 'flight';
-  if (/\b(zug|bus|bahn|öpnv|oepnv|verbindung|verspät)\b/u.test(t)) {
+  if (/\b(zug|bus|bahn|öpnv|oepnv|verbindung|verspät|verkehrsmitteln?)\b/u.test(t) ||
+    /\böffentlichen?\s+verkehr/u.test(t)) {
     return 'transit';
   }
   if (/\b(regen).{0,20}\b(unterstell|trocken|indoor|café|cafe)\b/u.test(t)) {
     return 'rain_shelter';
   }
   if (/\b(reserv|buch|tisch\s+für)\b/u.test(t)) return 'reservation';
-  if (/\b(hotel|unterkunft|übernacht|uebernacht)\b/u.test(t)) {
-    return 'accommodation_search';
-  }
   if (/\b(eis|gelato|ice\s*cream|kugel\s+eis|eisdiele)\b/u.test(t)) return 'cafe';
   if (/\b(café|cafe|kaffee|cappuccino)\b/u.test(t)) return 'cafe';
-  if (/\b(vegetar|vegan|allerg|gluten|laktos)\b/u.test(t)) return 'food_allergy';
-  if (
-    /\b(essen|restaurant|hunger|imbiss|bistro|burger|pizza|amerikan|pizzeria)\b/u.test(
-      t,
-    )
-  ) {
-    return 'dining';
-  }
   if (/\b(park|garten|grün)\b/u.test(t)) return 'park';
   if (/\b(bar|kneipe|pub|cocktail)\b/u.test(t)) return 'bar';
   if (/\b(strand|düne|duene|insel|beach)\b/u.test(t)) return 'beach_island';
@@ -167,12 +189,11 @@ function detectFloskelCategory(userText: string): string {
   if (/\b(wo\s+(ist|liegt|find)|lage|adresse)\b/u.test(t)) return 'location';
   if (/\b(pdf|flyer|programmheft)\b/u.test(t)) return 'pdf_flyer';
   if (/\b(ticket|eintritt|karte\s+kaufen)\b/u.test(t)) return 'ticket';
-  if (/\b(tour|gepäck|koffer|bounce)\b/u.test(t)) return 'luggage';
+  if (/\b(luggage|gepäck|koffer|bounce)\b/u.test(t)) return 'luggage';
   if (/\b(tour|aktivität|ausflug)\b/u.test(t)) return 'tours';
   if (/\b(uber|taxi|bolt)\b/u.test(t)) return 'uber_taxi';
   if (/\b(mietwagen|auto\s+mieten)\b/u.test(t)) return 'car_rental';
   if (/\b(einkauf|supermarkt|drogerie|besorgen|prospekt|angebot|aktionspreis)\b/u.test(t)) return 'shopping';
-  if (/\b(notfall|hilfe|apotheke|arzt|112)\b/u.test(t)) return 'safety';
   if (/\b(recherch|webseite|website|nachschau)\b/u.test(t)) return 'research_web';
   if (/\b(wer\s+hat|was\s+ist\s+findus|programmier|über\s+dich)\b/u.test(t)) {
     return 'knowledge';
@@ -220,6 +241,44 @@ export function pickFloskelPhrase(category: string): string {
   return finalPool[Math.floor(Math.random() * finalPool.length)]!;
 }
 
+/** Ort/Ziel aus dem User-Satz spiegeln — nie GPS-Heimat unterschieben. */
+function softEchoPlaceFromUtterance(userText: string): string | null {
+  const m = userText.match(
+    /\b(?:in|nach|zum|zur|am)\s+([A-ZÄÖÜ][\wäöüß\-]{2,}(?:\s+[A-ZÄÖÜ][\wäöüß\-]{2,}){0,3})/u,
+  );
+  if (!m?.[1]) return null;
+  const place = m[1].replace(/\s+/g, ' ').trim();
+  if (place.length < 3 || place.length > 48) return null;
+  if (/^(Heute|Morgen|Freitag|Samstag|Sonntag|Abend|Nähe)\b/u.test(place)) return null;
+  return place;
+}
+
+function maybeAnchorFloskelPhrase(
+  phrase: string,
+  userText: string,
+  category: string,
+): string {
+  if (
+    category === 'safety' &&
+    /\b(gebrochen|zahnschmerzen?|unfall|notfall|rettung)\b/iu.test(userText) &&
+    !/\b(übel|oh\s+nee|schlimm|priorisier)\b/iu.test(phrase)
+  ) {
+    phrase = `Oh nee, das klingt übel. ${phrase}`;
+  }
+  const place = softEchoPlaceFromUtterance(userText);
+  if (!place) return phrase;
+  if (category === 'accommodation_search' || category === 'hotel') {
+    return `Ich such dir in ${place} passende Hotels mit deinen Prefs raus.`;
+  }
+  if (category === 'nav') {
+    return `Alles klar — ich navigiere dich zu ${place}.`;
+  }
+  if (category === 'transit') {
+    return `Ich check die schnellste Verbindung zu ${place}.`;
+  }
+  return phrase;
+}
+
 export function pickFloskelForUserText(userText: string): {
   category: string;
   phrase: string;
@@ -231,7 +290,7 @@ export function pickFloskelForUserText(userText: string): {
     // Multi-Intent / Deep → oft „komplexe Planung“ oder multi_intent
     if (
       decision.intentDensity >= 2 &&
-      !['compound_togo_sunset', 'complex_plan', 'events'].includes(category)
+      !['compound_togo_sunset', 'complex_plan', 'events', 'cinema', 'dining', 'food_allergy', 'safety', 'accommodation_search'].includes(category)
     ) {
       category = decision.wordCount > 15 ? 'complex_plan' : 'multi_intent';
     }
@@ -241,7 +300,32 @@ export function pickFloskelForUserText(userText: string): {
   }
 
   if (!lib.categories[category]) category = 'generic';
-  return { category, phrase: pickFloskelPhrase(category) };
+  let phrase = pickFloskelPhrase(category);
+  phrase = maybeAnchorFloskelPhrase(phrase, userText, category);
+
+  // Lange Recherche: Cover etwas länger (2 Sätze), Nav bleibt knapp
+  const coverLong =
+    expectsSlowResponse(userText, decision) &&
+    [
+      'accommodation_search',
+      'hotel',
+      'events',
+      'cinema',
+      'dining',
+      'food_allergy',
+      'complex_plan',
+      'flight',
+      'safety',
+      'research_web',
+      'multi_intent',
+    ].includes(category);
+  if (coverLong) {
+    const second = pickFloskelPhrase(category);
+    if (second && second !== phrase && !phrase.includes(second.slice(0, 18))) {
+      phrase = `${phrase} ${second}`;
+    }
+  }
+  return { category, phrase };
 }
 
 export function pickActionButtonFloskel(actionType: QuickActionType | string): string | null {
@@ -359,6 +443,20 @@ export function shouldSpeakLatencyFloskel(
 async function speakLine(line: string): Promise<void> {
   markSpoken(line);
   try {
+    // Lazy: Node smokes must not pull react-native via TTS/profile at import time.
+    const { getCachedUserProfile } = require('../userProfileService') as {
+      getCachedUserProfile: () => { voiceId?: string } | null | undefined;
+    };
+    const { getVoiceSettingsForTour } = require('../ttsService') as {
+      getVoiceSettingsForTour: () => Promise<{ voiceId: string; speechRate: number }>;
+    };
+    const { speakRuntimeText } = require('../../runtime/speechModule') as {
+      speakRuntimeText: (
+        text: string,
+        voice: { voiceId?: string; speechRate?: number },
+        opts: { priority: string; deliveryKind: string },
+      ) => Promise<void>;
+    };
     const cached = getCachedUserProfile();
     const voice = cached
       ? { voiceId: cached.voiceId, speechRate: 1 as const }
@@ -384,6 +482,9 @@ async function speakLine(line: string): Promise<void> {
  */
 export function prefetchCommonLatencyAcks(): void {
   try {
+    const { getVoiceSettingsForTour } = require('../ttsService') as {
+      getVoiceSettingsForTour: () => Promise<unknown>;
+    };
     void getVoiceSettingsForTour();
   } catch {
     /* soft */

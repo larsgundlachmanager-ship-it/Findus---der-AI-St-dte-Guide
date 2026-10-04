@@ -30,10 +30,14 @@ for (const q of listDeviceMustQuestions()) {
 }
 
 const outDir = join(process.cwd(), 'data', 'liveQuality');
-mkdirSync(outDir, { recursive: true });
-const outPath = join(outDir, 'last-report.json');
-writeFileSync(outPath, JSON.stringify(report, null, 2), 'utf8');
-console.log(`\nReport: ${outPath}`);
+try {
+  mkdirSync(outDir, { recursive: true });
+  const outPath = join(outDir, 'last-report.json');
+  writeFileSync(outPath, JSON.stringify(report, null, 2), 'utf8');
+  console.log(`\nReport: ${outPath}`);
+} catch (err) {
+  console.warn('[live-quality] report write soft-fail', String(err).slice(0, 120));
+}
 
 if (!report.gateOk) {
   process.exitCode = 1;

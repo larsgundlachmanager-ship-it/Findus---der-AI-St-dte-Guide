@@ -122,6 +122,7 @@ export type DeepResearchUiCard = {
     mapsUrl: string;
     menuStatus: 'SEARCHING' | 'READY' | 'NONE';
     menuUrl?: string | null;
+    websiteUrl?: string | null;
     ticketUrl?: string | null;
     reserveUrl?: string | null;
   };

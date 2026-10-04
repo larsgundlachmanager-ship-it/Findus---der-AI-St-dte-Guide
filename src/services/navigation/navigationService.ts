@@ -7,17 +7,24 @@
 
 import * as Location from 'expo-location';
 import type { LocationSubscription } from 'expo-location';
-import { Platform } from 'react-native';
 import { getPoiWithFacts } from '../../db/database';
 import { useFinnusStore } from '../../store/useFinnusStore';
 import { getCachedUserProfile } from '../userProfileService';
 import {
-  getGpsStreamProfile,
+  ensureHeadingWatch,
+  isForegroundLocationWatchActive,
   requestLocationPermission,
   setGpsStreamProfile,
+  setGpsWatchInterval,
+  startWatchingLocation,
 } from '../locationService';
+import { gpsIntervalMsWhileNavigating } from '../../runtime/gpsCadence';
 import { speakAssistantText } from '../ttsService';
-import { getLiveDeviceHeadingDeg, getMapDisplayHeadingDeg, headingFromExpoEvent, noteHeadingAccuracy, noteExpoCompassHeading } from './liveDeviceHeading';
+import {
+  getLiveDeviceHeadingDeg,
+  getMapDisplayHeadingDeg,
+  subscribeMapHeading,
+} from './liveDeviceHeading';
 import {
   getCachedRoute,
   putCachedRoute,
@@ -70,6 +77,7 @@ import {
   directionsModeForNav,
   getSmoothedSpeedMs,
   isTransitMode,
+  offRouteThresholdM,
   pushSpeedSample,
   resetMotionTransportState,
   thresholdsForMode,
@@ -127,10 +135,10 @@ import {
   markRerouteFired,
   markRerouteAttemptFailed,
   markRerouteAttemptStarted,
-  canSilentReroute,
 } from './wrongWayMonitor';
 import {
   resetBoardingDetector,
+  takeAlightAdvancePending,
   tickBoardingDetector,
 } from './boardingDetector';
 import { formatNavTurnHint } from './navTurnHint';
@@ -181,13 +189,29 @@ let suppressArrivalUntilMs = 0;
 let modeSticky: NavMode = 'routing';
 let headingDeg = 0;
 let lastLat: number | null = null;
+/** ÖPNV in_transit: Puck auf Route/Stationspfad + Bearing der Linie. */
+let transitDisplayFix: {
+  lat: number;
+  lng: number;
+  bearingDeg: number;
+} | null = null;
+
+export function getTransitDisplayFix(): {
+  lat: number;
+  lng: number;
+  bearingDeg: number;
+} | null {
+  return transitDisplayFix;
+}
+
+let lastMapProjection: import('./routeSpline').PathProjection | null = null;
 let lastLng: number | null = null;
 /** Smart-Arrow / Map-Match snapshot for Modul 1 coexistence. */
 let navAlongM = 0;
 let navDistToNextTurnM: number | null = null;
 let navDistToArrowM: number | null = null;
 let posSub: LocationSubscription | null = null;
-let headingSub: LocationSubscription | null = null;
+let headingSub: (() => void) | null = null;
 let turnHapticArmed = true;
 let fadeCompleteTimer: ReturnType<typeof setTimeout> | null = null;
 /** Optional simulated user position (SimulationPicker / no GPS). */
@@ -196,9 +220,19 @@ let lastTransportMode: TransportMode = 'walk';
 /** Zuletzt geroutetes Profil (Fuß/Rad) — bei Wechsel still neu planen. */
 let lastRoutedProfile: 'foot' | 'bike' | null = null;
 let lastShortcutRerouteAtMs = 0;
+/** Dual-GPS-Dedupe: gleicher Fix nicht doppelt ticken. */
+let lastTickAtMs = 0;
+let lastTickLat = 0;
+let lastTickLng = 0;
+/** Bike: Overpass dead-end probe darf FOSSGIS nicht blockieren. */
+let lastDeadEndProbeAtMs = 0;
+const DEAD_END_BIKE_MIN_MS = 60_000;
+const DEAD_END_BIKE_SPEED_MS = 2.8;
+let deferredRerouteTimer: ReturnType<typeof setTimeout> | null = null;
 /** Laufender Fuß↔Rad-Profilwechsel — verhindert Spam bis Success/Fail. */
 let modeSwitchPending: 'foot' | 'bike' | null = null;
 let lastRemainingStations: number | null = null;
+let lastHeavyTourSyncAtMs = 0;
 let navTotalDistanceM: number | null = null;
 /** GPS course / movement bearing when available. */
 let movementBearingDeg: number | null = null;
@@ -213,6 +247,16 @@ let routeHasTransitLegs = false;
 export const SHORT_ROUTE_AUTO_ETA_MIN = 10;
 
 const positionFilter = new PositionLowPass(0.35, 28);
+
+function isModule2VoiceBusy(): boolean {
+  const store = useFinnusStore.getState();
+  return Boolean(
+    store.isListening ||
+      store.isGenerating ||
+      store.isPlayingAudio ||
+      store.isAudiblySpeaking,
+  );
+}
 
 /** Summe der Segmentlängen — für Auto-Umweg-Erkennung im Offline-Cache. */
 function waypointPathLengthM(
@@ -392,7 +436,15 @@ function computeRemainingStations(
   lng: number,
   transportMode: TransportMode,
 ): number | null {
-  if (!active || !isTransitMode(transportMode)) return null;
+  if (!active) return null;
+  // GPS-Tempo-Dip in Bahn (mode=walk) darf HUD-Stationen nicht killen.
+  if (
+    !isTransitMode(transportMode) &&
+    lastNavPhase !== 'in_transit' &&
+    !routeHasTransitLegs
+  ) {
+    return null;
+  }
   const stations = stationList();
   if (stations.length === 0) {
     const d = distanceMeters(lat, lng, active.lat, active.lng);
@@ -428,14 +480,13 @@ function computeTick(
     preferBike: hints.preferBike,
   });
   lastTransportMode = transportMode;
-  
-  // Dynamic GPS throttling based on transport mode
-  const currentProfile = getGpsStreamProfile();
-  if (transportMode === 'bicycle' && currentProfile === 'realtime') {
-    void setGpsStreamProfile('realtime-bike');
-  } else if (transportMode !== 'bicycle' && currentProfile === 'realtime-bike') {
-    void setGpsStreamProfile('realtime');
-  }
+
+  // Shared GPS + Cadence-SSOT (kein Dauer-0,5-s-Bike-Watch auf langen Touren)
+  void setGpsWatchInterval(
+    gpsIntervalMsWhileNavigating(speedMs ?? getSmoothedSpeedMs(), {
+      preferBike: transportMode === 'bicycle',
+    }),
+  );
 
   const thr = thresholdsForMode(transportMode);
 
@@ -454,6 +505,7 @@ function computeTick(
 
   let distanceToPathM: number | null = null;
   let alongM = 0;
+  lastMapProjection = null;
 
   if (mode === 'routing' && active.waypoints.length > 0) {
     const prevWpIdx = waypointIndex;
@@ -470,6 +522,7 @@ function computeTick(
     }
     waypointIndex = match.waypointIndex;
     distanceToPathM = match.distanceToPathM;
+    lastMapProjection = match.projection;
     const newAlong = match.projection?.alongM ?? 0;
     if (newAlong > alongM + 80) {
       resetSmartArrow();
@@ -586,7 +639,8 @@ function computeTick(
   noteHandsFreeEtaGps({
     lat,
     lng,
-    speedMps: speedMs ?? getSmoothedSpeedMs(),
+    // ETA consumes the transport SSOT's EMA, never a single raw GPS spike.
+    speedMps: getSmoothedSpeedMs(),
     isBike: transportMode === 'bicycle',
   });
 
@@ -617,6 +671,50 @@ function computeTick(
   const remainingStations = computeRemainingStations(lat, lng, transportMode);
 
   const stations = stationList();
+  const tourStop = (() => {
+    try {
+      const tour = useFinnusStore.getState().multiStopTour;
+      return tour?.stops?.[tour.currentIndex ?? 0] ?? null;
+    } catch {
+      return null;
+    }
+  })();
+  const alightTarget =
+    tourStop?.role === 'alight'
+      ? { lat: tourStop.lat, lng: tourStop.lng }
+      : routeHasTransitLegs && active
+        ? { lat: active.lat, lng: active.lng }
+        : null;
+  const tourStops = (() => {
+    try {
+      return useFinnusStore.getState().multiStopTour?.stops ?? [];
+    } catch {
+      return [];
+    }
+  })();
+  const boardSched =
+    tourStop?.role === 'alight' || tourStop?.role === 'board'
+      ? tourStop.vehicleStartMs
+      : tourStops.find((s) => s.role === 'board' || s.vehicleStartMs != null)
+          ?.vehicleStartMs ?? null;
+  const alightSched =
+    tourStop?.role === 'alight'
+      ? tourStop.endMs
+      : tourStops.find((s) => s.role === 'alight')?.endMs ?? null;
+  let boardingGpsAccuracyM: number | null = null;
+  let boardingGpsAtMs: number | null = null;
+  try {
+    const { useGpsStore } = require('../../store/useGpsStore') as {
+      useGpsStore: {
+        getState: () => { accuracyM: number | null; atMs: number | null };
+      };
+    };
+    const gps = useGpsStore.getState();
+    boardingGpsAccuracyM = gps.accuracyM;
+    boardingGpsAtMs = gps.atMs;
+  } catch {
+    /* soft */
+  }
   const navPhase = tickBoardingDetector({
     lat,
     lng,
@@ -629,8 +727,43 @@ function computeTick(
     })),
     remainingStations,
     hasTransitLegs: routeHasTransitLegs || stations.length > 0,
+    alightLat: alightTarget?.lat ?? null,
+    alightLng: alightTarget?.lng ?? null,
+    gpsAccuracyM: boardingGpsAccuracyM ?? gpsAccuracyM,
+    gpsAtMs: boardingGpsAtMs,
+    scheduledBoardMs: boardSched ?? null,
+    scheduledAlightMs: alightSched ?? null,
   });
   lastNavPhase = navPhase;
+
+  // Zug/Bus: Puck nur auf die Linie ziehen, wenn GPS nah dran ist — sonst echter Standort.
+  if (navPhase === 'in_transit' && lastMapProjection) {
+    const spline = getMapMatchSpline();
+    const idx = Math.max(
+      0,
+      Math.min(lastMapProjection.index, Math.max(0, spline.length - 1)),
+    );
+    const pt = spline[idx];
+    const nearPath =
+      typeof lastMapProjection.distanceToPathM === 'number' &&
+      lastMapProjection.distanceToPathM <= 120;
+    const nearPt =
+      pt &&
+      Number.isFinite(pt.lat) &&
+      Number.isFinite(pt.lng) &&
+      distanceMeters(lat, lng, pt.lat, pt.lng) <= 350;
+    if (pt && nearPath && nearPt) {
+      transitDisplayFix = {
+        lat: pt.lat,
+        lng: pt.lng,
+        bearingDeg: lastMapProjection.pathBearingDeg,
+      };
+    } else {
+      transitDisplayFix = null;
+    }
+  } else {
+    transitDisplayFix = null;
+  }
 
   return {
     mode,
@@ -652,6 +785,7 @@ function computeTick(
 }
 
 function applyTick(tick: NavigationTick, arrowName: string): void {
+  const voiceBusy = isModule2VoiceBusy();
   // Stuck-safe hint: always bind to next REAL turn + live remaining meters
   let navTurnHint: string | null = null;
   if (active && tick.mode === 'routing' && active.waypoints.length > 0) {
@@ -664,6 +798,21 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
         ? navDistToNextTurnM
         : tick.distanceToArrowM;
     if (nextTurn && isTurnManeuver(nextTurn.wp.maneuver)) {
+      let chainGapM: number | null = null;
+      try {
+        const { findChainedNextTurn } = require('./chainedTurnCue') as {
+          findChainedNextTurn: (
+            wps: typeof active.waypoints,
+            idx: number,
+          ) => { gapM: number } | null;
+        };
+        chainGapM = findChainedNextTurn(active.waypoints, nextTurn.index)?.gapM ?? null;
+      } catch {
+        chainGapM = null;
+      }
+      const isComplex =
+        nextTurn.wp.turnComplexity === 'complex' ||
+        (typeof chainGapM === 'number' && chainGapM > 0 && chainGapM <= 20);
       navTurnHint = formatNavTurnHint({
         landmark:
           nextTurn.wp.visibleLandmark?.trim() ||
@@ -672,6 +821,8 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
         maneuver: nextTurn.wp.maneuver ?? null,
         distanceM: distToTurn,
         bearingRelDeg: tick.bearingRelDeg,
+        isComplex,
+        roadName: nextTurn.wp.roadName ?? null,
       });
     } else {
       navTurnHint = null;
@@ -732,12 +883,28 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
     });
   }
 
+  let distanceToAlightM: number | null = null;
+  try {
+    const tour = useFinnusStore.getState().multiStopTour;
+    const alight =
+      tour?.stops.find((s) => s.role === 'alight' && !s.done) ?? null;
+    if (
+      alight &&
+      typeof lastLat === 'number' &&
+      typeof lastLng === 'number'
+    ) {
+      distanceToAlightM = distanceMeters(lastLat, lastLng, alight.lat, alight.lng);
+    }
+  } catch {
+    /* soft */
+  }
   void maybeSpeakAlightNow({
     transportMode: tick.transportMode,
     remainingStations: tick.remainingStations ?? null,
     distanceToDestinationM: tick.distanceToDestinationM,
     speedMs: tick.speedMs ?? null,
     navPhase: tick.navPhase ?? null,
+    distanceToAlightM,
   });
 
   if (tick.navPhase && tick.navPhase !== announcedNavPhase) {
@@ -754,6 +921,30 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
       destName: tick.targetName,
       transportMode: tick.transportMode,
     });
+  }
+
+  // Während der Fahrt: Ausstiegs-ETA — gedrosselt, nicht jeder GPS-Tick.
+  if (
+    (tick.navPhase === 'in_transit' || tick.navPhase === 'walk_to_stop') &&
+    Date.now() - lastHeavyTourSyncAtMs > 12_000
+  ) {
+    lastHeavyTourSyncAtMs = Date.now();
+    try {
+      const { syncLiveRideEtaToTour } = require('./liveRideEtaSync') as {
+        syncLiveRideEtaToTour: (o: {
+          distanceM?: number | null;
+          speedMs?: number | null;
+          remainingStations?: number | null;
+        }) => boolean;
+      };
+      syncLiveRideEtaToTour({
+        distanceM: tick.distanceToDestinationM,
+        speedMs: tick.speedMs ?? null,
+        remainingStations: tick.remainingStations ?? null,
+      });
+    } catch {
+      /* soft */
+    }
   }
 
   if (tick.turnImminent && turnHapticArmed) {
@@ -782,18 +973,23 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
       })
     : { missed: false, turnIndex: -1, backtrackM: 0 };
 
-  const wrongWayAction = tickWrongWayMonitor({
-    distanceToPathM: tick.distanceToPathM ?? null,
-    suppress:
-      isTransitMode(tick.transportMode) || tick.navPhase === 'in_transit',
-    speedMs: tick.speedMs,
-    missedTurn: missed.missed,
-    lat: lastLat,
-    lng: lastLng,
-  });
+  const wrongWayAction = voiceBusy
+    ? null
+    : tickWrongWayMonitor({
+        distanceToPathM: tick.distanceToPathM ?? null,
+        suppress:
+          isTransitMode(tick.transportMode) ||
+          tick.navPhase === 'in_transit' ||
+          tick.navPhase === 'walk_to_stop',
+        speedMs: tick.speedMs,
+        missedTurn: missed.missed,
+        lat: lastLat,
+        lng: lastLng,
+        offPathMinM: offRouteThresholdM(tick.transportMode),
+      });
 
   if (wrongWayAction === 'warn' && active) {
-    // Nur kurze Korrektur-Ansage — kein sofortiges OSRM-Recalc
+    // Nur kurze Korrektur-Ansage — kein sofortiges OSRM-Recalc (Route bleibt)
     try {
       const { speakWrongWayInterrupt } = require('./landmarkNavCoach') as {
         speakWrongWayInterrupt: (o: {
@@ -815,94 +1011,47 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
   } else if (wrongWayAction === 'reroute' && active) {
     markRerouteAttemptStarted();
     void silentRecalculateRoute({ announce: true });
-  } else if (
-    active &&
-    !isTransitMode(tick.transportMode) &&
-    tick.navPhase !== 'in_transit' &&
-    (tick.speedMs ?? 0) >= 0.45 &&
-    (tick.distanceToPathM ?? 0) > 45 &&
-    tick.distanceToDestinationM + 30 <
-      Math.max(60, (navTotalDistanceM ?? tick.distanceToDestinationM) * 0.85)
-  ) {
-    // Stille Abkürzungs-Neuberechnung — seltener, mit Wrong-Way-Cooldown
-    const now = Date.now();
-    if (
-      now - lastShortcutRerouteAtMs > 20_000 &&
-      !rerouteInFlight &&
-      canSilentReroute(now)
-    ) {
-      lastShortcutRerouteAtMs = now;
-      void silentRecalculateRoute({ announce: false });
+  }
+  // Route-Lock: kein Shortcut-/Detour-Dauer-Recalc — nur Wrong-Way-Flow (+ Mode-Switch).
+
+  // Stale Tour: GPS schon am Folgestopp → vorziehen.
+  if (!arrivalInFlight) {
+    try {
+      const { maybeCatchUpTourProgress } = require('./multiStopTour') as {
+        maybeCatchUpTourProgress: (o?: {
+          lat?: number | null;
+          lng?: number | null;
+        }) => Promise<boolean>;
+      };
+      if (Date.now() - lastHeavyTourSyncAtMs > 8_000) void maybeCatchUpTourProgress({ lat: lastLat, lng: lastLng });
+    } catch {
+      /* soft */
     }
   }
-
-  // Nah am Pin, aber Route zeigt noch km-Umweg → still neu vom GPS zum Ziel
-  if (
-    active &&
-    !rerouteInFlight &&
-    !isTransitMode(tick.transportMode) &&
-    typeof lastLat === 'number' &&
-    typeof lastLng === 'number'
-  ) {
-    const air = distanceMeters(lastLat, lastLng, active.lat, active.lng);
-    const rem = tick.distanceToDestinationM;
-    if (air < 150 && rem > Math.max(400, air * 3) && (tick.speedMs ?? 0) >= 0.45) {
-      const now = Date.now();
-      if (now - lastShortcutRerouteAtMs > 20_000 && canSilentReroute(now)) {
-        lastShortcutRerouteAtMs = now;
-        void silentRecalculateRoute({ announce: false });
-      }
-    }
-  }
-
-  // Auto-Umweg (z. B. alter Car-OSRM) + Fuß-ETA ≤ 10 Min → sofort neu berechnen & starten
-  if (
-    active &&
-    !rerouteInFlight &&
-    !isTransitMode(tick.transportMode) &&
-    typeof lastLat === 'number' &&
-    typeof lastLng === 'number'
-  ) {
-    const air = distanceMeters(lastLat, lastLng, active.lat, active.lng);
-    const routeM = Math.max(
-      tick.distanceToDestinationM,
-      navTotalDistanceM ?? 0,
-      waypointPathLengthM(active.waypoints),
-    );
-    if (air > 40 && routeM > 0 && (tick.speedMs ?? 0) >= 0.45) {
-      let detour = false;
-      try {
-        const {
-          isImplausiblePedestrianDetour,
-        } = require('./googleMapsNav') as {
-          isImplausiblePedestrianDetour: (
-            routeM: number,
-            airM: number,
-            mode?: 'walking' | 'bicycling' | 'transit',
-          ) => boolean;
-        };
-        detour = isImplausiblePedestrianDetour(
-          routeM,
-          air,
-          tick.transportMode === 'bicycle' ? 'bicycling' : 'walking',
-        );
-      } catch {
-        detour = routeM > air * 2 && routeM - air > 280;
-      }
-      const paceMPerMin = tick.transportMode === 'bicycle' ? 220 : 80;
-      const estShortEtaMin = Math.max(1, Math.ceil(air / paceMPerMin));
-      if (detour && estShortEtaMin <= SHORT_ROUTE_AUTO_ETA_MIN) {
-        const now = Date.now();
-        if (now - lastShortcutRerouteAtMs > 4_000) {
-          lastShortcutRerouteAtMs = now;
-          void silentRecalculateRoute({ announce: false });
+  // Ausstieg erkannt (Dwell/Stillstand) → sofort Fuß zum Bus/Transfer, ohne auf Ankunftsradius zu warten.
+  if (takeAlightAdvancePending() && !arrivalInFlight) {
+    const tour = useFinnusStore.getState().multiStopTour;
+    const cur = tour?.stops?.[tour.currentIndex ?? 0];
+    if (cur?.role === 'alight') {
+      arrivalInFlight = true;
+      void (async () => {
+        try {
+          const continued = await advanceMultiStopTour();
+          if (!continued) {
+            await fadeAndStopNavigation();
+          }
+        } catch {
+          /* soft */
+        } finally {
+          arrivalInFlight = false;
         }
-      }
+      })();
+      return;
     }
   }
 
   // Fuß ↔ Rad (≥ ~10 km/h): automatisch Radmodus + Route neu auf Radwegen
-  {
+  if (!voiceBusy) {
     const skipModeSwitch =
       isTransitMode(tick.transportMode) ||
       tick.navPhase === 'in_transit' ||
@@ -935,6 +1084,9 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
   }
 
   if (active) {
+    // Keep the cue scheduler alive: it owns imminent turn timing/haptics and
+    // queues speech via the existing multitask TTS path. It performs no
+    // Overpass/Places enrichment.
     onNavigationTickForCoach(tick, {
       waypointIndex,
       waypoints: active.waypoints,
@@ -951,7 +1103,7 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
       const destName = active?.name ?? 'Ziel';
       const destPoiId = active?.poiId ?? null;
       try {
-        if (destPoiId != null) {
+        if (destPoiId != null && destPoiId >= 0) {
           let storyPoiId = destPoiId;
           try {
             const { getPoiWithFacts } = await import('../../db/database');
@@ -968,6 +1120,16 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
           } catch {
             /* soft */
           }
+          const { buildArrivedCue } = await import('./spatialOrientation');
+          await speakAssistantText(buildArrivedCue(destName));
+          try {
+            const { vibrateNavTurn } = await import('./navTurnHaptics') as {
+              vibrateNavTurn: (s: 'arrive') => void;
+            };
+            vibrateNavTurn('arrive');
+          } catch {
+            /* soft */
+          }
           const { triggerPoiArrival } = await import('../../runtime/exploreModule');
           await triggerPoiArrival(storyPoiId, {
             force: true,
@@ -976,6 +1138,14 @@ function applyTick(tick: NavigationTick, arrowName: string): void {
         } else {
           const { buildArrivedCue } = await import('./spatialOrientation');
           await speakAssistantText(buildArrivedCue(destName));
+          try {
+            const { vibrateNavTurn } = await import('./navTurnHaptics') as {
+              vibrateNavTurn: (s: 'arrive') => void;
+            };
+            vibrateNavTurn('arrive');
+          } catch {
+            /* soft */
+          }
         }
       } catch {
         try {
@@ -1002,6 +1172,23 @@ export function tickNavigation(
   speedMs?: number | null,
 ): NavigationTick | null {
   if (!active) return null;
+
+  // Dual-watcher Dedupe (Nav-watch + locationService) — JS-Last bei Tempo
+  const nowTick = Date.now();
+  const dLat = (lat - lastTickLat) * 111_320;
+  const cosT = Math.cos((lat * Math.PI) / 180);
+  const dLng = (lng - lastTickLng) * 111_320 * Math.max(0.2, cosT);
+  const movedM = Math.sqrt(dLat * dLat + dLng * dLng);
+  if (
+    lastTickAtMs > 0 &&
+    nowTick - lastTickAtMs < 180 &&
+    movedM < 1.2
+  ) {
+    return null;
+  }
+  lastTickAtMs = nowTick;
+  lastTickLat = lat;
+  lastTickLng = lng;
 
   const smoothed = positionFilter.push(lat, lng, distanceMeters);
   lastLat = smoothed.lat;
@@ -1099,7 +1286,6 @@ export function noteFreeRoamGpsFix(
 }
 
 async function ensureWatchers(): Promise<void> {
-  if (posSub || headingSub) return;
   if (!active) return;
 
   try {
@@ -1113,103 +1299,122 @@ async function ensureWatchers(): Promise<void> {
 
     if (!active) return;
 
-    posSub = await Location.watchPositionAsync(
-      {
-        accuracy: Location.Accuracy.BestForNavigation,
-        distanceInterval: lastTransportMode === 'bicycle' ? 1 : 2,
-        timeInterval: lastTransportMode === 'bicycle' ? 1000 : 3500,
-      },
-      (loc) => {
-        if (!active || simulatedCoords) return;
-        const speed = loc.coords.speed;
-        const course = loc.coords.heading;
-        if (
-          typeof course === 'number' &&
-          Number.isFinite(course) &&
-          course >= 0 &&
-          typeof speed === 'number' &&
-          speed >= 0.6
-        ) {
-          movementBearingDeg = course;
+    /**
+     * Single GPS watcher (biggest tour/JS win):
+     * Prefer locationService foreground watch + gpsCadence SSOT.
+     * Nav consumes fixes via exploreModule → tickNavigation / noteFreeRoamGpsFix.
+     * Fallback only if shared watch cannot start — still cadence-capped, never
+     * a permanent 1 Hz BestForNavigation duplicate.
+     */
+    if (!posSub) {
+      if (!isForegroundLocationWatchActive()) {
+        try {
+          await startWatchingLocation(() => undefined);
+        } catch {
+          /* soft — fallback below */
         }
-        tickNavigation(
-          loc.coords.latitude,
-          loc.coords.longitude,
-          headingDeg,
-          typeof speed === 'number' && Number.isFinite(speed) && speed >= 0
-            ? speed
-            : null,
+      }
+      if (isForegroundLocationWatchActive()) {
+        if (__DEV__) {
+          console.log('[nav] GPS via locationService only (no duplicate watch)');
+        }
+      } else {
+        const intervalMs = gpsIntervalMsWhileNavigating(
+          getSmoothedSpeedMs(),
+          { preferBike: lastTransportMode === 'bicycle' },
         );
-      },
-    );
+        const moving = intervalMs <= 4_000;
+        posSub = await Location.watchPositionAsync(
+          {
+            accuracy: moving
+              ? Location.Accuracy.BestForNavigation
+              : Location.Accuracy.Balanced,
+            timeInterval: intervalMs,
+            distanceInterval:
+              intervalMs >= 12_000 ? 8 : intervalMs >= 6_000 ? 4 : intervalMs >= 3_000 ? 2 : 1,
+          },
+          (loc) => {
+            if (!active || simulatedCoords) return;
+            const speed = loc.coords.speed;
+            const course = loc.coords.heading;
+            if (
+              typeof course === 'number' &&
+              Number.isFinite(course) &&
+              course >= 0 &&
+              typeof speed === 'number' &&
+              speed >= 0.6
+            ) {
+              movementBearingDeg = course;
+            }
+            tickNavigation(
+              loc.coords.latitude,
+              loc.coords.longitude,
+              headingDeg,
+              typeof speed === 'number' && Number.isFinite(speed) && speed >= 0
+                ? speed
+                : null,
+            );
+          },
+        );
+        if (__DEV__) {
+          console.log(
+            `[nav] GPS fallback watch cadence ${intervalMs}ms (locationService idle)`,
+          );
+        }
+      }
+    }
 
     if (!active) {
       await stopWatchers();
       return;
     }
 
+    // Kompass-SSOT: locationService/facingHeadingWatch — kein paralleler Expo-Heading-Watch.
+    if (headingSub) return;
     try {
-      const store = useFinnusStore.getState();
-      const pocketOff = shouldDisableCompassWatch({
-        screenInteractive: store.navVisible !== false,
-        appStateActive: true,
-        pocketLikely: false,
-      });
-      // When UI compass not needed, skip heading subscription (battery)
-      if (pocketOff && !store.navVisible) {
-        headingSub = null;
-      } else {
-        headingSub = await Location.watchHeadingAsync((h) => {
-          if (!active) return;
-          // Pocket / nav HUD hidden → ignore compass updates
-          const st = useFinnusStore.getState();
-          if (
-            shouldDisableCompassWatch({
-              screenInteractive: st.navVisible,
-              appStateActive: true,
-              pocketLikely: !st.navVisible,
-            })
-          ) {
-            return;
-          }
-          if (Platform.OS !== 'android' && typeof h.accuracy === 'number') {
-            noteHeadingAccuracy(h.accuracy);
-          }
-          const raw = headingFromExpoEvent(h);
-          if (raw != null) {
-            noteExpoCompassHeading(raw);
-            headingDeg = pushAdaptiveHeading(getLiveDeviceHeadingDeg() ?? raw, {
-              speedMps: getSmoothedSpeedMs(),
-            });
-            if (lastLat != null && lastLng != null) {
-              const tick = computeTick(
-                lastLat,
-                lastLng,
-                headingDeg,
-                getSmoothedSpeedMs(),
-              );
-              if (tick) applyTick(tick, tick.targetName);
-            } else if (simulatedCoords) {
-              const smoothed = positionFilter.push(
-                simulatedCoords.lat,
-                simulatedCoords.lng,
-                distanceMeters,
-              );
-              lastLat = smoothed.lat;
-              lastLng = smoothed.lng;
-              const tick = computeTick(
-                lastLat,
-                lastLng,
-                headingDeg,
-                getSmoothedSpeedMs(),
-              );
-              if (tick) applyTick(tick, tick.targetName);
-            }
-          }
+      await ensureHeadingWatch();
+      headingSub = subscribeMapHeading((deg) => {
+        if (!active) return;
+        const st = useFinnusStore.getState();
+        if (
+          shouldDisableCompassWatch({
+            screenInteractive: st.navVisible,
+            appStateActive: true,
+            pocketLikely: !st.navVisible,
+          })
+        ) {
+          return;
+        }
+        headingDeg = pushAdaptiveHeading(deg, {
+          speedMps: getSmoothedSpeedMs(),
         });
-      }
+        if (lastLat != null && lastLng != null) {
+          const tick = computeTick(
+            lastLat,
+            lastLng,
+            headingDeg,
+            getSmoothedSpeedMs(),
+          );
+          if (tick) applyTick(tick, tick.targetName);
+        } else if (simulatedCoords) {
+          const smoothed = positionFilter.push(
+            simulatedCoords.lat,
+            simulatedCoords.lng,
+            distanceMeters,
+          );
+          lastLat = smoothed.lat;
+          lastLng = smoothed.lng;
+          const tick = computeTick(
+            lastLat,
+            lastLng,
+            headingDeg,
+            getSmoothedSpeedMs(),
+          );
+          if (tick) applyTick(tick, tick.targetName);
+        }
+      });
     } catch (err) {
-      console.warn('[nav] heading watch unavailable:', err);
+      console.warn('[nav] heading SSOT subscribe failed:', err);
     }
   } catch (err) {
     console.warn('[nav] position watch failed:', err);
@@ -1222,7 +1427,7 @@ async function stopWatchers(): Promise<void> {
     posSub = null;
   }
   if (headingSub) {
-    headingSub.remove();
+    headingSub();
     headingSub = null;
   }
 }
@@ -1440,6 +1645,10 @@ export function shouldPauseExploreStoryForNavTurn(
 }
 
 function resetSensorState(): void {
+  if (deferredRerouteTimer) {
+    clearTimeout(deferredRerouteTimer);
+    deferredRerouteTimer = null;
+  }
   resetHandsFreeCompass();
   resetCueScheduler();
   resetHandsFreeEta('walk');
@@ -1448,6 +1657,8 @@ function resetSensorState(): void {
   headingDeg = 0;
   lastLat = null;
   lastLng = null;
+  lastMapProjection = null;
+  transitDisplayFix = null;
   lastRemainingStations = null;
   navTotalDistanceM = null;
   movementBearingDeg = null;
@@ -1464,6 +1675,14 @@ function resetSensorState(): void {
   resetWrongWayMonitor();
   resetBoardingDetector();
   resetTransitGuideCoach();
+  try {
+    const { resetLiveRideEtaSync } = require('./liveRideEtaSync') as {
+      resetLiveRideEtaSync: () => void;
+    };
+    resetLiveRideEtaSync();
+  } catch {
+    /* soft */
+  }
   resetGpsTrackBuffer();
   clearNavTurnPrefetch();
   stopNavHybridSession();
@@ -1512,6 +1731,14 @@ async function silentRecalculateRoute(opts?: {
 }): Promise<void> {
   if (!active || rerouteInFlight) return;
   if (lastLat == null || lastLng == null) return;
+  if (isModule2VoiceBusy()) {
+    if (deferredRerouteTimer) clearTimeout(deferredRerouteTimer);
+    deferredRerouteTimer = setTimeout(() => {
+      deferredRerouteTimer = null;
+      void silentRecalculateRoute(opts);
+    }, 650);
+    return;
+  }
   if (await isDeviceOffline()) {
     void announceNavHybridOfflineRerouteBlocked();
     markRerouteAttemptFailed();
@@ -1544,15 +1771,26 @@ async function silentRecalculateRoute(opts?: {
     const facingDeg =
       getMovementBearingDeg() ?? getDeviceHeadingDeg() ?? headingDeg;
     let deadEnd = false;
-    try {
-      const { probeDeadEndAhead } = await import('./deadEndProbe');
-      deadEnd = await probeDeadEndAhead({
-        lat: originLat,
-        lng: originLng,
-        headingDeg: facingDeg,
-      });
-    } catch {
-      deadEnd = false;
+    // Bike / bike-speed: skip Overpass most silent recalcs — FOSSGIS first.
+    const bikeDeadEndTier =
+      lastTransportMode === 'bicycle' ||
+      getSmoothedSpeedMs() >= DEAD_END_BIKE_SPEED_MS;
+    const nowDeadEnd = Date.now();
+    const allowDeadEndProbe =
+      !bikeDeadEndTier ||
+      nowDeadEnd - lastDeadEndProbeAtMs >= DEAD_END_BIKE_MIN_MS;
+    if (allowDeadEndProbe) {
+      try {
+        const { probeDeadEndAhead } = await import('./deadEndProbe');
+        deadEnd = await probeDeadEndAhead({
+          lat: originLat,
+          lng: originLng,
+          headingDeg: facingDeg,
+        });
+        lastDeadEndProbeAtMs = nowDeadEnd;
+      } catch {
+        deadEnd = false;
+      }
     }
 
     const hints = profileTransportHints(
@@ -1704,15 +1942,7 @@ async function silentRecalculateRoute(opts?: {
     lastRoutedProfile = appliedProfile;
     if (modeSwitchTo && appliedProfile === modeSwitchTo) {
       setPreferredTravelMode(modeSwitchTo);
-      try {
-        void speakAssistantText(
-          modeSwitchTo === 'bike'
-            ? 'Du bist unterwegs mit dem Rad — ich nehme die Radwege.'
-            : 'Wieder zu Fuß — ich rechne die Fußroute neu.',
-        );
-      } catch {
-        /* soft */
-      }
+      // Still: Profil-Swap ohne Ansage (User: kein „nehme die Radwege“).
     }
     if (progressive) {
       navTotalDistanceM = progressive.distanceM;
@@ -2071,6 +2301,28 @@ export async function startNavigationToCoords(opts: {
     // pendingNavOffer erst nach erfolgreichem Start clearen —
     // sonst scheitert Auto-Start-Retry ohne Ziel-Koordinaten
     st.setPendingNavAlternatives([]);
+    // Stale Spickzettel (London etc.) + fremde Gesprächsstadt — Nav ist lokal.
+    try {
+      st.setActiveConciergeCard(null);
+    } catch {
+      /* soft */
+    }
+    try {
+      const { clearForeignStickyCity } = require('../../module2/context/placeContext') as {
+        clearForeignStickyCity: () => void;
+      };
+      clearForeignStickyCity();
+    } catch {
+      /* soft */
+    }
+    try {
+      const { useLivePitchStore } = require('../../module2/pitch/publishPitchUi') as {
+        useLivePitchStore: { getState: () => { clear: (force?: boolean) => void } };
+      };
+      useLivePitchStore.getState().clear(true);
+    } catch {
+      /* soft */
+    }
     // Loading-Bar nicht ausknipsen — Ort-Popup hat sie schon an.
     // Sonst wirkt „Navigation“ tot, bis OSRM (bis 9 s) zurück ist.
   }
@@ -2088,18 +2340,24 @@ export async function startNavigationToCoords(opts: {
 
   const isSimulation = useFinnusStore.getState().isSimulationMode;
   let offlineOnly = opts.offlineOnly === true;
+  // Disk-Cache und Offline-Probe parallel — früher navActive / GPS / Cues.
+  const cachedRouteP = Promise.race([
+    getCachedRoute(opts.lat, opts.lng),
+    new Promise<null>((resolve) => setTimeout(() => resolve(null), 800)),
+  ]).catch(() => null);
+  const offlineP =
+    !offlineOnly && !isSimulation
+      ? Promise.race([
+          isDeviceOffline(),
+          new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 400)),
+        ]).catch(() => false)
+      : Promise.resolve(false);
 
-  if (!offlineOnly && !isSimulation) {
-    try {
-      const offline = await Promise.race([
-        isDeviceOffline(),
-        new Promise<boolean>((resolve) => setTimeout(() => resolve(false), 400)),
-      ]);
-      if (offline) offlineOnly = true;
-    } catch {
-      /* online annehmen */
-    }
-  }
+  const [cachedRouteSettled, offlineSettled] = await Promise.all([
+    cachedRouteP,
+    offlineP,
+  ]);
+  if (offlineSettled) offlineOnly = true;
 
   const spotKey = opts.spotKey ?? null;
   let waypoints: NavWaypoint[] = [];
@@ -2110,14 +2368,7 @@ export async function startNavigationToCoords(opts: {
   }
   // Online: Cache sofort zeigen — darf den Start nicht blockieren
   let cachedRoute: Awaited<ReturnType<typeof getCachedRoute>> = null;
-  try {
-    cachedRoute = await Promise.race([
-      getCachedRoute(opts.lat, opts.lng),
-      new Promise<null>((resolve) => setTimeout(() => resolve(null), 800)),
-    ]);
-  } catch {
-    cachedRoute = null;
-  }
+  cachedRoute = cachedRouteSettled;
   if (cachedRoute?.waypoints?.length) {
     try {
     const pathLenM = waypointPathLengthM(cachedRoute.waypoints);
@@ -2178,6 +2429,10 @@ export async function startNavigationToCoords(opts: {
   }
 
   let arrivalRadiusM = opts.arrivalRadiusM ?? ARRIVAL_FALLBACK_M;
+  // ÖPNV-Ausstieg: größerer Radius — GPS im Bahnhof wackelt oft.
+  if (opts.transitRide && opts.arrivalRadiusM == null) {
+    arrivalRadiusM = Math.max(arrivalRadiusM, 55);
+  }
   // Schon nah am Label-Punkt (z. B. „Hafen“ am Rand) → nicht sofort „erreicht“
   try {
     const { useGpsStore } = require('../../store/useGpsStore') as {
@@ -2502,17 +2757,30 @@ export async function startNavigationToCoords(opts: {
         // Explizite Fuß/Rad vom Map-Tap: nicht erst ÖPNV-Lookahead abwarten
         if (forceTravelMode !== 'foot' && forceTravelMode !== 'bike') {
           const { tryAutoTransitBeforeWalk } = require('./navLeaveByFollowUp');
+          const {
+            PLAN_AIR_FORCE_TRANSIT_M,
+          } = require('../../module2/planning/planMobilityPolicy') as {
+            PLAN_AIR_FORCE_TRANSIT_M: number;
+          };
           const airM = distanceMeters(originLat, originLng, destLat, destLng);
-          useFinnusStore.getState().setNavRouteLoading(true);
-          // Fuß-FOSSGIS parallel zum ÖPNV-Lookahead (nicht 7s + 4s seriell)
-          enrichPromise = enrichNavigationRouteFull({
-            originLat,
-            originLng,
-            destLat,
-            destLng,
-            destinationName: destName,
-            travelMode,
-          });
+          if (
+            opts.commitGeneration == null ||
+            isNavCommitGenerationCurrent(opts.commitGeneration)
+          ) {
+            useFinnusStore.getState().setNavRouteLoading(true);
+          }
+          const forceAir = airM >= PLAN_AIR_FORCE_TRANSIT_M;
+          // ≥1,8 km Luftlinie: erst ÖPNV — kein paralleles Fuß-Enrich (sonst Thrash/Blackscreen).
+          if (!forceAir) {
+            enrichPromise = enrichNavigationRouteFull({
+              originLat,
+              originLng,
+              destLat,
+              destLng,
+              destinationName: destName,
+              travelMode,
+            });
+          }
           const switched = await tryAutoTransitBeforeWalk({
             destName,
             destLat,
@@ -2521,6 +2789,13 @@ export async function startNavigationToCoords(opts: {
             fromLng: originLng,
             airMeters: airM,
           });
+          if (
+            opts.commitGeneration != null &&
+            !isNavCommitGenerationCurrent(opts.commitGeneration)
+          ) {
+            useFinnusStore.getState().setNavRouteLoading(false);
+            return;
+          }
           if (switched) {
             try {
               const {
@@ -2540,7 +2815,12 @@ export async function startNavigationToCoords(opts: {
             } catch {
               /* soft */
             }
-            useFinnusStore.getState().setNavRouteLoading(false);
+            try {
+              useFinnusStore.getState().setIsGenerating(false);
+              useFinnusStore.getState().setNavRouteLoading(false);
+            } catch {
+              /* soft */
+            }
             return;
           }
         }
@@ -2548,8 +2828,19 @@ export async function startNavigationToCoords(opts: {
         /* weiter zu Fuß */
       }
       const hadCachedWaypoints = (active.waypoints.length ?? 0) > 1;
-      if (!hadCachedWaypoints) {
+      if (
+        !hadCachedWaypoints &&
+        (opts.commitGeneration == null ||
+          isNavCommitGenerationCurrent(opts.commitGeneration))
+      ) {
         useFinnusStore.getState().setNavRouteLoading(true);
+      }
+      if (
+        opts.commitGeneration != null &&
+        !isNavCommitGenerationCurrent(opts.commitGeneration)
+      ) {
+        useFinnusStore.getState().setNavRouteLoading(false);
+        return;
       }
 
       const commitStreetRoute = (
@@ -2560,8 +2851,13 @@ export async function startNavigationToCoords(opts: {
         if (!active || active.lat !== destLat || active.lng !== destLng) {
           return false;
         }
-        // ÖPNV hat übernommen — Fuß-Enrich nicht drüberlegen
-        if (routeHasTransitLegs || travelMode === 'transit') {
+        // ÖPNV-Ride hat übernommen — Fuß-Enrich nicht drüberlegen.
+        // Ausnahme: explizite Fuß-Etappe (Haltestelle/Umstieg/Ziel) muss Maneuvers bekommen.
+        if (
+          (routeHasTransitLegs || travelMode === 'transit') &&
+          forceTravelMode !== 'foot' &&
+          forceTravelMode !== 'bike'
+        ) {
           return false;
         }
         if (!enriched.waypoints?.length) return false;
@@ -3042,6 +3338,30 @@ export async function stopNavigation(opts?: {
       : null;
 
   resetLandmarkNavCoach();
+  try {
+    const { clearLookAheadRouteCache } = require('./lookAheadRouteCache') as {
+      clearLookAheadRouteCache: () => void;
+    };
+    clearLookAheadRouteCache();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { clearOsmRoadNetworkCache } = require('./osmRoadNetwork') as {
+      clearOsmRoadNetworkCache: () => void;
+    };
+    clearOsmRoadNetworkCache();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { clearRoutedEtaCache } = require('./travelEta') as {
+      clearRoutedEtaCache: () => void;
+    };
+    clearRoutedEtaCache();
+  } catch {
+    /* soft */
+  }
   navTrackingStop(Date.now());
   pendingSeedRoute = null;
   active = null;
@@ -3079,6 +3399,11 @@ export async function stopNavigation(opts?: {
     navTurnHint: null,
   });
   useFinnusStore.getState().setNavRouteLoading(false);
+  try {
+    useFinnusStore.getState().setIsGenerating(false);
+  } catch {
+    /* soft */
+  }
   runtimeNavEnd();
   try {
     const { clearLinkBackgroundSpeech } = require('../speech/backgroundSpeechPolicy') as {
@@ -3144,7 +3469,7 @@ function isRelatedNavPoi(poiId: number): boolean {
   return active.poiId === poiId;
 }
 
-/** Nach Audio wieder 1-Hz Free-Roam. */
+/** Nach Audio: Cadence/Economy — nicht wieder auf Dauer-Realtime. */
 export function notifyDestinationAudioEnded(): void {
-  void setGpsStreamProfile('realtime');
+  void setGpsStreamProfile('economy');
 }

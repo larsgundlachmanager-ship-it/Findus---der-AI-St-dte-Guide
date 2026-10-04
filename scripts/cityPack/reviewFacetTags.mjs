@@ -55,6 +55,16 @@ export const REVIEW_FACET_DEFS = [
     tag: 'ruhig',
     re: /\bruhig\b|\bquiet\b|zum\s+arbeiten|arbeitsfreundlich|nicht\s+laut/i,
   },
+  {
+    tag: 'laut',
+    re: /\blaut\b|\blärm|\blaerm|verkehrslärm|durchgangsverkehr|laut(?:er|es)?\s+hauptstra|hauptstra[ßs]e.{0,24}(?:laut|lärm|nerv)|sehr\s+laut|zu\s+laut|lautstarke/,
+    negate: /nicht\s+laut|kein(?:e|en)?\s+lärm|kein(?:e|en)?\s+laerm|trotz\s+hauptstra|trotz\s+verkehr/i,
+  },
+  {
+    tag: 'all_you_can_eat',
+    re: /all\s*you\s*can\s*eat|allyoucaneat|all-you-can-eat|\bayce\b|essen\s+so\s+viel|unbegrenzt\s+essen|flatrate\s+(?:essen|buffet)/i,
+  },
+
   { tag: 'fleisch', re: /\bfleisch\b|rinder|steak|grillteller|braten/i },
   { tag: 'angus', re: /\b(?:black\s+)?angus\b/i },
   { tag: 'wagyu', re: /\bwagyu\b|\bkobe\b/i },

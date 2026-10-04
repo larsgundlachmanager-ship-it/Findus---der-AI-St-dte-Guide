@@ -43,8 +43,11 @@ import {
 } from '../../services/research/trailPathResearch';
 import {
   isActivitySportQuery,
-  researchActivitySport,
 } from '../../services/research/activitySportResearch';
+import {
+  buildWaterActivityAllowSpeech,
+  researchActivitySportCached,
+} from '../../services/research/activityPrefetch';
 import {
   detectAmenityKind,
   researchAmenityNav,
@@ -74,7 +77,7 @@ function canonicalizeSubject(raw: string): string {
 
 function formatCinemaDist(m: number): string {
   if (m < 1000) return `${Math.max(50, Math.round(m / 50) * 50)} Meter`;
-  return `${(m / 1000).toFixed(m >= 10_000 ? 0 : 1)} Kilometer`;
+  return `rund ${Math.max(1, Math.round(m / 1000))} Kilometer`;
 }
 
 export const knowledgeAgent: Module2Agent = {
@@ -427,7 +430,7 @@ export const knowledgeAgent: Module2Agent = {
             hasTicketBtn: (buttons ?? []).some(
               (b) =>
                 b.payload?.kind === 'deep_link' &&
-                /ticket|kino|cinema|eventim|reservix|Trailer|▶/i.test(
+                /ticket|kino|cinema|eventim|reservix|adticket|Trailer|▶/i.test(
                   String(
                     (b.payload as { url?: string }).url ?? b.label ?? '',
                   ),
@@ -455,20 +458,25 @@ export const knowledgeAgent: Module2Agent = {
         task.city,
       );
       try {
-        const research = await researchActivitySport({
+        const cached = await researchActivitySportCached({
           userText: task.rewrittenText,
           lat: a.lat,
           lng: a.lng,
           cityHint: place.city ?? place.speechPlace ?? rucksack.cityHint,
           signal,
+          preferPrefetchWithoutPriceWait: true,
+        });
+        const research = cached.result;
+        const draft = buildWaterActivityAllowSpeech({
+          userText: task.rewrittenText,
+          namedPlace: research.namedPlace,
+          kind: research.kind,
+          research,
         });
         return {
           agent: 'knowledge',
           ok: true,
-          draftText: [
-            research.spokenDraft,
-            research.promptBlock,
-          ].join('\n\n'),
+          draftText: [draft, research.promptBlock].join('\n\n'),
           bullets: research.bullets.slice(0, 3),
           buttons: research.buttons.slice(0, 4),
           meta: {
@@ -485,6 +493,9 @@ export const knowledgeAgent: Module2Agent = {
             placeLat: research.primary?.lat,
             placeLng: research.primary?.lng,
             city: place.city ?? place.speechPlace,
+            fromPrefetch: cached.fromPrefetch,
+            pricesPending: cached.pricesPending,
+            priceEur: cached.pricesPending ? undefined : research.priceEur,
             venues: [research.primary, research.alternative, research.parking]
               .filter(Boolean)
               .map((v) => ({

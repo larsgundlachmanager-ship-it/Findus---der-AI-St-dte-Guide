@@ -24,13 +24,16 @@ const STORY_JOBS = new Set([
   'fact_number',
 ]);
 
-/** Follow-up am selben Ort/Topic → keine neue Bridge. */
+/**
+ * Bridge nur unterdrücken wenn wirklich kein Beat-1 nötig.
+ * Call-1 entscheidet den Text — continue/resume darf Zusage behalten
+ * (SUP nach Alster, Rad-Umschalten, Filter…).
+ */
 export function shouldSuppressBridge(opts: {
   topicMode: TopicRouteDecision['mode'] | null | undefined;
   jobId: string;
   userText: string;
 }): boolean {
-  // Live-Chat: Bridge ERLAUBT (kurz) — menschliches Gespräch
   // App-Steuerung / Hands-free: kein Bridge-Vorgeplänkel
   if (
     /\b(shortcut|hands[-\s]?free|sprechen[- ]?notification|live[-\s]?chat|gesprächs?modus|taschenlampe|stimme\s+(?:von|ändern)|einstellung)\b/iu.test(
@@ -39,24 +42,18 @@ export function shouldSuppressBridge(opts: {
   ) {
     return true;
   }
-  const mode = opts.topicMode;
-  // Gleicher Blaupausen-Chat außerhalb Live-Chat: keine neue Bridge
-  let live = false;
-  try {
-    const { isLiveChatTurnActive } = require('../../services/handsFree/liveChatTurnContext') as {
-      isLiveChatTurnActive: () => boolean;
-    };
-    live = isLiveChatTurnActive();
-  } catch {
-    live = false;
-  }
-  if (!live && (mode === 'continue' || mode === 'resume')) {
-    return true;
-  }
-  // Button „Mehr Historie“ immer ohne Bridge — auch wenn Topic-Router „new“ sagt
+  // Button „Mehr Historie“ immer ohne Bridge
   if (
     /\berzähl\s+mir\s+noch\s+mehr\s+zu\b/iu.test(opts.userText) ||
     /\bmehr\s+(zur\s+)?(historie|geschichte)\b/iu.test(opts.userText)
+  ) {
+    return true;
+  }
+  // Reine Mikro-Acks am Faden — keine zweite Bridge
+  const t = (opts.userText || '').replace(/\s+/g, ' ').trim();
+  if (
+    (opts.topicMode === 'continue' || opts.topicMode === 'resume') &&
+    /^(ja|nein|ok|okay|passt|genau|mach\s+das|los|klar|bitte|danke)[.!?]?$/iu.test(t)
   ) {
     return true;
   }

@@ -55,14 +55,24 @@ export type WeatherSnapshot = {
   rainWindows?: Array<{ startMs: number; endMs: number; pop: number }>;
   /** Sonnenuntergang (ms), wenn von OWM bekannt */
   sunsetMs?: number | null;
+  /** Sonnenaufgang (ms), wenn von OWM bekannt */
+  sunriseMs?: number | null;
   /** Aktuelle Temperatur °C (SSOT, nicht aus Summary parsen) */
   currentTempC?: number | null;
   /** Tageshoch bis Abend °C */
   dayHighC?: number | null;
   /** Morgen kurz, nur belegt */
   tomorrowSummary?: string | null;
+  /** Übermorgen / Tag+2 kurz, nur belegt */
+  day2Summary?: string | null;
+  /** Wind m/s */
+  windSpeedMs?: number | null;
+  /** Böen m/s */
+  windGustMs?: number | null;
   /** Tiefstwert heute Nacht °C (jetzt bis morgen früh) */
   nightLowC?: number | null;
+  /** Stunden-Wettercode für Zeitfenster-Chips */
+  skyHours?: Array<{ ms: number; code: number }>;
 };
 
 let cache: WeatherSnapshot | null = null;
@@ -268,7 +278,11 @@ export async function ensureWeatherFresh(
             rainWindows: meteo.rainWindows,
             dayHighC: meteo.dayHighC ?? null,
             tomorrowSummary: meteo.tomorrowSummary ?? null,
+            day2Summary: meteo.day2Summary ?? null,
+            windSpeedMs: meteo.windSpeedMs ?? null,
+            windGustMs: meteo.windGustMs ?? null,
             nightLowC: meteo.nightLowC ?? null,
+            skyHours: meteo.skyHours ?? undefined,
           },
           prev,
         );
@@ -313,7 +327,11 @@ export async function ensureWeatherFresh(
             rainWindows: meteo.rainWindows,
             dayHighC: meteo.dayHighC ?? null,
             tomorrowSummary: meteo.tomorrowSummary ?? null,
+            day2Summary: meteo.day2Summary ?? null,
+            windSpeedMs: meteo.windSpeedMs ?? null,
+            windGustMs: meteo.windGustMs ?? null,
             nightLowC: meteo.nightLowC ?? null,
+            skyHours: meteo.skyHours ?? undefined,
           },
           prev,
         );
@@ -349,7 +367,11 @@ export async function ensureWeatherFreshFromOwm(
     sunsetMs?: number | null;
     dayHighC?: number | null;
     tomorrowSummary?: string | null;
+    day2Summary?: string | null;
+    windSpeedMs?: number | null;
+    windGustMs?: number | null;
     nightLowC?: number | null;
+    skyHours?: Array<{ ms: number; code: number }>;
   },
   prev?: WeatherSnapshot | null,
 ): Promise<WeatherSnapshot> {
@@ -402,10 +424,21 @@ export async function ensureWeatherFreshFromOwm(
     rainEndsAtMs: owm.rainEndsAtMs ?? null,
     rainWindows: owm.rainWindows,
     sunsetMs: owm.sunsetMs ?? prior?.sunsetMs ?? null,
+    sunriseMs: owm.sunriseMs ?? prior?.sunriseMs ?? null,
     currentTempC: owm.currentTemp,
     dayHighC:
       dayHigh != null && Number.isFinite(dayHigh) ? dayHigh : prior?.dayHighC ?? null,
     tomorrowSummary: owm.tomorrowSummary ?? prior?.tomorrowSummary ?? null,
+    day2Summary: owm.day2Summary ?? prior?.day2Summary ?? null,
+    windSpeedMs:
+      owm.windSpeedMs != null && Number.isFinite(owm.windSpeedMs)
+        ? owm.windSpeedMs
+        : prior?.windSpeedMs ?? null,
+    windGustMs:
+      owm.windGustMs != null && Number.isFinite(owm.windGustMs)
+        ? owm.windGustMs
+        : prior?.windGustMs ?? null,
+    skyHours: owm.skyHours?.length ? owm.skyHours : prior?.skyHours,
     nightLowC:
       owm.nightLowC != null && Number.isFinite(owm.nightLowC)
         ? owm.nightLowC

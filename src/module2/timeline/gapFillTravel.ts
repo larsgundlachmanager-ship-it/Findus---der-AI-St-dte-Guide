@@ -4,7 +4,6 @@
  */
 
 import { haversineMeters } from '../../db/database';
-import { getPlanBikeMPerMin, getPlanWalkMPerMin } from '../../services/mobility/paceProfile';
 import {
   useFuturePlanStore,
   type FuturePlanStop,
@@ -18,37 +17,76 @@ import {
   roundUpMinutesTo5,
   scheduleRefineNavLegRoute,
 } from './planTravelHelpers';
-import { cleanPlanDestTitle, plannedJourneyGroupExists } from './plannedJourneyGroup';
+import { cleanPlanDestTitle, isPlanPromptLeak, plannedJourneyGroupExists } from './plannedJourneyGroup';
+import {
+  destAlreadyHasTravel,
+  isGapFillRealStop,
+  mergeGapFillPlanStops,
+  shouldSkipTourInternalLeg,
+} from './gapFillTravelPolicy';
+
+export {
+  isGapFillRealStop,
+  mergeGapFillPlanStops,
+  shouldSkipTourInternalLeg,
+  countOepnvNachZielTitles,
+  countTravelHeadsForDest,
+  navLegDestKey,
+  pruneStaleFallbackLegsForDest,
+  destAlreadyHasTravel,
+} from './gapFillTravelPolicy';
 
 function speedMPerMin(transport: FuturePlanTransport): number {
-  switch (transport) {
-    case 'bike':
-      return getPlanBikeMPerMin();
-    case 'transit':
-      return 220;
-    case 'car':
-    case 'taxi':
-      return 500;
-    case 'flight':
-      return 12_000;
-    default:
-      return getPlanWalkMPerMin();
+  try {
+    const {
+      getPlanBikeMPerMin,
+      getPlanWalkMPerMin,
+    } = require('../../services/mobility/paceProfile') as {
+      getPlanBikeMPerMin: () => number;
+      getPlanWalkMPerMin: () => number;
+    };
+    switch (transport) {
+      case 'bike':
+        return getPlanBikeMPerMin();
+      case 'transit':
+        return 220;
+      case 'car':
+      case 'taxi':
+        return 500;
+      case 'flight':
+        return 12_000;
+      default:
+        return getPlanWalkMPerMin();
+    }
+  } catch {
+    switch (transport) {
+      case 'bike':
+        return 216;
+      case 'transit':
+        return 220;
+      case 'car':
+      case 'taxi':
+        return 500;
+      case 'flight':
+        return 12_000;
+      default:
+        return 58;
+    }
   }
 }
 
-import {
-  pickPlanMobilityMode,
-} from '../planning/planMobilityPolicy';
-import {
-  resolveActiveTravelMode,
-  travelModeNavPrefs,
-} from '../../services/navigation/travelModeContext';
-
 function preferBikeNow(): boolean {
   try {
+    const {
+      resolveActiveTravelMode,
+      travelModeNavPrefs,
+    } = require('../../services/navigation/travelModeContext') as {
+      resolveActiveTravelMode: () => { mode: string };
+      travelModeNavPrefs: (m: string) => { preferBike?: boolean };
+    };
     const active = resolveActiveTravelMode();
     if (active.mode === 'bike') return true;
-    return travelModeNavPrefs(active.mode).preferBike;
+    return travelModeNavPrefs(active.mode).preferBike === true;
   } catch {
     return false;
   }
@@ -59,16 +97,29 @@ function pickLegTransport(
   walkMin: number,
 ): FuturePlanTransport {
   const bikeMin = Math.max(3, Math.round(walkMin * 0.4));
-  // Grobe ÖPNV-Schätzung: ~55% der Fußzeit (Haversine), Floor 8
   const transitMin = Math.max(8, Math.round(walkMin * 0.55));
-  return pickPlanMobilityMode({
-    walkMin,
-    bikeMin,
-    transitMin,
-    preferBike: preferBikeNow() || preferred === 'bike',
-    preferred,
-    forceTaxiOrCar: preferred === 'taxi' || preferred === 'car',
-  });
+  try {
+    const { pickPlanMobilityMode } = require('../planning/planMobilityPolicy') as {
+      pickPlanMobilityMode: (o: {
+        walkMin: number;
+        bikeMin: number;
+        transitMin: number;
+        preferBike: boolean;
+        preferred: FuturePlanTransport;
+        forceTaxiOrCar: boolean;
+      }) => FuturePlanTransport;
+    };
+    return pickPlanMobilityMode({
+      walkMin,
+      bikeMin,
+      transitMin,
+      preferBike: preferBikeNow() || preferred === 'bike',
+      preferred,
+      forceTaxiOrCar: preferred === 'taxi' || preferred === 'car',
+    });
+  } catch {
+    return preferred === 'bike' ? 'bike' : walkMin >= 25 ? 'transit' : 'walk';
+  }
 }
 
 function travelMinutes(
@@ -80,25 +131,25 @@ function travelMinutes(
   return Math.max(3, Math.ceil(dist / speedMPerMin(transport)));
 }
 
-function isTravelPlaceholderTitle(title: string): boolean {
-  return /\b(anreise|aufbruch|öpnv\s+(zu|nach)|bahn\s+nach|zug\s+nach)\b/i.test(
-    title,
-  );
+function hasLiveJourneyOnPlan(): boolean {
+  try {
+    const plan = useFuturePlanStore.getState().plan;
+    return plan.stops.some(
+      (s) =>
+        s.groupId === 'live_journey' ||
+        s.id === 'nav_live_active' ||
+        s.id.startsWith('nav_live_tour_'),
+    );
+  } catch {
+    return false;
+  }
 }
 
 function sortedRealStops(): FuturePlanStop[] {
   return useFuturePlanStore
     .getState()
     .plan.stops.filter(
-      (s) =>
-        s.kind !== 'nav_leg' &&
-        !isLiveNavLegId(s.id) &&
-        !s.id.startsWith('choice_') &&
-        !s.id.startsWith('ft:') &&
-        s.choiceSide == null &&
-        !isTravelPlaceholderTitle(s.title) &&
-        typeof s.lat === 'number' &&
-        typeof s.lng === 'number',
+      (s) => isGapFillRealStop(s) && !isLiveNavLegId(s.id),
     )
     .slice()
     .sort((a, b) => {
@@ -121,9 +172,8 @@ function pushOriginToFirstStopLeg(
       (s.plannedStartMs == null || s.plannedStartMs >= now - 5 * 60_000),
   );
   if (!first?.lat || !first.lng) return;
+  if (isPlanPromptLeak(first.title) || !cleanPlanDestTitle(first.title)) return;
 
-  // Nur Stops MIT Koordinaten zählen als „Prior“ — sonst fehlt die
-  // Route Basis→Ziel (z. B. Adresse nachgereicht, früherer Wunsch ohne GPS).
   const hasPriorWithCoords = realStops.some(
     (s) =>
       s.id !== first.id &&
@@ -134,6 +184,25 @@ function pushOriginToFirstStopLeg(
       s.plannedStartMs < first.plannedStartMs,
   );
   if (hasPriorWithCoords) return;
+
+  const navId = `nav_here_${first.id}`;
+  if (plannedJourneyGroupExists(navId)) return;
+  const planStopsNow = useFuturePlanStore.getState().plan.stops;
+  if (hasLiveJourneyOnPlan()) return;
+  if (destAlreadyHasTravel(first.id, planStopsNow)) return;
+  if (
+    planStopsNow.some(
+      (s) =>
+        s.kind === 'nav_leg' &&
+        (s.id === navId ||
+          s.groupId === navId ||
+          (/^ÖPNV (zu|nach) /i.test(s.title) &&
+            cleanPlanDestTitle(s.title) ===
+              cleanPlanDestTitle(first.title))),
+    )
+  ) {
+    return;
+  }
 
   const origin = resolveTravelOrigin({
     beforeMs: first.plannedStartMs ?? null,
@@ -161,8 +230,6 @@ function pushOriginToFirstStopLeg(
       ? first.plannedStartMs - mins * 60_000 - (first.bufferMin || 0) * 60_000
       : now + 5 * 60_000;
   const arriveMs = leaveMs + mins * 60_000;
-  const navId = `nav_here_${first.id}`;
-  if (plannedJourneyGroupExists(navId)) return;
   legs.push({
     id: navId,
     title:
@@ -195,20 +262,28 @@ function pushOriginToFirstStopLeg(
     arriveAtMs: first.plannedStartMs ?? null,
     prepBufferMin: first.bufferMin || 0,
     transport: legTransport,
+    force: true,
   });
 }
 
 /**
  * Sync-Fallback (Luftlinie/Pace) — EIN Leg pro Stop-Paar.
+ * Re-Run: stale Fallback „~ unterwegs“ weg, Journey-Gruppen bleiben, keine Doppel-ÖPNV.
  */
-export function applyGapFillTravelLegs(): {
+export function applyGapFillTravelLegs(opts?: {
+  preferredTransport?: FuturePlanTransport | null;
+  /** Nach Quiet-Shift einmal ohne Quiet-Reentry neu bauen. */
+  skipQuietResolve?: boolean;
+}): {
   legs: number;
   speech: string;
 } {
+  if (hasLiveJourneyOnPlan()) return { legs: 0, speech: '' };
   const store = useFuturePlanStore.getState();
   const realStops = sortedRealStops();
   const legs: FuturePlanStop[] = [];
-  const transport = store.plan.transportDefault;
+  const transport =
+    opts?.preferredTransport ?? store.plan.transportDefault;
 
   pushOriginToFirstStopLeg(realStops, legs, transport);
 
@@ -216,6 +291,7 @@ export function applyGapFillTravelLegs(): {
     const a = realStops[i]!;
     const b = realStops[i + 1]!;
     if (a.id.startsWith('ft:') || b.id.startsWith('ft:')) continue;
+    if (shouldSkipTourInternalLeg(a, b)) continue;
     if (
       a.lat == null ||
       a.lng == null ||
@@ -252,7 +328,6 @@ export function applyGapFillTravelLegs(): {
       const leaveBy =
         b.plannedStartMs - mins * 60_000 - (b.bufferMin || 0) * 60_000;
       if (startMs != null && leaveBy < startMs) {
-        // Eng — aber nicht rot markieren (Konflikt-Engine / Button löst das)
         void leaveBy;
       }
     }
@@ -260,7 +335,16 @@ export function applyGapFillTravelLegs(): {
     const navId = `nav_${a.id}_${b.id}`;
     if (plannedJourneyGroupExists(navId)) continue;
     const destTitle = cleanPlanDestTitle(b.title);
-    if (!destTitle) continue;
+    if (!destTitle || isPlanPromptLeak(b.title)) continue;
+    if (/^ziel$/i.test(destTitle)) continue;
+    if (
+      destAlreadyHasTravel(b.id, [
+        ...useFuturePlanStore.getState().plan.stops,
+        ...legs,
+      ])
+    ) {
+      continue;
+    }
     const title =
       legTransport === 'transit'
         ? `ÖPNV nach ${destTitle}`
@@ -318,26 +402,48 @@ export function applyGapFillTravelLegs(): {
         arriveAtMs: b.plannedStartMs ?? null,
         prepBufferMin: b.bufferMin || 0,
         transport: legTransport,
+        force: true,
       });
     }
   }
 
   const current = useFuturePlanStore.getState().plan;
-  const liveNav = current.stops.filter((s) => isLiveNavLegId(s.id));
-  const plannedGroups = current.stops.filter(
-    (s) =>
-      s.kind === 'nav_leg' &&
-      Boolean(s.groupId) &&
-      !isLiveNavLegId(s.id) &&
-      plannedJourneyGroupExists(s.groupId!),
-  );
-  const refreshed = current.stops.filter(
-    (s) => s.kind !== 'nav_leg' && !isLiveNavLegId(s.id),
-  );
+  const merged = mergeGapFillPlanStops({
+    currentStops: current.stops,
+    newLegs: legs,
+    isLiveNavLegId,
+    plannedJourneyGroupExists,
+  });
   useFuturePlanStore.getState().setPlan({
     ...current,
-    stops: [...refreshed, ...liveNav, ...plannedGroups, ...legs],
+    stops: merged,
   });
+
+  // Soft-Overlaps nach Legs still lösen — einmal, dann Legs ggf. neu
+  if (!opts?.skipQuietResolve) {
+    try {
+      const snap = useFuturePlanStore
+        .getState()
+        .plan.stops.map((s) => `${s.id}:${s.plannedStartMs ?? ''}`)
+        .join('|');
+      const { resolveOverlapsQuietly } = require('../planning/planConflictResolve') as {
+        resolveOverlapsQuietly: (o?: { speakIfStuck?: boolean }) => boolean;
+      };
+      resolveOverlapsQuietly({ speakIfStuck: false });
+      const snap2 = useFuturePlanStore
+        .getState()
+        .plan.stops.map((s) => `${s.id}:${s.plannedStartMs ?? ''}`)
+        .join('|');
+      if (snap !== snap2) {
+        return applyGapFillTravelLegs({
+          ...opts,
+          skipQuietResolve: true,
+        });
+      }
+    } catch {
+      /* soft — circular/RN */
+    }
+  }
 
   const speech =
     legs.length > 0

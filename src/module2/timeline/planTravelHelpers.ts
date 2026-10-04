@@ -387,6 +387,8 @@ export function scheduleRefineNavLegRoute(opts: {
   arriveAtMs?: number | null;
   prepBufferMin?: number;
   transport?: string;
+  /** Auch bei geschlossener Timeline (Einplanen / Gap-Fill). */
+  force?: boolean;
 }): void {
   try {
     const { usePlanCalendarUiStore } = require('./planCalendarUiStore') as {
@@ -398,8 +400,14 @@ export function scheduleRefineNavLegRoute(opts: {
       };
     };
     const ui = usePlanCalendarUiStore.getState();
-    // Geschlossen: kein OSRM-Sturm — ÖPNV trotzdem auflösen (Akkordeon).
-    if (ui.calendarVisible === false && opts.transport !== 'transit') return;
+    // Geschlossen: kein OSRM-Sturm — ÖPNV + forced Gap-Fill trotzdem auflösen.
+    if (
+      ui.calendarVisible === false &&
+      opts.transport !== 'transit' &&
+      opts.force !== true
+    ) {
+      return;
+    }
     ui.markRouteComputing(opts.navId, true);
   } catch {
     /* soft — refine trotzdem */
@@ -522,15 +530,73 @@ export function scheduleRefineNavLegRoute(opts: {
         const best = result?.itineraries?.[0] ?? null;
         if (best) {
           try {
-            const { replaceNavLegWithJourneyGroup } = await import(
-              './plannedJourneyGroup'
+            const { replaceNavLegWithJourneyGroup, cleanPlanDestTitle } =
+              await import('./plannedJourneyGroup');
+            const {
+              navLegDestKey,
+              knownGapFillStopIds,
+              pruneStaleFallbackLegsForDest,
+            } = await import('./gapFillTravelPolicy');
+            const storePre = useFuturePlanStore.getState();
+            const placeholder = storePre.plan.stops.find(
+              (s) => s.id === opts.navId,
             );
+            const known = knownGapFillStopIds(storePre.plan.stops);
+            const destId = navLegDestKey(opts.navId, known);
+            const destStop = destId
+              ? storePre.plan.stops.find((s) => s.id === destId)
+              : null;
+            const destTitle =
+              cleanPlanDestTitle(destStop?.title || '') ||
+              cleanPlanDestTitle(placeholder?.title || '') ||
+              null;
             if (
               replaceNavLegWithJourneyGroup({
                 navId: opts.navId,
+                destTitle,
                 itinerary: best,
               })
             ) {
+              if (destId) {
+                const pruned = pruneStaleFallbackLegsForDest({
+                  stops: useFuturePlanStore.getState().plan.stops,
+                  destId,
+                  keepGroupId: opts.navId,
+                  isLiveNavLegId: (id) => {
+                    try {
+                      const {
+                        isLiveNavLegId,
+                      } = require('./syncLiveNavToPlan') as {
+                        isLiveNavLegId: (x: string) => boolean;
+                      };
+                      return isLiveNavLegId(id);
+                    } catch {
+                      return false;
+                    }
+                  },
+                });
+                useFuturePlanStore.getState().setPlan({
+                  ...useFuturePlanStore.getState().plan,
+                  stops: pruned,
+                  updatedAtMs: Date.now(),
+                });
+              }
+              try {
+                const {
+                  usePlanCalendarUiStore,
+                } = require('./planCalendarUiStore') as {
+                  usePlanCalendarUiStore: {
+                    getState: () => {
+                      markRouteComputing: (id: string, on: boolean) => void;
+                    };
+                  };
+                };
+                usePlanCalendarUiStore
+                  .getState()
+                  .markRouteComputing(opts.navId, false);
+              } catch {
+                /* soft */
+              }
               return;
             }
           } catch {

@@ -244,15 +244,15 @@ export function getCartesiaVoice(
   id?: VoiceId | null,
 ): CartesiaVoiceDefinition {
   if (id && BY_ID.has(id)) return BY_ID.get(id)!;
-  return CARTESIA_VOICES[0];
+  return BY_ID.get(DEFAULT_CARTESIA_VOICE_ID) ?? CARTESIA_VOICES[0];
 }
 
 export function cartesiaVoiceUuid(id?: VoiceId | null): string {
   return getCartesiaVoice(id).cartesiaVoiceId;
 }
 
-/** Default = Alina (Position 1). */
-export const DEFAULT_CARTESIA_VOICE_ID: VoiceId = 'alina';
+/** Default = Sebastian (Classic-Guide). */
+export const DEFAULT_CARTESIA_VOICE_ID: VoiceId = 'sebastian';
 
 /** Dev/CI: alle Personas müssen native DE sein. */
 export function assertAllVoicesNativeGerman(): void {

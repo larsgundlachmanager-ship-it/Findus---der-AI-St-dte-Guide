@@ -15,7 +15,10 @@
 export const FOG_MERGE_GAP_M = 20;
 /** Mindest-Zellgröße in m — am Street-Zoom feiner, damit der Rand nicht treppig wird. */
 export const FOG_CELL_M = 0.45;
-export const FOG_SMOOTH_ITERS = 10;
+/** Wenige Chaikin-Pässe — 10 Pässe verdoppeln die Punkte bis in die Hunderttausende und blockieren die Karte. */
+export const FOG_SMOOTH_ITERS = 2;
+/** Obergrenze pro Ring, damit ein ShapeSource-Update die UI nicht einfriert. */
+export const FOG_RING_VERT_CAP = 360;
 /**
  * Stehende GPS-Blase / kompakter Cluster: echter Kreis statt Viewport-Raster.
  * Größerer Span → Kapsel-Raster im Track-BBox (weltfest, nicht am Kartenausschnitt).
@@ -153,9 +156,24 @@ function chaikinOnce(ring: FogRing): FogRing {
   return closeRing(out);
 }
 
+function decimateClosed(ring: FogRing, maxPts: number): FogRing {
+  const closed = closeRing(ring);
+  const open = closed.slice(0, -1);
+  if (open.length <= maxPts) return closed;
+  const step = Math.ceil(open.length / maxPts);
+  const out: FogRing = [];
+  for (let i = 0; i < open.length; i += step) out.push(open[i]!);
+  return closeRing(out);
+}
+
 function smoothClosed(ring: FogRing, iters: number = FOG_SMOOTH_ITERS): FogRing {
   let cur = closeRing(ring);
-  for (let k = 0; k < iters; k++) cur = chaikinOnce(cur);
+  const passes = cur.length > 180 ? 1 : iters;
+  for (let k = 0; k < passes; k++) {
+    cur = chaikinOnce(cur);
+    if (cur.length > FOG_RING_VERT_CAP) break;
+  }
+  if (cur.length > FOG_RING_VERT_CAP + 1) cur = decimateClosed(cur, FOG_RING_VERT_CAP);
   return closeRing(cur);
 }
 
@@ -814,12 +832,95 @@ export function fogPolygonsToGeoJSON(polygons: FogPolygon[]): {
     geometry: { type: 'Polygon'; coordinates: FogPolygon };
   }>;
 } {
-  return {
-    type: 'FeatureCollection',
-    features: polygons.map((coordinates) => ({
+  const features: Array<{
+    type: 'Feature';
+    properties: Record<string, never>;
+    geometry: { type: 'Polygon'; coordinates: FogPolygon };
+  }> = [];
+  for (const raw of polygons) {
+    if (!Array.isArray(raw) || raw.length < 1) continue;
+    const rings: FogRing[] = [];
+    for (let ri = 0; ri < raw.length; ri += 1) {
+      const ring = raw[ri];
+      if (!Array.isArray(ring) || ring.length < 3) continue;
+      const cleaned: FogRing = [];
+      for (const p of ring) {
+        if (
+          !Array.isArray(p) ||
+          p.length < 2 ||
+          !Number.isFinite(p[0]) ||
+          !Number.isFinite(p[1])
+        ) {
+          continue;
+        }
+        const prev = cleaned[cleaned.length - 1];
+        if (prev && prev[0] === p[0] && prev[1] === p[1]) continue;
+        cleaned.push([p[0], p[1]]);
+      }
+      if (cleaned.length < 3) continue;
+      const a = cleaned[0]!;
+      const b = cleaned[cleaned.length - 1]!;
+      const closed =
+        a[0] === b[0] && a[1] === b[1]
+          ? cleaned
+          : (cleaned.concat([[a[0], a[1]]]) as FogRing);
+      // MapLibre: ≥4 Positionen (3 Ecken + Schluss). Löcher ebenfalls.
+      if (closed.length < 4) continue;
+      rings.push(closed);
+    }
+    if (rings.length < 1) continue;
+    features.push({
       type: 'Feature' as const,
       properties: {},
-      geometry: { type: 'Polygon' as const, coordinates },
-    })),
+      geometry: { type: 'Polygon' as const, coordinates: rings },
+    });
+  }
+  return { type: 'FeatureCollection', features };
+}
+
+/** Nav-Trail (A): schmale LineString-Spur — kein Flächen-Merge, kein Mask-Schleier. */
+export function fogTrailGeoJSON(
+  track: Array<{ lat: number; lng: number }>,
+  opts?: { maxPoints?: number; minStepM?: number },
+): {
+  type: 'FeatureCollection';
+  features: Array<{
+    type: 'Feature';
+    properties: Record<string, never>;
+    geometry: { type: 'LineString'; coordinates: number[][] };
+  }>;
+} {
+  const maxPoints = opts?.maxPoints ?? 320;
+  // Größerer Min-Step → weniger Überlapp-/Stapel-Look bei Mehrfach-Lauf.
+  const minStepM = opts?.minStepM ?? 12;
+  const sampled: Array<{ lat: number; lng: number }> = [];
+  for (const p of track) {
+    if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
+    const prev = sampled[sampled.length - 1];
+    if (prev) {
+      const dLat = (p.lat - prev.lat) * 111_320;
+      const dLng =
+        (p.lng - prev.lng) * 111_320 * Math.cos((p.lat * Math.PI) / 180);
+      if (Math.hypot(dLat, dLng) < minStepM) continue;
+    }
+    sampled.push({ lat: p.lat, lng: p.lng });
+  }
+  const slice =
+    sampled.length > maxPoints ? sampled.slice(-maxPoints) : sampled;
+  if (slice.length < 2) {
+    return { type: 'FeatureCollection', features: [] };
+  }
+  return {
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: slice.map((p) => [p.lng, p.lat]),
+        },
+      },
+    ],
   };
 }

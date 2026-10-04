@@ -374,6 +374,16 @@ const produceWeather: TipProducer = () => {
   } catch {
     allowRainWarn = true;
   }
+  if (allowRainWarn) {
+    try {
+      const { isUserOutdoorsForRainWarn } = require('../weather/rainWarnOutdoorGate') as {
+        isUserOutdoorsForRainWarn: () => boolean;
+      };
+      if (!isUserOutdoorsForRainWarn()) allowRainWarn = false;
+    } catch {
+      /* soft */
+    }
+  }
 
   if (allowRainWarn) {
     try {
@@ -388,8 +398,16 @@ const produceWeather: TipProducer = () => {
       const line = getWeatherHudLine();
       const st = getWeatherTrackerState();
       if (line) {
-        const rainingNow = /^(🌧\s*)?Regen (jetzt|noch )/i.test(line);
-        const soonClock = /^Regen ab /i.test(line);
+        let rainingNow = false;
+        try {
+          const { isRainHudFallingLine } = require('../weather/rainIncomingPolicy') as {
+            isRainHudFallingLine: (line: string) => boolean;
+          };
+          rainingNow = isRainHudFallingLine(line);
+        } catch {
+          rainingNow = /Aktuell|noch |bis /i.test(line) && /regen/i.test(line);
+        }
+        const soonClock = /Regen ab /i.test(line);
         const mins = rainingNow
           ? 0
           : soonClock
@@ -397,23 +415,13 @@ const produceWeather: TipProducer = () => {
             : st?.nextRainAtMs != null
               ? Math.round((st.nextRainAtMs - Date.now()) / 60_000)
               : 99;
-        const soon = rainingNow || mins <= 30;
         tips.push({
           id: `rain-hud-${st?.nextRainAtMs ?? 'now'}`,
           kind: 'weather_rain',
           text: line.startsWith('🌧') ? line : `🌧 ${line}`,
-          meta: rainingNow
-            ? 'Aktuelle Dauer'
-            : soon
-              ? 'Schirm dabei?'
-              : mins <= 90
-                ? 'Bald nass'
-                : undefined,
-          tellMorePrompt: rainingNow
-            ? 'Es regnet — Café oder Indoor in der Nähe mit Route.'
-            : soon
-              ? 'Regen bald — Café oder Indoor in der Nähe mit Route, und sag mir ob Schirm sinnvoll ist.'
-              : `In etwa ${mins} Minuten könnte es regnen — was soll ich anpassen (Route, Indoor, Schirm)?`,
+          // Banner = Fakt only — kein Schirm/Indoor/Jacke oben.
+          meta: undefined,
+          tellMorePrompt: '__WEATHER_DAY_CHECK__',
           score: rainingNow || mins <= 5 ? 95 : mins <= 30 ? 88 : mins <= 90 ? 74 : 60,
         });
       }
@@ -427,13 +435,22 @@ const produceWeather: TipProducer = () => {
         getWeatherHudLine: () => string | null;
       };
       const line = getWeatherHudLine();
-      if (line && /^(🌧\s*)?Regen (jetzt|noch )/i.test(line)) {
+      let rainingNow = /Aktuell|noch |bis /i.test(line) && /regen/i.test(line);
+      try {
+        const { isRainHudFallingLine } = require('../weather/rainIncomingPolicy') as {
+          isRainHudFallingLine: (line: string) => boolean;
+        };
+        rainingNow = isRainHudFallingLine(line);
+      } catch {
+        /* soft */
+      }
+      if (line && rainingNow) {
         tips.push({
           id: 'rain-hud-now',
           kind: 'weather_rain',
           text: line.startsWith('🌧') ? line : `🌧 ${line}`,
-          meta: 'Aktuelle Regendauer',
-          tellMorePrompt: 'Es regnet — Café oder Indoor in der Nähe mit Route.',
+          meta: undefined,
+          tellMorePrompt: '__WEATHER_DAY_CHECK__',
           score: 95,
         });
       }
@@ -466,7 +483,15 @@ const produceWeather: TipProducer = () => {
         isHeavyRain: weather.isHeavyRain,
       });
       if (line) {
-        const rainingNow = /^(🌧\s*)?Regen (jetzt|noch )/i.test(line);
+        let rainingNow = false;
+        try {
+          const { isRainHudFallingLine } = require('../weather/rainIncomingPolicy') as {
+            isRainHudFallingLine: (line: string) => boolean;
+          };
+          rainingNow = isRainHudFallingLine(line);
+        } catch {
+          rainingNow = /Aktuell|noch |bis /i.test(line) && /regen/i.test(line);
+        }
         const mins =
           !rainingNow && weather.nextRainAtMs != null
             ? Math.round((weather.nextRainAtMs - Date.now()) / 60_000)
@@ -477,21 +502,9 @@ const produceWeather: TipProducer = () => {
         tips.push({
           id: `rain-${weather.nextRainAtMs ?? 'now'}`,
           kind: 'weather_rain',
-          text: `🌧 ${line}${
-            !rainingNow && weather.nextRainAtMs != null
-              ? ` (${formatClock(weather.nextRainAtMs)})`
-              : ''
-          }`,
-          meta: soon
-            ? 'Schirm/Indoor?'
-            : weather.nextRainAtMs != null
-              ? `Ab ~${formatClock(weather.nextRainAtMs)} · Schirm?`
-              : undefined,
-          tellMorePrompt: rainingNow
-            ? 'Es regnet — Café oder Indoor in der Nähe mit Route.'
-            : soon
-              ? 'Regen bald — Café oder Indoor in der Nähe mit Route.'
-              : `In etwa ${mins} Minuten Regen möglich — Schirm/Jacke oder Plan anpassen?`,
+          text: `🌧 ${line}`,
+          meta: undefined,
+          tellMorePrompt: '__WEATHER_DAY_CHECK__',
           score: rainingNow || mins <= 5 ? 95 : soon ? 84 : 72,
         });
       }
@@ -541,28 +554,8 @@ const produceWeather: TipProducer = () => {
 };
 
 const produceBatteryCharge: TipProducer = () => {
-  refreshBatteryCache();
-  const bat = getCachedBatteryLevel01();
-  if (bat == null || !Number.isFinite(bat)) return [];
-  const pct = Math.round(bat * 100);
-  // HUD vor Survival-Speech (15 %): ab 25 % fragen
-  if (pct > 25) return [];
-  const critical = pct <= 15;
-  return [
-    {
-      id: `battery-${pct}`,
-      kind: 'battery_charge',
-      text: critical
-        ? `🔋 Akku ${pct} % — Powerbank?`
-        : '🔋 Brauchst du mehr Akku?',
-      meta: critical
-        ? 'Nächste Station ansteuern?'
-        : `Noch ${pct} % — Station suchen?`,
-      tellMorePrompt:
-        'Akku wird knapp — such Powerbank-Automaten oder Café mit Steckdosen in der Nähe und gib mir Route-Buttons.',
-      score: critical ? 97 : pct <= 18 ? 93 : 80,
-    },
-  ];
+  // Keine ungefragten Akku-/Steckdosen-Vorschläge — nur wenn der User danach fragt.
+  return [];
 };
 
 const produceWakeAlarm: TipProducer = (ctx) => {
@@ -741,8 +734,8 @@ const produceTransitDepart: TipProducer = (ctx) => {
         id: `transit-${next.id}`,
         kind: 'transit_depart',
         text: `🚆 Abfahrt ${clock}`,
-        meta: `${next.title} · in ${mins} Min · hilft das?`,
-        tellMorePrompt: `Meine Bahn/Bus-Abfahrt um ${clock} (${next.title}) — Leave-by, Weg zur Haltestelle und was ich beachten soll.`,
+        meta: `${next.title} · in ${mins} Min `,
+        tellMorePrompt: `Wann muss ich los zur Abfahrt um ${clock}?`,
         score: mins <= 15 ? 94 : mins <= 45 ? 82 : 68,
       },
     ];
@@ -775,31 +768,24 @@ const produceOpenTasks: TipProducer = (ctx) => {
 /** Trigger-Matrix → HUD (Top-Score als generic Tip). */
 const produceContextMatrix: TipProducer = () => {
   refreshBatteryCache();
-  let amenityKinds = new Set<string>();
-  try {
-    const { getNearbyAmenityHudCards } = require('./liveHudNearbyAmenities') as {
-      getNearbyAmenityHudCards: () => Array<{ kind: string }>;
-    };
-    amenityKinds = new Set(getNearbyAmenityHudCards().map((c) => c.kind));
-  } catch {
-    /* soft */
-  }
   const top = evaluateContextTriggers({ limit: 5 }).filter((t) => {
     if (t.id === 'low_battery_charge') return false; // eigener battery_charge Producer
-    // Doppel vermeiden: konkrete Nearby-Karten schlagen generische Matrix
-    if (t.id === 'toilet_nearby' && amenityKinds.has('toilet')) return false;
-    if (t.id === 'drinking_water_nearby' && amenityKinds.has('drinking_water'))
+    // Nur konkrete Nearby-Karten — nie leere Kategorie-Fragen
+    if (
+      t.id === 'toilet_nearby' ||
+      t.id === 'drinking_water_nearby' ||
+      t.id === 'ice_cream_hot' ||
+      t.id === 'supermarket_evening' ||
+      t.id === 'park_pause' ||
+      t.id === 'photo_spots'
+    ) {
       return false;
-    if (t.id === 'ice_cream_hot' && amenityKinds.has('ice_cream')) return false;
-    if (t.id === 'supermarket_evening' && amenityKinds.has('supermarket'))
-      return false;
-    // Generisches „Supermarkt“ ohne Nearby-Treffer nicht zeigen
-    if (t.id === 'supermarket_evening') return false;
-    // Kein „Pause / Park?“ / „Foto-Spot?“ ohne konkreten Nearby-Treffer
-    if (t.id === 'park_pause' || t.id === 'photo_spots') return false;
+    }
     // Sunset-Karte aus liveHudCards ist SSOT (Uhr + Wetter)
     if (t.id === 'sunset_spot') return false;
     if (t.id === 'lunch_nearby' || t.id === 'dinner_reservation') return false;
+    // Kein Soft-Pitch oben: Regen→Indoor / Profil-Burger
+    if (t.id === 'sudden_rain_indoor' || t.id === 'profile_burger') return false;
     return true;
   });
   return top.map((t) => ({
@@ -810,6 +796,106 @@ const produceContextMatrix: TipProducer = () => {
     tellMorePrompt: t.prompt,
     score: Math.min(82, Math.round(t.score * 0.85)),
   }));
+};
+
+
+const produceLogisticsDeadlines: TipProducer = (ctx) => {
+  try {
+    const { useLogisticsTriggerStore } = require('../../store/useLogisticsTriggerStore') as {
+      useLogisticsTriggerStore: {
+        getState: () => {
+          getActiveEvents: () => Array<{
+            id: string;
+            kind: string;
+            title: string;
+            atMs: number | null;
+            meta?: Record<string, string | number | boolean | null>;
+          }>;
+          triggers: Array<{
+            eventId: string;
+            leaveByMs: number | null;
+            status: string;
+            mode: string | null;
+          }>;
+        };
+      };
+    };
+    const st = useLogisticsTriggerStore.getState();
+    const tips: HudTipCandidate[] = [];
+    for (const ev of st.getActiveEvents()) {
+      if (
+        ev.kind !== 'flight' &&
+        ev.kind !== 'train' &&
+        ev.kind !== 'bus' &&
+        ev.kind !== 'session' &&
+        ev.kind !== 'reminder'
+      ) {
+        continue;
+      }
+      const metaLeave =
+        typeof ev.meta?.leaveByMs === 'number' && Number.isFinite(ev.meta.leaveByMs)
+          ? ev.meta.leaveByMs
+          : null;
+      const trigLeave =
+        st.triggers.find(
+          (t) =>
+            t.eventId === ev.id &&
+            t.leaveByMs != null &&
+            (t.status === 'scheduled' || t.status === 'due'),
+        )?.leaveByMs ?? null;
+      const leaveBy = metaLeave ?? trigLeave;
+      const taxiStatus = String(ev.meta?.taxiStatus ?? '').toLowerCase();
+      if (taxiStatus === 'en_route' || taxiStatus === 'arriving' || taxiStatus === 'arrived') {
+        const etaMs =
+          typeof ev.meta?.taxiEtaMs === 'number' ? ev.meta.taxiEtaMs : null;
+        const etaLabel =
+          etaMs != null && etaMs > ctx.nowMs
+            ? ` · ca. ${formatClock(etaMs)}`
+            : taxiStatus === 'arrived'
+              ? ' · ist da'
+              : taxiStatus === 'arriving'
+                ? ' · kommt gleich'
+                : ' · unterwegs';
+        tips.push({
+          id: `taxi-${ev.id}`,
+          kind: 'session_deadline',
+          text: `🚕 Taxi${etaLabel}`,
+          meta: ev.title || 'Taxi',
+          tellMorePrompt: `Mein Taxi (${ev.title || 'Taxi'})${etaLabel} — Status und nächster Schritt.`,
+          score: taxiStatus === 'arrived' || taxiStatus === 'arriving' ? 97 : 90,
+        });
+      }
+      if (leaveBy == null || !Number.isFinite(leaveBy)) continue;
+      const delta = leaveBy - ctx.nowMs;
+      if (delta <= 0 || delta > 3 * 60 * 60_000) continue;
+      const mins = Math.max(1, Math.round(delta / 60_000));
+      const score =
+        delta <= 20 * 60_000
+          ? 97
+          : delta <= 45 * 60_000
+            ? 90
+            : delta <= 90 * 60_000
+              ? 80
+              : 70;
+      const icon =
+        ev.kind === 'flight' ? '✈️' : ev.kind === 'train' ? '🚆' : ev.kind === 'bus' ? '🚌' : '⏱️';
+      const countdown =
+        mins <= 90
+          ? `${icon} In ${mins} Min los`
+          : `${icon} Los ${formatClock(leaveBy)}`;
+      tips.push({
+        id: `logistics-leave-${ev.id}-${leaveBy}`,
+        kind: 'session_deadline',
+        text: countdown,
+        meta: `${ev.title} · Leave-by ${formatClock(leaveBy)}`,
+        tellMorePrompt: `Leave-by ${formatClock(leaveBy)} für „${ev.title}“ — Route und was ich jetzt tun soll.`,
+        score,
+      });
+    }
+    return tips;
+  } catch {
+    return [];
+  }
 };
 
 const produceNiceInfoScenarios: TipProducer = () => {
@@ -832,6 +918,7 @@ const PRODUCERS: TipProducer[] = [
   produceHotelCheckin,
   produceShoppingClosing,
   produceSessionDeadline,
+  produceLogisticsDeadlines,
   produceWeather,
   produceBatteryCharge,
   produceWakeAlarm,

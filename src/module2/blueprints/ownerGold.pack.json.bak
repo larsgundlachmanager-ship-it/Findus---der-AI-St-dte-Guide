@@ -1,0 +1,2945 @@
+{
+  "blueprints": [
+    {
+      "intentFamily": "general",
+      "situationKey": "general::bridge_understood_commit_v1",
+      "tags": [
+        "bridge",
+        "ack",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Bridge (Call 1): Laenge an erwartete Recherche — INSTANT Peek/Mini-Zusage (Rechnung/Alter/Quiz/Wetter), STANDARD 1 Satz (Nav/Zwischenstopp), COVER 2–3 Saetze Motiv+Filter+Suche (Hotel/Spielplan/Specialty). Nie pauschal continue=stumm. Nie alleinige 0815 ohne Anker. Blocker-Slot → kurze Gegenfrage + bridgeComplete. Mikro-Ack → bridge null ok. Keine Venue-Namen/Preise/Daten in Bridge. Call 2 = Loesung zuerst, Bridge nicht wiederholen."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::call1_instant_peek_v1",
+      "tags": [
+        "bridge",
+        "call1",
+        "latency"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Call-1 Mini-Zusage IMMER sofort (Peek), nicht erst nach LLM. Recherche, Pitch, Timeline, Wecker, Suche starten parallel in derselben Millisekunde — nie auf Speech warten. Call-2 klebt flüssig an dieselbe TTS-Session. Wortlaut frei, kurz, ohne Doppelpunkt/Bindestrich. Mikro-Ack darf still bleiben."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::spoken_colloquial_numbers_v1",
+      "tags": [
+        "speech",
+        "tts",
+        "casual_tone"
+      ],
+      "expect": [
+        "casual_tone",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "dry_list"
+      ],
+      "summary": "Gesprochene Zahlen menschlich: Temperatur-/Zeitspannen als bis (nicht Bindestrich), Uhrzeiten als Uhr oder Mitternacht (kein Doppelpunkt). Call-2 Fliesstext umgangssprachlich, nie Vorlese-Telegramm."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::speech_culture_v1",
+      "tags": [
+        "speech",
+        "casual_tone",
+        "answer_first"
+      ],
+      "expect": [
+        "casual_tone",
+        "answer_first",
+        "brief_speech",
+        "complete_sentences"
+      ],
+      "avoid": [
+        "dry_list",
+        "vague_filler",
+        "boilerplate_opener",
+        "essay"
+      ],
+      "summary": "Sprachkultur gilt immer: muendlich, umgangssprachlich, Fakten in Saetze weben, jeder Satz muss nuetzen. Persoenlichkeit aus Settings nur Overlay (Ton). Kein Stichpunkt-Vorlesen, keine Fuellsatz, kein Telegramm. Wortlaut frei."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::loose_complete_summary_v1",
+      "tags": [
+        "speech",
+        "casual_tone",
+        "answer_first"
+      ],
+      "expect": [
+        "casual_tone",
+        "answer_first",
+        "brief_speech",
+        "complete_sentences"
+      ],
+      "avoid": [
+        "dry_list",
+        "vague_filler",
+        "permission_questions",
+        "boilerplate_opener",
+        "essay"
+      ],
+      "summary": "Hauptantwort: Sprachkultur zuerst (muendlich verdichten, jeder Satz nuetzt), Persoenlichkeit nur Overlay. 1-3 vollstaendige Saetze, Fakten weben, kein Stichpunkt-Vorlesen, kein Telegramm, kein App-Opener. Spickzettel separat."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::device_style_feedback_v1",
+      "tags": [
+        "speech",
+        "correction",
+        "casual_tone",
+        "brief_speech"
+      ],
+      "expect": [
+        "brief_speech",
+        "casual_tone",
+        "complete_sentences",
+        "answer_first"
+      ],
+      "avoid": [
+        "boilerplate_opener",
+        "essay",
+        "dry_list",
+        "vague_filler"
+      ],
+      "summary": "Geraet-Feedback kuerzer/lockerer/weniger Also: als LearnedRule speichern (brief_speech, casual_tone, complete_sentences; vermeide boilerplate_opener/essay/dry_list). Struktur-Constraint fuer aehnliche Turns — nie feste Saetze. Kernel/TTS unangetastet."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::missing_blocker_slot_clarify_v1",
+      "tags": [
+        "bridge",
+        "clarify",
+        "call1",
+        "missing_slot"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_research_ack"
+      ],
+      "summary": "Aktion/Recherche ohne Pflicht-Slot sinnlos (Flug ohne Uhr, Taxi buchen ohne Ziel, …): Call-1 Bridge = eine gezielte Klärfrage, bridgeComplete=true, work leer. Zuerst Slot aus offenem Thread/Kontext herleiten — nur nachfragen wenn wirklich kein Anker. session=continue. Wortlaut frei."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::pitch_reject_followup_v1",
+      "tags": [
+        "pitch",
+        "followup",
+        "reject"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history"
+      ],
+      "summary": "Ablehnung einer Pitch-Option (mag ich nicht / kein X / was noch): gleicher Suchkontext, andere Orte ohne Abgelehntes. Call-2 nur diesen Faden, kein totes Trivia."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::compound_sunset_view_v1",
+      "tags": [
+        "pitch",
+        "compound",
+        "sunset",
+        "view",
+        "topic_cut"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "address_unless_asked"
+      ],
+      "summary": "Compound-Abend (Gericht + Sonnenuntergang/Blick): Call 1 setzt researchCity/Datensatz. Backend Cascade Zwei-Strang Perfect+Backtrack; Checkliste fulfilled/soft-miss/only_one. 1 Perfect ok; Soft-Miss ehrlich + Nachfrage. Shortlist Top-5 → Speak Top-2. Call 3 Speisekarte/Preis. Nach Wahl jetzt=Nav oder später=Timeline+Leave-by."
+    },
+    {
+      "intentFamily": "dining",
+      "tags": [
+        "pitch",
+        "topic_cut",
+        "future_place"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history"
+      ],
+      "summary": "Essenswunsch (auch morgen in anderer Stadt): Bridge zusagen, dann Pitch mit zwei passenden Orten. Totes Trivia nicht mischen. Kein Tagesplan-Popup, kein Pack-Zwang."
+    },
+    {
+      "intentFamily": "dining",
+      "tags": [
+        "speisekarte",
+        "reviews",
+        "maps",
+        "route",
+        "cafe",
+        "bar",
+        "snack",
+        "fruehstueck"
+      ],
+      "expect": [
+        "prices",
+        "menu",
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "fake_promises",
+        "address_unless_asked",
+        "long_history",
+        "hours_unless_tight",
+        "opposite_diet"
+      ],
+      "summary": "Gastro inkl. Fruehstueck/Cafe/Bar/Snack: Preise und Speisekarte-Deep-Link zuerst; genannter Ort hard-match. Historie weglassen. Zweite Option hinten. Buttons Route + Karte/Website 1:1.",
+      "situationKey": "dining::menu_prices_route_compact_v1"
+    },
+    {
+      "intentFamily": "navigation",
+      "tags": [
+        "taxi",
+        "uber",
+        "airport",
+        "transfer"
+      ],
+      "expect": [
+        "concrete_place",
+        "booking_url"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Taxi und Flughafentransfer: Ziel aus Route oder Flughafen; Partnerlink Pickup+Dropoff zuerst, lokale Nummer optional; ÖPNV beenden; Fahrtdauer nennen."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::weather_night_sky_woven_outfit_v1",
+      "tags": [
+        "weather"
+      ],
+      "expect": [
+        "answer_first",
+        "sky_conditions",
+        "temp_range",
+        "rain_timing",
+        "clothing_tip",
+        "casual_tone",
+        "woven_clothing"
+      ],
+      "avoid": [
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "station_board_fallback",
+        "aushang",
+        "invent_storm",
+        "dry_list",
+        "sun_as_day_at_night",
+        "parenthetical_aside"
+      ],
+      "summary": "Wetter: Call-1 kurz Zusagen. Slot/Jetzt/Regen → 1–2 knappe Sätze. Allgemeine Vorhersage → 2–3 Fließsätze Radio-Stil (Tage kontrastieren, Schauer den Tagen zuordnen, Wind wenn belegt, Höchst hinten). Kein Opener „Also in Stadt…“. Stichpunkte = Daypart-Chips + Temp + Outfit-Chip. Nie Telegramm in der Stimme. Nie Navigation aus Wetterfrage."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::weather_general_forecast_radio_v1",
+      "tags": [
+        "weather",
+        "forecast",
+        "multi_day"
+      ],
+      "expect": [
+        "answer_first",
+        "sky_conditions",
+        "temp_range",
+        "rain_timing",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "dry_list",
+        "meta_app_pitch",
+        "nav_auto_start",
+        "boilerplate_opener"
+      ],
+      "summary": "Allgemeine Wettervorhersage: Speech 2–3 Fließsätze Radio-Stil. Stichpunkte zeigen den morgigen Tag als Zeitfenster — zuerst Temperaturspanne, dann Icon plus Uhr-Spanne, letzte Phase ab Uhr. Kein Outfit, kein Prozent."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::outfit_woven_prose_v1",
+      "tags": [
+        "outfit",
+        "clothing",
+        "weather_outfit"
+      ],
+      "expect": [
+        "answer_first",
+        "clothing_tip",
+        "casual_tone",
+        "woven_clothing"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "dry_list",
+        "parenthetical_aside",
+        "tour_button",
+        "truncated_bullets"
+      ],
+      "summary": "Outfit/Anziehen: konkrete Kleidung zuerst aus belegtem Wetter+Plan, in kurzen vollständigen Sätzen weben — keine (…)-Klammern/Meta, kein Telegramm. Stichpunkte = 1–3 vollständige Sätze (Jacke/Schicht), nie mitten im Satz abbrechen. Kein Touren-Button, kein Sightseeing-Pitch."
+    },
+    {
+      "intentFamily": "general",
+      "tags": [
+        "passport",
+        "konsulat",
+        "embassy",
+        "lost_docs"
+      ],
+      "expect": [
+        "concrete_place",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Reisepass verloren / Konsulat: nächste zuständige Auslandsvertretung oder Bürgeramt-Schritt, Route/Anruf. Nie Heimatverein/Dorfmuseum als Treffer."
+    },
+    {
+      "intentFamily": "navigation",
+      "tags": [
+        "hauptbahnhof",
+        "hbf",
+        "fast_nav"
+      ],
+      "expect": [
+        "concrete_place",
+        "route_button",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler"
+      ],
+      "summary": "„Zum Hauptbahnhof“ ohne Ortsname: großer Hbf der Region (z. B. Hamburg Hbf), nicht der Dorf-Bahnhof am GPS. Schnell + Route starten."
+    },
+    {
+      "intentFamily": "general",
+      "tags": [
+        "fact",
+        "trivia",
+        "news_followup"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone",
+        "lookup_button"
+      ],
+      "avoid": [
+        "siezen",
+        "permission_questions",
+        "vague_more_button",
+        "stage_directions",
+        "dead_thread_weave"
+      ],
+      "summary": "Faktenfrage / Schnell-Lookup: Call-1 = Antwort-Einstieg (Peek-Struktur: Subjekt/Thema ansteuern, Satz offen) — NIE Zahl/Alter/Name/Hauptstadt-Fakt. Call-2 hängt nahtlos den Fakt in 1–2 Sätzen an. Stichpunkte eine klare Ziffer/Kern — keine Tausender-Splits. Kein Essay, keine ungefragte Tour. Isolation bei neuem Thema. Gleiche Blaupause für Alter, Rechnung, Hauptstadt, Wer-ist, Einwohner — Varianten analog."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::instant_answer_lead_v1",
+      "tags": [
+        "trivia",
+        "quick_lookup",
+        "answer_lead",
+        "hauptstadt",
+        "peek_structure"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "search_process_meta"
+      ],
+      "summary": "Schnell zu beantwortende Faktfrage (Alter, Rechnung, Hauptstadt von …, Wer ist …, Einwohner, kurze Was-ist-von-Frage): Call-1 Bridge = Antwort-Einstieg wie früher Peek — Thema/Subjekt ansteuern, Satz offen lassen, KEIN finaler Faktwert. Call-2 = nur der Kern. Blaupause auf ALLE ähnlichen Varianten übertragen (Land/Stadt/Person/Maß) — Wortlaut frei, nie Script. Nie spannende Frage, nie Recherche-Theater, nie „wen meinst du?“ bei klarer Frage."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::compact_stat_v1",
+      "tags": [
+        "trivia",
+        "einwohner",
+        "flaeche",
+        "compact"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history",
+        "permission_questions"
+      ],
+      "summary": "Statistik-/Größen-Kurzfrage (Einwohner, Fläche/Alster, Maße, Tennisplatz): Call-1 Bridge nur Thema aus DIESEM User-Satz. Call-2 = klare Antwort mit Ziffern. Spickzettel-Titel = Anliegen (z. B. Größe der Alster / Größe eines Tennisplatzes) — NIE gleich einem Stichpunkt, NIE Speech kopieren. Stichpunkte wie Alter-Schema: 1) Maßzahl zuerst (1,6 km² oder Außenalster: 1,6 km²) 2) zweite belegte Teilfläche/Maße wenn vorhanden 3) optional Fun-Fakt nur wenn Persona/Humor passt. Kein Sight-Pitch."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::arith_short_v1",
+      "tags": [
+        "math",
+        "rechen",
+        "compact"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Einfache Rechnung: Call-1 startet mit Antwort-Einstieg (Aufgabe + ergibt-Struktur) — nie spannende Frage, nie Recherche-Theater. Call-2 = nur die Ergebniszahl. Uhrzeiten (18 Uhr) sind keine Rechnung. Stichpunkt optional = Rechnung + Ergebnis. Erbt die Peek-Blaupause knowledge::instant_answer_lead_v1."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::clock_not_math_v1",
+      "tags": [
+        "clock",
+        "math",
+        "memory"
+      ],
+      "expect": [
+        "answer_first",
+        "times_hours"
+      ],
+      "avoid": [
+        "vague_filler"
+      ],
+      "summary": "Uhrzeit im Satz (18 Uhr, um 18, 18:00) ist Termin/Abflug, keine Kopfrechnung. Nicht als Ergebnis speichern. Rechnen nur bei klarem Rechen-Intent (plus/minus/mal/geteilt/was ist)."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "tags": [
+        "picknick",
+        "outdoor",
+        "weather"
+      ],
+      "expect": [
+        "concrete_place",
+        "route_button",
+        "alternatives",
+        "answer_first"
+      ],
+      "avoid": [
+        "long_history",
+        "address_unless_asked"
+      ],
+      "summary": "Picknick outdoor: Park/Wiese/See/Grillplatz plus Wetter; Tap startet Nav, keine Heritage-Tour. Unverbindlich fragen, ob noch Einkauf für unterwegs."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "sightseeing",
+        "tickets",
+        "day_plan"
+      ],
+      "expect": [
+        "prices",
+        "tickets",
+        "website",
+        "concrete_place",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions"
+      ],
+      "summary": "Tag oder Sehenswürdigkeit: Preise und Ticket-Link in derselben Antwort; Stichpunkte aus dem Gesagten; genannte Orte in die Timeline, nicht GPS-Heimat-POIs."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "ticketed_access",
+        "transit"
+      ],
+      "expect": [
+        "prices",
+        "tickets",
+        "website",
+        "concrete_place",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Ticketpflichtiger Zugang erbt Transit: Betreiber, Verbindung, belegter Preis, Ticket-Link (Partner vor Website). Timeline-Stop. Lokalen Modus recherchieren."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "leave_by",
+        "fixed_clock"
+      ],
+      "expect": [
+        "times_hours",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Fester Termin: erst Halt und Losgehen rückwärts, dann der Rest — analog Bahn, Konzert, Training. Geländer, Wortlaut frei."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity_poi::interest_activity_expand_v1",
+      "tags": [
+        "interest",
+        "sight",
+        "pitch",
+        "expand_radius",
+        "ticket"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "tickets"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "search_process_meta"
+      ],
+      "summary": "Lust auf Thema: Pitch Top-2. Pack lokal zuerst; leer → Umkreis intern (50–100 km). Speech: Ort + Preis/Ticket + Anreise-Lage — kein Expand-Log. Outdoor/Kleidung/Wetter nur wenn’s passt."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::day_plan_hamburg_walk_v1",
+      "tags": [
+        "day_plan",
+        "timeline",
+        "pitch_walk",
+        "landmark_qa",
+        "tour"
+      ],
+      "expect": [
+        "answer_first",
+        "times_hours",
+        "concrete_place",
+        "tickets"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Tagesplan multi-slot Walk: Bridge kurz zusagen → Timeline öffnen → Frühstück zuerst (ein Slot, keine Titel-Duplikate) → Landmarke/Michel Q&A (Preis/was ist das, kein Top-2-Drift) → Tour füllt Lücken nur in der Zielstadt mit getimten Optionen (z. B. Museum mit Preis/Dauer) → Abendessen ein Slot, Blick/Sonnenuntergang als Kontext-Kriterien nicht als Sibling-Stops (kein Zeitkonflikt). Nie auf Button „Punkte durchgehen“ warten. Maps/Speisekarte an Timeline-Punkten, nicht Chrome. Charakter färbt Ton, nicht Inhalt. Ablehnung = neue Suche; Ticket bestätigen; Ende Übernachten vs Heimfahrt."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_leave_by_staged_v1",
+      "tags": [
+        "flight",
+        "leave_by",
+        "luggage",
+        "buffer",
+        "airport_access"
+      ],
+      "expect": [
+        "answer_first",
+        "times_hours",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Flug-Leave-by (Task 1): User-Ziel + gegebene Slots sortieren — fehlende Pflicht-Slots nur fragen (Abflugzeit/Nummer und/oder Hand- vs Aufgabegepäck als Live-Chips). Startflughafen selbst herleiten (nächster/relevanter), User darf korrigieren. Mit Uhr: Abflugtafel selbst matchen (±45 Min), Boarding/Gate/Terminal/Security-Puffer belegt, Timeline öffnen, Leave-by rückwärts. Follow-up nur Uhr („um 18 Uhr“) sticky am Flug-Root — nie neues Thema/Pitch/Mathe. Alle Slots schon im Satz → keine Rückfrage, sofort Timeline. Nie Explore-Pitch statt Flugsystem. Wortlaut frei."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_access_choice_v1",
+      "tags": [
+        "flight",
+        "airport_access",
+        "taxi",
+        "transit",
+        "transfer"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Flughafen-Anreise gewählt: Soft-Commit sofort, rivalisierende Timeline-Optionen weg, kein Floskel-Bridge. Flug-Accordion = Flug + Terminal/Check-in/Security; Transfer-Accordion = nur Leave-by/Fahrt/Kosten. Taxi → Uber-Link mit Schedule wenn Abholung Zukunft (>15 Min), sonst product-selection. ÖPNV → volle Kette; Transfer → Personen und Abholadresse vor Partner-Link."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_taxi_compound_v1",
+      "tags": [
+        "flight",
+        "taxi",
+        "leave_by",
+        "airport_access"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Erkennung zuerst: Wunsch (Taxi vorbestellen pünktlich am Flughafen) + gegebene Infos (Zielstadt/Tag) → Tasks logisch ordnen. Hart flight_advisor — nie Stadt-Explore/Tagesplan („London erkunden“) und kein Reisebüro-Funnel. Task 1 = konkreten Flieger finden/eintragen (Startflughafen selbst wählen, Abflugtafel, Boarding/Gate/Security, Gepäck-Chips, Leave-by, Timeline). Task 2 erst danach = Taxi-Deep-Link voll prefilled. Fehlende Slot-Frage nur wenn Blocker. GPS≠Abflugstadt → zusätzliche Anreise-Task. Wortlaut frei."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_origin_mismatch_access_v1",
+      "tags": [
+        "flight",
+        "origin",
+        "access_leg",
+        "sticky",
+        "timeline"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone",
+        "times_hours"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "GPS≠Abflugstadt: echte work-Task origin_access zwischen Flug und Taxi — Live-Chips Schon vor Ort / Bahn / Hotel Vornacht. Bahn→Hbf eintragen oder Hotel Vornacht, dann Leave-by vom echten Startpunkt zum Flughafen, dann Taxi-Deep-Link. Sticky Follow-through accessLeg; nie Root droppen. Wortlaut frei."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::hotel_prefs_before_pitch_v1",
+      "tags": [
+        "hotel",
+        "stay",
+        "budget",
+        "party"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone",
+        "booking_url"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Hotel am Ziel ohne Prefs: erst knappe Klärung (Personen, Budget, Nächte, Must-Haves), dann 2 Optionen mit Preisen und Property-Deep-Link bis Zimmerwahl. Keine Google-Maps-Chips bei Hotels."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::reisebuero_collect_v1",
+      "tags": [
+        "reisebuero",
+        "trip",
+        "weekend",
+        "hotel",
+        "flight",
+        "funnel"
+      ],
+      "expect": [
+        "answer_first",
+        "tickets",
+        "website",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "Reise AN SICH (Flug/Hotel/Anreise/Trip-Inspiration, „überlege nach X zu fliegen — was davor?“): Switch Reisebüro. Call 1 erkennt Absicht, füllt Board, eine Lücke. Reines Hotel-Amenity ohne Zielstadt = lokal pitchen. Gegenpol: nur was-vor-Ort-möglich → nicht dieses Funnel."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::hotel_local_amenities_v1",
+      "tags": [
+        "hotel",
+        "stay",
+        "pool",
+        "sauna",
+        "stay22"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "booking_url"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Hotel mit Amenities/Budget ohne Zielstadt: 2 Optionen am GPS + Stay22, Must-Amenities nur belegt. Kein Reisebüro „von wo?“."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::hotel_empty_followup_v1",
+      "tags": [
+        "hotel",
+        "stay",
+        "pool",
+        "followup",
+        "empty"
+      ],
+      "expect": [
+        "answer_first",
+        "alternatives",
+        "casual_tone"
+      ],
+      "avoid": [
+        "fake_promises",
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Follow-up zu „erstes Hotel“/Pool nach leerem Hotel-Pitch: ehrlich — kein Hotel genannt. Entweder einmal breiter suchen (Radius/Budget/Amenities lockern) mit benannten Stay22-Optionen, oder kurz klären statt leerer UI."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::stay_day_interactive_v1",
+      "tags": [
+        "stay",
+        "timeline",
+        "highlights",
+        "events",
+        "tour"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "times_hours",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Ort+Fenster schon klar, Frage nur was vor Ort möglich (Highlights, Tour, Abend): interaktiv füllen — Call 1 erkennt Absicht (nicht Reise buchen). Kein neues Reisebüro-Funnel."
+    },
+    {
+      "intentFamily": "planning",
+      "tags": [
+        "flight",
+        "airport",
+        "leave_by"
+      ],
+      "expect": [
+        "times_hours",
+        "tickets",
+        "website",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Gebuchter Flug: zuerst Ziel/Tag/Uhr oder Ident klären — fehlt Uhr und Thread hat keine → Call-1 Klärfrage (bridgeComplete), kein Leave-by-Raten. Uhr da → Leave-by rückwärts. Nie Airline-App-Selbstcheck statt Recherche. E-SIM erst wenn Flug in der Timeline steht. Nach Trivia/Essen nur Flug — totes Thema nicht mischen."
+    },
+    {
+      "intentFamily": "mobility",
+      "situationKey": "mobility::taxi_missing_destination_clarify_v1",
+      "tags": [
+        "taxi",
+        "clarify",
+        "call1",
+        "missing_slot"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_research_ack"
+      ],
+      "summary": "Taxi/Uber buchen ohne Ziel: zuerst Ziel aus offenem Thread (Kino, Flughafen, Ort) ziehen. Fehlt jeder Anker → Call-1 Bridge = kurze Wohin-Frage, bridgeComplete, keine Buchungs-Recherche. Personenanzahl allein reicht nicht. Wortlaut frei."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::topic_cut_isolation_v1",
+      "tags": [
+        "topic_cut",
+        "isolation"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Beantwortetes Trivia ist tot, sobald ein neues Thema (Flug, Nav, Plan) kommt — nicht in Bridge oder Stichpunkte weiterschicken."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::person_age_trivia_v1",
+      "tags": [
+        "trivia",
+        "person",
+        "age",
+        "topic_cut",
+        "quick_lookup"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "fake_promises"
+      ],
+      "summary": "Personen-Alter (auch Papst/Past-STT): Call-1 = sehr kurzer Antwort-Einstieg (z. B. Der Papst Leo der 14 ist / Der derzeit älteste lebende Mensch der Welt ist) — Antwort kommt schnell, kein Cover-Warten, keine spannende Frage, nie „wen meinst du?“ bei klarer Superlativ-Frage. Call-2 = nur Kern („N Jahre alt.“ / Name). Aktueller Papst LIVE = Leo XIV (nicht Franziskus als amtierend). Spickzettel-Titel = Alter vom [Person/Amt]; Stichpunkte: 1) N Jahre alt 2) geboren am: Datum in Ort wenn belegt 3) optional Fun-Fakt nur wenn Persona/Humor passt. Kein Pitch."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::who_is_fact_card_v1",
+      "tags": [
+        "trivia",
+        "person",
+        "who_is",
+        "quick_lookup",
+        "spickzettel"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "fake_promises"
+      ],
+      "summary": "Wer-/Wie-heißt-Frage (Amt/Titel/Person): Call-1 = Einleitung ohne Name-Fakt, nie „wen meinst du?“. Aktueller Papst / Oberhaupt Kirche LIVE = Leo XIV (Franziskus nur historisch). Karten-Titel = Thema aus der Frage (nie Wetter/GPS). Speech Call-2: 1–2 flüssige Sätze, Antwort zuerst. Genau 3 kurze Stichpunkte aus Call-2: Name/Kern zuerst — vollständige Zeilen, kein Call-1-Leak. Kein Pitch."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::named_place_fact_or_activity_v1",
+      "tags": [
+        "trivia",
+        "place",
+        "followup",
+        "park",
+        "activity"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "fake_promises"
+      ],
+      "summary": "Fakt oder Aktivität zu einem genannten Ort (Park, Garten, Museum): Call-1 würdigt die Frage kurz und sagt Recherche zu — kein Nearby-Auswahl-Pitch. Call-2 beantwortet die konkrete Frage (Zahl, was man dort machen kann) mit Stichpunkten; Ort aus Thread behalten bei Follow-ups („was kann man da machen?“). Keine Fake-Treffer-Phrase, keine zweite Venue-Suche als Ersatz."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::dish_two_options_price_menu_v1",
+      "tags": [
+        "dining",
+        "pitch",
+        "dish",
+        "price",
+        "menu",
+        "appetizing"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "menu",
+        "user_fit_why",
+        "appetizing_both"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "fake_promises",
+        "dry_catalog",
+        "second_option_thin"
+      ],
+      "summary": "Gericht-Wunsch (Pizza/Rucola/Steak): zwei echte unterschiedliche Orte (nie Duplikat, nie Pension/Hotel ohne Gastro). Speech verkauft BEIDE schmackhaft — Gericht + belegte Stärke + kurzes Warum-zu-dir (Prefs/why_chosen), unterschiedliche Gründe. Preis nur belegt. Stichpunkte = Distanz, Gericht/Preis, Review-Hook — nie nur Ambiente. Buttons: Route + Speisekarte/Website je Option."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity::rental_evidence_needs_v1",
+      "tags": [
+        "activity",
+        "rental",
+        "price",
+        "evidence"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "prices",
+        "website",
+        "route_button",
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises"
+      ],
+      "summary": "Verleih/Aktivität (SUP, Surf, Rad, …): zwei Optionen wenn möglich, Preise nur von Website belegt, Website-/Preis-Button, Route. Gleiche Blaupause für jedes Verleih-Thema — kein Sport-Hardcode."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::evidence_needs_generic_v1",
+      "tags": [
+        "dining",
+        "evidence",
+        "menu",
+        "price",
+        "review"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "menu",
+        "prices",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises",
+        "long_history"
+      ],
+      "summary": "Genanntes Gericht/Produkt (egal welches): zwei echte Speiselokale, Live-Places/Google wenn Pack leer (nie Metzgerei als Steak, nie leerer Greifbares-Fallback). Review-Beleg zum Item wenn vorhanden, Preis nur belegt, Speisekarte-Button (Deeplink wenn möglich). Kein neues Hardcode pro Gericht — gleiche Blaupause für jedes Item."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::ayce_cuisine_hard_filter_v1",
+      "tags": [
+        "dining",
+        "ayce",
+        "buffet",
+        "cuisine",
+        "hard_match"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "menu"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises",
+        "opposite_diet"
+      ],
+      "summary": "All-you-can-eat: Hard-Filter — nur Orte mit belegtem AYCE/Buffet-Flatrate (Reviews/Website/Name), offen am genannten Abend. „kein Asiatisch“ = Must-Avoid: Sushi/Asia/Mongol/Hotpot/Running-Sushi nie pitchen, auch wenn sie AYCE sind. Qualität und Beleg vor Nähe. Soft-Fill mit Café/Eisdiele/Dessert/Rösterei/normalem Restaurant verboten. Leer lokal → Live-Places + Harvest + Expand ringweise bis belegt oder ehrlich leer — nie Fake-Treffer, nie nackter Google-Suchlink als Speisekarte."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::vegan_must_honest_v1",
+      "tags": [
+        "dining",
+        "vegan",
+        "vegetarian",
+        "diet",
+        "no_meat"
+      ],
+      "expect": [
+        "answer_first",
+        "alternatives",
+        "concrete_place",
+        "honest_empty",
+        "vegan_evidence"
+      ],
+      "avoid": [
+        "soft_fill_generic",
+        "steakhouse",
+        "opposite_diet",
+        "biergarten_fill",
+        "permission_questions"
+      ],
+      "summary": "Vegan/Veggie/Kein-Fleisch: Must-Filter — nur Orte mit belegter veganer Küche oder klarer veganer Option (Reviews/Tags/Name). Nie Steakhouse/Biergarten/Allround ohne Vegan-Beleg (z. B. Goldschätzchen) als Ersatz. Leer → ehrlich + weiter suchen, nicht einzelnen Irrelevant-Treffer pitchen."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::schedule_ask_when_v1",
+      "tags": [
+        "dining",
+        "timeline",
+        "einplanen"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone",
+        "just_do_it"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Nach Gastro-Wahl „Einplanen“: kurze Wann-Frage + Uhr-Chips. Mit Uhr → Stopp + Anreise-Leg in Timeline; bei Los >10 Min Timeline kurz öffnen. Kein „schon eingetragen“ ohne Zeit."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::sunrise_sunset_clock_v1",
+      "tags": [
+        "trivia",
+        "sunrise",
+        "sunset",
+        "sonnenaufgang",
+        "compact"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "vague_filler",
+        "long_history",
+        "permission_questions"
+      ],
+      "summary": "Sonnenaufgang/-untergang: Call-2 nur Ort + Uhrzeit (1 Satz). Kein Firmament-Essay, kein Extra-Offer."
+    },
+    {
+      "intentFamily": "knowledge",
+      "situationKey": "knowledge::named_product_offer_nearby_v1",
+      "tags": [
+        "angebot",
+        "prospekt",
+        "supermarkt",
+        "preis",
+        "deep_link"
+      ],
+      "expect": [
+        "prices",
+        "website",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises",
+        "address_unless_asked"
+      ],
+      "summary": "Genanntes Produkt im Angebot (auch „irgendwo“): GPS-nahe Märkte, Prospekt filtern, belegte Preise. Button = Produkt-/Flyer-Deep-Link inkl. Preis — nie Ketten-Home, nie Reisebüro. Produkt-agnostisch."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::cuisine_tonight_authentic_v1",
+      "tags": [
+        "pitch",
+        "cuisine",
+        "tonight",
+        "atmosphere",
+        "retry"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises",
+        "address_unless_asked",
+        "opposite_diet"
+      ],
+      "summary": "Cuisine + heute Abend + Atmosphäre (authentisch/heimisch): Call 1 zieht Küche/Zeit/Stadt/Vibe; Backend sucht Pack+Places; Vibe nur Soft. Leer → Retry (breitere Query, Vibe lockern). Mindestens 1–2 Optionen oder ehrlich nach Retry — nie sofort „kein Treffer“, nie Nightlife-Ersatz."
+    },
+    {
+      "intentFamily": "dining",
+      "tags": [
+        "steak",
+        "doener",
+        "hard_match",
+        "dish_filter"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "opposite_diet",
+        "fake_promises"
+      ],
+      "summary": "Gericht-Wunsch (Steak, Angus, Döner, …): Must-Filter in der Fact-Lane. Soft-Fail nur in derselben Familie. Nie Steak durch Döner/Pizza ersetzen; ehrlich wenn kein Beleg."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::post_choice_step_v1",
+      "tags": [
+        "pitch",
+        "timing",
+        "reserve",
+        "nav"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "route_button",
+        "booking_url",
+        "menu",
+        "prices"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "long_history",
+        "new_pitch"
+      ],
+      "summary": "Nach Gastro-Wahl: Timing jetzt vs. Abend. Jetzt → Nav/ÖPNV. Abend → Timeline + Tisch-Link. Stichpunkte = Vibe/Specialty/Preis, keine Kategorie-Labels. Speisekarte = echte Karte-URL."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::reserve_sticky_venue_v1",
+      "tags": [
+        "reserve",
+        "followup",
+        "sticky"
+      ],
+      "expect": [
+        "booking_url",
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "new_pitch"
+      ],
+      "summary": "Tisch reservieren nach Wahl: gleiches Venue (z. B. Rio Grande nach Tap), Reservierungs-URL/Telefon — Bridge sagt Reservierung für DIESES Venue zu. Kein neuer Pitch, keine fremden Orte (kein Goldschätzchen-Ersatz), keine zweite Dual-Option."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::travel_companion_foresight_v1",
+      "tags": [
+        "timeline",
+        "weather",
+        "pack_cache",
+        "hard_must",
+        "foresight"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "route_button",
+        "weather_fit"
+      ],
+      "avoid": [
+        "permission_questions",
+        "soft_fill_against_must",
+        "silent_timeline_overwrite",
+        "indoor_as_outdoor"
+      ],
+      "summary": "Reisebegleiter Call-1 überall: Specs ehren (nur Temp → nur Grad). Wetter+Absicht (Regen+Sport / Badetag) = Doppel-Intent mit Regenfenster, Aktivitäts-Bezug und Lösung (Halle/Alternative). Pack=Cache; Hard-Musts; Timeline transparent. Quiz/Maßzahl → Antwort und STOP."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::activity_weather_solution_v1",
+      "tags": [
+        "weather",
+        "activity",
+        "foresight",
+        "indoor_fallback"
+      ],
+      "expect": [
+        "answer_first",
+        "weather_fit",
+        "concrete_place",
+        "alternatives"
+      ],
+      "avoid": [
+        "permission_questions",
+        "weather_only_no_activity",
+        "problem_without_solution"
+      ],
+      "summary": "Wetter plus Spiel-/Outdoor-Absicht: Regenfenster belegen; trocken → Absicht freigeben; Regen → Fenster oder Indoor/Halle als Lösung in derselben Antwort. Nie nur Wetterbericht ohne Aktivitäts-Bezug."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity_poi::swim_day_weather_pitch_v1",
+      "tags": [
+        "baden",
+        "weather",
+        "day_plan",
+        "pitch"
+      ],
+      "expect": [
+        "answer_first",
+        "weather_fit",
+        "concrete_place",
+        "alternatives",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "address_unless_asked",
+        "long_history"
+      ],
+      "summary": "Badetag/Outdoor-Tag: Call-1 Absicht zusagen. Call-2 Wetter-Fit dann 2 Orte mit Distanz und Angebot-Unterschied; Chips Ort schon klar / Suche starten. Just-Do-It."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::booking_reserve_just_do_it_v1",
+      "tags": [
+        "reservation",
+        "booking",
+        "tickets",
+        "foresight"
+      ],
+      "expect": [
+        "answer_first",
+        "booking_url",
+        "concrete_place"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Reservierung/Vorbestellung/Ticket kaufen: Ort hard-match wenn genannt, Buchungs-URL in derselben Antwort. Keine Permission-Frage."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::access_family_hard_must_v1",
+      "tags": [
+        "barrierefrei",
+        "family",
+        "kids",
+        "hard_must"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "soft_fill_against_must",
+        "permission_questions"
+      ],
+      "summary": "Barrierefrei/Rollstuhl/Wickel/Kinderwagen: Hard-Must nur mit Beleg, kein Soft-Fill. Leer → ehrlich und Radius erweitern. Family-Musts in derselben Pitch-Antwort."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::evening_plan_weather_tickets_v1",
+      "tags": [
+        "nightlife",
+        "tonight",
+        "weather",
+        "tickets"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "times_hours",
+        "alternatives",
+        "weather_fit"
+      ],
+      "avoid": [
+        "permission_questions",
+        "past_events"
+      ],
+      "summary": "Was geht heute Abend: Top-2 laufende Optionen mit Uhr; Wetter parallel; Tickets wenn buchbar. Nichts Vergangenes."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::or_either_dynamic_v1",
+      "tags": [
+        "multi_lane",
+        "or_either",
+        "pitch"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Oder-Wahl aus der Frage (Museum|Galerie, Strand|Pool, …): zwei parallele Lanes, Top-1 je Lane als Option. Keine Domänen-Whitelist."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::fixture_tickets_v1",
+      "tags": [
+        "spielplan",
+        "tickets",
+        "sports"
+      ],
+      "expect": [
+        "answer_first",
+        "times_hours",
+        "tickets",
+        "booking_url"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Spielplan/Fixture: Datum Halle Gegner zuerst; Ticket-Link Just-Do-It wenn belegt."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::safety_lost_just_do_it_v1",
+      "tags": [
+        "konsulat",
+        "polizei",
+        "pass",
+        "safety"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "soft_fill_against_must"
+      ],
+      "summary": "Pass weg / Diebstahl / Konsulat: nächste Anlaufstelle mit Route und Durchwahl wenn belegt — Just-Do-It, kein Soft-Fill."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::open_air_cinema_weather_gate_v1",
+      "tags": [
+        "open_air",
+        "cinema",
+        "tonight",
+        "weather",
+        "outdoor"
+      ],
+      "expect": [
+        "concrete_place",
+        "answer_first",
+        "times_hours",
+        "route_button",
+        "weather_fit"
+      ],
+      "avoid": [
+        "permission_questions",
+        "indoor_soft_fill",
+        "address_unless_asked",
+        "button_meta_speech"
+      ],
+      "summary": "Open-Air/Freiluft-Programm: nur Outdoor-Venues. Parallel Programm + Wetter heute und morgen. Speech: Ort → Film heute → Wetter-Fit; Regen heute → morgen vorschlagen wenn besser + Prognose; Kälte-Abfall → Jacken-Hinweis. Nie Indoor als Open Air."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::cinema_program_first_v1",
+      "tags": [
+        "tonight",
+        "cinema",
+        "programm",
+        "filme"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "tickets",
+        "times_hours",
+        "prices"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "address_unless_asked",
+        "new_pitch"
+      ],
+      "summary": "Kino / welche Filme: Call-1 kurz zusagen. Call-2 = echte Filmtitel + Uhrzeiten (+ optional 1–2 Kinos) — keine Klaerfrage Kino-vs-Filme wenn User schon Filme will. Auswahl-Chips statt Nachfragen. Lokal/erreichbar vor Fern-Event. Ticket-URL = Show/Programm. Preise als Euro, nie Symbol-Muell."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::cinema_after_venue_choice_v1",
+      "tags": [
+        "cinema",
+        "programm",
+        "tickets",
+        "post_choice"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "times_hours",
+        "prices",
+        "tickets",
+        "website"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "new_pitch",
+        "nav_auto_start"
+      ],
+      "summary": "Nach Kino-Tap: sofort Programm briefen (heute, sonst morgen/Website). Ticket = Show-Deep-Link wenn belegt. Fakten, kein Re-Pitch und kein Gastro-Drift."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::sports_schedule_tickets_v1",
+      "tags": [
+        "sports",
+        "schedule",
+        "tickets",
+        "team"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "tickets",
+        "times_hours",
+        "prices",
+        "booking_url",
+        "website"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "meta_app_pitch",
+        "fake_promises",
+        "nav_auto_start"
+      ],
+      "summary": "Nächstes Spiel: 1–2 Sätze (Datum, Uhr, Gegner, genannte Halle hard-match). Kein Zahlen-Stakkato. Stichpunkte kurz lesbar. Partner-Ticket wenn belegt, sonst Venue/Club — kein toter Ticketmaster-Link."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::weather_not_help_v1",
+      "tags": [
+        "weather",
+        "tonight",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "clothing_tip",
+        "temp_range",
+        "rain_timing"
+      ],
+      "avoid": [
+        "vague_filler",
+        "meta_app_pitch",
+        "permission_questions"
+      ],
+      "summary": "Wetterfrage: Call-1 nur kurze Zusage (kein Stadt-Essay, keine Gradzahlen). Call-2: Slot/Heute-Jetzt = 1–2 Sätze; allgemeine Vorhersage = 2–3 Radio-Fließsätze (Tage kontrastieren · Schauer · Wind belegt · Höchst). Stichpunkte = FACT-CHIPS (max 4). Kleidung in UI, nicht nochmal in Speech. Nie dreifacher Opener, nie Hilfe-Katalog, nie Navigation."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::weather_rain_focus_v1",
+      "tags": [
+        "weather",
+        "rain",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "rain_timing"
+      ],
+      "avoid": [
+        "vague_filler",
+        "meta_app_pitch",
+        "permission_questions",
+        "nav_auto_start"
+      ],
+      "summary": "Regen-Frage: Call-1 eine kurze Regen-Zusage (kein Essay). Call-2 MUSS kommen: ja/nein + Timing flüssig. Stichpunkte FACT-CHIPS. Nie nur Bridge und Stopp. Kein Outfit-Essay in Speech, Outfit max als Chip, keine Navigation."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::nearby_festival_clear_open_v1",
+      "tags": [
+        "festival",
+        "weinfest",
+        "nearby",
+        "tonight"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "route_button",
+        "official_program_url"
+      ],
+      "avoid": [
+        "button_meta_speech",
+        "motivation_lead_before_fact",
+        "google_search_as_infos",
+        "permission_questions",
+        "address_unless_asked"
+      ],
+      "summary": "Nahes Fest: Call-1 nur Verstanden+Zusagen. Call-2 zuerst Name+Ort+Startuhr klar, dann Details. Programm-Button = echte Fest-Seite wenn belegt; Route tippbar sobald gesprochen. Kein Meta „Infos/Navigation liegen bereit“."
+    },
+    {
+      "intentFamily": "events",
+      "tags": [
+        "tonight",
+        "cinema",
+        "concert",
+        "market",
+        "open_air"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "address_unless_asked",
+        "button_meta_speech"
+      ],
+      "summary": "Abendprogramm: zwei echte laufende Optionen (Kino, Konzert, Markt, Open Air, Club) mit Uhrzeit und Route; nichts vorschlagen, was schon vorbei ist; keine Essensfrage nach 19 Uhr; kein Button-Meta in der Speech."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::date_window_empty_things_to_do_v1",
+      "tags": [
+        "date_range",
+        "trip",
+        "whats_on",
+        "fallback",
+        "sights"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "address_unless_asked",
+        "fake_festival"
+      ],
+      "summary": "Frage-Art: was VOR ORT/im Fenster möglich/los ist (nicht die Reise buchen) → execution=events_research. Call 1 erkennt Absicht selbst. Zuerst Events im Fenster; leer → ehrlich + 2–3 lohnende Orte in/um die Stadt. Nie Reisebüro nur wegen Datum+Stadt."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::on_route_zwischenstopp_top2_v1",
+      "tags": [
+        "on_route",
+        "zwischenstopp",
+        "detour",
+        "pitch"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "nav_auto_start",
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Zwischenstopp vage (Eis/Pause/Briefkasten/Packstation): Call-1 Bridge zuerst, dann Top-2 der gefragten Kategorie auf der Route mit Umweg. Briefkasten ist nicht Bahnhof/Baeckerei. Nach Wahl Stopp EINFUEGEN — Originalziel bleibt, Navigation nicht loeschen."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::on_route_named_insert_v1",
+      "tags": [
+        "on_route",
+        "zwischenstopp",
+        "named_place",
+        "insert_stop"
+      ],
+      "expect": [
+        "concrete_place",
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "alternatives"
+      ],
+      "summary": "Zwischenstopp mit klarem Ort: Bridge verstanden → Stopp/Route dorthin, kein Dual-Pitch fremder Läden. Danach Originalziel fortsetzen/hinzufügen — nie nur Historie ohne Nav."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::on_route_mailbox_top2_v1",
+      "tags": [
+        "on_route",
+        "zwischenstopp",
+        "briefkasten",
+        "mailbox",
+        "post_box",
+        "pitch"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "nav_auto_start",
+        "wrong_category"
+      ],
+      "summary": "Zwischenstopp Briefkasten/Packstation: Top-2 echte Briefkästen (Route oder Nähe via OSM/Pack). Nie Bahnhof, Bäckerei oder Gastro als Ersatz. Nach Wahl Stopp einfügen — Originalziel bleibt."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::bridge_before_route_v1",
+      "tags": [
+        "nav_start",
+        "bridge",
+        "eta",
+        "dest_name"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "duration"
+      ],
+      "avoid": [
+        "address_unless_asked",
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Nav-Start bei klarem Ziel: sofort erkannt (Pack/Anker) → Bridge „Ziel hab ich / ich starte die Navigation“. Route+Karte parallel zur Speech. Timeline still spiegeln — nie ansagen. Call-2 nur kurze ETA wenn da. Keine Strasse/PLZ."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::bike_eta_mode_switch_v1",
+      "tags": [
+        "bike",
+        "eta",
+        "mode_switch"
+      ],
+      "expect": [
+        "duration",
+        "answer_first"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Fahrrad/Fuß während aktiver Nav: execution=nav_execute, gleiches Ziel behalten, Profil sofort umstellen und neue ETA sprechen — Bridge „Route mit dem Rad“. Kein Pitch-Modul, keine Restaurants, kein neuer Nav-Start auf Stadtname."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity_poi::water_body_activity_followup_v1",
+      "tags": [
+        "water",
+        "sup",
+        "rental",
+        "followup"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "prices",
+        "website",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "new_pitch"
+      ],
+      "summary": "Follow-up zu genanntem Gewässer (Größe→SUP/Verleih): Bridge geht auf die Frage ein. Call-2 Answer-first wo/ob auf dem Wasser. Places-Suche hart „SUP Verleih“ + Gewässer/Stadt (nie Heimat-GPS, nie Gastro/Heimatverein). STT-Garbling (Sub/Centerpanel/Stellappell) wie SUP behandeln. 1–2 echte Verleihe mit Preisen/Links — alte Pitch-UI ersetzen."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::remote_research_no_city_switch_v1",
+      "tags": [
+        "remote_research",
+        "hotel",
+        "flight",
+        "city_scope"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "meta_app_pitch"
+      ],
+      "summary": "Remote-Recherche: Home-/Selected-Stadt unverändert (nur Modul 1). Pack auf dem Gerät → in der Zielstadt suchen. Katalog-Pack fehlt lokal → erst Download, dann Recherche. Kein Pack im Katalog → Geist (still suchen, Inbox wächst, nie auswählbar bis Founder scharf schaltet). Reiseplan/Flug und Reisebüro ohne Download-Zwang."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::city_research_four_lanes_v1",
+      "tags": [
+        "city_pack",
+        "ghost_city",
+        "download_gate",
+        "remote_research"
+      ],
+      "expect": [
+        "answer_first"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "meta_app_pitch"
+      ],
+      "summary": "Vier Lanes: (1) Ziel-Pack installiert → suchen. (2) Geist ohne Katalog → still recherchieren + Inbox. (3) Katalog-Pack nicht lokal → Download verlangen, Home nicht wechseln. (4) Flug/Leave-by/Reisebüro exempt. Selected-Stadt nur Modul 1."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::path_tour_learned_pace_v1",
+      "tags": [
+        "path_tour",
+        "jog",
+        "walk",
+        "bike",
+        "pace"
+      ],
+      "expect": [
+        "duration",
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "km- oder Zeit-Runde: Distanz/Dauer aus Wunsch; Tempo aus gelerntem Pace-Profil sobald Segmente da, sonst Default. Route grob treffen, kein Pflichtwortlaut."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::live_hud_concrete_pitch_v1",
+      "tags": [
+        "live_hud",
+        "proactive",
+        "pitch",
+        "leave_by"
+      ],
+      "expect": [
+        "concrete_place",
+        "answer_first",
+        "route_button",
+        "times_hours"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Live-Anzeige oben: konkrete Orte mit Distanz/Minuten, Uhr, Preis/ETA nur belegt — nie Gattungs-Fragen („Pause/Park?“, „Foto-Spot?“, „Hochhäuser“). Erholung = menschlicher Opener + Parkname + Gehzeit nur wenn Treffer in der Nähe; Fotospot = Einladung zum Hingucken + Name + Distanz, sonst stumm. Tap = Vertiefung/Route."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::wake_alarm_confirm_v1",
+      "tags": [
+        "wake",
+        "alarm",
+        "timer",
+        "timeline"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Wecker mit klarer Uhrzeit: sofort Native Clock-/Uhr-App stellen (Android SET_ALARM + Backup AlarmManager; iOS Mitteilung). Bestätigung nur nach echtem Erfolg: eine Zeit in Speech (z. B. Yo, hab um 7:45 gestellt), abends optional Gute Nacht. Genau ein Stichpunkt mit derselben Zeit. Kein Reminder-Button, kein Fake-gestellt, keine zweite Uhrzeit."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::wake_alarm_replace_v1",
+      "tags": [
+        "wake",
+        "alarm",
+        "replace",
+        "timeline"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone",
+        "choice_buttons"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Schon ein Wecker am Tag + neue Zeit: kurz Choice Aktualisieren vs. zweiten stellen. Bei Aktualisieren: alten Uhr-Eintrag löschen (DISMISS) und neuen stellen — Speech wie umgestellt auf die neue Zeit, nie beide aktiv lassen."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_direction_open_v1",
+      "tags": [
+        "flight",
+        "direction",
+        "tickets",
+        "wish"
+      ],
+      "expect": [
+        "answer_first",
+        "tickets",
+        "alternatives",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Offene Flugrichtung (Süden/Norden) mit Origin+Tag: 2–3 benannte Zielstädte pitchen und Ticket-/Suche-Buttons liefern — kein steckenbleibendes „Wohin?“ ohne Optionen."
+    },
+    {
+      "intentFamily": "mobility",
+      "situationKey": "mobility::taxi_schedule_prebook_v1",
+      "tags": [
+        "taxi",
+        "uber",
+        "schedule",
+        "airport"
+      ],
+      "expect": [
+        "answer_first",
+        "website",
+        "times_hours",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Taxi/Uber vorbestellen mit bekannter Zukunftszeit (Leave-by/morgen): Zusagen, Zeit nennen, Uber-Reserve-/Schedule-Deep-Link mit Datetime — nie Sofort-Fahrt „now“. Optional Taxi-Anruf."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::theater_program_first_v1",
+      "tags": [
+        "theater",
+        "tonight",
+        "programm",
+        "vorstellung"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "tickets",
+        "times_hours"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "new_pitch",
+        "address_unless_asked"
+      ],
+      "summary": "Theaterstücke/Vorstellungen heute oder die Tage: echte Theater/Spielpläne (nicht Kino), 1–2 Häuser mit Stück/Uhr wenn belegt, Programm/Ticket/Route-Buttons. Kein toter Flug-Thread."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::ambiance_view_terrace_v1",
+      "tags": [
+        "dining",
+        "terrasse",
+        "aussicht",
+        "ambiente",
+        "flair"
+      ],
+      "expect": [
+        "concrete_place",
+        "alternatives",
+        "answer_first",
+        "route_button",
+        "menu"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises"
+      ],
+      "summary": "Restaurant mit Aussicht/Ambiente/Flair/Terrasse: zwei echte Orte mit belegtem Outdoor-/Blick-Signal wenn möglich; Atmosphäre als Soft-Cascade-Stufe (Boost), nicht als leerer Hard-Wipe. Soft-Miss ehrlich. Route + Speisekarte."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::dataset_city_first_v1",
+      "tags": [
+        "dining",
+        "city_scope",
+        "research_city",
+        "specialty",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "alternatives"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises",
+        "search_process_meta"
+      ],
+      "summary": "Specialty-Gastro ohne genannte Stadt: Call 1 setzt researchCity/Datensatz (Metro wenn Specialty nicht am GPS-Heimatort). Leer lokal → nächste Packs, dann Live/Places-Expand (Ringe) nur intern. Speech: finale Treffer; Distanz nur als Lage, nie Recherche-Log."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::criteria_cascade_v1",
+      "tags": [
+        "dining",
+        "cascade",
+        "filter",
+        "checklist"
+      ],
+      "expect": [
+        "answer_first",
+        "alternatives",
+        "concrete_place",
+        "prices",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "fake_promises",
+        "permission_questions",
+        "search_process_meta"
+      ],
+      "summary": "Multi-Wunsch-Gastro: Cascade Perfect+Backtrack intern. Soft leer → Filter weglassen UND online erweitern (Backend). Call 2: nur finale Option(en) + kurze Lücke (Preis/Blick). Nie km-Ringe oder „weiter suchen?“ vorlesen."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::call3_dish_price_v1",
+      "tags": [
+        "dining",
+        "call3",
+        "menu",
+        "prices",
+        "evidence"
+      ],
+      "expect": [
+        "prices",
+        "menu",
+        "answer_first",
+        "concrete_place",
+        "alternatives"
+      ],
+      "avoid": [
+        "fake_promises",
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Nach Top-2-Pitch: Call 3 zieht Speisekarte/Ticket/Buchung + belegte Preise für BEIDE Optionen nach — nie nur Favorit. Preis nur mit Beleg; Link-Button je Option wenn URL da. Kein erfundenes Euro."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::radius_expand_honest_v1",
+      "tags": [
+        "events",
+        "radius",
+        "expand",
+        "honest_empty"
+      ],
+      "expect": [
+        "answer_first",
+        "alternatives",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "fake_festival",
+        "vague_filler",
+        "permission_questions",
+        "search_process_meta"
+      ],
+      "summary": "Events leer am Ort: intern Umkreis erweitern bis Treffer. Speech: 1–2 passende Alternativen als finale Antwort. Nie „lokal nichts, deshalb 20 km“-Prozess vorlesen; Distanz nur nebenbei als Lage."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity::rental_price_call3_v1",
+      "tags": [
+        "rental",
+        "sup",
+        "prices",
+        "call3",
+        "evidence"
+      ],
+      "expect": [
+        "prices",
+        "website",
+        "answer_first",
+        "concrete_place",
+        "alternatives"
+      ],
+      "avoid": [
+        "fake_promises",
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Verleih/Aktivität (SUP, Surf, Rad): Top-2 mit Beleg, dann Call 3 Preise/Dauer/Website vom Anbieter — Vergleich A/B mit Vor-/Nachteilen nur belegt. Nie nur Name ohne Preis wenn recherchierbar."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::pack_item_reminder_v1",
+      "tags": [
+        "reminder",
+        "pack",
+        "todo",
+        "zahnbuerste"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Mitnehmen/Pack-Item erinnern (Zahnbürste o. ä.): echte Erinnerung/Todo setzen (SET reminder), Item nennen — kein Wecker, keine Uhrzeit erzwingen wenn Item klar ist."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::flight_timeline_accordion_v1",
+      "tags": [
+        "flight",
+        "timeline",
+        "accordion",
+        "airport"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Flug-Timeline: Flug-Accordion trägt Flug plus Ankunft Terminal, Check-in und Security; Transfer-Accordion nur Fahrt zum Flughafen (Leave-by, Dauer, Kosten). Keine Orts-Hardcodes."
+    },
+    {
+      "intentFamily": "booking",
+      "situationKey": "booking::final_deep_link_v1",
+      "tags": [
+        "deeplink",
+        "affiliate",
+        "hotel",
+        "ticket",
+        "menu",
+        "uber"
+      ],
+      "expect": [
+        "website",
+        "answer_first",
+        "just_do_it",
+        "prices"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises"
+      ],
+      "summary": "OPEN_URL = finales Ziel (Zimmer/Property, Ticket-Eventseite, Speisekarte/PDF, GYG-Produkt, Uber now vs Reserve) — nicht Portal-Home und nicht Stadt-Listing. Nur Suche wenn kein Deep-Link: ehrliches Such-Label. Preise/Uhr nur belegt. Affiliate still, nie ansagen."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::silent_affiliate_v1",
+      "tags": [
+        "affiliate",
+        "monetization",
+        "speech"
+      ],
+      "expect": [
+        "answer_first",
+        "casual_tone",
+        "just_do_it"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions"
+      ],
+      "summary": "Partner/Affiliate nur intern priorisieren und verlinken. In Speech nie Affiliate, Provision, Tracking, Partnerlink oder Geld-Hinweis. Buttons still mit Tracking-URL."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::named_schedule_ticket_price_v1",
+      "tags": [
+        "sports",
+        "schedule",
+        "ticket",
+        "price",
+        "deeplink"
+      ],
+      "expect": [
+        "answer_first",
+        "prices",
+        "website",
+        "just_do_it"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "fake_promises",
+        "address_unless_asked"
+      ],
+      "summary": "Genannter Team/Act/Halle-Termin: Webrecherche bis Spielplan+Ticketseite. Call-2 = Datum + Halle + Gegner + belegter Ticketpreis in 1–2 Sätzen. Button = konkrete Ticket-URL (Affiliate still), nie Portal-Suche als Buchung."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::cascade_backtrack_honest_v1",
+      "tags": [
+        "cascade",
+        "backtrack",
+        "honest",
+        "soft_miss",
+        "budget"
+      ],
+      "expect": [
+        "answer_first",
+        "alternatives",
+        "concrete_place",
+        "prices",
+        "casual_tone"
+      ],
+      "avoid": [
+        "vague_filler",
+        "fake_promises",
+        "permission_questions",
+        "search_process_meta"
+      ],
+      "summary": "Cascade <2 Perfect: eine passende Option trotzdem pitchen; Soft-Filter intern zurücknehmen. Speech = nur finale Antwort (Ort + Beleg). VERBOTEN: Such-Prozess, km-Ringe („nichts in 10 km / in 20 km“), Datensatz/ringweise/Expand-Meta, „weiter suchen?“. Distanz nur als kurze Lage am Ort."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::medical_empathy_pitch_v1",
+      "tags": [
+        "medical",
+        "injury",
+        "dentist",
+        "emergency_care"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "alternatives",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "long_history"
+      ],
+      "summary": "Verletzung/Zahnschmerzen mit genannter Person: Call-1 kurze Empathie + Zusage Orte — nie Fuer-wen wenn Freundin/Person schon genannt. Call-2 Soft-Pitch Top-2 passende Anlaufstellen (Arzt/Zahnarzt) mit Route. Speech nicht nach Empathie abbrechen."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::tonight_open_local_first_v1",
+      "tags": [
+        "tonight",
+        "steak",
+        "open_now",
+        "local"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "menu",
+        "prices",
+        "route_button",
+        "times_hours"
+      ],
+      "avoid": [
+        "address_unless_asked",
+        "fake_promises",
+        "permission_questions",
+        "vague_filler"
+      ],
+      "summary": "Essen heute Abend: nur Orte die JETZT/heute Abend offen sind (belegt). Lokal/Naehe vor Fern-Metro. Nur echte Restaurants/Gastronomie — keine Metzgerei/Fleischanbieter als Speiselokal. Speech sagt Orte/Restaurants, nicht Adressen. Speisekarte-Links nachziehbar."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::bike_eta_followup_v1",
+      "tags": [
+        "bike",
+        "eta",
+        "followup",
+        "call1"
+      ],
+      "expect": [
+        "answer_first",
+        "route_button"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history"
+      ],
+      "summary": "Follow-up Fahrrad-ETA bei aktivem Ziel: Call-1 startet schon den Satz (mit dem Rad …), Call-2 = Minuten. Nie mittendrin abbrechen. Gleiches Ziel behalten."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::hotel_dual_options_voice_v1",
+      "tags": [
+        "hotel",
+        "pool",
+        "budget",
+        "amsterdam_remote"
+      ],
+      "expect": [
+        "alternatives",
+        "answer_first",
+        "concrete_place",
+        "prices",
+        "booking_url"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "google_maps_hotel"
+      ],
+      "summary": "Hotel mit Prefs (Pool/Budget/Daten): Call-1 kurze Trip-Zusage. Call-2 zwei benannte Optionen mit belegten Preisen + Property-Deep-Links — keine Meta-Recherche-Vorlesung, keine stumme UI. Flight-Erwaehnung merken fuer spaeteren Vorschlag nach Hotelwahl."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::prices_first_compact_buttons_v1",
+      "tags": [
+        "prices",
+        "compact",
+        "buttons",
+        "menu",
+        "pitch"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "concrete_place",
+        "menu",
+        "route_button",
+        "alternatives"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Gastro/Pitch: belegte Preise und Angebot zuerst in 2–4 knappen Saetzen; Historie weglassen. Buttons 1:1 zu Spoken (Route + Speisekarte/Website je Option) — keine Meta-/Mehr-Buttons. Zweite Option kurz hinten."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity_poi::prices_first_compact_buttons_v1",
+      "tags": [
+        "prices",
+        "compact",
+        "buttons",
+        "activity",
+        "booking"
+      ],
+      "expect": [
+        "prices",
+        "duration",
+        "life_now",
+        "answer_first",
+        "concrete_place",
+        "booking_url",
+        "route_button"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Aktivitaet/Verleih/Sport: Preis/Dauer/Mitbringen zuerst wenn belegt; kurze Motivation, keine Museums-Historie. Buttons: Route + Buchung/Website zuerst — Labels klar, 1:1 zu Spoken."
+    },
+    {
+      "intentFamily": "events",
+      "situationKey": "events::prices_first_compact_buttons_v1",
+      "tags": [
+        "prices",
+        "compact",
+        "buttons",
+        "tickets",
+        "events"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "times_hours",
+        "tickets",
+        "concrete_place",
+        "route_button"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Events/Kino/Programm: Was/Wann/Preis zuerst in knappen Saetzen; Eintritt nur belegt. Buttons: Navigation + Programm/Ticket wenn URL — keine leeren Ticket-Links, keine Adresse außer gefragt."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::prices_first_compact_buttons_v1",
+      "tags": [
+        "prices",
+        "compact",
+        "buttons",
+        "tickets",
+        "sight"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "tickets",
+        "concrete_place",
+        "booking_url"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "address_unless_asked",
+        "permission_questions",
+        "meta_app_pitch"
+      ],
+      "summary": "Sehenswuerdigkeit/Ticket/Tag: Eintritt und Ticket-Link vorne wenn belegt; Antwort kurz. Buttons = Ticket/Website + ggf. Route zu genannten Orten — keine Historie-Essays vor dem Preis."
+    },
+    {
+      "intentFamily": "hotel",
+      "situationKey": "hotel::prices_first_compact_buttons_v1",
+      "tags": [
+        "prices",
+        "compact",
+        "buttons",
+        "hotel",
+        "booking"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "concrete_place",
+        "alternatives",
+        "booking_url"
+      ],
+      "avoid": [
+        "vague_filler",
+        "permission_questions",
+        "long_history",
+        "meta_app_pitch"
+      ],
+      "summary": "Hotel/Stay: zwei Optionen mit belegtem Preis zuerst, dann Pref-Fit; Deep-Link-Buttons je Property. Kein Recherche-Meta, keine stumme UI ohne Speech-Preise."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::prices_first_compact_buttons_v1",
+      "tags": [
+        "prices",
+        "compact",
+        "buttons",
+        "answer_shape"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "route_button",
+        "casual_tone"
+      ],
+      "avoid": [
+        "long_history",
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch",
+        "address_unless_asked"
+      ],
+      "summary": "Preisrelevante Empfehlung (egal Familie): Kern + belegte Preise vorne, Tipps hinten, kurze Speech. Action-Buttons spiegeln Spoken 1:1 — Route/Link statt vager Mehr-Buttons."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::cruise_package_buyin_v1",
+      "tags": [
+        "cruise",
+        "kreuzfahrt",
+        "buyin",
+        "transfers",
+        "prenight",
+        "booking"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "booking_url",
+        "concrete_place",
+        "day_plan"
+      ],
+      "avoid": [
+        "invented_prices",
+        "vague_filler",
+        "permission_questions",
+        "meta_app_pitch",
+        "address_unless_asked",
+        "hardcoded_scripts"
+      ],
+      "summary": "Kreuzfahrt-Paket: Flug (ggf. Tag vorher) → Hotel nahe Terminal → Transfer Terminal → Einschiffzeit belegen → Kreuzfahrt → Ausschiffen → Transfer Flughafen → Rückflug. Buy-in p.P. = Summe belegter Zeilen (Flug×Pers., Vornacht, Transfers, Kabine, Getränkepaket wenn gewünscht und nicht inkl.) ÷ Pers.; fehlende Preise als Gap. Filter Embark/Kabine/Seetage/Party-Familie-Spa stadt-agnostisch. Jede Zeile mit Buchungs-Link wenn URL belegt."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::cruise_quick_pitch_v1",
+      "tags": [
+        "cruise",
+        "kreuzfahrt",
+        "quick",
+        "prices",
+        "booking"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "booking_url",
+        "alternatives"
+      ],
+      "avoid": [
+        "invented_prices",
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts",
+        "briefing_loop"
+      ],
+      "summary": "Kreuzfahrt-Schnellfrage: 1–2 passende Sailings oder ehrliche Gap + Vergleichs-Links (CHECK24/Reederei). Kein Hotel-Briefing-Marathon. Optional Chip als volles Reisebüro-Paket. Preise nur belegt."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::cruise_no_brief_loop_v1",
+      "tags": [
+        "cruise",
+        "briefing",
+        "anti_loop"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "Kreuzfahrt erkannt: max 1–2 Blocker-Fragen (Wann/Wer/Budget), genannte Wishes sofort übernehmen, Lodging/Meals nicht in Schleife fragen — Kabine und Bundle sind Defaults."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::ferry_island_package_v1",
+      "tags": [
+        "ferry",
+        "faehre",
+        "island",
+        "buyin",
+        "booking"
+      ],
+      "expect": [
+        "prices",
+        "answer_first",
+        "booking_url",
+        "day_plan"
+      ],
+      "avoid": [
+        "invented_prices",
+        "permission_questions",
+        "hardcoded_scripts"
+      ],
+      "summary": "Fähre/Insel: Flug oder Festland-Hafen → Fähre → Stay → Rückfähre. Buy-in nur mit belegtem Fährpreis; Auto-mit eigene Zeile. Links zur Reederei/Suche."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::rail_nightjet_buyin_v1",
+      "tags": [
+        "train",
+        "nightjet",
+        "rail",
+        "buyin"
+      ],
+      "expect": [
+        "prices",
+        "times_hours",
+        "booking_url"
+      ],
+      "avoid": [
+        "invented_prices",
+        "hardcoded_scripts"
+      ],
+      "summary": "Bahn/Nightjet: Ticket p.P. plus optional Cabin-Aufpreis; Zug-Nacht kann Hotel-Nacht ersetzen. Preis nur belegt, sonst Partner-URL (DB/ÖBB). Kein Fake-Sparpreis."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::taxi_airport_followthrough_v1",
+      "tags": [
+        "taxi",
+        "transfer",
+        "zwischenstopp",
+        "leave_by",
+        "sticky",
+        "prefill"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "booking_url",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "fake_promises",
+        "hardcoded_scripts"
+      ],
+      "summary": "Nach fertigem Flug-Task (Leave-by/Timeline): automatisch Task 2 — Uber/Taxi-Deep-Link Just-Do-It mit Startadresse, Flughafen-Ziel, Abholzeit=Leave-by, Personenzahl. Kein zweites „ÖPNV oder Taxi?“ und kein „soll ich vorbestellen?“. Sticky auch wenn Follow-up nur die Uhr nennt („um 18 Uhr“ / 18:00): Flug-Root halten, Session=continue, nie Pitch/Plan/Mathe. Prefill oder ehrliche Lücke. Wortlaut frei."
+    },
+    {
+      "intentFamily": "dining",
+      "situationKey": "dining::reserve_clarify_sticky_v1",
+      "tags": [
+        "reserve",
+        "sticky",
+        "control_distance",
+        "booking"
+      ],
+      "expect": [
+        "booking_url",
+        "answer_first",
+        "concrete_place",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "new_pitch",
+        "hardcoded_scripts"
+      ],
+      "summary": "Tisch reservieren bleibt Root über Klärung (wo/was essen → Pitch → Wahl). Nach Venue-Wahl Reservierungs-URL Just-Do-It. Prefill portalabhängig — TheFork/Widgets oft leer; Slots trotzdem behalten, nie Fake-Vollformular."
+    },
+    {
+      "intentFamily": "activity_poi",
+      "situationKey": "activity_poi::open_sport_invent_v1",
+      "tags": [
+        "sport",
+        "invent",
+        "fitness",
+        "foresight"
+      ],
+      "expect": [
+        "answer_first",
+        "concrete_place",
+        "alternatives",
+        "route_button"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "Offener Sport-Wunsch (Bock auf Sport / was geht sportlich): 2–3 Optionen vor Ort (Fitness, öffentlicher Platz, Outdoor) mit Distanz — Just-Do-It, kein Quiz."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::control_distance_booking_v1",
+      "tags": [
+        "control_distance",
+        "booking",
+        "deep_web"
+      ],
+      "expect": [
+        "answer_first",
+        "booking_url",
+        "just_do_it"
+      ],
+      "avoid": [
+        "vague_filler",
+        "fake_promises",
+        "permission_questions"
+      ],
+      "summary": "Kontrolldistanz als echter Such-Loop: bei dünnem Deep-Web Query schärfen und erneut suchen (Budget ~45–60s), bis Buchungs-Link/Must sitzt — sonst Lücke ehrlich, nie Fake-fertig. Prefill portalabhängig (Uber oft, Tisch-Widgets oft leer)."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::open_world_agent_v1",
+      "tags": [
+        "open_world",
+        "invent",
+        "sticky",
+        "control_distance",
+        "hard_must"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "concrete_place",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "soft_fill_against_must",
+        "fake_promises",
+        "hardcoded_scripts"
+      ],
+      "summary": "Offene Frage/Alltagsproblem auch als Dialekt, Geschwafel oder Insider — Struktur erkennen, keine Pflicht-Floskeln. Aufträge+Tools inventieren, Musts aus dem Satz, Kontext merken. Nie „was meinst du genau?“; nie Soft-Fill; Lücke ehrlich statt Fake."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::followthrough_multiroot_persist_v1",
+      "tags": [
+        "sticky",
+        "multi_root",
+        "persist",
+        "taxi",
+        "reserve",
+        "control_distance"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "booking_url",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts",
+        "fake_promises"
+      ],
+      "summary": "Mehrere offene Roots parallel (z. B. Tisch und Taxi): keinen Strang droppen. Nach App-Neustart sticky Persist; „wieder Taxi“ ohne Flughafen-Wort aus Kontext fortsetzen."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::auftrag_memory_sticky_v1",
+      "tags": [
+        "sticky",
+        "auftrag",
+        "tasks",
+        "memory",
+        "control_distance",
+        "invent"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "Auftrag-Gedächtnis pro Root: Wunsch + offene Tasks + bekannter Kontext als ein Sticky-Block. Tasks selbst inventieren/nachlegen; Infos zuerst aus Kontext/GPS/Board herleiten; nur echte Blocker fragen. Follow-ups (Uhr, Gepäck) mergen in denselben Block — Root bis Musts+Link sitzen. Wortlaut frei."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::mission_task_loop_v1",
+      "tags": [
+        "invent",
+        "tasks",
+        "blocker",
+        "derive",
+        "sticky",
+        "control_distance"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "Task-Schleife: Ziel erkennen → Tasks inventieren und ordnen → aus Kontext/GPS/Board herleiten → nur echte Blocker fragen (eine Klärfrage) → abhängige Tasks als later behalten und nach Slot-Fill nachlegen (now). Nie Ambiguity/Permission; Root sticky. Wortlaut frei."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::presence_gap_access_v1",
+      "tags": [
+        "presence",
+        "access",
+        "gap",
+        "sticky",
+        "invent"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "GPS≠Zielstadt (Presence-Gap): Anreise-Task access_to_dest zuerst inventieren; vor-Ort Tasks (Theater/Essen/Explore) later mit dependsOn. Modus aus Kontext herleiten; nur Blocker wenn nötig. Kein Explore-Pitch bevor Access sitzt. Wortlaut frei."
+    },
+    {
+      "intentFamily": "planning",
+      "situationKey": "planning::surprise_anchor_theater_v1",
+      "tags": [
+        "anchor",
+        "theater",
+        "ticket",
+        "gap",
+        "sticky"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "concrete_place",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "Überraschungs-Anker Ticket/Theater gebucht: zuerst Venue+Stück resolve (anchor_resolve), Timeline-Anker setzen, Folgetasks (Essen danach) later vom Anker — nicht vom GPS-Heimat. Sticky Auftrag zeigt Anchor. Wortlaut frei."
+    },
+    {
+      "intentFamily": "booking",
+      "situationKey": "booking::prefill_portal_honesty_v1",
+      "tags": [
+        "prefill",
+        "booking_url",
+        "control_distance",
+        "sticky"
+      ],
+      "expect": [
+        "booking_url",
+        "just_do_it",
+        "answer_first",
+        "casual_tone"
+      ],
+      "avoid": [
+        "fake_promises",
+        "vague_filler",
+        "hardcoded_scripts",
+        "permission_questions"
+      ],
+      "summary": "Prefill intern versuchen wenn Portal es kann; Speech nie über Link/Formular. Button still. Leeres Widget ≠ vergessener Auftrag."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::call2_must_fit_no_soft_pitch_v1",
+      "tags": [
+        "soft_fill",
+        "hard_must",
+        "call2",
+        "control_distance"
+      ],
+      "expect": [
+        "answer_first",
+        "just_do_it",
+        "concrete_place",
+        "casual_tone"
+      ],
+      "avoid": [
+        "soft_fill_against_must",
+        "vague_filler",
+        "permission_questions",
+        "fake_promises",
+        "hardcoded_scripts"
+      ],
+      "summary": "Call-2 Speech: Ask-Back Ambiguity ist schon weg — trotzdem kein weiches Raten und kein knapper Daneben-Pitch bei schwachen Musts. Shortlist 3–5 → hart filtern → Top-2 Must-Fit. Nur sagen was sitzt; keine Gap-Litanei; Buttons still."
+    },
+    {
+      "intentFamily": "general",
+      "situationKey": "general::dual_pitch_oversupply_v1",
+      "tags": [
+        "dual_option",
+        "hard_must",
+        "pack_first",
+        "control_distance"
+      ],
+      "expect": [
+        "answer_first",
+        "alternatives",
+        "concrete_place",
+        "just_do_it"
+      ],
+      "avoid": [
+        "soft_fill_against_must",
+        "vague_filler",
+        "fake_promises",
+        "hardcoded_scripts"
+      ],
+      "summary": "Pack ≥2 Must-Fit → stop. Sonst nachschärfen/Web bis ≥2 Perfect. Call-2 wählt aus Shortlist die besten zwei. Ein Web-Treffer reicht nie. Wirklich nicht da → eine nächste Option, kein 8× Loop und kein Ringsuch-Vortrag."
+    },
+    {
+      "intentFamily": "navigation",
+      "situationKey": "navigation::named_goto_instant_start_v1",
+      "tags": [
+        "nav_start",
+        "named_place",
+        "just_do_it",
+        "club"
+      ],
+      "expect": [
+        "route_button",
+        "answer_first",
+        "concrete_place",
+        "casual_tone"
+      ],
+      "avoid": [
+        "permission_questions",
+        "vague_filler",
+        "hardcoded_scripts"
+      ],
+      "summary": "Go-To zu genanntem Ort/Verein: Ziel sofort als klar erkennen (Pack/Anker). Speech: Ziel hab ich + Navigation starten. Route und Karte parallel zur Speech. Timeline still eintragen — nie ansagen. Kein Open-Quest, kein Stadt-Quiz wenn eindeutig."
+    },
+    {
+      "intentFamily": "navigation",
+      "expect": [
+        "turn_cues_with_screen_off_or_pocket",
+        "haptic_right_short_left_short_long",
+        "arrival_speech_always",
+        "landmarks_only_visually_obvious_outdoors",
+        "prefer_street_or_allee_over_mailbox_shop",
+        "simple_turn_says_jetzt_direction_abbiegen_cacheable",
+        "extra_hint_only_on_complex_or_tight_double_exit",
+        "on_track_reassure_only_after_5min_silence_walk_bike",
+        "no_confirm_immediately_after_turn",
+        "recenter_location_separate_from_compass_heading",
+        "address_dest_keeps_house_number_on_button"
+      ],
+      "avoid": [
+        "fake_schild_from_destination_name",
+        "brochure_or_mailbox_as_turn_landmark",
+        "long_exhibition_poi_as_turn_cue",
+        "landmark_on_every_simple_turn",
+        "du_bist_richtig_right_after_turn",
+        "couple_recenter_lock_with_heading_follow",
+        "strip_house_number_from_street_dest_label"
+      ],
+      "summary": "Hands-free Fuß/Rad: einfache Abbiegung = jetzt links/rechts abbiegen (vorproduzierbar/Cache); Extra-Hinweis nur bei unübersichtlicher Kreuzung/Doppel-Abbiegung; schwache POIs (Broschüre/Verein) nie als Cue; Ansagen+Haptik auch Hosentasche; Ziel erreicht immer; Recenter und Kompass getrennt.",
+      "situationKey": "navigation::handsfree_pocket_guide_v1",
+      "tags": [
+        "hands_free",
+        "pocket",
+        "haptics",
+        "landmarks",
+        "reassure",
+        "map_hud"
+      ]
+    },
+    {
+      "intentFamily": "navigation",
+      "expect": [
+        "call1_bridge_only_start_nav_with_dest_name",
+        "call2_only_eta_minutes_no_second_bridge",
+        "no_spickzettel_card_for_hard_nav_eta",
+        "hud_shows_eta_and_mode_walk_bike_transit",
+        "street_house_number_exact_coords_not_nearest_poi",
+        "pack_poi_before_generic_geocode",
+        "timeline_only_walk_leg_plus_dest_for_short_hard_nav",
+        "pan_unlocks_location_and_heading_follow"
+      ],
+      "avoid": [
+        "sorry_apology_on_nav_start",
+        "five_minute_bullet_card_duplicate_of_hud",
+        "auto_oepnv_tour_for_short_walk_hard_nav",
+        "fake_time_conflict_from_stale_journeys",
+        "boot_auto_gps_location_lock",
+        "snap_street_address_to_nearby_pack_poi"
+      ],
+      "summary": "Explizite Nav: Call-1 nur Start-Zusagen mit Ziel; Call-2 nur Dauer; Straße+Hausnummer = exakte Geocode-Koordinaten, nie nächster Pack-Ort; HUD ETA+Modus; kurze Hard-Nav Timeline nur Fussbein+Ziel; Pan loest Follow; kein GPS-Lock beim App-Start.",
+      "situationKey": "navigation::hard_nav_clean_start_v1",
+      "tags": [
+        "hard_nav",
+        "hud",
+        "timeline",
+        "pack_poi",
+        "map_boot"
+      ]
+    }
+  ]
+}

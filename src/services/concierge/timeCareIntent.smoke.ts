@@ -62,6 +62,26 @@ expect('Timer 10 Minuten', 'timer');
 expect('Bahn um 8:45, weck mich um 6', 'compound_wake_transit');
 
 {
+  const taxi = classifyTimeCareIntent(
+    'Reserviere morgen früh um 7 Uhr ein Taxi zum Flughafen Hamburg',
+  );
+  if (taxi != null) {
+    console.error(`FAIL taxi prebook classified as ${taxi.kind}`);
+    failed += 1;
+  }
+}
+
+{
+  const rem = classifyTimeCareIntent(
+    'Was brauche ich noch — eine Zahnbürste. Kannst du mich daran erinnern, die mitzunehmen?',
+  );
+  if (rem?.kind !== 'reminder') {
+    console.error(`FAIL toothbrush remind → ${rem?.kind ?? 'null'}`);
+    failed += 1;
+  }
+}
+
+{
   const fly = classifyTimeCareIntent(
     'Ich muss nach Wien fliegen. Wann muss ich los, damit ich pünktlich den Flieger bekommen kann?',
   );

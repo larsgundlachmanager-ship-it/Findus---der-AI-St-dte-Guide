@@ -1,0 +1,168 @@
+{
+  "city_id": "bornholm",
+  "center": {
+    "lat": 55.160427999999996,
+    "lng": 14.866883600000001
+  },
+  "added": [
+    "bornholm_s_ndre_lyngvej_v_kongensmark_bornholm",
+    "bornholm_aarsballe_syd_bornholm",
+    "bornholm_s_ndre_lyngvej_v_splitsgardsvej_bornholm",
+    "bornholm_simblegardsvej_v_nr_26_bornholm",
+    "bornholm_klemensker_ovf_bedegadevej_bornholm",
+    "bornholm_klemensker_v_agardsvej_bornholm",
+    "bornholm_bornholm_soskins_ens_h_jderyg",
+    "bornholm_puggekullek_r",
+    "bornholm_r_plantage",
+    "bornholm_granite_souvenir_self_shop",
+    "bornholm_rokkestenen_i_almindingen",
+    "bornholm_kr_mmerhuset_kunsthandv_rk",
+    "bornholm_r_plantage",
+    "bornholm_jan_ole_s_turisttrafik",
+    "bornholm_krogsholm_frugt_mosteri"
+  ],
+  "skipped": [
+    {
+      "name": "Aarsballe (skolestop.) (Bornholm)",
+      "near": "bornholm_aarsballe_syd_bornholm"
+    },
+    {
+      "name": "Aarsballe (nord) (Bornholm)",
+      "near": "bornholm_aarsballe_syd_bornholm"
+    },
+    {
+      "name": "Klemensker v. Bedegadevej (Bornholm)",
+      "near": "bornholm_klemensker_ovf_bedegadevej_bornholm"
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "errors": [],
+    "warnings": [
+      "bornholm_s_ndre_lyngvej_v_kongensmark_bornholm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_aarsballe_syd_bornholm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_s_ndre_lyngvej_v_splitsgardsvej_bornholm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_simblegardsvej_v_nr_26_bornholm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_klemensker_ovf_bedegadevej_bornholm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_klemensker_v_agardsvej_bornholm: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_bornholm_soskins_ens_h_jderyg: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_puggekullek_r: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_r_plantage: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_granite_souvenir_self_shop: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_rokkestenen_i_almindingen: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_kr_mmerhuset_kunsthandv_rk: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_jan_ole_s_turisttrafik: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_krogsholm_frugt_mosteri: missing general_info / Offline-[Erzählung] (≥20 chars)",
+      "bornholm_s_ndre_lyngvej_v_kongensmark_bornholm: general_info/Erzählung too short (0<80)",
+      "bornholm_s_ndre_lyngvej_v_kongensmark_bornholm: deep_data_pool thin (1<4)",
+      "bornholm_aarsballe_syd_bornholm: general_info/Erzählung too short (0<80)",
+      "bornholm_aarsballe_syd_bornholm: deep_data_pool thin (1<4)",
+      "bornholm_s_ndre_lyngvej_v_splitsgardsvej_bornholm: general_info/Erzählung too short (0<80)",
+      "bornholm_s_ndre_lyngvej_v_splitsgardsvej_bornholm: deep_data_pool thin (1<4)",
+      "bornholm_simblegardsvej_v_nr_26_bornholm: general_info/Erzählung too short (0<80)",
+      "bornholm_simblegardsvej_v_nr_26_bornholm: deep_data_pool thin (1<4)",
+      "bornholm_klemensker_ovf_bedegadevej_bornholm: general_info/Erzählung too short (0<80)",
+      "bornholm_klemensker_ovf_bedegadevej_bornholm: deep_data_pool thin (1<4)",
+      "bornholm_klemensker_v_agardsvej_bornholm: general_info/Erzählung too short (0<80)",
+      "bornholm_klemensker_v_agardsvej_bornholm: deep_data_pool thin (1<4)",
+      "bornholm_bornholm_soskins_ens_h_jderyg: general_info/Erzählung too short (0<80)",
+      "bornholm_bornholm_soskins_ens_h_jderyg: deep_data_pool thin (1<4)",
+      "bornholm_puggekullek_r: general_info/Erzählung too short (0<80)",
+      "bornholm_puggekullek_r: deep_data_pool thin (1<4)",
+      "bornholm_r_plantage: general_info/Erzählung too short (0<80)",
+      "bornholm_r_plantage: deep_data_pool thin (1<4)",
+      "bornholm_granite_souvenir_self_shop: general_info/Erzählung too short (0<80)",
+      "bornholm_granite_souvenir_self_shop: deep_data_pool thin (1<4)",
+      "bornholm_rokkestenen_i_almindingen: general_info/Erzählung too short (0<80)",
+      "bornholm_rokkestenen_i_almindingen: deep_data_pool thin (1<4)",
+      "bornholm_kr_mmerhuset_kunsthandv_rk: general_info/Erzählung too short (0<80)",
+      "bornholm_kr_mmerhuset_kunsthandv_rk: deep_data_pool thin (1<4)",
+      "bornholm_jan_ole_s_turisttrafik: general_info/Erzählung too short (0<80)",
+      "bornholm_jan_ole_s_turisttrafik: deep_data_pool thin (1<4)",
+      "bornholm_krogsholm_frugt_mosteri: general_info/Erzählung too short (0<80)",
+      "bornholm_krogsholm_frugt_mosteri: deep_data_pool thin (1<4)",
+      "coverage: missing must-have category 'kirche'",
+      "coverage: missing must-have category 'natur'",
+      "coverage: missing must-have category 'aussicht'",
+      "coverage: missing must-have category 'freizeit'"
+    ],
+    "stats": {
+      "spots": 14,
+      "storySpots": 14,
+      "directorySpots": 0,
+      "triggers": 14,
+      "missingTrigger": 0,
+      "missingNarration": 14,
+      "missingApproach": 0,
+      "missingPoly": 0,
+      "thinDeep": 14,
+      "orphanTriggers": 0,
+      "categories": [
+        "bahnhof",
+        "denkmal",
+        "museum",
+        "souvenir",
+        "tour",
+        "wanderung"
+      ],
+      "missingMustHave": [
+        "kirche",
+        "natur",
+        "aussicht",
+        "freizeit"
+      ],
+      "nicePresent": [
+        "bahnhof"
+      ],
+      "liveResearch": 4,
+      "offlineQa": 0,
+      "hasCoverage": true,
+      "hasTransit": false,
+      "hasMobility": false,
+      "links": 0
+    },
+    "gaps": {
+      "needsNarration": [
+        "bornholm_s_ndre_lyngvej_v_kongensmark_bornholm",
+        "bornholm_aarsballe_syd_bornholm",
+        "bornholm_s_ndre_lyngvej_v_splitsgardsvej_bornholm",
+        "bornholm_simblegardsvej_v_nr_26_bornholm",
+        "bornholm_klemensker_ovf_bedegadevej_bornholm",
+        "bornholm_klemensker_v_agardsvej_bornholm",
+        "bornholm_bornholm_soskins_ens_h_jderyg",
+        "bornholm_puggekullek_r",
+        "bornholm_r_plantage",
+        "bornholm_granite_souvenir_self_shop",
+        "bornholm_rokkestenen_i_almindingen",
+        "bornholm_kr_mmerhuset_kunsthandv_rk",
+        "bornholm_jan_ole_s_turisttrafik",
+        "bornholm_krogsholm_frugt_mosteri"
+      ],
+      "needsPolygon": [],
+      "needsApproach": [],
+      "needsDeep": [
+        "bornholm_s_ndre_lyngvej_v_kongensmark_bornholm",
+        "bornholm_aarsballe_syd_bornholm",
+        "bornholm_s_ndre_lyngvej_v_splitsgardsvej_bornholm",
+        "bornholm_simblegardsvej_v_nr_26_bornholm",
+        "bornholm_klemensker_ovf_bedegadevej_bornholm",
+        "bornholm_klemensker_v_agardsvej_bornholm",
+        "bornholm_bornholm_soskins_ens_h_jderyg",
+        "bornholm_puggekullek_r",
+        "bornholm_r_plantage",
+        "bornholm_granite_souvenir_self_shop",
+        "bornholm_rokkestenen_i_almindingen",
+        "bornholm_kr_mmerhuset_kunsthandv_rk",
+        "bornholm_jan_ole_s_turisttrafik",
+        "bornholm_krogsholm_frugt_mosteri"
+      ],
+      "missingCategories": [
+        "kirche",
+        "natur",
+        "aussicht",
+        "freizeit"
+      ]
+    }
+  },
+  "file": "C:\\Users\\larsf\\Findus 2.0\\data\\staedte\\bornholm.json"
+}

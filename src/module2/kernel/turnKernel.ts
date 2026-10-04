@@ -33,12 +33,12 @@ const STREET_ADDR_RE =
   /\b[\wÄÖÜäöüß.\-]*(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm|hof|hoop|berg)\s+\d{1,4}[a-zA-Z]?\b/iu;
 
 const CLOCK_RE =
-  /\b(wecker|weck\s+mich|wecke\s+mich|timer|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker|um\s+\d{1,2}(?:[:.]\d{2})?\s+uhr.{0,24}wecker)\b/iu;
+  /\b(wecker|weck\s+mich|wecke\s+mich|timer|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker|um\s+\d{1,2}(?:[:.]\d{2})?\s+uhr.{0,24}wecker|geweckt\b.{0,40}\d{1,2}|\d{1,2}(?::\d{2})?\s*(?:uhr)?.{0,24}geweckt|auf\s*steh\w*.{0,32}\d{1,2}|weck(?:e|en)?\s+(?:mich|uns))\b/iu;
 
 const TAXI_RE = /\b(taxi|uber|bolt|freenow)\b/iu;
 
 const SLOW_RESEARCH_RE =
-  /\b(flug|flüge|fluege|kino|filme|hotel|übernacht|uebernacht|kinoprogramm|günstigste\s+flüge|guenstigste\s+fluege|stay22|spielzeit|heimspiel|basketball|handball|towers|spielplan|spiel(?:en|t)|ticket(?:s)?|eis|gelato|spaghetti|restaurant|italiener|eisdiele|gelateria)\b/iu;
+  /\b(flug|flüge|fluege|kino|filme|hotel|übernacht|uebernacht|kinoprogramm|günstigste\s+flüge|guenstigste\s+fluege|stay22|spielzeit|heimspiel|basketball|handball|towers|spielplan|spiel(?:en|t)|ticket(?:s)?|eis|gelato|spaghetti|restaurant|italiener|eisdiele|gelateria|pizza|steak|essen|pizzeria|sup\b|stand[-\s]?up|paddle|verleih|alster)\b/iu;
 
 const FOLLOW_UP_RE =
   /\b(wie\s+(?:viele|viel|weit|lange|teuer|alt)|warum|wieso|weshalb|mehr\s+(?:dazu|historie)|erzähl|erzaehl|und\s+das\s+popcorn|stufen|treppen)\b/iu;
@@ -108,8 +108,8 @@ export function looksLikeNamedTriviaSubject(text: string): boolean {
   if (!t) return false;
   // Eigenname / Titel nach ist/war/sind (auch „der Papst“, „Manuel Neuer“).
   if (
-    /\b(?:wie\s+(?:alt|groß|gross|hoch|breit)|wer|wann)\b/iu.test(t) &&
-    /\b(?:ist|war|sind)\s+(?:(?:der|die|das)\s+)?[A-ZÄÖÜ][\wÄÖÜäöüß\-]/u.test(t)
+    /\b(?:wie\s+(?:alt|groß|gross|hoch|breit|heißt|heisst|nennt)|wer|wann)\b/iu.test(t) &&
+    /\b(?:ist|war|sind|heißt|heisst)\s+(?:(?:der|die|das)\s+)?[A-ZÄÖÜ][\wÄÖÜäöüß\-]/u.test(t)
   ) {
     return true;
   }
@@ -119,7 +119,7 @@ export function looksLikeNamedTriviaSubject(text: string): boolean {
     };
     if (
       isQuickLookupQuery(t) &&
-      /\b(?:ist|war|sind)\s+(?:(?:der|die|das)\s+)?[A-ZÄÖÜ]/u.test(t)
+      /\b(?:ist|war|sind|heißt|heisst)\s+(?:(?:der|die|das)\s+)?[A-ZÄÖÜ]/u.test(t)
     ) {
       return true;
     }
@@ -292,24 +292,28 @@ export function decideTopicCut(input: TopicCutInput): TopicCutMode {
     if (!sameKnowledgeThread) return 'new';
   }
 
-  // Offener Flug-Trip: Uhr/Slots weiterführen — kein Weave mit totem Trivia.
+  // Offener Flug-Trip / Taxi→Flughafen-Root: Uhr/Slots weiterführen — kein Weave mit totem Trivia.
   try {
-    const { hasFlightTripSession } = require('../../services/flights/flightTripSession') as {
-      hasFlightTripSession: () => boolean;
-    };
     const {
       isFlightTripFollowUp,
       extractClockHm,
       isFlightTripQuery,
+      hasStickyFlightRoot,
+      isBareClockStickyFlightFollowUp,
     } = require('../../services/flights/flightTripIntent') as {
       isFlightTripFollowUp: (s: string, has: boolean) => boolean;
       extractClockHm: (s: string) => string | null;
       isFlightTripQuery: (s: string) => boolean;
+      hasStickyFlightRoot: () => boolean;
+      isBareClockStickyFlightFollowUp: (s: string) => boolean;
     };
-    if (hasFlightTripSession()) {
+    if (hasStickyFlightRoot()) {
       if (
         !isFlightTripQuery(t) &&
-        (isFlightTripFollowUp(t, true) || extractClockHm(t) || nextFam === 'clock')
+        (isBareClockStickyFlightFollowUp(t) ||
+          isFlightTripFollowUp(t, true) ||
+          extractClockHm(t) ||
+          nextFam === 'clock')
       ) {
         return 'continue';
       }
@@ -535,6 +539,10 @@ export function resolveTurnBridgePace(userText: string): {
   fastDeadlineMs: number;
 } {
   const t = (userText || '').replace(/\s+/g, ' ').trim();
+  // Personen-Alter: Antwort kommt schnell → Call-1 nur kurzer Peek-Lead (kein Cover-Warten).
+  if (/\bwie\s+alt\b/iu.test(t)) {
+    return { pace: 'instant', bridgeMaxWords: 8, fastDeadlineMs: 1200 };
+  }
   // Named Trivia / Quick-Lookup: Cover + frühe Floskel (Alter recherchieren dauert).
   try {
     const { isQuickLookupQuery } = require('../../services/concierge/celestialSkyQuery') as {
@@ -551,7 +559,8 @@ export function resolveTurnBridgePace(userText: string): {
   if (classifyUtteranceFamily(t).family === 'knowledge' && !looksLikeFollowUpLite(t)) {
     return { pace: 'cover', bridgeMaxWords: 28, fastDeadlineMs: 8000 };
   }
-  // Wetter: kurze Lookup-Bridge (nicht null) — Call 2 liefert die Fakten.
+  // Wetter: normale Lookup-Bridge (Verstanden+Zusagen). Zu kurz (≤8) + WAIT-Sanitize = Stille.
+  // Stichpunkte warten auf Bridge-Ende in presentChatLane — nicht die Bridge kürzen.
   if (
     classifyUtteranceFamily(t).family === 'weather' &&
     !looksLikeSlowResearch(t)

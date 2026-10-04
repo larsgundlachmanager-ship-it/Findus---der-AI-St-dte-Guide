@@ -33,17 +33,28 @@ export function isAuthConfigured(): boolean {
 
 /** Feste Callback-URL für Magic Link + OAuth (kein Expo-Go/exp+ Drift). */
 export function getAuthRedirectUrl(): string {
-  return Linking.createURL(AUTH_CALLBACK_PATH, { scheme: AUTH_SCHEME });
+  // Release/APK: immer Custom Scheme — Linking.createURL kann in Dev driftet.
+  if (!__DEV__) {
+    return `${AUTH_SCHEME}://${AUTH_CALLBACK_PATH}`;
+  }
+  try {
+    const u = Linking.createURL(AUTH_CALLBACK_PATH, { scheme: AUTH_SCHEME });
+    if (u.startsWith(`${AUTH_SCHEME}://`)) return u;
+  } catch {
+    /* soft */
+  }
+  return `${AUTH_SCHEME}://${AUTH_CALLBACK_PATH}`;
 }
 
 export function isAuthCallbackUrl(url: string | null | undefined): boolean {
   if (!url) return false;
   const lower = url.toLowerCase();
+  // Nur echte Auth-Callbacks — nie findus://ask / voice / reisebuero schlucken.
   return (
-    lower.startsWith(`${AUTH_SCHEME}://`) ||
+    lower.startsWith(`${AUTH_SCHEME}://${AUTH_CALLBACK_PATH}`) ||
     lower.includes('://auth/callback') ||
-    lower.includes('://auth?') ||
-    /[?&#](access_token|refresh_token|code)=/i.test(url)
+    /[?&#](access_token|refresh_token)=/i.test(url) ||
+    (/[?&#]code=/i.test(url) && /auth/i.test(lower))
   );
 }
 

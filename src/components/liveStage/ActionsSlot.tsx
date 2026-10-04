@@ -267,6 +267,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 7,
     flexShrink: 0,
+    alignSelf: 'flex-start',
+    maxWidth: '92%',
     minHeight: 34,
     justifyContent: 'center',
     borderWidth: StyleSheet.hairlineWidth,

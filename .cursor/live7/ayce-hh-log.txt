@@ -1,0 +1,506 @@
+--------- beginning of main
+09-09 12:54:42.268  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:42.268  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:42.269  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:42.269  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:42.270  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:42.272  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:42.272  3283  3739 D ConnectivityService: NetReassign [no changes] [c 0] [a 1] [i 2]
+09-09 12:54:42.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:42.274  4350  2094 I NearbyMediums: Wifi changed new SSID: "ESSPrisdorf"
+09-09 12:54:42.274  4350  2094 I NearbyMediums: WifiLanConnectivityInfo is not changed, skip notify.
+09-09 12:54:42.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:42.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:42.353  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345829379D hal_ts 11703906555379 lux=448.700 Channel0-5=5694.0,2482.0,224.0,2418.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:42.360  4594  4594 W dataInfoSend: type=1400 audit(0.0:15433581): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:42.360  4594  4594 W dataInfoSend: type=1400 audit(0.0:15433582): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:42.360  4594  4594 W dataInfoSend: type=1400 audit(0.0:15433583): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+--------- beginning of kernel
+09-09 12:54:42.373 10854 10854 W audit   : audit_lost=15395695 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:42.360  4594  4594 W dataInfoSend: type=1400 audit(0.0:15433584): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:42.373 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:42.360  4594  4594 W dataInfoSend: type=1400 audit(0.0:15433585): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:42.384  2597  4451 D StNfcHal: (#08A82) Rx 6f 02 27 (hidden)
+09-09 12:54:42.384  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:42.463  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3458497161 hal_ts 11704016552254 lux=448.542 Channel0-5=5692.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:42.573  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345869ABAB hal_ts 11704126556108 lux=448.385 Channel0-5=5690.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:42.687  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345889E580 hal_ts 11704236553869 lux=448.227 Channel0-5=5688.0,2478.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:42.712  2597  4451 D StNfcHal: (#08A83) Rx 6f 02 0f (hidden)
+09-09 12:54:42.713  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:42.751  4350  2505 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-09 12:54:42.774  4350  2094 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-09 12:54:42.793  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3458AA1FD2 hal_ts 11704346558140 lux=447.754 Channel0-5=5682.0,2478.0,224.0,2410.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:42.903  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3458CA597D hal_ts 11704456553713 lux=447.912 Channel0-5=5684.0,2478.0,222.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:42.980  2597  4451 D StNfcHal: (#08A84) Rx 6f 02 27 (hidden)
+09-09 12:54:42.980  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:43.013  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3458EA93A1 hal_ts 11704566555588 lux=447.754 Channel0-5=5682.0,2478.0,222.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.123  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34590ACD49 hal_ts 11704676551004 lux=447.912 Channel0-5=5684.0,2478.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.188     0     0 W [    C2] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 2, moved it to CPU 0 (AudioOut_1D-3110)
+09-09 12:54:43.233  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34592B07CF hal_ts 11704786557983 lux=447.754 Channel0-5=5682.0,2476.0,222.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.307  2597  4451 D StNfcHal: (#08A85) Rx 6f 02 0f (hidden)
+09-09 12:54:43.307  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:43.343  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34594B41CF hal_ts 11704896557983 lux=447.754 Channel0-5=5682.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.380 10854 10854 W audit   : audit_lost=15398665 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:43.364  4594  4594 W dataInfoSend: type=1400 audit(0.0:15436556): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:43.380 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:43.364  4594  4594 W dataInfoSend: type=1400 audit(0.0:15436557): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:43.364  4594  4594 W dataInfoSend: type=1400 audit(0.0:15436558): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:43.364  4594  4594 W dataInfoSend: type=1400 audit(0.0:15436559): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:43.364  4594  4594 W dataInfoSend: type=1400 audit(0.0:15436560): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:43.453  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34596B7B9D hal_ts 11705006555379 lux=447.912 Channel0-5=5684.0,2478.0,224.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.455 13743 13743 I ExoPlayerImpl: Init 34cf486 [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36]
+09-09 12:54:43.457 13743 13743 I NtAudioManager: getStreamVolume streamType :3, pkg :de.findus.app, index :5
+09-09 12:54:43.462 13743  4557 W WavHeaderReader: Ignoring unknown WAV chunk: 1279873876
+09-09 12:54:43.462 13743  4557 W WavExtractor: Data exceeds input length: 4294967373, 1206654
+09-09 12:54:43.472     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 3 (binder:2355_1-2457)
+09-09 12:54:43.470  2330  5508 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:43.475  2330  5508 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:43.475  2330  5508 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:43.475 13743  4555 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 2041, transferType 3, uid 10534, pid 13743
+09-09 12:54:43.476  2330  5508 D NativePermissionController: checkPermission: missing 1 for 10534
+09-09 12:54:43.476  2330  5508 D NativePermissionController: checkPermission: missing 3 for 10534
+09-09 12:54:43.476  2330  5508 D NativePermissionController: checkPermission: missing 5 for 10534
+09-09 12:54:43.476  2330  5508 D APM_AudioPolicyManager: getOutputForAttrInt() attributes={ Content type: AUDIO_CONTENT_TYPE_UNKNOWN Usage: AUDIO_USAGE_MEDIA Source: AUDIO_SOURCE_INVALID Flags: 0xa00 Tags:  } stream=AUDIO_STREAM_MUSIC session 2041 selectedDeviceId 0
+09-09 12:54:43.476  2330  5508 D APM_AudioPolicyManager: getOutputForAttrInt() device {AUDIO_DEVICE_OUT_SPEAKER, @:}, sampling rate 44100, format 0x1, channel mask 0x1, flags 0x8 stream AUDIO_STREAM_MUSIC
+09-09 12:54:43.476  2330  5508 D APM_AudioPolicyManager: getOutputForAttrInt returns output 29 selectedDeviceIds 3
+09-09 12:54:43.476  2330  5508 V AudioFlinger: getOrphanEffectChain_l session 2041 index -2
+09-09 12:54:43.476  2330  5508 D AudioFlinger: createTrack() sessionId: 2041 volume: 0.031623 muted 0
+09-09 12:54:43.478  2330  5508 D AudioFlinger: createTrack_l()  latencyMs 109 mNormalFrameCount 1920 mSampleRate 48000
+09-09 12:54:43.478  2330  5508 D AudioFlinger: createTrack_l()  minFrameCount 3536 frameCount 14144
+09-09 12:54:43.478  2330  5508 D AudioFlinger: Client defaulted notificationFrames to 7072 for frameCount 14144
+09-09 12:54:43.478  2330  5508 I AF::PthrPatchRecord: creating track with enforcement level 0
+09-09 12:54:43.478 13743 13743 I ExoPlayerImpl: Init 62ee94b [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36]
+09-09 12:54:43.479  2330  5508 D AudioFlinger: createTrack_l() final frameCount 14144 for track session 2041 mFrameCount 1920 mNormalFrameCount 1920 notificationFrameCount 7072
+09-09 12:54:43.480  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1165: enter
+09-09 12:54:43.480  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1187: keys: is_direct_pcm_track
+09-09 12:54:43.480  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1224: exit: returns - is_direct_pcm_track=false
+09-09 12:54:43.480 13743 13743 I NtAudioManager: getStreamVolume streamType :3, pkg :de.findus.app, index :5
+09-09 12:54:43.481 13743  4555 E AudioTrack: createTrack_l(256) on outputId 29 : 0xb400007c89fd03c0, mCblk = 0x7b78002000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-09 12:54:43.481  2330 19305 V AudioFlinger: acquiring 2041 from 13743, for 13743
+09-09 12:54:43.481  2330 19305 V AudioFlinger:  added new entry for 2041
+09-09 12:54:43.484 13743  4562 W WavHeaderReader: Ignoring unknown WAV chunk: 1279873876
+09-09 12:54:43.484 13743  4562 W WavExtractor: Data exceeds input length: 4294967373, 437550
+09-09 12:54:43.494  2330 19305 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:43.494  2330 19305 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:43.494  2330 19305 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:43.495 13743  4561 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 2049, transferType 3, uid 10534, pid 13743
+09-09 12:54:43.496  2330 19305 D NativePermissionController: checkPermission: missing 1 for 10534
+09-09 12:54:43.496  2330 19305 D NativePermissionController: checkPermission: missing 3 for 10534
+09-09 12:54:43.496  2330 19305 D NativePermissionController: checkPermission: missing 5 for 10534
+09-09 12:54:43.496  2330 19305 D APM_AudioPolicyManager: getOutputForAttrInt() attributes={ Content type: AUDIO_CONTENT_TYPE_UNKNOWN Usage: AUDIO_USAGE_MEDIA Source: AUDIO_SOURCE_INVALID Flags: 0xa00 Tags:  } stream=AUDIO_STREAM_MUSIC session 2049 selectedDeviceId 0
+09-09 12:54:43.496  2330 19305 D APM_AudioPolicyManager: getOutputForAttrInt() device {AUDIO_DEVICE_OUT_SPEAKER, @:}, sampling rate 44100, format 0x1, channel mask 0x1, flags 0x8 stream AUDIO_STREAM_MUSIC
+09-09 12:54:43.496  2330 19305 D APM_AudioPolicyManager: getOutputForAttrInt returns output 29 selectedDeviceIds 3
+09-09 12:54:43.496  2330 19305 V AudioFlinger: getOrphanEffectChain_l session 2049 index -2
+09-09 12:54:43.496  2330 19305 D AudioFlinger: createTrack() sessionId: 2049 volume: 0.031623 muted 0
+09-09 12:54:43.496  2330 19305 D AudioFlinger: createTrack_l()  latencyMs 109 mNormalFrameCount 1920 mSampleRate 48000
+09-09 12:54:43.496  2330 19305 D AudioFlinger: createTrack_l()  minFrameCount 3536 frameCount 14144
+09-09 12:54:43.496  2330 19305 D AudioFlinger: Client defaulted notificationFrames to 7072 for frameCount 14144
+09-09 12:54:43.496  2330 19305 I AF::PthrPatchRecord: creating track with enforcement level 0
+09-09 12:54:43.498  2330 19305 D AudioFlinger: createTrack_l() final frameCount 14144 for track session 2049 mFrameCount 1920 mNormalFrameCount 1920 notificationFrameCount 7072
+09-09 12:54:43.500  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1165: enter
+09-09 12:54:43.500  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1187: keys: is_direct_pcm_track
+09-09 12:54:43.500  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1224: exit: returns - is_direct_pcm_track=false
+09-09 12:54:43.501 13743  4561 E AudioTrack: createTrack_l(257) on outputId 29 : 0xb400007c89fed9b0, mCblk = 0x7b66e48000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-09 12:54:43.501  2330 19305 V AudioFlinger: acquiring 2049 from 13743, for 13743
+09-09 12:54:43.501  2330 19305 V AudioFlinger:  added new entry for 2049
+09-09 12:54:43.519 24844 24844 I [kworke][0x345996de19][10:54:43.510128] qca6750: [24844:I:PMO] pmo_core_psoc_send_host_wakeup_ind_to_fw: Host wakeup indication sent to fw
+09-09 12:54:43.563  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34598BB557 hal_ts 11705116551733 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.576  2597  4451 D StNfcHal: (#08A86) Rx 6f 02 27 (hidden)
+09-09 12:54:43.576  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:43.673  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3459ABEFB7 hal_ts 11705226556733 lux=447.912 Channel0-5=5684.0,2478.0,222.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.789     0     0 W [    C3] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 3, moved it to CPU 1 (rcu_preempt-14)
+09-09 12:54:43.787  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3459CC29B9 hal_ts 11705336556838 lux=447.754 Channel0-5=5682.0,2478.0,222.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.893  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3459EC6401 hal_ts 11705446560588 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:43.902  2597  4451 D StNfcHal: (#08A87) Rx 6f 02 0f (hidden)
+09-09 12:54:43.902  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:44.003  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345A0C9DA4 hal_ts 11705556555744 lux=448.069 Channel0-5=5686.0,2480.0,222.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.113  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345A2CD7C9 hal_ts 11705666557671 lux=447.912 Channel0-5=5684.0,2478.0,222.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.161  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+09-09 12:54:44.161  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK ON
+09-09 12:54:44.161  2132  4632 D vendor.qti.bluetooth@1.1-wake_lock: Acquire wakelock is acquired 
+09-09 12:54:44.161  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+09-09 12:54:44.172  2597  4451 D StNfcHal: (#08A88) Rx 6f 02 27 (hidden)
+09-09 12:54:44.172  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:44.189 13743 13743 I ExoPlayerImpl: Init 1990858 [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36]
+09-09 12:54:44.191 13743 13743 I NtAudioManager: getStreamVolume streamType :3, pkg :de.findus.app, index :5
+09-09 12:54:44.201 13743  4565 W WavHeaderReader: Ignoring unknown WAV chunk: 1279873876
+09-09 12:54:44.201 13743  4565 W WavExtractor: Data exceeds input length: 4294967373, 225870
+09-09 12:54:44.202  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+09-09 12:54:44.202  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK OFF
+09-09 12:54:44.205  2330 19305 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:44.205  2330 19305 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:44.205  2330 19305 D APM_AudioPolicyManager: getOutput() stream 3 selected devices {AUDIO_DEVICE_OUT_SPEAKER, @:}, output 29
+09-09 12:54:44.205 13743  4564 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 2057, transferType 3, uid 10534, pid 13743
+09-09 12:54:44.206  2330 19305 D NativePermissionController: checkPermission: missing 1 for 10534
+09-09 12:54:44.206  2330 19305 D NativePermissionController: checkPermission: missing 3 for 10534
+09-09 12:54:44.206  2330 19305 D NativePermissionController: checkPermission: missing 5 for 10534
+09-09 12:54:44.206  2330 19305 D APM_AudioPolicyManager: getOutputForAttrInt() attributes={ Content type: AUDIO_CONTENT_TYPE_UNKNOWN Usage: AUDIO_USAGE_MEDIA Source: AUDIO_SOURCE_INVALID Flags: 0xa00 Tags:  } stream=AUDIO_STREAM_MUSIC session 2057 selectedDeviceId 0
+09-09 12:54:44.206  2330 19305 D APM_AudioPolicyManager: getOutputForAttrInt() device {AUDIO_DEVICE_OUT_SPEAKER, @:}, sampling rate 44100, format 0x1, channel mask 0x1, flags 0x8 stream AUDIO_STREAM_MUSIC
+09-09 12:54:44.207  2330 19305 D APM_AudioPolicyManager: getOutputForAttrInt returns output 29 selectedDeviceIds 3
+09-09 12:54:44.207  2330 19305 V AudioFlinger: getOrphanEffectChain_l session 2057 index -2
+09-09 12:54:44.207  2330 19305 D AudioFlinger: createTrack() sessionId: 2057 volume: 0.031623 muted 0
+09-09 12:54:44.207  2330 19305 D AudioFlinger: createTrack_l()  latencyMs 109 mNormalFrameCount 1920 mSampleRate 48000
+09-09 12:54:44.207  2330 19305 D AudioFlinger: createTrack_l()  minFrameCount 3536 frameCount 14144
+09-09 12:54:44.207  2330 19305 D AudioFlinger: Client defaulted notificationFrames to 7072 for frameCount 14144
+09-09 12:54:44.207  2330 19305 I AF::PthrPatchRecord: creating track with enforcement level 0
+09-09 12:54:44.208  2330 19305 D AudioFlinger: createTrack_l() final frameCount 14144 for track session 2057 mFrameCount 1920 mNormalFrameCount 1920 notificationFrameCount 7072
+09-09 12:54:44.209  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1165: enter
+09-09 12:54:44.209  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1187: keys: is_direct_pcm_track
+09-09 12:54:44.209  2126  2181 D AHAL: AudioStream: astream_out_get_parameters: 1224: exit: returns - is_direct_pcm_track=false
+09-09 12:54:44.222 13743  4564 E AudioTrack: createTrack_l(258) on outputId 29 : 0xb400007c89ff3a40, mCblk = 0x7b66d3e000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-09 12:54:44.222  2330 19305 V AudioFlinger: acquiring 2057 from 13743, for 13743
+09-09 12:54:44.222  2330 19305 V AudioFlinger:  added new entry for 2057
+09-09 12:54:44.223  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345A4D117F hal_ts 11705776553817 lux=447.912 Channel0-5=5684.0,2478.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.249  3283  4613 D NtGnssRecord: MaxCN0:39
+09-09 12:54:44.270  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:44.271  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:44.271  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:44.271  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:44.271  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:44.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:44.276  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:44.276  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:44.276  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:44.329     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 3 (rcu_preempt-14)
+09-09 12:54:44.333  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345A6D4B1C hal_ts 11705886548661 lux=447.754 Channel0-5=5682.0,2478.0,224.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.352  2132  4436 D vendor.qti.bluetooth@1.1-wake_lock: Release wakelock is released 
+09-09 12:54:44.372  4594  4594 W dataInfoSend: type=1400 audit(0.0:15439531): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:44.372  4594  4594 W dataInfoSend: type=1400 audit(0.0:15439532): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:44.372  4594  4594 W dataInfoSend: type=1400 audit(0.0:15439533): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:44.372  4594  4594 W dataInfoSend: type=1400 audit(0.0:15439534): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:44.372  4594  4594 W dataInfoSend: type=1400 audit(0.0:15439535): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:44.387 10854 10854 W audit   : audit_lost=15401635 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:44.387 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:44.443  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345A8D85A1 hal_ts 11705996555588 lux=447.912 Channel0-5=5684.0,2480.0,224.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.499  2597  4451 D StNfcHal: (#08A89) Rx 6f 02 0f (hidden)
+09-09 12:54:44.499  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:44.553  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345AADC00A hal_ts 11706106561056 lux=447.912 Channel0-5=5684.0,2478.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.663  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345ACDF95C hal_ts 11706216551994 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.727  4350  7420 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+09-09 12:54:44.733  4350  2894 W SystemServiceRegistry: No service published for: wifirtt
+09-09 12:54:44.769 10386 10386 I [schedu][0x345b050e35][10:54:44.760049] qca6750: [10386:I:OSIF] scan start scan id 41884
+09-09 12:54:44.767  2597  4451 D StNfcHal: (#08A8A) Rx 6f 02 27 (hidden)
+09-09 12:54:44.767  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:44.773  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345AEE3447 hal_ts 11706326564233 lux=447.912 Channel0-5=5684.0,2478.0,222.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.887  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345B0E6D69 hal_ts 11706436552671 lux=448.385 Channel0-5=5690.0,2482.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:44.993  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345B2EA815 hal_ts 11706546561629 lux=448.385 Channel0-5=5690.0,2482.0,224.0,2414.0,588.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.056     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 1 (SensorService-3644)
+09-09 12:54:45.094  2597  4451 D StNfcHal: (#08A8B) Rx 6f 02 0f (hidden)
+09-09 12:54:45.094  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:45.103  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345B4EE1F0 hal_ts 11706656559702 lux=448.700 Channel0-5=5694.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.213  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345B6F1BFB hal_ts 11706766560275 lux=448.542 Channel0-5=5692.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.250 10375 10375 I [binder][0x345b9226d2][10:54:45.241657] qca6750: [10375:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-09 12:54:45.245  4199  4199 D QtiLinkBandwidthEstimator-0: handleMessage: 4
+09-09 12:54:45.246  4199  4199 D QtiLinkBandwidthEstimator-1: handleMessage: 4
+09-09 12:54:45.249  4072  4980 D cneJni  : sendWifiStatus start
+09-09 12:54:45.253  4103  4799 D txpwrJni: sendNetworkInfo start
+09-09 12:54:45.253  4103  4799 D txpwrJni: sendNetworkInfo RatType 0
+09-09 12:54:45.254  3283  4700 D NtWifiBtCoExManager: handleMessage: WIFI_STATE_CHANGED
+09-09 12:54:45.256  3283  3731 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-09 12:54:45.256  3283  5292 D NtSmartWifiMonitor: get rssi = -54, frequecy=5600, datastall=0, current state=6
+09-09 12:54:45.256  3283  5292 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-54, -54]
+09-09 12:54:45.256  4072  4980 D QCNEJ/NativeAidlConnector: -> SND notifyDefaultNetworkChanged(1)
+09-09 12:54:45.256  6013  7902 I BugleRcsEngine: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference [CONTEXT log_prefix="RcsEngineImpl[DUAL_REG]:[37ac7fa5-3c79]>Handler" thread_id=59 ]
+09-09 12:54:45.257  4072  4980 D cneJni  : sendDefaultNwMsg start
+09-09 12:54:45.257  6013  7697 I BugleRcsEngine: Connected state: [1], networkType: [WIFI] [CONTEXT thread_id=55 ]
+09-09 12:54:45.257  6013  7902 I BugleRcsEngine: Cannot use CS.apk as it's battery optimized [CONTEXT thread_id=59 ]
+09-09 12:54:45.258  3283  3739 D ConnectivityService: NetReassign [no changes] [c 1] [a 1] [i 1]
+09-09 12:54:45.259  4350  2094 I NearbyMediums: Wifi changed new SSID: "ESSPrisdorf"
+09-09 12:54:45.259  4350  2094 I NearbyMediums: WifiLanConnectivityInfo is not changed, skip notify.
+09-09 12:54:45.264  4350  6345 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+09-09 12:54:45.264  4350  6345 W .gms.persistent: Large reply transaction of 2097152 bytes, interface descriptor , code 1
+09-09 12:54:45.272  4350  6345 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+09-09 12:54:45.272  4350  6345 W .gms.persistent: Large reply transaction of 2097152 bytes, interface descriptor , code 1
+09-09 12:54:45.324  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345B8F5598 hal_ts 11706876555119 lux=448.385 Channel0-5=5690.0,2480.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.363  2597  4451 D StNfcHal: (#08A8C) Rx 6f 02 27 (hidden)
+09-09 12:54:45.364  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:45.384  4594  4594 W dataInfoSend: type=1400 audit(0.0:15442506): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:45.384  4594  4594 W dataInfoSend: type=1400 audit(0.0:15442507): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:45.384  4594  4594 W dataInfoSend: type=1400 audit(0.0:15442508): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:45.399 10854 10854 W audit   : audit_lost=15404605 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:45.399 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:45.384  4594  4594 W dataInfoSend: type=1400 audit(0.0:15442509): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:45.384  4594  4594 W dataInfoSend: type=1400 audit(0.0:15442510): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:45.413  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+09-09 12:54:45.413  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK ON
+09-09 12:54:45.413  2132  4632 D vendor.qti.bluetooth@1.1-wake_lock: Acquire wakelock is acquired 
+09-09 12:54:45.413  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+09-09 12:54:45.433  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345BAF8FC5 hal_ts 11706986557463 lux=448.227 Channel0-5=5688.0,2478.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.454  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+09-09 12:54:45.454  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK OFF
+09-09 12:54:45.543  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345BCFC96B hal_ts 11707096552775 lux=448.069 Channel0-5=5686.0,2480.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.604  2132  4436 D vendor.qti.bluetooth@1.1-wake_lock: Release wakelock is released 
+09-09 12:54:45.653  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345BF004CE hal_ts 11707206571265 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.690  2597  4451 D StNfcHal: (#08A8D) Rx 6f 02 0f (hidden)
+09-09 12:54:45.690  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:45.754  4350  2505 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-09 12:54:45.756  4350  2505 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-09 12:54:45.763  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345C103DC5 hal_ts 11707316557463 lux=448.542 Channel0-5=5692.0,2480.0,224.0,2416.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.877     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 3 (binder:2355_1-2457)
+09-09 12:54:45.873  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345C3077DE hal_ts 11707426558765 lux=448.542 Channel0-5=5692.0,2480.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.948     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 2 (rcu_preempt-14)
+--------- beginning of system
+09-09 12:54:45.947  3283  3325 I ActivityManager: Killing 31396:com.google.android.apps.wellbeing/u0a132 (adj 985): empty #31
+09-09 12:54:45.951  2330 19305 D AudioPolicyService: allowCapture = 1, isAssistantOnTop = 0, isTopOrLatestActive = 1, isTopOrLatestSensitive = 0, isSensitiveActive = 0, current->canBypassConcurrentPolicy = 1, canCaptureIfInCallOrCommunication = 1
+09-09 12:54:45.951  2330 19305 D AudioPolicyService: updateUidStates_l() current->uid = 10127, current->pid = 5976, allowCapture = 1, UidState = 5, apmState = 1
+09-09 12:54:45.960  2597  4451 D StNfcHal: (#08A8E) Rx 6f 02 27 (hidden)
+09-09 12:54:45.960  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:45.985  2035  2035 I Zygote  : Process 31396 exited due to signal 9 (Killed)
+09-09 12:54:45.985  3283  3328 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10132/pid_31396
+09-09 12:54:45.986  2287  2287 I vendor.qti.hardware.servicetrackeraidl-service: killProcess is called for pid : 31396
+09-09 12:54:45.986  2287  2287 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 31396 is client
+09-09 12:54:45.986  2287  2287 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.chimera.PersistentApiServiceafter removal is 44
+09-09 12:54:45.985  1345  1345 E BATTERY_CHG: handle_message: adsp_to_kernel_log:key_info:battid:99149 pump_chip:8582,buck_chip:89601,pump_en:0,buck_en:0,ovp:0,fcc:1600,fv:4500,icl:3000,ibus_ma:456,usb_sus:0,BattInit:1,chg_type:15,soc:7911,real_cap:4333000,plug_in:1,plugGpio:0,usbTemp:0,battTemp:0,nt_cc_enable:0,2646:00,2654:1a,2606:87,2708:2b,2952:3c,2658:b4,2707:2b,2b09:a3,280c:08,280d:08,2910:11,2940:00,2941:00,270b:e2,4f46:80,2954:00,
+09-09 12:54:45.993 26115 26115 I binder  : undelivered transaction 7391785, process died.
+09-09 12:54:45.993 26115 26115 I binder  : undelivered transaction 7450711, process died.
+09-09 12:54:45.993 26115 26115 I binder  : undelivered transaction 7576584, process died.
+09-09 12:54:45.993 26115 26115 I binder  : undelivered transaction 7376493, process died.
+09-09 12:54:45.986  2287  2287 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.chimera.PersistentDirectBootAwareApiServiceafter removal is 34
+09-09 12:54:45.986  2287  2287 I vendor.qti.hardware.servicetrackeraidl-service: removing client with pid 31396process namecom.google.android.apps.wellbeing
+09-09 12:54:45.987  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345C50B16B hal_ts 11707536552775 lux=448.542 Channel0-5=5692.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:45.988  5230  5264 V OsAgent : broadcastSystemEvent - 7
+09-09 12:54:46.076     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 0 (binder:2355_1-2457)
+09-09 12:54:46.093  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345C70EBE3 hal_ts 11707646559025 lux=448.385 Channel0-5=5690.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.203  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345C912574 hal_ts 11707756553244 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.252  3283  4613 D NtGnssRecord: MaxCN0:39
+09-09 12:54:46.273  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:46.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:46.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:46.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:46.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:46.275  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:46.277  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:46.280  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:46.280  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:46.281  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:46.285  2597  4451 D StNfcHal: (#08A8F) Rx 6f 02 0f (hidden)
+09-09 12:54:46.285  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:46.313  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345CB16050 hal_ts 11707866564702 lux=448.385 Channel0-5=5690.0,2482.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.412 10854 10854 W audit   : audit_lost=15407575 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:46.412 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:46.396  4594  4594 W dataInfoSend: type=1400 audit(0.0:15445481): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:46.396  4594  4594 W dataInfoSend: type=1400 audit(0.0:15445482): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:46.396  4594  4594 W dataInfoSend: type=1400 audit(0.0:15445483): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:46.396  4594  4594 W dataInfoSend: type=1400 audit(0.0:15445484): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:46.396  4594  4594 W dataInfoSend: type=1400 audit(0.0:15445485): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:46.423  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345CD1997B hal_ts 11707976553608 lux=448.385 Channel0-5=5690.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.533  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345CF1D437 hal_ts 11708086563400 lux=448.385 Channel0-5=5690.0,2480.0,224.0,2416.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.554  2597  4451 D StNfcHal: (#08A90) Rx 6f 02 27 (hidden)
+09-09 12:54:46.554  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:46.643  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345D120D4C hal_ts 11708196551161 lux=448.385 Channel0-5=5690.0,2480.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.753  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345D32476F hal_ts 11708306552983 lux=448.385 Channel0-5=5690.0,2482.0,224.0,2416.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.788     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 3 (crtc_commit:146-1059)
+09-09 12:54:46.863  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345D528202 hal_ts 11708416560640 lux=448.542 Channel0-5=5692.0,2482.0,224.0,2416.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.877     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 2 (SensorService-3644)
+09-09 12:54:46.881  2597  4451 D StNfcHal: (#08A91) Rx 6f 02 0f (hidden)
+09-09 12:54:46.881  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:46.884  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+09-09 12:54:46.884  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK ON
+09-09 12:54:46.885  2132  4632 D vendor.qti.bluetooth@1.1-wake_lock: Acquire wakelock is acquired 
+09-09 12:54:46.885  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+09-09 12:54:46.925  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+09-09 12:54:46.925  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK OFF
+09-09 12:54:46.973  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345D72BCCD hal_ts 11708526571213 lux=448.700 Channel0-5=5694.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:46.983  2287  2287 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.chimera.PersistentIntentOperationService
+09-09 12:54:47.075  2132  4436 D vendor.qti.bluetooth@1.1-wake_lock: Release wakelock is released 
+09-09 12:54:47.087  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345D92F5D8 hal_ts 11708636558452 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.150  2597  4451 D StNfcHal: (#08A92) Rx 6f 02 27 (hidden)
+09-09 12:54:47.150  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:47.182  2254  2266 E NtChgAidl: NtChgAidl: InGameStatus: 0
+09-09 12:54:47.191  2266  2266 I NtChg   : T0-6:[50,350,370,390,410,430,500],chg_series:8,is_changed:0,TeBoT0-6:[50,330,370,390,410,430,500],TRegion:2,Temp:358,tzname:shell_max,Ibat:3000,onlineI:-400,param_type:6,AbnormalStatus:0,tzn:3,g_cp_mode:5,vbat:0,pr_id:6,OnGameStatus:0
+09-09 12:54:47.193  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345DB32FCA hal_ts 11708746557723 lux=448.385 Channel0-5=5690.0,2482.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.303  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345DD369A1 hal_ts 11708856555588 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2416.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.413  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345DF3A3C9 hal_ts 11708966557671 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.412  4594  4594 W dataInfoSend: type=1400 audit(0.0:15448456): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:47.412  4594  4594 W dataInfoSend: type=1400 audit(0.0:15448457): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:47.412  4594  4594 W dataInfoSend: type=1400 audit(0.0:15448458): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:47.424 10854 10854 W audit   : audit_lost=15410545 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:47.425 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:47.412  4594  4594 W dataInfoSend: type=1400 audit(0.0:15448459): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:47.412  4594  4594 W dataInfoSend: type=1400 audit(0.0:15448460): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:47.476  2597  4451 D StNfcHal: (#08A93) Rx 6f 02 0f (hidden)
+09-09 12:54:47.476  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:47.523  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345E13DDAC hal_ts 11709076556161 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.633  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345E3417F2 hal_ts 11709186559806 lux=447.754 Channel0-5=5682.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.743  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345E545254 hal_ts 11709296564911 lux=447.281 Channel0-5=5676.0,2474.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.747  2597  4451 D StNfcHal: (#08A94) Rx 6f 02 27 (hidden)
+09-09 12:54:47.747  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:47.772     0     0 W [    C2] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 2, moved it to CPU 1 (rcu_preempt-14)
+09-09 12:54:47.854  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345E748BEE hal_ts 11709406559598 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:47.883  4350  2505 I NearbyMediums: Found Fast Ble Advertisements :
+09-09 12:54:47.883  4350  2505 I NearbyMediums: BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x43 0x57 0x53 0x52 0x11 0x34 0xcf 0x44 0xd2 0x20 0x88 0xef 0xaf 0x95 0x78 0xae 0x1e 0xb1 0x03 0xb7 0xd2 0x4e ], deviceToken=[ 0x26 0xaa ], rxAdvertisement=null } : 1 times.
+09-09 12:54:47.883  4350  2505 I NearbyMediums: BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x5a 0x37 0x51 0x52 0x11 0x32 0x70 0x67 0xe0 0x34 0xba 0xd1 0x69 0x5b 0x36 0x31 0x2a 0x8a 0x3d 0xc2 0x04 0x30 ], deviceToken=[ 0x5f 0x03 ], rxAdvertisement=[ 0xa0 0x17 0x82 0x9c 0x16 0x73 0x70 0xb6 0x09 0x4b 0x3b 0x48 0xb2 0x54 0x05 0x58 0xb2 0x89 0x88 0x6e 0x51 0xd5 0x47 0x9c 0x93 0x38 0x42 0x70 0xe8 0x06 0x09 0xf4 0x89 0x75 0x84 0x15 0x05 0x7f 0x00 0x00 0x84 0x15 0x06 0x61 0x00 0x00 0x84 0x15 0x04 0x7f 0x00 0x00 0x83 0x15 0x01 0x15 0xe0 ] } : 3 times.
+09-09 12:54:47.883  4350  2505 I NearbyMediums: Total 4 fast advertisements from 2 unique advertisers.
+09-09 12:54:47.884  4350  2505 I NearbyMediums: Current Tracked Scanning Clients are : {NearbyConnections.EnvironmentMonitor, NearbySharing}
+09-09 12:54:47.963  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345E94C5CD hal_ts 11709516557879 lux=447.596 Channel0-5=5680.0,2476.0,222.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.072  2597  4451 D StNfcHal: (#08A95) Rx 6f 02 0f (hidden)
+09-09 12:54:48.072  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:48.073  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345EB4FFD2 hal_ts 11709626558140 lux=447.439 Channel0-5=5678.0,2476.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.140  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+09-09 12:54:48.140  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK ON
+09-09 12:54:48.140  2132  4632 D vendor.qti.bluetooth@1.1-wake_lock: Acquire wakelock is acquired 
+09-09 12:54:48.140  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+09-09 12:54:48.182  2132  4632 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+09-09 12:54:48.182  2132  4632 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK OFF
+09-09 12:54:48.187  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345ED53999 hal_ts 11709736555171 lux=447.754 Channel0-5=5682.0,2476.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.251  3283  4615 D NtGnssRecord: MaxCN0:39
+09-09 12:54:48.278 10375 10375 I [binder][0x345f09513f][10:54:48.269850] qca6750: [10375:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-09 12:54:48.272  3283  3731 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-09 12:54:48.272  3283  5292 D NtSmartWifiMonitor: get rssi = -53, frequecy=5600, datastall=0, current state=6
+09-09 12:54:48.272  3283  5292 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-54, -54, -53]
+09-09 12:54:48.272  3283  4701 D NtSmartWifi: handleMessage EVENT_LINK_QUALITY_CHANGED ...
+09-09 12:54:48.273  3283  4701 D NtSmartWifi: enableSufficientCheckWhenScreenOn, true,  mSmartWifiEnabled=true, screenOn= true
+09-09 12:54:48.274  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:48.275  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:48.275  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:48.275  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:48.275  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:48.277  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:48.278  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:48.279  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:48.279  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:48.288  4350  2290 I FrewleTileCacheManagerV: (REDACTED) Fetched %d AP models from cache
+09-09 12:54:48.291  4350  2290 I FrewleTileCacheManagerV: (REDACTED) Fetched %d AP models from cache
+09-09 12:54:48.293  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345EF573E3 hal_ts 11709846559025 lux=447.754 Channel0-5=5682.0,2478.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.318  4350  2290 I TFLite-in-PlayServices: Created interpreter.
+09-09 12:54:48.326  4350  2290 I TFLite-in-PlayServices: Created interpreter.
+09-09 12:54:48.332  2132  4436 D vendor.qti.bluetooth@1.1-wake_lock: Release wakelock is released 
+09-09 12:54:48.335  4350  2290 I SemanticLocation: (REDACTED) [Inferrer] %s%s
+09-09 12:54:48.341  2597  4451 D StNfcHal: (#08A96) Rx 6f 02 27 (hidden)
+09-09 12:54:48.341  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:48.372     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 1 (AudioOut_1D-3110)
+09-09 12:54:48.403  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345F15ADB2 hal_ts 11709956556473 lux=447.281 Channel0-5=5676.0,2476.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.456  4594  4594 W dataInfoSend: type=1400 audit(0.0:15451433): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:48.460  4594  4594 W dataInfoSend: type=1400 audit(0.0:15451434): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:48.460  4594  4594 W dataInfoSend: type=1400 audit(0.0:15451435): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:48.460  4594  4594 W dataInfoSend: type=1400 audit(0.0:15451436): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:48.460  4594  4594 W dataInfoSend: type=1400 audit(0.0:15451437): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:48.472 10854 10854 W audit   : audit_lost=15413517 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:48.472 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:48.513  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345F35E7B5 hal_ts 11710066556629 lux=447.439 Channel0-5=5678.0,2476.0,224.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.623  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345F562167 hal_ts 11710176552567 lux=447.439 Channel0-5=5678.0,2476.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.668  2597  4451 D StNfcHal: (#08A97) Rx 6f 02 0f (hidden)
+09-09 12:54:48.668  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:48.733  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345F765BF7 hal_ts 11710286560067 lux=447.281 Channel0-5=5676.0,2474.0,224.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.772     0     0 W [    C2] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 2, moved it to CPU 1 (161_see-13816)
+09-09 12:54:48.843  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345F96966F hal_ts 11710396566317 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:48.936  2597  4451 D StNfcHal: (#08A98) Rx 6f 02 27 (hidden)
+09-09 12:54:48.937  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:48.953  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345FB6CF1B hal_ts 11710506548608 lux=446.808 Channel0-5=5670.0,2472.0,222.0,2406.0,582.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.003  2657  2657 I CNSS    : /sys/wifi/dump_in_progress doesn't exist
+09-09 12:54:49.003  2657  2657 I CNSS    : /sys/wifi/max_chipset_log_size doesn't exist
+09-09 12:54:49.063  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345FD7097E hal_ts 11710616553765 lux=447.124 Channel0-5=5674.0,2474.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.097     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 2 (rcuog/4-50)
+09-09 12:54:49.113     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 3 (rcu_preempt-14)
+09-09 12:54:49.173  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x345FF7441F hal_ts 11710726562150 lux=447.281 Channel0-5=5676.0,2474.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.267  2597  4451 D StNfcHal: (#08A99) Rx 6f 02 0f (hidden)
+09-09 12:54:49.267  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:49.287  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3460177D47 hal_ts 11710836550900 lux=447.439 Channel0-5=5678.0,2476.0,224.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.393  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x346037B814 hal_ts 11710946561577 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.472  4594  4594 W dataInfoSend: type=1400 audit(0.0:15454412): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:49.472  4594  4594 W dataInfoSend: type=1400 audit(0.0:15454413): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:49.472  4594  4594 W dataInfoSend: type=1400 audit(0.0:15454414): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:49.472  4594  4594 W dataInfoSend: type=1400 audit(0.0:15454415): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:49.472  4594  4594 W dataInfoSend: type=1400 audit(0.0:15454416): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:49.485 10854 10854 W audit   : audit_lost=15416491 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:49.485 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:49.503  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x346057F1B5 hal_ts 11711056556629 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.512     0     0 W [    C3] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 3, moved it to CPU 0 (binder:2355_3-3534)
+09-09 12:54:49.532  2597  4451 D StNfcHal: (#08A9A) Rx 6f 02 27 (hidden)
+09-09 12:54:49.532  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:49.613  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3460782BD9 hal_ts 11711166558504 lux=447.596 Channel0-5=5680.0,2476.0,222.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.723  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x346098657F hal_ts 11711276553817 lux=447.754 Channel0-5=5682.0,2478.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.768  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:49.768  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:49.768  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:49.768  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:49.769  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:49.773  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:49.779  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:49.779  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:49.780  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:49.784  4350  7420 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+09-09 12:54:49.786  4350  6637 I heub    : Received empty WiFi-RTT scan. [CONTEXT service_id=6 ]
+09-09 12:54:49.787  4350  4580 W SystemServiceRegistry: No service published for: wifirtt
+09-09 12:54:49.833  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3460B89FC5 hal_ts 11711386557463 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:49.858  2597  4451 D StNfcHal: (#08A9B) Rx 6f 02 0f (hidden)
+09-09 12:54:49.858  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:49.943  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3460D8D998 hal_ts 11711496555119 lux=447.754 Channel0-5=5682.0,2478.0,222.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.053  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3460F914A1 hal_ts 11711606568921 lux=447.754 Channel0-5=5682.0,2478.0,224.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.127  2597  4451 D StNfcHal: (#08A9C) Rx 6f 02 27 (hidden)
+09-09 12:54:50.127  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:50.163  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3461194DCF hal_ts 11711716557983 lux=447.912 Channel0-5=5684.0,2478.0,222.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.186 10386 10386 I [schedu][0x346138547e][10:54:50.177947] qca6750: [10386:I:OSIF] vdev 0, scan id 41884 type COMPLETED(1) reason COMPLETED(1) scan found 12 bss
+09-09 12:54:50.181  3283  4613 D WifiNl80211Manager: Scan result ready event
+09-09 12:54:50.181  3283  4613 D WifiNative: Scan result ready event
+09-09 12:54:50.185  2996 10467 I LOWI-9.0.1.80.b: [LOWI-Scan] lowi_close_record:Scan done in 9690578ms, 13 APs in scan results
+09-09 12:54:50.186  2996  3038 I LOWI-9.0.1.80.b: [LOWIUtils] responseToOutPostcard - TO: FreeWifiScanObserver, FROM:   LOWI-SERVER, RESP:  LOWI_ASYNC_DISCOVERY_SCAN_RESULTS
+09-09 12:54:50.190  3283  3736 D WificondScannerImpl: Filtering out 1 scan results.
+09-09 12:54:50.200  3856  6910 D NothingWifiTrackService: set preference_5G_650 to 798
+09-09 12:54:50.201  4350  4580 I FrewleTileCacheManagerV: (REDACTED) Fetched %d AP models from cache
+09-09 12:54:50.213 10375 10375 I [binder][0x34614016c2][10:54:50.204430] qca6750: [10375:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-09 12:54:50.207  3283  3731 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-09 12:54:50.216  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.216  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.216  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.216  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.216  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.217  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.218  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.218  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.218  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.219  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.220  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.227  4350  6637 I heub    : Received empty WiFi-RTT scan. [CONTEXT service_id=6 ]
+09-09 12:54:50.249  3283  4610 D NtGnssRecord: MaxCN0:39
+09-09 12:54:50.264  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.264  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.264  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.264  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.265  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.266  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.266  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.267  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.268  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.268  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too close
+09-09 12:54:50.268  4350  6637 I FusedLocation: (REDACTED) location delivery to %s blocked - too fast
+09-09 12:54:50.273  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34613987E3 hal_ts 11711826559025 lux=447.754 Channel0-5=5682.0,2476.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.353  3283  4388 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+09-09 12:54:50.354  3283  4388 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-09 12:54:50.354  3283  4388 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+09-09 12:54:50.358  4496  4524 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+09-09 12:54:50.358  4496  4519 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+09-09 12:54:50.358  4496  4551 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+09-09 12:54:50.359  4496  4496 D AndroidRuntime: Shutting down VM
+09-09 12:54:50.368  3283  3283 D BatterySaverPolicy: accessibility changed to false, updating policy.
+09-09 12:54:50.387  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x346159C18D hal_ts 11711936554546 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.454  2597  4451 D StNfcHal: (#08A9D) Rx 6f 02 0f (hidden)
+09-09 12:54:50.454  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:50.493  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x346179FBAC hal_ts 11712046556161 lux=447.596 Channel0-5=5680.0,2476.0,224.0,2412.0,586.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.524  4594  4594 W dataInfoSend: type=1400 audit(0.0:15457391): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:50.524  4594  4594 W dataInfoSend: type=1400 audit(0.0:15457392): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:50.524  4594  4594 W dataInfoSend: type=1400 audit(0.0:15457393): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:50.524  4594  4594 W dataInfoSend: type=1400 audit(0.0:15457394): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:50.524  4594  4594 W dataInfoSend: type=1400 audit(0.0:15457395): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-09 12:54:50.536 10854 10854 W audit   : audit_lost=15419465 audit_rate_limit=5 audit_backlog_limit=64
+09-09 12:54:50.536 10854 10854 E audit   : rate limit exceeded
+09-09 12:54:50.603  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34619A35B2 hal_ts 11712156556473 lux=448.227 Channel0-5=5688.0,2480.0,224.0,2414.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.713  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3461BA7006 hal_ts 11712266560848 lux=447.912 Channel0-5=5684.0,2478.0,224.0,2412.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.723  2597  4451 D StNfcHal: (#08A9E) Rx 6f 02 27 (hidden)
+09-09 12:54:50.723  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:50.823  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3461DAA9A7 hal_ts 11712376555900 lux=447.439 Channel0-5=5678.0,2476.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:50.933  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x3461FAE3B5 hal_ts 11712486556629 lux=446.966 Channel0-5=5672.0,2472.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:51.043  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34621B1DBA hal_ts 11712596556890 lux=447.124 Channel0-5=5674.0,2474.0,222.0,2408.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:51.049  2597  4451 D StNfcHal: (#08A9F) Rx 6f 02 0f (hidden)
+09-09 12:54:51.050  2597  4450 D StNfcHal: HalStopTimer 
+09-09 12:54:51.140     0     0 W [    C1] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 1, moved it to CPU 2 (SensorService-3644)
+09-09 12:54:51.153  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34623B57DD hal_ts 11712706558713 lux=446.966 Channel0-5=5672.0,2472.0,222.0,2410.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:51.263  2158  3826 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x34625B9134 hal_ts 11712816549911 lux=446.966 Channel0-5=5672.0,2472.0,224.0,2408.0,584.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-09 12:54:51.264  3019  3019 I adbd    : adbd service requested 'sync:'
+09-09 12:54:51.290  3283  3731 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-09 12:54:51.291  3283  5292 D NtSmartWifiMonitor: get rssi = -55, frequecy=5600, datastall=0, current state=6
+09-09 12:54:51.291  3283  5292 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-55]
+09-09 12:54:51.297 10375 10375 I [binder][0x34627dc6e3][10:54:51.288805] qca6750: [10375:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-09 12:54:51.308  3019  3019 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '500''
+09-09 12:54:51.318  2597  4451 D StNfcHal: (#08AA0) Rx 6f 02 27 (hidden)
+09-09 12:54:51.319  2597  4450 D StNfcHal: HalStopTimer 

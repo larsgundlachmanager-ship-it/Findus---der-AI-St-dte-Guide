@@ -1,0 +1,154 @@
+{
+  "city": "bornholm",
+  "apply": true,
+  "touched": 18,
+  "approachesFixed": 18,
+  "faqAdded": 1,
+  "data_version": 41,
+  "rows": [
+    {
+      "id": "bornholm_r_plantage",
+      "name": "Rø Plantage",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_rokkestenen_i_almindingen",
+      "name": "Rokkestenen i Almindingen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_stadtgeschichte",
+      "name": "Geschichte von Bornholm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "bornholm_hammershus",
+      "name": "Hammershus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_sterlars_rundkirke",
+      "name": "Østerlars Rundkirke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_dueodde_fyr",
+      "name": "Dueodde Fyr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_dueodde_strand",
+      "name": "Dueodde Strand",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_gudhjem_havn",
+      "name": "Gudhjem Havn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_helligdomsklipperne",
+      "name": "Helligdomsklipperne",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_svaneke",
+      "name": "Svaneke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 3,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_nylars_rundkirke",
+      "name": "Nylars Rundkirke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_olsker_rundkirke",
+      "name": "Olsker Rundkirke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_sankt_nicolai_kirke",
+      "name": "Sankt Nicolai Kirke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_r_nne_havn",
+      "name": "Rønne Havn",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_bornholms_museum",
+      "name": "Bornholms Museum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_r_nne_bagfyr",
+      "name": "Rønne Bagfyr",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 4,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_hjorths_fabrik",
+      "name": "Hjorths Fabrik",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "bornholm_erichsens_gard",
+      "name": "Erichsens Gård",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    }
+  ]
+}

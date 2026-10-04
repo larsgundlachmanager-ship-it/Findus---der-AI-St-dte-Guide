@@ -9,9 +9,31 @@ import {
   speechOffersRemind,
   userAsksRemind,
 } from '../../services/concierge/reminderActionPolicy';
-import { looksLikeSlotGluedBridge, sanitizeBridgeText } from './bridgeGlue';
+import {
+  ensureBridgeAnchoredToAsk,
+  extractBridgeAskAnchor,
+  looksLikeSlotGluedBridge,
+  looksLikeSoleVagueFillerBridge,
+  sanitizeBridgeText,
+  scrubAffiliateMonetizationSpeech,
+  scrubBridgeCityLeak,
+  scrubPrematureTriviaFacts,
+  scrubTriviaClarifyBridge,
+  scrubMetaPraiseBridge,
+} from './bridgeGlue';
 
-export { looksLikeSlotGluedBridge, sanitizeBridgeText };
+export {
+  ensureBridgeAnchoredToAsk,
+  extractBridgeAskAnchor,
+  looksLikeSlotGluedBridge,
+  looksLikeSoleVagueFillerBridge,
+  sanitizeBridgeText,
+  scrubAffiliateMonetizationSpeech,
+  scrubBridgeCityLeak,
+  scrubPrematureTriviaFacts,
+  scrubTriviaClarifyBridge,
+  scrubMetaPraiseBridge,
+};
 
 export type ButlerOfferKind =
   | 'reminder'

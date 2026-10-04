@@ -11,6 +11,7 @@
  */
 
 import {
+  clearLastMentionedCity,
   extractCityFromText,
   getLastMentionedCity,
   getLastLiveInventory,
@@ -26,6 +27,7 @@ import {
   type CityChatScope,
   type CityChatScopeSource,
 } from './cityChatScope';
+import { foldCityKey } from '../../services/navigation/landmarkAliases';
 
 export type { CityChatScope, CityChatScopeSource };
 
@@ -122,28 +124,16 @@ export function resolvePlaceContext(
     }
   }
 
-  const mentioned = getLastMentionedCity();
-  if (mentioned) {
-    // Produkt/Prospekt: GPS/Active — Sticky-Flugstadt (Athen) nicht übernehmen.
-    let skipSticky = false;
-    try {
-      const {
-        isSupermarketOfferQuery,
-      } = require('../../services/research/supermarketProspectGates') as {
-        isSupermarketOfferQuery: (s: string) => boolean;
-      };
-      skipSticky = isSupermarketOfferQuery(text);
-    } catch {
-      skipSticky = false;
-    }
-    if (!skipSticky) {
-      return {
-        city: mentioned,
-        speechPlace: mentioned,
-        biasMode: 'named_city',
-        source: 'conversation',
-      };
-    }
+  // Sticky nur bei Follow-up / Live-Inventar / gleicher Stadt —
+  // sonst Active (kein London/Athen-Leak in lokale Suche/Pitch).
+  const scope = resolveCityChatScope(text, liveLocationLabel);
+  if (scope.source === 'conversation' && scope.cityHint) {
+    return {
+      city: scope.cityHint,
+      speechPlace: scope.cityHint,
+      biasMode: 'named_city',
+      source: 'conversation',
+    };
   }
 
   const live = liveLocationLabel?.trim() || null;
@@ -157,11 +147,10 @@ export function resolvePlaceContext(
     };
   }
 
-  const active = resolveActiveCity();
-  if (active) {
+  if (scope.cityHint) {
     return {
-      city: active,
-      speechPlace: active,
+      city: scope.cityHint,
+      speechPlace: scope.cityHint,
       biasMode: 'named_city',
       source: getSoftWorkingCity()?.soft ? 'soft' : 'profile',
     };
@@ -173,6 +162,23 @@ export function resolvePlaceContext(
     biasMode: 'gps',
     source: 'gps',
   };
+}
+
+/**
+ * Fremde Gesprächsstadt (z. B. London nach Flug-Chat) lösen,
+ * wenn die aktive GPS-/Pack-Stadt eine andere ist — z. B. bei lokalem Nav-Start.
+ */
+export function clearForeignStickyCity(): void {
+  try {
+    const sticky = getLastMentionedCity();
+    if (!sticky) return;
+    const active = resolveActiveCity();
+    if (!active || foldCityKey(sticky) !== foldCityKey(active)) {
+      clearLastMentionedCity();
+    }
+  } catch {
+    /* soft */
+  }
 }
 
 /** Kompatibel für Agents: Stadtname oder „hier in der Nähe“ — nie Pack-Default. */

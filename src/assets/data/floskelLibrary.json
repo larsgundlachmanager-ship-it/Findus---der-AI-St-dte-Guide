@@ -2,10 +2,10 @@
   "version": 1,
   "meta": {
     "minCategories": 40,
-    "categoryCount": 45,
-    "researchPhraseCount": 267,
-    "actionPhraseCount": 95,
-    "totalPhrases": 362,
+    "categoryCount": 48,
+    "researchPhraseCount": 268,
+    "actionPhraseCount": 93,
+    "totalPhrases": 361,
     "antiRepeatMinutes": 45,
     "slowThresholdMs": 2500
   },
@@ -18,7 +18,7 @@
         "Alles klar, ich schau, ob du einen Schirm brauchst.",
         "Jo, Wetterlage kommt gleich.",
         "Ich hole mir kurz die aktuellen Werte.",
-        "Kurz Wetter checken — bin gleich wieder da.",
+        "Alles klar — ich check kurz Wetter für dich.",
         "Mal sehen, was der Himmel macht.",
         "Ich prüfe Temperatur und Niederschlag."
       ]
@@ -26,14 +26,11 @@
     "dining": {
       "label": "Restaurants",
       "phrases": [
-        "Ich schau kurz, was zum Essen passt.",
+        "Ich schau, wo das am besten passt.",
         "Alles klar — passende Orte zum Essen kommen gleich.",
-        "Jo, ich finde kurz was Leckeres für dich.",
-        "Moment, ich filter Restaurants in der Nähe.",
-        "Ich guck, wo es jetzt gut zu essen gibt.",
-        "Kurze Gastro-Suche — hang tight.",
-        "Ich prüfe Öffnung und Entfernung parallel.",
-        "Lass mich kurz die besten Optionen sortieren."
+        "Jo, ich filter Restaurants in der Nähe nach deinem Wunsch.",
+        "Moment, ich guck, was heute Abend offen und passend ist.",
+        "Ich such dir die besten Essens-Optionen raus."
       ]
     },
     "cafe": {
@@ -50,27 +47,22 @@
     "nav": {
       "label": "Navigation",
       "phrases": [
-        "Klar, ich setz die Route kurz auf.",
-        "Navigation kommt gleich — einen Moment.",
-        "Jo, ich führ dich gleich hin.",
-        "Ich berechne kurz den Weg.",
-        "Route wird vorbereitet.",
-        "Alles klar — Kompass und Weg, Moment.",
-        "Ich richte die Navigation für dich ein."
+        "Alles klar — ich navigiere dich hin.",
+        "Jo, ich setz die Route jetzt auf.",
+        "Klar, Navigation startet gleich.",
+        "Ich führ dich zum Ziel — Route kommt.",
+        "Alles klar, ich bring dich hin."
       ]
     },
     "events": {
       "label": "Event-Suche",
       "phrases": [
-        "Ich schaue mal nach aktuellen Veranstaltungen.",
-        "Lass mich prüfen, was heute Abend los ist.",
+        "Ich schau mal, was heute Abend wirklich los ist.",
+        "Lass mich prüfen, welche Events heute passen.",
         "Jo, ich guck kurz, wo heute was geht.",
         "Alles klar — ich such dir die Termine raus.",
-        "Check, ich schau kurz ins Abendprogramm.",
-        "Okay, ich wühle kurz in den Events für dich.",
         "Moment — ich check Flyer und heutige Programme.",
-        "Ich recherchiere kurz, was heute wirklich stattfindet.",
-        "Kurzer Event-Scan für heute."
+        "Ich recherchiere kurz, was heute wirklich stattfindet."
       ]
     },
     "named_schedule": {
@@ -95,7 +87,7 @@
         "Komplexer Plan — ich nehme mir die Teile parallel vor.",
         "Jo, ich orchestriere das kurz.",
         "Ich prüfe alle Teilfragen und kombiniere sie dann.",
-        "Hang on — guter Plan braucht einen Moment."
+        "Alles klar — ich sortier den Plan für dich."
       ]
     },
     "menu": {
@@ -134,24 +126,21 @@
     "hotel": {
       "label": "Hotel",
       "phrases": [
-        "Alles klar, ich schau kurz Unterkünfte.",
-        "Jo, Hotel-Optionen — Moment.",
-        "Okay, ich check kurz, was noch frei wirkt.",
-        "Ich suche passende Hotels in der Nähe.",
-        "Kurzer Unterkunfts-Scan für dich.",
-        "Moment — Lage und Verfügbarkeit prüfe ich.",
-        "Ich filter Hotels nach deinen Prefs."
+        "Ich such dir passende Hotels mit deinen Prefs raus.",
+        "Alles klar — ich check Hotels mit Pool und Preisrahmen.",
+        "Jo, ich filter Lage, Pool und Budget für dich.",
+        "Moment, ich guck live nach passenden Unterkünften.",
+        "Ich such die besten Hotel-Optionen zu deinen Kriterien."
       ]
     },
     "transit": {
       "label": "ÖPNV",
       "phrases": [
-        "Klar, ich check kurz die Verbindung.",
-        "Alles klar — Zug und Bus Status kommt gleich.",
-        "Jo, ich schau kurz, wie pünktlich das läuft.",
-        "Moment, Fahrplan-Check.",
-        "Ich prüfe die nächste Verbindung.",
-        "Kurzer ÖPNV-Blick für dich."
+        "Ich check die schnellste Verbindung für dich.",
+        "Alles klar — ich schau kurz Zug und Bus zum Ziel.",
+        "Jo, ich hol die beste ÖPNV-Verbindung.",
+        "Moment, Fahrplan und Dauer checke ich parallel.",
+        "Ich guck, wie du am schnellsten hinkommst."
       ]
     },
     "flight": {
@@ -161,19 +150,18 @@
         "Jo, Gate und Abflug — Moment.",
         "Okay, ich schau kurz den Flugstatus.",
         "Ich hole die Flugdaten für dich.",
-        "Kurzer Flug-Check, gleich fertig.",
+        "Alles klar — ich hole die Flugdaten.",
         "Moment — Abflug und Puffer rechne ich mit."
       ]
     },
     "cinema": {
       "label": "Kino",
       "phrases": [
-        "Kino-Abend — nice Idee.",
-        "Filmabend klingt stark.",
-        "Jo, Abendprogramm — ich bin dabei.",
-        "Gute Wahl, raus und Leinwand.",
-        "Kino — mag ich.",
-        "Filmplan, ohne Gelaber."
+        "Ich schau mal, was das aktuelle Kinoprogramm heute Abend anbietet.",
+        "Alles klar — ich check kurz Filme und Vorstellungen in der Nähe.",
+        "Jo, ich guck, welche Filme heute Abend laufen.",
+        "Moment, ich hol das heutige Kinoprogramm.",
+        "Ich schau, welche Kinos hier in Frage kommen und was läuft."
       ]
     },
     "activity_sport": {
@@ -273,7 +261,7 @@
         "Jo, ich hol die Fakten aus dem Netz.",
         "Kurzer Deep-Dive online, keinen Fake.",
         "Ich schaue auf offizielle Seiten und PDFs.",
-        "Hang on — ich lese das kurz nach."
+        "Alles klar — ich lese das kurz nach."
       ]
     },
     "shopping": {
@@ -290,11 +278,11 @@
     "safety": {
       "label": "Sicherheit",
       "phrases": [
-        "Alles klar — ich check kurz die nächste Hilfe.",
-        "Moment, Sicherheitshinweise hole ich.",
-        "Jo, ich schau nach Apotheke oder Hilfe vor Ort.",
-        "Ich priorisiere das — einen Augenblick.",
-        "Kurzer Safety-Check für dich."
+        "Oh nee, das klingt übel — ich schau sofort, wohin ihr am besten könnt.",
+        "Alles klar, ich priorisiere das und finde die nächste sinnvolle Hilfe.",
+        "Verstanden — ich check Notdienst und nächste Anlaufstelle für euch.",
+        "Moment, ich hol dir den nächsten passenden Ort plus was du jetzt tun kannst.",
+        "Ich kümmere mich drum — Hilfe und Weg kommen gleich."
       ]
     },
     "knowledge": {
@@ -304,7 +292,7 @@
         "Moment, ich sortier die Antwort.",
         "Alles klar, Wissen kommt gleich.",
         "Jo, ich check das für dich.",
-        "Kurzer Faktencheck, gleich fertig."
+        "Alles klar — ich hol das sauber für dich."
       ]
     },
     "cheer": {
@@ -427,7 +415,7 @@
         "Jo, ich zerlege das kurz sauber.",
         "Moment, ich arbeite die Teilziele ab.",
         "Komplex — ich priorisiere und kombiniere.",
-        "Hang on, ich hole alle Teile zusammen."
+        "Alles klar — ich hole alle Teile zusammen."
       ]
     },
     "pdf_flyer": {
@@ -493,11 +481,11 @@
     "food_allergy": {
       "label": "Ernährung / Allergie",
       "phrases": [
-        "Ich filter kurz nach deinen Essensprefs.",
-        "Alles klar — passende Küche kommt.",
-        "Jo, ich respektiere Allergien und Diät.",
-        "Moment, sichere Optionen für dich.",
-        "Kurzer Check auf passende Gerichte."
+        "Alles klar — ich filter passende Läden zu deiner Ernährung.",
+        "Jo, ich schau nach vegetarischen Optionen in der Nähe.",
+        "Moment, ich respektiere die Prefs und finde passende Orte.",
+        "Ich filter Küchen, die zu dir passen.",
+        "Alles klar — passende Gerichte und Läden kommen."
       ]
     },
     "follow_up": {
@@ -513,22 +501,21 @@
     "generic": {
       "label": "Allgemein",
       "phrases": [
-        "Verstehe — ich setz genau da an.",
-        "Passt, ich mach dir das konkret.",
-        "Passt, ich hol dir die nützlichen Fakten dazu.",
-        "Genau das klären wir jetzt.",
-        "Alles klar, ich geh an dein Anliegen ran."
+        "Verstanden — ich setz genau bei deinem Wunsch an.",
+        "Passt, ich mach das konkret für dich.",
+        "Alles klar, ich geh den Punkt direkt an.",
+        "Jo, ich kümmere mich um genau das.",
+        "Moment, ich hol die Antwort zu deiner Frage."
       ]
     },
     "accommodation_search": {
       "label": "Unterkunftssuche",
       "phrases": [
-        "Ich durchsuche kurz passende Unterkünfte.",
-        "Alles klar — Stay-Optionen kommen.",
-        "Jo, Lage und Preis filtere ich.",
-        "Moment, Hotel- und Apartment-Check.",
-        "Kurzer Scan nach Übernachtung.",
-        "Ich schau, was in Reichweite liegt."
+        "Ich such dir passende Hotels mit deinen Prefs raus.",
+        "Alles klar — ich check Hotels mit Pool und Preisrahmen.",
+        "Jo, ich filter Lage, Pool und Budget für dich.",
+        "Moment, ich guck live nach passenden Unterkünften.",
+        "Ich such die besten Hotel-Optionen zu deinen Kriterien."
       ]
     }
   },

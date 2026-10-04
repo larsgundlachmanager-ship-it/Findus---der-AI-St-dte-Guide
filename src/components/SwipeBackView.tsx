@@ -54,6 +54,14 @@ export function SwipeBackView({
   const runBack = () => {
     if (!enabledRef.current) return;
     if (!claimAndroidBackStep()) return;
+    try {
+      const { noteChromePriority } = require('../services/boot/interactiveBootGate') as {
+        noteChromePriority: () => void;
+      };
+      noteChromePriority();
+    } catch {
+      /* soft */
+    }
     onBackRef.current();
   };
 

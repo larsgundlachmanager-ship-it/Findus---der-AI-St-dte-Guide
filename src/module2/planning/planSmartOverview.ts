@@ -35,7 +35,7 @@ Du hast die KOMPLETTE Timeline des Tags (und wenn im Prompt: ±1 Tag) im Kopf.
 - Pitch (z. B. Pannfisch): Wunsch priorisieren, dann Lücke + Laufweg; beste Kombi Wunsch+Nähe.
 
 5) MOBILITÄT (Code rechnet nach; du nur Hinweise)
-- Luftlinie: ab ~1,4 km ÖPNV als Option; ab ~3 km zu Fuß ÖPNV direkt wenn schneller (Taxi extra nur wenn Pref ja; Pref nein → nur ÖPNV, keine Wahl).
+- Luftlinie: ab ~1,4 km ÖPNV als Option; ab ~1,8 km zu Fuß ÖPNV direkt wenn schneller (Taxi extra nur wenn Pref ja; Pref nein → nur ÖPNV, keine Wahl).
 - Rad: bis ~6 km ok; ab ~10 km ÖPNV anbieten wenn schneller; ab ~15 km direkt wenn schneller.
 - Plan-Änderungen still umsetzen — niemals ansagen „ich aktualisiere den Plan“.
 

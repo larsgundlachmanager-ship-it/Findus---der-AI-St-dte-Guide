@@ -9,6 +9,11 @@ import {
   mergeCall1Criteria,
   parseCall1Criteria,
   visitAtMsFromCall1When,
+  isStructuralCriterionKey,
+  isNegativeCuisineCriterion,
+  isNegativeCriterion,
+  avoidTokensFromNegativeCriterion,
+  negativesFromUserText,
 } from './call1Criteria';
 import { buildPitchSearchBrief } from './searchBrief';
 import { rankCandidatesForUser, shortlistTopN } from './candidateRank';
@@ -153,6 +158,65 @@ function assert(cond: unknown, msg: string): void {
   const short = shortlistTopN(req, pool);
   assert(short.length <= 5, 'max 5');
   assert(short[0]!.name.includes('Einhorn'), 'shortlist lead');
+}
+
+{
+  assert(isStructuralCriterionKey('location_hamburg'), 'location meta');
+  assert(isStructuralCriterionKey('day_friday'), 'day meta');
+  assert(isNegativeCuisineCriterion('kein Asiatisch'), 'kein asia');
+  assert(isNegativeCuisineCriterion('cuisine_not_asian'), 'cuisine_not');
+  assert(
+    avoidTokensFromNegativeCriterion('cuisine_not_asian').includes('asiatisch'),
+    'avoid asia tokens',
+  );
+  assert(!isStructuralCriterionKey('terrasse'), 'terrasse stays');
+  assert(!isStructuralCriterionKey('spaziergang_nah'), 'walk stays');
+  const brief = buildPitchSearchBrief({
+    userText: 'Asiatisch essen in Hamburg Freitag',
+    kind: 'food',
+    baseWishes: parseWishesFromText('Asiatisch essen in Hamburg Freitag'),
+    call1MustHaves: [
+      'kein Asiatisch',
+      'cuisine_not_asian',
+      'location_hamburg',
+      'day_friday',
+      'Hamburg',
+    ],
+  });
+  assert(
+    !brief.wishes.some((w) => /kein|cuisine_not|location_|day_/i.test(w.text)),
+    'no meta/negative must wishes',
+  );
+  assert(brief.avoidFromCall1.includes('asiatisch'), 'negative → avoid');
+  assert(
+    brief.wishes.some((w) => /asiatisch/i.test(w.text) && w.kind === 'cuisine'),
+    'user asiatisch still must',
+  );
+}
+
+
+{
+  assert(isNegativeCriterion('avoid_amenity_disco'), 'avoid disco');
+  assert(isNegativeCriterion('keine Lust auf Museum'), 'lust museum');
+  assert(
+    avoidTokensFromNegativeCriterion('avoid_amenity_disco').includes('disco'),
+    'disco tokens',
+  );
+  assert(
+    negativesFromUserText('Keine Lust auf Disco heute').includes('disco'),
+    'user disco avoid',
+  );
+  assert(
+    negativesFromUserText('kein Asiatisch bitte').includes('asiatisch'),
+    'user asia avoid',
+  );
+  const brief2 = buildPitchSearchBrief({
+    userText: 'Restaurant ohne Disco',
+    kind: 'food',
+    baseWishes: parseWishesFromText('Restaurant ohne Disco'),
+    call1MustHaves: ['avoid_amenity_disco'],
+  });
+  assert(brief2.avoidFromCall1.includes('disco'), 'brief avoid disco');
 }
 
 console.log('call1Criteria.smoke.test.ts ok');

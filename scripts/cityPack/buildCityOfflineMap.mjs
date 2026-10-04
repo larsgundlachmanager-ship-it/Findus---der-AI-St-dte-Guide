@@ -95,6 +95,18 @@ function nominatimCountryForPack(pack) {
       query: `${pack.name || 'Amsterdam'}, Netherlands`,
     };
   }
+  if (id === 'danzig' || id === 'gdansk') {
+    return {
+      countrycodes: 'pl',
+      query: `${pack.name || 'Gdańsk'}, Poland`,
+    };
+  }
+  if (id === 'roenne' || id === 'ronne' || id === 'bornholm') {
+    return {
+      countrycodes: 'dk',
+      query: `${pack.name || 'Rønne'}, Denmark`,
+    };
+  }
   if (id === 'lissabon' || id === 'lisbon') {
     return {
       countrycodes: 'pt',
@@ -122,6 +134,20 @@ function nominatimCountryForPack(pack) {
       return {
         countrycodes: 'pt',
         query: `${pack.name || id}, Portugal`,
+      };
+    }
+    // Poland (Danzig/Gdańsk sonst fälschlich als DE)
+    if (lat >= 49.0 && lat <= 54.9 && lng >= 14.0 && lng <= 24.2) {
+      return {
+        countrycodes: 'pl',
+        query: `${pack.name || id}, Poland`,
+      };
+    }
+    // Bornholm / Rønne (sonst DE wegen lng~14.7)
+    if (lat >= 54.85 && lat <= 55.4 && lng >= 14.55 && lng <= 15.3) {
+      return {
+        countrycodes: 'dk',
+        query: `${pack.name || id}, Denmark`,
       };
     }
   }
@@ -730,11 +756,14 @@ function compactBuildingRing(pts) {
 const SLIM_MAX_ROADS = 14000;
 const SLIM_PATH_NEAR_PIN_M = 90;
 
+/** Ortskern: alle Gebäude behalten — Uniform-Grid ließ Dörfer fast leer. */
+const CORE_BUILDING_KEEP_M = 3_000;
+
 /**
- * Bei Cap (8000/14000): Gebäude räumlich streuen, sonst bleibt nur der Kern
- * und das 10-km-Umland wäre leer.
+ * Bei Cap (8000/14000): zuerst dichten Ortskern (um Pack-Zentrum), Rest
+ * räumlich streuen — sonst 10-km-Umland voll, Dorfkern mit ~30 Häuschen.
  */
-function spreadSampleBuildings(buildings, maxN, bbox) {
+function spreadSampleBuildingsUniform(buildings, maxN, bbox) {
   if (!Array.isArray(buildings) || buildings.length <= maxN) return buildings;
   if (!bbox) return buildings.slice(0, maxN);
   const cols = 8;
@@ -764,7 +793,6 @@ function spreadSampleBuildings(buildings, maxN, bbox) {
   for (const bucket of buckets) {
     if (!bucket.length) continue;
     const take = Math.min(bucket.length, per);
-    // gleichmäßig aus dem Bucket (nicht nur die ersten OSM-IDs)
     const step = bucket.length / take;
     for (let i = 0; i < take && out.length < maxN; i++) {
       out.push(bucket[Math.min(bucket.length - 1, Math.floor(i * step))]);
@@ -779,6 +807,41 @@ function spreadSampleBuildings(buildings, maxN, bbox) {
     }
   }
   return out.slice(0, maxN);
+}
+
+function spreadSampleBuildings(buildings, maxN, bbox, center) {
+  if (!Array.isArray(buildings) || buildings.length <= maxN) return buildings;
+  const cLat = center?.lat;
+  const cLng = center?.lng;
+  if (!Number.isFinite(cLat) || !Number.isFinite(cLng)) {
+    return spreadSampleBuildingsUniform(buildings, maxN, bbox);
+  }
+  const core = [];
+  const rest = [];
+  for (const b of buildings) {
+    const lat = b?.c?.lat;
+    const lng = b?.c?.lng;
+    if (
+      Number.isFinite(lat) &&
+      Number.isFinite(lng) &&
+      distM({ lat, lng }, { lat: cLat, lng: cLng }) <= CORE_BUILDING_KEEP_M
+    ) {
+      core.push(b);
+    } else {
+      rest.push(b);
+    }
+  }
+  if (core.length >= maxN) {
+    core.sort(
+      (a, b) =>
+        distM({ lat: a.c.lat, lng: a.c.lng }, { lat: cLat, lng: cLng }) -
+        distM({ lat: b.c.lat, lng: b.c.lng }, { lat: cLat, lng: cLng }),
+    );
+    return core.slice(0, maxN);
+  }
+  const remain = maxN - core.length;
+  const umland = spreadSampleBuildingsUniform(rest, remain, bbox);
+  return core.concat(umland).slice(0, maxN);
 }
 
 function slimLargeCityExtract(extract, pins) {
@@ -933,8 +996,10 @@ async function fetchMapLayersOne(bbox, large) {
   const extraLand = large
     ? ''
     : `way["landuse"="residential"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});`;
+  // Auch bei großem Umland-Extract: Fußwege/Pfade/Treppen mitnehmen —
+  // sonst fehlen Minipfade auf der Karte und im Routing-Graph.
   const highways = large
-    ? `way["highway"~"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street)$"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});`
+    ? `way["highway"~"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|service|footway|path|cycleway|pedestrian|track|steps)$"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});`
     : `way["highway"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});`;
   const q = `
 [out:json][timeout:${large ? 120 : 90}];
@@ -1064,13 +1129,20 @@ out geom;
 }
 
 async function fetchHousenumbers(bbox, large) {
-  if (large) return [];
+  // Großes Umland: nur Kern um Mitte — sonst Overpass-Timeout und 0 Nummern.
+  const queryBbox = large
+    ? coreBboxFromCenter(
+        (bbox.south + bbox.north) / 2,
+        (bbox.west + bbox.east) / 2,
+        CORE_EXTRACT_RADIUS_M,
+      )
+    : bbox;
   try {
     const data = await overpass(`
 [out:json][timeout:50];
 (
-  node["addr:housenumber"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});
-  way["addr:housenumber"](${bbox.south},${bbox.west},${bbox.north},${bbox.east});
+  node["addr:housenumber"](${queryBbox.south},${queryBbox.west},${queryBbox.north},${queryBbox.east});
+  way["addr:housenumber"](${queryBbox.south},${queryBbox.west},${queryBbox.north},${queryBbox.east});
 );
 out center;
 `);
@@ -1341,12 +1413,12 @@ export async function buildCityOfflineMap(cityId, { skipUpload = false } = {}) {
   }
   await sleep(300);
   try {
-    housenumbers = cityIsLarge
-      ? []
-      : await fetchHousenumbers(buildingBbox, buildingLarge);
-    if (cityIsLarge) {
-      console.log(`[offline-map] ${cityId} skip housenumbers (dense core)`);
-    }
+    // Auch bei großer Umland-BBox: Kern-Hausnummern (fetchHousenumbers clippt selbst).
+    housenumbers = await fetchHousenumbers(buildingBbox, buildingLarge);
+    console.log(
+      `[offline-map] ${cityId} housenumbers ${housenumbers.length}` +
+        (buildingLarge ? ' (core clip)' : ''),
+    );
   } catch (e) {
     console.warn(`[offline-map] ${cityId} housenumbers: ${e.message || e}`);
   }
@@ -1424,6 +1496,7 @@ export async function buildCityOfflineMap(cityId, { skipUpload = false } = {}) {
     buildings,
     buildingCap,
     extractBbox,
+    Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null,
   );
   const graph = cityIsLarge ? { nodes: [], edges: [] } : buildGraph(roads);
   const extract = {

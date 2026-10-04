@@ -12,7 +12,7 @@ import {
 } from '../personaEngine';
 import type { Module1LookCue } from '../navigation/module1Facing';
 import { formatModule1LookCueForPrompt } from '../navigation/module1Facing';
-import { FINDUS_MODULE1_IMMERSIVE_STORY_BLOCK } from '../concierge/findusResponsePolicy';
+import { FINDUS_MODULE1_IMMERSIVE_STORY_BLOCK, FINDUS_SPEECH_CULTURE_BLOCK } from '../concierge/findusResponsePolicy';
 import { extractPlaceOffers, formatPlaceOffersForPrompt } from '../poi/placeOffers';
 import { formatModule1CharacterVoice } from '../persona/personalityMatrixPrompt';
 import {
@@ -189,6 +189,8 @@ Struktur: Visuell → User ist Teil der Geschichte → flüssige Brücke (dersel
 Max ${MODULE1_MAIN_MAX_CHARS} Zeichen. Nichts erfinden. Kein Mindestmaß.
 Keine Adresse/Tel/GPS. Kein App-Pitch. Keine Abschlussfrage.
 
+${FINDUS_SPEECH_CULTURE_BLOCK}
+
 ${FINDUS_MODULE1_IMMERSIVE_STORY_BLOCK}
 
 Persona: ${engine.persona}, Ton: ${engine.toneStyle}
@@ -279,6 +281,8 @@ ZIEL / ANPEILEN (Ortstyp darf dosieren — Labels nie sagen):
 Aktivität/Sport: Historie kürzer, Mitmachen stärker. Modernes Café: kein Pseudo-Epos.
 Persönlichkeits-Matrix färbt Stimme/Anrede/Tempo — Struktur bleibt.
 
+${FINDUS_SPEECH_CULTURE_BLOCK}
+
 ${FINDUS_MODULE1_IMMERSIVE_STORY_BLOCK}
 ${voice}
 ${
@@ -313,6 +317,8 @@ kein Hook-Ritual — nur neues Material.
 Wenn etwas nur angerissen war: kurz ankern, dann deutlich tiefer.
 Gleicher immersiver Stil: User ist Teil der Geschichte, Historie anfassbar, Brücke → Heute als Payoff nur belegt — in der gewählten Charakter-Stimme.
 Max ${MODULE1_EXPAND_MAX_CHARS} Zeichen; kein Aufblasen ohne Stoff.
+
+${FINDUS_SPEECH_CULTURE_BLOCK}
 
 ${FINDUS_MODULE1_IMMERSIVE_STORY_BLOCK}
 ${voice}

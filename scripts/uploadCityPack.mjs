@@ -22,6 +22,7 @@ import {
   patchObjectPath,
   patchTooLarge,
 } from './cityPack/packDelta.mjs';
+import { welcomeFactsJson } from './cityPack/buildCityWelcomeFacts.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -411,29 +412,41 @@ async function main() {
       uploadedSomething = true;
     }
 
+    // Slim Welcome-Fakten (Stadtgeschichte) — vor dem Voll-Pack nutzbar.
+    try {
+      const welcomeText = welcomeFactsJson(pack);
+      const welcomeKey = `${pack.city_id}.welcome.json`;
+      const welcomePath = path.join(OUT_DIR, welcomeKey);
+      try {
+        fs.writeFileSync(welcomePath, welcomeText);
+      } catch {
+        /* soft */
+      }
+      const welcomeHash = crypto
+        .createHash('sha256')
+        .update(welcomeText)
+        .digest('hex');
+      if (hashes[welcomeKey] === welcomeHash) {
+        console.log(`[skip] ${welcomeKey} unverändert`);
+      } else {
+        await uploadJson(welcomeKey, welcomeText, 'public, max-age=3600');
+        hashes[welcomeKey] = welcomeHash;
+        uploadedSomething = true;
+        console.log(
+          `[welcome] ${welcomeKey} ${Math.round(Buffer.byteLength(welcomeText) / 1024)}k`,
+        );
+      }
+    } catch (e) {
+      console.warn(`[welcome] ${pack.city_id}: ${e.message || e}`);
+    }
+
+    // Protomaps-Weltkarte: kein Offline-Extract mehr mitpacken/hochladen.
+    // Alt-Dateien *.map.json bleiben lokal harmlos; Upload bewusst aus.
     const mapFile = path.join(OUT_DIR, `${pack.city_id}.map.json`);
     if (fs.existsSync(mapFile)) {
-      const mapBuf = fs.readFileSync(mapFile);
-      const mapKey = `${pack.city_id}.map.json`;
-      const mapHash = crypto.createHash('sha256').update(mapBuf).digest('hex');
-      if (hashes[mapKey] === mapHash) {
-        console.log(`[skip] ${mapKey} unverändert`);
-      } else {
-        try {
-          await uploadObject(mapKey, mapBuf, 'application/json', {
-            cacheControl: 'public, max-age=3600',
-          });
-          hashes[mapKey] = mapHash;
-          uploadedSomething = true;
-        } catch (e) {
-          const msg = String(e.message || e);
-          if (/413|too large|EntityTooLarge/i.test(msg)) {
-            console.warn(`[skip] ${mapKey} zu groß für Storage — Pack-JSON ist oben`);
-          } else {
-            throw e;
-          }
-        }
-      }
+      console.log(
+        `[skip] ${pack.city_id}.map.json — Offline-Basemap abgeschaltet (Protomaps)`,
+      );
     }
   }
 

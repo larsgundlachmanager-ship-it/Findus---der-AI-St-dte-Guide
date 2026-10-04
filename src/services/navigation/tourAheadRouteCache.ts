@@ -15,14 +15,44 @@ export type AheadCoord = {
   lng: number;
   role?: string | null;
   path?: AheadCoord[] | null;
+  stations?: AheadCoord[] | null;
   vehicleMode?: string | null;
 };
 
+function haversineRoughM(
+  aLat: number,
+  aLng: number,
+  bLat: number,
+  bLng: number,
+): number {
+  const dLat = (aLat - bLat) * 111_320;
+  const dLng = (aLng - bLng) * 111_320 * Math.cos((aLat * Math.PI) / 180);
+  return Math.hypot(dLat, dLng);
+}
+
+/** Nur wenn die Polyline wirklich von a nach b geht — sonst klaut der Alight-Rail-Pfad den Fußweg zum Ziel. */
+function pathConnects(a: AheadCoord, b: AheadCoord, path: AheadCoord[]): boolean {
+  if (path.length < 2) return false;
+  const start = path[0]!;
+  const end = path[path.length - 1]!;
+  return (
+    haversineRoughM(start.lat, start.lng, a.lat, a.lng) < 90 &&
+    haversineRoughM(end.lat, end.lng, b.lat, b.lng) < 90
+  );
+}
+
 function seedPath(a: AheadCoord, b: AheadCoord): AheadCoord[] | null {
+  // Transit: Stationskette schlägt Fuß-OSRM.
+  if (isTransitRole(b.role) || isTransitRole(a.role)) {
+    const stB = Array.isArray(b.stations) && b.stations.length >= 2 ? b.stations : null;
+    if (stB) return stB;
+    const stA = Array.isArray(a.stations) && a.stations.length >= 2 ? a.stations : null;
+    if (stA) return stA;
+  }
   const fromB = Array.isArray(b.path) && b.path.length >= 3 ? b.path : null;
-  if (fromB) return fromB;
+  if (fromB && pathConnects(a, b, fromB)) return fromB;
   const fromA = Array.isArray(a.path) && a.path.length >= 3 ? a.path : null;
-  if (fromA) return fromA;
+  if (fromA && pathConnects(a, b, fromA)) return fromA;
   return null;
 }
 
@@ -140,7 +170,7 @@ export function ensureTourAheadRoutes(stops: AheadCoord[]): void {
     if (!Number.isFinite(a.lat) || !Number.isFinite(b.lat)) continue;
     const key = aheadLegKey(a, b);
     const seeded = seedPath(a, b);
-    if (seeded && seeded.length >= 3) {
+    if (seeded && seeded.length >= 2) {
       cache.set(key, seeded);
       continue;
     }
@@ -151,12 +181,14 @@ export function ensureTourAheadRoutes(stops: AheadCoord[]): void {
       continue;
     }
     const mode = b.vehicleMode || a.vehicleMode;
-    if (isBusMode(mode)) {
-      void fetchLeg(a, b);
-      continue;
-    }
-    if (isTransitRole(b.role) || isRailMode(mode)) {
-      void fetchRailLeg(a, b);
+    // Transit ohne Seed: Rail-OSM / Stations-Fallback — kein Fuß-OSRM entlang Linie.
+    if (isTransitRole(b.role) || isRailMode(mode) || isBusMode(mode)) {
+      if (isBusMode(mode) && !seeded) {
+        // Bus ohne Stationskette: Straßen-Directions ok (kein Fuß-Label).
+        void fetchLeg(a, b);
+      } else if (!isBusMode(mode)) {
+        void fetchRailLeg(a, b);
+      }
       continue;
     }
     void fetchLeg(a, b);

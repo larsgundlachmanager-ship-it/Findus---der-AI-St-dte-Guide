@@ -64,6 +64,20 @@ export async function buildM1PoiOffer(opts: {
       cityHint: null,
     });
     if (!hit) {
+      const ask = (opts.userText || '').replace(/\s+/g, ' ').trim();
+      // Aktivität / Darf-man / Wo-kann-man → Web-Recherche, kein Pack-Klär-Stopp
+      if (
+        /\b(darf|kann|wo\s+kann|verleih|ausleihen|stand.?up|sup|sub|paddle|paddel|center[\s-]*panel|stell[\s-]*appell|surf|boot|rudern|segeln)\b/iu.test(
+          ask,
+        )
+      ) {
+        return {
+          speech: '',
+          poiId: null,
+          placeName: null,
+          askMore: false,
+        };
+      }
       return {
         speech:
           'Von hier erkenne ich den Ort im Datensatz noch nicht sicher. Zeig etwas deutlicher hin oder beschreib kurz — dann hol ich mehr dazu.',

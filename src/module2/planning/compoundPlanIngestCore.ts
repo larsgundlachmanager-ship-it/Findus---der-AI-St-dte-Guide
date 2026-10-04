@@ -14,6 +14,31 @@ import type { IngestedPlan } from './planningTypes';
 export function shouldIngestCompoundPlan(userText: string): boolean {
   const t = (userText || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
+  try {
+    const { blocksExploreDriftForFlight } = require('../../services/flights/flightTripIntent') as {
+      blocksExploreDriftForFlight: (s: string) => boolean;
+    };
+    if (blocksExploreDriftForFlight(t)) return false;
+  } catch {
+    /* soft */
+  }
+  try {
+    const {
+      looksLikeOutfitOrWeatherUtterance,
+      looksLikeChaoticDayPlanUtterance,
+      looksLikeModul5PlanUtterance,
+    } = require('./planUtteranceGate') as {
+      looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+      looksLikeChaoticDayPlanUtterance: (s: string) => boolean;
+      looksLikeModul5PlanUtterance: (s: string) => boolean;
+    };
+    if (looksLikeOutfitOrWeatherUtterance(t)) return false;
+    // Chaos-Tag / klare M5-Absicht → immer Skeleton (auch wenn Slot-Muster dünn)
+    if (looksLikeChaoticDayPlanUtterance(t)) return true;
+    if (looksLikeModul5PlanUtterance(t) && t.length >= 50) return true;
+  } catch {
+    /* soft */
+  }
   const orch = orchestrateUtterance(t);
   if (!orch.weaveDayPlan) return false;
   return call1OwnsCompoundTurn(t);
@@ -29,9 +54,10 @@ export function buildCompoundPlanFromUtterance(opts: {
 }): IngestedPlan | null {
   if (!shouldIngestCompoundPlan(opts.userText)) return null;
 
+  // Utterance-Tag schlägt Hint (sonst landet „morgen“ auf sticky Heute).
   const dayKey =
-    opts.dayKeyHint ||
     tryResolveDateKeyFromUserText(opts.userText) ||
+    opts.dayKeyHint ||
     todayDateKey();
 
   const gpsCity = opts.gpsCity ?? null;

@@ -351,8 +351,19 @@ export function formatMorningBriefingContext(facts: MorningBriefingFacts): strin
   } else if (facts.pressure === 'steady') {
     lines.push('Druck: normaler Tag, planbar');
   }
-  if (facts.weatherLine) lines.push(`Wetter: ${facts.weatherLine}`);
-  if (facts.clothingHint) lines.push(`Kleidung: ${facts.clothingHint}`);
+  if (facts.weatherLine || facts.clothingHint) {
+    const wx = (facts.weatherLine || '').trim();
+    const cloth = (facts.clothingHint || '').trim();
+    if (wx && cloth) {
+      lines.push(
+        `Wetter+Kleidung (ein Fließtext, keine Klammern): ${wx} — Anziehen: ${cloth}`,
+      );
+    } else if (wx) {
+      lines.push(`Wetter: ${wx}`);
+    } else if (cloth) {
+      lines.push(`Anziehen im Fließtext weben, keine Klammern: ${cloth}`);
+    }
+  }
   if (facts.weatherVsYesterday === 'nicer') lines.push('Wetter vs gestern: schöner');
   if (facts.weatherVsYesterday === 'worse') lines.push('Wetter vs gestern: schlechter');
   if (facts.weatherVsYesterday === 'similar') lines.push('Wetter vs gestern: ähnlich');

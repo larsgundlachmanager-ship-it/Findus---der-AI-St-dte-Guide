@@ -13,6 +13,8 @@ import {
   looksLikeSpokenMeatOrFish,
   looksLikeCattleBreed,
   looksLikeTrainRestaurant,
+  looksLikeSpecialtyFoodAsk,
+  extractCravingDishToken,
   canonicalCattleBreed,
 } from './specializedFoodMatch';
 import { extractNamedRestaurantWish } from './namedVenueIntent';
@@ -27,13 +29,17 @@ const NOW_RE =
   /\b(jetzt|gleich|sofort|hier\s+und\s+jetzt|gerade|heute\s+mittag)\b/iu;
 
 const EVENING_RE =
-  /\b(heute\s+abend|abendessen|dinner|tonight|um\s+(\d{1,2})\s*uhr)\b/iu;
+  /\b(heute\s+abend|(?:montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)\s*abends?|abendessen|dinner|tonight|um\s+(\d{1,2})\s*uhr)\b/iu;
+
+/** Freitag/Samstag/… ohne Uhr → Abendessen-Default 19:00 (nicht Mittag). */
+const WEEKDAY_MEAL_EVENING_RE =
+  /\b(essen(?:\s+gehen)?|restaurant|abendessen|dinner|gastro|abend)\b/iu;
 
 const LATE_SNACK_RE =
   /\b(snack|snacks|nachtisch|spät\s*noch|spaet\s*noch|noch\s+was\s+essen|was\s+essen|hunger|imbiss|döner|doener|dönerladen|kebab)\b/iu;
 
 const FOOD_KIND_RE =
-  /\b(essen|restaurant|pizza|italiener|grieche|sushi|imbiss|café|cafe|frühstück|fruehstueck|mittag|abendessen|burger|fisch|pannfisch|pannenfisch|pfannfisch|pfannenfisch|snack|snacks|döner|doener|kebab|eis|spaghettieis|gelato|steak|vegan\w*|vegetarisch\w*|asiatisch\w*|angus|wagyu|zugrestaurant|speisewagen)\b/;
+  /\b(essen|restaurant|pizza|italiener|grieche|sushi|imbiss|café|cafe|frühstück|fruehstueck|mittag|abendessen|burger|fisch|pannfisch|pannenfisch|pfannfisch|pfannenfisch|snack|snacks|döner|doener|kebab|eis|spaghettieis|gelato|steak|vegan\w*|vegetarisch\w*|asiatisch\w*|angus|wagyu|zugrestaurant|speisewagen|buffet|ayce|croque|sandwich|toast|all[\s-]*(?:you|xou|jou)[\s-]*can[\s-]*eat)\b/;
 
 export function detectCityBestIntent(text: string): boolean {
   return BEST_CITY_RE.test(text.replace(/\s+/g, ' ').trim());
@@ -72,6 +78,10 @@ export function detectPitchKind(text: string): PitchKind {
   }
   if (/\b(kino|film|cinema)\b/.test(t)) return 'cinema';
   if (/\b(bar|pub|biergarten|cocktail)\b/.test(t)) return 'bar';
+  // Trivia-Zahl („wie hoch/alt …“) ≠ Sight-Pitch am GPS
+  if (/\b(wie\s+hoch\s+ist|wie\s+alt\s+ist|wie\s+lang(?:e)?\s+ist)\b/.test(t)) {
+    return 'generic';
+  }
   if (
     /\b(michel|museum|kirche|dom|turm|aussichtsturm|denkmal|aussicht|sehenswürdigkeit|sehenswuerdigkeit|strand|strände|straende|beach|baden|badestelle|freibad|dinosaur|dinosaurier|dino\b|t[-\s]?rex|zoo|aquarium|planetarium|science\s*center)\b/.test(
       t,
@@ -90,7 +100,12 @@ export function detectPitchKind(text: string): PitchKind {
   } catch {
     if (/\b(picknick|picnic|grillen|grillplatz|liegewiese)\b/.test(t)) return 'sight';
   }
-  if (FOOD_KIND_RE.test(t) || looksLikeCattleBreed(t) || looksLikeTrainRestaurant(t)) {
+  if (
+    FOOD_KIND_RE.test(t) ||
+    looksLikeCattleBreed(t) ||
+    looksLikeTrainRestaurant(t) ||
+    looksLikeSpecialtyFoodAsk(text)
+  ) {
     return 'food';
   }
   if (extractNamedRestaurantWish(text)) {
@@ -127,13 +142,23 @@ export function resolveSearchMode(opts: {
     /* soft */
   }
   if (LANDMARK_RE.test(t) || opts.landmarkHint) return 'landmark';
-  // „auf dem Weg“ nur wenn der User das EXPLIZIT will — nie auto wegen Nav
+  // „auf dem Weg“ / Zwischenstopp — explizit ODER „vorher/nochmal zum …“ unter aktiver Nav
   const wantsAlongRoute =
-    /\b(auf\s+dem\s+weg|unterwegs|zwischenstopp|voraus|zwischen\s+(?:hier\s+und|den\s+stops?))\b/iu.test(
+    /\b(auf\s+dem\s+weg|unterwegs|zwischenstopp|voraus|zwischen\s+(?:hier\s+und|den\s+stops?)|vorher|davor|zwischendurch|nochmal\s+(?:kurz\s+)?(?:zum|zur|zu)|vorbeifahren|vorbei\s+fahren)\b/iu.test(
       t,
     );
   if (wantsAlongRoute && (opts.hasActiveNav || opts.hasTimelineNext)) {
     return /\bzwischen\b/iu.test(t) ? 'between_stops' : 'on_route';
+  }
+  // „Können wir … zum X gehen?“ / Briefkasten vorbeifahren während Nav = Zwischenstopp
+  if (
+    opts.hasActiveNav &&
+    /\b(können|koennen|lass(?:t)?\s+uns)\b/iu.test(t) &&
+    (/\b(zum|zur|nach|zu|an)\b/iu.test(t) ||
+      /\b(briefkasten|postkasten|mailbox|packstation)\b/iu.test(t)) &&
+    /\b(geh(?:en)?|fahr(?:en)?|stopp|halt|vorbeifahren|vorbei)\b/iu.test(t)
+  ) {
+    return 'on_route';
   }
   // Spät abends Snacks / „heute Abend noch“ → jetzt öffnen, nicht future_place
   const hour = new Date().getHours();
@@ -158,7 +183,14 @@ export function resolveSearchMode(opts: {
 
 /** visitAt aus Text — „um 18 Uhr“ / jetzt / Abend ≈ 19:00 */
 export function resolveVisitAtMs(text: string, nowMs = Date.now()): number {
-  const t = text.replace(/\s+/g, ' ').trim();
+  // „Freitagabend“ → „Freitag abend“, damit Wochentag + Abend greifen
+  const t = text
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(
+      /\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)abends?\b/giu,
+      '$1 abend',
+    );
   let dayOffset = 0;
   if (/\bübermorgen|uebermorgen\b/iu.test(t)) dayOffset = 2;
   else if (
@@ -191,7 +223,10 @@ export function resolveVisitAtMs(text: string, nowMs = Date.now()): number {
             const m = clock[2] ? Math.min(59, Number(clock[2])) : 0;
             return new Date(y!, mo! - 1, d!, h, m, 0, 0).getTime();
           }
-          return new Date(y!, mo! - 1, d!, 12, 0, 0, 0).getTime();
+          // „Freitagabend essen“ / „Freitag essen gehen“ → 19:00, nicht Mittag
+          const hour =
+            EVENING_RE.test(t) || WEEKDAY_MEAL_EVENING_RE.test(t) ? 19 : 12;
+          return new Date(y!, mo! - 1, d!, hour, 0, 0, 0).getTime();
         }
       }
     } catch {
@@ -230,6 +265,8 @@ export function resolveVisitAtMs(text: string, nowMs = Date.now()): number {
       /\b(früh|frueh|morgens)\b/iu.test(t)
     ) {
       d.setHours(8, 0, 0, 0);
+    } else if (EVENING_RE.test(t) || WEEKDAY_MEAL_EVENING_RE.test(t)) {
+      d.setHours(19, 0, 0, 0);
     } else {
       d.setHours(12, 0, 0, 0);
     }
@@ -276,6 +313,75 @@ export function dietLabelsFromProfile(
 
 export function buildPrefSliceForPitch(text: string): PitchPrefSlice {
   const slice: PitchPrefSlice = {};
+  const t = text.replace(/\s+/g, ' ').trim();
+  const avoid: string[] = [];
+  // „nicht asiatisch“ / „kein Sushi“ → Avoid-Kategorien (Hard-Filter)
+  if (
+    /\b(?:nicht|kein(?:e|en)?|ohne|garantiert\s+nicht)\s+(?:asiatisch\w*|asian|sushi|thai|chinesisch|japanisch|vietnamesisch|koreanisch|indisch)\b/iu.test(
+      t,
+    ) ||
+    /\b(?:asiatisch\w*|asian)\b.{0,24}\b(?:nicht|nein|ausgeschlossen)\b/iu.test(t) ||
+    /\bab(?:er)?\s+nicht\s+asiatisch\b/iu.test(t)
+  ) {
+    avoid.push(
+      'asiatisch',
+      'asian',
+      'sushi',
+      'thai',
+      'chinesisch',
+      'japanisch',
+      'vietnamesisch',
+      'koreanisch',
+      'indisch',
+      'ramen',
+      'dim sum',
+      'hotpot',
+      'poke',
+    );
+  }
+  // Persistente No-Gos aus Profil-Dislikes / experiencePrefs=no
+  try {
+    const { getCachedUserProfile } = require('../../services/userProfileService') as {
+      getCachedUserProfile: () => Record<string, unknown> | null;
+    };
+    const profile = getCachedUserProfile();
+    if (profile) {
+      const prefsBlock = profile.preferences as
+        | { dislikes?: string[]; allergies?: string[] }
+        | undefined;
+      for (const d of prefsBlock?.dislikes ?? []) {
+        const s = String(d || '')
+          .toLowerCase()
+          .trim();
+        if (s.length >= 3) avoid.push(s);
+      }
+      const likes = profile.likes as { dislikes?: string[] } | undefined;
+      for (const d of likes?.dislikes ?? []) {
+        const s = String(d || '')
+          .toLowerCase()
+          .trim();
+        if (s.length >= 3) avoid.push(s);
+      }
+      const prefs = profile.experiencePrefs as Record<string, string> | undefined;
+      if (prefs) {
+        for (const [k, v] of Object.entries(prefs)) {
+          if (v === 'no' || v === 'never') {
+            const key = k.toLowerCase();
+            if (
+              /asia|sushi|thai|china|japan|vietnam|korea|indisch|steak|fleisch|fish|fisch/.test(
+                key,
+              )
+            ) {
+              avoid.push(key);
+            }
+          }
+        }
+      }
+    }
+  } catch {
+    /* soft — allergies/diet weiter unten */
+  }
+  if (avoid.length) slice.avoidCategories = [...new Set(avoid)];
   try {
     const { getCachedUserProfile } = require('../../services/userProfileService') as {
       getCachedUserProfile: () => Record<string, unknown> | null;
@@ -307,6 +413,17 @@ export function buildPrefSliceForPitch(text: string): PitchPrefSlice {
     if (diet.length) slice.diet = diet;
     if (/\b(günstig|guenstig|budget|billig)\b/.test(blob + text.toLowerCase())) {
       slice.budgetHint = 'günstig';
+    }
+    try {
+      const { parseBudgetPerPersonEur } = require('./diningHarden') as {
+        parseBudgetPerPersonEur: (s: string) => number | null;
+      };
+      const perPerson = parseBudgetPerPersonEur(text);
+      if (perPerson != null) {
+        slice.budgetHint = `${perPerson} euro pro person`;
+      }
+    } catch {
+      /* soft */
     }
   } catch {
     /* soft */
@@ -376,6 +493,38 @@ export function parseWishesFromText(text: string): PitchWish[] {
   if (namedVenue) {
     pushMust({ text: namedVenue, hardness: 'must', kind: 'venue' });
   }
+  // Zwischenstopp: klarer Ort (Kindergarten/Club/…) auch ohne Gastro-Wording
+  try {
+    const {
+      extractNamedOnRoutePlace,
+      extractMailboxAmenityWish,
+      isOnRouteZwischenstoppIntent,
+    } = require('../../services/navigation/onRouteZwischenstopp') as {
+      extractNamedOnRoutePlace: (s: string) => string | null;
+      extractMailboxAmenityWish: (s: string) => string | null;
+      isOnRouteZwischenstoppIntent: (s: string, nav: boolean) => boolean;
+    };
+    let navActive = false;
+    try {
+      const { useFinnusStore } = require('../../store/useFinnusStore') as {
+        useFinnusStore: { getState: () => { navActive?: boolean } };
+      };
+      navActive = Boolean(useFinnusStore.getState().navActive);
+    } catch {
+      navActive = false;
+    }
+    const mailboxWish = extractMailboxAmenityWish(t);
+    if (mailboxWish) {
+      pushMust({ text: mailboxWish, hardness: 'must', kind: 'amenity' });
+    } else if (isOnRouteZwischenstoppIntent(t, navActive) || navActive) {
+      const onRoutePlace = extractNamedOnRoutePlace(t);
+      if (onRoutePlace && !wishes.some((w) => w.kind === 'venue' && w.hardness === 'must')) {
+        pushMust({ text: onRoutePlace, hardness: 'must', kind: 'venue' });
+      }
+    }
+  } catch {
+    /* soft */
+  }
 
   try {
     const { looksLikePicnicQuery } = require('./picnicIntent') as {
@@ -402,7 +551,7 @@ export function parseWishesFromText(text: string): PitchWish[] {
 
   // Spezifische Gerichte zuerst (Hard-Match) — „kein Steak“ ist Ablehnung, kein Wunsch.
   for (const m of t.matchAll(
-    /\b(spaghetti[- ]?eis|eisbecher|p(?:f)?ann(?:en)?fisch|pizza\s*hawaii|schnitzel|burger|sushi|döner|doener|kebab|kebap|ramen|pasta carbonara|steak|rumpsteak|ribeye|entrecôte|entrecote)\b/giu,
+    /\b(spaghetti[- ]?eis|eisbecher|p(?:f)?ann(?:en)?fisch|pizza\s*hawaii|pizza\s*rucola|rucola[- ]?pizza|rucola|ruccola|arugula|schnitzel|burger|sushi|döner|doener|kebab|kebap|ramen|pasta carbonara|steak|rumpsteak|ribeye|entrecôte|entrecote|steinofen)\b/giu,
   )) {
     if (!m[1]) continue;
     const raw = m[1].replace(/\s+/g, ' ').trim();
@@ -417,6 +566,51 @@ export function parseWishesFromText(text: string): PitchWish[] {
       continue;
     }
     pushMust({ text, hardness: 'must', kind: 'dish' });
+  }
+  // Generische Items („beste Poke-Bowl“, „Rucola-Pizza“, „leckeren Croque“) — ohne Whitelist
+  const specialtyFoodAsk = looksLikeSpecialtyFoodAsk(t);
+  try {
+    const { extractEvidenceItems } = require('../evidence/evidenceNeeds') as {
+      extractEvidenceItems: (s: string) => string[];
+    };
+    if (
+      FOOD_KIND_RE.test(t) ||
+      specialtyFoodAsk ||
+      wishes.some((w) => w.kind === 'dish' || w.kind === 'cuisine')
+    ) {
+      for (const item of extractEvidenceItems(t)) {
+        const low = item.toLowerCase();
+        if (wishes.some((w) => w.text.toLowerCase() === low)) continue;
+        if (/^fleisch$/i.test(item)) continue;
+        const idx = t.toLowerCase().indexOf(low);
+        if (idx > 0) {
+          const before = t.slice(Math.max(0, idx - 24), idx);
+          if (
+            /\b(?:kein(?:e|en)?|ohne|nicht|nix)\s*$/iu.test(before) ||
+            /\bmag\s+(?:eigentlich\s+)?kein/iu.test(before)
+          ) {
+            continue;
+          }
+        }
+        if (
+          /^(heute|abend|morgen|restaurant|essen|pizza|steak|café|cafe)$/i.test(
+            item,
+          )
+        ) {
+          continue;
+        }
+        pushMust({ text: item, hardness: 'must', kind: 'dish' });
+      }
+    }
+  } catch {
+    /* soft */
+  }
+  // „Lust auf einen Croque“ ohne Adj — Evidence-Items brauchen oft „lecker/beste“
+  if (specialtyFoodAsk && !wishes.some((w) => w.kind === 'dish')) {
+    const craving = extractCravingDishToken(t);
+    if (craving) {
+      pushMust({ text: craving, hardness: 'must', kind: 'dish' });
+    }
   }
   // Rinderrasse (Angus/Wagyu/…) — Hard dish, Soft-Fail → Steakhouse
   if (looksLikeCattleBreed(t)) {
@@ -458,6 +652,20 @@ export function parseWishesFromText(text: string): PitchWish[] {
   ) {
     pushMust({ text: 'takeaway', hardness: 'must', kind: 'amenity' });
   }
+  // Kein Fleisch / vegan essen → Must-Cuisine vegan (nie dish „Fleisch“)
+  if (
+    (/\b(?:kein(?:e|en)?|ohne|nicht|nix)\s+fleisch\b/iu.test(t) ||
+      /\bvegan\b/iu.test(t)) &&
+    !wishes.some((w) => w.kind === 'cuisine' && /vegan/i.test(w.text))
+  ) {
+    pushMust({ text: 'vegan', hardness: 'must', kind: 'cuisine' });
+  } else if (
+    /\bvegetarisch\b/iu.test(t) &&
+    !wishes.some((w) => w.kind === 'cuisine' && /vegetarisch/i.test(w.text))
+  ) {
+    pushMust({ text: 'vegetarisch', hardness: 'must', kind: 'cuisine' });
+  }
+
   const cuisineRe =
     /\b(italiener|italienisch|grieche|griechisch|japanisch|indisch|türkisch|tuerkisch|asian|asiatisch(?:es|er|e)?|thai|chinesisch|vietnamesisch|koreanisch|mexikanisch|steakhouse|vegan(?:es|er|en|e)?|vegetarisch(?:es|er|en|e)?|vegetarian)\b/giu;
   for (const m of t.matchAll(cuisineRe)) {
@@ -470,14 +678,63 @@ export function parseWishesFromText(text: string): PitchWish[] {
         : /^asiatisch|^asian/.test(raw)
           ? 'asiatisch'
           : m[1];
+    const before = t.slice(Math.max(0, (m.index ?? 0) - 36), m.index ?? 0);
+    if (
+      /\b(?:kein(?:e|en)?|keine[rn]?|ohne|nicht|nix|garantiert\s+nicht)\s*$/iu.test(
+        before,
+      ) ||
+      /\b(?:aber\s+)?nicht\s*$/iu.test(before) ||
+      /\bmag\s+(?:eigentlich\s+)?kein/iu.test(before)
+    ) {
+      continue; // Ablehnung → avoidCategories in buildPrefSliceForPitch
+    }
     pushMust({ text, hardness: 'must', kind: 'cuisine' });
   }
+  // All-you-can-eat / Buffet = hartes Amenity (inkl. STT „all xou can eat“)
+  try {
+    const { looksLikeAyceQuery } = require('./ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    if (
+      looksLikeAyceQuery(t) &&
+      !wishes.some((w) => /all_you_can_eat|ayce|buffet/i.test(w.text))
+    ) {
+      pushMust({ text: 'all_you_can_eat', hardness: 'must', kind: 'amenity' });
+    }
+  } catch {
+    if (
+      /\b(all[\s-]*you[\s-]*can[\s-]*eat|ayce|schlemmer[\s-]*buffet|all[\s-]*you[\s-]*can\b|unlimited\s+buffet|\bbuffet\b)/iu.test(
+        t,
+      ) &&
+      !wishes.some((w) => /all_you_can_eat|ayce|buffet/i.test(w.text))
+    ) {
+      pushMust({ text: 'all_you_can_eat', hardness: 'must', kind: 'amenity' });
+    }
+  }
 
-  // Alle Amenities (Pool + Sauna + Massage + …), nicht nur das erste
-  for (const m of t.matchAll(
-    /\b(pool|sauna|spa|jacuzzi|whirlpool|massagen?)\b/giu,
-  )) {
-    if (m[1]) pushMust({ text: m[1], hardness: 'must', kind: 'amenity' });
+  // Alle Amenities (Pool + Sauna + Massage + …), nicht nur das erste.
+  // „Spa oder Sauna“ → nur ein Must (OR), nicht beide hart.
+  {
+    const amenityHits = [
+      ...t.matchAll(/\b(pool|sauna|spa|jacuzzi|whirlpool|massagen?)\b/giu),
+    ]
+      .map((m) => (m[1] || '').toLowerCase())
+      .filter(Boolean);
+    const orSpaSauna =
+      /\b(spa|wellness)\b/iu.test(t) &&
+      /\bsauna\b/iu.test(t) &&
+      /\boder\b/iu.test(t);
+    if (orSpaSauna) {
+      pushMust({ text: 'spa_or_sauna', hardness: 'must', kind: 'amenity' });
+      for (const a of amenityHits) {
+        if (a === 'spa' || a === 'sauna') continue;
+        pushMust({ text: a, hardness: 'must', kind: 'amenity' });
+      }
+    } else {
+      for (const a of amenityHits) {
+        pushMust({ text: a, hardness: 'must', kind: 'amenity' });
+      }
+    }
   }
   if (/\ball[\s-]*inclusive\b|\ballinclusive\b/iu.test(t)) {
     pushMust({ text: 'all-inclusive', hardness: 'must', kind: 'amenity' });
@@ -495,10 +752,25 @@ export function parseWishesFromText(text: string): PitchWish[] {
   }
   if (/\b(biergarten|terrasse|sonnenuntergang|außen|aussen)\b/iu.test(t)) {
     const m = t.match(/\b(biergarten|terrasse|sonnenuntergang)\b/iu);
+    // Terrasse/Outdoor = Boost (nice), nie Hard-Wipe in Umland ohne Beleg
     pushMust({
       text: m?.[1] ?? 'Outdoor',
-      hardness: /\bsonnenuntergang\b/iu.test(t) ? 'nice' : 'must',
+      hardness: 'nice',
       kind: 'vibe',
+    });
+  }
+  if (/\b(aussicht|ausblick|panorama)\b/iu.test(t)) {
+    pushMust({ text: 'aussicht', hardness: 'nice', kind: 'vibe' });
+  }
+  if (
+    /\b(ambiente|flair|atmosphäre|atmosphaere)\b/iu.test(t) &&
+    !wishes.some((w) => /ambiente|flair|atmosph/i.test(w.text))
+  ) {
+    wishes.push({
+      text: 'ambiente',
+      hardness: 'nice',
+      kind: 'vibe',
+      weight: 12,
     });
   }
   if (/\b(wlan|wifi|wi-?fi)\b/iu.test(t)) {
@@ -511,7 +783,8 @@ export function parseWishesFromText(text: string): PitchWish[] {
       t,
     )
   ) {
-    pushMust({ text: 'ruhig', hardness: 'must', kind: 'vibe' });
+    // Ruhig = Boost (nice), nie Hard-Wipe bei Gastro-Ambiente-Fragen
+    pushMust({ text: 'ruhig', hardness: 'nice', kind: 'vibe' });
   }
   // Atmosphäre / Dorfküche — nice (Boost), nie Must-Wipe
   if (
@@ -528,24 +801,48 @@ export function parseWishesFromText(text: string): PitchWish[] {
     });
   }
   if (
-    /\b(toilette|klo|\bwc\b|apotheke|geldautomat|\batm\b|ladestation|powerbank)\b/iu.test(
+    /\b(toilette|klo|\bwc\b|apotheke|geldautomat|\batm\b|ladestation|powerbank|briefkasten|postkasten|mailbox|packstation|paketautomat)\b/iu.test(
       t,
     )
   ) {
     const m = t.match(
-      /\b(toilette|klo|wc|apotheke|geldautomat|atm|ladestation|powerbank)\b/iu,
+      /\b(toilette|klo|wc|apotheke|geldautomat|atm|ladestation|powerbank|briefkasten|postkasten|mailbox|packstation|paketautomat)\b/iu,
     );
-    pushMust({
-      text: m?.[1] ?? 'Amenity',
-      hardness: 'must',
-      kind: 'amenity',
-    });
+    let amenityText = m?.[1] ?? 'Amenity';
+    if (/paketautomat|packstation/i.test(amenityText)) amenityText = 'packstation';
+    if (/postkasten|mailbox|briefkasten/i.test(amenityText)) {
+      amenityText = 'briefkasten';
+    }
+    if (
+      !wishes.some(
+        (w) =>
+          w.kind === 'amenity' &&
+          w.hardness === 'must' &&
+          /briefkasten|packstation|toilette|apotheke|geldautomat|ladestation|powerbank/i.test(
+            w.text,
+          ),
+      )
+    ) {
+      pushMust({
+        text: amenityText,
+        hardness: 'must',
+        kind: 'amenity',
+      });
+    }
   }
   if (
     /frühstück(?:en)?|fruehstueck(?:en)?|breakfast|brunch/iu.test(t) &&
     !wishes.some((w) => /frühstück|fruehstueck|breakfast|brunch/i.test(w.text))
   ) {
-    pushMust({ text: 'Frühstück', hardness: 'must', kind: 'cuisine' });
+    // Hotel: Frühstück = Amenity (Stay22), nicht Cuisine-Wipe
+    const hotelAsk = /\b(hotel|boutique|übernacht|uebernacht|unterkunft|spa|sauna|wellness)\b/iu.test(
+      t,
+    );
+    pushMust({
+      text: 'Frühstück',
+      hardness: 'must',
+      kind: hotelAsk ? 'amenity' : 'cuisine',
+    });
   }
   if (
     /frühstück(?:en)?|fruehstueck(?:en)?|breakfast|brunch/iu.test(t) &&

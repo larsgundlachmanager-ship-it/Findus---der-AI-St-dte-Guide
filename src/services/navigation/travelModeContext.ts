@@ -155,13 +155,17 @@ export function detectTravelModeVoiceOverride(text: string): TravelMode | null {
   ) {
     return 'bike';
   }
+  // Hinweis: „ß“ ist in JS kein \w — `\bfuß\b` matcht oft nicht. Deshalb fu(?:ss|ß|ße)
+  // und Fallback „laufen/gehend“ + Kontext (nach/zu/route…).
   if (
-    /\b(ich\s+bin\s+)?(zu\s+fu[sß]|zu\s*fuss|laufend|zu\s+fuße)\s*(unterwegs)?\b/i.test(
+    /\b(ich\s+bin\s+)?(zu\s+fu(?:ss|ß|ße)|laufend)\s*(unterwegs|unter\s*wegs)?(?:\b|(?=\s|$))/i.test(
       t,
     ) ||
-    /\bich\s+(geh|gehe|laufe|lauf)\s+(zu\s+fu[sß]|jetzt)\b/i.test(t) ||
-    (/\b(zu\s+fu[sß]|zu\s*fuss|laufen|gehend)\b/i.test(t) &&
-      /\b(nach|zu|wie\s+lange|brauch|dauer|minuten|route|weg)\b/i.test(t))
+    /\bich\s+(geh|gehe|laufe|lauf)\s+(zu\s+fu(?:ss|ß|ße)|jetzt)\b/i.test(t) ||
+    (/\b(zu\s+fu(?:ss|ß|ße)|zu\s*fuss|laufen|gehend)(?:\b|(?=\s|$))/i.test(t) &&
+      /\b(nach|zu|wie\s+lange|brauch|dauer|minuten|route|weg|lieber|doch|möchte|moechte|will|starte?)\b/i.test(
+        t,
+      ))
   ) {
     return 'foot';
   }
@@ -231,8 +235,9 @@ ${ask}
 - transit: Öffis priorisieren, Live-Verspätungen & Puffer nennen.
 
 === NAVI-STIMME (Human Co-Pilot) ===
-- Alltagssprache (du, jo, schau mal, pass auf, gleich) — wie ein Freund neben dem User.
-- Landmarke ZUERST, dann Aktion. Nie „in X Metern links abbiegen“, nie Himmelsrichtungen/Grad.
-- Max. 1–2 kurze Sätze. Bei Schlenker: „Sollen wir da kurz einen Schlenker machen?“
+- Sprachkultur: mündlich wie ein Freund neben dem User. Kein Pflicht-Vokabular (kein erzwungenes jo/schau mal).
+- Einfache Abbiegung kurz. Komplizierte Wegabelung: Sichtbares + Richtung in einem Satz.
+- Landmarke zuerst, dann Aktion. Nie „in X Metern links“, nie Himmelsrichtungen/Grad.
+- Max. 1–2 kurze Sätze. Schlenker nur als echte Frage, Wortlaut frei.
 `.trim();
 }

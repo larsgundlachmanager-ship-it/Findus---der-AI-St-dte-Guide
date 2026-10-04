@@ -1,6 +1,8 @@
 /**
  * HUD-Ankunft: ÖPNV-Timeline schlägt Fuß-ETA auf der Gesamtstrecke.
  * Kein RN — Header + Tests.
+ *
+ * Speech-ETA = dieselbe Zahl wie Live-HUD (eine Rundung).
  */
 
 export function pickNavHudEta(input: {
@@ -10,7 +12,24 @@ export function pickNavHudEta(input: {
   remainingM?: number | null;
   walkFallbackMin?: number | null;
   nowMs: number;
-}): { etaMin: number | null; arriveMs: number | null } {
+  /**
+   * Am Halt wartend: Minuten bis Fahrzeug — nicht Ziel-ETA.
+   * walk_to_stop / waiting.
+   */
+  waitingForVehicle?: boolean;
+  vehicleDepartMs?: number | null;
+}): { etaMin: number | null; arriveMs: number | null; waitMin?: number | null } {
+  if (input.waitingForVehicle) {
+    const dep = input.vehicleDepartMs ?? input.rideStartMs;
+    if (dep != null && Number.isFinite(dep)) {
+      const waitMin = Math.max(0, Math.round((dep - input.nowMs) / 60_000));
+      return {
+        etaMin: waitMin,
+        arriveMs: dep,
+        waitMin,
+      };
+    }
+  }
   const end = input.lastStopEndMs;
   if (end != null && Number.isFinite(end) && end > input.nowMs - 30 * 60_000) {
     const rideStart = input.rideStartMs;
@@ -50,4 +69,40 @@ export function pickNavHudEta(input: {
     };
   }
   return { etaMin: null, arriveMs: null };
+}
+
+/**
+ * Eine ETA für Speech + HUD: store/phrase/HUD-Pick → einmal runden.
+ * Preferenzen: phrase (committed route) → store navEtaMin → fallback.
+ */
+export function resolveNavSpeechEtaMin(opts?: {
+  phraseEtaMin?: number | null;
+  storeEtaMin?: number | null;
+  lastStopEndMs?: number | null;
+  rideStartMs?: number | null;
+  remainingM?: number | null;
+  walkFallbackMin?: number | null;
+  nowMs?: number;
+}): number | null {
+  const nowMs = opts?.nowMs ?? Date.now();
+  const phrase =
+    opts?.phraseEtaMin != null && Number.isFinite(opts.phraseEtaMin)
+      ? Math.max(1, Math.round(opts.phraseEtaMin))
+      : null;
+  const store =
+    opts?.storeEtaMin != null && Number.isFinite(opts.storeEtaMin)
+      ? Math.max(1, Math.round(opts.storeEtaMin))
+      : null;
+  const hud = pickNavHudEta({
+    lastStopEndMs: opts?.lastStopEndMs,
+    rideStartMs: opts?.rideStartMs,
+    navEtaMin: store ?? phrase,
+    remainingM: opts?.remainingM,
+    walkFallbackMin: opts?.walkFallbackMin,
+    nowMs,
+  });
+  if (hud.etaMin != null && Number.isFinite(hud.etaMin) && hud.etaMin > 0) {
+    return Math.max(1, Math.round(hud.etaMin));
+  }
+  return phrase ?? store;
 }

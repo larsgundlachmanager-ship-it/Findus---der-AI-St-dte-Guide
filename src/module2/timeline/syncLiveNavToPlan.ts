@@ -365,8 +365,19 @@ function replaceLiveNavRows(dayKey: string, next: FuturePlanStop[]): void {
   store.ensureDay(dayKey);
   const liveIds = new Set(next.map((s) => s.id));
   const plan = store.getPlanForDay(dayKey);
+  const nextOwnsLive = next.some((r) => r.groupId === 'live_journey');
   for (const s of [...plan.stops]) {
     if (isLiveNavLegId(s.id) && !liveIds.has(s.id)) {
+      store.removeStop(s.id);
+      continue;
+    }
+    // Live-Spiegel besitzt die Gruppe: alle alten live_journey-Zeilen weg
+    // (auch _l* / _h* aus addJourneyToTimeline) — sonst Doppel-RB71 / Doppel-zu-Fuß.
+    if (
+      nextOwnsLive &&
+      s.groupId === 'live_journey' &&
+      !liveIds.has(s.id)
+    ) {
       store.removeStop(s.id);
     }
   }
@@ -487,13 +498,16 @@ export function upsertLiveNavFromStore(opts?: { force?: boolean }): void {
           vehicleMode: s.vehicleMode ?? null,
           path: s.path,
           notes: s.notes,
+          liveHint: (s as { liveHint?: string | null }).liveHint ?? null,
           mapsUrl:
             s.role === 'walk' ||
             s.role === 'alight' ||
             s.role === 'transfer' ||
             s.role === 'board'
               ? null
-              : urls.mapsUrl,
+              : urls.menuUrl
+                ? null
+                : urls.mapsUrl,
           menuUrl: urls.menuUrl,
           reserveUrl: urls.reserveUrl,
           websiteUrl: urls.websiteUrl,
@@ -544,6 +558,71 @@ export function upsertLiveNavFromStore(opts?: { force?: boolean }): void {
     });
   } catch {
     /* soft — Timeline darf Nav nie killen */
+  }
+}
+
+/**
+ * Hard-Nav (explizit „navigiere zu X“): alte ÖPNV-/Tour-Gruppen am selben Ziel
+ * und Live-Spiegel weg — sonst Timeline-Chaos + Fake-Zeitkonflikt.
+ */
+export function purgeStaleJourneysForHardNav(destHint?: string | null): void {
+  clearLiveNavFromPlan();
+  const hint = String(destHint || '')
+    .toLowerCase()
+    .replace(/[^a-zäöüß0-9]+/giu, ' ')
+    .trim();
+  const tokens = hint
+    .split(/\s+/)
+    .map((t) => t.trim())
+    .filter((t) => t.length >= 3 && !/^(der|die|das|zum|zur|nach|mit|tcp|tc)$/i.test(t));
+  try {
+    const store = useFuturePlanStore.getState();
+    const dayKey = todayDateKey();
+    store.ensureDay(dayKey);
+    const plan = store.getPlanForDay(dayKey);
+    const now = Date.now();
+    const windowMs = 4 * 60 * 60_000;
+    for (const s of [...plan.stops]) {
+      if (isLiveNavLegId(s.id) || s.groupId === 'live_journey') {
+        store.removeStop(s.id);
+        continue;
+      }
+      const title = String(s.title || '').toLowerCase();
+      const nearNow =
+        s.plannedStartMs != null &&
+        Math.abs(s.plannedStartMs - now) < windowMs;
+      const nameHit =
+        tokens.length > 0 &&
+        tokens.some((tok) => title.includes(tok));
+      const gid = String(s.groupId || '');
+      const oepnvAuto =
+        /^öpnv\b/i.test(s.title || '') ||
+        s.transport === 'transit' ||
+        /^live_/i.test(gid) ||
+        /journey|oepnv|transit|nav_/i.test(gid);
+      // Hard-Walk: Auto-ÖPNV/Touren rund um Jetzt weg (auch anderes Ziel),
+      // sonst Timeline-Chaos + Fake-Konflikt. Manuelle Termine ohne Gruppe bleiben.
+      const wipeAutoNear =
+        nearNow &&
+        oepnvAuto &&
+        (nameHit || /^öpnv\b/i.test(s.title || '') || /^live_/i.test(gid) || /journey/i.test(gid));
+      if (wipeAutoNear) {
+        if (s.groupId) {
+          try {
+            const { removePlanGroup } = require('./planLiveEdits') as {
+              removePlanGroup: (g: string) => unknown;
+            };
+            removePlanGroup(s.groupId);
+          } catch {
+            store.removeStop(s.id);
+          }
+        } else {
+          store.removeStop(s.id);
+        }
+      }
+    }
+  } catch {
+    /* soft */
   }
 }
 

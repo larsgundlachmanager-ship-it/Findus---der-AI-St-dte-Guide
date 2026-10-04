@@ -12,14 +12,17 @@ import android.media.RingtoneManager
 import android.os.Build
 
 /**
- * Feuert den AlarmManager-Backup-Wecker (wenn keine System-Uhr den Intent übernimmt).
+ * Feuert AlarmManager-Backup: Wecker oder Küchen-Timer
+ * (auch bei App im Hintergrund / Display aus).
  */
 class FindusAlarmReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent?) {
-    if (intent?.action != ACTION_FIRE) return
+    val action = intent?.action ?: return
+    val isTimer = action == ACTION_FIRE_TIMER
+    if (action != ACTION_FIRE && !isTimer) return
 
     val message = intent.getStringExtra(EXTRA_MESSAGE)?.take(80).orEmpty()
-      .ifBlank { "Findus Wecker" }
+      .ifBlank { if (isTimer) "Yorro Timer" else "Findus Wecker" }
     val hour = intent.getIntExtra(EXTRA_HOUR, -1)
     val minute = intent.getIntExtra(EXTRA_MINUTE, -1)
     val timeLabel =
@@ -29,7 +32,7 @@ class FindusAlarmReceiver : BroadcastReceiver() {
         "jetzt"
       }
 
-    ensureChannel(context)
+    ensureChannel(context, isTimer)
 
     val launch = context.packageManager.getLaunchIntentForPackage(context.packageName)
       ?: Intent()
@@ -41,29 +44,40 @@ class FindusAlarmReceiver : BroadcastReceiver() {
         } else {
           0
         }
-    val contentPi = PendingIntent.getActivity(context, 71021, launch, flags)
+    val contentPi = PendingIntent.getActivity(
+      context,
+      if (isTimer) 71031 else 71021,
+      launch,
+      flags,
+    )
 
     val alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
       ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
     val builder =
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        Notification.Builder(context, CHANNEL_ID)
+        Notification.Builder(context, if (isTimer) CHANNEL_TIMER_ID else CHANNEL_ID)
       } else {
         @Suppress("DEPRECATION")
         Notification.Builder(context)
       }
 
+    val title =
+      if (isTimer) "Yorro — Timer durch"
+      else "Findus — Aufstehen ($timeLabel)"
+    val body =
+      if (isTimer) {
+        "$message\nTimer ist abgelaufen — auch im Hintergrund."
+      } else {
+        "$message\nBackup-Wecker (System-Uhr war nicht erreichbar)."
+      }
+
     @Suppress("DEPRECATION")
     val notification = builder
       .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
-      .setContentTitle("Findus — Aufstehen ($timeLabel)")
+      .setContentTitle(title)
       .setContentText(message)
-      .setStyle(
-        Notification.BigTextStyle().bigText(
-          "$message\nBackup-Wecker (System-Uhr war nicht erreichbar).",
-        ),
-      )
+      .setStyle(Notification.BigTextStyle().bigText(body))
       .setAutoCancel(true)
       .setSound(alarmUri)
       .setVibrate(longArrayOf(0, 500, 250, 500, 250, 500))
@@ -74,20 +88,26 @@ class FindusAlarmReceiver : BroadcastReceiver() {
       .build()
 
     val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
-    nm?.notify(NOTIFICATION_FIRE_ID, notification)
+    nm?.notify(
+      if (isTimer) NOTIFICATION_TIMER_FIRE_ID else NOTIFICATION_FIRE_ID,
+      notification,
+    )
   }
 
-  private fun ensureChannel(context: Context) {
+  private fun ensureChannel(context: Context, isTimer: Boolean) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
     val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
       ?: return
-    if (nm.getNotificationChannel(CHANNEL_ID) != null) return
+    val channelId = if (isTimer) CHANNEL_TIMER_ID else CHANNEL_ID
+    if (nm.getNotificationChannel(channelId) != null) return
     val channel = NotificationChannel(
-      CHANNEL_ID,
-      "Findus Wecker",
+      channelId,
+      if (isTimer) "Yorro Timer" else "Findus Wecker",
       NotificationManager.IMPORTANCE_HIGH,
     ).apply {
-      description = "Weckalarme und Backup-Alarme"
+      description =
+        if (isTimer) "Küchen-Timer und Countdowns"
+        else "Weckalarme und Backup-Alarme"
       enableVibration(true)
       val alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
       if (alarmUri != null) {
@@ -105,11 +125,15 @@ class FindusAlarmReceiver : BroadcastReceiver() {
 
   companion object {
     const val ACTION_FIRE = "de.findus.app.ACTION_FINDUS_ALARM_FIRE"
+    const val ACTION_FIRE_TIMER = "de.findus.app.ACTION_FINDUS_TIMER_FIRE"
     const val EXTRA_MESSAGE = "message"
     const val EXTRA_HOUR = "hour"
     const val EXTRA_MINUTE = "minute"
     const val EXTRA_TRIGGER_AT = "triggerAt"
+    const val EXTRA_KIND = "kind"
     private const val CHANNEL_ID = "findus_wake_alarm"
+    private const val CHANNEL_TIMER_ID = "findus_kitchen_timer"
     private const val NOTIFICATION_FIRE_ID = 71002
+    private const val NOTIFICATION_TIMER_FIRE_ID = 71003
   }
 }

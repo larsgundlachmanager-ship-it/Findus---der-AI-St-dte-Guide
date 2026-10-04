@@ -11,12 +11,14 @@ export async function planTransitHandsFree(opts: {
   from: { lat: number; lng: number };
   to: { lat: number; lng: number };
   departAt?: Date | null;
+  arriveBy?: Date | null;
 }): Promise<JourneyItinerary | null> {
   const result = await planJourney({
     from: opts.from,
     to: opts.to,
     travelMode: 'transit',
-    departAt: opts.departAt ?? new Date(),
+    arriveBy: opts.arriveBy ?? null,
+    departAt: opts.arriveBy ? null : opts.departAt ?? new Date(),
     numItineraries: 5,
   });
   return result.itineraries[0] ?? null;

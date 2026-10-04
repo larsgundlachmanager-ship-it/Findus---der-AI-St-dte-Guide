@@ -225,7 +225,7 @@ function stopToNode(s: FuturePlanStop, nowMs: number): TimelineNode {
   }
   const livePathTitle =
     /^(zu Fuß|Rad|ÖPNV|Fahrt)\s*·/.test(s.title) ||
-    /\bRichtung\b/.test(s.title) ||
+    /\b(Richtung|nach)\b/.test(s.title) ||
     s.groupId === 'live_journey';
   const notesTrim = s.notes?.trim();
   const isFtLeg = s.id.startsWith('ft:');
@@ -284,8 +284,9 @@ function stopToNode(s: FuturePlanStop, nowMs: number): TimelineNode {
 }
 
 function dedupeReality(nodes: TimelineNode[]): TimelineNode[] {
-  // Gleicher Ort in ~90 Min mergen (Visit + Hist oft 2–3×); Bar→Döner→Bar bleibt.
-  const WINDOW_MS = 90 * 60_000;
+  // Gleicher Ort hintereinander immer mergen (Adresse 2× = 1 Block).
+  // Nicht-aufeinanderfolgend nur innerhalb ~3 h (GPS-Blip), sonst Bar→X→Bar bleibt.
+  const WINDOW_MS = 3 * 60 * 60_000;
   const sorted = [...nodes].sort((a, b) => (a.atMs ?? 0) - (b.atMs ?? 0));
   const out: TimelineNode[] = [];
   for (const n of sorted) {
@@ -294,36 +295,79 @@ function dedupeReality(nodes: TimelineNode[]): TimelineNode[] {
       .toLowerCase()
       .replace(/[^a-z0-9äöüß]+/gi, '')
       .slice(0, 48);
-    const matchIdx = out.findIndex((prev) => {
+    const sameTitleAs = (prev: TimelineNode): boolean => {
       const prevKey = prev.title
         .replace(/^📍\s*/, '')
         .toLowerCase()
         .replace(/[^a-z0-9äöüß]+/gi, '')
         .slice(0, 48);
-      const closeInTime =
-        prev.atMs != null &&
-        n.atMs != null &&
-        Math.abs(prev.atMs - n.atMs) <= WINDOW_MS;
-      const sameTitle =
+      return (
         (key.length >= 3 && key === prevKey) ||
         prev.title.replace(/^📍\s*/, '').toLowerCase() ===
-          n.title.replace(/^📍\s*/, '').toLowerCase();
-      return sameTitle && (closeInTime || !prev.endMs || !n.atMs);
-    });
+          n.title.replace(/^📍\s*/, '').toLowerCase()
+      );
+    };
+    // 1) Direkt vorheriger Reality-Eintrag = gleiche Adresse → immer zusammen
+    const last = out[out.length - 1];
+    let matchIdx =
+      last && sameTitleAs(last) ? out.length - 1 : -1;
+    // 2) Sonst gleicher Titel in Fenster (ohne fremden Ort dazwischen)
+    if (matchIdx < 0) {
+      matchIdx = out.findIndex((prev, idx) => {
+        if (!sameTitleAs(prev)) return false;
+        const closeInTime =
+          prev.atMs != null &&
+          n.atMs != null &&
+          Math.abs(prev.atMs - n.atMs) <= WINDOW_MS;
+        if (!closeInTime && prev.endMs != null && n.atMs != null) {
+          // Noch offen / überlappend
+          if (prev.untilNow || (prev.endMs >= n.atMs - 5 * 60_000)) {
+            /* continue check */
+          } else {
+            return false;
+          }
+        } else if (!closeInTime) {
+          return false;
+        }
+        // Fremder Ort dazwischen → kein Merge (Hotel → Ausflug → Hotel)
+        const between = out.slice(idx + 1);
+        if (between.some((b) => !sameTitleAs(b))) return false;
+        return true;
+      });
+    }
     if (matchIdx >= 0) {
       const prev = out[matchIdx]!;
       // Prefer visit_* over hist_* (richer dwell)
       if (n.id.startsWith('visit_') && prev.id.startsWith('hist_')) {
         out[matchIdx] = {
           ...n,
-          endMs: n.endMs ?? prev.endMs,
+          atMs:
+            prev.atMs != null && n.atMs != null
+              ? Math.min(prev.atMs, n.atMs)
+              : (n.atMs ?? prev.atMs),
+          endMs:
+            n.endMs != null && prev.endMs != null
+              ? Math.max(n.endMs, prev.endMs)
+              : (n.endMs ?? prev.endMs),
           subtitle: n.subtitle ?? prev.subtitle,
-          untilNow: n.untilNow ?? prev.untilNow,
+          untilNow: n.untilNow || prev.untilNow,
         };
       } else {
-        if (!prev.endMs && n.endMs) prev.endMs = n.endMs;
+        if (prev.atMs != null && n.atMs != null) {
+          prev.atMs = Math.min(prev.atMs, n.atMs);
+        }
+        if (n.endMs != null) {
+          prev.endMs =
+            prev.endMs != null ? Math.max(prev.endMs, n.endMs) : n.endMs;
+        }
         if (!prev.subtitle && n.subtitle) prev.subtitle = n.subtitle;
         if (n.untilNow) prev.untilNow = true;
+        // Geschlossener zweiter Block → „Aufenthalt“ statt „bis jetzt“ wenn beide zu
+        if (prev.endMs != null && !n.untilNow && !prev.untilNow) {
+          if (!prev.subtitle || /bis jetzt|seit/i.test(prev.subtitle)) {
+            prev.subtitle = 'Aufenthalt';
+          }
+        }
       }
       continue;
     }
@@ -458,17 +502,25 @@ export function buildDayTimeline(dateKey: string, nowMs = Date.now()): {
       tone: 'default',
       kind: 'now',
     };
-    const out: TimelineNode[] = [];
-    let placed = false;
+    // Fußweg der „jetzt“ läuft (Start knapp vor/bei now) → unter Jetzt, nicht darüber
+    const WALK_SLACK_MS = 2 * 60_000;
+    const isWalkish = (n: TimelineNode): boolean =>
+      n.transport === 'walk' ||
+      /zu\s*fu[ßs]|🚶|fussweg|fußweg/i.test(`${n.title} ${n.emoji ?? ''}`);
+
+    const past: TimelineNode[] = [];
+    const rest: TimelineNode[] = [];
     for (const n of timed) {
-      if (!placed && (n.atMs ?? 0) > nowMs) {
-        out.push(nowNode);
-        placed = true;
+      const t = n.atMs ?? 0;
+      const currentWalk =
+        isWalkish(n) && t >= nowMs - WALK_SLACK_MS && t <= nowMs + 30_000;
+      if (t < nowMs && !currentWalk) {
+        past.push(n);
+      } else {
+        rest.push(n);
       }
-      out.push(n);
     }
-    if (!placed) out.push(nowNode);
-    return out;
+    return [...past, nowNode, ...rest];
   };
 
   const nodes: TimelineNode[] = [];

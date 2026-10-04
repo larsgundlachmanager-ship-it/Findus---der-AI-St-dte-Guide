@@ -4,6 +4,7 @@
  */
 
 import type { PitchCandidate, PitchWish } from '../../pitch/types';
+import { stripInternalWorkerSpeech } from '../../speech/speechHumanOnly';
 
 export type CriteriaId =
   | 'dish_specialty'
@@ -237,7 +238,9 @@ export function formatResearchPackForPrompt(pack: ResearchPack): string {
     .join(' + ');
   return [
     '=== RESEARCH_PACK (Backend → Call 2) ===',
-    pack.authorIntent ? `INTENT: ${pack.authorIntent}` : '',
+    pack.authorIntent
+      ? `INTENT: ${stripInternalWorkerSpeech(pack.authorIntent) || '—'}`
+      : '',
     pack.spokenBridge
       ? `BRIDGE (schon gesprochen): ${pack.spokenBridge}`
       : 'BRIDGE: keine',

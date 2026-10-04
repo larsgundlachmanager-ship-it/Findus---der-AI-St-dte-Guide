@@ -1,0 +1,61 @@
+09-09 00:21:11.340     0     0 I [    C1] [soft_i][0x1c140493a003][22: 21:20.359505] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:21.139  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:22.144  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:23.147  3070  3715 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:14.514     0     0 I [    C1] [soft_i][0x1c1408359391][22: 21:23.533739] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:24.151  3070  4434 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:25.154  3070  4434 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:16.350     0     0 I [    C0] [soft_i][0x1c140a4f42eb][22: 21:25.369037] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:26.158  3070  4434 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:27.162  3070  4434 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:28.166  3070  3715 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:19.424     0     0 I [    C0] [soft_i][0x1c140dd3e5fd][22: 21:28.443211] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:28.552 14291 14302 I ewrk    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+09-09 00:21:28.627  3070  4418 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:28.639  3070  4216 D BackgroundInstallControlService: Package event received: 0
+09-09 00:21:28.639  3070  4216 D BackgroundInstallControlService: Package event received: 0
+09-09 00:21:28.645 14291 14302 I ewrk    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+09-09 00:21:29.171  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:30.175  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:31.179  3070  4434 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:31.312  3070  4216 D BackgroundInstallControlService: Package event received: 0
+09-09 00:21:32.183  3070  4418 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:32.245  3070  4238 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:32.971  3070  4418 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:32.984  3070  4238 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:33.187  3070  4434 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:33.707  3070  4418 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:34.192  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:35.196  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:36.200  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:37.204  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:38.209  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:29.568     0     0 I [    C1] [soft_i][0x1c14196fd300][22: 21:38.587385] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:39.212  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:40.216  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:31.308     0     0 I [    C1] [soft_i][0x1c141b6d9add][22: 21:40.327436] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:41.220  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:42.224  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:43.229  3070  4406 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:34.585     0     0 I [    C1] [soft_i][0x1c141f2d921e][22: 21:43.604120] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-09 00:21:44.232  3070  3122 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:44.645  3070  3122 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:44.653 14291 14302 I ewrk    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+09-09 00:21:44.671  3070  4216 D BackgroundInstallControlService: Package event received: 0
+09-09 00:21:44.671  3070  4216 D BackgroundInstallControlService: Package event received: 0
+09-09 00:21:44.678 14291 14302 I ewrk    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+09-09 00:21:45.236  3070  4411 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:46.241  3070  4411 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:46.403  3070  4216 D BackgroundInstallControlService: Package event received: 0
+09-09 00:21:47.245  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:48.237  3070  4418 D NtLocationRequestRecord: The package: com.google.android.gms is in blacklist, do nothing!
+09-09 00:21:48.251  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:49.255  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:50.261  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:51.266  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:52.269  3070  4411 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:53.275  3070  4411 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:54.278  3070  4411 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:55.282  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:56.286  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui
+09-09 00:21:57.291  3070  4405 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 4316, onlyPackageName = true, name = com.android.systemui

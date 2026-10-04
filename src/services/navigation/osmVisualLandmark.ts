@@ -1,6 +1,6 @@
 /**
- * OSM Overpass — sichtbare Landmarken für TTS-Ansagen (Briefkasten, Ampel, …).
- * Street View nur als lazy Button (kein Prefetch).
+ * OSM Overpass — sichtbare Verkehrs-Landmarken an der Kreuzung.
+ * Einfach: nur Ampel / Brücke / Tunnel / Treppe, ≤5 m.
  */
 
 import { streetViewAvailable } from './googleMapsNav';
@@ -16,6 +16,9 @@ export type VisualLandmarkCue = {
   /** Button vorbereiten, Bild erst bei Tap laden */
   streetViewButtonReady: boolean;
 };
+
+/** Default: nur Elemente direkt an der Kreuzung. */
+export const OSM_VISUAL_LANDMARK_RADIUS_M = 5;
 
 const OVERPASS = 'https://overpass-api.de/api/interpreter';
 const FETCH_MS = 8_000;
@@ -39,17 +42,12 @@ function haversine(
 }
 
 function labelForTags(tags: Record<string, string>): string | null {
-  if (tags.amenity === 'post_box' || tags.amenity === 'mailbox') {
-    return tags.colour || tags.color
-      ? `${tags.colour || tags.color}er Briefkasten`
-      : 'Briefkasten';
-  }
   if (tags.highway === 'traffic_signals') return 'Ampel';
-  if (tags.amenity === 'bench') return 'Bank';
-  if (tags.amenity === 'waste_basket') return 'Mülleimer';
-  if (tags.highway === 'crossing') return 'Fußgängerüberweg';
-  if (tags.amenity === 'fountain') return 'Brunnen';
-  // Brücke / Steg (ways kommen mit center lat/lon)
+  if (tags.highway === 'steps' || tags.stairs === 'yes') return 'Treppe';
+  if (tags.tunnel === 'yes' || tags.man_made === 'tunnel') {
+    return tags.name || 'Tunnel';
+  }
+
   const bridgeVal = (tags.bridge || '').toLowerCase();
   const isBridge =
     tags.man_made === 'bridge' ||
@@ -74,15 +72,12 @@ function labelForTags(tags: Record<string, string>): string | null {
     }
     return 'Brücke';
   }
-  if (tags.natural === 'tree' && tags.name) return `Baum „${tags.name}"`;
-  if (tags.shop) return tags.name || `Laden (${tags.shop})`;
-  if (tags.tourism === 'artwork' && tags.name) return tags.name;
-  if (tags.name) return tags.name;
+  // Keine Briefkästen, Läden, Kirchen, Shops — nur Verkehrs-Anker.
   return null;
 }
 
 /**
- * Nächste sichtbare Landmarke im Radius (für „lauf auf den roten Briefkasten zu“).
+ * Nächste Verkehrs-Landmarke im Radius (Ampel/Brücke/Tunnel/Treppe).
  */
 export async function fetchOsmVisualLandmark(opts: {
   lat: number;
@@ -90,17 +85,18 @@ export async function fetchOsmVisualLandmark(opts: {
   radiusM?: number;
   headingDeg?: number | null;
 }): Promise<VisualLandmarkCue | null> {
-  const radius = opts.radiusM ?? 45;
+  const radius = opts.radiusM ?? OSM_VISUAL_LANDMARK_RADIUS_M;
   const q = `
 [out:json][timeout:6];
 (
-  node(around:${radius},${opts.lat},${opts.lng})["amenity"~"post_box|mailbox|bench|waste_basket|fountain"];
-  node(around:${radius},${opts.lat},${opts.lng})["highway"~"traffic_signals|crossing"];
-  node(around:${radius},${opts.lat},${opts.lng})["shop"];
-  node(around:${radius},${opts.lat},${opts.lng})["tourism"="artwork"];
+  node(around:${radius},${opts.lat},${opts.lng})["highway"="traffic_signals"];
+  node(around:${radius},${opts.lat},${opts.lng})["highway"="steps"];
+  way(around:${radius},${opts.lat},${opts.lng})["highway"="steps"];
   way(around:${radius},${opts.lat},${opts.lng})["bridge"];
   way(around:${radius},${opts.lat},${opts.lng})["man_made"="bridge"];
-  way(around:${radius},${opts.lat},${opts.lng})["highway"~"footway|path|pedestrian"]["bridge"];
+  way(around:${radius},${opts.lat},${opts.lng})["tunnel"="yes"];
+  way(around:${radius},${opts.lat},${opts.lng})["man_made"="tunnel"];
+  way(around:${radius},${opts.lat},${opts.lng})["highway"~"footway|path|pedestrian|steps"]["bridge"];
 );
 out center body 16;
 `;
@@ -137,44 +133,49 @@ out center body 16;
         label === 'Brücke' ||
         /brücke$/i.test(label) ||
         label === 'Ampel' ||
-        label === 'Bank';
+        label === 'Treppe';
       const cue: VisualLandmarkCue = {
         labelDe: label,
         typ:
           el.tags.amenity ||
           el.tags.highway ||
           el.tags.man_made ||
-          el.tags.shop ||
+          el.tags.tunnel ||
           'poi',
         distanceM: Math.round(d),
         lat,
         lng: lon,
         ttsLine: feminine
-          ? `Orientier dich an der ${label} — etwa ${Math.round(d)} Meter.`
-          : `Orientier dich am ${label} — etwa ${Math.round(d)} Meter.`,
+          ? `Orientier dich an der ${label}.`
+          : `Orientier dich am ${label}.`,
         streetViewButtonReady: false,
       };
-      // Fußgängerbrücke leicht bevorzugen gegenüber generischem Street-Furniture
       const prefer =
-        label === 'Fußgängerbrücke' || /brücke$/i.test(label) ? -8 : 0;
+        label === 'Ampel'
+          ? -14
+          : label === 'Fußgängerbrücke' || /brücke$/i.test(label)
+            ? -12
+            : label === 'Tunnel' || label === 'Treppe'
+              ? -10
+              : 0;
       const score = cue.distanceM + prefer;
       const bestScore =
         best == null
           ? Number.POSITIVE_INFINITY
           : best.distanceM +
-            (best.labelDe === 'Fußgängerbrücke' || /brücke$/i.test(best.labelDe)
-              ? -8
-              : 0);
+            (best.labelDe === 'Ampel'
+              ? -14
+              : best.labelDe === 'Fußgängerbrücke' ||
+                  /brücke$/i.test(best.labelDe)
+                ? -8
+                : 0);
       if (!best || score < bestScore) best = cue;
     }
-    if (!best) return null;
-
-    // Nur Metadata: gibt es Street View? Bild NICHT laden.
-    try {
-      const ok = await streetViewAvailable(best.lat, best.lng);
-      best.streetViewButtonReady = !!ok;
-    } catch {
-      best.streetViewButtonReady = false;
+    if (best) {
+      best.streetViewButtonReady = await streetViewAvailable(
+        best.lat,
+        best.lng,
+      ).catch(() => false);
     }
     return best;
   } catch {

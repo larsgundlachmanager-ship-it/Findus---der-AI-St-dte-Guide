@@ -146,7 +146,7 @@ export function classifyOpenUrlIntent(
     return 'menu';
   }
   if (
-    /🎫|🎟|ticket|eintritt|eventim|ticketmaster|konfetti|gokonfetti|tiqets|musement/i.test(
+    /🎫|🎟|ticket|eintritt|eventim|ticketmaster|reservix|adticket|konfetti|gokonfetti|tiqets|musement/i.test(
       blob,
     )
   ) {
@@ -185,7 +185,10 @@ function intentTokenScore(url: string, intent: DeepLinkIntent): number {
   }
   if (intent === 'ticket') {
     if (/\/(tickets?|eintritt|checkout|kaufen)\b/.test(u)) return 18;
-    if (/eventim|ticketmaster|gokonfetti|tiqets\.com\/.+-p\d+/i.test(u)) return 16;
+    if (/eventim|ticketmaster|reservix|adticket|gokonfetti|tiqets\.com\/.+-p\d+/i.test(u)) return 16;
+    if (/\/group\/\d+|\/tickets\/[a-z0-9-]+/i.test(u) && /reservix|adticket/i.test(u)) {
+      return 20;
+    }
     if (/\/events\/[a-z0-9-]{8,}/.test(u)) return 12;
     return 0;
   }

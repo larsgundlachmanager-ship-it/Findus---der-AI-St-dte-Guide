@@ -1,5 +1,5 @@
 /**
- * Auto-ÖPNV Gate: Luftlinie 1,4 / 3 km, Rad 10 / 15 km.
+ * Auto-ÖPNV Gate: Luftlinie 1,4 / 1,8 km, Rad 10 / 15 km.
  */
 import assert from 'node:assert/strict';
 import {
@@ -39,7 +39,7 @@ function shouldOfferAutoTransit(opts: {
 assert.equal(PLAN_SOFT_MODE_MAX_MIN, 20);
 assert.equal(PLAN_AIRLINE_LONG_WALK_M, PLAN_AIR_FORCE_TRANSIT_M);
 assert.equal(PLAN_AIR_OFFER_TRANSIT_M, 1_400);
-assert.equal(PLAN_AIR_FORCE_TRANSIT_M, 3_000);
+assert.equal(PLAN_AIR_FORCE_TRANSIT_M, 1_800);
 assert.equal(PLAN_AIR_BIKE_OFFER_TRANSIT_M, 10_000);
 assert.equal(PLAN_AIR_BIKE_FORCE_TRANSIT_M, 15_000);
 assert.equal(
@@ -59,6 +59,15 @@ assert.equal(decideAirMobility({ airMeters: 400, walkMin: 6 }).kind, 'walk');
 assert.equal(
   decideAirMobility({ airMeters: 1_600, walkMin: 22 }).kind,
   'ask_transit',
+);
+assert.equal(
+  decideAirMobility({
+    airMeters: 1_900,
+    walkMin: 28,
+    transitMin: 14,
+    taxiPref: 'no',
+  }).kind,
+  'auto_transit',
 );
 assert.equal(
   decideAirMobility({
@@ -113,7 +122,7 @@ assert.equal(
   tidyHaltName(
     'Haltestelle Prisdorf, Pinnau, Kreis Pinneberg, Schleswig-Holstein, 25497, Deutschland',
   ),
-  'Prisdorf',
+  'Prisdorf, Pinnau',
 );
 assert.equal(
   tidyHaltName(

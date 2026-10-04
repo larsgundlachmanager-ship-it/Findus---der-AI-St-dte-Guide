@@ -710,10 +710,37 @@ export async function interruptAndNavigateToDiscovery(
     skipClosingGate?: boolean;
     /** Pin / „Ja, dorthin“ — kein Fernziel-Verify, kein Einweben in alte Tour */
     skipDestVerify?: boolean;
+    /** Explizit Zwischenstopp einfügen (Originalziel bleibt) */
+    insertStop?: boolean;
   },
 ): Promise<boolean> {
+  // Call-1/Call-2 nicht hart killen — Nav-Cue wartet auf Satzgrenze / Speech-Ende.
+  // Button-Tap mit stiller App: weiter stopSpeaking.
   try {
-    await stopSpeaking();
+    let questionsLive = false;
+    try {
+      const { isStreamingAudioQueueBusy } = await import(
+        '../audio/streamingAudioQueueService'
+      );
+      const { isFusedTurnLive } = await import(
+        '../../module2/speech/fusedTurnSpeech'
+      );
+      const {
+        getActiveTtsSessionCount,
+        isAudiblyPlaying,
+      } = await import('../AudioVoiceService');
+      questionsLive =
+        isStreamingAudioQueueBusy() ||
+        isFusedTurnLive() ||
+        getActiveTtsSessionCount() > 0 ||
+        isAudiblyPlaying() ||
+        useFinnusStore.getState().isGenerating;
+    } catch {
+      questionsLive = useFinnusStore.getState().isGenerating;
+    }
+    if (!questionsLive) {
+      await stopSpeaking();
+    }
   } catch {
     // ignore
   }
@@ -808,45 +835,16 @@ export async function interruptAndNavigateToDiscovery(
     }
   }
 
-  // Karten-Pin / bestätigtes Ziel: frisch starten — nicht in stale Tour einweben
-  if (!opts?.skipDestVerify) {
-    const keepFinal = opts?.keepFinal ?? getActiveNavDestination();
-    if (keepFinal) {
-      const gps = useFinnusStore.getState();
-      const fromLat = gps.lastGpsLat;
-      const fromLng = gps.lastGpsLng;
-      const longWalk =
-        fromLat != null &&
-        fromLng != null &&
-        distanceMeters(fromLat, fromLng, candidate.lat, candidate.lng) / 80 >
-          20;
-
-      // Lange Ziele nicht in lokale Walk-Tour einweben — frische Route (Auto-ÖPNV)
-      if (longWalk) {
-        const tour = gps.multiStopTour;
-        const transitTour = tour?.stops?.some(
-          (s) =>
-            s.role === 'board' ||
-            s.role === 'alight' ||
-            s.role === 'transfer',
-        );
-        if (!transitTour) {
-          useFinnusStore.getState().setMultiStopTour(null);
-        }
-        const poiIdLong =
-          'poiId' in candidate &&
-          typeof (candidate as { poiId?: number }).poiId === 'number'
-            ? (candidate as { poiId: number }).poiId
-            : -1;
-        return startNavigationToCoords({
-          name: candidate.name,
-          lat: candidate.lat,
-          lng: candidate.lng,
-          poiId: poiIdLong,
-          skipDestVerify: true,
-        });
-      }
-
+  // Laufende Nav: Zwischenstopp EINFügen — Originalziel nie löschen.
+  // skipDestVerify nur für frische Pin-Ziele ohne aktive Tour.
+  const keepFinal =
+    opts?.keepFinal !== undefined
+      ? opts.keepFinal
+      : getActiveNavDestination();
+  const forceInsert =
+    opts?.insertStop === true ||
+    (!opts?.skipDestVerify && Boolean(keepFinal));
+  if (forceInsert && keepFinal) {
       ensureTourFromActiveNav({
         name: keepFinal.name,
         lat: keepFinal.lat,
@@ -854,7 +852,11 @@ export async function interruptAndNavigateToDiscovery(
         poiId: 'poiId' in keepFinal ? keepFinal.poiId ?? -1 : -1,
       });
       const stop: TourStop = {
-        poiId: -1,
+        poiId:
+          'poiId' in candidate &&
+          typeof (candidate as { poiId?: number }).poiId === 'number'
+            ? (candidate as { poiId: number }).poiId
+            : -1,
         name: candidate.name,
         lat: candidate.lat,
         lng: candidate.lng,
@@ -862,7 +864,21 @@ export async function interruptAndNavigateToDiscovery(
         priority: opts?.emergency ? 'must' : 'high',
         remindMinBefore: opts?.emergency ? 5 : null,
       };
-      // Smart einweben (on-route vorher), nicht nur blind vorne — Tour bleibt
+      // Kürzeste Reihenfolge (pinLast Hotel/Ziel) — Tour bleibt
+      try {
+        const { addOptimizedTourStop } = await import('./multiStopTour');
+        const optimized = await addOptimizedTourStop(stop, { startNow: true });
+        if (optimized) {
+          try {
+            await speakAssistantText(optimized.speechHint);
+          } catch {
+            /* soft */
+          }
+          return true;
+        }
+      } catch {
+        /* soft — weave/insert */
+      }
       if (hasActiveTourQueue()) {
         const woven = await weaveSpontaneousStop(stop, { startNow: true });
         if (woven) {
@@ -879,7 +895,6 @@ export async function interruptAndNavigateToDiscovery(
         startNow: true,
       });
       return true;
-    }
   }
 
   const poiId =

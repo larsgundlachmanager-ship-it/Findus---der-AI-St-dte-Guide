@@ -12,10 +12,12 @@ const STORAGE_KEY = 'findus.reisebuero.taste.v1';
 export type TasteMem = {
   counts: Record<string, number>;
   likes: string[];
+  /** Stabile Prefs: party_yes|party_no|cheap_beer|eco|… */
+  stablePrefs: string[];
   updatedAtMs: number;
 };
 
-let mem: TasteMem = { counts: {}, likes: [], updatedAtMs: 0 };
+let mem: TasteMem = { counts: {}, likes: [], stablePrefs: [], updatedAtMs: 0 };
 let hydrated = false;
 
 async function getStorage(): Promise<{
@@ -39,7 +41,14 @@ async function hydrate(): Promise<void> {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
     if (!raw) return;
     const p = JSON.parse(raw) as TasteMem;
-    if (p && p.counts && Array.isArray(p.likes)) mem = p;
+    if (p && p.counts && Array.isArray(p.likes)) {
+      mem = {
+        counts: p.counts,
+        likes: p.likes,
+        stablePrefs: Array.isArray(p.stablePrefs) ? p.stablePrefs : [],
+        updatedAtMs: p.updatedAtMs ?? 0,
+      };
+    }
   } catch {
     /* soft */
   }
@@ -79,10 +88,65 @@ export function tastePromptLine(): string {
     .slice(0, 6)
     .map(([k, n]) => `${k}×${n}`);
   const likes = mem.likes.slice(-6).join(', ');
-  if (!top.length && !likes) return '(noch kein gespeicherter Geschmack)';
-  return [top.length ? `Archetypen: ${top.join(', ')}` : '', likes ? `mag: ${likes}` : '']
+  const prefs = mem.stablePrefs.slice(-8).join(', ');
+  if (!top.length && !likes && !prefs) return '(noch kein gespeicherter Geschmack)';
+  return [
+    top.length ? `Archetypen: ${top.join(', ')}` : '',
+    likes ? `mag: ${likes}` : '',
+    prefs ? `Prefs: ${prefs}` : '',
+  ]
     .filter(Boolean)
     .join(' · ');
+}
+
+/** Stabile Prefs (Party ja/nein, günstiges Bier, Eco) — Brief startet nicht bei Null. */
+export async function rememberStablePref(pref: string): Promise<void> {
+  await hydrate();
+  const cut = pref.trim().toLowerCase().slice(0, 40);
+  if (cut.length < 3) return;
+  if (!mem.stablePrefs.includes(cut)) {
+    mem.stablePrefs = [...mem.stablePrefs.slice(-23), cut];
+  }
+  mem.updatedAtMs = Date.now();
+  await persist();
+}
+
+export function listStablePrefs(): string[] {
+  return [...mem.stablePrefs];
+}
+
+export async function rememberOptionReject(opts: {
+  placeOrHotel: string;
+  reason?: string | null;
+}): Promise<void> {
+  await hydrate();
+  bump('reject');
+  rememberLike(`skip:${opts.placeOrHotel.slice(0, 40)}`);
+  if (opts.reason) rememberLike(`why:${opts.reason.slice(0, 40)}`);
+  mem.updatedAtMs = Date.now();
+  await persist();
+  try {
+    const { putTravelCache, buildTravelCacheKey } = require('./research/travelResearchCache') as {
+      putTravelCache: (e: {
+        key: string;
+        kind: 'near_miss';
+        payload: Record<string, unknown>;
+        validUntilMs: number;
+      }) => Promise<void>;
+      buildTravelCacheKey: (p: { musts?: string[] }) => string;
+    };
+    await putTravelCache({
+      key: buildTravelCacheKey({ musts: [opts.placeOrHotel] }),
+      kind: 'near_miss',
+      payload: {
+        name: opts.placeOrHotel,
+        reason: opts.reason ?? 'user_reject',
+      },
+      validUntilMs: Date.now() + 90 * 24 * 3600 * 1000,
+    });
+  } catch {
+    /* soft */
+  }
 }
 
 export async function rememberTripTaste(ledger: ReiseLedger, lastAsk?: string | null): Promise<void> {
@@ -151,6 +215,6 @@ export async function hydrateTasteMemory(): Promise<string> {
 
 /** Test helper */
 export function _resetTasteMemoryForTests(): void {
-  mem = { counts: {}, likes: [], updatedAtMs: 0 };
+  mem = { counts: {}, likes: [], stablePrefs: [], updatedAtMs: 0 };
   hydrated = true;
 }

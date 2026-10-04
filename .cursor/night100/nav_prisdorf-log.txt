@@ -1,0 +1,5 @@
+--------- beginning of main
+09-07 02:57:11.922 18525 18547 I ReactNativeJS: [cityPronunciation] prisdorf: 17 EintrÃ¤ge gecacht (2315 Textquellen)
+09-07 02:57:12.476 18525 18547 I ReactNativeJS: [cityScanner] prisdorf: 446 Anomalien, 0 neue Mappings â†’ Master (2315 Textquellen)
+09-07 02:57:13.381 18525 18547 I ReactNativeJS: [poiDatasetScanner] prisdorf: 107 FremdwÃ¶rter, 0 neu, 0 aktualisiert (2315 Textquellen)
+09-07 02:57:14.545 18525 18547 I ReactNativeJS: [sync] 325 POIs, 5720 Fakten â†’ SQLite (storage/prisdorf)

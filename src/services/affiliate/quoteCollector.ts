@@ -36,6 +36,11 @@ export function classifyTicketPartner(url: string): {
   if (/klook/i.test(url)) return { id: 'klook', commissionScore: 55 };
   if (/gokonfetti|konfetti/i.test(url)) return { id: 'konfetti', commissionScore: 68 };
   if (/reservix\.(de|at|ch)/i.test(url)) return { id: 'reservix', commissionScore: 72 };
+  if (/adticket\.de/i.test(url)) return { id: 'adticket', commissionScore: 72 };
+  // Direkt ~9 % — höher als Reservix/ADticket (~2,5 %), Ranking nur bei Preis-Parität
+  if (/gigsberg\.(com|co\.uk|de)/i.test(url)) {
+    return { id: 'gigsberg', commissionScore: 90 };
+  }
   if (/kkday/i.test(url)) return { id: 'kkday', commissionScore: 50 };
   return { id: 'direct', commissionScore: 0 };
 }

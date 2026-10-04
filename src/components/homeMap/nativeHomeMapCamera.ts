@@ -1,6 +1,7 @@
 /**
  * Kamera-Vertrags-Typen für NativeHomeMapView.
- * followMode + userView — Restore nur bei GPS-Snap in explore.
+ * Google-Maps-Verfassung: Finger = explore (nie GPS-Snap);
+ * Follow nur nach Recenter/reattachFollow. Kamera bleibt wo der User sie lässt.
  */
 export type HomeMapFollowMode = 'gps' | 'explore' | 'nav';
 

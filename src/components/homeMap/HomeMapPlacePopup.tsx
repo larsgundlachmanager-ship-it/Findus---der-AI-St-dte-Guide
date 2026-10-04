@@ -18,6 +18,11 @@ import {
 } from 'react-native';
 import { useSystemSafePad } from '../../hooks/useSystemSafePad';
 import { colors, spacing } from '../../constants/theme';
+import {
+  rewriteBulletToFit,
+  stripLeadingEllipsisSnippet,
+  BULLET_SURFACE_MAX_CHARS,
+} from '../../services/concierge/visualBullets';
 import { UI_LAYER } from '../../constants/uiLayers';
 import {
   HOME_DOCK_BAR_H,
@@ -37,8 +42,12 @@ import { noteUiVisible } from '../../services/diagnostics/interactionDelay';
 import type { MapPlacePreview } from '../../services/homeMap/mapPlacePreview';
 import {
   runMapPlaceLiveAction,
+  prefetchMapPlaceLiveEvidence,
+  filterLiveActionsWithEvidence,
   type MapPlaceLiveActionId,
+  type MapPlaceLiveEvidence,
 } from '../../services/homeMap/mapPlaceLiveActions';
+import { placeRatingLabel } from '../../services/homeMap/placeRatingLabel';
 import { isEstablishedGoogleMapsPlaceUrl } from '../../services/research/eventInfoUrl';
 import {
   airNeedsTransitLookahead,
@@ -52,6 +61,17 @@ export type HomeMapPopupAction = {
 };
 
 export type HomeMapPopupPlace = MapPlacePreview;
+
+/**
+ * Gelbe Rubrik im Popup — absichtlich aus.
+ * Kategorie steckt schon in Name/Stichpunkten; EN-Tags (supermarket/cafe) sind Rauschen.
+ */
+function shouldShowHomeMapPopupCategory(
+  _category: string | null | undefined,
+  _name: string | null | undefined,
+): boolean {
+  return false;
+}
 
 function listedPopupUrl(url: string | null | undefined): string | null {
   const u = (url || '').trim();
@@ -88,6 +108,11 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
   );
   const [liveBullets, setLiveBullets] = useState<string[]>([]);
   const [liveNote, setLiveNote] = useState<string | null>(null);
+  const [liveEvidence, setLiveEvidence] = useState<MapPlaceLiveEvidence | null>(
+    null,
+  );
+  const [liveProbing, setLiveProbing] = useState(false);
+  const [menuUrlOverride, setMenuUrlOverride] = useState<string | null>(null);
   const safePad = useSystemSafePad();
   const buttonMul = useUiScaleStore((s) => s.buttonMul);
   const navActive = useFinnusStore((s) => s.navActive);
@@ -232,16 +257,19 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
                 addStop: mode === 'add',
               },
             );
-            if (
-              !res.ok &&
-              !useFinnusStore.getState().navActive &&
-              !useFinnusStore.getState().navRouteLoading
-            ) {
+            if (!res.ok && !useFinnusStore.getState().navActive) {
               speakFail(res.reason);
             }
           } catch {
             speakFail('nav_failed');
           } finally {
+            try {
+              const st = useFinnusStore.getState();
+              if (!st.navActive) st.setNavRouteLoading(false);
+              st.setIsGenerating(false);
+            } catch {
+              /* soft */
+            }
             clearThinkingUi();
             setTimeout(() => {
               busyRef.current = false;
@@ -266,7 +294,53 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
     setLiveBusyId(null);
     setLiveBullets([]);
     setLiveNote(null);
+    setLiveEvidence(null);
+    setLiveProbing(false);
+    setMenuUrlOverride(null);
   }, [placeKey]);
+
+  // Popup-Open: Hours/Menu parallel — Buttons erst bei Treffer.
+  useEffect(() => {
+    if (!place || place.id <= 0) return;
+    const candidates = place.liveActions ?? [];
+    const needsProbe = candidates.some(
+      (a) => a.id === 'hours' || a.id === 'menu',
+    );
+    if (!needsProbe) return;
+    let cancelled = false;
+    setLiveProbing(true);
+    setLiveNote('Suche Öffnungszeiten und Speisekarte …');
+    const profile = getCachedUserProfile();
+    void prefetchMapPlaceLiveEvidence(
+      {
+        id: place.id,
+        name: place.name,
+        category: place.category,
+        lat: Number(place.lat),
+        lng: Number(place.lng),
+        websiteUrl: place.websiteUrl ?? null,
+        ticketUrl: place.ticketUrl ?? null,
+        city: profile?.cityName ?? profile?.cityId ?? null,
+        tagsBlob: place.category ?? null,
+      },
+      candidates,
+    ).then((ev) => {
+      if (cancelled) return;
+      setLiveEvidence(ev);
+      setLiveProbing(false);
+      if (ev.hoursBullet) {
+        setLiveBullets((prev) => {
+          if (prev.includes(ev.hoursBullet!)) return prev;
+          return [...prev, ev.hoursBullet!].slice(0, 3);
+        });
+      }
+      if (ev.menuUrl) setMenuUrlOverride(ev.menuUrl);
+      setLiveNote(ev.statusLine || null);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [placeKey, place?.liveActions, place?.websiteUrl, place?.ticketUrl]);
 
   const speakBrief = useCallback((text: string) => {
     const t = (text || '').trim();
@@ -279,6 +353,11 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
   const runLiveAction = useCallback(
     (action: MapPlaceLiveActionId) => {
       if (!place || liveBusyId) return;
+      // Speisekarte: schon prefetchter Deep-Link → direkt öffnen.
+      if (action === 'menu' && menuUrlOverride) {
+        openUrl(menuUrlOverride);
+        return;
+      }
       setLiveBusyId(action);
       setLiveNote(null);
       const profile = getCachedUserProfile();
@@ -291,6 +370,7 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
             lat: Number(place.lat),
             lng: Number(place.lng),
             websiteUrl: place.websiteUrl ?? null,
+            ticketUrl: place.ticketUrl ?? null,
             city: profile?.cityName ?? profile?.cityId ?? null,
             tagsBlob: place.category ?? null,
           });
@@ -303,7 +383,7 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
               for (const b of result.bullets ?? []) {
                 if (b && !merged.includes(b)) merged.push(b);
               }
-              return merged.slice(0, 4);
+              return merged.slice(0, 3);
             });
           }
           if (!result.ok && result.message) {
@@ -311,7 +391,8 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
           } else if (result.message && !result.url) {
             setLiveNote(result.message);
           }
-          if (result.speak) speakBrief(result.speak);
+          // Nur sprechen, wenn wirklich etwas geöffnet/geliefert wurde — keine leeren Ansagen.
+          if (result.ok && result.speak) speakBrief(result.speak);
         } catch {
           setLiveNote('Das hat gerade nicht geklappt. Versuch es nochmal.');
         } finally {
@@ -319,22 +400,61 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
         }
       })();
     },
-    [liveBusyId, openUrl, place, speakBrief],
+    [liveBusyId, menuUrlOverride, openUrl, place, speakBrief],
   );
 
-  if (!place) return null;
+  // Warm-Keep ohne Fullscreen: absoluteFill+Elevation würde Mic/Dock fressen.
+  if (!place) {
+    return (
+      <View
+        style={styles.rootWarmKeep}
+        pointerEvents="none"
+        collapsable={false}
+      />
+    );
+  }
 
-  const bullets = (place.bullets ?? []).slice(0, 3);
+  const isTransitPlace = /\b(bahnhof|haltepunkt|haltestelle|s-bahn|u-bahn|zug|öpnv|abfahrt)\b/iu.test(
+    `${place.name} ${place.category}`,
+  );
+  const packRaw = (place.bullets ?? [])
+    .map((b) =>
+      rewriteBulletToFit(
+        stripLeadingEllipsisSnippet(b),
+        BULLET_SURFACE_MAX_CHARS.default,
+      ),
+    )
+    .filter(Boolean);
+  const liveRaw = liveBullets
+    .map((b) =>
+      rewriteBulletToFit(
+        stripLeadingEllipsisSnippet(b),
+        BULLET_SURFACE_MAX_CHARS.default,
+      ),
+    )
+    .filter(Boolean);
+  // Bahnhof: Live-Abfahrten vor Historie — gesamt max 3, nie abschneiden
+  let bullets: string[];
+  let liveShown: string[];
+  if (isTransitPlace && liveRaw.length) {
+    liveShown = liveRaw.slice(0, 3);
+    bullets = packRaw.slice(0, Math.max(0, 3 - liveShown.length));
+  } else {
+    bullets = packRaw.slice(0, 3);
+    liveShown = liveRaw.slice(0, Math.max(0, 3 - bullets.length));
+  }
   const ratingValue =
     typeof place.rating === 'number' && place.rating > 0 ? place.rating : null;
-  const ratingLine = ratingValue
-    ? `★ ${ratingValue.toFixed(1)}${
-        place.ratingCount && place.ratingCount > 0
-          ? ` · ${place.ratingCount} Bewertungen`
-          : ''
-      }`
-    : null;
-  const liveActions = place.liveActions ?? [];
+  const ratingLine = placeRatingLabel(
+    ratingValue,
+    place.ratingCount,
+  );
+  const liveActions = filterLiveActionsWithEvidence(place.liveActions ?? [], {
+    probing: liveProbing,
+    evidence: liveEvidence,
+    websiteUrl: place.websiteUrl,
+    ticketUrl: place.ticketUrl,
+  });
   const linkActions: HomeMapPopupAction[] = [];
   const seen = new Set<string>();
   const pushLink = (label: string, url: string | null | undefined) => {
@@ -344,6 +464,7 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
     linkActions.push({ label, url: u });
   };
   pushLink('Webseite', listedPopupUrl(place.websiteUrl));
+  pushLink('Speisekarte', listedPopupUrl(menuUrlOverride));
   // Maps nur bei Restaurants/Cafés — Hotels/ÖPNV/Museum bleiben in-app
   // bzw. über Affiliate-Buttons (Buchen/Tickets).
   const allowMaps = /\b(restaurant|caf[eé]|bistro|imbiss|pizzeria|gasthof|gasthaus|wirtshaus|trattoria|osteria|bar|pub|kneipe|b[aä]ck|baeck|bakery|steakhouse)\b/i.test(
@@ -383,14 +504,16 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
         <Text style={styles.title} numberOfLines={2}>
           {place.name}
         </Text>
-        <Text style={styles.cat}>{place.category}</Text>
+        {shouldShowHomeMapPopupCategory(place.category, place.name) ? (
+          <Text style={styles.cat}>{place.category}</Text>
+        ) : null}
         {ratingLine ? <Text style={styles.rating}>{ratingLine}</Text> : null}
         {bullets.map((b, i) => (
           <Text key={i} style={styles.bullet} numberOfLines={3}>
             · {b}
           </Text>
         ))}
-        {liveBullets.map((b, i) => (
+        {liveShown.map((b, i) => (
           <Text key={`live_${i}`} style={styles.bulletLive} numberOfLines={3}>
             · {b}
           </Text>
@@ -521,9 +644,18 @@ export const HomeMapPlacePopup = React.memo(function HomeMapPlacePopup({
 const styles = StyleSheet.create({
   root: {
     ...StyleSheet.absoluteFillObject,
+    // Unter Dock (hud=200), aber Elevation hoch genug gegen MapLibre-TextureView.
     zIndex: UI_LAYER.placePopup,
-    elevation: UI_LAYER.placePopup,
+    elevation: Math.max(UI_LAYER.placePopup, 24),
     justifyContent: 'flex-end',
+  },
+  rootWarmKeep: {
+    position: 'absolute',
+    width: 0,
+    height: 0,
+    opacity: 0,
+    elevation: 0,
+    zIndex: -1,
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
@@ -537,7 +669,7 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
     zIndex: 1,
-    elevation: 12,
+    elevation: 28,
   },
   title: {
     color: colors.text,

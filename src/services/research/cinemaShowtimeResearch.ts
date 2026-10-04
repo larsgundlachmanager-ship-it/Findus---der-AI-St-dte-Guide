@@ -14,6 +14,15 @@ import type { Module2ActionButton } from '../../module2/types';
 import { FINDUS_FEW_SHOT_DISCLAIMER } from '../concierge/findusResponsePolicy';
 import { pickAffiliateOffer } from '../affiliate/affiliatePickOffer';
 import { classifyTicketPartner } from '../affiliate/quoteCollector';
+import {
+  cinemaTicketDeepLinkScore,
+  preferCinemaTicketUrl,
+} from './cinemaTicketUrl';
+
+export {
+  cinemaTicketDeepLinkScore,
+  preferCinemaTicketUrl,
+} from './cinemaTicketUrl';
 
 export type CinemaVenue = {
   name: string;
@@ -40,6 +49,10 @@ export type CinemaShowtimeHit = {
   snackPriceHint?: string | null;
 };
 
+/**
+ * Show-spezifische Buchungs-Links (Cinetixx showId, Ticket-Wrapper) vor
+ * nackten Programmseiten — User-Beispiel: burgkino.de/ticket?…showId=…
+ */
 function primaryCinemaTicketHits(showtimes: CinemaShowtimeHit[]): CinemaShowtimeHit[] {
   const withTix = showtimes.filter((s) => s.ticketUrl);
   if (withTix.length <= 1) return withTix;
@@ -56,6 +69,12 @@ function primaryCinemaTicketHits(showtimes: CinemaShowtimeHit[]): CinemaShowtime
       out.push(group[0]!);
       continue;
     }
+    // Deep-Link (showId/Cinetixx) schlägt Affiliate-Score auf Programm-URLs
+    const deepPick = preferCinemaTicketUrl(...group.map((s) => s.ticketUrl));
+    if (deepPick && cinemaTicketDeepLinkScore(deepPick) >= 40) {
+      out.push(group.find((s) => s.ticketUrl === deepPick) ?? group[0]!);
+      continue;
+    }
     const identity = `cinema:${group[0]!.filmTitle}:${group[0]!.cinemaName}:${group[0]!.whenLabel}`
       .toLowerCase()
       .slice(0, 80);
@@ -66,7 +85,8 @@ function primaryCinemaTicketHits(showtimes: CinemaShowtimeHit[]): CinemaShowtime
         id: `${meta.id}:${i}`,
         label: s.cinemaName,
         url,
-        commissionScore: meta.commissionScore,
+        commissionScore:
+          meta.commissionScore + Math.max(0, cinemaTicketDeepLinkScore(url)),
         deepLinkLevel: 'deep' as const,
         partnerPriceEur: s.priceEur,
         identity,
@@ -142,14 +162,20 @@ export function detectCinemaPhase(text: string): CinemaPhase {
     return 'showtimes';
   }
   const { filmHint } = extractCinemaHints(t);
+  // „Welche Filme / was läuft / Kinoprogramm“ → immer Programm (Filme), nie Kino-vs-Filme-Ask
   if (
-    /\b(welche\s+filme|was\s+(?:kannst|läuf|läuft|empfehl)|empfehlen|ins\s+kino|kino\s+gehen|kinobesuch|kinoabend|kinoprogramm|was\s+läuft|aktuell(?:es)?\s+programm|programm(?:vorschau)?)\b/iu.test(
+    /\b(welche\s+filme|was\s+läuft|was\s+laeuft|kinoprogramm|filme\s+(?:laufen|gibt)|aktuell(?:es)?\s+programm|programm(?:vorschau)?)\b/iu.test(
       t,
     )
   ) {
-    // „Welche Filme / Programm …“ bleibt Orient, auch wenn ein Genre genannt ist
-    if (!filmHint) return 'orient';
-    // Genre-Wörter sind keine Film-Titel
+    return 'showtimes';
+  }
+  if (
+    /\b(was\s+(?:kannst|läuf|läuft|empfehl)|empfehlen|ins\s+kino|kino\s+gehen|kinobesuch|kinoabend)\b/iu.test(
+      t,
+    )
+  ) {
+    // Genre ohne konkreten Film → Orient (Kino/Charakter); sonst Showtimes
     if (
       filmHint &&
       /\b(komödie|comedy|action|drama|thriller|horror|familie|kinder)\b/iu.test(
@@ -158,13 +184,15 @@ export function detectCinemaPhase(text: string): CinemaPhase {
     ) {
       return 'orient';
     }
+    if (filmHint) return 'showtimes';
+    return 'orient';
   }
   if (filmHint && filmHint.length >= 3) return 'showtimes';
   if (CINEMA_RE.test(t) && !filmHint) return 'orient';
   return 'orient';
 }
 
-/** Struktur-Hint für Synthese — kein Zwangs-Wortlaut. */
+/** Struktur-Hint für Synthese — kein Zwangs-Wortlaut. Nie Junk „Kino in Reichweite“. */
 export function venueCharacterHint(name: string): string {
   const n = name.toLowerCase();
   if (
@@ -172,21 +200,27 @@ export function venueCharacterHint(name: string): string {
       n,
     )
   ) {
-    return 'großes Multiplex / breite Auswahl';
+    return 'großes Multiplex, breite Auswahl';
   }
   if (
-    /\b(burgkino|filmbühne|filmtheater|programmkino|atelier|lichtspiele|kino\s*treff)\b/u.test(
+    /\b(burgkino|burkino|filmbühne|filmtheater|programmkino|atelier|lichtspiele|kino\s*treff)\b/u.test(
       n,
     )
   ) {
-    return 'kleineres / heimisches Kino';
+    return 'kleines Programmkino, oft Sofa-Feeling';
   }
-  return 'Kino in Reichweite';
+  return '';
+}
+
+/** Speech-Distanz: ganze km („rund 7 km“), kein „6, 9“ für TTS. */
+export function formatCinemaDistSpeech(m: number): string {
+  if (m < 1000) return `${Math.max(50, Math.round(m / 50) * 50)} m`;
+  const km = Math.max(1, Math.round(m / 1000));
+  return `rund ${km} km`;
 }
 
 function formatDist(m: number): string {
-  if (m < 1000) return `${Math.max(50, Math.round(m / 50) * 50)} m`;
-  return `${(m / 1000).toFixed(m >= 10_000 ? 0 : 1)} km`;
+  return formatCinemaDistSpeech(m);
 }
 
 function extractJsonObject(raw: string): unknown | null {
@@ -544,6 +578,7 @@ async function researchShowtimesWeb(opts: {
         : '') +
       '.',
     'PFLICHT wenn belegbar: Ticket-URL, Preis in Euro, Trailer-Link — sonst null, nie erfinden.',
+    'ticketUrl: wenn möglich Show-/Vorstellungs-Deep-Link (z. B. Cinetixx mit showId, Kino-Ticket-Wrapper) — nie nur die allgemeine Programmseite, wenn ein Show-Link belegt ist.',
     wantSnackPrices
       ? 'CROWD-LERNEN: User fragen oft nach Popcorn-/Snack-Preisen — wenn belegt, snackPriceHint setzen und in der Antwort mitliefern; sonst null, nichts schätzen.'
       : '',
@@ -596,10 +631,15 @@ async function researchShowtimesWeb(opts: {
         typeof r.infoUrl === 'string' && /^https?:\/\//i.test(r.infoUrl)
           ? r.infoUrl
           : null;
-      const ticketUrl =
+      const rawTicket =
         typeof r.ticketUrl === 'string' && /^https?:\/\//i.test(r.ticketUrl)
           ? r.ticketUrl
           : null;
+      const bestTicket = preferCinemaTicketUrl(rawTicket, infoUrl);
+      const ticketUrl =
+        bestTicket && cinemaTicketDeepLinkScore(bestTicket) >= 25
+          ? bestTicket
+          : rawTicket;
       const trailerRaw =
         typeof r.trailerUrl === 'string' ? r.trailerUrl.trim() : '';
       const trailerUrl =
@@ -631,7 +671,7 @@ async function researchShowtimesWeb(opts: {
       });
     }
     return {
-      showtimes: keepReachableShowtimes(showtimes, opts.venues, now).slice(0, 4),
+      showtimes: keepReachableShowtimes(showtimes, opts.venues, now).slice(0, 7),
       notes,
     };
   } catch {

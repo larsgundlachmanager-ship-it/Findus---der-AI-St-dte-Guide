@@ -180,22 +180,8 @@ export function evaluateContextTriggers(opts?: {
       title: 'Mittagessen nah?',
       prompt: 'Mittagessen in unter 500 Metern — konkrete Orte, live.',
     });
-    push({
-      id: 'toilet_nearby',
-      score: 42,
-      title: 'Klo in der Nähe?',
-      prompt:
-        'Falls hilfreich: nächste öffentliche Toilette in der Nähe — Distanz und Route, ohne Drama.',
-    });
-    push({
-      id: 'drinking_water_nearby',
-      score: 40,
-      title: 'Trinkwasser um die Ecke?',
-      prompt:
-        'Trinkbrunnen oder Trinkwasser in der Nähe — kurz mit Distanz und Route.',
-    });
-    // park_pause / photo_spots: nur über Nearby-Amenity-Karten (Ort + Min),
-    // nie als leere Kategorie-Frage in der Live-Anzeige.
+    // toilet_nearby / drinking_water_nearby: nur über Nearby-Amenity-Karten
+    // (Name + ≤15 Min). Keine leeren „Klo?“ / „Trinkwasser?“-Fragen.
   }
 
   // Hitze → Eis (locker)
@@ -214,16 +200,6 @@ export function evaluateContextTriggers(opts?: {
           'Nächste Eisdiele in der Nähe mit Distanz und Route — locker, kein Upsell.',
       });
     }
-  }
-
-  if (bat != null && bat < 0.25) {
-    push({
-      id: 'low_battery_charge',
-      score: bat < 0.18 ? 96 : bat < 0.2 ? 92 : 80,
-      title: 'Brauchst du mehr Akku?',
-      prompt:
-        'Akku wird knapp — such Powerbank-Automaten oder Café mit Steckdosen in der Nähe und gib mir Route-Buttons.',
-    });
   }
 
   if (rain && !atHotel) {

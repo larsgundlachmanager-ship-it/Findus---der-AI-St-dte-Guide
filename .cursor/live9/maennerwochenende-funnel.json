@@ -1,0 +1,1323 @@
+{
+  "ok": true,
+  "elapsedMs": 237623,
+  "brief": {
+    "score": 82,
+    "ready": true,
+    "stickers": 21,
+    "purpose": "Männerwochenende",
+    "adults": 3,
+    "budgetEur": 400,
+    "dates": [
+      "2026-10-15",
+      "2026-10-19"
+    ],
+    "origins": [
+      "Hamburg",
+      "Bremen",
+      "Berlin",
+      "Hannover"
+    ],
+    "mode": "fly",
+    "meals": "all",
+    "wishHaves": [
+      "pool",
+      "apartment",
+      "hotel",
+      "party",
+      "warm",
+      "padel"
+    ]
+  },
+  "funnelLog": [
+    {
+      "stage": "0a",
+      "detail": "Research-Pfad flight_first · Archetype menstrip_party — Regionen wählt Yorro"
+    },
+    {
+      "stage": "0i",
+      "detail": "Inspiration-Katalog pack · 6 Sparks · 83 Places"
+    },
+    {
+      "stage": "0",
+      "detail": "Brief komplett — Modus fly → Pro+Live (erste Auswahl) · Cap 15 Min"
+    },
+    {
+      "stage": "0d",
+      "detail": "Discover-Intent party: beste Party-/Nightlife-Destinationen  Budget ca. 400 € — diverse Städte, User-Fit vor „Weltbesten“"
+    },
+    {
+      "stage": "0b",
+      "detail": "Discover(Pro) 8 — Die Recherche kombiniert warme Südeuropa-Ziele mit Padel-Fokus und günstigen AI/Apartment-Optionen (Spanien, Malta, Portugal, Zypern) sowie osteuropäische Budget-Party-Metropolen (Budapest, Krakau), um das straffe Budget von 400 € p.P. inkl"
+    },
+    {
+      "stage": "0g",
+      "detail": "Gem-Hunt 5 Tipps — Oktober-Reisen an die europäischen Küsten bieten massive Preissprünge nach unten bei noch ausreichenden Club-Openings und spätsommerlicher Wärme."
+    },
+    {
+      "stage": "1",
+      "detail": "Seed-Geografie 20 · Pfad flight_first"
+    },
+    {
+      "stage": "1b",
+      "detail": "Anreise-Cap 12h → 20"
+    },
+    {
+      "stage": "1c",
+      "detail": "Passport-Filter → 20"
+    },
+    {
+      "stage": "1insp",
+      "detail": "Inspiration-Places 6 in Shortlist-Pool"
+    },
+    {
+      "stage": "2",
+      "detail": "Shortlist 10/10 divers (Taste+Seed+Pro·flight_first) — parallele Stay22/Flug"
+    },
+    {
+      "stage": "2c",
+      "detail": "Calendar-Kombi 4 Fenster · DEAL · flight_first"
+    },
+    {
+      "stage": "3",
+      "detail": "Live-Backend fertig: 8/10 mit Buchungs-URL"
+    },
+    {
+      "stage": "3b",
+      "detail": "Flug-Hints(Pro) 4 → Magazin-Beats"
+    },
+    {
+      "stage": "4",
+      "detail": "Rank soft-fail — Score aus Live-Facts"
+    },
+    {
+      "stage": "4p",
+      "detail": "Package-Score Top 4 · Archetype menstrip_party"
+    },
+    {
+      "stage": "5",
+      "detail": "Aus 8 geprüften Orten 4 Finalisten (Preis-Leistung + party-Fit) (Pro+Live)"
+    },
+    {
+      "stage": "5q0",
+      "detail": "Kontrolle fail — 0/4 ok, nachziehen: Alicante: Unterkunft mit Preis fehlt, Kein Buy-in (Unterkunft + Anreise) · Krakau: Unterkunft mit Preis fehlt, Kein Buy-in (Unterkunft + Anreise) · Budapest: Unterkunft mit Preis fehlt, Kein Buy-in (Unterkunft + Anreise)"
+    },
+    {
+      "stage": "5q1",
+      "detail": "Kontrolle fail — 1/4 ok, nachziehen: Alicante: Unterkunft mit Preis fehlt, Kein Buy-in (Unterkunft + Anreise) · Krakau: Unterkunft mit Preis fehlt, Kein Buy-in (Unterkunft + Anreise) · Albufeira: Unterkunft mit Preis fehlt, Kein Buy-in (Unterkunft + Anreise)"
+    },
+    {
+      "stage": "5q2",
+      "detail": "Kontrolle ok — 2/4 Finalisten komplett & wunschfit"
+    }
+  ],
+  "searchError": null,
+  "endControls": {
+    "pass": true,
+    "summary": "Kontrolle ok — 2/4 Finalisten komplett & wunschfit",
+    "passingIds": [
+      "alicante",
+      "insp-budapest"
+    ],
+    "failingIds": [
+      "albufeira",
+      "krakau"
+    ]
+  },
+  "optionCount": 4,
+  "idealPassCount": 3,
+  "scores": [
+    {
+      "place": "Alicante",
+      "packageHardOk": true,
+      "wishHardOk": true,
+      "packageIssues": [],
+      "wishIssues": [
+        "soft:soft_meals_ai",
+        "soft:budget_soft"
+      ],
+      "hasStay": true,
+      "hasFlight": true,
+      "hasTransfer": true,
+      "hasOutboundBeat": true,
+      "hasTransferBeat": true,
+      "metWishChapters": 3,
+      "hasPackageCompare": true,
+      "noAbPrice": true,
+      "buyInEur": 429,
+      "stayPriceEur": 650,
+      "flightPriceEur": 198,
+      "transferEur": 44,
+      "speechLen": 333
+    },
+    {
+      "place": "Budapest",
+      "packageHardOk": true,
+      "wishHardOk": true,
+      "packageIssues": [],
+      "wishIssues": [
+        "soft:soft_cheap_drinks",
+        "soft:soft_meals_ai",
+        "soft:soft_warm",
+        "soft:soft_wish_party"
+      ],
+      "hasStay": true,
+      "hasFlight": true,
+      "hasTransfer": true,
+      "hasOutboundBeat": true,
+      "hasTransferBeat": true,
+      "metWishChapters": 3,
+      "hasPackageCompare": true,
+      "noAbPrice": true,
+      "buyInEur": 374,
+      "stayPriceEur": 790,
+      "flightPriceEur": 96,
+      "transferEur": 44,
+      "speechLen": 339
+    },
+    {
+      "place": "Albufeira",
+      "packageHardOk": true,
+      "wishHardOk": false,
+      "packageIssues": [],
+      "wishIssues": [
+        "hard:budget_over"
+      ],
+      "hasStay": true,
+      "hasFlight": true,
+      "hasTransfer": true,
+      "hasOutboundBeat": true,
+      "hasTransferBeat": true,
+      "metWishChapters": 3,
+      "hasPackageCompare": true,
+      "noAbPrice": true,
+      "buyInEur": 494,
+      "stayPriceEur": 620,
+      "flightPriceEur": 273,
+      "transferEur": 44,
+      "speechLen": 340
+    },
+    {
+      "place": "Krakau",
+      "packageHardOk": false,
+      "wishHardOk": false,
+      "packageIssues": [
+        "hard:stay_missing"
+      ],
+      "wishIssues": [
+        "soft:soft_meals_ai",
+        "soft:soft_warm",
+        "soft:soft_wish_pool",
+        "hard:gap_stay"
+      ],
+      "hasStay": false,
+      "hasFlight": true,
+      "hasTransfer": true,
+      "hasOutboundBeat": true,
+      "hasTransferBeat": true,
+      "metWishChapters": 2,
+      "hasPackageCompare": true,
+      "noAbPrice": true,
+      "buyInEur": 155,
+      "stayPriceEur": null,
+      "flightPriceEur": 140,
+      "transferEur": 44,
+      "speechLen": 264
+    }
+  ],
+  "options": [
+    {
+      "id": "alicante",
+      "placeName": "Alicante",
+      "title": "Alicante-Pool für 429€ p.P.",
+      "matchScore": 67,
+      "buyInEur": 429,
+      "stayName": "Apartamentos Tito San Fernando",
+      "stayPriceEur": 650,
+      "flightPriceEur": 198,
+      "transferEur": 44,
+      "transferMinutes": 27,
+      "packageBookUrl": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+      "stayBookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamentos%2BTito%2BSan%2BFernando%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+      "flightBookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Falc%2F2026-10-21%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+      "transferBookUrl": "https://www.google.com/maps/dir/?api=1&destination=38.3452,-0.481&travelmode=driving",
+      "speechSummary": "Alicante — Pool, genau euer Trip. Abreise so um den 15.10.. Ihr landet in Apartamentos Tito San Fernando — Rating 8. Vor Ort: Pool, Padel, Marmarela. Transfer Hin und Rück etwa 44€ für euch 3 zusammen. Buy-in liegt bei 429€ p.P. — Flug, Unterkunft, Transfer zusammengerechnet. Unten im Magazin sind die Buchungs-Links, wenn’s klickt.",
+      "experienceSummary": "Alicante für pool — trifft euren Brief. Pool direkt bei Apartamentos Tito San Fernando — wie gewünscht. Basis: Apartamentos Tito San Fernando — Rating 8.",
+      "decisionNotes": [
+        "Finalist 2/4 · Shortlist 8",
+        "Bier-Preis-Niveau eher günstig eingeschätzt",
+        "Gem-Hunt: Geheimtipp / besondere Idee",
+        "Geheimtipp / Exklusiv im Shortlist",
+        "All Inclusive soft geprüft — hier eher ohne AI (Budget/Fit)",
+        "Starts geprüft: HAM, BRE, BER, HAJ",
+        "Schnäppchen vs. Vergleichspreise"
+      ],
+      "journeyBeats": [
+        {
+          "id": "out-fly-best-BER-2026-10-21",
+          "kind": "flight_out",
+          "title": "FR 1639 · BER → ALC",
+          "detail": "Abflug 13:55 · BER → ALC",
+          "priceEur": 198,
+          "photoUrl": null,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Falc%2F2026-10-21%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "icon": "✈️",
+          "durationHint": null
+        },
+        {
+          "id": "dest",
+          "kind": "destination",
+          "title": "Ankunft Alicante",
+          "detail": "Willkommen am Ziel — die Kulisse, für die ihr kommt.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG/330px-Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "icon": "📍"
+        },
+        {
+          "id": "xfer",
+          "kind": "transfer",
+          "title": "Taxi und Transfer",
+          "detail": "Ca. 27 Min zur Unterkunft · Hin+Rück für die Gruppe",
+          "priceEur": 44,
+          "durationHint": "27 Min",
+          "bookUrl": "https://www.google.com/maps/dir/?api=1&destination=38.3452,-0.481&travelmode=driving",
+          "photoUrl": null,
+          "icon": "🚕"
+        },
+        {
+          "id": "stay-stay-gnd-apartamentos-tito-san-fernando",
+          "kind": "stay",
+          "title": "Apartamentos Tito San Fernando",
+          "detail": "Rating 8.8",
+          "priceEur": 650,
+          "photoUrl": null,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamentos%2BTito%2BSan%2BFernando%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "icon": "🏡"
+        }
+      ],
+      "wishChapters": [
+        {
+          "id": "wish-pool",
+          "mustHaveId": "pool",
+          "title": "Pool",
+          "blurb": "Pool direkt bei Apartamentos Tito San Fernando — wie gewünscht.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG/330px-Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": "an der Unterkunft",
+          "costHint": null,
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🏊"
+        },
+        {
+          "id": "wish-apartment",
+          "mustHaveId": "apartment",
+          "title": "Wohnung",
+          "blurb": "Wohnung noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG/330px-Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🔑"
+        },
+        {
+          "id": "wish-hotel",
+          "mustHaveId": "hotel",
+          "title": "Hotel",
+          "blurb": "Hotel noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG/330px-Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🏨"
+        },
+        {
+          "id": "wish-party",
+          "mustHaveId": "party",
+          "title": "Party",
+          "blurb": "Party noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG/330px-Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🎉"
+        },
+        {
+          "id": "wish-warm",
+          "mustHaveId": "warm",
+          "title": "Warm",
+          "blurb": "Warm noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG/330px-Vista_de_Alicante%2C_Espa%C3%B1a%2C_2014-07-04%2C_DD_49.JPG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "☀️"
+        },
+        {
+          "id": "wish-padel",
+          "mustHaveId": "padel",
+          "title": "Padel",
+          "blurb": "Padel: Club Atlético Montemar. 1.4 km · Club Atlético Montemar.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJAQBAZac3Yg0Rq5CaSQiFuII/photos/AVoNoXS1WWFgyBhdSzKySkdi8uxAopOpZ6aoPlBNARF0Nql_Hml68WoYrAEgRQiyN3-58Q5XMoBC0xo5CKIntdqXaRF23ZL9WK4UahXmwiGIWWAeZWkmVp7z1ALR48Z3qlsc46cFvPKD1savdGRKPig7crKGTuTgfy9lEgm6-u3zxu8EVPFoDfTr0gDX7kEuBAf8fHgCZt9EEKwT0u5XT6WIENZWuylR9IT-E6O1tyhIm-SSjvXYQXyWY3-iwTSOja90RbMxzuqTj2KG4N71jY82hIVow6V6m17VQhktCS_3h0HDfPhfRaYZgpdTanZlbn8OoURVhne7ihuHUHb0zCxk9wJthVZE7sE87OIdROu7arl_vLU1ifmMolYIhGOfgn1zhJWStJobV1rXjEAwKPJpawiEQwfaQ7u5ltF1Rk07OnQ/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "distanceHint": "1.4 km · Club Atlético Montemar",
+          "costHint": null,
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🎾"
+        },
+        {
+          "id": "act-Marmarela",
+          "mustHaveId": "activity",
+          "title": "Marmarela",
+          "blurb": "Ausgehadresse am Meer mit Nachtclub, Außenpool und mediterranem Restaurant.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJ66pAG7g3Yg0R3dypksJjAO4/photos/AVoNoXS6HFYst-DGM6Nz_XyGm9nXtkpAcliXSe04aW2BC-47U5riTXvwSsVpYrenT-ZD-Zzpt94IVlp6LZl-NTY-_hsrU8rH2fUgqgSrQ2oBpfOK3Gk7td9tOpyOhkxL21o2M0abxp6EK5jzrpUSgK-scxS8NFBFJO8VN5TTs8oiyL4CtLzj2VcSplMfRjzTZwGwPy-KB5vK4WKnoLMKXam5ZvnibhmORc47iU_euJBGI6gXpRPj1zYDimcqvnTNTk9T4dJ9moiwvIKAJv2DDXYZ5rwHMd92yr5eDfoXYVrNT4kL3etU2fuYg8fRn3ofgwGx0bwnOwOFnKtwjWSRqA1cgul3MDeEDn8rEO6uFb2ZG8fgOgz_-BNUHQvdJNoo4vxjAIsXAvIL3dNibviGZkEMezT1-YYAQzThTXwEbWPjDkwFCfg/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "met": true,
+          "emoji": "✨",
+          "distanceHint": "957 m · Marmarela",
+          "costHint": "15€"
+        }
+      ],
+      "facts": [],
+      "gaps": [
+        "Stay22 offline — Unterkunftspreise web-belegt (Grounding)",
+        "Padel: nicht belegt"
+      ],
+      "bookingChecklist": [
+        {
+          "id": "tr-fly-best-BER-2026-10-21",
+          "label": "Flug BER→ALC · 1639 · Abflug 13:55 · 198€ · 1 Stop",
+          "url": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Falc%2F2026-10-21%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "tr-fly-alt-BER-2026-10-21",
+          "label": "Alternative BER→ALC · Abflug 13:55 · 198€",
+          "url": "https://www.aviasales.com/search/BER2110ALC1?marker=760293",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-apartamentos-tito-san-fernando",
+          "label": "Apartamentos Tito San Fernando",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamentos%2BTito%2BSan%2BFernando%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-eurostars-centrum-alicante",
+          "label": "Eurostars Centrum Alicante",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DEurostars%2BCentrum%2BAlicante%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-apartamento-las-dunas-san-juan",
+          "label": "Apartamento Las Dunas San Juan",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamento%2BLas%2BDunas%2BSan%2BJuan%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "xfer",
+          "label": "Taxi / Transfer zur Unterkunft",
+          "url": "https://www.google.com/maps/dir/?api=1&destination=38.3452,-0.481&travelmode=driving",
+          "kind": "transfer",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal CHECK24",
+          "label": "Pauschal CHECK24",
+          "url": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+          "kind": "package",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal ab-in-den-urlaub",
+          "label": "Pauschal ab-in-den-urlaub",
+          "url": "https://www.awin1.com/cread.php?awinmid=9369&awinaffid=3021215&ued=https%3A%2F%2Fwww.ab-in-den-urlaub.de%2Ffind%2Foffers%3FdateMin%3D2026-10-05%26dateMax%3D2026-10-09%26airports%3DHAM%26rooms%3DA%252CA%252CA%26durationMin%3D4%26durationMax%3D4%26travelType%3DpackageTour",
+          "kind": "package",
+          "clickedAtMs": null
+        }
+      ],
+      "stays": [
+        {
+          "id": "stay-gnd-apartamentos-tito-san-fernando",
+          "name": "Apartamentos Tito San Fernando",
+          "priceEur": 650,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamentos%2BTito%2BSan%2BFernando%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8.8",
+          "lat": 38.3452,
+          "lng": -0.481,
+          "distToAnchorM": null,
+          "dealHit": false
+        },
+        {
+          "id": "stay-gnd-eurostars-centrum-alicante",
+          "name": "Eurostars Centrum Alicante",
+          "priceEur": 790,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DEurostars%2BCentrum%2BAlicante%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8.6",
+          "lat": 38.3452,
+          "lng": -0.481,
+          "distToAnchorM": null,
+          "dealHit": false
+        },
+        {
+          "id": "stay-gnd-apartamento-las-dunas-san-juan",
+          "name": "Apartamento Las Dunas San Juan",
+          "priceEur": 480,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamento%2BLas%2BDunas%2BSan%2BJuan%252C%2BAlicante%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8.5",
+          "lat": 38.3452,
+          "lng": -0.481,
+          "distToAnchorM": null,
+          "dealHit": true
+        }
+      ],
+      "transports": [
+        {
+          "id": "fly-best-BER-2026-10-21",
+          "kind": "flight",
+          "label": "Flug BER→ALC · 1639 · Abflug 13:55 · 198€ · 1 Stop",
+          "departAt": "13:55",
+          "arriveAt": "Rück 23:10",
+          "priceEur": 198,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Falc%2F2026-10-21%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "better": true,
+          "fromIata": "BER",
+          "toIata": "ALC",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20BER%20to%20ALC%20on%202026-10-21%20through%202026-10-25",
+          "durationHint": null,
+          "flightNumber": "1639",
+          "carrier": "FR",
+          "transfers": 1
+        },
+        {
+          "id": "fly-alt-BER-2026-10-21",
+          "kind": "flight",
+          "label": "Flug BER→ALC · 1639 · Abflug 13:55 · 198€ · 1 Stop",
+          "departAt": "13:55",
+          "arriveAt": "Rück 23:10",
+          "priceEur": 198,
+          "bookUrl": "https://www.aviasales.com/search/BER2110ALC1?marker=760293",
+          "better": false,
+          "fromIata": "BER",
+          "toIata": "ALC",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20BER%20to%20ALC%20on%202026-10-21%20through%202026-10-25",
+          "flightNumber": "1639",
+          "carrier": "FR",
+          "transfers": 1
+        }
+      ]
+    },
+    {
+      "id": "insp-budapest",
+      "placeName": "Budapest",
+      "title": "Budapest-Pool für 374€ p.P.",
+      "matchScore": 58,
+      "buyInEur": 374,
+      "stayName": "Anantara New York Palace Budapest Hotel",
+      "stayPriceEur": 790,
+      "flightPriceEur": 96,
+      "transferEur": 44,
+      "transferMinutes": 27,
+      "packageBookUrl": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+      "stayBookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAnantara%2BNew%2BYork%2BPalace%2BBudapest%2BHotel%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+      "flightBookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Fbud%2F2026-10-17%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+      "transferBookUrl": "https://www.google.com/maps/dir/?api=1&destination=47.4979,19.0402&travelmode=driving",
+      "speechSummary": "Budapest — Pool, genau euer Trip. Abreise so um den 15.10.. Ihr landet in Anantara New York Palace Budapest Hotel — Rating 9. Vor Ort: Pool, Padel, Ötkert. Transfer Hin und Rück etwa 44€ für euch 3 zusammen. Buy-in liegt bei 374€ p.P. — Flug, Unterkunft, Transfer zusammengerechnet. Unten im Magazin sind die Buchungs-Links, wenn’s klickt.",
+      "experienceSummary": "Budapest für pool — trifft euren Brief. Pool direkt bei Anantara New York Palace Budapest Hotel — wie gewünscht. Basis: Anantara New York Palace Budapest Hotel — Rating 9.",
+      "decisionNotes": [
+        "Finalist 3/4 · Shortlist 8",
+        "Finalist 1/4 · Shortlist 8",
+        "Bier-Preise vor Ort noch live prüfen",
+        "Schnäppchen-Korridor im Shortlist",
+        "All Inclusive soft geprüft — hier eher ohne AI (Budget/Fit)",
+        "Starts geprüft: HAM, BRE, BER, HAJ"
+      ],
+      "journeyBeats": [
+        {
+          "id": "out-fly-best-BER-2026-10-17",
+          "kind": "flight_out",
+          "title": "W6 2318 · BER → BUD",
+          "detail": "Abflug 21:45 · BER → BUD",
+          "priceEur": 96,
+          "photoUrl": null,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Fbud%2F2026-10-17%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "icon": "✈️",
+          "durationHint": "Direkt"
+        },
+        {
+          "id": "dest",
+          "kind": "destination",
+          "title": "Ankunft Budapest",
+          "detail": "Willkommen am Ziel — die Kulisse, für die ihr kommt.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Reliefkarte_Budapest_2025.png/330px-Reliefkarte_Budapest_2025.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "icon": "📍"
+        },
+        {
+          "id": "xfer",
+          "kind": "transfer",
+          "title": "Taxi und Transfer",
+          "detail": "Ca. 27 Min zur Unterkunft · Hin+Rück für die Gruppe",
+          "priceEur": 44,
+          "durationHint": "27 Min",
+          "bookUrl": "https://www.google.com/maps/dir/?api=1&destination=47.4979,19.0402&travelmode=driving",
+          "photoUrl": null,
+          "icon": "🚕"
+        },
+        {
+          "id": "stay-stay-gnd-anantara-new-york-palace-budapest-hotel",
+          "kind": "stay",
+          "title": "Anantara New York Palace Budapest Hotel",
+          "detail": "Rating 9.2",
+          "priceEur": 790,
+          "photoUrl": null,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAnantara%2BNew%2BYork%2BPalace%2BBudapest%2BHotel%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "icon": "🏡"
+        }
+      ],
+      "wishChapters": [
+        {
+          "id": "wish-pool",
+          "mustHaveId": "pool",
+          "title": "Pool",
+          "blurb": "Pool direkt bei Anantara New York Palace Budapest Hotel — wie gewünscht.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Reliefkarte_Budapest_2025.png/330px-Reliefkarte_Budapest_2025.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": "an der Unterkunft",
+          "costHint": null,
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🏊"
+        },
+        {
+          "id": "wish-apartment",
+          "mustHaveId": "apartment",
+          "title": "Wohnung",
+          "blurb": "Wohnung noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Reliefkarte_Budapest_2025.png/330px-Reliefkarte_Budapest_2025.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🔑"
+        },
+        {
+          "id": "wish-hotel",
+          "mustHaveId": "hotel",
+          "title": "Hotel",
+          "blurb": "Hotel noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Reliefkarte_Budapest_2025.png/330px-Reliefkarte_Budapest_2025.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🏨"
+        },
+        {
+          "id": "wish-party",
+          "mustHaveId": "party",
+          "title": "Party",
+          "blurb": "Party noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Reliefkarte_Budapest_2025.png/330px-Reliefkarte_Budapest_2025.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🎉"
+        },
+        {
+          "id": "wish-warm",
+          "mustHaveId": "warm",
+          "title": "Warm",
+          "blurb": "Warm noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Reliefkarte_Budapest_2025.png/330px-Reliefkarte_Budapest_2025.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "☀️"
+        },
+        {
+          "id": "wish-padel",
+          "mustHaveId": "padel",
+          "title": "Padel",
+          "blurb": "Padel: Top Padel. 1.8 km · Top Padel.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJx4Hhv5ffQUcRiG2jg6-5zts/photos/AVoNoXSlAonIy9vmalNZ54sxGCDcbIHcHcDHBHY84nnborYRkg2lY-kIC6KRWYpMjgDV7WfD5o1g5fo-AFWfrjyLuC2rti8dOoYLw-qPQ5LZLOKtQtgpHxw4TDQFNG0-zUa41I4V4WSt604o1kGbvnmtqBtfmqSAal9YegAQHbtftQ3tO-1Upx8ghFQ1SpUHeMwRc2ZQ0ZviXacZmI0_RD1iJaUhHHrBWcbQZGxrmHha0lI5vpyjjbHpdF5Bg467aRSJizr7i7uoUGTXiFNKFbmUBLZ010-DiIMdEYBDGgXTSg-Y9ehbNln4TUQlL-sL6TACFviheWZ-CQY6p68K4bya4I7llVI3j4ulJEoMj0hQj7F-9MTC96R3kkO37po00yFuJsxqpgjsM-TjkKDrEnqx0hIgr3O4AQ38aW226-kSSaENNG_Y/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "distanceHint": "1.8 km · Top Padel",
+          "costHint": null,
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🎾"
+        },
+        {
+          "id": "act-Ötkert",
+          "mustHaveId": "activity",
+          "title": "Ötkert",
+          "blurb": "Lebhafte Bar mit Speisenangebot und großer, zwangloser Nachtclub mit DJs, Livebands, Tanzfläche im Freien und Terrasse.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJsZI4nRXcQUcRR-YYBZCskAk/photos/AVoNoXTcwSnDd4fl5w83KGx5TOoutHblYPrn4JIAhbVfqm6XhotBziiMpEVMmhZlATnXB6G32ZvGeMTudJXYFvJNZUhgagQgYzmX-F2MvsK1ucEZYCt2xv8KJW58xVrbDs6s6Of8TQgb0baUlTi_YFmtfkQK22tlNvWDzHZ3ItHFOolXT8e0tgNzcluLHspqKAZn_5C3TZtkT8h7XbcBHbyqeG_1YGWcKo5NRyii5rcr-wpaDOO4F9ftxjSFiUSSZS5Tjls_FetCPF1ryrqrH4DrLTWmrRpGyVKb1CL7Jy2NrIWknCSbpr202ejG8oqlGmd1ZcNQ98ddlESTnwOmC9XCcQePCTJy23tS6N4pdN0rmKFXVp7FM6NxWXBenKCdOPVSHtH0PPChpmdvjqJrZHg6K0b5wkOSNHU1BPMPmegpNbdTB1g/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "met": true,
+          "emoji": "✨",
+          "distanceHint": "678 m · Ötkert",
+          "costHint": null
+        }
+      ],
+      "facts": [],
+      "gaps": [
+        "Stay22 offline — Unterkunftspreise web-belegt (Grounding)",
+        "Padel: nicht belegt"
+      ],
+      "bookingChecklist": [
+        {
+          "id": "tr-fly-best-BER-2026-10-17",
+          "label": "Flug BER→BUD · 2318 · Abflug 21:45 · 96€ · Direkt",
+          "url": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Fbud%2F2026-10-17%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "tr-fly-alt-BER-2026-10-17",
+          "label": "Alternative BER→BUD · Abflug 21:45 · 96€",
+          "url": "https://www.aviasales.com/search/BER1710BUD1?marker=760293",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-anantara-new-york-palace-budapest-hotel",
+          "label": "Anantara New York Palace Budapest Hotel",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAnantara%2BNew%2BYork%2BPalace%2BBudapest%2BHotel%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-corinthia-budapest",
+          "label": "Corinthia Budapest",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DCorinthia%2BBudapest%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-intercontinental-budapest",
+          "label": "InterContinental Budapest",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DInterContinental%2BBudapest%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "xfer",
+          "label": "Taxi / Transfer zur Unterkunft",
+          "url": "https://www.google.com/maps/dir/?api=1&destination=47.4979,19.0402&travelmode=driving",
+          "kind": "transfer",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal CHECK24",
+          "label": "Pauschal CHECK24",
+          "url": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+          "kind": "package",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal ab-in-den-urlaub",
+          "label": "Pauschal ab-in-den-urlaub",
+          "url": "https://www.awin1.com/cread.php?awinmid=9369&awinaffid=3021215&ued=https%3A%2F%2Fwww.ab-in-den-urlaub.de%2Ffind%2Foffers%3FdateMin%3D2026-10-05%26dateMax%3D2026-10-09%26airports%3DHAM%26rooms%3DA%252CA%252CA%26durationMin%3D4%26durationMax%3D4%26travelType%3DpackageTour",
+          "kind": "package",
+          "clickedAtMs": null
+        }
+      ],
+      "stays": [
+        {
+          "id": "stay-gnd-anantara-new-york-palace-budapest-hotel",
+          "name": "Anantara New York Palace Budapest Hotel",
+          "priceEur": 790,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAnantara%2BNew%2BYork%2BPalace%2BBudapest%2BHotel%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 9.2",
+          "lat": 47.4979,
+          "lng": 19.0402,
+          "distToAnchorM": null,
+          "dealHit": false
+        },
+        {
+          "id": "stay-gnd-corinthia-budapest",
+          "name": "Corinthia Budapest",
+          "priceEur": 720,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DCorinthia%2BBudapest%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 9.1",
+          "lat": 47.4979,
+          "lng": 19.0402,
+          "distToAnchorM": null,
+          "dealHit": false
+        },
+        {
+          "id": "stay-gnd-intercontinental-budapest",
+          "name": "InterContinental Budapest",
+          "priceEur": 845,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DInterContinental%2BBudapest%252C%2BBudapest%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8.9",
+          "lat": 47.4979,
+          "lng": 19.0402,
+          "distToAnchorM": null,
+          "dealHit": false
+        }
+      ],
+      "transports": [
+        {
+          "id": "fly-best-BER-2026-10-17",
+          "kind": "flight",
+          "label": "Flug BER→BUD · 2318 · Abflug 21:45 · 96€ · Direkt",
+          "departAt": "21:45",
+          "arriveAt": "Rück 10:05",
+          "priceEur": 96,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Fbud%2F2026-10-17%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "better": true,
+          "fromIata": "BER",
+          "toIata": "BUD",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20BER%20to%20BUD%20on%202026-10-17%20through%202026-10-21",
+          "durationHint": "Direkt",
+          "flightNumber": "2318",
+          "carrier": "W6",
+          "transfers": 0
+        },
+        {
+          "id": "fly-alt-BER-2026-10-17",
+          "kind": "flight",
+          "label": "Flug BER→BUD · 2318 · Abflug 21:45 · 96€ · Direkt",
+          "departAt": "21:45",
+          "arriveAt": "Rück 10:05",
+          "priceEur": 96,
+          "bookUrl": "https://www.aviasales.com/search/BER1710BUD1?marker=760293",
+          "better": false,
+          "fromIata": "BER",
+          "toIata": "BUD",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20BER%20to%20BUD%20on%202026-10-17%20through%202026-10-21",
+          "flightNumber": "2318",
+          "carrier": "W6",
+          "transfers": 0
+        }
+      ]
+    },
+    {
+      "id": "albufeira",
+      "placeName": "Albufeira",
+      "title": "Albufeira-Pool für 494€ p.P.",
+      "matchScore": 67,
+      "buyInEur": 494,
+      "stayName": "Albufeira Sol Hotel & Spa",
+      "stayPriceEur": 620,
+      "flightPriceEur": 273,
+      "transferEur": 44,
+      "transferMinutes": 27,
+      "packageBookUrl": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+      "stayBookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAlbufeira%2BSol%2BHotel%2B%2526%2BSpa%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+      "flightBookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Ffao%2F2026-12-28%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+      "transferBookUrl": "https://www.google.com/maps/dir/?api=1&destination=37.0891,-8.2479&travelmode=driving",
+      "speechSummary": "Albufeira — Pool, genau euer Trip. Abreise so um den 15.10.. Ihr landet in Albufeira Sol Hotel & Spa — Rating 8 · AI. Vor Ort: Pool, Padel, Clube Albufeira. Transfer Hin und Rück etwa 44€ für euch 3 zusammen. Buy-in liegt bei 494€ p.P. — Flug, Unterkunft, Transfer zusammengerechnet. Unten im Magazin sind die Buchungs-Links, wenn’s klickt.",
+      "experienceSummary": "Albufeira für pool — trifft euren Brief. Pool direkt bei Albufeira Sol Hotel & Spa — wie gewünscht. Basis: Albufeira Sol Hotel & Spa — Rating 8 · AI.",
+      "decisionNotes": [
+        "Finalist 1/4 · Shortlist 8",
+        "Bier-Preis-Niveau eher günstig eingeschätzt",
+        "All Inclusive als Option gefunden",
+        "AI: Alkohol inklusive? — Paket noch prüfen",
+        "Starts geprüft: HAM, BRE, BER, HAJ",
+        "Schnäppchen vs. Vergleichspreise",
+        "AI-Paket: Das Albufeira Sol Hotel & Spa bietet optional Halbpension oder All-Inclusive an, wobei laut Hotelbeschreibung zu den All-Inclusive-Leistunge",
+        "Alkohol nicht inklusive — Recherche belegt"
+      ],
+      "journeyBeats": [
+        {
+          "id": "out-fly-best-BER-2026-12-28",
+          "kind": "flight_out",
+          "title": "FR 148 · BER → FAO",
+          "detail": "Abflug 22:05 · BER → FAO",
+          "priceEur": 273,
+          "photoUrl": null,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Ffao%2F2026-12-28%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "icon": "✈️",
+          "durationHint": null
+        },
+        {
+          "id": "dest",
+          "kind": "destination",
+          "title": "Ankunft Albufeira",
+          "detail": "Willkommen am Ziel — die Kulisse, für die ihr kommt.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "icon": "📍"
+        },
+        {
+          "id": "xfer",
+          "kind": "transfer",
+          "title": "Taxi und Transfer",
+          "detail": "Ca. 27 Min zur Unterkunft · Hin+Rück für die Gruppe",
+          "priceEur": 44,
+          "durationHint": "27 Min",
+          "bookUrl": "https://www.google.com/maps/dir/?api=1&destination=37.0891,-8.2479&travelmode=driving",
+          "photoUrl": null,
+          "icon": "🚕"
+        },
+        {
+          "id": "stay-stay-gnd-albufeira-sol-hotel-spa",
+          "kind": "stay",
+          "title": "Albufeira Sol Hotel & Spa",
+          "detail": "Rating 8 · AI",
+          "priceEur": 620,
+          "photoUrl": null,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAlbufeira%2BSol%2BHotel%2B%2526%2BSpa%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "icon": "🏡"
+        }
+      ],
+      "wishChapters": [
+        {
+          "id": "wish-pool",
+          "mustHaveId": "pool",
+          "title": "Pool",
+          "blurb": "Pool direkt bei Albufeira Sol Hotel & Spa — wie gewünscht.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": "an der Unterkunft",
+          "costHint": null,
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🏊"
+        },
+        {
+          "id": "wish-apartment",
+          "mustHaveId": "apartment",
+          "title": "Wohnung",
+          "blurb": "Wohnung noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🔑"
+        },
+        {
+          "id": "wish-hotel",
+          "mustHaveId": "hotel",
+          "title": "Hotel",
+          "blurb": "Hotel noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🏨"
+        },
+        {
+          "id": "wish-party",
+          "mustHaveId": "party",
+          "title": "Party",
+          "blurb": "Party noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🎉"
+        },
+        {
+          "id": "wish-warm",
+          "mustHaveId": "warm",
+          "title": "Warm",
+          "blurb": "Warm noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "☀️"
+        },
+        {
+          "id": "wish-padel",
+          "mustHaveId": "padel",
+          "title": "Padel",
+          "blurb": "Padel: Padel4Move Albufeira. 845 m · Padel4Move Albufeira · 8 Plätze.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJ4xh35mPNGg0R5fWG2HiFed0/photos/AVoNoXRF--07tJ1m8McDML2eDa2LCxkZ_-pyxYFxJRjqLH1Qu1EFSXVF3qRo-GmYZFvkB205iAu3N6p_RJcxeoiEzzkk1KQL_78RNTYMaM3nQfx_1kqNNXuEZ5BjqEB5UUoZVUvTKLjJ_l-29ih7tZQAVUAu7ZcK3giDxMWlFXLhkodITVFHnIMkC-YJP_3h-vSLKP4AWeGG5W3KLf2oWJNAWo0gngCX-xqriMHGIh8d6_I_xV9x1vxPWauB6VHsJ1p72GjI9V8g1vZ9RJgii_4ZGa8oRfGHhlRZMDNrrzYuY_XCJiMFJ6TOJ43Onan1jbcymFXgx86WsWxl9qSOb0OD9ez237vxNfyTn7UPxcG69qI7D28CdGyV_I4zS_xoqPk_BKaOKhPpJdxEjd33YjyI65g9efPUUJ8XPQQClkzn0NbrpelzKCbAGa_qyBSt4Q/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "distanceHint": "845 m · Padel4Move Albufeira",
+          "costHint": "8 Plätze",
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🎾"
+        },
+        {
+          "id": "act-Clube Albufeira",
+          "mustHaveId": "activity",
+          "title": "Clube Albufeira",
+          "blurb": "Programmpunkt aus deinem Brief — in Albufeira einplanen.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/COA_of_Albufeira_municipality_%28Portugal%29.png/330px-COA_of_Albufeira_municipality_%28Portugal%29.png?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "met": true,
+          "emoji": "✨",
+          "distanceHint": "2 km · Clube Albufeira",
+          "costHint": null
+        }
+      ],
+      "facts": [],
+      "gaps": [
+        "Stay22 offline — Unterkunftspreise web-belegt (Grounding)",
+        "Schnäppchen vs. Vergleichspreise",
+        "Padel: nicht belegt",
+        "All Inclusive: Alkohol/Open-Bar nicht in Amenities belegt"
+      ],
+      "bookingChecklist": [
+        {
+          "id": "tr-fly-best-BER-2026-12-28",
+          "label": "Flug BER→FAO · 148 · Abflug 22:05 · 273€ · 2 Stop",
+          "url": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Ffao%2F2026-12-28%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "tr-fly-alt-BER-2026-12-28",
+          "label": "Alternative BER→FAO · Abflug 22:05 · 273€",
+          "url": "https://www.aviasales.com/search/BER2812FAO1?marker=760293",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-albufeira-sol-hotel-spa",
+          "label": "Albufeira Sol Hotel & Spa",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAlbufeira%2BSol%2BHotel%2B%2526%2BSpa%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-alfagar-village",
+          "label": "Alfagar Village",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAlfagar%2BVillage%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "st-stay-gnd-apartamentos-turisticos-soldemar",
+          "label": "Apartamentos Turisticos Soldemar",
+          "url": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamentos%2BTuristicos%2BSoldemar%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "kind": "stay",
+          "clickedAtMs": null
+        },
+        {
+          "id": "xfer",
+          "label": "Taxi / Transfer zur Unterkunft",
+          "url": "https://www.google.com/maps/dir/?api=1&destination=37.0891,-8.2479&travelmode=driving",
+          "kind": "transfer",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal CHECK24",
+          "label": "Pauschal CHECK24",
+          "url": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+          "kind": "package",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal ab-in-den-urlaub",
+          "label": "Pauschal ab-in-den-urlaub",
+          "url": "https://www.awin1.com/cread.php?awinmid=9369&awinaffid=3021215&ued=https%3A%2F%2Fwww.ab-in-den-urlaub.de%2Ffind%2Foffers%3FdateMin%3D2026-10-05%26dateMax%3D2026-10-09%26airports%3DHAM%26rooms%3DA%252CA%252CA%26durationMin%3D4%26durationMax%3D4%26travelType%3DpackageTour",
+          "kind": "package",
+          "clickedAtMs": null
+        }
+      ],
+      "stays": [
+        {
+          "id": "stay-gnd-albufeira-sol-hotel-spa",
+          "name": "Albufeira Sol Hotel & Spa",
+          "priceEur": 620,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAlbufeira%2BSol%2BHotel%2B%2526%2BSpa%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8 · AI",
+          "lat": 37.0891,
+          "lng": -8.2479,
+          "distToAnchorM": null,
+          "dealHit": false
+        },
+        {
+          "id": "stay-gnd-alfagar-village",
+          "name": "Alfagar Village",
+          "priceEur": 450,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DAlfagar%2BVillage%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8.4",
+          "lat": 37.0891,
+          "lng": -8.2479,
+          "distToAnchorM": null,
+          "dealHit": true
+        },
+        {
+          "id": "stay-gnd-apartamentos-turisticos-soldemar",
+          "name": "Apartamentos Turisticos Soldemar",
+          "priceEur": 780,
+          "bookUrl": "https://expedia.com/affiliate?siteid=1&camref=1101l5Qcvp&creativeref=1100l86803&landingPage=https%3A%2F%2Fwww.expedia.de%2FHotel-Search%3Fdestination%3DApartamentos%2BTuristicos%2BSoldemar%252C%2BAlbufeira%26locale%3Dde_DE%26currency%3DEUR%26chkin%3D2026-10-05%26chkout%3D2026-10-09%26rm1%3Da3",
+          "photoUrl": null,
+          "why": "Rating 8.1",
+          "lat": 37.0891,
+          "lng": -8.2479,
+          "distToAnchorM": null,
+          "dealHit": false
+        }
+      ],
+      "transports": [
+        {
+          "id": "fly-best-BER-2026-12-28",
+          "kind": "flight",
+          "label": "Flug BER→FAO · 148 · Abflug 22:05 · 273€ · 2 Stop",
+          "departAt": "22:05",
+          "arriveAt": "Rück 06:15",
+          "priceEur": 273,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fber%2Ffao%2F2026-12-28%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "better": true,
+          "fromIata": "BER",
+          "toIata": "FAO",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20BER%20to%20FAO%20on%202026-12-28%20through%202027-01-01",
+          "durationHint": null,
+          "flightNumber": "148",
+          "carrier": "FR",
+          "transfers": 2
+        },
+        {
+          "id": "fly-alt-BER-2026-12-28",
+          "kind": "flight",
+          "label": "Flug BER→FAO · 148 · Abflug 22:05 · 273€ · 2 Stop",
+          "departAt": "22:05",
+          "arriveAt": "Rück 06:15",
+          "priceEur": 273,
+          "bookUrl": "https://www.aviasales.com/search/BER2812FAO1?marker=760293",
+          "better": false,
+          "fromIata": "BER",
+          "toIata": "FAO",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20BER%20to%20FAO%20on%202026-12-28%20through%202027-01-01",
+          "flightNumber": "148",
+          "carrier": "FR",
+          "transfers": 2
+        }
+      ]
+    },
+    {
+      "id": "krakau",
+      "placeName": "Krakau",
+      "title": "Krakau · Pool",
+      "matchScore": 44,
+      "buyInEur": 155,
+      "stayName": null,
+      "stayPriceEur": null,
+      "flightPriceEur": 140,
+      "transferEur": 44,
+      "transferMinutes": 27,
+      "packageBookUrl": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+      "stayBookUrl": null,
+      "flightBookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fham%2Fkrk%2F2026-10-05%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+      "transferBookUrl": "https://www.google.com/maps/dir/?api=1&destination=50.0647,19.945&travelmode=driving",
+      "speechSummary": "Krakau — Pool, genau euer Trip. Abreise so um den 15.10.. Vor Ort: Padel, Coco | Music Club. Transfer Hin und Rück etwa 44€ für euch 3 zusammen. Buy-in liegt bei 155€ p.P. — Flug, Transfer zusammengerechnet. Unten im Magazin sind die Buchungs-Links, wenn’s klickt.",
+      "experienceSummary": "Krakau für pool — trifft euren Brief. Padel: Fame Sport Club. Unterkunft wird noch final belegt.",
+      "decisionNotes": [
+        "Finalist 4/4 · Shortlist 8",
+        "Bier-Preis-Niveau eher günstig eingeschätzt",
+        "Geheimtipp / Exklusiv im Shortlist",
+        "All Inclusive soft geprüft — hier eher ohne AI (Budget/Fit)",
+        "Starts geprüft: HAM, BRE, BER, HAJ"
+      ],
+      "journeyBeats": [
+        {
+          "id": "out-fly-best-HAM-2026-10-05",
+          "kind": "flight_out",
+          "title": "U2 1182 · HAM → KRK",
+          "detail": "Abflug 08:00 · HAM → KRK",
+          "priceEur": 140,
+          "photoUrl": null,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fham%2Fkrk%2F2026-10-05%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "icon": "✈️",
+          "durationHint": null
+        },
+        {
+          "id": "dest",
+          "kind": "destination",
+          "title": "Ankunft Krakau",
+          "detail": "Willkommen am Ziel — die Kulisse, für die ihr kommt.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Collage_of_views_of_Cracow.PNG/330px-Collage_of_views_of_Cracow.PNG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "icon": "📍"
+        },
+        {
+          "id": "xfer",
+          "kind": "transfer",
+          "title": "Taxi und Transfer",
+          "detail": "Ca. 27 Min zur Unterkunft · Hin+Rück für die Gruppe",
+          "priceEur": 44,
+          "durationHint": "27 Min",
+          "bookUrl": "https://www.google.com/maps/dir/?api=1&destination=50.0647,19.945&travelmode=driving",
+          "photoUrl": null,
+          "icon": "🚕"
+        }
+      ],
+      "wishChapters": [
+        {
+          "id": "wish-pool",
+          "mustHaveId": "pool",
+          "title": "Pool",
+          "blurb": "Pool war Wunsch — hier noch nicht klar belegt.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Collage_of_views_of_Cracow.PNG/330px-Collage_of_views_of_Cracow.PNG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": "an der Unterkunft",
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🏊"
+        },
+        {
+          "id": "wish-apartment",
+          "mustHaveId": "apartment",
+          "title": "Wohnung",
+          "blurb": "Wohnung noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Collage_of_views_of_Cracow.PNG/330px-Collage_of_views_of_Cracow.PNG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🔑"
+        },
+        {
+          "id": "wish-hotel",
+          "mustHaveId": "hotel",
+          "title": "Hotel",
+          "blurb": "Hotel noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Collage_of_views_of_Cracow.PNG/330px-Collage_of_views_of_Cracow.PNG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🏨"
+        },
+        {
+          "id": "wish-party",
+          "mustHaveId": "party",
+          "title": "Party",
+          "blurb": "Party noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Collage_of_views_of_Cracow.PNG/330px-Collage_of_views_of_Cracow.PNG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "🎉"
+        },
+        {
+          "id": "wish-warm",
+          "mustHaveId": "warm",
+          "title": "Warm",
+          "blurb": "Warm noch in Klärung — erst wenn belegt, kommt’s ins Magazin.",
+          "photoUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Collage_of_views_of_Cracow.PNG/330px-Collage_of_views_of_Cracow.PNG?utm_source=de.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+          "distanceHint": null,
+          "costHint": null,
+          "met": false,
+          "bookUrl": null,
+          "emoji": "☀️"
+        },
+        {
+          "id": "wish-padel",
+          "mustHaveId": "padel",
+          "title": "Padel",
+          "blurb": "Padel: Fame Sport Club. 2.6 km · Fame Sport Club.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJWxyrVklbFkcRNKFluCUsDCU/photos/AVoNoXQoHYCDT0iuRE1v_18_scsgYVTNF2Aj5JJZJlqjIu4-ITBhu8y5X5ydrt4fhDEL72ClAin6kRMtfMce4d-PhBeMqNzjMHQ67qrFs8nAxnbCmJ1oOPxpMuPCTVU2qUEorvOW4SQ5CP1w6NuB4liyngP9_wzoH7_ts6RbiYOY2VRI5tHCKW60n566zwkt-ddKHjLnJGsSnF5TPGFbi7hc_dLur_OU-1OHN3zDM9oQx7k7dYKQ0x_Fo60wR8IjQ8_uHH3xyNEqdhjtBGtGdPVl99yQHj7WaapYHzVbXuvEeuN0sAQsDFfUOiQi8WOu4cZw0BGmJpq7zfg7Lo8v6KC9sEQCysZGd7-iuIpcTkduHk8YnmCS5w8sFk9TJ3lb7hMJR_1AzNaCSf94t15kk9suM4YrokhviN676fhf2rlZ5QWs29Vt/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "distanceHint": "2.6 km · Fame Sport Club",
+          "costHint": null,
+          "met": true,
+          "bookUrl": null,
+          "emoji": "🎾"
+        },
+        {
+          "id": "act-Coco | Music Club",
+          "mustHaveId": "activity",
+          "title": "Coco | Music Club",
+          "blurb": "Club combining exposed brickwork & glitzy modern fittings, with 3 bars & house music DJ sessions.",
+          "photoUrl": "https://places.googleapis.com/v1/places/ChIJUzxtRxBbFkcRT14eXW3gduk/photos/AVoNoXS0HhbzJ50HcnJsmEeQGmFm6ApDHxqm82ujUwq8M78pS-Gb69zlhNmnloKOGFF0_PTEFKNhRP6nPLwGtSW93zbGwyOFBHywK7_9hxvi62wqcgJv8GHkZA2PMNiAAU0R00XkWFWHCuAYB00ypioSHCgwdeFUTtWndMVMeOd6__fDl7jLFoLTP6cKep8p0I66bTYOJKISl2pKFTVGdvcWOd0OUmfUh9z0KLH9QxS65Lse2-CGo6q3ojygj33yMSEggTLFDvng8YK24bngVPqD0Jxve0uSGhEun16QR2Rm648Z-G_PsuH6vSfLsKOTGouoCaCE_WZjuBMY8TNVRO4MjTZysIPFLJ-nrshN61dmocw9EEok6Gwli8sPcTmUasSbWQIU3yJvb4TtGsHoCrFGo3V1b7Ho1T1cnEloQCwcHYJSIw/media?maxHeightPx=900&key=AIzaSyD3PKSRcznT4G4zgzTL80r2HdyF9VKpmZY",
+          "met": true,
+          "emoji": "✨",
+          "distanceHint": "209 m · Coco | Music Club",
+          "costHint": null
+        }
+      ],
+      "facts": [],
+      "gaps": [
+        "Unterkunfts-API leer (grounded_empty)",
+        "Noch keine Unterkunft mit Preis gefunden",
+        "Unterkunftspreis fehlt — Buy-in noch nicht final"
+      ],
+      "bookingChecklist": [
+        {
+          "id": "tr-fly-best-HAM-2026-10-05",
+          "label": "Flug HAM→KRK · 1182 · Abflug 08:00 · 140€",
+          "url": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fham%2Fkrk%2F2026-10-05%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "tr-fly-alt-HAM-2026-10-05",
+          "label": "Alternative HAM→KRK · Abflug 08:00 · 140€",
+          "url": "https://www.aviasales.com/search/HAM0510KRK1?marker=760293",
+          "kind": "flight",
+          "clickedAtMs": null
+        },
+        {
+          "id": "xfer",
+          "label": "Taxi / Transfer zur Unterkunft",
+          "url": "https://www.google.com/maps/dir/?api=1&destination=50.0647,19.945&travelmode=driving",
+          "kind": "transfer",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal CHECK24",
+          "label": "Pauschal CHECK24",
+          "url": "https://www.awin1.com/cread.php?awinmid=9364&awinaffid=3021215&ued=https%3A%2F%2Fwww.check24.net%2Fpauschalreisen-vergleich%2F%3Fc24pp_departure_date%3D2026-10-05%26c24pp_return_date%3D2026-10-09%26c24pp_travel_duration%3D1-4%26c24pp_airport%3DHAM%26c24pp_adult%3D3%26c24pp_childrenCount%3D0%26c24pp_children_0%255Bage%255D%3D-%26c24pp_children_1%255Bage%255D%3D-%26c24pp_children_2%255Bage%255D%3D-%26c24pp_children_3%255Bage%255D%3D-",
+          "kind": "package",
+          "clickedAtMs": null
+        },
+        {
+          "id": "pkg-Pauschal ab-in-den-urlaub",
+          "label": "Pauschal ab-in-den-urlaub",
+          "url": "https://www.awin1.com/cread.php?awinmid=9369&awinaffid=3021215&ued=https%3A%2F%2Fwww.ab-in-den-urlaub.de%2Ffind%2Foffers%3FdateMin%3D2026-10-05%26dateMax%3D2026-10-09%26airports%3DHAM%26rooms%3DA%252CA%252CA%26durationMin%3D4%26durationMax%3D4%26travelType%3DpackageTour",
+          "kind": "package",
+          "clickedAtMs": null
+        }
+      ],
+      "stays": [],
+      "transports": [
+        {
+          "id": "fly-best-HAM-2026-10-05",
+          "kind": "flight",
+          "label": "Flug HAM→KRK · 1182 · Abflug 08:00 · 140€",
+          "departAt": "08:00",
+          "arriveAt": "Rück 20:55",
+          "priceEur": 140,
+          "bookUrl": "https://c111.travelpayouts.com/click?shmarker=760293.reisebuero&promo_id=3791&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.kiwi.com%2Fde%2Fsearch%2Fresults%2Fham%2Fkrk%2F2026-10-05%2Fno-return%2F%3Fadults%3D1%26children%3D0%26infants%3D0%26bags%3D0.0",
+          "better": true,
+          "fromIata": "HAM",
+          "toIata": "KRK",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20HAM%20to%20KRK%20on%202026-10-05%20through%202026-10-19",
+          "durationHint": null,
+          "flightNumber": "1182",
+          "carrier": "U2",
+          "transfers": null
+        },
+        {
+          "id": "fly-alt-HAM-2026-10-05",
+          "kind": "flight",
+          "label": "Flug HAM→KRK · 1182 · Abflug 08:00 · 140€",
+          "departAt": "08:00",
+          "arriveAt": "Rück 20:55",
+          "priceEur": 140,
+          "bookUrl": "https://www.aviasales.com/search/HAM0510KRK1?marker=760293",
+          "better": false,
+          "fromIata": "HAM",
+          "toIata": "KRK",
+          "compareUrl": "https://www.google.com/travel/flights?hl=de&curr=EUR&q=Flights%20from%20HAM%20to%20KRK%20on%202026-10-05%20through%202026-10-19",
+          "flightNumber": "1182",
+          "carrier": "U2",
+          "transfers": null
+        }
+      ]
+    }
+  ]
+}

@@ -14,6 +14,7 @@ assert(src.includes('coverageBounds'), 'Viewport-Coverage-Overlap');
 assert(src.includes('coverageOverlapsView'), 'Pack-Box vs View');
 assert(src.includes('Profil-Pack'), 'Boot-Race: Profil-Pack Fallback');
 assert(src.includes('isYorroMapContentAllowed'), 'Gate export');
+assert(src.includes('soft_'), 'Soft-GPS darf Pack-Browse nicht blocken');
 
 const welcome = readFileSync(
   join(process.cwd(), 'src/services/cityWelcomeService.ts'),

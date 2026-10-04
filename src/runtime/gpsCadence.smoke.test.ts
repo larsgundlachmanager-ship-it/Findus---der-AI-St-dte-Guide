@@ -1,11 +1,12 @@
 /**
- * Run: npx --yes tsx src/runtime/gpsCadence.smoke.test.ts
+ * Run: npx --yes --package tsx@4.19.4 tsx src/runtime/gpsCadence.smoke.test.ts
  */
 
 import {
   GPS_CADENCE,
   gpsIntervalMsForSpeedKmh,
   gpsIntervalMsForSpeedMs,
+  gpsIntervalMsWhileNavigating,
   resolveEffectiveSpeedMs,
 } from './gpsCadence';
 
@@ -32,6 +33,37 @@ assert(
   gpsIntervalMsForSpeedMs(resolveEffectiveSpeedMs(0, 4.0, null)) ===
     GPS_CADENCE.fastMs,
   'Track ~14 km/h → fast 0.5s',
+);
+assert(
+  resolveEffectiveSpeedMs(0, 0, 0, 5) !== null &&
+    (resolveEffectiveSpeedMs(0, 0, 0, 5) as number) >= 0.45,
+  'GPS 0 + Displacement fährt → nicht still',
+);
+{
+  const { speedMsFromDisplacement } = require('./gpsCadence') as typeof import('./gpsCadence');
+  const ms = speedMsFromDisplacement(53.55, 9.93, 53.56, 9.93, 2000);
+  assert(ms != null && ms > 4, 'Displacement ~111 m / 2 s → Zugtempo');
+  assert(speedMsFromDisplacement(53.55, 9.93, 53.55, 9.93, 2000) == null, 'kein Move → null');
+}
+
+// Nav: Stillstand nicht 15 s; Fuß dichter; Rad nicht dauerhaft 0,5 s
+assert(gpsIntervalMsWhileNavigating(0) === GPS_CADENCE.briskMs, 'nav still → 2 s');
+assert(gpsIntervalMsWhileNavigating(1.1) === 1_000, 'nav walk ~4 km/h → 1 s');
+assert(
+  gpsIntervalMsWhileNavigating(2.78) === 1_000,
+  'nav ~10 km/h walk → 1 s',
+);
+assert(
+  gpsIntervalMsWhileNavigating(5.5, { preferBike: true }) === 1_000,
+  'nav bike fast → 1 s floor (not 0.5)',
+);
+assert(
+  gpsIntervalMsWhileNavigating(2.78, { preferBike: true }) === GPS_CADENCE.briskMs,
+  'nav bike ~10 km/h → 2 s cadence',
+);
+assert(
+  gpsIntervalMsWhileNavigating(0, { preferBike: true }) === GPS_CADENCE.walkMs,
+  'nav bike still/boarding → 4 s',
 );
 
 console.log('gpsCadence.smoke.test.ts OK');

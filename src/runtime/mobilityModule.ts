@@ -123,9 +123,12 @@ async function speakProactiveLine(
   opts?: { critical?: boolean },
 ): Promise<void> {
   try {
-    const { canSpeakUnsolicited } = await import(
-      '../services/navigation/modulePriorityPolicy'
-    );
+    const {
+      canSpeakUnsolicited,
+      isOpenQuietActive,
+    } = await import('../services/navigation/modulePriorityPolicy');
+    // Auch zeitkritische Nudges warten die Open-Quiet (User öffnet App bewusst)
+    if (isOpenQuietActive()) return;
     if (!canSpeakUnsolicited().ok && !opts?.critical) return;
   } catch {
     /* soft */

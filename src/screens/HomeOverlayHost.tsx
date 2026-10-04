@@ -83,6 +83,26 @@ const HomeSettingsLayer = React.memo(function HomeSettingsLayer({
   const onClose = useCallback(() => {
     useHomeOverlayStore.getState().closeSettings();
     useFinnusStore.setState({ settingsOpenFocus: null });
+    // Nach „Sprache an“: Reisebüro wieder öffnen, falls wir genau dafür hier waren.
+    try {
+      const rb = useReisebueroStore.getState();
+      if (!rb.consumeReopenAfterMicConsent()) return;
+      const { getCachedUserProfile } = require('../services/userProfileService') as {
+        getCachedUserProfile: () => {
+          hasAcceptedAudioConsent?: boolean;
+          micListenMode?: string | null;
+        } | null;
+      };
+      const cached = getCachedUserProfile();
+      const voiceOn =
+        !!cached?.hasAcceptedAudioConsent && cached?.micListenMode === 'hear';
+      if (!voiceOn) return;
+      setTimeout(() => {
+        useReisebueroStore.getState().openOverlay({ reset: true });
+      }, 320);
+    } catch {
+      /* soft */
+    }
   }, []);
 
   const onSaved = useCallback(
@@ -289,6 +309,14 @@ function HomeBackHandler() {
 
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      try {
+        const { noteChromePriority } = require('../services/boot/interactiveBootGate') as {
+          noteChromePriority: () => void;
+        };
+        noteChromePriority();
+      } catch {
+        /* soft */
+      }
       if (!claimAndroidBackStep()) return true;
 
       if (useHomeMapUiStore.getState().placePopup) {
@@ -443,6 +471,13 @@ export const HomeOverlayHost = React.memo(function HomeOverlayHost({
       />
       <HomeSeekLayer />
       <HomeQuestionLayer onSubmit={submitUserQuestion} />
+      <PackListOverlayHost />
     </>
   );
 });
+
+function PackListOverlayHost() {
+  const PackListOverlay = require('../components/PackListOverlay')
+    .PackListOverlay as React.ComponentType;
+  return <PackListOverlay />;
+}

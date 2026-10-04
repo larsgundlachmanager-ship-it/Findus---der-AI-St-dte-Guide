@@ -32,6 +32,17 @@ function identityKey(ref: CityRef): string {
 function cityFamilyKey(ref: CityRef): string {
   const k = identityKey(ref);
   if (k.startsWith('berlin')) return 'berlin';
+  // Tri-City / Trójmiasto: Pack „Danzig“ = Gdańsk + Gdynia/Gdingen (+ Sopot)
+  if (
+    k === 'danzig' ||
+    k === 'gdansk' ||
+    k === 'gdynia' ||
+    k === 'gdingen' ||
+    k === 'sopot' ||
+    k === 'zoppot'
+  ) {
+    return 'trojmiasto';
+  }
   return k;
 }
 
@@ -48,7 +59,21 @@ export function isSameCityFamily(a: CityRef, b: CityRef): boolean {
   if (isSameCity(a, b)) return true;
   const aFam = cityFamilyKey(a);
   const bFam = cityFamilyKey(b);
-  return Boolean(aFam && bFam && aFam === bFam && aFam === 'berlin');
+  return Boolean(
+    aFam &&
+      bFam &&
+      aFam === bFam &&
+      (aFam === 'berlin' || aFam === 'trojmiasto'),
+  );
+}
+
+/**
+ * Soft-/Alias-Ort -> Catalog-Pack-Slug der Familie.
+ * Gdynia/Sopot/Gdansk -> danzig (Trojmiasto).
+ */
+export function resolveFamilyCatalogPackId(ref: CityRef): string | null {
+  if (cityFamilyKey(ref) === 'trojmiasto') return 'danzig';
+  return null;
 }
 
 export function decideSessionOpenCitySwitch(input: {
@@ -75,7 +100,7 @@ export function decideSessionOpenCitySwitch(input: {
   if (locality && !isSameCityFamily({ name: locality.name }, selected)) {
     if (
       nearest &&
-      isSameCity(nearest, { name: locality.name }) &&
+      isSameCityFamily(nearest, { name: locality.name }) &&
       nearest.km <= inCityKm * 3
     ) {
       return { action: 'prompt', via: 'catalog' };

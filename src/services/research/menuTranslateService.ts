@@ -128,6 +128,17 @@ export function extractVenueNameForMenu(
   lastPlaceName?: string | null,
 ): string | null {
   const t = text.replace(/\s+/g, ' ').trim();
+  try {
+    const { resolvePitchOptionVenueForMenu } = require('../../module2/pitch/pitchMenuFollowUp') as {
+      resolvePitchOptionVenueForMenu: (
+        s: string,
+      ) => { name: string; menuUrl?: string | null } | null;
+    };
+    const fromPitch = resolvePitchOptionVenueForMenu(t);
+    if (fromPitch?.name) return fromPitch.name;
+  } catch {
+    /* soft */
+  }
   const m =
     t.match(
       /(?:bei|im|in\s+der|in\s+dem|vom|von|für|fuer|zu)\s+(?:dem\s+|der\s+)?([A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']+(?:\s+[A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']+){0,4})/i,
@@ -142,7 +153,7 @@ export function extractVenueNameForMenu(
       .trim();
     if (
       name.length >= 2 &&
-      !/^(hier|der|die|das|dem|den|nähe|nahe|stadt|ort|karte|seite|website|link)$/i.test(
+      !/^(hier|der|die|das|dem|den|nähe|nahe|stadt|ort|karte|seite|website|link|erste|ersten|zweite|zweiten|restaurant|lokal)$/i.test(
         name,
       )
     ) {

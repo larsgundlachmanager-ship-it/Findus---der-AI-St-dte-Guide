@@ -31,4 +31,19 @@ assert(
   'Hotel in Lissabon',
 );
 
+// Vier-Lane Gate SSOT in cityPackOffer + cityResearchLane
+{
+  const src = require('fs').readFileSync(
+    require('path').join(__dirname, 'cityPackOffer.ts'),
+    'utf8',
+  );
+  assert(/resolveCityResearchLane/.test(src), 'uses cityResearchLane');
+  assert(/requires_download/.test(src), 'download gate present');
+  assert(
+    /ensureBrowseCityPackOnDevice/.test(src),
+    'browse install no profile switch',
+  );
+  assert(/ghost/.test(src), 'ghost lane');
+}
+
 console.log('cityPackOffer.smoke.test.ts ok');

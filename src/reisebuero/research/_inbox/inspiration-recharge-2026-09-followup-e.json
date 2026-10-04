@@ -1,0 +1,1131 @@
+{
+  "version": 1,
+  "generatedFor": "yorro-reisebuero-inspiration-recharge",
+  "originHint": "DE",
+  "generatedAt": "2026-09-13",
+  "notes": "Follow-up E: überhyped_vs_better (18) + ski_lite_winter + season calendar + micro-gaps.",
+  "chapters": [
+    {
+      "vibe": "anti_party",
+      "title": "Überhyped vs Better",
+      "intro": "18 Paare Qualitätsfilter 2026/27"
+    },
+    {
+      "vibe": "adventure",
+      "title": "Ski-Lite & Winter-Aktiv",
+      "intro": "Therme, Langlauf, Budget-Ski, Winterstädte"
+    }
+  ],
+  "items": [
+    {
+      "id": "ski-bansko",
+      "destLabel": "Bansko",
+      "region": "Pirin",
+      "countryCode": "BG",
+      "lat": 41.83,
+      "lng": 23.48,
+      "iata": "SOF",
+      "altAirports": [
+        {
+          "iata": "PDV",
+          "note": "Plovdiv"
+        }
+      ],
+      "seasonHint": "Dez–März",
+      "durationHint": "5–7 Nächte",
+      "whyFit": "75 km Pisten Budget + Banya-Thermen 38°C.",
+      "hook": "Ski by day, Kalkstein-Therme by night.",
+      "access": "Shuttle SOF/PDV",
+      "avoidIf": "Nur High-End",
+      "priceBandEurPp": "30–50",
+      "tags": [
+        "ski",
+        "thermal",
+        "deal",
+        "ski_lite"
+      ],
+      "catalogVibes": [
+        "spa_value",
+        "ultra_cheap"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-borovets",
+      "destLabel": "Borovets",
+      "region": "Rila",
+      "countryCode": "BG",
+      "lat": 42.26,
+      "lng": 23.6,
+      "iata": "SOF",
+      "seasonHint": "Dez–März",
+      "durationHint": "4–5 Nächte",
+      "whyFit": "Flaches Terrain für Einsteiger und Ski-Lite.",
+      "hook": "Selbstvertrauen ohne Druck.",
+      "access": "Airport Shuttle SOF",
+      "avoidIf": "Off-Piste",
+      "priceBandEurPp": "30–45",
+      "tags": [
+        "ski_lite",
+        "deal",
+        "ski"
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-seefeld",
+      "destLabel": "Seefeld",
+      "region": "Tirol",
+      "countryCode": "AT",
+      "lat": 47.33,
+      "lng": 11.18,
+      "iata": "INN",
+      "seasonHint": "Jan–März",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "279 km Loipen — Premium Langlauf statt Lift-Wettrüsten.",
+      "hook": "Nordisch stressfrei, 30 Min ab INN.",
+      "access": "Bahn / Auto 30 Min INN",
+      "avoidIf": "Abfahrt-Fokus",
+      "priceBandEurPp": "70–100",
+      "tags": [
+        "langlauf",
+        "train",
+        "winter"
+      ],
+      "catalogVibes": [
+        "anti_party",
+        "spa_value"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-levi",
+      "destLabel": "Levi",
+      "region": "Lappland",
+      "countryCode": "FI",
+      "lat": 67.8,
+      "lng": 24.8,
+      "iata": "KTT",
+      "seasonHint": "Jan–März",
+      "durationHint": "5–7 Nächte",
+      "whyFit": "170 km nördlich Polarkreis — Snow-Wow statt Tromsø-Bus.",
+      "hook": "Polarlicht + Snowpark, 20 Min ab KTT.",
+      "access": "20 Min Airport KTT",
+      "avoidIf": "Geringes Budget",
+      "priceBandEurPp": "90–130",
+      "tags": [
+        "snowshoe",
+        "winter",
+        "ski",
+        "polar"
+      ],
+      "catalogVibes": [
+        "adventure",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-yllas",
+      "destLabel": "Ylläs",
+      "region": "Lappland",
+      "countryCode": "FI",
+      "lat": 67.56,
+      "lng": 24.22,
+      "iata": "KTT",
+      "seasonHint": "Feb–April",
+      "durationHint": "7 Nächte",
+      "whyFit": "Größtes Downhill FI + riesiges Langlaufnetz, meditativ.",
+      "hook": "Längste Abfahrt Finnland ~3 km.",
+      "access": "35 Min Airport KTT",
+      "avoidIf": "Party-Fokus",
+      "priceBandEurPp": "80–120",
+      "tags": [
+        "langlauf",
+        "ski",
+        "winter"
+      ],
+      "catalogVibes": [
+        "adventure",
+        "family"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-budapest-winter",
+      "destLabel": "Budapest Winterstadt",
+      "region": "Ungarn",
+      "countryCode": "HU",
+      "lat": 47.49,
+      "lng": 19.04,
+      "iata": "BUD",
+      "seasonHint": "Nov–Feb",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Winterstadt ohne Ski — dampfende Széchenyi-Außenbecken.",
+      "hook": "Therme im Schnee + Ruin Bars.",
+      "access": "Flug/Nightjet",
+      "avoidIf": "Bergluft zwingend",
+      "priceBandEurPp": "30–60",
+      "tags": [
+        "thermal",
+        "winter",
+        "spa",
+        "deal"
+      ],
+      "catalogVibes": [
+        "spa_value",
+        "ultra_cheap",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-jasna",
+      "destLabel": "Jasná",
+      "region": "Niedere Tatra",
+      "countryCode": "SK",
+      "lat": 48.97,
+      "lng": 19.58,
+      "iata": "TAT",
+      "seasonHint": "Jan–März",
+      "durationHint": "4–6 Nächte",
+      "whyFit": "Größtes CEE-Resort, A6 Doppelmayr, Freeride — Gstaad-Alternative.",
+      "hook": "Westalpin-Feeling zu Ost-Preisen.",
+      "access": "Airport TAT / Zug",
+      "avoidIf": "Nur Chalet-Romantik",
+      "priceBandEurPp": "45–75",
+      "tags": [
+        "ski",
+        "deal",
+        "adventure"
+      ],
+      "catalogVibes": [
+        "adventure",
+        "menstrip"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-tourmalet",
+      "destLabel": "Grand Tourmalet",
+      "region": "Pyrenäen",
+      "countryCode": "FR",
+      "lat": 42.91,
+      "lng": 0.18,
+      "iata": "LDE",
+      "altAirports": [
+        {
+          "iata": "TLS",
+          "note": "Toulouse"
+        }
+      ],
+      "seasonHint": "Jan–April",
+      "durationHint": "5 Nächte",
+      "whyFit": "Chamonix-Alternative: Ski-Lite + E-Schneemobile + Winterwandern.",
+      "hook": "Pic du Midi ohne Nordalpen-Gedränge.",
+      "access": "Mietwagen LDE/TLS",
+      "avoidIf": "Luxus-Shopping",
+      "priceBandEurPp": "50–80",
+      "tags": [
+        "ski_lite",
+        "snowshoe",
+        "family",
+        "teens"
+      ],
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-zakopane",
+      "destLabel": "Zakopane",
+      "region": "Hohe Tatra",
+      "countryCode": "PL",
+      "lat": 49.29,
+      "lng": 19.94,
+      "iata": "KRK",
+      "seasonHint": "Dez–Feb",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Polens Winterhauptstadt — Schneeschuh + Kultur, wenig Pisten-Druck.",
+      "hook": "Goralen-Küche und Tatra-Wald.",
+      "access": "Bus ab Krakau",
+      "avoidIf": "Viele Pistenkilometer",
+      "priceBandEurPp": "35–55",
+      "tags": [
+        "winter",
+        "deal",
+        "snowshoe"
+      ],
+      "catalogVibes": [
+        "date",
+        "ultra_cheap"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-bardonecchia",
+      "destLabel": "Bardonecchia",
+      "region": "Piemont",
+      "countryCode": "IT",
+      "lat": 45.07,
+      "lng": 6.7,
+      "iata": "TRN",
+      "seasonHint": "Dez–März",
+      "durationHint": "4 Nächte",
+      "whyFit": "Olympische Anlagen, Zug ab Turin — ohne Courmayeur-Preise.",
+      "hook": "Ski ohne Mietwagen-Zwang.",
+      "access": "Direktzug ab Turin",
+      "avoidIf": "",
+      "priceBandEurPp": "55–85",
+      "tags": [
+        "ski",
+        "train"
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-livigno",
+      "destLabel": "Livigno",
+      "region": "Lombardei",
+      "countryCode": "IT",
+      "lat": 46.54,
+      "lng": 10.13,
+      "iata": "BGY",
+      "altAirports": [
+        {
+          "iata": "INN",
+          "note": "Innsbruck"
+        },
+        {
+          "iata": "MXP",
+          "note": "Mailand"
+        }
+      ],
+      "seasonHint": "Nov–April",
+      "durationHint": "7 Nächte",
+      "whyFit": "Hoch + schneesicher + Zollfrei — DIY lohnt ab einer Woche.",
+      "hook": "Tax-Free Skiwoche.",
+      "access": "Transfer BGY/MXP/INN",
+      "avoidIf": "Sehr kurze Anreise",
+      "priceBandEurPp": "60–90",
+      "tags": [
+        "ski",
+        "deal"
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-vogel",
+      "destLabel": "Vogel",
+      "region": "Triglav",
+      "countryCode": "SI",
+      "lat": 46.25,
+      "lng": 13.84,
+      "iata": "LJU",
+      "seasonHint": "Dez–Mai",
+      "durationHint": "3–4 Nächte",
+      "whyFit": "Bohinj-Panorama; Nursery-Slopes ohne Skipass — Jungfraujoch-Alternative.",
+      "hook": "Anfänger ohne Pass-Druck.",
+      "access": "Flug LJU",
+      "avoidIf": "Mega-Skigebiet",
+      "priceBandEurPp": "40–60",
+      "tags": [
+        "ski_lite",
+        "deal",
+        "nature"
+      ],
+      "catalogVibes": [
+        "family",
+        "anti_party"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-brezovica",
+      "destLabel": "Brezovica",
+      "region": "Sharr",
+      "countryCode": "XK",
+      "lat": 42.21,
+      "lng": 21.01,
+      "iata": "PRN",
+      "altAirports": [
+        {
+          "iata": "SKP",
+          "note": "Skopje"
+        }
+      ],
+      "seasonHint": "Jan–März",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "~25 € Pass — rohes Adventure-Terrain.",
+      "hook": "Günstigster ernsthafter Ski-Pass Europa-Muster.",
+      "access": "PRN/SKP",
+      "avoidIf": "EU-5-Sterne-Standard",
+      "priceBandEurPp": "20–40",
+      "tags": [
+        "ski",
+        "deal",
+        "adventure"
+      ],
+      "catalogVibes": [
+        "ultra_cheap",
+        "adventure"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-arinsal",
+      "destLabel": "Arinsal",
+      "region": "Andorra",
+      "countryCode": "AD",
+      "lat": 42.57,
+      "lng": 1.48,
+      "iata": "BCN",
+      "altAirports": [
+        {
+          "iata": "TLS",
+          "note": "Toulouse"
+        }
+      ],
+      "seasonHint": "Jan–März",
+      "durationHint": "5 Nächte",
+      "whyFit": "Familien/Anfänger Pyrenäen, ruhiger als Grandvalira.",
+      "hook": "Budget-Familien-Ski.",
+      "access": "Bus Transfer BCN/TLS",
+      "avoidIf": "Experten-Pisten-Only",
+      "priceBandEurPp": "50–80",
+      "tags": [
+        "ski_lite",
+        "deal",
+        "kids"
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-prague-winter",
+      "destLabel": "Prag Winterstadt",
+      "region": "Böhmen",
+      "countryCode": "CZ",
+      "lat": 50.07,
+      "lng": 14.43,
+      "iata": "PRG",
+      "seasonHint": "Jan–Feb",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Hotel-Tiefpreise nach Neujahr; European Sleeper-Knoten.",
+      "hook": "Burg morgens fast allein.",
+      "access": "Flug/Sleeper",
+      "avoidIf": "Aktivsport Berg",
+      "priceBandEurPp": "40–70",
+      "tags": [
+        "winter",
+        "train",
+        "deal"
+      ],
+      "catalogVibes": [
+        "anti_party",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-obergurgl",
+      "destLabel": "Obergurgl",
+      "region": "Ötztal",
+      "countryCode": "AT",
+      "lat": 46.86,
+      "lng": 11.02,
+      "iata": "INN",
+      "seasonHint": "Nov–April",
+      "durationHint": "4–7 Nächte",
+      "whyFit": "1927 m Schneesicherheit, keine Schlangen — St. Moritz-Alternative sportlich.",
+      "hook": "Maximale Netto-Fahrzeit auf Schnee.",
+      "access": "~90 Min ab INN",
+      "avoidIf": "Low Budget",
+      "priceBandEurPp": "100–150",
+      "tags": [
+        "ski",
+        "premium"
+      ],
+      "catalogVibes": [
+        "spa_value",
+        "adventure"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-montgenevre",
+      "destLabel": "Montgenèvre",
+      "region": "Via Lattea",
+      "countryCode": "FR",
+      "lat": 44.93,
+      "lng": 6.72,
+      "iata": "TRN",
+      "seasonHint": "Dez–März",
+      "durationHint": "5 Nächte",
+      "whyFit": "FR–IT Hybrid Via Lattea, 90 Min ab Turin.",
+      "hook": "Savoyen + italienische Küche.",
+      "access": "TRN + Transfer",
+      "avoidIf": "Isoliert ohne Auto unpraktisch",
+      "priceBandEurPp": "70–100",
+      "tags": [
+        "ski",
+        "deal",
+        "food"
+      ],
+      "catalogVibes": [
+        "family",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-la-clusaz",
+      "destLabel": "La Clusaz",
+      "region": "Haute-Savoie",
+      "countryCode": "FR",
+      "lat": 45.9,
+      "lng": 6.42,
+      "iata": "GVA",
+      "seasonHint": "Dez–März",
+      "durationHint": "4 Nächte",
+      "whyFit": "Authentisches Dorf, 30 km Annecy, 90 Min GVA — kein Retorten-Mega-Resort.",
+      "hook": "Ski-Lite + Annecy-Kombi.",
+      "access": "GVA Transfer",
+      "avoidIf": "Mega-Resorts",
+      "priceBandEurPp": "80–120",
+      "tags": [
+        "ski_lite",
+        "food",
+        "date"
+      ],
+      "catalogVibes": [
+        "spa_value",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "ski-sestriere",
+      "destLabel": "Sestriere",
+      "region": "Via Lattea",
+      "countryCode": "IT",
+      "lat": 44.96,
+      "lng": 6.88,
+      "iata": "TRN",
+      "seasonHint": "Dez–März",
+      "durationHint": "5–7 Nächte",
+      "whyFit": "248 Pistenmeilen Via Lattea, ~2800 m — Zermatt-Alternative.",
+      "hook": "Schneesicher + italienische Küche.",
+      "access": "TRN",
+      "avoidIf": "Schweizer Jetset",
+      "priceBandEurPp": "LIVE prüfen",
+      "tags": [
+        "ski",
+        "deal",
+        "food"
+      ],
+      "catalogVibes": [
+        "adventure",
+        "ultra_cheap",
+        "family"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-trieste",
+      "destLabel": "Triest",
+      "region": "Friaul-Julisch Venetien",
+      "countryCode": "IT",
+      "lat": 45.65,
+      "lng": 13.77,
+      "iata": "TRS",
+      "seasonHint": "Frühling/Herbst",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Venedig-Alternative: Adria + Kaffee + Habsburg ohne Overtourism.",
+      "hook": "Mondäne Hafen-Romantik.",
+      "access": "Flug TRS / Zug",
+      "tags": [
+        "überhyped",
+        "alternative",
+        "date",
+        "culture"
+      ],
+      "catalogVibes": [
+        "anti_party",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-oviedo",
+      "destLabel": "Oviedo",
+      "region": "Asturien",
+      "countryCode": "ES",
+      "lat": 43.36,
+      "lng": -5.84,
+      "iata": "OVD",
+      "seasonHint": "Mai–Okt",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Sidrerías statt überfüllter Pintxo-Masse — Food-Geheimtipp.",
+      "hook": "Apfelwein und nordspanische Küche.",
+      "access": "Flug OVD",
+      "tags": [
+        "überhyped",
+        "geheim",
+        "food"
+      ],
+      "catalogVibes": [
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-gosauseen",
+      "destLabel": "Gosauseen",
+      "region": "Salzkammergut",
+      "countryCode": "AT",
+      "lat": 47.53,
+      "lng": 13.52,
+      "iata": "SZG",
+      "seasonHint": "ganzjährig",
+      "durationHint": "1–3 Nächte",
+      "whyFit": "Hallstatt-Alternative: Dachstein-Kulisse ohne Massen.",
+      "hook": "See + Gletscher-Fotostops in Ruhe.",
+      "access": "SZG + Auto",
+      "tags": [
+        "überhyped",
+        "geheim",
+        "nature",
+        "date"
+      ],
+      "catalogVibes": [
+        "anti_party",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-cavtat",
+      "destLabel": "Cavtat",
+      "region": "Dalmatien",
+      "countryCode": "HR",
+      "lat": 42.58,
+      "lng": 18.22,
+      "iata": "DBV",
+      "seasonHint": "Mai/Sep",
+      "durationHint": "4–7 Nächte",
+      "whyFit": "Amalfi-Alternative: venezianische Küste, 30 Min Boot Dubrovnik.",
+      "hook": "Kristallklar ohne Van-Stau.",
+      "access": "Flug DBV",
+      "tags": [
+        "überhyped",
+        "alternative",
+        "beach",
+        "date"
+      ],
+      "catalogVibes": [
+        "date",
+        "anti_party"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-valencia",
+      "destLabel": "Valencia Wintersonne",
+      "region": "Valencia",
+      "countryCode": "ES",
+      "lat": 39.47,
+      "lng": -0.38,
+      "iata": "VLC",
+      "seasonHint": "Nov, Feb–April",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Barcelona-Alternative: Turia-Park, Menú del Día 12–15 €.",
+      "hook": "Wintersonne ohne Protest-Spannung.",
+      "access": "Flug VLC",
+      "tags": [
+        "überhyped",
+        "alternative",
+        "city",
+        "deal"
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-ierapetra",
+      "destLabel": "Ierapetra Kreta",
+      "region": "Kreta Süd",
+      "countryCode": "GR",
+      "lat": 35.01,
+      "lng": 25.74,
+      "iata": "HER",
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "5–8 Nächte",
+      "whyFit": "Mykonos-Alternative: rau, Tavernen, Kiesstrände.",
+      "hook": "Authentisches Kreta-Süd.",
+      "access": "Flug HER",
+      "tags": [
+        "überhyped",
+        "geheim",
+        "beach",
+        "quiet"
+      ],
+      "catalogVibes": [
+        "anti_party",
+        "date"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    },
+    {
+      "id": "alt-malta-teens",
+      "destLabel": "Malta / Valletta Familie",
+      "region": "Malta",
+      "countryCode": "MT",
+      "lat": 35.9,
+      "lng": 14.51,
+      "iata": "MLA",
+      "seasonHint": "Nov–Apr mild",
+      "durationHint": "4–7 Nächte",
+      "whyFit": "Teens/Family Micro-Gap: milde Winterwärme ohne Fernreise.",
+      "hook": "Tempel + Küstenwandern.",
+      "access": "Flug MLA",
+      "tags": [
+        "family",
+        "teens",
+        "winter",
+        "culture"
+      ],
+      "catalogVibes": [
+        "family",
+        "kids"
+      ],
+      "vibe": "ski_lite_winter",
+      "confidence": "medium",
+      "volatile": true
+    }
+  ],
+  "overhypedPairs": [
+    {
+      "hypedLabel": "Venedig",
+      "betterLabel": "Triest",
+      "sameVibe": "date",
+      "whyOverrated": "Overtourism/Überlastung trotz Gebühren-Ende 2026 — LIVE",
+      "whyBetter": "Adria-Kultur ohne Lagunen-Gedränge"
+    },
+    {
+      "hypedLabel": "San Sebastián",
+      "betterLabel": "Oviedo",
+      "sameVibe": "food",
+      "whyOverrated": "Pintxo-Kommerz und Preisspirale",
+      "whyBetter": "Sidrerías authentisch ohne Aufschlag"
+    },
+    {
+      "hypedLabel": "Ibiza",
+      "betterLabel": "Belgrad",
+      "sameVibe": "party",
+      "whyOverrated": "Kapitalintensive Club-Enklave",
+      "whyBetter": "Splavovi bis zum Morgen, deutlich günstiger"
+    },
+    {
+      "hypedLabel": "Marbella Puente Romano",
+      "betterLabel": "Šilainė Glamping",
+      "sameVibe": "spa",
+      "whyOverrated": "Hermetischer Ultra-Luxus",
+      "whyBetter": "Padel+Spa in der Natur, starkes Preis-Leistung"
+    },
+    {
+      "hypedLabel": "Gstaad",
+      "betterLabel": "Jasná",
+      "sameVibe": "winter",
+      "whyOverrated": "Elitäre Alpenpreise",
+      "whyBetter": "Modernes CEE-Resort zu Bruchteil"
+    },
+    {
+      "hypedLabel": "Tromsø Polarlicht-Bus",
+      "betterLabel": "Levi",
+      "sameVibe": "adventure",
+      "whyOverrated": "Industrialisierte Bustouren",
+      "whyBetter": "KTT 20 Min, Polarlicht ohne Kolonne"
+    },
+    {
+      "hypedLabel": "Hallstatt",
+      "betterLabel": "Gosauseen",
+      "sameVibe": "date",
+      "whyOverrated": "Viraler Tagestourismus",
+      "whyBetter": "Dachstein-Ruhe und Tiefe"
+    },
+    {
+      "hypedLabel": "Amalfiküste",
+      "betterLabel": "Cavtat",
+      "sameVibe": "beach",
+      "whyOverrated": "Van-Staus und Restriktionen",
+      "whyBetter": "Küste + Dubrovnik-Boot ohne Chaos"
+    },
+    {
+      "hypedLabel": "Paris Winter",
+      "betterLabel": "Budapest",
+      "sameVibe": "date",
+      "whyOverrated": "Nasskalt + teuer",
+      "whyBetter": "Dampfbäder + günstige Winterstadt"
+    },
+    {
+      "hypedLabel": "Barcelona",
+      "betterLabel": "Valencia",
+      "sameVibe": "city",
+      "whyOverrated": "Anti-Tourismus-Spannung",
+      "whyBetter": "Turia-Park und Menús 12–15 €"
+    },
+    {
+      "hypedLabel": "Zermatt",
+      "betterLabel": "Sestriere",
+      "sameVibe": "ski",
+      "whyOverrated": "Elitäres Preisniveau",
+      "whyBetter": "Via Lattea Schneesicherheit fair"
+    },
+    {
+      "hypedLabel": "Chamonix",
+      "betterLabel": "Grand Tourmalet",
+      "sameVibe": "adventure",
+      "whyOverrated": "Liftschlangen und Kommerz",
+      "whyBetter": "Pyrenäen Ski-Lite + Schneemobile"
+    },
+    {
+      "hypedLabel": "Mallorca Peak",
+      "betterLabel": "Euböa / Evia",
+      "sameVibe": "beach",
+      "whyOverrated": "Dauer-Peak-Preise",
+      "whyBetter": "Pinien und ruhige Ägäis"
+    },
+    {
+      "hypedLabel": "Kitzbühel",
+      "betterLabel": "Bansko",
+      "sameVibe": "ski",
+      "whyOverrated": "Promi-Après vor Sport",
+      "whyBetter": "Budget-Ski + Banya-Therme"
+    },
+    {
+      "hypedLabel": "Mykonos",
+      "betterLabel": "Ierapetra",
+      "sameVibe": "beach",
+      "whyOverrated": "Hyper-Luxus-Entfremdung",
+      "whyBetter": "Kreta-Süd authentisch"
+    },
+    {
+      "hypedLabel": "Courchevel",
+      "betterLabel": "Borovets",
+      "sameVibe": "ski_lite",
+      "whyOverrated": "Ultra-elitär",
+      "whyBetter": "Flache Einsteigerpisten günstig"
+    },
+    {
+      "hypedLabel": "Jungfraujoch",
+      "betterLabel": "Vogel",
+      "sameVibe": "nature",
+      "whyOverrated": "Foto-Touristen und Preise",
+      "whyBetter": "Bohinj-Panorama, Nursery ohne Pass"
+    },
+    {
+      "hypedLabel": "St. Moritz",
+      "betterLabel": "Obergurgl",
+      "sameVibe": "ski",
+      "whyOverrated": "Jetset-Aufschlag",
+      "whyBetter": "Schneesicher sportlich ohne Schaulaufen"
+    }
+  ],
+  "seasonCalendar": [
+    {
+      "regionOrVibe": "Zentraleuropa Budapest/Prag",
+      "bestMonths": "Jan–Feb",
+      "avoidMonths": "Jul–Aug Hitze",
+      "note": "Hotel-Tiefpreise Winter"
+    },
+    {
+      "regionOrVibe": "Ostalpen Bansko/Jasná",
+      "bestMonths": "Jan–März",
+      "avoidMonths": "Weihnachts-Peak Dez",
+      "note": "Budget-Ski"
+    },
+    {
+      "regionOrVibe": "Baltikum Padel",
+      "bestMonths": "Jun–Aug",
+      "avoidMonths": "—",
+      "note": "wenig Overtourism"
+    },
+    {
+      "regionOrVibe": "Balkan Party/Küste",
+      "bestMonths": "Mai, Sep–Okt",
+      "avoidMonths": "Jul–Aug Küste",
+      "note": "Shoulder"
+    },
+    {
+      "regionOrVibe": "Pyrenäen Ski-Lite",
+      "bestMonths": "Jan–März",
+      "avoidMonths": "Weihnachten",
+      "note": "Schnee-Ränder volatil"
+    },
+    {
+      "regionOrVibe": "Nightjet/Sleeper",
+      "bestMonths": "ganzjährig Early Bird",
+      "avoidMonths": "Sommer oft voll",
+      "note": "früh buchen"
+    },
+    {
+      "regionOrVibe": "Südspanien Wintersonne",
+      "bestMonths": "Nov, Feb–Apr",
+      "avoidMonths": "Jul–Sep Hitze",
+      "note": "Valencia/Andalusien"
+    },
+    {
+      "regionOrVibe": "Lappland",
+      "bestMonths": "Feb–Apr",
+      "avoidMonths": "Dez Santa-Peak",
+      "note": "Nov/Dez dunkel"
+    },
+    {
+      "regionOrVibe": "Seefeld Langlauf",
+      "bestMonths": "Jan–März",
+      "avoidMonths": "Feb Schulferien",
+      "note": "30 Min INN"
+    },
+    {
+      "regionOrVibe": "Asturien Food",
+      "bestMonths": "Mai, Sep",
+      "avoidMonths": "Jul–Aug San Seb",
+      "note": "Oviedo"
+    },
+    {
+      "regionOrVibe": "Griechenland Inseln ruhig",
+      "bestMonths": "Mai–Jun, Sep",
+      "avoidMonths": "Jul–Aug Mykonos",
+      "note": "Evia/Kreta Süd"
+    },
+    {
+      "regionOrVibe": "Via Lattea IT",
+      "bestMonths": "Dez–März",
+      "avoidMonths": "Feb IT-Ferien",
+      "note": "Preisvorteil vs FR"
+    }
+  ],
+  "trains": [
+    {
+      "name": "European Sleeper Paris–Berlin",
+      "routeSummary": "Paris → Berlin",
+      "countries": [
+        "FR",
+        "DE"
+      ],
+      "special": "ab März 2026 3×/Woche — LIVE",
+      "durationHint": "Nacht",
+      "priceBandEur": "ab ~30 LIVE",
+      "nearAirports": [
+        "CDG",
+        "BER"
+      ],
+      "bookingSystemHint": "European Sleeper"
+    },
+    {
+      "name": "European Sleeper Brüssel–Mailand",
+      "routeSummary": "Brüssel → Mailand Simplon",
+      "countries": [
+        "BE",
+        "CH",
+        "IT"
+      ],
+      "special": "ab Sep 2026 — LIVE",
+      "durationHint": "Nacht",
+      "priceBandEur": "ab ~50 LIVE",
+      "nearAirports": [
+        "BRU",
+        "MXP"
+      ],
+      "bookingSystemHint": "European Sleeper"
+    }
+  ],
+  "airports": [
+    {
+      "destLabel": "Sofia Ski-Gate",
+      "iata": "SOF",
+      "fromDeOftenCheap": [
+        "BER",
+        "CGN",
+        "MUC",
+        "FRA"
+      ],
+      "altAirports": [
+        {
+          "iata": "PDV",
+          "note": "Plovdiv Bansko"
+        }
+      ],
+      "transferNote": "Shuttle Bansko/Borovets",
+      "seasonDealHint": "Dez–März"
+    },
+    {
+      "destLabel": "Kittilä Lappland",
+      "iata": "KTT",
+      "fromDeOftenCheap": [
+        "HEL"
+      ],
+      "transferNote": "Levi ~20 Min, Ylläs ~35 Min",
+      "seasonDealHint": "Feb–Apr"
+    },
+    {
+      "destLabel": "Poprad-Tatry Jasná",
+      "iata": "TAT",
+      "fromDeOftenCheap": [
+        "VIE",
+        "BUD"
+      ],
+      "transferNote": "Jasná Niedere Tatra",
+      "seasonDealHint": "Jan–März"
+    },
+    {
+      "destLabel": "Krakau Zakopane",
+      "iata": "KRK",
+      "fromDeOftenCheap": [
+        "BER",
+        "CGN",
+        "DTM",
+        "FMM"
+      ],
+      "transferNote": "Bus Zakopane",
+      "seasonDealHint": "Dez–Feb"
+    },
+    {
+      "destLabel": "Triest Venedig-Alt",
+      "iata": "TRS",
+      "fromDeOftenCheap": [
+        "MUC",
+        "FRA",
+        "VIE"
+      ],
+      "transferNote": "Stadt direkt",
+      "seasonDealHint": "Frühling/Herbst"
+    },
+    {
+      "destLabel": "Valencia Wintersonne",
+      "iata": "VLC",
+      "fromDeOftenCheap": [
+        "CGN",
+        "BER",
+        "FRA",
+        "MUC"
+      ],
+      "transferNote": "Aerobús/Metro",
+      "seasonDealHint": "Nov, Feb–Apr"
+    },
+    {
+      "destLabel": "Dubrovnik Cavtat",
+      "iata": "DBV",
+      "fromDeOftenCheap": [
+        "MUC",
+        "CGN",
+        "STR"
+      ],
+      "transferNote": "Boot/Bus Cavtat ~30 Min",
+      "seasonDealHint": "Mai/Sep"
+    }
+  ],
+  "flyRailCombos": [
+    {
+      "label": "Prag–Berlin–Kopenhagen Tag",
+      "flyTo": "PRG",
+      "then": "11h Tagzug mit Berlin-Stop DIY",
+      "why": "Micro-Gap Sightseeing-Stop"
+    },
+    {
+      "label": "TRN + Via Lattea",
+      "flyTo": "TRN",
+      "then": "Sestriere/Montgenèvre/Bardonecchia",
+      "why": "Ski ohne Schweizer Preise"
+    },
+    {
+      "label": "SOF Package Ski",
+      "flyTo": "SOF",
+      "then": "Veranstalter-Paket Bansko oft günstiger als DIY",
+      "why": "Package>DIY Osteuropa-Ski"
+    }
+  ],
+  "dealPatterns": [
+    "Osteuropa-Ski: Package oft günstiger als DIY vor Ort",
+    "Nightjet/Sleeper: Early Bird >3 Monate; <14 Tage meist nur Sitz",
+    "Prag/Budapest Jan–Feb Hotel-Tief",
+    "Valencia Wintersonne Last-Minute oft stark",
+    "Cavtat Oktober Shoulder nach Kreuzfahrt-Peak",
+    "Vogel April/Mai Spät-Ski möglich — LIVE Schnee prüfen",
+    "Club Med/Padel-Resorts: Package schlägt Court-Stunden-DIY",
+    "Livigno: DIY Auto/Tax-Free oft besser als HP/VP",
+    "Interrail + Sleeper: Reservierungsaufpreise 11–179 € Muster — LIVE"
+  ]
+}

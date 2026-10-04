@@ -14,6 +14,7 @@ import {
   getRecentStepsPerMin,
   resetMotionCadence,
 } from './motionCadence';
+import { isGenericMapPointLabel } from './streetAddressQuery';
 
 export type MotionTransportMode =
   | 'walk'
@@ -295,7 +296,10 @@ export function formatNavHudTitle(
   mode: MotionTransportMode | null | undefined,
 ): string {
   // Volle Breite nutzen — Kürzung nur als Notbremse; Text wrappt auf 2 Zeilen.
-  const place = shortenNavDestName(destName, 56);
+  const raw = (destName ?? '').replace(/\s+/g, ' ').trim();
+  const place = isGenericMapPointLabel(raw)
+    ? 'Ziel'
+    : shortenNavDestName(destName, 56);
   return `${navTransportEmoji(mode)} → ${place}`;
 }
 

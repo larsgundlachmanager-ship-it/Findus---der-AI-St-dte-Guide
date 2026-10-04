@@ -1,0 +1,1 @@
+{"detail":"Requests to the radar endpoint with format 'plain' or 'bytes' must accept br, zstd, or gzip encoding"}

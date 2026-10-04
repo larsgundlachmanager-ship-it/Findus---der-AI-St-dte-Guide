@@ -23,6 +23,8 @@ export {
 
 export {
   resetCueScheduler,
+  noteCuePhaseSpoken,
+  armTurnForCues,
   estimateSpeechSec,
   speakStartDistanceM,
   findNextTurnWaypoint,

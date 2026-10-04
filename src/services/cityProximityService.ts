@@ -30,6 +30,8 @@ import {
   IN_CITY_KM,
   decideSessionOpenCitySwitch,
   isSameCity,
+  isSameCityFamily,
+  resolveFamilyCatalogPackId,
   pickSelectedCityKm,
   shouldHoldCitySwitchPrompt,
 } from './cityProximityDecision';
@@ -280,18 +282,27 @@ async function applyCitySwitch(
 
   if (soft) return;
 
-  void installCityPack(city.id, { checkRemote: true, reason: 'switch' }).catch((err) => {
-    console.warn('[cityProximity] pack install failed, soft fallback:', err);
-    void setSoftWorkingCity({
-      id: slugifySoftCityId(city.name),
-      name: city.name,
-      lat: typeof city.lat === 'number' ? city.lat : null,
-      lng: typeof city.lng === 'number' ? city.lng : null,
-      soft: true,
-      source: 'gps_soft',
-    });
-  });
-  void speakCityWelcomeForCity(city, { preferSwitch: true }).catch(() => undefined);
+  // Welcome zuerst (Slim-Speech), Pack erst danach — sonst blockiert Mega-JSON den Button.
+  void (async () => {
+    try {
+      await speakCityWelcomeForCity(city, { preferSwitch: true });
+    } catch {
+      /* soft */
+    }
+    void installCityPack(city.id, { checkRemote: true, reason: 'switch' }).catch(
+      (err) => {
+        console.warn('[cityProximity] pack install failed, soft fallback:', err);
+        void setSoftWorkingCity({
+          id: slugifySoftCityId(city.name),
+          name: city.name,
+          lat: typeof city.lat === 'number' ? city.lat : null,
+          lng: typeof city.lng === 'number' ? city.lng : null,
+          soft: true,
+          source: 'gps_soft',
+        });
+      },
+    );
+  })();
   coldStartWelcomeSpoken = true;
 }
 
@@ -557,7 +568,7 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
         softTarget = false;
       } else if (locality) {
         const byName = withDistance.find((c) =>
-          isSameCity({ id: c.id, name: c.name }, { name: locality.name }),
+          isSameCityFamily({ id: c.id, name: c.name }, { name: locality.name }),
         );
         if (byName) {
           target = {
@@ -639,12 +650,57 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
 
   // ── Dataset-Wechsel wenn physisch in anderer Stadt ──────────────
   const profileCity = { id: profile.cityId, name: profile.cityName };
+  let viaCruiseTerminal = false;
+
+  // Cruise-Terminal-Ausnahme: Nähe zum Terminal (nicht Stadtmitte) → Pack anbieten
+  // z. B. Gdynia-Terminal → Danzig-Pack, obwohl Altstadt > 12 km entfernt ist.
+  if (!target) {
+    try {
+      const { findNearbyCruiseTerminal } = require('./cruiseTerminalAnchors') as {
+        findNearbyCruiseTerminal: (
+          la: number,
+          ln: number,
+          maxKm?: number,
+        ) => {
+          anchor: {
+            cityId: string;
+            cityName: string;
+            terminalName: string;
+          };
+          km: number;
+        } | null;
+      };
+      const hit = findNearbyCruiseTerminal(lat, lng, IN_CITY_KM);
+      if (
+        hit &&
+        !isSameCityFamily(
+          { id: hit.anchor.cityId, name: hit.anchor.cityName },
+          profileCity,
+        )
+      ) {
+        const pack = withDistance.find((c) =>
+          isSameCityFamily(
+            { id: c.id, name: c.name },
+            { id: hit.anchor.cityId, name: hit.anchor.cityName },
+          ),
+        );
+        if (pack) {
+          target = { ...pack, distanceKm: hit.km };
+          softTarget = false;
+          viaCruiseTerminal = true;
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
   if (!target) {
     if (
       nearestCatalog &&
       nearestCatalog.distanceKm != null &&
       nearestCatalog.distanceKm <= DETECT_MAX_KM &&
-      !isSameCity(nearestCatalog, profileCity)
+      !isSameCityFamily(nearestCatalog, profileCity)
     ) {
       const inNewCity = nearestCatalog.distanceKm <= IN_CITY_KM;
       // Ohne bekannte Distanz zur aktuellen Stadt: KEIN Fake-Gap → sonst Spam
@@ -676,19 +732,19 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
     // Kein sinnvoller Katalog-Treffer → Soft aus Reverse-Geocode (Wedel etc.)
     if (!target && locality) {
       const softId = slugifySoftCityId(locality.name);
-      const sameAsProfile = isSameCity(
+      const sameAsProfile = isSameCityFamily(
         { id: softId, name: locality.name },
         profileCity,
       );
       if (!sameAsProfile) {
-        // Katalog-Match per Name?
+        // Katalog-Match per Name / Familie (Danzig <-> Gdansk/Gdynia)
         const byName = withDistance.find((c) =>
-          isSameCity(
+          isSameCityFamily(
             { id: c.id, name: c.name },
             { id: softId, name: locality.name },
           ),
         );
-        if (byName && !isSameCity(byName, profileCity)) {
+        if (byName && !isSameCityFamily(byName, profileCity)) {
           const candKm =
             byName.distanceKm ??
             haversineKm(lat, lng, locality.lat, locality.lng);
@@ -699,8 +755,8 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
             };
             softTarget = false;
           }
-        } else if (byName && isSameCity(byName, profileCity)) {
-          // Soft-Geocode = Profil-Stadt → kein Prompt
+        } else if (byName && isSameCityFamily(byName, profileCity)) {
+          // Soft-Geocode = Profil-Stadt / Familie → kein Prompt
           await lockFocusToSelected({
             id: byName.id,
             name: byName.name,
@@ -720,18 +776,71 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
               okSoft = true;
             }
             if (okSoft) {
-              target = emptyCatalogItem({
+              const famId = resolveFamilyCatalogPackId({
                 id: softId,
                 name: locality.name,
-                lat: locality.lat,
-                lng: locality.lng,
-                distanceKm: softKm,
               });
-              softTarget = true;
+              const famPack =
+                famId &&
+                withDistance.find((c) => c.id.toLowerCase() === famId);
+              if (famPack) {
+                target = {
+                  ...famPack,
+                  distanceKm: softKm,
+                };
+                softTarget = false;
+              } else {
+                target = emptyCatalogItem({
+                  id: softId,
+                  name: locality.name,
+                  lat: locality.lat,
+                  lng: locality.lng,
+                  distanceKm: softKm,
+                });
+                softTarget = true;
+              }
             }
           }
         }
       } else if (sameAsProfile) {
+        // Soft-GPS in Pack-Familie (Gdynia -> danzig): echtes Pack nutzen
+        const familyId = resolveFamilyCatalogPackId({
+          id: softId,
+          name: locality.name,
+        });
+        const familyPack =
+          familyId &&
+          withDistance.find((c) => c.id.toLowerCase() === familyId);
+        if (familyPack) {
+          await lockFocusToSelected({
+            id: familyPack.id,
+            name: familyPack.name,
+            lat:
+              typeof familyPack.lat === 'number'
+                ? familyPack.lat
+                : locality.lat,
+            lng:
+              typeof familyPack.lng === 'number'
+                ? familyPack.lng
+                : locality.lng,
+            soft: false,
+          });
+          if (
+            profile.cityId !== familyPack.id ||
+            profile.cityName !== familyPack.name
+          ) {
+            try {
+              await saveUserProfile({
+                ...profile,
+                cityId: familyPack.id,
+                cityName: familyPack.name,
+              });
+            } catch {
+              /* soft */
+            }
+          }
+          return;
+        }
         // Schon diese Soft-Stadt — Arbeitsstadt syncen, kein Prompt
         await lockFocusToSelected({
           id: softId,
@@ -760,13 +869,13 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
   // Nie dieselbe Stadt vorschlagen (Name/ID)
   if (
     target &&
-    isSameCity(target, { id: selectedId, name: selectedName })
+    isSameCityFamily(target, { id: selectedId, name: selectedName })
   ) {
     return;
   }
 
   // Ein Prompt, nächster erst nach 1 h — alle Städte, auch nach App-Neustart
-  if (target && promptHeld) {
+  if (target && promptHeld && !viaCruiseTerminal) {
     return;
   }
 
@@ -862,6 +971,30 @@ export async function checkCityProximity(lat: number, lng: number): Promise<void
 
   promptOpen = true;
   rememberCitySwitchPrompt(target.id);
+  if (viaCruiseTerminal && !softTarget) {
+    try {
+      const { scheduleNiceInfoPush } = require('./notifications/niceInfoNotifications') as {
+        scheduleNiceInfoPush: (o: {
+          title: string;
+          body: string;
+          dataKey: string;
+        }) => Promise<{ ok: boolean }>;
+      };
+      const termKm =
+        typeof target.distanceKm === 'number' && Number.isFinite(target.distanceKm)
+          ? target.distanceKm.toFixed(1)
+          : null;
+      void scheduleNiceInfoPush({
+        title: 'Stadtwechsel möglich',
+        body: termKm
+          ? `Cruise Terminal — ${target.name} ist ${termKm} km nah. Tippen zum Wechseln.`
+          : `Cruise Terminal — du könntest auf ${target.name} wechseln.`,
+        dataKey: `city_switch_cruise_${target.id}`,
+      });
+    } catch {
+      /* soft */
+    }
+  }
   try {
     // Nur echte Katalog-Packs → Wechsel-Karte (kein Soft)
     const decision = await presenter({

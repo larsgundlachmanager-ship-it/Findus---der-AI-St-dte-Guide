@@ -1,0 +1,1314 @@
+{
+  "pinneberg": {
+    "city": "pinneberg",
+    "version": 69,
+    "nSpots": 406,
+    "nTriggers": 406,
+    "story": 18,
+    "dir": 348,
+    "mixed": 40,
+    "osm": 366,
+    "mapOutline": 365,
+    "box": 7,
+    "poly": 365,
+    "noPoly": 41,
+    "booking": 0,
+    "hours": 7,
+    "menu": 0,
+    "breakfast": 8,
+    "checkin": 0,
+    "price": 14,
+    "website": 0,
+    "live": 7,
+    "fields": [
+      "_google",
+      "approach_triggers",
+      "bullets",
+      "category",
+      "district",
+      "facts",
+      "id",
+      "name",
+      "pack_role",
+      "place_tier",
+      "polygonCoordinates",
+      "relevance",
+      "sub_pois",
+      "tags"
+    ],
+    "topTags": [
+      [
+        "directory",
+        384
+      ],
+      [
+        "tier4",
+        384
+      ],
+      [
+        "sourced_osm",
+        366
+      ],
+      [
+        "map_outline",
+        365
+      ],
+      [
+        "offline_lookup",
+        359
+      ],
+      [
+        "osm_map",
+        261
+      ],
+      [
+        "bahnhof",
+        135
+      ],
+      [
+        "transit",
+        133
+      ],
+      [
+        "amenity_skip",
+        123
+      ],
+      [
+        "optional_live",
+        93
+      ],
+      [
+        "master_baseline",
+        90
+      ],
+      [
+        "briefkasten",
+        54
+      ],
+      [
+        "post_box",
+        54
+      ],
+      [
+        "module1",
+        49
+      ],
+      [
+        "story",
+        49
+      ],
+      [
+        "tier2",
+        48
+      ],
+      [
+        "map_point",
+        41
+      ],
+      [
+        "tourist_info",
+        38
+      ],
+      [
+        "review_facet",
+        37
+      ],
+      [
+        "master_report",
+        26
+      ],
+      [
+        "classified",
+        25
+      ],
+      [
+        "touristic",
+        23
+      ]
+    ],
+    "topCats": [
+      [
+        "bahnhof",
+        135
+      ],
+      [
+        "briefkasten",
+        54
+      ],
+      [
+        "tourist_info",
+        38
+      ],
+      [
+        "packstation",
+        20
+      ],
+      [
+        "denkmal",
+        13
+      ],
+      [
+        "hotel",
+        10
+      ],
+      [
+        "sport",
+        10
+      ],
+      [
+        "natur",
+        10
+      ],
+      [
+        "tankstelle",
+        10
+      ],
+      [
+        "restaurant",
+        10
+      ],
+      [
+        "service",
+        9
+      ],
+      [
+        "apotheke",
+        8
+      ],
+      [
+        "cafe",
+        8
+      ],
+      [
+        "post",
+        8
+      ],
+      [
+        "spielplatz",
+        7
+      ],
+      [
+        "toilette",
+        7
+      ],
+      [
+        "supermarket",
+        6
+      ],
+      [
+        "tour",
+        5
+      ]
+    ],
+    "idx": {
+      "total": 406,
+      "story": 21,
+      "directory": 385,
+      "offline_qa": 32,
+      "map_extract_kb": 18058
+    },
+    "transit": {
+      "provider": "db_rest",
+      "nStops": 2,
+      "stopSample": [
+        {
+          "id": "pinneberg_hbf",
+          "name": "Pinneberg",
+          "lat": 53.6549011,
+          "lng": 9.7989172,
+          "ibnr": "8004812",
+          "mode": "rail"
+        },
+        {
+          "id": "pinneberg_thesdorf",
+          "name": "Pinneberg-Thesdorf",
+          "lat": 53.6415612,
+          "lng": 9.8205777,
+          "mode": "rail"
+        }
+      ],
+      "extraKeys": [
+        "provider",
+        "default_ibnr",
+        "hafas_base_url",
+        "stops"
+      ]
+    },
+    "nLiveResearch": 5,
+    "liveR": [
+      {
+        "id": "events_today",
+        "kind": "events",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Was läuft HEUTE und in den nächsten 7 Tagen in Pinneberg (Konzerte, SummerJazz, Theater, Führungen)? Nur belegte Termine"
+      },
+      {
+        "id": "tours_activities",
+        "kind": "tours",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Aktuelle Führungen, Bäder-Öffnung, Ausstellungen Drostei/Stadtmuseum/Samlandmuseum Pinneberg — Links und heutige Zeiten "
+      },
+      {
+        "id": "dining_live",
+        "kind": "dining",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Aktuelle Speisekarten und Öffnungszeiten empfohlener Restaurants/Cafés in Pinneberg — Links suchen, keine Pack-Preise."
+      },
+      {
+        "id": "hotels_live",
+        "kind": "hotels",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Hotel-/Unterkunftspreise und Verfügbarkeit in Pinneberg für das Reisedatum live suchen."
+      },
+      {
+        "id": "summerjazz",
+        "kind": "events",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "SummerJazz Pinneberg: aktuelles Festivaljahr, Bühnen, Programm und Festival-Pin — nur frische Quellen, keine alten Pack-"
+      }
+    ],
+    "hotels": [
+      {
+        "id": "pinneberg_hotel_cap_polonio",
+        "name": "Hotel Cap Polonio",
+        "category": "hotel",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "module1",
+          "normalized",
+          "geschichte",
+          "legendäres_gebäude",
+          "historische_läden",
+          "must_have",
+          "master_report",
+          "directory",
+          "tier4",
+          "amenity_skip",
+          "prune_pinneberg",
+          "map_outline",
+          "sourced_osm",
+          "review_facet",
+          "frühstück"
+        ],
+        "nPoly": 13,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "name",
+          "district",
+          "bullets",
+          "id",
+          "category",
+          "tags",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois",
+          "facts",
+          "pack_role",
+          "place_tier",
+          "_google"
+        ],
+        "bullets": [
+          "Das Hotel rettete den prachtvollen, hölzernen Speisesaal der ersten Klasse des 1914 gebauten Ozeandampfers 'Cap Polonio' vor der endgültigen Verschrottung.",
+          "Während andere Fragmente des legendären Schiffs steril im Deutschen Schifffahrtsmuseum in Bremerhaven landeten, wird dieser holzgetäfelte Saal bis heute aktiv als lebendige Gastronomie in Pinneberg genutzt.",
+          "Gehobene norddeutsche Gastronomie im Ambiente der ersten Klasse. Die Location ist aufgrund des historischen Flairs extrem beliebt für Hochzeiten und festliche Dinners.",
+          "Historische Entität: geretteter 1.-Klasse-Speisesaal des Dampfers Cap Polonio (1914)."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Hotel Cap Polonio mit historischem Speisesaal — Hochzeiten und festliche Dinner; Querverbindungen zur Innenstadt-Kulturachse."
+      },
+      {
+        "id": "pinneberg_gasthaus_pinneberg",
+        "name": "Gasthaus Pinneberg",
+        "category": "hotel",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ],
+        "nPoly": 5,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois"
+        ],
+        "bullets": [
+          "Adresse: Mühlenstraße 109, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Mühlenstraße 109, 25421 Pinneberg"
+      },
+      {
+        "id": "pinneberg_c_und_s_hotel",
+        "name": "C und S Hotel",
+        "category": "hotel",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ],
+        "nPoly": 6,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois"
+        ],
+        "bullets": [
+          "Adresse: Prisdorfer Str. 21, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Prisdorfer Str. 21, 25421 Pinneberg"
+      },
+      {
+        "id": "pinneberg_hotel_und_gasthof_heidekrug",
+        "name": "Hotel und Gasthof Heidekrug",
+        "category": "restaurant",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "master_baseline",
+          "restaurant",
+          "kulinarik",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet",
+          "biergarten"
+        ],
+        "nPoly": 5,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois",
+          "_google"
+        ],
+        "bullets": [
+          "Adresse: Wedeler Chaussee 20, 25482 Appen-Etz.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Wedeler Chaussee 20, 25482 Appen-Etz"
+      }
+    ],
+    "bakeries": [
+      {
+        "id": "pinneberg_junge_die_backerei",
+        "name": "Junge Die Bäckerei.",
+        "category": "bakerei",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "kulinarik",
+          "master_baseline",
+          "bakerei",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet",
+          "frühstück"
+        ],
+        "nPoly": 16,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois",
+          "_google"
+        ],
+        "bullets": [
+          "Adresse: Bismarckstr. 13, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Bismarckstr. 13, 25421 Pinneberg"
+      },
+      {
+        "id": "pinneberg_backer_schluter",
+        "name": "Bäcker Schlüter",
+        "category": "cafe",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "kulinarik",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ],
+        "nPoly": 5,
+        "box": true,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois"
+        ],
+        "bullets": [
+          "Adresse: Elmshorner Str. 107, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Elmshorner Str. 107, 25421 Pinneberg"
+      },
+      {
+        "id": "pinneberg_backerei_dwenger",
+        "name": "Bäckerei Dwenger",
+        "category": "bakerei",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "kulinarik",
+          "master_baseline",
+          "bakerei",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ],
+        "nPoly": 7,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois"
+        ],
+        "bullets": [
+          "Adresse: Mühlenstraße 26, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Mühlenstraße 26, 25421 Pinneberg"
+      },
+      {
+        "id": "pinneberg_pbs_backer_gmbh_co_kg",
+        "name": "PBS Bäcker GmbH & Co. KG",
+        "category": "cafe",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "kulinarik",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ],
+        "nPoly": 7,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois"
+        ],
+        "bullets": [
+          "Adresse: Elmshorner Str. 29, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Elmshorner Str. 29, 25421 Pinneberg"
+      }
+    ],
+    "buses": [],
+    "nLinks": 1,
+    "linkSample": [
+      {
+        "id": "pinneberg_tourismus",
+        "title": "Stadt Pinneberg",
+        "url": "https://www.pinneberg.de",
+        "provider": "Stadt Pinneberg",
+        "tags": [
+          "official",
+          "orientierung"
+        ]
+      }
+    ]
+  },
+  "tornesch": {
+    "city": "tornesch",
+    "version": 55,
+    "nSpots": 310,
+    "nTriggers": 310,
+    "story": 18,
+    "dir": 240,
+    "mixed": 52,
+    "osm": 279,
+    "mapOutline": 277,
+    "box": 4,
+    "poly": 278,
+    "noPoly": 32,
+    "booking": 0,
+    "hours": 5,
+    "menu": 0,
+    "breakfast": 9,
+    "checkin": 0,
+    "price": 1,
+    "website": 37,
+    "live": 0,
+    "fields": [
+      "_google",
+      "approach_triggers",
+      "bullets",
+      "category",
+      "district",
+      "facts",
+      "id",
+      "name",
+      "nav_waypoints",
+      "pack_role",
+      "place_tier",
+      "polygonCoordinates",
+      "relevance",
+      "sub_pois",
+      "tags"
+    ],
+    "topTags": [
+      [
+        "directory",
+        292
+      ],
+      [
+        "tier4",
+        292
+      ],
+      [
+        "sourced_osm",
+        279
+      ],
+      [
+        "map_outline",
+        277
+      ],
+      [
+        "offline_lookup",
+        249
+      ],
+      [
+        "osm_map",
+        174
+      ],
+      [
+        "amenity_skip",
+        118
+      ],
+      [
+        "bahnhof",
+        100
+      ],
+      [
+        "transit",
+        98
+      ],
+      [
+        "optional_live",
+        69
+      ],
+      [
+        "module1",
+        67
+      ],
+      [
+        "master_baseline",
+        64
+      ],
+      [
+        "story",
+        63
+      ],
+      [
+        "tier2",
+        59
+      ],
+      [
+        "must_have",
+        42
+      ],
+      [
+        "briefkasten",
+        40
+      ],
+      [
+        "post_box",
+        40
+      ],
+      [
+        "skeleton",
+        39
+      ],
+      [
+        "google_places",
+        39
+      ],
+      [
+        "map_point",
+        33
+      ],
+      [
+        "review_facet",
+        32
+      ],
+      [
+        "touristic",
+        30
+      ]
+    ],
+    "topCats": [
+      [
+        "bahnhof",
+        99
+      ],
+      [
+        "briefkasten",
+        40
+      ],
+      [
+        "tourist_info",
+        20
+      ],
+      [
+        "packstation",
+        15
+      ],
+      [
+        "natur",
+        12
+      ],
+      [
+        "denkmal",
+        10
+      ],
+      [
+        "restaurant",
+        10
+      ],
+      [
+        "hotel",
+        10
+      ],
+      [
+        "spielplatz",
+        9
+      ],
+      [
+        "freizeit",
+        8
+      ],
+      [
+        "souvenir",
+        8
+      ],
+      [
+        "gesundheit",
+        7
+      ],
+      [
+        "museum",
+        6
+      ],
+      [
+        "golf",
+        5
+      ],
+      [
+        "cafe",
+        5
+      ],
+      [
+        "wanderung",
+        4
+      ],
+      [
+        "service",
+        4
+      ],
+      [
+        "markt",
+        4
+      ]
+    ],
+    "idx": {
+      "total": 310,
+      "story": 18,
+      "directory": 292,
+      "offline_qa": 16,
+      "map_extract_kb": 11978
+    },
+    "transit": null,
+    "nLiveResearch": 4,
+    "liveR": [
+      {
+        "id": "events_today",
+        "kind": "events",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Was läuft HEUTE und in den nächsten 7 Tagen an Konzerten, Theater, Festen und Touren in Tornesch? Nur belegte Termine mi"
+      },
+      {
+        "id": "tours_activities",
+        "kind": "tours",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Welche geführten Touren, Wanderungen, Watt-/Naturführungen oder Ticket-Erlebnisse gibt es aktuell in Tornesch? Links zur"
+      },
+      {
+        "id": "dining_live",
+        "kind": "dining",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Aktuelle Speisekarten, Ruhetag und Bewertungen für empfohlene Restaurants/Cafés in Tornesch — Links suchen, keine alten "
+      },
+      {
+        "id": "hotels_live",
+        "kind": "hotels",
+        "keys": [
+          "id",
+          "topic",
+          "prompt",
+          "tags"
+        ],
+        "prompt": "Aktuelle Hotel-/Unterkunftsverfügbarkeit und Preise in Tornesch für das geplante Datum — Live-Suche, keine Pack-Preise."
+      }
+    ],
+    "hotels": [
+      {
+        "id": "tornesch_c_und_s_hotel",
+        "name": "C und S Hotel",
+        "category": "hotel",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "master_baseline",
+          "tier4",
+          "review_facet",
+          "map_outline",
+          "sourced_osm"
+        ],
+        "nPoly": 6,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "approach_triggers",
+          "sub_pois",
+          "polygonCoordinates"
+        ],
+        "bullets": [
+          "Adresse: Prisdorfer Str. 21, 25421 Pinneberg.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Prisdorfer Str. 21, 25421 Pinneberg"
+      },
+      {
+        "id": "tornesch_hotel_esinger_hof_by_alesta",
+        "name": "Hotel Esinger Hof by Alesta",
+        "category": "hotel",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet",
+          "frühstück"
+        ],
+        "nPoly": 7,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois",
+          "_google"
+        ],
+        "bullets": [
+          "Adresse: Denkmalstraße 7, 25436 Tornesch.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Denkmalstraße 7, 25436 Tornesch"
+      },
+      {
+        "id": "tornesch_schleswig_holstein_hotel",
+        "name": "Schleswig Holstein Hotel",
+        "category": "hotel",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "master_baseline",
+          "tier4",
+          "review_facet",
+          "burger",
+          "frühstück",
+          "map_outline",
+          "sourced_osm"
+        ],
+        "nPoly": 5,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "approach_triggers",
+          "sub_pois",
+          "_google",
+          "polygonCoordinates"
+        ],
+        "bullets": [
+          "Adresse: Werner-von-Siemens-Straße 5, 25337 Elmshorn.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Werner-von-Siemens-Straße 5, 25337 Elmshorn"
+      },
+      {
+        "id": "tornesch_hotel_und_gasthof_heidekrug",
+        "name": "Hotel und Gasthof Heidekrug",
+        "category": "restaurant",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "hotel",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "restaurant",
+          "kulinarik",
+          "master_baseline",
+          "tier4",
+          "review_facet",
+          "biergarten",
+          "map_outline",
+          "sourced_osm"
+        ],
+        "nPoly": 5,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "approach_triggers",
+          "sub_pois",
+          "_google",
+          "polygonCoordinates"
+        ],
+        "bullets": [
+          "Adresse: Wedeler Chaussee 20, 25482 Appen-Etz.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Wedeler Chaussee 20, 25482 Appen-Etz"
+      }
+    ],
+    "bakeries": [
+      {
+        "id": "tornesch_backerei_und_cafe_veloso_tornesch",
+        "name": "Bäckerei und Café Veloso Tornesch",
+        "category": "bakerei",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "bakerei",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet",
+          "frühstück"
+        ],
+        "nPoly": 7,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois",
+          "_google"
+        ],
+        "bullets": [
+          "Adresse: Lindenweg 76, 25436 Tornesch.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Lindenweg 76, 25436 Tornesch"
+      },
+      {
+        "id": "tornesch_backerei_eggers",
+        "name": "Bäckerei Eggers",
+        "category": "bakerei",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "bakerei",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ],
+        "nPoly": 7,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "approach_triggers",
+          "sub_pois",
+          "polygonCoordinates"
+        ],
+        "bullets": [
+          "Adresse: Pinneberger Str. 3, 25436 Tornesch.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Pinneberger Str. 3, 25436 Tornesch"
+      },
+      {
+        "id": "tornesch_backerei_allworden",
+        "name": "Bäckerei Allwörden",
+        "category": "bakerei",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "bakerei",
+          "master_baseline",
+          "tier4",
+          "map_outline",
+          "sourced_osm",
+          "review_facet",
+          "frühstück"
+        ],
+        "nPoly": 10,
+        "box": false,
+        "osm": true,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "pack_role",
+          "place_tier",
+          "relevance",
+          "tags",
+          "bullets",
+          "facts",
+          "polygonCoordinates",
+          "approach_triggers",
+          "sub_pois",
+          "_google"
+        ],
+        "bullets": [
+          "Adresse: Ohlenhoff 2, 25436 Tornesch.",
+          "Offline-Katalog: Standort für Fragen/Suche — kein proaktiver Story-Trigger."
+        ],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Adresse: Ohlenhoff 2, 25436 Tornesch"
+      }
+    ],
+    "buses": [
+      {
+        "id": "tornesch_businesspark_oha",
+        "name": "Businesspark Tornesch-Oha",
+        "category": "service",
+        "pack_role": "directory",
+        "place_tier": 4,
+        "tags": [
+          "service",
+          "module1",
+          "tier4",
+          "directory",
+          "master_report",
+          "amenity_skip",
+          "offline_lookup",
+          "map_point"
+        ],
+        "nPoly": 0,
+        "box": false,
+        "osm": false,
+        "keys": [
+          "id",
+          "name",
+          "category",
+          "district",
+          "tags",
+          "bullets",
+          "facts",
+          "approach_triggers",
+          "sub_pois",
+          "pack_role",
+          "place_tier",
+          "relevance"
+        ],
+        "bullets": [],
+        "booking": null,
+        "liveHints": [],
+        "factsNow": "Gewerbe-/Logistikpark — kein Story-Trigger."
+      }
+    ],
+    "nLinks": 0,
+    "linkSample": []
+  }
+}

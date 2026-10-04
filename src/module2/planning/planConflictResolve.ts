@@ -50,6 +50,10 @@ import {
   isSoftMovableStop,
   prioOfStop,
 } from './planHardLock';
+import {
+  findQuietOverlapPair,
+  resolveOverlapsQuietlyOnStops,
+} from './planQuietOverlap';
 
 function prioOf(s: FuturePlanStop): PlanPriority {
   return prioOfStop(s);
@@ -97,6 +101,7 @@ export function shiftStopPastHarder(
   hard: FuturePlanStop,
   reason = 'Verschoben',
 ): boolean {
+  if (soft.groupId === "live_journey" || hard.groupId === "live_journey") return false;
   if (isHardFixedStop(soft) || !isSoftMovableStop(soft)) return false;
   const hardEnd =
     hard.plannedEndMs ??
@@ -172,6 +177,64 @@ async function askDropPermission(title: string, prio: PlanPriority): Promise<boo
   return usePlanSessionStore.getState().beginWaitConflict();
 }
 
+/** Kurzer Ack wenn zwei fixe Zeiten nicht auto-lösbar sind — Struktur, kein Stadt-Skript. */
+export function speakUnresolvedPlanConflict(
+  a?: FuturePlanStop | null,
+  b?: FuturePlanStop | null,
+): void {
+  const pair =
+    a && b
+      ? ([a, b] as [FuturePlanStop, FuturePlanStop])
+      : findQuietOverlapPair(useFuturePlanStore.getState().plan.stops) ??
+        findOverlapPair(useFuturePlanStore.getState().plan.stops);
+  if (!pair) {
+    enqueueSpeech({
+      kind: 'main',
+      text: sanitizePlanSpeech(
+        'Kurz eng: zwei Zeiten passen so nicht — einer der Slots muss weichen.',
+      ),
+      turnId: `m5_quiet_cf_${Date.now()}`,
+    });
+    return;
+  }
+  const t0 = sanitizePlanSpeech(pair[0].title.replace(/^[🥇🥈📌📍✨🏁🔔]\s*/u, ''));
+  const t1 = sanitizePlanSpeech(pair[1].title.replace(/^[🥇🥈📌📍✨🏁🔔]\s*/u, ''));
+  enqueueSpeech({
+    kind: 'main',
+    text: sanitizePlanSpeech(
+      `Kurz eng: „${t0}“ und „${t1}“ knallen — einer der Slots muss weichen.`,
+    ),
+    turnId: `m5_quiet_cf_${Date.now()}`,
+  });
+}
+
+/**
+ * Soft-Overlaps vor UI-Paint still schieben (kein Ask, kein Drop).
+ * @returns true wenn nach max. Shifts noch Überlappung (Banner-Fall).
+ */
+export function resolveOverlapsQuietly(opts?: {
+  speakIfStuck?: boolean;
+  maxShifts?: number;
+}): boolean {
+  const plan = useFuturePlanStore.getState().plan;
+  const result = resolveOverlapsQuietlyOnStops(plan.stops, {
+    maxShifts: opts?.maxShifts,
+  });
+
+  if (result.shiftedIds.length > 0) {
+    const byId = new Map(result.stops.map((s) => [s.id, s]));
+    for (const id of result.shiftedIds) {
+      const next = byId.get(id);
+      if (next) useFuturePlanStore.getState().upsertStop(next);
+    }
+  }
+
+  if ((result.stillOverlapping || result.stuck) && opts?.speakIfStuck) {
+    speakUnresolvedPlanConflict();
+  }
+  return result.stillOverlapping;
+}
+
 /**
  * Interaktive Overlap-Auflösung nach Opfer-Hierarchie.
  */
@@ -179,6 +242,9 @@ export async function resolveOverlapsInteractive(): Promise<{
   dropped: string[];
   shifted: string[];
 }> {
+  // Zuerst still schieben — Banner/Ask nur für Rest
+  resolveOverlapsQuietly({ speakIfStuck: false });
+
   const dropped: string[] = [];
   const shifted: string[] = [];
   let guard = 0;
@@ -692,6 +758,8 @@ function showFinalActionCards(opts?: {
  * Finaler Timeline-Check: Konflikte → Geo → Trigger → kurze Speech → Actions.
  */
 export async function runFinalTimelineOptimization(): Promise<void> {
+  // Quiet zuerst (Skeleton/Tour können schon gelaufen sein — idempotent)
+  resolveOverlapsQuietly({ speakIfStuck: false });
   const { dropped, shifted } = await resolveOverlapsInteractive();
 
   const pendingGeoWishes = fetchPendingGeoWishes();

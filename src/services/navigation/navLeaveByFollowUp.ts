@@ -45,7 +45,7 @@ function consumeSkipMobilityChoice(): boolean {
 }
 
 /**
- * Lange Strecke: ÖPNV zuerst planen, nicht erst 9s Fußroute zeigen.
+ * Lange Strecke (≥1,8 km Luftlinie): ÖPNV zuerst planen, nicht erst Fußroute zeigen.
  * true = Journey läuft, Fuß-Enrich überspringen.
  */
 export async function tryAutoTransitBeforeWalk(opts: {
@@ -78,6 +78,12 @@ export async function tryAutoTransitBeforeWalk(opts: {
     taxiPref = null;
   }
   try {
+    // Generating-Flag runter, bevor Transit plant — sonst Stack aus Walk+ÖPNV+Speech.
+    try {
+      useFinnusStore.getState().setIsGenerating(false);
+    } catch {
+      /* soft */
+    }
     const { planTransitHandsFree, startTransitHandsFree } = await import(
       './handsFreeNav/transitBridge'
     );
@@ -114,6 +120,14 @@ export async function tryAutoTransitBeforeWalk(opts: {
       to: { lat: opts.destLat, lng: opts.destLng },
       destName: opts.destName,
     });
+    if (tr.ok) {
+      try {
+        useFinnusStore.getState().setIsGenerating(false);
+        useFinnusStore.getState().setNavRouteLoading(false);
+      } catch {
+        /* soft */
+      }
+    }
     return Boolean(tr.ok);
   } catch {
     return false;
@@ -229,10 +243,25 @@ export async function offerMobilityChoiceAfterRouteReady(opts: {
 
   if (decision.kind === 'auto_transit' && !decision.includeTaxi) {
     try {
+      try {
+        useFinnusStore.getState().setIsGenerating(false);
+      } catch {
+        /* soft */
+      }
       const { setPreferredTravelMode } = require('./travelModeContext') as {
         setPreferredTravelMode: (m: 'transit' | 'foot' | 'bike' | null) => void;
       };
       setPreferredTravelMode('transit');
+      try {
+        const {
+          bumpProgressiveEnrichEpoch,
+        } = require('./handsFreeNav/startNav') as {
+          bumpProgressiveEnrichEpoch: () => void;
+        };
+        bumpProgressiveEnrichEpoch();
+      } catch {
+        /* soft */
+      }
       const { startTransitHandsFree } = await import('./handsFreeNav/transitBridge');
       const tr = await startTransitHandsFree({
         from: { lat, lng },
@@ -240,6 +269,12 @@ export async function offerMobilityChoiceAfterRouteReady(opts: {
         destName: opts.destName,
       });
       if (tr.ok) {
+        try {
+          useFinnusStore.getState().setIsGenerating(false);
+          useFinnusStore.getState().setNavRouteLoading(false);
+        } catch {
+          /* soft */
+        }
         return {
           deferredWalkSpeech: true,
           walkMin,

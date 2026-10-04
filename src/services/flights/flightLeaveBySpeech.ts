@@ -26,6 +26,10 @@ export function buildLeaveBySpeech(opts: {
   planAck?: boolean;
   transitLeaveMs?: number | null;
   accessRecommend?: 'taxi' | 'transit' | 'either';
+  /**
+   * Task 2 (Taxi) war schon Root — kein ÖPNV/Taxi-Ask; Deep-Link Just-Do-It.
+   */
+  taxiCommitted?: boolean;
   /** Check-in-Uhr nur bei Aufgabegepäck. */
   checkinClock?: string | null;
   /** Taxi-Fahrzeit für den geplanten Start — nie „aktuell nachts“. */
@@ -54,10 +58,14 @@ export function buildLeaveBySpeech(opts: {
     opts.taxiMin != null && opts.taxiMin >= 1
       ? ` Taxi etwa ${opts.taxiMin} Min${opts.taxiPrice ? ` (${opts.taxiPrice})` : ''}`
       : '';
-  const accessAsk =
-    opts.accessRecommend === 'transit'
+  const accessAsk = opts.taxiCommitted
+    ? ''
+    : opts.accessRecommend === 'transit'
       ? ` Mit den Öffis oder lieber Taxi?`
       : ` ÖPNV oder Taxi — was passt besser?`;
+  const taxiTask2 = opts.taxiCommitted
+    ? ` Taxi ist vorbereitet — Abholzeit ${leave}${taxiBit}, Deep-Link steht bereit.`
+    : '';
   const checkin =
     opts.luggage === 'checked' && opts.checkinClock
       ? ` Check-in um ${opts.checkinClock}.`
@@ -70,21 +78,25 @@ export function buildLeaveBySpeech(opts: {
   const transitLeave = clockFromMs(opts.transitLeaveMs);
   const bufferRecalcSpeech =
     transitLeave && transitLeave !== '—' && leave !== '—'
-      ? `Mit angepasstem Puffer: Öffis los um ${transitLeave}, Taxi um ${leave}${taxiBit}. Am Terminal ${airport}.`
-      : `Neuer Puffer — Los ${leave}, am Terminal ${airport}. Steht so im Plan.${accessAsk}`;
+      ? `Mit angepasstem Puffer: Öffis los um ${transitLeave}, Taxi um ${leave}${taxiBit}. Am Terminal ${airport}.${taxiTask2}`
+      : `Neuer Puffer — Los ${leave}, am Terminal ${airport}. Steht so im Plan.${accessAsk}${taxiTask2}`;
   const speech = opts.planAck
-    ? `Passt — der Zeitplan Richtung ${city} bleibt so. Los ${leave}, am Terminal ${airport}.`
+    ? `Passt — der Zeitplan Richtung ${city} bleibt so. Los ${leave}, am Terminal ${airport}.${taxiTask2}`
     : opts.bufferConfirm
-    ? bufferRecalcSpeech
-    : opts.leaveByAsk
-      ? `${foundWithDay}, laut Abflugtafel. Am Flughafen solltest du um ${airport} sein, ${bag}. Los ${leave}.${checkin}${bufferAsk}${accessAsk}${wake}`
-      : `${foundWithDay}, laut Abflugtafel. Los ${leave}.${checkin}${bufferAsk}${accessAsk}${wake}`;
+      ? bufferRecalcSpeech
+      : opts.leaveByAsk
+        ? `${foundWithDay}, laut Abflugtafel. Am Flughafen solltest du um ${airport} sein, ${bag}. Los ${leave}.${checkin}${bufferAsk}${accessAsk}${taxiTask2}${wake}`
+        : `${foundWithDay}, laut Abflugtafel. Los ${leave}.${checkin}${bufferAsk}${accessAsk}${taxiTask2}${wake}`;
+  const bullets = [
+    ident ? `${ident} ${dep} · ${opts.destCity}` : `${dep} · ${opts.destCity}`,
+    `Los ${leave} · Flughafen ${airport}`,
+    opts.luggage === 'checked' ? 'Mit Aufgabegepäck' : 'Nur Handgepäck',
+  ];
+  if (opts.taxiCommitted) {
+    bullets.unshift(`Taxi vorbestellen · ${leave}`);
+  }
   return {
     speech,
-    bullets: [
-      ident ? `${ident} ${dep} · ${opts.destCity}` : `${dep} · ${opts.destCity}`,
-      `Los ${leave} · Flughafen ${airport}`,
-      opts.luggage === 'checked' ? 'Mit Aufgabegepäck' : 'Nur Handgepäck',
-    ].filter(Boolean) as string[],
+    bullets: bullets.filter(Boolean).slice(0, 4) as string[],
   };
 }

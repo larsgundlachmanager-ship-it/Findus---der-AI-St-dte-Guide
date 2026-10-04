@@ -11,12 +11,27 @@ import { hasFlag, loadPack, savePack } from './lib.mjs';
 const MAX = 72;
 
 const SKIP_RE =
-  /zentrumsanker|transformationsgeschichte|offline-katalog|offline-directory|ist ein \w+-punkt in|user-frage:|woran erkenne|beliebter .+ moment|^ja[,!.]?\s|google_maps:|gps-eingang|koordinaten\s*~|sourced_osm|live:\s|tel\.?\s*\d|adresse:|öffnungszeiten club/i;
+  /zentrumsanker|transformationsgeschichte|offline-katalog|offline-directory|ist ein \w+-punkt in|user-frage:|woran erkenne|beliebter .+ moment|^ja[,!.]?\s|google_maps:|gps-eingang|koordinaten\s*~|sourced_osm|live:\s|tel\.?\s*\d|adresse:|öffnungszeiten club|google-bewertung|^\(leer\)$/i;
+
+function ratingWordFromText(text) {
+  const m = String(text || '').match(
+    /(?:google-)?bewertung:\s*(\d+(?:[.,]\d+)?)\s*\/\s*5/i,
+  );
+  if (!m) return null;
+  const r = Number(String(m[1]).replace(',', '.'));
+  if (!Number.isFinite(r)) return null;
+  if (r >= 4.5) return 'top bewertet';
+  if (r >= 4.0) return 'gut bewertet';
+  if (r >= 3.5) return 'okay bewertet';
+  return 'schlechter bewertet';
+}
 
 function looksLikeBareAddress(text) {
   const t = String(text || '').trim();
   if (/^\d+[a-z]?,?\s*\d{5}\b/i.test(t)) return true;
-  if (/^[A-ZÄÖÜa-zäöü][\wÄÖÜäöüß.\- ]+\s+\d+[a-zA-Z]?,?\s*\d{5}\b/.test(t)) return true;
+  if (/^[A-ZÄÖÜa-zäöü][\wÄÖÜäöüß.\- ]+\s+\d+[a-zA-Z]?,?\s*\d{5}\b/.test(t)) {
+    return true;
+  }
   if (/^[\wÄÖÜäöüß.\- ]+,\s*\d{5}\b/.test(t) && t.length < 55) return true;
   return false;
 }
@@ -52,7 +67,7 @@ const OVERRIDES = {
     'Pendlerparken — Auto stehen lassen und Zug nehmen',
   ],
   prisdorf_sparkasse_geldautomat_meyers: [
-    'Sparkasse-Geldautomat im Meyers Frischecenter',
+    'Geldautomat der Sparkasse Südholstein',
     'Peiner Hag — praktischer Stopp beim Einkaufen',
   ],
   prisdorf_marktkauf_meyers_frischecenter: [
@@ -66,6 +81,8 @@ const OVERRIDES = {
 };
 
 function compact(text) {
+  const ratingWord = ratingWordFromText(text);
+  if (ratingWord) return ratingWord;
   let t = String(text || '')
     .replace(/^➔\s*/u, '')
     .replace(/^heute:\s*/i, '')
@@ -103,6 +120,8 @@ function stripLead(text) {
 
 function goodLine(raw) {
   const t = compact(stripLead(raw));
+  if (!t) return null;
+  if (/^(top|gut|okay|schlechter) bewertet$/i.test(t)) return t;
   if (t.length < 18 || t.length > MAX) return null;
   if (SKIP_RE.test(t)) return null;
   if (looksLikeBareAddress(t)) return null;

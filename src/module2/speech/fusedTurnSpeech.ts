@@ -53,13 +53,32 @@ export function beginFusedTurnSpeech(turnId: string): void {
   activeTurnId = id;
   lastBridge = '';
   starting = false;
+  try {
+    const { noteModule2TurnBusy } = require('../../services/boot/interactiveBootGate') as {
+      noteModule2TurnBusy: (b: boolean) => void;
+    };
+    noteModule2TurnBusy(true);
+  } catch {
+    /* soft */
+  }
 }
 
 export function isFusedTurnLive(): boolean {
   return Boolean(pump && !pump.isEnded());
 }
 
+export function getFusedTurnId(): string {
+  return activeTurnId;
+}
+
+/** Bridge dieses Turns schon committed — nie wegen Pump-Ende erneut sprechen. */
+export function fusedBridgeCommitted(): boolean {
+  return Boolean(lastBridge.trim()) || starting || Boolean(pump?.hasStarted());
+}
+
 export function getFusedTurnPump(): LiveSentencePump {
+  // Mid-Turn: Pump nach Bridge-Satz oft „ended“ — neuen Pump für Call-2,
+  // aber lastBridge/starting nicht löschen (sonst zweite Bridge).
   if (!pump || pump.isEnded()) {
     pump = createLiveSentencePump();
     starting = false;
@@ -144,6 +163,17 @@ export function fusedEnqueue(opts: {
   return run;
 }
 
+function ttsConsumerAlive(): boolean {
+  try {
+    const { getActiveTtsSessionCount } = require('../../services/AudioVoiceService') as {
+      getActiveTtsSessionCount: () => number;
+    };
+    return getActiveTtsSessionCount() > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function fusedEnqueueImpl(opts: {
   kind: 'bridging' | 'main';
   text: string;
@@ -152,7 +182,7 @@ async function fusedEnqueueImpl(opts: {
   const t = (opts.text || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
   if (opts.turnId && !activeTurnId) beginFusedTurnSpeech(opts.turnId);
-  const p = getFusedTurnPump();
+  let p = getFusedTurnPump();
 
   if (opts.kind === 'bridging') {
     if (p.hasStarted() || starting) return true;
@@ -164,6 +194,15 @@ async function fusedEnqueueImpl(opts: {
 
   const payload = p.hasStarted() || starting ? remainderAfterBridge(t) : t;
   if (!payload) return true;
+
+  // Bridge-Session schon tot (Mic/OEM/Error) → Call-2 sonst stumm im toten Pump.
+  // Nicht während ensureSession (starting) — sonst Race mit Session-Start.
+  if (p.hasStarted() && !starting && !ttsConsumerAlive() && !p.isEnded()) {
+    p.end();
+    p = getFusedTurnPump();
+    starting = false;
+  }
+
   p.push(payload);
   if (!p.hasStarted() && !starting) {
     await ensureSession(payload, opts.turnId || activeTurnId);
@@ -177,6 +216,8 @@ export async function drainFusedEnqueue(): Promise<void> {
 
 export function endFusedTurnSpeech(): void {
   pump?.end();
+  // Busy erst wenn TTS/Queue idle — sonst Grün-Lücke zwischen Call-1 und Call-2.
+  scheduleClearModule2TurnBusyWhenSpeechIdle();
 }
 
 export function resetFusedTurnSpeech(): void {
@@ -186,4 +227,62 @@ export function resetFusedTurnSpeech(): void {
   lastBridge = '';
   starting = false;
   enqueueChain = Promise.resolve();
+  try {
+    const { noteModule2TurnBusy } = require('../../services/boot/interactiveBootGate') as {
+      noteModule2TurnBusy: (b: boolean) => void;
+    };
+    noteModule2TurnBusy(false);
+  } catch {
+    /* soft */
+  }
+}
+
+function scheduleClearModule2TurnBusyWhenSpeechIdle(): void {
+  let tries = 0;
+  const tick = () => {
+    tries += 1;
+    // Gate-Flag selbst nicht prüfen — sonst Endlosschleife.
+    if (isTurnSpeechPendingIgnoringGateBusy() && tries < 40) {
+      setTimeout(tick, 120);
+      return;
+    }
+    try {
+      const { noteModule2TurnBusy } = require('../../services/boot/interactiveBootGate') as {
+        noteModule2TurnBusy: (b: boolean) => void;
+      };
+      noteModule2TurnBusy(false);
+    } catch {
+      /* soft */
+    }
+  };
+  setTimeout(tick, 0);
+}
+
+/** Speech/TTS noch aktiv — ohne Gate-Flag (sonst Cleared-Busy nie). */
+function isTurnSpeechPendingIgnoringGateBusy(): boolean {
+  try {
+    const { isStreamingAudioQueueBusy } = require('../../services/audio/streamingAudioQueueService') as {
+      isStreamingAudioQueueBusy: () => boolean;
+    };
+    if (isStreamingAudioQueueBusy()) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { isSpeechActive } = require('./speechQueue') as {
+      isSpeechActive: () => boolean;
+    };
+    if (isSpeechActive()) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { getActiveTtsSessionCount } = require('../../services/AudioVoiceService') as {
+      getActiveTtsSessionCount: () => number;
+    };
+    if (getActiveTtsSessionCount() > 0) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
 }

@@ -64,6 +64,8 @@ export const HOME_MAP_AMENITY_ICON_GROUPS: HomeMapAmenityIconGroup[] = [
       { id: 'bakery', label: 'Bäckerei' },
       { id: 'info', label: 'Info' },
       { id: 'bike', label: 'Mietrad' },
+      { id: 'laundry', label: 'Waschsalon' },
+      { id: 'charging', label: 'E-Laden' },
     ],
   },
   {
@@ -71,6 +73,7 @@ export const HOME_MAP_AMENITY_ICON_GROUPS: HomeMapAmenityIconGroup[] = [
     icons: [
       { id: 'toilet', label: 'WC' },
       { id: 'water', label: 'Wasser' },
+      { id: 'luggage', label: 'Gepäck' },
     ],
   },
   {

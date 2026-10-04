@@ -15,6 +15,10 @@ import {
 } from '../alarmService';
 import { setWakeAlarmWithBridge } from '../alarms/nativeAlarmBridge';
 import { buildWakeSuccessExtras } from '../alarms/wakeAlarmAdvisor';
+import {
+  buildWakeConfirmSpeech,
+  parseWakeVoiceStyle,
+} from '../alarms/wakeConfirmSpeech';
 import { hasClockHint } from '../alarms/wakeIntentDetect';
 
 /** Alles, was „Wecker ist schon erledigt“ behauptet — ohne Native-Beweis = Lüge. */
@@ -124,26 +128,29 @@ async function recoverWakeTaskFromText(
     const { resolveDateTimeMs } = await import('../time/temporalGerman');
     const blob = `${userText || ''} ${speech}`.replace(/\s+/g, ' ').trim();
     if (!hasClockHint(blob)) return null;
+    // Explizite HH:MM / H.MM zuerst — nie defaultHour 8 unterschieben
+    const explicit =
+      blob.match(/\b(\d{1,2})[:.,](\d{2})\b/) ||
+      blob.match(/\b(?:um\s+)?(\d{1,2})(?::(\d{2}))?\s*uhr\b/i);
+    if (explicit) {
+      const h = Number(explicit[1]);
+      const min = Number(explicit[2] ?? 0);
+      if (h >= 0 && h <= 23 && min >= 0 && min <= 59) {
+        const d = new Date();
+        d.setSeconds(0, 0);
+        d.setHours(h, min, 0, 0);
+        if (d.getTime() < Date.now() + 2 * 60_000) d.setDate(d.getDate() + 1);
+        return {
+          type: 'SET_NATIVE_ALARM',
+          wakeAtMs: d.getTime(),
+          time: `${h}:${String(min).padStart(2, '0')}`,
+          label: 'Aufstehen',
+        };
+      }
+    }
     const ms = resolveDateTimeMs({ text: blob, defaultHour: 8 });
     if (ms == null || ms < Date.now() + 20_000) {
-      // Fallback: erste Uhrzeit im Blob
-      const m =
-        blob.match(/\b(\d{1,2})[:.](\d{2})\b/) ||
-        blob.match(/\b(?:um\s+)?(\d{1,2})(?::(\d{2}))?\s*(?:uhr)?\b/i);
-      if (!m) return null;
-      const h = Number(m[1]);
-      const min = Number(m[2] ?? 0);
-      if (h < 0 || h > 23 || min < 0 || min > 59) return null;
-      const d = new Date();
-      d.setSeconds(0, 0);
-      d.setHours(h, min, 0, 0);
-      if (d.getTime() < Date.now() + 2 * 60_000) d.setDate(d.getDate() + 1);
-      return {
-        type: 'SET_NATIVE_ALARM',
-        wakeAtMs: d.getTime(),
-        time: `${h}:${String(min).padStart(2, '0')}`,
-        label: 'Aufstehen',
-      };
+      return null;
     }
     const d = new Date(ms);
     return {
@@ -255,6 +262,9 @@ export async function applyBackgroundTasks(
   let actions = [...response.quickActions];
   let changed = false;
   const consumedWakeActions = promoted.length > 0;
+  const voiceStyle = parseWakeVoiceStyle(
+    `${opts?.userText ?? ''} ${response.speechText}`,
+  );
 
   for (const task of alarmTasks) {
     const wakeAtMs =
@@ -271,23 +281,28 @@ export async function applyBackgroundTasks(
         wakeAtMs,
         reasonLabel: task.label || 'Aufstehen',
         preferNative: true,
+        voiceStyle,
       });
       if (bridged.needsChoice && bridged.existingWakeAtMs != null) {
-        const { formatClockDe } = await import('../alarms/wakeAlarmAdvisor');
-        const oldC = formatClockDe(bridged.existingWakeAtMs);
-        const newC = formatClockDe(wakeAtMs);
+        const { buildWakeChoiceSpeech, formatWakeClockDe } = await import(
+          '../alarms/wakeConfirmSpeech'
+        );
+        const newC = formatWakeClockDe(wakeAtMs);
         return {
           response: {
             ...response,
             speechText:
               bridged.message ||
-              `Schon ein Wecker um ${oldC}. Neu wäre ${newC}.`,
-            visualBullets: [`Bestehend ${oldC}`, `Neu ${newC}`],
+              buildWakeChoiceSpeech({
+                existingWakeAtMs: bridged.existingWakeAtMs,
+                newWakeAtMs: wakeAtMs,
+              }),
+            visualBullets: [],
             backgroundTasks: [],
             quickActions: [
               {
                 type: 'SET_WAKE_ALARM',
-                label: 'Aktualisieren',
+                label: 'Zeit aktualisieren',
                 payload: {
                   dateIso: new Date(wakeAtMs).toISOString(),
                   timeLabel: newC,
@@ -356,12 +371,13 @@ export async function applyBackgroundTasks(
     changed = true;
 
     if (result.ok && result.wakeAtMs != null) {
-      speech = result.speech;
+      speech = buildWakeConfirmSpeech({ wakeAtMs: result.wakeAtMs, ok: true });
       const extras = buildWakeSuccessExtras({
         wakeAtMs: result.wakeAtMs,
         reasonLabel: task.label || 'Aufstehen',
+        lean: true,
       });
-      bullets = extras.bullets;
+      bullets = extras.bullets.slice(0, 1);
       actions = consumedWakeActions
         ? [
             ...extras.quickActions,
@@ -394,6 +410,9 @@ export async function applyBackgroundTasks(
       visualBullets: bullets.slice(0, 3),
       backgroundTasks: [],
       quickActions: actions,
+      ...(alarmResults.some((r) => r.ok)
+        ? { cardTitle: 'Wecker' as const }
+        : {}),
     },
     alarmResults,
     changed,

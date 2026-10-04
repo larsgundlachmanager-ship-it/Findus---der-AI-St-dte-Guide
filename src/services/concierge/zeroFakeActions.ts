@@ -9,6 +9,7 @@ import {
   isHollowPartnerUrl,
   looksLikePartnerBookClaim,
   rejectHollowPartnerBookAction,
+  softenHollowPartnerBookAction,
 } from '../affiliate/hollowPartnerUrl';
 
 const HOLLOW_LABEL =
@@ -57,7 +58,9 @@ export function stripUnbackedActions(
     module1?: boolean | object;
   },
 ): QuickAction[] {
-  return actions.filter((a) => {
+  return actions
+    .map((a) => softenHollowPartnerBookAction(a))
+    .filter((a) => {
     // ActionBoard Pending-Chips (Deep Recharge lädt noch) — behalten
     if (a.payload.pending === true && a.payload.actionBoardId) return true;
     // Müll-Labels aus LLM / Leak

@@ -178,6 +178,23 @@ export async function searchPackDining(opts: {
 
   ranked.sort((a, b) => b.score - a.score || a.distanceM - b.distanceM);
 
+  // AYCE: nie Pack Soft-Fill ohne Beleg (Goldschätzchen ≠ All-you-can-eat)
+  try {
+    const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    const { scoreAyceEvidence } = require('../pitch/hardMatchVerify') as {
+      scoreAyceEvidence: (b: string) => number;
+    };
+    if (looksLikeAyceQuery(opts.query)) {
+      const ayceOnly = ranked.filter((r) => scoreAyceEvidence(r.blob) >= 2);
+      ranked.length = 0;
+      ranked.push(...ayceOnly);
+    }
+  } catch {
+    /* soft */
+  }
+
   // Bei Küche ohne Name-Hit: Facts der nächsten Food-POIs scannen (max 24)
   if (wantsCuisine && ranked.length < minResults) {
     const nearFood = pois
@@ -221,6 +238,23 @@ export async function searchPackDining(opts: {
       });
     }
     ranked.sort((a, b) => b.score - a.score || a.distanceM - b.distanceM);
+  }
+
+  // AYCE erneut: Cuisine-Backfill darf Goldschätzchen nicht nachschieben
+  try {
+    const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    const { scoreAyceEvidence } = require('../pitch/hardMatchVerify') as {
+      scoreAyceEvidence: (b: string) => number;
+    };
+    if (looksLikeAyceQuery(opts.query)) {
+      const ayceOnly = ranked.filter((r) => scoreAyceEvidence(r.blob) >= 2);
+      ranked.length = 0;
+      ranked.push(...ayceOnly);
+    }
+  } catch {
+    /* soft */
   }
 
   const top = ranked.slice(0, 12);

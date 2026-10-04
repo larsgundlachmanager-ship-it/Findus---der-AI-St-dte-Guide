@@ -3,7 +3,14 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { colors, spacing } from '../constants/theme';
 import {
   citySearchMeta,
@@ -118,7 +125,7 @@ export function CityCatalogCard({
               {regionLine}
             </Text>
           ) : null}
-          {selected && !busy ? (
+          {selected || busy ? (
             <Text style={styles.selectedMark}>{'  '}✓</Text>
           ) : null}
         </Text>
@@ -152,7 +159,13 @@ export function CityCatalogCard({
           </View>
         ) : null}
         {busy ? (
-          <Text style={styles.busyHint}>{t(lang, 'downloadingCity')}</Text>
+          <View style={styles.busyRow}>
+            <ActivityIndicator size="small" color={colors.accent} />
+            <View style={styles.busyBarTrack}>
+              <View style={styles.busyBarFill} />
+            </View>
+            <Text style={styles.busyHint}>{t(lang, 'downloadingCity')}</Text>
+          </View>
         ) : null}
       </View>
     </Pressable>
@@ -249,10 +262,30 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   busyHint: {
-    color: colors.accent,
-    fontSize: 11,
+    color: colors.textMuted,
+    fontSize: 12,
     fontWeight: '600',
-    marginTop: 2,
+    flexShrink: 1,
+  },
+  busyRow: {
+    marginTop: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  busyBarTrack: {
+    flex: 1,
+    height: 4,
+    borderRadius: 999,
+    backgroundColor: colors.border,
+    overflow: 'hidden',
+    minWidth: 48,
+  },
+  busyBarFill: {
+    width: '55%',
+    height: '100%',
+    borderRadius: 999,
+    backgroundColor: colors.accent,
   },
   statRow: {
     flexDirection: 'row',

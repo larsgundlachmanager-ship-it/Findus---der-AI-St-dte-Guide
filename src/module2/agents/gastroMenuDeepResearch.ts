@@ -699,7 +699,7 @@ export async function runGastroMenuDeepResearch(
     ok: true,
     draftText: draft,
     bullets: findings.slice(0, 3),
-    buttons: buttons.slice(0, 4),
+    buttons: buttons.slice(0, 8),
     slowLane: true,
     meta: {
       silent: !findings.length,

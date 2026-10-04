@@ -1,0 +1,35 @@
+const line = getWeatherHudLine();
+      const st = getWeatherTrackerState();
+      if (line) {
+        let rainingNow = false;
+        try {
+          const { isRainHudFallingLine } = require('../weather/rainIncomingPolicy') as {
+            isRainHudFallingLine: (line: string) => boolean;
+          };
+          rainingNow = isRainHudFallingLine(line);
+        } catch {
+          rainingNow = /Aktuell|noch |bis /i.test(line) && /regen/i.test(line);
+        }
+        const soonClock = /Regen ab /i.test(line);
+        const mins = rainingNow
+          ? 0
+          : soonClock
+            ? 90
+            : st?.nextRainAtMs != null
+              ? Math.round((st.nextRainAtMs - Date.now()) / 60_000)
+              : 99;
+        tips.push({
+          id: `rain-hud-${st?.nextRainAtMs ?? 'now'}`,
+          kind: 'weather_rain',
+          text: line.startsWith('🌧') ? line : `🌧 ${line}`,
+          // Banner = Fakt only — kein Schirm/Indoor/Jacke oben.
+          meta: undefined,
+          tellMorePrompt: '__WEATHER_DAY_CHECK__',
+          score: rainingNow || mins <= 5 ? 95 : mins <= 30 ? 88 : mins <= 90 ? 74 : 60,
+        });
+      }
+    } catch {
+      /* soft */
+    }
+  } else {
+    // Au

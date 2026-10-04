@@ -589,6 +589,8 @@ export async function recalculateMissedConnection(opts: {
   preferLine?: string | null;
   numItineraries?: number;
   missedLineLabel?: string | null;
+  reason?: import('./missedConnectionPolicy').MissedTriggerReason;
+  delayMin?: number | null;
 }): Promise<import('./missedConnectionPolicy').MissedConnectionPick> {
   const { pickMissedConnection } = await import('./missedConnectionPolicy');
   const departAt = opts.after ?? new Date(Date.now() + 60_000);
@@ -602,7 +604,9 @@ export async function recalculateMissedConnection(opts: {
   return pickMissedConnection({
     itineraries: plan.itineraries,
     preferLine: opts.preferLine,
-    nowMs: departAt.getTime(),
+    nowMs: Date.now(),
     missedLineLabel: opts.missedLineLabel ?? opts.preferLine,
+    reason: opts.reason,
+    delayMin: opts.delayMin,
   });
 }

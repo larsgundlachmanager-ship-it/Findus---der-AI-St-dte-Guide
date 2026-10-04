@@ -1,0 +1,155 @@
+founder_must scenarios 25
+
+=== flug_morgen_ham ===
+Q: Hey Yorro, ich will morgen fliegen — guck bei Hamburg Fluege, was geht so Richtung Sueden, und ob ich noch Tickets kriege
+queued flug_morgen_ham {"ok":true,"queued":1}
+wrote 23 strings
+FAIL [] ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 11 Min · hilft das? | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  
+
+=== flug_fu_uhr ===
+Q: Nimm den ersten, Abflug so gegen 10 Uhr
+queued flug_fu_uhr {"ok":true,"queued":1}
+wrote 28 strings
+PASS [] ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 8 Min · hilft das? | 0 von 29 Orten · 0 % erkundet |  | Flug suchen | ✕ | • de
+
+=== flug_fu_taxi_vorbestellen ===
+Q: Bitte Taxi zum Flughafen vorreservieren
+queued flug_fu_taxi_vorbestellen {"ok":true,"queued":1}
+wrote 28 strings
+PASS [] 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 8 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  | Flug suchen | ✕ | • de
+
+=== taxi_hbf_jetzt ===
+Q: Buch mir ein Taxi zum Hauptbahnhof
+queued taxi_hbf_jetzt {"ok":true,"queued":1}
+wrote 23 strings
+PASS [] 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 6 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  |  |  | Timeline |  |
+
+=== taxi_vorbestellen_morgen ===
+Q: Reserviere morgen frueh um 7 Uhr ein Taxi zum Flughafen Hamburg
+queued taxi_vorbestellen_morgen {"ok":true,"queued":1}
+wrote 28 strings
+FAIL [] 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 4 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  | zum | Flughafen | für 
+
+=== theater_heute ===
+Q: Welche Theaterstuecke oder Vorstellungen laufen heute oder die Tage in der Naehe?
+queued theater_heute {"ok":true,"queued":1}
+wrote 27 strings
+FAIL [] 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 3 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  | Wohin? | ✕ | • Ab HAM 
+
+=== kino_heute ===
+Q: Kinosuche: Welche Filme laufen heute Abend in der Naehe, mit Uhrzeiten?
+queued kino_heute {"ok":true,"queued":1}
+wrote 30 strings
+PASS [] 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 2 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  | Programm in Cineplex |
+
+=== livemusik ===
+Q: Wo kann man heute oder am Wochenende Live-Musik sehen oder hoeren?
+queued livemusik {"ok":true,"queued":1}
+wrote 34 strings
+PASS [] 🚆 Abfahrt 05:05 | S-Bahn (Hamburg) · in 1 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  | ✕ | 🎟️ Touren suchen |
+
+=== party_wo ===
+Q: Wo kann man hier Party machen — Clubs oder gute Locations?
+queued party_wo {"ok":true,"queued":1}
+wrote 38 strings
+PASS [] ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 12 Min · hilft das? | 0 von 29 Orten · 0 % erkundet |  | Party | ✕ 
+
+=== gastro_aussicht_flair ===
+Q: Restaurant mit schoener Aussicht, gemuetlichem Ambiente und gutem Flair — am besten Terrasse
+queued gastro_aussicht_flair {"ok":true,"queued":1}
+wrote 26 strings
+FAIL [] ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 11 Min · hilft das? | 0 von 29 Orten · 0 % erkundet |  | Kein Treff
+
+=== gastro_steak_elbblick ===
+Q: Spezifisch: Steak mit Elbblick, nicht zu steif
+queued gastro_steak_elbblick {"ok":true,"queued":1}
+wrote 23 strings
+PASS [] 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 10 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  |  |  | Ti
+
+=== bier_guenstig ===
+Q: Wo gibt es das guenstigste Bier in der Naehe und was kostet es?
+queued bier_guenstig {"ok":true,"queued":1}
+wrote 35 strings
+PASS [] 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 8 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 von 29 Orten · 0 % erkundet |  | Empfehlung:
+
+=== hotel_suche ===
+Q: Unterkunftsuche: Hotel oder Apartment fuer Freitag bis Sonntag, zentral, unter 600 Euro
+queued hotel_suche {"ok":true,"queued":1}
+wrote 0 strings
+wrote 0 strings
+FAIL ['no_capture'] 
+
+=== hotel_spezifisch ===
+Q: Spezifisch: Boutique-Hotel mit Spa oder Sauna und Fruehstueck
+queued hotel_spezifisch {"ok":true,"queued":1}
+wrote 0 strings
+wrote 0 strings
+FAIL ['no_capture'] 
+
+=== hotel_fu_buchen ===
+Q: Zeig mir den Buchungslink vom ersten Hotel
+queued hotel_fu_buchen {"ok":true,"queued":1}
+wrote 23 strings
+FAIL [] 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 4 Min · hilft das? | ☁️ Teilweise bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  |  |  | Timeline |  | Orte 
+
+=== michel_hoehe ===
+Q: Wie hoch ist der Michel?
+queued michel_hoehe {"ok":true,"queued":1}
+wrote 23 strings
+FAIL [] 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 2 Min · hilft das? | ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Eins
+
+=== eiffel_farbe ===
+Q: Wie viel Farbe wuerde auf dem Eiffelturm raufpassen — also wie viel Farbe braucht man zum Streichen?
+queued eiffel_farbe {"ok":true,"queued":1}
+wrote 24 strings
+PASS [] ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 🚆 Abfahrt 05:19 | 🚆 RB61 nach Itzehoe · 1 St. · in 1 Min · hilft das? | 0 % erkundet |  | schützen. |  |  | Timeline |  | Ort
+
+=== quiz_fu_eintritt_michel ===
+Q: Und was kostet der Eintritt auf den Turm?
+queued quiz_fu_eintritt_michel {"ok":true,"queued":1}
+wrote 55 strings
+PASS [] ‹ | FR 11.09. | › |  | 7 |  | ✕ | 16:36 | 18:00 | 🚌 | ▸ ÖPNV nach Inselpark Arena | Tippen für die Schritte | 18:45 | 🌿 | Inselpark Arena | Löschen |  | 🚆 Abfahrt 05:19 | 🚆 RB61
+
+=== zahnbuerste_erinnerung ===
+Q: Was brauche ich noch — eine Zahnbuerste. Kannst du mich daran erinnern, die mitzunehmen?
+queued zahnbuerste_erinnerung {"ok":true,"queued":1}
+wrote 23 strings
+FAIL [] 🚆 Abfahrt 05:31 | 🚌 X66 nach Uetersen, Großer Wulfhagen · 6 St. · in 11 Min · hilft das? | ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  |  |  | Timeline | 
+
+=== zahnbuerste_fu_timeline ===
+Q: Trag das bitte in die Timeline ein
+queued zahnbuerste_fu_timeline {"ok":true,"queued":1}
+wrote 23 strings
+PASS [] 🚆 Abfahrt 05:31 | 🚌 X66 nach Uetersen, Großer Wulfhagen · 6 St. · in 11 Min · hilft das? | ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  |  |  | Timeline | 
+
+=== plan_tag_fuellen ===
+Q: Planungsmodus: Fuell mir die Timeline fuer heute — vormittags Kaffee, mittags gutes Essen, nachmittags ein Museum oder Theater, abends Live-Musik oder Party, und trag das alles ein
+queued plan_tag_fuellen {"ok":true,"queued":1}
+wrote 41 strings
+PASS [] 🚆 Abfahrt 05:31 | 🚌 X66 nach Uetersen, Großer Wulfhagen · 6 St. · in 9 Min · hilft das? | ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  | Zwei Optionen | ✕ | 
+
+=== plan_fu_durchgehen ===
+Q: Lass uns jeden Punkt der Timeline durchgehen, step by step
+queued plan_fu_durchgehen {"ok":true,"queued":1}
+wrote 31 strings
+PASS [] ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 🚆 Abfahrt 05:31 | 🚌 X66 nach Uetersen, Großer Wulfhagen · 6 St. · in 8 Min · hilft das? | 0 % erkundet |  | Ersten Stopp für den
+
+=== plan_fu_aendern_abend ===
+Q: Abend aendern: lieber ruhiges Restaurant mit Flair statt Party
+queued plan_fu_aendern_abend {"ok":true,"queued":1}
+wrote 43 strings
+PASS [] 🚆 Abfahrt 05:31 | 🚌 X66 nach Uetersen, Großer Wulfhagen · 6 St. · in 8 Min · hilft das? | ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  | Party | ✕ | 🥇 | VRAP
+
+=== tour_modus ===
+Q: Tourmodus: Wir haben zwei Stunden — fuehr mich zu zwei spannenden Orten und danach zum Essen
+queued tour_modus {"ok":true,"queued":1}
+wrote 23 strings
+PASS [] 🚆 Abfahrt 05:31 | 🚌 X66 nach Uetersen, Großer Wulfhagen · 6 St. · in 6 Min · hilft das? | ☁️ Bewölkt · 13° | Nacht um 12° · bleibt trocken | 0 % erkundet |  |  |  | Timeline | 
+
+=== tour_fu_start ===
+Q: Start die Route zum ersten Stopp
+queued tour_fu_start {"ok":true,"queued":1}
+wrote 24 strings
+PASS [] In 100 m an der Gemeinschaftspraxis Prisdorf rechts | 151 m · ca. 2 Min · Ankunft 05:29 | Prisdorf, Deutschland | × | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | 
+
+SUMMARY {'pass': 16, 'fail': 9, 'failed_ids': ['flug_morgen_ham', 'taxi_vorbestellen_morgen', 'theater_heute', 'gastro_aussicht_flair', 'hotel_suche', 'hotel_spezifisch', 'hotel_fu_buchen', 'michel_hoehe', 'zahnbuerste_erinnerung'], 'at': '2026-09-07T02:55:44.716540+00:00', 'n': 25}

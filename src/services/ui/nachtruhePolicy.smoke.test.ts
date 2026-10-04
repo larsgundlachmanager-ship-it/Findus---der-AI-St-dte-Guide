@@ -3,6 +3,8 @@
  */
 
 import {
+  allowsUserInitiatedConcierge,
+  allowProactiveVoice,
   isNachtruhe,
   NACHTRUHE_ACTIVE_END_MIN,
   NACHTRUHE_ACTIVE_START_MIN,
@@ -26,5 +28,8 @@ assert(isNachtruhe(at(9, 0)) === false, '9:00 Aktiv');
 assert(isNachtruhe(at(21, 0)) === false, '21:00 noch Abend');
 assert(isNachtruhe(at(21, 29)) === false, '21:29 noch Aktiv');
 assert(isNachtruhe(at(21, 30)) === true, '21:30 Nachtruhe');
+assert(isNachtruhe(at(22, 32)) === true, '22:32 Nachtruhe (nur Proaktiv)');
+assert(!allowProactiveVoice(at(22, 32)), '22:32 kein Ambient-Pitch');
+assert(allowsUserInitiatedConcierge(), 'User-Frage nie Nachtruhe-gated');
 
 console.log('nachtruhePolicy.smoke.test.ts OK');

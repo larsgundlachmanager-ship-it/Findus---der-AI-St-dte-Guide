@@ -4,8 +4,11 @@
 import { parseGoogleRouteFare } from '../navigation/googleRouteFare';
 import { extractSpokenPriceEur } from '../research/extractSpokenPrice';
 import {
+  buildDbBookingOpenUrl,
+  buildDbJourneySearchUrl,
   dbJourneySearchUrl,
   extractTicketProductName,
+  looksLikeLongDistanceRailBooking,
   scoreTransitTicketShopUrl,
   wantsTransitTicketFare,
 } from './transitTicketFareParse';
@@ -51,5 +54,31 @@ assert(
       scoreTransitTicketShopUrl(home, 'Bahn'),
   'Buchung schlägt Home',
 );
+
+
+assert(wantsTransitTicketFare('ICE Hamburg Berlin buchen'), 'ICE buchen');
+assert(
+  wantsTransitTicketFare('brauche eine 9-Uhr-Karte Preis'),
+  '9-Uhr-Karte',
+);
+assert(
+  looksLikeLongDistanceRailBooking('ICE von Hamburg nach Berlin', 'ICE 602'),
+  'long distance',
+);
+const book = buildDbBookingOpenUrl({
+  fromName: 'Hamburg Hbf',
+  toName: 'Berlin Hbf',
+  departAt: new Date('2026-09-22T09:12:00'),
+  userText: 'ICE nach Berlin',
+  line: 'ICE 602',
+});
+assert(book && /bahn\.de\/buchung/.test(book.url), 'book url');
+assert(book && /ICE buchen/i.test(book.label), 'ICE label');
+const timed = buildDbJourneySearchUrl({
+  from: 'Hamburg Hbf',
+  to: 'Berlin Hbf',
+  departAt: new Date('2026-09-22T09:12:00'),
+});
+assert(timed && decodeURIComponent(timed).includes('2026-09-22T09:12:00'), 'hd clock');
 
 console.log('transitTicketResearch.smoke.test.ts OK');

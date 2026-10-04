@@ -14,7 +14,13 @@ import {
   isMapCrossingKeepDotPoi,
   isNatureLandscapeNotPin,
   placeMapIcon,
+  homeMapIconLod,
+  HOME_MAP_ICON_LOD_ZOOM,
 } from './homeMapPlaceType';
+import {
+  allAmenityIconsOn,
+  isAmenityIconEnabled,
+} from './homeMapAmenityIconPrefs';
 import { isTransitMapPoi } from './homeMapTransit';
 
 function assert(cond: unknown, msg: string): void {
@@ -108,6 +114,27 @@ assert(!isStreetPointAmenity(museum), 'Museum ist kein Street-Punkt — Story da
 
 assert(placeMapIcon(resto) === 'restaurant', 'Gasthof = Restaurant-Icon');
 
+assert(
+  placeMapIcon(
+    poi({
+      id: 12,
+      name: 'Bahnhof Prisdorf',
+      lat: 53.67529,
+      lng: 9.7602,
+      category: 'bahnhof',
+      tags_json: JSON.stringify([
+        'bahnhof',
+        'transport',
+        'denkmal',
+        'wartehaeuschen',
+        'story',
+        'bahn',
+      ]),
+    }),
+  ) === 'rail',
+  'Bahnhof Prisdorf mit Denkmal-Tag = Bahn-Icon, nicht Attraction',
+);
+
 const cabin = poi({
   id: 8,
   name: 'Historisches Bahnwartehäuschen',
@@ -126,6 +153,7 @@ const combinedHalt = poi({
 });
 assert(isMapShelterBuildingPoi(cabin), 'Wartehäuschen-Sub ist Gebäude');
 assert(!isKeepDotMapPoi(cabin), 'Wartehäuschen nicht als ÖPNV-Punkt');
+assert(placeMapIcon(cabin) === 'historic', 'Wartehäuschen = Historic-Icon');
 assert(!isMapShelterBuildingPoi(combinedHalt), 'Halt-Parent bleibt Stopp, nicht Shelter');
 assert(isKeepDotMapPoi(combinedHalt), 'Halt bleibt Punkt, auch wenn Wartehäuschen im Namen steht');
 
@@ -203,6 +231,81 @@ assert(homeMapTypeFilterId(poi({
   tags_json: JSON.stringify(['directory', 'tier4', 'map_outline']),
 })) === 'alltag', 'Tankstelle ist Alltag');
 
+assert(
+  homeMapTypeFilterId(
+    poi({
+      id: 71,
+      name: 'Öffentliche Toilette',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'toilette',
+    }),
+  ) === 'notfall',
+  'WC = Notfall-Typ',
+);
+assert(
+  homeMapTypeFilterId(
+    poi({
+      id: 72,
+      name: 'Gemeinschaftspraxis Nord',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'arzt',
+    }),
+  ) === 'notfall',
+  'Arzt = Notfall-Typ',
+);
+assert(
+  homeMapTypeFilterId(
+    poi({
+      id: 73,
+      name: 'Heimatstube Archiv',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'historisch',
+    }),
+  ) === 'historie',
+  'Historie-Typ',
+);
+{
+  const filterSrc = readFileSync(
+    join(process.cwd(), 'src/services/homeMap/homeMapPlaceFilter.ts'),
+    'utf8',
+  );
+  assert(
+    filterSrc.includes("'historie'") && filterSrc.includes("'notfall'"),
+    'Typ-Chips Historie + Notfall',
+  );
+  assert(
+    filterSrc.includes('isModul1AutoTriggerMapPoi'),
+    'Auslösen = M1-Trigger nur als Filter-ID, nicht Karten-Zwang',
+  );
+}
+
+{
+  const icons = allAmenityIconsOn();
+  icons.doctor = false;
+  assert(isAmenityIconEnabled(icons, 'doctor') === false, 'Arzt-Icon aus');
+  assert(isAmenityIconEnabled(icons, 'post') === true, 'Briefkasten-Icon Default an');
+}
+
+{
+  const host = readFileSync(
+    join(process.cwd(), 'src/components/homeMap/HomePresenceMap.tsx'),
+    'utf8',
+  );
+  assert(
+    host.includes('amenityBypass') &&
+      host.includes('isAmenityIconEnabled') &&
+      host.includes('isAlwaysOnMapAmenity'),
+    'Karte: Icon-Prefs + Always-On Amenities',
+  );
+  assert(
+    host.includes('!isAlwaysOnMapAmenity(poi)'),
+    'Stadt-Übersicht droppt Always-On-Icons nicht',
+  );
+}
+
 assert(placeMapIcon(halt) === 'rail', 'Haltepunkt = Bahn-Icon');
 assert(
   placeMapIcon(
@@ -215,6 +318,61 @@ assert(
     }),
   ) === 'rail',
   'Bahnhof = Bahn-Icon',
+);
+assert(
+  homeMapIconLod('bus') === 'transitLocal',
+  'Bus erst bei Street-Zoom',
+);
+assert(
+  homeMapIconLod('doctor') === 'microClinic',
+  'Arzt = microClinic-LOD (später als Briefkasten)',
+);
+assert(
+  homeMapIconLod('toilet') === 'microWhite',
+  'Toilette = microWhite-LOD (weiß)',
+);
+assert(
+  homeMapIconLod('water') === 'microWhite',
+  'Wasserspender = microWhite-LOD',
+);
+assert(
+  homeMapIconLod('post') === 'microClose',
+  'Briefkasten = microClose-LOD (nah)',
+);
+assert(
+  HOME_MAP_ICON_LOD_ZOOM.microClinic.goneAt >
+    HOME_MAP_ICON_LOD_ZOOM.microClose.goneAt,
+  'Arzt später als Briefkasten',
+);
+assert(
+  HOME_MAP_ICON_LOD_ZOOM.microClose.goneAt >= 15,
+  'microClose ab Zoom ≥15',
+);
+assert(
+  homeMapIconLod(
+    'rail',
+    poi({
+      id: 20,
+      name: 'Bahnhof Prisdorf',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'bahnhof',
+    }),
+  ) === 'transitMajor',
+  'Bahnhof Prisdorf = früher sichtbar',
+);
+assert(
+  homeMapIconLod(
+    'rail',
+    poi({
+      id: 21,
+      name: 'S-Bahn Pinneberg',
+      lat: 53.66,
+      lng: 9.8,
+      category: 'bahnhof',
+    }),
+  ) === 'transitLocal',
+  'S-Bahn-Halt erst nah',
 );
 assert(placeMapIcon(bus) === 'bus', 'Bushaltestelle = Bus-Icon');
 assert(
@@ -478,6 +636,58 @@ assert(
 assert(
   placeMapIcon(
     poi({
+      id: 261,
+      name: 'Zahnarztpraxis Heilmann und von Döhren',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'gesundheit',
+      tags_json: JSON.stringify(['gesundheit', 'bahnhof', 'tier4']),
+    }),
+  ) === 'doctor',
+  'Zahnarztpraxis-Komposit = Arzt, nicht Bahn',
+);
+assert(
+  placeMapIcon(
+    poi({
+      id: 262,
+      name: 'Gemeinschaftspraxis Prisdorf',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'gesundheit',
+      tags_json: JSON.stringify(['gesundheit', 'bahnhof', 'tier4']),
+    }),
+  ) === 'doctor',
+  'Gemeinschaftspraxis = Arzt-Icon',
+);
+assert(
+  !isTransitMapPoi(
+    poi({
+      id: 263,
+      name: 'Gemeinschaftspraxis Prisdorf',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'gesundheit',
+      tags_json: JSON.stringify(['bahnhof', 'gesundheit']),
+    }),
+  ),
+  'Gemeinschaftspraxis mit District-Tag bahnhof ≠ ÖPNV',
+);
+assert(
+  placeMapIcon(
+    poi({
+      id: 264,
+      name: 'Bahnhof Prisdorf',
+      lat: 53.67,
+      lng: 9.76,
+      category: 'bahnhof',
+      tags_json: JSON.stringify(['bahnhof', 'wartehaeuschen', 'story']),
+    }),
+  ) === 'rail',
+  'Bahnhof Prisdorf = Bahn-Icon',
+);
+assert(
+  placeMapIcon(
+    poi({
       id: 36,
       name: 'REWE Prisdorf',
       lat: 53.67,
@@ -624,5 +834,19 @@ assert(
   'Echter Souvenirshop behält Icon',
 );
 
+
+{
+  const hotel = poi({
+    id: 9001,
+    name: 'Fairway Hotel Peiner Hof',
+    lat: 53.67,
+    lng: 9.76,
+    category: 'hotel',
+    tags_json: '["restaurant","hotel","directory"]',
+  });
+  assert(placeMapIcon(hotel) === 'hotel', 'Fairway Hotel = Hotel-Icon trotz Restaurant-Tag');
+}
+
 console.log('homeMapPlaceFilter.smoke.test.ts OK');
+
 

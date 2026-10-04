@@ -108,6 +108,19 @@ export async function tickLogisticsTriggerEngine(opts?: {
   if (!opts?.force && now - lastTickMs < MIN_TICK_GAP_MS) {
     return { fired: 0 };
   }
+
+  // App gerade geöffnet: keine Leave-by-/Guardian-Automationen (5 Min Quiet)
+  try {
+    const { isOpenQuietActive } = await import(
+      '../navigation/modulePriorityPolicy'
+    );
+    if (isOpenQuietActive(now) && !opts?.force) {
+      return { fired: 0 };
+    }
+  } catch {
+    /* soft */
+  }
+
   lastTickMs = now;
 
   // Modul 4: 30s nach Modul 2 + nie während Modul 2

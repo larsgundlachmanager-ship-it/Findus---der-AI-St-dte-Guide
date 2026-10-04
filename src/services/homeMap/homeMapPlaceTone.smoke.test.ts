@@ -38,11 +38,17 @@ assert(colors.includes("neutral: '#C45B5B'"), 'Rot kein Trigger');
 assert(colors.includes("visited: '#5FA88A'"), 'Grün besucht');
 assert(colors.includes("planned: '#3B7DD8'"), 'Blau geplant');
 assert(
-  style.includes('HOME_MAP_FOG_MASK_ENABLED = false') ||
-    style.includes("HOME_MAP_FOG_REVEAL = '#2A9A62'") ||
-    style.includes('HOME_MAP_FOG_REVEAL = colors.online') ||
-    style.includes("HOME_MAP_FOG_REVEAL = 'rgba("),
-  'Fog: dunkle Basis + dezentes Mint-Reveal, keine Viewport-Maske',
+  style.includes('HOME_MAP_FOG_MASK_ENABLED = false'),
+  'Fog: kein dunkler Viewport-Kasten (nur Reveal)',
 );
+assert(
+  style.includes("HOME_MAP_FOG_REVEAL = '#7AD4E8'"),
+  'Fog: Eis-Cyan-Reveal behalten',
+);
+assert(
+  /HOME_MAP_FOG_REVEAL_OPACITY\s*=\s*0\.3\b/.test(style),
+  'Fog-Reveal-Deckkraft ~30 %',
+);
+assert(style.includes('HOME_MAP_FOG_REVEAL_EDGE'), 'weicher Reveal-Rand');
 
 console.log('homeMapPlaceTone.smoke.test.ts OK');

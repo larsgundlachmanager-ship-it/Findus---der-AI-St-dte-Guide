@@ -1,7 +1,7 @@
 /**
  * Ort-Popup → Navigation.
  * Button = Koordinaten aus dem Pin → bei kurzer Luftlinie sofort Fuß-/Radroute.
- * ≥1,4 km: ÖPNV-Option. ≥3 km: ÖPNV direkt wenn schneller (Taxi nur bei Pref).
+ * ≥1,4 km: ÖPNV-Option. ≥1,8 km: ÖPNV direkt wenn schneller (Taxi nur bei Pref).
  */
 
 import type { UserProfile } from '../../types/userProfile';
@@ -213,7 +213,9 @@ async function commitImmediateNav(
   } finally {
     try {
       const now = useFinnusStore.getState();
+      // Loading nie kleben lassen — sonst wirkt Tap „Navigation“ tot.
       if (!now.navActive) now.setNavRouteLoading(false);
+      now.setIsGenerating(false);
     } catch {
       /* soft */
     }
@@ -228,9 +230,24 @@ export async function startHomeMapNavigation(
   _profile?: UserProfile | null,
   opts?: HomeMapNavStartOpts,
 ): Promise<HomeMapNavResult> {
-  const dest = resolveDest(target);
+  let dest = resolveDest(target);
   if (!isUsableHomeMapNavCoord(dest.lat, dest.lng) || !dest.name.trim()) {
     return { ok: false, reason: 'bad_dest' };
+  }
+  // Gebäude-Tap oft noch „Punkt auf der Karte“ — Name vor Route nachziehen.
+  try {
+    const { isGenericMapPointLabel } = require('../navigation/streetAddressQuery') as {
+      isGenericMapPointLabel: (s: string) => boolean;
+    };
+    if (isGenericMapPointLabel(dest.name)) {
+      const { resolveMapDropName } = require('./snapMapDrop') as {
+        resolveMapDropName: (lat: number, lng: number) => Promise<string | null>;
+      };
+      const named = await resolveMapDropName(dest.lat, dest.lng);
+      if (named) dest = { ...dest, name: named };
+    }
+  } catch {
+    /* soft */
   }
 
   // Sofort-Feedback: Mic/Busy-Kreis im selben Frame — vor GPS/Route-I/O.
@@ -238,6 +255,24 @@ export async function startHomeMapNavigation(
     const st = useFinnusStore.getState();
     st.setNavRouteLoading(true);
     st.setIsGenerating(true);
+    // London-/Pitch-Spickzettel weg — sonst blockiert Ambient + Recherche am Sticky.
+    st.setActiveConciergeCard(null);
+  } catch {
+    /* soft */
+  }
+  try {
+    const { clearForeignStickyCity } = require('../../module2/context/placeContext') as {
+      clearForeignStickyCity: () => void;
+    };
+    clearForeignStickyCity();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { useLivePitchStore } = require('../../module2/pitch/publishPitchUi') as {
+      useLivePitchStore: { getState: () => { clear: (force?: boolean) => void } };
+    };
+    useLivePitchStore.getState().clear(true);
   } catch {
     /* soft */
   }
@@ -254,21 +289,21 @@ export async function startHomeMapNavigation(
         /* soft */
       }
       try {
-        const { addOptimizedTourStop } = await import(
+        // Wie Speech: Tour = SSOT; Timeline nur ueber Live-Nav-Spiegel.
+        const { addOptimizedTourStop, appendTourStop } = await import(
           '../navigation/multiStopTour'
         );
-        const added = await addOptimizedTourStop(
-          {
-            poiId: dest.poiId ?? -1,
-            name: dest.name,
-            lat: dest.lat,
-            lng: dest.lng,
-            done: false,
-            priority: 'high',
-            remindMinBefore: null,
-          },
-          { startNow: true },
-        );
+        const stop = {
+          poiId: dest.poiId ?? -1,
+          name: dest.name,
+          lat: dest.lat,
+          lng: dest.lng,
+          done: false as const,
+          priority: 'high' as const,
+          remindMinBefore: null,
+        };
+        const optimized = await addOptimizedTourStop(stop, { startNow: true });
+        const added = optimized ?? (await appendTourStop(stop, { startNow: true }));
         if (added) {
           notifyNavRouteGeometryChanged();
           try {
@@ -396,9 +431,8 @@ export async function startHomeMapNavigation(
       return { ok: true, mode: 'ask' };
     }
 
-    // Kurz: sofort Fuß. Live-Guard nach Route-Ready nur falls OSRM doch länger ist.
-    const skipMobilityAsk = false;
-    return commitImmediateNav(dest, 'foot', { skipMobilityAsk });
+    // Karten-Button „Navigation“ = explizite Wahl — kein zweites Mobility-Ask.
+    return commitImmediateNav(dest, 'foot', { skipMobilityAsk: true });
   } catch {
     if (navLooksStarted()) {
       notifyNavRouteGeometryChanged();
@@ -406,14 +440,12 @@ export async function startHomeMapNavigation(
     }
     return { ok: false, reason: 'nav_failed' };
   } finally {
-    if (opts?.addStop) {
-      try {
-        const now = useFinnusStore.getState();
-        if (!now.navActive) now.setNavRouteLoading(false);
-        now.setIsGenerating(false);
-      } catch {
-        /* soft */
-      }
+    try {
+      const now = useFinnusStore.getState();
+      if (!now.navActive) now.setNavRouteLoading(false);
+      now.setIsGenerating(false);
+    } catch {
+      /* soft */
     }
   }
 }

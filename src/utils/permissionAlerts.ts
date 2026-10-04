@@ -49,9 +49,9 @@ const COPY: Record<
     openSettings: true,
   },
   audioConsent: {
-    title: 'Mikrofon-Einwilligung fehlt',
+    title: 'Spracheingabe ist aus',
     message:
-      'Spracheingabe ist aus oder noch nicht bestätigt. Tippe „Zu den Einstellungen“, aktiviere „Sprache an“ unter Allgemeine Einstellungen → Audio & Sparmodus — danach hören Halten, Fixieren und Live-Chat wieder.',
+      'Yorro darf dich noch nicht hören. Tippe „Jetzt einstellen“ — ich öffne direkt Allgemeine Einstellungen → Audio & Sparmodus. Dort „Sprache an“ wählen, dann geht’s weiter.',
     openSettings: false,
   },
   notifications: {
@@ -101,7 +101,7 @@ export function showPermissionMissingAlert(
 
   if (kind === 'audioConsent' && options?.onOpenInAppSettings) {
     buttons.push({
-      text: 'Zu den Einstellungen',
+      text: 'Jetzt einstellen',
       onPress: () => {
         options.onOpenInAppSettings?.();
       },
@@ -114,22 +114,10 @@ export function showPermissionMissingAlert(
       },
     });
   } else if (kind === 'audioConsent') {
-    // Fallback ohne Callback: trotzdem in-App Settings ansteuern
     buttons.push({
-      text: 'Zu den Einstellungen',
+      text: 'Jetzt einstellen',
       onPress: () => {
-        try {
-          const { useFinnusStore } = require('../store/useFinnusStore') as {
-            useFinnusStore: {
-              getState: () => {
-                requestOpenSettings: (focus?: 'voice' | 'mic' | null) => void;
-              };
-            };
-          };
-          useFinnusStore.getState().requestOpenSettings('mic');
-        } catch {
-          /* soft */
-        }
+        openInAppMicConsentSettings({ reopenReisebuero: true });
       },
     });
   }
@@ -137,27 +125,59 @@ export function showPermissionMissingAlert(
   Alert.alert(copy.title, copy.message, buttons);
 }
 
+/**
+ * Schließt blockierende Overlays (z. B. Reisebüro) und öffnet Settings
+ * genau bei Audio & Sparmodus → „Sprache an“.
+ */
+export function openInAppMicConsentSettings(opts?: {
+  /** Nach dem Speichern Reisebüro wieder öffnen */
+  reopenReisebuero?: boolean;
+}): void {
+  try {
+    const { useReisebueroStore } = require('../reisebuero/store') as {
+      useReisebueroStore: {
+        getState: () => {
+          overlayOpen: boolean;
+          closeOverlay: () => void;
+          setReopenAfterMicConsent: (v: boolean) => void;
+        };
+      };
+    };
+    const rb = useReisebueroStore.getState();
+    if (opts?.reopenReisebuero || rb.overlayOpen) {
+      rb.setReopenAfterMicConsent(true);
+    }
+    if (rb.overlayOpen) rb.closeOverlay();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { useFinnusStore } = require('../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => {
+          requestOpenSettings: (focus?: 'voice' | 'mic' | null) => void;
+        };
+      };
+    };
+    useFinnusStore.getState().requestOpenSettings('mic');
+  } catch {
+    /* soft */
+  }
+}
+
 /** Ein Popup für fehlende In-App-Mikrofon-Einwilligung (kein zweites Tippfeld parallel). */
 export function showAudioConsentMissingAlert(options?: {
   force?: boolean;
   onTypeAsk?: () => void;
+  reopenReisebuero?: boolean;
 }): void {
   showPermissionMissingAlert('audioConsent', {
     force: options?.force ?? true,
     onTypeAsk: options?.onTypeAsk,
     onOpenInAppSettings: () => {
-      try {
-        const { useFinnusStore } = require('../store/useFinnusStore') as {
-          useFinnusStore: {
-            getState: () => {
-              requestOpenSettings: (focus?: 'voice' | 'mic' | null) => void;
-            };
-          };
-        };
-        useFinnusStore.getState().requestOpenSettings('mic');
-      } catch {
-        /* soft */
-      }
+      openInAppMicConsentSettings({
+        reopenReisebuero: options?.reopenReisebuero ?? true,
+      });
     },
   });
 }

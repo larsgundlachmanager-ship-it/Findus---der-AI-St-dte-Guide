@@ -14,6 +14,8 @@ type DiscoveredDraft = {
   lng: number;
   category: string | null;
   cityId: string | null;
+  /** Anzeigename der Recherche-Stadt (Geist/Remote) — nicht Home-Profil */
+  cityName?: string | null;
   facts: Array<{
     text: string;
     sourceUrl?: string | null;
@@ -70,7 +72,17 @@ export async function persistDiscoveredPoiIntoDataset<T extends DiscoveredDraft>
     /* soft */
   }
   const profile = getCachedUserProfile();
-  const cityName = profile?.cityName ?? null;
+  // Geist-/Remote-Stadt: Hint aus Draft, nicht Home-Profil
+  const cityName =
+    (draft as { cityName?: string | null }).cityName?.trim() ||
+    (draft.cityId &&
+    profile?.cityId &&
+    draft.cityId.replace(/^soft_/i, '').toLowerCase() !==
+      String(profile.cityId).replace(/^soft_/i, '').toLowerCase()
+      ? draft.cityId.replace(/^soft_/i, '').replace(/_/g, ' ')
+      : null) ||
+    profile?.cityName ||
+    null;
   let wikiChars = 0;
   let wikiUrl: string | null = null;
   let wikiExtract: string | null = null;
@@ -161,16 +173,8 @@ export async function persistDiscoveredPoiIntoDataset<T extends DiscoveredDraft>
     } catch {
       /* soft */
     }
-    try {
-      const { maybePingCityPackDemand } = await import('../cityPackDemand');
-      void maybePingCityPackDemand({
-        lat: draft.lat,
-        lng: draft.lng,
-        force: true,
-      });
-    } catch {
-      /* soft */
-    }
+    // Kein Demand-Ping aus Remote-/Geist-Recherche — Freischaltung nur Founder
+    // (city:auto). GPS-Soft-Demand läuft separat über cityPackDemand.
   }
 
   return draft;

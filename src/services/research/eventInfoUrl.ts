@@ -560,8 +560,11 @@ function scoreUrlAgainstHints(url: string, hints: EventInfoUrlHints): number {
     }
     if (path === '/' || path === '') score -= 4;
   }
-  if (/rausgegangen\.de|eventim|ticketmaster|facebook\.com\/events/i.test(host)) {
+  if (/rausgegangen\.de|eventim|ticketmaster|reservix\.de|adticket\.de|facebook\.com\/events/i.test(host)) {
     score += 1;
+  }
+  if (/reservix\.de|adticket\.de/i.test(host) && /\/(group|tickets?|events?)\//i.test(path)) {
+    score += 4;
   }
   return score;
 }
@@ -613,7 +616,7 @@ export function resolveEventInfoUrl(opts: {
 export function buildEventInfoSearchFallbackUrl(
   hints: EventInfoUrlHints,
 ): string {
-  const bits = [hints.title, hints.venue, hints.city, 'Programm']
+  const bits = [hints.title, hints.venue, hints.city, 'offizielle Seite']
     .map((s) => String(s ?? '').trim())
     .filter((s) => s.length >= 2);
   const q = (bits.join(' ') || 'Event Programm')
@@ -696,7 +699,8 @@ export function resolveEventProgramLink(opts: {
   return {
     url: buildEventInfoSearchFallbackUrl(opts.hints),
     kind: 'search',
-    label: '🔍 Infos',
+    // Suche ≠ offizielle Programmseite — ehrlich benennen
+    label: '🔍 Website suchen',
   };
 }
 

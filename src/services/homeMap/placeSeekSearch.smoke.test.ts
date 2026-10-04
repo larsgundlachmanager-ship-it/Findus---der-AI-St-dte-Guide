@@ -53,6 +53,18 @@ assert(
 );
 assert(
   shouldFetchPlaceSeekRemote({
+    query: 'Ulmenallee 23',
+    localHits: 0,
+    hasAddressHit: false,
+  }),
+  'Adresse ohne Index → Geocode',
+);
+assert(
+  !poiMatchesSeekQuery(bakery, 'Ulmenallee 23'),
+  'Adresse matcht keinen Pack-Laden',
+);
+assert(
+  shouldFetchPlaceSeekRemote({
     query: 'Lasertag',
     localHits: 0,
     hasAddressHit: false,

@@ -1,0 +1,693 @@
+/**
+ * Call-1 Dispatch — einzige Weiche nach dem Manager-JSON.
+ * Soft-Overrides nur als Airbag: Safety flips immer; sonst nur wenn execution fehlt.
+ */
+
+import type { ManagerAnalysis } from './types';
+import { frameHasWorker, frameOwnsDayPlan, emptyTurnFrame } from './turnFrame';
+import {
+  detectMobilityCompoundKind,
+} from './call1MobilityCompound';
+
+export type Call1ExecutionBackend =
+  | 'chat_lane'
+  | 'pitch_module'
+  | 'flight_advisor'
+  | 'plan_module'
+  | 'plan_walkthrough'
+  | 'tour_module'
+  | 'events_research'
+  | 'nav_execute'
+  | 'm1_poi'
+  | 'memory'
+  | 'task_fanout'
+  | 'reisebuero';
+
+const EXECUTION_VALUES: Call1ExecutionBackend[] = [
+  'chat_lane',
+  'pitch_module',
+  'flight_advisor',
+  'plan_module',
+  'plan_walkthrough',
+  'tour_module',
+  'events_research',
+  'nav_execute',
+  'm1_poi',
+  'memory',
+  'task_fanout',
+  'reisebuero',
+];
+
+export function asCall1Execution(
+  raw: unknown,
+): Call1ExecutionBackend | null {
+  const s = String(raw || '')
+    .trim()
+    .toLowerCase();
+  return EXECUTION_VALUES.includes(s as Call1ExecutionBackend)
+    ? (s as Call1ExecutionBackend)
+    : null;
+}
+
+/** Ableitung nur aus Call-1-Output — nie aus userText.
+ * Phase C: frame.work[] / tasks Worker sind SSOT; lane/route nur Fallback.
+ */
+export function deriveCall1Execution(
+  analysis: ManagerAnalysis,
+): Call1ExecutionBackend {
+  const frame = analysis.frame;
+  const lane = String(analysis.chatLane || 'chat');
+  const route = analysis.route;
+  const handoff = String(analysis.handoff || '').toLowerCase();
+
+  if (handoff === 'reisebuero') return 'reisebuero';
+
+  // work[] zuerst
+  try {
+    const { workersFromAnalysis } = require('./call1WorkOrchestrator') as {
+      workersFromAnalysis: (a: ManagerAnalysis) => string[];
+    };
+    const { executionFromWorkers } = require('./call1CapabilityMap') as {
+      executionFromWorkers: (w: string[]) => Call1ExecutionBackend;
+    };
+    const workers = workersFromAnalysis(analysis);
+    if (workers.length) {
+      const fromWork = executionFromWorkers(workers as never);
+      // plan_walkthrough nur bei continue + plan
+      if (
+        fromWork === 'plan_module' &&
+        analysis.session === 'continue' &&
+        frameOwnsDayPlan(frame)
+      ) {
+        return 'plan_walkthrough';
+      }
+      return fromWork;
+    }
+  } catch {
+    /* soft — legacy unten */
+  }
+
+  if (frameHasWorker(frame, 'flight') || analysis.jobHint === 'flight_trip') {
+    return 'flight_advisor';
+  }
+  if (frameHasWorker(frame, 'events' as never)) return 'events_research';
+  if (frameHasWorker(frame, 'tour' as never)) return 'tour_module';
+  if (frameHasWorker(frame, 'place' as never)) return 'pitch_module';
+  if (lane === 'nav' || frameHasWorker(frame, 'nav') || route === 'm3_nav_start') {
+    return 'nav_execute';
+  }
+  if (
+    lane === 'm1' ||
+    frameHasWorker(frame, 'm1') ||
+    frameHasWorker(frame, 'm1_poi' as never) ||
+    route === 'm1_poi'
+  ) {
+    return 'm1_poi';
+  }
+  if (
+    analysis.execution === 'plan_walkthrough' ||
+    (frameOwnsDayPlan(frame) && analysis.session === 'continue')
+  ) {
+    return 'plan_walkthrough';
+  }
+  if (lane === 'plan' || frameOwnsDayPlan(frame) || route === 'm5_plan') {
+    return 'plan_module';
+  }
+  if (lane === 'pitch' || frameHasWorker(frame, 'pitch') || frameHasWorker(frame, 'dining')) {
+    return 'pitch_module';
+  }
+  if (
+    (frameHasWorker(frame, 'hotel') || frameHasWorker(frame, 'dining')) &&
+    (analysis.tasks?.length ?? 0) > 1
+  ) {
+    return 'task_fanout';
+  }
+  if (frameHasWorker(frame, 'hotel') && lane === 'pitch') {
+    return 'pitch_module';
+  }
+  if (frameHasWorker(frame, 'weather') && lane === 'chat' && !analysis.blueprintId) {
+    return 'chat_lane';
+  }
+  if (route === 'memory' || frameHasWorker(frame, 'memory_prefs' as never)) {
+    return 'memory';
+  }
+  if (
+    frameHasWorker(frame, 'memory_recall' as never) ||
+    frameHasWorker(frame, 'deep_web' as never) ||
+    frameHasWorker(frame, 'identify_nearby' as never) ||
+    frameHasWorker(frame, 'map_pin' as never) ||
+    frameHasWorker(frame, 'voice_settings' as never) ||
+    frameHasWorker(frame, 'device_action' as never)
+  ) {
+    return 'task_fanout';
+  }
+  if (lane === 'chat' || route === 'blueprint' || route === 'smalltalk') {
+    return 'chat_lane';
+  }
+  if (analysis.tasks?.length) return 'task_fanout';
+  return 'chat_lane';
+}
+
+export function resolveCall1Execution(
+  analysis: ManagerAnalysis,
+): Call1ExecutionBackend {
+  const explicit = asCall1Execution(analysis.execution);
+  if (explicit) return explicit;
+  return deriveCall1Execution(analysis);
+}
+
+export function isLocalHotelAmenityQuery(userText: string): boolean {
+  const t = (userText || '').replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  const stay =
+    /\b(hotel|hotels|unterkunft|übernacht|uebernacht|hostel|pension|airbnb|ferienwohnung)\b/iu.test(
+      t,
+    );
+  if (!stay) return false;
+  if (
+    /\b(flug|fliegen|flieger|mietwagen|reisebüro|reisebuero|urlaub|kurztrip|städtetrip|staedtetrip)\b/iu.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  if (
+    /\b(nach|in)\s+[A-ZÄÖÜ][A-Za-zÄÖÜäöüß\-']{2,}(?:\s+[A-ZÄÖÜ][A-Za-zÄÖÜäöüß\-']{2,}){0,2}\b/u.test(
+      t,
+    ) &&
+    !/\b(in\s+der\s+nähe|in\s+der\s+naehe|hier|vor\s+ort)\b/iu.test(t)
+  ) {
+    return false;
+  }
+  if (/\b(irgendwo|inspiration|wo\s+hin)\b/iu.test(t)) return false;
+  return (
+    /\b(pool|sauna|spa|massage|terrasse|balkon|meerblick|seeblick|frühstück|fruehstueck|all.?inclusive|wellness)\b/iu.test(
+      t,
+    ) ||
+    /\b(\d+)\s*(€|euro)\b/iu.test(t) ||
+    /\b(unter|bis|max\.?)\s*\d+/iu.test(t) ||
+    /\b(freitag|samstag|sonntag|montag|dienstag|mittwoch|donnerstag|wochenende|heute|morgen)\b/iu.test(
+      t,
+    ) ||
+    /\b(nacht|nächte|naechte|übernachtung|uebernachtung)\b/iu.test(t)
+  );
+}
+
+function logCall1SoftOverride(opts: {
+  before: Call1ExecutionBackend;
+  after: Call1ExecutionBackend;
+  reason: string;
+  safety: boolean;
+}): void {
+  if (opts.before === opts.after) return;
+  try {
+    const g = globalThis as { __DEV__?: boolean };
+    if (g.__DEV__) {
+      // eslint-disable-next-line no-console
+      console.log('[call1_soft_override]', {
+        before: opts.before,
+        after: opts.after,
+        reason: opts.reason,
+        safety: opts.safety,
+      });
+    }
+  } catch {
+    /* soft */
+  }
+}
+
+/** Frame anreichern ohne execution zu flippen. */
+function enrichFrameForSoft(
+  analysis: ManagerAnalysis,
+  userText: string,
+  hint: string,
+): void {
+  try {
+    const frame = analysis.frame ?? emptyTurnFrame();
+    const ahead = [...(frame.thinkAhead ?? [])];
+    if (!ahead.some((x) => x.includes(hint.slice(0, 24)))) {
+      ahead.push(hint.slice(0, 160));
+    }
+    analysis.frame = { ...frame, thinkAhead: ahead.slice(0, 4) };
+    const must = [...(analysis.mustHaves ?? []), ...(frame.mustHaves ?? [])];
+    if (/ayce|all\s*you\s*can\s*eat|kein\s+asiatisch/i.test(userText)) {
+      if (!must.some((m) => /asiatisch|cuisine_not|avoid_cuisine/i.test(m))) {
+        /* leave must as-is — Call-1 owns criteria */
+      }
+    }
+  } catch {
+    /* soft */
+  }
+}
+
+/**
+ * Session-aware Ausführung nach Call 1.
+ * Safety-Flips immer; Soft-Backups nur wenn Call-1 kein gültiges execution gesetzt hat.
+ */
+export function finalizeCall1Execution(
+  analysis: ManagerAnalysis,
+  userText: string,
+): Call1ExecutionBackend {
+  const explicit = asCall1Execution(analysis.execution);
+  const baseline = explicit ?? resolveCall1Execution(analysis);
+
+  const apply = (
+    next: Call1ExecutionBackend,
+    reason: string,
+    safety: boolean,
+  ): Call1ExecutionBackend => {
+    logCall1SoftOverride({
+      before: baseline,
+      after: next,
+      reason,
+      safety,
+    });
+    return next;
+  };
+
+  // ——— SAFETY (immer) ———
+  // Timing / Blocker: „morgen dahin“ ≠ Nav jetzt; Taxi Flughafen ohne Flug → askBack
+  try {
+    const {
+      isPrematureNavStart,
+      detectTaxiAirportBlocker,
+      applyBriefTimingToFrame,
+    } = require('./call1TaskBrief') as {
+      isPrematureNavStart: (s: string) => boolean;
+      detectTaxiAirportBlocker: (s: string) => {
+        blocked: boolean;
+        askBack: string | null;
+      };
+      applyBriefTimingToFrame: (
+        frame: ManagerAnalysis['frame'],
+        text: string,
+      ) => ManagerAnalysis['frame'];
+    };
+    analysis.frame = applyBriefTimingToFrame(analysis.frame, userText) ?? analysis.frame;
+    const taxiBlock = detectTaxiAirportBlocker(userText);
+    if (taxiBlock.blocked) {
+      if (taxiBlock.askBack && !analysis.bridgeComplete) {
+        analysis.bridgeComplete = true;
+        analysis.askBack = taxiBlock.askBack;
+        if (!analysis.bridge || analysis.bridge.length < 12) {
+          analysis.bridge = taxiBlock.askBack;
+        }
+      }
+      if (baseline === 'nav_execute') {
+        return apply('chat_lane', 'taxi_airport_blocker', true);
+      }
+    }
+    if (isPrematureNavStart(userText) && baseline === 'nav_execute') {
+      return apply('chat_lane', 'premature_nav_later', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  try {
+    const {
+      isActiveNavTravelModeSwitchIntent,
+    } = require('../../services/navigation/switchActiveNavTravelMode') as {
+      isActiveNavTravelModeSwitchIntent: (s: string) => 'foot' | 'bike' | null;
+    };
+    let navLive = false;
+    try {
+      const { useFinnusStore } = require('../../store/useFinnusStore') as {
+        useFinnusStore: { getState: () => { navActive?: boolean } };
+      };
+      navLive = Boolean(useFinnusStore.getState().navActive);
+    } catch {
+      navLive = false;
+    }
+    if (navLive) {
+      const mode = isActiveNavTravelModeSwitchIntent(userText);
+      if (mode === 'foot' || mode === 'bike') {
+        return apply('nav_execute', 'nav_mode_switch', true);
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  try {
+    const { isStickyVenueTaskIntent } = require('../pitch/shouldHandoffPitch') as {
+      isStickyVenueTaskIntent: (s: string) => boolean;
+    };
+    if (
+      isStickyVenueTaskIntent(userText) &&
+      /\b(reservier|tisch\s+(?:anfrag|buch|vorbereiten|reserv)|speisekarte|menükarte|menuekarte)\b/iu.test(
+        userText,
+      )
+    ) {
+      return apply('chat_lane', 'sticky_venue_task', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Reines Taxi-Hail (kein Flug, kein Venue-Compound) → Fanout
+  try {
+    const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
+      wantsTaxiRide: (s: string) => boolean;
+    };
+    const compound = detectMobilityCompoundKind(userText);
+    if (
+      wantsTaxiRide(userText) &&
+      compound === 'taxi_only' &&
+      !/\b(flieg(?:e|st|t)?|fliegen|flugnummer|boarding)\b/iu.test(userText)
+    ) {
+      return apply('task_fanout', 'taxi_hail', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  try {
+    const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
+      isExplicitNavIntent: (s: string) => boolean;
+    };
+    if (isExplicitNavIntent(userText)) {
+      try {
+        const { isPrematureNavStart } = require('./call1TaskBrief') as {
+          isPrematureNavStart: (s: string) => boolean;
+        };
+        if (isPrematureNavStart(userText)) {
+          /* morgen dahin — kein Sofort-Nav trotz Nav-Keywords */
+        } else {
+          return apply('nav_execute', 'explicit_nav', true);
+        }
+      } catch {
+        return apply('nav_execute', 'explicit_nav', true);
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Produkt-Angebot: nie Reisebüro/Pitch
+  try {
+    const { isSupermarketOfferQuery } = require('../../services/research/supermarketProspectGates') as {
+      isSupermarketOfferQuery: (s: string) => boolean;
+    };
+    if (isSupermarketOfferQuery(userText)) {
+      return apply('chat_lane', 'supermarket_offer', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Wetter-Opener: Topic-Cut gegen Sticky Pitch/Nav
+  try {
+    const {
+      looksLikeOutfitOrWeatherUtterance,
+      weatherAskWantsConversationPlace,
+    } = require('../planning/planUtteranceGate') as {
+      looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+      weatherAskWantsConversationPlace: (s: string) => boolean;
+    };
+    const { looksLikePicnicQuery } = require('../pitch/picnicIntent') as {
+      looksLikePicnicQuery: (s: string) => boolean;
+    };
+    if (
+      looksLikeOutfitOrWeatherUtterance(userText) &&
+      !weatherAskWantsConversationPlace(userText) &&
+      !looksLikePicnicQuery(userText)
+    ) {
+      return apply('chat_lane', 'weather_topic_cut', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Flight Leave-by / offene Flug-Session
+  try {
+    const { shouldEnterFlightAdvisor } = require('../../services/flights/flightTripIntent') as {
+      shouldEnterFlightAdvisor: (o: {
+        userText: string;
+        chatLane?: string | null;
+        session?: string | null;
+        jobHint?: string | null;
+        intentSummary?: string | null;
+        hasOpenSession?: boolean;
+        flightWorker?: boolean;
+      }) => boolean;
+    };
+    const { hasFlightTripSession } = require('../../services/flights/flightTripSession') as {
+      hasFlightTripSession: () => boolean;
+    };
+    const flightWorker =
+      frameHasWorker(analysis.frame, 'flight') || analysis.jobHint === 'flight_trip';
+    if (
+      shouldEnterFlightAdvisor({
+        userText,
+        chatLane: analysis.chatLane,
+        session: analysis.session,
+        jobHint: analysis.jobHint,
+        intentSummary: analysis.intentSummary,
+        hasOpenSession: hasFlightTripSession(),
+        flightWorker,
+      })
+    ) {
+      return apply('flight_advisor', 'flight_advisor_safety', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Datum+Stadt Events vs. Reisebüro — FRAGE-ART Airbag
+  try {
+    const { looksLikeDateWindowWhatsOnAsk } = require('../../services/concierge/eventDateWindow') as {
+      looksLikeDateWindowWhatsOnAsk: (s: string) => boolean;
+    };
+    if (looksLikeDateWindowWhatsOnAsk(userText)) {
+      return apply('events_research', 'date_window_events', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  try {
+    const { looksLikeNamedScheduleQuery } = require('../../services/concierge/sportsScheduleQuery') as {
+      looksLikeNamedScheduleQuery: (s: string) => boolean;
+    };
+    if (looksLikeNamedScheduleQuery(userText)) {
+      return apply('events_research', 'named_schedule', true);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // ——— SOFT: nur wenn Call-1 kein execution gesetzt hat ———
+  if (explicit) {
+    // Anreichern statt flippen
+    if (isLocalHotelAmenityQuery(userText)) {
+      enrichFrameForSoft(analysis, userText, 'local hotel amenities → Stay22 pitch preferred');
+    }
+    try {
+      const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+        looksLikeAyceQuery: (s: string) => boolean;
+      };
+      if (looksLikeAyceQuery(userText)) {
+        enrichFrameForSoft(analysis, userText, 'AYCE dining — pitch form preferred');
+      }
+    } catch {
+      /* soft */
+    }
+    return baseline;
+  }
+
+  if (isLocalHotelAmenityQuery(userText)) {
+    return apply('pitch_module', 'local_hotel_soft', false);
+  }
+
+  // Taxi/Uber Just-Do-It → Fanout (nicht Events/Chat)
+  try {
+    const { wantsTaxiRide } = require('../../services/mobility/taxiRideIntent') as {
+      wantsTaxiRide: (s: string) => boolean;
+    };
+    const { detectTaxiAirportBlocker } = require('./call1TaskBrief') as {
+      detectTaxiAirportBlocker: (s: string) => { blocked: boolean };
+    };
+    if (
+      (wantsTaxiRide(userText) || frameHasWorker(analysis.frame, 'taxi' as never)) &&
+      !detectTaxiAirportBlocker(userText).blocked
+    ) {
+      return apply('task_fanout', 'taxi_soft', false);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // package_quick / Pauschal-schnell → Stay22/Hotel-Pitch, kein Reisebüro-Wizard
+  // (außer Multi-Tag-Trip-Wörter: Wochenende/Urlaub/Flug+Hotel/…)
+  try {
+    const multiDayTrip =
+      /\b(wochenende|woche\b|urlaub|kurztrip|städtetrip|staedtetrip|flug\s*\+|flug.{0,24}hotel|hotel.{0,24}flug|mietwagen|reise\s+planen|plane\s+mir)\b/iu.test(
+        userText,
+      );
+    const packageQuick =
+      frameHasWorker(analysis.frame, 'package_quick' as never) ||
+      (/\b(pauschal|package|all[\s-]?inclusive\s+reise|check[\s-]?24)\b/iu.test(
+        userText,
+      ) &&
+        !multiDayTrip);
+    if (packageQuick) {
+      return apply('pitch_module', 'package_quick_soft', false);
+    }
+  } catch {
+    /* soft */
+  }
+
+  try {
+    const { detectCall1Situation } = require('../reboot/pipeline/call1AnswerContract') as {
+      detectCall1Situation: (
+        t: string,
+        o?: { correction?: boolean },
+      ) => string;
+    };
+    try {
+      const { isEventResearchQuery } = require('../../services/concierge/eventResearchService') as {
+        isEventResearchQuery: (s: string) => boolean;
+      };
+      if (
+        isEventResearchQuery(userText) &&
+        !/\b(flug|fliegen|mietwagen|hotel\s+suchen|plane\s+mir|reisebüro|reisebuero)\b/iu.test(
+          userText,
+        )
+      ) {
+        try {
+          const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+            looksLikeAyceQuery: (s: string) => boolean;
+          };
+          if (looksLikeAyceQuery(userText)) {
+            return apply('pitch_module', 'ayce_blocks_events_soft', false);
+          }
+          // Offenes AYCE/Dining-Inventar: Events-Soft darf Musts nicht verdrängen
+          try {
+            const { getLastLiveInventory } = require('../context/shortTermContext') as {
+              getLastLiveInventory: () => { kind: string; query: string } | null;
+            };
+            const pending = getLastLiveInventory();
+            if (
+              pending?.kind === 'pitch_choice' &&
+              (looksLikeAyceQuery(pending.query) ||
+                /\b(essen|restaurant|speisekarte|ayce|buffet)\b/iu.test(
+                  pending.query,
+                ))
+            ) {
+              return apply(
+                'pitch_module',
+                'ayce_inventory_blocks_events_soft',
+                false,
+              );
+            }
+          } catch {
+            /* soft */
+          }
+        } catch {
+          /* soft */
+        }
+        const { detectPitchKind } = require('../pitch/parentBrief') as {
+          detectPitchKind: (s: string) => string;
+        };
+        if (
+          detectPitchKind(userText) === 'food' ||
+          /\b(essen|restaurant|speisekarte|ayce|buffet)\b/iu.test(userText)
+        ) {
+          return apply('pitch_module', 'dining_blocks_events_soft', false);
+        }
+        return apply('events_research', 'events_query_soft', false);
+      }
+    } catch {
+      /* soft */
+    }
+    const family = detectCall1Situation(userText);
+    if (family === 'reisebuero_collect') {
+      // Safety: package_quick schon oben — hier nur echter Multi-Tag-Trip
+      return apply('reisebuero', 'reisebuero_soft', false);
+    }
+    if (family === 'stay_day_interactive') {
+      try {
+        const { isEventResearchQuery } = require('../../services/concierge/eventResearchService') as {
+          isEventResearchQuery: (s: string) => boolean;
+        };
+        if (isEventResearchQuery(userText)) {
+          return apply('events_research', 'stay_day_events_soft', false);
+        }
+      } catch {
+        /* soft */
+      }
+      return apply('plan_walkthrough', 'stay_day_soft', false);
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Gastro/AYCE Soft — VOR derive, wenn noch kein execution
+  try {
+    const { detectPitchKind } = require('../pitch/parentBrief') as {
+      detectPitchKind: (s: string) => string;
+    };
+    const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    const { shouldHandoffToPitchModule } = require('../pitch/shouldHandoffPitch') as {
+      shouldHandoffToPitchModule: (s: string) => boolean;
+    };
+    const resolved = resolveCall1Execution(analysis);
+    const foodish =
+      detectPitchKind(userText) === 'food' || looksLikeAyceQuery(userText);
+    if (
+      foodish &&
+      shouldHandoffToPitchModule(userText) &&
+      (resolved === 'chat_lane' ||
+        resolved === 'task_fanout' ||
+        analysis.blueprintId === 'weather')
+    ) {
+      return apply('pitch_module', 'ayce_food_soft', false);
+    }
+  } catch {
+    /* soft */
+  }
+
+  return baseline;
+}
+
+export function shouldSpeakManagerBridge(analysis: ManagerAnalysis): boolean {
+  if (analysis.bridgeSpokenEarly) return false;
+  if (!analysis.bridge?.trim()) return false;
+  if (analysis.session === 'continue' || analysis.session === 'resume') {
+    return false;
+  }
+  return true;
+}
+
+export function executionUsesChatLane(
+  execution: Call1ExecutionBackend,
+): boolean {
+  return execution === 'chat_lane';
+}
+
+export function executionUsesPitchModule(
+  execution: Call1ExecutionBackend,
+): boolean {
+  return execution === 'pitch_module' || execution === 'tour_module';
+}
+
+export function executionUsesPlanModule(
+  execution: Call1ExecutionBackend,
+): boolean {
+  return execution === 'plan_module' || execution === 'plan_walkthrough';
+}
+
+export function executionUsesFlightAdvisor(
+  execution: Call1ExecutionBackend,
+): boolean {
+  return execution === 'flight_advisor';
+}
+
+export function executionUsesNav(
+  execution: Call1ExecutionBackend,
+): boolean {
+  return execution === 'nav_execute';
+}

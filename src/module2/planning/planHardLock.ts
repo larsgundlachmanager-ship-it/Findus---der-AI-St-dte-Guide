@@ -71,12 +71,50 @@ export function hardIntervalsFromStops(
 }
 
 /**
+ * Soft-Wünsche mit Zeit (Frühstück, Ankunft, Mahlzeiten) — Tour/Explore
+ * dürfen nicht davor oder darüber gelegt werden.
+ */
+export function softTimedIntervalsFromStops(
+  stops: FuturePlanStop[],
+): Array<{ start: number; end: number }> {
+  const out: Array<{ start: number; end: number }> = [];
+  for (const s of stops) {
+    if (s.kind === 'nav_leg' || s.id.startsWith('choice_')) continue;
+    if (s.id.startsWith('tour_') || s.id.startsWith('explore_')) continue;
+    if (isHardFixedStop(s)) continue;
+    if (s.plannedStartMs == null || !Number.isFinite(s.plannedStartMs)) continue;
+    // Nur zeitige Soft-Bänder (Wish / Mahlzeit / Anreise), keine leeren Explore-Reste
+    const timedWish =
+      s.kind === 'wish' ||
+      Boolean(s.userFixedTime) ||
+      /\b(frühstück|fruehstueck|breakfast|ankunft|anreise|mittag|abendessen|dinner|lunch)\b/i.test(
+        `${s.title} ${s.notes ?? ''}`,
+      );
+    if (!timedWish) continue;
+    const iv = intervalOf(s, 45 * 60_000);
+    if (iv) out.push(iv);
+  }
+  return out.sort((a, b) => a.start - b.start);
+}
+
+/** Hard + soft-timed — Blocker für Tour-Platzierung. */
+export function blockIntervalsFromStops(
+  stops: FuturePlanStop[],
+): Array<{ start: number; end: number }> {
+  return [...hardIntervalsFromStops(stops), ...softTimedIntervalsFromStops(stops)].sort(
+    (a, b) => a.start - b.start,
+  );
+}
+
+/**
  * Bevorzugte Startzeit behalten, sonst in die nächste Lücke vor/nach Hard-Ankern.
  */
 export function findFreeSlotStartMs(opts: {
   preferredStartMs: number | null;
   durationMs: number;
   hardIntervals: Array<{ start: number; end: number }>;
+  /** Extra-Blocker (z. B. soft Frühstück) — wie Hard behandelt. */
+  extraIntervals?: Array<{ start: number; end: number }>;
   dayStartMs: number;
   dayEndMs: number;
   nowFloorMs?: number | null;
@@ -86,27 +124,52 @@ export function findFreeSlotStartMs(opts: {
   let preferred = opts.preferredStartMs;
   if (preferred != null && preferred < floor) preferred = floor;
 
-  const overlapsHard = (start: number): boolean => {
+  const blocked = [
+    ...opts.hardIntervals,
+    ...(opts.extraIntervals ?? []),
+  ].sort((a, b) => a.start - b.start);
+
+  const overlapsBlocked = (start: number): boolean => {
     const end = start + dur;
-    return opts.hardIntervals.some((h) =>
+    return blocked.some((h) =>
       intervalsOverlapMs(start, end, h.start, h.end),
     );
   };
 
-  if (preferred != null && !overlapsHard(preferred)) {
+  if (preferred != null && !overlapsBlocked(preferred)) {
     return preferred;
   }
 
-  // Nach jedem Hard-Ende + 10 Min Puffer versuchen
+  // Preferierte Zeit kollidiert → zuerst hinter den Blocker (Tour nicht vor Frühstück)
+  if (preferred != null) {
+    for (const h of blocked) {
+      if (!intervalsOverlapMs(preferred, preferred + dur, h.start, h.end)) {
+        continue;
+      }
+      const after = h.end + 10 * 60_000;
+      if (
+        after >= floor &&
+        after + dur <= opts.dayEndMs &&
+        !overlapsBlocked(after)
+      ) {
+        return after;
+      }
+    }
+  }
+
+  // Nach jedem Block-Ende + 10 Min Puffer versuchen
   const candidates: number[] = [];
   if (preferred != null) candidates.push(preferred);
   candidates.push(Math.max(floor, opts.dayStartMs + 11 * 60 * 60_000)); // ~11:00
   candidates.push(Math.max(floor, opts.dayStartMs + 12 * 60 * 60_000));
   candidates.push(Math.max(floor, opts.dayStartMs + 12.5 * 60 * 60_000));
   candidates.push(Math.max(floor, opts.dayStartMs + 17 * 60 * 60_000));
-  for (const h of opts.hardIntervals) {
+  for (const h of blocked) {
     candidates.push(h.end + 10 * 60_000);
-    candidates.push(h.start - dur - 10 * 60_000);
+    // Früher Slot nur wenn preferred deutlich nach dem Block lag (nicht „vor Frühstück“)
+    if (preferred != null && preferred >= h.end) {
+      candidates.push(h.start - dur - 10 * 60_000);
+    }
   }
 
   const unique = [...new Set(candidates)]
@@ -114,14 +177,14 @@ export function findFreeSlotStartMs(opts: {
     .sort((a, b) => a - b);
 
   for (const t of unique) {
-    if (!overlapsHard(t)) return t;
+    if (!overlapsBlocked(t)) return t;
   }
 
-  // Fallback: direkt hinter dem letzten Hard-Anker — nie überlappend zurückgeben
-  const last = opts.hardIntervals[opts.hardIntervals.length - 1];
+  // Fallback: direkt hinter dem letzten Blocker — nie überlappend zurückgeben
+  const last = blocked[blocked.length - 1];
   if (last) {
     const t = Math.max(floor, last.end + 10 * 60_000);
-    if (t + dur <= opts.dayEndMs && !overlapsHard(t)) return t;
+    if (t + dur <= opts.dayEndMs && !overlapsBlocked(t)) return t;
   }
   return null;
 }

@@ -284,4 +284,47 @@ function assert(cond: unknown, msg: string): void {
   );
 }
 
+{
+  const w = parseWishesFromText('Kein Fleisch bitte, ich will vegan essen');
+  assert(
+    w.some((x) => x.kind === 'cuisine' && /vegan/i.test(x.text) && x.hardness === 'must'),
+    'kein fleisch + vegan → must cuisine vegan',
+  );
+  assert(
+    !w.some((x) => x.kind === 'dish' && /^fleisch$/i.test(x.text)),
+    'kein fleisch must not become dish Fleisch',
+  );
+}
+
+{
+  const {
+    hasStrongVeganEvidence,
+    isOppositeDietVenue,
+    scoreSpecializedFoodWish,
+  } = require('./specializedFoodMatch') as {
+    hasStrongVeganEvidence: (b: string) => boolean;
+    isOppositeDietVenue: (v: string, w: string) => boolean;
+    scoreSpecializedFoodWish: (
+      blob: string,
+      w: { text: string; kind?: string; hardness?: string },
+    ) => number;
+  };
+  const goldBlob =
+    'Goldschätzchen Wein- & Biergarten Auch Veganer Vegane Gerichte auf der Speisekarte';
+  const wish = 'Kein Fleisch bitte, ich will vegan essen';
+  assert(!hasStrongVeganEvidence(goldBlob), 'weak biergarten vegan mention not strong');
+  assert(
+    isOppositeDietVenue(goldBlob, wish),
+    'Goldschätzchen biergarten opposite for vegan wish',
+  );
+  assert(
+    scoreSpecializedFoodWish(goldBlob, {
+      text: 'vegan',
+      kind: 'cuisine',
+      hardness: 'must',
+    }) === 0,
+    'biergarten weak vegan scores 0',
+  );
+}
+
 console.log('pitch hard-match smoke ok');

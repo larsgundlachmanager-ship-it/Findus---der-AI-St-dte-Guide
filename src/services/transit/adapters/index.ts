@@ -12,7 +12,7 @@ import type { AdapterDeparture, TransitAdapter } from './types';
 
 export type { AdapterDeparture, TransitAdapter };
 export { resolveCityTransitProfile } from './cityProfiles';
-export { createTransitousAdapter, resolveTransitousStopId } from './transitousAdapter';
+export { createTransitousAdapter, resolveTransitousStopId, looksLikeStreetHeadsign, cleanDirectionLabel, polishStreetDirection } from './transitousAdapter';
 export { planJourney, recalculateNextConnection, recalculateMissedConnection } from '../journeyPlanner';
 export {
   planDbJourneys,

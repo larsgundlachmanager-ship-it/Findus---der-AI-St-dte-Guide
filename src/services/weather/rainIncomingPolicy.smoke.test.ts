@@ -10,7 +10,11 @@ import {
   isPrecipWeatherCode,
   isRainDontCareUtterance,
   isRainShelterUtterance,
+  findSeriesRainEndMs,
+  mergeRainWindowsByDryGap,
+  RAIN_END_MIN_DRY_GAP_MS,
 } from './rainIncomingPolicy';
+import { formatClockSpokenDe } from '../../utils/dateKeys';
 import { nextWeatherPollDelayMs, WEATHER_POLL } from './weatherPollSchedule';
 
 function assert(cond: unknown, msg: string): void {
@@ -18,10 +22,7 @@ function assert(cond: unknown, msg: string): void {
 }
 
 function clockLabel(ms: number): string {
-  return new Date(ms).toLocaleTimeString('de-DE', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return formatClockSpokenDe(ms);
 }
 
 function run(): void {
@@ -85,8 +86,8 @@ function run(): void {
       weatherCode: 200,
       nextRainAtMs: now + 25 * 60_000,
       rainEndsAtMs: now + 40 * 60_000,
-    }) === 'Regen noch 40 Min',
-    'Gewitter → noch Minuten (≤60), nicht Uhrzeit',
+    }) === 'Starker Regen noch 40 Min',
+    'Gewitter → starker Regen + noch Minuten (≤60)',
   );
   const dur = rainDurationMin(
     [{ startMs: now + 27 * 60_000, endMs: now + 27 * 60_000 + 15 * 60_000 }],
@@ -105,6 +106,34 @@ function run(): void {
     fallingLine === 'Regen noch 40 Min',
     `Regen noch Minuten, got ${fallingLine}`,
   );
+
+  assert(
+    formatRainHudLine({
+      nowMs: now,
+      currentPrecipMm: 3.2,
+      isHeavyRain: true,
+      rainEndsAtMs: now + 25 * 60_000,
+    }) === 'Starker Regen noch 25 Min',
+    'starker Regen + Restminuten',
+  );
+  assert(
+    formatRainHudLine({
+      nowMs: now,
+      currentPrecipMm: 0.2,
+      weatherCode: 61,
+    }) === 'Aktuell leichter Regen',
+    'leichter Regen ohne Ende',
+  );
+  assert(
+    formatRainHudLine({
+      nowMs: now,
+      currentPrecipMm: 1.0,
+      isHeavyRain: true,
+    }) === 'Aktuell starker Regen',
+    'starker Regen ohne Ende',
+  );
+
+
 
   const longEnd = now + 90 * 60_000;
   assert(
@@ -125,6 +154,14 @@ function run(): void {
   );
   assert(
     formatRainHudLine({
+      nowMs: now,
+      nextRainAtMs: now + 25 * 60_000,
+      rainEndsAtMs: now + 25 * 60_000 + 40 * 60_000,
+    }) === 'Regen in 25 Min · Dauer ca. 40 Min',
+    'countdown + Dauer klar als Länge',
+  );
+  assert(
+    formatRainHudLine({
       nowMs: now + 5 * 60_000,
       nextRainAtMs: now + 30 * 60_000,
     }) === 'Regen in 25 Min',
@@ -134,9 +171,48 @@ function run(): void {
     formatRainHudLine({
       nowMs: now,
       nextRainAtMs: now + 3 * 60 * 60_000,
+      rainEndsAtMs: now + 3 * 60 * 60_000 + 30 * 60_000,
     }) === `Regen ab ${clockLabel(now + 3 * 60 * 60_000)}`,
-    'in 3 h → Regen ab Uhrzeit',
+    'in 3 h → nur Regen ab Uhrzeit, keine Dauer',
   );
+  assert(
+    !/Dauer|ca\. \d+ Min/.test(
+      formatRainHudLine({
+        nowMs: now,
+        nextRainAtMs: now + 75 * 60_000,
+        rainEndsAtMs: now + 75 * 60_000 + 30 * 60_000,
+      }) ?? '',
+    ),
+    '>60 Min bis Start → keine Dauer-Anzeige',
+  );
+
+
+  // Flatterpause < 30 Min ≠ Regenende
+  const seriesBase = now;
+  const flutter = [];
+  for (let m = 0; m <= 80; m++) {
+    const wet = m <= 35 || m >= 45; // 10 Min trocken
+    flutter.push({ atMs: seriesBase + m * 60_000, wet });
+  }
+  assert(
+    findSeriesRainEndMs({ samples: flutter }) == null,
+    '10 Min Flatterpause → kein frühes Ende (Serie endet noch nass)',
+  );
+  const realPause = [];
+  for (let m = 0; m <= 90; m++) {
+    const wet = m <= 30 || m >= 65; // 35 Min Pause
+    realPause.push({ atMs: seriesBase + m * 60_000, wet });
+  }
+  assert(
+    findSeriesRainEndMs({ samples: realPause }) === seriesBase + 31 * 60_000,
+    '≥30 Min Pause → Ende am ersten Trocken-Slot',
+  );
+  const mergedWin = mergeRainWindowsByDryGap([
+    { startMs: now, endMs: now + 40 * 60_000, pop: 70 },
+    { startMs: now + 50 * 60_000, endMs: now + 100 * 60_000, pop: 60 },
+  ]);
+  assert(mergedWin.length === 1 && mergedWin[0]!.endMs === now + 100 * 60_000, 'Fenster 10-Min-Lücke gemerged');
+  assert(RAIN_END_MIN_DRY_GAP_MS === 30 * 60_000, '30 Min Pause-SSOT');
 
   assert(
     nextWeatherPollDelayMs({

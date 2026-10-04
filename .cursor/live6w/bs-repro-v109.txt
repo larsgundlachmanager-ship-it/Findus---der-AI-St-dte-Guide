@@ -1,0 +1,630 @@
+--------- beginning of main
+09-13 23:48:20.549 24443 24443 I de.findus.app: Using generational CollectorTypeCMC GC.
+09-13 23:48:20.555 24443 24443 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+--------- beginning of system
+09-13 23:48:20.571 24443 24443 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-13 23:48:20.600 24443 24443 D nativeloader: Configuring clns-9 for other apk /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/lib/arm64:/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/de.findus.app
+09-13 23:48:20.604 24443 24443 I de.findus.app: AssetManager2(0xb400007ac55de0b8) locale list changing from [] to [de-DE]
+09-13 23:48:20.605 24443 24443 I Perf    : Connecting to perf service.
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment: Currently set values for:
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[com.android.angle, com.linecorp.b612.android, com.campmobile.snow, com.google.android.apps.tachyon]
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment:   angle_gl_driver_selection_values=[angle, native, native, native]
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment: de.findus.app is not listed in per-application setting
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment: ANGLE allowlist from config: 
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment: de.findus.app is not listed in ANGLE allowlist or settings, returning default
+09-13 23:48:20.608 24443 24443 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+09-13 23:48:20.613 24443 24443 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+09-13 23:48:20.613 24443 24443 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-13 23:48:20.616 24443 24443 D SceneManager: init SceneManager
+09-13 23:48:20.618 24443 24443 W SoLoader: Initializing SoLoader: 0
+09-13 23:48:20.618 24443 24443 W SoLoader: Recording new base apk path: /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk
+09-13 23:48:20.618 24443 24443 W SoLoader: Previously recorded 0 base apk paths.
+09-13 23:48:20.618 24443 24443 I SoLoader: Preparing SO source: DirectorySoSource[root = /vendor/lib64 flags = 2]
+09-13 23:48:20.619 24443 24443 I SoLoader: Preparing SO source: DirectorySoSource[root = /system/lib64 flags = 2]
+09-13 23:48:20.619 24443 24443 I SoLoader: Preparing SO source: DirectApkSoSource[root = [/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a]]
+09-13 23:48:20.621 24443 24443 I SoLoader: Preparing SO source: ApplicationSoSource[DirectorySoSource[root = /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/lib/arm64 flags = 0]]
+09-13 23:48:20.621 24443 24443 I SoLoader: init finish: 4 SO sources prepared
+09-13 23:48:20.621 24443 24443 W SoLoader: SoLoader initialized: 8
+09-13 23:48:20.625 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libc++_shared.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.628 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libjsi.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.630 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libfbjni.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.635 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libreactnative.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Entering merged library JNI_OnLoad.
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x788e9fb2c0
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libmapbufferjni_so.  onload_func: 0x788ea46588
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x788eabdbf0
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x788eac4b40
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x788eae7e0c
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x788eb70200
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x788eb8eb48
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x788eba8d4c
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x788ec080a0
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x788ec0f918
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x788ec14bc8
+09-13 23:48:20.635 24443 24443 D jni_lib_merge: About to register 11 actual methods.
+09-13 23:48:20.640 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libreact_codegen_safeareacontext.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.641 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libappmodules.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.653 24443 24463 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+09-13 23:48:20.655 24443 24443 I de.findus.app: AssetManager2(0xb400007ac56138f8) locale list changing from [] to [de-DE]
+09-13 23:48:20.656 24443 24443 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+09-13 23:48:20.657 24443 24443 I de.findus.app: AssetManager2(0xb400007ac5612638) locale list changing from [] to [de-DE]
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: QUALCOMM build                   : f1c98d72b3, I45c5214ffd
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Build Date                       : 07/11/25
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: OpenGL ES Shader Compiler Version: E031.47.18.36
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Local Branch                     : 
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Remote Branch                    : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.14.3.0.11.00.00.973.839
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Remote Branch                    : NONE
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Reconstruct Branch               : NOTHING
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Build Config                     : S L 16.1.2 AArch64
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Driver Path                      : /vendor/lib64/egl/libGLESv2_adreno.so
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Driver Version                   : 0800.49
+09-13 23:48:20.657 24443 24463 I AdrenoGLES-0: Process Name                     : de.findus.app
+09-13 23:48:20.658 24443 24443 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+09-13 23:48:20.666 24443 24443 D NtViewImpl: init NtViewImpl
+09-13 23:48:20.668 24443 24443 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Schedule
+09-13 23:48:20.668 24443 24443 W unknown:BridgelessReact: ReactHost{0}.attachSurface(surfaceId = 0)
+09-13 23:48:20.668 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask()
+09-13 23:48:20.668 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Start
+09-13 23:48:20.668 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getJSBundleLoader()
+09-13 23:48:20.669 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactContext(): Creating BridgelessReactContext
+09-13 23:48:20.669 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Creating ReactInstance
+09-13 23:48:20.669 24443 24443 D CompatChangeReporter: Compat change id reported: 377864165; UID 10538; state: ENABLED
+09-13 23:48:20.670 24443 24443 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+09-13 23:48:20.674 24443 24443 I ContentCaptureHelper: Setting logging level to OFF
+09-13 23:48:20.675 24443 24466 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libhermes.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.676 24443 24466 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libhermestooling.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.676 24443 24466 D jni_lib_merge: Entering merged library JNI_OnLoad.
+09-13 23:48:20.676 24443 24466 D jni_lib_merge: Preparing 4 pre-merged libs (including stub)
+09-13 23:48:20.676 24443 24466 D jni_lib_merge: Preparing to register libhermes_executor_so.  onload_func: 0x78f9c9d780
+09-13 23:48:20.676 24443 24466 D jni_lib_merge: Preparing to register libhermesinstancejni_so.  onload_func: 0x78f9ca4178
+09-13 23:48:20.676 24443 24466 D jni_lib_merge: Preparing to register libjsijniprofiler_so.  onload_func: 0x78f9ca4834
+09-13 23:48:20.676 24443 24466 D jni_lib_merge: About to register 3 actual methods.
+09-13 23:48:20.678 24443 24443 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+09-13 23:48:20.678 24443 24443 W unknown:BridgelessReact: ReactContext.onHostResume()
+09-13 23:48:20.685 24443 24466 D DefaultLocationEngineProvider: DefaultLocationEngine will be used.
+09-13 23:48:20.686 24443 24471 E HWUI    : attachRenderThreadToJvm
+09-13 23:48:20.686 24443 24471 E HWUI    : AM IS NOT NULL!
+09-13 23:48:20.688 24443 24472 E HWUI    : attachRenderThreadToJvm
+09-13 23:48:20.688 24443 24472 E HWUI    : AM IS NOT NULL!
+09-13 23:48:20.688 24443 24463 I AdrenoGLES-0: PFP: 0x01100079, ME: 0x00000000
+09-13 23:48:20.695 24443 24466 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libexpo-av.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes4.dex): ok
+09-13 23:48:20.700 24443 24463 I AdrenoUtils: <ReadGpuID:366>: Reading chip ID through GSL
+09-13 23:48:20.702 24443 24466 I TaskService: Registered task with name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-13 23:48:20.704 24443 24466 W LocationTaskConsumer: Foreground location task cannot be started while the app is in the background!
+09-13 23:48:20.727 24443 24443 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-13 23:48:20.744 24443 24443 I TaskService: Handling intent with action 'android.intent.action.BOOT_COMPLETED'.
+09-13 23:48:20.773 24443 24443 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-13 23:48:20.776 24443 24443 D InsetsController: hide(ime(), fromIme=false)
+09-13 23:48:20.777 24443 24443 I ImeTracker: de.findus.app:d7faadf4: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-13 23:48:20.792 24443 24466 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libttsespeak.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes4.dex): ok
+09-13 23:48:20.792 24443 24466 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libfindus_espeak.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes4.dex): ok
+09-13 23:48:20.793 24443 24466 I ExpoModulesCore: ✅ AppContext was initialized
+09-13 23:48:20.804 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Loading JS Bundle
+09-13 23:48:20.915 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Calling DevSupportManagerBase.onNewReactContextCreated(reactContext)
+09-13 23:48:20.916 24443 24443 W unknown:BridgelessReact: ReactContext.onHostResume()
+09-13 23:48:20.916 24443 24443 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Executing ReactInstanceEventListeners
+09-13 23:48:20.916 24443 24466 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Execute
+09-13 23:48:20.936 24443 24467 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libexpo-modules-core.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:20.937 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNBackgroundLayerManager
+09-13 23:48:20.938 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.uimanager.LayoutShadowNode
+09-13 23:48:20.939 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class expo.modules.kotlin.views.GroupViewManagerWrapper
+09-13 23:48:20.940 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.annotation.MLRNMarkerViewManager
+09-13 23:48:20.940 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNImageSourceManager
+09-13 23:48:20.940 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNCircleLayerManager
+09-13 23:48:20.940 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNVectorSourceManager
+09-13 23:48:20.941 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNFillLayerManager
+09-13 23:48:20.941 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewManager
+09-13 23:48:20.941 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewShadowNode
+09-13 23:48:20.942 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.location.MLRNNativeUserLocationManager
+09-13 23:48:20.942 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNHeatmapLayerManager
+09-13 23:48:20.942 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.light.MLRNLightManager
+09-13 23:48:20.942 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.images.MLRNImagesManager
+09-13 23:48:20.942 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.annotation.MLRNCalloutManager
+09-13 23:48:20.942 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNSymbolLayerManager
+09-13 23:48:20.943 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaProviderManager
+09-13 23:48:20.943 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNShapeSourceManager
+09-13 23:48:20.943 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.reactnativecommunity.webview.RNCWebViewManager
+09-13 23:48:20.944 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNRasterSourceManager
+09-13 23:48:20.944 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.camera.MLRNCameraManager
+09-13 23:48:20.944 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.mapview.MLRNMapViewManager
+09-13 23:48:20.945 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.mapview.MLRNMapViewManager$MapShadowNode
+09-13 23:48:20.945 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNFillExtrusionLayerManager
+09-13 23:48:20.945 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNLineLayerManager
+09-13 23:48:20.945 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.mapview.MLRNAndroidTextureMapViewManager
+09-13 23:48:20.945 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNRasterLayerManager
+09-13 23:48:20.945 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.annotation.MLRNPointAnnotationManager
+09-13 23:48:20.957 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.safeareaview.ReactSafeAreaViewManager
+09-13 23:48:20.957 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.safeareaview.ReactSafeAreaViewShadowNode
+09-13 23:48:20.957 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.modal.ReactModalHostManager
+09-13 23:48:20.958 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageViewManager
+09-13 23:48:20.958 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageShadowNode
+09-13 23:48:20.959 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ReactProgressBarViewManager
+09-13 23:48:20.959 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ProgressBarShadowNode
+09-13 23:48:20.959 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollViewManager
+09-13 23:48:20.960 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.image.ReactImageManager
+09-13 23:48:20.961 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextViewManager
+09-13 23:48:20.961 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextShadowNode
+09-13 23:48:20.962 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollContainerViewManager
+09-13 23:48:20.962 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.unimplementedview.ReactUnimplementedViewManager
+09-13 23:48:20.963 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactScrollViewManager
+09-13 23:48:20.964 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.view.ReactViewManager
+09-13 23:48:20.965 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.drawer.ReactDrawerLayoutManager
+09-13 23:48:20.966 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager
+09-13 23:48:20.966 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager$ReactSwitchShadowNode
+09-13 23:48:20.966 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactVirtualTextViewManager
+09-13 23:48:20.966 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactVirtualTextShadowNode
+09-13 23:48:20.967 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.swiperefresh.SwipeRefreshLayoutManager
+09-13 23:48:20.968 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactRawTextManager
+09-13 23:48:20.968 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactRawTextShadowNode
+09-13 23:48:20.968 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputManager
+09-13 23:48:20.968 24443 24467 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputShadowNode
+09-13 23:48:20.970 24443 24467 I ReactNativeJS: Bridgeless mode is enabled
+09-13 23:48:20.971 24443 24467 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+09-13 23:48:20.972 24443 24467 I ExpoModulesCore: ✅ JSI interop was installed
+09-13 23:48:20.974 24443 24467 E AVManager: Cannot install JSI bindings for AV module because JS context is not available
+09-13 23:48:20.974 24443 24467 W ExpoModulesCore: ⚠️ JSI interop was already installed
+09-13 23:48:20.979 24443 24467 I ExpoModulesCore: ✅ Constants were exported
+09-13 23:48:21.057 24443 24467 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libworklets.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:21.058 24443 24467 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libreanimated.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:21.058 24443 24467 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+09-13 23:48:21.106 24443 24443 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libmaplibre.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes5.dex): ok
+09-13 23:48:21.126 24443 24467 I ReactNativeJS: Running "main"
+09-13 23:48:21.135 24443 24508 I de.findus.app: AssetManager2(0xb400007ac5633018) locale list changing from [] to [de-DE]
+09-13 23:48:21.136 24443 24508 I WebViewFactory: Loading com.google.android.webview version 151.0.7922.199 (code 792219903)
+09-13 23:48:21.136 24443 24467 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+09-13 23:48:21.136 24443 24508 I de.findus.app: AssetManager2(0xb400007ac562e1f8) locale list changing from [] to [de-DE]
+09-13 23:48:21.137 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:48:21.137 24443 24508 I de.findus.app: AssetManager2(0xb400007ac5633c98) locale list changing from [] to [de-DE]
+09-13 23:48:21.138 24443 24508 I de.findus.app: AssetManager2(0xb400007ac5633978) locale list changing from [] to [de-DE]
+09-13 23:48:21.139 24443 24508 I de.findus.app: AssetManager2(0xb400007ac5633658) locale list changing from [] to [de-DE]
+09-13 23:48:21.139 24443 24508 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=56a6912f mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={420dpi always-compat} mLoaders=[]}
+09-13 23:48:21.139 24443 24508 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+09-13 23:48:21.139 24443 24508 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+09-13 23:48:21.142 24443 24508 D nativeloader: Configuring clns-10 for other apk /data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/lib/arm64:/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+09-13 23:48:21.154 24443 24508 I cr_WVCFactoryProvider: version=151.0.7922.199 (792219903) minSdkVersion=29 multiprocess=true packageId=2 splits=<none>
+09-13 23:48:21.157 24443 24508 D nativeloader: Load /data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk!/lib/arm64-v8a/libwebviewchromium.so using class loader ns clns-10 (caller=/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk): ok
+09-13 23:48:21.158 24443 24508 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns clns-10 (caller=/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk): ok
+09-13 23:48:21.171 24443 24467 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libexpo-sqlite.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes4.dex): ok
+09-13 23:48:21.171 24443 24508 I cr_LibraryLoader: Successfully loaded native library
+09-13 23:48:21.172 24443 24508 I cr_CachingUmaRecorder: Flushed 37 samples from 19 histograms, 0 samples were dropped.
+09-13 23:48:21.286 24443 24467 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-13 23:48:21.311 24443 24554 D nativeloader: Load /data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!/lib/arm64-v8a/libimagepipeline.so using class loader ns clns-9 (caller=/data/app/~~U7BouAHge7HVsyx6TlWnug==/de.findus.app-RFKI3cITenrMpuYwudHuWg==/base.apk!classes3.dex): ok
+09-13 23:48:21.332 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:48:21.336 24443 24555 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.607 24443 24467 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-13 23:48:21.627 24443 24467 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+09-13 23:48:21.643 24443 24443 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.741 24443 24467 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-13 23:48:21.744 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:48:21.786 24443 24443 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.796 24443 24443 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.799 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.801 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.806 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.809 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.811 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.813 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.815 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.817 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.819 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.821 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.823 24443 24573 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.825 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.827 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.829 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.831 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.834 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.836 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.840 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.842 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.845 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.847 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.849 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.851 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.853 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.857 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.859 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.861 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.861 24443 24443 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-13 23:48:21.862 24443 24443 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-13 23:48:21.862 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.864 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.867 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.872 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.875 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.877 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.879 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.883 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.885 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.888 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.890 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.892 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.894 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.896 24443 24443 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-13 23:48:21.896 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.898 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.900 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.902 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.904 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.907 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.910 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.912 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.914 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.916 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.918 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.920 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.922 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.924 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.926 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.929 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:21.929 24443 24511 W HWUI    : Image decoding logging dropped!
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.637 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.638 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.639 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.640 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.640 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:22.640 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:24.297 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:24.299 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.317 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.317 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.318 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.318 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.318 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.318 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:25.494 24443 24443 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-13 23:48:25.495 24443 24443 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-13 23:48:25.532 24443 24443 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-13 23:48:25.825 24443 24475 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId '002af8d6-b3e7-471a-80a2-c25583a093f6'.
+09-13 23:48:25.889 24443 24647 D ProfileInstaller: Installing profile for de.findus.app
+09-13 23:48:27.699 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:27.699 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:27.699 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:27.699 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:35.195 24443 24475 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId '77d1c1d4-f1a4-4cc6-bd70-73b9dee9ad08'.
+09-13 23:48:35.264 24443 24467 I ReactNativeJS: '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+09-13 23:48:35.264 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:48:35.298 24443 24467 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+09-13 23:48:35.298 24443 24467 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+09-13 23:48:36.882 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.883 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:36.884 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:44.229 24443 24467 W HWUI    : Image decoding logging dropped!
+09-13 23:48:44.229 24443 24467 W HWUI    : Image decoding logging dropped!
+09-13 23:48:44.248 24443 24467 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-13 23:48:44.249 24443 24467 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-13 23:48:44.249 24443 24467 I ReactNativeJS:   'com.google.android.tts',
+09-13 23:48:44.249 24443 24467 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-13 23:48:44.249 24443 24467 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-13 23:48:44.252 24443 24475 I de.findus.app: AssetManager2(0xb400007ac564d918) locale list changing from [] to [de-DE]
+09-13 23:48:44.253 24443 24475 I TextToSpeech: Sucessfully bound to com.google.android.tts
+09-13 23:48:44.253 24443 24475 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:48:44.263 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:48:44.264 24443 24475 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:48:44.273 24443 24443 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:48:44.273 24443 24443 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:48:44.282 24443 24443 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:48:44.358 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:48:44.425 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:44.425 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:44.425 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:44.427 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:44.554 24443 24467 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:48:44.555 24443 24467 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:48:44.555 24443 24467 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-13 23:48:44.574 24443 24443 D ExpoSpeechService: Start recognition.
+09-13 23:48:44.574 24443 24443 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-13 23:48:44.575 24443 24443 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-13 23:48:44.575 24443 24443 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-13 23:48:44.575 24443 24443 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-13 23:48:44.575 24443 24443 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-13 23:48:44.576 24443 24443 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-13 23:48:44.667 24443 24456 I TextToSpeech: Connected to TTS engine
+09-13 23:48:44.923 24443 24467 I ReactNativeJS: [stt] recognition started
+09-13 23:48:45.047 24443 24449 I de.findus.app: Background concurrent mark compact GC freed 48MB AllocSpace bytes, 10(636KB) LOS objects, 75% free, 12MB/48MB, paused 2.571ms,4.779ms total 109.647ms
+09-13 23:48:46.164 24443 24653 I TextToSpeech: Setting up the connection to TTS engine...
+09-13 23:48:46.164 24443 24475 W TextToSpeech: stop failed: TTS engine connection not fully set up
+09-13 23:48:46.164 24443 24475 W TextToSpeech: stop failed: TTS engine connection not fully set up
+09-13 23:48:46.164 24443 24475 W TextToSpeech: stop failed: TTS engine connection not fully set up
+09-13 23:48:46.263 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:48:46.560 24443 24443 D ExpoSpeechService: onPartialResults(), results: []
+09-13 23:48:46.561 24443 24443 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-13 23:48:46.562 24443 24467 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-1.9', 'partial=false', 'svc=com.google.android.tts'
+09-13 23:48:46.563 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:48:48.797 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:48.798 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:51.323 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:58.621 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:58.622 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:58.622 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:58.622 24443 24451 W System  : A resource failed to call close. 
+09-13 23:48:58.622 24443 24451 W System  : A resource failed to call close. 
+09-13 23:49:07.526 24443 24467 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-13 23:49:08.145 24443 24467 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)
+09-13 23:49:09.110 24443 24467 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 0 neu, 0 aktualisiert (4319 Textquellen)
+09-13 23:49:09.401 24443 24467 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-13 23:49:09.402 24443 24467 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-13 23:49:09.402 24443 24467 I ReactNativeJS:   'com.google.android.tts',
+09-13 23:49:09.402 24443 24467 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-13 23:49:09.402 24443 24467 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-13 23:49:09.414 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:49:09.416 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:09.450 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:09.479 24443 24467 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-13 23:49:10.877 24443 24467 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:49:10.877 24443 24467 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:49:10.878 24443 24467 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: Start recognition.
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-13 23:49:10.896 24443 24443 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-13 23:49:10.909 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:49:10.916 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:11.031 24443 24467 I ReactNativeJS: [stt] recognition started
+09-13 23:49:11.035 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:11.042 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:11.225 24443 24443 D ExpoSpeechService: onPartialResults(), results: []
+09-13 23:49:11.226 24443 24467 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+09-13 23:49:11.231 24443 24443 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-13 23:49:11.232 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:12.057 24443 24467 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-13 23:49:12.058 24443 24467 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-13 23:49:12.058 24443 24467 I ReactNativeJS:   'com.google.android.tts',
+09-13 23:49:12.058 24443 24467 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-13 23:49:12.058 24443 24467 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-13 23:49:12.079 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:49:12.082 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:12.086 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:12.181 24443 24467 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:49:12.182 24443 24467 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:49:12.182 24443 24467 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-13 23:49:12.199 24443 24443 D ExpoSpeechService: Start recognition.
+09-13 23:49:12.200 24443 24443 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-13 23:49:12.200 24443 24443 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-13 23:49:12.200 24443 24443 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-13 23:49:12.200 24443 24443 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-13 23:49:12.200 24443 24443 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-13 23:49:12.200 24443 24443 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-13 23:49:12.269 24443 24467 I ReactNativeJS: [stt] recognition started
+09-13 23:49:12.775 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:12.778 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:12.783 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:14.324 24443 24443 D ExpoSpeechService: onPartialResults(), results: []
+09-13 23:49:14.499 24443 24443 D ExpoSpeechService: onPartialResults(), results: []
+09-13 23:49:14.783 24443 24443 D ExpoSpeechService: onPartialResults(), results: []
+09-13 23:49:14.822 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie, confidence=0.0, segments=[]}]
+09-13 23:49:15.065 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß, confidence=0.0, segments=[]}]
+09-13 23:49:15.405 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-13 23:49:15.472 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-13 23:49:15.758 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-13 23:49:15.773 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-13 23:49:15.838 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-13 23:49:15.972 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-13 23:49:16.060 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist ein, confidence=0.0, segments=[]}]
+09-13 23:49:16.207 24443 24467 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:49:16.327 24443 24451 W System  : A resource failed to call close. 
+09-13 23:49:16.327 24443 24451 W System  : A resource failed to call close. 
+09-13 23:49:16.328 24443 24451 W System  : A resource failed to call close. 
+09-13 23:49:16.328 24443 24451 W System  : A resource failed to call close. 
+09-13 23:49:16.328 24443 24451 W System  : A resource failed to call close. 
+09-13 23:49:16.346 24443 24467 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".'
+09-13 23:49:16.347 24443 24467 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-13 23:49:16.388 24443 24443 D ExpoSpeechService: onEndOfSpeech()
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: ReactHost{0}.handleHostException(message = "Error: Requiring unknown module "undefined"., stack:
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: unknownModuleError@1:77981
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: loadModuleImplementation@1:77790
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: guardedLoadModule@1:77369
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: metroRequire@1:77042
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: looksLikeInstantAnswerLeadQuery@1:2743579
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: shouldHandoffToPitchModule@1:2638224
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: shouldHandoffToPitchModuleSafe@1:2610053
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: detectLiveInventoryKind@1:2610627
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: resolveLiveInventoryUserText@1:2612450
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: decideTopicCut@1:2606333
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: buildCityChatRegelwerk@1:3599015
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: ?anon_0_@1:3445060
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: asyncGeneratorStep@1:587620
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: _next@1:587878
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: anonymous@1:587830
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: anonymous@1:587751
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: _analyzeManagerTurn@1:3444593
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: analyzeManagerTurn@1:3444541
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: startAnalyze@1:3582299
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: anonymous@1:3582966
+09-13 23:49:16.418 24443 24468 W unknown:BridgelessReact: ")
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask()
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: ReactHost{0}.raiseSoftException(getOrCreateDestroyTask()): handleHostException(message = "Error: Requiring unknown module "undefined"., stack:
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: unknownModuleError@1:77981
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: loadModuleImplementation@1:77790
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: guardedLoadModule@1:77369
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: metroRequire@1:77042
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: looksLikeInstantAnswerLeadQuery@1:2743579
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: shouldHandoffToPitchModule@1:2638224
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: shouldHandoffToPitchModuleSafe@1:2610053
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: detectLiveInventoryKind@1:2610627
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: resolveLiveInventoryUserText@1:2612450
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: decideTopicCut@1:2606333
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: buildCityChatRegelwerk@1:3599015
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: ?anon_0_@1:3445060
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: asyncGeneratorStep@1:587620
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: _next@1:587878
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: anonymous@1:587830
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: anonymous@1:587751
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: _analyzeManagerTurn@1:3444593
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: analyzeManagerTurn@1:3444541
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: startAnalyze@1:3582299
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: anonymous@1:3582966
+09-13 23:49:16.418 24443 24466 W unknown:BridgelessReact: ")
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: Unhandled SoftException
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: com.facebook.react.bridge.ReactNoCrashSoftException: raiseSoftException(getOrCreateDestroyTask()): handleHostException(message = "Error: Requiring unknown module "undefined"., stack:
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: unknownModuleError@1:77981
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: loadModuleImplementation@1:77790
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: guardedLoadModule@1:77369
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: metroRequire@1:77042
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: looksLikeInstantAnswerLeadQuery@1:2743579
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: shouldHandoffToPitchModule@1:2638224
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: shouldHandoffToPitchModuleSafe@1:2610053
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: detectLiveInventoryKind@1:2610627
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: resolveLiveInventoryUserText@1:2612450
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: decideTopicCut@1:2606333
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: buildCityChatRegelwerk@1:3599015
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: ?anon_0_@1:3445060
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: asyncGeneratorStep@1:587620
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: _next@1:587878
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: anonymous@1:587830
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: anonymous@1:587751
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: _analyzeManagerTurn@1:3444593
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: analyzeManagerTurn@1:3444541
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: startAnalyze@1:3582299
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: anonymous@1:3582966
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: ")
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.runtime.ReactHostImpl.raiseSoftException(ReactHostImpl.java:942)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.runtime.ReactHostImpl.getOrCreateDestroyTask(ReactHostImpl.java:1575)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.runtime.ReactHostImpl.lambda$destroy$7(ReactHostImpl.java:541)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.runtime.ReactHostImpl.$r8$lambda$uso21_D6dCZdcf-JomVD56kdG4c(ReactHostImpl.java:0)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.runtime.ReactHostImpl$$ExternalSyntheticLambda37.call(D8$$SyntheticClass:0)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.runtime.internal.bolts.Task$2.run(Task.java:240)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at java.lang.Thread.run(Thread.java:1572)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: Caused by: com.facebook.react.common.JavascriptException: Error: Requiring unknown module "undefined"., stack:
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: unknownModuleError@1:77981
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: loadModuleImplementation@1:77790
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: guardedLoadModule@1:77369
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: metroRequire@1:77042
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: looksLikeInstantAnswerLeadQuery@1:2743579
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: shouldHandoffToPitchModule@1:2638224
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: shouldHandoffToPitchModuleSafe@1:2610053
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: detectLiveInventoryKind@1:2610627
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: resolveLiveInventoryUserText@1:2612450
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: decideTopicCut@1:2606333
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: buildCityChatRegelwerk@1:3599015
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: ?anon_0_@1:3445060
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: asyncGeneratorStep@1:587620
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: _next@1:587878
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: anonymous@1:587830
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: anonymous@1:587751
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: _analyzeManagerTurn@1:3444593
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: analyzeManagerTurn@1:3444541
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: startAnalyze@1:3582299
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: anonymous@1:3582966
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.modules.core.ExceptionsManagerModule.reportException(ExceptionsManagerModule.kt:52)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.jni.NativeRunnable.run(Native Method)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at android.os.Handler.handleCallback(Handler.java:995)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandler.java:27)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at android.os.Looper.loopOnce(Looper.java:283)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at android.os.Looper.loop(Looper.java:392)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.bridge.queue.MessageQueueThreadImpl.lambda$startNewBackgroundThread$2(MessageQueueThreadImpl.java:217)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	at com.facebook.react.bridge.queue.MessageQueueThreadImpl$$ExternalSyntheticLambda1.run(D8$$SyntheticClass:0)
+09-13 23:49:16.419 24443 24466 E unknown:ReactHost: 	... 1 more
+09-13 23:49:16.423 24443 24443 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist ein Tennisplatz, confidence=0.9141081, segments=[]}, {transcript=wie groß ist ein Tennis, confidence=0.9141081, segments=[]}, {transcript=wie groß ist ein Tennis Platz, confidence=0.9284234, segments=[]}]
+09-13 23:49:16.424 24443 24443 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Starting React Native destruction
+09-13 23:49:16.424 24443 24443 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Move ReactHost to onHostDestroy()
+09-13 23:49:16.424 24443 24443 W unknown:BridgelessReact: ReactContext.onHostPause()
+09-13 23:49:16.426 24443 24443 W unknown:BridgelessReact: ReactContext.onHostDestroy()
+09-13 23:49:16.435 24443 24443 E unknown:ReactNative: Tried to remove non-existent frame callback
+09-13 23:49:16.457 24443 24640 I TextToSpeech: Disconnected from TTS engine
+09-13 23:49:16.465 24443 24443 D ExpoSpeechService: onResults(), results: []
+09-13 23:49:16.465 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Stopping all React Native surfaces
+09-13 23:49:16.466 24443 24466 E unknown:SurfaceMountingManager: Stopping surface [11]
+09-13 23:49:16.474 24443 24443 E unknown:SurfaceMountingManager: Surface [11] was stopped on SurfaceMountingManager.
+09-13 23:49:16.478 24443 24443 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:49:16.478 24443 24443 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:49:16.486 24443 24443 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Destroying MemoryPressureRouter
+09-13 23:49:16.486 24443 24443 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Resetting ReactContext ref
+09-13 23:49:16.486 24443 24443 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Destroying ReactContext
+09-13 23:49:16.486 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Resetting ReactInstance ptr
+09-13 23:49:16.486 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Destroying ReactInstance
+09-13 23:49:16.487 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:16.489 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.489 24443 24467 I ReactNativeJS: '[voice] submit (main):', 'wie groß ist ein Tennis Platz'
+09-13 23:49:16.494 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.494 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.494 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.494 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:16.495 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.495 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.495 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.496 24443 24467 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.497 24443 24475 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:49:16.500 24443 24475 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:49:16.507 24443 24475 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_js... dropping Runnable.
+09-13 23:49:16.507 24443 24475 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:49:16.510 24443 24475 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:49:16.511 24443 24466 I ExpoModulesCore: ✅ ModuleRegistry was destroyed
+09-13 23:49:16.515 24443 24466 I ExpoModulesCore: ✅ AppContext was destroyed
+09-13 23:49:16.515 24443 24466 I ExpoModulesCore: ✅ KotlinInteropModuleRegistry was destroyed
+09-13 23:49:16.515 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.515 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.515 24443 24466 E unknown:ReactNative: Tried to remove non-existent frame callback
+09-13 23:49:16.515 24443 24466 W ReactNativeJNI: Scheduler::~Scheduler() was called (address: 0xb4000079b56223d0).
+09-13 23:49:16.516 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.516 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.516 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.517 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.517 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.517 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.517 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.517 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.517 24443 24466 W ReactNativeJNI: UIManagerBinding::~UIManagerBinding() was called (address: 0xb4000079b56222a8).
+09-13 23:49:16.518 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.519 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.519 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.519 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.520 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.520 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.520 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.521 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.521 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.522 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.523 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.523 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.523 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.523 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.534 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.535 24443 24466 W unknown:ReactNative: Tried to enqueue runnable on already finished thread: 'v_native... dropping Runnable.
+09-13 23:49:16.554 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Resetting createReactInstance task ref
+09-13 23:49:16.554 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Resetting start task ref
+09-13 23:49:16.554 24443 24466 W unknown:BridgelessReact: ReactHost{0}.getOrCreateDestroyTask(): Resetting destroy task ref

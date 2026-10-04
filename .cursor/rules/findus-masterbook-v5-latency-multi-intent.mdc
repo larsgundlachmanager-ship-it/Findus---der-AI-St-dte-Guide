@@ -8,6 +8,7 @@ alwaysApply: true
 ## Frühes Feedback
 
 - Lange Recherche (Web/Events/Dining): sofort Bridge = **Verstanden + Zusagen/Cover** — das ist das **einzige** Vorgeplänkel. Fakten/Optionen erst Call 2.
+- **Parallel zur Call-1-Speech:** suchen, geocoden, recherchieren, Route bauen, UI vorbereiten — nie erst Bridge zu Ende, dann Worker. Call-2-Speech klebt nur flüssig in dieselbe TTS-Queue/Session.
 - Ack vor Context/Decompose feuern (`researchAck.ts` / Floskel-Engine); Phrasen variieren.
 - Decompose: Heuristik-Agents starten parallel zum LLM-Decompose; fehlende Agenten danach nachziehen.
 - Finale Antwort: **eine** TTS-Session (Fast-Hook + Prefetch). Gesperrt: `findus-tts-sentence-pipeline-lock.mdc` · `npm run test:tts-pipeline`.

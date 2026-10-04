@@ -1,12 +1,11 @@
 /**
- * Live-Aktionen für das Ort-Popup — Google-frei.
+ * Live-Aktionen für das Ort-Popup.
  *
- * Diese Buttons lösen erst beim Tap eine Live-Abfrage aus (kein Vorab-Fetch,
- * keine Google Places): Öffnungszeiten (OSM/Overpass), Speisekarte (OSM-Website
- * → menuDeepLink), Buchen (Stay22-Affiliate), Abfahrten (Transit-Adapter).
+ * Buttons lösen erst beim Tap eine Live-Abfrage aus (kein Vorab-Fetch):
+ * Öffnungszeiten (OSM → Pack-Fakten → Google Places), Speisekarte (Website
+ * → menuDeepLink), Buchen (Stay22), Abfahrten (Transit).
  *
- * Jede Aktion ist fail-closed: findet sie nichts Belegtes, kommt eine ehrliche
- * Rückmeldung statt eines erfundenen Ergebnisses.
+ * Fail-closed: nichts Belegtes → ehrliche Meldung, nichts erfinden.
  */
 
 export type MapPlaceLiveActionId =
@@ -14,7 +13,11 @@ export type MapPlaceLiveActionId =
   | 'menu'
   | 'book'
   | 'ticket'
-  | 'departures';
+  | 'departures'
+  | 'cinema_program'
+  | 'theater_program'
+  | 'museum_program'
+  | 'concert_program';
 
 export type MapPlaceLiveActionDef = {
   id: MapPlaceLiveActionId;
@@ -28,6 +31,8 @@ export type MapPlaceLiveActionContext = {
   lat: number;
   lng: number;
   websiteUrl?: string | null;
+  /** Echter Ticket-/Produkt-Link (kein Partner-Search). */
+  ticketUrl?: string | null;
   /** Optionaler Stadt-Kontext (für Buchen/Abfahrten). */
   city?: string | null;
   /** Optionale Roh-Tags (name/category/tags_json) für die Klassifizierung. */
@@ -54,9 +59,18 @@ const TRANSIT_RE =
   /bahnhof|haltepunkt|haltestelle|\bbus\b|[oö]pnv|oepnv|\bhbf\b|\bs-?bahn\b|u-?bahn|stra[ßs]enbahn|\btram\b|\bstation\b|f[aä]hre|anleger|\b[oö]pnv\b/i;
 const MUSEUM_RE = /museum|ausstellung|galerie|gallery|kunsthalle/i;
 const ACTIVITY_RE =
-  /kletter|boulder|schwimmbad|freibad|hallenbad|therme|minigolf|bowling|kino|theater|\bsport\b|fitness|wasserski|surf|\bkart\b|paintball|freizeitpark|zoo|tierpark/i;
+  /kletter|boulder|schwimmbad|freibad|hallenbad|therme|minigolf|bowling|\bsport\b|fitness|wasserski|surf|\bkart\b|paintball|freizeitpark|zoo|tierpark/i;
+const CINEMA_RE = /\bkino\b|cinema|filmtheater|lichtspiel/i;
+const THEATER_RE =
+  /theater|theatre|schauspielhaus|schauspiel|\boper\b|opernhaus|bühne|buehne/i;
+const CONCERT_RE =
+  /konzert|philharmon|konzerthaus|konzertsaal|konzerthalle|musikhalle|elbphil|elphi|symphony|concert\s*hall|\barena\b/i;
 const SHOP_RE =
-  /shop|laden|gesch[aä]ft|supermarkt|apotheke|drogerie|markt|store|kiosk|buchhandlung|metzger|fleischer/i;
+  /shop|laden|gesch[aä]ft|supermarkt|supermarket|apotheke|drogerie|markt|store|kiosk|buchhandlung|metzger|fleischer|edeka|rewe|aldi|lidl|food\s*plus|mcdonald|burger\s*king/i;
+
+function hasHttpUrl(url: string | null | undefined): boolean {
+  return /^https?:\/\//i.test(String(url || '').trim());
+}
 
 /** Straßen-/District-Tag „bahnhof“ ist kein echter Halt. */
 function isRealTransitStop(blob: string): boolean {
@@ -67,11 +81,14 @@ function isRealTransitStop(blob: string): boolean {
 
 /**
  * Welche Live-Buttons passen zu diesem Ort? (Reihenfolge = Anzeige-Reihenfolge)
+ * Ausstellung/Theater/Konzert nur mit Website; Tickets nur mit echtem Produkt-Link.
  */
 export function deriveMapPlaceLiveActions(ctx: {
   name?: string | null;
   category?: string | null;
   tagsBlob?: string | null;
+  websiteUrl?: string | null;
+  ticketUrl?: string | null;
 }): MapPlaceLiveActionDef[] {
   const blob = `${ctx.name ?? ''} ${ctx.category ?? ''} ${ctx.tagsBlob ?? ''}`
     .toLowerCase()
@@ -82,27 +99,55 @@ export function deriveMapPlaceLiveActions(ctx: {
   const gastro = !transit && GASTRO_RE.test(blob);
   const hotel = HOTEL_RE.test(blob);
   const museum = MUSEUM_RE.test(blob);
+  const cinema = CINEMA_RE.test(blob);
+  const theater = THEATER_RE.test(blob) && !cinema;
+  const concert =
+    CONCERT_RE.test(blob) && !cinema && !theater && !museum;
   const activity = ACTIVITY_RE.test(blob);
   const shop = SHOP_RE.test(blob);
   const park =
-    /\bpark\b|garten|spielplatz|grünanlage|gruenanlage|wald|picknick|hundewiese/i.test(
+    /\bpark\b|garten|spielplatz|grünanlage|gruenanlage|wald|gehege|picknick|hundewiese/i.test(
       blob,
     );
   const toilet = /toilette|\bwc\b|restroom|bathroom/i.test(blob);
+  const hasWebsite = hasHttpUrl(ctx.websiteUrl);
+  const hasTicket = hasHttpUrl(ctx.ticketUrl);
 
   const acts: MapPlaceLiveActionDef[] = [];
   // Öffnungszeiten für Orte mit plausiblen Zeiten (kein reiner Halt).
   if (
     !transit &&
-    (gastro || hotel || museum || activity || shop || park || toilet)
+    (gastro ||
+      hotel ||
+      museum ||
+      cinema ||
+      theater ||
+      concert ||
+      activity ||
+      shop ||
+      park ||
+      toilet)
   ) {
     acts.push({ id: 'hours', label: 'Öffnungszeiten' });
   }
   if (gastro) acts.push({ id: 'menu', label: 'Speisekarte' });
   // Hotel: Affiliate-Buchen (Stay22) — kein externes Maps daneben.
   if (hotel) acts.push({ id: 'book', label: 'Buchen' });
-  // Museum/Attraktion: Ticket über Partner-Link (GYG/Musement).
-  if (museum || activity) acts.push({ id: 'ticket', label: 'Tickets' });
+  if (cinema) acts.push({ id: 'cinema_program', label: 'Kinoprogramm' });
+  // Programm-Buttons nur mit belegter Website — sonst leerer Tap / Fake-Versprechen.
+  if (theater && hasWebsite) {
+    acts.push({ id: 'theater_program', label: 'Theaterprogramm' });
+  }
+  if (museum && hasWebsite) {
+    acts.push({ id: 'museum_program', label: 'Ausstellung' });
+  }
+  if (concert && hasWebsite) {
+    acts.push({ id: 'concert_program', label: 'Konzertprogramm' });
+  }
+  // Tickets nur mit echtem Produkt-Deep-Link — nie hohle GetYourGuide-Suche.
+  if ((museum || activity || concert) && hasTicket) {
+    acts.push({ id: 'ticket', label: 'Tickets' });
+  }
   // ÖPNV bleibt in-app (Abfahrten), kein externes Maps.
   if (transit) acts.push({ id: 'departures', label: 'Abfahrten' });
   return acts;
@@ -130,11 +175,12 @@ function nameSimilar(a: string, b: string): number {
 
 /** Ortstyp → Overpass placeType für die OSM-Suche. */
 function osmPlaceTypeFor(blob: string): string {
+  if (/toilette|\bwc\b|toilets?|restroom|bathroom/i.test(blob)) return 'toilets';
   if (/museum|ausstellung|galerie|kunsthalle/i.test(blob)) return 'museum';
   if (/b[aä]ck|baeck|bakery/i.test(blob)) return 'bakery';
   if (/caf[eé]|kaffee|eiscaf[eé]/i.test(blob)) return 'cafe';
   if (/apotheke/i.test(blob)) return 'pharmacy';
-  if (/supermarkt/i.test(blob)) return 'supermarket';
+  if (/supermarkt|edeka|marktkauf|rewe|aldi|lidl/i.test(blob)) return 'supermarket';
   if (/park|garten/i.test(blob)) return 'park';
   if (GASTRO_RE.test(blob)) return 'restaurant';
   return 'dwell';
@@ -205,17 +251,99 @@ async function nearestOsmMatch(
   }
 }
 
+const GOOGLE_DAY_DE = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'] as const;
+
+/** Google regularOpeningHours.periods → knappe DE-Zeile. */
+export function prettyGoogleHoursPeriods(
+  periods: Array<{
+    open?: { day?: number; hour?: number; minute?: number };
+    close?: { day?: number; hour?: number; minute?: number };
+  }>,
+): string {
+  if (!periods?.length) return '';
+  const parts: string[] = [];
+  for (const p of periods) {
+    const od = p.open?.day;
+    if (od == null || p.open?.hour == null) continue;
+    const day = GOOGLE_DAY_DE[od] ?? `T${od}`;
+    const oh = String(p.open.hour).padStart(2, '0');
+    const om = String(p.open.minute ?? 0).padStart(2, '0');
+    if (p.close?.hour == null) {
+      parts.push(`${day} ab ${oh}:${om}`);
+      continue;
+    }
+    const ch = String(p.close.hour).padStart(2, '0');
+    const cm = String(p.close.minute ?? 0).padStart(2, '0');
+    parts.push(`${day} ${oh}:${om}–${ch}:${cm}`);
+  }
+  return parts.join(' · ');
+}
+
+async function googleHoursFallback(
+  ctx: MapPlaceLiveActionContext,
+): Promise<string | null> {
+  try {
+    const { fetchPlacePitchDetails } = await import(
+      '../navigation/placePitchDetails'
+    );
+    const city = (ctx.city || '').trim();
+    const query = city ? `${ctx.name} ${city}` : ctx.name;
+    const details = await fetchPlacePitchDetails({
+      query,
+      lat: ctx.lat,
+      lng: ctx.lng,
+    });
+    if (!details) return null;
+    const fromPeriods = prettyGoogleHoursPeriods(
+      details.regularOpeningHoursPeriods ?? [],
+    );
+    if (fromPeriods) return fromPeriods;
+    if (details.openNow === true) return 'Laut Google gerade geöffnet';
+    if (details.openNow === false) return 'Laut Google gerade geschlossen';
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+async function packHoursFallback(
+  ctx: MapPlaceLiveActionContext,
+): Promise<string | null> {
+  try {
+    const { lookupPackHoursOrMenu } = await import(
+      '../research/packHoursOffline'
+    );
+    const hit = await lookupPackHoursOrMenu({
+      userText: `Öffnungszeiten ${ctx.name}`,
+      placeNameHint: ctx.name,
+    });
+    if (!hit?.line) return null;
+    // „Name: Öffnungszeiten: …“ → nur den Zeiten-Teil behalten.
+    const m = hit.line.match(/öffnung[^:]*:\s*(.+)$/i);
+    return (m?.[1] || hit.line).trim().slice(0, 220) || null;
+  } catch {
+    return null;
+  }
+}
+
 async function runHours(
   ctx: MapPlaceLiveActionContext,
 ): Promise<MapPlaceLiveActionResult> {
   const match = await nearestOsmMatch(ctx);
-  if (!match?.openingHours) {
+  let raw = (match?.openingHours || '').trim();
+  let pretty = raw ? prettyOpeningHours(raw) : '';
+  if (!pretty) {
+    pretty = (await packHoursFallback(ctx)) || '';
+  }
+  if (!pretty) {
+    pretty = (await googleHoursFallback(ctx)) || '';
+  }
+  if (!pretty) {
     return {
       ok: false,
       message: 'Für diesen Ort sind keine Öffnungszeiten hinterlegt.',
     };
   }
-  const pretty = prettyOpeningHours(match.openingHours);
   return {
     ok: true,
     bullets: [`Öffnungszeiten: ${pretty}`],
@@ -299,6 +427,7 @@ async function runBook(
         checkout: res.checkout,
         adults: 2,
         expediaPropertyId: pick.expediaPropertyId ?? null,
+        priceEur: pick.priceTotal,
       });
       const price =
         pick.priceTotal != null
@@ -346,6 +475,81 @@ function clock(d: Date): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
+const ONES_DE = [
+  'null',
+  'eins',
+  'zwei',
+  'drei',
+  'vier',
+  'fünf',
+  'sechs',
+  'sieben',
+  'acht',
+  'neun',
+  'zehn',
+  'elf',
+  'zwölf',
+  'dreizehn',
+  'vierzehn',
+  'fünfzehn',
+  'sechzehn',
+  'siebzehn',
+  'achtzehn',
+  'neunzehn',
+];
+const TENS_DE = [
+  '',
+  '',
+  'zwanzig',
+  'dreißig',
+  'vierzig',
+  'fünfzig',
+  'sechzig',
+  'siebzig',
+  'achtzig',
+  'neunzig',
+];
+
+/** Nur Liniennummern 0–999 — kein RN/G2P-Import. */
+function lineNumberWords(n: number): string {
+  if (!Number.isFinite(n) || n < 0) return String(n);
+  const v = Math.floor(n);
+  if (v < 20) return ONES_DE[v] ?? String(v);
+  if (v < 100) {
+    const ones = v % 10;
+    const tens = Math.floor(v / 10);
+    if (ones === 0) return TENS_DE[tens]!;
+    const oneWord = ones === 1 ? 'ein' : ONES_DE[ones]!;
+    return `${oneWord}und${TENS_DE[tens]}`;
+  }
+  if (v < 1000) {
+    const h = Math.floor(v / 100);
+    const rest = v % 100;
+    const head = h === 1 ? 'einhundert' : `${ONES_DE[h]}hundert`;
+    return rest === 0 ? head : `${head}${lineNumberWords(rest)}`;
+  }
+  return String(v);
+}
+
+/**
+ * Linie für TTS: „RB61“ / „RB 61“ → „RB einundsechzig“ (Zahl als Wort, Prefix kurz).
+ */
+export function lineLabelForSpeech(line: string): string {
+  const raw = (line || '').trim();
+  if (!raw) return 'Linie';
+  const m = raw.match(/^([A-Za-zÄÖÜäöü]{1,4})\s*[-./]?\s*(\d{1,4})([a-zA-Z])?$/);
+  if (m) {
+    const prefix = m[1]!.toUpperCase();
+    const n = parseInt(m[2]!, 10);
+    const suffix = (m[3] || '').toLowerCase();
+    if (Number.isFinite(n)) {
+      const num = lineNumberWords(n) + (suffix ? ` ${suffix}` : '');
+      return `${prefix} ${num}`;
+    }
+  }
+  return raw.replace(/\d+/g, (d) => lineNumberWords(parseInt(d, 10)));
+}
+
 /**
  * `when` = Live-/Prognosezeit (schon inkl. Verspätung).
  * Bei Verspätung: Plan durchgestrichen + neue Uhrzeit — kein verwirrendes „+20 Min“.
@@ -378,26 +582,57 @@ export function departureLine(d: {
   return `${d.line}${dir} ${live}`.trim();
 }
 
-/** Kurze Speech nur für die nächste Abfahrt. */
+
+/** Stichpunkte: eine Zeile pro Abfahrt — Linie → Ziel  🕐 Uhrzeit. */
+export function departureBulletsCompact(
+  rows: Array<{
+    line: string;
+    direction: string;
+    when: Date;
+    plannedWhen?: Date | null;
+    delaySec: number | null;
+    cancelled: boolean;
+  }>,
+): string[] {
+  const out: string[] = [];
+  for (const d of rows) {
+    const dest = (d.direction || '').trim();
+    const head = dest ? `${d.line} → ${dest}` : d.line;
+    if (d.cancelled) {
+      out.push(`${head}  fällt aus`);
+      continue;
+    }
+    const liveT = clock(d.when);
+    const planned = d.plannedWhen instanceof Date ? d.plannedWhen : null;
+    const delayed =
+      (d.delaySec != null && d.delaySec >= 60) ||
+      (planned != null &&
+        Math.abs(d.when.getTime() - planned.getTime()) >= 60_000);
+    if (delayed && planned) {
+      const planStruck = [...clock(planned)]
+        .map((ch) => `${ch}\u0336`)
+        .join('');
+      out.push(`${head}  🕐 ${planStruck} → ${liveT}`);
+    } else {
+      out.push(`${head}  🕐 ${liveT}`);
+    }
+  }
+  return out.slice(0, 3);
+}
+
+/** Speech nur für die nächste Abfahrt — eine flüssige Ansage. */
 export function departureSpeakFirst(d: {
   line: string;
   direction: string;
   when: Date;
 }): string {
-  const live = `${d.when.getHours()}:${String(d.when.getMinutes()).padStart(2, '0')}`;
+  const live = clock(d.when);
   const dest = (d.direction || '').trim();
-  const blob = `${d.line} ${dest}`;
-  const vehicle = /\bbus\b/i.test(d.line)
-    ? 'Bus'
-    : /\b(tram|stra[ßs]enbahn)\b/i.test(blob)
-      ? 'Bahn'
-      : /\b(u-?bahn|s-?bahn|rb|re|ic|ice|ec|ire)\b/i.test(d.line)
-        ? 'Zug'
-        : 'Verbindung';
+  const lineSpeech = lineLabelForSpeech(d.line);
   if (dest) {
-    return `Der nächste ${vehicle} fährt um ${live} Uhr nach ${dest}.`;
+    return `Die nächste Abfahrt ist um ${live} Uhr mit der ${lineSpeech} Richtung ${dest}.`;
   }
-  return `Die nächste ${vehicle} ${d.line} fährt um ${live} Uhr.`;
+  return `Die nächste Abfahrt ist um ${live} Uhr mit der ${lineSpeech}.`;
 }
 
 async function runDepartures(
@@ -432,7 +667,7 @@ async function runDepartures(
         message: 'Gerade keine Live-Abfahrten für diesen Halt gefunden.',
       };
     }
-    const bullets = rows.map(departureLine);
+    const bullets = departureBulletsCompact(rows);
     const first = rows[0]!;
     return {
       ok: true,
@@ -451,6 +686,15 @@ async function runDepartures(
 async function runTicket(
   ctx: MapPlaceLiveActionContext,
 ): Promise<MapPlaceLiveActionResult> {
+  const { isHollowPartnerUrl } = await import('../affiliate/hollowPartnerUrl');
+  const direct = String(ctx.ticketUrl || '').trim();
+  if (hasHttpUrl(direct) && !isHollowPartnerUrl(direct)) {
+    return {
+      ok: true,
+      url: direct,
+      speak: 'Ich öffne die Tickets.',
+    };
+  }
   const city = (ctx.city || '').trim();
   const q = [ctx.name, city].filter(Boolean).join(' ').trim() || ctx.name;
   try {
@@ -463,35 +707,133 @@ async function runTicket(
       city,
     });
     const url = String(act?.payload?.url || '').trim();
-    if (/^https?:\/\//i.test(url)) {
+    // Nur echte Produkt-Links — keine GetYourGuide-/Musement-Suche ohne Treffer.
+    if (hasHttpUrl(url) && !isHollowPartnerUrl(url)) {
       return {
         ok: true,
         url,
-        speak: 'Ich öffne die Ticket-Suche.',
+        speak: 'Ich öffne die Tickets.',
       };
     }
   } catch {
     /* soft */
   }
+  return {
+    ok: false,
+    message: 'Für diesen Ort sind keine Tickets hinterlegt.',
+  };
+}
+
+async function runCinemaProgram(
+  ctx: MapPlaceLiveActionContext,
+): Promise<MapPlaceLiveActionResult> {
   try {
-    const { buildGetYourGuideSearchUrl } = await import(
-      '../affiliate/affiliateService'
+    const { researchCinemaAndShowtimes } = await import(
+      '../research/cinemaShowtimeResearch'
     );
-    const url = buildGetYourGuideSearchUrl(q);
+    const research = await researchCinemaAndShowtimes({
+      userText: `Kinoprogramm und Spielzeiten heute im ${ctx.name}`,
+      lat: ctx.lat,
+      lng: ctx.lng,
+      venuesOnly: false,
+      phase: 'showtimes',
+      showtimeBudgetMs: 10_000,
+    });
+    const needle = ctx.name
+      .toLowerCase()
+      .replace(/[^a-zäöüß0-9]/giu, '')
+      .slice(0, 10);
+    const matchVenue = (label: string) => {
+      const a = label
+        .toLowerCase()
+        .replace(/[^a-zäöüß0-9]/giu, '')
+        .slice(0, 10);
+      if (!a || !needle) return false;
+      return a.includes(needle.slice(0, 6)) || needle.includes(a.slice(0, 6));
+    };
+    const shows = research.showtimes.filter((s) => matchVenue(s.cinemaName));
+    const todayish = shows.filter((s) => /heute/i.test(s.whenLabel));
+    const use = (todayish.length ? todayish : shows).slice(0, 4);
+    if (!use.length) {
+      return {
+        ok: false,
+        message: 'Gerade kein Kinoprogramm für diesen Ort gefunden.',
+      };
+    }
+    const bullets = use.map((s) => {
+      const price =
+        s.priceEur != null && Number.isFinite(s.priceEur)
+          ? ` · ab ${Math.round(s.priceEur)} €`
+          : '';
+      return `${s.filmTitle}: ${s.whenLabel}${price}`.slice(0, 72);
+    });
     return {
       ok: true,
-      url,
-      speak: 'Ich öffne die Ticket-Suche.',
+      bullets,
+      speak: `Hier das aktuelle Programm in ${ctx.name}.`,
     };
   } catch {
     return {
       ok: false,
-      message: 'Ticket-Link gerade nicht verfügbar.',
+      message: 'Kinoprogramm gerade nicht abrufbar.',
     };
   }
 }
 
-/** Führt eine Live-Aktion aus (Google-frei). */
+/** Website/Programm öffnen — fail-closed ohne erfundene Shows. */
+async function runWebsiteProgram(
+  ctx: MapPlaceLiveActionContext,
+  kind: 'theater' | 'museum' | 'concert',
+): Promise<MapPlaceLiveActionResult> {
+  const site = (ctx.websiteUrl || '').trim();
+  const labels = {
+    theater: {
+      bullet: 'Theaterprogramm auf der Website',
+      speak: 'Ich öffne das Theaterprogramm.',
+      miss: 'Kein Programm-Link hinterlegt — Website des Theaters später prüfen.',
+    },
+    museum: {
+      bullet: 'Aktuelle Ausstellung auf der Website',
+      speak: 'Ich öffne die Ausstellungsinfos.',
+      miss: 'Kein Programm-Link hinterlegt — Museum-Website später prüfen.',
+    },
+    concert: {
+      bullet: 'Konzertprogramm auf der Website',
+      speak: 'Ich öffne das Konzertprogramm.',
+      miss: 'Kein Programm-Link hinterlegt — Venue-Website später prüfen.',
+    },
+  } as const;
+  const L = labels[kind];
+  if (/^https?:\/\//i.test(site)) {
+    return {
+      ok: true,
+      url: site,
+      bullets: [L.bullet],
+      speak: L.speak,
+    };
+  }
+  return { ok: false, message: L.miss };
+}
+
+async function runTheaterProgram(
+  ctx: MapPlaceLiveActionContext,
+): Promise<MapPlaceLiveActionResult> {
+  return runWebsiteProgram(ctx, 'theater');
+}
+
+async function runMuseumProgram(
+  ctx: MapPlaceLiveActionContext,
+): Promise<MapPlaceLiveActionResult> {
+  return runWebsiteProgram(ctx, 'museum');
+}
+
+async function runConcertProgram(
+  ctx: MapPlaceLiveActionContext,
+): Promise<MapPlaceLiveActionResult> {
+  return runWebsiteProgram(ctx, 'concert');
+}
+
+/** Führt eine Live-Aktion aus (Google-frei wo möglich). */
 export async function runMapPlaceLiveAction(
   action: MapPlaceLiveActionId,
   ctx: MapPlaceLiveActionContext,
@@ -510,7 +852,141 @@ export async function runMapPlaceLiveAction(
       return runTicket(ctx);
     case 'departures':
       return runDepartures(ctx);
+    case 'cinema_program':
+      return runCinemaProgram(ctx);
+    case 'theater_program':
+      return runTheaterProgram(ctx);
+    case 'museum_program':
+      return runMuseumProgram(ctx);
+    case 'concert_program':
+      return runConcertProgram(ctx);
     default:
       return { ok: false, message: 'Aktion nicht verfügbar.' };
   }
 }
+
+/** Ergebnis der parallelen Live-Suche beim Popup-Open. */
+export type MapPlaceLiveEvidence = {
+  hoursOk: boolean;
+  hoursBullet: string | null;
+  /** Direkte Speisekarte — nicht nur Website-Fallback. */
+  menuUrl: string | null;
+  statusLine: string;
+};
+
+/**
+ * Hours/Web/Menu parallel prüfen — Buttons erst bei Treffer enablen.
+ * Menu: nur echter Speisekarten-Link (kein Website-Fail-open).
+ */
+export async function prefetchMapPlaceLiveEvidence(
+  ctx: MapPlaceLiveActionContext,
+  candidates: readonly MapPlaceLiveActionDef[],
+): Promise<MapPlaceLiveEvidence> {
+  const wantsHours = candidates.some((a) => a.id === 'hours');
+  const wantsMenu = candidates.some((a) => a.id === 'menu');
+  if (!wantsHours && !wantsMenu) {
+    return {
+      hoursOk: false,
+      hoursBullet: null,
+      menuUrl: null,
+      statusLine: '',
+    };
+  }
+
+  const hoursP = wantsHours
+    ? runHours(ctx).catch(
+        (): MapPlaceLiveActionResult => ({
+          ok: false,
+          message: 'Öffnungszeiten nicht gefunden.',
+        }),
+      )
+    : Promise.resolve(null);
+  const menuP = wantsMenu
+    ? (async (): Promise<string | null> => {
+        let website = (ctx.websiteUrl || '').trim();
+        if (!hasHttpUrl(website)) {
+          const match = await nearestOsmMatch(ctx);
+          website = (match?.website || '').trim();
+        }
+        if (!hasHttpUrl(website)) return null;
+        try {
+          const { findDeepestMenuLink } = await import(
+            '../actionBoard/menuDeepLink'
+          );
+          const ctrl = new AbortController();
+          const timer = setTimeout(() => ctrl.abort(), 10_000);
+          try {
+            const hit = await findDeepestMenuLink({
+              websiteUrl: website,
+              kind: 'food',
+              signal: ctrl.signal,
+            });
+            return hit?.url && hasHttpUrl(hit.url) ? hit.url : null;
+          } finally {
+            clearTimeout(timer);
+          }
+        } catch {
+          return null;
+        }
+      })()
+    : Promise.resolve(null);
+
+  const [hoursRes, menuUrl] = await Promise.all([hoursP, menuP]);
+  const hoursOk = !!(hoursRes && hoursRes.ok && hoursRes.bullets?.[0]);
+  const hoursBullet = hoursOk ? hoursRes!.bullets![0]! : null;
+
+  const parts: string[] = [];
+  if (wantsHours) {
+    parts.push(
+      hoursOk ? 'Öffnungszeiten gefunden' : 'Keine Öffnungszeiten gefunden',
+    );
+  }
+  if (wantsMenu) {
+    parts.push(
+      menuUrl ? 'Speisekarte gefunden' : 'Keine Speisekarte gefunden',
+    );
+  }
+
+  return {
+    hoursOk,
+    hoursBullet,
+    menuUrl,
+    statusLine: parts.join(' · '),
+  };
+}
+
+/**
+ * Ghost-frei: Hours/Menu nur mit Evidenz; Programm/Ticket nur mit URL.
+ * `probing`: Hours/Menu ausblenden während der parallelen Suche.
+ */
+export function filterLiveActionsWithEvidence(
+  actions: readonly MapPlaceLiveActionDef[],
+  opts: {
+    probing?: boolean;
+    evidence?: MapPlaceLiveEvidence | null;
+    websiteUrl?: string | null;
+    ticketUrl?: string | null;
+  },
+): MapPlaceLiveActionDef[] {
+  const ev = opts.evidence;
+  return actions.filter((a) => {
+    if (a.id === 'hours') {
+      if (opts.probing) return false;
+      return !!ev?.hoursOk;
+    }
+    if (a.id === 'menu') {
+      if (opts.probing) return false;
+      return hasHttpUrl(ev?.menuUrl);
+    }
+    if (
+      a.id === 'museum_program' ||
+      a.id === 'theater_program' ||
+      a.id === 'concert_program'
+    ) {
+      return hasHttpUrl(opts.websiteUrl);
+    }
+    if (a.id === 'ticket') return hasHttpUrl(opts.ticketUrl);
+    return true;
+  });
+}
+

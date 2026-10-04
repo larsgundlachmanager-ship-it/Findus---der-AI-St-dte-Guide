@@ -2,6 +2,10 @@
 
 **Ship erst nach:** Implementierung aller Sprints A–D **und** grüner Gate-Liste.
 
+## Agent-Harden (Masterplan)
+
+Vor Phasen-Merges zusätzlich: [agent-harden-contract.md](./agent-harden-contract.md) — bestehende Engines nur erweitern; Live-Quality + Lübeck + Call1-Smokes grün halten.
+
 ## Automatisch (CI / lokal)
 
 ```bash

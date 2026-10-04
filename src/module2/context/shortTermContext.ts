@@ -22,14 +22,49 @@ let lastCityPackOffer: {
   atMs: number;
 } | null = null;
 
-export type LiveInventoryKind = 'hotel' | 'pitch_choice' | 'events';
+export type LiveInventoryKind =
+  | 'hotel'
+  | 'pitch_choice'
+  | 'events'
+  | 'activity_rental';
+
+export type HotelPitchOutcome = 'empty' | 'named' | 'generic';
+
+export type ActivityInventoryVenue = {
+  name: string;
+  lat: number;
+  lng: number;
+  websiteUrl?: string | null;
+  priceLabel?: string | null;
+};
 
 /** Letzter Auftrag, der Live-Inventar + Pitch braucht — für „ja“ / „wie teuer“. */
 let lastLiveInventory: {
   kind: LiveInventoryKind;
   query: string;
   atMs: number;
+  /** Hotel: leer / generische Karte / benannte Optionen */
+  hotelOutcome?: HotelPitchOutcome;
+  hotelNames?: string[];
+  /** Breitere Retry-Suche schon versucht */
+  hotelRetried?: boolean;
+  /** Phase 6: Activity/SUP — Anchor, Musts, Rejects, Venues */
+  activityAnchor?: string | null;
+  activityMust?: string[];
+  activityRejects?: string[];
+  activityVenues?: ActivityInventoryVenue[];
 } | null = null;
+
+/** Gewässer-Anker (Alster…) für SUP-Follow-up + Prefetch. */
+let lastWaterAnchor: { name: string; atMs: number } | null = null;
+
+/**
+ * Root-Ziel der aktuellen Session (Ausgangswunsch) — hält über Follow-ups,
+ * bis Topic-Cut / session=new. Autonomy Reboot.
+ */
+let sessionRootGoal: string | null = null;
+/** Kurzer Faden: was schon geklärt/gewählt (kompakt). */
+let sessionThreadSpine: string | null = null;
 
 const LIVE_INVENTORY_TTL_MS = 45 * 60_000;
 
@@ -76,6 +111,48 @@ export function clearShortTermOnCitySwitch(): void {
   lastCompanionsNote = null;
   lastCityPackOffer = null;
   lastLiveInventory = null;
+  lastWaterAnchor = null;
+  sessionRootGoal = null;
+  sessionThreadSpine = null;
+  try {
+    const { clearFollowThroughGoal } = require('../router/missionFollowThrough') as {
+      clearFollowThroughGoal: () => void;
+    };
+    clearFollowThroughGoal();
+  } catch {
+    /* soft */
+  }
+}
+
+export function clearSessionRootGoal(): void {
+  sessionRootGoal = null;
+  sessionThreadSpine = null;
+}
+
+/** Setzt/aktualisiert Root-Ziel (nur bei neuem Thema oder wenn leer). */
+export function noteSessionRootGoal(goal: string | null | undefined): void {
+  const g = (goal || '').replace(/\s+/g, ' ').trim().slice(0, 220);
+  if (!g) return;
+  sessionRootGoal = g;
+}
+
+export function getSessionRootGoal(): string | null {
+  return sessionRootGoal;
+}
+
+export function appendSessionThreadSpine(bit: string | null | undefined): void {
+  const b = (bit || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+  if (!b) return;
+  if (!sessionThreadSpine) {
+    sessionThreadSpine = b;
+    return;
+  }
+  if (sessionThreadSpine.includes(b.slice(0, 40))) return;
+  sessionThreadSpine = `${sessionThreadSpine} · ${b}`.slice(0, 400);
+}
+
+export function getSessionThreadSpine(): string | null {
+  return sessionThreadSpine;
 }
 
 export function noteUserUtterance(text: string): void {
@@ -121,6 +198,37 @@ export function noteUserUtterance(text: string): void {
     !wantsLocalCityStay(text)
   ) {
     lastTopic = 'beach_activity';
+  }
+  // Benanntes Gewässer → Sticky für SUP/Aktivitäts-Follow-ups + Prefetch
+  if (
+    /\b(see|meer|fluss|alster|außenalster|aussenalster|innenalster|elb[e]?|weiher|bucht|lagune)\b/iu.test(
+      text,
+    ) &&
+    !/\b(restaurant|essen|steak|café|cafe|bäck|baeck)\b/iu.test(text)
+  ) {
+    lastTopic = 'named_water';
+    try {
+      const {
+        extractWaterAnchorName,
+        prefetchActivitySport,
+      } = require('../../services/research/activityPrefetch') as {
+        extractWaterAnchorName: (s: string) => string | null;
+        prefetchActivitySport: (o: {
+          namedPlace: string;
+          cityHint?: string | null;
+        }) => Promise<unknown>;
+      };
+      const water = extractWaterAnchorName(text);
+      if (water) {
+        noteWaterAnchor(water);
+        void prefetchActivitySport({
+          namedPlace: water,
+          cityHint: lastMentionedCity || cityFromLandmarkUtterance(text),
+        }).catch(() => {});
+      }
+    } catch {
+      /* soft */
+    }
   }
 
   if (
@@ -294,6 +402,8 @@ export function getShortTerm(): {
   lastPlaceName: string | null;
   lastMenuUrl: string | null;
   lastCompanionsNote: string | null;
+  rootGoal: string | null;
+  threadSpine: string | null;
   cityPackOffer: {
     cityId: string;
     cityName: string;
@@ -314,6 +424,8 @@ export function getShortTerm(): {
     lastPlaceName,
     lastMenuUrl,
     lastCompanionsNote,
+    rootGoal: sessionRootGoal,
+    threadSpine: sessionThreadSpine,
     cityPackOffer: offer,
   };
 }
@@ -343,27 +455,130 @@ export function setLastTopic(topic: string | null): void {
   lastTopic = topic;
 }
 
+export function noteWaterAnchor(name: string | null | undefined): void {
+  const n = String(name || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 48);
+  if (n.length < 2) return;
+  lastWaterAnchor = { name: n, atMs: Date.now() };
+}
+
+export function getLastWaterAnchor(): string | null {
+  if (!lastWaterAnchor) return null;
+  if (Date.now() - lastWaterAnchor.atMs > LIVE_INVENTORY_TTL_MS) {
+    lastWaterAnchor = null;
+    return null;
+  }
+  return lastWaterAnchor.name;
+}
+
 export function noteLastLiveInventory(opts: {
   kind: LiveInventoryKind;
   query: string;
+  hotelOutcome?: HotelPitchOutcome;
+  hotelNames?: string[];
+  hotelRetried?: boolean;
 }): void {
   const query = (opts.query || '').replace(/\s+/g, ' ').trim();
   if (!query) return;
+  const prev =
+    lastLiveInventory?.kind === opts.kind &&
+    lastLiveInventory.query === query.slice(0, 400)
+      ? lastLiveInventory
+      : null;
   lastLiveInventory = {
     kind: opts.kind,
     query: query.slice(0, 400),
     atMs: Date.now(),
+    hotelOutcome:
+      opts.kind === 'hotel'
+        ? opts.hotelOutcome ?? prev?.hotelOutcome
+        : undefined,
+    hotelNames:
+      opts.kind === 'hotel'
+        ? opts.hotelNames ?? prev?.hotelNames
+        : undefined,
+    hotelRetried:
+      opts.kind === 'hotel'
+        ? opts.hotelRetried ?? prev?.hotelRetried
+        : undefined,
+    activityAnchor:
+      opts.kind === 'activity_rental'
+        ? prev?.activityAnchor
+        : undefined,
+    activityMust:
+      opts.kind === 'activity_rental' ? prev?.activityMust : undefined,
+    activityRejects:
+      opts.kind === 'activity_rental' ? prev?.activityRejects : undefined,
+    activityVenues:
+      opts.kind === 'activity_rental' ? prev?.activityVenues : undefined,
   };
   if (opts.kind === 'hotel') {
     lastTopic = 'hotel';
   } else if (opts.kind === 'events') {
     lastTopic = query.slice(0, 80) || 'events';
+  } else if (opts.kind === 'activity_rental') {
+    lastTopic = 'named_water';
   }
+}
+
+/** Phase 6 — Musts/Rejects/Venues am offenen Activity-Auftrag. */
+export function noteActivityInventoryDetails(opts: {
+  anchor?: string | null;
+  must?: string[];
+  rejects?: string[];
+  venues?: ActivityInventoryVenue[];
+}): void {
+  if (!lastLiveInventory || lastLiveInventory.kind !== 'activity_rental') {
+    return;
+  }
+  if (opts.anchor != null) {
+    lastLiveInventory.activityAnchor = String(opts.anchor).slice(0, 48);
+    noteWaterAnchor(opts.anchor);
+  }
+  if (opts.must) {
+    lastLiveInventory.activityMust = opts.must
+      .map((m) => String(m || '').trim())
+      .filter(Boolean)
+      .slice(0, 8);
+  }
+  if (opts.rejects) {
+    lastLiveInventory.activityRejects = opts.rejects
+      .map((m) => String(m || '').trim())
+      .filter(Boolean)
+      .slice(0, 12);
+  }
+  if (opts.venues) {
+    lastLiveInventory.activityVenues = opts.venues.slice(0, 4);
+  }
+  lastLiveInventory.atMs = Date.now();
+}
+
+export function pushActivityReject(name: string | null | undefined): void {
+  const n = String(name || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 64);
+  if (!n || !lastLiveInventory || lastLiveInventory.kind !== 'activity_rental') {
+    return;
+  }
+  const prev = lastLiveInventory.activityRejects ?? [];
+  if (prev.some((x) => x.toLowerCase() === n.toLowerCase())) return;
+  lastLiveInventory.activityRejects = [...prev, n].slice(0, 12);
+  lastLiveInventory.atMs = Date.now();
 }
 
 export function getLastLiveInventory(): {
   kind: LiveInventoryKind;
   query: string;
+  hotelOutcome?: HotelPitchOutcome;
+  hotelNames?: string[];
+  hotelRetried?: boolean;
+  activityAnchor?: string | null;
+  activityMust?: string[];
+  activityRejects?: string[];
+  activityVenues?: ActivityInventoryVenue[];
 } | null {
   if (!lastLiveInventory) return null;
   if (Date.now() - lastLiveInventory.atMs > LIVE_INVENTORY_TTL_MS) {
@@ -373,6 +588,13 @@ export function getLastLiveInventory(): {
   return {
     kind: lastLiveInventory.kind,
     query: lastLiveInventory.query,
+    hotelOutcome: lastLiveInventory.hotelOutcome,
+    hotelNames: lastLiveInventory.hotelNames,
+    hotelRetried: lastLiveInventory.hotelRetried,
+    activityAnchor: lastLiveInventory.activityAnchor,
+    activityMust: lastLiveInventory.activityMust,
+    activityRejects: lastLiveInventory.activityRejects,
+    activityVenues: lastLiveInventory.activityVenues,
   };
 }
 
@@ -381,8 +603,8 @@ export function clearLastLiveInventory(): void {
 }
 
 /**
- * Bekannte lokale Anker — optionale Offline-Hilfe, kein Pack-Zwang.
- * Navigation darf sie nutzen, wenn der User den Namen sagt.
+ * Bekannte lokale Anker — nur Named Lookup (User sagt den Ortsnamen).
+ * Nie Soft-Fill für AYCE/Dining-Musts (Goldschätzchen ≠ All-you-can-eat).
  */
 export const LOCAL_PLACE_ANCHORS: Record<
   string,
@@ -446,16 +668,28 @@ export function resolveLocalAnchor(
     .replace(/ä/g, 'a')
     .replace(/ö/g, 'o')
     .replace(/ü/g, 'u');
+  // AYCE/Specialty ohne Namen → kein Goldschätzchen Soft-Fill
+  try {
+    const { looksLikeAyceQuery } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+    };
+    const namedHint =
+      /goldschatz|hoyers|tennis|tcp|goldjatze|goldjaetze/.test(t);
+    if (looksLikeAyceQuery(text) && !namedHint) return null;
+  } catch {
+    /* soft */
+  }
   for (const [key, val] of Object.entries(LOCAL_PLACE_ANCHORS)) {
     if (t.includes(key.replace(/ä/g, 'a'))) return val;
   }
   if (/gold/.test(t) && /schatz|jatze|jätze|saetze/.test(t)) {
     return LOCAL_PLACE_ANCHORS.goldschatz!;
   }
-  // STT: Priesdorf / Tennisclub / „Tennis Club“
+  // STT: Priesdorf / prisodrf / prsidorf / Tennisclub / „Tennis Club“ / Tennisklub
   if (
-    /\btennis\b/.test(t) &&
-    /\b(club|tcp|halle|prisdorf|priesdorf)\b/.test(t)
+    /\btennisclub\b/.test(t) ||
+    (/\btennis\b/.test(t) &&
+      /\b(club|klub|tcp|halle|prisdorf|prsidorf|prisodrf|priesdorf)\b/.test(t))
   ) {
     return LOCAL_PLACE_ANCHORS.tennisclub!;
   }

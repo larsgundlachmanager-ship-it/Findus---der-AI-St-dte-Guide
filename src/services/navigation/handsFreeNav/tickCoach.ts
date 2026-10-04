@@ -35,6 +35,8 @@ import {
   estimateSpeechSec,
   findNextTurnWaypoint,
   buildFinalCueText,
+  noteCuePhaseSpoken,
+  armTurnForCues,
 } from './cueScheduler';
 import { etaMinutesFromRoute } from './eta';
 
@@ -94,6 +96,19 @@ export function onHandsFreeNavTick(
   },
 ): void {
   if (!tickSession) return;
+  try {
+    const { useFinnusStore } = require('../../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => { isListening?: boolean; isGenerating?: boolean };
+      };
+    };
+    const voice = useFinnusStore.getState();
+    // Do not run look-ahead/prefetch or speak into STT/manager work. The tick
+    // remains unconsumed, so the next GPS fix can still issue the turn cue.
+    if (voice.isListening || voice.isGenerating) return;
+  } catch {
+    /* soft */
+  }
   const now = Date.now();
   const session = tickSession;
 
@@ -112,24 +127,6 @@ export function onHandsFreeNavTick(
       waypoints: ctx.waypoints,
       transportMode: tick.transportMode,
     });
-  }
-
-  if (
-    userLat != null &&
-    userLng != null &&
-    !isTransitMode(tick.transportMode) &&
-    now - session.lastSpokenAt >= MIN_SPEAK_GAP_MS
-  ) {
-    const obstacleCue = maybeRouteObstacleCue({
-      lat: userLat,
-      lng: userLng,
-      speakStairs: true,
-    });
-    if (obstacleCue) {
-      session.lastSpokenAt = now;
-      void speak(obstacleCue);
-      return;
-    }
   }
 
   const next = findNextTurnWaypoint({
@@ -151,8 +148,36 @@ export function onHandsFreeNavTick(
     distToTurnM = tick.distanceToArrowM;
   }
 
-  const landmark =
+  let landmark =
     turnWp?.visibleLandmark?.trim() || turnWp?.landmark?.trim() || null;
+  try {
+    const { isWeakVisualLandmark } = require('../visualLandmarkQuality') as {
+      isWeakVisualLandmark: (l: string | null | undefined) => boolean;
+    };
+    if (isWeakVisualLandmark(landmark)) landmark = null;
+  } catch {
+    /* soft */
+  }
+  let chainNext: { maneuver: string | null; gapM: number } | null = null;
+  if (turnWp && turnIdx >= 0) {
+    try {
+      const { findChainedNextTurn } = require('../chainedTurnCue') as {
+        findChainedNextTurn: (
+          wps: typeof ctx.waypoints,
+          idx: number,
+        ) => { index: number; wp: (typeof ctx.waypoints)[0]; gapM: number } | null;
+      };
+      const chained = findChainedNextTurn(ctx.waypoints, turnIdx);
+      if (chained) {
+        chainNext = {
+          maneuver: chained.wp.maneuver ?? null,
+          gapM: chained.gapM,
+        };
+      }
+    } catch {
+      /* soft */
+    }
+  }
   const draft = turnWp
     ? buildFinalCueText({
         maneuver: turnWp.maneuver,
@@ -160,6 +185,7 @@ export function onHandsFreeNavTick(
         roadName: turnWp.roadName ?? null,
         distanceM: distToTurnM ?? 20,
         isComplexTurn: turnWp.turnComplexity === 'complex',
+        chainNext,
       })
     : buildPredictiveTurnCue({
         turn: 'links',
@@ -180,6 +206,31 @@ export function onHandsFreeNavTick(
     transportMode: tick.transportMode,
   });
 
+  if (
+    userLat != null &&
+    userLng != null &&
+    !isTransitMode(tick.transportMode) &&
+    now - session.lastSpokenAt >= MIN_SPEAK_GAP_MS
+  ) {
+    const nearTurnSoon =
+      distToTurnM != null &&
+      distToTurnM <= speakAtM + 20 &&
+      turnIdx >= 0;
+    // Nahe an Abbiegung: keine Obstacle-Cue die die Rechts-/Fork-Ansage blockt
+    if (!nearTurnSoon) {
+      const obstacleCue = maybeRouteObstacleCue({
+        lat: userLat,
+        lng: userLng,
+        speakStairs: true,
+      });
+      if (obstacleCue) {
+        session.lastSpokenAt = now;
+        void speak(obstacleCue);
+        return;
+      }
+    }
+  }
+
   // Warm TTS
   if (
     turnWp &&
@@ -195,7 +246,32 @@ export function onHandsFreeNavTick(
     }
   }
 
-  if (now - session.lastSpokenAt < MIN_SPEAK_GAP_MS) return;
+  const turnImminentForGap =
+    distToTurnM != null &&
+    distToTurnM <= speakAtM + 15 &&
+    turnIdx >= 0 &&
+    isHandsFreeSpeakTurn({
+      maneuver: turnWp?.maneuver,
+      roadName: turnWp?.roadName,
+      turnComplexity: turnWp?.turnComplexity,
+    });
+  // Neue Abbiegung: Gap darf Warn/Final der nächsten Kreuzung nicht schlucken.
+  const newTurnPending =
+    turnIdx >= 0 &&
+    turnIdx !== session.lastSpokenTurnIdx &&
+    isHandsFreeSpeakTurn({
+      maneuver: turnWp?.maneuver,
+      roadName: turnWp?.roadName,
+      turnComplexity: turnWp?.turnComplexity,
+    });
+  if (
+    now - session.lastSpokenAt < MIN_SPEAK_GAP_MS &&
+    !turnImminentForGap &&
+    !newTurnPending
+  ) {
+    return;
+  }
+  if (turnIdx >= 0) armTurnForCues(turnIdx);
 
   // Arrival soon
   if (
@@ -205,15 +281,11 @@ export function onHandsFreeNavTick(
   ) {
     session.arrivalSoonSpoken = true;
     session.lastSpokenAt = now;
-    const sign =
-      session.destinationName.trim().length >= 3
-        ? session.destinationName.trim()
-        : null;
     void speak(
       buildArrivalSoonCue(
         session.destinationName,
         relateFromRelativeBearing(tick.bearingRelDeg),
-        { visualSign: sign },
+        { visualSign: null },
       ),
     );
     return;
@@ -228,7 +300,7 @@ export function onHandsFreeNavTick(
   const nearTurn =
     turnWp &&
     distToTurnM != null &&
-    distToTurnM <= speakAtM + 4 &&
+    distToTurnM <= speakAtM + 12 &&
     distToTurnM >= 0 &&
     isHandsFreeSpeakTurn({
       maneuver: turnWp.maneuver,
@@ -237,15 +309,29 @@ export function onHandsFreeNavTick(
     });
 
   if (nearTurn && turnIdx >= 0 && session.lastSpokenTurnIdx !== turnIdx) {
+    // Nur diese Abbiegung als gesprochen markieren.
+    // Nie die Folgekurbel vorab als „schon gesagt“ setzen — sonst zweite Kreuzung stumm.
     session.lastSpokenTurnIdx = turnIdx;
     session.lastSpokenAt = now;
+    noteCuePhaseSpoken('final', turnIdx, now);
+    try {
+      const { vibrateNavTurnFromManeuver } = require('../navTurnHaptics') as {
+        vibrateNavTurnFromManeuver: (m: string | null | undefined) => void;
+      };
+      vibrateNavTurnFromManeuver(turnWp?.maneuver);
+    } catch {
+      /* soft */
+    }
     const key = turnPrefetchKey(turnIdx, turnWp!.cue ?? draft);
-    // Landmarken-Draft vor Straßen-Cue (Google-Instruktion oft voller Straßennamen)
+    // Einfach: immer Draft (feste Phrase / Cache). Komplex: Landmark-Draft ok.
     const cueRaw = turnWp!.cue?.trim() || '';
+    const complexTurn =
+      turnWp!.turnComplexity === 'complex' || chainNext != null;
     const cueLooksStreet =
       /\b(straße|strasse|weg|allee|gasse|platz|ring|damm)\b/iu.test(cueRaw);
-    const cue =
-      landmark && (cueLooksStreet || !cueRaw)
+    const cue = !complexTurn
+      ? draft
+      : landmark && (cueLooksStreet || !cueRaw)
         ? draft
         : cueRaw || draft;
     void (async () => {
@@ -271,10 +357,22 @@ export function onHandsFreeNavTick(
     onRoute,
     isComplexTurn: isComplexTurnWaypoint(turnWp),
     nowMs: now,
+    waypoints: ctx.waypoints,
   });
   if (scheduled && scheduled.phase !== 'final') {
     // final handled above with prefetch
     session.lastSpokenAt = now;
+    if (scheduled.phase === 'warn' || scheduled.phase === 'final') {
+      noteCuePhaseSpoken(scheduled.phase, turnIdx, now);
+      try {
+        const { vibrateNavTurnFromManeuver } = require('../navTurnHaptics') as {
+          vibrateNavTurnFromManeuver: (m: string | null | undefined) => void;
+        };
+        vibrateNavTurnFromManeuver(turnWp?.maneuver);
+      } catch {
+        /* soft */
+      }
+    }
     void speak(scheduled.text);
   }
 }

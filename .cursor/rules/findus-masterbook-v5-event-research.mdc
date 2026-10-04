@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Tagesaktuelle Events
 
-- Ambient „was heute geht“ (App offen ~10 Min + Stille): max. **1 Ansage / 8 h** (`ambientEventPitch` / `lastPitchAtMs`). **Tagesfeste** (Straßenfest, Weinfest, Hafengeburtstag, Umzug, Markt, Kinderprogramm) dürfen schon laufen → **„läuft noch bis …“** nur mit belegtem Ende. **Zeitgenaue Starts** (Kino, Konzert, Auftritt, Vorstellung, Sonnenfinsternis): nur wenn der Start noch kommt — schon begonnen → **Stille**, kein „läuft noch“. Ende vorbei → Stille. Nichts Passendes → nichts sagen. Nachtruhe (außerhalb 9:00–21:30): kein Ambient-Event-Pitch. Welcome-Event zählt als Pitch (nicht nochmal Ambient).
+- Ambient „was heute geht“ (App offen ~10 Min + Stille): max. **1 Ansage / 2 h** (`ambientEventPitch` / `eventPitchQuota`) — anderer Ort + anderer Vorschlag als zuletzt. Ansage motivierend: **Was · Preis (belegt) · Wo · wie lange dahin · Warum hingehen** → weiche Einladung. **Tagesfeste** (Straßenfest, Weinfest, Hafengeburtstag, Umzug, Markt, Kinderprogramm) dürfen schon laufen → **„läuft noch bis …“** nur mit belegtem Ende. **Zeitgenaue Starts** (Kino, Konzert, Auftritt, Vorstellung, Sonnenfinsternis): nur wenn der Start noch kommt — schon begonnen → **Stille**, kein „läuft noch“. Ende vorbei → Stille. Nichts Passendes → nichts sagen. Nachtruhe (außerhalb 9:00–21:30): kein Ambient-Event-Pitch. Welcome-Event zählt als Pitch.
 - „Was geht heute Abend?“ / Events / Festivals → echte heutige Programme recherchieren (Kalender, Flyer, PDF, Venue-Sites).
 - Keine generischen Platzhalter (Kulturverwaltung, Tourist-Info ohne Programm).
 - Extra-Mile: PDF/Wochenprogramm parsen → Uhrzeit, was passiert, Eintritt, Stände, Acts, Preise, Buchbares.
@@ -19,7 +19,7 @@ alwaysApply: true
 - Mehrere Treffer → Top-2-Pitch; genanntes Fest / Vertiefung → Briefing bis ~1200 Zeichen (SSOT `FINDUS_EVENT_FESTIVAL_BRIEFING_BLOCK`) — nie dünnes „ja läuft“ und Stopp.
 - Keine Adressen in Speech/Stichpunkten — außer User fragt **explizit** danach.
 - Speech: Fahrzeit flüssig einweben (Ankunftsuhr + Modus, kein „Anreise:“-Label) **nur wenn das Event jetzt läuft oder Start ≤ ~45 Min**. Später (heute Abend): Zeit + Ort + Was in 1–2 knackigen Sätzen, kein Los-jetzt-Ton; Nähe höchstens nebenbei; Einladung ob einplanen. Speech-Modus = Route-Modus. Immer Fließtext.
-- Ungefragte Ambient-Pitches (`ambientEventPitch`): kurzer menschlicher Opener → Hiebsatz mit Uhr/Ort/Was → weiche Einladung. SSOT `FINDUS_WOVEN_PITCH_SPEECH_BLOCK`.
+- Ungefragte Ambient-Pitches (`ambientEventPitch`): max. alle **2 h**; Opener → Was/Wann/Wo → Preis → Anreise → Warum → Einladung. SSOT `FINDUS_WOVEN_PITCH_SPEECH_BLOCK` + `formatTemporaryLiveSpeech`.
 
 ## Action-Button Sync
 

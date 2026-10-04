@@ -125,7 +125,7 @@ export function preloadTtsAtBoot(): void {
   void purgeLegacyVoiceAssets().catch(() => undefined);
 
   void loadUserProfile().then((profile) => {
-    const voiceId = profile?.voiceId ?? 'alina';
+    const voiceId = profile?.voiceId ?? 'sebastian';
     startVoiceBuffer({ speechRate: 1, priorityVoiceId: voiceId });
     void prefetchVoiceSamples(voiceId);
     void voicePreloader.warmActiveVoice(voiceId);

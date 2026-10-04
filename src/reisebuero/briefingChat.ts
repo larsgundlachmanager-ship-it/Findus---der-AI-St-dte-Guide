@@ -3,26 +3,21 @@
  * Board hält die Notizen. Speech = eingehen + eine menschliche Frage.
  */
 
-import {
-  FINDUS_DYNAMIC_STRUCTURE_DOCTRINE,
-  FINDUS_FEW_SHOT_DISCLAIMER,
-  FINDUS_REISEBUERO_DEEP_BRIEFING_BLOCK,
-} from '../services/concierge/findusResponsePolicy';
-import { generateGeminiText, hasGeminiApiKey } from '../services/geminiService';
 import { getCachedUserProfile } from '../services/userProfileService';
 import {
   briefingPath,
-  buildRecapLines,
+  isBriefComplete,
   nextQuestionKey,
 } from './completeness';
 import { useReisebueroStore } from './store';
-import { hydrateTasteMemory, tastePersona, tastePromptLine } from './tasteMemory';
 import type { ReiseLedger } from './types';
-import { detectTripVibes, probeDirection, vibeDigest } from './vibeProbes';
-
-function ledgerDigest(ledger: ReiseLedger): string {
-  return buildRecapLines(ledger).join(' | ') || '(noch dünn)';
-}
+import { detectTripVibes } from './vibeProbes';
+import {
+  ensureBriefingQuestion,
+  keepTalkingAlreadyNudged,
+  pickOpeningGreeting,
+  weaveSpokenFacts,
+} from './briefingSpeech';
 
 function firstName(): string {
   try {
@@ -45,63 +40,175 @@ function groupWord(ledger: ReiseLedger): 'du' | 'ihr' {
   return n > 1 ? 'ihr' : 'du';
 }
 
-function recentChat(): string {
-  const chat = useReisebueroStore.getState().trip.chat;
-  return chat
-    .slice(-8)
-    .map((t) => `${t.role === 'user' ? 'User' : 'Yorro'}: ${t.text}`)
-    .join('\n') || '(noch leer)';
-}
-
 function fallbackHint(askedKey: string | null, opening: boolean): string {
-  if (opening) return 'Wie kann ich helfen?';
+  if (opening) return 'Erzähl los';
   if (askedKey === 'adults') return 'Allein oder zu mehreren?';
   if (askedKey === 'when') return 'Wann soll’s losgehen?';
   if (askedKey === 'budget') return 'Was schwebt preislich vor?';
   if (askedKey === 'mode') return 'Wie kommt ihr hin?';
+  if (askedKey === 'meals') return 'Wie wollt ihr essen?';
+  if (askedKey === 'localMove') return 'Wie vor Ort unterwegs?';
+  if (askedKey === 'whenTight') return 'Daten noch schärfen?';
+  if (askedKey === 'dest') return 'Richtung oder Ort?';
+  if (askedKey === 'comfort') return 'Komfort bei Anreise?';
+  if (askedKey === 'ages') return 'Alter oder Bahncard?';
+  if (askedKey === 'geo') return 'Lage-Wunsch?';
   if (askedKey === 'lodging') return 'Wo wollt ihr unterkommen?';
   if (askedKey === 'departWindow') return 'Los- und Ankunftszeit?';
   if (askedKey === 'directFlight') return 'Direktflug wichtig?';
+  if (askedKey === 'bags') return 'Hand- oder Aufgabegepäck?';
   if (askedKey === 'weather') return 'Wie soll das Wetter sein?';
   if (askedKey === 'driveTime') return 'Wie weit darf die Anfahrt sein?';
-  if (askedKey === 'purpose') return 'Was für eine Reise soll das werden?';
+  if (askedKey === 'purpose') return 'Was soll der Urlaub werden?';
   if (askedKey === 'locationBias') return 'Eher zentral oder ruhig?';
   if (askedKey === 'lastTrip') return 'Highlight vom letzten Urlaub?';
-  if (askedKey === 'highlight') return 'Was wäre euer Highlight?';
+  if (askedKey === 'highlight') return 'Was soll euer Highlight werden?';
   if (askedKey === 'dealbreaker') return 'Was darf nicht passieren?';
   if (askedKey === 'partyStyle') return 'Clubs, Bars oder Open Air?';
+  if (askedKey === 'partyGrain') return 'Privat, Bars oder Clubs?';
   if (askedKey === 'spaStyle') return 'Pool, Meer, Massage, Sauna?';
   if (askedKey === 'kidsStyle') return 'Was mögen die Kinder?';
   if (askedKey === 'tripShape') return 'Ein Ort oder mehrere?';
+  if (askedKey === 'cruiseCore') return 'Wohin / welche Reederei?';
+  if (askedKey === 'cruiseShipVibe') return 'Was soll das Schiff können?';
+  if (askedKey === 'cruiseShipPick') return 'Welches Schiff passt?';
+  if (askedKey === 'cruiseDepth') return 'Einschiffen und Kabine?';
   if (askedKey === 'ideaHook') return 'Wäre das was für euch?';
-  if (askedKey === 'extraWishes') return 'Noch Wünsche aufs Board?';
+  if (askedKey === 'extraWishes') return 'Was ist euch wichtig?';
   if (askedKey === 'rentalCar') return 'Mietwagen dazu?';
+  if (askedKey === 'ready_announce') return 'Suche starten?';
   if (askedKey === 'wrap_up') return 'Soll ich suchen?';
-  if (askedKey === 'keep_talking') return 'Sonst Suche starten?';
+  if (askedKey === 'keep_talking') return 'Noch was aufs Board?';
   return 'Was soll noch aufs Board?';
 }
 
 function fallbackOpening(): { speech: string; hint: string } {
   const name = firstName();
-  const speech = name ? `Hey ${name}, wie kann ich dir helfen?` : 'Hey, wie kann ich dir helfen?';
-  return { speech, hint: 'Wie kann ich helfen?' };
+  const tripId = useReisebueroStore.getState().trip.id || '';
+  return pickOpeningGreeting(name, tripId);
+}
+
+function isUnclearAnswer(userLine: string): boolean {
+  const t = (userLine || '').trim();
+  if (!t) return true;
+  try {
+    const { looksLikeGarbageFact } = require('./parseBriefSlots') as typeof import('./parseBriefSlots');
+    if (looksLikeGarbageFact(t)) return true;
+  } catch {
+    /* soft */
+  }
+  if (/^(äh+|ähm+|hm+|was\??|hä\??|nochmal|wie\??)$/iu.test(t)) return true;
+  return false;
 }
 
 function fallbackSpeech(
   ledger: ReiseLedger,
   asked: string[],
   userLine: string,
-): { speech: string; askedKey: string | null; hint: string } {
-  const gap = nextQuestionKey(ledger, asked);
+  opts?: {
+    searchReadyAnnounced?: boolean;
+    catalogExtras?: import('./questionCatalog').CatalogExtra[];
+    /** Letzte gestellte Katalog-Frage — bei Unklarheit nachhaken statt weiter. */
+    holdAskKey?: string | null;
+  },
+): { speech: string; askedKey: string | null; hint: string; holdTopic?: boolean } {
+  const gap = nextQuestionKey(ledger, asked, {
+    searchReadyAnnounced: opts?.searchReadyAnnounced,
+    catalogExtras: opts?.catalogExtras,
+    userLine,
+  });
   const addr = groupWord(ledger);
-  const hint = fallbackHint(gap.key, false);
-  const ack = reactFallback(userLine, ledger);
+  const holdKey = opts?.holdAskKey || null;
+  if (holdKey && isUnclearAnswer(userLine)) {
+    let hint = fallbackHint(holdKey, false).replace(/\?+\s*$/, '');
+    try {
+      const { QUESTION_CATALOG } = require('./questionCatalog') as typeof import('./questionCatalog');
+      const q = QUESTION_CATALOG.find((x) => x.id === holdKey);
+      if (q?.askSeed) hint = q.askSeed.replace(/\?+\s*$/, '');
+    } catch {
+      /* soft */
+    }
+    return {
+      speech: `Hab ich nicht sauber mitbekommen — kurz nochmal: ${hint}?`,
+      askedKey: null,
+      hint,
+      holdTopic: true,
+    };
+  }
+  const hint = (gap.askSeed || fallbackHint(gap.key, false)).replace(/\?+\s*$/, '');
+  try {
+    const {
+      rememberShelfAsked,
+      rememberShelfFromLedger,
+    } = require('./shelfAskedPrefs') as typeof import('./shelfAskedPrefs');
+    if (asked.length) {
+      rememberShelfFromLedger(ledger, asked);
+      rememberShelfAsked(asked);
+    }
+  } catch {
+    /* soft */
+  }
+  let ack = reactFallback(userLine, ledger);
+  // Langer Dump / Teil-Inventar: kurzer Recap vor der Lücken-Frage (Struktur, kein Skript)
+  try {
+    const { inventoryRecapHint, isInventoryGapFill } = require('./inventoryRecap') as typeof import('./inventoryRecap');
+    if (isInventoryGapFill(ledger) && userLine.trim().length >= 80) {
+      const recap = inventoryRecapHint(ledger);
+      if (recap) ack = `${ack} ${recap}.`.replace(/\.\.+/g, '.');
+    }
+  } catch {
+    /* soft */
+  }
+  // Shelf-Reuse: Themen die wir still abgehakt haben — kurz im Ack andeuten (Struktur)
+  try {
+    const { shelfReuseTopics } = require('./shelfAskedPrefs') as typeof import('./shelfAskedPrefs');
+    const reused = shelfReuseTopics(ledger);
+    if (reused.length && asked.length <= 2) {
+      ack = `${ack} ${weaveSpokenFacts(reused.slice(0, 3))} wie zuletzt — sag Bescheid wenn anders.`.replace(
+        /\.\.+/g,
+        '.',
+      );
+    }
+  } catch {
+    /* soft */
+  }
+  if (gap.key === 'ready_announce') {
+    let scoreLine = '';
+    try {
+      const { computeBriefScore } = require('./briefScore') as typeof import('./briefScore');
+      const sc = computeBriefScore(ledger);
+      const top = sc.missing.slice(0, 2).map((m: { label: string }) => m.label);
+      scoreLine = top.length
+        ? ` Brief steht bei ${sc.score} Prozent — für noch härter fehlen vor allem ${top.join(' und ')}.`
+        : ` Brief steht bei ${sc.score} Prozent.`;
+    } catch {
+      /* ignore */
+    }
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack}${scoreLine} Fehlt euch für den Urlaub noch was Wichtiges — oder soll ich die Suche starten?`
+          : `${ack}${scoreLine} Fehlt dir für den Urlaub noch was Wichtiges — oder soll ich die Suche starten?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'partyGrain') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Feiert ihr eher privat unter euch, oder eher Bars und Clubs?`
+          : `${ack} Eher privat unter euch feiern, oder Bars und Clubs?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
   if (gap.key === 'purpose') {
     return {
       speech:
         addr === 'ihr'
-          ? `${ack} Was für eine Reise soll das werden — Stadt, Strand, oder eher so ein Mix?`
-          : `${ack} Was für eine Reise soll das werden?`,
+          ? `${ack} Was soll das für ein Urlaub werden — eher entspannen, Stadt, Strand, oder was ganz anderes?`
+          : `${ack} Was soll das für ein Urlaub werden?`,
       askedKey: gap.key,
       hint,
     };
@@ -148,12 +255,15 @@ function fallbackSpeech(
   }
   if (gap.key === 'when') {
     const monthOnly = Boolean(ledger.dateMonth && !ledger.dateStart);
+    const hasDuration = Boolean(ledger.stayDays || ledger.stayNights);
     return {
-      speech: monthOnly
-        ? `${ack} Welches Wochenende — welche Tage genau?`
-        : addr === 'ihr'
-          ? `${ack} Wann wollt ihr weg — welcher Monat, und welches Wochenende genau?`
-          : `${ack} Wann soll’s losgehen — welches Wochenende genau?`,
+      speech: monthOnly && !hasDuration
+        ? `${ack} Ungefähr wie lange — paar Tage, eine Woche?`
+        : monthOnly
+          ? `${ack} Monat passt — konkrete Tage schon klar, oder lassen wir’s flexibel?`
+          : addr === 'ihr'
+            ? `${ack} Wann wollt ihr weg — grob Monat reicht, oder habt ihr schon Tage?`
+            : `${ack} Wann soll’s losgehen — Monat reicht, Tage optional?`,
       askedKey: gap.key,
       hint,
     };
@@ -164,6 +274,63 @@ function fallbackSpeech(
         addr === 'ihr'
           ? `${ack} Wie wollt ihr hinkommen — Flug, Bahn oder Auto?`
           : `${ack} Wie willst du hinkommen?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'meals') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Verpflegung — eher selbst kochen, Frühstück, Halbpension, oder All Inclusive?`
+          : `${ack} Essen vor Ort — selbst, Frühstück, Halbpension oder All Inclusive?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'localMove') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Vor Ort — eher zu Fuß und ÖPNV, oder lieber Mietwagen?`
+          : `${ack} Vor Ort eher zu Fuß/ÖPNV oder Mietwagen?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'whenTight') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Können wir den Zeitraum noch enger machen — konkrete Tage, oder ein klares Fenster?`
+          : `${ack} Können wir den Zeitraum noch enger machen?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'comfort') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Bei Flug oder Bahn — Direkt wichtig, max. Umsteigezeit, oder Nachtfahrt okay?`
+          : `${ack} Direktflug, kurze Umsteiger, oder ist Nachtfahrt auch okay?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'ages') {
+    return {
+      speech: `${ack} Für Sparpreise der Bahn — ungefähres Alter der Mitreisenden, und hat jemand eine Bahncard?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'geo') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Lage — eher zentral, ruhig draußen, oder nah an einem bestimmten Spot?`
+          : `${ack} Lieber zentral, ruhig, oder nah an einem bestimmten Ort?`,
       askedKey: gap.key,
       hint,
     };
@@ -181,6 +348,16 @@ function fallbackSpeech(
   if (gap.key === 'directFlight') {
     return {
       speech: `${ack} Ist euch ein Direktflug wichtig, oder wäre Umsteigen auch okay?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'bags') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Was für Gepäck nehmt ihr mit — nur Handgepäck, oder auch Aufgabegepäck? Und ungefähr wie viele?`
+          : `${ack} Was für Gepäck nimmst du mit — nur Handgepäck, oder auch Aufgabegepäck? Und ungefähr wie viele?`,
       askedKey: gap.key,
       hint,
     };
@@ -207,32 +384,120 @@ function fallbackSpeech(
     const path = briefingPath(ledger);
     if (path === 'family') {
       return {
-        speech: `${ack} Gibt’s sonst noch was, das euch richtig wichtig ist — Ausstattung vor Ort, Lage, irgendwas Pflicht?`,
+        speech: `${ack} Was ist euch wichtig — Ausstattung, Lage, irgendwas Pflicht für die Kleinen?`,
         askedKey: gap.key,
-        hint,
+        hint: 'Was ist wichtig?',
       };
     }
     if (path === 'chill') {
       return {
-        speech: `${ack} Gibt’s ein No-Go, worauf ihr gar keine Lust habt?`,
+        speech: `${ack} Was ist euch wichtig — und gibt’s ein klares No-Go?`,
         askedKey: gap.key,
-        hint,
+        hint: 'Was ist wichtig?',
       };
     }
     return {
       speech:
         addr === 'ihr'
-          ? `${ack} Noch Wünsche aufs Board — oder ist der Rest flexibel?`
-          : `${ack} Noch Wünsche, oder lassen wir’s so?`,
+          ? `${ack} Was ist euch wichtig auf dem Trip — was muss sitzen?`
+          : `${ack} Was ist dir wichtig — was muss sitzen?`,
       askedKey: gap.key,
-      hint,
+      hint: 'Was ist wichtig?',
+    };
+  }
+  if (gap.key === 'bookedBits') {
+    if (ledger.bookedStay?.value && ledger.bookedFlight == null && ledger.bookedRail == null) {
+      return {
+        speech: `${ack} Hotel steht — braucht ihr noch den Flug, die Bahn, oder ist die Anreise auch schon durch?`,
+        askedKey: gap.key,
+        hint: 'Anreise noch?',
+      };
+    }
+    if (ledger.bookedFlight?.value && ledger.bookedStay == null) {
+      return {
+        speech: `${ack} Flug steht — Unterkunft noch suchen, oder habt ihr die schon?`,
+        askedKey: gap.key,
+        hint: 'Unterkunft noch?',
+      };
+    }
+    if (ledger.needCar?.value === true) {
+      return {
+        speech: `${ack} Mietwagen fehlt noch — sonst noch was, oder soll ich den raussuchen?`,
+        askedKey: gap.key,
+        hint: 'Was fehlt noch?',
+      };
+    }
+    return {
+      speech: `${ack} Was ist schon gebucht — und was soll ich noch raussuchen?`,
+      askedKey: gap.key,
+      hint: 'Was fehlt noch?',
+    };
+  }
+  if (gap.key === 'needCar') {
+    return {
+      speech: `${ack} Braucht ihr vor Ort noch einen Mietwagen, oder kommt ihr ohne klar?`,
+      askedKey: gap.key,
+      hint: 'Mietwagen?',
+    };
+  }
+  if (gap.key === 'transfer') {
+    return {
+      speech: `${ack} Vom Flughafen oder Bahnhof zum Hotel — eher Taxi, ÖPNV, oder Transfer in einer Pauschale?`,
+      askedKey: gap.key,
+      hint: 'Transfer?',
+    };
+  }
+  if (gap.key === 'rentalCar') {
+    return {
+      speech: `${ack} Braucht ihr vor Ort noch einen Mietwagen, oder kommt ihr ohne klar?`,
+      askedKey: gap.key,
+      hint: 'Mietwagen?',
     };
   }
   if (gap.key === 'wrap_up') {
     return {
-      speech: `${ack} Dann hab ich die wichtigen Infos zusammen. Soll ich zwei Optionen raussuchen?`,
+      speech:
+        addr === 'ihr'
+          ? `${ack} Die wichtigen Infos hab ich. Fehlt euch für den Urlaub noch was — oder soll ich zwei Optionen raussuchen?`
+          : `${ack} Die wichtigen Infos hab ich. Fehlt dir für den Urlaub noch was — oder soll ich zwei Optionen raussuchen?`,
       askedKey: gap.key,
       hint,
+    };
+  }
+  if (gap.key === 'keep_talking') {
+    const alreadyNudged = keepTalkingAlreadyNudged(asked, opts?.searchReadyAnnounced);
+    // Schon einmal eingeladen → nur kurz ack, kein zweites „Noch was präzisieren?“
+    if (alreadyNudged) {
+      const shortAck = (ack || 'Notiert.').replace(/\s+/g, ' ').trim();
+      return {
+        speech: shortAck.endsWith('.') || shortAck.endsWith('!') ? shortAck : `${shortAck}.`,
+        askedKey: gap.key,
+        hint: 'Noch was — oder suchen?',
+      };
+    }
+    let tip = '';
+    try {
+      const { computeBriefScore } = require('./briefScore') as typeof import('./briefScore');
+      const sc = computeBriefScore(ledger);
+      const top = sc.missing.slice(0, 2).map((m: { label: string; points: number }) => m.label);
+      if (top.length && sc.score < 100) {
+        tip =
+          addr === 'ihr'
+            ? ` Fehlt euch noch eine Kleinigkeit — z. B. ${top.join(' oder ')} — oder soll ich suchen?`
+            : ` Fehlt dir noch eine Kleinigkeit — z. B. ${top.join(' oder ')} — oder soll ich suchen?`;
+      } else {
+        tip =
+          addr === 'ihr'
+            ? ' Fehlt euch noch was Wichtiges — oder soll ich zwei Optionen raussuchen?'
+            : ' Fehlt dir noch was Wichtiges — oder soll ich zwei Optionen raussuchen?';
+      }
+    } catch {
+      tip = ' Soll ich suchen, oder fehlt noch was?';
+    }
+    return {
+      speech: `${ack}${tip}`.trim(),
+      askedKey: gap.key,
+      hint: 'Noch was — oder suchen?',
     };
   }
   if (gap.key === 'dest') {
@@ -279,8 +544,8 @@ function fallbackSpeech(
     return {
       speech:
         addr === 'ihr'
-          ? `${ack} Wenn der Trip sitzt: was wäre die eine Sache, die sitzen muss?`
-          : `${ack} Was wäre dein Highlight auf der Reise?`,
+          ? `${ack} Was soll euer Highlight werden — die eine Sache, die sitzen muss?`
+          : `${ack} Was soll dein Highlight werden?`,
       askedKey: gap.key,
       hint,
     };
@@ -328,6 +593,72 @@ function fallbackSpeech(
         addr === 'ihr'
           ? `${ack} Ein Ort als Basis, oder mehrere Stationen hintereinander — Roadtrip oder sogar Kreuzfahrt ein Thema?`
           : `${ack} Ein Ort, mehrere Stationen, Roadtrip — oder eher bleiben?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'cruiseCore') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Wohin soll die Kreuzfahrt — Ostsee, Mittelmeer, woanders — und schwebt schon AIDA oder Mein Schiff vor?`
+          : `${ack} Wohin soll die Route — und welche Reederei, falls schon klar?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'cruiseShipVibe') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Was soll das Schiff können — Pool, Rutsche, Laufbahn, Sauna, Kids, Teens, Party oder eher ruhig?`
+          : `${ack} Was ist dir am Schiff wichtig — Pool, Rutsche, Laufbahn, Sauna, Kids, Teens, Party oder eher ruhig für Rentner?`,
+      askedKey: gap.key,
+      hint,
+    };
+  }
+  if (gap.key === 'cruiseShipPick') {
+    let recommend: string | null = null;
+    try {
+      const {
+        matchCruiseShipsFromLedger,
+        weaveCruiseShipFitRecommendAsk,
+      } = require('./research/cruiseShipFit') as {
+        matchCruiseShipsFromLedger: (
+          l: ReiseLedger,
+          o?: { userText?: string | null },
+        ) => import('./research/cruiseShipFit').CruiseShipFitResult;
+        weaveCruiseShipFitRecommendAsk: (
+          r: import('./research/cruiseShipFit').CruiseShipFitResult,
+        ) => string | null;
+      };
+      const fit = matchCruiseShipsFromLedger(ledger, { userText });
+      if (
+        fit.fits.length &&
+        (fit.wants.length > 0 || fit.audiences.length > 0) &&
+        (!ledger.cruiseShipName?.value || ledger.cruiseShipName.value === 'open')
+      ) {
+        recommend = weaveCruiseShipFitRecommendAsk(fit);
+      }
+    } catch {
+      /* soft */
+    }
+    return {
+      speech: recommend
+        ? `${ack} ${recommend}`
+        : addr === 'ihr'
+          ? `${ack} Habt ihr schon ein konkretes Schiff im Kopf — Mein Schiff 3 oder 7, AIDAnova — oder soll ich passende vorschlagen?`
+          : `${ack} Hast du schon ein konkretes Schiff im Kopf — z. B. Mein Schiff 3 oder 7 — oder soll ich passende vorschlagen?`,
+      askedKey: gap.key,
+      hint: recommend ? 'Welches Schiff?' : hint,
+    };
+  }
+  if (gap.key === 'cruiseDepth') {
+    return {
+      speech:
+        addr === 'ihr'
+          ? `${ack} Einschiff-Hafen, Kabine, eher viele Seetage oder viele Häfen — und Allergien?`
+          : `${ack} Einschiff-Hafen, Kabine, Seetage oder viele Häfen — Allergien?`,
       askedKey: gap.key,
       hint,
     };
@@ -384,7 +715,7 @@ function reactFallback(userLine: string, ledger: ReiseLedger): string {
   const t = (userLine || '').replace(/\s+/g, ' ').trim();
   if (!t) return '';
   if (/\b(nicht\s+campen|kein(?:en)?\s+camping|kein(?:es)?\s+zelt|nicht\s+zelten)\b/iu.test(t)) {
-    return 'Camping streiche ich.';
+    return 'Camping streiche ich — bleibt vom Tisch.';
   }
   const budget = ledger.budgetEur?.value;
   if (
@@ -392,64 +723,72 @@ function reactFallback(userLine: string, ledger: ReiseLedger): string {
     (/\b(euro|€|budget|pro\s+person)\b/iu.test(t) || new RegExp(`\\b${budget}\\b`).test(t))
   ) {
     if (budget < 280) return 'Okay, dann müssen wir schon ein bisschen gucken, dass es sitzt.';
-    if (budget < 500) return 'Solides Budget für ein Wochenende.';
+    if (budget < 500) return 'Solides Budget für ein Wochenende — damit lässt sich was machen.';
     return 'Damit können wir auf jeden Fall was reißen.';
+  }
+  if (/\b(bahncard|bahnkarte)\b/iu.test(t)) {
+    return ledger.bahncard?.value && ledger.bahncard.value !== 'none'
+      ? 'Bahncard notiert — das rechnet die Suche mit.'
+      : 'Sparpreise der Bahn hab ich im Blick.';
   }
   if (/\bpool\b/iu.test(t) && /egal|frei/iu.test(t)) {
     return 'Verstehe — Typ ist zweitrangig, ein Pool wäre der Bonus.';
   }
-  if (/\bpool\b/iu.test(t)) return 'Pool hab ich als Wunsch drauf.';
-  if (/\b(september|freitag|montag|samstag)\b/iu.test(t) && /\b\d{1,2}\b/.test(t)) {
-    return 'Termin notiert.';
+  if (/\bpool\b/iu.test(t)) return 'Pool kommt als Wunsch aufs Board.';
+  if (/\b(club|clubs|disco)\b/iu.test(t) && /\b(party|selber|privat|haus)\b/iu.test(t)) {
+    return 'Beides notiert: Party selbst und Clubs — dann ist der Brief klar.';
+  }
+  if (/\b(selber\s+party|hausparty|privat)\b/iu.test(t)) {
+    return 'Hausparty unter euch — steht als eigener Punkt.';
+  }
+  if (/\b(club|clubs|disco)\b/iu.test(t)) return 'Clubs hab ich extra drauf.';
+  if (/\b(september|oktober|freitag|montag|samstag|anreise|los)\b/iu.test(t) && /\b\d{1,2}\b/.test(t)) {
+    return 'Termin sitzt.';
+  }
+  if (/\begal\s+wann\s+(?:wir\s+)?(?:wieder|zurück|zurueck)/iu.test(t)) {
+    return 'Rückreise bleibt flexibel — Anreise ist der Anker.';
+  }
+  if (/\b(optional|nicht\s+zwingend|wäre\s+cool|notfalls)\b/iu.test(t)) {
+    return 'Als Optional, nicht als Muss — klar.';
   }
   if (/\b(unser\s+baby|neugeboren|\d{1,2}\s+monate)\b/iu.test(t)) {
     return 'Glückwunsch zum Nachwuchs — dann wird’s eher ruhig.';
   }
-  if (/\bparty|feiern|kneipe|männerwochenende|jungs\b/iu.test(t) && !ledger.purpose) {
-    return 'Klingt nach einem lockeren Trip.';
+  if (/\bgünstig(?:e|es)?\s+bier|bierpreis|billig(?:es)?\s+bier\b/iu.test(t)) {
+    return 'Günstiges Bier — klar, das bleibt im Blick.';
   }
-  if (/\b(spa|wellness|massage|sauna)\b/iu.test(t)) return 'Richtig runterkommen — nice.';
-  if (/\b(kind|kinder|kids)\b/iu.test(t)) return 'Mit den Kleinen dabei, klar.';
-  if (/\b(wein|weinfest)\b/iu.test(t)) return 'Wein-Richtung merke ich mir.';
-  if (/\bgünstig|guenstig\b/iu.test(t)) return 'Günstig ist völlig okay.';
-  return 'Alles klar.';
+  if (/\bapartment\b/iu.test(t) && /\bhotel\b/iu.test(t)) {
+    return 'Apartment bevorzugt, Hotel als Alternative — hab ich getrennt.';
+  }
+  if (/\b(direktflug|umsteigen)\b/iu.test(t)) return 'Flug-Komfort notiert.';
+  if (/\bparty|feiern|kneipe|männerwochenende|jungs\b/iu.test(t) && !ledger.purpose) {
+    return 'Party und Entspannung — merke ich als Mix.';
+  }
+  if (/\b(spa|wellness|massage|sauna)\b/iu.test(t)) return 'Entspannen — nice, steht drauf.';
+  if (/\b(kind|kinder|kids)\b/iu.test(t)) return 'Mit den Kleinen, klar.';
+  if (/\b(wein|weinfest)\b/iu.test(t)) return 'Wein — notiert.';
+  if (/\bgünstig|guenstig\b/iu.test(t)) return 'Günstig, okay — dann rechne ich knapp.';
+  if (/\b(selber\s+einkaufen|selbst\s+kochen|eigene\s+küche)\b/iu.test(t)) {
+    return 'Selbstverpflegung — dann brauchts eine Küche.';
+  }
+  if (/\b(direktflug|umsteigen|loslegen)\b/iu.test(t) && /\b(auch|egal|okay|ok)\b/iu.test(t)) {
+    return 'Direkt wäre schön, Umsteigen geht auch — merke ich als weich.';
+  }
+  try {
+    const { looksLikeGarbageFact } = require('./parseBriefSlots') as typeof import('./parseBriefSlots');
+    if (looksLikeGarbageFact(t)) {
+      return 'Das hab ich nicht klar verstanden — sag’s nochmal in einem Satz.';
+    }
+  } catch { /* soft */ }
+  const echo = t.replace(/\s+/g, ' ').trim();
+  if (echo.length >= 12 && echo.length <= 48) {
+    return `Okay, ${echo.replace(/[.!?]+$/, '')} — steht.`;
+  }
+  return 'Okay, merke ich mir.';
 }
 
 function ensureQuestion(speech: string, question: string): string {
-  const s = (speech || '').trim();
-  if (/\?/.test(s)) return s;
-  const q = (question || 'Was soll ich noch festhalten?').trim().replace(/\?+$/, '?');
-  if (!s) return q;
-  return `${s.replace(/[.!]+$/, '')}. ${q.endsWith('?') ? q : `${q}?`}`;
-}
-
-function splitSpeechAndHint(raw: string, fallbackHint: string): { speech: string; hint: string } {
-  const hintMatch = raw.match(/\bFRAGE:\s*(.+)$/imu);
-  let speech = raw
-    .replace(/\n?FRAGE:\s*.+$/imu, '')
-    .replace(/^TEXT:\s*/imu, '')
-    .trim();
-  const hint = (hintMatch?.[1] || fallbackHint).replace(/^["'\s]+|["'\s]+$/g, '').trim();
-  if (speech.length < 8) speech = raw.replace(/\bFRAGE:\s*.+$/imu, '').trim();
-  return { speech, hint: hint.slice(0, 48) || fallbackHint };
-}
-
-async function polishSpeech(prompt: string, fallback: string): Promise<string> {
-  if (!hasGeminiApiKey()) return fallback;
-  try {
-    const raw = await generateGeminiText(prompt, {
-      maxTokens: 280,
-      temperature: 0.85,
-      useFindusSystem: false,
-      task: 'concierge',
-      tier: 'lite',
-    });
-    const cleaned = (raw || '').replace(/^["'\s]+|["'\s]+$/g, '').trim();
-    if (cleaned.length >= 12 && cleaned.length < 900) return cleaned;
-  } catch {
-    /* fallback */
-  }
-  return fallback;
+  return ensureBriefingQuestion(speech, question);
 }
 
 export function composeBriefingFallback(
@@ -469,77 +808,62 @@ export async function runOpeningGreeting(): Promise<string> {
 }
 
 export async function runBriefingReply(): Promise<string> {
-  const { trip, appendAssistant, markAsked } = useReisebueroStore.getState();
-  if (trip.ledger.recapDone?.value) {
-    const speech = 'Alles klar — ich erstelle den Plan.';
-    appendAssistant(speech, 'Plan erstellen');
+  const store = useReisebueroStore.getState();
+  const { trip, appendAssistant, markAsked, markSearchReadyAnnounced, syncSearchReadySticky } = store;
+  syncSearchReadySticky();
+  if (trip.phase === 'recap') {
+    return trip.recapText || 'Passt das so?';
+  }
+  if (trip.ledger.recapDone?.value && trip.phase === 'research') {
+    const speech = 'Alles klar — ich starte die Recherche.';
+    appendAssistant(speech, 'Recherche');
     return speech;
   }
   const userLine = lastUserLine();
-  const fb = fallbackSpeech(trip.ledger, trip.askedSlotKeys, userLine);
-  let speech = fb.speech;
-  let hint = fb.hint;
-  const direction = probeDirection(fb.askedKey || '') || fb.hint;
-  let learned = '';
-  try {
-    learned = await hydrateTasteMemory();
-  } catch {
-    learned = tastePromptLine();
+  const wasReady = trip.searchReadySticky || isBriefComplete(trip.ledger);
+  const lastAsk = trip.askedSlotKeys[trip.askedSlotKeys.length - 1] ?? null;
+  const fb = fallbackSpeech(trip.ledger, trip.askedSlotKeys, userLine, {
+    searchReadyAnnounced: trip.searchReadyAnnounced,
+    catalogExtras: trip.catalogExtras,
+    holdAskKey: lastAsk,
+  });
+  // Fast path: lokale Speech sofort — kein Gemini-/Taste-Warten im Ping-Pong.
+  // (Polish war bis 10s Race und hat die Antwort spürbar verzögert.)
+  const speech = ensureQuestion(fb.speech, `${fb.hint}?`);
+  const hint = fb.hint;
+  if (fb.askedKey && !fb.holdTopic) markAsked(fb.askedKey);
+  // Extra-Fragen: wenn User vage/mehrdeutig antwortet → Katalog ergänzen
+  if (!fb.holdTopic) {
+    try {
+      const { maybeProposeCatalogExtra } = require('./questionCatalog') as typeof import('./questionCatalog');
+      const extra = maybeProposeCatalogExtra(trip.ledger, userLine, fb.askedKey || lastAsk);
+      if (extra) useReisebueroStore.getState().addCatalogExtra(extra);
+    } catch {
+      /* soft */
+    }
   }
-  let autoBriefs = '';
-  try {
-    const { getLearnedFactBriefs } = require('../module2/blueprints/autoLearn/index') as {
-      getLearnedFactBriefs: (o: { blueprintId: string; personaVariant: string }) => Promise<string[]>;
-    };
-    const briefs = await getLearnedFactBriefs({
-      blueprintId: 'reisebuero',
-      personaVariant: tastePersona(trip.ledger),
-    });
-    autoBriefs = briefs.slice(0, 6).join(' | ');
-  } catch {
-    /* soft */
+  if (fb.askedKey === 'ready_announce' || (wasReady && !trip.searchReadyAnnounced && isBriefComplete(trip.ledger))) {
+    markSearchReadyAnnounced();
   }
-  const raw = await polishSpeech(
-    `${FINDUS_DYNAMIC_STRUCTURE_DOCTRINE}
-
-${FINDUS_REISEBUERO_DEEP_BRIEFING_BLOCK}
-
-${FINDUS_FEW_SHOT_DISCLAIMER}
-
-Du planst mit dem User eine Reise am Tisch. Zuhören-Modus: eine Frage, dann Notiz, dann die nächste Lücke. Kein Fragebogen, kein Vorwegnehmen.
-Ping-Pong: kurz bestätigen, was gerade gesagt wurde — dann GENAU EINE Frage, und zwar die nächste leere Lücke in ${fb.askedKey || 'frei'} (${direction}).
-Board: grün = Hard Facts / Pflicht, gelb = Wünsche / Soft Facts, rot = No-Gos unten.
-Struktur:
-1. Nur auf den letzten User-Satz eingehen. Schon notierte Kategorien nicht nochmal fragen.
-2. Nichts erfinden. Korrekturen ersetzen den alten Sticker.
-3. Fragen kurz. Unterkunft darf Hotel/Ferienhaus/Apartment als Beispiele nennen, NUR wenn die Lücke Unterkunft ist — sonst keine Menüs.
-4. Extra-Fragen (Lage, No-Go, Direktflug, Ausstattung) nur wenn die Richtung das sagt. Nicht Highlight/letzten Urlaub von selbst anstoßen.
-${fb.askedKey === 'wrap_up' || fb.askedKey === 'keep_talking' ? 'ABSCHLUSS: Eine Frage ob die Suche starten soll. Keine neuen Kategorien.' : ''}
-
-Pflicht:
-- ${fb.askedKey === 'wrap_up' || fb.askedKey === 'keep_talking' ? 'Abschlussfrage, dann Schluss.' : 'Genau eine Frage zur aktuellen Lücke.'}
-- Prio-Paare merken (Bahn sonst Auto / Apartment sonst Hotel). Egal = Typ offen, gelber Sticker.
-- Budget-Zahl nicht umrechnen.
-- Max 3 kurze Sätze.
-
-User gerade: ${userLine || '(leer)'}
-Letzte Runden:
-${recentChat()}
-Notizen: ${ledgerDigest(trip.ledger)}
-Vibe: ${vibeDigest(trip.ledger)}
-Gelernt von diesem User: ${learned}
-Gelernt (Blaupause): ${autoBriefs || '(leer)'}
-Nächstes Thema (nur Richtung, kein Skript): ${fb.askedKey} — ${direction}
-
-Ausgabe exakt:
-TEXT: <gesprochen, MUSS mit Frage enden>
-FRAGE: <Kurzfrage für die Leiste, max 8 Wörter>`,
-    `TEXT: ${fb.speech}\nFRAGE: ${fb.hint}`,
-  );
-  const split = splitSpeechAndHint(raw, fb.hint);
-  speech = ensureQuestion(split.speech, `${fb.hint}?`);
-  hint = split.hint;
-  if (fb.askedKey) markAsked(fb.askedKey);
+  useReisebueroStore.getState().syncSearchReadySticky();
   appendAssistant(speech, hint);
   return speech;
 }
+
+/** Kompakte Recap vor finaler Recherche — flüssig mit Trip-Titel, Flipchart bleibt in der UI. */
+export async function runRecapSpeech(opts?: { forceFull?: boolean }): Promise<string> {
+  const { trip, appendAssistant, setRecapText, setPhase } = useReisebueroStore.getState();
+  const { composeRecapSpeech, composeRecapPatchAck } = require('./recapSpeech') as typeof import('./recapSpeech');
+  const already = trip.recapSpokenOnce && !opts?.forceFull;
+  const speech = (already ? composeRecapPatchAck(trip.ledger) : composeRecapSpeech(trip.ledger)).trim();
+  setRecapText(speech);
+  setPhase('recap');
+  if (!already) {
+    useReisebueroStore.setState({
+      trip: { ...useReisebueroStore.getState().trip, recapSpokenOnce: true },
+    });
+  }
+  appendAssistant(speech, 'Passt das so?');
+  return speech;
+}
+

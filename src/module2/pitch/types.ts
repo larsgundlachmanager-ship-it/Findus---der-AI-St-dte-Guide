@@ -97,6 +97,44 @@ export type PitchRequest = {
   call1Criteria?: PitchCall1Criterion[];
   /** Backend Shortlist vor Speak (Default 5) */
   shortlistSize?: number;
+  /**
+   * Live-Places-Radius erzwingen (m) — Cascade-Backtrack / Soft-Miss:
+   * online weiter suchen, nicht nur Datensatz.
+   */
+  liveExpandRadiusM?: number;
+  /** Call-1 Order.search — Soft-Fill gegen Must verboten */
+  forbidSoftFill?: boolean;
+  /** Call-1 Order.search.maxRadiusKm */
+  maxRadiusKm?: number;
+  /** Call-1 Order.search.stages (pack→neighbor→metro→web→verify) */
+  searchStages?: Array<'pack' | 'neighbor' | 'metro' | 'web' | 'verify'>;
+  /** Call-1 Order.need — Evidence/Actions nur wenn true */
+  orderNeed?: {
+    menuUrl?: boolean;
+    prices?: boolean;
+    openHours?: boolean;
+    eta?: boolean;
+    maps?: boolean;
+    ticket?: boolean;
+    bookingLink?: boolean;
+    dishVerify?: boolean;
+  };
+  /** Call-1 Order.ui */
+  orderUi?: {
+    openPitch?: boolean;
+    startNav?: boolean;
+    openTimeline?: boolean;
+    openCalendar?: boolean;
+    delayMs?: number;
+  };
+  /** Call-1 Order.bulletBudget */
+  bulletBudget?: {
+    max: number;
+    maxLines: number;
+    maxChars: number;
+  };
+  /** Call-1 Multi-Lane (or_either / fetch_then_spot) — parallele Recherchen */
+  multiLane?: import('../router/call1MultiLane').MultiLanePlan | null;
 };
 
 export type PitchCandidate = {
@@ -120,7 +158,7 @@ export type PitchCandidate = {
   hardEvidence?: string[];
   /** Konkreter Preis-Hinweis zum Wunschgericht (Menue-Beleg) */
   dishPriceHint?: string | null;
-  source: 'pack' | 'places' | 'osm' | 'stay22';
+  source: 'pack' | 'places' | 'osm' | 'stay22' | 'soft_seed';
   /** Stay22 live total for the stay window */
   priceTotalEur?: number | null;
   pricePerNightEur?: number | null;
@@ -155,6 +193,21 @@ export type PitchOptionCard = {
   actions: QuickAction[];
   /** Benannter Laden: Route schon vor der Kartenwahl zeigen */
   showNavBeforeSelect?: boolean;
+  /** Phase 8: Amenity — Koordinaten-Maps + Nav nach Tap erlauben */
+  allowCoordsMaps?: boolean;
+  /** Phase 4: belegte Gründe für Call-2 — nichts erfinden */
+  whyChosen?: string[];
+  /**
+   * Multi-Lane fetch→spot: nach Wahl zuerst hierhin, dann dieser Spot
+   * (Multi-Stop Nav + Speech).
+   */
+  followOnStop?: {
+    name: string;
+    lat: number;
+    lng: number;
+    placeId?: string | null;
+    enjoyHint?: string | null;
+  } | null;
 };
 
 export type PitchResult = {

@@ -8,6 +8,9 @@ import sys
 import time
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _device_ids import require_qa_serial  # noqa: E402
+
 ADB = r"C:\Users\larsf\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 XML = Path(r"C:\Users\larsf\Findus 2.0\.cursor\phone-ui.xml")
 SHOT = Path(r"C:\Users\larsf\Findus 2.0\.cursor\phone-live.png")
@@ -15,7 +18,9 @@ SHOT_SM = Path(r"C:\Users\larsf\Findus 2.0\.cursor\phone-live-sm.png")
 
 
 def adb(*args: str) -> subprocess.CompletedProcess:
-    return subprocess.run([ADB, *args], capture_output=True, text=True)
+    return subprocess.run(
+        [ADB, "-s", require_qa_serial(), *args], capture_output=True, text=True
+    )
 
 
 def dump_ui() -> str:

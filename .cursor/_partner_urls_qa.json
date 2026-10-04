@@ -1,0 +1,15 @@
+{
+  "kiwi": "https://www.kiwi.com/deep?from=HAM&to=ATH&departure=2026-11-12&return=anytime&adults=2&children=0&infants=0&bags=0.1_0.1-&lang=de&stopNumber=0%7Etrue",
+  "kiwiInner": "https://www.kiwi.com/deep?from=HAM&to=ATH&departure=2026-11-12&return=anytime&adults=2&children=0&infants=0&bags=0.1_0.1-&lang=de&stopNumber=0%7Etrue",
+  "kiwiHollow": false,
+  "kiwiTpHollow": false,
+  "stayHotel": "https://www.stay22.com/allez/findus?address=Ermass+Modern+Living+Apartments%2C+Athens&checkin=2026-09-30&checkout=2026-10-01&adults=2",
+  "stayHotelHollow": false,
+  "stayCity": "https://www.stay22.com/allez/findus?address=Athens&checkin=2026-09-30&checkout=2026-10-01&adults=2",
+  "stayCityHollow": false,
+  "exp": "https://www.expedia.de/Athens-Hotels-Ermass-Modern-Living-Apartments.h106254548.Hotel-Beschreibung?chkin=2026-09-30&chkout=2026-10-01&rm1=a2&NumRooms=1&NumNights=1&NumAdult-Room1=2&locale=de_DE&currency=EUR&destination=Athens&top_dp=110&top_cur=EUR",
+  "expFin": "https://www.expedia.de/Athens-Hotels-Ermass-Modern-Living-Apartments.h106254548.Hotel-Beschreibung?chkin=2026-09-30&chkout=2026-10-01&rm1=a2&NumRooms=1&NumNights=1&NumAdult-Room1=2&locale=de_DE&currency=EUR&destination=Athens&top_dp=110&top_cur=EUR",
+  "expFinHollow": false,
+  "avia": "https://www.aviasales.com/search/HAM1211ATH2?marker=760293",
+  "aviaHollow": false
+}

@@ -8,6 +8,7 @@ import {
   magBiasFromWalkSamples,
   mapIsOffNorth,
   nextCompassTap,
+  nextGpsRecenterTap,
   nextHudLockTap,
   facingHeadingFromAccelMag,
   headingFromDeviceMotionRotation,
@@ -32,19 +33,30 @@ assert(unlock.action === 'unlock' && !unlock.locked, 'Tipp bei Follow: aus');
 const relock = nextHudLockTap(unlock, t0 + 4_000);
 assert(relock.action === 'lock' && relock.locked, 'nach Aus in 5 s wieder Follow');
 
+const gpsLock = nextGpsRecenterTap(
+  { locked: false, lastTapAt: 0 },
+  t0,
+  11,
+);
+assert(gpsLock.action === 'lock' && gpsLock.locked, 'GPS 1: zentrieren + Fixierung');
+const gpsUnlock = nextGpsRecenterTap(gpsLock, t0 + 3_000, 16);
+assert(gpsUnlock.action === 'unlock' && !gpsUnlock.locked, 'GPS bei Follow: Standort frei');
+const gpsRelock = nextGpsRecenterTap(gpsUnlock, t0 + 8_000, 11);
+assert(gpsRelock.action === 'lock' && gpsRelock.locked, 'GPS nach Unlock wieder Fix mit einem Tipp');
+
 const idle = { follow: false, armedForFollow: false, mapOffNorth: false, lastTapAt: 0 };
 const first = nextCompassTap(idle, t0);
-assert(first.action === 'north' && !first.follow && first.armedForFollow, 'Tipp: Norden oben');
+assert(first.action === 'north_up' && !first.follow && first.armedForFollow, 'Tipp: Norden oben');
 const second = nextCompassTap(
   { follow: first.follow, armedForFollow: first.armedForFollow, mapOffNorth: false, lastTapAt: first.lastTapAt },
   t0 + 1_200,
 );
-assert(second.action === 'follow' && second.follow, 'nochmal in 5 s: Karte folgt Blick');
+assert(second.action === 'heading_lock' && second.follow, 'nochmal in 5 s: Karte folgt Blick');
 const third = nextCompassTap(
   { follow: true, armedForFollow: false, mapOffNorth: true, lastTapAt: second.lastTapAt },
   t0 + 2_000,
 );
-assert(third.action === 'north' && !third.follow, 'Tipp bei Follow: Norden oben');
+assert(third.action === 'unlock' && !third.follow, 'Tipp bei Follow: Norden oben');
 
 assert(mapIsOffNorth(45), '45° ist nicht Norden');
 assert(!mapIsOffNorth(3), '3° gilt als Norden');

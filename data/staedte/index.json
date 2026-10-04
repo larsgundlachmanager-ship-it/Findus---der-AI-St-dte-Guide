@@ -1,24 +1,24 @@
 {
-  "last_global_update": "2026-08-31T02:58:31.501Z",
+  "last_global_update": "2026-09-21T09:01:15.288Z",
   "available_cities": [
     {
       "id": "amsterdam",
       "name": "Amsterdam",
-      "data_version": 34,
+      "data_version": 47,
       "symbol": "🌳",
       "lat": 52.3675734,
       "lng": 4.9041388999999995,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/amsterdam-mt39jz52.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/amsterdam-mt39jz52.jpg",
-      "triggerCount": 1320,
-      "zoneCount": 544,
+      "triggerCount": 1696,
+      "zoneCount": 920,
       "approachCount": 776,
       "subCount": 0,
       "storyCount": 101,
-      "directoryCount": 443,
-      "factCount": 3841,
-      "placeCount": 1320,
-      "gpsCount": 544,
+      "directoryCount": 866,
+      "factCount": 6636,
+      "placeCount": 1696,
+      "gpsCount": 920,
       "latMin": 52.2779766,
       "latMax": 52.3310447,
       "lngMin": 4.9293283,
@@ -505,21 +505,21 @@
     {
       "id": "bad_saarow",
       "name": "Bad Saarow",
-      "data_version": 48,
+      "data_version": 60,
       "symbol": "🌳",
       "lat": 52.27429619999999,
       "lng": 14.0546568,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/bad_saarow-mstidnc2.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/bad_saarow-mstidnc2.jpg",
-      "triggerCount": 401,
-      "zoneCount": 197,
+      "triggerCount": 561,
+      "zoneCount": 357,
       "approachCount": 204,
       "subCount": 0,
       "storyCount": 99,
-      "directoryCount": 98,
-      "factCount": 1266,
-      "placeCount": 401,
-      "gpsCount": 197,
+      "directoryCount": 258,
+      "factCount": 2399,
+      "placeCount": 561,
+      "gpsCount": 357,
       "latMin": 52.2033196,
       "latMax": 52.3299152,
       "lngMin": 14.0076755,
@@ -1006,21 +1006,21 @@
     {
       "id": "beelitz",
       "name": "Beelitz",
-      "data_version": 36,
+      "data_version": 48,
       "symbol": "🌳",
       "lat": 52.2353295,
       "lng": 12.9784788,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/beelitz-mstidnxn.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/beelitz-mstidnxn.jpg",
-      "triggerCount": 377,
-      "zoneCount": 208,
+      "triggerCount": 510,
+      "zoneCount": 341,
       "approachCount": 169,
       "subCount": 0,
       "storyCount": 87,
-      "directoryCount": 121,
-      "factCount": 1382,
-      "placeCount": 377,
-      "gpsCount": 208,
+      "directoryCount": 254,
+      "factCount": 2312,
+      "placeCount": 510,
+      "gpsCount": 341,
       "latMin": 52.1411865,
       "latMax": 52.3035461,
       "lngMin": 12.781117,
@@ -1507,21 +1507,21 @@
     {
       "id": "berlin-umland",
       "name": "Berlin Umland",
-      "data_version": 37,
+      "data_version": 48,
       "symbol": "🌳",
       "lat": 52.52,
       "lng": 13.405,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-umland-mstido9n.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-umland-mstido9n.jpg",
-      "triggerCount": 10294,
-      "zoneCount": 10132,
+      "triggerCount": 10859,
+      "zoneCount": 10697,
       "approachCount": 162,
       "subCount": 0,
       "storyCount": 29,
-      "directoryCount": 10103,
-      "factCount": 45331,
-      "placeCount": 10294,
-      "gpsCount": 10132,
+      "directoryCount": 10668,
+      "factCount": 49402,
+      "placeCount": 10859,
+      "gpsCount": 10697,
       "latMin": 52.338,
       "latMax": 52.675,
       "lngMin": 13.088,
@@ -1530,21 +1530,21 @@
     {
       "id": "berlin-zentral",
       "name": "Berlin Zentral",
-      "data_version": 22,
+      "data_version": 35,
       "symbol": "🌳",
       "lat": 52.52,
       "lng": 13.405,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-zentral-mstidom8.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/berlin-zentral-mstidom8.jpg",
-      "triggerCount": 1027,
-      "zoneCount": 429,
+      "triggerCount": 1637,
+      "zoneCount": 1039,
       "approachCount": 598,
       "subCount": 0,
       "storyCount": 137,
-      "directoryCount": 292,
-      "factCount": 3789,
-      "placeCount": 1027,
-      "gpsCount": 429,
+      "directoryCount": 902,
+      "factCount": 8055,
+      "placeCount": 1637,
+      "gpsCount": 1039,
       "latMin": 52.478,
       "latMax": 52.555,
       "lngMin": 13.29,
@@ -1553,21 +1553,21 @@
     {
       "id": "brandenburg_havel",
       "name": "Brandenburg an der Havel",
-      "data_version": 40,
+      "data_version": 52,
       "symbol": "🌳",
       "lat": 52.4125287,
       "lng": 12.5316444,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/brandenburg_havel-mstidpfh.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/brandenburg_havel-mstidpfh.jpg",
-      "triggerCount": 840,
-      "zoneCount": 488,
+      "triggerCount": 1044,
+      "zoneCount": 692,
       "approachCount": 352,
       "subCount": 0,
       "storyCount": 180,
-      "directoryCount": 308,
-      "factCount": 2709,
-      "placeCount": 840,
-      "gpsCount": 488,
+      "directoryCount": 512,
+      "factCount": 4067,
+      "placeCount": 1044,
+      "gpsCount": 692,
       "latMin": 52.3116314,
       "latMax": 52.5131961,
       "lngMin": 12.3610911,
@@ -2054,21 +2054,21 @@
     {
       "id": "bremen",
       "name": "Bremen",
-      "data_version": 21,
+      "data_version": 34,
       "symbol": "🌳",
       "lat": 53.079296199999995,
       "lng": 8.8016937,
       "cover_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Bremen_1661_Johann_Landwehr.jpg/1280px-Bremen_1661_Johann_Landwehr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Bremen_1661_Johann_Landwehr.jpg/1280px-Bremen_1661_Johann_Landwehr.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "triggerCount": 914,
-      "zoneCount": 406,
+      "triggerCount": 1320,
+      "zoneCount": 812,
       "approachCount": 508,
       "subCount": 0,
       "storyCount": 35,
-      "directoryCount": 371,
-      "factCount": 2507,
-      "placeCount": 914,
-      "gpsCount": 406,
+      "directoryCount": 821,
+      "factCount": 5358,
+      "placeCount": 1320,
+      "gpsCount": 812,
       "latMin": 53.0111644,
       "latMax": 53.2289101,
       "lngMin": 8.4815929,
@@ -2555,21 +2555,21 @@
     {
       "id": "chorin",
       "name": "Chorin",
-      "data_version": 34,
+      "data_version": 47,
       "symbol": "🌳",
       "lat": 52.9038,
       "lng": 13.87274,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/chorin-mstidps3.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/chorin-mstidps3.jpg",
-      "triggerCount": 150,
-      "zoneCount": 95,
+      "triggerCount": 177,
+      "zoneCount": 122,
       "approachCount": 55,
       "subCount": 0,
       "storyCount": 33,
-      "directoryCount": 62,
-      "factCount": 658,
-      "placeCount": 150,
-      "gpsCount": 95,
+      "directoryCount": 89,
+      "factCount": 818,
+      "placeCount": 177,
+      "gpsCount": 122,
       "latMin": 52.8461133,
       "latMax": 52.9674715,
       "lngMin": 13.7422792,
@@ -3051,26 +3051,34 @@
           52.9259158,
           13.7737906
         ]
+      ],
+      "patches": [
+        {
+          "from": 37,
+          "to": 39,
+          "file": "patches/chorin.v37-v39.patch.json",
+          "bytes": 51420
+        }
       ]
     },
     {
       "id": "dresden",
       "name": "Dresden",
-      "data_version": 37,
+      "data_version": 48,
       "symbol": "🌳",
       "lat": 51.0504088,
       "lng": 13.7372621,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/dresden-mstidq40.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/dresden-mstidq40.jpg",
-      "triggerCount": 1128,
-      "zoneCount": 435,
+      "triggerCount": 1592,
+      "zoneCount": 899,
       "approachCount": 693,
       "subCount": 0,
       "storyCount": 289,
-      "directoryCount": 146,
-      "factCount": 2755,
-      "placeCount": 1128,
-      "gpsCount": 435,
+      "directoryCount": 610,
+      "factCount": 5917,
+      "placeCount": 1592,
+      "gpsCount": 899,
       "latMin": 50.9749317,
       "latMax": 51.1776864,
       "lngMin": 13.5793237,
@@ -3557,21 +3565,21 @@
     {
       "id": "duesseldorf",
       "name": "Düsseldorf",
-      "data_version": 37,
+      "data_version": 48,
       "symbol": "🌳",
       "lat": 51.2230411,
       "lng": 6.7824545,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/duesseldorf-mstidqm6.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/duesseldorf-mstidqm6.jpg",
-      "triggerCount": 1868,
-      "zoneCount": 1213,
+      "triggerCount": 2303,
+      "zoneCount": 1648,
       "approachCount": 655,
       "subCount": 0,
       "storyCount": 283,
-      "directoryCount": 930,
-      "factCount": 6254,
-      "placeCount": 1868,
-      "gpsCount": 1213,
+      "directoryCount": 1365,
+      "factCount": 9189,
+      "placeCount": 2303,
+      "gpsCount": 1648,
       "latMin": 51.1243747,
       "latMax": 51.3524872,
       "lngMin": 6.6888147,
@@ -4058,21 +4066,21 @@
     {
       "id": "finsterwalde",
       "name": "Finsterwalde",
-      "data_version": 27,
+      "data_version": 39,
       "symbol": "🌳",
       "lat": 51.6302792,
       "lng": 13.7085021,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/finsterwalde-mt1x6i8w.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/finsterwalde-mt1x6i8w.jpg",
-      "triggerCount": 359,
-      "zoneCount": 197,
+      "triggerCount": 424,
+      "zoneCount": 262,
       "approachCount": 162,
       "subCount": 0,
       "storyCount": 24,
-      "directoryCount": 173,
-      "factCount": 1477,
-      "placeCount": 359,
-      "gpsCount": 197,
+      "directoryCount": 238,
+      "factCount": 1903,
+      "placeCount": 424,
+      "gpsCount": 262,
       "latMin": 51.5188502,
       "latMax": 51.6511382,
       "lngMin": 13.6288187,
@@ -4567,21 +4575,21 @@
     {
       "id": "flensburg",
       "name": "Flensburg",
-      "data_version": 49,
+      "data_version": 61,
       "symbol": "🌳",
       "lat": 54.7937431,
       "lng": 9.4469964,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/flensburg-mstidqxi.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/flensburg-mstidqxi.jpg",
-      "triggerCount": 1012,
-      "zoneCount": 592,
+      "triggerCount": 1187,
+      "zoneCount": 767,
       "approachCount": 420,
       "subCount": 0,
       "storyCount": 83,
-      "directoryCount": 509,
-      "factCount": 3164,
-      "placeCount": 1012,
-      "gpsCount": 592,
+      "directoryCount": 684,
+      "factCount": 4435,
+      "placeCount": 1187,
+      "gpsCount": 767,
       "latMin": 54.7517986,
       "latMax": 54.8370717,
       "lngMin": 9.357298,
@@ -5068,21 +5076,21 @@
     {
       "id": "frankfurt_am_main",
       "name": "Frankfurt am Main",
-      "data_version": 30,
+      "data_version": 41,
       "symbol": "🌳",
       "lat": 50.1109221,
       "lng": 8.6821267,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/frankfurt_am_main-mstidr9t.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/frankfurt_am_main-mstidr9t.jpg",
-      "triggerCount": 1843,
-      "zoneCount": 1251,
+      "triggerCount": 2312,
+      "zoneCount": 1720,
       "approachCount": 592,
       "subCount": 0,
       "storyCount": 250,
-      "directoryCount": 1001,
-      "factCount": 6667,
-      "placeCount": 1843,
-      "gpsCount": 1251,
+      "directoryCount": 1470,
+      "factCount": 9863,
+      "placeCount": 2312,
+      "gpsCount": 1720,
       "latMin": 50.0153529,
       "latMax": 50.2271424,
       "lngMin": 8.4727605,
@@ -5569,21 +5577,21 @@
     {
       "id": "halle_saale",
       "name": "Halle (Saale)",
-      "data_version": 25,
+      "data_version": 37,
       "symbol": "🌳",
       "lat": 51.495356699999995,
       "lng": 11.966237099999999,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/halle_saale-mt1x8x0u.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/halle_saale-mt1x8x0u.jpg",
-      "triggerCount": 1190,
-      "zoneCount": 715,
+      "triggerCount": 1482,
+      "zoneCount": 1007,
       "approachCount": 475,
       "subCount": 0,
       "storyCount": 50,
-      "directoryCount": 665,
-      "factCount": 4081,
-      "placeCount": 1190,
-      "gpsCount": 715,
+      "directoryCount": 957,
+      "factCount": 6125,
+      "placeCount": 1482,
+      "gpsCount": 1007,
       "latMin": 51.4021008,
       "latMax": 51.5435116,
       "lngMin": 11.8552541,
@@ -6078,21 +6086,21 @@
     {
       "id": "hamburg",
       "name": "Hamburg",
-      "data_version": 76,
+      "data_version": 88,
       "symbol": "🌳",
       "lat": 53.5488282,
       "lng": 9.987170299999999,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hamburg-mstidrp4.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hamburg-mstidrp4.jpg",
-      "triggerCount": 1211,
-      "zoneCount": 478,
+      "triggerCount": 1748,
+      "zoneCount": 1015,
       "approachCount": 733,
       "subCount": 0,
       "storyCount": 107,
-      "directoryCount": 371,
-      "factCount": 4320,
-      "placeCount": 1211,
-      "gpsCount": 478,
+      "directoryCount": 908,
+      "factCount": 8103,
+      "placeCount": 1748,
+      "gpsCount": 1015,
       "latMin": 53.3951118,
       "latMax": 53.7394378,
       "lngMin": 9.7301155,
@@ -6579,21 +6587,21 @@
     {
       "id": "hechingen",
       "name": "Zollernstadt Hechingen",
-      "data_version": 49,
+      "data_version": 60,
       "symbol": "🏰",
       "lat": 48.3538888,
       "lng": 8.9613627,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hechingen-mstidtch.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hechingen-mstidtch.jpg",
-      "triggerCount": 341,
-      "zoneCount": 232,
+      "triggerCount": 569,
+      "zoneCount": 460,
       "approachCount": 109,
       "subCount": 0,
       "storyCount": 52,
-      "directoryCount": 180,
-      "factCount": 1541,
-      "placeCount": 341,
-      "gpsCount": 232,
+      "directoryCount": 408,
+      "factCount": 3035,
+      "placeCount": 569,
+      "gpsCount": 460,
       "latMin": 48.3001104,
       "latMax": 48.3908091,
       "lngMin": 8.8907469,
@@ -7080,21 +7088,21 @@
     {
       "id": "hochheim_am_main",
       "name": "Hochheim am Main",
-      "data_version": 30,
+      "data_version": 43,
       "symbol": "🌳",
       "lat": 50.01358260000001,
       "lng": 8.3599322,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hochheim_am_main-mstidu22.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/hochheim_am_main-mstidu22.jpg",
-      "triggerCount": 738,
-      "zoneCount": 476,
+      "triggerCount": 1207,
+      "zoneCount": 945,
       "approachCount": 262,
       "subCount": 0,
       "storyCount": 139,
-      "directoryCount": 337,
-      "factCount": 2597,
-      "placeCount": 738,
-      "gpsCount": 476,
+      "directoryCount": 806,
+      "factCount": 5916,
+      "placeCount": 1207,
+      "gpsCount": 945,
       "latMin": 49.997058,
       "latMax": 50.0581309,
       "lngMin": 8.3301923,
@@ -7581,21 +7589,21 @@
     {
       "id": "kiel",
       "name": "Kiel",
-      "data_version": 24,
+      "data_version": 37,
       "symbol": "🌳",
       "lat": 54.323292699999996,
       "lng": 10.1227652,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/kiel-mt3ab68a.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/kiel-mt3ab68a.jpg",
-      "triggerCount": 975,
-      "zoneCount": 408,
+      "triggerCount": 1354,
+      "zoneCount": 787,
       "approachCount": 567,
       "subCount": 0,
       "storyCount": 42,
-      "directoryCount": 366,
-      "factCount": 2480,
-      "placeCount": 975,
-      "gpsCount": 408,
+      "directoryCount": 790,
+      "factCount": 4795,
+      "placeCount": 1354,
+      "gpsCount": 787,
       "latMin": 54.2507055,
       "latMax": 54.4333247,
       "lngMin": 10.0329284,
@@ -8082,21 +8090,21 @@
     {
       "id": "koeln",
       "name": "Köln",
-      "data_version": 34,
+      "data_version": 45,
       "symbol": "🌳",
       "lat": 50.937531,
       "lng": 6.9602786,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/koeln-mstidudf.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/koeln-mstidudf.jpg",
-      "triggerCount": 1188,
-      "zoneCount": 457,
+      "triggerCount": 1739,
+      "zoneCount": 1008,
       "approachCount": 731,
       "subCount": 0,
       "storyCount": 307,
-      "directoryCount": 150,
-      "factCount": 2848,
-      "placeCount": 1188,
-      "gpsCount": 457,
+      "directoryCount": 701,
+      "factCount": 6508,
+      "placeCount": 1739,
+      "gpsCount": 1008,
       "latMin": 50.8304399,
       "latMax": 51.0849743,
       "lngMin": 6.7725303,
@@ -8583,21 +8591,21 @@
     {
       "id": "korbach",
       "name": "Korbach",
-      "data_version": 40,
+      "data_version": 51,
       "symbol": "🌳",
       "lat": 51.2774069,
       "lng": 8.8709876,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/korbach-mstidv25.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/korbach-mstidv25.jpg",
-      "triggerCount": 512,
-      "zoneCount": 280,
+      "triggerCount": 757,
+      "zoneCount": 525,
       "approachCount": 232,
       "subCount": 0,
       "storyCount": 18,
-      "directoryCount": 262,
-      "factCount": 1677,
-      "placeCount": 512,
-      "gpsCount": 280,
+      "directoryCount": 507,
+      "factCount": 3373,
+      "placeCount": 757,
+      "gpsCount": 525,
       "latMin": 51.2087802,
       "latMax": 51.3339468,
       "lngMin": 8.7274478,
@@ -9084,21 +9092,21 @@
     {
       "id": "laboe",
       "name": "Laboe",
-      "data_version": 52,
+      "data_version": 64,
       "symbol": "🌳",
       "lat": 54.4022362,
       "lng": 10.2255695,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/laboe-mstidvbx.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/laboe-mstidvbx.jpg",
-      "triggerCount": 401,
-      "zoneCount": 238,
+      "triggerCount": 673,
+      "zoneCount": 510,
       "approachCount": 163,
       "subCount": 0,
       "storyCount": 30,
-      "directoryCount": 208,
-      "factCount": 1296,
-      "placeCount": 401,
-      "gpsCount": 238,
+      "directoryCount": 480,
+      "factCount": 3258,
+      "placeCount": 673,
+      "gpsCount": 510,
       "latMin": 54.3871933,
       "latMax": 54.4163771,
       "lngMin": 10.209264,
@@ -9580,26 +9588,34 @@
           54.3962,
           10.2096167
         ]
+      ],
+      "patches": [
+        {
+          "from": 55,
+          "to": 57,
+          "file": "patches/laboe.v55-v57.patch.json",
+          "bytes": 50708
+        }
       ]
     },
     {
       "id": "lissabon",
       "name": "Lissabon",
-      "data_version": 64,
+      "data_version": 75,
       "symbol": "🌊",
       "lat": 38.7223,
       "lng": -9.1393,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/lissabon-mstidvr7.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/lissabon-mstidvr7.jpg",
-      "triggerCount": 688,
-      "zoneCount": 352,
+      "triggerCount": 1192,
+      "zoneCount": 856,
       "approachCount": 336,
       "subCount": 0,
       "storyCount": 94,
-      "directoryCount": 258,
-      "factCount": 3367,
-      "placeCount": 688,
-      "gpsCount": 352,
+      "directoryCount": 762,
+      "factCount": 6644,
+      "placeCount": 1192,
+      "gpsCount": 856,
       "latMin": 38.6731469,
       "latMax": 39.3177287,
       "lngMin": -9.5005266,
@@ -10086,21 +10102,21 @@
     {
       "id": "london",
       "name": "London",
-      "data_version": 64,
+      "data_version": 75,
       "symbol": "🇬🇧",
       "lat": 51.5072178,
       "lng": -0.12758619999999998,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/london-mstidw4z.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/london-mstidw4z.jpg",
-      "triggerCount": 1313,
-      "zoneCount": 520,
+      "triggerCount": 1960,
+      "zoneCount": 1167,
       "approachCount": 793,
       "subCount": 0,
       "storyCount": 70,
-      "directoryCount": 450,
-      "factCount": 4032,
-      "placeCount": 1313,
-      "gpsCount": 520,
+      "directoryCount": 1097,
+      "factCount": 8399,
+      "placeCount": 1960,
+      "gpsCount": 1167,
       "latMin": 51.2867601,
       "latMax": 51.6918741,
       "lngMin": -0.5103751,
@@ -10587,21 +10603,21 @@
     {
       "id": "luebeck",
       "name": "Lübeck",
-      "data_version": 56,
+      "data_version": 67,
       "symbol": "🌳",
       "lat": 53.8654673,
       "lng": 10.6865593,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/luebeck-mstidwh1.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/luebeck-mstidwh1.jpg",
-      "triggerCount": 1134,
-      "zoneCount": 877,
+      "triggerCount": 1342,
+      "zoneCount": 1085,
       "approachCount": 257,
       "subCount": 0,
       "storyCount": 91,
-      "directoryCount": 786,
-      "factCount": 5080,
-      "placeCount": 1134,
-      "gpsCount": 877,
+      "directoryCount": 994,
+      "factCount": 6663,
+      "placeCount": 1342,
+      "gpsCount": 1085,
       "latMin": 53.7680103,
       "latMax": 53.9940188,
       "lngMin": 10.5540402,
@@ -11088,21 +11104,21 @@
     {
       "id": "muenchen",
       "name": "München",
-      "data_version": 28,
+      "data_version": 39,
       "symbol": "🌳",
       "lat": 48.1351253,
       "lng": 11.5819806,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/muenchen-mstidwst.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/muenchen-mstidwst.jpg",
-      "triggerCount": 2048,
-      "zoneCount": 1400,
+      "triggerCount": 2553,
+      "zoneCount": 1905,
       "approachCount": 648,
       "subCount": 0,
       "storyCount": 278,
-      "directoryCount": 1122,
-      "factCount": 7387,
-      "placeCount": 2048,
-      "gpsCount": 1400,
+      "directoryCount": 1627,
+      "factCount": 10843,
+      "placeCount": 2553,
+      "gpsCount": 1905,
       "latMin": 48.0616244,
       "latMax": 48.2481162,
       "lngMin": 11.360777,
@@ -11589,21 +11605,21 @@
     {
       "id": "oranienburg",
       "name": "Oranienburg",
-      "data_version": 36,
+      "data_version": 47,
       "symbol": "🌳",
       "lat": 52.7557351,
       "lng": 13.2408643,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/oranienburg-mstidxd3.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/oranienburg-mstidxd3.jpg",
-      "triggerCount": 616,
-      "zoneCount": 335,
+      "triggerCount": 888,
+      "zoneCount": 607,
       "approachCount": 281,
       "subCount": 0,
       "storyCount": 142,
-      "directoryCount": 193,
-      "factCount": 2022,
-      "placeCount": 616,
-      "gpsCount": 335,
+      "directoryCount": 465,
+      "factCount": 3886,
+      "placeCount": 888,
+      "gpsCount": 607,
       "latMin": 52.7093903,
       "latMax": 52.8464685,
       "lngMin": 13.1309636,
@@ -12090,21 +12106,21 @@
     {
       "id": "pinneberg",
       "name": "Pinneberg",
-      "data_version": 69,
+      "data_version": 82,
       "symbol": "🌳",
       "lat": 53.661,
       "lng": 9.7966,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/pinneberg-mstidxpf.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/pinneberg-mstidxpf.jpg",
-      "triggerCount": 479,
-      "zoneCount": 406,
+      "triggerCount": 757,
+      "zoneCount": 684,
       "approachCount": 73,
       "subCount": 0,
       "storyCount": 21,
-      "directoryCount": 385,
-      "factCount": 2514,
-      "placeCount": 479,
-      "gpsCount": 406,
+      "directoryCount": 663,
+      "factCount": 4535,
+      "placeCount": 757,
+      "gpsCount": 684,
       "latMin": 53.6086307,
       "latMax": 53.6838731,
       "lngMin": 9.7636444,
@@ -12586,26 +12602,34 @@
           53.6566101,
           9.7650772
         ]
+      ],
+      "patches": [
+        {
+          "from": 73,
+          "to": 74,
+          "file": "patches/pinneberg.v73-v74.patch.json",
+          "bytes": 116
+        }
       ]
     },
     {
       "id": "potsdam",
       "name": "Potsdam",
-      "data_version": 32,
+      "data_version": 43,
       "symbol": "🌳",
       "lat": 52.3905689,
       "lng": 13.0644729,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/potsdam-mstidy3y.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/potsdam-mstidy3y.jpg",
-      "triggerCount": 1360,
-      "zoneCount": 804,
+      "triggerCount": 1697,
+      "zoneCount": 1141,
       "approachCount": 556,
       "subCount": 0,
       "storyCount": 264,
-      "directoryCount": 540,
-      "factCount": 4471,
-      "placeCount": 1360,
-      "gpsCount": 804,
+      "directoryCount": 877,
+      "factCount": 6801,
+      "placeCount": 1697,
+      "gpsCount": 1141,
       "latMin": 52.3420411,
       "latMax": 52.5146876,
       "lngMin": 12.8867757,
@@ -13092,21 +13116,21 @@
     {
       "id": "prisdorf",
       "name": "Prisdorf",
-      "data_version": 84,
+      "data_version": 108,
       "symbol": "🌳",
       "lat": 53.6799982,
       "lng": 9.7606944,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/prisdorf-msjjrdwz.png",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/prisdorf-msjjrdwz.png",
-      "triggerCount": 264,
-      "zoneCount": 153,
+      "triggerCount": 464,
+      "zoneCount": 353,
       "approachCount": 111,
       "subCount": 0,
-      "storyCount": 30,
-      "directoryCount": 123,
-      "factCount": 1810,
-      "placeCount": 264,
-      "gpsCount": 153,
+      "storyCount": 29,
+      "directoryCount": 324,
+      "factCount": 3386,
+      "placeCount": 464,
+      "gpsCount": 353,
       "latMin": 53.662776,
       "latMax": 53.6968562,
       "lngMin": 9.7449903,
@@ -13539,31 +13563,31 @@
       ],
       "patches": [
         {
-          "from": 74,
-          "to": 76,
-          "file": "patches/prisdorf.v74-v76.patch.json",
-          "bytes": 88695
+          "from": 84,
+          "to": 85,
+          "file": "patches/prisdorf.v84-v85.patch.json",
+          "bytes": 256
         }
       ]
     },
     {
       "id": "rheinsberg",
       "name": "Rheinsberg",
-      "data_version": 37,
+      "data_version": 48,
       "symbol": "🌳",
       "lat": 53.0983691,
       "lng": 12.8974874,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/rheinsberg-mstidyuu.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/rheinsberg-mstidyuu.jpg",
-      "triggerCount": 312,
-      "zoneCount": 140,
+      "triggerCount": 376,
+      "zoneCount": 204,
       "approachCount": 172,
       "subCount": 0,
       "storyCount": 82,
-      "directoryCount": 58,
-      "factCount": 913,
-      "placeCount": 312,
-      "gpsCount": 140,
+      "directoryCount": 122,
+      "factCount": 1327,
+      "placeCount": 376,
+      "gpsCount": 204,
       "latMin": 53.0014016,
       "latMax": 53.210074,
       "lngMin": 12.6416337,
@@ -14050,21 +14074,21 @@
     {
       "id": "spreewald",
       "name": "Lübbenau",
-      "data_version": 39,
+      "data_version": 50,
       "symbol": "🌳",
       "lat": 51.8654806,
       "lng": 13.9539622,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/spreewald-mstidz6o.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/spreewald-mstidz6o.jpg",
-      "triggerCount": 443,
-      "zoneCount": 228,
+      "triggerCount": 568,
+      "zoneCount": 353,
       "approachCount": 215,
       "subCount": 0,
       "storyCount": 104,
-      "directoryCount": 124,
-      "factCount": 1415,
-      "placeCount": 443,
-      "gpsCount": 228,
+      "directoryCount": 249,
+      "factCount": 2292,
+      "placeCount": 568,
+      "gpsCount": 353,
       "latMin": 51.7615405,
       "latMax": 51.9026761,
       "lngMin": 13.8273245,
@@ -14546,26 +14570,34 @@
           51.8669755,
           13.835938
         ]
+      ],
+      "patches": [
+        {
+          "from": 41,
+          "to": 43,
+          "file": "patches/spreewald.v41-v43.patch.json",
+          "bytes": 65436
+        }
       ]
     },
     {
       "id": "stuttgart",
       "name": "Stuttgart",
-      "data_version": 35,
+      "data_version": 46,
       "symbol": "🌳",
       "lat": 48.7758459,
       "lng": 9.1829321,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/stuttgart-mstidzja.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/stuttgart-mstidzja.jpg",
-      "triggerCount": 1658,
-      "zoneCount": 1020,
+      "triggerCount": 2142,
+      "zoneCount": 1504,
       "approachCount": 638,
       "subCount": 0,
       "storyCount": 268,
-      "directoryCount": 752,
-      "factCount": 5446,
-      "placeCount": 1658,
-      "gpsCount": 1020,
+      "directoryCount": 1236,
+      "factCount": 8760,
+      "placeCount": 2142,
+      "gpsCount": 1504,
       "latMin": 48.6920188,
       "latMax": 48.8663994,
       "lngMin": 9.0386007,
@@ -15052,21 +15084,21 @@
     {
       "id": "tettnang",
       "name": "Tettnang",
-      "data_version": 45,
+      "data_version": 56,
       "symbol": "🌿",
       "lat": 47.6681722,
       "lng": 9.5916036,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tettnang-mstidzv2.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tettnang-mstidzv2.jpg",
-      "triggerCount": 401,
-      "zoneCount": 282,
+      "triggerCount": 696,
+      "zoneCount": 577,
       "approachCount": 119,
       "subCount": 0,
       "storyCount": 17,
-      "directoryCount": 265,
-      "factCount": 1620,
-      "placeCount": 401,
-      "gpsCount": 282,
+      "directoryCount": 560,
+      "factCount": 3675,
+      "placeCount": 696,
+      "gpsCount": 577,
       "latMin": 47.6036817,
       "latMax": 47.7055265,
       "lngMin": 9.5440703,
@@ -15548,26 +15580,34 @@
           47.6734045,
           9.5498097
         ]
+      ],
+      "patches": [
+        {
+          "from": 47,
+          "to": 49,
+          "file": "patches/tettnang.v47-v49.patch.json",
+          "bytes": 90641
+        }
       ]
     },
     {
       "id": "tornesch",
       "name": "Tornesch",
-      "data_version": 55,
+      "data_version": 68,
       "symbol": "🌳",
       "lat": 53.6973396,
       "lng": 9.7123761,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tornesch-mstie07f.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/tornesch-mstie07f.jpg",
-      "triggerCount": 423,
-      "zoneCount": 310,
+      "triggerCount": 550,
+      "zoneCount": 437,
       "approachCount": 113,
       "subCount": 0,
       "storyCount": 18,
-      "directoryCount": 292,
-      "factCount": 1650,
-      "placeCount": 423,
-      "gpsCount": 310,
+      "directoryCount": 419,
+      "factCount": 2648,
+      "placeCount": 550,
+      "gpsCount": 437,
       "latMin": 53.6728196,
       "latMax": 53.7246346,
       "lngMin": 9.6951852,
@@ -16054,21 +16094,21 @@
     {
       "id": "wandlitz",
       "name": "Wandlitz",
-      "data_version": 38,
+      "data_version": 49,
       "symbol": "🌳",
       "lat": 52.75422,
       "lng": 13.47277,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wandlitz-mstie0vk.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wandlitz-mstie0vk.jpg",
-      "triggerCount": 379,
-      "zoneCount": 204,
+      "triggerCount": 484,
+      "zoneCount": 309,
       "approachCount": 175,
       "subCount": 0,
       "storyCount": 78,
-      "directoryCount": 126,
-      "factCount": 1329,
-      "placeCount": 379,
-      "gpsCount": 204,
+      "directoryCount": 231,
+      "factCount": 2048,
+      "placeCount": 484,
+      "gpsCount": 309,
       "latMin": 52.6354682,
       "latMax": 52.8765924,
       "lngMin": 13.3922586,
@@ -16555,21 +16595,21 @@
     {
       "id": "wangerooge",
       "name": "Wangerooge",
-      "data_version": 67,
+      "data_version": 82,
       "symbol": "🏝️",
       "lat": 53.7902,
       "lng": 7.8995,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wangerooge-mstie171.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/wangerooge-mstie171.jpg",
-      "triggerCount": 386,
-      "zoneCount": 175,
+      "triggerCount": 388,
+      "zoneCount": 177,
       "approachCount": 211,
       "subCount": 0,
       "storyCount": 18,
-      "directoryCount": 157,
-      "factCount": 2496,
-      "placeCount": 386,
-      "gpsCount": 175,
+      "directoryCount": 159,
+      "factCount": 2343,
+      "placeCount": 388,
+      "gpsCount": 177,
       "latMin": 53.775733,
       "latMax": 53.7944825,
       "lngMin": 7.8466296,
@@ -17056,21 +17096,21 @@
     {
       "id": "werder",
       "name": "Werder (Havel)",
-      "data_version": 40,
+      "data_version": 51,
       "symbol": "🌳",
       "lat": 52.3764709,
       "lng": 12.9341448,
       "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/werder-mstie1j6.jpg",
       "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/werder-mstie1j6.jpg",
-      "triggerCount": 678,
-      "zoneCount": 368,
+      "triggerCount": 1057,
+      "zoneCount": 747,
       "approachCount": 310,
       "subCount": 0,
       "storyCount": 157,
-      "directoryCount": 211,
-      "factCount": 2045,
-      "placeCount": 678,
-      "gpsCount": 368,
+      "directoryCount": 590,
+      "factCount": 4738,
+      "placeCount": 1057,
+      "gpsCount": 747,
       "latMin": 52.2988481,
       "latMax": 52.4603865,
       "lngMin": 12.8003979,
@@ -17553,6 +17593,573 @@
           12.8081053
         ]
       ]
+    },
+    {
+      "id": "danzig",
+      "name": "Danzig",
+      "data_version": 36,
+      "symbol": "🌳",
+      "lat": 54.35202520000001,
+      "lng": 18.6466384,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/danzig-muad3bcp.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/danzig-muad3bcp.jpg",
+      "triggerCount": 1563,
+      "zoneCount": 1045,
+      "approachCount": 518,
+      "subCount": 0,
+      "storyCount": 87,
+      "directoryCount": 1000,
+      "factCount": 6761,
+      "placeCount": 1563,
+      "gpsCount": 1045,
+      "latMin": 54.2749189,
+      "latMax": 54.46640982261942,
+      "lngMin": 18.4294955,
+      "lngMax": 18.998945577312117,
+      "polygon": [
+        [
+          54.3850491,
+          18.4294955
+        ],
+        [
+          54.3807987,
+          18.4376912
+        ],
+        [
+          54.3737933,
+          18.4446128
+        ],
+        [
+          54.3658286,
+          18.4440927
+        ],
+        [
+          54.3573894,
+          18.4410685
+        ],
+        [
+          54.3556097,
+          18.4540007
+        ],
+        [
+          54.3525669,
+          18.462677
+        ],
+        [
+          54.3485019,
+          18.4675971
+        ],
+        [
+          54.3414097,
+          18.4646211
+        ],
+        [
+          54.3351664,
+          18.4588032
+        ],
+        [
+          54.3299482,
+          18.4634413
+        ],
+        [
+          54.3259167,
+          18.4786105
+        ],
+        [
+          54.3201193,
+          18.482691
+        ],
+        [
+          54.3177704,
+          18.4902919
+        ],
+        [
+          54.3223219,
+          18.4910941
+        ],
+        [
+          54.3295161,
+          18.494352
+        ],
+        [
+          54.3352123,
+          18.5075425
+        ],
+        [
+          54.3352604,
+          18.5238442
+        ],
+        [
+          54.3354971,
+          18.5329106
+        ],
+        [
+          54.3325687,
+          18.5317043
+        ],
+        [
+          54.3268936,
+          18.5344466
+        ],
+        [
+          54.3218399,
+          18.5349982
+        ],
+        [
+          54.319677,
+          18.5335432
+        ],
+        [
+          54.3140107,
+          18.5402728
+        ],
+        [
+          54.3124956,
+          18.5473873
+        ],
+        [
+          54.3171198,
+          18.5518103
+        ],
+        [
+          54.3181756,
+          18.5562614
+        ],
+        [
+          54.3184825,
+          18.561153
+        ],
+        [
+          54.3163882,
+          18.5667357
+        ],
+        [
+          54.3131948,
+          18.5705259
+        ],
+        [
+          54.3100858,
+          18.5710588
+        ],
+        [
+          54.3071325,
+          18.5720213
+        ],
+        [
+          54.3037569,
+          18.5743791
+        ],
+        [
+          54.3032639,
+          18.58003
+        ],
+        [
+          54.3031246,
+          18.5817855
+        ],
+        [
+          54.3025321,
+          18.5837857
+        ],
+        [
+          54.3030207,
+          18.5857655
+        ],
+        [
+          54.3042737,
+          18.5879821
+        ],
+        [
+          54.3053853,
+          18.5933156
+        ],
+        [
+          54.304635,
+          18.5960726
+        ],
+        [
+          54.3025764,
+          18.5997803
+        ],
+        [
+          54.3000601,
+          18.6037105
+        ],
+        [
+          54.29601,
+          18.6043087
+        ],
+        [
+          54.2915626,
+          18.6107085
+        ],
+        [
+          54.2883177,
+          18.6044942
+        ],
+        [
+          54.2859981,
+          18.5997489
+        ],
+        [
+          54.2849169,
+          18.5990735
+        ],
+        [
+          54.2837406,
+          18.6054127
+        ],
+        [
+          54.2786081,
+          18.6251843
+        ],
+        [
+          54.2797905,
+          18.6387942
+        ],
+        [
+          54.2906468,
+          18.6393812
+        ],
+        [
+          54.292563,
+          18.6505003
+        ],
+        [
+          54.29785,
+          18.6744585
+        ],
+        [
+          54.3024383,
+          18.6894192
+        ],
+        [
+          54.3084166,
+          18.6879264
+        ],
+        [
+          54.3132645,
+          18.6897923
+        ],
+        [
+          54.3148253,
+          18.699051
+        ],
+        [
+          54.3131214,
+          18.7035599
+        ],
+        [
+          54.3202236,
+          18.7112108
+        ],
+        [
+          54.3237076,
+          18.7139379
+        ],
+        [
+          54.3317357,
+          18.7202793
+        ],
+        [
+          54.3410563,
+          18.7276024
+        ],
+        [
+          54.3404377,
+          18.7339067
+        ],
+        [
+          54.3411618,
+          18.7437433
+        ],
+        [
+          54.3387549,
+          18.7481455
+        ],
+        [
+          54.3351747,
+          18.7517577
+        ],
+        [
+          54.3338806,
+          18.7610757
+        ],
+        [
+          54.3369267,
+          18.7743663
+        ],
+        [
+          54.3397749,
+          18.7791624
+        ],
+        [
+          54.3434185,
+          18.7895447
+        ],
+        [
+          54.3446943,
+          18.8147025
+        ],
+        [
+          54.3297829,
+          18.8386158
+        ],
+        [
+          54.3194465,
+          18.8610464
+        ],
+        [
+          54.3185622,
+          18.8616908
+        ],
+        [
+          54.3180236,
+          18.862531
+        ],
+        [
+          54.31686,
+          18.8637641
+        ],
+        [
+          54.3158423,
+          18.8646848
+        ],
+        [
+          54.3125139,
+          18.8843858
+        ],
+        [
+          54.3115889,
+          18.9110292
+        ],
+        [
+          54.2884129,
+          18.9223578
+        ],
+        [
+          54.2974955,
+          18.9342137
+        ],
+        [
+          54.3372202,
+          18.941221
+        ],
+        [
+          54.4663838,
+          18.6430624
+        ],
+        [
+          54.4282,
+          18.5878304
+        ],
+        [
+          54.4257571,
+          18.578997
+        ],
+        [
+          54.4237182,
+          18.5715859
+        ],
+        [
+          54.4224048,
+          18.5615074
+        ],
+        [
+          54.4204657,
+          18.5578728
+        ],
+        [
+          54.4221376,
+          18.5494184
+        ],
+        [
+          54.4216227,
+          18.5408764
+        ],
+        [
+          54.4231929,
+          18.5291395
+        ],
+        [
+          54.42275,
+          18.5075443
+        ],
+        [
+          54.4272276,
+          18.5024599
+        ],
+        [
+          54.4288615,
+          18.4963121
+        ],
+        [
+          54.427973,
+          18.4880932
+        ],
+        [
+          54.4284609,
+          18.4824859
+        ],
+        [
+          54.4298532,
+          18.4907862
+        ],
+        [
+          54.4352455,
+          18.4887482
+        ],
+        [
+          54.4328796,
+          18.4800496
+        ],
+        [
+          54.4330144,
+          18.4742857
+        ],
+        [
+          54.4350346,
+          18.4700491
+        ],
+        [
+          54.4397909,
+          18.4680762
+        ],
+        [
+          54.44535,
+          18.4599296
+        ],
+        [
+          54.4468181,
+          18.4556015
+        ],
+        [
+          54.4442154,
+          18.4517189
+        ],
+        [
+          54.4391659,
+          18.4489321
+        ],
+        [
+          54.4400029,
+          18.4440141
+        ],
+        [
+          54.439439,
+          18.4376691
+        ],
+        [
+          54.4359626,
+          18.451487
+        ],
+        [
+          54.4352212,
+          18.4569173
+        ],
+        [
+          54.433169,
+          18.4572325
+        ],
+        [
+          54.4182407,
+          18.4486262
+        ],
+        [
+          54.4134574,
+          18.4453153
+        ],
+        [
+          54.4080756,
+          18.4469354
+        ],
+        [
+          54.40775,
+          18.4640983
+        ],
+        [
+          54.4019342,
+          18.4642152
+        ],
+        [
+          54.3998658,
+          18.4630641
+        ],
+        [
+          54.3961903,
+          18.457266
+        ],
+        [
+          54.3872525,
+          18.4353137
+        ],
+        [
+          54.3851942,
+          18.4296024
+        ]
+      ],
+      "patches": [
+        {
+          "from": 26,
+          "to": 27,
+          "file": "patches/danzig.v26-v27.patch.json",
+          "bytes": 16186
+        }
+      ]
+    },
+    {
+      "id": "bornholm",
+      "name": "Bornholm",
+      "data_version": 51,
+      "symbol": "🌳",
+      "lat": 55.160427999999996,
+      "lng": 14.866883600000001,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/bornholm-muazwqt0.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/bornholm-muazwqt0.jpg",
+      "triggerCount": 604,
+      "zoneCount": 542,
+      "approachCount": 62,
+      "subCount": 0,
+      "storyCount": 51,
+      "directoryCount": 521,
+      "factCount": 2664,
+      "placeCount": 604,
+      "gpsCount": 542,
+      "latMin": 55.12843,
+      "latMax": 55.19243,
+      "lngMin": 14.81087,
+      "lngMax": 14.9229,
+      "patches": [
+        {
+          "from": 50,
+          "to": 51,
+          "file": "patches/bornholm.v50-v51.patch.json",
+          "bytes": 55381
+        }
+      ]
+    },
+    {
+      "id": "roenne",
+      "name": "Rønne",
+      "data_version": 21,
+      "symbol": "🌳",
+      "lat": 55.101017,
+      "lng": 14.708328999999999,
+      "cover_url": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/roenne-muafrx0s.jpg",
+      "coverUrl": "https://evswmsydbmrzzjjfynvj.supabase.co/storage/v1/object/public/staedte/covers/roenne-muafrx0s.jpg",
+      "triggerCount": 470,
+      "zoneCount": 226,
+      "approachCount": 244,
+      "subCount": 0,
+      "storyCount": 26,
+      "directoryCount": 200,
+      "factCount": 1240,
+      "placeCount": 470,
+      "gpsCount": 226,
+      "latMin": 55.06902,
+      "latMax": 55.13302,
+      "lngMin": 14.6524,
+      "lngMax": 14.76426
     }
   ]
 }

@@ -70,9 +70,36 @@ import { tickGrowthOnGps } from './growthModule';
 
 /**
  * Ambient „was heute geht“ (10 Min App offen + 60 s Stille → Events ~5 km;
- * max. 1 Ansage / 8 h).
+ * max. 1 Ansage / 2 h). Venue-Walk-By (~420 m Arena/Theater) läuft früher
+ * am GPS-Tick — teilt denselben Cooldown.
  */
 async function tickTemporaryLiveSpots(lat: number, lng: number): Promise<void> {
+  try {
+    const { homeMapShouldPause } = require('../services/ui/homeMapPause') as {
+      homeMapShouldPause: () => boolean;
+    };
+    if (homeMapShouldPause()) return;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { getSmoothedSpeedMs } = require('../services/navigation/transportMode') as {
+      getSmoothedSpeedMs: () => number;
+    };
+    // Zug/Transit: Ambient-Gates nicht jeden GPS-Tick fahren.
+    if (getSmoothedSpeedMs() >= 8.3) return;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { tickVenueWalkByPitch } = await import(
+      '../services/research/venueWalkByPitch'
+    );
+    const walked = await tickVenueWalkByPitch(lat, lng);
+    if (walked) return;
+  } catch (err) {
+    if (__DEV__) console.warn('[explore] venue walk-by pitch', err);
+  }
   try {
     const { tickAmbientEventPitch } = await import(
       '../services/research/ambientEventPitch'
@@ -127,6 +154,13 @@ export async function triggerPoiArrival(
       }
       return;
     }
+  }
+
+  if (!(poiId >= 0)) {
+    if (__DEV__) {
+      console.warn('[geofence] skip invalid poiId:', poiId);
+    }
+    return;
   }
 
   const pendingWatch = getPendingInterestWatch();

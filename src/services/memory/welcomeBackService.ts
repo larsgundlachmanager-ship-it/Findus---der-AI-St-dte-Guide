@@ -1,8 +1,10 @@
 /**
  * Welcome-Back Protocol:
  * - Volle Willkommensnachricht höchstens 1× / 72 h
- * - Nach App-Schließen: Begrüßung + Vorschläge erst ab ≥ 3 h Idle
- * - Frühestens 2 h nach Einrichtung (kein „alles klar bei dir“ direkt nach Setup)
+ * - Nach App-Schließen: Begrüßung erst ab ≥ 24 h Idle (selber Kalendertag = still)
+ * - Kein Chat-Thread-Continue; kein leeres „Womit starten wir?“ — User startet Themen selbst
+ * - Nur sprechen bei Substanz: Morgen-Briefing und/oder offener Timeline-Plan
+ * - Frühestens 2 h nach Einrichtung
  * - Gesagtes merken → kein identischer Text bei jedem Neustart
  */
 
@@ -25,15 +27,15 @@ const STATE_PATH = `${FileSystem.documentDirectory}findus-welcome-back.json`;
 
 /**
  * Mind. Pause bevor begrüßt / Vorschläge gemacht werden.
- * Darunter: still (kein „Hallo … Guten Abend“ + Ideen).
+ * Darunter / selber Kalendertag: still (User öffnet App → normal, Themen selbst).
  */
-export const LIGHT_GREETING_IDLE_MS = 3 * 60 * 60_000;
-/** Plan-/Erlebnis-Recall + Vorschläge (gleicher Floor wie Begrüßung) */
-export const PLAN_RECALL_IDLE_MS = 3 * 60 * 60_000;
-/** Alias / Fallback wenn lastActiveAtMs fehlt — gleiche 3h-Schwelle */
+export const LIGHT_GREETING_IDLE_MS = 24 * 60 * 60_000;
+/** Timeline-Plan-Recall (gleicher Floor wie Begrüßung) */
+export const PLAN_RECALL_IDLE_MS = 24 * 60 * 60_000;
+/** Alias / Fallback wenn lastActiveAtMs fehlt — gleiche 24h-Schwelle */
 export const WELCOME_IDLE_MS = LIGHT_GREETING_IDLE_MS;
 /** „Cool dass du wieder da bist“-Schwelle */
-export const LONG_AWAY_IDLE_MS = 6 * 60 * 60_000;
+export const LONG_AWAY_IDLE_MS = 48 * 60 * 60_000;
 /** Volle Welcome-Back-Nachricht max. alle 72 h */
 export const FULL_WELCOME_COOLDOWN_MS = 72 * 60 * 60_000;
 /** Nach Einrichtung: kein Welcome-Back / Check-in vor Ablauf */
@@ -171,6 +173,64 @@ function wasSaidRecently(state: WelcomeBackState, speech: string): boolean {
   );
 }
 
+/**
+ * Nur offener Timeline-/Session-Plan — keine Chat-Threads (Kathedrale/Tower…).
+ * User startet Gesprächsthemen selbst nach App-Öffnen.
+ */
+function formatOpenTimelinePlanForWelcome(max = 4): string {
+  const lines: string[] = [];
+  try {
+    const plan = useSessionPlanStore.getState().plan;
+    if (plan?.active && Array.isArray(plan.stops)) {
+      for (const s of plan.stops) {
+        if (s.done) continue;
+        const label = String(s.label || '').trim();
+        if (label) lines.push(label);
+        if (lines.length >= max) break;
+      }
+    }
+  } catch {
+    /* soft */
+  }
+  if (lines.length < max) {
+    try {
+      const { todayDateKey } = require('../../utils/dateKeys') as {
+        todayDateKey: () => string;
+      };
+      const { readFuturePlanSnapshot } = require('../../module2/timeline/futurePlanState') as {
+        readFuturePlanSnapshot: () => {
+          dayKey?: string;
+          stops?: Array<{ title?: string; status?: string; plannedStartMs?: number | null }>;
+        };
+      };
+      const snap = readFuturePlanSnapshot();
+      const today = todayDateKey();
+      if (snap?.dayKey === today && Array.isArray(snap.stops)) {
+        const now = Date.now();
+        for (const s of snap.stops) {
+          if (s.status === 'done') continue;
+          const title = String(s.title || '').trim();
+          if (!title) continue;
+          if (
+            typeof s.plannedStartMs === 'number' &&
+            Number.isFinite(s.plannedStartMs) &&
+            s.plannedStartMs < now - 30 * 60_000
+          ) {
+            continue;
+          }
+          if (lines.some((l) => l.toLowerCase() === title.toLowerCase())) continue;
+          lines.push(title);
+          if (lines.length >= max) break;
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
+  if (!lines.length) return '';
+  return lines.map((l) => `• ${l}`).join('\n');
+}
+
 /** Mark today as active calendar day (ohne Idle-Reset). */
 export async function touchActiveDay(): Promise<string> {
   const today = localDayKey();
@@ -285,44 +345,31 @@ async function composeFullWelcomeSpeech(opts: {
   const isMorning = daypartNow() === 'morning';
   const briefing = opts.morningBriefing?.trim() || '';
 
-  let threadRecall = '';
-  try {
-    const {
-      loadConversationThreads,
-      formatResumableThreadsForWelcome,
-    } = require('./conversationThreads') as {
-      loadConversationThreads: () => Promise<unknown>;
-      formatResumableThreadsForWelcome: (max?: number) => string;
-    };
-    await loadConversationThreads();
-    threadRecall = formatResumableThreadsForWelcome(3);
-  } catch {
-    threadRecall = '';
-  }
+  const timelinePlan = formatOpenTimelinePlanForWelcome(4);
 
   if (hasGeminiApiKey()) {
     const prompt = [
       'Du bist Yorro — lockerer Reisebegleiter auf Deutsch.',
       isMorning && briefing
         ? 'Schreib GENAU EINEN Morgen-Bericht (max. 95 Wörter). FLOW: Gruß → gestern kurz → heute Highlights → Druck/entspannt → Wetter+Kleidung → ggf. Todos/Reise. Leere Slots stumm. Wortlaut frei. Keine Meta („erst sag ich…“, „jetzt zum Wetter“) — flüssig einweben.'
-        : 'Schreib GENAU EINE kurze Welcome-Back-Begrüßung (max. 42 Wörter).',
+        : 'Schreib GENAU EINE kurze Welcome-Back-Notiz (max. 36 Wörter) — nur wegen offenem Timeline-Plan.',
       'Regeln:',
       '- Du-Form, natürlich, kein Markdown, kein Emoji-Overkill.',
       '- Nur Belegtes aus KONTEXT — nichts erfinden, nichts Leeres erwähnen.',
       isMorning && briefing
         ? '- Wenn offener Wecker + User schon wach: anerkennen und fragen, ob der Wecker gelöscht werden soll.'
-        : '- Referenziere KONKRET etwas aus dem Kontext (Ort, Plan, Hotel, Absicht oder offenes Gesprächsthema) — aber NIEMALS Straßennamen, Hausnummern oder reine Adressen als „weitermachen“-Ziel. Straßen sind Orte zum Navigieren, keine offenen Themen.',
+        : '- Referenziere KONKRET den offenen Timeline-Plan — NIEMALS Straßennamen/Adressen, NIEMALS alte Chat-Themen als „weitermachen“.',
       isMorning && briefing
         ? '- Kein Aufsatz. Dicht, natürlich, wie ein guter Reise-Manager am Morgen.'
-        : '- Nur bei echtem offenen Plan/Thread (kein Straßenname): anbieten weiterzumachen. Sonst: begrüßen und fragen, was heute dran ist.',
-      '- Wenn Kontext dünn: freundlich begrüßen und fragen, was heute dran ist.',
+        : '- Kurz den Plan nennen. Keine Fangfrage („womit starten wir?“, „was steht an?“, „worauf hast du Lust?“).',
+      '- NIEMALS leere Einladungsfragen („womit starten wir?“, „was soll ich tun?“, „was steht auf dem Plan?“). App-Öffnen = still, User startet Themen.',
       '- Jede Begrüßung soll sich anders anfühlen als die vermiedenen.',
       name ? `User-Name: ${name}` : 'Kein Name.',
       city ? `Aktuelle Stadt: ${city}` : 'Stadt unbekannt.',
       `Bezugstag: ${opts.yesterday}.`,
-      threadRecall
-        ? `Offene Gesprächsthemen:\n${threadRecall}`
-        : '',
+      timelinePlan
+        ? `Offener Timeline-Plan (erwähnen):\n${timelinePlan}`
+        : 'Kein offener Timeline-Plan.',
       avoidBlock,
       '',
       'KONTEXT:',
@@ -355,18 +402,22 @@ async function composeFullWelcomeSpeech(opts: {
   if (isMorning && briefing) {
     return fallbackSpeech(
       'WelcomeBack-Heuristik',
-      `${hey}${place} Kurzer Blick auf den Tag — sag Bescheid, wenn wir starten.`,
+      `${hey}${place} Kurzer Blick auf den Tag — sag Bescheid, wenn du magst.`,
     );
   }
-  const variants = [
-    `${hey}${place} Schön, dass du wieder da bist — was steht als Nächstes an?`,
-    `${hey}${place} Neuer Anlauf — worauf hast du Lust?`,
-    `${name ? `Hey ${name}!` : 'Hey!'}${place} Bereit für den nächsten Schritt — was steht an?`,
-  ];
-  const picked =
-    variants.find((v) => !opts.avoid.some((a) => normalizeSpeech(v) === a)) ??
-    variants[0]!;
-  return fallbackSpeech('WelcomeBack-Heuristik', picked);
+  if (timelinePlan) {
+    const first = timelinePlan.split('\n')[0]?.replace(/^•\s*/, '').trim();
+    return fallbackSpeech(
+      'WelcomeBack-Heuristik',
+      first
+        ? `${hey}${place} Auf dem Plan steht noch ${first}.`
+        : `${hey}${place} Du hast noch etwas Offenes in der Timeline.`,
+    );
+  }
+  return fallbackSpeech(
+    'WelcomeBack-Heuristik',
+    `${hey}${place} Schön, dass du wieder da bist.`,
+  );
 }
 
 function buildDaypartFallbacks(opts: {
@@ -382,27 +433,27 @@ function buildDaypartFallbacks(opts: {
   switch (opts.part) {
     case 'morning':
       return [
-        `${greet}${who}! Frischer Start${place} — worauf hast du Lust?`,
-        `${greet}${who}. Schön dich zu sehen${place}. Was steht als Erstes an?`,
-        `Moin${who}! Bereit für den Tag${place}?`,
+        `${greet}${who}! Frischer Start${place}.`,
+        `${greet}${who}. Schön dich zu sehen${place}.`,
+        `Moin${who}! Guten Rutsch in den Tag${place}.`,
       ];
     case 'midday':
       return [
-        `${greet}${who}! Mitten am Tag${place} — brauchst du eine Idee?`,
-        `Hey${who}, willkommen zurück${place}. Weiter geht's?`,
-        `${greet}${who}. Kurz checken: was machst du als Nächstes?`,
+        `${greet}${who}! Mitten am Tag${place}.`,
+        `Hey${who}, schön dich wiederzusehen${place}.`,
+        `${greet}${who}.`,
       ];
     case 'evening':
       return [
-        `${greet}${who}! Schöner Abend${place} — noch was vor?`,
-        `Hey${who}, abends wieder da${place}. Noch was vor?`,
-        `${greet}${who}. Entspannen oder noch raus?`,
+        `${greet}${who}! Schöner Abend${place}.`,
+        `Hey${who}, abends wieder da${place}.`,
+        `${greet}${who}.`,
       ];
     default:
       return [
-        `Hey${who} — spät unterwegs${place}? Ich bin da.`,
-        `Noch wach${who}? Sag Bescheid, wenn ich helfen soll.`,
-        `Na${who}, Mitternachtstour${place}?`,
+        `Hey${who} — spät unterwegs${place}.`,
+        `Noch wach${who}? Ich bin da.`,
+        `Na${who}, Mitternachtstour${place}.`,
       ];
   }
 }
@@ -426,25 +477,11 @@ async function composeDaypartSpeech(opts: {
   const idle = opts.idleMs ?? 0;
   const intensity =
     idle >= LONG_AWAY_IDLE_MS
-      ? 'länger weg (≥6h): kurzes Wiedersehen; Plan-Recall nur wenn unten Themen stehen'
-      : 'mittel (≥3h): kurze Tageszeit-Begrüßung; Vorschlag nur wenn unten Themen stehen';
+      ? 'länger weg (≥48h): kurzes Wiedersehen; Timeline-Plan nur wenn unten Themen stehen'
+      : 'mittel (≥24h): kurze Tageszeit-Begrüßung; Timeline-Plan nur wenn unten Themen stehen';
 
-  let threadRecall = '';
-  if (idle >= PLAN_RECALL_IDLE_MS) {
-    try {
-      const {
-        loadConversationThreads,
-        formatResumableThreadsForWelcome,
-      } = require('./conversationThreads') as {
-        loadConversationThreads: () => Promise<unknown>;
-        formatResumableThreadsForWelcome: (max?: number) => string;
-      };
-      await loadConversationThreads();
-      threadRecall = formatResumableThreadsForWelcome(3);
-    } catch {
-      threadRecall = '';
-    }
-  }
+  const timelinePlan =
+    idle >= PLAN_RECALL_IDLE_MS ? formatOpenTimelinePlanForWelcome(3) : '';
 
   if (hasGeminiApiKey()) {
     const prompt = [
@@ -452,11 +489,13 @@ async function composeDaypartSpeech(opts: {
       `FLOW-BLAUPAUSE (${intensity}) — Wortlaut frei, nie festen Satz übernehmen.`,
       `Schreib GENAU EINE kurze ${daypartLabel(part)}-Begrüßung (max. 28 Wörter).`,
       'Du-Form, kein Markdown.',
+      'KEINE alten Chat-Themen anbieten (Kathedrale, Tower, Filme…) — User startet Gespräche selbst.',
+      'NIEMALS Fangfragen: „womit starten wir?“, „was steht an?“, „worauf hast du Lust?“, „brauchst du eine Idee?“.',
       opts.userName ? `Name: ${opts.userName}` : 'Kein Name.',
       opts.cityName ? `Stadt: ${opts.cityName}` : '',
-      threadRecall
-        ? `Offene Gesprächsthemen (höchstens EINS kurz anbieten, nicht alle aufzählen; NIEMALS Straßennamen/Adressen):\n${threadRecall}`
-        : 'Keine Vorschläge, keine Plan-Ideen, keine „soll ich …?“-Angebote — nur Begrüßung.',
+      timelinePlan
+        ? `Offener Timeline-Plan (höchstens EINS kurz erwähnen, keine Frage danach):\n${timelinePlan}`
+        : 'Nur knappe Begrüßung — keine Vorschläge, keine Fragen, keine „soll ich …?“-Angebote.',
       opts.avoid.length
         ? `Vermeide diese früheren Formulierungen:\n${opts.avoid
             .slice(0, 4)
@@ -533,7 +572,6 @@ async function deliverSpeech(
       label: string;
       payload: { textPrompt: string };
     }> = [];
-    let hasMeaningfulResume = false;
     try {
       const { dateKeyFromMs } = require('../../utils/dateKeys') as {
         dateKeyFromMs: (ms: number) => string;
@@ -555,30 +593,25 @@ async function deliverSpeech(
     } catch {
       unfinishedActions = [];
     }
-    try {
-      const {
-        formatResumableThreadsForWelcome,
-        loadConversationThreads,
-      } = require('./conversationThreads') as {
-        loadConversationThreads: () => Promise<unknown>;
-        formatResumableThreadsForWelcome: (max?: number) => string;
-      };
-      await loadConversationThreads();
-      hasMeaningfulResume = formatResumableThreadsForWelcome(1).length > 0;
-    } catch {
-      hasMeaningfulResume = false;
-    }
 
-    const continueAction = hasMeaningfulResume
-      ? {
-          type: 'SHOW_MORE' as const,
-          label: 'Ja, weitermachen',
-          payload: {
-            textPrompt:
-              'Ja, lass uns dort weitermachen, wo wir aufgehört haben — aber nur beim offenen Thema, keine Straßenadresse.',
-          },
-        }
-      : null;
+    // Kein „Ja, weitermachen“ für Chat-Threads — User startet Themen selbst.
+    // Offener Timeline-Plan: optionaler Chip nur wenn wirklich Stops offen.
+    let planContinueAction: {
+      type: 'SHOW_MORE';
+      label: string;
+      payload: { textPrompt: string };
+    } | null = null;
+    const openPlan = formatOpenTimelinePlanForWelcome(2);
+    if (openPlan) {
+      planContinueAction = {
+        type: 'SHOW_MORE',
+        label: 'Plan ansehen',
+        payload: {
+          textPrompt:
+            'Zeig mir kurz meinen offenen Timeline-Plan und was als Nächstes ansteht.',
+        },
+      };
+    }
 
     const visualBullets = bulletsFromWelcomeSpeech(speech, {
       full: opts.full,
@@ -600,7 +633,7 @@ async function deliverSpeech(
         ? ([
             ...wakeActions,
             ...unfinishedActions,
-            ...(continueAction ? [continueAction] : []),
+            ...(planContinueAction ? [planContinueAction] : []),
           ] as import('../../types/concierge').QuickAction[]).slice(0, 4)
         : (wakeActions as import('../../types/concierge').QuickAction[]),
     });
@@ -613,21 +646,27 @@ async function deliverSpeech(
   }
 }
 
-/** Stichpunkte aus dem gesprochenen Text — keine Platzhalter wie „Weiter?“. */
+/** Stichpunkte aus dem gesprochenen Text — max 3 × ~2 Zeilen, nie Platzhalter. */
 function bulletsFromWelcomeSpeech(
   speech: string,
   opts: { full: boolean; morning: boolean; unfinished: boolean },
 ): string[] {
+  const { rewriteBulletToFit, BULLET_SURFACE_MAX_CHARS } =
+    require('../concierge/visualBullets') as {
+      rewriteBulletToFit: (raw: string, max: number) => string;
+      BULLET_SURFACE_MAX_CHARS: { default: number };
+    };
+  const maxChars = BULLET_SURFACE_MAX_CHARS.default;
   const parts = speech
     .replace(/\s+/g, ' ')
     .trim()
     .split(/(?<=[.!?])\s+/)
     .map((p) => p.replace(/^["„]|["“.!?]+$/g, '').trim())
     .filter((p) => p.length >= 8);
-  const fromSpeech = parts.slice(0, 3).map((p) => {
-    const words = p.split(/\s+/).filter(Boolean);
-    return words.slice(0, 7).join(' ');
-  });
+  const fromSpeech = parts
+    .slice(0, 3)
+    .map((p) => rewriteBulletToFit(p, maxChars))
+    .filter(Boolean);
   if (fromSpeech.length >= 2) return fromSpeech.slice(0, 3);
   if (!opts.full) return [daypartLabel(daypartNow())];
   if (opts.morning) {
@@ -639,13 +678,23 @@ function bulletsFromWelcomeSpeech(
 }
 
 /**
- * Nach Idle ≥ 3 h: Tageszeit-Gruß / Vorschläge oder (alle 72 h) volle Welcome-Back-Nachricht.
- * Unter 3 h Idle: still.
+ * Nach Idle ≥ 24 h (und nicht am selben Kalendertag): nur bei Substanz sprechen
+ * (Morgen-Briefing / offener Timeline-Plan) — nie leeres „Womit starten wir?“.
+ * Unter 24 h / selber Tag: still — User startet Themen selbst.
  * Frühestens 2 h nach Einrichtung.
  */
 export async function maybeSpeakWelcomeBack(): Promise<boolean> {
   if (speaking || sessionWelcomed) return false;
   if (useFinnusStore.getState().isSimulationMode) return false;
+
+  try {
+    const { isOpenQuietActive } = require('../navigation/modulePriorityPolicy') as {
+      isOpenQuietActive: (n?: number) => boolean;
+    };
+    if (isOpenQuietActive()) return false;
+  } catch {
+    /* soft */
+  }
 
   const profile = getCachedUserProfile();
   if (!profile?.setupComplete) return false;
@@ -682,8 +731,44 @@ export async function maybeSpeakWelcomeBack(): Promise<boolean> {
   const idleMs =
     state.lastActiveAtMs != null ? now - state.lastActiveAtMs : WELCOME_IDLE_MS;
 
-  // < 3 h → keine Begrüßung, keine Vorschläge
-  if (idleMs < LIGHT_GREETING_IDLE_MS) {
+  // Selber Kalendertag ODER < 24 h → keine Begrüßung, keine Chat-Continues
+  if (idleMs < LIGHT_GREETING_IDLE_MS || state.lastActiveDay === today) {
+    await persist({
+      ...state,
+      lastActiveDay: today,
+      lastActiveAtMs: now,
+    });
+    sessionWelcomed = true;
+    return false;
+  }
+
+  const timelinePlan = formatOpenTimelinePlanForWelcome(4);
+  let morningBriefing: string | null = null;
+  let pendingWakeAtMs: number | null = null;
+  if (daypartNow() === 'morning') {
+    try {
+      const {
+        collectMorningBriefingFacts,
+        formatMorningBriefingContext,
+      } = await import('./morningBriefingContext');
+      const yesterdayHint =
+        state.lastActiveDay && state.lastActiveDay !== today
+          ? state.lastActiveDay
+          : yesterdayKey();
+      const facts = collectMorningBriefingFacts({ yesterdayKey: yesterdayHint });
+      morningBriefing = formatMorningBriefingContext(facts);
+      pendingWakeAtMs = facts.pendingWake?.wakeAtMs ?? null;
+    } catch {
+      /* soft */
+    }
+  }
+
+  const hasSubstance = Boolean(
+    (morningBriefing && morningBriefing.trim().length >= 12) ||
+      (timelinePlan && timelinePlan.trim().length >= 2),
+  );
+  if (!hasSubstance) {
+    // Kein leeres „Hey, womit starten wir?“ — User startet Themen selbst.
     await persist({
       ...state,
       lastActiveDay: today,
@@ -701,27 +786,12 @@ export async function maybeSpeakWelcomeBack(): Promise<boolean> {
   speaking = true;
   try {
     let speech: string;
-    if (wantFull) {
+    if (wantFull || (morningBriefing && morningBriefing.trim())) {
       const yesterday =
         state.lastActiveDay && state.lastActiveDay !== today
           ? state.lastActiveDay
           : yesterdayKey();
       const highlights = buildYesterdayHighlights(yesterday);
-      let morningBriefing: string | null = null;
-      let pendingWakeAtMs: number | null = null;
-      if (daypartNow() === 'morning') {
-        try {
-          const {
-            collectMorningBriefingFacts,
-            formatMorningBriefingContext,
-          } = await import('./morningBriefingContext');
-          const facts = collectMorningBriefingFacts({ yesterdayKey: yesterday });
-          morningBriefing = formatMorningBriefingContext(facts);
-          pendingWakeAtMs = facts.pendingWake?.wakeAtMs ?? null;
-        } catch {
-          /* soft */
-        }
-      }
       speech = await composeFullWelcomeSpeech({
         cityName: profile.cityName ?? null,
         userName: profile.firstName ?? null,
@@ -730,12 +800,14 @@ export async function maybeSpeakWelcomeBack(): Promise<boolean> {
         avoid: state.recentSpeeches,
         morningBriefing,
       });
-      // Falls Gemini denselben Text liefert → Daypart-Fallback
       if (wasSaidRecently(state, speech)) {
-        speech = await composeDaypartSpeech({
-          userName: profile.firstName ?? null,
+        speech = await composeFullWelcomeSpeech({
           cityName: profile.cityName ?? null,
-          avoid: state.recentSpeeches,
+          userName: profile.firstName ?? null,
+          yesterday,
+          highlights,
+          avoid: [...state.recentSpeeches, normalizeSpeech(speech)],
+          morningBriefing,
         });
       }
       await deliverSpeech(speech, {
@@ -755,43 +827,7 @@ export async function maybeSpeakWelcomeBack(): Promise<boolean> {
       return true;
     }
 
-    // Auch leichte Morgen-Begrüßung: Briefing wenn Idle ≥ 3h und Morgen
-    if (daypartNow() === 'morning' && idleMs >= PLAN_RECALL_IDLE_MS) {
-      try {
-        const {
-          collectMorningBriefingFacts,
-          formatMorningBriefingContext,
-        } = await import('./morningBriefingContext');
-        const facts = collectMorningBriefingFacts();
-        const morningBriefing = formatMorningBriefingContext(facts);
-        speech = await composeFullWelcomeSpeech({
-          cityName: profile.cityName ?? null,
-          userName: profile.firstName ?? null,
-          yesterday: yesterdayKey(),
-          highlights: buildYesterdayHighlights(yesterdayKey()),
-          avoid: state.recentSpeeches,
-          morningBriefing,
-        });
-        await deliverSpeech(speech, {
-          full: true,
-          card: true,
-          pendingWakeAtMs: facts.pendingWake?.wakeAtMs ?? null,
-        });
-        let next = rememberSpeech(state, speech);
-        next = {
-          ...next,
-          lastActiveDay: today,
-          lastWelcomeDay: today,
-          lastActiveAtMs: now,
-          lastFullWelcomeAtMs: now,
-        };
-        await persist(next);
-        return true;
-      } catch {
-        /* fall through to daypart */
-      }
-    }
-
+    // Nur Timeline-Plan: knappe Notiz, keine Fangfrage
     speech = await composeDaypartSpeech({
       userName: profile.firstName ?? null,
       cityName: profile.cityName ?? null,

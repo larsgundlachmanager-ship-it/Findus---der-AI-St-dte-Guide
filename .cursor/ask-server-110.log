@@ -1,0 +1,29 @@
+[askServer] http://127.0.0.1:8791  POST /ask  GET /next
+[askServer] queued: Ich habe Lust auf einen leckeren Croque. Wo kann ich da hingehen? (n=1)
+[askServer] queued: Ich habe Lust heute Abend All you can eat zu essen, aber kein Asiatisch. Was kannst du mir empfehlen? (n=2)
+[askServer] delivered: Ich habe Lust auf einen leckeren Croque. Wo kann ich da hingehen?
+[askServer] delivered: Ich habe Lust heute Abend All you can eat zu essen, aber kein Asiatisch. Was kannst du mir empfehlen?
+[askServer] queued: Gibt es irgendwo ein Museum, wo ich Dinosaurier angucken kann? (n=1)
+[askServer] queued: Nee, ich moechte gerne heute Abend Oyukin Eat essen, also All you can eat, kein asiatisch (n=2)
+[askServer] delivered: Gibt es irgendwo ein Museum, wo ich Dinosaurier angucken kann?
+[askServer] delivered: Nee, ich moechte gerne heute Abend Oyukin Eat essen, also All you can eat, kein asiatisch
+[askServer] queued: Flug morgen nach Wien, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Flug morgen nach Wien, bitte Taxi zum Flughafen vorbestellen
+[askServer] queued: Mein Flug morgen nach Wien geht um 18 Uhr von Hamburg, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Mein Flug morgen nach Wien geht um 18 Uhr von Hamburg, bitte Taxi zum Flughafen vorbestellen
+[askServer] queued: Mein Flug morgen nach Wien geht um 18 Uhr von Hamburg, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Mein Flug morgen nach Wien geht um 18 Uhr von Hamburg, bitte Taxi zum Flughafen vorbestellen
+[askServer] queued: Nur Handgepäck (n=1)
+[askServer] delivered: Nur Handgepäck
+[askServer] queued: Flug morgen 18 Uhr von Hamburg nach Wien, nur Handgepaeck, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Flug morgen 18 Uhr von Hamburg nach Wien, nur Handgepaeck, bitte Taxi zum Flughafen vorbestellen
+[askServer] queued: Flug morgen 18 Uhr von Hamburg nach Wien, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Flug morgen 18 Uhr von Hamburg nach Wien, bitte Taxi zum Flughafen vorbestellen
+[askServer] queued: Nur Handgepäck (n=1)
+[askServer] delivered: Nur Handgepäck
+[askServer] queued: Flug morgen 18 Uhr von Hamburg nach Wien, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Flug morgen 18 Uhr von Hamburg nach Wien, bitte Taxi zum Flughafen vorbestellen
+[askServer] queued: Nur Handgepaeck (n=1)
+[askServer] delivered: Nur Handgepaeck
+[askServer] queued: Flug morgen 18 Uhr von Hamburg nach Wien, bitte Taxi zum Flughafen vorbestellen (n=1)
+[askServer] delivered: Flug morgen 18 Uhr von Hamburg nach Wien, bitte Taxi zum Flughafen vorbestellen

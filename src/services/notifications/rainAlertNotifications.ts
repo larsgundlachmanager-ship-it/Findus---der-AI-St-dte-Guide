@@ -1,6 +1,8 @@
 /**
- * Regen-Warnungen als geplante Local Notifications.
- * Feuern auch bei gesperrtem Handy / geschlossener App (OS-Scheduler).
+ * Regen-Warnungen:
+ * - Mit aktiver Standort-Live-Karte → Hinweis still auf derselben Karte (kein Extra-Push).
+ * - Ohne Live-Karte → geplante Local Notifications (auch bei gesperrtem Handy).
+ * Push nur exakt 30 Min und 5 Min vor Regenbeginn (kein Catch-up).
  */
 
 import { Platform } from 'react-native';
@@ -13,9 +15,11 @@ import {
 } from './notificationService';
 import { getCachedUserProfile } from '../userProfileService';
 import { earliestProactiveRainWarnAtMs } from '../weather/rainWarnSessionGate';
+import { rainPushFireTimes } from './rainAlertLead';
 
 export const RAIN_ALERT_CHANNEL_ID = 'findus-rain-alerts';
 export const RAIN_ALERT_DATA_TYPE = 'rain_alert';
+export { RAIN_PUSH_LEAD_MS, rainPushFireTimes } from './rainAlertLead';
 
 const ID_30 = 'findus-rain-warn-30';
 const ID_5 = 'findus-rain-warn-5';
@@ -25,6 +29,8 @@ type StoredSchedule = {
   rainAtMs: number;
   scheduled30AtMs: number | null;
   scheduled5AtMs: number | null;
+  /** Regen lief über die Standort-Live-Karte, nicht als Push. */
+  viaLiveCard?: boolean;
 };
 
 let channelReady = false;
@@ -34,7 +40,7 @@ async function ensureRainChannel(): Promise<void> {
   if (Platform.OS !== 'android' || channelReady) return;
   await Notifications.setNotificationChannelAsync(RAIN_ALERT_CHANNEL_ID, {
     name: 'Regen-Warnungen',
-    description: 'Warnung ~30 und ~5 Minuten vor Regen — auch bei gesperrtem Handy',
+    description: 'Warnung 30 und 5 Minuten vor Regen — auch bei gesperrtem Handy',
     importance: Notifications.AndroidImportance.HIGH,
     vibrationPattern: [0, 280, 120, 280],
     lightColor: '#C4A35A',
@@ -96,6 +102,44 @@ async function writeStored(s: StoredSchedule): Promise<void> {
   }
 }
 
+async function clearLiveRainHint(): Promise<void> {
+  try {
+    const loc = require('../locationService') as {
+      updateLocationLiveNotification?: (o: {
+        rainHint?: string | null;
+      }) => Promise<void>;
+    };
+    await loc.updateLocationLiveNotification?.({ rainHint: null });
+  } catch {
+    /* soft */
+  }
+}
+
+async function applyRainOnLiveCard(opts: {
+  clock: string;
+  kind: 'approaching' | 'soon';
+}): Promise<boolean> {
+  if (Platform.OS !== 'android') return false;
+  try {
+    const loc = require('../locationService') as {
+      isLocationForegroundServiceActiveAsync?: () => Promise<boolean>;
+      updateLocationLiveNotification?: (o: {
+        rainHint?: string | null;
+      }) => Promise<void>;
+    };
+    const active = (await loc.isLocationForegroundServiceActiveAsync?.()) === true;
+    if (!active) return false;
+    const hint =
+      opts.kind === 'soon'
+        ? `Gleich Regen (ab ca. ${opts.clock}). Kurz rein oder Schutz suchen.`
+        : `Bald Regen (ab ca. ${opts.clock}). Rein gehen oder draußen bleiben?`;
+    await loc.updateLocationLiveNotification?.({ rainHint: hint });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function scheduleAt(opts: {
   identifier: string;
   dateMs: number;
@@ -106,7 +150,6 @@ async function scheduleAt(opts: {
 }): Promise<boolean> {
   const now = Date.now();
   const earliest = earliestProactiveRainWarnAtMs(now);
-  // Mindestens ~2 s in der Zukunft (OS-Trigger), nicht vor der Start-Ruhe
   const when = Math.max(opts.dateMs, now + 2_000, earliest);
   if (when >= opts.rainAtMs - 30_000) return false;
   if (when - now > 7 * 24 * 60 * 60_000) return false;
@@ -149,17 +192,17 @@ function clockLabel(ms: number): string {
 }
 
 /**
- * Plant/aktualisiert 30-Min- und 5-Min-Regenwarnungen.
- * Ohne nextRainAtMs → alles stornieren.
+ * Plant/aktualisiert nur 30-Min- und 5-Min-Regenwarnungen.
+ * Ohne nextRainAtMs → alles stornieren. Kein Catch-up-Sofortpush.
  */
 export async function syncRainAlertNotifications(opts: {
   nextRainAtMs: number | null;
-  /** Optional: Minutely-Schätzung */
   rainStartsInMin?: number | null;
   summaryLine?: string | null;
 }): Promise<{ ok: boolean; reason?: string }> {
   if (!remindersWanted()) {
     await cancelRainAlertNotifications();
+    await clearLiveRainHint();
     return { ok: false, reason: 'disabled' };
   }
 
@@ -175,7 +218,6 @@ export async function syncRainAlertNotifications(opts: {
       ? opts.nextRainAtMs
       : null;
 
-  // Minutely schärfer als hourly
   if (
     opts.rainStartsInMin != null &&
     opts.rainStartsInMin >= 0 &&
@@ -187,16 +229,35 @@ export async function syncRainAlertNotifications(opts: {
 
   if (rainAt == null || rainAt - now > 12 * 60 * 60_000) {
     await cancelRainAlertNotifications();
+    await clearLiveRainHint();
     return { ok: true, reason: 'clear' };
   }
 
+  const clock = clockLabel(rainAt);
+  const minsLeft = Math.round((rainAt - now) / 60_000);
+  const kind: 'approaching' | 'soon' = minsLeft <= 8 ? 'soon' : 'approaching';
+
+  const onLive = await applyRainOnLiveCard({ clock, kind });
+  if (onLive) {
+    await cancelId(ID_30);
+    await cancelId(ID_5);
+    await writeStored({
+      rainAtMs: rainAt,
+      scheduled30AtMs: null,
+      scheduled5AtMs: null,
+      viaLiveCard: true,
+    });
+    return { ok: true, reason: 'live_card' };
+  }
+
+  await clearLiveRainHint();
+
   const prev = await readStored();
-  // Gleicher Regen ±2 Min → nicht unnötig neu planen
   if (
     prev &&
+    !prev.viaLiveCard &&
     Math.abs(prev.rainAtMs - rainAt) < 2 * 60_000 &&
-    prev.scheduled30AtMs != null &&
-    prev.scheduled5AtMs != null
+    (prev.scheduled30AtMs != null || prev.scheduled5AtMs != null)
   ) {
     return { ok: true, reason: 'unchanged' };
   }
@@ -204,47 +265,40 @@ export async function syncRainAlertNotifications(opts: {
   await cancelId(ID_30);
   await cancelId(ID_5);
 
-  const clock = clockLabel(rainAt);
-  const t30 = rainAt - 30 * 60_000;
-  const t5 = rainAt - 5 * 60_000;
+  const { t30, t5 } = rainPushFireTimes(rainAt, now);
 
   let scheduled30AtMs: number | null = null;
   let scheduled5AtMs: number | null = null;
 
-  // 30-Min-Warnung: nur wenn noch ≥6 Min bis Regen (sonst direkt 5-Min)
-  if (rainAt - now > 6 * 60_000) {
-    const fire30 = t30 > now + 3_000 ? t30 : now + 3_000;
-    // Nur planen wenn Fire-Zeit noch vor dem 5-Min-Punkt liegt
-    if (fire30 < t5 - 60_000 || rainAt - now > 32 * 60_000) {
-      const ok = await scheduleAt({
-        identifier: ID_30,
-        dateMs: fire30,
-        title: 'Yorro — Regen',
-        body: `Bald Regen (ab ca. ${clock}). Rein gehen oder draußen bleiben?`,
-        kind: '30',
-        rainAtMs: rainAt,
-      });
-      if (ok) scheduled30AtMs = fire30;
-    }
+  if (t30 != null) {
+    const ok = await scheduleAt({
+      identifier: ID_30,
+      dateMs: t30,
+      title: 'Yorro — Regen',
+      body: `Bald Regen (ab ca. ${clock}). Rein gehen oder draußen bleiben?`,
+      kind: '30',
+      rainAtMs: rainAt,
+    });
+    if (ok) scheduled30AtMs = t30;
   }
 
-  if (rainAt - now > 90_000) {
-    const fire5 = t5 > now + 2_000 ? t5 : now + 2_000;
+  if (t5 != null) {
     const ok = await scheduleAt({
       identifier: ID_5,
-      dateMs: fire5,
+      dateMs: t5,
       title: 'Yorro — gleich Regen',
       body: `In wenigen Minuten wird's nass (ab ca. ${clock}).`,
       kind: '5',
       rainAtMs: rainAt,
     });
-    if (ok) scheduled5AtMs = fire5;
+    if (ok) scheduled5AtMs = t5;
   }
 
   await writeStored({
     rainAtMs: rainAt,
     scheduled30AtMs,
     scheduled5AtMs,
+    viaLiveCard: false,
   });
 
   return { ok: true };

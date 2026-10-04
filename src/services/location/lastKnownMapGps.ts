@@ -146,10 +146,23 @@ export function persistLastMapGpsSoon(fix: {
   if (persistTimer) return;
   persistTimer = setTimeout(() => {
     persistTimer = null;
-    const snap = mem;
-    if (!snap) return;
-    void AsyncStorage.setItem(KEY, JSON.stringify(snap)).catch(() => undefined);
-  }, 8_000);
+    void flushLastMapGpsNow();
+  }, 2_500);
+}
+
+/** App → Hintergrund/Kill: sofort schreiben, sonst fehlt der Ausschnitt beim Cold-Start. */
+export async function flushLastMapGpsNow(): Promise<void> {
+  if (persistTimer) {
+    clearTimeout(persistTimer);
+    persistTimer = null;
+  }
+  const snap = mem;
+  if (!snap) return;
+  try {
+    await AsyncStorage.setItem(KEY, JSON.stringify(snap));
+  } catch {
+    /* soft */
+  }
 }
 
 /** Kamera-Seed: Live, Puck-frisch, oder älteres Last-Known. */

@@ -16,9 +16,13 @@ import {
 import { publishPitchResult, useLivePitchStore } from './publishPitchUi';
 import { pitchHeadlineFromContext } from './pitchHeadline';
 import { namedVenueFromWishes } from './namedVenueIntent';
-import { broadenDiningPitchRequest, diningExpandRingsFor, withLiveExpandRadius } from './searchBrief';
 import { enqueueSpeech } from '../speech/speechQueue';
+import { humanizeBullets } from '../speech/draftToHumanSpeech';
 import { buildPitchHotelBookingUrl } from './pitchBookingUrl';
+import { runMissionStages } from '../mission/runMissionStages';
+import {
+  verifyMissionPass,
+} from '../mission/verifyMissionPass';
 import type {
   PitchDeepAppend,
   PitchOptionCard,
@@ -38,30 +42,84 @@ export async function runPitchModule(
   reqIn: PitchRequest,
 ): Promise<PitchResult> {
   let req = reqIn;
+  // Multi-Lane: parallele Worker-Recherchen vor Single-Kind-Pfaden
+  if (req.multiLane && req.multiLane.lanes?.length) {
+    const { runMultiLanePitch } = await import('./runMultiLanePitch');
+    return runMultiLanePitch(req, req.multiLane);
+  }
+  try {
+    const { detectMultiLanePlan } = require('../router/call1MultiLane') as {
+      detectMultiLanePlan: (
+        t: string,
+      ) => import('../router/call1MultiLane').MultiLanePlan | null;
+    };
+    const plan = detectMultiLanePlan(`${req.title} ${req.context}`);
+    if (plan && plan.lanes.length >= 1) {
+      const { runMultiLanePitch } = await import('./runMultiLanePitch');
+      return runMultiLanePitch(req, plan);
+    }
+  } catch {
+    /* soft */
+  }
+  // Vier Recherche-Zustände: installed / ghost / requires_download / exempt
+  try {
+    const { promptDestinationCitySwitch } = await import(
+      '../../services/cityPackOffer'
+    );
+    const gateText = `${req.title} ${req.context}`.trim();
+    const switched = await promptDestinationCitySwitch({
+      text: gateText,
+      intent: req.kind === 'hotel' ? 'hotel' : 'research',
+    });
+    if (switched?.blocked) {
+      const spokenText =
+        switched.cityName
+          ? `Lad dir bitte zuerst den Datensatz für ${switched.cityName} herunter — dann starte ich die Recherche.`
+          : 'Lad dir bitte zuerst den Datensatz für diese Stadt herunter — dann starte ich die Recherche.';
+      const blocked: PitchResult = {
+        requestId: req.requestId,
+        softFail: true,
+        spokenText,
+        summary: 'Pack-Download nötig',
+        options: [],
+        outOfBoxHint: null,
+        uiLayout: req.uiLayout,
+      };
+      publishPitchResult(blocked, {
+        stepKey: req.requestId,
+        headline: pitchHeadlineFromContext({
+          city: switched.cityName,
+          userText: req.title,
+          fallback: 'Datensatz',
+        }),
+        anchorTimeMs: req.visitAtMs,
+        pitchKind: req.kind,
+        pitchContext: gateText,
+        openCalendar: false,
+      });
+      return blocked;
+    }
+    if (switched?.cityName) {
+      req = {
+        ...req,
+        cityHint: switched.cityName,
+        searchMode:
+          switched.lane === 'ghost' ||
+          switched.lane === 'installed' ||
+          switched.lane === 'requires_download'
+            ? 'city_best'
+            : req.searchMode === 'here_now'
+              ? 'city_best'
+              : req.searchMode,
+      };
+    }
+  } catch {
+    /* soft — Suche läuft weiter */
+  }
   // Kino: Programm-Research (Filme zuerst), nie nackte „Kino in der Nähe“-Venue-Suche
   if (req.kind === 'cinema') {
     const { runCinemaPitch } = await import('./runCinemaPitch');
     return runCinemaPitch(req);
-  }
-  if (req.kind === 'hotel') {
-    try {
-      const { promptDestinationCitySwitch } = await import(
-        '../../services/cityPackOffer'
-      );
-      const switched = await promptDestinationCitySwitch({
-        text: `${req.title} ${req.context}`,
-        intent: 'hotel',
-      });
-      if (switched?.cityName) {
-        req = {
-          ...req,
-          cityHint: switched.cityName,
-          searchMode: 'city_best',
-        };
-      }
-    } catch {
-      /* soft — Suche läuft in der genannten Stadt weiter */
-    }
   }
   async function rankDiningPool(activeReq: PitchRequest) {
     const pool = await collectCandidates(activeReq);
@@ -134,6 +192,78 @@ export async function runPitchModule(
 
   let { ranked, pool } = await rankDiningPool(req);
 
+  // P9: Open-now härten (here_now) — geschlossene raus außer alle zu
+  try {
+    const { filterOpenNowHard } = require('./diningHarden') as {
+      filterOpenNowHard: <T extends { openNow?: boolean | null; closedOnVisitDay?: boolean | null }>(
+        list: T[],
+        mode: string,
+      ) => { kept: T[]; allClosed: boolean };
+    };
+    if (req.searchMode === 'here_now' || req.searchMode === 'open_now') {
+      const filtered = filterOpenNowHard(ranked.top, req.searchMode);
+      if (filtered.kept.length && filtered.kept.length < ranked.top.length) {
+        ranked = {
+          ...ranked,
+          top: filtered.kept as typeof ranked.top,
+          shortlist: filterOpenNowHard(ranked.shortlist, req.searchMode)
+            .kept as typeof ranked.shortlist,
+          reason: filtered.allClosed
+            ? ranked.reason
+            : ranked.reason || 'Nur geöffnete Treffer jetzt.',
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // P9: Budget/Person — soft demote teure wenn Budget gesetzt
+  try {
+    const { parseBudgetPerPersonEur } = require('./diningHarden') as {
+      parseBudgetPerPersonEur: (s: string) => number | null;
+    };
+    const budget = parseBudgetPerPersonEur(`${req.title} ${req.context}`);
+    if (budget != null && ranked.top.length) {
+      const under = ranked.top.filter(
+        (c) =>
+          c.priceTotalEur == null ||
+          !(c.priceTotalEur > 0) ||
+          c.priceTotalEur <= budget * 1.15,
+      );
+      if (under.length) {
+        ranked = { ...ranked, top: under, shortlist: under };
+      } else {
+        ranked = {
+          ...ranked,
+          softFail: true,
+          reason:
+            ranked.reason ||
+            `Nichts klar unter ca. ${budget} €/Person — hier die nächsten Optionen.`,
+        };
+        try {
+          const { broadenDiningPitchRequest } = require('./searchBrief') as {
+            broadenDiningPitchRequest: (r: typeof req) => typeof req;
+          };
+          const wider = broadenDiningPitchRequest({
+            ...req,
+            liveExpandRadiusM: Math.max(req.liveExpandRadiusM ?? 8000, 18_000),
+          });
+          const retry = await rankDiningPool(wider);
+          if (retry.ranked.top.length) {
+            req = wider;
+            ranked = retry.ranked;
+            pool = retry.pool;
+          }
+        } catch {
+          /* soft */
+        }
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
   // On-route: klarer Unique-Ort → Stopp einfügen, KEIN Top-2-Pitch vor Call-1
   if (
     (req.searchMode === 'on_route' || req.searchMode === 'between_stops') &&
@@ -173,7 +303,7 @@ export async function runPitchModule(
         );
         const ok = await interruptAndNavigateToDiscovery(
           { name: pick.name, lat: pick.lat, lng: pick.lng },
-          { skipClosingGate: true, skipDestVerify: false },
+          { skipClosingGate: true, skipDestVerify: false, insertStop: true },
         );
         if (ok) {
           const after = keepName
@@ -202,215 +332,19 @@ export async function runPitchModule(
     }
   }
 
-  // Empty→Retry (wie named schedule): Vibe lockern, Query/Stadt breiter, Cuisine behalten
-  if (
-    !ranked.top.length &&
-    (req.kind === 'food' || req.kind === 'bar')
-  ) {
-    try {
-      const retryReq = broadenDiningPitchRequest(req);
-      const second = await rankDiningPool(retryReq);
-      if (second.ranked.top.length) {
-        ranked = {
-          ...second.ranked,
-          softFail: true,
-          reason:
-            second.ranked.reason ||
-            'Zweite Suche (breitere Query) — Cuisine/Zeit behalten.',
-        };
-        pool = second.pool;
-        req = retryReq;
-      } else if (second.pool.length > pool.length) {
-        pool = second.pool;
-        ranked = second.ranked;
-        req = retryReq;
-      }
-    } catch {
-      /* soft — erstes Result behalten */
-    }
-  }
-
-  // Two-Lane: Pack/Places Perfect ≥2 ohne Hard-soft_miss → kein Harvest (LightVerify reicht).
-  // Gap: DiscoveryHarvest (Guides) vor Radius-Expand.
+  // Empty→Retry / Harvest / Expand — Mission Stage-Runner (alle Find-Kinds)
   let harvestNearMisses: typeof pool = [];
-  try {
-    const {
-      shouldRunDiscoveryHarvest,
-      discoveryHarvest,
-      harvestClaimsToSeedCandidates,
-    } = await import('./discoveryHarvest');
-    const packPerfect =
-      pool.filter((c) => c.source === 'pack' || c.source === 'soft_seed').length >=
-        2 &&
-      ranked.top.length >= 2 &&
-      !ranked.softFail &&
-      !(ranked.criteriaChecklist ?? []).some(
-        (s) =>
-          (s.status === 'soft_miss' || s.status === 'only_one') &&
-          !/^(open_at_visit|rating_floor|budget)$/i.test(s.key),
-      );
-    if (
-      !packPerfect &&
-      shouldRunDiscoveryHarvest({
-        kind: req.kind,
-        topLen: ranked.top.length,
-        softFail: ranked.softFail,
-        checklist: ranked.criteriaChecklist,
-      })
-    ) {
-      const harvested = await discoveryHarvest(req);
-      harvestNearMisses = harvestClaimsToSeedCandidates(
-        harvested.claims.filter((c) => c.constraintFit === 'near_miss'),
-        {
-          lat: req.anchor?.lat ?? ranked.top[0]?.lat ?? 0,
-          lng: req.anchor?.lng ?? ranked.top[0]?.lng ?? 0,
-        },
-      );
-      const perfectSeeds = harvestClaimsToSeedCandidates(
-        harvested.claims.filter((c) => c.constraintFit !== 'near_miss'),
-        {
-          lat: req.anchor?.lat ?? ranked.top[0]?.lat ?? 53.55,
-          lng: req.anchor?.lng ?? ranked.top[0]?.lng ?? 9.99,
-        },
-      );
-      if (perfectSeeds.length || harvested.rawNames.length) {
-        // Namen → Places Resolve über bestehenden Pool-Pfad (Query mit Top-Namen)
-        const nameBoost = harvested.rawNames.slice(0, 6).join(' ');
-        if (nameBoost) {
-          const harvestReq: PitchRequest = {
-            ...req,
-            title: `${req.title} ${nameBoost}`.slice(0, 160),
-            context: `${req.context} harvest:${nameBoost}`.slice(0, 400),
-          };
-          const next = await rankDiningPool(harvestReq);
-          const better =
-            next.ranked.top.length > ranked.top.length ||
-            (next.ranked.top.length >= 2 && ranked.top.length < 2);
-          if (better || next.pool.length > pool.length) {
-            ranked = {
-              ...next.ranked,
-              softFail: next.ranked.softFail || ranked.softFail,
-              reason:
-                next.ranked.reason ||
-                'Web-Guides/Harvest — Hard-Musts erneut geprüft.',
-            };
-            pool = next.pool;
-            req = harvestReq;
-          }
-        }
-      }
-    }
-  } catch {
-    /* soft — Ring-Expand bleibt Fallback */
-  }
-
-  // Soft-Miss / <2 Perfect: nicht nur Datensatz — online Places ringweise bis Treffer
-  if (
-    (req.kind === 'food' || req.kind === 'bar') &&
-    (ranked.softFail ||
-      ranked.top.length < 2 ||
-      (ranked.criteriaChecklist ?? []).some(
-        (s) => s.status === 'soft_miss' || s.status === 'only_one',
-      ))
-  ) {
-    const already = req.liveExpandRadiusM ?? 0;
-    const rings = diningExpandRingsFor(req);
-    for (const ring of rings) {
-      if (ring <= already) continue;
-      try {
-        const expandReq = withLiveExpandRadius(
-          broadenDiningPitchRequest(req),
-          ring,
-        );
-        const next = await rankDiningPool(expandReq);
-        const betterTop =
-          next.ranked.top.length > ranked.top.length ||
-          (next.ranked.top.length >= 2 && ranked.top.length < 2) ||
-          (next.ranked.top.length >= 1 && !ranked.top.length);
-        const fewerMisses =
-          (next.ranked.criteriaChecklist ?? []).filter(
-            (s) => s.status === 'soft_miss',
-          ).length <
-          (ranked.criteriaChecklist ?? []).filter((s) => s.status === 'soft_miss')
-            .length;
-        if (!(betterTop || fewerMisses || next.pool.length > pool.length)) {
-          continue;
-        }
-        ranked = {
-          ...next.ranked,
-          // Expand-Radius nur Backend — nie „in 10 km nichts, in 20 km…“ in Speech
-          softFail: next.ranked.softFail,
-          reason: next.ranked.reason,
-        };
-        pool = next.pool;
-        req = expandReq;
-        const stillSoft = (next.ranked.criteriaChecklist ?? []).some(
-          (s) =>
-            (s.status === 'soft_miss' || s.status === 'only_one') &&
-            !/^(open_at_visit|rating_floor|budget)$/i.test(s.key),
-        );
-        // Perfect genug → stop; sonst nächster Ring
-        if (next.ranked.top.length >= 1 && !stillSoft) break;
-        if (next.ranked.top.length >= 2) break;
-      } catch {
-        /* soft — nächsten Ring */
-      }
-    }
-  }
-  // Open-World: zweiter Web-Harvest wenn nach Expand noch Thin (until_evidence)
-  if (
-    (req.kind === 'food' || req.kind === 'bar') &&
-    (ranked.softFail || ranked.top.length < 2)
-  ) {
-    try {
-      const {
-        shouldRunDiscoveryHarvest,
-        discoveryHarvest,
-        harvestClaimsToSeedCandidates,
-      } = await import('./discoveryHarvest');
-      if (
-        shouldRunDiscoveryHarvest({
-          kind: req.kind,
-          topLen: ranked.top.length,
-          softFail: true,
-          checklist: ranked.criteriaChecklist,
-        })
-      ) {
-        const harvested = await discoveryHarvest(req);
-        const seeds = harvestClaimsToSeedCandidates(
-          harvested.claims.filter((c) => c.constraintFit !== 'rejected'),
-          {
-            lat: req.anchor?.lat ?? 53.55,
-            lng: req.anchor?.lng ?? 9.99,
-          },
-        );
-        const nameBoost = [
-          ...harvested.rawNames.slice(0, 6),
-          ...seeds.map((c) => c.name).slice(0, 4),
-        ]
-          .filter(Boolean)
-          .join(' ');
-        if (nameBoost) {
-          const harvestReq: PitchRequest = {
-            ...req,
-            title: `${req.title} ${nameBoost}`.slice(0, 160),
-            context: `${req.context} harvest2:${nameBoost}`.slice(0, 400),
-            liveExpandRadiusM: Math.max(req.liveExpandRadiusM ?? 0, 100_000),
-          };
-          const next = await rankDiningPool(harvestReq);
-          if (
-            next.ranked.top.length > ranked.top.length ||
-            (next.ranked.top.length >= 1 && ranked.top.length === 0)
-          ) {
-            ranked = next.ranked;
-            pool = next.pool;
-            req = harvestReq;
-          }
-        }
-      }
-    } catch {
-      /* soft */
-    }
+  {
+    const staged = await runMissionStages({
+      req,
+      ranked,
+      pool,
+      rank: rankDiningPool,
+    });
+    req = staged.req;
+    ranked = staged.ranked;
+    pool = staged.pool;
+    harvestNearMisses = staged.harvestNearMisses;
   }
 
   // Shortlist (bis 5) → Kriterien-Score → Speak Top-2
@@ -437,14 +371,159 @@ export async function runPitchModule(
   } catch {
     /* soft */
   }
+  // Belt: AYCE never publish non-evidence venues (Goldschaetzchen Soft-Fill)
+  try {
+    const { looksLikeAyceQuery } = require('./ayceIntent') as {
+      looksLikeAyceQuery: (t: string) => boolean;
+    };
+    const { scoreAyceEvidence } = require('./hardMatchVerify') as {
+      scoreAyceEvidence: (b: string) => number;
+    };
+    const q = `${req.title} ${req.context}`;
+    const checklistAyce = (ranked.criteriaChecklist ?? []).some((s) =>
+      /all_you_can_eat|ayce|must_ayce|schlemmer|buffet/i.test(
+        `${s.key} ${s.label}`,
+      ),
+    );
+    const ayceTurn =
+      looksLikeAyceQuery(q) ||
+      checklistAyce ||
+      req.wishes.some((w) =>
+        /all_you_can_eat|ayce|must_ayce|schlemmer|buffet|rodiz/i.test(w.text),
+      );
+    if (ayceTurn) {
+      const { looksLikeAsianCuisineVenue, prefsAvoidAsianCuisine } =
+        require('./specializedFoodMatch') as {
+          looksLikeAsianCuisineVenue: (b: string) => boolean;
+          prefsAvoidAsianCuisine: (a: string[] | null | undefined) => boolean;
+        };
+      const avoidAsia = prefsAvoidAsianCuisine(req.prefs.avoidCategories);
+      const ok = shortlist.filter((c) => {
+        const blob = `${c.name} ${(c.softTags ?? []).join(' ')} ${(c.hardEvidence ?? []).join(' ')} ${(c.hookNotes ?? []).join(' ')}`;
+        if (scoreAyceEvidence(blob) < 2) return false;
+        if (avoidAsia && looksLikeAsianCuisineVenue(blob)) return false;
+        return true;
+      });
+      if (ok.length !== shortlist.length || !ok.length) {
+        shortlist = ok;
+        if (!ok.length) {
+          ranked = {
+            ...ranked,
+            top: [],
+            shortlist: [],
+            softFail: true,
+            reason:
+              ranked.reason ||
+              'Kein belegtes All-you-can-eat — Expand/Web weiter, kein Soft-Fill.',
+          };
+        } else {
+          ranked = { ...ranked, top: ok.slice(0, 2), shortlist: ok };
+        }
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Phase 4: Mission Verify-Pass — Musts belegt, Soft-Fill weg, whyChosen
+  let whyByName: Record<string, { id: string; label: string; evidence: string }[]> =
+    {};
+  try {
+    const verified = verifyMissionPass({
+      req,
+      candidates: shortlist,
+      priorSoftFail: ranked.softFail,
+    });
+    whyByName = verified.whyByName;
+    if (verified.survivors.length !== shortlist.length || verified.softFail) {
+      shortlist = verified.survivors;
+      ranked = {
+        ...ranked,
+        top: verified.survivors.slice(0, 2),
+        shortlist: verified.survivors,
+        softFail: verified.softFail || ranked.softFail,
+        reason: verified.reason || ranked.reason,
+      };
+    } else {
+      shortlist = verified.survivors;
+    }
+  } catch {
+    /* soft — Hard-Match bleibt */
+  }
+
+  // Reisebegleiter: Hard-Publish-Gate — AYCE / kein Asiatisch / Open-Air nie Soft-Fill
+  try {
+    const { gatePitchCandidatesForPublish } = require('./pitchHardPublishGate') as {
+      gatePitchCandidatesForPublish: (
+        r: typeof req,
+        c: typeof shortlist,
+      ) => { kept: typeof shortlist; reason: string | null };
+    };
+    const gated = gatePitchCandidatesForPublish(req, shortlist);
+    if (gated.kept.length !== shortlist.length) {
+      shortlist = gated.kept;
+      ranked = {
+        ...ranked,
+        top: gated.kept.slice(0, 2),
+        shortlist: gated.kept,
+        softFail: ranked.softFail || !gated.kept.length,
+        reason:
+          gated.reason === 'ayce_hard_gate'
+            ? 'Kein belegtes All-you-can-eat — weiter live suchen.'
+            : gated.reason === 'avoid_asian_gate'
+              ? 'Asiatisch ausgeschlossen — andere Küchen live suchen.'
+              : gated.reason === 'open_air_hard_gate'
+                ? 'Kein Open-Air-Beleg — Indoor verworfen, weiter suchen.'
+                : ranked.reason,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
   const top = shortlist.slice(0, 2);
 
   if (req.kind === 'hotel' && top.length === 0) {
-    const city = (req.cityHint || '').trim() || 'hier';
+    const cityRaw = (req.cityHint || '').trim();
+    const cityOk =
+      cityRaw.length >= 2 &&
+      !/^hier$/i.test(cityRaw) &&
+      !/^in der nähe$/i.test(cityRaw);
+    const city = cityOk ? cityRaw : '';
     const mustLabels = req.wishes
       .filter((w) => w.hardness === 'must' && (w.kind === 'amenity' || w.kind === 'vibe'))
       .map((w) => w.text)
       .join(', ');
+    // Honesty first: ohne verifizierte Stadt kein Fake-Hotel-Pitch mit Expedia-Karte
+    if (!cityOk || (req.forbidSoftFill && mustLabels)) {
+      const spokenText = mustLabels
+        ? `Dazu finde ich gerade kein Hotel, bei dem ${mustLabels} belegt ist. Sag Stadt oder Zeitraum klarer — oder lockere den Filter.`
+        : cityOk
+          ? `In ${city} gerade kein passendes Hotel mit den Musts. Sag Zeitraum oder lockere den Filter — dann such ich weiter.`
+          : 'Für die Hotelsuche brauche ich noch die Stadt (oder einen klaren Ort). Dann prüfe ich Preise und Amenities live.';
+      const result: PitchResult = {
+        requestId: req.requestId,
+        softFail: true,
+        spokenText,
+        summary: mustLabels ? 'Kein Hard-Match' : 'Hotel: Stadt/Musts fehlen',
+        options: [],
+        outOfBoxHint: null,
+        uiLayout: req.uiLayout,
+      };
+      publishPitchResult(result, {
+        stepKey: req.requestId,
+        headline: pitchHeadlineFromContext({
+          city: req.cityHint,
+          userText: req.title,
+          fallback: 'Hotels',
+        }),
+        anchorTimeMs: req.visitAtMs,
+        pitchKind: req.kind,
+        pitchContext: `${req.title} ${req.context}`.trim(),
+        openCalendar: false,
+      });
+      return result;
+    }
     let url = '';
     let expediaUrl = '';
     let dates: { checkin?: string; checkout?: string } | undefined;
@@ -469,6 +548,7 @@ export async function runPitchModule(
       };
       dates = parseHotelStayDates(`${req.title} ${req.context}`);
       adults = parseHotelAdults(`${req.title} ${req.context}`);
+      // Suche-Link nur mit Stadt + idealerweise Daten (verifiziert)
       url = getStay22AccommodationUrl(city, dates) || '';
       expediaUrl =
         getExpediaAccommodationUrl(city, {
@@ -492,7 +572,7 @@ export async function runPitchModule(
         ? [
             {
               type: 'OPEN_URL' as const,
-              label: expediaUrl ? `🏨 Hotels suchen` : '🏨 Hotels suchen',
+              label: '🏨 Hotels suchen',
               payload: {
                 url: primaryUrl,
                 destName: city,
@@ -521,11 +601,12 @@ export async function runPitchModule(
           ]
         : []),
     ];
+    // Soft-Fail-Karte = Such-Hilfe, kein verifiziertes Hotel
     const options: PitchOptionCard[] = primaryUrl
       ? [
           {
             id: `pitch_${req.requestId}_stay`,
-            name: `Hotels in ${city}`,
+            name: `Hotels in ${city} (Suche)`,
             lat: req.anchor.lat,
             lng: req.anchor.lng,
             role: 'favorite',
@@ -542,6 +623,7 @@ export async function runPitchModule(
             mapsUrl: primaryUrl,
             bookingUrl: primaryUrl,
             actions,
+            whyChosen: ['Stadt verifiziert', 'kein belegtes Einzel-Hotel'],
           },
         ]
       : [];
@@ -716,6 +798,7 @@ export async function runPitchModule(
         }>;
       }
     ).criteriaChecklist,
+    whyByName,
     signal: req.signal,
   });
 
@@ -724,12 +807,25 @@ export async function runPitchModule(
     const role = roleFor(i, ranked.softFail);
     const mapsUrl = c.mapsUrl;
     const websiteUrl = c.websiteUrl ?? null;
-    // Gastro: Website immer als Speisekarte-Seed (Deep-Append ersetzt später)
+    const need = req.orderNeed;
+    // Gastro: Website als Speisekarte-Seed nur wenn Order.need.menuUrl (Default: ja bei food)
+    const wantMenu =
+      need?.menuUrl === true ||
+      (need?.menuUrl !== false && (req.kind === 'food' || req.kind === 'bar'));
+    const wantMaps = need?.maps !== false;
+    const wantPrices =
+      need?.prices === true ||
+      (need?.prices !== false && (req.kind === 'food' || req.kind === 'bar'));
     const namedVenue = namedVenueFromWishes(req.wishes);
-    const menuSeed =
-      (req.kind === 'food' || req.kind === 'bar') && websiteUrl
-        ? websiteUrl
+    const menuFromCandidate =
+      wantMenu && (c.menuUrl || '').trim().startsWith('http')
+        ? String(c.menuUrl).trim()
         : null;
+    const menuSeed =
+      menuFromCandidate ||
+      (wantMenu && (req.kind === 'food' || req.kind === 'bar') && websiteUrl
+        ? websiteUrl
+        : null);
     const bookingUrl =
       req.kind === 'hotel'
         ? c.bookingUrl ??
@@ -739,32 +835,52 @@ export async function runPitchModule(
             req.cityHint,
           )
         : null;
-    const suppressNav = !namedVenue;
+    let amenityPlace = false;
+    try {
+      const { isAmenitySinglePlacePitch } = require('./pitchAmenityUi') as {
+        isAmenitySinglePlacePitch: (o: Record<string, unknown>) => boolean;
+      };
+      amenityPlace = isAmenitySinglePlacePitch({
+        kind: req.kind,
+        text: `${req.title} ${req.context}`,
+        mustHaves: req.call1MustHaves,
+        wishes: req.wishes,
+      });
+    } catch {
+      amenityPlace = false;
+    }
+    const suppressNav =
+      amenityPlace ? false : !namedVenue;
     const actions = buildPitchActions({
       kind: req.kind,
       name: c.name,
       lat: c.lat,
       lng: c.lng,
-      mapsUrl,
+      mapsUrl: wantMaps ? mapsUrl : '',
       menuUrl: menuSeed,
-      bookingUrl,
+      bookingUrl: need?.bookingLink === false ? null : bookingUrl,
       websiteUrl,
       role: role === 'out_of_box' ? 'alternative' : role,
-      suppressNav,
+      suppressNav:
+        (suppressNav && !amenityPlace) || req.orderUi?.startNav === false,
     });
     const evidenceBullets = (c.hardEvidence ?? []).slice(0, 2);
+    const whyLines = (whyByName[c.name] ?? []).map((w) => w.evidence);
     const priceBullet =
-      c.dishPriceHint ||
-      (c.priceTotalEur != null
-        ? `${Math.round(c.priceTotalEur)} € live`
-        : null);
+      wantPrices &&
+      (c.dishPriceHint ||
+        (c.priceTotalEur != null
+          ? `${Math.round(c.priceTotalEur)} € live`
+          : null));
+    const bulletMax = req.bulletBudget?.max ?? 3;
     let bullets = [
       ...(priceBullet ? [priceBullet] : []),
+      ...whyLines.slice(0, 2),
       ...evidenceBullets,
       ...card.bullets,
     ]
       .filter((b, idx, arr) => arr.indexOf(b) === idx)
-      .slice(0, 3);
+      .slice(0, bulletMax);
     try {
       const { filterWeakCategoryBullets } = require('./weakCategoryBullet') as {
         filterWeakCategoryBullets: (xs: string[]) => string[];
@@ -794,6 +910,8 @@ export async function runPitchModule(
     } catch {
       /* soft */
     }
+    // Gold/Contract-Meta nie in PitchOptionCard (Spickzettel/Choice-Slot)
+    bullets = humanizeBullets(bullets, 3);
     return {
       id: `pitch_${req.requestId}_${i === 0 ? 'a' : 'b'}`,
       name: c.name,
@@ -809,7 +927,9 @@ export async function runPitchModule(
       menuUrl: menuSeed,
       bookingUrl,
       actions,
-      showNavBeforeSelect: Boolean(namedVenue),
+      showNavBeforeSelect: Boolean(namedVenue) || amenityPlace,
+      allowCoordsMaps: amenityPlace,
+      whyChosen: whyLines.slice(0, 5),
     };
   });
 
@@ -830,7 +950,8 @@ export async function runPitchModule(
     .trim();
 
   // Open-World learn stage: belegte Treffer lokal/Inbox (fire-and-forget)
-  if (!ranked.softFail && options.length) {
+  // Phase 7: auch softFail — recherchierte Hits trotzdem schreiben
+  if (options.length) {
     void (async () => {
       try {
         const { persistDiscoveredPoiIntoDataset } = await import(
@@ -843,8 +964,28 @@ export async function runPitchModule(
               name: o.name,
               lat: o.lat,
               lng: o.lng,
-              category: req.kind === 'hotel' ? 'hotel' : 'restaurant',
-              cityId: req.cityHint ?? null,
+              category:
+                req.kind === 'hotel'
+                  ? 'hotel'
+                  : req.kind === 'cinema'
+                    ? 'cinema'
+                    : req.kind === 'sight'
+                      ? 'sight'
+                      : 'restaurant',
+              cityId: (() => {
+                try {
+                  const {
+                    ghostCityIdFromName,
+                  } = require('../../services/cityResearchLane') as {
+                    ghostCityIdFromName: (n: string) => string;
+                  };
+                  const hint = (req.cityHint || '').trim();
+                  return hint ? ghostCityIdFromName(hint) : null;
+                } catch {
+                  return req.cityHint ?? null;
+                }
+              })(),
+              cityName: (req.cityHint || '').trim() || null,
               facts: (o.bullets ?? []).slice(0, 3).map((t) => ({
                 text: t,
                 sourceUrl: o.websiteUrl ?? o.menuUrl ?? null,
@@ -854,7 +995,13 @@ export async function runPitchModule(
             },
             {
               skipWiki: true,
-              tags: req.wishes?.map((w) => w.text).filter(Boolean).slice(0, 6),
+              tags: [
+                ...(req.wishes?.map((w) => w.text).filter(Boolean).slice(0, 6) ??
+                  []),
+                ...(req.call1MustHaves ?? []).slice(0, 4),
+                ...(req.multiLane?.hardOutdoorOnly ? ['open_air'] : []),
+                'pitch_verified',
+              ],
               userText: `${req.title}`,
             },
           );
@@ -865,11 +1012,38 @@ export async function runPitchModule(
     })();
   }
 
-  // Dining/AYCE: live_split default — Calendar nur bei uiRequirements.openCalendar
-  const uiLayout =
-    req.kind === 'food' || req.kind === 'bar'
-      ? 'live_split'
-      : req.uiLayout;
+  // Phase 8: Amenity single-place nie Timeline; Calendar nur bei echtem Tour/Plan
+  let wantCalendar =
+    req.orderUi?.openCalendar === true || req.orderUi?.openTimeline === true;
+  let uiLayout: typeof req.uiLayout = req.uiLayout;
+  try {
+    const { resolvePitchUiLayout, isAmenitySinglePlacePitch } = require('./pitchAmenityUi') as {
+      resolvePitchUiLayout: (o: Record<string, unknown>) => 'live_split' | 'timeline_stack';
+      isAmenitySinglePlacePitch: (o: Record<string, unknown>) => boolean;
+    };
+    const amenity = isAmenitySinglePlacePitch({
+      kind: req.kind,
+      text: `${req.title} ${req.context}`,
+      mustHaves: req.call1MustHaves,
+      wishes: req.wishes,
+    });
+    if (amenity) wantCalendar = false;
+    uiLayout = resolvePitchUiLayout({
+      kind: req.kind,
+      text: `${req.title} ${req.context}`,
+      mustHaves: req.call1MustHaves,
+      wishes: req.wishes,
+      requested: req.uiLayout,
+      orderOpenCalendar: wantCalendar,
+      orderOpenTimeline: false,
+    });
+  } catch {
+    uiLayout = wantCalendar
+      ? 'timeline_stack'
+      : req.kind === 'food' || req.kind === 'bar'
+        ? 'live_split'
+        : req.uiLayout;
+  }
   const result: PitchResult = {
     requestId: req.requestId,
     softFail: ranked.softFail,
@@ -880,14 +1054,21 @@ export async function runPitchModule(
     uiLayout,
   };
 
-  publishPitchResult(result, {
-    stepKey: req.requestId,
-    headline: pitchHeadlineFromContext({ city: req.cityHint, userText: req.title, fallback: 'Zwei Optionen' }),
-    anchorTimeMs: req.visitAtMs,
-    pitchKind: req.kind,
-    pitchContext: `${req.title} ${req.context}`.trim(),
-    openCalendar: false,
-  });
+  const publish = () =>
+    publishPitchResult(result, {
+      stepKey: req.requestId,
+      headline: pitchHeadlineFromContext({ city: req.cityHint, userText: req.title, fallback: 'Zwei Optionen' }),
+      anchorTimeMs: req.visitAtMs,
+      pitchKind: req.kind,
+      pitchContext: `${req.title} ${req.context}`.trim(),
+      openCalendar: wantCalendar,
+    });
+  const delayMs = req.orderUi?.delayMs;
+  if (typeof delayMs === 'number' && delayMs > 0) {
+    setTimeout(publish, Math.min(15_000, delayMs));
+  } else {
+    publish();
+  }
 
   startPitchDeepAppend({
     req,

@@ -1,0 +1,7 @@
+founder_must scenarios 25
+TOTAL_MERGED=110 RUNNING=110
+
+=== vf_ayce_kein_asiatisch ===
+Q: Ich habe Lust heute Abend All you can eat zu essen, aber kein Asiatisch. Was kannst du mir empfehlen?
+WARN app_ready_timeout
+WARN app_ready_timeout_retry

@@ -14,6 +14,7 @@ import {
   isFlightTripFollowUp,
   isFlightTripQuery,
   parseFlightTripSlots,
+  extractFlightRegionHint,
   shouldEnterFlightAdvisor,
   shouldYieldPlanWaitToFlight,
   isShortReplyToLastAsk,
@@ -154,6 +155,21 @@ assert(
     .includes('antalya') === true,
   'lowercase destHint',
 );
+
+{
+  const south = parseFlightTripSlots(
+    'ich will morgen fliegen — guck bei Hamburg Flüge, was geht so Richtung Süden, und ob ich noch Tickets kriege',
+  );
+  assert(south.regionHint === 'south', 'regionHint south');
+  assert(south.destHint == null, 'Süden is not destHint');
+  assert(extractFlightRegionHint('Richtung Sueden') === 'south', 'sueden ascii');
+  assert(
+    shouldScrubFlightOnTopicCut(
+      'Welche Theaterstücke oder Vorstellungen laufen heute oder die Tage in der Nähe?',
+    ),
+    'theater scrubs flight',
+  );
+}
 assert(
   parseFlightTripSlots('Antalya').destHint?.toLowerCase().includes('antalya') ===
     true,
@@ -570,7 +586,7 @@ assert(
     airportLabel: 'Hamburg Airport',
     airportMs: Date.parse('2026-08-19T18:00:00'),
   });
-  assert(/RB61 Richtung Hamburg-Altona/.test(rail.title), rail.title);
+  assert(/RB61 (?:Richtung|nach) Hamburg-Altona/.test(rail.title), rail.title);
   const bus = planAccessLeg({
     legs,
     index: 3,
@@ -1025,6 +1041,32 @@ assert(
     { arriveByMs: arrive, taxiMin: 45, nowMs },
   ),
   'sane tomorrow ÖPNV',
+);
+assert(
+  !isSaneAirportAccessTransit(
+    {
+      durationSec: 75 * 60,
+      startTime: new Date('2026-08-19T09:15:00'),
+      endTime: new Date('2026-08-19T10:45:00'),
+    },
+    { arriveByMs: arrive, taxiMin: 45, nowMs },
+  ),
+  'reject ÖPNV >10 min after arriveBy',
+);
+assert(
+  !isSaneAirportAccessTransit(
+    {
+      durationSec: 90 * 60,
+      startTime: new Date('2026-08-19T09:00:00'),
+      endTime: new Date('2026-08-19T10:30:00'),
+      legs: [
+        { mode: 'RAIL', line: 'RB61', distanceM: 0 },
+        { mode: 'WALK', distanceM: 2400, durationSec: 33 * 60 },
+      ],
+    },
+    { arriveByMs: arrive, taxiMin: 45, nowMs },
+  ),
+  'reject long final walk egress',
 );
 assert(
   !isSaneAirportAccessTransit(

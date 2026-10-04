@@ -128,28 +128,69 @@ export async function maybeRunCall3Enrichment(
 
   const patchSpeech = deep.agentResult.draftText?.trim();
   if (patchSpeech) {
+    // Append-only: Call-2 Text nie überschreiben
+    const appendedUi = `${input.synthesis.fullDraftForUi} ${patchSpeech}`.trim();
     await presentToUi(
-      speechIdle
-        ? `${input.synthesis.fullDraftForUi} ${patchSpeech}`.trim()
-        : input.synthesis.fullDraftForUi,
+      speechIdle ? appendedUi : input.synthesis.fullDraftForUi,
       mergedBullets,
       mergedButtons,
       { userText: input.userText },
     );
     if (speechIdle && patchSpeech.length > 20) {
       try {
-        const { enqueueSpeech } = require('../../speech/speechQueue') as {
-          enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
+        // Bevorzugt dieselbe TTS-Session (append), kein zweites Main-Job-Override
+        const { getFusedTurnPump, isFusedTurnLive } = require('../../speech/fusedTurnSpeech') as {
+          getFusedTurnPump: () => {
+            hasStarted: () => boolean;
+            isEnded: () => boolean;
+            push: (s: string) => void;
+          };
+          isFusedTurnLive: () => boolean;
         };
-        enqueueSpeech({
-          kind: 'main',
-          text: patchSpeech.slice(0, 400),
-          turnId: `call3_${Date.now()}`,
-        });
+        if (isFusedTurnLive()) {
+          const pump = getFusedTurnPump();
+          if (pump.hasStarted() && !pump.isEnded()) {
+            pump.push(patchSpeech.slice(0, 400));
+          } else {
+            const { enqueueSpeech } = require('../../speech/speechQueue') as {
+              enqueueSpeech: (o: {
+                kind: string;
+                text: string;
+                turnId: string;
+              }) => void;
+            };
+            enqueueSpeech({
+              kind: 'main',
+              text: patchSpeech.slice(0, 400),
+              turnId: `call3_${Date.now()}`,
+            });
+          }
+        } else {
+          const { enqueueSpeech } = require('../../speech/speechQueue') as {
+            enqueueSpeech: (o: {
+              kind: string;
+              text: string;
+              turnId: string;
+            }) => void;
+          };
+          enqueueSpeech({
+            kind: 'main',
+            text: patchSpeech.slice(0, 400),
+            turnId: `call3_${Date.now()}`,
+          });
+        }
       } catch {
         /* soft */
       }
     }
+    return {
+      synthesis: {
+        ...nextSynthesis,
+        fullDraftForUi: appendedUi,
+      },
+      buttons: mergedButtons,
+      ran: true,
+    };
   }
 
   return {

@@ -1,0 +1,11 @@
+{
+  "ts": "2026-09-13T13:05:25.010515+00:00",
+  "serial": "00143157P001105",
+  "verdict": "FAIL",
+  "score": "0/4",
+  "open_path": "ask_fallback",
+  "ask_server": true,
+  "error": "could not open Reisebüro",
+  "checks": {},
+  "snippet": "&#127749; 19:45 Sonnenuntergang. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.\n&#127749; 19:45 Sonnenuntergang\nnoch 4 Std 40 Min · Himmel eher wolkig\n⛅ Wechselhaft · 19°. Tippen: Wetter und Tipps. Wischen: nächste Karte.\n⛅ Wechselhaft · 19°\nbleibt trocken\n&#127749; 19:45 Sonnenuntergang. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.\n&#127749; 19:45 Sonnenuntergang\nnoch 4 Std 40 Min · Himmel eher wolkig\nShowing a Map created with MapLibre. Scroll "
+}

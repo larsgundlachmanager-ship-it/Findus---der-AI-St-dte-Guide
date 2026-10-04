@@ -1,0 +1,16 @@
+npm warn Unknown env config "devdir". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+<--- Last few GCs --->
+
+[30740:0000021F196A6000] 33144056 ms: Scavenge (interleaved) 4077.7 (4091.1) -> 4075.6 (4111.6) MB, pooled: 0 MB, 29.60 / 0.01 ms  (average mu = 0.347, current mu = 0.282) allocation failure; 
+[30740:0000021F196A6000] 33146623 ms: Mark-Compact (reduce) 4117.5 (4142.3) -> 4109.0 (4115.4) MB, pooled: 0 MB, 1176.06 / 0.09 ms  (+ 939.9 ms in 186 steps since start of marking, biggest step 7.1 ms, walltime since start of marking 2360 ms) (average mu 
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF7CA433D9F node::OnFatalError+1343
+ 2: 00007FF7C907DCB7 v8::Function::NewInstance+423
+ 3: 00007FF7C8E7E4F7 uv_udp_get_send_queue_count+54423
+ 4: 00007FF7C8E7C196 uv_udp_get_send_queue_count+45366
+ 5: 00007FF7C8EFFDA9 v8::Unlocker::~Unlocker+9273
+ 6: 00007FF7C8A735D8 v8::CodeEvent::GetFunctionName+131144
+ 7: 0000021F51D375FA 

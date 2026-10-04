@@ -15,6 +15,24 @@ import deProblemWordJson from '../../assets/data/deProblemWordPronunciations.jso
 import { onDictionaryCacheInvalidate } from '../tts/dictionaryEngine';
 import { stripStageDirections } from './germanTtsProsodyRules';
 import { stripArtificialBreathPauses } from './ttsProsody';
+import {
+  numberToGermanWords,
+  clockHourToGermanWords,
+  transformClockTimes,
+  transformNumericRanges,
+  transformNumericDotDates,
+  transformOrdinalDates,
+  transformBareOrdinals,
+} from './germanNumberSpeech';
+export {
+  numberToGermanWords,
+  clockHourToGermanWords,
+  transformClockTimes,
+  transformNumericRanges,
+  transformNumericDotDates,
+  transformOrdinalDates,
+  transformBareOrdinals,
+};
 
 /** IPA-typische Zeichen — Werte damit bleiben IPA-Marker, keine Ortho-Hints. */
 const IPA_HINT_RE =
@@ -45,92 +63,6 @@ function matchWordCase(original: string, replacement: string): string {
   return replacement.charAt(0).toLowerCase() + replacement.slice(1);
 }
 
-const ORDINAL_MASC: Record<number, string> = {
-  1: 'erster',
-  2: 'zweiter',
-  3: 'dritter',
-  4: 'vierter',
-  5: 'fünfter',
-  6: 'sechster',
-  7: 'siebter',
-  8: 'achter',
-  9: 'neunter',
-  10: 'zehnter',
-  11: 'elfter',
-  12: 'zwölfter',
-  13: 'dreizehnter',
-  14: 'vierzehnter',
-  15: 'fünfzehnter',
-  16: 'sechzehnter',
-  17: 'siebzehnter',
-  18: 'achtzehnter',
-  19: 'neunzehnter',
-  20: 'zwanzigster',
-  21: 'einundzwanzigster',
-  22: 'zweiundzwanzigster',
-  23: 'dreiundzwanzigster',
-  24: 'vierundzwanzigster',
-  25: 'fünfundzwanzigster',
-  26: 'sechsundzwanzigster',
-  27: 'siebenundzwanzigster',
-  28: 'achtundzwanzigster',
-  29: 'neunundzwanzigster',
-  30: 'dreißigster',
-  31: 'einunddreißigster',
-};
-
-const ORDINAL_NEUT: Record<number, string> = {
-  1: 'erstes',
-  2: 'zweites',
-  3: 'drittes',
-  4: 'viertes',
-  5: 'fünftes',
-  6: 'sechstes',
-  7: 'siebtes',
-  8: 'achtes',
-  9: 'neuntes',
-  10: 'zehntes',
-};
-
-const MONTHS =
-  'Januar|Februar|März|Maerz|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember';
-
-const ONES = [
-  'null',
-  'eins',
-  'zwei',
-  'drei',
-  'vier',
-  'fünf',
-  'sechs',
-  'sieben',
-  'acht',
-  'neun',
-  'zehn',
-  'elf',
-  'zwölf',
-  'dreizehn',
-  'vierzehn',
-  'fünfzehn',
-  'sechzehn',
-  'siebzehn',
-  'achtzehn',
-  'neunzehn',
-];
-
-const TENS = [
-  '',
-  '',
-  'zwanzig',
-  'dreißig',
-  'vierzig',
-  'fünfzig',
-  'sechzig',
-  'siebzig',
-  'achtzig',
-  'neunzig',
-];
-
 const UNIT_MAP: [RegExp, string][] = [
   [/€/g, ' Euro'],
   [/\$/g, ' Dollar'],
@@ -140,125 +72,11 @@ const UNIT_MAP: [RegExp, string][] = [
   [/\bkg\b/gi, ' Kilogramm'],
 ];
 
-/**
- * Zahl → ausgeschriebene deutsche Wörter.
- * Jahre 1100–1999: „achtzehnhundertvierundsiebzig“ (Jahr-Lesart).
- */
-export function numberToGermanWords(
-  n: number,
-  options?: { yearStyle?: boolean },
-): string {
-  if (!Number.isFinite(n)) return String(n);
-  const neg = n < 0;
-  let v = Math.abs(Math.floor(n));
-
-  if (options?.yearStyle && v >= 1100 && v <= 1999) {
-    const century = Math.floor(v / 100);
-    const rest = v % 100;
-    const head = underHundred(century);
-    // Leerzeichen vor Rest → TTS betont „neunzehnhundert elf“ statt Ziffern-Salat
-    const body =
-      rest === 0 ? 'hundert' : `hundert ${underHundred(rest)}`;
-    return neg ? `minus ${head}${body}` : `${head}${body}`;
-  }
-
-  let out: string;
-  if (v < 20) {
-    out = ONES[v] ?? String(v);
-  } else if (v < 100) {
-    out = underHundred(v);
-  } else if (v < 1000) {
-    const h = Math.floor(v / 100);
-    const rest = v % 100;
-    const head = h === 1 ? 'einhundert' : `${ONES[h]}hundert`;
-    out = rest === 0 ? head : `${head}${underHundred(rest)}`;
-  } else if (v < 1_000_000) {
-    const th = Math.floor(v / 1000);
-    const rest = v % 1000;
-    const head =
-      th === 1 ? 'eintausend' : `${numberToGermanWords(th)}tausend`;
-    out =
-      rest === 0
-        ? head
-        : `${head}${numberToGermanWords(rest)}`;
-  } else {
-    out = String(v)
-      .split('')
-      .map((d) => ONES[Number(d)] ?? d)
-      .join(' ');
-  }
-
-  return neg ? `minus ${out}` : out;
-}
-
-function underHundred(n: number): string {
-  if (n < 20) return ONES[n] ?? String(n);
-  const t = Math.floor(n / 10);
-  const o = n % 10;
-  if (o === 0) return TENS[t];
-  const one = o === 1 ? 'ein' : ONES[o];
-  return `${one}und${TENS[t]}`;
-}
-
-/** "08:00 Uhr", "8:00", "20:15" → "acht Uhr" / "zwanzig Uhr fünfzehn" */
-export function transformClockTimes(text: string): string {
-  return text.replace(
-    /\b([01]?\d|2[0-3])[:.]([0-5]\d)(?:\s*[Uu]hr)?\b/g,
-    (_m, hRaw: string, mRaw: string) => {
-      const h = numberToGermanWords(Number(hRaw));
-      const mins = Number(mRaw);
-      if (mins === 0) return `${h} Uhr`;
-      return `${h} Uhr ${numberToGermanWords(mins)}`;
-    },
-  );
-}
-
-/** "18.08.2026" → "18. August 2026" (sonst buchstabiert TTS die Jahreszahl). */
-export function transformNumericDotDates(text: string): string {
-  const names = [
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember',
-  ];
-  return text.replace(/\b(\d{1,2})\.(\d{1,2})\.(\d{4})\b/g, (full, ds, ms, ys) => {
-    const d = Number(ds);
-    const mo = Number(ms);
-    const y = Number(ys);
-    if (d < 1 || d > 31 || mo < 1 || mo > 12) return full;
-    return `${d}. ${names[mo - 1]} ${y}`;
-  });
-}
-export function transformOrdinalDates(text: string): string {
-  const re = new RegExp(`\\b([0-3]?\\d)\\.\\s*(${MONTHS})\\b`, 'gi');
-  return text.replace(re, (_m, dayRaw: string, month: string) => {
-    const day = Number(dayRaw);
-    if (!Number.isFinite(day) || day < 1 || day > 31) {
-      return `${numberToGermanWords(Number(dayRaw))} ${month}`;
-    }
-    const ordinal = ORDINAL_MASC[day] ?? `${numberToGermanWords(day)}ter`;
-    return `${ordinal} ${month}`;
-  });
-}
-
-/** Stehende Ordinalziffern: "1." / "2." → "erstes" / "zweites" */
-export function transformBareOrdinals(text: string): string {
-  return text.replace(/\b(\d{1,2})\.(?=\s|$)/g, (_m, raw: string) => {
-    const n = Number(raw);
-    if (!Number.isFinite(n) || n < 1 || n > 31) {
-      return numberToGermanWords(n);
-    }
-    return ORDINAL_NEUT[n] ?? ORDINAL_MASC[n] ?? `${numberToGermanWords(n)}tes`;
-  });
-}
+export {
+  parseRomanNumeral,
+  germanOrdinalAbsolute,
+  expandRomanNumeralsForSpeech,
+} from './romanNumeralsSpeech';
 
 /**
  * Buchstaben-Codes: KEINE Einzelbuchstaben-Spelling-Fallen mehr.
@@ -638,6 +456,30 @@ export function stripSpellTrapsAndMarkdownJunk(text: string): string {
     },
   );
 
+  // Zero-width / Soft-Hyphen zwischen Buchstaben → Wort (sonst Cartesia buchstabiert)
+  s = s.replace(/([\p{L}])[\u200b\u200c\u200d\ufeff\u00ad]+([\p{L}])/gu, '$1$2');
+  s = s.replace(/([\p{L}])(?:[\u200b\u200c\u200d\ufeff\u00ad]+([\p{L}]))+/gu, (m) =>
+    m.replace(/[\u200b\u200c\u200d\ufeff\u00ad]/g, ''),
+  );
+
+  // Punkt-/Mittelpunkt-Buchstabieren: R.e.s.t / R·e·s·t
+  s = s.replace(/\b(?:[\p{L}][.·•]){2,}[\p{L}]\b/gu, (m) =>
+    m.replace(/[.·•]/g, ''),
+  );
+
+  // Kleinbuchstaben-Buchstabierfallen: a l l / w o r t -> Wort
+  s = s.replace(/\b(?:[\p{L}]\s+){2,}[\p{L}]\b/gu, (m) => {
+    const letters = m.replace(/\s+/g, '');
+    if (letters.length >= 3 && letters.length <= 24) return letters;
+    return ' ';
+  });
+
+  // Bindestrich-Buchstabieren: W-o-r-t / A-Y-C-E
+  s = s.replace(
+    /\b(?:[\p{L}]-){2,}[\p{L}]\b/gu,
+    (m) => m.replace(/-/g, ''),
+  );
+
   // Einzelziffern-Ketten: „2 6 1" / „1 2 3 4" → entfernen (Buchstabier-Falle)
   s = s.replace(/\b(?:\d\s+){2,}\d\b/g, ' ');
 
@@ -683,7 +525,10 @@ export function sanitizeSpokenText(text: string): string {
  * Englische Orthografie-Swaps und Hof→Hoff kommen NICHT hier rein.
  */
 export function prepareDisplayText(text: string): string {
-  let s = text.normalize('NFKC').replace(/\s+/g, ' ').trim();
+  const { stripInternalWorkerSpeech } = require('../../module2/speech/speechHumanOnly') as {
+    stripInternalWorkerSpeech: (t: string) => string;
+  };
+  let s = stripInternalWorkerSpeech(text.normalize('NFKC').replace(/\s+/g, ' ').trim());
   if (!s) return s;
   // Cartesia-/IPA-Spans gehören nie in UI/Untertitel
   s = s.replace(/<<[^>]*>>/g, ' ');
@@ -694,6 +539,7 @@ export function prepareDisplayText(text: string): string {
   s = applyPlaceNamePhonetics(s);
   s = normalizeOnomatopoeia(s);
   s = transformClockTimes(s);
+  s = transformNumericRanges(s);
   s = transformNumericDotDates(s);
   s = transformOrdinalDates(s);
   s = transformBareOrdinals(s);
@@ -720,6 +566,13 @@ export function prepareSpokenText(text: string): string {
 export function prepareAudioText(text: string): string {
   let s = prepareDisplayText(text);
   if (!s) return s;
+  const { expandRomanNumeralsForSpeech } = require('./romanNumeralsSpeech') as {
+    expandRomanNumeralsForSpeech: (t: string) => string;
+  };
+  s = expandRomanNumeralsForSpeech(s);
+  // Cartesia liest restliches € oft als „O“ — immer aussprechen
+  s = s.replace(/\u20ac/g, ' Euro').replace(/\bEUR\b/gi, 'Euro');
+  s = s.replace(/\bEuro\s*[Oo]\b/g, 'Euro');
   s = stripArtificialBreathPauses(s);
   return s.replace(/\s+/g, ' ').trim();
 }

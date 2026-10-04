@@ -12,6 +12,7 @@
 
 import { isWakeAlarmIntent, hasClockHint } from '../alarms/wakeIntentDetect';
 import { isFlightTripQuery } from '../flights/flightTripIntent';
+import { wantsTaxiRide } from '../mobility/taxiRideIntent';
 
 export type TimeCareKind =
   | 'wake'
@@ -34,10 +35,10 @@ const LEAVE_RE =
   /\b(?:los\s*geh|los\s*muss|aufbruch|rechtzeitig|pünktlich|puenktlich|leave[-\s]?by|wann\s+(?:muss|soll)\s+ich\s+(?:los|weg)|nicht\s+(?:den\s+)?(?:zug|bus|bahn)\s+verpassen|zur\s+(?:bahn|haltestelle)|zum\s+(?:zug|bus|bahnhof|flughafen))\b/iu;
 
 const REMIND_TASK_RE =
-  /\b(?:anruf|anrufen|call|denk(?:en)?\s+dran|todo|termin\s+erinner|medikament|tablette|einkauf|mitnehm|pack(?:en)?|mail|nachricht|sag(?:en)?\s+(?:ihm|ihr|denen|dem|der))\b/iu;
+  /\b(?:anruf|anrufen|call|denk(?:en)?\s+dran|todo|termin\s+erinner|medikament|tablette|einkauf|mitnehm|mitzunehmen|pack(?:en)?|packliste|zahnbürste|zahnbuerste|mail|nachricht|sag(?:en)?\s+(?:ihm|ihr|denen|dem|der))\b/iu;
 
 const PURE_REMIND_RE =
-  /\berinner(?:e|n)?\s+(?:mich|uns)\b/iu;
+  /\berinner(?:e|n)?\s+(?:mich|uns)\b|\bdaran\s+erinner(?:e|n)?\b|\berinner(?:e|n)?(?:\s+\w+){0,4}\s+(?:mich|uns)\b/iu;
 
 const WAKE_STRONG_RE =
   /\b(?:wecker|geweckt|weck\s+mich|aufweck|alarm(?:uhr)?|auf\s*steh|aufsteh|wach\s*(?:sein|werden|machen|bin))\b/iu;
@@ -58,7 +59,7 @@ const CLOCK_TOKEN_RE =
 function asksRemindLight(text: string): boolean {
   return (
     PURE_REMIND_RE.test(text) ||
-    /\b(?:erinnerung|denk\s+dran|mach\s+mich\s+dran|sag\s+(?:mir\s+)?bescheid)\b/iu.test(
+    /\b(?:erinnerung|denk\s+dran|mach\s+mich\s+dran|sag\s+(?:mir\s+)?bescheid|daran\s+erinner)\b/iu.test(
       text,
     )
   );
@@ -266,10 +267,23 @@ export function isParkingCareIntent(text: string): boolean {
 export function isTransitLeaveIntent(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (isFlightTripQuery(t)) return false;
+  // Taxi/Uber-Vorbestellung ist Ride-Hail — kein ÖPNV-/Leave-by-Pfad.
+  if (wantsTaxiRide(t)) return false;
   if (!TRANSIT_RE.test(t)) return false;
 
   // Explizites Los / Leave
   if (LEAVE_RE.test(t)) return true;
+
+  // „Wann fährt die nächste Bahn/Zug nach X?“ = Live-Verbindung, kein Leave-by-Slot nötig
+  if (
+    /\b(?:wann\s+fährt|wann\s+faehrt|nächste[rn]?\s+(?:bahn|zug|bus|s-?bahn|u-?bahn)|naechste[rn]?\s+(?:bahn|zug|bus))\b/iu.test(
+      t,
+    ) &&
+    (/\b(?:nach|von|ab|Richtung|richtung)\b/iu.test(t) ||
+      /\b(?:hbf|hauptbahnhof|bahnhof)\b/iu.test(t))
+  ) {
+    return true;
+  }
 
   // „muss/soll … zur Bahn/zum Zug“ + Zeit
   if (
@@ -290,6 +304,14 @@ export function isTransitLeaveIntent(text: string): boolean {
     return true;
   }
 
+  // „gibt's eine Bahn früher/später?“ — Live neu planen, kein LLM-„keine Livepläne“
+  if (
+    /\b(?:früher|frueher|später|spaeter|andere\s+verbindung)\b/iu.test(t) &&
+    /\b(?:bahn|zug|bus|s-?bahn|öpnv|oepnv|verbindung|abfahrt)\b/iu.test(t)
+  ) {
+    return true;
+  }
+
   return false;
 }
 
@@ -303,10 +325,31 @@ function wantsWakeSignal(text: string): boolean {
  * Klassifiziert Care-Zeit-Intents. Priorität:
  * Parken → Timer → Compound Wake+Transit → Wake → Reminder → Transit.
  */
+
+/** Pack-/Hygiene-Item — kein Geo-Geocode („Zahnbürste“ ist kein Ort). */
+export function isPackItemReminderAnchor(place: string | null | undefined): boolean {
+  const p = String(place || '').replace(/\s+/g, ' ').trim();
+  if (!p) return false;
+  return /\b(?:zahnbürste|zahnbuerste|zahncreme|zahnpasta|shampoo|deo|powerbank|ladekabel|adapter|sonnencreme|medikament(?:e)?|tablette[n]?|pass|ausweis)\b/iu.test(
+    p,
+  );
+}
+
+/** Default-Zeit für Pack-Item-Erinnerung (heute/morgen 18 Uhr). */
+export function defaultPackItemReminderMs(nowMs = Date.now()): number {
+  const d = new Date(nowMs);
+  d.setSeconds(0, 0);
+  d.setHours(18, 0, 0, 0);
+  if (d.getTime() <= nowMs + 20_000) d.setDate(d.getDate() + 1);
+  return d.getTime();
+}
+
 export function classifyTimeCareIntent(text: string): TimeCareIntent | null {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t) return null;
   if (isFlightTripQuery(t)) return null;
+  // Taxi vor Transit — sonst frisst „Flughafen + 7 Uhr“ den Ride.
+  if (wantsTaxiRide(t)) return null;
 
   if (isParkingCareIntent(t)) {
     return { kind: 'parking', confidence: 0.92, reason: 'parking_ctx' };

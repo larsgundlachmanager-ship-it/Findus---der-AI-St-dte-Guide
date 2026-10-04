@@ -8,8 +8,9 @@
  * - Economy Bookings Mietwagen Referral 16yupj/l0j2ln (Backup)
  * - TravelSecure DE AWIN mid=106517 / publisher 3021215
  * - travSIM DACH AWIN mid=15561 / publisher 3021215 (Primär eSIM)
- * - Reservix DE AWIN mid=31293 (Live-Events: Konzert, Theater, Sport)
+ * - Reservix DE AWIN mid=31293 · ADticket mid=18490 (Live-Events)
  * - camping.info AWIN mid=44063 (Campingplatz ~5 %)
+ * - Camping-and-Co AWIN mid=16438 (FR/EU Camping ~7 % thematisch)
  * - Solmar DE AWIN mid=114510 (Spanien Bus-/Pauschal)
  * - CHECK24 DE AWIN mid=9364 (Pauschal ~5,5 % · Mietwagen ~5,5 %, Primär Pauschal)
  * - ab-in-den-urlaub DE AWIN mid=9369 (Pauschal / Last Minute / Kurztrips, wenn explizit)
@@ -115,8 +116,22 @@ export {
   looksLikePartnerBookClaim,
   mayShowAsPartnerBookAction,
   rejectHollowPartnerBookAction,
+  softenHollowPartnerBookAction,
   unwrapPartnerLandingUrl,
 } from './hollowPartnerUrl';
+
+/** Airbnb deep-link helpers (Demand Program pending — commission 0). */
+export {
+  buildAirbnbAction,
+  buildAirbnbRoomsUrl,
+  extractAirbnbRoomId,
+  getAirbnbSearchUrl,
+  isAirbnbUrl,
+  normalizeAirbnbListingUrl,
+  slugifyAirbnbCity,
+  wantsExplicitAirbnb,
+  withAirbnbStayPrefill,
+} from './airbnbDeepLink';
 
 /** Yorro GetYourGuide Partner-ID (Affiliate). */
 export const GYG_PARTNER_ID = 'ZVQGONB';
@@ -165,8 +180,17 @@ export const RESERVIX_AWIN_MID = '31293';
 /** camping.info DE/AT — AWIN Advertiser (Campingplatz-Buchung ~5 %). */
 export const CAMPING_INFO_AWIN_MID = '44063';
 
+/** Camping-and-Co DE — AWIN Advertiser (FR/EU Camping ~7 % thematisch). */
+export const CAMPING_AND_CO_AWIN_MID = '16438';
+
 /** Solmar DE — AWIN Advertiser (Spanien-Bus-/Pauschalreisen). */
 export const SOLMAR_AWIN_MID = '114510';
+
+/** TUI Magic Life DE — AWIN Advertiser (Club-/All-inclusive ~4 %). */
+export const MAGIC_LIFE_AWIN_MID = '15933';
+
+/** Lidl Reisen DE — AWIN Advertiser (Pauschal / Last-Minute ~4 % CPO). */
+export const LIDL_REISEN_AWIN_MID = '11773';
 
 /** CHECK24 DE — AWIN Advertiser (Pauschalreise / Mietwagen-Vergleich). */
 export const CHECK24_AWIN_MID = '9364';
@@ -775,7 +799,8 @@ export type Check24Prefill = {
 function isBareCheck24Home(url: string): boolean {
   try {
     const u = new URL(url);
-    if (!/check24\.(de|net)$/i.test(u.hostname)) return false;
+    // Nur Haupt-/Reisen-Portal — kreuzfahrt.* / Vertical-Subdomains behalten.
+    if (!/^(?:www\.|reisen\.)?check24\.(de|net)$/i.test(u.hostname)) return false;
     const path = (u.pathname || '/').replace(/\/+$/, '') || '/';
     return (
       path === '/' &&
@@ -1854,10 +1879,19 @@ export type TicketSourceProvider =
   | 'tiqets'
   | 'konfetti'
   | 'reservix'
+  | 'adticket'
+  | 'gigsberg'
   | 'direct';
 
 export type PreferTicketSourceInput = {
-  kind?: 'museum' | 'tour' | 'attraction' | 'vip' | 'worldwide' | 'generic';
+  kind?:
+    | 'museum'
+    | 'tour'
+    | 'attraction'
+    | 'vip'
+    | 'worldwide'
+    | 'generic'
+    | 'live_event';
   gygSlug?: string;
   musementUrl?: string;
   viatorUrl?: string;
@@ -1878,6 +1912,8 @@ function ticketProviderFromId(id: string): TicketSourceProvider {
   if (base === 'tiqets') return 'tiqets';
   if (base === 'konfetti') return 'konfetti';
   if (base === 'reservix') return 'reservix';
+  if (base === 'adticket') return 'adticket';
+  if (base === 'gigsberg') return 'gigsberg';
   if (base === 'direct') return 'direct';
   return 'getyourguide';
 }
@@ -1903,6 +1939,26 @@ function trackTicketUrl(url: string): string {
         getReservixUrl: (d?: string | null, q?: string | null) => string;
       };
       return getReservixUrl(url);
+    } catch {
+      return url;
+    }
+  }
+  if (meta.id === 'adticket') {
+    try {
+      const { getAdticketUrl } = require('./reservixAffiliate') as {
+        getAdticketUrl: (d?: string | null, q?: string | null) => string;
+      };
+      return getAdticketUrl(url);
+    } catch {
+      return url;
+    }
+  }
+  if (meta.id === 'gigsberg') {
+    try {
+      const { preferGigsbergAffiliateUrl } = require('./gigsbergAffiliate') as {
+        preferGigsbergAffiliateUrl: (u: string) => string;
+      };
+      return preferGigsbergAffiliateUrl(url);
     } catch {
       return url;
     }
@@ -1977,7 +2033,21 @@ export function preferTicketSource(input: PreferTicketSourceInput): {
 
   const preferMusement = kind === 'museum';
   const preferViator = kind === 'vip' || kind === 'worldwide';
+  const preferLiveEvent = kind === 'live_event';
 
+  if (preferLiveEvent && input.query) {
+    try {
+      const { getReservixUrl } = require('./reservixAffiliate') as {
+        getReservixUrl: (d?: string | null, q?: string | null) => string;
+      };
+      return {
+        provider: 'reservix',
+        url: getReservixUrl(null, input.query),
+      };
+    } catch {
+      /* fall through */
+    }
+  }
   if (preferViator && input.query) {
     return { provider: 'viator', url: buildViatorSearchUrl(input.query) };
   }
@@ -2100,7 +2170,11 @@ export function buildTourBookingAction(input: {
               ? '🎫 Probe buchen'
               : picked.provider === 'reservix'
                 ? '🎫 Tickets bei Reservix'
-                : picked.provider === 'direct'
+                : picked.provider === 'adticket'
+                  ? '🎫 Tickets bei ADticket'
+                  : picked.provider === 'gigsberg'
+                    ? '🎫 Tickets bei Gigsberg'
+                  : picked.provider === 'direct'
                 ? '🎫 Tickets'
                 : '🎟️ Tour bei GetYourGuide';
 
@@ -2183,6 +2257,19 @@ export function normalizeAffiliateUrl(url: string): string {
     };
     return getReservixUrl(/^https?:\/\//i.test(inner) ? inner : url);
   }
+  if (/adticket\.de|awin1\.com\/cread\.php.*18490/i.test(url)) {
+    const inner = unwrapPartnerLandingUrl(url);
+    const { getAdticketUrl } = require('./reservixAffiliate') as {
+      getAdticketUrl: (d?: string | null, q?: string | null) => string;
+    };
+    return getAdticketUrl(/^https?:\/\//i.test(inner) ? inner : url);
+  }
+  if (/gigsberg\.(com|co\.uk|de)/i.test(url)) {
+    const { preferGigsbergAffiliateUrl } = require('./gigsbergAffiliate') as {
+      preferGigsbergAffiliateUrl: (u: string) => string;
+    };
+    return preferGigsbergAffiliateUrl(url);
+  }
   if (/travelsecure\.de|awin1\.com\/cread\.php.*106517/i.test(url)) {
     const inner = unwrapPartnerLandingUrl(url);
     return getTravelSecureUrl(
@@ -2227,9 +2314,37 @@ export function normalizeAffiliateUrl(url: string): string {
       return getCampingInfoUrl(inner);
     }
   }
+  if (/camping-and-co\.com|awin1\.com\/cread\.php.*(16438|13348)/i.test(url)) {
+    const inner = unwrapPartnerLandingUrl(url);
+    const { getCampingAndCoUrl } = require('./campingAndCoAffiliate') as {
+      getCampingAndCoUrl: (d?: string | null, q?: string | null) => string;
+    };
+    return getCampingAndCoUrl(/^https?:\/\//i.test(inner) ? inner : url);
+  }
   if (/solmar\.de|awin1\.com\/cread\.php.*114510/i.test(url)) {
     const inner = unwrapPartnerLandingUrl(url);
     return getSolmarUrl(/solmar\.de/i.test(inner) ? inner : url);
+  }
+  if (/magiclife\.com|awin1\.com\/cread\.php.*15933/i.test(url)) {
+    const inner = unwrapPartnerLandingUrl(url);
+    const { getMagicLifeUrl } = require('./magicLifeAffiliate') as {
+      getMagicLifeUrl: (d?: string | null, q?: string | null) => string;
+    };
+    return getMagicLifeUrl(/^https?:\/\//i.test(inner) ? inner : url);
+  }
+  if (/lidl-reisen\.de|awin1\.com\/cread\.php.*11773/i.test(url)) {
+    const inner = unwrapPartnerLandingUrl(url);
+    const { getLidlReisenUrl } = require('./lidlReisenAffiliate') as {
+      getLidlReisenUrl: (d?: string | null, q?: string | null) => string;
+    };
+    return getLidlReisenUrl(/^https?:\/\//i.test(inner) ? inner : url);
+  }
+  if (/aida\.de|awin1\.com\/cread\.php.*9144/i.test(url)) {
+    const inner = unwrapPartnerLandingUrl(url);
+    const { getAidaUrl } = require('./aidaAffiliate') as {
+      getAidaUrl: (d?: string | null, q?: string | null) => string;
+    };
+    return getAidaUrl(/^https?:\/\//i.test(inner) ? inner : url);
   }
   if (/check24\.(de|net)|awin1\.com\/cread\.php.*9364/i.test(url)) {
     const inner = unwrapPartnerLandingUrl(url);
@@ -2479,6 +2594,7 @@ export function buildUberRideAction(
   opts?: {
     dropoffFormattedAddress?: string | null;
     pickupTimeLabel?: string | null;
+    pickupDateIso?: string | null;
     pickupNickname?: string | null;
     pickupFormattedAddress?: string | null;
   },
@@ -2493,6 +2609,8 @@ export function buildUberRideAction(
     url: string;
     dropoffFormattedAddress?: string;
     pickupTimeLabel?: string;
+    pickupDateIso?: string;
+    dateIso?: string;
   };
 } {
   const name = (destName || 'Ziel').trim() || 'Ziel';
@@ -2532,6 +2650,7 @@ export function buildUberRideAction(
     pickupMyLocation: !pickup,
     dropoffFormattedAddress: opts?.dropoffFormattedAddress ?? name,
     pickupTimeLabel: time,
+    pickupDateIso: opts?.pickupDateIso ?? null,
   });
   return {
     type: 'BOOK_UBER',
@@ -2544,6 +2663,8 @@ export function buildUberRideAction(
       url,
       dropoffFormattedAddress: opts?.dropoffFormattedAddress ?? name,
       pickupTimeLabel: time || undefined,
+      pickupDateIso: opts?.pickupDateIso?.trim() || undefined,
+      dateIso: opts?.pickupDateIso?.trim() || undefined,
     },
   };
 }
@@ -2768,6 +2889,26 @@ export function getAffiliateCatalog(): AffiliatePartnerCatalogEntry[] {
         'Backup + Live-Preis-API; Expedia ist Primär-Buchungspfad für Unterkunft.',
     },
     {
+      id: 'airbnb',
+      name: 'Airbnb (Deep-Link)',
+      category: 'Unterkünfte',
+      envKeys: [],
+      value: 'deep-link-only',
+      helperFns: [
+        'buildAirbnbAction',
+        'getAirbnbSearchUrl',
+        'buildAirbnbRoomsUrl',
+        'withAirbnbStayPrefill',
+        'normalizeAirbnbListingUrl',
+        'wantsExplicitAirbnb',
+        'extractAirbnbRoomId',
+      ],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'Deep-link only (Search/Rooms + Stay-Prefill). Commission 0 · Airbnb Demand Program pending. Nur bei explizitem \\bairbnb\\b / lodgingKind airbnb.',
+    },
+    {
       id: 'opentable',
       name: 'OpenTable',
       category: 'Restaurant-Reservierung',
@@ -2858,7 +2999,59 @@ export function getAffiliateCatalog(): AffiliatePartnerCatalogEntry[] {
       conciergeActions: ['OPEN_URL'],
       status: 'ready',
       notes:
-        'AWIN mid=31293. ~2,5 % Warenkorb + VVK-Anteil · Cookie 30 Tage. Konzert/Theater/Festival/Sport DE; Museen → Tiqets.',
+        'AWIN mid=31293. ~2,5 % Warenkorb + VVK-Anteil · Cookie 30 Tage. Schwester: ADticket mid=18490. Konzert/Theater/Festival/Sport DE; Museen → Tiqets.',
+    },
+    {
+      id: 'adticket_awin',
+      name: 'ADticket.de (AWIN)',
+      category: 'Live-Events & Tickets',
+      envKeys: [
+        'EXPO_PUBLIC_AWIN_PUBLISHER_ID',
+        'EXPO_PUBLIC_ADTICKET_AWIN_MID',
+        'EXPO_PUBLIC_ADTICKET_AFFILIATE_URL',
+      ],
+      value: (() => {
+        const { getAdticketUrl } = require('./reservixAffiliate') as {
+          getAdticketUrl: () => string;
+        };
+        return getAdticketUrl();
+      })(),
+      helperFns: [
+        'getAdticketUrl',
+        'getAdticketLandingUrl',
+        'buildReservixAction',
+        'buildAwinClickUrl',
+      ],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'AWIN mid=18490 · Reservix-Marke. ~2,5 % Warenkorb + 25 % VVK. Tracking wenn Research ADticket-URL liefert oder User ADticket nennt; Default-Button = Reservix.',
+    },
+    {
+      id: 'gigsberg_direct',
+      name: 'Gigsberg (Direct API)',
+      category: 'Live-Events & Tickets',
+      envKeys: ['GIGSBERG_API_KEY', 'EXPO_PUBLIC_GIGSBERG_API_KEY'],
+      value: (() => {
+        try {
+          const { getGigsbergLandingUrl } = require('./gigsbergAffiliate') as {
+            getGigsbergLandingUrl: () => string;
+          };
+          return getGigsbergLandingUrl();
+        } catch {
+          return 'https://www.gigsberg.com/?aff=Yorro';
+        }
+      })(),
+      helperFns: [
+        'searchGigsbergEvents',
+        'findBestGigsbergTicket',
+        'buildGigsbergAction',
+        'withGigsbergAff',
+      ],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'Direct API ~9 % CPA · Cookie ~10 Tage. Header x-api-key. Deep-Links ?aff=Yorro. Sekundärmarkt — AGB-Hinweis. Ranking vs Reservix: User-Preis zuerst, bei ~≤10 % Diff höhere Provision.',
     },
     {
       id: 'camping_info',
@@ -2878,7 +3071,120 @@ export function getAffiliateCatalog(): AffiliatePartnerCatalogEntry[] {
       conciergeActions: ['OPEN_URL'],
       status: 'ready',
       notes:
-        'AWIN mid=44063. ~5 % auf Campingplatz-Buchung (Ø ~€244), App 0,50 €, Shop 30 %. Button bei Camping-Intent.',
+        'AWIN mid=44063. ~5 % auf Campingplatz-Buchung (Ø ~€244), App 0,50 €, Shop 30 %. Mit Camping-and-Co vergleichen (pickCampingBookingOffer).',
+    },
+    {
+      id: 'camping_and_co',
+      name: 'Camping-and-Co (AWIN DE/FR)',
+      category: 'Camping',
+      envKeys: [
+        'EXPO_PUBLIC_AWIN_PUBLISHER_ID',
+        'EXPO_PUBLIC_CAMPING_AND_CO_AWIN_MID',
+        'EXPO_PUBLIC_CAMPING_AND_CO_AFFILIATE_URL',
+      ],
+      value: (() => {
+        try {
+          const { getCampingAndCoUrl } = require('./campingAndCoAffiliate') as {
+            getCampingAndCoUrl: (d?: string | null, q?: string | null) => string;
+          };
+          return getCampingAndCoUrl();
+        } catch {
+          return '';
+        }
+      })(),
+      helperFns: [
+        'getCampingAndCoUrl',
+        'getCampingAndCoLandingUrl',
+        'buildCampingAndCoAction',
+        'buildCampingBookingActions',
+        'buildAwinClickUrl',
+      ],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'AWIN DE mid=16438 · FR 13348. ~7 % thematisch / 3 % Cashback. Tracking erst nach Awin-Freigabe zuverlässig — Links nutzbar. Immer vs camping.info vergleichen.',
+    },
+    {
+      id: 'magic_life',
+      name: 'TUI Magic Life DE (AWIN)',
+      category: 'Club / All-inclusive',
+      envKeys: [
+        'EXPO_PUBLIC_AWIN_PUBLISHER_ID',
+        'EXPO_PUBLIC_MAGIC_LIFE_AFFILIATE_URL',
+      ],
+      value: (() => {
+        try {
+          const { getMagicLifeUrl } = require('./magicLifeAffiliate') as {
+            getMagicLifeUrl: () => string;
+          };
+          return getMagicLifeUrl();
+        } catch {
+          return '';
+        }
+      })(),
+      helperFns: [
+        'getMagicLifeUrl',
+        'buildMagicLifeAction',
+        'buildAwinClickUrl',
+      ],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'AWIN mid=15933. Club-/All-inclusive (~4 %). Parallel mit CHECK24 bei Club/AI-Intent.',
+    },
+    {
+      id: 'lidl_reisen',
+      name: 'Lidl Reisen DE (AWIN)',
+      category: 'Pauschal / Last Minute / Kreuzfahrt',
+      envKeys: [
+        'EXPO_PUBLIC_AWIN_PUBLISHER_ID',
+        'EXPO_PUBLIC_LIDL_REISEN_AFFILIATE_URL',
+      ],
+      value: (() => {
+        try {
+          const { getLidlReisenUrl } = require('./lidlReisenAffiliate') as {
+            getLidlReisenUrl: () => string;
+          };
+          return getLidlReisenUrl();
+        } catch {
+          return '';
+        }
+      })(),
+      helperFns: [
+        'getLidlReisenUrl',
+        'getLidlReisenCruiseUrl',
+        'buildLidlReisenAction',
+        'buildLidlReisenCruiseAction',
+        'buildAwinClickUrl',
+      ],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'AWIN mid=11773. Pauschal + Deep-Link /kreuzfahrten. Parallel CHECK24/AIDA bei Cruise.',
+    },
+    {
+      id: 'aida',
+      name: 'AIDA Cruises DE (AWIN)',
+      category: 'Kreuzfahrt',
+      envKeys: [
+        'EXPO_PUBLIC_AWIN_PUBLISHER_ID',
+        'EXPO_PUBLIC_AIDA_AFFILIATE_URL',
+      ],
+      value: (() => {
+        try {
+          const { getAidaUrl } = require('./aidaAffiliate') as {
+            getAidaUrl: () => string;
+          };
+          return getAidaUrl();
+        } catch {
+          return '';
+        }
+      })(),
+      helperFns: ['getAidaUrl', 'buildAidaAction', 'buildAwinClickUrl'],
+      conciergeActions: ['OPEN_URL'],
+      status: 'ready',
+      notes:
+        'AWIN mid=9144. ~7 % Reisepreis. Parallel Lidl Kreuzfahrt + CHECK24 Kreuzfahrt.',
     },
     {
       id: 'solmar',

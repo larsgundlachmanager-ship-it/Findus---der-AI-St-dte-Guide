@@ -63,8 +63,43 @@ function partnerHotelFallbackButtons(opts: {
   checkin?: string;
   checkout?: string;
   adults: number;
+  /** Explizites Airbnb (\bairbnb\b) — Button voranstellen. */
+  preferAirbnb?: boolean;
 }): Module2ActionButton[] {
   const buttons: Module2ActionButton[] = [];
+  if (opts.preferAirbnb) {
+    try {
+      const { buildAirbnbAction } = require('../../services/affiliate/airbnbDeepLink') as {
+        buildAirbnbAction: (o: {
+          city: string;
+          checkin?: string;
+          checkout?: string;
+          adults?: number;
+        }) => { type: string; label: string; payload: { url: string } };
+      };
+      const a = buildAirbnbAction({
+        city: opts.city,
+        checkin: opts.checkin,
+        checkout: opts.checkout,
+        adults: opts.adults,
+      });
+      buttons.push({
+        id: 'airbnb_city',
+        label: shortenActionLabel(a.label),
+        payload: {
+          kind: 'deep_link',
+          url: a.payload.url,
+          destName: opts.city,
+          destination: opts.city,
+          checkin: opts.checkin,
+          checkout: opts.checkout,
+          adults: opts.adults,
+        },
+      });
+    } catch {
+      /* soft */
+    }
+  }
   const expediaUrl = getExpediaAccommodationUrl(opts.city, {
     checkin: opts.checkin,
     checkout: opts.checkout,
@@ -133,6 +168,8 @@ function resolveHotelBookUrl(
         checkin: string;
         checkout: string;
         adults?: number;
+        expediaPropertyId?: string | null;
+        priceEur?: number | null;
       }) => string;
     };
     return finalizeHotelBookAffiliateUrl({
@@ -142,6 +179,8 @@ function resolveHotelBookUrl(
       checkin,
       checkout,
       adults,
+      expediaPropertyId: stay.expediaPropertyId,
+      priceEur: stay.priceTotal,
     });
   } catch {
     const raw = (stay.bookUrl || '').trim();
@@ -205,6 +244,362 @@ function mapsUrlForStay(stay: HotelLiveStay): string | null {
   } catch {
     return null;
   }
+}
+
+function airbnbRoomKey(stay: HotelLiveStay): string {
+  try {
+    const { extractAirbnbRoomId } = require('../../services/affiliate/airbnbDeepLink') as {
+      extractAirbnbRoomId: (u?: string | null) => string | null;
+    };
+    return (
+      extractAirbnbRoomId(stay.bookUrl) ||
+      extractAirbnbRoomId(stay.id) ||
+      stay.name.trim().toLowerCase()
+    );
+  } catch {
+    return stay.name.trim().toLowerCase();
+  }
+}
+
+function filterPricedAirbnbRooms(stays: HotelLiveStay[]): HotelLiveStay[] {
+  try {
+    const { extractAirbnbRoomId } = require('../../services/affiliate/airbnbDeepLink') as {
+      extractAirbnbRoomId: (u?: string | null) => string | null;
+    };
+    return (stays || []).filter(
+      (s) =>
+        s.priceTotal != null &&
+        s.priceTotal > 0 &&
+        Boolean(extractAirbnbRoomId(s.bookUrl)),
+    );
+  } catch {
+    return [];
+  }
+}
+
+/** Merge Airbnb /rooms/ into Stay22 inventory — dedupe by room id / name. */
+function mergeAirbnbRoomStays(
+  inventory: HotelLiveStay[],
+  airbnbRooms: HotelLiveStay[],
+): HotelLiveStay[] {
+  const seen = new Set(inventory.map(airbnbRoomKey).filter(Boolean));
+  const out = [...inventory];
+  for (const s of airbnbRooms) {
+    const key = airbnbRoomKey(s);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(s);
+  }
+  return out;
+}
+
+/**
+ * Shared grounded Airbnb rooms pitch (explicit brand-first OR soft probe when Stay22 thin).
+ * Soft: no hollow Airbnb search CTA — only concrete /rooms/ with live prices.
+ */
+async function pitchGroundedAirbnbRooms(opts: {
+  city: string;
+  speechCity: string;
+  checkin: string;
+  checkout: string;
+  adults: number;
+  nights: number;
+  lodgingType: 'hotel' | 'apartment' | 'any';
+  text: string;
+  searchUrl: string;
+  a: { lat: number; lng: number };
+  namedCity: boolean;
+  signal?: AbortSignal;
+  airbnbPicks: HotelLiveStay[];
+  partnerStays: HotelLiveStay[];
+  /** Explicit \\bairbnb\\b — brand search / pick behavior. Soft probe = false. */
+  explicitAirbnb: boolean;
+}): Promise<import('../types').AgentResult | null> {
+  const airbnbPicks = opts.airbnbPicks.slice(0, 2);
+  if (airbnbPicks.length < 1) return null;
+
+  const {
+    city,
+    speechCity,
+    checkin,
+    checkout,
+    adults,
+    nights,
+    lodgingType,
+    text,
+    searchUrl,
+    a,
+    namedCity,
+    signal,
+    partnerStays,
+    explicitAirbnb,
+  } = opts;
+
+  const { buildAirbnbAction, extractAirbnbRoomId } = await import(
+    '../../services/affiliate/airbnbDeepLink'
+  );
+  const { pickAirbnbStayActions } = await import(
+    '../../services/affiliate/airbnbStayPick'
+  );
+
+  const primary = airbnbPicks[0]!;
+  const secondary = airbnbPicks[1] ?? null;
+  let draft = '';
+  if (hasGeminiApiKey()) {
+    try {
+      const factLines = airbnbPicks.map((s, i) =>
+        describeStayFacts(
+          s,
+          i === 0 ? 'empfehlung' : 'günstigste',
+          distanceHint(s, a.lat, a.lng, namedCity),
+          nights,
+          [],
+        ),
+      );
+      draft = await generateGeminiText(
+        `${FINDUS_MAPS_PITCH_BLOCK}\n${FINDUS_FEW_SHOT_DISCLAIMER}\n` +
+          `Stadt: ${speechCity}\n` +
+          `Zeitraum: ${fmtDateDe(checkin)}–${fmtDateDe(checkout)} = ${nights} Nacht${nights === 1 ? '' : 'e'}, ${adults} Erwachsene\n` +
+          `Echte Airbnb-Listings (Live-Gesamtpreis aus Research — nie erfinden):\n` +
+          `${factLines.map((l, i) => `${i + 1}) ${l}`).join('\n')}\n` +
+          (partnerStays.length
+            ? `Zusätzlich Stay22/Partner-Optionen möglich — flüssig mitweben wenn relevant.\n`
+            : '') +
+          `Struktur: 1–2 konkrete Apartment-/Rooms-Optionen flüssig weben — Name, Gesamtpreis für genau dieses Fenster, weicher Übergang. ` +
+          `Buttons = Deep-Link zur konkreten Rooms-Seite. Keine Fake-Preise. Max ~200 Wörter.`,
+        {
+          temperature: 0.4,
+          maxTokens: 650,
+          useFindusSystem: true,
+          signal,
+        },
+      );
+    } catch {
+      draft = '';
+    }
+  }
+  if (!draft.trim()) {
+    const lines = airbnbPicks.map((s) => {
+      const short = s.name.split(/[|,]/)[0]!.trim();
+      return `${short}${
+        s.priceTotal != null ? ` · ${Math.round(s.priceTotal)}€ gesamt` : ''
+      }`;
+    });
+    draft =
+      `Für ${fmtDateDe(checkin)} bis ${fmtDateDe(checkout)} ${
+        speechCity === 'hier in der Nähe' ? 'hier' : `in ${speechCity}`
+      } habe ich konkrete Unterkünfte mit Live-Preis: ` +
+      lines.join(' — oder ') +
+      `. Was passt besser?`;
+  }
+  draft = draft
+    .replace(
+      /\b(klick(e)?\s+dich|schau\s+selbst|selber\s+durchklick\w*|am\s+besten\s+mal\s+selbst)\b[^.!?]*[.!?]?/gi,
+      '',
+    )
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
+  const buttons: Module2ActionButton[] = [];
+  for (let i = 0; i < airbnbPicks.length; i++) {
+    const s = airbnbPicks[i]!;
+    const shortName = s.name.split(/[|,]/)[0]!.trim();
+    const roomId = extractAirbnbRoomId(s.bookUrl);
+    const act = buildAirbnbAction({
+      city,
+      checkin,
+      checkout,
+      adults,
+      roomId,
+      listingUrl: s.bookUrl,
+      name: shortName,
+      priceTotalEur: s.priceTotal,
+    });
+    buttons.push({
+      id: `airbnb_room_${i}`,
+      label: shortenActionLabel(act.label),
+      payload: {
+        kind: 'deep_link',
+        url: act.payload.url,
+        destName: shortName,
+        destination: city,
+        checkin,
+        checkout,
+        adults,
+      },
+    });
+  }
+
+  const liveForPick = [
+    ...airbnbPicks.map((s) => ({
+      name: s.name,
+      priceEur: s.priceTotal ?? null,
+      bookUrl: s.bookUrl,
+    })),
+    ...partnerStays.slice(0, 8).map((s) => ({
+      name: s.name,
+      priceEur: s.priceTotal ?? null,
+      bookUrl: resolveHotelBookUrl(s, city, checkin, checkout, adults),
+    })),
+  ];
+  const airbnbActs = pickAirbnbStayActions({
+    city,
+    checkin,
+    checkout,
+    adults,
+    userText: explicitAirbnb ? text : text.replace(/\bairbnb\b/gi, 'apartment'),
+    liveStays: liveForPick,
+  });
+  for (let i = 0; i < airbnbActs.length; i++) {
+    const act = airbnbActs[i]!;
+    if (
+      buttons.some(
+        (b) =>
+          b.payload &&
+          typeof b.payload === 'object' &&
+          'url' in b.payload &&
+          (b.payload as { url?: string }).url === act.payload.url,
+      )
+    ) {
+      continue;
+    }
+    // Soft: never hollow Airbnb homepage/search; explicit: rooms or non-Airbnb partner OK
+    const isAirbnb = /airbnb\./i.test(act.payload.url);
+    const isRooms = /\/rooms\//i.test(act.payload.url);
+    if (isAirbnb && !isRooms) {
+      if (!explicitAirbnb) continue;
+      // explicit search CTAs come from pick — allow only if no room buttons yet (handled above)
+      continue;
+    }
+    if (!isAirbnb || isRooms) {
+      buttons.push({
+        id: `airbnb_pick_alt_${i}`,
+        label: shortenActionLabel(act.label),
+        payload: {
+          kind: 'deep_link',
+          url: act.payload.url,
+          destName: city,
+          destination: city,
+          checkin,
+          checkout,
+          adults,
+        },
+      });
+    }
+  }
+
+  if (explicitAirbnb) {
+    // Ensure brand search CTA only when explicit and missing
+    if (
+      !buttons.some(
+        (b) =>
+          typeof b.payload === 'object' &&
+          b.payload &&
+          'url' in b.payload &&
+          /airbnb\./i.test(String((b.payload as { url?: string }).url || '')),
+      )
+    ) {
+      const a = buildAirbnbAction({ city, checkin, checkout, adults });
+      buttons.unshift({
+        id: 'airbnb_search',
+        label: shortenActionLabel(a.label),
+        payload: {
+          kind: 'deep_link',
+          url: a.payload.url,
+          destName: city,
+          destination: city,
+          checkin,
+          checkout,
+          adults,
+        },
+      });
+    }
+  }
+
+  buttons.push({
+    id: 'stay22_more',
+    label: shortenActionLabel('🏨 Mehr bei Stay22'),
+    payload: {
+      kind: 'ui',
+      action: 'book_stay22',
+      data: {
+        destination: city,
+        url: searchUrl,
+        checkin,
+        checkout,
+        adults,
+      },
+    },
+  });
+
+  const dualBullets = airbnbPicks.map((s, i) => {
+    const short = s.name.split(/[|,]/)[0]!.trim();
+    return `${i === 0 ? '🥇' : '🥈'} Airbnb · ${short}${
+      s.priceTotal != null ? ` · ${Math.round(s.priceTotal)}€` : ''
+    }`;
+  });
+  if (dualBullets.length < 3) {
+    dualBullets.push(
+      `${fmtDateDe(checkin)}–${fmtDateDe(checkout)} · ${nights} Nächte`,
+    );
+  }
+
+  return {
+    agent: 'booking',
+    ok: true,
+    draftText: [
+      'FAKTEN Airbnb Rooms-Pitch (nicht wörtlich vorlesen):',
+      draft,
+      explicitAirbnb
+        ? 'FLOW: Konkrete Airbnb-/rooms/-Deep-Links + Live-Preis → Buttons. Partner-Alternativen nur Same-House/günstiger. Nie Fake-Preise.'
+        : 'FLOW: Soft Apartment-Probe → konkrete /rooms/ mit Live-Preis + Stay22 wenn da. Kein hohler Airbnb-Search-CTA.',
+    ].join('\n'),
+    bullets: dualBullets.slice(0, 3),
+    buttons: buttons.slice(0, 6),
+    money:
+      primary.priceTotal != null
+        ? [
+            {
+              amount: primary.priceTotal,
+              currency: 'EUR',
+              amountEur: primary.priceTotal,
+            },
+            ...(secondary?.priceTotal != null
+              ? [
+                  {
+                    amount: secondary.priceTotal,
+                    currency: 'EUR',
+                    amountEur: secondary.priceTotal,
+                  },
+                ]
+              : []),
+          ]
+        : [],
+    meta: {
+      city,
+      checkin,
+      checkout,
+      adults,
+      nights,
+      lodgingType,
+      wantsAirbnb: explicitAirbnb,
+      softAirbnbProbe: !explicitAirbnb,
+      groundedAirbnb: true,
+      amenityNeeds: [],
+      hardAmenityReject: false,
+      primaryId: primary.id,
+      affiliate: 'airbnb',
+      booking_deep_link: true,
+      mapsPitch: true,
+      pitchKind: 'airbnb',
+      venues: airbnbPicks.map((s) => ({
+        name: s.name,
+        lat: s.lat,
+        lng: s.lng,
+        bookUrl: s.bookUrl,
+      })),
+    },
+  };
 }
 
 export const bookingAgent: Module2Agent = {
@@ -272,6 +667,20 @@ export const bookingAgent: Module2Agent = {
         text,
         intent: 'hotel',
       });
+      if (switched?.blocked) {
+        return {
+          agent: 'booking',
+          ok: true,
+          draftText: switched.cityName
+            ? `Lad dir bitte zuerst den Datensatz für ${switched.cityName} herunter — dann starte ich die Hotelsuche.`
+            : 'Lad dir bitte zuerst den Datensatz herunter — dann starte ich die Hotelsuche.',
+          bullets: switched.cityName
+            ? [`Datensatz ${switched.cityName} laden`]
+            : ['Datensatz laden'],
+          buttons: [],
+          meta: { blocked: 'pack_download', city: switched.cityName },
+        };
+      }
       if (switched?.cityName) {
         city = switched.cityName;
         speechCity = switched.cityName;
@@ -299,6 +708,15 @@ export const bookingAgent: Module2Agent = {
         : lodgingType === 'any'
           ? 'Unterkunft (Hotel & Ferienwohnung)'
           : 'Hotel';
+    let wantsAirbnb = false;
+    try {
+      const { wantsExplicitAirbnb } = require('../../services/affiliate/airbnbDeepLink') as {
+        wantsExplicitAirbnb: (t?: string | null) => boolean;
+      };
+      wantsAirbnb = wantsExplicitAirbnb(text);
+    } catch {
+      wantsAirbnb = /\bairbnb\b/i.test(text);
+    }
 
     const searchUrl = getStay22AccommodationUrl(city, {
       checkin: datesKnown ? checkin : undefined,
@@ -317,7 +735,10 @@ export const bookingAgent: Module2Agent = {
             ? ` mit deinen Must-Haves (${amenityNeeds.map((n) => n.label).join(', ')})`
             : '') +
           ` über Hotels, Apartments und Ferienwohnungen, pitche dir zwei passende Optionen ` +
-          `und gebe dir die Buchungs-Buttons — du musst nichts selbst durchklicken.`,
+          `und gebe dir die Buchungs-Buttons — du musst nichts selbst durchklicken.` +
+          (wantsAirbnb
+            ? ` Airbnb-Intent: Airbnb-Suche + Live-Vergleich (Stay22/Expedia) ohne Fake-Preise auf Airbnb.`
+            : ''),
         bullets: [
           speechCity,
           `${adults} Erwachsene`,
@@ -330,9 +751,64 @@ export const bookingAgent: Module2Agent = {
           city,
           stay22Url: searchUrl,
           adults,
+          preferAirbnb: wantsAirbnb,
         }),
-        meta: { city, adults, awaitingDates: true, lodgingType },
+        meta: { city, adults, awaitingDates: true, lodgingType, wantsAirbnb },
       };
+    }
+
+    // Explizites Airbnb + Daten: zuerst echte /rooms/-Listings mit Live-Preis (Grounding)
+    if (wantsAirbnb) {
+      try {
+        const { searchGroundedAirbnbListings } = await import(
+          '../../reisebuero/research/groundedAirbnbListings'
+        );
+        const grounded = await searchGroundedAirbnbListings({
+          city,
+          checkin,
+          checkout,
+          adults,
+          max: 3,
+        });
+        const airbnbPicks = filterPricedAirbnbRooms(grounded.stays || []).slice(0, 2);
+        if (airbnbPicks.length >= 1) {
+          let partnerStays: HotelLiveStay[] = [];
+          try {
+            const live = await searchStay22HotelsInCity({
+              city,
+              checkin,
+              checkout,
+              adults,
+              amenityHint: amenityHint || null,
+              lodgingType: 'apartment',
+              pageSize: 24,
+            });
+            partnerStays = live.stays || [];
+          } catch {
+            /* soft */
+          }
+          const pitched = await pitchGroundedAirbnbRooms({
+            city,
+            speechCity,
+            checkin,
+            checkout,
+            adults,
+            nights,
+            lodgingType,
+            text,
+            searchUrl,
+            a,
+            namedCity,
+            signal,
+            airbnbPicks,
+            partnerStays,
+            explicitAirbnb: true,
+          });
+          if (pitched) return pitched;
+        }
+      } catch {
+        /* soft — Fallthrough Stay22 + Airbnb-Search */
+      }
     }
 
     let stays: HotelLiveStay[] = [];
@@ -359,12 +835,74 @@ export const bookingAgent: Module2Agent = {
 
     const filtered = filterHotelsByAmenityNeeds(stays, amenityNeeds);
     // Hard-Reject: Must-Haves → nur Voll-Matches pitchen/buchen (nie Partial als „Empfehlung“)
-    const inventory =
+    let inventory =
       amenityNeeds.length > 0 ? filtered.matched : stays;
     const hardMiss =
       amenityNeeds.length > 0 && filtered.matched.length === 0;
 
+    // Soft Airbnb-Probe: Apartment/Wohnung/Fewo wenn Stay22 dünn / hard miss / leer
+    let softAirbnbRooms: HotelLiveStay[] = [];
+    let softAirbnbProbed = false;
+    try {
+      const { shouldProbeAirbnb } = require('../../services/affiliate/airbnbDeepLink') as {
+        shouldProbeAirbnb: (o: {
+          text?: string | null;
+          lodgingType?: 'hotel' | 'apartment' | 'any' | null;
+          liveCount?: number;
+        }) => boolean;
+      };
+      const liveCountForProbe =
+        hardMiss || (!inventory.length && !stays.length) ? 0 : inventory.length;
+      if (
+        !wantsAirbnb &&
+        shouldProbeAirbnb({
+          text,
+          lodgingType,
+          liveCount: liveCountForProbe,
+        })
+      ) {
+        softAirbnbProbed = true;
+        const { searchGroundedAirbnbListings } = await import(
+          '../../reisebuero/research/groundedAirbnbListings'
+        );
+        const grounded = await searchGroundedAirbnbListings({
+          city,
+          checkin,
+          checkout,
+          adults,
+          max: 3,
+        });
+        softAirbnbRooms = filterPricedAirbnbRooms(grounded.stays || []).slice(0, 3);
+        if (softAirbnbRooms.length) {
+          inventory = mergeAirbnbRoomStays(inventory, softAirbnbRooms);
+        }
+      }
+    } catch {
+      /* soft */
+    }
+
     if (hardMiss || (!inventory.length && !stays.length)) {
+      // Soft probe may have filled rooms despite Stay22 hard miss / empty
+      if (softAirbnbRooms.length >= 1) {
+        const pitched = await pitchGroundedAirbnbRooms({
+          city,
+          speechCity,
+          checkin,
+          checkout,
+          adults,
+          nights,
+          lodgingType,
+          text,
+          searchUrl,
+          a,
+          namedCity,
+          signal,
+          airbnbPicks: softAirbnbRooms.slice(0, 2),
+          partnerStays: stays,
+          explicitAirbnb: false,
+        });
+        if (pitched) return pitched;
+      }
       const needTxt = amenityNeeds.map((n) => n.label).join(' + ');
       return {
         agent: 'booking',
@@ -391,6 +929,8 @@ export const bookingAgent: Module2Agent = {
           checkin,
           checkout,
           adults,
+          // Soft probe empty → kein hohler Airbnb-Search-Primary
+          preferAirbnb: wantsAirbnb,
         }),
         meta: {
           city,
@@ -400,8 +940,32 @@ export const bookingAgent: Module2Agent = {
           hardAmenityReject: hardMiss,
           missingAmenities: filtered.missingLabels,
           searchError: searchError || null,
+          wantsAirbnb,
+          softAirbnbProbe: softAirbnbProbed,
         },
       };
+    }
+
+    // Soft probe mit Rooms + etwas Stay22: Rooms-Pitch (Stay22 als Partner)
+    if (!wantsAirbnb && softAirbnbRooms.length >= 1) {
+      const pitched = await pitchGroundedAirbnbRooms({
+        city,
+        speechCity,
+        checkin,
+        checkout,
+        adults,
+        nights,
+        lodgingType,
+        text,
+        searchUrl,
+        a,
+        namedCity,
+        signal,
+        airbnbPicks: softAirbnbRooms.slice(0, 2),
+        partnerStays: inventory.filter((s) => !/^airbnb-/i.test(s.id)),
+        explicitAirbnb: false,
+      });
+      if (pitched) return pitched;
     }
 
     const pool = inventory;
@@ -465,6 +1029,9 @@ export const bookingAgent: Module2Agent = {
               : lodgingType === 'any'
                 ? ` Mix aus Hotel und Ferienwohnung ok.`
                 : '') +
+            (wantsAirbnb
+              ? ` Airbnb-Intent: Airbnb nennen + Live-Vergleich Stay22/Expedia; keine Fake-Preise — nur Search-Fallback wenn keine Rooms-Grounding-Treffer.`
+              : '') +
             ` Max ~220 Wörter. Keine erfundenen Amenities/Preise/Rezensionen.`,
           {
             temperature: 0.45,
@@ -507,10 +1074,72 @@ export const bookingAgent: Module2Agent = {
       .trim();
 
     const buttons: Module2ActionButton[] = [];
+    // Explizites Airbnb: Pick (brand-first / same-house günstiger Partner)
+    if (wantsAirbnb) {
+      try {
+        const { pickAirbnbStayActions } = require('../../services/affiliate/airbnbStayPick') as {
+          pickAirbnbStayActions: (o: {
+            city: string;
+            checkin?: string;
+            checkout?: string;
+            adults?: number;
+            userText?: string;
+            liveStays?: Array<{
+              name: string;
+              priceEur?: number | null;
+              bookUrl?: string | null;
+            }>;
+          }) => Array<{ type: string; label: string; payload: { url: string } }>;
+        };
+        const liveForPick = picks.map((s) => ({
+          name: s.name,
+          priceEur: s.priceTotal ?? null,
+          bookUrl: resolveHotelBookUrl(s, city, checkin, checkout, adults),
+        }));
+        const airbnbActs = pickAirbnbStayActions({
+          city,
+          checkin,
+          checkout,
+          adults,
+          userText: text,
+          liveStays: liveForPick,
+        });
+        for (let i = 0; i < airbnbActs.length; i++) {
+          const a = airbnbActs[i]!;
+          buttons.push({
+            id: `airbnb_pick_${i}`,
+            label: shortenActionLabel(a.label),
+            payload: {
+              kind: 'deep_link',
+              url: a.payload.url,
+              destName: city,
+              destination: city,
+              checkin,
+              checkout,
+              adults,
+            },
+          });
+        }
+      } catch {
+        /* soft */
+      }
+    }
     for (let i = 0; i < picks.length; i++) {
       const s = picks[i]!;
       const shortName = s.name.split(/[|,]/)[0]!.trim();
       const bookUrl = resolveHotelBookUrl(s, city, checkin, checkout, adults);
+      // Skip duplicate if already primary from Airbnb pick
+      if (
+        buttons.some(
+          (b) =>
+            b.payload &&
+            typeof b.payload === 'object' &&
+            'url' in b.payload &&
+            (b.payload as { url?: string }).url === bookUrl,
+        )
+      ) {
+        continue;
+      }
       buttons.push({
         id: `book_hotel_${i}`,
         label: shortenActionLabel(
@@ -543,6 +1172,45 @@ export const bookingAgent: Module2Agent = {
             url: maps,
           },
         });
+      }
+    }
+    if (wantsAirbnb) {
+      // Airbnb search already via pick; ensure search CTA if missing
+      if (
+        !buttons.some(
+          (b) =>
+            typeof b.payload === 'object' &&
+            b.payload &&
+            'url' in b.payload &&
+            /airbnb\./i.test(String((b.payload as { url?: string }).url || '')),
+        )
+      ) {
+        try {
+          const { buildAirbnbAction } = require('../../services/affiliate/airbnbDeepLink') as {
+            buildAirbnbAction: (o: {
+              city: string;
+              checkin?: string;
+              checkout?: string;
+              adults?: number;
+            }) => { label: string; payload: { url: string } };
+          };
+          const a = buildAirbnbAction({ city, checkin, checkout, adults });
+          buttons.unshift({
+            id: 'airbnb_search',
+            label: shortenActionLabel(a.label),
+            payload: {
+              kind: 'deep_link',
+              url: a.payload.url,
+              destName: city,
+              destination: city,
+              checkin,
+              checkout,
+              adults,
+            },
+          });
+        } catch {
+          /* soft */
+        }
       }
     }
     buttons.push({
@@ -627,7 +1295,9 @@ export const bookingAgent: Module2Agent = {
       draftText: [
         'FAKTEN Unterkunft Maps-Pitch + Stay22 (nicht wörtlich vorlesen):',
         draft,
-        'FLOW: Immer 2 Optionen flüssig weben (Name + warum + Preis, weicher Übergang) → Buttons je Unterkunft (Buchen + Maps). Nie „selbst durchklicken“.',
+        wantsAirbnb
+          ? 'FLOW: Airbnb-Intent → Airbnb + Live-Vergleich ohne Fake-Preise auf Airbnb. 2 Optionen weben → Buttons. Nie „selbst durchklicken“.'
+          : 'FLOW: Immer 2 Optionen flüssig weben (Name + warum + Preis, weicher Übergang) → Buttons je Unterkunft (Buchen + Maps). Nie „selbst durchklicken“.',
       ].join('\n'),
       bullets: dualBullets.slice(0, 3),
       buttons: buttons.slice(0, 6),
@@ -657,6 +1327,7 @@ export const bookingAgent: Module2Agent = {
         adults,
         nights,
         lodgingType,
+        wantsAirbnb,
         amenityNeeds: needLabels,
         partialAmenityFallback: false,
         hardAmenityReject: false,

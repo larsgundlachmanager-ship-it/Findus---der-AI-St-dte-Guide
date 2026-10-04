@@ -8,7 +8,7 @@ const TRANSIT_CATEGORY_RE =
 
 /** Praxis/Laden — nie ÖPNV, auch wenn tags „bahnhof“ (Viertel) enthalten. */
 const NON_TRANSIT_NAME_RE =
-  /zahnarzt|zahnärztin|zahnaerztin|arztpraxis|\barzt\b|ärztin|aerztin|\bpraxis\b|frisör|friseur|bäcker|baecker|apotheke|restaurant|café|cafe|hotel|kita|kindergarten|parkplatz|p\+r/i;
+  /zahnarzt|zahnärztin|zahnaerztin|arztpraxis|hausarztpraxis|gemeinschaftspraxis|\barzt\b|ärztin|aerztin|praxis|frisör|friseur|bäcker|baecker|apotheke|restaurant|café|cafe|hotel|kita|kindergarten|parkplatz|p\+r/i;
 
 function tagsOf(raw: string | null | undefined): string[] {
   if (!raw) return [];

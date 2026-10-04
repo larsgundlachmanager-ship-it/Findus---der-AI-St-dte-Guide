@@ -21,7 +21,12 @@ const warmup = readFileSync(
   join(process.cwd(), 'src/services/homeMap/warmupHomeMap.ts'),
   'utf8',
 );
-assert(warmup.includes('warmupCityExtract'), 'Splash lädt Stadt-Extract vor der Map');
+assert(warmup.includes('warmupCityExtract'), 'Legacy-Extract-Helper bleibt');
+assert(
+  warmup.includes('isVectorBasemapEnabled') &&
+    (warmup.includes('kein GeoJSON') || warmup.includes('PROTOMAPS_STYLE_SPLASH_BUDGET')),
+  'Vector-Splash: Style statt GeoJSON-Extract',
+);
 assert(warmup.includes('hydrateDisplayExtract'), 'Letzter Kartenausschnitt aus Disk');
 assert(warmup.includes('setExtract'), 'Snapshot geht in Map-Store vor Map-Mount');
 assert(warmup.includes('Native-only'), 'Native-only Warmup (kein WebView-CDN)');
@@ -44,5 +49,6 @@ const extract = readFileSync(
 );
 assert(extract.includes('peekDisplayExtract'), 'Extract aus RAM');
 assert(extract.includes('.map.display.json'), 'Kleiner Display-Snapshot auf Disk');
+assert(extract.includes('flushDisplayExtractNow'), 'Display-Snap Flush bei App-Kill');
 
 console.log('mapLibreDiskCache.smoke.test.ts OK');

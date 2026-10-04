@@ -14,7 +14,7 @@ import {
   hotelNameAppearsInUrl,
   finalizeHotelBookAffiliateUrl,
 } from './hotelPropertyDeepLink';
-import { unwrapPartnerLandingUrl } from './hollowPartnerUrl';
+import { isHollowPartnerUrl, unwrapPartnerLandingUrl } from './hollowPartnerUrl';
 
 function assert(cond: unknown, msg: string): void {
   if (!cond) throw new Error(`FAIL: ${msg}`);
@@ -129,5 +129,25 @@ assert(
 );
 assert(/2026-08-21/.test(landing) && /2026-08-23/.test(landing), `dates in rebuilt: ${landing}`);
 assert(/adults=1|NumAdult-Room1=1|rm1=a1/i.test(landing), `adults in rebuilt: ${landing}`);
+
+
+const besch =
+  'https://www.expedia.de/Athens-Hotels-Ermass-Modern-Living-Apartments.h106254548.Hotel-Beschreibung?chkin=2026-09-30&chkout=2026-10-01&rm1=a2&top_dp=110&top_cur=EUR';
+assert(extractExpediaPropertyId(besch) === '106254548', 'Hotel-Beschreibung property id');
+assert(isExpediaHotelPropertyUrl(besch), 'Hotel-Beschreibung is property');
+assert(!isHollowPartnerUrl(besch), 'Hotel-Beschreibung not hollow');
+
+const slugDeep = buildExpediaHotelPropertyDeepLink('106254548', {
+  checkin: '2026-09-30',
+  checkout: '2026-10-01',
+  adults: 2,
+  hotelName: 'Ermass Modern Living Apartments',
+  city: 'Athens',
+  priceEur: 110,
+});
+assert(/Athens-Hotels-Ermass-Modern-Living-Apartments\.h106254548\.Hotel-Beschreibung/.test(slugDeep), slugDeep);
+assert(/chkin=2026-09-30/.test(slugDeep) && /chkout=2026-10-01/.test(slugDeep), 'slug dates');
+assert(/rm1=a2/.test(slugDeep), 'slug adults');
+assert(/top_dp=110/.test(slugDeep), 'slug price');
 
 console.log('All hotelPropertyDeepLink tests passed.');

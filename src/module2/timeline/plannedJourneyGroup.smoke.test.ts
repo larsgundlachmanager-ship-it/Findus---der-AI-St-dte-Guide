@@ -6,6 +6,7 @@ import type { JourneyItinerary } from '../../services/transit/journeyPlanner';
 import {
   buildPlannedJourneyStops,
   cleanPlanDestTitle,
+  isPlanPromptLeak,
   titleForJourneyLeg,
 } from './plannedJourneyGroup';
 
@@ -81,17 +82,26 @@ const stops = buildPlannedJourneyStops({
   itinerary,
 });
 
-assert(stops.length === 2, `2 legs, got ${stops.length}`);
+// Ort → Weg → Ort … : Start + 2×(Weg+Halt) = 5
+assert(stops.length === 5, `origin+2 legs → 5 rows, got ${stops.length}`);
 assert(stops.every((s) => s.groupId === 'nav_here_breakfast'), 'same group');
 assert(
   stops.every((s) => s.groupLabel === 'ÖPNV nach Frühstück'),
   'group label',
 );
-assert(stops[0]!.transport === 'walk', 'first walk');
-assert(stops[1]!.transport === 'transit', 'second rail');
-assert(stops[0]!.kind === 'nav_leg' && stops[1]!.kind === 'nav_leg', 'nav legs');
-assert(stops[0]!.routeEstimate === 'routed', 'routed');
-assert(/^nav_here_breakfast_l/.test(stops[0]!.id), 'leg ids');
+assert(stops[0]!.kind === 'stop', 'origin halt first');
+assert(/^1 ·/.test(stops[0]!.title), 'numbered origin');
+assert(stops[1]!.kind === 'nav_leg', 'walk path after origin');
+assert(stops[1]!.transport === 'walk', 'first walk path');
+assert(/zu Fuß|520|8 Min/i.test(stops[1]!.title), 'walk title live-style');
+assert(stops[2]!.kind === 'stop', 'first arrival halt');
+assert(/^2 ·/.test(stops[2]!.title), 'numbered halt');
+assert(stops[3]!.transport === 'transit', 'rail path');
+assert(/RE nach/i.test(stops[3]!.title), 'rail live-style title');
+assert(stops[4]!.kind === 'stop', 'dest halt');
+assert(/Ankunft/i.test(stops[4]!.notes || ''), 'arrival notes');
+assert(stops[1]!.routeEstimate === 'routed', 'routed');
+assert(/^nav_here_breakfast_l/.test(stops[1]!.id), 'leg ids');
 
 assert(cleanPlanDestTitle('Schönes Hamburg') === 'Hamburg', 'strip hollow schönes');
 assert(
@@ -104,3 +114,6 @@ assert(
 );
 
 console.log('plannedJourneyGroup.smoke.test.ts ok');
+
+assert(isPlanPromptLeak('Weg zur Haltestelle und was ich beachten soll.'), 'prompt leak');
+assert(cleanPlanDestTitle('Cruise hinterher in Kiel damit') === 'Cruise Center Kiel' || cleanPlanDestTitle('Cruise hinterher in Kiel damit') === '', 'cruise/prompt dest cleaned');

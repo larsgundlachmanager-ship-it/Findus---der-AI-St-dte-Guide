@@ -1,0 +1,13 @@
+09-12 15:40:22.095 11042 11042 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-12 15:40:22.105 11042 11083 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId 'a6010b48-cd90-4e75-a3ab-38af7273438e'.
+09-12 15:40:26.871 11042 11042 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-12 15:40:28.618 11042 11042 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-12 15:40:28.679 11042 11042 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-12 15:40:28.695 11042 11083 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId '3a726da5-01df-45fc-a895-0330a5d4ca83'.
+09-12 15:40:33.568 11042 11042 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-12 15:40:35.332 11042 11042 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-12 15:40:35.355 11042 11042 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-12 15:40:35.775 11042 11083 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId '5d8c3d2c-a25f-401b-8913-32afd0cd411e'.
+09-12 15:40:40.304 11042 11042 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-12 15:40:41.977 11042 11042 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-12 15:40:42.002 11042 11042 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.

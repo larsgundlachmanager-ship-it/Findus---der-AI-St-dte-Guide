@@ -112,6 +112,8 @@ const later = formatTemporaryLiveSpeech(
     whenLabel: 'heute Abend 21:00',
     distanceHintM: 400,
     hook: 'Pack die Decke ein, heute Abend ist Open-Air-Kino im Pillerwerk.',
+    priceHint: '8 Euro',
+    whyHint: 'Open-Air unter freiem Himmel mit großer Leinwand',
   },
   afternoon,
 );
@@ -119,12 +121,15 @@ const later = formatTemporaryLiveSpeech(
 assert(/21/.test(later), `Uhr fehlt: «${later}»`);
 assert(/heute\s+abend/iu.test(later), `heute Abend fehlt: «${later}»`);
 assert(/geschaut|geguckt/iu.test(later), `Opener fehlt: «${later}»`);
-assert(/einplanen/iu.test(later), `Invite fehlt: «${later}»`);
+assert(/einplanen|merken/iu.test(later), `Invite fehlt: «${later}»`);
+assert(/8\s*euro|eintritt/iu.test(later), `Preis fehlt: «${later}»`);
+assert(/minuten/iu.test(later), `Anreise fehlt: «${later}»`);
+assert(/open-air|leinwand|himmel/iu.test(later), `Warum fehlt: «${later}»`);
 assert(
   !/um die Ecke|direkt vor dir|in \d+\s*Min da/iu.test(later),
   `Los-jetzt-Ton: «${later}»`,
 );
-assert(later.length < 420, `zu lang (${later.length}): «${later}»`);
+assert(later.length < 900, `zu lang (${later.length}): «${later}»`);
 
 const nowish = formatTemporaryLiveSpeech(
   {
@@ -132,13 +137,16 @@ const nowish = formatTemporaryLiveSpeech(
     whenLabel: 'läuft noch bis 23:00',
     distanceHintM: 80,
     hook: 'Das Straßenfest auf dem Marktplatz ist in vollem Gange.',
+    priceHint: 'Eintritt frei',
+    whyHint: 'Live-Musik und Stände mitten im Ort',
   },
   evening,
 );
 
 assert(
-  !/einplanen/iu.test(nowish),
+  !/einplanen|merken/iu.test(nowish),
   `kein Kalender-Invite bei laufendem Fest: «${nowish}»`,
 );
+assert(/frei|eintritt/iu.test(nowish), `Preis bei Fest: «${nowish}»`);
 
 console.log('temporaryLiveSpeech.smoke.test.ts ok');

@@ -6,6 +6,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Animated,
+  AppState,
   Dimensions,
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -62,6 +63,7 @@ import {
 } from '../services/onboarding/uiCoachMarks';
 import { presenceHint } from '../runtime/uiModule';
 import { formatNavHudTitle, formatRemainingStations } from '../services/navigation/transportMode';
+import { isLiveTurnCue } from '../services/navigation/navTurnHint';
 import {
   bikeMinutesForDistanceM,
   formatDurationMinutesDe,
@@ -81,6 +83,20 @@ const AUTO_ROTATE_MS = 10_000;
 const USER_PAUSE_MS = 10_000;
 /** Horizontal-Padding der Live-Karten (locationPress). */
 const HUD_TEXT_PAD_X = spacing.md * 2;
+
+/** Chrome-Vorfahrt: kein HUD-setState hinter Overlay / Background. */
+function hudTickAllowed(): boolean {
+  if (AppState.currentState !== 'active') return false;
+  try {
+    const { isOverlayBusy } = require('../services/boot/interactiveBootGate') as {
+      isOverlayBusy: () => boolean;
+    };
+    if (isOverlayBusy()) return false;
+  } catch {
+    /* soft */
+  }
+  return true;
+}
 
 export type PassportTab = 'discover' | 'route';
 
@@ -194,6 +210,13 @@ const NavHudMeta = React.memo(function NavHudMeta({
           );
         })?.vehicleStartMs ?? null
       : null;
+    const waitingAtBoard =
+      s.navPhase === 'walk_to_stop' ||
+      (Boolean(tour?.stops.some((st) => Boolean(st.line))) &&
+        s.navPhase !== 'in_transit' &&
+        s.navPhase !== 'post_transit_walk' &&
+        rideStartMs != null &&
+        rideStartMs > Date.now() - 30_000);
     const hudEta = pickNavHudEta({
       lastStopEndMs,
       rideStartMs,
@@ -201,6 +224,8 @@ const NavHudMeta = React.memo(function NavHudMeta({
       remainingM: remaining,
       walkFallbackMin: walkFallback,
       nowMs: Date.now(),
+      waitingForVehicle: waitingAtBoard,
+      vehicleDepartMs: rideStartMs,
     });
     const totalEtaMin = hudEta.etaMin;
     const stopProg = isMultiStop
@@ -219,25 +244,56 @@ const NavHudMeta = React.memo(function NavHudMeta({
           st.role === 'alight' || st.role === 'board' || Boolean(st.line),
       ) || tour?.liveMeta,
     );
-    const distEta = transitHud
-      ? totalEtaMin != null
-        ? formatDurationMinutesDe(totalEtaMin, 'short')
-        : null
-      : remaining != null
-        ? totalEtaMin != null
-          ? `${formatKm(remaining)} · ${formatDurationMinutesDe(totalEtaMin, 'short')}`
-          : formatKm(remaining)
+    const lineLabel = (() => {
+      const open = (tour?.stops ?? []).filter((x) => !x.done);
+      const board =
+        open.find((st) => st.role === 'board' || Boolean(st.line)) ??
+        tour?.stops?.find((st) => st.role === 'board' || Boolean(st.line));
+      const line = board?.line?.trim();
+      const head = board?.headsign?.trim();
+      if (line && head) return `${line} nach ${head}`;
+      if (line) return line;
+      return null;
+    })();
+    const waitLabel =
+      waitingAtBoard && totalEtaMin != null
+        ? totalEtaMin <= 0
+          ? lineLabel
+            ? `${lineLabel} gleich da`
+            : 'Fahrzeug gleich da'
+          : lineLabel
+            ? `${lineLabel} in ${totalEtaMin} Min`
+            : `Fahrzeug in ${totalEtaMin} Min`
         : null;
+    const distEta = waitLabel
+      ? waitLabel
+      : transitHud
+        ? totalEtaMin != null
+          ? formatDurationMinutesDe(totalEtaMin, 'short')
+          : null
+        : remaining != null
+          ? totalEtaMin != null
+            ? `${formatKm(remaining)} · ${formatDurationMinutesDe(totalEtaMin, 'short')}`
+            : formatKm(remaining)
+          : null;
+    const modeLabel =
+      s.navPhase === 'in_transit' ||
+      s.transportMode === 'transit_bus' ||
+      s.transportMode === 'transit_train'
+        ? 'ÖPNV'
+        : s.navPhase === 'walk_to_stop'
+          ? 'Zur Haltestelle'
+          : s.transportMode === 'bicycle'
+            ? 'Fahrrad'
+            : s.transportMode === 'jog'
+              ? 'Joggen'
+              : 'zu Fuß';
     const parts = [
       stopProg,
       landmarkBit,
       distEta,
+      modeLabel,
       arriveClock ? `Ankunft ${arriveClock}` : null,
-      s.navPhase === 'in_transit'
-        ? 'ÖPNV'
-        : s.navPhase === 'walk_to_stop'
-          ? 'Zur Haltestelle'
-          : null,
       s.navPhase === 'in_transit' && s.remainingStations != null
         ? formatRemainingStations(s.remainingStations)
         : null,
@@ -255,6 +311,11 @@ const NavHudMeta = React.memo(function NavHudMeta({
 
 const NavHudTitle = React.memo(function NavHudTitle() {
   const title = useFinnusStore((s) => {
+    // Abbiege-Countdown im Live-Banner (Google-Stil), sonst Ziel
+    const hint = s.navTurnHint?.trim();
+    if (hint && s.navActive && s.navMode === 'routing' && isLiveTurnCue(hint)) {
+      return hint;
+    }
     const tour = s.multiStopTour;
     const open = (tour?.stops ?? []).filter((x) => !x.done);
     const finalStop =
@@ -346,6 +407,14 @@ export const Header = React.memo(function Header({
     void ensureMealHudFresh({ force: true });
     void ensureNearbyAmenityHudFresh({ force: true });
     void ensureSunsetHudFresh({ force: true });
+    try {
+      const { hydrateActiveTimerFromStorage } = require('../services/alarms/timerService') as {
+        hydrateActiveTimerFromStorage: () => Promise<void>;
+      };
+      void hydrateActiveTimerFromStorage();
+    } catch {
+      /* soft */
+    }
     const unsubTip = subscribeHudTip(() => {
       setCardTick((n) => n + 1);
     });
@@ -358,7 +427,20 @@ export const Header = React.memo(function Header({
     const unsubSunset = subscribeSunsetHud(() => {
       setCardTick((n) => n + 1);
     });
+    let unsubTimer: (() => void) | null = null;
+    try {
+      const { subscribeActiveTimer } = require('../services/alarms/timerService') as {
+        subscribeActiveTimer: (fn: () => void) => () => void;
+      };
+      unsubTimer = subscribeActiveTimer(() => {
+        setCardTick((n) => n + 1);
+        setCardIndex(0);
+      });
+    } catch {
+      unsubTimer = null;
+    }
     const interval = setInterval(() => {
+      if (!hudTickAllowed()) return;
       evaluateProactiveHud({ force: false });
       void tickProactiveReminderEngine({ force: false });
       void ensureMealHudFresh();
@@ -371,7 +453,55 @@ export const Header = React.memo(function Header({
       unsubMeal();
       unsubAmenity();
       unsubSunset();
+      unsubTimer?.();
       clearInterval(interval);
+    };
+  }, []);
+
+  /** Sekunden-Takt nur solange ein Küchen-Timer läuft (nicht global). */
+  useEffect(() => {
+    let tick: ReturnType<typeof setInterval> | null = null;
+    const stopTick = () => {
+      if (tick) {
+        clearInterval(tick);
+        tick = null;
+      }
+    };
+    const arm = () => {
+      try {
+        const { getActiveTimer } = require('../services/alarms/timerService') as {
+          getActiveTimer: () => { endsAtMs: number } | null;
+        };
+        const t = getActiveTimer();
+        if (t && t.endsAtMs > Date.now()) {
+          if (!tick) {
+            tick = setInterval(() => {
+              if (!hudTickAllowed()) return;
+              setCardTick((n) => n + 1);
+            }, 1000);
+          }
+        } else {
+          stopTick();
+        }
+      } catch {
+        stopTick();
+      }
+    };
+    arm();
+    let unsub: (() => void) | null = null;
+    try {
+      const { subscribeActiveTimer } = require('../services/alarms/timerService') as {
+        subscribeActiveTimer: (fn: () => void) => () => void;
+      };
+      unsub = subscribeActiveTimer(arm);
+    } catch {
+      unsub = null;
+    }
+    const watch = setInterval(arm, 15_000);
+    return () => {
+      unsub?.();
+      stopTick();
+      clearInterval(watch);
     };
   }, []);
 
@@ -458,8 +588,26 @@ export const Header = React.memo(function Header({
   useEffect(() => {
     if (mode !== 'idle') return;
     const id = setInterval(() => {
+      if (!hudTickAllowed()) return;
       if (userSwiping.current) return;
       if (Date.now() < autoResumeAtMs.current) return;
+      // Küchen-Timer: Karte fest oben — nicht wegdrehen
+      try {
+        const { getActiveTimer } = require('../services/alarms/timerService') as {
+          getActiveTimer: () => { endsAtMs: number } | null;
+        };
+        const t = getActiveTimer();
+        if (t && t.endsAtMs > Date.now()) {
+          if (cardIndexRef.current !== 0) {
+            cardIndexRef.current = 0;
+            setCardIndex(0);
+            scrollToLogical(0, true);
+          }
+          return;
+        }
+      } catch {
+        /* soft */
+      }
       const len = cardsLenRef.current;
       if (len <= 1) return;
       const w = cardWidthRef.current;
@@ -481,7 +629,7 @@ export const Header = React.memo(function Header({
       }).start();
     }, AUTO_ROTATE_MS);
     return () => clearInterval(id);
-  }, [mode, fade]);
+  }, [mode, fade, scrollToLogical]);
 
   const pauseAutoRotate = useCallback(() => {
     userSwiping.current = true;
@@ -666,7 +814,7 @@ export const Header = React.memo(function Header({
             navTargetName?.trim() || multiStopName?.trim() || 'Ziel',
             transportMode,
           )
-        : activeCard?.title ?? '📍';
+        : activeCard?.title ?? '';
 
   const presenceLine = presenceHint(findusPresence);
 
@@ -713,11 +861,13 @@ export const Header = React.memo(function Header({
                       onPress={onCardTap}
                       style={{ width: cardWidth }}
                       accessibilityRole="button"
-                      accessibilityLabel={
-                        c.id === 'weather-live'
-                          ? `${c.title}. Tippen: Wetter und Tipps. Wischen: nächste Karte.`
-                          : `${c.title}. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.`
-                      }
+                      accessibilityLabel={(() => {
+                        const title = String(c.title ?? '').trim();
+                        const join = /[.!?…]$/u.test(title) ? ' ' : '. ';
+                        return c.id === 'weather-live'
+                          ? `${title}${join}Tippen: Wetter und Tipps. Wischen: nächste Karte.`
+                          : `${title}${join}Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.`;
+                      })()}
                     >
                       <Text
                         style={styles.location}
@@ -792,12 +942,13 @@ export const Header = React.memo(function Header({
               {mode === 'nav' ? (
                 <>
                   <NavHudMeta showRouteHint={showRouteHint} />
-                  {presenceLine ? (
-                    <Text style={styles.meta} numberOfLines={1}>
-                      {presenceLine}
-                    </Text>
-                  ) : null}
+                  {/* Presence nicht unter ETA — klingt wie Routen-Stau („langsamer“). Mikro zeigt Status. */}
                 </>
+              ) : null}
+              {mode !== 'nav' && presenceLine ? (
+                <Text style={styles.meta} numberOfLines={1}>
+                  {presenceLine}
+                </Text>
               ) : null}
 
               {showTipsHint && onTellMore ? (

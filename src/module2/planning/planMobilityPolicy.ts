@@ -3,7 +3,7 @@
  *
  * Luftlinie (Karten-Tap / Nav-Start):
  * - ≥ 1,4 km Fuß: ÖPNV als Option
- * - ≥ 3 km Fuß: ÖPNV direkt, wenn schneller — niemand läuft 3 km.
+ * - ≥ 1,8 km Fuß: ÖPNV direkt, wenn schneller (oder Zeit noch unbekannt).
  *   Taxi nur extra, wenn Pref ja; Pref nein → ÖPNV ohne Auswahl.
  * - Rad: bis ~6 km ok; ≥ 10 km Option, ≥ 15 km direkt — nur wenn ÖPNV schneller.
  */
@@ -16,8 +16,8 @@ export const PLAN_FORCE_TRANSIT_WALK_MIN = 30;
 export const PLAN_TRANSIT_MIN_SAVINGS_MIN = 5;
 /** Ab hier Luftlinie: ÖPNV als Option (nicht erst 20-Min-Fuß). */
 export const PLAN_AIR_OFFER_TRANSIT_M = 1_400;
-/** Ab hier zu Fuß: ÖPNV direkt, wenn schneller — niemand läuft 3 km. */
-export const PLAN_AIR_FORCE_TRANSIT_M = 3_000;
+/** Ab hier zu Fuß: ÖPNV direkt, wenn schneller — niemand läuft >1,8 km. */
+export const PLAN_AIR_FORCE_TRANSIT_M = 1_800;
 /** Rad bleibt bis hier Luftlinie alltagstauglich. */
 export const PLAN_AIR_BIKE_OK_M = 6_000;
 /** Rad: ÖPNV anbieten, wenn schneller. */
@@ -71,7 +71,7 @@ export function airNeedsTransitLookahead(opts: {
 
 /**
  * Karten-Tap / Nav-Start: Luftlinie, nicht erst 4 h OSRM.
- * 1,4 km → Option. 3 km → ÖPNV wenn schneller (Taxi extra, wenn Pref ja).
+ * 1,4 km → Option. 1,8 km → ÖPNV wenn schneller (Taxi extra, wenn Pref ja).
  * Rad: bis ~6 km ok, ab 10 km Option, ab 15 km direkt — jeweils nur wenn ÖPNV schneller.
  */
 export function decideAirMobility(opts: {
@@ -101,7 +101,7 @@ export function decideAirMobility(opts: {
   if (air < PLAN_AIR_FORCE_TRANSIT_M) {
     return { kind: 'ask_transit', includeTaxi: taxi };
   }
-  // ≥ 3 km: zu Fuß raus, wenn ÖPNV schneller (oder Zeit noch unbekannt → direkt).
+  // ≥ 1,8 km: zu Fuß raus, wenn ÖPNV schneller (oder Zeit noch unbekannt → direkt).
   if (transit != null && !transitBeats(transit, walk)) {
     return { kind: 'ask_transit', includeTaxi: taxi };
   }

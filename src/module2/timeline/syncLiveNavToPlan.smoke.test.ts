@@ -187,7 +187,7 @@ const withLinks = buildLiveTourSchedule({
   destLng: 10.0,
 });
 const gastro = withLinks.find((r) => r.kind === 'stop');
-assert(gastro?.mapsUrl?.includes('google.com/maps'), 'Maps bleibt am Stop');
+assert(gastro?.mapsUrl == null || gastro?.mapsUrl === '', 'Maps am Gastro-Ziel weg wenn Speisekarte da');
 assert(gastro?.menuUrl?.includes('speisekarte'), 'Speisekarte bleibt am Stop');
 assert(gastro?.websiteUrl === 'https://osteria.example', 'Website bleibt am Stop');
 
@@ -257,6 +257,14 @@ const prisdorf = transitRows.find((r) => (r.title ?? '').includes('Prisdorf'));
 assert(
   (prisdorf?.notes ?? '').includes('warten'),
   'Warten auf die Bahn, nicht vor Ort',
+);
+assert(
+  !/warten auf RB/i.test(prisdorf?.notes ?? ''),
+  'kein Doppel-RB61 in den Halt-Notizen',
+);
+assert(
+  transitLegs.some((r) => /RB 61 nach Pinneberg/i.test(r.title ?? '')),
+  'Fahrbein: Linie nach Ziel',
 );
 assert(!prisdorf?.mapsUrl, 'Haltestelle ohne Maps-Link');
 
@@ -364,4 +372,35 @@ assert(
   'kein nacktes „Haltestelle“ als Stop-Titel',
 );
 
-console.log('liveTourSchedule.smoke.test.ts OK');
+{
+  const { readFileSync } = require('node:fs') as typeof import('node:fs');
+  const { join } = require('node:path') as typeof import('node:path');
+  const modal = readFileSync(
+    join(process.cwd(), 'src/components/PlanCalendarModal.tsx'),
+    'utf8',
+  );
+  assert(modal.includes('skipUpcomingTourStop'), 'Timeline löscht einzelnen Tour-Stop');
+  assert(modal.includes('upcomingIndexForLiveId'), 'Live-ID → Upcoming-Index');
+  assert(
+    /skipUpcomingTourStop[\s\S]*cleared[\s\S]*clearLiveNavFromPlan/.test(modal) ||
+      modal.includes('r.cleared'),
+    'nur wenn Tour leer: ganze Nav beenden',
+  );
+  const tourSrc = readFileSync(
+    join(process.cwd(), 'src/services/navigation/multiStopTour.ts'),
+    'utf8',
+  );
+  assert(
+    tourSrc.includes('clearTourAheadRouteCache'),
+    'Skip invalidiert Ahead-Cache',
+  );
+  assert(
+    /path:\s*null/.test(tourSrc) && tourSrc.includes('skipUpcomingTourStop'),
+    'Skip löscht stale Stop-Pfade',
+  );
+  assert(tourSrc.includes('maybeCatchUpTourProgress'), 'stale progress catch-up');
+  assert(tourSrc.includes('entgegen der Fahrtrichtung'), 'Fuß entgegen Fahrtrichtung');
+  assert(tourSrc.includes('clearLiveNavFromPlan'), 'Tour-Ende räumt Live-ÖPNV');
+}
+
+console.log('syncLiveNavToPlan.smoke.test.ts OK');

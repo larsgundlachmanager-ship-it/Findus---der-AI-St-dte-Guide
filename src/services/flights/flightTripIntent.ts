@@ -8,10 +8,14 @@ import { classifyUtteranceFamily } from '../../module2/kernel/utteranceFamily';
 
 export type FlightBookingStance = 'booked' | 'wish' | 'ambiguous';
 
+export type FlightRegionHint = 'south' | 'north' | 'east' | 'west';
+
 export type FlightTripSlots = {
   isFlightTrip: boolean;
   stance: FlightBookingStance;
   destHint: string | null;
+  /** Kompass-Richtung statt Stadt („Richtung Süden“) — kein IATA-Ziel. */
+  regionHint: FlightRegionHint | null;
   originHint: string | null;
   returning: boolean;
   clockHm: string | null;
@@ -36,7 +40,7 @@ const BOOKED_RE =
   /\b(ich\s+flieg(?:e|st|t)?|flieg(?:e|st|t)?\s+heute|mein(?:e[rn]?)?\s+(?:flug|flieger)|schon\s+gebucht|habe\s+(?:schon\s+)?(?:einen?\s+)?(?:flug|flieger)|gebucht|zurückflieg|zurueckflieg|rückflug|rueckflug|von\s+\w+\s+zurück|von\s+\w+\s+zurueck)\b/iu;
 
 const LEAVE_BY_RE =
-  /\b(wann\s+(?:muss|soll)(?:\s+ich)?.{0,48}(?:flughafen|los|da\s+sein)|(?:muss|müsst|müssen|muessen).{0,24}am\s+flughafen|am\s+flughafen\s+sein|wann\s+los(?:fahren|gehen)?|check[\s-]?in\s+zeit|boarding)\b/iu;
+  /\b(wann\s+(?:muss|müsst|musst|müssen|muessen|soll)(?:\s+(?:ich|du|wir))?.{0,48}(?:flughafen|los|da\s+sein)|(?:muss|müsst|musst|müssen|muessen).{0,24}am\s+flughafen|am\s+flughafen\s+sein|wann\s+los(?:fahren|gehen)?|check[\s-]?in\s+zeit|boarding)\b/iu;
 
 const MUST_FLY_RE =
   /\b(muss|müsst|muessen|müssen)\b.{0,48}\b(fliegen|fliegst|fliegt|flug|flieger)\b/iu;
@@ -47,11 +51,18 @@ const GET_THE_PLANE_RE =
 const RETURN_RE =
   /\b(zurück|zurueck|rückflug|rueckflug|heimflieg|heim\s*flieg)\b/iu;
 
-const FROM_CITY_RE =
-  /\bvon\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,2})/iu;
+const CITY_STOP =
+  'nach|richtung|bis|vom|zum|zur|aus|fliegen|flüge|fluege|flieger|für|fuer|mit|ohne|raus|am|um';
 
-const TO_CITY_RE =
-  /\b(?:nach|richtung)\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,2})/iu;
+const FROM_CITY_RE = new RegExp(
+  String.raw`\bvon\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+(?!${CITY_STOP}\b)[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,2})`,
+  'iu',
+);
+
+const TO_CITY_RE = new RegExp(
+  String.raw`\b(?:nach|richtung)\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+(?!${CITY_STOP}\b|von\b)[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,2})`,
+  'iu',
+);
 
 const BAHN_EXPLICIT =
   /\b(bahn|zug|ice|ic\b|re\b|rb\b|s-?bahn|öpnv|oepnv|flixbus|verbindung\s+nach)\b/iu;
@@ -108,9 +119,32 @@ const MONTH_WORDS: Record<string, number> = {
 const STOP_DEST =
   /^(den|die|das|dem|der|mein|meinen|heute|morgen|abend|flughafen|airport|hause|haus|mir|dir)$/iu;
 
-/** Bricht „nach Antalya wann muss ich…“ — Stadt, nicht die Frage. */
+const COMPASS_DEST_RE =
+  /^(süden|sueden|süd|sued|norden|nord|osten|ost|westen|west)$/iu;
+
+const REGION_HINT_RE =
+  /\b(?:richtung\s+)?(süden|sueden|südlich|suedlich|norden|nördlich|noerdlich|osten|östlich|oestlich|westen|westlich)\b/iu;
+
+export function extractFlightRegionHint(text: string): FlightRegionHint | null {
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (!t) return null;
+  const m = t.match(REGION_HINT_RE);
+  const raw = (m?.[1] || '').toLowerCase();
+  if (!raw) return null;
+  if (/süd|sued/.test(raw)) return 'south';
+  if (/nord/.test(raw)) return 'north';
+  if (/öst|oest|^ost/.test(raw)) return 'east';
+  if (/west/.test(raw)) return 'west';
+  return null;
+}
+
+export function isCompassDestHint(hint: string | null | undefined): boolean {
+  return COMPASS_DEST_RE.test(String(hint || '').trim());
+}
+
+/** Bricht „nach Antalya wann muss ich…“ / „nach Split vom 27“ — Stadt, nicht die Frage. */
 const DEST_CUT =
-  /^(wann|muss|müsst|muessen|müssen|soll|sollte|sollst|ich|wir|du|los|sein|spätestens|spaetestens)$/iu;
+  /^(wann|muss|müsst|muessen|müssen|soll|sollte|sollst|ich|wir|du|los|sein|spätestens|spaetestens|nach|richtung|von|bis|vom|zum|zur|aus|und|oder|für|fuer|mit|ohne|fliegen|flüge|fluege|flieger|am|um)$/iu;
 
 const INSEL_RE =
   /\b(inselflieger|wangerooge|flugplatz\s*harle|frisia\s*luft)\b/iu;
@@ -126,7 +160,17 @@ export function extractFlightIdent(text: string): string | null {
   if (digitAirline?.[1]) return digitAirline[1].replace(/\s+/g, '');
   const generic = u.match(/\b([A-Z]{2,3}\s?\d{2,4}[A-Z]?)\b/);
   if (!generic?.[1]) return null;
-  if (/\b(UM|AM|IM|PM|ZM|NM|BIS|AB)\s?\d/i.test(generic[1])) return null;
+  // „vom 27“ / „bis 10“ / „um 18“ sind keine Flugnummern
+  if (
+    /\b(UM|AM|IM|PM|ZM|NM|BIS|AB|VOM|DEM|DEN|DER|UND|MIT|FUR|FÜR|VON|NACH|AUS)\s?\d/i.test(
+      generic[1],
+    )
+  ) {
+    return null;
+  }
+  if (/\bvom\s*\d/i.test(text) && /^VOM\d/i.test(generic[1].replace(/\s+/g, ''))) {
+    return null;
+  }
   return generic[1].replace(/\s+/g, '');
 }
 
@@ -335,6 +379,16 @@ export function isFlightTripQuery(text: string): boolean {
     /* soft */
   }
   if (isIslandFlightQuery(t)) return false;
+  try {
+    const { wantsTaxiRide } = require('../mobility/taxiRideIntent') as {
+      wantsTaxiRide: (s: string) => boolean;
+    };
+    if (wantsTaxiRide(t) && !/\b(flieg(?:e|st|t)?|fliegen|flugnummer|boarding)\b/iu.test(t)) {
+      return false;
+    }
+  } catch {
+    /* soft */
+  }
   if (BAHN_EXPLICIT.test(t) && !/\b(flug|flieger|fliegen|flughafen)\b/iu.test(t)) {
     return false;
   }
@@ -354,6 +408,49 @@ export function isFlightTripQuery(text: string): boolean {
   return false;
 }
 
+/**
+ * Solo-Flug A→B (+ optional Zeitraum): Modul-2 flight_advisor — nie Pitch/Reisebüro.
+ * Hotel/Urlaub/Kurztrip/Mietwagen/Full-Plan → false.
+ * „für X Tage“ / Wochenende ohne klares von…nach → Reisebüro (Aufenthalt), nicht Solo.
+ * Datumsfenster allein (27.3–10.4) + von…nach bleibt Solo.
+ */
+export function isSoloFlightAbSearch(text: string): boolean {
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (!t || !isFlightTripQuery(t)) return false;
+  if (
+    /\b(hotel|unterkunft|ferienhaus|apartment|mietwagen|leihwagen|pauschal|flug\s*\+|flug.{0,24}hotel|hotel.{0,24}flug)\b/iu.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  if (
+    /\b(urlaub|kurztrip|städtetrip|staedtetrip|urlaubsplan|reise\s+planen|plane\s+mir|wochenende\s+weg|wochenende)\b/iu.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  // Explizites A→B (von…nach… / nach X ab Y) oder IATA-Paar
+  const fromM = t.match(FROM_CITY_RE);
+  const toM = t.match(TO_CITY_RE);
+  const hasAb =
+    Boolean(fromM?.[1] && toM?.[1]) ||
+    /\b([A-Z]{3})\s*(?:→|->|nach)\s*([A-Z]{3})\b/.test(t) ||
+    (/\bflüge?\b/iu.test(t) && Boolean(toM?.[1]) && /\b(von|ab|aus)\b/iu.test(t));
+  // Aufenthalts-Rahmen (auch mit A→B) → Reisebüro/Paket, nicht Solo-Flug
+  const stayHorizon =
+    /\bfür\s+(\d+|zwei|drei|vier|fünf|fuenf|sechs)\s+tage?\b/iu.test(t) ||
+    /\b(\d+|zwei|drei|vier|fünf|fuenf|sechs)\s+tage?\b/iu.test(t) ||
+    /\bin\s+(zwei|drei|\d+)\s+wochen?\b/iu.test(t);
+  if (stayHorizon) return false;
+  if (!hasAb) {
+    // „günstige Flüge nach Split“ ohne Origin — noch Solo wenn kein Trip-Rahmen
+    if (!(/\b(flug|flüge|fluege|fliegen|flieger)\b/iu.test(t) && toM?.[1])) return false;
+  }
+  return true;
+}
+
 export function parseFlightTripSlots(text: string): FlightTripSlots {
   const t = text.replace(/\s+/g, ' ').trim();
   const isFlightTrip = isFlightTripQuery(t);
@@ -362,9 +459,48 @@ export function parseFlightTripSlots(text: string): FlightTripSlots {
   const toM = t.match(TO_CITY_RE);
   let destHint = cleanHint(toM?.[1] ?? null);
   let originHint = cleanHint(fromM?.[1] ?? null);
-  if (!destHint) {
+  const regionHint = extractFlightRegionHint(t);
+  if (!originHint) {
+    const bei = t.match(
+      /\b(?:bei|ab|aus)\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,2})\s+(?:flüge|fluege|flug|flughafen|airport)\b/iu,
+    );
+    const bare = t.match(
+      /\b([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+)\s+(?:flüge|fluege)\b/iu,
+    );
+    originHint = cleanHint(bei?.[1] ?? bare?.[1] ?? null);
+  }
+  // „Richtung Süden“ / „Richtung Süden Tickets“ ist kein Flughafen.
+  if (
+    isCompassDestHint(destHint) ||
+    (regionHint &&
+      destHint &&
+      COMPASS_DEST_RE.test(destHint.split(/\s+/)[0] || ''))
+  ) {
+    destHint = null;
+  }
+  if (!destHint && !regionHint) {
     const mentioned = findAirportMentionedInText(t);
-    if (mentioned) destHint = mentioned.city;
+    // „bei Hamburg Flüge Richtung Süden“ → Hamburg ist Origin, nicht Dest
+    if (mentioned) {
+      const city = mentioned.city;
+      if (
+        originHint &&
+        city &&
+        city.toLowerCase() === originHint.toLowerCase()
+      ) {
+        /* skip */
+      } else if (
+        /\b(?:bei|ab|aus)\s+/iu.test(t) &&
+        new RegExp(
+          `\\b(?:bei|ab|aus)\\s+${city.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`,
+          'iu',
+        ).test(t)
+      ) {
+        if (!originHint) originHint = city;
+      } else {
+        destHint = city;
+      }
+    }
   }
   if (returning && originHint && !destHint) {
     destHint = null;
@@ -395,12 +531,14 @@ export function parseFlightTripSlots(text: string): FlightTripSlots {
 
   return {
     isFlightTrip,
-    stance: isFlightTrip
-      ? inferFlightBookingStance(t)
-      : leaveByAsk
-        ? 'booked'
+    // Leave-by/„am Flughafen sein“ = gebuchter Flug, nie Cheap-Flight-Suche
+    stance: leaveByAsk
+      ? 'booked'
+      : isFlightTrip
+        ? inferFlightBookingStance(t)
         : 'ambiguous',
     destHint,
+    regionHint,
     originHint,
     returning,
     clockHm: extractClockHm(t),
@@ -489,6 +627,40 @@ export function isShortReplyToLastAsk(text: string): boolean {
 }
 
 /**
+ * Sticky Flug-Root: offene Trip-Session ODER Taxi→Flughafen Follow-through.
+ * Bare-Clock („um 18 Uhr“) darf diesen Root nicht verlassen.
+ */
+export function hasStickyFlightRoot(): boolean {
+  try {
+    const { hasFlightTripSession } = require('./flightTripSession') as {
+      hasFlightTripSession: () => boolean;
+    };
+    if (hasFlightTripSession()) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { getFollowThroughGoals } = require('../../module2/router/missionFollowThrough') as {
+      getFollowThroughGoals: () => Array<{ kind: string }>;
+    };
+    if (getFollowThroughGoals().some((g) => g.kind === 'taxi_airport')) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
+}
+
+/** Nackte Uhr / kurze Slot-Antwort am offenen Flug-Root. */
+export function isBareClockStickyFlightFollowUp(text: string): boolean {
+  if (!hasStickyFlightRoot()) return false;
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (!t || t.length > 48) return false;
+  if (extractClockHm(t)) return true;
+  if (isShortReplyToLastAsk(t)) return true;
+  return isFlightTripFollowUp(t, true);
+}
+
+/**
  * Offene Flug-Session nicht wegscruben: Follow-up, Uhr, Ja/Nein zur letzten Ask.
  * session=new vom Manager darf den Trip nicht killen.
  */
@@ -496,12 +668,13 @@ export function shouldPreserveFlightTripSession(text: string): boolean {
   const t = (text || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
   if (isFlightTripQuery(t)) return true;
+  if (isBareClockStickyFlightFollowUp(t)) return true;
   try {
     const { hasFlightTripSession, getFlightTripSession } = require('./flightTripSession') as {
       hasFlightTripSession: () => boolean;
       getFlightTripSession: () => { pendingAsk?: string | null } | null;
     };
-    if (!hasFlightTripSession()) return false;
+    if (!hasFlightTripSession() && !hasStickyFlightRoot()) return false;
     if (isFlightTripFollowUp(t, true)) return true;
     if (extractClockHm(t)) return true;
     if (getFlightTripSession()?.pendingAsk && isShortReplyToLastAsk(t)) return true;
@@ -521,6 +694,21 @@ export function shouldScrubFlightOnTopicCut(text: string): boolean {
     if (isSupermarketOfferQuery(text)) return true;
   } catch {
     /* soft */
+  }
+  try {
+    const { isEventResearchQuery } = require('../concierge/eventResearchService') as {
+      isEventResearchQuery: (s: string) => boolean;
+    };
+    if (isEventResearchQuery(text)) return true;
+  } catch {
+    /* soft */
+  }
+  if (
+    /\b(theater|theatre|theaterstück|theaterstueck|schauspiel|musical|bühne|buehne|vorstellung(?:en)?)\b/iu.test(
+      text,
+    )
+  ) {
+    return true;
   }
   const fam = classifyUtteranceFamily(text).family;
   if (fam === 'flight' || fam === 'clock' || fam === 'knowledge' || fam === 'unknown') {
@@ -586,6 +774,42 @@ export function isFlightTripFollowUp(text: string, hasSession: boolean): boolean
   );
 }
 
+/** Flug-Leave-by / Taxi-zum-Flughafen — nie Stadt-Explore / Tagesplan. */
+export function blocksExploreDriftForFlight(text: string): boolean {
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  // Solo A→B Flug-Suche: nie Explore/Pitch/Reisebüro
+  if (isSoloFlightAbSearch(t)) return true;
+  try {
+    const { looksLikeTaxiWithFlight } = require('../../module2/router/call1MobilityCompound') as {
+      looksLikeTaxiWithFlight: (s: string) => boolean;
+    };
+    if (looksLikeTaxiWithFlight(t)) return true;
+  } catch {
+    /* soft */
+  }
+  if (wantsFlightTaxiAccess(t)) return true;
+  if (
+    isFlightTripQuery(t) &&
+    /\b(taxi|uber|bolt|pünktlich|puenktlich|vorbestell|am\s+flughafen\s+sein)\b/iu.test(t)
+  ) {
+    return true;
+  }
+  // Sticky Root (Session oder Taxi-Follow-through): Uhr/Gepäck nie Explore
+  if (hasStickyFlightRoot()) {
+    if (
+      isFlightTripQuery(t) ||
+      extractClockHm(t) ||
+      isShortReplyToLastAsk(t) ||
+      isFlightTripFollowUp(t, true) ||
+      /\b(gepäck|gepaeck|handgepäck|handgepaeck|aufgabe)\b/iu.test(t)
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 /** Manager-Lane darf den Flug-Advisor nicht schlucken (Plan = Timetable des Flugs). */
 export function shouldEnterFlightAdvisor(opts: {
   userText: string;
@@ -598,26 +822,46 @@ export function shouldEnterFlightAdvisor(opts: {
 }): boolean {
   const t = (opts.userText || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
+  // Hard: Taxi+Flug / Sticky → immer Advisor, nie Explore/Reisebüro
+  if (blocksExploreDriftForFlight(t)) return true;
+  try {
+    const { wantsTaxiRide } = require('../mobility/taxiRideIntent') as {
+      wantsTaxiRide: (s: string) => boolean;
+    };
+    if (wantsTaxiRide(t) && !/\b(flieg(?:e|st|t)?|fliegen|flugnummer|boarding)\b/iu.test(t)) {
+      return false;
+    }
+  } catch {
+    /* soft */
+  }
   // Wochenend-/Urlaubs-Reise mit Flug+Hotel/Programm = Reisebüro, nicht Solo-Flug-Advisor
+  // Ausnahme: Solo A→B / Taxi-zum-Flughafen / Leave-by (blocksExploreDrift oben)
   try {
     const { detectCall1Situation } = require('../../module2/reboot/pipeline/call1AnswerContract') as {
       detectCall1Situation: (s: string) => string;
     };
-    if (detectCall1Situation(t) === 'reisebuero_collect') return false;
+    if (detectCall1Situation(t) === 'reisebuero_collect' && !isSoloFlightAbSearch(t)) {
+      return false;
+    }
   } catch {
     /* soft */
   }
   if (isFlightTripQuery(t)) return true;
-  if (opts.hasOpenSession && extractClockHm(t)) return true;
+  const stickyOpen = Boolean(opts.hasOpenSession) || hasStickyFlightRoot();
+  if (stickyOpen && extractClockHm(t)) return true;
+  if (stickyOpen && isBareClockStickyFlightFollowUp(t)) return true;
   const fam = classifyUtteranceFamily(t).family;
   const steal =
     opts.chatLane === 'nav' || opts.chatLane === 'pitch' || opts.chatLane === 'm1';
   const flightNow = fam === 'flight' || isFlightTripQuery(t);
-  if (steal && !flightNow) return false;
-  if (fam === 'weather' || fam === 'pitch' || fam === 'm1' || fam === 'travel_agency') {
+  // Bare clock am Sticky-Root schlägt Pitch/Nav-Steal
+  if (steal && !flightNow && !(stickyOpen && (fam === 'clock' || extractClockHm(t)))) {
     return false;
   }
-  if (fam === 'nav' && !flightNow) return false;
+  if (fam === 'weather' || fam === 'pitch' || fam === 'm1' || fam === 'travel_agency') {
+    if (!(stickyOpen && (fam === 'clock' || extractClockHm(t)))) return false;
+  }
+  if (fam === 'nav' && !flightNow && !(stickyOpen && extractClockHm(t))) return false;
   if (flightNow) return true;
   if (opts.flightWorker) return true;
   const managerSaysFlight =
@@ -630,15 +874,15 @@ export function shouldEnterFlightAdvisor(opts: {
   ) {
     return true;
   }
-  if (opts.hasOpenSession && isFlightTripFollowUp(t, true)) return true;
-  if (opts.hasOpenSession && isShortReplyToLastAsk(t)) {
+  if (stickyOpen && isFlightTripFollowUp(t, true)) return true;
+  if (stickyOpen && isShortReplyToLastAsk(t)) {
     try {
       const { getFlightTripSession } = require('./flightTripSession') as {
         getFlightTripSession: () => { pendingAsk?: string | null } | null;
       };
-      if (getFlightTripSession()?.pendingAsk) return true;
+      if (getFlightTripSession()?.pendingAsk || hasStickyFlightRoot()) return true;
     } catch {
-      /* soft */
+      if (hasStickyFlightRoot()) return true;
     }
   }
   return false;
@@ -652,20 +896,22 @@ export function shouldYieldPlanWaitToFlight(opts: {
 }): boolean {
   const t = (opts.userText || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
+  if (blocksExploreDriftForFlight(t)) return true;
   if (isFlightTripQuery(t)) return true;
-  if (opts.hasOpenSession && extractClockHm(t)) return true;
+  const stickyOpen = Boolean(opts.hasOpenSession) || hasStickyFlightRoot();
+  if (stickyOpen && extractClockHm(t)) return true;
   const fam = classifyUtteranceFamily(t).family;
   if (fam === 'weather' || fam === 'pitch' || fam === 'm1' || fam === 'travel_agency') {
-    return false;
+    if (!(stickyOpen && (fam === 'clock' || extractClockHm(t)))) return false;
   }
-  if (fam === 'nav' && !(isFlightTripQuery(t) || fam === 'flight')) {
+  if (fam === 'nav' && !(isFlightTripQuery(t) || fam === 'flight' || (stickyOpen && extractClockHm(t)))) {
     return false;
   }
   if (isFlightTripQuery(t) || fam === 'flight') {
     return true;
   }
-  if (opts.hasOpenSession && isFlightTripFollowUp(t, true)) return true;
+  if (stickyOpen && isFlightTripFollowUp(t, true)) return true;
   return Boolean(
-    opts.hasOpenSession && opts.pendingAsk && isShortReplyToLastAsk(t),
+    stickyOpen && (opts.pendingAsk || hasStickyFlightRoot()) && isShortReplyToLastAsk(t),
   );
 }

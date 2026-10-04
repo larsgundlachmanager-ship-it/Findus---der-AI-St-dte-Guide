@@ -1,6 +1,6 @@
 /**
  * Modul-1 Wegweiser: Route + ETA vorbereiten, Navigation erst nach Tap.
- * Kein Auto-Start — Karte zeigt blaues Ziel + Walk-Linie (gestrichelt).
+ * Kein Auto-Start — Karte zeigt gelbes Ziel + gestrichelte Walk-Linie.
  */
 
 import { haversineMeters } from '../../db/database';
@@ -28,11 +28,8 @@ function buildPreviewPayload(opts: {
   lng: number;
   route: Array<{ lat: number; lng: number }>;
 }): NavRouteMapPayload {
-  // Wegweiser: echte Walk-Polyline wenn ≥3 Punkte, sonst nur Pin (keine Luftlinie).
-  const street =
-    opts.route.length >= 3
-      ? opts.route
-      : [];
+  // Wegweiser: Polyline ab 2 Punkten; immer preview=true → gelbe gestrichelte Linie.
+  const street = opts.route.length >= 2 ? opts.route : [];
   return {
     current: street,
     ahead: [],
@@ -48,7 +45,7 @@ function buildPreviewPayload(opts: {
     arrows: [],
     fitWide: false,
     previewPin: { lat: opts.lat, lng: opts.lng },
-    preview: street.length < 3,
+    preview: true,
   };
 }
 
@@ -160,7 +157,7 @@ export async function refreshWegweiserApproachCard(): Promise<void> {
     speechText: '',
     visualBullets: [
       formatWegweiserDistHint(offer.etaMin, offer.name),
-      'Ziel blau auf der Karte — ein Tap startet die Route',
+      'Ziel gelb auf der Karte — ein Tap startet die Route',
     ].slice(0, 2),
     quickActions: [
       {

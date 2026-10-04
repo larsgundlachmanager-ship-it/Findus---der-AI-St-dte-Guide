@@ -9,12 +9,20 @@ const TIPPEN_LINE =
 const TIPPEN_SUFFIX =
   /\s*[·|]\s*(?:😊\s*)?Tippen(?:\s*(?:für|→|=|zum).*)?$/iu;
 
+const INTERNAL_NOTE_SUFFIX =
+  /\s*[—–-]\s*Zeit trotzdem merken\s*$/iu;
+
 /** Entfernt dauerhafte Tippen-/Coach-Suffixe aus HUD-Meta. */
 export function stripHudCoachMeta(meta?: string | null): string | undefined {
   if (!meta) return undefined;
   const cleaned = meta
     .split(/\n/)
-    .map((line) => line.replace(TIPPEN_SUFFIX, '').trim())
+    .map((line) =>
+      line
+        .replace(TIPPEN_SUFFIX, '')
+        .replace(INTERNAL_NOTE_SUFFIX, '')
+        .trim(),
+    )
     .filter((line) => line.length > 0 && !TIPPEN_LINE.test(line))
     .join('\n')
     .trim();

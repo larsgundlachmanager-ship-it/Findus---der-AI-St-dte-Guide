@@ -121,6 +121,8 @@ import {
   HOME_DOCK_BAR_H,
   HOME_MIC_DOCK_GAP,
   HOME_MIC_HINT_RESERVE,
+  homeMicClearancePx,
+  homeMapBottomChromePx,
 } from '../components/liveStage';
 import { PathChoiceStep } from './PathChoiceStep';
 import { ExpressSetupStep } from './ExpressSetupStep';
@@ -409,12 +411,12 @@ export function OnboardingNavigator({
       language: 'de' as const,
       voiceId: draft.voiceId || defaultVoiceForLanguage('de'),
       speechRate: 1 as const,
-      // Standard: nichts vorauswählen. Express: Rolle+Preset später wählen.
+      // Standard: Classic-Guide + Sebastian. Express: Rolle+Preset später wählen.
       ...(nextMode === 'standard'
         ? {
-            coreRole: null,
-            vibeTone: null,
-            knowledgeStyle: null,
+            coreRole: 'classic_guide' as const,
+            vibeTone: 'balanced' as const,
+            knowledgeStyle: 'clear_essence' as const,
             spleens: [] as SpleenId[],
           }
         : {}),
@@ -493,15 +495,16 @@ export function OnboardingNavigator({
                 .then(() => {
                   setAuthUser(null);
                   setAuthStatus(null);
-                  patch({ accountMode: 'guest', email: '' });
+                  // Nicht still auf Gast umschalten — nur Session leeren.
+                  patch({ email: '' });
                 })
                 .finally(() => setAuthBusy(false));
             }}
             onGuest={() => goNext({ accountMode: 'guest' })}
-            onMagicLink={(email) => {
+            onMagicLink={async (email) => {
               setAuthBusy(true);
-              void sendMagicLink(email).then((r) => {
-                setAuthBusy(false);
+              try {
+                const r = await sendMagicLink(email);
                 setAuthStatus(
                   r.ok
                     ? 'Magic Link gesendet. Tippe den Link in der Mail — Yorro öffnet sich danach von selbst.'
@@ -510,7 +513,10 @@ export function OnboardingNavigator({
                 if (r.ok) {
                   patch({ email, accountMode: 'registered' });
                 }
-              });
+                return r;
+              } finally {
+                setAuthBusy(false);
+              }
             }}
             onGoogle={() => void openOAuth('google')}
             onApple={() => void openOAuth('apple')}
@@ -1925,7 +1931,7 @@ function SummaryIntroStep({
   }, [clearTourTimeline, draft, onFinished, showFinger]);
 
   const cityLabel = draft.cityName ?? draft.cityId ?? 'dein Ort';
-  const mapBottomChrome = HOME_DOCK_BAR_H + safePad.bottom;
+  const mapBottomChrome = homeMapBottomChromePx(safePad.bottom);
 
   return (
     <View ref={rootRef} style={styles.homeLikeInner} collapsable={false}>
@@ -1963,9 +1969,7 @@ function SummaryIntroStep({
             bottom:
               HOME_DOCK_BAR_H +
               safePad.bottom +
-              HOME_MIC_DOCK_GAP +
-              HOME_MIC_HINT_RESERVE +
-              88,
+              homeMicClearancePx(1),
           },
         ]}
         pointerEvents="none"

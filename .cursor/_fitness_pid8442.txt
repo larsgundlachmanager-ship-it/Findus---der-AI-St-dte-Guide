@@ -1,0 +1,101 @@
+﻿--------- beginning of system
+09-14 10:07:32.486  8442  8442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 10:56:27.355  8442  8442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 11:02:38.310  8442  8442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 11:05:00.886  8442  8442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 11:08:10.388  8442  8442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+--------- beginning of main
+09-14 11:08:47.611  8442  8544 D Vibrator: [NOS_VIBRATE] checkDoAACVibrationInstead: begin
+09-14 11:08:47.611  8442  8544 D Vibrator: Don't need instead, ignore
+09-14 11:08:47.859  8442 25282 D AudioTrack: flush(5029): prior state:STATE_STOPPED
+09-14 11:08:47.861  8442 25282 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 11:08:47.861  8442 25282 D AudioTrack: stop(5029): prior state:STATE_FLUSHED
+09-14 11:08:47.861  8442 25282 D AudioTrack: stop(5029): prior state:STATE_FLUSHED
+09-14 11:08:47.861  8442 25282 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:08:47.861  8442 25282 D AudioTrack: ~AudioTrack(5029), releasing session id 27321 from 8442 on behalf of 8442
+09-14 11:08:47.870  8442 25243 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 27321, transferType 3, uid 10538, pid 8442
+09-14 11:08:47.875  8442 25243 E AudioTrack: createTrack_l(5030) on outputId 29 : 0xb400007a4587a930, mCblk = 0x78e90fa000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 11:08:48.160  8442  8442 I ExoPlayerImpl: Release ae43028 [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36] [goog.exo.core, goog.exo.exoplayer, goog.exo.decoder, goog.exo.okhttp, goog.exo.datasource, goog.exo.extractor]
+09-14 11:08:48.162  8442 25288 D AudioTrack: flush(5030): prior state:STATE_STOPPED
+09-14 11:08:48.162  8442 25288 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 11:08:48.164  8442 25288 D AudioTrack: stop(5030): prior state:STATE_FLUSHED
+09-14 11:08:48.164  8442 25288 D AudioTrack: stop(5030): prior state:STATE_FLUSHED
+09-14 11:08:48.165  8442 25288 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:08:48.165  8442 25288 D AudioTrack: ~AudioTrack(5030), releasing session id 27321 from 8442 on behalf of 8442
+09-14 11:08:48.480  8442  8442 E unknown:SurfaceMountingManager: removeViewAt: [3790] -> [3794] @0: view already removed from parent! Children in parent: 0
+09-14 11:08:48.480  8442  8442 E unknown:SurfaceMountingManager: removeViewAt: [3770] -> [3774] @0: view already removed from parent! Children in parent: 0
+09-14 11:08:48.480  8442  8442 E unknown:SurfaceMountingManager: removeViewAt: [3754] -> [3758] @0: view already removed from parent! Children in parent: 0
+09-14 11:08:48.484  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 11:08:48.534  8442  8544 D Vibrator: [NOS_VIBRATE] checkDoAACVibrationInstead: begin
+09-14 11:08:48.534  8442  8544 D Vibrator: Don't need instead, ignore
+09-14 11:08:53.094  8442  8442 D SCViewSupport: screenshot.scroll_capture_delay = 60
+09-14 11:08:53.095  8442  8442 D ViewRootImpl: ScrollCaptureSearchResponse: android.view.ScrollCaptureResponse$Builder@10b6cc2
+09-14 11:08:55.908  8442  8442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 11:08:55.915  8442  8442 D InsetsController: hide(ime(), fromIme=false)
+09-14 11:08:55.916  8442  8442 I ImeTracker: de.findus.app:42f5e6d3: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-14 11:08:58.745  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 11:09:07.171  8442  8442 I ExoPlayerImpl: Init b865f59 [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36]
+09-14 11:09:07.174  8442  8442 I NtAudioManager: getStreamVolume streamType :3, pkg :de.findus.app, index :7
+09-14 11:09:07.179  8442 25397 W WavHeaderReader: Ignoring unknown WAV chunk: 1279873876
+09-14 11:09:07.179  8442 25397 W WavExtractor: Data exceeds input length: 4294967373, 190590
+09-14 11:09:07.190  8442 25396 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 27337, transferType 3, uid 10538, pid 8442
+09-14 11:09:07.194  8442 25396 E AudioTrack: createTrack_l(5032) on outputId 29 : 0xb400007a4576b650, mCblk = 0x78e94cb000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 11:09:07.213  8442  8466 W System  : A resource failed to call close. 
+09-14 11:09:07.214  8442  8466 W System  : A resource failed to call close. 
+09-14 11:09:07.459  8442  8442 W AudioManager: Use of stream types is deprecated for operations other than volume control
+09-14 11:09:07.459  8442  8442 W AudioManager: See the documentation of requestAudioFocus() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+09-14 11:09:07.462  8442 25396 D AudioTrack: start(5032): prior state:STATE_STOPPED
+09-14 11:09:07.628  8442 25401 D AudioTrack: updateStateToService: AudioTrackStatus state:0
+09-14 11:09:09.325  8442 25396 D AudioTrack: stop(5032): prior state:STATE_ACTIVE
+09-14 11:09:09.325  8442 25396 D AudioTrack: stop(5032): called with 95256 frames delivered
+09-14 11:09:09.327  8442 25396 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:09:10.407  8442 25406 D AudioTrack: flush(5032): prior state:STATE_STOPPED
+09-14 11:09:10.408  8442 25406 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 11:09:10.408  8442 25406 D AudioTrack: stop(5032): prior state:STATE_FLUSHED
+09-14 11:09:10.408  8442 25406 D AudioTrack: stop(5032): prior state:STATE_FLUSHED
+09-14 11:09:10.409  8442 25406 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:09:10.409  8442 25406 D AudioTrack: ~AudioTrack(5032), releasing session id 27337 from 8442 on behalf of 8442
+09-14 11:09:10.415  8442 25396 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 27337, transferType 3, uid 10538, pid 8442
+09-14 11:09:10.419  8442 25396 E AudioTrack: createTrack_l(5033) on outputId 29 : 0xb400007a458c7d30, mCblk = 0x78f9b42000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 11:09:10.546  8442  8442 I ExoPlayerImpl: Release b865f59 [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36] [goog.exo.core, goog.exo.exoplayer, goog.exo.decoder, goog.exo.okhttp, goog.exo.datasource, goog.exo.extractor]
+09-14 11:09:10.547  8442 25408 D AudioTrack: flush(5033): prior state:STATE_STOPPED
+09-14 11:09:10.547  8442 25408 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 11:09:10.548  8442 25408 D AudioTrack: stop(5033): prior state:STATE_FLUSHED
+09-14 11:09:10.548  8442 25408 D AudioTrack: stop(5033): prior state:STATE_FLUSHED
+09-14 11:09:10.548  8442 25408 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:09:10.549  8442 25408 D AudioTrack: ~AudioTrack(5033), releasing session id 27337 from 8442 on behalf of 8442
+09-14 11:09:10.756  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 11:09:10.948  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 11:09:10.990  8442  8442 I ExoPlayerImpl: Init db94ada [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36]
+09-14 11:09:10.992  8442  8442 I NtAudioManager: getStreamVolume streamType :3, pkg :de.findus.app, index :7
+09-14 11:09:10.995  8442 25410 W WavHeaderReader: Ignoring unknown WAV chunk: 1279873876
+09-14 11:09:10.995  8442 25410 W WavExtractor: Data exceeds input length: 4294967373, 190590
+09-14 11:09:11.007  8442 25409 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 27345, transferType 3, uid 10538, pid 8442
+09-14 11:09:11.015  8442 25409 E AudioTrack: createTrack_l(5034) on outputId 29 : 0xb400007a45883060, mCblk = 0x78f9ede000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 11:09:11.123  8442  8442 W AudioManager: Use of stream types is deprecated for operations other than volume control
+09-14 11:09:11.123  8442  8442 W AudioManager: See the documentation of requestAudioFocus() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+09-14 11:09:11.127  8442 25409 D AudioTrack: start(5034): prior state:STATE_STOPPED
+09-14 11:09:11.151  8442 25413 D AudioTrack: updateStateToService: AudioTrackStatus state:0
+09-14 11:09:11.157  8442 25409 D AudioTrack: getTimestamp_l(5034): device stall time corrected using current time 242628733066453
+09-14 11:09:12.970  8442 25409 D AudioTrack: stop(5034): prior state:STATE_ACTIVE
+09-14 11:09:12.970  8442 25409 D AudioTrack: stop(5034): called with 95256 frames delivered
+09-14 11:09:12.971  8442 25409 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:09:13.231  8442  8464 I de.findus.app: Background young concurrent mark compact GC freed 61MB AllocSpace bytes, 0(0B) LOS objects, 65% free, 32MB/94MB, paused 845us,6.383ms total 30.904ms
+09-14 11:09:13.374  8442 25419 D AudioTrack: flush(5034): prior state:STATE_STOPPED
+09-14 11:09:13.374  8442 25419 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 11:09:13.375  8442 25419 D AudioTrack: stop(5034): prior state:STATE_FLUSHED
+09-14 11:09:13.375  8442 25419 D AudioTrack: stop(5034): prior state:STATE_FLUSHED
+09-14 11:09:13.375  8442 25419 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:09:13.375  8442 25419 D AudioTrack: ~AudioTrack(5034), releasing session id 27345 from 8442 on behalf of 8442
+09-14 11:09:13.384  8442 25409 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 27345, transferType 3, uid 10538, pid 8442
+09-14 11:09:13.389  8442 25409 E AudioTrack: createTrack_l(5035) on outputId 29 : 0xb400007a45892b70, mCblk = 0x78f9ede000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 11:09:13.465  8442  8442 I ExoPlayerImpl: Release db94ada [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36] [goog.exo.core, goog.exo.exoplayer, goog.exo.decoder, goog.exo.okhttp, goog.exo.datasource, goog.exo.extractor]
+09-14 11:09:13.466  8442 25421 D AudioTrack: flush(5035): prior state:STATE_STOPPED
+09-14 11:09:13.467  8442 25421 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 11:09:13.467  8442 25421 D AudioTrack: stop(5035): prior state:STATE_FLUSHED
+09-14 11:09:13.467  8442 25421 D AudioTrack: stop(5035): prior state:STATE_FLUSHED
+09-14 11:09:13.467  8442 25421 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 11:09:13.467  8442 25421 D AudioTrack: ~AudioTrack(5035), releasing session id 27345 from 8442 on behalf of 8442
+09-14 11:09:13.538  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 11:09:25.272  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 11:09:25.301  8442  8544 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app

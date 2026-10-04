@@ -1,0 +1,376 @@
+{
+  "startedAt": "2026-09-09T21:18:04.709Z",
+  "done": {
+    "tornesch": {
+      "ok": true,
+      "at": "2026-09-09T21:31:09.748Z",
+      "ms": 785035,
+      "version": 64,
+      "restaurants": 51,
+      "cafes": 20,
+      "museums": 8,
+      "total": 437
+    },
+    "hamburg": {
+      "ok": true,
+      "at": "2026-09-09T21:55:45.620Z",
+      "ms": 1475865,
+      "version": 83,
+      "restaurants": 204,
+      "cafes": 70,
+      "museums": 73,
+      "total": 1015
+    },
+    "chorin": {
+      "ok": true,
+      "at": "2026-09-09T21:57:56.312Z",
+      "ms": 91563,
+      "version": 43,
+      "restaurants": 12,
+      "cafes": 3,
+      "museums": 3,
+      "total": 122
+    },
+    "rheinsberg": {
+      "ok": true,
+      "at": "2026-09-09T22:05:19.633Z",
+      "ms": 443319,
+      "version": 44,
+      "restaurants": 20,
+      "cafes": 8,
+      "museums": 8,
+      "total": 204
+    },
+    "prisdorf": {
+      "ok": true,
+      "at": "2026-09-09T22:11:34.305Z",
+      "ms": 374670,
+      "version": 99,
+      "restaurants": 81,
+      "cafes": 28,
+      "museums": 7,
+      "total": 353
+    },
+    "wangerooge": {
+      "ok": true,
+      "at": "2026-09-09T22:12:34.778Z",
+      "ms": 60471,
+      "version": 78,
+      "restaurants": 20,
+      "cafes": 10,
+      "museums": 4,
+      "total": 177
+    },
+    "bad_saarow": {
+      "ok": true,
+      "at": "2026-09-09T22:17:44.507Z",
+      "ms": 309726,
+      "version": 56,
+      "restaurants": 63,
+      "cafes": 13,
+      "museums": 9,
+      "total": 357
+    },
+    "finsterwalde": {
+      "ok": true,
+      "at": "2026-09-09T22:20:28.266Z",
+      "ms": 163757,
+      "version": 35,
+      "restaurants": 22,
+      "cafes": 8,
+      "museums": 3,
+      "total": 262
+    },
+    "wandlitz": {
+      "ok": true,
+      "at": "2026-09-09T22:27:03.253Z",
+      "ms": 394986,
+      "version": 45,
+      "restaurants": 46,
+      "cafes": 14,
+      "museums": 3,
+      "total": 309
+    },
+    "beelitz": {
+      "ok": true,
+      "at": "2026-09-09T22:31:20.533Z",
+      "ms": 257278,
+      "version": 44,
+      "restaurants": 46,
+      "cafes": 17,
+      "museums": 7,
+      "total": 341
+    },
+    "spreewald": {
+      "ok": true,
+      "at": "2026-09-09T22:35:55.052Z",
+      "ms": 274517,
+      "version": 46,
+      "restaurants": 55,
+      "cafes": 17,
+      "museums": 8,
+      "total": 353
+    },
+    "hechingen": {
+      "ok": true,
+      "at": "2026-09-09T22:43:29.329Z",
+      "ms": 454275,
+      "version": 56,
+      "restaurants": 80,
+      "cafes": 31,
+      "museums": 17,
+      "total": 460
+    },
+    "laboe": {
+      "ok": true,
+      "at": "2026-09-10T07:42:04.584Z",
+      "ms": 32315253,
+      "version": 60,
+      "restaurants": 78,
+      "cafes": 39,
+      "museums": 20,
+      "total": 510
+    },
+    "korbach": {
+      "ok": true,
+      "at": "2026-09-10T07:48:12.677Z",
+      "ms": 368082,
+      "version": 47,
+      "restaurants": 87,
+      "cafes": 26,
+      "museums": 15,
+      "total": 525
+    },
+    "tettnang": {
+      "ok": true,
+      "at": "2026-09-10T07:55:48.450Z",
+      "ms": 455770,
+      "version": 52,
+      "restaurants": 75,
+      "cafes": 40,
+      "museums": 12,
+      "total": 577
+    },
+    "oranienburg": {
+      "ok": true,
+      "at": "2026-09-10T08:03:34.834Z",
+      "ms": 466379,
+      "version": 43,
+      "restaurants": 97,
+      "cafes": 50,
+      "museums": 19,
+      "total": 607
+    },
+    "lissabon": {
+      "ok": true,
+      "at": "2026-09-10T08:16:54.954Z",
+      "ms": 800115,
+      "version": 71,
+      "restaurants": 121,
+      "cafes": 90,
+      "museums": 70,
+      "total": 856
+    },
+    "werder": {
+      "ok": true,
+      "at": "2026-09-10T08:28:31.925Z",
+      "ms": 696967,
+      "version": 47,
+      "restaurants": 96,
+      "cafes": 52,
+      "museums": 51,
+      "total": 747
+    },
+    "bremen": {
+      "ok": true,
+      "at": "2026-09-10T08:45:58.187Z",
+      "ms": 1046259,
+      "version": 29,
+      "restaurants": 151,
+      "cafes": 70,
+      "museums": 54,
+      "total": 812
+    },
+    "pinneberg": {
+      "ok": true,
+      "at": "2026-09-10T08:55:47.958Z",
+      "ms": 589766,
+      "version": 78,
+      "restaurants": 99,
+      "cafes": 47,
+      "museums": 12,
+      "total": 684
+    },
+    "kiel": {
+      "ok": true,
+      "at": "2026-09-10T09:06:39.943Z",
+      "ms": 651982,
+      "version": 31,
+      "restaurants": 82,
+      "cafes": 50,
+      "museums": 35,
+      "total": 667
+    },
+    "dresden": {
+      "ok": true,
+      "at": "2026-09-10T09:20:55.775Z",
+      "ms": 855707,
+      "version": 44,
+      "restaurants": 164,
+      "cafes": 75,
+      "museums": 66,
+      "total": 899
+    },
+    "koeln": {
+      "ok": true,
+      "at": "2026-09-10T09:39:46.771Z",
+      "ms": 1130990,
+      "version": 41,
+      "restaurants": 192,
+      "cafes": 70,
+      "museums": 72,
+      "total": 1008
+    },
+    "hochheim_am_main": {
+      "ok": true,
+      "at": "2026-09-10T10:01:23.490Z",
+      "ms": 1296714,
+      "version": 39,
+      "restaurants": 132,
+      "cafes": 50,
+      "museums": 49,
+      "total": 945
+    },
+    "brandenburg_havel": {
+      "ok": true,
+      "at": "2026-09-10T10:11:18.689Z",
+      "ms": 595191,
+      "version": 48,
+      "restaurants": 87,
+      "cafes": 32,
+      "museums": 19,
+      "total": 692
+    },
+    "london": {
+      "ok": true,
+      "at": "2026-09-10T10:34:13.331Z",
+      "ms": 1374637,
+      "version": 71,
+      "restaurants": 218,
+      "cafes": 88,
+      "museums": 115,
+      "total": 1167
+    },
+    "amsterdam": {
+      "ok": true,
+      "at": "2026-09-10T10:47:12.192Z",
+      "ms": 778859,
+      "version": 42,
+      "restaurants": 128,
+      "cafes": 67,
+      "museums": 90,
+      "total": 920
+    },
+    "flensburg": {
+      "ok": true,
+      "at": "2026-09-10T10:54:13.859Z",
+      "ms": 421658,
+      "version": 57,
+      "restaurants": 47,
+      "cafes": 24,
+      "museums": 24,
+      "total": 767
+    },
+    "halle_saale": {
+      "ok": true,
+      "at": "2026-09-10T11:03:53.542Z",
+      "ms": 579678,
+      "version": 32,
+      "restaurants": 112,
+      "cafes": 46,
+      "museums": 44,
+      "total": 1007
+    },
+    "potsdam": {
+      "ok": true,
+      "at": "2026-09-10T11:17:36.857Z",
+      "ms": 823311,
+      "version": 39,
+      "restaurants": 92,
+      "cafes": 47,
+      "museums": 54,
+      "total": 1141
+    },
+    "luebeck": {
+      "ok": true,
+      "at": "2026-09-10T11:24:53.971Z",
+      "ms": 437107,
+      "version": 63,
+      "restaurants": 67,
+      "cafes": 31,
+      "museums": 25,
+      "total": 1085
+    },
+    "stuttgart": {
+      "ok": true,
+      "at": "2026-09-10T11:43:37.585Z",
+      "ms": 1123609,
+      "version": 42,
+      "restaurants": 156,
+      "cafes": 60,
+      "museums": 74,
+      "total": 1504
+    },
+    "duesseldorf": {
+      "ok": true,
+      "at": "2026-09-10T12:00:20.660Z",
+      "ms": 780940,
+      "version": 44,
+      "restaurants": 134,
+      "cafes": 53,
+      "museums": 56,
+      "total": 1648
+    },
+    "frankfurt_am_main": {
+      "ok": true,
+      "at": "2026-09-10T20:17:42.606Z",
+      "ms": 29841944,
+      "version": 37,
+      "restaurants": 162,
+      "cafes": 56,
+      "museums": 62,
+      "total": 1720
+    },
+    "muenchen": {
+      "ok": true,
+      "at": "2026-09-10T20:35:53.251Z",
+      "ms": 1090644,
+      "version": 35,
+      "restaurants": 188,
+      "cafes": 63,
+      "museums": 61,
+      "total": 1905
+    },
+    "berlin-umland": {
+      "ok": true,
+      "at": "2026-09-10T21:05:32.633Z",
+      "ms": 1779378,
+      "version": 44,
+      "restaurants": 151,
+      "cafes": 62,
+      "museums": 78,
+      "total": 10697
+    },
+    "berlin-zentral": {
+      "ok": true,
+      "at": "2026-09-10T21:50:00.533Z",
+      "ms": 2651750,
+      "version": 30,
+      "restaurants": 175,
+      "cafes": 86,
+      "museums": 106,
+      "total": 1039
+    }
+  },
+  "failed": {}
+}

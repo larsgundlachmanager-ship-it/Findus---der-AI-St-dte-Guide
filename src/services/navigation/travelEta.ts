@@ -305,6 +305,20 @@ const ROUTED_ETA_CACHE = new Map<string, { atMs: number; eta: TravelEta }>();
 const ROUTED_ETA_TTL_MS = 12 * 60_000;
 const ROUTED_ETA_CACHE_MAX = 80;
 
+function putRoutedEta(key: string, eta: TravelEta): void {
+  if (ROUTED_ETA_CACHE.has(key)) ROUTED_ETA_CACHE.delete(key);
+  while (ROUTED_ETA_CACHE.size >= ROUTED_ETA_CACHE_MAX) {
+    const oldest = ROUTED_ETA_CACHE.keys().next().value;
+    if (oldest == null) break;
+    ROUTED_ETA_CACHE.delete(oldest);
+  }
+  ROUTED_ETA_CACHE.set(key, { atMs: Date.now(), eta });
+}
+
+export function clearRoutedEtaCache(): void {
+  ROUTED_ETA_CACHE.clear();
+}
+
 function routedEtaCacheKey(opts: {
   userLat: number;
   userLng: number;
@@ -380,11 +394,7 @@ export async function estimateTravelEtaRouted(opts: {
           obstacleHint,
           providerDurationSec: result.durationSec ?? null,
         });
-        if (ROUTED_ETA_CACHE.size >= ROUTED_ETA_CACHE_MAX) {
-          const oldest = ROUTED_ETA_CACHE.keys().next().value;
-          if (oldest) ROUTED_ETA_CACHE.delete(oldest);
-        }
-        ROUTED_ETA_CACHE.set(key, { atMs: Date.now(), eta });
+        putRoutedEta(key, eta);
         return eta;
       }
     }
@@ -401,7 +411,7 @@ export async function estimateTravelEtaRouted(opts: {
       `ROUTE NOCH NICHT GELADEN — keine Minuten/km aus Luftlinie vorlesen. ` +
       (eta.promptHint ?? ''),
   };
-  ROUTED_ETA_CACHE.set(key, { atMs: Date.now(), eta });
+  putRoutedEta(key, eta);
   return eta;
 }
 

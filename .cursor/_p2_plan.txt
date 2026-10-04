@@ -1,0 +1,14 @@
+## P2 — Akt 3 Theater-UI
+
+**Problem:** Gelbes „Unterkünfte“ oben; Palette während Suche; Text auf dem Kopf.
+
+**Änderung:**
+1. Während Recherche: **nur Checkliste** — keine Kategorie-Hero-Gelb, keine Vergleichs-Palette bis Schritt „Vergleich“.
+2. Live-Fokus: immer zeigen **welcher Check-Schritt** gerade läuft + kurzer Statussatz.
+3. CompareOrbit: Text gegenrotieren (siehe P0).
+4. Speech Akt 3: **eine** Pitch-Zusammenfassung (Preis + 2–3 Highlights + Warum zum Trip) — `buildSpeechSummary800` umbauen, kein Brief-Jargon.
+
+**Dateien:** `ResearchTheater.tsx`, `theaterScene.ts`, `stepEngine.ts` / Progress-UI, `storyMagazine.ts`
+
+---
+

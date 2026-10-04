@@ -54,7 +54,9 @@ function ringOf(p: ExclusiveMapPlace): Array<[number, number]> | null {
 }
 
 export function isBuildingFillPlace(p: ExclusiveMapPlace): boolean {
-  // Echter Umriss = Fläche — auch wenn Host amenityDot falsch gesetzt hat.
+  // Punkt-Amenities / ÖPNV-Icons nie als Fläche behandeln — sonst Icon weg.
+  if (p.amenityDot || p.keepDot || p.pointOnly) return false;
+  if (p.icon === 'rail' || p.icon === 'bus' || p.icon === 'ferry') return false;
   return ringOf(p) != null;
 }
 
@@ -97,6 +99,33 @@ function buildingsOverlap(a: ExclusiveMapPlace, b: ExclusiveMapPlace): boolean {
 
 function mergePair<T extends ExclusiveMapPlace>(keep: T, drop: T): T {
   const color = winningStatusColor(keep.color, drop.color);
+  const keepTransit =
+    keep.icon === 'rail' || keep.icon === 'bus' || keep.icon === 'ferry';
+  const dropTransit =
+    drop.icon === 'rail' || drop.icon === 'bus' || drop.icon === 'ferry';
+  // ÖPNV-Icon schlägt Fill — nie Bahn-Icon für Praxis-Fläche opfern.
+  if (keepTransit && !dropTransit) {
+    return {
+      ...keep,
+      color,
+      keepDot: true,
+      pointOnly: true,
+      amenityDot: true,
+      ring: null,
+      icon: keep.icon,
+    };
+  }
+  if (dropTransit && !keepTransit) {
+    return {
+      ...drop,
+      color,
+      keepDot: true,
+      pointOnly: true,
+      amenityDot: true,
+      ring: null,
+      icon: drop.icon,
+    };
+  }
   const keepIsFill = isBuildingFillPlace(keep);
   const dropIsFill = isBuildingFillPlace(drop);
   if (keepIsFill) {

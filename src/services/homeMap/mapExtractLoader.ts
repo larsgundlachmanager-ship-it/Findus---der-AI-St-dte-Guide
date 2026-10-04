@@ -12,6 +12,7 @@ import {
 import { useMapExtractStore } from '../../store/useMapExtractStore';
 import {
   buildAndPersistDisplaySnap,
+  deleteCityMapExtractFile,
   ensureCityMapExtract,
   hydrateDisplayExtract,
   peekCityMapExtract,
@@ -19,10 +20,19 @@ import {
   prepareExtractForDisplayAsync,
   rememberDisplayExtract,
   prefetchCityMapExtract,
+  mergeCityMapExtracts,
   type CityMapExtract,
 } from './cityMapExtract';
+import { isMapExtractRoadsSane } from './mapExtractSanity';
+import {
+  shouldSkipSameCityReclip,
+  isMapExtractFrozen,
+  peekMapLoadPhases,
+} from './mapLoadPhases';
+import { isMapUserGesturing } from './mapGestureLane';
 
-const RECLIP_M = 1_400;
+/** Weniger Reclips = weniger ShapeSource-Stürme (Kamera-Snap nach pickRoads). */
+const RECLIP_M = 2_200;
 /** Vorheriges Extract behalten, solange Viewport noch nahe am Clip-Zentrum (~10 km Umland + Puffer). */
 const KEEP_EXTRACT_M = 14_000;
 /** Außerhalb der Admin-Fläche: trotzdem Extract der nächsten lokalen Stadt (10 km Umland). */
@@ -194,12 +204,80 @@ export async function loadExtractForViewport(
     urgent?: boolean;
   },
 ): Promise<CityMapExtract | null> {
-  const localIds = await ensureLocalMapIndex();
-  let id = (opts?.cityId || '').toLowerCase();
-  if (!id || !localIds.has(id)) {
-    id = resolveViewportCityId(lat, lng, localIds) || '';
+  const preferId = (opts?.cityId || '').toLowerCase();
+  // Mic / Modul-2: Extract-Nachladen pausieren — Chrome/Mic zuerst.
+  // Urgent Stadtwechsel darf trotzdem, sonst leere Karte nach Switch.
+  if (!opts?.urgent && opts?.force !== true) {
+    try {
+      const { isVoiceLaneBusy } = require('../boot/interactiveBootGate') as {
+        isVoiceLaneBusy: () => boolean;
+      };
+      if (isVoiceLaneBusy()) {
+        const stBusy = useMapExtractStore.getState();
+        return stBusy.extract;
+      }
+    } catch {
+      /* soft */
+    }
   }
+  // Freeze: dieselbe Stadt nie nachladen — auch force/urgent (nur R3 während 3-Release).
+  {
+    const st0 = useMapExtractStore.getState();
+    const wantId = preferId || (st0.cityId || '').toLowerCase();
+    const phases = peekMapLoadPhases();
+    const inSwitchRun =
+      phases.paintRelease > 0 && phases.paintRelease < 3;
+    const switchingCity =
+      !!preferId &&
+      !!(st0.cityId || '').toLowerCase() &&
+      preferId !== (st0.cityId || '').toLowerCase();
+    if (
+      wantId &&
+      isMapExtractFrozen(wantId) &&
+      !inSwitchRun &&
+      !switchingCity
+    ) {
+      return st0.extract;
+    }
+  }
+
+  if (isMapUserGesturing() && !opts?.urgent && opts?.force !== true) {
+    const stG = useMapExtractStore.getState();
+    if (stG.extract) return stG.extract;
+  }
+
+  const localIds = await ensureLocalMapIndex();
+  let id = preferId;
+  const explicit = !!id;
   if (!id || !localIds.has(id)) {
+    if (explicit && id) {
+      // Expliziter Stadtwechsel: Map ggf. erst jetzt laden — Index invalidieren.
+      try {
+        await prefetchCityMapExtract(id);
+      } catch {
+        /* soft */
+      }
+      invalidateLocalMapIndex();
+      const refreshed = await ensureLocalMapIndex();
+      if (!refreshed.has(id)) {
+        refreshed.add(id); // Pack kann schon da sein; Extract holt Map on-demand.
+        localMapIds = refreshed;
+      }
+    } else {
+      id = resolveViewportCityId(lat, lng, localIds) || '';
+    }
+  }
+  // Near/Partial/Final: kein Pan-Reclip in derselben Stadt (Kamera-Snap).
+  if (
+    id &&
+    !opts?.force &&
+    !opts?.urgent &&
+    shouldSkipSameCityReclip(id)
+  ) {
+    const st = useMapExtractStore.getState();
+    if (st.cityId === id && st.extract) return st.extract;
+  }
+  if (!id || (!localMapIds.has(id) && !explicit)) {
     const prev = useMapExtractStore.getState();
     // Leicht nach Pinneberg panschen ≠ Prisdorf-Extract sofort killen.
     if (
@@ -209,14 +287,25 @@ export async function loadExtractForViewport(
     ) {
       return prev.extract;
     }
-    useMapExtractStore.getState().clear();
-    return null;
+    // Expliziter Switch: nie blank clearen bevor neues Extract da ist.
+    if (!explicit) {
+      useMapExtractStore.getState().clear();
+    }
+    return explicit ? useMapExtractStore.getState().extract : null;
   }
   if (isRegionPackCityId(id) && id === 'berlin-umland') {
     /* Phase 6a: nur Display-Snap / Clip */
   }
   const st = useMapExtractStore.getState();
   const cityChanged = st.cityId != null && st.cityId !== id;
+  const explicitSwitch =
+    !!preferId && (opts?.force === true || opts?.urgent === true);
+  const mergeBase =
+    st.extract &&
+    (cityChanged ||
+      (explicitSwitch && peekMapLoadPhases().paintRelease < 3))
+      ? st.extract
+      : null;
   const urgent = opts?.urgent === true || (opts?.force === true && cityChanged);
   if (
     !opts?.force &&
@@ -232,26 +321,37 @@ export async function loadExtractForViewport(
   // Sofort-Pfade: Display-Snap oder geparstes Pack in RAM — ohne Warten.
   const memSnap = peekDisplayExtract(id);
   if (memSnap?.extract) {
+    if (!isMapExtractRoadsSane(memSnap.extract)) {
+      await deleteCityMapExtractFile(id).catch(() => undefined);
+    } else {
     const drift = metersBetween({ lat: memSnap.lat, lng: memSnap.lng }, { lat, lng });
     if (drift < KEEP_EXTRACT_M) {
       useMapExtractStore.getState().setExtract(id, memSnap.extract, {
         lat: memSnap.lat,
         lng: memSnap.lng,
       });
-      if (!urgent && drift < RECLIP_M && st.cityId === id) {
-        return memSnap.extract;
+      // Cold-Start / urgent Boot: Snap sofort paint — kein Full-Parse.
+      // force / Stadtwechsel clippen weiter neu.
+      if (!opts?.force && !cityChanged) {
+        if (drift < RECLIP_M || urgent) {
+          return memSnap.extract;
+        }
       }
+    }
     }
   }
   const fullMem = peekCityMapExtract(id);
   if (fullMem && (urgent || cityChanged)) {
-    const clipped = await prepareExtractForDisplayAsync(
+    let clipped = await prepareExtractForDisplayAsync(
       fullMem,
       lat,
       lng,
       id,
       opts?.radiusM,
     );
+    if (mergeBase) {
+      clipped = mergeCityMapExtracts(mergeBase, clipped, id);
+    }
     useMapExtractStore.getState().setExtract(id, clipped, { lat, lng });
     void prefetchCityMapExtract(id);
   } else {
@@ -265,7 +365,10 @@ export async function loadExtractForViewport(
   if (!snap) snap = await hydrateDisplayExtract(id);
   // Fremd-Stadt-Snap nie; bei Stadtwechsel immer neu clippen am Viewport.
   if (snap?.extract && !opts?.force && !cityChanged && !urgent) {
-    if (metersBetween({ lat: snap.lat, lng: snap.lng }, { lat, lng }) < RECLIP_M) {
+    if (
+      isMapExtractRoadsSane(snap.extract) &&
+      metersBetween({ lat: snap.lat, lng: snap.lng }, { lat, lng }) < RECLIP_M
+    ) {
       if (gen !== loadGen) return null;
       useMapExtractStore.getState().setExtract(id, snap.extract, {
         lat: snap.lat,
@@ -299,8 +402,12 @@ export async function loadExtractForViewport(
       if (gen !== loadGen) {
         return null;
       }
-      useMapExtractStore.getState().setExtract(id, clipped, { lat, lng });
-      return clipped;
+      const painted =
+        mergeBase != null
+          ? mergeCityMapExtracts(mergeBase, clipped, id)
+          : clipped;
+      useMapExtractStore.getState().setExtract(id, painted, { lat, lng });
+      return painted;
     } catch {
       const prev = useMapExtractStore.getState();
       if (!prev.extract) useMapExtractStore.getState().clear();
@@ -328,6 +435,8 @@ export async function loadExtractForViewport(
 export function reclipExtractIfNeeded(lat: number, lng: number): void {
   const st = useMapExtractStore.getState();
   if (!st.extract || !st.cityId || !st.clipCenter) return;
+  if (isMapUserGesturing()) return;
+  if (isMapExtractFrozen(st.cityId) || shouldSkipSameCityReclip(st.cityId)) return;
   if (metersBetween(st.clipCenter, { lat, lng }) < RECLIP_M) return;
   const full = peekCityMapExtract(st.cityId);
   if (!full) return;

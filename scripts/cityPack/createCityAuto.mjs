@@ -29,16 +29,24 @@ import {
 } from './lib.mjs';
 import { runQualityGate } from './qualityGate.mjs';
 import { findPending, pendingBriefSection } from './pendingCovers.mjs';
+import {
+  citySizeHint,
+  packStoryBelowValueFloor,
+  suggestedMinStory,
+  suggestedTargetStory,
+} from './placeCategoryPolicy.mjs';
 
 loadEnvFile();
 
-function run(scriptRel, args, label) {
+function run(scriptRel, args, label, cityId = '') {
   const script = path.join(ROOT, 'scripts', 'cityPack', scriptRel);
   console.log(`\n[auto] ▶ ${label}`);
+  const env = { ...process.env };
+  if (cityId) env.FINDUS_PACK_CITY = cityId;
   const r = spawnSync(process.execPath, [script, ...args], {
     cwd: ROOT,
     stdio: 'inherit',
-    env: process.env,
+    env,
   });
   if (r.status !== 0) {
     throw new Error(`${label} failed (exit ${r.status})`);
@@ -177,6 +185,9 @@ ${
 ## Alle Stories
 ${stories.map((s, i) => `${i + 1}. ${s.name} (T${s.place_tier}) \`${s.id}\``).join('\n')}
 
+## Value-Floor
+- Größe: ${citySizeHint(pack)} · Floor ≥ ${suggestedMinStory(pack)} · Soft-Ziel ≈ ${suggestedTargetStory(pack)} · Ist: ${stories.length}${packStoryBelowValueFloor(pack) ? ' — **UNTER FLOOR**' : ''}
+
 ## Stats
 - Spots: ${pack.spots.length} · Story: ${stories.length} · Directory: ${pack.spots.length - stories.length}
 - Offline-QA: ${(pack._offline_qa || []).length}
@@ -185,7 +196,14 @@ ${pendingBriefSection(cityId)}
 `;
   const out = path.join(ROOT, 'data', 'staedte', `${cityId}.agent-brief.md`);
   fs.writeFileSync(out, md, 'utf8');
-  return { out, thinCount: thin.length, storyCount: stories.length };
+  return {
+    out,
+    thinCount: thin.length,
+    storyCount: stories.length,
+    valueFloor: suggestedMinStory(pack),
+    targetStory: suggestedTargetStory(pack),
+    belowFloor: packStoryBelowValueFloor(pack),
+  };
 }
 
 function main() {
@@ -195,30 +213,32 @@ function main() {
     process.exit(1);
   }
   const id = (arg('id') || slugify(city)).toLowerCase();
+  process.env.FINDUS_PACK_CITY = id;
   const doUpload = hasFlag('upload');
   const skipWiki = hasFlag('skip-wiki');
   const radius = arg('radius');
   const cheap = packCostIsCheap();
   console.log(`[auto] cost-mode=${cheap ? 'cheap' : 'full'} (FINDUS_PACK_COST / --cheap / --full)`);
+  console.log(`[auto] live-price city=${id} (FINDUS_PACK_CITY)`);
 
   const skeletonArgs = ['--city', city, '--id', id];
   if (radius) skeletonArgs.push('--radius', String(radius));
-  run('buildCitySkeleton.mjs', skeletonArgs, 'skeleton');
-  run('expandCityDirectory.mjs', ['--city', id], 'directory');
+  run('buildCitySkeleton.mjs', skeletonArgs, 'skeleton', id);
+  run('expandCityDirectory.mjs', ['--city', id], 'directory', id);
   const classifyArgs = ['--city', id];
   if (radius) classifyArgs.push('--radius', String(radius));
   if (cheap) classifyArgs.push('--skip-discover');
-  run('classifyPackCategories.mjs', classifyArgs, 'classify');
-  run('seedLiveHints.mjs', ['--city', id, '--apply'], 'live-hints');
+  run('classifyPackCategories.mjs', classifyArgs, 'classify', id);
+  run('seedLiveHints.mjs', ['--city', id, '--apply'], 'live-hints', id);
 
   if (!skipWiki) {
     try {
-      run('enrichFromWikipedia.mjs', ['--city', id, '--apply', '--limit', '40'], 'wikipedia');
+      run('enrichFromWikipedia.mjs', ['--city', id, '--apply', '--limit', '40'], 'wikipedia', id);
     } catch (e) {
       console.warn('[auto] wikipedia failed (non-fatal) — Agent Deep Research übernimmt Tiefe', e?.message || e);
     }
     try {
-      run('expandStoryWiki.mjs', ['--city', id], 'wiki-depth');
+      run('expandStoryWiki.mjs', ['--city', id], 'wiki-depth', id);
     } catch (e) {
       console.warn('[auto] wiki-depth failed (non-fatal)', e?.message || e);
     }
@@ -230,16 +250,29 @@ function main() {
   console.log(`[auto] polish demoted=${polish.demoted} promoted=${polish.promoted}`);
 
   try {
-    run('enrichReviewFacets.mjs', ['--city', id], 'review-facets');
+    run('enrichReviewFacets.mjs', ['--city', id], 'review-facets', id);
   } catch (e) {
     console.warn('[auto] review-facets failed (non-fatal)', e?.message || e);
+  }
+
+  try {
+    run('polishMapBullets.mjs', ['--city', id], 'map-bullets', id);
+  } catch (e) {
+    console.warn('[auto] polishMapBullets failed (non-fatal)', e?.message || e);
   }
 
   run(
     'gpsWegweiserLoop.mjs',
     ['--city', id],
-    'gps-wegweiser (story pins + visual approaches + OSM footprints)',
+    'gps-wegweiser (story pins + visual approaches + OSM footprints + map-perfect)',
+    id,
   );
+
+  try {
+    run('mapPerfectCity.mjs', ['--city', id, '--no-upload'], 'map-perfect', id);
+  } catch (e) {
+    console.warn('[auto] map-perfect failed (non-fatal)', e?.message || e);
+  }
 
   const pendingCover = findPending(id);
   const hasLocalCover = fs.existsSync(
@@ -255,6 +288,7 @@ function main() {
           'applyStylizedCityCover.mjs',
           ['--id', id, '--city', city, '--from', path.join(ROOT, pendingCover.stylized)],
           'cover-apply-pending',
+          id,
         );
       } catch (e) {
         console.warn('[auto] pending cover apply failed (non-fatal)', e?.message || e);
@@ -262,7 +296,7 @@ function main() {
     }
   } else if (!hasLocalCover) {
     try {
-      run('fetchCityCover.mjs', ['--id', id, '--title', city, '--force'], 'cover');
+      run('fetchCityCover.mjs', ['--id', id, '--title', city, '--force'], 'cover', id);
     } catch {
       console.warn('[auto] cover failed (non-fatal)');
     }
@@ -270,7 +304,7 @@ function main() {
     console.log(`[auto] local cover already present: city-${id}.png`);
   }
 
-  run('runQualityGate.mjs', ['--city', id], 'gate');
+  run('runQualityGate.mjs', ['--city', id], 'gate', id);
 
   const finalPack = loadPack(id);
   const brief = writeAgentBrief(finalPack, id);
@@ -286,15 +320,34 @@ function main() {
     const up = spawnSync(
       process.execPath,
       [path.join(ROOT, 'scripts', 'uploadCityPack.mjs'), path.join('data', 'staedte', `${id}.json`)],
-      { cwd: ROOT, stdio: 'inherit', env: process.env },
+      { cwd: ROOT, stdio: 'inherit', env: { ...process.env, FINDUS_PACK_CITY: id } },
     );
     if (up.status !== 0) throw new Error('upload failed');
   }
 
   const gate = runQualityGate(finalPack, { strict: false });
+  let cityUsd = 0;
+  try {
+    const ledger = JSON.parse(
+      fs.readFileSync(path.join(ROOT, 'data', 'staedte', '_google_spend_by_city.json'), 'utf8'),
+    );
+    cityUsd = Number(ledger?.cities?.[id]?.usd) || 0;
+  } catch {
+    /* soft */
+  }
+  const floorNote = brief.belowFloor
+    ? ` UNDER-FLOOR(min=${brief.valueFloor})`
+    : brief.storyCount < brief.targetStory
+      ? ` soft-target=${brief.targetStory}`
+      : '';
   console.log(
-    `\n[auto] DONE ${id} v${finalPack.data_version} story=${brief.storyCount} thin=${brief.thinCount} gate=${gate.ok ? 'ok' : 'FAIL'}`,
+    `\n[auto] DONE ${id} v${finalPack.data_version} story=${brief.storyCount} thin=${brief.thinCount} gate=${gate.ok ? 'ok' : 'FAIL'}${floorNote}`,
   );
+  if (cityUsd > 0) {
+    console.log(
+      `[auto] LIVE price city=${id} total ≈ $${cityUsd.toFixed(2)} (~€${(cityUsd * 0.92).toFixed(2)})`,
+    );
+  }
   console.log('[auto] Next: Agent vertieft T1 laut agent-brief.md → upload:city');
 }
 

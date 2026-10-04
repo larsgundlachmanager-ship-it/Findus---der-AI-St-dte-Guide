@@ -23,7 +23,24 @@ assert(
   'nightlife not sky',
 );
 
-assert(isQuickLookupQuery('Wie alt ist Mark Forster?'), 'mark quick');
+assert(isQuickLookupQuery('Wie viele Einwohner hat Paris?'), 'einwohner quick');
+assert(isQuickLookupQuery('Ist das der aktuelle Papst?'), 'papst followup quick');
+assert(
+  isQuickLookupQuery('Ist Papst Franziskus aktuell der aktuelle Papst?'),
+  'franziskus still pope quick',
+);
+assert(
+  isQuickLookupQuery('Es geht mir gerade darum, wer aktuell Papst ist'),
+  'wer aktuell papst quick',
+);
+assert(
+  isQuickLookupQuery('Wie alt ist die älteste aktuelle Person?'),
+  'aelteste person quick',
+);
+assert(
+  isQuickLookupQuery('Und wie alt ist die altälteste Person?'),
+  'altälteste person quick',
+);
 assert(isQuickLookupQuery('Alter, wie alt ist der Papst?'), 'slang trivia still quick');
 assert(isQuickLookupQuery('Was ist 3 + 3?'), 'arith quick');
 assert(

@@ -88,6 +88,9 @@ export const umweltAgent: Module2Agent = {
     let summary: string | null = null;
     let rainHint: string | null = null;
     let tomorrowSummary: string | null = null;
+    let day2Summary: string | null = null;
+    let windSpeedMs: number | null = null;
+    let windGustMs: number | null = null;
     let weatherCode: number | null = null;
     try {
       const snap = await ensureWeatherFresh(
@@ -98,6 +101,17 @@ export const umweltAgent: Module2Agent = {
       refreshRucksackWeather();
       summary = snap?.summaryLine ?? null;
       tomorrowSummary = snap?.tomorrowSummary?.trim() || null;
+      day2Summary =
+        (snap as { day2Summary?: string | null } | null)?.day2Summary?.trim() ||
+        null;
+      const windSnap = snap as {
+        windSpeedMs?: number | null;
+        windGustMs?: number | null;
+      } | null;
+      windSpeedMs =
+        typeof windSnap?.windSpeedMs === 'number' ? windSnap.windSpeedMs : null;
+      windGustMs =
+        typeof windSnap?.windGustMs === 'number' ? windSnap.windGustMs : null;
       weatherCode = snap?.weatherCode ?? null;
       const extracted = extractTempsFromWeatherText({
         summaryLine: snap?.summaryLine,
@@ -146,11 +160,28 @@ export const umweltAgent: Module2Agent = {
     const futureDay = /\b(morgen|übermorgen|uebermorgen)\b/iu.test(
       task.rewrittenText,
     );
+    const wantsOutfitEarly =
+      /\b(anzieh|outfit|kleidung|jacke|pulli|hose)\b/i.test(task.rewrittenText);
+    const rainFocusAsk =
+      /\b(regnet|regnen|regen|schauer|schirm)\b/iu.test(task.rewrittenText) &&
+      !/\bwettervorhersage\b/iu.test(task.rewrittenText);
+    const immediateAsk =
+      /\b(jetzt|gerade|im moment|momentan|aktuell)\b/iu.test(task.rewrittenText);
+    const generalForecast =
+      !wantsOutfitEarly &&
+      !rainFocusAsk &&
+      !immediateAsk &&
+      !futureDay &&
+      /\b(wetter|wettervorhersage|wie\s+(?:wird|ist)\s+(?:das\s+)?wetter|wochenende)\b/iu.test(
+        task.rewrittenText,
+      );
     const plan = planEveningHint();
     const windyWater =
       /\b(wind|wasser|förde|foerde|strand|elbe|meer|küste|kueste)\b/i.test(
         task.rewrittenText,
-      );
+      ) ||
+      (typeof windSpeedMs === 'number' && windSpeedMs >= 8) ||
+      (typeof windGustMs === 'number' && windGustMs >= 12);
 
     // „heute Nachmittag / um 17 Uhr anziehen“ → Zielstunde statt nur Jetzt
     const hourMatch = task.rewrittenText.match(
@@ -206,8 +237,7 @@ export const umweltAgent: Module2Agent = {
       clothingBits.push('kein reiner Sportlook bei Fine-Dining/Rooftop');
     }
 
-    const wantsOutfit =
-      /\b(anzieh|outfit|kleidung|jacke|pulli|hose)\b/i.test(task.rewrittenText);
+    const wantsOutfit = wantsOutfitEarly;
 
     const draft = [
       'FAKTEN Umwelt (nicht wörtlich vorlesen):',
@@ -217,6 +247,19 @@ export const umweltAgent: Module2Agent = {
         : summary
           ? `Wetter-Summary: ${summary}`
           : null,
+      generalForecast && tomorrowSummary
+        ? `Morgen (belegt): ${tomorrowSummary}`
+        : null,
+      generalForecast && day2Summary
+        ? `Übermorgen/Tag+2 (belegt): ${day2Summary}`
+        : null,
+      typeof windSpeedMs === 'number'
+        ? `Wind ~${Math.round(windSpeedMs)} m/s${
+            typeof windGustMs === 'number'
+              ? `, Böen ~${Math.round(windGustMs)} m/s`
+              : ''
+          }`
+        : null,
       !futureDay && nowTemp != null
         ? `Jetzt ~${Math.round(Number(nowTemp))} °C`
         : null,
@@ -224,13 +267,14 @@ export const umweltAgent: Module2Agent = {
         ? `Tageshoch bis Abend ~${Math.round(dayHigh)} °C`
         : null,
       weatherCode != null ? `Wettercode: ${weatherCode}` : null,
+      'NACHT (wenn jetzt nach Sonnenuntergang / vor Sonnenaufgang): Himmel nur als klar/bewölkt — nie Sonne/„haben wir Sonne“ als Tag-Wetter. Klar → klarer Himmel; Sterne nur ehrlich: Dorf/Land oft sichtbar, Stadt oft nicht. Wortlaut frei.',
       targetHour != null && targetTempC != null
         ? `Für ~${String(targetHour).padStart(2, '0')}:00 ≈ ${Math.round(targetTempC)} °C`
         : null,
       outfit.eveningCool && outfit.eveningTempC != null
-        ? `Abend wirklich kühler ~${outfit.eveningTempC} °C (Extra-Lage ok)`
+        ? `Abend wirklich kühler ~${outfit.eveningTempC} °C — Extra-Lage ok`
         : outfit.eveningTempC != null && targetHour != null
-          ? `Abend-Schätzung ~${outfit.eveningTempC} °C (nicht als „frisch“ verkaufen wenn ≥16°)`
+          ? `Abend-Schätzung ~${outfit.eveningTempC} °C — nicht als „frisch“ verkaufen wenn ≥16°`
           : null,
       outfit.trendHint ? `Trend: ${outfit.trendHint}` : null,
       precip != null
@@ -246,17 +290,22 @@ export const umweltAgent: Module2Agent = {
         ? targetHour != null
           ? `1) Konkrete Kleidung ZUERST — für ca. ${String(targetHour).padStart(2, '0')}:00, am belegten Trend.`
           : '1) Konkrete Kleidung ZUERST — am Jetzt + Tageshoch ausrichten.'
-        : futureDay
-          ? '1) Morgen: Himmel (Sonne/Wolken), Temperatur von–bis, Regenrisiko — locker erzählen.'
-          : '1) Himmel + Temperatur (Jetzt/Spitze) + wann Regen — locker erzählen.',
+        : generalForecast
+          ? '1) ALLGEMEINE VORHERSAGE (Radio-Stil, 2–3 Fließsätze): Himmel über heute/morgen/Tag+2 kontrastieren (gleiche Tage bündeln); Schauer den betroffenen Tagen zuordnen; Wind nur wenn belegt+spürbar; Höchstwerte am Ende weben. Kein Telegramm, kein Prozent-Dump, keine Kleidung in Speech.'
+          : futureDay
+            ? '1) Morgen: Himmel (Sonne/Wolken), Temperatur von–bis, Regenrisiko — locker erzählen.'
+            : '1) Himmel + Temperatur (Jetzt/Spitze) + wann Regen — locker erzählen.',
       wantsOutfit
-        ? '2) Wetter kurz als Begründung.'
-        : '2) Ein Kleidungstipp hinten (bei Nässe Jacke/Schirm); Jacke nicht erzwingen wenn mild/trocken.',
+        ? '2) Wetter kurz als Begründung — Kleidung im Fließtext weben, keine Parenthesen/Meta-Klammern.'
+        : generalForecast
+          ? '2) Kein Outfit-Essay in Speech — Outfit nur als UI-Chip.'
+          : '2) Ein Kleidungstipp im Fließtext hinten (bei Nässe Jacke/Schirm); Jacke nicht erzwingen wenn mild/trocken; keine (…)-Klammern.',
       '3) Stichpunkte: Himmel · Temperatur · Kleidung.',
       '4) Abend nur „frisch/kühl“ nennen wenn Forecast wirklich kühl (<~16°).',
       '5) Wenn Plan-Stop bekannt und Outfit gefragt: Dresscode daran koppeln.',
       '6) KEINE Timeline öffnen, kein „Passt der Plan?“.',
       '7) Wohin-gehen nur wenn User danach fragt.',
+      '8) Keine Meta-Labels wie „Kleidung:“ oder Outfit in Klammern — alles ein Atemzug.',
     ]
       .filter(Boolean)
       .join('\n');

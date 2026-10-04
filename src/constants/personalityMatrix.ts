@@ -72,7 +72,8 @@ export const CORE_ROLES: PersonalityOption<CoreRoleId>[] = [
     id: 'aristocrat',
     emoji: '🎩',
     labelDe: 'Aristokrat',
-    infoDe: 'Immer Du — gepflegt, edel, leicht veraltete Sprache; nie Siezen.',
+    infoDe:
+      'Immer Du — gepflegt und edel, höchstens leichte Wortwahl-Färbung; Pläne/Preise klar modern; nie Siezen, nie Theater-Deutsch ohne Inhalt.',
   },
   {
     id: 'nerd',

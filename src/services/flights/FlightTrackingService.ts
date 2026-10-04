@@ -8,7 +8,7 @@ import { planJourney, type JourneyItinerary } from '../transit/journeyPlanner';
 import { dateKeyFromMs, localTimeZone } from '../../utils/dateKeys';
 import { airportCodeMatches, icaoForIata, normalizeAirportIata, relatedAirportIatas } from './airportIata';
 import { identVariants, preferredIataIdent } from './flightIdent';
-import { isSaneAirportAccessTransit } from './airportAccessSane';
+import { pickBestAirportAccessTransit } from './airportAccessSane';
 import { aeroScheduleWindow } from './aeroApiBudget';
 import {
   hasJsonOriginBoard,
@@ -416,18 +416,13 @@ export async function buildAirportArrivalPlan(opts: {
         to: opts.airportCoords,
         travelMode: 'transit',
         arriveBy: airportArrivalTarget,
-        numItineraries: 2,
+        numItineraries: 6,
       });
-      const cand = plan.itineraries[0] ?? null;
       const taxiMinGuess = 40;
-      transitItinerary =
-        cand &&
-        isSaneAirportAccessTransit(cand, {
-          arriveByMs: airportArrivalTarget.getTime(),
-          taxiMin: taxiMinGuess,
-        })
-          ? cand
-          : null;
+      transitItinerary = pickBestAirportAccessTransit(plan.itineraries ?? [], {
+        arriveByMs: airportArrivalTarget.getTime(),
+        taxiMin: taxiMinGuess,
+      });
       if (transitItinerary) {
         suggestedTransitLeave = transitItinerary.startTime;
       }

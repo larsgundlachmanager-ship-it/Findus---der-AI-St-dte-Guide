@@ -169,12 +169,42 @@ export const env = {
     getPublicEnv('EXPO_PUBLIC_RESERVIX_AWIN_MID') || '31293',
   reservixAffiliateUrl: () =>
     getPublicEnv('EXPO_PUBLIC_RESERVIX_AFFILIATE_URL'),
+  /** ADticket.de AWIN Merchant-ID (Default 18490 — Reservix-Schwester). */
+  adticketAwinMid: () =>
+    getPublicEnv('EXPO_PUBLIC_ADTICKET_AWIN_MID') || '18490',
+  adticketAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_ADTICKET_AFFILIATE_URL'),
+  /**
+   * Gigsberg Direct API key (Live-Tickets).
+   * Prefer EXPO_PUBLIC_ for device; GIGSBERG_API_KEY works in Metro/.env.
+   */
+  gigsbergApiKey: () =>
+    getPublicEnv('EXPO_PUBLIC_GIGSBERG_API_KEY') ||
+    (typeof process !== 'undefined'
+      ? String(process.env.GIGSBERG_API_KEY ?? '').trim()
+      : ''),
+  gigsbergAffiliateName: () =>
+    getPublicEnv('EXPO_PUBLIC_GIGSBERG_AFF_NAME') || 'Yorro',
   /** camping.info AWIN Tracking-URL (optional Override). */
   campingInfoAffiliateUrl: () =>
     getPublicEnv('EXPO_PUBLIC_CAMPING_INFO_AFFILIATE_URL'),
+  /** Camping-and-Co AWIN Merchant-ID (Default DE 16438). */
+  campingAndCoAwinMid: () =>
+    getPublicEnv('EXPO_PUBLIC_CAMPING_AND_CO_AWIN_MID') || '16438',
+  /** Camping-and-Co AWIN Tracking-URL (optional Override). */
+  campingAndCoAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_CAMPING_AND_CO_AFFILIATE_URL'),
   /** Solmar DE AWIN Tracking-URL (optional Override). */
   solmarAffiliateUrl: () =>
     getPublicEnv('EXPO_PUBLIC_SOLMAR_AFFILIATE_URL'),
+  /** TUI Magic Life DE AWIN Tracking-URL (optional Override). */
+  magicLifeAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_MAGIC_LIFE_AFFILIATE_URL'),
+  /** Lidl Reisen DE AWIN Tracking-URL (optional Override). */
+  lidlReisenAffiliateUrl: () =>
+    getPublicEnv('EXPO_PUBLIC_LIDL_REISEN_AFFILIATE_URL'),
+  /** AIDA Cruises DE AWIN Tracking-URL (optional Override, mid=9144). */
+  aidaAffiliateUrl: () => getPublicEnv('EXPO_PUBLIC_AIDA_AFFILIATE_URL'),
   check24PackageAffiliateUrl: () =>
     getPublicEnv('EXPO_PUBLIC_CHECK24_PACKAGE_AFFILIATE_URL'),
   check24CarAffiliateUrl: () =>
@@ -197,6 +227,15 @@ export const env = {
   /** Travelpayouts Partner-Marker (Default 760293). */
   travelpayoutsMarker: () =>
     getPublicEnv('EXPO_PUBLIC_TRAVELPAYOUTS_MARKER') || '760293',
+  travelpayoutsToken: () =>
+    getPublicEnv('EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN') ||
+    (typeof process !== 'undefined'
+      ? String(
+          process.env.TRAVELPAYOUTS_TOKEN ??
+            process.env.EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN ??
+            '',
+        ).trim()
+      : ''),
   /**
    * Google Maps Platform (Directions / Places / Street View) für
    * freihändige Landmarken-Navigation. Optional.

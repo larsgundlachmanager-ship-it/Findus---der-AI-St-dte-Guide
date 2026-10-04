@@ -1140,6 +1140,41 @@ export function parseDiningHardNeeds(
         /\b(terrasse|outdoor|biergarten|außenbereich|aussenbereich|gartenwirtschaft|patio|terrace)\b/i,
     });
   }
+  if (
+    /\b(ruhig|leise|nicht\s+laut|ohne\s+lärm|ohne\s+laerm|kein\s+lärm)\b/i.test(q)
+  ) {
+    out.push({
+      id: 'quiet',
+      label: 'ruhig',
+      searchBoost: 'ruhig Restaurant leise entspannt',
+      evidence: /\b(ruhig|quiet|leise|nicht\s+laut|entspannt)\b/i,
+    });
+  }
+  try {
+    const { looksLikeAyceQuery, normalizeAyceStt } = require('../pitch/ayceIntent') as {
+      looksLikeAyceQuery: (s: string) => boolean;
+      normalizeAyceStt: (s: string) => string;
+    };
+    if (looksLikeAyceQuery(q) || looksLikeAyceQuery(normalizeAyceStt(q))) {
+      out.push({
+        id: 'ayce',
+        label: 'All you can eat',
+        searchBoost: 'All you can eat Buffet Flatrate Schlemmerbuffet Restaurant',
+        evidence:
+          /all\s*you\s*can\s*eat|allyoucaneat|ayce|unbegrenzt|flatrate|schlemmer|mongol.{0,12}grill|(?:asian|asiat|sushi|chines).{0,24}buffet|buffet.{0,24}(?:asian|asiat|sushi|chines|flatrate)/i,
+      });
+    }
+  } catch {
+    if (/\b(all\s*you\s*can\s*eat|allyoucaneat|ayce|unbegrenzt\s+essen)\b/i.test(q)) {
+      out.push({
+        id: 'ayce',
+        label: 'All you can eat',
+        searchBoost: 'All you can eat Buffet Flatrate Schlemmerbuffet Restaurant',
+        evidence:
+          /all\s*you\s*can\s*eat|allyoucaneat|ayce|unbegrenzt|flatrate|schlemmer|mongol.{0,12}grill|(?:asian|asiat|sushi|chines).{0,24}buffet|buffet.{0,24}(?:asian|asiat|sushi|chines|flatrate)/i,
+      });
+    }
+  }
   const dietBlob = (diet ?? []).join(' ').toLowerCase();
   const spokenMeat =
     /\b(steak|rumpsteak|ribeye|entrecôte|entrecote|schnitzel|burger|döner|doener|kebab|wurst|steakhouse|pannfisch|pannenfisch|pfannfisch|fisch)\b/i.test(
@@ -1192,7 +1227,28 @@ function hitMatchesDiningNeeds(
 ): boolean {
   if (!needs.length) return true;
   const blob = `${hit.name} ${(hit.types ?? []).join(' ')} ${evidenceExtra ?? ''}`;
-  return needs.every((n) => n.evidence.test(blob));
+  const wantsQuiet = needs.some((n) => n.id === 'quiet');
+  const wantsOutdoorCalm =
+    needs.some((n) => n.id === 'outdoor') && wantsQuiet;
+  // Lärm / Hauptstraße: raus, wenn User Ruhe (ggf. mit Draußen) will.
+  if (
+    (wantsQuiet || wantsOutdoorCalm) &&
+    /\b(laut)\b|\blärm|\blaerm|verkehrslärm|durchgangsverkehr|lautstarke|hauptstra[ßs]e.{0,20}(?:laut|lärm|nerv)/i.test(
+      blob,
+    ) &&
+    !/nicht\s+laut|kein(?:e|en)?\s+lärm/i.test(blob)
+  ) {
+    return false;
+  }
+  return needs.every((n) => {
+    if (n.id === 'quiet') {
+      return (
+        n.evidence.test(blob) ||
+        /\bruhig\b|\bquiet\b|\bleise\b/.test(blob)
+      );
+    }
+    return n.evidence.test(blob);
+  });
 }
 
 /**

@@ -1,0 +1,420 @@
+{
+  "city_id": "danzig",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 120,
+  "country": "Germany",
+  "summary": {
+    "ok": 12,
+    "check": 1,
+    "bad": 0,
+    "errors": 0,
+    "applied": 1,
+    "skipped_directory": 653,
+    "skipped_cached_google": 20
+  },
+  "rows": [
+    {
+      "id": "danzig_gdansk_stocznia",
+      "name": "Danziger Werft",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.36428814,
+        "lng": 18.64173666
+      }
+    },
+    {
+      "id": "danzig_museum_des_zweiten_weltkriegs",
+      "name": "Museum des Zweiten Weltkriegs",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.356039280000005,
+        "lng": 18.65992498
+      }
+    },
+    {
+      "id": "danzig_nationalmuseum",
+      "name": "Nationalmuseum Danzig",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.34538598,
+        "lng": 18.6468251
+      }
+    },
+    {
+      "id": "danzig_bernsteinmuseum_danzig",
+      "name": "Bernsteinmuseum Danzig",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.353944780000006,
+        "lng": 18.649905580000002
+      }
+    },
+    {
+      "id": "danzig_artushof_danzig",
+      "name": "Artushof",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.34875238000001,
+        "lng": 18.653313180000005
+      }
+    },
+    {
+      "id": "danzig_europaisches_zentrum_der_solidaritat",
+      "name": "Europäisches Solidarność-Zentrum",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.36139988,
+        "lng": 18.64905826
+      }
+    },
+    {
+      "id": "danzig_uphagenhaus_danzig",
+      "name": "Uphagenhaus Danzig",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.34929348000001,
+        "lng": 18.64927118
+      }
+    },
+    {
+      "id": "danzig_festung_weichselmunde",
+      "name": "Festung Weichselmünde",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.39562138,
+        "lng": 18.6798301
+      }
+    },
+    {
+      "id": "danzig_so_dek",
+      "name": "Museumsschiff Sołdek",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.35139658000001,
+        "lng": 18.65857688
+      }
+    },
+    {
+      "id": "danzig_konigliche_kapelle_danzig",
+      "name": "Königliche Kapelle Danzig",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.35024898,
+        "lng": 18.65362418
+      }
+    },
+    {
+      "id": "danzig_st_marienkirche",
+      "name": "Marienkirche Danzig",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.34979538,
+        "lng": 18.65298828
+      }
+    },
+    {
+      "id": "danzig_brigittenkirche_sw_brygidy",
+      "name": "Brigittenkirche (św. Brygidy)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.35455258,
+        "lng": 18.652194880000003
+      }
+    },
+    {
+      "id": "danzig_johanneskirche",
+      "name": "Johanneskirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.35185978,
+        "lng": 18.656312879999998
+      }
+    },
+    {
+      "id": "danzig_denkmal_fur_die_gefallenen_werftarbeiter_1970",
+      "name": "Denkmal für die gefallenen Werftarbeiter 1970",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.36050828,
+        "lng": 18.64893326
+      }
+    },
+    {
+      "id": "danzig_johannes_hevelius_monument",
+      "name": "Johannes Hevelius monument",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.354072079999995,
+        "lng": 18.64873968
+      }
+    },
+    {
+      "id": "danzig_leuchtturm_nowy_port_neufahrwasser",
+      "name": "Leuchtturm Nowy Port (Neufahrwasser)",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.406227879999996,
+        "lng": 18.6610952
+      }
+    },
+    {
+      "id": "danzig_altstadtisches_rathaus",
+      "name": "Altstädtisches Rathaus",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.35392517999999,
+        "lng": 18.64784768
+      }
+    },
+    {
+      "id": "danzig_langer_markt",
+      "name": "Langer Markt",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.34828738,
+        "lng": 18.65397438
+      }
+    },
+    {
+      "id": "danzig_hohes_tor",
+      "name": "Hohes Tor",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.349892880000006,
+        "lng": 18.64646588
+      }
+    },
+    {
+      "id": "danzig_westerplatte",
+      "name": "Westerplatte",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 54.406654079999996,
+        "lng": 18.66690088
+      }
+    },
+    {
+      "id": "danzig_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "before": {
+        "lat": 54.34848302,
+        "lng": 18.65311792
+      },
+      "google": {
+        "lat": 54.3485459,
+        "lng": 18.653225799999998,
+        "place_id": "ChIJcTDQ0qFz_UYRMdczCkqH3oA",
+        "address": "Długi Targ, 80-833 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_krantor",
+      "name": "Krantor",
+      "before": {
+        "lat": 54.35042722000001,
+        "lng": 18.6573146
+      },
+      "google": {
+        "lat": 54.350494299999994,
+        "lng": 18.657527899999998,
+        "place_id": "ChIJV2nWGqdz_UYRwS-frZqF0J0",
+        "address": "Szeroka 67/68, 80-835 Gdańsk, Poland"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_frauengasse",
+      "name": "Frauengasse",
+      "before": {
+        "lat": 54.34956748,
+        "lng": 18.65540722
+      },
+      "google": {
+        "lat": 54.3494022,
+        "lng": 18.6567562,
+        "place_id": "ChIJa19aIqBz_UYRPwF_A0kabz0",
+        "address": "Mariacka 28/30, 80-833 Gdańsk, Poland"
+      },
+      "delta_m": 89,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "danzig_katharinenkirche",
+      "name": "Katharinenkirche",
+      "before": {
+        "lat": 54.35398562,
+        "lng": 18.6511234
+      },
+      "google": {
+        "lat": 54.3540485,
+        "lng": 18.6512313,
+        "place_id": "ChIJUULiq3Vz_UYRYjIK4VTDLEo",
+        "address": "Profesorska 3, 80-856 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_stockturm",
+      "name": "Stockturm",
+      "before": {
+        "lat": 54.34977202,
+        "lng": 18.64732942
+      },
+      "google": {
+        "lat": 54.3498349,
+        "lng": 18.6474373,
+        "place_id": "ChIJafTq859z_UYRdVCgnZhUX7M",
+        "address": "Targ Węglowy 26, 80-836 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_speicherinsel",
+      "name": "Speicherinsel",
+      "before": {
+        "lat": 54.346470880000005,
+        "lng": 18.65849502
+      },
+      "google": {
+        "lat": 54.346514,
+        "lng": 18.658569,
+        "place_id": "ChIJaVi8OaFz_UYRhnGnX4B7hNQ",
+        "address": "Wyspa Spichrzów, 80-749 Gdańsk, Poland"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_johannistor",
+      "name": "Johannistor",
+      "before": {
+        "lat": 54.351341919999996,
+        "lng": 18.6576446
+      },
+      "google": {
+        "lat": 54.3514048,
+        "lng": 18.6577525,
+        "place_id": "ChIJ82c9kApz_UYR8QA_nFGMdyY",
+        "address": "80-888 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_frauentor",
+      "name": "Frauentor",
+      "before": {
+        "lat": 54.34933932,
+        "lng": 18.65664832
+      },
+      "google": {
+        "lat": 54.3494022,
+        "lng": 18.6567562,
+        "place_id": "ChIJa19aIqBz_UYRPwF_A0kabz0",
+        "address": "Mariacka 28/30, 80-833 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_hakertor",
+      "name": "Häkertor",
+      "before": {
+        "lat": 54.35207212,
+        "lng": 18.657648400000003
+      },
+      "google": {
+        "lat": 54.352135,
+        "lng": 18.6577563,
+        "place_id": "ChIJBS9D6wpz_UYRw9mFRCYxfSY",
+        "address": "Straganiarska, 80-980 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_dominikermarkt",
+      "name": "Dominikermarkt",
+      "before": {
+        "lat": 54.35242652000001,
+        "lng": 18.6555789
+      },
+      "google": {
+        "lat": 54.352489399999996,
+        "lng": 18.655686799999998,
+        "place_id": "ChIJaTbCSXVz_UYROW2GMGqNipk",
+        "address": "Straganiarska 56, 80-837 Gdańsk, Poland"
+      },
+      "delta_m": 10,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_ostseeoper",
+      "name": "Ostseeoper",
+      "before": {
+        "lat": 54.37250988000001,
+        "lng": 18.625059980000003
+      },
+      "google": {
+        "lat": 54.372552999999996,
+        "lng": 18.625134000000003,
+        "place_id": "ChIJfxQ9B5x0_UYR0v6RGX-ykDY",
+        "address": "Aleja Zwycięstwa 15, 80-219 Gdańsk, Poland"
+      },
+      "delta_m": 7,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_danzig_hauptbahnhof",
+      "name": "Danzig Hauptbahnhof",
+      "before": {
+        "lat": 54.35649198,
+        "lng": 18.64416264
+      },
+      "google": {
+        "lat": 54.3565908,
+        "lng": 18.6443322,
+        "place_id": "ChIJbwJpAndz_UYRSsEa7dkfYwI",
+        "address": "Gdańsk, Poland"
+      },
+      "delta_m": 16,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "danzig_motlawa_lange_brucke",
+      "name": "Motława / Lange Brücke",
+      "before": {
+        "lat": 54.349281080000004,
+        "lng": 18.65668326
+      },
+      "google": {
+        "lat": 54.349131299999996,
+        "lng": 18.6566668,
+        "place_id": "ChIJI3IYXKBz_UYR8joqeqYwg4U",
+        "address": "Długie Pobrzeże 11, 80-888 Gdańsk, Poland"
+      },
+      "delta_m": 17,
+      "status": "OK",
+      "streetview": "OK"
+    }
+  ]
+}

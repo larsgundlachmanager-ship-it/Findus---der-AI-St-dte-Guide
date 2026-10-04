@@ -4,6 +4,7 @@
  *
  * Ehrliche Grenzen (kein Fake-Checkout):
  * - Uber: Pickup/Dropoff + Produktwahl (Preis/ETA) oder Reserve mit Abholzeit; client_id bleibt
+ * - TheFork/Quandoo/Hotel-Widgets: oft leeres Formular trotz Params — Link + Sticky, nie „voll vorausgefüllt“
  * - eSIM: Land/Produktseite ja; konkreter GB-Tarif oft erst im Shop wählbar
  * - Camping: Platz-Detailseite ja; Stellplatz+Bezahlung je nach Platz
  */

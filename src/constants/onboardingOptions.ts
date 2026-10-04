@@ -119,8 +119,9 @@ export const CHARACTER_CATEGORIES: OptionCategory[] = [
         emoji: '⚔️',
         labelDe: 'Sagen & Epochen',
         labelEn: 'Legends & eras',
-        infoDe: 'Leichte historische Färbung — Burgen, Zünfte, Sagen (optional).',
-        infoEn: 'Light medieval / legend tint.',
+        infoDe:
+          'Leichte historische Färbung bei Geschichten — Pläne/Preise bleiben klares heutiges Deutsch.',
+        infoEn: 'Light legend tint on stories; plans/prices stay clear modern German.',
       },
     ],
   },
@@ -224,7 +225,7 @@ export const CHARACTER_CATEGORIES: OptionCategory[] = [
     options: [
       {
         id: 'urlaub',
-        emoji: '🏖️',
+        emoji: '🏖',
         labelDe: 'Urlaub',
         labelEn: 'Holiday',
         infoDe: 'Entspannen und die Stadt genießen.',
@@ -232,7 +233,7 @@ export const CHARACTER_CATEGORIES: OptionCategory[] = [
       },
       {
         id: 'kurztrip',
-        emoji: '✈️',
+        emoji: '✈',
         labelDe: 'Kurztrip',
         labelEn: 'Short trip',
         infoDe: 'Wenige Tage — Highlights kompakt.',
@@ -240,7 +241,7 @@ export const CHARACTER_CATEGORIES: OptionCategory[] = [
       },
       {
         id: 'wochenende',
-        emoji: '🗓️',
+        emoji: '📅',
         labelDe: 'Wochenendtrip',
         labelEn: 'Weekend trip',
         infoDe: 'Fr–So: gut getaktet, nicht hetzen.',
@@ -248,7 +249,7 @@ export const CHARACTER_CATEGORIES: OptionCategory[] = [
       },
       {
         id: 'partyurlaub',
-        emoji: '🥳',
+        emoji: '🎉',
         labelDe: 'Partyurlaub',
         labelEn: 'Party trip',
         infoDe: 'Nightlife, Bars, Clubs im Fokus.',
@@ -826,8 +827,6 @@ export const EXPERIENCE_CARDS: ExperienceCard[] = [
     noLabelEn: 'Enough',
     yesLabelDe: 'Zeig mir',
     yesLabelEn: 'Show me',
-    midLabelDe: 'Gerne',
-    midLabelEn: 'Gladly',
   },
   {
     id: 'barriere_care',

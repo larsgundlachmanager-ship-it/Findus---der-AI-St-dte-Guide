@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
   OnboardingShell,
   PrimaryButton,
@@ -15,45 +15,59 @@ type Props = {
 
 /**
  * Einstieg: Express vs. Standard.
+ * ScrollView: auf kurzen Displays (z. B. Galaxy S7) sonst keine Karten erreichbar.
  */
 export function PathChoiceStep({ onChoose }: Props) {
   return (
-    <OnboardingShell>
-      <StepTitle>Kopfhörer rein. Die Stadt läuft mit.</StepTitle>
-      <StepSubtitle>
-        Yorro ist dein Stadtguide für den Städtetrip — am Ort erzählt er, du
-        fragst mit der Stimme. Einrichtung einmal, dann läuft der Trip.
-      </StepSubtitle>
+    <OnboardingShell style={styles.shell}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+      >
+        <StepTitle>Kopfhörer rein. Die Stadt läuft mit.</StepTitle>
+        <StepSubtitle>
+          Yorro ist dein Stadtguide für den Städtetrip — am Ort erzählt er, du
+          fragst mit der Stimme. Einrichtung einmal, dann läuft der Trip.
+        </StepSubtitle>
 
-      <View style={styles.card}>
-        <Text style={styles.badge}>Empfohlen</Text>
-        <Text style={styles.cardTitle}>Express-Einrichtung</Text>
-        <Text style={styles.cardBody}>
-          Nur das Nötigste — danach Kopfhörer rein.
-        </Text>
-        <PrimaryButton
-          label="Express starten"
-          onPress={() => onChoose('express')}
-        />
-      </View>
+        <View style={styles.card}>
+          <Text style={styles.badge}>Empfohlen</Text>
+          <Text style={styles.cardTitle}>Express-Einrichtung</Text>
+          <Text style={styles.cardBody}>
+            Nur das Nötigste — danach Kopfhörer rein.
+          </Text>
+          <PrimaryButton
+            label="Express starten"
+            onPress={() => onChoose('express')}
+          />
+        </View>
 
-      <View style={[styles.card, styles.cardSecondary]}>
-        <Text style={styles.badge}>Ausführlich</Text>
-        <Text style={styles.cardTitle}>Standard-Einrichtung</Text>
-        <Text style={styles.cardBody}>
-          Für den perfekt zugeschnittenen Yorro — Feinschliff auch später in
-          den Einstellungen.
-        </Text>
-        <PrimaryButton
-          label="Standard starten"
-          onPress={() => onChoose('standard')}
-        />
-      </View>
+        <View style={[styles.card, styles.cardSecondary]}>
+          <Text style={styles.badge}>Ausführlich</Text>
+          <Text style={styles.cardTitle}>Standard-Einrichtung</Text>
+          <Text style={styles.cardBody}>
+            Für den perfekt zugeschnittenen Yorro — Feinschliff auch später in
+            den Einstellungen.
+          </Text>
+          <PrimaryButton
+            label="Standard starten"
+            onPress={() => onChoose('standard')}
+          />
+        </View>
+      </ScrollView>
     </OnboardingShell>
   );
 }
 
 const styles = StyleSheet.create({
+  shell: { flex: 1 },
+  scroll: { flex: 1 },
+  scrollContent: {
+    paddingBottom: spacing.xl,
+    flexGrow: 1,
+  },
   card: {
     marginTop: spacing.lg,
     padding: spacing.lg,

@@ -51,6 +51,8 @@ export {
   normalizeShortGermanNounCasing,
   transformClockTimes,
   transformOrdinalDates,
+  transformBareOrdinals,
+  clockHourToGermanWords,
   transformLetterCodes,
   expandTransitLineCodes,
   normalizeOnomatopoeia,

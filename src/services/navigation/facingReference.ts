@@ -116,8 +116,8 @@ export function buildVisualDirectionalPromptRule(opts?: {
     sourceHint,
     side ? `Aktuelle Richtungsvorgabe: ${side}.` : 'Keine sichere Seite — Landmarken bevorzugen.',
     uncertain
-      ? 'Gold-Muster: „Richtung der Haltestelle / Kirche — siehst du das runde, weiße Gebäude?“'
-      : 'Gold-Muster: „Schau nach rechts. Siehst du das runde, weiße Gebäude, das dort oben thront? Da steht groß Café Pudding drauf.“',
+      ? 'Struktur: Landmarke oder „Richtung …“, nicht geratenes links/rechts. Wortlaut frei.'
+      : 'Struktur: Blickrichtung → visuelle Details → dann Name/Aktion. Wortlaut frei.',
     'Verboten: Ort zuerst benennen ohne Richtung. Keine Himmelsrichtungen. Kein Broschüren-Ton. Kein falsches links/rechts bei unsicherem Facing.',
   ]
     .filter(Boolean)

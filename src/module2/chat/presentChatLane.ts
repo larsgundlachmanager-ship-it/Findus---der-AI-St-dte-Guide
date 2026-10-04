@@ -82,6 +82,24 @@ async function enrichChatPresentation(
     /* soft */
   }
   try {
+    const { ensureLetterDigitSpaces, normalizeTriviaFactBullets } = require('./instantFactFormat') as {
+      ensureLetterDigitSpaces: (s: string) => string;
+      normalizeTriviaFactBullets: (o: {
+        userText?: string | null;
+        speech?: string | null;
+        bullets?: string[] | null;
+      }) => string[];
+    };
+    speech = ensureLetterDigitSpaces(speech);
+    bullets = normalizeTriviaFactBullets({
+      userText,
+      speech,
+      bullets,
+    });
+  } catch {
+    /* soft */
+  }
+  try {
     const { looksLikeOutfitOrWeatherUtterance } = require('../planning/planUtteranceGate') as {
       looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
     };
@@ -214,19 +232,37 @@ export async function presentChatLaneResult(opts: {
   const synthesis: SynthesisPayload = synthesizeOutput(logic);
 
   // Haupt-Antwort nur über die Queue — sonst alreadySpoken ohne Audio = Stille.
-  enqueueSpeech({
-    kind: 'main',
-    text: result.speech,
-    turnId,
-    alreadySpoken: false,
-  });
+  const mainSpeech = (result.speech || '').replace(/\s+/g, ' ').trim();
+  if (mainSpeech && !/^(?:\.{2,}|…+)$/u.test(mainSpeech)) {
+    enqueueSpeech({
+      kind: 'main',
+      text: mainSpeech,
+      turnId,
+      alreadySpoken: false,
+    });
+  }
+  try {
+    const { noteLastReplayableSpeech } = require('../../services/speech/lastReplayableSpeech') as {
+      noteLastReplayableSpeech: (o: {
+        speech: string;
+        bullets?: string[] | null;
+        cardTitle?: string | null;
+      }) => void;
+    };
+    noteLastReplayableSpeech({
+      speech: result.speech,
+      bullets: result.bullets,
+      cardTitle: result.cardTitle,
+    });
+  } catch {
+    /* soft */
+  }
 
-  // Parallel: Speech läuft → Stichpunkte/Buttons nachziehen (nicht 10 s warten).
-  // Max kurz nach Hörstart bzw. Fallback ~0,9 s, damit die Card nie „leer“ bleibt.
+  // Parallel: Speech läuft → Stichpunkte/Buttons nachziehen. UI darf schon während Bridge.
   const bullets = result.bullets;
   const buttons = result.buttons;
   void (async () => {
-    await waitUntilSpeechRunningOrMs(900);
+    await waitUntilSpeechRunningOrMs(250);
     try {
       await presentToUi(result.speech, bullets, buttons, {
         userText: opts.userText,

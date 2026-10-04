@@ -2,6 +2,9 @@
  * Heuristik: User will bestehenden Plan ändern (nicht neu ingesten).
  */
 
+const WEEKDAY_OR_REL =
+  '(?:montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|morgen|übermorgen|uebermorgen|heute)';
+
 /** Ganzen Tag / Timeline leeren — kein neuer Wunsch, kein LLM. */
 export function looksLikeClearDayPlan(text: string): boolean {
   const t = (text ?? '').replace(/\s+/g, ' ').trim();
@@ -33,10 +36,50 @@ export function looksLikeClearDayPlan(text: string): boolean {
   return false;
 }
 
+/**
+ * Ganzen Plan / alle Stops auf einen anderen Kalendertag legen
+ * („verschieb den ganzen Plan auf Donnerstag“, „alles auf Donnerstag“).
+ */
+export function looksLikeWholePlanDayShift(text: string): boolean {
+  const t = (text ?? '').replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  // Nicht „Plan löschen“ / Clear
+  if (looksLikeClearDayPlan(t)) return false;
+  const whole =
+    /\b(ganzen?\s+plan|ganze\s+planung|komplette?n?\s+plan|alles|alle\s+(?:termine|einträge|eintraege|stopps?|orte|punkte)|den\s+ganzen\s+tag)\b/i.test(
+      t,
+    );
+  const shiftVerb =
+    /\b(verschieb|leg|setz|schieb|umplan|umleg)\w*\b/i.test(t) ||
+    /\bauf\s+/.test(t);
+  const targetDay = new RegExp(
+    `\\b(?:auf|nach|zum|zur)\\s+${WEEKDAY_OR_REL}\\b`,
+    'i',
+  ).test(t);
+  if (whole && targetDay) return true;
+  if (
+    shiftVerb &&
+    whole &&
+    new RegExp(`\\b${WEEKDAY_OR_REL}\\b`, 'i').test(t)
+  ) {
+    return true;
+  }
+  // „Plan auf Donnerstag“ / „Timeline auf Freitag verschieben“
+  if (
+    /\b(?:plan(?:ung)?|timeline|zeitlinie)\b/i.test(t) &&
+    targetDay &&
+    (shiftVerb || /\bverschieb/i.test(t) || /\balle[sr]?\b/i.test(t))
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export function looksLikePlanEditUtterance(text: string): boolean {
   const t = (text ?? '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
   if (looksLikeClearDayPlan(t)) return true;
+  if (looksLikeWholePlanDayShift(t)) return true;
   return (
     /\b(nicht\s+mehr|raus\s+damit|lösch|loesch|streich|änder|aender|verschieb|früher|frueher|später|spaeter|stattdessen|doch\s+nicht|ganz\s+anderen?\s+plan|komplett\s+neu)\b/i.test(
       t,

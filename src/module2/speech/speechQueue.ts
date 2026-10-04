@@ -111,8 +111,20 @@ export function enqueueSpeech(opts: {
 }): string {
   const id = `sq_${++jobSeq}`;
   let text = (opts.text ?? '').replace(/\s+/g, ' ').trim();
+  // Prompt-Echo / leere Call-2 nie als „Punkt Punkt … nichts Greifbares“
+  if (/^(?:\.{2,}|…+)$/u.test(text)) text = '';
+  text = text.replace(/^(?:\.{2,}|…+)\s*/u, '').trim();
   if (!text) {
     if (opts.kind !== 'main') return id;
+    // Bridge schon da → still (kein Greifbares-Spam nach Call 1)
+    try {
+      const { fusedBridgeCommitted } = require('./fusedTurnSpeech') as {
+        fusedBridgeCommitted: () => boolean;
+      };
+      if (fusedBridgeCommitted()) return id;
+    } catch {
+      /* soft */
+    }
     text =
       'Dazu hab ich gerade nichts Greifbares. Sag nochmal, worum es geht.';
   }
@@ -166,12 +178,18 @@ export function enqueueSpeech(opts: {
         }) => Promise<boolean>;
         isFusedTurnLive: () => boolean;
       };
-      void fused.fusedEnqueue({
-        kind: opts.kind,
-        text,
-        turnId: opts.turnId,
-      });
-      if (opts.kind === 'main') mainActiveOrPending = true;
+      void fused
+        .fusedEnqueue({
+          kind: opts.kind,
+          text,
+          turnId: opts.turnId,
+        })
+        .finally(() => {
+          // Busy läuft über Streaming-TTS — Queue-Flag nicht kleben lassen.
+          if (opts.kind === 'main') {
+            mainActiveOrPending = queue.some((j) => j.kind === 'main');
+          }
+        });
       return id;
     } catch {
       /* fall through — alte Zwei-Job-Queue */
@@ -364,5 +382,20 @@ export function getSpeechQueueDebug(): {
 
 /** true = TTS/Queue aktiv — Maps darf Speech nicht killen. */
 export function isSpeechActive(): boolean {
-  return playing || mainActiveOrPending || queue.length > 0;
+  if (playing || queue.length > 0) return true;
+  if (!mainActiveOrPending) return false;
+  // Fused-Pfad setzt mainActiveOrPending, spielt aber nicht über diese Queue —
+  // Flag darf nicht ewig kleben (sonst Call-2/Idle tot, Mic dauerblau).
+  try {
+    const {
+      isStreamingAudioQueueBusy,
+    } = require('../../services/audio/streamingAudioQueueService');
+    if (isStreamingAudioQueueBusy()) return true;
+  } catch {}
+  try {
+    const { getActiveTtsSessionCount } = require('../../services/AudioVoiceService');
+    if (getActiveTtsSessionCount() > 0) return true;
+  } catch {}
+  mainActiveOrPending = false;
+  return false;
 }

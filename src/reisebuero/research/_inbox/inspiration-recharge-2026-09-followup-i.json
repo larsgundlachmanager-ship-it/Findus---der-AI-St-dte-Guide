@@ -1,0 +1,2677 @@
+{
+  "version": 1,
+  "generatedFor": "yorro-reisebuero-inspiration-recharge",
+  "originHint": "DE",
+  "generatedAt": "2026-09-13",
+  "notes": "Follow-up I: Natur-Wow Europa+Near-DE — Silfra/Katla/Aurora/Wildlife/Caves mit RealityCheck+photoTruth+ethicalNote",
+  "chapters": [
+    {
+      "vibe": "adventure",
+      "title": "Natur Wow I1–I8",
+      "intro": "Phänomen > Selfie"
+    }
+  ],
+  "items": [
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-silfra",
+      "destLabel": "Silfra Spalte",
+      "region": "Þingvellir",
+      "countryCode": "IS",
+      "lat": 64.25,
+      "lng": -21.12,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "snorkel",
+        "dive",
+        "rift",
+        "nature_wow",
+        "snorkel_rift"
+      ],
+      "wowType": "snorkel_rift",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag + Island-Nächte",
+      "whyFit": "Schweben zwischen nordamerikanischer und eurasischer Platte — Klarwasser >100m Sicht.",
+      "hook": "2–4°C, reines Blau, Schwerelosigkeit ohne Fisch-Show.",
+      "access": "KEF + Tour/Permit Nationalpark",
+      "avoidIf": "Schwanger, unter 12, ohne Kälte-OK; >120kg Ausschluss oft",
+      "sensoryHook": "Kälteschock Gesicht, absolute Klarheit",
+      "uniqueness": "Tektonische Plattengrenze + Gletscherfilter",
+      "effortLevel": "moderate",
+      "guideRequired": "yes",
+      "realityCheck": "Kein Fisch; Trockenanzug; Manschetten-Dichtheit kritisch",
+      "photoTruth": "Blau ist real — Fauna fehlt komplett",
+      "bestWindow": "Ganzjährig stabil",
+      "ethicalNote": "Tägliches Besucherlimit Wasserqualität",
+      "specials": [
+        "Permit",
+        "Dry Suit"
+      ]
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-plura",
+      "destLabel": "Plura Cave",
+      "region": "Norwegen",
+      "countryCode": "NO",
+      "lat": 66.5,
+      "lng": 14.5,
+      "iata": "BOO",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "cave",
+        "dive",
+        "expert",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Winter klarstes Wasser",
+      "durationHint": "Expedition",
+      "whyFit": "Größtes wassergefülltes Marmorsystem Nordeuropa — nur Tech-Cave.",
+      "hook": "Weiße Marmorgänge im Eiswasser.",
+      "access": "Lokal + Zertifizierung",
+      "avoidIf": "Ohne Cave-Tech-Zertifikat",
+      "sensoryHook": "Platzangst vs. endlose Gänge",
+      "uniqueness": "Speleo-Extrem",
+      "effortLevel": "expert",
+      "guideRequired": "yes",
+      "realityCheck": "Lebensgefährlich bei Selbstüberschätzung",
+      "photoTruth": "Oft unterbelichtet",
+      "bestWindow": "Winter",
+      "ethicalNote": "Selbstüberschätzung tötet"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-capo-acqua",
+      "destLabel": "Capo d Acqua / Capestrano",
+      "region": "Abruzzo",
+      "countryCode": "IT",
+      "lat": 42.27,
+      "lng": 13.79,
+      "iata": "PSA",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "dive",
+        "ruins",
+        "nature_wow"
+      ],
+      "wowType": "dive",
+      "seasonHint": "Mai–Okt",
+      "durationHint": "1–2 Tage",
+      "whyFit": "Versunkene Mühlen in Quellsee — privat, selten.",
+      "hook": "Mittelalter unter klarem Bergwasser.",
+      "access": "Privatbesitz Guide",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Exklusiver Zugang LIVE",
+      "photoTruth": "Wie Bilder wenn erlaubt",
+      "bestWindow": "Mai–Okt",
+      "ethicalNote": "Tarierung Ruinen schonen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-scapa-flow",
+      "destLabel": "Scapa Flow Wracks",
+      "region": "Orkney",
+      "countryCode": "GB",
+      "lat": 58.9,
+      "lng": -3.05,
+      "iata": "KOI",
+      "catalogVibes": [
+        "adventure",
+        "menstrip"
+      ],
+      "tags": [
+        "wreck",
+        "dive",
+        "ww1",
+        "nature_wow"
+      ],
+      "wowType": "dive",
+      "seasonHint": "Sommer Tageslicht",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Deutsche Kaiserflotte WWI am Grund — maritime Gräber.",
+      "hook": "Rostende Giganten im Nordsee-Dunkel.",
+      "access": "Boot + Guide",
+      "guideRequired": "yes",
+      "effortLevel": "hard",
+      "realityCheck": "Trüb 10–15m; Deko-Tiefe",
+      "photoTruth": "Dunkel, nicht tropisch klar",
+      "bestWindow": "Sommer",
+      "ethicalNote": "Keine Artefakte bergen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-verzasca",
+      "destLabel": "Verzasca Fluss",
+      "region": "Tessin",
+      "countryCode": "CH",
+      "lat": 46.25,
+      "lng": 8.83,
+      "iata": "MXP",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "snorkel",
+        "river",
+        "danger",
+        "nature_wow",
+        "dive"
+      ],
+      "wowType": "dive",
+      "seasonHint": "Jul–Sep",
+      "durationHint": "1–2 Tage",
+      "whyFit": "Gletscherschliff unter klarem Fluss — Strömung tötet Leichtsinn.",
+      "hook": "Polierter Stein, optische Verzerrung.",
+      "access": "Auto Tessin",
+      "guideRequired": "recommended",
+      "effortLevel": "hard",
+      "realityCheck": "Strudel; hohe Todesrate Schwimmer",
+      "photoTruth": "Authentisch klar",
+      "bestWindow": "Jul–Sep",
+      "ethicalNote": "Nicht unterschätzen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-zenobia",
+      "destLabel": "MS Zenobia",
+      "region": "Zypern",
+      "countryCode": "CY",
+      "lat": 34.99,
+      "lng": 33.66,
+      "iata": "LCA",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "wreck",
+        "dive",
+        "nature_wow"
+      ],
+      "wowType": "dive",
+      "seasonHint": "Apr–Nov",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "172m RoRo auf der Seite — LKW in Laderäumen.",
+      "hook": "Gigantismus unter Mittelmeer.",
+      "access": "LCA + Dive Boat",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Massentourismus — frühmorgens",
+      "photoTruth": "20m+ Sicht warm",
+      "bestWindow": "Apr–Nov"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-kleifarvatn",
+      "destLabel": "Kleifarvatn Unterwasserquellen",
+      "region": "Reykjanes",
+      "countryCode": "IS",
+      "lat": 63.88,
+      "lng": -21.97,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "dive",
+        "geothermal",
+        "nature_wow"
+      ],
+      "wowType": "geothermal",
+      "seasonHint": "Mai–Sep",
+      "durationHint": "Halbtag",
+      "whyFit": "Blubbernde heiße Quellen im Seegrund.",
+      "hook": "Schwefel, Vibration, Hitze unter Wasser.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Sicht oft durch Schlamm mäßig",
+      "photoTruth": "Spürbar heiß > foto-klar",
+      "bestWindow": "Mai–Sep",
+      "ethicalNote": "Mikrobiologie schonen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-ghar-lapsi",
+      "destLabel": "Ghar Lapsi",
+      "region": "Malta",
+      "countryCode": "MT",
+      "lat": 35.82,
+      "lng": 14.42,
+      "iata": "MLA",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "cave",
+        "snorkel",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Jun–Okt",
+      "durationHint": "Halbtag",
+      "whyFit": "Sunbursts durch Kalkspalten — Capri-Alternative.",
+      "hook": "Laser-Lichtstrahlen im Blau.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Seegang = Einstieg zu",
+      "photoTruth": "Wetterabhängig",
+      "bestWindow": "Jun–Okt"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-gruener-see",
+      "destLabel": "Grüner See Tragöß",
+      "region": "Steiermark",
+      "countryCode": "AT",
+      "lat": 47.55,
+      "lng": 15.05,
+      "iata": "GRZ",
+      "catalogVibes": [
+        "family",
+        "anti_party"
+      ],
+      "tags": [
+        "lake",
+        "banned_swim",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Mai–Jun Hochstand",
+      "durationHint": "Tagesausflug",
+      "whyFit": "Überfluteter Park — NUR von außen, Schwimmen verboten.",
+      "hook": "Smaragd, Bänke unter Wasser sichtbar.",
+      "avoidIf": "Tauchen/Schwimmen erwarten",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "STRENG VERBOTEN schwimmen — Overtourism-Opfer",
+      "photoTruth": "Ästhetik ja, Erlebnis nur Betrachtung",
+      "bestWindow": "Mai–Jun",
+      "ethicalNote": "Flora schützen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-ohrid-dive",
+      "destLabel": "Ohridsee Unterwasser",
+      "region": "Nordmazedonien",
+      "countryCode": "MK",
+      "lat": 41.12,
+      "lng": 20.8,
+      "iata": "OHD",
+      "catalogVibes": [
+        "ultra_cheap",
+        "adventure"
+      ],
+      "tags": [
+        "dive",
+        "unesco",
+        "lake",
+        "nature_wow"
+      ],
+      "wowType": "dive",
+      "seasonHint": "Jun–Sep",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Uralter See, Pfahlbauten, endemische Arten.",
+      "hook": "Archäologie unter Wasser.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Kühl; Infra im Aufbau",
+      "photoTruth": "Sicht saisonal",
+      "bestWindow": "Jun–Sep",
+      "ethicalNote": "UNESCO endemisch"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-rio-tinto",
+      "destLabel": "Río Tinto",
+      "region": "Andalusien",
+      "countryCode": "ES",
+      "lat": 37.68,
+      "lng": -6.59,
+      "iata": "SVQ",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "surreal",
+        "chemistry",
+        "nature_wow",
+        "rainbow_geology"
+      ],
+      "wowType": "rainbow_geology",
+      "seasonHint": "Frühling/Herbst",
+      "durationHint": "1–2 Tage",
+      "whyFit": "Blutroter Extremophilen-Fluss — Mars-Analog.",
+      "hook": "Metallischer Geruch, opakes Rot.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Industrie-/Bergbau-Kulisse, kein Wildnis-Idyll",
+      "photoTruth": "Rot ist real — Umgebung Minen",
+      "bestWindow": "Frühling/Herbst",
+      "ethicalNote": "Kein Hautkontakt — toxisch"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-landmannalaugar",
+      "destLabel": "Landmannalaugar",
+      "region": "Hochland Island",
+      "countryCode": "IS",
+      "lat": 63.99,
+      "lng": -19.06,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "hike",
+        "rhyolite",
+        "4x4",
+        "nature_wow",
+        "rainbow_geology"
+      ],
+      "wowType": "rainbow_geology",
+      "seasonHint": "Jul–Aug Straßen offen",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Rhyolith-Pastellberge — 4x4 Furt-Pflicht.",
+      "hook": "Bunte Massive + Dampf.",
+      "guideRequired": "no",
+      "effortLevel": "hard",
+      "realityCheck": "Ohne Sonne oft grau; Off-Road illegal",
+      "photoTruth": "Nachsättigte IG vs. bedeckter Himmel",
+      "bestWindow": "Jul–Aug",
+      "ethicalNote": "Moose fragil"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-zumaia-flysch",
+      "destLabel": "Flysch de Zumaia",
+      "region": "Baskenland",
+      "countryCode": "ES",
+      "lat": 43.3,
+      "lng": -2.25,
+      "iata": "BIO",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "geology",
+        "coast",
+        "nature_wow",
+        "rainbow_geology"
+      ],
+      "wowType": "rainbow_geology",
+      "seasonHint": "Bei Ebbe",
+      "durationHint": "Halbtag–2 Nächte",
+      "whyFit": "Vertikale Schichten K-T-Grenze — Geometrie ins Meer.",
+      "hook": "Messerscharfe Küstenplatten.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Nur Ebbe betretbar",
+      "photoTruth": "Wie Drohnenbilder",
+      "bestWindow": "Ebbe-Fenster",
+      "ethicalNote": "Keine Proben"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-bardenas",
+      "destLabel": "Bardenas Reales",
+      "region": "Navarra",
+      "countryCode": "ES",
+      "lat": 42.19,
+      "lng": -1.48,
+      "iata": "ZAZ",
+      "catalogVibes": [
+        "ultra_cheap",
+        "adventure"
+      ],
+      "tags": [
+        "desert",
+        "badlands",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Frühling/Herbst",
+      "durationHint": "1–2 Tage",
+      "whyFit": "Halbwürste Badlands mitten in Europa.",
+      "hook": "Staub, Hitze, Lehm-Türme.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Militärzone Teile; Drohnen verboten",
+      "photoTruth": "Echt wüstenartig",
+      "bestWindow": "Shoulder",
+      "ethicalNote": "Nur markierte Pisten"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-sete-cidades",
+      "destLabel": "Sete Cidades",
+      "region": "São Miguel Azoren",
+      "countryCode": "PT",
+      "lat": 37.86,
+      "lng": -25.78,
+      "iata": "PDL",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "volcano",
+        "lake",
+        "nature_wow"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Mai–Okt",
+      "durationHint": "3–5 Nächte Azoren",
+      "whyFit": "Doppelkratersee blau/grün — oft Nebel.",
+      "hook": "Farbkontrast vom Kamm.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Tage im Nebel unsichtbar",
+      "photoTruth": "Farben nur bei Sonne",
+      "bestWindow": "Mai–Okt klar"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-las-medulas",
+      "destLabel": "Las Médulas",
+      "region": "León",
+      "countryCode": "ES",
+      "lat": 42.46,
+      "lng": -6.76,
+      "iata": "LEN",
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "tags": [
+        "unesco",
+        "red_rock",
+        "nature_wow",
+        "rainbow_geology"
+      ],
+      "wowType": "rainbow_geology",
+      "seasonHint": "Mai–Okt",
+      "durationHint": "1–2 Tage",
+      "whyFit": "Römische Goldmine — rote Zacken im Kastanienwald.",
+      "hook": "Anthropogen-surreal UNESCO.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Hochsommer Hitze",
+      "photoTruth": "Morgen/Abend Kontrast",
+      "bestWindow": "Shoulder"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-hallerbos",
+      "destLabel": "Hallerbos",
+      "region": "Belgien",
+      "countryCode": "BE",
+      "lat": 50.7,
+      "lng": 4.28,
+      "iata": "BRU",
+      "catalogVibes": [
+        "family",
+        "date"
+      ],
+      "tags": [
+        "flowers",
+        "seasonal",
+        "overtourism",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Mitte April ~14–21 Tage",
+      "durationHint": "Tagestrip",
+      "whyFit": "Blauer Glockenblumen-Teppich — extrem kurz und voll.",
+      "hook": "Waldboden ultramarin.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Overtourism; Zauber nur 2–3 Wochen",
+      "photoTruth": "Real blau — Wege verlassen zerstört Jahre",
+      "bestWindow": "Mitte April",
+      "ethicalNote": "Wege NIEMALS verlassen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-raufarholshellir",
+      "destLabel": "Raufarhólshellir",
+      "region": "Island",
+      "countryCode": "IS",
+      "lat": 63.94,
+      "lng": -21.4,
+      "iata": "KEF",
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "tags": [
+        "lava_tube",
+        "cave",
+        "nature_wow",
+        "volcano"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "Lavatunnel mit Regenbogen-Oxidation.",
+      "hook": "Rot/Violett unter Lampe.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Farben brauchen Kunstlicht",
+      "photoTruth": "Ohne Licht matter",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-pamukkale",
+      "destLabel": "Pamukkale",
+      "region": "Türkei",
+      "countryCode": "TR",
+      "lat": 37.92,
+      "lng": 29.12,
+      "iata": "DNZ",
+      "catalogVibes": [
+        "anti_party",
+        "spa_value"
+      ],
+      "tags": [
+        "thermal",
+        "overhyped_soft",
+        "nature_wow",
+        "geothermal"
+      ],
+      "wowType": "geothermal",
+      "seasonHint": "Winter/Nebensaison",
+      "durationHint": "1–2 Nächte",
+      "whyFit": "Sinterterrassen — viele Pools künstlich/trocken, Badeverbote.",
+      "hook": "Blendendes Weiß + Kalk auf Haut.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Fake-Gefahr Massentourismus",
+      "photoTruth": "Hero-Fotos oft selektiv",
+      "bestWindow": "Nebensaison",
+      "ethicalNote": "Zerstörung durch früheren Tourismus"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-lueneburger-heide",
+      "destLabel": "Lüneburger Heide Blüte",
+      "region": "Niedersachsen",
+      "countryCode": "DE",
+      "lat": 53.1,
+      "lng": 9.9,
+      "iata": "HAJ",
+      "catalogVibes": [
+        "family",
+        "anti_party"
+      ],
+      "tags": [
+        "heather",
+        "seasonal",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Aug–Sep",
+      "durationHint": "1–3 Nächte",
+      "whyFit": "Violetter Horizont + Bienensummen ab DE ohne Flug.",
+      "hook": "Heide-Monochrom pur.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Flach und voll in Blüte",
+      "photoTruth": "Fotorealistisch",
+      "bestWindow": "Aug–Sep"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-fairy-pools",
+      "destLabel": "Fairy Pools",
+      "region": "Isle of Skye",
+      "countryCode": "GB",
+      "lat": 57.25,
+      "lng": -6.27,
+      "iata": "GLA",
+      "catalogVibes": [
+        "adventure",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "waterfall",
+        "swim",
+        "nature_wow"
+      ],
+      "wowType": "waterfall",
+      "seasonHint": "Mai, Sep (Midges meiden)",
+      "durationHint": "1–2 Tage Skye",
+      "whyFit": "Türkis-Kaskaden unter Cuillins — Midges Sommerhölle.",
+      "hook": "Eisbaden zwischen dunklen Bergen.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Regen = braun; Midges Jul/Aug",
+      "photoTruth": "Nur bei Klarwasser",
+      "bestWindow": "Mai, Sep",
+      "ethicalNote": "Keine Steinmännchen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "medium",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-colored-canyon",
+      "destLabel": "Colored Canyon Sinai",
+      "region": "Sinai Near-DE",
+      "countryCode": "EG",
+      "lat": 28.7,
+      "lng": 34.55,
+      "iata": "SSH",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "canyon",
+        "security_live",
+        "nature_wow",
+        "rainbow_geology"
+      ],
+      "wowType": "rainbow_geology",
+      "seasonHint": "Nov–März",
+      "durationHint": "Tagestrip ab Dahab",
+      "whyFit": "Enge Sandsteinschlucht Farbspiel — Sicherheit Sinai LIVE.",
+      "hook": "Rot/Magenta-Labyrinth.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Hitze + Klettern; Sicherheitslage prüfen",
+      "photoTruth": "Farben echt",
+      "bestWindow": "Winter"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-katla-ice",
+      "destLabel": "Katla Eishöhle",
+      "region": "Mýrdalsjökull / Vík",
+      "countryCode": "IS",
+      "lat": 63.63,
+      "lng": -19.05,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "ice_cave",
+        "volcano",
+        "nature_wow"
+      ],
+      "wowType": "ice_cave",
+      "seasonHint": "Ganzjährig (geothermal)",
+      "durationHint": "Tagestrip ab Vík",
+      "whyFit": "Asche-Eis über aktivem Vulkan — Sommer zugänglich anders als Vatnajökull-Blau.",
+      "hook": "Schwarze Bänder 1918, enge Kammern.",
+      "access": "Super-Jeep ab Vík LIVE",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Klein/dunkel; Veðurstofa Ampel",
+      "photoTruth": "Oft schwarzgrau nicht crystal blue",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-vatnajokull-blue",
+      "destLabel": "Vatnajökull Crystal Caves",
+      "region": "Südisland",
+      "countryCode": "IS",
+      "lat": 64,
+      "lng": -16.8,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "ice_cave",
+        "winter",
+        "nature_wow"
+      ],
+      "wowType": "ice_cave",
+      "seasonHint": "Okt–Apr",
+      "durationHint": "1–2 Tage",
+      "whyFit": "Kristallblau — nur Winter, kollabiert/flutet.",
+      "hook": "Blau-Overkill, knisterndes Eis.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Bedingungen täglich neu",
+      "photoTruth": "Blau real im Winter",
+      "bestWindow": "Nov–März"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "medium",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-fagradalsfjall",
+      "destLabel": "Fagradalsfjall / Reykjanes Lava",
+      "region": "Reykjanes",
+      "countryCode": "IS",
+      "lat": 63.9,
+      "lng": -22.27,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure",
+        "menstrip"
+      ],
+      "tags": [
+        "volcano",
+        "eruption_live",
+        "nature_wow"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Eruptionsabhängig LIVE",
+      "durationHint": "Tageswanderung",
+      "whyFit": "Spalteneruption Bodennähe — kann pausieren.",
+      "hook": "Hitze, Glas-Krachen erkaltender Lava.",
+      "guideRequired": "recommended",
+      "effortLevel": "hard",
+      "realityCheck": "Gas-Senken tödlich; Zivilschutz Gesetz",
+      "photoTruth": "Drohnen schmelzen oft",
+      "bestWindow": "Nur bei aktiver Phase",
+      "ethicalNote": "Warnungen befolgen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-stromboli",
+      "destLabel": "Stromboli Nachtfontänen",
+      "region": "Äolische Inseln",
+      "countryCode": "IT",
+      "lat": 38.79,
+      "lng": 15.21,
+      "iata": "REG",
+      "catalogVibes": [
+        "menstrip",
+        "adventure"
+      ],
+      "tags": [
+        "volcano",
+        "night",
+        "nature_wow"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Apr–Okt",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Daueraktiver Leuchtturm — Gipfel oft gesperrt, Boot Alternative.",
+      "hook": "Bodenbeben + rote Fontänen.",
+      "guideRequired": "yes",
+      "effortLevel": "hard",
+      "realityCheck": "Aktivität sperrt Aufstieg",
+      "photoTruth": "Nacht real spektakulär",
+      "bestWindow": "Apr–Okt"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-aetna",
+      "destLabel": "Ätna Gipfelkrater",
+      "region": "Sizilien",
+      "countryCode": "IT",
+      "lat": 37.75,
+      "lng": 14.99,
+      "iata": "CTA",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "volcano",
+        "alpine",
+        "nature_wow"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Sommer",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Höchster aktiver Vulkan EU — oben alpin kalt!",
+      "hook": "Schwefel, Dampf, 3300m.",
+      "guideRequired": "yes",
+      "effortLevel": "expert",
+      "realityCheck": "Gipfel bei Aktivität zu; alpine Ausrüstung",
+      "photoTruth": "Mittelmeerinsel ≠ Strandwetter oben",
+      "bestWindow": "Sommer"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-strokkur",
+      "destLabel": "Strokkur / Geysir",
+      "region": "Golden Circle",
+      "countryCode": "IS",
+      "lat": 64.31,
+      "lng": -20.3,
+      "iata": "KEF",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "geyser",
+        "overtourism",
+        "nature_wow",
+        "geothermal"
+      ],
+      "wowType": "geothermal",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "Alle 5–10 Min Fontäne — touristisch voll.",
+      "hook": "Explosion, Hitze, Schwefel.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Massen; Absperrungen lebensrettend",
+      "photoTruth": "Geduld für Moment",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-furnas",
+      "destLabel": "Furnas Fumarolen",
+      "region": "São Miguel",
+      "countryCode": "PT",
+      "lat": 37.77,
+      "lng": -25.31,
+      "iata": "PDL",
+      "catalogVibes": [
+        "spa_value",
+        "adventure"
+      ],
+      "tags": [
+        "geothermal",
+        "azores",
+        "nature_wow"
+      ],
+      "wowType": "geothermal",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Kochender Schlamm im Grün + Thermalbaden.",
+      "hook": "Schwefel-Geruch, Dampf im Dschungel.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Geruch penetrant",
+      "photoTruth": "Wie beschrieben",
+      "bestWindow": "Ganzjährig",
+      "ethicalNote": "Erdöfen lokal nutzen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-eisriesenwelt",
+      "destLabel": "Eisriesenwelt",
+      "region": "Werfen",
+      "countryCode": "AT",
+      "lat": 47.5,
+      "lng": 13.19,
+      "iata": "SZG",
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "tags": [
+        "ice_cave",
+        "no_photo",
+        "nature_wow"
+      ],
+      "wowType": "ice_cave",
+      "seasonHint": "Mai–Okt",
+      "durationHint": "Tagestrip",
+      "whyFit": "Größte Eishöhle — Foto innen verboten.",
+      "hook": "Eisdome, Zugluft-Kälte.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Kalter Wind; keine Fotos innen",
+      "photoTruth": "Erlebnis > Foto",
+      "bestWindow": "Mai–Okt"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-aletsch",
+      "destLabel": "Aletschgletscher",
+      "region": "Wallis",
+      "countryCode": "CH",
+      "lat": 46.5,
+      "lng": 8.03,
+      "iata": "BRN",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "glacier",
+        "climate",
+        "nature_wow"
+      ],
+      "wowType": "glacier",
+      "seasonHint": "Jul–Sep",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Größter Alpen-Eisstrom — schwindet sichtbar.",
+      "hook": "Dimensionen jenseits Maßstab.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Instabiles Moränengeröll",
+      "photoTruth": "Klimawandel-Monument",
+      "bestWindow": "Jul–Sep"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-campi-flegrei",
+      "destLabel": "Campi Flegrei / Solfatara",
+      "region": "Neapel",
+      "countryCode": "IT",
+      "lat": 40.83,
+      "lng": 14.14,
+      "iata": "NAP",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "volcano",
+        "urban",
+        "nature_wow"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Ganzjährig offene Bereiche",
+      "durationHint": "Halbtag",
+      "whyFit": "Supervulkan unter Stadt — Teile geschlossen.",
+      "hook": "Boden kocht, Bradyseismos.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Gas/Einbruch — Wege strikt",
+      "photoTruth": "Teile gesperrt",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-langjokull-tunnel",
+      "destLabel": "Langjökull Tunnel",
+      "region": "Island",
+      "countryCode": "IS",
+      "lat": 64.65,
+      "lng": -20.3,
+      "iata": "KEF",
+      "catalogVibes": [
+        "kids",
+        "family"
+      ],
+      "tags": [
+        "glacier",
+        "anthropogenic",
+        "nature_wow"
+      ],
+      "wowType": "glacier",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Tagestrip",
+      "whyFit": "Künstlicher Tunnel — weniger organisch als Naturhöhlen.",
+      "hook": "0°C tief im Eisschild.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Anthropogen, Mega-Truck",
+      "photoTruth": "Beleuchtete Gänge ≠ Crystal Cave",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-aurora-abisko",
+      "destLabel": "Aurora Abisko Blue Hole",
+      "region": "Schwedisch Lappland",
+      "countryCode": "SE",
+      "lat": 68.35,
+      "lng": 18.83,
+      "iata": "KRN",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "northern_lights",
+        "winter",
+        "nature_wow"
+      ],
+      "wowType": "northern_lights",
+      "seasonHint": "Nov–März",
+      "durationHint": "4–5 Nächte Puffer",
+      "whyFit": "Mikroklima reißt Wolken — beste Aurora-Chance EU.",
+      "hook": "Tanzendes Licht, −20 bis −30°C.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Auge sieht blasser als Kamera; KP≥5 für Explosion",
+      "photoTruth": "Neon oft nur Sensor",
+      "bestWindow": "Nov–März",
+      "ethicalNote": "Stirnlampen dimmen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "medium",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-biolum-zeeland",
+      "destLabel": "Biolumineszenz Zeeland",
+      "region": "Niederlande",
+      "countryCode": "NL",
+      "lat": 51.5,
+      "lng": 3.7,
+      "iata": "AMS",
+      "catalogVibes": [
+        "date"
+      ],
+      "tags": [
+        "bioluminescence",
+        "rare",
+        "nature_wow"
+      ],
+      "wowType": "bioluminescence",
+      "seasonHint": "Jul–Aug heiße Nächte",
+      "durationHint": "Spontan",
+      "whyFit": "Neonblaues Meer bei Bewegung — nicht planbar.",
+      "hook": "Wellen leuchten.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Extrem selten; Ausfallquote hoch",
+      "photoTruth": "Nur bei Blüte",
+      "bestWindow": "Jul–Aug"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-midnight-sun-lofoten",
+      "destLabel": "Mitternachtssonne Lofoten",
+      "region": "Nordnorwegen",
+      "countryCode": "NO",
+      "lat": 68.15,
+      "lng": 13.6,
+      "iata": "LKN",
+      "catalogVibes": [
+        "adventure",
+        "date"
+      ],
+      "tags": [
+        "midnight_sun",
+        "nature_wow"
+      ],
+      "wowType": "midnight_sun",
+      "seasonHint": "Jun–Jul",
+      "durationHint": "4–7 Nächte",
+      "whyFit": "Golden Hour Stunden — Schlafzyklus kaputt.",
+      "hook": "Sonne geht nicht unter.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Oft Regen; Erschöpfung real",
+      "photoTruth": "Licht magisch wenn klar",
+      "bestWindow": "Jun–Jul"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-alqueva-dark",
+      "destLabel": "Dark Sky Alqueva",
+      "region": "Alentejo",
+      "countryCode": "PT",
+      "lat": 38.2,
+      "lng": -7.5,
+      "iata": "LIS",
+      "catalogVibes": [
+        "date",
+        "anti_party"
+      ],
+      "tags": [
+        "dark_sky",
+        "stars",
+        "nature_wow"
+      ],
+      "wowType": "dark_sky",
+      "seasonHint": "Mai–Sep Neumond",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Erste Starlight Destination EU — Milchstraße bloßäugig.",
+      "hook": "Sternendichte ohne Stadtlicht.",
+      "guideRequired": "recommended",
+      "effortLevel": "easy",
+      "realityCheck": "Vollmond ruiniert; Wolken",
+      "photoTruth": "Nur Neumond klar",
+      "bestWindow": "Neumond Sommer"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-teide-stars",
+      "destLabel": "Teide Observatorium Sterne",
+      "region": "Teneriffa",
+      "countryCode": "ES",
+      "lat": 28.3,
+      "lng": -16.51,
+      "iata": "TFS",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "dark_sky",
+        "volcano",
+        "nature_wow"
+      ],
+      "wowType": "dark_sky",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Nacht-Tour",
+      "whyFit": "Über Inversionswolken — weltklasse Klarheit.",
+      "hook": "Wolkenmeer darunter, Sterne darüber.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "2400m nachts kalt; Seilbahn nachts nicht",
+      "photoTruth": "Kalt auch Sommer",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-lauterbrunnen",
+      "destLabel": "Lauterbrunnental",
+      "region": "Jungfrau",
+      "countryCode": "CH",
+      "lat": 46.59,
+      "lng": 7.91,
+      "iata": "ZRH",
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "tags": [
+        "waterfall",
+        "overtourism",
+        "nature_wow"
+      ],
+      "wowType": "waterfall",
+      "seasonHint": "Mai–Jun Schmelze",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "72 Wasserfälle — Social-Media-Kollaps Verkehr.",
+      "hook": "Donnerndes Wasser, senkrechte Wände.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Extrem voll; Anwohner-Stress",
+      "photoTruth": "Landschaft hält, Masse stört",
+      "bestWindow": "Mai–Jun früh",
+      "ethicalNote": "Privatsphäre Anwohner"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-trolltunga",
+      "destLabel": "Trolltunga",
+      "region": "Norwegen",
+      "countryCode": "NO",
+      "lat": 60.12,
+      "lng": 6.75,
+      "iata": "BGO",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "hike",
+        "cliff",
+        "queue",
+        "nature_wow",
+        "fjord_cliff"
+      ],
+      "wowType": "fjord_cliff",
+      "seasonHint": "Jun–Sep",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "22–28 km hart + bis 2h Selfie-Schlange.",
+      "hook": "Felszunge über Abgrund.",
+      "guideRequired": "no",
+      "effortLevel": "expert",
+      "realityCheck": "Warteschlange Foto; Fitness Pflicht",
+      "photoTruth": "Kante real — Queue verschwiegen",
+      "bestWindow": "Jun–Sep",
+      "ethicalNote": "Keine waghalsigen Posen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-tre-cime",
+      "destLabel": "Tre Cime di Lavaredo",
+      "region": "Dolomiten",
+      "countryCode": "IT",
+      "lat": 46.62,
+      "lng": 12.3,
+      "iata": "VCE",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "hike",
+        "dolomites",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Sep–Okt",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Drei Zinnen — Maut teuer, Parkplatz nach 9 voll.",
+      "hook": "Enrosadira Abendrot.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Früh starten oder Nebensaison",
+      "photoTruth": "Monumental real",
+      "bestWindow": "Sep–Okt"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-verdon",
+      "destLabel": "Verdonschlucht",
+      "region": "Provence",
+      "countryCode": "FR",
+      "lat": 43.74,
+      "lng": 6.36,
+      "iata": "NCE",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "canyon",
+        "kayak",
+        "nature_wow"
+      ],
+      "wowType": "canyon",
+      "seasonHint": "Mai, Sep",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Grand Canyon EU — Sommer Hitze im Canyon.",
+      "hook": "Türkis 700m unten, Gänsegeier.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Staudamm reguliert Wasser",
+      "photoTruth": "Weite real",
+      "bestWindow": "Mai, Sep"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-seceda",
+      "destLabel": "Seceda",
+      "region": "Südtirol",
+      "countryCode": "IT",
+      "lat": 46.6,
+      "lng": 11.72,
+      "iata": "INN",
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "tags": [
+        "dolomites",
+        "cable",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Jul–Okt",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Schiefe Kammlinie — Seilbahn = voll in Peak.",
+      "hook": "Erstarrte Wellen-Berge.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Hochsaison wenig exklusiv",
+      "photoTruth": "Geometrie real",
+      "bestWindow": "Jul–Okt Shoulder"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-bastei",
+      "destLabel": "Basteibrücke",
+      "region": "Sächsische Schweiz",
+      "countryCode": "DE",
+      "lat": 50.97,
+      "lng": 14.07,
+      "iata": "DRS",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "sandstone",
+        "fog",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Herbst Nebel",
+      "durationHint": "1–2 Nächte",
+      "whyFit": "Sandsteinnadeln — tags Bustouristen, morgens Magie.",
+      "hook": "Nebel über Felsen.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Nur Früh/Herbst-Nebel wow",
+      "photoTruth": "Tags voll",
+      "bestWindow": "Herbst früh"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-vestrahorn",
+      "destLabel": "Vestrahorn Stokksnes",
+      "region": "Ostisland",
+      "countryCode": "IS",
+      "lat": 64.25,
+      "lng": -14.96,
+      "iata": "EGS",
+      "catalogVibes": [
+        "date",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "scenic",
+        "fee",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "1–2 Nächte",
+      "whyFit": "Schwarze Zacken auf Sandbank — Privatland Eintritt.",
+      "hook": "Spiegelung bei Nässe ohne Wind.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Oft stürmisch; Viking Café Fee",
+      "photoTruth": "Perfekt nur nass+windstill",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-cliffs-moher",
+      "destLabel": "Cliffs of Moher",
+      "region": "Irland",
+      "countryCode": "IE",
+      "lat": 52.97,
+      "lng": -9.43,
+      "iata": "SNN",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "cliff",
+        "wind",
+        "nature_wow",
+        "fjord_cliff"
+      ],
+      "wowType": "fjord_cliff",
+      "seasonHint": "Apr–Okt",
+      "durationHint": "Halbtag–2 Nächte",
+      "whyFit": "Vertikale Atlantik-Klippen — Wind kann töten.",
+      "hook": "Heulender Wind, Fallhöhe.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Visitor Center kommerziell; Gras-Kanten",
+      "photoTruth": "Drama real",
+      "bestWindow": "Apr–Okt",
+      "ethicalNote": "Ungesicherte Kanten"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-tara-canyon",
+      "destLabel": "Tara River Canyon",
+      "region": "Montenegro",
+      "countryCode": "ME",
+      "lat": 43.2,
+      "lng": 19.1,
+      "iata": "TGD",
+      "catalogVibes": [
+        "adventure",
+        "menstrip"
+      ],
+      "tags": [
+        "rafting",
+        "canyon",
+        "nature_wow"
+      ],
+      "wowType": "canyon",
+      "seasonHint": "Mai–Jun Rafting",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Tiefste Schlucht EU — wildes Rafting.",
+      "hook": "Eiswasser, Urwald-Steilhänge.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Schneeschmelze abhängig",
+      "photoTruth": "Unkommerziell stark",
+      "bestWindow": "Mai–Jun"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-meteora",
+      "destLabel": "Meteora",
+      "region": "Griechenland",
+      "countryCode": "GR",
+      "lat": 39.72,
+      "lng": 21.63,
+      "iata": "VOL",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "monastery",
+        "geology",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Apr, Okt",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Klöster auf Monolithen — Busmassen + Kleiderordnung.",
+      "hook": "Schwebende Klöster im Nebel.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Sommer heiß und voll",
+      "photoTruth": "Ikonisch real",
+      "bestWindow": "Apr, Okt",
+      "ethicalNote": "Religiöse Stätten respektieren"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-glencoe",
+      "destLabel": "Glencoe",
+      "region": "Schottland",
+      "countryCode": "GB",
+      "lat": 56.68,
+      "lng": -5.1,
+      "iata": "GLA",
+      "catalogVibes": [
+        "adventure",
+        "anti_party"
+      ],
+      "tags": [
+        "valley",
+        "rain",
+        "nature_wow",
+        "other_unique"
+      ],
+      "wowType": "other_unique",
+      "seasonHint": "Herbst Farben",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Vulkan-/Gletschertal Melancholie — Regen ist Teil.",
+      "hook": "Steile Grashänge, düster.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Oft nass",
+      "photoTruth": "Drama braucht Regen",
+      "bestWindow": "Herbst"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-plitvice",
+      "destLabel": "Plitvicer Seen",
+      "region": "Kroatien",
+      "countryCode": "HR",
+      "lat": 44.88,
+      "lng": 15.62,
+      "iata": "ZAG",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "waterfall",
+        "overtourism",
+        "nature_wow"
+      ],
+      "wowType": "waterfall",
+      "seasonHint": "Okt Nebensaison",
+      "durationHint": "1–2 Nächte",
+      "whyFit": "Türkis-Kaskaden — Sommer Gänsemarsch; Baden verboten.",
+      "hook": "Wasserfälle überall.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Peak unpassierbar; Una besser Alternative",
+      "photoTruth": "Landschaft hält, Masse nicht",
+      "bestWindow": "Okt"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-geiranger",
+      "destLabel": "Geirangerfjord",
+      "region": "Norwegen",
+      "countryCode": "NO",
+      "lat": 62.1,
+      "lng": 7.2,
+      "iata": "AES",
+      "catalogVibes": [
+        "anti_party",
+        "adventure"
+      ],
+      "tags": [
+        "fjord",
+        "cruise_pollution",
+        "nature_wow",
+        "fjord_cliff"
+      ],
+      "wowType": "fjord_cliff",
+      "seasonHint": "Jun–Aug",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Ikonischer Fjord — Kreuzfahrt-Abgase Reality.",
+      "hook": "Sieben Schwestern Wasserfälle.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Kreuzfahrtschiffe verschmutzen",
+      "photoTruth": "Landschaft ja, Luft nein Peak",
+      "bestWindow": "Jun–Aug kleine Boote",
+      "ethicalNote": "Kleine/elektro Fähren"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-husavik-whales",
+      "destLabel": "Whale Watching Húsavík",
+      "region": "Nordisland",
+      "countryCode": "IS",
+      "lat": 66.04,
+      "lng": -17.34,
+      "iata": "KEF",
+      "catalogVibes": [
+        "family",
+        "adventure"
+      ],
+      "tags": [
+        "wildlife",
+        "whale",
+        "ethical",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Jun–Aug",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Elektroboote weniger Sonar-Stress — Sicht >90% Muster.",
+      "hook": "Blas in Stille, Fluken.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Seekrankheit Nordatlantik",
+      "photoTruth": "Kalt auf Deck",
+      "bestWindow": "Jun–Aug",
+      "ethicalNote": "Elektro bevorzugen"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-kainuu-bears",
+      "destLabel": "Braunbären Kainuu Hides",
+      "region": "Finnland",
+      "countryCode": "FI",
+      "lat": 64.5,
+      "lng": 28.5,
+      "iata": "OUL",
+      "catalogVibes": [
+        "adventure",
+        "anti_party"
+      ],
+      "tags": [
+        "wildlife",
+        "bear",
+        "hide",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Mai–Aug",
+      "durationHint": "2–3 Nächte Hide",
+      "whyFit": "Nacht in Hide — Geduld, Kälte, spartanisch.",
+      "hook": "Bär in der Dämmerung.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Lange kalte Nächte; Köder ethisch prüfen",
+      "photoTruth": "Geduld > Garantie",
+      "bestWindow": "Mai–Aug"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-skomer-puffins",
+      "destLabel": "Puffins Skomer Island",
+      "region": "Wales",
+      "countryCode": "GB",
+      "lat": 51.74,
+      "lng": -5.3,
+      "iata": "CWL",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "wildlife",
+        "birds",
+        "permit",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Mai–Jul Brut",
+      "durationHint": "Tagestrip",
+      "whyFit": "Tausende Puffins — Bootstickets Monate voraus.",
+      "hook": "Bunte Schnäbel ohne Scheu.",
+      "guideRequired": "no",
+      "effortLevel": "moderate",
+      "realityCheck": "Limit + Wetter",
+      "photoTruth": "Nah real",
+      "bestWindow": "Mai–Jul",
+      "ethicalNote": "Nester nicht zertreten"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-bialowieza",
+      "destLabel": "Białowieża Wisente",
+      "region": "Polen",
+      "countryCode": "PL",
+      "lat": 52.7,
+      "lng": 23.87,
+      "iata": "WAW",
+      "catalogVibes": [
+        "adventure",
+        "anti_party"
+      ],
+      "tags": [
+        "wildlife",
+        "forest",
+        "bison",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Winter Tracking",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Urwald + Wisent — Kernzone nur mit Guide.",
+      "hook": "Prähistorisches Schnaufen im Nebel.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Tiere wandern — keine Garantie",
+      "photoTruth": "Spuren oft nur",
+      "bestWindow": "Winter"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-orcas-tromso",
+      "destLabel": "Orcas Tromsø Heringsrun",
+      "region": "Nordnorwegen",
+      "countryCode": "NO",
+      "lat": 69.65,
+      "lng": 18.96,
+      "iata": "TOS",
+      "catalogVibes": [
+        "adventure",
+        "menstrip"
+      ],
+      "tags": [
+        "wildlife",
+        "orca",
+        "winter",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Nov–Jan",
+      "durationHint": "4–5 Nächte",
+      "whyFit": "Karussell-Jagd im Zwielicht — rau, dunkel, kalt.",
+      "hook": "Orcas im Polarnacht-Blau.",
+      "guideRequired": "yes",
+      "effortLevel": "hard",
+      "realityCheck": "Keine Taghelle; Seegang",
+      "photoTruth": "Dunkelheit real",
+      "bestWindow": "Nov–Jan",
+      "ethicalNote": "Schnorcheln mit Orcas umstritten"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-helgoland-seals",
+      "destLabel": "Kegelrobben Helgoland",
+      "region": "Nordsee DE",
+      "countryCode": "DE",
+      "lat": 54.18,
+      "lng": 7.89,
+      "iata": "HAM",
+      "catalogVibes": [
+        "kids",
+        "family"
+      ],
+      "tags": [
+        "wildlife",
+        "seals",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Dez–Jan Geburten",
+      "durationHint": "1–2 Nächte",
+      "whyFit": "Heuler an der Düne — 30m Abstand Pflicht.",
+      "hook": "Weiße Jungtiere am Strand.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Selfie-Verletzungen Abstand",
+      "photoTruth": "Nähe verboten",
+      "bestWindow": "Dez–Jan",
+      "ethicalNote": "Nicht berühren / Weg blockieren"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-basking-sharks",
+      "destLabel": "Riesenhaie Hebriden",
+      "region": "Schottland",
+      "countryCode": "GB",
+      "lat": 56.5,
+      "lng": -6.5,
+      "iata": "GLA",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "wildlife",
+        "shark",
+        "nature_wow"
+      ],
+      "wowType": "wildlife",
+      "seasonHint": "Jul–Aug",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Zweitgrößter Fisch filtert Plankton — trüb und kalt.",
+      "hook": "Rückenflosse durchschneidet See.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Trübes Planktonwasser",
+      "photoTruth": "Keine Tropenklarheit",
+      "bestWindow": "Jul–Aug"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-skocjan",
+      "destLabel": "Škocjan-Höhlen",
+      "region": "Slowenien",
+      "countryCode": "SI",
+      "lat": 45.66,
+      "lng": 13.99,
+      "iata": "TRI",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "cave",
+        "unesco",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Tagestrip–2 Nächte",
+      "whyFit": "Unterirdischer Canyon + Brücke über Reka.",
+      "hook": "Tosender Fluss in der Dunkelheit.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Fotos oft verboten",
+      "photoTruth": "Erlebnis > Foto",
+      "bestWindow": "Ganzjährig",
+      "ethicalNote": "Fledermaus/Grottenolm"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-thrihnukagigur",
+      "destLabel": "Thrihnukagigur Magmakammer",
+      "region": "Island",
+      "countryCode": "IS",
+      "lat": 63.88,
+      "lng": -21.7,
+      "iata": "KEF",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "volcano",
+        "expensive",
+        "nature_wow"
+      ],
+      "wowType": "volcano",
+      "seasonHint": "Mai–Okt",
+      "durationHint": "Tagestrip",
+      "whyFit": "Gondel 120m in leere Magmakammer — teuer + Lavafeld-Wanderung.",
+      "hook": "Bunte Oxidationswände im Bauch des Vulkans.",
+      "guideRequired": "yes",
+      "effortLevel": "moderate",
+      "realityCheck": "Ca. 300€+ Muster LIVE; 3km Wanderung",
+      "photoTruth": "Einzigartig real",
+      "bestWindow": "Mai–Okt"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-derinkuyu",
+      "destLabel": "Derinkuyu Unterstadt",
+      "region": "Kappadokien",
+      "countryCode": "TR",
+      "lat": 38.37,
+      "lng": 34.73,
+      "iata": "NAV",
+      "catalogVibes": [
+        "adventure"
+      ],
+      "tags": [
+        "underground",
+        "claustrophobia",
+        "nature_wow",
+        "cave"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "8 Stockwerke Fluchtstadt — Bücken, Enge.",
+      "hook": "Rollsteintüren, Lüftungsschächte.",
+      "guideRequired": "recommended",
+      "effortLevel": "moderate",
+      "realityCheck": "Klaustrophobie-Risiko",
+      "photoTruth": "Dunkel eng",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-padirac",
+      "destLabel": "Gouffre de Padirac",
+      "region": "Frankreich",
+      "countryCode": "FR",
+      "lat": 44.8,
+      "lng": 1.75,
+      "iata": "BOD",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "cave",
+        "boat",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Apr–Okt",
+      "durationHint": "Tagestrip",
+      "whyFit": "Bootsfahrt im Erdschlund — Sommer Warteschlangen.",
+      "hook": "100m offener Schlund, stilles Wasser.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Peak laut und voll",
+      "photoTruth": "Akustik Peak ruiniert",
+      "bestWindow": "Shoulder"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-salina-turda",
+      "destLabel": "Salina Turda",
+      "region": "Rumänien",
+      "countryCode": "RO",
+      "lat": 46.58,
+      "lng": 23.78,
+      "iata": "CLJ",
+      "catalogVibes": [
+        "kids",
+        "family"
+      ],
+      "tags": [
+        "salt_mine",
+        "underground",
+        "nature_wow",
+        "cave"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "Salzbergwerk mit Riesenrad unter Tage — laut touristisch.",
+      "hook": "Sci-Fi-Halle aus Salz.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Hall laut",
+      "photoTruth": "Visuell surreal real",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-frasassi",
+      "destLabel": "Frasassi-Höhlen",
+      "region": "Marken",
+      "countryCode": "IT",
+      "lat": 43.4,
+      "lng": 12.93,
+      "iata": "AOI",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "cave",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "Dom-große Halle — 14°C feucht.",
+      "hook": "Mailänder Dom passt hinein.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Kein Blitz; kalt feucht",
+      "photoTruth": "Weite real",
+      "bestWindow": "Ganzjährig",
+      "ethicalNote": "Tropfsteine nicht berühren"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-chauvet2",
+      "destLabel": "Chauvet 2 Replik",
+      "region": "Ardèche",
+      "countryCode": "FR",
+      "lat": 44.4,
+      "lng": 4.43,
+      "iata": "LYS",
+      "catalogVibes": [
+        "family",
+        "date"
+      ],
+      "tags": [
+        "cave",
+        "replica",
+        "art",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "Original versiegelt — Replik schützt 30k Jahre Kunst.",
+      "hook": "Eiszeit-Tiere in Stille.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Ist Replik — ehrlich kommunizieren",
+      "photoTruth": "Architektur-Kopie",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-postojna",
+      "destLabel": "Postojna-Höhle",
+      "region": "Slowenien",
+      "countryCode": "SI",
+      "lat": 45.78,
+      "lng": 14.2,
+      "iata": "LJU",
+      "catalogVibes": [
+        "family"
+      ],
+      "tags": [
+        "cave",
+        "train",
+        "nature_wow"
+      ],
+      "wowType": "cave",
+      "seasonHint": "Ganzjährig",
+      "durationHint": "Halbtag",
+      "whyFit": "Schmalspurbahn in den Berg — kommerziell aber skaliert.",
+      "hook": "Zug in Kronleuchter-Räume.",
+      "guideRequired": "yes",
+      "effortLevel": "easy",
+      "realityCheck": "Stark kommerzialisiert",
+      "photoTruth": "Geologie hält",
+      "bestWindow": "Ganzjährig"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-una-alt",
+      "destLabel": "Una Nationalpark",
+      "region": "Bosnien",
+      "countryCode": "BA",
+      "lat": 44.5,
+      "lng": 16.15,
+      "iata": "SJJ",
+      "catalogVibes": [
+        "adventure",
+        "ultra_cheap",
+        "anti_party"
+      ],
+      "tags": [
+        "waterfall",
+        "plitvice_alt",
+        "nature_wow"
+      ],
+      "wowType": "waterfall",
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Plitvice-Alternative Travertin ohne Gänsemarsch.",
+      "hook": "Kaskaden ohne Crowds.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Infra simpler",
+      "photoTruth": "Vergleichbar türkis",
+      "bestWindow": "Shoulder"
+    },
+    {
+      "vibe": "nature_wow",
+      "volatile": true,
+      "confidence": "high",
+      "priceBandEurPp": "LIVE prüfen",
+      "id": "i-saturnia-alt",
+      "destLabel": "Saturnia / Bagni San Filippo",
+      "region": "Toskana",
+      "countryCode": "IT",
+      "lat": 42.87,
+      "lng": 11.7,
+      "iata": "FCO",
+      "catalogVibes": [
+        "spa_value",
+        "anti_party",
+        "date"
+      ],
+      "tags": [
+        "thermal",
+        "pamukkale_alt",
+        "nature_wow",
+        "geothermal"
+      ],
+      "wowType": "geothermal",
+      "seasonHint": "Nebensaison",
+      "durationHint": "1–2 Nächte",
+      "whyFit": "Wilde Kalk/Thermal statt Pamukkale-Masse.",
+      "hook": "Warm im Wald/freien Cascaden.",
+      "guideRequired": "no",
+      "effortLevel": "easy",
+      "realityCheck": "Lokale Regeln LIVE",
+      "photoTruth": "Authentischer als Pamukkale-Pools",
+      "bestWindow": "Shoulder"
+    }
+  ],
+  "wowClusters": [
+    {
+      "cluster": "rift_snorkel",
+      "places": [
+        "Silfra",
+        "Verzasca",
+        "Ghar Lapsi",
+        "Zenobia"
+      ],
+      "watchOut": "Kälte/Strömung/Zertifikat"
+    },
+    {
+      "cluster": "rainbow_geology",
+      "places": [
+        "Landmannalaugar",
+        "Río Tinto",
+        "Zumaia",
+        "Bardenas",
+        "Colored Canyon"
+      ],
+      "watchOut": "Licht/4x4/toxisch"
+    },
+    {
+      "cluster": "fire_ice",
+      "places": [
+        "Katla",
+        "Vatnajökull Blue",
+        "Fagradalsfjall",
+        "Stromboli",
+        "Ätna",
+        "Furnas"
+      ],
+      "watchOut": "Warnsysteme/Sperrungen"
+    },
+    {
+      "cluster": "sky_light",
+      "places": [
+        "Abisko Aurora",
+        "Alqueva",
+        "Teide",
+        "Lofoten Midnight Sun",
+        "Zeeland Biolum"
+      ],
+      "watchOut": "Puffer-Nächte; Kamera ≠ Auge"
+    },
+    {
+      "cluster": "mega_landscape",
+      "places": [
+        "Trolltunga",
+        "Tre Cime",
+        "Verdon",
+        "Geiranger",
+        "Lauterbrunnen",
+        "Plitvice"
+      ],
+      "watchOut": "Overtourism Peak"
+    },
+    {
+      "cluster": "wildlife",
+      "places": [
+        "Húsavík",
+        "Kainuu",
+        "Skomer",
+        "Białowieża",
+        "Tromsø Orcas",
+        "Helgoland"
+      ],
+      "watchOut": "Keine Garantie; Ethik"
+    },
+    {
+      "cluster": "underground",
+      "places": [
+        "Škocjan",
+        "Thrihnukagigur",
+        "Derinkuyu",
+        "Padirac",
+        "Frasassi",
+        "Salina Turda"
+      ],
+      "watchOut": "Klaustrophobie/Fotos"
+    }
+  ],
+  "overhypedPairs": [
+    {
+      "hypedLabel": "Blaue Grotte Capri",
+      "betterLabel": "Ghar Lapsi / Chios Höhlen",
+      "sameVibe": "cave",
+      "whyOverrated": "Massenabfertigung teuer limitiert",
+      "whyBetter": "Autonomere Licht-Höhlen"
+    },
+    {
+      "hypedLabel": "Pamukkale Peak",
+      "betterLabel": "Saturnia / Bagni San Filippo",
+      "sameVibe": "spa_value",
+      "whyOverrated": "Wasserumleitung + Badeverbote",
+      "whyBetter": "Wilde Thermal-Kalk"
+    },
+    {
+      "hypedLabel": "Plitvice Hochsommer",
+      "betterLabel": "Una NP / Krka Nebensaison",
+      "sameVibe": "family",
+      "whyOverrated": "Holzstege blockiert",
+      "whyBetter": "Gleiche Travertin-Ästhetik weniger Gedränge"
+    }
+  ],
+  "top40Speakable": [
+    {
+      "destLabel": "Silfra",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Katla Eishöhle",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Vatnajökull Crystal",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Trolltunga",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Aurora Abisko",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Škocjan",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Fagradalsfjall",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Húsavík Whales",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Stromboli",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Thrihnukagigur",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Río Tinto",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Zumaia Flysch",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Verdon",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Ätna",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Bardenas",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Seceda",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Plura",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Tre Cime",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Białowieża",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Alqueva Dark Sky",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Sete Cidades",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Hallerbos",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Padirac",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Geiranger",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Orcas Tromsø",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Landmannalaugar",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Tara Canyon",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Kainuu Bären",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Teide Sterne",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Furnas",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Raufarhólshellir",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Skomer Puffins",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Derinkuyu",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Vestrahorn",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Bastei",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Riesenhaie Hebriden",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Campi Flegrei",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Biolum Zeeland",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Una",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    },
+    {
+      "destLabel": "Saturnia/San Filippo",
+      "wowType": "mixed",
+      "oneLinerHook": "Natur-Wow mit RealityCheck",
+      "realityCheck": "LIVE Saison/Permit"
+    }
+  ],
+  "seasonWindows": [
+    {
+      "phenomenon": "northern_lights",
+      "where": "Abisko",
+      "window": "Nov–März",
+      "bufferNights": "4–5"
+    },
+    {
+      "phenomenon": "ice_cave_blue",
+      "where": "Vatnajökull",
+      "window": "Okt–Apr",
+      "bufferNights": "2–3"
+    },
+    {
+      "phenomenon": "ice_cave_katla",
+      "where": "Vík",
+      "window": "Ganzjährig",
+      "bufferNights": "1–2"
+    },
+    {
+      "phenomenon": "midnight_sun",
+      "where": "Lofoten",
+      "window": "Jun–Jul",
+      "bufferNights": "Wetter"
+    },
+    {
+      "phenomenon": "hallerbos",
+      "where": "Belgien",
+      "window": "Mitte April 2–3 Wochen",
+      "bufferNights": "0–1"
+    },
+    {
+      "phenomenon": "landmannalaugar",
+      "where": "Island Hochland",
+      "window": "Jul–Aug",
+      "bufferNights": "4x4"
+    },
+    {
+      "phenomenon": "orcas_herring",
+      "where": "Tromsø",
+      "window": "Nov–Jan",
+      "bufferNights": "4–5"
+    },
+    {
+      "phenomenon": "bioluminescence",
+      "where": "Zeeland",
+      "window": "Jul–Aug heiß",
+      "bufferNights": "Spontan"
+    }
+  ],
+  "airports": [
+    {
+      "destLabel": "Keflavík Wow Gate",
+      "iata": "KEF",
+      "fromDeOftenCheap": [
+        "FRA",
+        "MUC",
+        "BER"
+      ],
+      "transferNote": "Golden Circle / Südküste Tours",
+      "seasonDealHint": "Winter Aurora/Ice; Sommer Highlands"
+    },
+    {
+      "destLabel": "Kiruna Abisko",
+      "iata": "KRN",
+      "fromDeOftenCheap": [
+        "ARN"
+      ],
+      "transferNote": "Zug/Bus Abisko",
+      "seasonDealHint": "Nov–März"
+    }
+  ],
+  "trains": [],
+  "flyRailCombos": [],
+  "dealPatterns": [
+    "Polarlicht/Ice Cave: 4–5 Nächte Puffer statt 2",
+    "Silfra: Dry-Suit-Tour — Wassertemperatur ehrlich",
+    "Highlands Island: nur Sommelfenster + 4x4",
+    "Hallerbos/Skomer/Thrihnukagigur: Monate voraus Kapazitätsgrenze",
+    "Plitvice/Pamukkale/Capri: Peak meiden oder Alternative"
+  ]
+}

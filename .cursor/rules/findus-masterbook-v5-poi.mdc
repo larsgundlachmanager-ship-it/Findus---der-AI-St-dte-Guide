@@ -10,7 +10,7 @@ alwaysApply: true
 - Haupt erlebt / teaser-locked → alle Wegpunkte dieses Parents **skip**
 - Approach 2× mit ≥1 h Abstand, nie am Haupt → Approach **dauerhaft skip**
 - Cooldown = **Defer** (nicht permanent skip): nach Ende + **3 s** Radius-Recheck
-- Stille: **15 s** nach M1/Nav · **60 s** nach Modul 2 / Planung
+- Stille: **15 s** nach M1/Nav · **60 s** nach Modul 2 / Planung (Wegweiser/Ambient) · **Hauptort vor dir: 30 s** nach M2/Planung, **kein** Open-Quiet
 - Free-Roam Full unter **10 km/h** (kein Stillstand nötig)
 - Nav-Mode (`navExploreMode`, Settings): `quiet` (Default) / `mute_until_dest` / `full`
 - Place-Tiers: `must_have` immer · harte Amenities (`toilette`/`praxis`/…) raus · Directory-Venues (Sport/Theater/Kino/Café/Aktivität) feuern bei Pref **yes** · Zeit (Bäcker morgens) · Prefs
@@ -38,7 +38,7 @@ Ziel anpeilen (Ortstyp darf dosieren):
 
 **Kurzantworten (`module1StoryMode: brief`, Settings opt-in):** nur **Name + Zusammenfassung**, max. **400 Zeichen**.
 
-**Hardfacts (UI):** immer aus dem **Gesprochenen** — max. **3 Stichpunkte**, je max. **~2 Zeilen**.
+**Hardfacts (UI):** immer aus dem **Gesprochenen** — max. **3 Stichpunkte**, je max. **~2 Zeilen** (gesamt bis 6 Zeilen), **nie abgeschnitten**. Programm-Liste (Kino/Venue nach Wahl): bis **7** Einträge.
 
 ### Aktivitäts-Orte (Sport, Wasserski, Freizeit, Buchung…)
 
@@ -58,7 +58,7 @@ Ziel anpeilen (Ortstyp darf dosieren):
 
 ## UI nach Story
 
-- 1–3 Stichpunkte aus dem **gesprochenen** Text (harte Fakten, je max. ~2 Zeilen) — keine Pack-Dumps, keine Tel/E-Mail/PLZ/**Adresse/GPS** außer User fragt danach.
+- 1–3 Stichpunkte aus dem **gesprochenen** Text (harte Fakten, je max. ~2 Zeilen, nie abgeschnitten) — keine Pack-Dumps, keine Tel/E-Mail/PLZ/**Adresse/GPS** außer User fragt danach.
 - Buttons: „Mehr Historie“ (Kultur) bzw. „Mehr dazu“ (Aktivität) → Modul-1 `interestDeepDive`.
 - **Kein Audio-Selbstvorschlag** („frag mich“, App-Features, Mikro) — Story endet am Ort.
 - Ort-Links aus Pack-URLs (`buildPlaceOfferUrlActions`); Nähe kategoriebasiert; Hotel-Label generisch aus Name.

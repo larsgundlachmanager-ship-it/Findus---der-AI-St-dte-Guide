@@ -44,6 +44,17 @@ export type FactLaneId =
   | 'agent_fallback'
   | 'system_control';
 
+type Call1PitchOpts = {
+  call1DestCity?: string | null;
+  call1MustHaves?: string[] | null;
+  call1Criteria?: Array<{
+    key: string;
+    role: 'must' | 'nice' | 'soft';
+    weight: number;
+  }> | null;
+  authorIntent?: string | null;
+};
+
 function wantsTimeTrigger(text: string): boolean {
   try {
     const { isClockIntent } = require('../../services/alarms/clockIntents') as {
@@ -58,6 +69,13 @@ function wantsTimeTrigger(text: string): boolean {
 }
 
 function wantsSystemAppControl(text: string): boolean {
+  if (
+    /\b(wetter|regen|temperatur|einwohner|wie\s+(?:hoch|groß|gross|alt|viel|viele))\b/iu.test(
+      text,
+    )
+  ) {
+    return false;
+  }
   if (wantsHandsFreeSetup(text)) return true;
   if (wantsLiveChatVoiceCommand(text) || wantsStopLiveChatVoiceCommand(text)) {
     return true;
@@ -124,7 +142,7 @@ async function runOneFactLane(opts: {
   signal?: AbortSignal;
   /** Bei Secondary: Amenity/Parking/Combo nicht nochmal stehlen */
   secondary?: boolean;
-}): Promise<{ lane: FactLaneId; result: AgentResult }> {
+} & Call1PitchOpts): Promise<{ lane: FactLaneId; result: AgentResult }> {
   const text = opts.userText;
   const a = anchorCoords(opts.rucksack);
 
@@ -290,6 +308,10 @@ async function runOneFactLane(opts: {
             userText: text,
             requestId: `lane_${opts.jobId}_${Date.now()}`,
             signal: opts.signal,
+            call1DestCity: opts.call1DestCity ?? opts.city ?? null,
+            call1MustHaves: opts.call1MustHaves ?? null,
+            call1Criteria: opts.call1Criteria ?? null,
+            authorIntent: opts.authorIntent ?? null,
           }),
         };
       }
@@ -355,7 +377,7 @@ export async function runFactLanes(opts: {
   subject?: string | null;
   city?: string | null;
   signal?: AbortSignal;
-}): Promise<{ lane: FactLaneId; result: AgentResult }> {
+} & Call1PitchOpts): Promise<{ lane: FactLaneId; result: AgentResult }> {
   const seen = new Set<string>();
   const ids: FindusJobId[] = [];
   for (const id of [opts.jobId, ...(opts.secondaryJobIds ?? [])]) {

@@ -1,6 +1,10 @@
 import type { Module2Agent } from './types';
 import { setWakeAlarmWithBridge } from '../../services/alarms/nativeAlarmBridge';
 import {
+  buildWakeConfirmSpeech,
+  parseWakeVoiceStyle,
+} from '../../services/alarms/wakeConfirmSpeech';
+import {
   parseTimerDurationMs,
   startFindusTimer,
 } from '../../services/alarms/timerService';
@@ -154,27 +158,31 @@ export const triggerAgent: Module2Agent = {
       };
     }
 
+    const voiceStyle = parseWakeVoiceStyle(task.rewrittenText);
     const result = await setWakeAlarmWithBridge({
       wakeAtMs: atMs,
       reasonLabel: label,
       reminderKey: `${label}:${atMs}`,
       preferNative: true,
+      voiceStyle,
     });
 
     if (result.needsChoice && result.existingWakeAtMs != null && when) {
-      const oldWhen = new Date(result.existingWakeAtMs).toLocaleTimeString(
-        'de-DE',
-        { hour: '2-digit', minute: '2-digit' },
+      const { buildWakeChoiceSpeech } = await import(
+        '../../services/alarms/wakeConfirmSpeech'
       );
       return {
         agent: 'trigger',
         ok: true,
-        draftText: `Du hast schon einen Wecker um ${oldWhen}. Soll ich auf ${when} aktualisieren oder einen zweiten stellen?`,
-        bullets: [`Bestehend ${oldWhen}`, `Neu ${when}`],
+        draftText: buildWakeChoiceSpeech({
+          existingWakeAtMs: result.existingWakeAtMs,
+          newWakeAtMs: atMs,
+        }),
+        bullets: [],
         buttons: [
           {
             id: 'wake_replace',
-            label: 'Aktualisieren',
+            label: 'Zeit aktualisieren',
             payload: {
               kind: 'ui',
               action: 'set_wake_alarm',
@@ -215,7 +223,7 @@ export const triggerAgent: Module2Agent = {
       ok: result.ok,
       draftText: result.ok
         ? isWake
-          ? `Ich habe deinen Wecker auf ${when} gestellt.`
+          ? buildWakeConfirmSpeech({ wakeAtMs: atMs, ok: true })
           : `Erinnerung um ${when} für ${label} ist gesetzt.`
         : result.message ||
           `Konnte den ${isWake ? 'Wecker' : 'Timer'} um ${when} nicht setzen.`,

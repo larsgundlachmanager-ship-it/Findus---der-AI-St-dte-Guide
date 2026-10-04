@@ -64,9 +64,15 @@ export async function maybeMorningActiveCitySync(opts?: {
   inFlight = (async () => {
     const meta = await readMeta();
     const day = todayKey();
-    if (!opts?.force && meta.lastCheckDay === day) return;
-    await installCityPack(cityId, { checkRemote: true, reason: 'morning' });
-    await writeMeta({ lastCheckDay: day });
+    // Version/Index bei jedem Foreground prüfen — sonst bleiben Uploads
+    // am selben Tag (Story-Fixes) unsichtbar bis Mitternacht.
+    // installCityPack skippt lokal, wenn remote == local (alreadyOn).
+    await installCityPack(cityId, {
+      checkRemote: true,
+      forceRefresh: opts?.force === true,
+      reason: 'morning',
+    });
+    await writeMeta({ lastCheckDay: day, ...(meta || {}) });
   })();
 
   try {

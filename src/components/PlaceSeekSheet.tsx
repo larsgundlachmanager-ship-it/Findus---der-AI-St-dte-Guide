@@ -5,6 +5,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Image,
   Keyboard,
   Pressable,
   ScrollView,
@@ -36,7 +37,14 @@ import {
   isStandardHomeMapFilters,
   poiPassesHomeMapFilter,
 } from '../services/homeMap/homeMapPlaceFilter';
+import {
+  HOME_MAP_AMENITY_ICON_GROUPS,
+} from '../services/homeMap/homeMapAmenityIconPrefs';
 import { homeMapTypeFilterId } from '../services/homeMap/homeMapPlaceType';
+import {
+  HOME_MAP_AMENITY_IMAGES,
+  amenityIconImageName,
+} from './homeMap/homeMapAmenityImages';
 import { useHomeMapUiStore } from '../store/useHomeMapUiStore';
 import { useGpsStore } from '../store/useGpsStore';
 import {
@@ -87,6 +95,9 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
   const selectAllFilters = useHomeMapUiStore((s) => s.selectAllFilters);
   const selectNoFilters = useHomeMapUiStore((s) => s.selectNoFilters);
   const selectStandardFilters = useHomeMapUiStore((s) => s.selectStandardFilters);
+  const amenityIcons = useHomeMapUiStore((s) => s.amenityIcons);
+  const toggleAmenityIcon = useHomeMapUiStore((s) => s.toggleAmenityIcon);
+  const [iconsOpen, setIconsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const kbInset = useKeyboardInset();
   const searchRef = useRef<TextInput>(null);
@@ -127,6 +138,21 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
     if (visible) return;
     Keyboard.dismiss();
     searchRef.current?.blur();
+    setIconsOpen(false);
+  }, [visible]);
+
+  useEffect(() => {
+    if (!visible) return;
+    const raf = requestAnimationFrame(() => {
+      searchRef.current?.focus();
+    });
+    const tFocus = setTimeout(() => {
+      searchRef.current?.focus();
+    }, 16);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(tFocus);
+    };
   }, [visible]);
 
   useEffect(() => {
@@ -304,7 +330,16 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
       });
     }
     if (seeking && origin) {
-      slim.sort((a, b) => distOf(a) - distOf(b));
+      const addrQ = parseStreetHouseQuery(q);
+      slim.sort((a, b) => {
+        // Straße+Nr.: Adresse vor Pack/Web — nie „nächster Laden“ oben.
+        if (addrQ) {
+          const aAddr = a.source === 'address' ? 0 : 1;
+          const bAddr = b.source === 'address' ? 0 : 1;
+          if (aAddr !== bAddr) return aAddr - bAddr;
+        }
+        return distOf(a) - distOf(b);
+      });
     }
     return slim;
   }, [
@@ -321,17 +356,19 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
     gpsLng,
   ]);
 
-  if (!visible) {
-    /* keep mounted */
-  }
-
   return (
     <View
-      style={[styles.overlay, kbInset > 0 && { paddingBottom: kbInset }, !visible && styles.overlayHidden]}
+      style={[
+        visible ? styles.overlay : styles.rootWarmKeep,
+        visible && kbInset > 0 ? { paddingBottom: kbInset } : null,
+      ]}
       pointerEvents={visible ? 'box-none' : 'none'}
+      collapsable={false}
+      accessibilityElementsHidden={!visible}
+      importantForAccessibility={visible ? 'yes' : 'no-hide-descendants'}
     >
       <Pressable style={styles.backdrop} onPress={onClose} />
-      <View style={styles.sheet} pointerEvents="auto" collapsable={false}>
+      <View style={styles.sheet} pointerEvents={visible ? "auto" : "none"} collapsable={false}>
         <View style={styles.head}>
           <Text style={styles.title}>Orte</Text>
           <Pressable onPress={onClose} hitSlop={10} accessibilityRole="button">
@@ -377,6 +414,27 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
           >
             <Text style={[styles.bulkTxt, standardOn && styles.bulkTxtOn]}>Standard</Text>
           </Pressable>
+          <Pressable
+            onPress={() => setIconsOpen((v) => !v)}
+            style={[
+              styles.bulkBtn,
+              styles.iconsBulkBtn,
+              iconsOpen && styles.iconsBulkBtnOn,
+            ]}
+            accessibilityRole="button"
+            accessibilityState={{ expanded: iconsOpen }}
+            accessibilityLabel="Karten-Icons einzeln ein- oder ausschalten"
+          >
+            <Text
+              style={[
+                styles.bulkTxt,
+                styles.iconsBulkTxt,
+                iconsOpen && styles.iconsBulkTxtOn,
+              ]}
+            >
+              Icons
+            </Text>
+          </Pressable>
         </View>
 
         {kbInset < 40 ? (
@@ -402,6 +460,55 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
         </View>
         ) : null}
 
+        {iconsOpen && kbInset < 40 ? (
+          <ScrollView
+            style={[styles.iconPanel, styles.iconPanelSolo]}
+            nestedScrollEnabled
+            keyboardShouldPersistTaps="handled"
+          >
+            {HOME_MAP_AMENITY_ICON_GROUPS.map((group) => (
+              <View key={group.title} style={styles.iconGroup}>
+                <Text style={styles.iconGroupTitle}>{group.title}</Text>
+                <View style={styles.iconRow}>
+                  {group.icons.map((item) => {
+                    const on = amenityIcons[item.id] !== false;
+                    const imgName = amenityIconImageName(item.id);
+                    const src = imgName
+                      ? HOME_MAP_AMENITY_IMAGES[imgName]
+                      : undefined;
+                    return (
+                      <Pressable
+                        key={item.id}
+                        onPress={() => toggleAmenityIcon(item.id)}
+                        style={[
+                          styles.iconChip,
+                          on ? styles.chipOn : styles.chipOff,
+                        ]}
+                        accessibilityRole="button"
+                        accessibilityState={{ selected: on }}
+                        accessibilityLabel={`${item.label}${on ? ', an' : ', aus'}`}
+                      >
+                        {src ? (
+                          <Image source={src} style={styles.iconThumb} />
+                        ) : null}
+                        <Text
+                          style={[
+                            styles.chipTxt,
+                            on ? styles.chipTxtOn : styles.chipTxtOff,
+                          ]}
+                        >
+                          {item.label}
+                        </Text>
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+        ) : null}
+
+        {!iconsOpen ? (
         <ScrollView
           style={[styles.list, kbInset > 80 && styles.listKb]}
           keyboardShouldPersistTaps="handled"
@@ -470,6 +577,7 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
             </>
           )}
         </ScrollView>
+        ) : null}
       </View>
     </View>
   );
@@ -478,12 +586,20 @@ export const PlaceSeekSheet = React.memo(function PlaceSeekSheet({
 const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    zIndex: UI_LAYER.sheet,
-    elevation: UI_LAYER.sheet,
+    // Wie Settings/Timeline — sonst MapLibre-TextureView überdeckt das Sheet (Orte „lädt nicht“).
+    zIndex: UI_LAYER.overlay,
+    elevation: UI_LAYER.overlay,
     justifyContent: 'flex-end',
   },
-  overlayHidden: {
+  /** Geschlossen: kein absoluteFill/display:none — 0×0 Warm-Keep. */
+  rootWarmKeep: {
+    position: 'absolute',
+    width: 0,
+    height: 0,
     opacity: 0,
+    elevation: 0,
+    zIndex: -1,
+    overflow: 'hidden',
   },
   backdrop: {
     ...StyleSheet.absoluteFillObject,
@@ -499,8 +615,8 @@ const styles = StyleSheet.create({
     maxHeight: '78%',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
-    zIndex: UI_LAYER.sheet + 1,
-    elevation: UI_LAYER.sheet + 8,
+    zIndex: UI_LAYER.overlay + 1,
+    elevation: UI_LAYER.overlay + 8,
   },
   head: {
     flexDirection: 'row',
@@ -544,6 +660,21 @@ const styles = StyleSheet.create({
   bulkTxtOn: {
     color: colors.text,
   },
+  iconsBulkBtn: {
+    borderColor: colors.accent,
+    backgroundColor: 'rgba(61, 207, 122, 0.12)',
+  },
+  iconsBulkBtnOn: {
+    borderColor: colors.accent,
+    backgroundColor: colors.accentSoft,
+  },
+  iconsBulkTxt: {
+    color: colors.accent,
+    fontWeight: '800',
+  },
+  iconsBulkTxtOn: {
+    color: colors.text,
+  },
   chipWrap: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -585,6 +716,48 @@ const styles = StyleSheet.create({
   },
   chipTxtOff: {
     color: colors.textMuted,
+  },
+  iconPanel: {
+    maxHeight: 168,
+    marginBottom: spacing.sm,
+    paddingBottom: spacing.sm,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.border,
+  },
+  iconPanelSolo: {
+    maxHeight: 420,
+    flexGrow: 1,
+    borderBottomWidth: 0,
+  },
+  iconGroup: {
+    marginBottom: 10,
+  },
+  iconGroupTitle: {
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.4,
+    marginBottom: 6,
+    textTransform: 'uppercase',
+  },
+  iconRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  iconChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  iconThumb: {
+    width: 16,
+    height: 16,
+    resizeMode: 'contain',
   },
   search: {
     borderWidth: StyleSheet.hairlineWidth,

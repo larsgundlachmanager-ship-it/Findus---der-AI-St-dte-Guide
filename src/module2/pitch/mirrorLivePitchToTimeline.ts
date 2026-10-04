@@ -130,10 +130,18 @@ export function mirrorLivePitchChoiceToTimeline(opts: {
 
   useFuturePlanStore.getState().upsertStopOnDay(dayKey, stop);
   try {
-    const { markFresh } = require('../timeline/planLiveEdits') as {
-      markFresh: (dayKey: string) => void;
+    const { applyGapFillTravelLegs } = require('../timeline/gapFillTravel') as {
+      applyGapFillTravelLegs: () => unknown;
     };
-    markFresh(dayKey);
+    applyGapFillTravelLegs();
+  } catch {
+    /* soft */
+  }
+  try {
+    const { markFresh } = require('../timeline/planLiveEdits') as {
+      markFresh: (ids: string[]) => void;
+    };
+    markFresh([stop.id]);
   } catch {
     /* soft — Node smoke */
   }

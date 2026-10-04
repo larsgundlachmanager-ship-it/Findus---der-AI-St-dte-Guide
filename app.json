@@ -1,193 +1,210 @@
 {
-  "expo": {
-    "name": "Yorro",
-    "slug": "findus",
-    "version": "2.0.26",
-    "owner": "findusai",
-    "scheme": [
-      "yorro",
-      "findus"
-    ],
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#18181B"
-    },
-    "ios": {
-      "supportsTablet": false,
-      "bundleIdentifier": "de.findus.app",
-      "buildNumber": "26",
-      "usesAppleSignIn": true,
-      "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Yorro nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
-        "NSLocationAlwaysUsageDescription": "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
-        "UIBackgroundModes": [
-          "location",
-          "audio"
-        ],
-        "NSMicrophoneUsageDescription": "Yorro braucht das Mikrofon für deine Rückfragen.",
-        "NSMotionUsageDescription": "Yorro nutzt Bewegungssensoren für den Kompass auf der Karte.",
-        "NSSpeechRecognitionUsageDescription": "Yorro wandelt deine Sprache in Text um.",
-        "NSPhotoLibraryUsageDescription": "Yorro greift nicht aktiv auf deine Fotomediathek zu. Diese Angabe ist erforderlich, weil eingebundene Bibliotheken die Foto-API referenzieren können.",
-        "ITSAppUsesNonExemptEncryption": false,
-        "NSCameraUsageDescription": "Yorro nutzt die Kamera nur für die Taschenlampe (Torch), nicht für Fotos.",
-        "LSApplicationQueriesSchemes": [
-          "uber",
-          "uberauth",
-          "spotify"
-        ]
-      }
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#18181B"
-      },
-      "package": "de.findus.app",
-      "versionCode": 53,
-      "largeHeap": true,
-      "intentFilters": [
-        {
-          "action": "VIEW",
-          "autoVerify": false,
-          "data": [
-            {
-              "scheme": "yorro"
-            },
-            {
-              "scheme": "findus"
-            },
-            {
-              "scheme": "de.findus.app"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "VIEW",
-          "autoVerify": false,
-          "data": [
-            {
-              "scheme": "yorro",
-              "host": "auth",
-              "pathPrefix": "/"
-            },
-            {
-              "scheme": "findus",
-              "host": "auth",
-              "pathPrefix": "/"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "VIEW",
-          "autoVerify": false,
-          "data": [
-            {
-              "scheme": "yorro",
-              "host": "voice",
-              "pathPrefix": "/"
-            },
-            {
-              "scheme": "findus",
-              "host": "voice",
-              "pathPrefix": "/"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "ASSIST",
-          "category": [
-            "DEFAULT"
-          ]
-        }
-      ],
-      "permissions": [
-        "ACCESS_COARSE_LOCATION",
-        "ACCESS_FINE_LOCATION",
-        "ACCESS_BACKGROUND_LOCATION",
-        "FOREGROUND_SERVICE",
-        "FOREGROUND_SERVICE_LOCATION",
-        "RECORD_AUDIO",
-        "MODIFY_AUDIO_SETTINGS",
-        "INTERNET",
-        "POST_NOTIFICATIONS",
-        "RECEIVE_BOOT_COMPLETED",
-        "SCHEDULE_EXACT_ALARM",
-        "com.android.alarm.permission.SET_ALARM",
-        "VIBRATE"
-      ]
-    },
-    "plugins": [
-      "./plugins/withJetifier",
-      "./plugins/withFindusEspeak",
-      "./plugins/withMapLibreGlyphs",
-      "@maplibre/maplibre-react-native",
-      [
-        "expo-dev-client",
-        {
-          "launchMode": "most-recent"
-        }
-      ],
-      [
-        "expo-location",
-        {
-          "locationWhenInUsePermission": "Yorro nutzt deinen Standort, um Tour-Stops in der Nähe zu erkennen.",
-          "locationAlwaysAndWhenInUsePermission": "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterläuft.",
-          "isAndroidBackgroundLocationEnabled": true,
-          "isAndroidForegroundServiceEnabled": true
-        }
-      ],
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/icon.png",
-          "color": "#FCC70A",
-          "sounds": [],
-          "defaultChannel": "findus-departure-reminders"
-        }
-      ],
-      [
-        "expo-av",
-        {
-          "microphonePermission": "Yorro braucht das Mikrofon für deine Rückfragen."
-        }
-      ],
-      "expo-sqlite",
-      [
-        "expo-speech-recognition",
-        {
-          "microphonePermission": "Yorro braucht das Mikrofon für deine Rückfragen.",
-          "speechRecognitionPermission": "Yorro wandelt deine Sprache in Text um.",
-          "androidSpeechServicePackages": [
-            "com.google.android.googlequicksearchbox"
-          ]
-        }
-      ],
-      "expo-asset",
-      "expo-font",
-      "expo-apple-authentication"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "208487d8-640a-47d8-b77e-5ece29680839"
-      }
-    }
-  }
+    "expo":  {
+                 "name":  "Yorro",
+                 "slug":  "findus",
+                 "version": "2.0.111",
+                 "owner":  "findusai",
+                 "scheme":  [
+                                "yorro",
+                                "findus"
+                            ],
+                 "orientation":  "portrait",
+                 "icon":  "./assets/icon.png",
+                 "userInterfaceStyle":  "dark",
+                 "newArchEnabled":  true,
+                 "splash":  {
+                                "image":  "./assets/splash-icon.png",
+                                "resizeMode":  "contain",
+                                "backgroundColor":  "#18181B"
+                            },
+                 "ios":  {
+                             "supportsTablet":  false,
+                             "bundleIdentifier":  "de.findus.app",
+                             "buildNumber":  "33",
+                             "usesAppleSignIn":  true,
+                             "infoPlist":  {
+                                               "NSLocationWhenInUseUsageDescription":  "Yorro nutzt deinen Standort, um Tour-Stops in der NÃƒÆ’Ã‚Â¤he zu erkennen.",
+                                               "NSLocationAlwaysAndWhenInUseUsageDescription":  "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterlÃƒÆ’Ã‚Â¤uft.",
+                                               "NSLocationAlwaysUsageDescription":  "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterlÃƒÆ’Ã‚Â¤uft.",
+                                               "UIBackgroundModes":  [
+                                                                         "location",
+                                                                         "audio"
+                                                                     ],
+                                               "NSMicrophoneUsageDescription":  "Yorro braucht das Mikrofon fÃƒÆ’Ã‚Â¼r deine RÃƒÆ’Ã‚Â¼ckfragen.",
+                                               "NSMotionUsageDescription":  "Yorro nutzt Bewegungssensoren fÃƒÆ’Ã‚Â¼r den Kompass auf der Karte.",
+                                               "NSSpeechRecognitionUsageDescription":  "Yorro wandelt deine Sprache in Text um.",
+                                               "NSPhotoLibraryUsageDescription":  "Yorro greift nicht aktiv auf deine Fotomediathek zu. Diese Angabe ist erforderlich, weil eingebundene Bibliotheken die Foto-API referenzieren kÃƒÆ’Ã‚Â¶nnen.",
+                                               "ITSAppUsesNonExemptEncryption":  false,
+                                               "NSCameraUsageDescription":  "Yorro nutzt die Kamera nur fÃƒÆ’Ã‚Â¼r die Taschenlampe (Torch), nicht fÃƒÆ’Ã‚Â¼r Fotos.",
+                                               "LSApplicationQueriesSchemes":  [
+                                                                                   "uber",
+                                                                                   "uberauth",
+                                                                                   "spotify"
+                                                                               ]
+                                           }
+                         },
+                 "android":  {
+                                 "adaptiveIcon":  {
+                                                      "foregroundImage":  "./assets/adaptive-icon.png",
+                                                      "backgroundColor":  "#18181B"
+                                                  },
+                                 "package":  "de.findus.app",
+                                 "versionCode": 138,
+                                 "largeHeap":  true,
+                                 "intentFilters":  [
+                                                       {
+                                                           "action":  "VIEW",
+                                                           "autoVerify":  false,
+                                                           "data":  [
+                                                                        {
+                                                                            "scheme":  "yorro"
+                                                                        },
+                                                                        {
+                                                                            "scheme":  "findus"
+                                                                        },
+                                                                        {
+                                                                            "scheme":  "de.findus.app"
+                                                                        }
+                                                                    ],
+                                                           "category":  [
+                                                                            "BROWSABLE",
+                                                                            "DEFAULT"
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "action":  "VIEW",
+                                                           "autoVerify":  false,
+                                                           "data":  [
+                                                                        {
+                                                                            "scheme":  "yorro",
+                                                                            "host":  "auth",
+                                                                            "pathPrefix":  "/"
+                                                                        },
+                                                                        {
+                                                                            "scheme":  "findus",
+                                                                            "host":  "auth",
+                                                                            "pathPrefix":  "/"
+                                                                        }
+                                                                    ],
+                                                           "category":  [
+                                                                            "BROWSABLE",
+                                                                            "DEFAULT"
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "action":  "VIEW",
+                                                           "autoVerify":  false,
+                                                           "data":  [
+                                                                        {
+                                                                            "scheme":  "yorro",
+                                                                            "host":  "voice",
+                                                                            "pathPrefix":  "/"
+                                                                        },
+                                                                        {
+                                                                            "scheme":  "findus",
+                                                                            "host":  "voice",
+                                                                            "pathPrefix":  "/"
+                                                                        }
+                                                                    ],
+                                                           "category":  [
+                                                                            "BROWSABLE",
+                                                                            "DEFAULT"
+                                                                        ]
+                                                       },
+                                                       {
+                                                           "action":  "ASSIST",
+                                                           "category":  [
+                                                                            "DEFAULT"
+                                                                        ]
+                                                       }
+                                                   ],
+                                 "permissions":  [
+                                                     "ACCESS_COARSE_LOCATION",
+                                                     "ACCESS_FINE_LOCATION",
+                                                     "ACCESS_BACKGROUND_LOCATION",
+                                                     "FOREGROUND_SERVICE",
+                                                     "FOREGROUND_SERVICE_LOCATION",
+                                                     "RECORD_AUDIO",
+                                                     "MODIFY_AUDIO_SETTINGS",
+                                                     "INTERNET",
+                                                     "POST_NOTIFICATIONS",
+                                                     "RECEIVE_BOOT_COMPLETED",
+                                                     "SCHEDULE_EXACT_ALARM",
+                                                     "com.android.alarm.permission.SET_ALARM",
+                                                     "VIBRATE"
+                                                 ]
+                             },
+                 "plugins":  [
+                                 "./plugins/withJetifier",
+                                 "./plugins/withFindusEspeak",
+                                 "./plugins/withMapLibreGlyphs",
+                                 "@maplibre/maplibre-react-native",
+                                 [
+                                     "expo-dev-client",
+                                     {
+                                         "launchMode":  "most-recent"
+                                     }
+                                 ],
+                                 [
+                                     "expo-location",
+                                     {
+                                         "locationWhenInUsePermission":  "Yorro nutzt deinen Standort, um Tour-Stops in der NÃƒÆ’Ã‚Â¤he zu erkennen.",
+                                         "locationAlwaysAndWhenInUsePermission":  "Yorro braucht auch im Hintergrund und bei gesperrtem Bildschirm deinen Standort, damit die Tour weiterlÃƒÆ’Ã‚Â¤uft.",
+                                         "isAndroidBackgroundLocationEnabled":  true,
+                                         "isAndroidForegroundServiceEnabled":  true
+                                     }
+                                 ],
+                                 [
+                                     "expo-notifications",
+                                     {
+                                         "icon":  "./assets/notification-icon.png",
+                                         "color":  "#FCC70A",
+                                         "sounds":  [
+
+                                                    ],
+                                         "defaultChannel":  "findus-departure-reminders"
+                                     }
+                                 ],
+                                 [
+                                     "expo-av",
+                                     {
+                                         "microphonePermission":  "Yorro braucht das Mikrofon fÃƒÆ’Ã‚Â¼r deine RÃƒÆ’Ã‚Â¼ckfragen."
+                                     }
+                                 ],
+                                 "expo-sqlite",
+                                 [
+                                     "expo-speech-recognition",
+                                     {
+                                         "microphonePermission":  "Yorro braucht das Mikrofon fÃƒÆ’Ã‚Â¼r deine RÃƒÆ’Ã‚Â¼ckfragen.",
+                                         "speechRecognitionPermission":  "Yorro wandelt deine Sprache in Text um.",
+                                         "androidSpeechServicePackages":  [
+                                                                              "com.google.android.googlequicksearchbox"
+                                                                          ]
+                                     }
+                                 ],
+                                 "expo-asset",
+                                 "expo-font",
+                                 "expo-apple-authentication"
+                             ],
+                 "extra":  {
+                               "eas":  {
+                                           "projectId":  "208487d8-640a-47d8-b77e-5ece29680839"
+                                       }
+                           },
+                 "assetBundlePatterns":  [
+                                             "assets/icon.png",
+                                             "assets/adaptive-icon.png",
+                                             "assets/splash-icon.png",
+                                             "assets/splash-logo-clear.png",
+                                             "assets/notification-icon.png",
+                                             "assets/notification-icon-192.png",
+                                             "assets/onboarding/persona-*.jpg",
+                                             "assets/onboarding/city-card-hero.jpg",
+                                             "src/assets/audio/intro.wav",
+                                             "src/assets/audio/voices/*",
+                                             "src/assets/homeMap/**/*",
+                                             "src/assets/data/**/*",
+                                             "src/assets/phonetics/**/*"
+                                         ]
+             }
 }

@@ -137,7 +137,9 @@ export function extractExpediaPropertyId(url: string): string | null {
     if (!raw) continue;
     const go = raw.match(/\/go\/hotel\/info\/(\d{4,})/i);
     if (go?.[1]) return go[1];
-    const hDot = raw.match(/\.h(\d{5,})\.Hotel-Information/i);
+    const hDot = raw.match(
+      /\.h(\d{5,})\.Hotel-(?:Information|Beschreibung)/i,
+    );
     if (hDot?.[1]) return hDot[1];
     const hQuery = raw.match(
       /[?&](?:hotelid|HotelID|selected|propertyId|HTID)=(\d{4,})/i,
@@ -168,10 +170,39 @@ export function isExpediaHotelPropertyUrl(url: string): boolean {
   for (const u of hotelUrlCandidates(url)) {
     if (!u) continue;
     if (/\/go\/hotel\/info\/\d+/i.test(u)) return true;
-    if (/\.h\d{5,}\.Hotel-Information/i.test(u)) return true;
-    if (/Hotel-Information/i.test(u) && extractExpediaPropertyId(u)) return true;
+    if (/\.h\d{5,}\.Hotel-(?:Information|Beschreibung)/i.test(u)) return true;
+    if (
+      /Hotel-(?:Information|Beschreibung)/i.test(u) &&
+      extractExpediaPropertyId(u)
+    ) {
+      return true;
+    }
   }
   return false;
+}
+
+/** Expedia-Pfad-Slug: „Athens-Hotels-Ermass-….h123.Hotel-Beschreibung“. */
+export function expediaHotelPathSlug(opts: {
+  hotelName?: string | null;
+  city?: string | null;
+}): string | null {
+  const city = String(opts.city || '')
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  const hotel = String(opts.hotelName || '')
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  if (!hotel || hotel.length < 3) return null;
+  if (city && city.length >= 2 && city.toLowerCase() !== hotel.toLowerCase()) {
+    return `${city}-Hotels-${hotel}`;
+  }
+  return hotel;
 }
 
 /** Expedia-Suchseite (Hotel wählen) — noch nicht „Zimmer auswählen“. */
@@ -184,7 +215,15 @@ export function isExpediaHotelSearchUrl(url: string): boolean {
 
 export function buildExpediaHotelPropertyDeepLink(
   propertyId: string,
-  opts: { checkin: string; checkout: string; adults?: number },
+  opts: {
+    checkin: string;
+    checkout: string;
+    adults?: number;
+    hotelName?: string | null;
+    city?: string | null;
+    /** Live-Preis (€) — landet als top_dp, damit die Detailseite den Preis zeigt. */
+    priceEur?: number | null;
+  },
 ): string {
   const id = String(propertyId || '').replace(/\D/g, '');
   const adults =
@@ -199,10 +238,37 @@ export function buildExpediaHotelPropertyDeepLink(
       return 1;
     }
   })();
+  const slug = expediaHotelPathSlug({
+    hotelName: opts.hotelName,
+    city: opts.city,
+  });
+  const q = new URLSearchParams({
+    chkin: opts.checkin,
+    chkout: opts.checkout,
+    rm1: `a${adults}`,
+    NumRooms: '1',
+    NumNights: String(nights),
+    'NumAdult-Room1': String(adults),
+    locale: 'de_DE',
+    currency: 'EUR',
+  });
+  if (opts.city?.trim()) q.set('destination', opts.city.trim());
+  const price =
+    opts.priceEur != null && Number.isFinite(opts.priceEur) && opts.priceEur > 0
+      ? Math.round(opts.priceEur)
+      : null;
+  if (price != null) {
+    q.set('top_dp', String(price));
+    q.set('top_cur', 'EUR');
+  }
+  // Zielbild wie Expedia-DE: Stadt-Hotels-Name.hID.Hotel-Beschreibung?chkin&chkout&rm1&top_dp
+  if (slug) {
+    return `https://www.expedia.de/${slug}.h${id}.Hotel-Beschreibung?${q.toString()}`;
+  }
   return (
     `https://www.expedia.de/go/hotel/info/${id}/${opts.checkin}/${opts.checkout}` +
     `?NumRooms=1&NumNights=${nights}&NumAdult-Room1=${adults}` +
-    `&locale=de_DE&currency=EUR`
+    `&locale=de_DE&currency=EUR&rm1=a${adults}`
   );
 }
 
@@ -298,6 +364,8 @@ export function finalizeHotelBookAffiliateUrl(opts: {
   adults?: number;
   /** Explizite Expedia Property-ID (aus Stay22 raw.id / suppliers) */
   expediaPropertyId?: string | null;
+  /** Live-Preis (€) für top_dp im Expedia-Deep-Link */
+  priceEur?: number | null;
 }): string {
   const adults = opts.adults != null && opts.adults > 0 ? opts.adults : 2;
   const raw = (opts.bookUrl || '').trim();
@@ -322,6 +390,9 @@ export function finalizeHotelBookAffiliateUrl(opts: {
         checkin: opts.checkin,
         checkout: opts.checkout,
         adults,
+        hotelName: target.hotelName,
+        city: target.city,
+        priceEur: opts.priceEur,
       }),
     );
   }
@@ -380,6 +451,7 @@ export async function resolveHotelPropertyAffiliateUrl(opts: {
   checkout: string;
   adults?: number;
   expediaPropertyId?: string | null;
+  priceEur?: number | null;
 }): Promise<string> {
   const adults = opts.adults != null && opts.adults > 0 ? opts.adults : 2;
   const name = (opts.hotelName || '').trim();
@@ -415,6 +487,7 @@ export async function resolveHotelPropertyAffiliateUrl(opts: {
         checkout: opts.checkout,
         adults,
         expediaPropertyId: hit.expediaPropertyId,
+        priceEur: opts.priceEur ?? hit.priceTotal,
       });
       if (isHotelRoomSelectUrl(resolved)) return resolved;
       if (hit.bookUrl && !isExpediaHotelSearchUrl(hit.bookUrl)) {
@@ -426,6 +499,7 @@ export async function resolveHotelPropertyAffiliateUrl(opts: {
           checkout: opts.checkout,
           adults,
           expediaPropertyId: hit.expediaPropertyId,
+          priceEur: opts.priceEur ?? hit.priceTotal,
         });
       }
     }

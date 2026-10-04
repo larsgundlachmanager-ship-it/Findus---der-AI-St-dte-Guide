@@ -38,6 +38,96 @@ export function looksLikeTrainRestaurant(text: string): boolean {
   return TRAIN_RESTAURANT_RE.test(String(text || ''));
 }
 
+/** Asia-Küche inkl. Places-Types — für „kein Asiatisch“ / AYCE-Avoid. */
+const ASIAN_CUISINE_RE =
+  /\b(asiatisch|asian|\basia\b|asia[\s-]?buffet|asia[\s-]?küche|asia[\s-]?kueche|sushi|sashimi|\bmaki\b|ramen|\bpho\b|wok|dim[\s-]?sum|poke|teppan(?:yaki)?|mongol(?:isch(?:er|es|e)?)?|hot[\s-]?pot|shabu|running[\s-]?sushi|sushi[\s-]?(?:boot|boat|gürtel|guertel)|thai|vietnam(?:esisch)?|chinesisch|chinese_restaurant|japanisch|japanese_restaurant|koreanisch|korean_restaurant|indisch|indian_restaurant|tandoori|curry[\s-]?haus|pan[\s-]?asian|sichuan|szechuan|cantonese|kantones)\b/iu;
+
+export function looksLikeAsianCuisineVenue(blob: string): boolean {
+  const b = String(blob || '').toLowerCase().replace(/\s+/g, ' ');
+  if (!b) return false;
+  return ASIAN_CUISINE_RE.test(b);
+}
+
+export function prefsAvoidAsianCuisine(avoid: string[] | null | undefined): boolean {
+  return (avoid ?? []).some((a) =>
+    /asia|asiatisch|asian|sushi|thai|chines|japan|vietnam|korea|indisch|ramen|poke|hot.?pot|mongol|cuisine_not_asian|avoid_cuisine_asian/i.test(
+      String(a || ''),
+    ),
+  );
+}
+
+/** Metzgerei/Theke — kein Speiselokal, auch mit „Steak“ im Namen. */
+export function looksLikeButcherNotDining(blob: string): boolean {
+  const b = String(blob || '').toLowerCase();
+  if (!b) return false;
+  const butcher =
+    /\b(fleischerei|metzgerei|metzger|butcher_shop|butcher)\b/.test(b);
+  if (!butcher) return false;
+  return !/\b(steakhouse|steak.?haus|grillhaus|restaurant|parrilla|churrasco|meal_takeaway|bistro)\b/.test(
+    b,
+  );
+}
+
+/** Sight-/Themen-Ask — nie als Gastro-Specialty lesen. */
+const SIGHT_THEME_RE =
+  /\b(museum|dinosaur(?:ier)?|dino\b|t[-\s]?rex|zoo|aquarium|planetarium|aussicht(?:spunkt|sturm)?|sehenswürdigkeit|sehenswuerdigkeit|kirche|dom|turm|denkmal|strand|beach|baden|picknick|picnic|grillplatz)\b/iu;
+
+const CRAVING_RE =
+  /\b((?:lust|bock)\s+auf|(?:möcht|moecht|will|hätt|haett)\w*\s+(?:gern(?:e)?\s+)?(?:einen?|eine|ein)\b|appetit\s+auf|hunger\s+auf)\b/iu;
+
+const FOOD_ADJ_RE =
+  /\b(lecker(?:e[rnms]?)?|geil(?:e[rnms]?)?|gut(?:e[rnms]?)?|beste[rn]?|richtig(?:e[rnms]?)?|perfekt(?:e[rnms]?)?)\b/iu;
+
+const GO_OR_FIND_RE =
+  /\b(wo\s+kann|wo\s+gibt|hingehen|gibt\s+es|empfehl|suche|find(?:e|en)?|probieren|bestellen)\b/iu;
+
+const CRAVING_STOP =
+  /^(heute|abend|morgen|mittag|nacht|etwas|was|mehr|mich|dich|uns|dort|hier|einen|eine|ein|den|die|das|lecker|geil|gut|besten|richtige|perfekte)$/i;
+
+/**
+ * Specialty-Gericht ohne Whitelist: „Lust auf einen leckeren Croque / Poke / …“.
+ * Struktur: Craving + Item (± Adj) + oft Wo/Hingehen — nie Sight-Themen.
+ */
+export function looksLikeSpecialtyFoodAsk(text: string): boolean {
+  const raw = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!raw || raw.length < 8) return false;
+  const t = normalizeFoodStt(raw);
+  const low = t.toLowerCase();
+  if (SIGHT_THEME_RE.test(low) && !/\b(essen|restaurant|café|cafe|imbiss|hunger|bistro|bäck|baeck)\b/iu.test(low)) {
+    return false;
+  }
+  if (extractCravingDishToken(t)) return true;
+  const craving = CRAVING_RE.test(low) || FOOD_ADJ_RE.test(low);
+  const go = GO_OR_FIND_RE.test(low);
+  if (!craving || !(go || CRAVING_RE.test(low))) return false;
+  try {
+    const { extractEvidenceItems } = require('../evidence/evidenceNeeds') as {
+      extractEvidenceItems: (s: string) => string[];
+    };
+    if (extractEvidenceItems(t).length > 0) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
+}
+
+/** Token nach „Lust/Bock auf (Adj) X“ — stadt-/gericht-agnostisch. */
+export function extractCravingDishToken(text: string): string | null {
+  const t = normalizeFoodStt(String(text || '').replace(/\s+/g, ' ').trim());
+  if (!t) return null;
+  const low = t.toLowerCase();
+  if (SIGHT_THEME_RE.test(low) && !/\b(essen|restaurant|café|cafe|imbiss)\b/iu.test(low)) {
+    return null;
+  }
+  const m = t.match(
+    /\b(?:lust|bock|appetit|hunger)\s+auf\s+(?:einen?|eine|ein|das|die|den)?\s*(?:leckere[rnms]?|geile[rnms]?|gute[rnms]?|beste[rn]?|richtige[rnms]?|perfekte[rnms]?)?\s*([A-ZÄÖÜa-zäöüß][\wÄÖÜäöüß-]{2,28})\b/iu,
+  );
+  const token = (m?.[1] || '').trim();
+  if (!token || CRAVING_STOP.test(token)) return null;
+  if (SIGHT_THEME_RE.test(token)) return null;
+  return token.slice(0, 48);
+}
+
 /** Canonical dish token for breed wishes (angus, wagyu, fleckvieh, …). */
 export function canonicalCattleBreed(text: string): string | null {
   const t = normalizeFoodStt(text);
@@ -69,7 +159,53 @@ export function looksLikeSpokenMeatOrFish(text: string): boolean {
 /** Gesprochener Vegan-/Vegetarisch-Wunsch — Steakhouse ist kein Soft-Fail-Fallback. */
 export function looksLikeSpokenVeganOrVeg(text: string): boolean {
   const t = String(text || '').toLowerCase();
-  return /\b(vegan|vegetarisch|vegetarier|vegetarian|veggie)\b/i.test(t);
+  if (/\b(vegan|vegetarisch|vegetarier|vegetarian|veggie)\b/i.test(t)) {
+    return true;
+  }
+  return /\b(?:kein(?:e|en)?|ohne|nicht|nix)\s+fleisch\b/i.test(t);
+}
+
+/** Belegte vegane Küche/Option — „Auch Veganer“ in Biergarten-Review reicht nicht. */
+export function hasStrongVeganEvidence(blob: string): boolean {
+  const b = String(blob || '').toLowerCase();
+  if (
+    /kein(?:e|en)?\s+vegan|nicht\s+vegan|nichts\s+vegan|ohne\s+vegan/.test(b) &&
+    !/vegan(?:es|e|er|en)?\s+(gericht|essen|option|küche|kueche|speise|menu|bowl|bistro)/.test(
+      b,
+    )
+  ) {
+    return false;
+  }
+  if (
+    /vegan(?:es|e|er|en)?\s+(gericht|essen|option|küche|kueche|speise|menu|bowl|bistro|restaurant)/.test(
+      b,
+    )
+  ) {
+    if (looksLikeBiergartenPrimaryVenue(b) || looksLikeMeatPrimaryVenue(b)) {
+      return false;
+    }
+    return true;
+  }
+  if (/\b(?:rein\s+)?vegan(?:es|er|en)?\s+(?:restaurant|bistro|café|cafe|bowl)\b/.test(b)) {
+    return true;
+  }
+  if (
+    /\bvegan\b/.test(b) &&
+    !/\bbiergarten\b|\bwein[\s-]*&|\bweingarten\b|\bsteakhouse\b|\bgrill(?:haus|erei)?\b/.test(
+      b,
+    ) &&
+    /vegetarisch|veggie|pflanzlich|plant[-\s]?based|vegane\s+speisekarte/.test(b)
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function looksLikeBiergartenPrimaryVenue(blob: string): boolean {
+  const b = String(blob || '').toLowerCase();
+  return /\bbiergarten\b|\bwein[\s-]*&\s*bier|\bweingarten\b|\bbeer[\s-]*garden\b/.test(
+    b,
+  );
 }
 
 /** Fleisch-primäre Venue-Signale (Steakhouse / Grill / Fleisch) ohne Vegan-Beleg. */
@@ -88,6 +224,17 @@ export function isOppositeDietVenue(venueBlob: string, wishBlob: string): boolea
   const b = String(venueBlob || '').toLowerCase();
   const wish = String(wishBlob || '');
 
+  // Explizit nicht asiatisch → Asia/Sushi/Thai/… raus
+  if (
+    /\b(?:nicht|kein(?:e|en)?|ohne|garantiert\s+nicht)\s+(?:asiatisch\w*|asian|sushi|thai|chinesisch|japanisch)\b/iu.test(
+      wish,
+    ) ||
+    /\bab(?:er)?\s+nicht\s+asiatisch\b/iu.test(wish) ||
+    /avoid_cuisine_asian|cuisine_not_asian/.test(wish)
+  ) {
+    if (looksLikeAsianCuisineVenue(b)) return true;
+  }
+
   if (looksLikeSpokenMeatOrFish(wish)) {
     if (/kein(?:e|en)?\s+vegan|nicht\s+vegan|nichts\s+vegan|ohne\s+vegan/.test(b)) {
       return false;
@@ -99,12 +246,10 @@ export function isOppositeDietVenue(venueBlob: string, wishBlob: string): boolea
   }
 
   if (looksLikeSpokenVeganOrVeg(wish)) {
-    const hasVeganEvidence =
-      /\bvegan|\bvegetar|\bveggie\b/.test(b) &&
-      !(/kein(?:e|en)?\s+vegan|nicht\s+vegan|nichts\s+vegan|ohne\s+vegan/.test(b) &&
-        !/vegan(?:es|e|er|en)?\s+(gericht|essen|option|küche|kueche|speise)/.test(b));
-    if (hasVeganEvidence) return false;
-    return looksLikeMeatPrimaryVenue(b);
+    if (looksLikeBiergartenPrimaryVenue(b)) return true;
+    if (looksLikeMeatPrimaryVenue(b)) return true;
+    if (hasStrongVeganEvidence(b)) return false;
+    return false;
   }
 
   return false;
@@ -245,21 +390,30 @@ export function scoreSpecializedFoodWish(blob: string, wish: PitchWish): number 
   }
 
   if (/steak/.test(wt)) {
+    // Metzgerei/Fleischerei ≠ Speiselokal — auch wenn „Steak“ im Namen steht
+    const butcherOnly =
+      blobHas(b, /\b(fleischerei|metzgerei|metzger|butcher)\b/) &&
+      !blobHas(
+        b,
+        /\b(steakhouse|steak.?haus|grillhaus|restaurant|parrilla|churrasco|meal_takeaway|bistro)\b/,
+      );
+    if (butcherOnly) return 0;
     if (
       blobHas(
         b,
         /steakhouse|steak.?haus|\bsteaks?\b|prime\s*rib|ribeye|rinderfilet|rumpsteak|hüftsteak|hueftsteak|filetsteak|entrecote|entrecôte|filet.{0,16}gegrillt|gegrilltes?\s+filet/,
-      )
+      ) &&
+      !butcherOnly
     ) {
       return 3;
     }
-    // Soft-Fail-Familie: nur Fleisch/Grill-Träger — nie generisches Restaurant/Bistro/Döner
+    // Soft-Fail-Familie: Grill-/Steakhouse-Träger — nie Metzgerei/Döner
     if (
       blobHas(
         b,
-        /steakhouse|steak.?haus|grillhaus|fleischerei|\bribs?\b|prime\s*rib|rumpsteak|ribeye|churrasco|asado|parrilla|steak\s*frites/,
+        /steakhouse|steak.?haus|grillhaus|\bribs?\b|prime\s*rib|rumpsteak|ribeye|churrasco|asado|parrilla|steak\s*frites/,
       ) &&
-      !blobHas(b, /\bd[öo]ner\b|kebab|kebap|shawarma/)
+      !blobHas(b, /\bd[öo]ner\b|kebab|kebap|shawarma|fleischerei|metzgerei|metzger|butcher/)
     ) {
       return 1;
     }
@@ -281,13 +435,8 @@ export function scoreSpecializedFoodWish(blob: string, wish: PitchWish): number 
   }
 
   if (/vegan/.test(wt)) {
-    if (
-      /kein(?:e|en)?\s+vegan|nicht\s+vegan|nichts\s+vegan|ohne\s+vegan/.test(b) &&
-      !/vegan(?:es|e|er|en)?\s+(gericht|essen|option|küche|kueche|speise)/.test(b)
-    ) {
-      return 0;
-    }
-    if (blobHas(b, /\bvegan/)) return 3;
+    if (hasStrongVeganEvidence(b)) return 3;
+    if (blobHas(b, /\bvegan/) && !looksLikeBiergartenPrimaryVenue(b)) return 1;
     return 0;
   }
 

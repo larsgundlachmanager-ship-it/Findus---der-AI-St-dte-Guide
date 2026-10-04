@@ -179,9 +179,8 @@ export function collectNiceInfoScenarioTips(opts?: {
         id: `umbrella-${dayKey}-${Math.floor(inMin / 60)}`,
         kind: 'umbrella_day',
         text: `🌂 Regen ab ~${new Date(weather.nextRainAtMs).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}`,
-        meta: 'Schirm einpacken?',
-        tellMorePrompt:
-          'Später Regen möglich — kurz sagen ob Schirm/Jacke sinnvoll ist, ohne Panik.',
+        meta: undefined,
+        tellMorePrompt: '__WEATHER_DAY_CHECK__',
         score: 62,
       });
     }
@@ -257,21 +256,15 @@ export function collectNiceInfoScenarioTips(opts?: {
 
   // --- 6) Outfit / Kleidung wenn Wetterwechsel ---
   if (isMorningWindow(nowMs) && weather) {
-    const precip = weather.nextRainProb ?? null;
     const high = weather.dayHighC ?? weather.currentTempC ?? null;
-    if (
-      (typeof precip === 'number' && precip >= 45) ||
-      (typeof high === 'number' && (high <= 10 || high >= 28))
-    ) {
+    if (typeof high === 'number' && (high <= 10 || high >= 28)) {
       tips.push({
         id: `outfit-${dayKey}`,
         kind: 'nice_tip',
         text:
           typeof high === 'number' && high >= 28
             ? '👕 Heiß — luftig + Sonnenschutz'
-            : typeof precip === 'number' && precip >= 45
-              ? '🧥 Regen möglich — Jacke mitnehmen'
-              : '🧥 Cooler Tag — Schicht empfohlen',
+            : '🧥 Cooler Tag — Schicht empfohlen',
         meta: weather.summaryLine?.slice(0, 40) || 'Wetter',
         tellMorePrompt:
           'Kurzer Kleidungs-Tipp für heute aus dem Wetter, ohne Vorlesung.',

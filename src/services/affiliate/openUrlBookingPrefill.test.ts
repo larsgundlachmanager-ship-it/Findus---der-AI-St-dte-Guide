@@ -73,4 +73,34 @@ assert(
 assert(destHotel.checkin === '2026-08-21' && destHotel.checkout === '2026-08-23', 'prefill dates');
 assert(destHotel.adults === 1, 'prefill adults');
 
+const {
+  bookingPrefillTier,
+  bookingPrefillHonestyIntent,
+} = require('./openUrlBookingPrefill') as typeof import('./openUrlBookingPrefill');
+
+assert(
+  bookingPrefillTier('https://m.uber.com/ul/?action=setPickup', 'Uber') === 'deep',
+  'uber deep',
+);
+assert(
+  bookingPrefillTier('https://www.thefork.de/restaurant/demo', 'TheFork') ===
+    'link_only',
+  'thefork link_only',
+);
+assert(
+  bookingPrefillTier('https://www.quandoo.de/place/x', 'Quandoo') === 'link_only',
+  'quandoo link_only',
+);
+assert(
+  bookingPrefillTier('https://www.opentable.de/r/demo', 'OpenTable') ===
+    'best_effort',
+  'opentable best_effort',
+);
+assert(
+  /leeres Formular|nicht vergessen|Root/i.test(
+    bookingPrefillHonestyIntent('link_only'),
+  ),
+  'honesty intent link_only',
+);
+
 console.log('openUrlBookingPrefill.test.ts ok');

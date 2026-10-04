@@ -35,63 +35,63 @@ function safeDecode(s: string): string {
 export function unwrapPartnerLandingUrl(url: string): string {
   const u = (url || '').trim();
   if (!u) return '';
-  const decoded = safeDecode(u);
-  // AWIN: ued=
-  const ued =
-    decoded.match(/[?&]ued=([^&]+)/i)?.[1] ??
-    u.match(/[?&]ued=([^&]+)/i)?.[1];
+
+  // URLSearchParams auf RAW-URL: decoded custom_url sonst an & abgeschnitten
+  try {
+    const parsed = new URL(u);
+    for (const key of [
+      'ued',
+      'landingPage',
+      'custom_url',
+      'k_site',
+      'destination_url',
+      'redirect',
+    ]) {
+      const v = parsed.searchParams.get(key)?.trim();
+      if (v && /^https?:\/\//i.test(v)) return v;
+    }
+    // CJ / tp.media: u= oder url= (nur absolute http)
+    for (const key of ['u', 'url']) {
+      const v = parsed.searchParams.get(key)?.trim();
+      if (v && /^https?:\/\//i.test(v)) return v;
+    }
+  } catch {
+    /* soft — Regex-Fallback */
+  }
+
+  // Regex: immer RAW zuerst (nicht vorab decodeURIComponent der ganzen URL)
+  const ued = u.match(/[?&]ued=([^&]+)/i)?.[1];
   if (ued) return safeDecode(ued);
-  // Expedia affiliate wrapper: landingPage=
-  const lp =
-    decoded.match(/[?&]landingPage=([^&]+)/i)?.[1] ??
-    u.match(/[?&]landingPage=([^&]+)/i)?.[1];
+  const lp = u.match(/[?&]landingPage=([^&]+)/i)?.[1];
   if (lp) return safeDecode(lp);
-  // CJ: url=
-  const cj =
-    decoded.match(/[?&]url=([^&]+)/i)?.[1] ??
-    u.match(/[?&]url=([^&]+)/i)?.[1];
-  if (cj && /^https?%3A/i.test(cj)) return safeDecode(cj);
-  // Travelpayouts: custom_url=
-  const custom =
-    decoded.match(/[?&]custom_url=([^&]+)/i)?.[1] ??
-    u.match(/[?&]custom_url=([^&]+)/i)?.[1];
+  const custom = u.match(/[?&]custom_url=([^&]+)/i)?.[1];
   if (custom) {
     const inner = safeDecode(custom);
     if (/^https?:\/\//i.test(inner)) return inner;
   }
-  // Travelpayouts tp.media: u=
-  if (/tp\.media\/r\?/i.test(decoded) || /tp\.media\/r\?/i.test(u)) {
-    const tpU =
-      decoded.match(/[?&]u=([^&]+)/i)?.[1] ??
-      u.match(/[?&]u=([^&]+)/i)?.[1];
+  if (/tp\.media\/r\?/i.test(u)) {
+    const tpU = u.match(/[?&]u=([^&]+)/i)?.[1];
     if (tpU) {
       const inner = safeDecode(tpU);
       if (/^https?:\/\//i.test(inner)) return inner;
     }
   }
-  // Klook affiliate: k_site=
-  const kSite =
-    decoded.match(/[?&]k_site=([^&]+)/i)?.[1] ??
-    u.match(/[?&]k_site=([^&]+)/i)?.[1];
+  const kSite = u.match(/[?&]k_site=([^&]+)/i)?.[1];
   if (kSite) {
     const inner = safeDecode(kSite);
     if (/^https?:\/\//i.test(inner)) return inner;
   }
-  // Partnerize: /destination:https://
-  const prf = decoded.match(/\/destination:(https?:\/\/[^\s]+)/i)?.[1];
+  const prf = u.match(/\/destination:(https?:\/\/[^\s]+)/i)?.[1];
   if (prf) {
     const inner = safeDecode(prf);
     if (/^https?:\/\//i.test(inner)) return inner;
   }
-  // Generic url= (KKday invl.me)
-  const wrapped =
-    decoded.match(/[?&]url=(https?[^&]+)/i)?.[1] ??
-    u.match(/[?&]url=(https?[^&]+)/i)?.[1];
+  const wrapped = u.match(/[?&]url=(https?[^&]+)/i)?.[1];
   if (wrapped) {
     const inner = safeDecode(wrapped);
     if (/^https?:\/\//i.test(inner)) return inner;
   }
-  return decoded;
+  return safeDecode(u);
 }
 
 function isBareHostPath(landing: string, hostRe: RegExp): boolean {
@@ -183,6 +183,13 @@ export function isHollowPartnerUrl(url: string): boolean {
   if (/tpx\.li\/?(\?|#|$)/i.test(landing)) return true;
   if (/c111\.travelpayouts\.com\/?(\?|#|$)/i.test(landing)) return true;
   if (isBareHostPath(landing, /kiwi\.com$/i)) return true;
+  // /deep?from=&to= is a full search deeplink (never hollow)
+  if (/kiwi\.com\/deep\?/i.test(landing)) {
+    const from = queryParam(landing, 'from');
+    const to = queryParam(landing, 'to');
+    if (from && to) return false;
+  }
+
   if (/aviasales\.(?:com|tpx\.li)\/search\/[A-Z]{3}\d{4}[A-Z]{3}/i.test(landing)) {
     return false;
   }
@@ -201,8 +208,11 @@ export function isHollowPartnerUrl(url: string): boolean {
     }
   }
   if (isBareHostPath(landing, /expedia\.(com|de|at|ch)$/i)) return true;
-  // Property-Deep-Link ist nie hollow
-  if (/\/go\/hotel\/info\/\d+/i.test(landing) || /\.h\d{5,}\.Hotel-Information/i.test(landing)) {
+  // Property-Deep-Link ist nie hollow (DE: Hotel-Beschreibung, EN: Hotel-Information)
+  if (
+    /\/go\/hotel\/info\/\d+/i.test(landing) ||
+    /\.h\d{5,}\.Hotel-(?:Information|Beschreibung)/i.test(landing)
+  ) {
     return false;
   }
   if (/expedia\.[^/\s]+\/hotel-search/i.test(landing)) {
@@ -239,6 +249,20 @@ export function isHollowPartnerUrl(url: string): boolean {
   if (isBareHostPath(landing, /booking\.com$/i)) return true;
   if (isBareHostPath(landing, /hotels\.com$/i)) return true;
   if (isBareHostPath(landing, /vrbo\.com$/i)) return true;
+  // Airbnb: bare home ohne /s/ oder /rooms/ = hollow; Search/Rooms ok
+  if (/(?:^|\/\/)(?:www\.)?airbnb\.(?:com|de|at|ch)\b/i.test(landing)) {
+    try {
+      const href = /^https?:\/\//i.test(landing)
+        ? landing
+        : `https://${landing.replace(/^\/\//, '')}`;
+      const path = (new URL(href).pathname || '/').toLowerCase();
+      const hasSearchOrRooms =
+        /\/s\//.test(path) || /\/rooms\//.test(path) || /\/luxury\/listing\//.test(path);
+      if (!hasSearchOrRooms) return true;
+    } catch {
+      if (isBareHostPath(landing, /airbnb\.(com|de|at|ch)$/i)) return true;
+    }
+  }
 
   // --- Mobility / luggage ---
   if (isBareHostPath(landing, /discovercars\.com$/i)) {
@@ -279,10 +303,28 @@ export function isHollowPartnerUrl(url: string): boolean {
     const q = queryParam(landing, 'q');
     if (!q) return true;
   }
+  if (isBareHostPath(landing, /(?:de|fr)\.camping-and-co\.com$/i)) return true;
+  if (/(?:de|fr)\.camping-and-co\.com\/?$/i.test(landing)) {
+    const q = queryParam(landing, 'q');
+    if (!q) return true;
+  }
   if (isBareHostPath(landing, /solmar\.de$/i)) return true;
+  if (isBareHostPath(landing, /(?:www\.)?magiclife\.com$/i)) return true;
+  if (isBareHostPath(landing, /(?:www\.)?aida\.de$/i)) return true;
+  // Lidl Reisen: Portal-Home oder Soft-Suche ohne `q` = hollow
+  // (/kreuzfahrten hat Pfad → nicht bare → nicht hollow)
+  if (isBareHostPath(landing, /(?:www\.)?lidl-reisen\.de$/i)) {
+    const q = queryParam(landing, 'q');
+    if (!q) return true;
+  }
   if (isBareHostPath(landing, /travelsecure\.de$/i)) return true;
   if (isBareHostPath(landing, /^(www\.)?reservix\.de$/i)) return true;
   if (/reservix\.de\/search/i.test(blob)) {
+    const q = queryParam(landing, 'q');
+    if (!q) return true;
+  }
+  if (isBareHostPath(landing, /^(www\.)?adticket\.de$/i)) return true;
+  if (/adticket\.de\/search/i.test(blob)) {
     const q = queryParam(landing, 'q');
     if (!q) return true;
   }
@@ -341,4 +383,42 @@ export function rejectHollowPartnerBookAction(action: {
     return false;
   }
   return !mayShowAsPartnerBookAction({ label: action.label, url });
+}
+
+/**
+ * Buchungs-Claim + Suche/Portal-URL → ehrliches Such-Label behalten statt Button droppen.
+ * Final-Deep-Link bleibt Buchungs-Label; nur Hollow wird entschärft.
+ */
+export function softenHollowPartnerBookAction<
+  T extends {
+    type: string;
+    label: string;
+    payload?: { url?: string; pending?: boolean };
+  },
+>(action: T): T {
+  if (action.payload?.pending === true) return action;
+  if (action.type !== 'OPEN_URL' && action.type !== 'OPEN_GYG_WIDGET') {
+    return action;
+  }
+  const url = (action.payload?.url ?? '').trim();
+  if (!url || !looksLikePartnerBookClaim(action.label)) return action;
+  if (!isHollowPartnerUrl(url)) return action;
+
+  const blob = `${url}\n${unwrapPartnerLandingUrl(url)}`.toLowerCase();
+  let label = action.label;
+  if (/expedia|stay22|booking\.com|hotels\.com|vrbo/i.test(blob)) {
+    label = '🏨 Hotels suchen';
+  } else if (/airbnb\./i.test(blob)) {
+    label = '🔑 Airbnb suchen';
+  } else if (/getyourguide|tiqets|musement|viator|klook|kkday/i.test(blob)) {
+    label = '🎟️ Touren suchen';
+  } else if (/reservix|adticket|ticketmaster|eventim/i.test(blob)) {
+    label = '🎟️ Tickets suchen';
+  } else if (/uber\.com/i.test(blob)) {
+    label = '🚗 Uber öffnen';
+  } else if (!/\bsuchen\b/iu.test(label)) {
+    label = label.replace(/\b(jetzt\s*)?buch(?:en|ung)?\b/giu, 'suchen').trim() ||
+      '🔍 Suchen';
+  }
+  return { ...action, label };
 }

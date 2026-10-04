@@ -44,11 +44,17 @@ export function QuestionModal({
       Keyboard.dismiss();
       return;
     }
-    // Autofocus leicht verzögern — sonst öffnet/schließt die Tastatur auf Android kurz.
+    // Sofort fokussieren — 0/rAF reicht; 60ms fühlte sich unter Last wie „keine Tastatur“ an.
+    const raf = requestAnimationFrame(() => {
+      inputRef.current?.focus();
+    });
     const id = setTimeout(() => {
       inputRef.current?.focus();
-    }, 60);
-    return () => clearTimeout(id);
+    }, 16);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(id);
+    };
   }, [visible]);
 
   if (!visible) return null;

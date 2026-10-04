@@ -10,6 +10,23 @@ import {
   transitousFetchJson,
 } from './transitousClient';
 import { directionMatchesHint } from '../directionMatch';
+import {
+  cleanDirectionLabel,
+  looksLikeStreetHeadsign,
+  pickRawDirection,
+} from '../directionLabel';
+
+export {
+  cleanDirectionLabel,
+  looksLikeStreetHeadsign,
+} from '../directionLabel';
+
+type MotisPlace = {
+  name?: string;
+  lat?: number;
+  lon?: number;
+  stopId?: string;
+};
 
 type MotisStopTime = {
   place?: {
@@ -23,6 +40,8 @@ type MotisStopTime = {
   mode?: string;
   realTime?: boolean;
   headsign?: string;
+  /** Finalhalt der Fahrt — oft zuverlässiger als Headsign. */
+  tripTo?: MotisPlace;
   routeShortName?: string;
   displayName?: string;
   cancelled?: boolean;
@@ -144,6 +163,50 @@ export async function resolveTransitousStopId(opts: {
   return null;
 }
 
+/**
+ * Straßen-Ziel → nächsten Halt ohne Straßen-Headsign (z. B. Wrist Bahnhof).
+ * DELFI setzt manchmal Straßen+Hausnr.; TripTo-Koordinaten liegen oft am Bahnhof.
+ */
+export async function polishStreetDirection(opts: {
+  direction: string;
+  tripToLat?: number | null;
+  tripToLon?: number | null;
+}): Promise<string> {
+  const raw = (opts.direction || '').trim();
+  if (!looksLikeStreetHeadsign(raw)) return cleanDirectionLabel(raw) || raw;
+  const lat = opts.tripToLat;
+  const lon = opts.tripToLon;
+  if (
+    typeof lat !== 'number' ||
+    typeof lon !== 'number' ||
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lon)
+  ) {
+    return cleanDirectionLabel(raw) || raw;
+  }
+  try {
+    const rev = await transitousFetchJson(
+      `/v1/reverse-geocode?place=${encodeURIComponent(
+        `${placeTuple(lat, lon)},200`,
+      )}&type=STOP`,
+    );
+    const hits = asMatchList(rev);
+    const candidates = hits.filter(
+      (h) =>
+        typeof h.name === 'string' &&
+        h.name.trim().length >= 2 &&
+        !looksLikeStreetHeadsign(h.name),
+    );
+    const better =
+      candidates.find((h) => /\bbahnhof\b/i.test(h.name || '')) ??
+      candidates[0];
+    if (better?.name) return cleanDirectionLabel(better.name) || better.name.trim();
+  } catch {
+    /* soft */
+  }
+  return cleanDirectionLabel(raw) || raw;
+}
+
 function mapStopTime(
   row: MotisStopTime,
   directionHint?: string | null,
@@ -153,9 +216,13 @@ function mapStopTime(
       parseIsoDate(row.place?.departure) ??
       parseIsoDate(row.place?.scheduledDeparture);
     if (!when) return null;
+    const direction = pickRawDirection(
+      row.headsign || '',
+      row.tripTo?.name || '',
+    );
     return {
       line: row.routeShortName || row.displayName || 'Linie',
-      direction: row.headsign || '—',
+      direction: cleanDirectionLabel(direction) || direction || '—',
       when,
       plannedWhen: parseIsoDate(row.place?.scheduledDeparture),
       delaySec: null,
@@ -171,7 +238,10 @@ function mapStopTime(
   if (!when) return null;
   const plannedWhen = parseIsoDate(row.place?.scheduledDeparture);
   const delaySec = delaySecFromTimes(when, plannedWhen);
-  const direction = (row.headsign || '—').trim();
+  const direction = pickRawDirection(
+    row.headsign || '',
+    row.tripTo?.name || '',
+  );
   const hint = (directionHint ?? '').toLowerCase().trim();
   if (hint && !directionMatchesHint(direction, hint)) {
     return null;
@@ -179,7 +249,7 @@ function mapStopTime(
 
   return {
     line: (row.routeShortName || row.displayName || 'Linie').trim(),
-    direction,
+    direction: cleanDirectionLabel(direction) || direction || '—',
     when,
     plannedWhen,
     delaySec,
@@ -187,6 +257,23 @@ function mapStopTime(
     planned: !row.realTime,
     platform: row.place?.track || row.place?.scheduledTrack || null,
   };
+}
+
+async function mapStopTimePolished(
+  row: MotisStopTime,
+  directionHint?: string | null,
+): Promise<AdapterDeparture | null> {
+  const mapped = mapStopTime(row, directionHint);
+  if (!mapped) return null;
+  if (!looksLikeStreetHeadsign(mapped.direction) && !looksLikeStreetHeadsign(row.headsign)) {
+    return mapped;
+  }
+  const polished = await polishStreetDirection({
+    direction: mapped.direction,
+    tripToLat: row.tripTo?.lat ?? null,
+    tripToLon: row.tripTo?.lon ?? null,
+  });
+  return { ...mapped, direction: polished || mapped.direction };
 }
 
 export function createTransitousAdapter(opts?: {
@@ -221,7 +308,7 @@ export function createTransitousAdapter(opts?: {
       const hint = (directionHint ?? '').trim();
 
       for (const row of rows) {
-        const mapped = mapStopTime(row, hint);
+        const mapped = await mapStopTimePolished(row, hint);
         if (!mapped) continue;
         out.push(mapped);
         if (out.length >= limit) break;
@@ -230,7 +317,7 @@ export function createTransitousAdapter(opts?: {
       // Wenn Richtungsfilter alles verworfen hat → ungefiltert (Caller kann Ziel-Journey nutzen)
       if (!out.length && hint) {
         for (const row of rows) {
-          const mapped = mapStopTime(row, null);
+          const mapped = await mapStopTimePolished(row, null);
           if (!mapped) continue;
           out.push(mapped);
           if (out.length >= limit) break;

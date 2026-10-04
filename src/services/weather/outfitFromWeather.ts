@@ -117,26 +117,26 @@ export function buildOutfitAdviceFromWeather(
       );
     }
   } else if (dressFor >= 18) {
-    clothingBits.push('eher leicht (kurze Hose / T-Shirt ok)');
+    clothingBits.push('eher leicht, kurze Hose oder T-Shirt ok');
     if (morningFresher) {
       clothingBits.push(
         'jetzt noch etwas kühler — leichte Jacke oder Überwurf, später ablegen',
       );
     }
   } else if (dressFor >= 14) {
-    clothingBits.push('Übergangsjacke / Schichten');
+    clothingBits.push('Übergangsjacke oder Schichten');
     if (morningFresher && high != null && high >= 18) {
       clothingBits.push('wird tagsüber wärmer — nicht überziehen');
     }
   } else if (dressFor >= 8) {
-    clothingBits.push('wärmere Jacke / Pulli');
+    clothingBits.push('wärmere Jacke oder Pulli');
   } else {
     clothingBits.push('richtig warm anziehen');
   }
 
   if (eveningCool && evening != null) {
     clothingBits.push(
-      `Abend deutlich kühler (~${Math.round(evening)}°C) — Extra-Lage für später`,
+      `Abend deutlich kühler, etwa ${Math.round(evening)}°C — Extra-Lage für später`,
     );
   }
 

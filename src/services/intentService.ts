@@ -360,7 +360,7 @@ function formatDaySummary(entities: UserEntity[]): string {
   }
   const last = parts[parts.length - 1];
   const head = parts.slice(0, -1).join(', ');
-  return `Schau mal, das hab ich mir gemerkt: ${head} und ${last}.`;
+  return `Im Gedächtnis hab ich ${head} und ${last}.`;
 }
 
 type LearnedPreferenceHit = {
@@ -679,7 +679,7 @@ export async function handleMemoryIntent(
         })(),
       });
   if (hardDestEarly && (store.navActive || store.multiStopTour)) {
-    const result = await hardOverrideNavigationTo(hardDestEarly);
+    const result = await hardOverrideNavigationTo(hardDestEarly, { userText: text });
     return {
       handled: true,
       startedNav: result.ok,
@@ -691,7 +691,7 @@ export async function handleMemoryIntent(
       /\b(restaurant|café|cafe|bistro|imbiss)\b/iu.test(text) ||
       /\b(tisch|reservier|speisekarte)\b/iu.test(text);
     if (!gastroNamed) {
-      const result = await hardOverrideNavigationTo(hardDestEarly);
+      const result = await hardOverrideNavigationTo(hardDestEarly, { userText: text });
       return {
         handled: true,
         startedNav: result.ok,

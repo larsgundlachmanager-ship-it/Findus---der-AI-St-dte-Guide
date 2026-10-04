@@ -1,5 +1,5 @@
 /**
- * Boot-Gate Queue — Overlay parked nur Idle; Wake bei Block.
+ * Boot-Gate Queue — Overlay parked Polish+Idle; Wake bei Block.
  * Run: npx --yes tsx src/services/boot/bootGate.queue.smoke.test.ts
  */
 
@@ -42,11 +42,12 @@ async function main(): Promise<void> {
     idle = true;
   });
   await sleep(DEFERRED_JOB_GAP_MS + 50);
-  assert(polish, 'mapPolish läuft trotz Overlay');
+  assert(!polish, 'mapPolish wartet hinter Overlay');
   assert(!idle, 'mapIdle wartet hinter Overlay');
-  assert(peekBootGateWaiters() >= 1, 'Idle in Queue');
+  assert(peekBootGateWaiters() >= 2, 'Polish+Idle in Queue');
   noteOverlayBusy(false);
-  await sleep(DEFERRED_JOB_GAP_MS + 80);
+  await sleep(DEFERRED_JOB_GAP_MS * 2 + 120);
+  assert(polish, 'mapPolish nach Overlay-Close');
   assert(idle, 'mapIdle nach Overlay-Close');
   assert(peekBootGateWaiters() === 0, 'Queue leer');
 

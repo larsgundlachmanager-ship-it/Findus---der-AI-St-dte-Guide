@@ -156,6 +156,30 @@ export function scoreCandidateForUser(
     // Nähe schon in call1 — Legacy-Proximity dämpfen
     proximity *= 0.35;
   }
+  // Hard-Amenity / city_best: Qualität vor Nähe (AYCE, Spezialgericht, …)
+  const hardAmenityMust = wishes.some(
+    (w) =>
+      w.hardness === 'must' &&
+      (w.kind === 'amenity' || w.kind === 'dish' || w.kind === 'cuisine') &&
+      /all_you_can_eat|ayce|buffet|schlemmer|steak|aussicht|live.?musik|live.?music/i.test(
+        w.text,
+      ),
+  );
+  const qualityFirst =
+    req.searchMode === 'city_best' ||
+    hardAmenityMust ||
+    criteria.some(
+      (cr) =>
+        cr.role === 'must' &&
+        /all_you_can_eat|ayce|buffet|schlemmer|steak|cuisine|live.?musik|live_music/i.test(
+          cr.key,
+        ),
+    );
+  if (qualityFirst && req.searchMode !== 'here_now') {
+    proximity *= 0.2;
+  } else if (qualityFirst) {
+    proximity *= 0.55;
+  }
 
   let price = 0;
   const cheapAsk =
@@ -174,8 +198,34 @@ export function scoreCandidateForUser(
 
   const detour = (c.detourPrio ?? 6) <= 2 ? 8 : (c.detourPrio ?? 6) <= 4 ? 3 : 0;
 
+  let touristTrap = 0;
+  try {
+    const { touristTrapRankPenalty } = require('./diningHarden') as {
+      touristTrapRankPenalty: (o: {
+        rating?: number | null;
+        ratingCount?: number | null;
+        softTags?: string[] | null;
+      }) => number;
+    };
+    touristTrap = touristTrapRankPenalty({
+      rating: c.rating,
+      ratingCount: c.ratingCount,
+      softTags: c.softTags,
+    });
+  } catch {
+    touristTrap = 0;
+  }
+
   const score =
-    evidence + wish + call1 + ratingPart + proximity + price + open + detour;
+    evidence +
+    wish +
+    call1 +
+    ratingPart +
+    proximity +
+    price +
+    open +
+    detour +
+    touristTrap;
 
   return {
     c,

@@ -1,6 +1,6 @@
-/**
- * Offline-Kartenextract der gewählten Stadt (GeoJSON-ähnlich, lokal).
- * Datei: staedte/<id>.map.json — Download mit dem Pack.
+﻿/**
+ * Offline-Kartenextract der gewÃ¤hlten Stadt (GeoJSON-Ã¤hnlich, lokal).
+ * Datei: staedte/<id>.map.json â€” Download mit dem Pack.
  */
 
 import * as FileSystem from 'expo-file-system';
@@ -10,6 +10,9 @@ import {
   isNativeMapParseAvailable,
   parseMapExtractFileNative,
 } from 'findus-map-native';
+import { mapExtractCapsForRadius } from './mapDeviceTier';
+import { isMapExtractRoadsSane } from './mapExtractSanity';
+import { noteMapDataWarm } from './mapDataCache';
 
 export type CityMapExtractRoad = {
   k: 0 | 1 | 2;
@@ -41,9 +44,24 @@ const DOC = FileSystem.documentDirectory;
 const DIR = DOC ? `${DOC}cities/` : null;
 
 const mem = new Map<string, CityMapExtract>();
+/** Volle Parses â€” klein halten (Display-Snaps haben eigenes Cap). */
+const MEM_CAP = 4;
+
+function putCityMapExtractMem(id: string, extract: CityMapExtract): void {
+  const key = id.toLowerCase();
+  if (mem.has(key)) mem.delete(key);
+  while (mem.size >= MEM_CAP) {
+    const oldest = mem.keys().next().value;
+    if (oldest == null) break;
+    mem.delete(oldest);
+  }
+  mem.set(key, extract);
+}
 const prefetchInFlight = new Map<string, Promise<void>>();
-/** Normale Städte ~0.5–12 MB; Mega-Regionen nur per Display-Snap + Clip. */
+/** Voll-Parse/JS-Mem-Grenze â€” darÃ¼ber nur Display-Snap/Clip, Datei behalten. */
 const MAX_EXTRACT_BYTES = 28_000_000;
+/** Download-Cap (Amsterdam ~39 MB) â€” Clip auf GerÃ¤t, kein silent Delete. */
+const MAX_DOWNLOAD_BYTES = 48_000_000;
 /** Region-Packs: enger Clip (Phase 6a), nie Full-Parse in Map. */
 const REGION_CLIP_RADIUS_M = 3_000;
 
@@ -61,7 +79,7 @@ export type DisplayExtractSnap = {
 };
 
 let displayMem: DisplayExtractSnap | null = null;
-/** Letzte Display-Snaps pro Stadt — Sofort-Wechsel beim Pan ohne erneutes Parse. */
+/** Letzte Display-Snaps pro Stadt â€” Sofort-Wechsel beim Pan ohne erneutes Parse. */
 const displayMemByCity = new Map<string, DisplayExtractSnap>();
 const DISPLAY_MEM_CAP = 8;
 let persistDisplayTimer: ReturnType<typeof setTimeout> | null = null;
@@ -88,6 +106,12 @@ export function peekDisplayExtract(
 }
 
 export function rememberDisplayExtract(snap: DisplayExtractSnap): void {
+  if (!isMapExtractRoadsSane(snap.extract)) {
+    if (__DEV__) {
+      console.warn('[map-extract] skip corrupt display snap', snap.cityId);
+    }
+    return;
+  }
   const id = snap.cityId.toLowerCase();
   displayMem = snap;
   displayMemByCity.set(id, snap);
@@ -107,7 +131,7 @@ export function rememberDisplayExtract(snap: DisplayExtractSnap): void {
   persistDisplayTimer = setTimeout(() => {
     persistDisplayTimer = null;
     void writeDisplayExtractFile(snap);
-  }, 600);
+  }, 400);
 }
 
 async function writeDisplayExtractFile(snap: DisplayExtractSnap): Promise<void> {
@@ -128,6 +152,17 @@ async function writeDisplayExtractFile(snap: DisplayExtractSnap): Promise<void> 
   } catch {
     /* Disk voll / iOS sandbox */
   }
+}
+
+/** App â†’ Hintergrund/Kill: Display-Snap sofort auf Disk â€” Cold-Start ohne Neu-Parse. */
+export async function flushDisplayExtractNow(): Promise<void> {
+  if (persistDisplayTimer) {
+    clearTimeout(persistDisplayTimer);
+    persistDisplayTimer = null;
+  }
+  const snap = displayMem;
+  if (!snap) return;
+  await writeDisplayExtractFile(snap);
 }
 
 export async function hydrateDisplayExtract(
@@ -152,6 +187,14 @@ export async function hydrateDisplayExtract(
     const lng = typeof j.lng === 'number' ? j.lng : Number(j.lng);
     const parsed = coerceExtract(j.extract, id);
     if (!parsed || !Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+    if (!isMapExtractRoadsSane(parsed)) {
+      try {
+        await FileSystem.deleteAsync(p, { idempotent: true });
+      } catch {
+        /* soft */
+      }
+      return null;
+    }
     displayMem = {
       cityId: id,
       lat,
@@ -260,16 +303,25 @@ export async function buildAndPersistDisplaySnap(
   return clipped;
 }
 
-/** Prefetch Offline-Karte nach Pack-Install — ohne sofortigen Riesen-Parse. */
+/** Prefetch Offline-Karte nach Pack-Install â€” ohne sofortigen Riesen-Parse.
+ * Vector/Protomaps: no-op (keine *.map.json mehr). */
 let idleExtractTimer: ReturnType<typeof setTimeout> | null = null;
 export function scheduleIdleCityMapExtract(cityId: string): void {
+  try {
+    const { isVectorBasemapEnabled } = require('./mapTileConfig') as {
+      isVectorBasemapEnabled: () => boolean;
+    };
+    if (isVectorBasemapEnabled()) return;
+  } catch {
+    /* soft â€” Legacy weiter */
+  }
   const id = cityId.trim().toLowerCase();
   if (!id) return;
   if (idleExtractTimer) {
     clearTimeout(idleExtractTimer);
     idleExtractTimer = null;
   }
-  // Download *.map.json im Idle — Parse erst wenn Viewport die Stadt braucht.
+  // Download *.map.json im Idle â€” Parse erst wenn Viewport die Stadt braucht.
   idleExtractTimer = setTimeout(() => {
     idleExtractTimer = null;
     void (async () => {
@@ -302,24 +354,31 @@ export async function loadCachedCityMapExtract(
       const info = await FileSystem.getInfoAsync(p);
       if (!info.exists) return null;
       const size = 'size' in info && typeof info.size === 'number' ? info.size : 0;
-      if (size > MAX_EXTRACT_BYTES && !isRegionPackCityId(id)) {
-        try {
-          await FileSystem.deleteAsync(p, { idempotent: true });
-        } catch {
-          /* leftover London mega-extract */
-        }
-        return null;
-      }
-      if (size > MAX_EXTRACT_BYTES && isRegionPackCityId(id)) {
+      // Mega-Stadt (Amsterdam) / Region: nie still lÃ¶schen â€” Display-Snap oder Clip.
+      if (size > MAX_EXTRACT_BYTES) {
         const snap = await hydrateDisplayExtract(id);
         if (snap?.extract) {
-          mem.set(id, snap.extract);
+          putCityMapExtractMem(id, snap.extract);
           return snap.extract;
         }
-        return null;
+        const parsedHuge = await readAndParseExtractFile(p, id);
+        if (!parsedHuge) return null;
+        const midLat =
+          (parsedHuge.bbox.south + parsedHuge.bbox.north) / 2;
+        const midLng =
+          (parsedHuge.bbox.west + parsedHuge.bbox.east) / 2;
+        const clipped = await buildAndPersistDisplaySnap(
+          id,
+          parsedHuge,
+          midLat,
+          midLng,
+          DISPLAY_BOOT_RADIUS_M,
+        );
+        putCityMapExtractMem(id, clipped);
+        return clipped;
       }
       const parsed = await readAndParseExtractFile(p, id);
-      if (parsed) mem.set(id, parsed);
+      if (parsed) putCityMapExtractMem(id, parsed);
       return parsed;
     } catch {
       return null;
@@ -350,7 +409,10 @@ export async function prefetchCityMapExtract(
   const job = (async () => {
     try {
       const info = await FileSystem.getInfoAsync(dest);
-      if (info.exists) return;
+      if (info.exists) {
+        noteMapDataWarm(id);
+        return;
+      }
       await FileSystem.makeDirectoryAsync(DIR, { intermediates: true });
       const tmp = `${DIR}_tmp_map_${Date.now()}.json`;
       const res = await FileSystem.downloadAsync(url, tmp);
@@ -365,14 +427,15 @@ export async function prefetchCityMapExtract(
       const tmpInfo = await FileSystem.getInfoAsync(tmp);
       const tmpSize =
         'size' in tmpInfo && typeof tmpInfo.size === 'number' ? tmpInfo.size : 0;
-      if (tmpSize > MAX_EXTRACT_BYTES) {
+      if (tmpSize > MAX_DOWNLOAD_BYTES) {
         try {
           await FileSystem.deleteAsync(tmp, { idempotent: true });
         } catch {
-          /* too big */
+          /* too big even for clip-on-device */
         }
         return;
       }
+      // > MAX_EXTRACT_BYTES ok â€” loadCached clippt zu Display-Snap.
       try {
         await FileSystem.moveAsync({ from: tmp, to: dest });
       } catch {
@@ -388,6 +451,7 @@ export async function prefetchCityMapExtract(
           /* ignore */
         }
       }
+      noteMapDataWarm(id);
     } catch {
       /* offline / 404 */
     }
@@ -415,6 +479,7 @@ export async function ensureCityMapExtract(
 export function clearCityMapExtractMem(): void {
   mem.clear();
   displayMem = null;
+  displayMemByCity.clear();
 }
 
 const EMPTY_GRAPH: CityMapExtractGraph = { nodes: [], edges: [] };
@@ -435,17 +500,80 @@ function ringTouchesBox(
   return false;
 }
 
-/** Erster sichtbarer Ausschnitt um GPS (~1 km). */
-export const DISPLAY_BOOT_RADIUS_M = 1_200;
 /**
- * Idle-Ausschnitt: ~10 km — gleiches Detail wie Offline-Umland-Pack
- * (Gebäude+Straßen). Überlappende Städte: ein Extract via Viewport-Switch.
+ * Cap nicht â€žerste N im Bboxâ€œ â€” sonst fehlen alle GebÃ¤ude um GPS
+ * (OSM-Reihenfolge oft SW-first â†’ leere Street-View).
+ */
+function pickNearestBuildings(
+  buildings: CityMapExtract['buildings'],
+  lat: number,
+  lng: number,
+  hit: (ring?: Array<[number, number]>) => boolean,
+  maxBuildings: number,
+): CityMapExtract['buildings'] {
+  const inBox = buildings.filter(hit);
+  if (inBox.length <= maxBuildings) return inBox;
+  const scored = inBox.map((ring) => {
+    const p = ring[0];
+    const dLat = p ? p[0] - lat : 99;
+    const dLng = p ? p[1] - lng : 99;
+    return { ring, d2: dLat * dLat + dLng * dLng };
+  });
+  scored.sort((a, b) => a.d2 - b.d2);
+  const out: CityMapExtract['buildings'] = [];
+  for (let i = 0; i < maxBuildings; i += 1) {
+    out.push(scored[i]!.ring);
+  }
+  return out;
+}
+
+/**
+ * StraÃŸen: Major behalten, dann nÃ¤chste Streets zum GPS â€” sonst leeres StraÃŸennetz
+ * in der Dorfmitte bei Umland-Cap.
+ */
+function pickRoadsForDisplay(
+  roads: CityMapExtract['roads'],
+  lat: number,
+  lng: number,
+  hit: (ring?: Array<[number, number]>) => boolean,
+  maxRoads: number,
+): CityMapExtract['roads'] {
+  const inBox = roads.filter((r) => hit(r.c));
+  if (inBox.length <= maxRoads) return inBox;
+  const majors: typeof inBox = [];
+  const rest: typeof inBox = [];
+  for (const r of inBox) {
+    if ((r.k ?? 1) === 0) majors.push(r);
+    else rest.push(r);
+  }
+  const scored = rest.map((r) => {
+    const p = r.c?.[0];
+    const dLat = p ? p[0] - lat : 99;
+    const dLng = p ? p[1] - lng : 99;
+    // Streets (k=1) vor Pfaden (k=2)
+    const kindBias = (r.k ?? 1) === 1 ? 0 : 1;
+    return { r, kindBias, d2: dLat * dLat + dLng * dLng };
+  });
+  scored.sort((a, b) => a.kindBias - b.kindBias || a.d2 - b.d2);
+  const out = majors.slice();
+  const remain = Math.max(0, maxRoads - out.length);
+  for (let i = 0; i < remain && i < scored.length; i += 1) {
+    out.push(scored[i]!.r);
+  }
+  return out;
+}
+
+/** Erster sichtbarer Ausschnitt um GPS (~5 km) â€” Splash-Kern. */
+export const DISPLAY_BOOT_RADIUS_M = 5_000;
+/**
+ * Stadt-Release: ~10 km â€” gleiches Detail wie Offline-Umland-Pack
+ * (GebÃ¤ude+StraÃŸen). Ãœberlappende StÃ¤dte: ein Extract via Viewport-Switch.
  */
 export const DISPLAY_WIDE_RADIUS_M = 10_000;
 
 /**
- * Volles Extract wenn klein genug; sonst Clip um GPS (WebView-Schutz —
- * 3–13 MB JSON + 10k Gebäude killt sonst Android/MapLibre).
+ * Volles Extract wenn klein genug; sonst Clip um GPS (WebView-Schutz â€”
+ * 3â€“13 MB JSON + 10k GebÃ¤ude killt sonst Android/MapLibre).
  */
 export function prepareExtractForDisplay(
   extract: CityMapExtract,
@@ -467,14 +595,16 @@ export function prepareExtractForDisplay(
   const radiusM =
     radiusOverrideM ??
     (region ? REGION_CLIP_RADIUS_M : DISPLAY_WIDE_RADIUS_M);
-  const maxBuildings = region
-    ? 4_000
-    : radiusM <= 1_500
-      ? 2_500
-      : radiusM <= 10_000
-        ? 8_000
-        : 10_000;
-  return clipCityMapExtractForDisplay(extract, lat, lng, radiusM, maxBuildings);
+  const caps = mapExtractCapsForRadius(radiusM);
+  const maxBuildings = region ? 4_000 : caps.maxBuildings;
+  return clipCityMapExtractForDisplay(
+    extract,
+    lat,
+    lng,
+    radiusM,
+    maxBuildings,
+    caps.maxRoads,
+  );
 }
 
 export function clipCityMapExtractForDisplay(
@@ -482,8 +612,12 @@ export function clipCityMapExtractForDisplay(
   lat: number,
   lng: number,
   radiusM = 5200,
-  maxBuildings = 8_000,
+  maxBuildings?: number,
+  maxRoads?: number,
 ): CityMapExtract {
+  const caps = mapExtractCapsForRadius(radiusM);
+  const capBuildings = maxBuildings ?? caps.maxBuildings;
+  const capRoads = maxRoads ?? caps.maxRoads;
   const dLat = radiusM / 111_320;
   const cos = Math.cos((lat * Math.PI) / 180);
   const dLng = radiusM / (111_320 * Math.max(0.2, cos));
@@ -493,34 +627,169 @@ export function clipCityMapExtractForDisplay(
   const east = lng + dLng;
   const hit = (ring?: Array<[number, number]>) =>
     ringTouchesBox(ring, south, north, west, east);
-  const maxRoads =
-    radiusM <= 1_500 ? 2_500 : radiusM <= 10_000 ? 5_500 : 9_000;
+  // Cap bewusst unter 5500 â€” pickRoads wechselt Inhalt bei jedem Reclip;
+  // zu viele Features â†’ MapLibre ShapeSource-Sturm â†’ Kamera-Snap.
   return {
     v: extract.v,
     cityId: extract.cityId,
     bbox: { south, west, north, east },
-    roads: extract.roads.filter((r) => hit(r.c)).slice(0, maxRoads),
-    buildings: extract.buildings.filter(hit).slice(0, maxBuildings),
+    roads: pickRoadsForDisplay(extract.roads, lat, lng, hit, capRoads),
+    buildings: pickNearestBuildings(
+      extract.buildings,
+      lat,
+      lng,
+      hit,
+      capBuildings,
+    ),
     water: extract.water.filter(hit),
     parks: extract.parks.filter(hit),
     woods: extract.woods.filter(hit),
     land: (extract.land || []).filter(hit).slice(0, 80),
     rails: extract.rails.filter(hit),
-    housenumbers: extract.housenumbers
-      .filter(
-        (n) =>
-          n.lat >= south &&
-          n.lat <= north &&
-          n.lng >= west &&
-          n.lng <= east,
-      )
-      .slice(0, 2_400),
+    // Keine Hausnummern auf der Karte â€” Adress-Nav lÃ¤uft Ã¼ber Geocode/Suche.
+    housenumbers: [],
     graph: EMPTY_GRAPH,
   };
 }
 
-function yieldToMainThread(): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, 0));
+function roadMergeKey(r: CityMapExtractRoad): string {
+  const c = r.c;
+  if (!c?.length) return `${r.k}:${r.n || ''}:empty`;
+  const a = c[0]!;
+  const b = c[c.length - 1]!;
+  return `${r.k}:${r.n || ''}:${a[0].toFixed(5)},${a[1].toFixed(5)}:${b[0].toFixed(5)},${b[1].toFixed(5)}:${c.length}`;
+}
+
+function ringMergeKey(ring: Array<[number, number]>): string {
+  if (!ring?.length) return '';
+  const a = ring[0]!;
+  return `${ring.length}:${a[0].toFixed(5)},${a[1].toFixed(5)}`;
+}
+
+function mergePolyRings(
+  a: Array<Array<[number, number]>>,
+  b: Array<Array<[number, number]>>,
+  cap: number,
+): Array<Array<[number, number]>> {
+  const out: Array<Array<[number, number]>> = [];
+  const seen = new Set<string>();
+  for (const ring of [...a, ...b]) {
+    const k = ringMergeKey(ring);
+    if (!k || seen.has(k)) continue;
+    seen.add(k);
+    out.push(ring);
+    if (out.length >= cap) break;
+  }
+  return out;
+}
+
+/** Stadtwechsel: neue Stadt dazu, alte Nachbar-Geometrie behalten (Prisdorf + Pinneberg). */
+export function mergeCityMapExtracts(
+  prev: CityMapExtract,
+  next: CityMapExtract,
+  primaryCityId: string,
+): CityMapExtract {
+  const roads: CityMapExtractRoad[] = [];
+  const roadSeen = new Set<string>();
+  for (const r of [...(prev.roads || []), ...(next.roads || [])]) {
+    const k = roadMergeKey(r);
+    if (roadSeen.has(k)) continue;
+    roadSeen.add(k);
+    roads.push(r);
+  }
+  const buildings: Array<Array<[number, number]>> = [];
+  const bSeen = new Set<string>();
+  for (const ring of [...(prev.buildings || []), ...(next.buildings || [])]) {
+    const k = ringMergeKey(ring);
+    if (!k || bSeen.has(k)) continue;
+    bSeen.add(k);
+    buildings.push(ring);
+    if (buildings.length >= 3_600) break;
+  }
+  const pb = prev.bbox;
+  const nb = next.bbox;
+  return {
+    v: Math.max(prev.v, next.v),
+    cityId: primaryCityId.toLowerCase(),
+    bbox: {
+      south: Math.min(pb.south, nb.south),
+      west: Math.min(pb.west, nb.west),
+      north: Math.max(pb.north, nb.north),
+      east: Math.max(pb.east, nb.east),
+    },
+    roads: roads.slice(0, 5_500),
+    buildings,
+    water: mergePolyRings(prev.water || [], next.water || [], 120),
+    parks: mergePolyRings(prev.parks || [], next.parks || [], 120),
+    woods: mergePolyRings(prev.woods || [], next.woods || [], 80),
+    land: mergePolyRings(prev.land || [], next.land || [], 100),
+    rails: mergePolyRings(prev.rails || [], next.rails || [], 80),
+    housenumbers: [],
+    graph: EMPTY_GRAPH,
+  };
+}
+
+/** Gebäude-Hit-Test Chunk — klein halten, damit Mic/Chrome atmen. */
+export const EXTRACT_BUILDING_CLIP_CHUNK = 800;
+/** Scoring/Sort Chunk für pickNearestBuildingsAsync. */
+export const EXTRACT_BUILDING_SCORE_CHUNK = 600;
+
+function chromeBusyNow(): boolean {
+  try {
+    const {
+      isVoiceLaneBusy,
+      isOverlayBusy,
+    } = require('../boot/interactiveBootGate') as {
+      isVoiceLaneBusy: () => boolean;
+      isOverlayBusy: () => boolean;
+    };
+    return isVoiceLaneBusy() || isOverlayBusy();
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Main-Thread-Yield. Bei Mic/Chrome länger warten — Gebäude-Clip hinter Lane C/B.
+ */
+function yieldToMainThread(preferChrome = false): Promise<void> {
+  const ms = preferChrome && chromeBusyNow() ? 32 : 0;
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Wie pickNearestBuildings, aber Scoring in Chunks + Yields (kein Sync-Spike auf 10k).
+ */
+async function pickNearestBuildingsAsync(
+  buildings: CityMapExtract['buildings'],
+  lat: number,
+  lng: number,
+  maxBuildings: number,
+): Promise<CityMapExtract['buildings']> {
+  if (buildings.length <= maxBuildings) return buildings;
+  const scored: Array<{ ring: CityMapExtract['buildings'][number]; d2: number }> =
+    [];
+  const CHUNK = EXTRACT_BUILDING_SCORE_CHUNK;
+  for (let i = 0; i < buildings.length; i += CHUNK) {
+    const end = Math.min(i + CHUNK, buildings.length);
+    for (let j = i; j < end; j += 1) {
+      const ring = buildings[j]!;
+      const p = ring[0];
+      const dLat = p ? p[0] - lat : 99;
+      const dLng = p ? p[1] - lng : 99;
+      scored.push({ ring, d2: dLat * dLat + dLng * dLng });
+    }
+    if (end < buildings.length) {
+      await yieldToMainThread(true);
+    }
+  }
+  scored.sort((a, b) => a.d2 - b.d2);
+  await yieldToMainThread(true);
+  const out: CityMapExtract['buildings'] = [];
+  for (let i = 0; i < maxBuildings; i += 1) {
+    out.push(scored[i]!.ring);
+  }
+  return out;
 }
 
 /**
@@ -546,19 +815,15 @@ export async function prepareExtractForDisplayAsync(
   const radiusM =
     radiusOverrideM ??
     (region ? REGION_CLIP_RADIUS_M : DISPLAY_WIDE_RADIUS_M);
-  const maxBuildings = region
-    ? 4_000
-    : radiusM <= 1_500
-      ? 2_500
-      : radiusM <= 10_000
-        ? 8_000
-        : 10_000;
+  const caps = mapExtractCapsForRadius(radiusM);
+  const maxBuildings = region ? 4_000 : caps.maxBuildings;
   return clipCityMapExtractForDisplayAsync(
     extract,
     lat,
     lng,
     radiusM,
     maxBuildings,
+    caps.maxRoads,
   );
 }
 
@@ -567,8 +832,12 @@ export async function clipCityMapExtractForDisplayAsync(
   lat: number,
   lng: number,
   radiusM = 5200,
-  maxBuildings = 8_000,
+  maxBuildings?: number,
+  maxRoads?: number,
 ): Promise<CityMapExtract> {
+  const caps = mapExtractCapsForRadius(radiusM);
+  const capBuildings = maxBuildings ?? caps.maxBuildings;
+  const capRoads = maxRoads ?? caps.maxRoads;
   const dLat = radiusM / 111_320;
   const cos = Math.cos((lat * Math.PI) / 180);
   const dLng = radiusM / (111_320 * Math.max(0.2, cos));
@@ -578,41 +847,39 @@ export async function clipCityMapExtractForDisplayAsync(
   const east = lng + dLng;
   const hit = (ring?: Array<[number, number]>) =>
     ringTouchesBox(ring, south, north, west, east);
-  const maxRoads =
-    radiusM <= 1_500 ? 2_500 : radiusM <= 10_000 ? 5_500 : 9_000;
 
-  const roads = extract.roads.filter((r) => hit(r.c)).slice(0, maxRoads);
-  await yieldToMainThread();
+  // Straßen zuerst — Chrome bleibt frei; Gebäude bewusst danach.
+  const roads = pickRoadsForDisplay(extract.roads, lat, lng, hit, capRoads);
+  await yieldToMainThread(true);
 
-  const buildings: typeof extract.buildings = [];
+  // Gebäude-Hit-Test gestückelt; bei Mic/Chrome extra Pause.
+  const inBox: typeof extract.buildings = [];
   const srcB = extract.buildings;
-  const CHUNK = 2_500;
-  for (let i = 0; i < srcB.length && buildings.length < maxBuildings; i += CHUNK) {
+  const CHUNK = EXTRACT_BUILDING_CLIP_CHUNK;
+  for (let i = 0; i < srcB.length; i += CHUNK) {
     const end = Math.min(i + CHUNK, srcB.length);
-    for (let j = i; j < end && buildings.length < maxBuildings; j += 1) {
+    for (let j = i; j < end; j += 1) {
       const b = srcB[j]!;
-      if (hit(b)) buildings.push(b);
+      if (hit(b)) inBox.push(b);
     }
-    if (i + CHUNK < srcB.length && buildings.length < maxBuildings) {
-      await yieldToMainThread();
+    if (end < srcB.length) {
+      await yieldToMainThread(true);
     }
   }
+  const buildings = await pickNearestBuildingsAsync(
+    inBox,
+    lat,
+    lng,
+    capBuildings,
+  );
 
   const water = extract.water.filter(hit);
-  await yieldToMainThread();
-  const parks = extract.parks.filter(hit);
-  const woods = extract.woods.filter(hit);
+  await yieldToMainThread(true);
+  const parks = extract.parks.filter(hit);  const woods = extract.woods.filter(hit);
   const land = (extract.land || []).filter(hit).slice(0, 80);
   const rails = extract.rails.filter(hit);
-  const housenumbers = extract.housenumbers
-    .filter(
-      (n) =>
-        n.lat >= south &&
-        n.lat <= north &&
-        n.lng >= west &&
-        n.lng <= east,
-    )
-    .slice(0, 2_400);
+  // Keine Hausnummern im Display-Clip â€” Karte bleibt leicht; Adress-Nav = Geocode.
+  const housenumbers: CityMapExtract['housenumbers'] = [];
 
   return {
     v: extract.v,

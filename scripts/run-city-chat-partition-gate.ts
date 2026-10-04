@@ -39,6 +39,17 @@ assert(foldCityKey('Prisdorf') !== foldCityKey('Lübeck'), 'fold distinct');
   assert(s.source === 'active', 'forced active');
 }
 
+// London-Sticky darf lokale Pitch-Suche nicht vergiften
+{
+  const s = computeCityChatScope({
+    userText: 'Such ein gutes Restaurant in der Nähe',
+    activeCity: 'Prisdorf',
+    stickyCity: 'London',
+  });
+  assert(s.cityKey === foldCityKey('Prisdorf'), 'no london leak on local pitch ask');
+  assert(s.source === 'active', 'london sticky dropped');
+}
+
 // Fremder Sticky + Follow-up → Sticky behalten (Hotel-Sidequest)
 {
   assert(keepCityStickyForFollowUp('wie teuer'), 'follow-up detector');

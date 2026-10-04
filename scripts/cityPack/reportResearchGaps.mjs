@@ -20,6 +20,7 @@ import { placesTextAll, requireGoogleKey } from './google.mjs';
 import {
   STORY_DISCOVERY_QUERIES,
   suggestedMinStory,
+  suggestedTargetStory,
   suggestedDiscoveryRadius,
 } from './placeCategoryPolicy.mjs';
 
@@ -104,6 +105,7 @@ async function main() {
   }
   const pack = loadPack(cityId);
   const minStory = suggestedMinStory(pack);
+  const targetStory = suggestedTargetStory(pack);
   const radius = suggestedDiscoveryRadius(pack);
   const stories = (pack.spots || []).filter((s) => s.pack_role !== 'directory');
   const thin = stories.filter((s) => isThinStory(pack, s));
@@ -120,7 +122,7 @@ async function main() {
   lines.push('');
   lines.push(`Stand: ${new Date().toISOString()}`);
   lines.push(
-    `Story: **${stories.length}** (Guidance ≥ **${minStory}**) · Directory: **${pack._pack_index?.directory ?? '—'}** · dünn: **${thin.length}** · angereichert: **${rich.length}**`,
+    `Story: **${stories.length}** (Value-Floor ≥ **${minStory}**, Soft-Ziel ≈ **${targetStory}**) · Directory: **${pack._pack_index?.directory ?? '—'}** · dünn: **${thin.length}** · angereichert: **${rich.length}**`,
   );
   lines.push('');
   lines.push('## Bitte nachliefern (Gemini / Deep Research)');
@@ -138,10 +140,17 @@ async function main() {
   }
   lines.push('');
   if (stories.length < minStory) {
-    lines.push('## Pack zu dünn');
+    lines.push('## Pack unter Value-Floor');
     lines.push('');
     lines.push(
-      `Aktuell ${stories.length} Stories, Ziel für diese Stadtgröße ≈ ${minStory}. Bitte weitere Top-Sehenswürdigkeiten / Museen / Theater / Kirchen / Aussichten liefern oder \`city:classify --radius ${radius}\` mit Google-Discovery laufen lassen.`,
+      `Aktuell ${stories.length} Stories — Mindestzahl fürs Geld ≈ **${minStory}**, Soft-Ziel ≈ **${targetStory}**. Weitere Top-Sehenswürdigkeiten / Museen / Theater / Kirchen / Aussichten oder \`city:classify --radius ${radius}\` mit Google-Discovery.`,
+    );
+    lines.push('');
+  } else if (stories.length < targetStory) {
+    lines.push('## Soft-Ziel noch offen');
+    lines.push('');
+    lines.push(
+      `Floor erreicht (${stories.length} ≥ ${minStory}), Soft-Ziel ≈ **${targetStory}** — optional mehr Landmarken für dickeren Pack-Wert.`,
     );
     lines.push('');
   }

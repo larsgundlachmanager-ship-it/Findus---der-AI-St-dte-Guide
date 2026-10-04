@@ -12,7 +12,12 @@ import { turnPrefetchKey, warmNavTurnCue } from './navTurnPrefetch';
 import type { ClassifiedTurn } from './turnComplexityClassifier';
 import { clearVisionCueCache } from './visionCueCache';
 import { fetchOsmVisualLandmark } from './osmVisualLandmark';
-import { scrubRoboticNavSpeak } from './spatialOrientation';
+import {
+  navHoldPhrase,
+  navTurnSideWord,
+  scrubRoboticNavSpeak,
+  weaveComplexNavCue,
+} from './spatialOrientation';
 
 export const PREFETCH_ZONE_MIN_M = 40;
 export const PREFETCH_ZONE_MAX_M = 50;
@@ -32,7 +37,6 @@ type LookAheadSlot = {
   roadName: string | null;
   placeHint: string | null;
   status: SlotStatus;
-  /** OSM-basierter TTS-Cue (kein Gemini-Vision). */
   visionCue: string | null;
   streetViewReady: boolean;
   prefetchedAt: number | null;
@@ -43,7 +47,6 @@ type LookAheadSlot = {
 let slots = new Map<string, LookAheadSlot>();
 let activeJob: Promise<void> | null = null;
 let classifiedTurns: ClassifiedTurn[] = [];
-/** Letztes Street-View-Angebot (für Voice „zeig Street View“). */
 let lastStreetViewOffer: {
   lat: number;
   lng: number;
@@ -68,7 +71,6 @@ export function isStreetViewVoiceAsk(text: string): boolean {
   );
 }
 
-/** Voice: zuletzt angebotene Kreuzung als Street View öffnen. */
 export async function fulfillStreetViewVoiceAsk(): Promise<{
   ok: boolean;
   message?: string;
@@ -128,9 +130,6 @@ function slotId(waypointIndex: number): string {
   return `turn:${waypointIndex}`;
 }
 
-/**
- * OSM Overpass → TTS. Street View nur Availability (kein Bild-Fetch).
- */
 async function buildOsmTurnCue(opts: {
   lat: number;
   lng: number;
@@ -142,7 +141,6 @@ async function buildOsmTurnCue(opts: {
   let streetViewReady = false;
   try {
     streetViewReady = await streetViewAvailable(opts.lat, opts.lng);
-    // One-time SV meta → local cache → community dataset for all users
     if (streetViewReady) {
       void import('../../runtime/growthModule').then((g) => {
         void g.warmStreetViewForPoint({
@@ -160,34 +158,37 @@ async function buildOsmTurnCue(opts: {
   const osm = await fetchOsmVisualLandmark({
     lat: opts.lat,
     lng: opts.lng,
-    radiusM: 55,
+    radiusM: 5,
     headingDeg: opts.heading,
   });
 
-  const turnPart =
-    opts.turn === 'geradeaus'
-      ? 'geh weiter geradeaus'
-      : `abbiegen nach ${opts.turn}`;
+  const hold = navHoldPhrase(navTurnSideWord(opts.turn));
 
   if (osm?.ttsLine) {
-    const cue = scrubRoboticNavSpeak(`${osm.ttsLine} Dann ${turnPart}.`);
+    const visual = scrubRoboticNavSpeak(
+      osm.ttsLine.replace(/[—–-]\s*etwa\s+\d+\s*Meter\.?/gi, '').trim(),
+    ).replace(/[.!?]+$/, '');
+    const cue = scrubRoboticNavSpeak(
+      visual ? `${visual} — ${hold}.` : weaveComplexNavCue({ kind: 'complex', turn: opts.turn }),
+    );
     return { cue, streetViewReady };
   }
 
   if (opts.placeHint) {
     return {
-      cue: scrubRoboticNavSpeak(
-        `Orientier dich an ${opts.placeHint} — dann ${turnPart}.`,
-      ),
+      cue: weaveComplexNavCue({
+        kind: 'complex',
+        turn: opts.turn,
+        landmark: opts.placeHint,
+      }),
       streetViewReady,
     };
   }
 
-  // Keine Straßennamen — visuelle Kreuzung reicht
   void opts.roadName;
 
   return {
-    cue: scrubRoboticNavSpeak(`Gleich ${turnPart}.`),
+    cue: weaveComplexNavCue({ kind: 'complex', turn: opts.turn }),
     streetViewReady,
   };
 }
@@ -339,11 +340,10 @@ export function isStreetViewButtonReady(waypointIndex: number): boolean {
 export function buildComplexTurnFallback(
   maneuver: string | null | undefined,
 ): string {
-  const turn = turnWordFromManeuver(maneuver);
-  if (turn === 'geradeaus') {
-    return 'Gleich weiter geradeaus.';
-  }
-  return `An der nächsten Kreuzung ${turn}.`;
+  return weaveComplexNavCue({
+    kind: 'complex',
+    turn: turnWordFromManeuver(maneuver),
+  });
 }
 
 export function isComplexTurnWaypoint(

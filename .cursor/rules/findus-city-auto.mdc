@@ -28,13 +28,26 @@ Wenn der User **nur einen Stadtnamen** nennt oder schreibt:
 6. **Cover:** Wenn Pending-User-Bild (`city:cover:pending`) → Cover-Agent stylizen + `city:cover:apply` (Kernrollen-Stil). Sonst Wikipedia-Cover / lokales Asset.
 7. `npm run upload:city -- data/staedte/<id>.json` — **ohne Extra-Freigabe** (User-Default: Pack-Uploads sind vorab erlaubt)
 
-## Qualitätsziel (klein/mittel, Wangerooge-Stil)
+## Qualitätsziel (Value-for-Money)
 
-- Lieber **weniger Stories, tief** (Ziel ≈ 12–25 Stories für kleine Orte) als 70 dünne
-- Pro Story-Ort: genug Rohstoff für **~1200 Zeichen** gesprochene Story (`general_info` + `deep_data_pool` Text-Pool **≥ ~1200**, ideal `deep ≥ 12`)
-- **Große/Ikonische Orte** (Wahrzeichen, Top-Museen, Schlösser): Text-Pool gerne **≥ ~3000** Zeichen (für Mehr-Historie / Adjustable Depth) — gesprochene Hauptstory bleibt Masterbook-Max (~1200), Pack speichert tiefer
+User zahlt für Pack-Download — genug **tiefe** Stories, keine Hotel/Shop-Stubs.
+
+SSOT: `STORY_COUNT_GUIDANCE` / `packStoryBelowValueFloor` in `placeCategoryPolicy.mjs` (Gate warnt unter Floor).
+
+| Größe | Floor (min) | Soft-Ziel |
+|---|---|---|
+| Dorf / klein | 15 | 20 |
+| Stadt / Mittel | 28 | 35 |
+| Stadt groß | 50 | 60 |
+| Insel (Bornholm, Sylt, Rügen…) | 60 | 75 |
+| Metro | 80 | 100 |
+
+- Lieber **weniger Stories, tief** als viele dünne — Floor ist Mindestzahl *echter* Stories
+- Pro Story-Ort: Text-Pool **≥ ~1200** Zeichen (`general_info` + `deep_data_pool`, ideal `deep ≥ 12`)
+- **Große/Ikonische Orte**: Text-Pool gerne **≥ ~3000** (Mehr-Historie); gesprochene Hauptstory bleibt Masterbook-Max (~1200)
 - Noise (Bushaltestellen, Gastro, Hotels) → Directory
 - Cover: User-Pending (stylisiert) schlägt Wikipedia; sonst Wikipedia-Wahrzeichen
+- Vor Upload: Floor erreichen; Soft-Ziel anstreben
 
 ## Cover vor Research
 
@@ -74,3 +87,14 @@ App recherchiert → schreibt den Ort **sofort lokal** in SQLite (Overlay überl
 CI `city:spot:process` merget in `data/staedte/<id>.json` (neue Pack-Version), läuft wiki-depth + review-facets + gps-wegweiser (über `city:merge-research`) und `upload:city`.
 **Live-Recherche** (Gastro-Treffer + Review-Tags) geht denselben Weg automatisch — auch bei schon bekannten Orten, wenn neue Facetten dazukommen.
 Bushaltestellen/Shops bleiben Directory; Museen/Denkmäler mit Wiki werden Story.
+
+## Vier Recherche-Zustände (Modul 2 — SSOT `cityResearchLane.ts`)
+
+Selected-/Home-Stadt gilt **nur Modul 1**. Modul-2 Ortssuche:
+
+1. **Pack auf dem Gerät** (auch andere Selected-Stadt) → in der genannten Stadt suchen
+2. **Geist** (kein Katalog-Pack) → still live recherchieren; Treffer → Inbox; **nie** auswählbar/downloadbar, bis Founder `city:auto` / „erstelle X“ — dann Inbox mit rein
+3. **Katalog-Pack existiert, fehlt lokal** → erst Download verlangen, dann Recherche (Home nicht wechseln)
+4. **Exempt:** Flug/Leave-by/„nach X“ ohne Venue-Suche; **Reisebüro** unbeschränkt
+
+Policy: `FINDUS_CITY_RESEARCH_LANE_BLOCK`

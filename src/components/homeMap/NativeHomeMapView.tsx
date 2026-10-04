@@ -57,7 +57,9 @@ import {
   hasBasemapPoiSymbolNear,
   listBasemapPoiLayerIds,
   MAP_BASEMAP_POI_ID,
+  BASEMAP_POI_TAP_PIXEL_OFFSETS,
   pickBasemapPoiAt,
+  pickBasemapPoiKindFallback,
   pickBestBuildingRingAt,
   PROTOMAPS_ROAD_LABEL_LAYER_FALLBACK,
 } from '../../services/homeMap/basemapFeatureQuery';
@@ -2566,15 +2568,29 @@ export const NativeHomeMapView = memo(
           const poiLayers = listBasemapPoiLayerIds(
             peekYorroProtomapsBasemapStyle(),
           );
-          if (mv && poiLayers.length && Number.isFinite(lat) && Number.isFinite(lng)) {
+          if (mv && Number.isFinite(lat) && Number.isFinite(lng)) {
             const px = await mv.getPointInView([lng, lat]);
             if (px && px.length >= 2) {
-              const fc = await mv.queryRenderedFeaturesAtPoint(
-                [px[0]!, px[1]!],
-                undefined,
-                poiLayers,
-              );
-              const feats = fc?.features ?? [];
+              const layerFilter =
+                poiLayers.length > 0 ? poiLayers : undefined;
+              const seen = new Set<string>();
+              const feats: unknown[] = [];
+              for (const [dx, dy] of BASEMAP_POI_TAP_PIXEL_OFFSETS) {
+                const fc = await mv.queryRenderedFeaturesAtPoint(
+                  [px[0]! + dx, px[1]! + dy],
+                  undefined,
+                  layerFilter,
+                );
+                for (const f of fc?.features ?? []) {
+                  const key = JSON.stringify(
+                    (f as { properties?: unknown })?.properties ?? f,
+                  ).slice(0, 180);
+                  if (seen.has(key)) continue;
+                  seen.add(key);
+                  feats.push(f);
+                }
+                if (feats.length >= 12) break;
+              }
               if (feats.length) {
                 placeTapQuietUntil.current = Date.now() + 450;
                 ignoreBlankUntil.current = Date.now() + 280;
@@ -2586,7 +2602,9 @@ export const NativeHomeMapView = memo(
                   lat,
                   lng,
                 });
-                const hit = pickBasemapPoiAt(lat, lng, feats);
+                const hit =
+                  pickBasemapPoiAt(lat, lng, feats) ??
+                  pickBasemapPoiKindFallback(lat, lng, feats);
                 if (hit) {
                   props.onPlaceTap({
                     id: MAP_BASEMAP_POI_ID,
@@ -2597,6 +2615,15 @@ export const NativeHomeMapView = memo(
                   });
                   return;
                 }
+                // Features da, aber ohne Name — Popup trotzdem (Tipp war treffer).
+                props.onPlaceTap({
+                  id: MAP_BASEMAP_POI_ID,
+                  name: 'Ort auf der Karte',
+                  category: 'ort',
+                  lat,
+                  lng,
+                });
+                return;
               }
             }
           }
@@ -4171,6 +4198,62 @@ export const NativeHomeMapView = memo(
                 ],
                 iconAllowOverlap: false,
                 iconIgnorePlacement: false,
+              }}
+            />
+            {/* WC / Wasserspender: weißer Halo + Icon — rund um Bahnhöfe gut sichtbar */}
+            <CircleLayer
+              id="places-icon-micro-white-halo"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.microWhite.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'microWhite',
+                ] as never
+              }
+              style={{
+                circleColor: '#FFFFFF',
+                circleRadius: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  13.8,
+                  9,
+                  16,
+                  12,
+                  18,
+                  15,
+                ],
+                circleOpacity: 0.95,
+                circleStrokeWidth: 1.2,
+                circleStrokeColor: '#1A3D32',
+              }}
+            />
+            <SymbolLayer
+              id="places-icon-micro-white"
+              minZoomLevel={HOME_MAP_ICON_LOD_ZOOM.microWhite.goneAt}
+              filter={
+                [
+                  '==',
+                  ['get', 'kind'],
+                  'microWhite',
+                ] as never
+              }
+              style={{
+                iconImage: ['get', 'iconImg'],
+                iconSize: [
+                  'interpolate',
+                  ['linear'],
+                  ['zoom'],
+                  13.8,
+                  0.18,
+                  16,
+                  0.3,
+                  18,
+                  0.38,
+                ],
+                iconAllowOverlap: true,
+                iconIgnorePlacement: true,
               }}
             />
             <SymbolLayer

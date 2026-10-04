@@ -258,8 +258,12 @@ export function projectOntoSpline(
   let bestIdx = floor;
   let bestD = distanceMeters(lat, lng, spline[bestIdx].lat, spline[bestIdx].lng);
 
-  // Grobe Vorwärtssuche (Abkürzung / Jump) — nie hinter floor zurück
+  // Grobe Vorwärtssuche — nie hinter floor, und nie Kilometer vor dem GPS springen.
+  const floorAlong = spline[floor]?.alongM ?? 0;
+  const maxAlong = floorAlong + 8000;
   for (let i = floor; i < spline.length; i += 5) {
+    const along = spline[i]?.alongM ?? 0;
+    if (along > maxAlong) break;
     const d = distanceMeters(lat, lng, spline[i].lat, spline[i].lng);
     if (d < bestD) {
       bestD = d;

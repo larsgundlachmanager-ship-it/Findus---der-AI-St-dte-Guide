@@ -10,6 +10,7 @@ import {
   isOppositeDietVenue,
   looksLikeSpokenMeatOrFish,
   looksLikeSpokenVeganOrVeg,
+  hasStrongVeganEvidence,
   canonicalCattleBreed,
 } from './specializedFoodMatch';
 import { inferGastroFacetTags } from './gastroFacetTags';
@@ -23,7 +24,19 @@ function blobOf(c: PitchCandidate, extra = ''): string {
 }
 
 function mustWishes(req: PitchRequest): PitchWish[] {
-  return req.wishes.filter((w) => w.hardness === 'must');
+  return req.wishes.filter((w) => {
+    if (w.hardness !== 'must') return false;
+    // Atmosphäre/Terrasse/View: nie Hard-Wipe — nur Ranking-Boost
+    try {
+      const { isAtmosphereVibeLabel } = require('./searchBrief') as {
+        isAtmosphereVibeLabel: (s: string) => boolean;
+      };
+      if (w.kind === 'vibe' || isAtmosphereVibeLabel(w.text)) return false;
+    } catch {
+      if (w.kind === 'vibe') return false;
+    }
+    return true;
+  });
 }
 
 function dishNeedles(w: PitchWish): string[] {
@@ -33,6 +46,13 @@ function dishNeedles(w: PitchWish): string[] {
     out.add('spaghetti-eis');
     out.add('spaghettieis');
     out.add('spaghetti eis');
+  }
+  if (/rucola|ruccola|arugula/.test(t)) {
+    out.add('rucola');
+    out.add('ruccola');
+    out.add('arugula');
+    out.add('rucola-pizza');
+    out.add('pizza rucola');
   }
   if (/\beis\b/.test(t) || /eisbecher|gelato|ice\s*cream/.test(t)) {
     out.add('eis');
@@ -47,6 +67,16 @@ function amenityNeedle(w: PitchWish): RegExp {
   const t = w.text.trim();
   if (/takeaway|mitnehmen|to[-\s]?go/i.test(t)) {
     return /\b(takeaway|take[-\s]?away|to[-\s]?go|mitnehmen|zum\s+mitnehmen|meal_takeaway|delivery|abholen|pizzeria|imbiss)\b/i;
+  }
+  if (/all_you_can_eat|ayce|buffet|schlemmer/i.test(t)) {
+    return /\b(all[\s-]*(?:you|xou|jou|ju|yo|u|iu)[\s-]*can[\s-]*eat|ayce|buffet|schlemmer[\s-]*buffet|unlimited|flatrate|all\s*inclusive\s*essen)\b/i;
+  }
+  // „Spa oder Sauna“: eines reicht
+  if (/spa_or_sauna|spa\s*oder\s*sauna/i.test(t)) {
+    return /\b(spa|wellness|sauna|dampfbad|steam|jacuzzi|whirlpool|thermal)\b/i;
+  }
+  if (/frühstück|fruehstueck|breakfast|brunch/i.test(t)) {
+    return /\b(frühstück|fruehstueck|breakfast|brunch|morgenbuffet)\b/i;
   }
   if (/wlan|wifi|wi-?fi|internet/i.test(t)) {
     return /\b(wlan|wifi|wi-?fi|internet|internet_access|free\s+wifi)\b/i;
@@ -92,7 +122,33 @@ function scoreAmenityEvidence(blob: string, wish: PitchWish): number {
     const spec = scoreSpecializedFoodWish(blob, wish);
     if (spec >= 0) return spec;
   }
+  if (/all_you_can_eat|ayce|buffet|schlemmer/i.test(wish.text)) {
+    return scoreAyceEvidence(blob);
+  }
   return amenityNeedle(wish).test(blob) ? 3 : 0;
+}
+
+/** AYCE-Härte: „buffet“ allein reicht nicht — sonst Soft-Fill (Rösterei etc.). */
+export function scoreAyceEvidence(blob: string): number {
+  const b = (blob || '').toLowerCase();
+  if (
+    /all[\s-]*(?:you|xou|jou|ju|yo|u|iu)[\s-]*can[\s-]*eat|allyoucaneat|\bayce\b|unbegrenzt\s+essen|schlemmer[\s-]*buffet|unlimited\s+(?:buffet|eat|sushi)|flatrate\s+(?:essen|buffet|sushi)|essen\s+so\s+viel/i.test(
+      b,
+    )
+  ) {
+    return 4;
+  }
+  if (
+    /\bbuffet\b/i.test(b) &&
+    /mongol|grill\s*buffet|hot\s*pot|shabu|running\s*sushi|sushi\s*(?:boot|boat|gürtel|guertel)|asiat|asian|chines|japan|korea|thai|vietnam/i.test(
+      b,
+    )
+  ) {
+    return 3;
+  }
+  // Nacktes „Buffet“ / Frühstücksbuffet = zu schwach für AYCE-Must
+  if (/\bbuffet\b/i.test(b)) return 1;
+  return 0;
 }
 
 function scoreWishEvidence(blob: string, wish: PitchWish): number {
@@ -201,10 +257,36 @@ async function enrichCandidateEvidence(
     )) {
       if (!softTags.includes(f)) softTags.push(f);
     }
+
+    // Gericht-Wunsch: Review-Snippets als hardEvidence (Rucola/Steak/…)
+    const dishMusts = mustWishes(req).filter((w) => w.kind === 'dish');
+    const dishEvidence: string[] = [...(c.hardEvidence ?? [])];
+    for (const w of dishMusts) {
+      const needles = dishNeedles(w);
+      for (const r of reviewTexts) {
+        const low = r.toLowerCase();
+        const hit = needles.find((n) => low.includes(n));
+        if (!hit) continue;
+        const praise =
+          /\b(lecker|beste|beste[nr]?|perfekt|mega|hammer|empfehl|empfehle|riesig|groß|gross|steinofen|frisch|kruste|knusprig|genial|wunderbar|top)\b/iu.test(
+            r,
+          );
+        // Nie mittendrin mit „…“ anschneiden — Chip bleibt lesbar (max ~2 Zeilen).
+        const label = praise
+          ? `${w.text}: gelobt`
+          : `${w.text} in Reviews`;
+        if (!dishEvidence.some((e) => e.toLowerCase().includes(hit))) {
+          dishEvidence.push(label.slice(0, 48));
+        }
+        if (dishEvidence.length >= 6) break;
+      }
+    }
+
     const next: PitchCandidate = {
       ...c,
       softTags,
       hookNotes: [...(c.hookNotes ?? []), ...hooks].slice(0, 8),
+      hardEvidence: dishEvidence.slice(0, 6),
       websiteUrl: c.websiteUrl || details.websiteUri || null,
       rating: c.rating ?? details.rating,
       ratingCount: c.ratingCount ?? details.ratingCount,
@@ -227,14 +309,54 @@ export async function verifyHardMatches(opts: {
   shortlist?: PitchCandidate[];
   softFail: boolean;
   reason?: string;
+  /** Cascade: was erfüllt / soft-miss — für Call-2 Ehrlichkeit */
+  criteriaChecklist?: Array<{
+    key: string;
+    label: string;
+    status: string;
+    remaining: number;
+  }>;
 }> {
-  const musts = mustWishes(opts.req).filter(
+  let musts = mustWishes(opts.req).filter(
     (w) =>
       w.kind === 'dish' ||
       w.kind === 'amenity' ||
       w.kind === 'vibe' ||
       w.kind === 'cuisine',
   );
+  // AYCE aus Title/Context injizieren — sonst Early-Return ohne Musts
+  // (oder nur Vibe) published Pack Soft-Fill (Goldschätzchen) ohne Beleg.
+  if (opts.req.kind === 'food' || opts.req.kind === 'bar') {
+    const ayceBlob = `${opts.req.title} ${opts.req.context}`;
+    const hasAyceMust = musts.some((w) =>
+      /all_you_can_eat|ayce|buffet|schlemmer/i.test(w.text),
+    );
+    if (!hasAyceMust) {
+      let ayceFromQuery = /all_you_can_eat|must_ayce|\bayce\b|schlemmer|all[\s_-]*you[\s_-]*can[\s_-]*eat|unbegrenzt\s+essen|rodiz/i.test(
+        ayceBlob,
+      );
+      if (!ayceFromQuery) {
+        try {
+          const { looksLikeAyceQuery } = require('./ayceIntent') as {
+            looksLikeAyceQuery: (s: string) => boolean;
+          };
+          ayceFromQuery = looksLikeAyceQuery(ayceBlob);
+        } catch {
+          /* soft */
+        }
+      }
+      if (ayceFromQuery) {
+        musts = [
+          ...musts,
+          {
+            text: 'all_you_can_eat',
+            hardness: 'must',
+            kind: 'amenity',
+          },
+        ];
+      }
+    }
+  }
   const n = opts.req.shortlistSize ?? PITCH_SHORTLIST_SIZE;
   const pool = opts.candidates.slice(0, 12);
   if (!pool.length) {
@@ -302,13 +424,46 @@ export async function verifyHardMatches(opts: {
   }
 
   // Food/Bar/etc.: Details nachziehen, dann hart filtern
-  const enriched = await Promise.all(
+  const enrichedRaw = await Promise.all(
     pool.map((c) => enrichCandidateEvidence(c, opts.req)),
   );
+  const enriched = enrichedRaw.filter((c) => {
+    const blob = blobOf(c);
+    try {
+      const {
+        looksLikeAsianCuisineVenue,
+        looksLikeButcherNotDining,
+        prefsAvoidAsianCuisine,
+      } = require('./specializedFoodMatch') as {
+        looksLikeAsianCuisineVenue: (b: string) => boolean;
+        looksLikeButcherNotDining: (b: string) => boolean;
+        prefsAvoidAsianCuisine: (a: string[] | null | undefined) => boolean;
+      };
+      if (
+        prefsAvoidAsianCuisine(opts.req.prefs?.avoidCategories) &&
+        looksLikeAsianCuisineVenue(blob)
+      ) {
+        return false;
+      }
+      const steakMust = musts.some((w) => /steak/i.test(w.text));
+      if (steakMust && looksLikeButcherNotDining(blob)) return false;
+    } catch {
+      /* soft */
+    }
+    return true;
+  });
 
   // Optional: Menü/Preise für Gericht- oder Küchen-Wunsch (nicht erfinden)
   const priceMusts = musts.filter((w) => w.kind === 'dish' || w.kind === 'cuisine' || w.kind === 'venue');
-  if (priceMusts.length && (opts.req.kind === 'food' || opts.req.kind === 'bar')) {
+  const wantMenuVerify =
+    opts.req.orderNeed?.dishVerify === true ||
+    opts.req.orderNeed?.prices === true ||
+    priceMusts.some((w) => w.kind === 'dish');
+  if (
+    wantMenuVerify &&
+    priceMusts.length &&
+    (opts.req.kind === 'food' || opts.req.kind === 'bar')
+  ) {
     try {
       const { runGastroMenuDeepResearch } = await import(
         '../agents/gastroMenuDeepResearch'
@@ -342,7 +497,8 @@ export async function verifyHardMatches(opts: {
             ),
           );
         if (pm?.[1]) {
-          c.dishPriceHint = `${dishBit} ~${pm[1]}`;
+          // Ein Preis-Stichpunkt — kein paralleles „Menü: Gericht“
+          c.dishPriceHint = `${dishBit}: ${pm[1]}`.replace(/\s+/g, ' ');
           const n = Number(
             String(pm[1]).replace(/[^\d.,]/g, '').replace(',', '.'),
           );
@@ -352,11 +508,14 @@ export async function verifyHardMatches(opts: {
         }
         c.hookNotes = [...(c.hookNotes ?? []), draft.slice(0, 220)].slice(0, 6);
         for (const w of priceMusts) {
-          if (scoreDishEvidence(draft.toLowerCase(), w) > 0) {
-            c.hardEvidence = [
-              ...(c.hardEvidence ?? []),
-              `Menü: ${w.text}`,
-            ].slice(0, 6);
+          if (scoreDishEvidence(draft.toLowerCase(), w) >= 2) {
+            // Nur wenn kein Preis-Hint — sonst doppelte Gericht-Stichpunkte
+            if (!c.dishPriceHint) {
+              c.hardEvidence = [
+                ...(c.hardEvidence ?? []),
+                w.text,
+              ].slice(0, 6);
+            }
           }
         }
       }
@@ -365,14 +524,66 @@ export async function verifyHardMatches(opts: {
     }
   }
 
-  const scored = enriched.map((c) => {
+  // Cascade: Dish → View → Outdoor → offen → Rating → Budget (Checkliste)
+  let cascadeHonesty: string | null = null;
+  let cascadeChecklist: Array<{
+    key: string;
+    label: string;
+    status: string;
+    remaining: number;
+  }> = [];
+  let cascadePool = enriched;
+  if (opts.req.kind === 'food' || opts.req.kind === 'bar') {
+    try {
+      const { applyCriteriaCascade } = require('./criteriaCascade') as {
+        applyCriteriaCascade: (
+          req: PitchRequest,
+          pool: PitchCandidate[],
+        ) => {
+          pool: PitchCandidate[];
+          perfectPool: PitchCandidate[];
+          checklist: typeof cascadeChecklist;
+          honestyLine: string | null;
+          relaxedLabels: string[];
+        };
+      };
+      const cascaded = applyCriteriaCascade(opts.req, enriched);
+      cascadeChecklist = cascaded.checklist;
+      cascadeHonesty = cascaded.honestyLine;
+      if (cascaded.pool.length >= 1) {
+        cascadePool = cascaded.pool;
+      }
+      // Nur eine Perfect-Option + Soft gelockert → softFail mit ehrlicher Nachfrage
+      if (
+        cascaded.perfectPool.length === 1 ||
+        cascaded.relaxedLabels.length > 0
+      ) {
+        cascadeHonesty =
+          cascaded.honestyLine ||
+          'Nicht alles perfekt belegt — Option ehrlich pitchen und nachfragen.';
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
+  const scored = cascadePool.map((c) => {
     const blob = blobOf(c);
     let score = 0;
     const evidence = [...(c.hardEvidence ?? [])];
     let allMust = true;
     for (const w of musts) {
       const s = scoreWishEvidence(blob, w);
-      if (s <= 0) allMust = false;
+      // AYCE: Score ≥2 (asiatisches Buffet+); nacktes „Buffet“=1 reicht nicht
+      const min =
+        w.kind === 'amenity' &&
+        /all_you_can_eat|ayce|buffet|schlemmer/i.test(w.text)
+          ? 2
+          : (w.kind === 'cuisine' || w.kind === 'dish') &&
+              /vegan|vegetar/i.test(w.text)
+            ? 3
+            : 1;
+      if (s < min) allMust = false;
       score += s;
       if (s > 0) {
         const label = String(w.text || '').trim();
@@ -386,11 +597,16 @@ export async function verifyHardMatches(opts: {
         }
       }
     }
-    // Preis/Rating/Distanz als Tie-Breaker (niedriger dist besser)
+    // Preis/Rating/Distanz als Tie-Breaker.
+    // city_best (Metro-Datensatz): Nähe zum Stadtzentrum, nicht GPS-Heimat bestrafen.
     const priceBias =
       c.dishPriceHint || c.priceTotalEur != null ? 1.5 : 0;
     const ratingBias = (c.rating ?? 0) * 0.4;
-    const distBias = Math.max(0, 3 - (c.distFromAnchorM ?? 5000) / 2000);
+    const distM = c.distFromAnchorM ?? 5000;
+    const cityBest = opts.req.searchMode === 'city_best';
+    const distBias = cityBest
+      ? Math.max(0, 6 - distM / 2500)
+      : Math.max(0, 8 - distM / 1500) + (distM < 10_000 ? 2 : 0);
     return {
       c: { ...c, hardEvidence: [...new Set(evidence)].slice(0, 6) },
       score: score + priceBias + ratingBias + distBias,
@@ -399,15 +615,42 @@ export async function verifyHardMatches(opts: {
   });
 
   const hard = scored.filter((s) => s.allMust).sort((a, b) => b.score - a.score);
+  const diversify = (list: typeof scored) => {
+    const out: typeof scored = [];
+    for (const s of list) {
+      const dup = out.some((o) => {
+        if (o.c.placeId && s.c.placeId && o.c.placeId === s.c.placeId) return true;
+        const na = o.c.name.toLowerCase().replace(/\s+/g, ' ').trim();
+        const nb = s.c.name.toLowerCase().replace(/\s+/g, ' ').trim();
+        if (na && nb && (na === nb || na.includes(nb) || nb.includes(na))) return true;
+        const dlat = Math.abs((o.c.lat ?? 0) - (s.c.lat ?? 0));
+        const dlng = Math.abs((o.c.lng ?? 0) - (s.c.lng ?? 0));
+        // ~100 m bei DE-Breite
+        if (dlat < 0.0009 && dlng < 0.0013) return true;
+        return false;
+      });
+      if (!dup) out.push(s);
+    }
+    return out;
+  };
   if (hard.length >= 1) {
+    const distinct = diversify(hard);
     return {
-      top: hard.map((x) => x.c).slice(0, n),
-      shortlist: hard.map((x) => x.c).slice(0, n),
-      softFail: hard.length < 2,
+      top: distinct.map((x) => x.c).slice(0, n),
+      shortlist: distinct.map((x) => x.c).slice(0, n),
+      softFail:
+        distinct.length < 2 ||
+        cascadeChecklist.some(
+          (s) =>
+            (s.status === 'soft_miss' || s.status === 'only_one') &&
+            !/^(open_at_visit|rating_floor|budget)$/i.test(s.key),
+        ),
       reason:
-        hard.length < 2
-          ? 'Nur eine Option mit klarem Beleg für deinen Wunsch.'
-          : undefined,
+        cascadeHonesty ||
+        (distinct.length < 2
+          ? 'Nur eine Option mit klarem Beleg für deinen Wunsch — passt das, oder weiter suchen?'
+          : undefined),
+      criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
     };
   }
 
@@ -417,6 +660,7 @@ export async function verifyHardMatches(opts: {
       top: [],
       softFail: true,
       reason: 'Genannten Ort nicht belegt — ich ersetze ihn nicht durch Nearby.',
+      criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
     };
   }
   if (
@@ -429,45 +673,113 @@ export async function verifyHardMatches(opts: {
       .join(' ');
     const wishBlob = mustFood || `${opts.req.title} ${opts.req.context}`;
     let live = [...scored];
-    if (looksLikeSpokenMeatOrFish(wishBlob) || looksLikeSpokenVeganOrVeg(wishBlob)) {
-      const family = live.filter((s) =>
+    const isAyceWishText = (t: string) =>
+      /all_you_can_eat|must_ayce|\bayce\b|schlemmer|all[\s_-]*you[\s_-]*can[\s_-]*eat|unbegrenzt\s+essen|unlimited\s+buffet|flatrate\s+(?:essen|buffet|sushi)|rodiz/i.test(
+        t || '',
+      );
+    const ayceReqBlob = `${opts.req.title} ${opts.req.context}`;
+    let ayceMust = musts.some((w) => isAyceWishText(w.text)) || isAyceWishText(ayceReqBlob);
+    if (!ayceMust) {
+      try {
+        const { looksLikeAyceQuery } = require('./ayceIntent') as {
+          looksLikeAyceQuery: (s: string) => boolean;
+        };
+        ayceMust = looksLikeAyceQuery(ayceReqBlob);
+      } catch {
+        /* soft */
+      }
+    }
+    // AYCE: nie Soft-Fill mit Rösterei/Café — nur Belege ≥2 oder ehrlich leer
+    if (ayceMust) {
+      const ayceFamily = live.filter((s) => scoreAyceEvidence(blobOf(s.c)) >= 2);
+      if (!ayceFamily.length) {
+        return {
+          top: [],
+          softFail: true,
+          reason:
+            'Kein belegtes All-you-can-eat / Buffet hier — nächste größere Stadt und Web weiter prüfen, keine normalen Restaurants als Ersatz.',
+          criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
+        };
+      }
+      live = ayceFamily;
+    } else if (looksLikeSpokenMeatOrFish(wishBlob) || looksLikeSpokenVeganOrVeg(wishBlob)) {
+      const veganMust = looksLikeSpokenVeganOrVeg(wishBlob);
+      // score ≥ 2 = echter Gericht-/Specialty-Beleg; 1 = nur Fisch-/Fleisch-Familie
+      let family = live.filter((s) =>
         musts.some(
           (w) =>
             (w.kind === 'dish' || w.kind === 'cuisine') &&
-            scoreSpecializedFoodWish(blobOf(s.c), w) >= 1,
+            scoreSpecializedFoodWish(blobOf(s.c), w) >= 2,
         ),
       );
+      if (veganMust) {
+        family = family.filter(
+          (s) =>
+            hasStrongVeganEvidence(blobOf(s.c)) &&
+            !isOppositeDietVenue(blobOf(s.c), wishBlob),
+        );
+      }
       // Keine Familie → ehrlich leer (Steak ≠ Top-Döner nach Rating)
       if (!family.length) {
         return {
           top: [],
           softFail: true,
-          reason: `Nichts mit Beleg für „${labels}“ gefunden — ich pitche keine Fake-Treffer.`,
+          reason: `Dazu finde ich gerade keinen belegten Treffer für „${labels}“.`,
+          criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
         };
       }
       live = family.filter((s) => !isOppositeDietVenue(blobOf(s.c), wishBlob));
+      if (veganMust) {
+        live = live.filter(
+          (s) =>
+            hasStrongVeganEvidence(blobOf(s.c)) &&
+            musts.some(
+              (w) =>
+                (w.kind === 'dish' || w.kind === 'cuisine') &&
+                scoreSpecializedFoodWish(blobOf(s.c), w) >= 3,
+            ),
+        );
+      }
     }
+    // Nähe: bei here_now lokale Treffer bevorzugen; city_best = Score/Rating im Metro-Anker
+    const cityBest = opts.req.searchMode === 'city_best';
     live.sort((a, b) => {
+      if (!cityBest) {
+        const da = a.c.distFromAnchorM ?? 99_000;
+        const db = b.c.distFromAnchorM ?? 99_000;
+        const nearA = da < 12_000 ? 1 : 0;
+        const nearB = db < 12_000 ? 1 : 0;
+        if (nearA !== nearB) return nearB - nearA;
+      }
       if (b.score !== a.score) return b.score - a.score;
+      const da = a.c.distFromAnchorM ?? 99_000;
+      const db = b.c.distFromAnchorM ?? 99_000;
+      if (da !== db) return da - db;
       return (b.c.rating ?? 0) - (a.c.rating ?? 0);
     });
     if (!live.length) {
       return {
         top: [],
         softFail: true,
-        reason: `Nichts mit Beleg für „${labels}“ gefunden — ich pitche keine Fake-Treffer.`,
+        reason: `Dazu finde ich gerade keinen belegten Treffer für „${labels}“.`,
+        criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
       };
     }
+    const distinctLive = diversify(live);
     return {
-      top: live.map((x) => x.c).slice(0, n),
-      shortlist: live.map((x) => x.c).slice(0, n),
+      top: distinctLive.map((x) => x.c).slice(0, n),
+      shortlist: distinctLive.map((x) => x.c).slice(0, n),
       softFail: true,
-      reason: `Kein klarer Beleg für „${labels}“ im Namen — Live-Suche, stärkste Treffer in der Nähe.`,
+      reason:
+        cascadeHonesty ||
+        `Kein klarer Beleg für „${labels}“ im Namen — Live-Suche, stärkste Treffer.`,
+      criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
     };
   }
   return {
     top: [],
     softFail: true,
-    reason: `Nichts mit Beleg für „${labels}“ gefunden — ich pitche keine Fake-Treffer.`,
+    reason: `Dazu finde ich gerade keinen belegten Treffer für „${labels}“.`,
+    criteriaChecklist: cascadeChecklist.length ? cascadeChecklist : undefined,
   };
 }

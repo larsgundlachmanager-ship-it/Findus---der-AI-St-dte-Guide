@@ -49,7 +49,8 @@ export function filterAndRankPool(
           w.kind === 'cuisine' ||
           w.kind === 'amenity' ||
           w.kind === 'dish' ||
-          w.kind === 'vibe',
+          w.kind === 'vibe' ||
+          w.kind === 'theme',
       );
   if (hardKinds.length) {
     const hard = scored.filter((s) =>
@@ -67,16 +68,22 @@ export function filterAndRankPool(
           w.kind === 'dish' ||
           w.kind === 'amenity' ||
           w.kind === 'vibe' ||
-          w.kind === 'cuisine',
+          w.kind === 'cuisine' ||
+          w.kind === 'theme',
       )
     ) {
       const family = scored.filter((s) =>
         hardKinds.some((w) => softMatchWish(s.c, w) >= 1),
       );
-      open =
-        req.kind === 'food' || req.kind === 'bar'
-          ? (family.length ? family : scored).map((s) => s.c)
-          : [];
+      // Theme/Erlebnis: kein Soft-Fill mit Souvenir-Pack — Harvest/Places
+      if (musts.some((w) => w.kind === 'theme')) {
+        open = [];
+      } else {
+        open =
+          req.kind === 'food' || req.kind === 'bar'
+            ? (family.length ? family : scored).map((s) => s.c)
+            : [];
+      }
     }
   }
   const rankKey = (c: PitchCandidate) => {
@@ -88,10 +95,12 @@ export function filterAndRankPool(
         w.hardness === 'must' &&
         (w.kind === 'dish' || w.kind === 'cuisine'),
     );
+    // Spezialgericht: Nähe schlägt Fern-Rating (Prisdorf ≠ Hafen 20 km)
     const ratingW =
-      specialized || req.searchMode === 'city_best' ? 8000 : 1000;
+      specialized ? 2000 : req.searchMode === 'city_best' ? 8000 : 1000;
+    const distW = specialized ? 1 : 0.01;
     const reviewW = Math.log10(Math.max(10, c.ratingCount ?? 10));
-    return prio * 1_000_000 - rating * ratingW * reviewW + dist / 100;
+    return prio * 1_000_000 - rating * ratingW * reviewW + dist * distW;
   };
   open = [...open].sort((a, b) => rankKey(a) - rankKey(b));
   if (!open.length) return full;
@@ -199,7 +208,29 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
     if (blob.includes(wt)) return 3;
     return 0;
   }
+  if (w.kind === 'theme') {
+    try {
+      const { themeAttractionEvidenceScore } = require('../mission/openPlaceFind') as {
+        themeAttractionEvidenceScore: (blob: string, theme: string) => number;
+      };
+      const score = themeAttractionEvidenceScore(blob, wt);
+      if (score >= 3) return 4;
+      if (score >= 2) return 3;
+      // Nur Namens-Treffer ohne Attraction → Hard-Must nicht erfüllen
+      return 0;
+    } catch {
+      return blob.includes(wt) ? 2 : 0;
+    }
+  }
   if (w.kind === 'amenity' || w.kind === 'vibe') {
+    if (/briefkasten|postkasten|post_box|mailbox/.test(wt)) {
+      if (/briefkasten|postkasten|post_box|mailbox|letter/.test(blob)) return 4;
+      // Bahnhof/Baeckerei nie als Briefkasten-Treffer werten
+      return 0;
+    }
+    if (/packstation|paketautomat|parcel/.test(wt)) {
+      return /packstation|paketautomat|parcel.?locker|dhl/.test(blob) ? 4 : 0;
+    }
     if (blob.includes(wt)) return 3;
     if (/blick|view|aussicht/.test(wt) && /blick|view|aussicht/.test(blob)) {
       return 2;
@@ -217,6 +248,16 @@ function softMatchWish(c: PitchCandidate, w: PitchWish): number {
         return 2;
       }
       return 1;
+    }
+    // Open-Find Ortstyp: Stamm/Präfix — keine Domänen-Synonymliste
+    try {
+      const { openPlaceTypeSoftScore } = require('../mission/openPlaceFind') as {
+        openPlaceTypeSoftScore: (blob: string, typ: string) => number;
+      };
+      const openScore = openPlaceTypeSoftScore(blob, wt);
+      if (openScore > 0) return openScore;
+    } catch {
+      /* soft */
     }
     return 0;
   }
@@ -239,6 +280,36 @@ function prefsOk(c: PitchCandidate, req: PitchRequest): boolean {
   ) {
     return false;
   }
+  // Metzgerei/Fleischerei nie als Dining-Pitch (außer klar Steakhouse/Restaurant)
+  if (req.kind === 'food' || req.kind === 'bar') {
+    const n = `${c.name} ${(c.softTags ?? []).join(' ')} ${c.address ?? ''}`;
+    try {
+      const { looksLikeButcherNotDining, looksLikeAsianCuisineVenue, prefsAvoidAsianCuisine } =
+        require('./specializedFoodMatch') as {
+          looksLikeButcherNotDining: (b: string) => boolean;
+          looksLikeAsianCuisineVenue: (b: string) => boolean;
+          prefsAvoidAsianCuisine: (a: string[] | null | undefined) => boolean;
+        };
+      if (looksLikeButcherNotDining(n) && !namedVenueFromWishes(req.wishes)) {
+        return false;
+      }
+      if (
+        prefsAvoidAsianCuisine(req.prefs.avoidCategories) &&
+        looksLikeAsianCuisineVenue(
+          `${n} ${(c.hookNotes ?? []).join(' ')} ${(c.hardEvidence ?? []).join(' ')}`,
+        )
+      ) {
+        return false;
+      }
+    } catch {
+      const tags = (c.softTags ?? []).map((t) => t.toLowerCase());
+      const butcher =
+        tags.includes('butcher') ||
+        (/\b(fleischerei|metzgerei|metzger|butcher)\b/.test(c.name.toLowerCase()) &&
+          !/\b(steakhouse|steak.?haus|grillhaus|restaurant)\b/.test(c.name.toLowerCase()));
+      if (butcher && !namedVenueFromWishes(req.wishes)) return false;
+    }
+  }
   const blob = `${c.name} ${(c.softTags ?? []).join(' ')}`.toLowerCase();
   const mustFood = req.wishes
     .filter((w) => w.hardness === 'must' && (w.kind === 'dish' || w.kind === 'cuisine'))
@@ -255,7 +326,20 @@ function prefsOk(c: PitchCandidate, req: PitchRequest): boolean {
     return false;
   }
   for (const a of req.prefs.avoidCategories ?? []) {
-    if (blob.includes(a.toLowerCase())) return false;
+    const needle = a.toLowerCase();
+    if (!needle) continue;
+    if (blob.includes(needle)) return false;
+    // Asia-Familie: kurze Tokens treffen auch „asia-küche“ / „sushi-bar“
+    if (
+      /asiatisch|asian|sushi|thai|chinesisch|japanisch|vietnamesisch|koreanisch|indisch|ramen|hotpot|poke/.test(
+        needle,
+      ) &&
+      /\b(asiatisch|asian|sushi|thai|china|chines|japan|vietnam|korea|indisch|ramen|dim\s*sum|hot[\s-]?pot|poke|wok|sashimi|maki)\b/i.test(
+        blob,
+      )
+    ) {
+      return false;
+    }
   }
   return kindFitsCandidate(c, req);
 }
@@ -267,9 +351,9 @@ function isDinnerOrEveningMeal(req: PitchRequest): boolean {
   const hour = new Date(req.visitAtMs).getHours();
   return (
     hour >= 17 ||
-    /\b(abend|dinner|tonight|abendessen|abendessen|spätessen|spaetessen)\b/.test(
-      wishBlob,
-    )
+    /\b(abend|dinner|tonight|abendessen|spätessen|spaetessen)\b/.test(wishBlob) ||
+    /\wabend\b/.test(wishBlob) ||
+    /\b(essen\s+gehen|abendessen)\b/.test(wishBlob)
   );
 }
 
@@ -352,9 +436,9 @@ function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
       }
       try {
         const { isCrediblePizzaVenue } = require('./pizzaVenueGate') as {
-          isCrediblePizzaVenue: (b: string) => boolean;
+          isCrediblePizzaVenue: (b: string, name?: string) => boolean;
         };
-        return isCrediblePizzaVenue(blob);
+        return isCrediblePizzaVenue(blob, c.name);
       } catch {
         return /pizza|pizzeria|trattoria|osteria|italia/.test(blob);
       }
@@ -403,6 +487,17 @@ function kindFitsCandidate(c: PitchCandidate, req: PitchRequest): boolean {
     }
     // Abendessen: echtes Gastro-Lokal — Küchenwort allein reicht nicht (Asia-Regal im Markt)
     if (isDinnerOrEveningMeal(req)) {
+      // Abendessen ≠ Eis — Eiscafé/Gelaterie raus (außer klar auch Restaurant)
+      if (
+        /\b(eisdiele|eiscaf[eé]|eiscafe|gelater\w*|gelato|eissalon|spaghettieis|eisbecher)\b/.test(
+          blob,
+        ) &&
+        !/\b(restaurant|pizza|pasta|trattoria|osteria|bistro|imbiss|burger|sushi|grill|steak|wirtshaus|gasthof)\b/.test(
+          blob,
+        )
+      ) {
+        return false;
+      }
       return /\b(restaurant|pizza|pasta|trattoria|osteria|bistro|gastro|imbiss|burger|sushi|döner|doener|kebab|grill|steak|wirtshaus|gasthof|brasserie|steakhouse|ramen|tapas|vietnames|thailänd|thailaend|chinesisch|japanisch|koreanisch|indisch|griech)\b/.test(
         blob,
       );
@@ -497,11 +592,13 @@ export function filterAndRank(
           w.kind === 'cuisine' ||
           w.kind === 'amenity' ||
           w.kind === 'dish' ||
-          w.kind === 'vibe',
+          w.kind === 'vibe' ||
+          w.kind === 'theme',
       );
   if (hardKinds.length) {
     // Cuisine/Amenity/Vibe: Name/Tags-Score reicht als Vorfilter
     // Dish: mind. Kategorie-Signal (Score≥1), Beleg kommt in hardMatchVerify
+    // Theme: Attraction-Beleg Pflicht — sonst softFail → Harvest/Places
     const hard = scored.filter((s) => {
       return hardKinds.every((w) => {
         const part = softMatchWish(s.c, w);
@@ -516,8 +613,11 @@ export function filterAndRank(
     } else if (namedVenue) {
       open = [];
       wishSoftFail = true;
-    } else if (musts.some((w) => w.kind === 'dish' || w.kind === 'amenity' || w.kind === 'vibe' || w.kind === 'cuisine')) {
-      if (req.kind === 'food' || req.kind === 'bar') {
+    } else if (musts.some((w) => w.kind === 'dish' || w.kind === 'amenity' || w.kind === 'vibe' || w.kind === 'cuisine' || w.kind === 'theme')) {
+      if (musts.some((w) => w.kind === 'theme')) {
+        open = [];
+        wishSoftFail = true;
+      } else if (req.kind === 'food' || req.kind === 'bar') {
         const family = scored.filter((s) =>
           hardKinds.some((w) => softMatchWish(s.c, w) >= 1),
         );

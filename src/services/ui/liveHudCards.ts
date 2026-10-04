@@ -16,7 +16,7 @@ import { useFinnusStore } from '../../store/useFinnusStore';
 import { getCachedWeatherSnapshot } from '../weatherService';
 import { computeSunsetMs, isTodaysSunsetLive } from '../geo/solarTimes';
 import { getSunsetHorizonCache } from './sunsetHorizonSpots';
-import { formatHudRemain, sameLocalCalendarDay } from './hudRemainLabel';
+import { formatHudRemain, formatTimerCountdown, sameLocalCalendarDay } from './hudRemainLabel';
 import {
   HUD_META_CHARS_PER_LINE,
   HUD_TITLE_CHARS_PER_LINE,
@@ -41,14 +41,14 @@ import {
   getMealHudCache,
   resolveMealSlot,
 } from './liveHudMealSuggestions';
+import { isMappedHudPlaceLabel } from './liveHudPlacePin';
 import {
   allowActivitySoftTips,
   isNachtruhe,
 } from './nachtruhePolicy';
 import {
   formatRainHudLine,
-  isRainAlreadyFalling,
-  isRainHudUrgent,
+  isPrecipWeatherCode,
 } from '../weather/rainIncomingPolicy';
 import { stripHudCoachMeta } from './hudCoachMeta';
 import { formatWeatherHudCard } from './weatherDayPlanSpeech';
@@ -104,7 +104,13 @@ function polishCard(c: LiveHudCard): LiveHudCard {
   };
 }
 
-function placeCard(): LiveHudCard {
+/**
+ * Live-Ort nur bei echtem Karten-Pin (POI/Hotel/Shop/Bahnhof …).
+ * Keine reine Adresse, kein „Hier in der Gegend“.
+ */
+export { isMappedHudPlaceLabel } from './liveHudPlacePin';
+
+function placeCard(): LiveHudCard | null {
   const presence = resolvePlacePresence();
   const store = useFinnusStore.getState();
   let offer = store.pendingNavOffer;
@@ -156,15 +162,6 @@ function placeCard(): LiveHudCard {
     }
   }
 
-  const name =
-    presence.role === 'hotel'
-      ? presence.hotelName
-      : presence.role === 'poi'
-        ? presence.poiName
-        : presence.role === 'stationary' || presence.role === 'moving'
-          ? presence.place
-          : store.currentLocationName?.trim() || 'der Gegend';
-
   const navDest =
     offer &&
     typeof offer.lat === 'number' &&
@@ -174,6 +171,27 @@ function placeCard(): LiveHudCard {
     offer.name.trim()
       ? { name: offer.name.trim(), lat: offer.lat, lng: offer.lng }
       : undefined;
+
+  // Nur echte Pins / aktive Nav — sonst keine Ort-Karte
+  const atHotel = presence.role === 'hotel';
+  const atPoi = presence.role === 'poi';
+  const inNav = presence.role === 'nav';
+  if (!navDest && !atHotel && !atPoi && !inNav) {
+    const label =
+      presence.role === 'stationary' || presence.role === 'moving'
+        ? presence.place
+        : store.currentLocationName?.trim() || '';
+    if (!isMappedHudPlaceLabel(label)) return null;
+  }
+
+  const name =
+    presence.role === 'hotel'
+      ? presence.hotelName
+      : presence.role === 'poi'
+        ? presence.poiName
+        : presence.role === 'stationary' || presence.role === 'moving'
+          ? presence.place
+          : store.currentLocationName?.trim() || 'der Gegend';
 
   let title: string;
   let meta: string | undefined;
@@ -199,23 +217,13 @@ function placeCard(): LiveHudCard {
     meta = undefined;
     tellMorePrompt = `Was wäre jetzt bei ${name} am hilfreichsten — eine kurze Idee, die zu mir passt?`;
   } else if (presence.role === 'moving') {
-    title =
-      presence.place === 'der Gegend'
-        ? '🚶 Unterwegs'
-        : `🚶 ${presence.place}`;
-    meta = undefined;
-    tellMorePrompt = `Was wäre jetzt bei ${name} am hilfreichsten — eine kurze Idee, die zu mir passt?`;
-  } else if (
-    presence.place === 'der Gegend' ||
-    /hier in der gegend/i.test(presence.title)
-  ) {
-    title = '📍 Hier in der Gegend';
+    title = `🚶 ${presence.place}`;
     meta = undefined;
     tellMorePrompt = `Was wäre jetzt bei ${name} am hilfreichsten — eine kurze Idee, die zu mir passt?`;
   } else {
     title = presence.title.startsWith('📍')
       ? presence.title
-      : `📍 ${presence.title.replace(/^Hier:\s*/i, '').trim()}`;
+      : `📍 ${name.replace(/^Hier:\s*/i, '').trim()}`;
     meta = undefined;
     tellMorePrompt = `Was wäre jetzt bei ${name} am hilfreichsten — eine kurze Idee, die zu mir passt?`;
   }
@@ -329,7 +337,7 @@ function tipToCard(tip: HudTipCandidate): LiveHudCard {
     tip.kind === 'battery_charge'
       ? 'Akku wird knapp — such Powerbank-Automaten oder Café mit Steckdosen in der Nähe und gib mir Route-Buttons.'
       : tip.kind === 'weather_rain'
-        ? 'Regen-Hinweis: Schirm/Jacke oder Indoor/Café mit Route — was hilft mir jetzt?'
+        ? '__WEATHER_DAY_CHECK__'
         : `Hinweis „${tip.text}“ — hilft mir das? Wenn ja, setz es konkret um (Route, Reminder oder nächster Schritt).`;
   return polishCard({
     id: tip.id,
@@ -371,11 +379,12 @@ function timerCard(nowMs: number): LiveHudCard | null {
     };
     const t = getActiveTimer();
     if (!t || t.endsAtMs <= nowMs) return null;
-    const remMin = Math.max(1, Math.ceil((t.endsAtMs - nowMs) / 60_000));
+    const remain = t.endsAtMs - nowMs;
+    const clock = formatTimerCountdown(remain);
     return polishCard({
       id: `timer-${t.endsAtMs}`,
-      title: `⏱️ ${t.label} · noch ${remMin} Min`,
-      meta: 'läuft',
+      title: `Timer ${clock}`,
+      meta: t.label !== 'Timer' ? `${t.label} · läuft` : 'läuft · klingelt auch aus',
       tellMorePrompt: `Status zu meinem Timer „${t.label}“ — noch wie lange, und was danach?`,
     });
   } catch {
@@ -393,59 +402,69 @@ function formatClock(ms: number): string {
 /** Wetter — menschlicher Mini-Bericht, Tap = lockerer Tagesbericht. */
 function weatherCard(): LiveHudCard | null {
   const snap = getCachedWeatherSnapshot();
-  if (!snap?.summaryLine?.trim() && snap?.currentTempC == null) return null;
-  const rainOpts = {
-    currentPrecipMm: snap.precipitationMm,
-    nextRainAtMs: snap.nextRainAtMs,
-    rainStartsInMin: snap.rainStartsInMin,
-    rainEndsAtMs: snap.rainEndsAtMs,
-    rainWindows: snap.rainWindows,
-    weatherCode: snap.weatherCode,
-    isHeavyRain: snap.isHeavyRain,
-  };
-  const rainHud = formatRainHudLine(rainOpts);
-  let allowRainWarn = true;
+  let tracker: {
+    currentPrecipMm?: number | null;
+    nextRainAtMs?: number | null;
+    rainStartsInMin?: number | null;
+    rainEndsAtMs?: number | null;
+    rainWindows?: Array<{ startMs: number; endMs: number; pop?: number }> | null;
+    weatherCode?: number | null;
+    summaryLine?: string | null;
+  } | null = null;
   try {
-    const { canIssueProactiveRainWarning } = require('../weather/rainWarnSessionGate') as {
-      canIssueProactiveRainWarning: () => boolean;
+    const { getWeatherTrackerState } = require('../logistics/weatherTracker') as {
+      getWeatherTrackerState: () => typeof tracker;
     };
-    allowRainWarn = canIssueProactiveRainWarning();
+    tracker = getWeatherTrackerState();
   } catch {
-    allowRainWarn = true;
+    tracker = null;
   }
-  const rainingNow = isRainAlreadyFalling(rainOpts);
-  const rainUrgent =
-    !!rainHud && (rainingNow || (allowRainWarn && isRainHudUrgent(rainHud)));
-
-  const hud = formatWeatherHudCard({ snap, nowMs: Date.now() });
-  if (!hud) return null;
-
-  // Akuter Regen: Headline aus Regen-Warn, Meta aus Temperatur/Hoch
-  let title = hud.title;
-  let meta = hud.meta;
-  if (rainUrgent && rainHud) {
-    const headline = rainHud.replace(/^Regen in (\d+) Min$/, 'Regen in ~$1 Min');
-    title = `🌧 ${headline}`;
-    const temp =
-      snap.currentTempC != null && Number.isFinite(snap.currentTempC)
-        ? Math.round(snap.currentTempC)
-        : null;
-    const dayHigh =
-      snap.dayHighC != null && Number.isFinite(snap.dayHighC)
-        ? Math.round(snap.dayHighC)
-        : null;
-    const bits: string[] = [];
-    if (temp != null) bits.push(`${temp}°`);
-    if (dayHigh != null && (temp == null || dayHigh >= temp + 2)) {
-      bits.push(`bis ${dayHigh}°`);
-    }
-    meta = bits.join(' · ') || meta;
+  if (!snap?.summaryLine?.trim() && snap?.currentTempC == null && !tracker) {
+    return null;
   }
+  // Tracker/Radar-Timing schlägt ggf. stale Cache (Live-Anzeige SSOT).
+  const hudSnap = {
+    ...(snap ?? {}),
+    precipitationMm: tracker?.currentPrecipMm ?? snap?.precipitationMm,
+    nextRainAtMs: tracker?.nextRainAtMs ?? snap?.nextRainAtMs,
+    rainStartsInMin: tracker?.rainStartsInMin ?? snap?.rainStartsInMin,
+    rainEndsAtMs: tracker?.rainEndsAtMs ?? snap?.rainEndsAtMs,
+    rainWindows: (tracker?.rainWindows ?? snap?.rainWindows) as
+      | Array<{ startMs: number; endMs: number; pop: number }>
+      | undefined,
+    weatherCode: tracker?.weatherCode ?? snap?.weatherCode,
+    summaryLine:
+      (tracker?.summaryLine && /regen/i.test(tracker.summaryLine)
+        ? tracker.summaryLine
+        : null) ??
+      snap?.summaryLine ??
+      null,
+    currentTempC: snap?.currentTempC,
+    dayHighC: snap?.dayHighC,
+    isHeavyRain: snap?.isHeavyRain,
+    nightLowC: snap?.nightLowC,
+    sunsetMs: snap?.sunsetMs,
+    sunriseMs: snap?.sunriseMs,
+    nextRainProb: snap?.nextRainProb,
+  };
+  const rainHud = formatRainHudLine({
+    currentPrecipMm: hudSnap.precipitationMm,
+    nextRainAtMs: hudSnap.nextRainAtMs,
+    rainStartsInMin: hudSnap.rainStartsInMin,
+    rainEndsAtMs: hudSnap.rainEndsAtMs,
+    rainWindows: hudSnap.rainWindows,
+    weatherCode: hudSnap.weatherCode,
+    isHeavyRain: hudSnap.isHeavyRain,
+  });
+  const hud = formatWeatherHudCard({ snap: hudSnap, nowMs: Date.now() });
+  if (!hud && !rainHud) return null;
 
+  // Fallback wenn formatWeatherHudCard null (nur Radar-Felder).
+  const title = hud?.title ?? (rainHud ? `🌧 ${rainHud}` : '🌧 Regen');
   return polishCard({
     id: 'weather-live',
     title,
-    meta: meta || undefined,
+    meta: hud?.meta,
     tellMorePrompt: '__WEATHER_DAY_CHECK__',
   });
 }
@@ -482,10 +501,10 @@ function sunsetCard(nowMs: number): LiveHudCard | null {
         : null;
   if (!remainLine) return null;
 
-  // Wetter: bei Regen trotzdem zeigen („egal“) — nur ehrlich sagen
+  // Wetter nur als Fakt — keine Coach-Anweisung im HUD.
   let weatherBit: string;
   if (skyPoor) {
-    weatherBit = 'Regen — Zeit trotzdem merken';
+    weatherBit = 'voraussichtlich Regen';
   } else if (
     snap &&
     (/sonne|klar|sonnig/i.test(snap.summaryLine ?? '') ||
@@ -501,7 +520,8 @@ function sunsetCard(nowMs: number): LiveHudCard | null {
   const spotLine = spots[0]
     ? `${spots[0].name} · ${spots[0].walkMin} Min`
     : null;
-  const metaParts = [`um ${clock}`, remainLine, weatherBit];
+  // Uhr steht schon im Titel — Meta nicht nochmal „um 20:09“.
+  const metaParts = [remainLine, weatherBit];
   if (spotLine) metaParts.push(spotLine);
   const meta = metaParts.join(' · ');
 
@@ -539,9 +559,22 @@ function sunsetSkyIsPoor(snap: ReturnType<typeof getCachedWeatherSnapshot>): boo
   if (snap.isHeavyRain) return true;
   if ((snap.precipitationMm ?? 0) >= 0.4) return true;
   if (snap.rainStartsInMin != null && snap.rainStartsInMin <= 90) return true;
-  const code = snap.weatherCode ?? 0;
-  if (code >= 51) return true;
+  if (isPrecipWeatherCode(snap.weatherCode)) return true;
   return /regen|schauer|gewitter/i.test(snap.summaryLine ?? '');
+}
+
+/**
+ * Klar bis leicht bewölkt (WMO 0–2 / OWM 800–802) — gut zum Sunset-Zuschauen.
+ * Muss existieren: liveHudCards ruft das in sunsetCard auf.
+ */
+export function isClearishSunsetSky(
+  weatherCode: number | null | undefined,
+): boolean {
+  if (weatherCode == null || !Number.isFinite(weatherCode)) return false;
+  const c = Math.round(weatherCode);
+  if (c >= 0 && c <= 2) return true; // WMO / Open-Meteo
+  if (c === 800 || c === 801 || c === 802) return true; // OWM
+  return false;
 }
 
 /**
@@ -551,20 +584,30 @@ function sunsetSkyIsPoor(snap: ReturnType<typeof getCachedWeatherSnapshot>): boo
 function dinnerCard(nowMs: number): LiveHudCard | null {
   const slot = resolveMealSlot(nowMs);
   const hour = new Date(nowMs).getHours();
-  if (hour >= 19) return null;
+  // Nur mit echtem Nearby-Treffer — nie leere Soft-Frage.
   if (slot === 'bakery' && (hour < 6 || hour >= 11)) return null;
   if (slot === 'lunch' && (hour < 11 || hour >= 16)) return null;
-  if (slot === 'dinner' && (hour < 16 || hour >= 19)) return null;
+  if (slot === 'dinner' && (hour < 16 || hour >= 22)) return null;
 
   const cached = getMealHudCache();
   if (!cached || cached.slot !== slot || cached.items.length === 0) {
     return null;
   }
+  const primary = cached.items[0];
+  const navDest =
+    primary &&
+    typeof primary.lat === 'number' &&
+    typeof primary.lng === 'number' &&
+    Number.isFinite(primary.lat) &&
+    Number.isFinite(primary.lng)
+      ? { name: primary.name, lat: primary.lat, lng: primary.lng }
+      : undefined;
   return polishCard({
     id: `meal-${slot}`,
     title: cached.title,
     meta: cached.meta,
     tellMorePrompt: cached.tellMorePrompt,
+    navDest,
   });
 }
 
@@ -574,6 +617,7 @@ function pushThemeCards(
   nowMs: number,
 ): void {
   if (themes.has('sunset')) push(sunsetCard(nowMs));
+  // Konkrete Gastro nur mit Cache-Treffer (dinnerCard), nie Soft-Placeholder.
   if (themes.has('dinner')) push(dinnerCard(nowMs));
 
   // Pro aktivem Pulse-Thema nur den besten Tipp — kein Durchreichen aller Karten
@@ -655,11 +699,19 @@ function buildLiveHudCardsInner(
     (atPoi ? 'poi' : navigating ? 'nav' : 'idle');
 
   if (mode === 'poi') {
-    return [placeCard()];
+    const cards: LiveHudCard[] = [];
+    const t = timerCard(nowMs);
+    if (t) cards.push(t);
+    const pin = placeCard();
+    if (pin) cards.push(pin);
+    return cards.slice(0, 2);
   }
 
   if (mode === 'nav') {
-    const cards: LiveHudCard[] = [navCard()];
+    const cards: LiveHudCard[] = [];
+    const t = timerCard(nowMs);
+    if (t) cards.push(t);
+    cards.push(navCard());
     evaluateProactiveHud({ force: false });
     const tips = collectHudTipCandidates({ nowMs })
       .filter(
@@ -688,14 +740,14 @@ function buildLiveHudCardsInner(
     cards.push(c);
   };
 
+  // Aktiver Timer immer ganz vorne (Sekunden-Countdown im Header)
+  push(timerCard(nowMs));
   push(placeCard());
   push(weatherCard());
-  push(timerCard(nowMs));
   push(parkingCard(nowMs));
-  // Konkrete Gastro-Treffer (Cache) — unabhängig vom Theme-Mix
+  // Konkrete Gastro-Treffer (Cache) — unabhängig vom Theme-Mix, nie Soft-Placeholder.
   if (allowActivitySoftTips(nowMs)) push(dinnerCard(nowMs));
 
-  // Utility-Tipps zuerst (Wecker, Akku, Bahn, Leave-by, Regen …)
   evaluateProactiveHud({ force: false });
   const utilityTips = collectHudTipCandidates({ nowMs })
     .filter(
@@ -704,20 +756,36 @@ function buildLiveHudCardsInner(
         (t.score >= 70 && t.kind !== 'weather_summary'),
     )
     .sort((a, b) => b.score - a.score);
+  const skipSoftUtility = (tip: (typeof utilityTips)[number]) => {
+    if (tip.id.startsWith('wx-')) return true;
+    if (tip.kind === 'parking_ticket' && seen.has('parking-spot')) return true;
+    if (tip.kind === 'weather_rain' && seen.has('weather-live')) return true;
+    if (
+      tip.kind === 'umbrella_day' ||
+      /Jacke mitnehmen|Regen möglich|Regen → Indoor|Burger lokal/i.test(tip.text)
+    ) {
+      return true;
+    }
+    return false;
+  };
+  // 1) Zeitkritisch zuerst: Leave-by / Bahn / Flug / Taxi
   for (const tip of utilityTips) {
-    if (tip.id.startsWith('wx-')) continue;
-    // Parken schon als parkingCard
-    if (tip.kind === 'parking_ticket' && seen.has('parking-spot')) continue;
+    if (skipSoftUtility(tip)) continue;
+    const critical =
+      tip.score >= 88 &&
+      (tip.kind === 'session_deadline' ||
+        tip.kind === 'transit_depart' ||
+        tip.kind === 'nav_eta');
+    if (!critical) continue;
     push(tipToCard(tip));
     if (cards.length >= MAX_IDLE_CARDS) break;
   }
 
-  // Nearby: Klo / Wasser / Eis / Museum / Erholung / Fotospot — nur mit Treffer
+  // 2) Nearby-Amenities (Klo/Wasser/Eis…) bevor Soft-Utility die Slots füllt
   if (allowActivitySoftTips(nowMs)) {
     const amenityCards = getNearbyAmenityHudCards(nowMs).sort(
       (a, b) => b.score - a.score,
     );
-    // Max 2 Amenity-Karten, damit es nicht aufdringlich wird
     let amenityPushed = 0;
     for (const a of amenityCards) {
       if (amenityPushed >= 2) break;
@@ -732,8 +800,6 @@ function buildLiveHudCardsInner(
       );
       amenityPushed += 1;
     }
-
-    // Eingeklemmte Ideen (Plan/Liste/Wunsch) — eine Karte reicht
     const pinned = pinnedIdeaSoftTips(nowMs).sort((a, b) => b.score - a.score)[0];
     if (pinned) {
       push(
@@ -747,9 +813,22 @@ function buildLiveHudCardsInner(
     }
   }
 
+  // 3) Restliche Utility (Akku, Wecker, Parken …)
+  for (const tip of utilityTips) {
+    if (skipSoftUtility(tip)) continue;
+    const alreadyCritical =
+      tip.score >= 88 &&
+      (tip.kind === 'session_deadline' ||
+        tip.kind === 'transit_depart' ||
+        tip.kind === 'nav_eta');
+    if (alreadyCritical) continue;
+    push(tipToCard(tip));
+    if (cards.length >= MAX_IDLE_CARDS) break;
+  }
+
   // Nachtruhe: keine Soft-Aktivitäts-Tips
   if (isNachtruhe(nowMs) || !allowActivitySoftTips(nowMs)) {
-    return cards.length ? cards.slice(0, MAX_IDLE_CARDS) : [placeCard()];
+    return cards.slice(0, MAX_IDLE_CARDS);
   }
 
   if (cards.length >= MAX_IDLE_CARDS) {
@@ -772,5 +851,5 @@ function buildLiveHudCardsInner(
     }
   }
 
-  return cards.length ? cards.slice(0, MAX_IDLE_CARDS) : [placeCard()];
+  return cards.slice(0, MAX_IDLE_CARDS);
 }

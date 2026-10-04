@@ -122,6 +122,57 @@ function namedTitleFromClause(clause: string): string | null {
   return title.slice(0, 48);
 }
 
+/** Blick/Sunset sind Kriterien am Abendessen — keine eigenen Timeline-Stops. */
+function isViewOrSunsetCriteria(slot: UtteranceSlot): boolean {
+  if (slot.kind === 'meal' || slot.kind === 'breakfast' || slot.kind === 'travel') {
+    return false;
+  }
+  // Landmarken nie als Blick-Kriterium (Context kann STT-Nachbartext mit Sunset enthalten).
+  if (/\b(michel|museum|kirche|dom|turm|aussichtsturm)\b/i.test(slot.title)) {
+    return false;
+  }
+  if (
+    /\b(pann(?:en)?fisch|abendessen|mittagessen|restaurant|frühstück|fruehstueck)\b/i.test(
+      slot.title,
+    )
+  ) {
+    return false;
+  }
+  // Nur Titel — Context oft voller STT-Blob.
+  return /\b(elbblick|sonnenuntergang|sunset|elb\s*blick)\b/i.test(slot.title);
+}
+
+function viewCriteriaNote(slot: UtteranceSlot): string {
+  if (/\b(sonnenuntergang|sunset)\b/i.test(`${slot.title} ${slot.context}`)) {
+    return 'Sonnenuntergang';
+  }
+  if (/\b(elbblick|elb\s*blick)\b/i.test(`${slot.title} ${slot.context}`)) {
+    return 'Elbblick';
+  }
+  return slot.title.replace(/\s+/g, ' ').trim().slice(0, 48);
+}
+
+function appendNoteToContext(context: string, note: string): string {
+  const n = note.replace(/\s+/g, ' ').trim();
+  if (!n) return context;
+  if (blobCoversTitle(context, n) || foldToken(context).includes(foldToken(n))) {
+    return context;
+  }
+  const joined = `${context} · ${n}`.replace(/\s+/g, ' ').trim();
+  return joined.slice(0, 240);
+}
+
+function foldViewCriteriaIntoMeal(
+  out: UtteranceSlot[],
+  slot: UtteranceSlot,
+): boolean {
+  if (!isViewOrSunsetCriteria(slot)) return false;
+  const meal = out.find((s) => s.kind === 'meal');
+  if (!meal) return false;
+  meal.context = appendNoteToContext(meal.context, viewCriteriaNote(slot));
+  return true;
+}
+
 function classifyClause(clause: string): UtteranceSlot | null {
   const t = clause.replace(/\s+/g, ' ').trim();
   if (t.length < 3) return null;
@@ -150,8 +201,9 @@ function classifyClause(clause: string): UtteranceSlot | null {
   ) {
     if (!/\b(frühstück|fruehstueck)\b/i.test(t)) {
       const named = namedTitleFromClause(t);
-      const title =
+      let title =
         named && !/^(essen|restaurant)$/i.test(named) ? named : 'Essen';
+      if (/\bpann(?:en)?fisch\b/i.test(t)) title = 'Pannfisch';
       return { kind: 'meal', title, context: t };
     }
   }
@@ -183,8 +235,23 @@ export function extractUtteranceSlots(utterance: string): UtteranceSlot[] {
   const out: UtteranceSlot[] = [];
   const seen = new Set<string>();
   const push = (slot: UtteranceSlot) => {
+    // Ein Frühstück pro Utterance — Titelvarianten nicht doppelt.
+    if (slot.kind === 'breakfast' && out.some((s) => s.kind === 'breakfast')) {
+      const existing = out.find((s) => s.kind === 'breakfast')!;
+      if (
+        /\b(typisch|hamburgerisch|hanseatisch)\b/i.test(slot.title) &&
+        !/\b(typisch|hamburgerisch|hanseatisch)\b/i.test(existing.title)
+      ) {
+        existing.title = slot.title;
+      }
+      existing.context = appendNoteToContext(existing.context, slot.context.slice(0, 80));
+      return;
+    }
+    if (foldViewCriteriaIntoMeal(out, slot)) return;
     const key = `${slot.kind}:${foldToken(slot.title)}`;
     if (seen.has(key)) return;
+    // Identische Titel (auch über kinds) nicht doppelt.
+    if (out.some((s) => foldToken(s.title) === foldToken(slot.title))) return;
     seen.add(key);
     out.push(slot);
   };
@@ -207,7 +274,7 @@ function harvestMissingSlots(
     /\b(los|aufbruch|abfahrt)\b/i.test(raw) &&
     extractCityFromText(raw)
   ) {
-    push({ kind: 'travel', title: 'Anreise', context: raw.slice(0, 180) });
+    push({ kind: 'travel', title: 'Anreise', context: 'Anreise / Los' });
   }
   if (
     !out.some((s) => s.kind === 'breakfast') &&
@@ -218,14 +285,41 @@ function harvestMissingSlots(
       title: /\b(typisch|hamburgerisch|hanseatisch)\b/i.test(raw)
         ? 'Typisch hamburgerisch frühstücken'
         : 'Frühstück',
-      context: raw.slice(0, 180),
+      context: /\b(typisch|hamburgerisch|hanseatisch)\b/i.test(raw)
+        ? 'Typisch hamburgerisch frühstücken'
+        : 'Frühstück',
     });
   }
   if (
     !out.some((s) => s.kind === 'meal') &&
     /\b(pann(?:en)?fisch|abendessen|dinner|restaurant)\b/i.test(raw)
   ) {
-    push({ kind: 'meal', title: 'Essen', context: raw.slice(0, 180) });
+    push({
+      kind: 'meal',
+      title: /\bpann(?:en)?fisch\b/i.test(raw) ? 'Pannfisch' : 'Essen',
+      context: raw.slice(0, 180),
+    });
+  }
+  if (/\b(sonnenuntergang|sunset)\b/i.test(raw)) {
+    const meal = out.find((s) => s.kind === 'meal');
+    if (meal) {
+      meal.context = appendNoteToContext(meal.context, 'Sonnenuntergang');
+    } else if (!out.some((s) => /sonnenuntergang|sunset/i.test(s.title))) {
+      push({
+        kind: 'named',
+        title: 'Sonnenuntergang',
+        context:
+          (raw.match(/.{0,40}(?:sonnenuntergang|sunset).{0,60}/i)?.[0] ||
+            'Sonnenuntergang').slice(0, 180),
+      });
+    }
+  }
+  if (
+    /\b(elbblick|elb\s*blick)\b/i.test(raw) &&
+    out.some((s) => s.kind === 'meal')
+  ) {
+    const meal = out.find((s) => s.kind === 'meal')!;
+    meal.context = appendNoteToContext(meal.context, 'Elbblick');
   }
   if (
     !out.some((s) => /michel/i.test(s.title)) &&
@@ -234,10 +328,7 @@ function harvestMissingSlots(
     push({
       kind: 'named',
       title: 'Michel',
-      context: (raw.match(/.{0,48}michel.{0,80}/i)?.[0] || 'Michel rauf, Eintritt').slice(
-        0,
-        180,
-      ),
+      context: 'Michel rauf, Eintritt / Q&A',
     });
   }
   if (
@@ -246,7 +337,7 @@ function harvestMissingSlots(
       raw,
     )
   ) {
-    push({ kind: 'explore', title: 'Erkunden', context: raw.slice(0, 180) });
+    push({ kind: 'explore', title: 'Erkunden', context: 'Must-Haves / Erkunden' });
   }
 }
 
@@ -290,6 +381,14 @@ function planCoversSlot(plan: IngestedPlan, slot: UtteranceSlot): boolean {
         /\b(erkunden|highlights?|sightseeing)\b/i.test(w.title),
     );
   }
+  // Blick/Sunset: von bestehendem Meal abgedeckt — kein Sibling-Stop.
+  if (isViewOrSunsetCriteria(slot)) {
+    return plan.openWishesQueue.some((w) =>
+      /\b(restaurant|essen|dinner|mittag|abendessen|italiener|sushi|pizza|pann(?:en)?fisch)\b/i.test(
+        w.title,
+      ),
+    );
+  }
   return blobCoversTitle(titles, slot.title);
 }
 
@@ -327,7 +426,45 @@ export function mergeUtteranceSlotsIntoPlan(
     breakfastHm || (departHm ? addMinutesHm(departHm, 90) : '11:00');
 
   for (const slot of slots) {
-    if (planCoversSlot({ ...plan, openWishesQueue: wishes }, slot)) continue;
+    if (planCoversSlot({ ...plan, openWishesQueue: wishes }, slot)) {
+      // Blick/Sunset-Kriterien an bestehendes Meal hängen (auch wenn covered).
+      if (isViewOrSunsetCriteria(slot)) {
+        const mealIdx = wishes.findIndex((w) =>
+          /\b(restaurant|essen|dinner|mittag|abendessen|italiener|sushi|pizza|pann(?:en)?fisch)\b/i.test(
+            w.title,
+          ),
+        );
+        if (mealIdx >= 0) {
+          wishes[mealIdx] = {
+            ...wishes[mealIdx]!,
+            context: appendNoteToContext(
+              wishes[mealIdx]!.context,
+              viewCriteriaNote(slot),
+            ),
+          };
+        }
+      }
+      continue;
+    }
+
+    // View/Sunset ohne Cover nur an Meal anhängen — kein neuer Named-Stop.
+    if (isViewOrSunsetCriteria(slot)) {
+      const mealIdx = wishes.findIndex((w) =>
+        /\b(restaurant|essen|dinner|mittag|abendessen|italiener|sushi|pizza|pann(?:en)?fisch)\b/i.test(
+          w.title,
+        ),
+      );
+      if (mealIdx >= 0) {
+        wishes[mealIdx] = {
+          ...wishes[mealIdx]!,
+          context: appendNoteToContext(
+            wishes[mealIdx]!.context,
+            viewCriteriaNote(slot),
+          ),
+        };
+        continue;
+      }
+    }
 
     let estimatedTime: string | null = nextFreeHm(wishes, namedCursor);
     let priority: 4 | 5 | 6 = 5;
@@ -337,6 +474,18 @@ export function mergeUtteranceSlotsIntoPlan(
       priority = 4;
       title = stamp(dest ? `Anreise ${dest}` : 'Anreise', dest).slice(0, 48);
     } else if (slot.kind === 'breakfast') {
+      // Nur ein Frühstück-Wish — Titelvarianten mergen.
+      const existingBf = wishes.findIndex((w) => isBreakfastWish(w));
+      if (existingBf >= 0) {
+        wishes[existingBf] = {
+          ...wishes[existingBf]!,
+          context: appendNoteToContext(
+            wishes[existingBf]!.context,
+            slot.context.slice(0, 80),
+          ),
+        };
+        continue;
+      }
       estimatedTime = breakfastHm || addMinutesHm(departHm || '09:00', 60);
       priority = 4;
       title = stamp('Frühstück', dest).slice(0, 48);
@@ -368,9 +517,22 @@ export function mergeUtteranceSlotsIntoPlan(
         /\b(?:um|ab|gegen)?\s*\d{1,2}(?::\d{2})?\s*(?:uhr)?\b/i.test(
           slot.context,
         );
-      estimatedTime = clauseHasClock ? namedCursor : null;
-      if (clauseHasClock) {
-        namedCursor = addMinutesHm(namedCursor, 75);
+      if (/sonnenuntergang|sunset/i.test(slot.title)) {
+        // Ohne Meal: Sunset allein erst nach Dinner-Fallback — sonst an Meal (oben).
+        try {
+          const { dinnerHmBeforeSunset } = require('./planWalkOrder') as {
+            dinnerHmBeforeSunset: (fb?: string) => string;
+          };
+          const dinner = dinnerHmBeforeSunset('19:30');
+          estimatedTime = addMinutesHm(dinner, 60);
+        } catch {
+          estimatedTime = '20:30';
+        }
+      } else {
+        estimatedTime = clauseHasClock ? namedCursor : null;
+        if (clauseHasClock) {
+          namedCursor = addMinutesHm(namedCursor, 75);
+        }
       }
       priority = 5;
     } else if (slot.kind === 'explore') {
@@ -379,6 +541,17 @@ export function mergeUtteranceSlotsIntoPlan(
       estimatedTime = breakfastHm
         ? addMinutesHm(breakfastHm, 75)
         : addMinutesHm(departHm || '09:00', 150);
+    }
+
+    // Identische Titel nicht doppelt anlegen.
+    if (
+      wishes.some(
+        (w) =>
+          foldToken(w.title) === foldToken(title) ||
+          foldToken(w.title) === foldToken(slot.title),
+      )
+    ) {
+      continue;
     }
 
     wishes.push({
@@ -414,6 +587,18 @@ export function mergeUtteranceSlotsIntoPlan(
     if (dinnerHm && t >= dinnerHm) t = addMinutesHm(dinnerHm, -90);
     return { ...w, estimatedTime: t };
   });
+
+  // Genau ein Frühstück — Titelvarianten zusammenführen.
+  const breakfasts = wishes.filter((w) => isBreakfastWish(w));
+  if (breakfasts.length > 1) {
+    const keep = breakfasts[0]!;
+    const mergedCtx = breakfasts
+      .slice(1)
+      .reduce((c, w) => appendNoteToContext(c, (w.context || '').slice(0, 80)), keep.context);
+    wishes = wishes
+      .filter((w) => !isBreakfastWish(w) || w === keep)
+      .map((w) => (w === keep ? { ...w, context: mergedCtx } : w));
+  }
 
   const travel = wishes.filter((w) => isTravelToDestWish(w));
   const explore = wishes.filter(

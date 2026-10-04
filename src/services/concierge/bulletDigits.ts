@@ -123,11 +123,35 @@ function replaceAges(s: string): string {
 
 function replaceSimpleCounts(s: string): string {
   return s.replace(
-    /\b([A-Za-zÄÖÜäöüß]{3,40})\s+(Euro|€|Meter|m|Stufen|Minuten|Min)\b/giu,
+    /\b([A-Za-zÄÖÜäöüß]{3,40})\s+(Euro|€|Meter|m|Stufen|Minuten|Min|Grad|°C?)\b/giu,
     (full, word: string, unit: string) => {
       const n = germanWordToNumber(word);
       if (n == null || n > 10000) return full;
+      if (/^grad$/iu.test(unit) || unit.startsWith('°')) return `${n}°`;
       return `${n} ${unit}`;
+    },
+  );
+}
+
+/** Einzelne Zahlwörter → Ziffern (Stichpunkte, nicht Speech). */
+function replaceBareNumberWords(s: string): string {
+  return s.replace(
+    /\b([A-Za-zÄÖÜäöüß]{3,40})\b/giu,
+    (word) => {
+      const n = germanWordToNumber(word);
+      if (n == null || n > 100) return word;
+      const foldW = fold(word).replace(/[^a-z]/g, '');
+      if (
+        foldW === 'ein' ||
+        foldW === 'eine' ||
+        foldW === 'einem' ||
+        foldW === 'einen' ||
+        foldW === 'eines' ||
+        foldW === 'einer'
+      ) {
+        return word;
+      }
+      return String(n);
     },
   );
 }
@@ -140,6 +164,7 @@ export function compactBulletDigits(text: string): string {
   s = replaceOrdinalDates(s);
   s = replaceAges(s);
   s = replaceSimpleCounts(s);
+  s = replaceBareNumberWords(s);
   return s.replace(/\s+/g, ' ').trim();
 }
 
@@ -157,6 +182,17 @@ export function bulletClockKey(text: string): string | null {
 export function speechHasBulletDigit(speech: string, digit: string): boolean {
   if (!digit) return true;
   if (speech.includes(digit)) return true;
+  // DE-Tausender: 45000 ↔ 45.000 / 45 000
+  const bare = digit.replace(/[.\s]/g, '');
+  if (/^\d{4,}$/.test(bare)) {
+    const withDot = bare.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (speech.includes(withDot) || speech.includes(bare)) return true;
+    const speechBare = speech.replace(
+      /\b(\d{1,3})\.(\d{3})\b/g,
+      '$1$2',
+    );
+    if (speechBare.includes(bare)) return true;
+  }
   return compactBulletDigits(speech).includes(digit);
 }
 

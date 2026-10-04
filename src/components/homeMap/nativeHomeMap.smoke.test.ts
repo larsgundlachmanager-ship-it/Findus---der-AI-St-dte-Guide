@@ -253,8 +253,15 @@ assert(
 assert(view.includes('id="places-icon-park"'), 'Park/Wald erst nah');
 assert(view.includes('id="places-icon-gastro-top"'), 'Gastro-Highlights früher');
 assert(view.includes('id="places-icon-micro"'), 'Micro-Amenities nah');
+assert(view.includes('id="places-icon-micro-white"'), 'WC/Wasser weiß hervorgehoben');
+assert(view.includes('places-icon-micro-white-halo'), 'Weißer Halo unter WC/Wasser');
 assert(view.includes('id="places-icon-micro-close"'), 'Briefkasten nah');
 assert(view.includes('id="places-icon-micro-clinic"'), 'Arzt-LOD eigener Layer');
+assert(
+  view.includes('pickBasemapPoiKindFallback') &&
+    view.includes('BASEMAP_POI_TAP_PIXEL_OFFSETS'),
+  'Basemap-Tap mit Pixel-Offsets / Kind-Fallback',
+);
 assert(
   view.includes('Icons via amenityIcons') ||
     !/places-icon-micro-close[\s\S]{0,220}placeVisFilter/.test(view),
@@ -935,6 +942,12 @@ assert(host.includes('basemapLabelAtRef'), 'Eigenes Icon nur ohne Basemap-Label'
 assert(view.includes('places-hit'), 'Unsichtbarer Hit-Layer für Nicht-Fill');
 assert(host.includes('shouldPaintPlaceBuildingFill'), 'Fill-Gate SSOT Status-only');
 assert(host.includes('wantFill'), 'Fill nur visited/nav/M1-auto');
+assert(
+  host.includes('p.liked === 1') &&
+    host.includes('Fill nur M1-Schätzung') &&
+    host.includes("filterTags: (['trigger']"),
+  'Nachbar-Packs: Fill nur liked, kein Directory-Massen-Fill',
+);
 assert(view.includes('places-fill-outline'), 'Gebäude-Outline stärker sichtbar');
 const bulletsSrc = readFileSync(
   join(process.cwd(), 'src/services/homeMap/homeMapPlaceBullets.ts'),

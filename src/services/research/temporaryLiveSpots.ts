@@ -26,6 +26,10 @@ export type TemporaryLiveSpot = {
   audienceMaxAge?: number | null;
   venueLat?: number | null;
   venueLng?: number | null;
+  /** Belegter Preis/Eintritt */
+  priceHint?: string | null;
+  /** Warum hingehen (Motivation), nur belegt */
+  whyHint?: string | null;
 };
 
 export type TemporaryLiveUserCtx = {
@@ -167,20 +171,22 @@ export async function researchTemporaryLiveSpots(opts: {
 
   const prompt = [
     `Du suchst aktuelle Events/Programme HEUTE (${today}) im Umkreis ~${Math.round(maxM / 1000)} km um GPS ${opts.lat.toFixed(5)},${opts.lng.toFixed(5)}${city ? ` (${city})` : ''}.`,
-    'Quellen: Venue-Seiten, Kalender, Flyer, Instagram/Facebook-Posts mit Datum — nur mit echter HTTPS-URL.',
+    'Quellen: Venue-Seiten (Arena, Theater, Konzerthalle, Stadion), Kalender, Flyer, Instagram/Facebook-Posts mit Datum — nur mit echter HTTPS-URL.',
+    'DE Live-Tickets: bevorzugt Deep-Links auf reservix.de / adticket.de wenn belegt; sonst Eventim/Venue.',
     'Ohne URL → []. Lieber [] als raten. Nichts erfinden.',
     'VERBOTEN: erfundene Parties; feste Läden als Event verkaufen ohne heutiges Programm;',
     'Meter schätzen ist ok — App prüft Nähe (Places oder venueLat/Lng).',
     audienceBlock,
     'ZEIT-FILTER: Tagesfeste (Straßenfest, Weinfest, Hafengeburtstag, Umzug, Markt, Kinderprogramm) dürfen schon laufen — whenLabel dann „läuft noch bis …“ nur mit belegtem Ende. Zeitgenaue Starts (Kino, Konzert, Auftritt, Vorstellung, Sonnenfinsternis) nur wenn Start noch kommt — schon begonnen weglassen, kein „läuft noch“. Ende vorbei → weglassen. Nichts Passendes → [].',
     'Max 4 Treffer, sortiert nach Passung für DIESE Person.',
-    'hook: 1–2 flüssige Sätze (Du). Zeitrelation (heute Abend + Uhr wenn belegt) + Ort + Was in einem Atemzug. Ungefragt: kurzer menschlicher Opener, dann Hiebsatz, dann weiche Einladung ob einplanen. KEIN Los-jetzt (keine „in X Minuten da“, keine „um die Ecke“ als Sofort-Los). Uhr nur aus Belegen.',
+    'hook: Was passiert (Titel/Act) + Ort in 1 flüssigen Satz. priceHint: belegter Eintritt/Preis („12 Euro“, „Eintritt frei“) oder null. whyHint: ein knapper Motivationsgrund (Atmosphäre/Act/Besonderheit) — nur belegt, kein Werbesprech.',
+    'UNGEFRAGT später formatiert die App: Opener → Was/Wann/Wo → Preis → Anreise-Minuten → Warum → Einladung. KEIN Los-jetzt in hook.',
     FINDUS_WOVEN_PITCH_SPEECH_BLOCK,
     'audienceTags: z.B. kids|family|nightlife|techno|ue30|market|culture|seniors',
     FINDUS_FEW_SHOT_DISCLAIMER,
     '',
     'JSON array only:',
-    '[{ "name":"…", "kindHint":"markt|festival|popup|party|kids|culture|other", "whenLabel":"heute / ab 18 Uhr", "distanceHintM":800, "hook":"…", "sourceUrl":"https://…", "audienceTags":["…"], "audienceMinAge":18, "audienceMaxAge":null, "venueLat":53.65, "venueLng":9.79 }]',
+    '[{ "name":"…", "kindHint":"markt|festival|popup|party|kids|culture|other", "whenLabel":"heute / ab 18 Uhr", "distanceHintM":800, "hook":"…", "priceHint":"12 Euro"|null, "whyHint":"…"|null, "sourceUrl":"https://…", "audienceTags":["…"], "audienceMinAge":18, "audienceMaxAge":null, "venueLat":53.65, "venueLng":9.79 }]',
   ].join('\n');
 
   try {
@@ -244,6 +250,14 @@ export async function researchTemporaryLiveSpots(opts: {
         typeof o.audienceMaxAge === 'number' && Number.isFinite(o.audienceMaxAge)
           ? o.audienceMaxAge
           : null;
+      const priceHint =
+        typeof o.priceHint === 'string' && o.priceHint.trim().length >= 2
+          ? o.priceHint.trim().slice(0, 48)
+          : null;
+      const whyHint =
+        typeof o.whyHint === 'string' && o.whyHint.trim().length >= 8
+          ? o.whyHint.trim().slice(0, 120)
+          : null;
       candidates.push({
         name,
         kindHint,
@@ -256,6 +270,8 @@ export async function researchTemporaryLiveSpots(opts: {
         audienceMaxAge,
         venueLat,
         venueLng,
+        priceHint,
+        whyHint,
       });
     }
 

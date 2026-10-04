@@ -84,27 +84,21 @@ export type CruiseTerminalPin = {
 
 /**
  * Fester Liegeplatz — nicht den Füllsatz geocoden und nicht Ostufer/Fähre.
- * Kiel + Mein Schiff / Cruise Center → Ostseekai (Terminal 27/28).
+ * SSOT: cruiseTerminalAnchors.ts (alle Pack-Städte mit Terminal).
  */
-const CRUISE_TERMINALS: Array<CruiseTerminalPin & { city: RegExp }> = [
-  {
-    city: /\bkiel\b/iu,
-    name: 'Cruise Terminal Ostseekai, Kiel',
-    lat: 54.32487,
-    lng: 10.14549,
-  },
-];
-
 export function cruiseTerminalPin(text: string): CruiseTerminalPin | null {
   const dest = extractCruiseCenterNavDest(text);
   if (!dest) return null;
-  const blob = `${repairCruiseVoiceText(text)} ${dest}`;
-  for (const row of CRUISE_TERMINALS) {
-    if (row.city.test(blob)) {
-      return { name: row.name, lat: row.lat, lng: row.lng };
-    }
+  try {
+    const {
+      cruiseTerminalPinFromText,
+    } = require('../cruiseTerminalAnchors') as {
+      cruiseTerminalPinFromText: (t: string) => CruiseTerminalPin | null;
+    };
+    return cruiseTerminalPinFromText(`${repairCruiseVoiceText(text)} ${dest}`);
+  } catch {
+    return null;
   }
-  return null;
 }
 
 /** Für Detector-Regex: „Mein Schiff“ inkl. STT „meinen Schiff“. */

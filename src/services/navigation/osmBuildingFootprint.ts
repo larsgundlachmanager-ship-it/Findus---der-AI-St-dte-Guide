@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   approxPolygonAreaM2,
   isAxisAlignedBoxPolygon,
+  isNearRectanglePolygon,
   parsePolygonJson,
   pointInPolygon,
 } from '../geo/polygon';
@@ -265,28 +266,37 @@ export function footprintFromPack(poi: {
   return ring.map((p) => [p.latitude, p.longitude]);
 }
 
+/**
+ * Pack-Ring first (SSOT Persistenz): valider Gebäude-Ring im Pack → kein Overpass.
+ * Overpass nur bei fehlendem Ring, Achsen-Box oder Pin außerhalb.
+ * Ergebnis → sofort SQLite (`enrichHomeMapFootprints`); AsyncStorage nur Cache.
+ */
 export function packNeedsOsmFootprint(poi: {
   id?: number;
   name?: string;
+  lat?: number;
+  lng?: number;
   polygon_json?: string | null;
   tags_json?: string | null;
 }): boolean {
   if (poi.name && isMapCrossingPoi(poi.name)) return false;
   const ring = parsePolygonJson(poi.polygon_json);
-  const needsShape = !ring || isAxisAlignedBoxPolygon(ring);
-  // Manuelle GPS-Fixes mit echtem Gebäudeumriss nicht überschreiben.
-  // Fehlender/Box-Umriss: trotzdem Overpass (sonst bleibt nur der rote Punkt).
-  if (!needsShape) {
-    const tags = String(poi.tags_json || '').toLowerCase();
-    if (
-      tags.includes('gps_manual_fix') ||
-      tags.includes('gps_entrance') ||
-      tags.includes('nav_target')
-    ) {
-      return false;
-    }
-    return false;
+  const needsShape =
+    !ring ||
+    isAxisAlignedBoxPolygon(ring) ||
+    isNearRectanglePolygon(ring);
+  // Pin außerhalb des Pack-Rings = falscher Shared-/Versatz-Footprint → neu snappen.
+  if (
+    ring &&
+    typeof poi.lat === 'number' &&
+    typeof poi.lng === 'number' &&
+    Number.isFinite(poi.lat) &&
+    Number.isFinite(poi.lng) &&
+    !pointInPolygon(poi.lat, poi.lng, ring)
+  ) {
+    return true;
   }
+  if (!needsShape) return false;
   return true;
 }
 

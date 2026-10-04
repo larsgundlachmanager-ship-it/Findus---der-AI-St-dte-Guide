@@ -14,7 +14,8 @@ import {
 } from './handsFreePrefs';
 import { shouldShowHandsFreeSticky } from './handsFreeNotificationPolicy';
 
-export const HANDSFREE_CHANNEL_ID = 'findus-handsfree';
+/** v2: LOW importance — altes HIGH-Channel bleibt sonst auf dem Gerät kleben. */
+export const HANDSFREE_CHANNEL_ID = 'findus-handsfree-v2';
 export const HANDSFREE_CATEGORY = 'findus_handsfree';
 export const HANDSFREE_ACTION_SPEAK = 'FINDUS_SPEAK';
 export const HANDSFREE_NOTIF_ID = 'findus-handsfree-ready';
@@ -27,11 +28,12 @@ async function ensureChannelAndCategory(): Promise<void> {
     await Notifications.setNotificationChannelAsync(HANDSFREE_CHANNEL_ID, {
       name: 'Yorro Hands-free',
       description: 'Schnell sprechen — auch bei gesperrtem Display',
-      importance: Notifications.AndroidImportance.HIGH,
-      vibrationPattern: [0, 120],
+      // LOW: nicht als Heads-up poppen; Sticky reicht in der Leiste
+      importance: Notifications.AndroidImportance.LOW,
+      vibrationPattern: undefined,
       lightColor: '#C4A35A',
       sound: undefined,
-      enableVibrate: true,
+      enableVibrate: false,
       lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
     });
   }
@@ -54,13 +56,14 @@ export async function syncHandsFreeListenNotification(): Promise<void> {
   const prefs = getHandsFreePrefsSync();
   await ensureChannelAndCategory();
 
-  try {
-    await Notifications.dismissNotificationAsync(HANDSFREE_NOTIF_ID);
-  } catch {
-    /* soft */
+  if (!prefs.stickyListenNotification) {
+    try {
+      await Notifications.dismissNotificationAsync(HANDSFREE_NOTIF_ID);
+    } catch {
+      /* soft */
+    }
+    return;
   }
-
-  if (!prefs.stickyListenNotification) return;
 
   let locationFgs = false;
   if (Platform.OS === 'android') {
@@ -84,12 +87,18 @@ export async function syncHandsFreeListenNotification(): Promise<void> {
       os: Platform.OS,
     })
   ) {
+    try {
+      await Notifications.dismissNotificationAsync(HANDSFREE_NOTIF_ID);
+    } catch {
+      /* soft */
+    }
     return;
   }
 
   const perm = await requestNotificationPermission();
   if (!perm.granted) return;
 
+  // Gleicher Identifier ohne vorheriges dismiss → still ersetzen, kein An/Aus-Pop
   await Notifications.scheduleNotificationAsync({
     identifier: HANDSFREE_NOTIF_ID,
     content: {
@@ -100,7 +109,10 @@ export async function syncHandsFreeListenNotification(): Promise<void> {
       categoryIdentifier: HANDSFREE_CATEGORY,
       data: { kind: 'handsfree_ready', action: 'speak' },
       ...(Platform.OS === 'android'
-        ? { channelId: HANDSFREE_CHANNEL_ID }
+        ? {
+            channelId: HANDSFREE_CHANNEL_ID,
+            priority: Notifications.AndroidNotificationPriority.LOW,
+          }
         : {}),
     },
     trigger: null,

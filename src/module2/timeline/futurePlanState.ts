@@ -116,6 +116,19 @@ export function sortStopsChronologically(
     if (aT == null) return 1;
     if (bT == null) return -1;
     if (aT !== bT) return aT - bT;
+    // Live-Tour: Reihenfolge aus ID (nav_live_tour_N_…) schlägt Titel — Ausstieg vor Ziel.
+    const liveIdx = (id: string | undefined) => {
+      const m = /^nav_live_tour_(\d+)_/.exec(String(id || ''));
+      if (m) return Number(m[1]);
+      const leg = /^nav_live_tour_leg_(\d+)$/.exec(String(id || ''));
+      if (leg) return Number(leg[1]) - 0.5;
+      if (id === 'nav_live_active') return -1;
+      if (id === 'nav_live_dest') return 999;
+      return null;
+    };
+    const ai = liveIdx(a.id);
+    const bi = liveIdx(b.id);
+    if (ai != null && bi != null && ai !== bi) return ai - bi;
     // Bei gleicher Startzeit: kürzerer Stop zuerst, sonst Titel
     const aEnd = a.plannedEndMs ?? aT;
     const bEnd = b.plannedEndMs ?? bT;

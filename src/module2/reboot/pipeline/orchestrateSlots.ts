@@ -145,7 +145,7 @@ export function orchestrateUtterance(text: string): OrchestratedTurn {
 
   const jobs = uniqJobs(slots.map((s) => s.job));
 
-  const weaveDayPlan =
+  let weaveDayPlan =
     slots.some((s) => s.kind === 'travel') &&
     slots.some((s) =>
       s.kind === 'breakfast' ||
@@ -153,6 +153,33 @@ export function orchestrateUtterance(text: string): OrchestratedTurn {
       s.kind === 'named' ||
       s.kind === 'explore',
     );
+
+  // STT/Chaos: Multi-Slot-Tag auch ohne exaktes travel∩meal-Muster → Timeline weben
+  if (!weaveDayPlan) {
+    try {
+      const {
+        looksLikeChaoticDayPlanUtterance,
+        looksLikeModul5PlanUtterance,
+        looksLikeOutfitOrWeatherUtterance,
+      } = require('../../planning/planUtteranceGate') as {
+        looksLikeChaoticDayPlanUtterance: (s: string) => boolean;
+        looksLikeModul5PlanUtterance: (s: string) => boolean;
+        looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+      };
+      if (!looksLikeOutfitOrWeatherUtterance(raw)) {
+        if (looksLikeChaoticDayPlanUtterance(raw)) {
+          weaveDayPlan = true;
+        } else if (
+          looksLikeModul5PlanUtterance(raw) &&
+          slots.length >= 2
+        ) {
+          weaveDayPlan = true;
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
 
   if (weaveDayPlan && !jobs.includes('day_plan_budget')) {
     jobs.push('day_plan_budget');

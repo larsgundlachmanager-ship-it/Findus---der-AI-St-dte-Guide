@@ -1,0 +1,172 @@
+﻿
+09-13 11:05:48.303  1638  1638 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 2 
+to 1
+09-13 11:05:48.330 28970 29010 I ReactNativeJS: [devAskPoller] started ÔåÆ :8791
+09-13 11:05:48.335 28970 29010 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-13 11:05:48.336 28970 29010 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-13 11:05:48.336 28970 29010 I ReactNativeJS:   'com.google.android.tts',
+09-13 11:05:48.336 28970 29010 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-13 11:05:48.336 28970 29010 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-13 11:05:48.367  2573  3174 I AudioService.NtAudioRecordControlImpl: notifyCommunicationDeviceChanged device:2
+09-13 11:05:48.389  2573  3322 D AudioService.NtAudioRecordControlImpl: doUpdate: [SPEAKER_CHANGED] show(false=>false) 
+speakerMode(true=>true) isVoip (false=>false) hasConnectedDevice (false=>false) micMode (0=>0)
+09-13 11:05:48.428 28970 29010 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.as'
+09-13 11:05:48.448 28970 28970 D ExpoSpeechService: Start recognition.
+09-13 11:05:48.448 28970 28970 D ExpoSpeechService: androidIntentOptions: 
+{EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, 
+EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form}
+09-13 11:05:48.448 28970 28970 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> 
+android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-13 11:05:48.448 28970 28970 D ExpoSpeechService: Resolved key 
+EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> 
+android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-13 11:05:48.448 28970 28970 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> 
+android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-13 11:05:48.449 28970 28970 D ExpoSpeechService: Found service for package com.google.android.as: 
+com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService
+09-13 11:05:48.450  2573  3806 I SpeechRecognitionManagerServiceImpl: Client 10537 has opened 1 sessions
+09-13 11:05:48.451  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : 
+com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService and for client system
+09-13 11:05:48.451  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : 
+com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionServiceare :1
+09-13 11:05:48.459  5302  5302 I AiAi    : AiAiSpeechRecognitionService#getMaxConcurrentSessionsCount
+09-13 11:05:48.461  5302  5302 I AiAi    : AiAiSpeechRecognitionService#onStartListening
+09-13 11:05:48.463  5302  5302 I RecognitionServiceImpl: RecognitionService#onStartListening
+09-13 11:05:48.464  5302  5302 I RecognitionServiceImpl: RecognitionService#logStartListening: callingApp: 
+de.findus.app, locale: de-DE
+09-13 11:05:48.465  5302  5302 I RecognitionClient: #startListening
+09-13 11:05:48.465  5302  6036 I SodaSpeechRecognizer: Offline recognizer - start listening
+09-13 11:05:48.465  5302  6036 I SodaSpeechRecognizer: Initialize Soda [locale: de-DE], [applicationDomain: 
+AMBIENT_CONTINUOUS], [aicore streaming: false]
+09-13 11:05:48.467  5302  5840 D AudioRecord: set(): inputSource 6, sampleRate 16000, format 0x1, channelMask 0x10, 
+frameCount 640, notificationFrames 0, sessionId 0, transferType 0, flags 0, attributionSource 
+AttributionSourceState{pid: 5302, uid: 10127, deviceId: 0, packageName: com.google.android.as, attributionTag: (null), 
+token: binder:0xb400007a0566df70, renouncedPermissions: [], next: [AttributionSourceState{pid: -1, uid: 10537, 
+deviceId: 0, packageName: de.findus.app, attributionTag: (null), token: binder:0xb400007a0561b4b0, 
+renouncedPermissions: [], next: []}]}uid -1, pid -1
+09-13 11:05:48.473  5302  5840 D AudioRecord: set: Building AudioRecord with attributes: source=6 flags=0x800 tags=[]
+09-13 11:05:48.474  5302  5840 D AudioRecord: set: binding to audio service start
+09-13 11:05:48.474  5302  5840 D AudioRecord: set: binding to audio service end
+09-13 11:05:48.476  1691 28251 D APM_AudioPolicyManager: getInputForAttr() source 6, sampling rate 16000, format 0x1, 
+channel mask 0x10, session 12817, flags 0 attributes={ Content type: AUDIO_CONTENT_TYPE_UNKNOWN Usage: 
+AUDIO_USAGE_UNKNOWN Source: AUDIO_SOURCE_VOICE_RECOGNITION Flags: 0x800 Tags:  } requested device ID 0
+09-13 11:05:48.504  2573  3278 D AS.AudioService: AudioRecordStatus: pid = 5302; uid = 10127; sessionId = 12817; 
+source = 6 [START]; pkgName = com.google.android.as; attribuitionTag = 
+09-13 11:05:48.504  2573  3278 E AudioService.NtAudioRecordControlImpl: isInWhiteList: whiteList is empty !!!
+09-13 11:05:48.504  2573  3278 D AudioService.NtAudioRecordControlImpl: onTrackStateChange: [START] inWhiteList = 
+false; pid= 5302; uid = 10127
+09-13 11:05:48.504  5302  5840 D AudioRecord: set(2282): status 0
+09-13 11:05:48.506  5302 10699 D AudioRecord: start(2282): sync event 0 trigger session 0
+09-13 11:05:48.523  2573  3806 I AudioService.NtAudioRecordControlImpl: notifyNtAudioRecordControlRecordEvent return - 
+invalid config or state
+09-13 11:05:48.525  2573  3278 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 5302, onlyPackageName = 
+true, name = com.google.android.as
+09-13 11:05:48.525  2573  3278 I AudioService.NtAudioRecordControlImpl: upadateRecordingApps 
+mRecordingApps=[com.google.android.as]
+09-13 11:05:48.525  2573  3278 D AS.AudioService: AudioRecordStatus send to AudioRecordControl [START] pid = 5302; uid 
+= 10127; sessionId = 12817; source = 6; pkgName = com.google.android.as
+09-13 11:05:48.525  2573  3278 I AudioService.NtAudioRecordControlImpl: notifyNtAudioRecordControlRecordEvent return - 
+invalid config or state
+09-13 11:05:48.528  3521  3521 I aptxalsAudioMonitor: handleRecordingConfigChanged adding to 
+mAudioRecordingClientList, pid: 5302 appId: com.google.android.as mAudioDeviceConnected: false
+09-13 11:05:48.528  3521  3521 I aptxalsAudioRecordingClientList: created new aptxalsAudioRecordingClient, pid:5302 
+appId: com.google.android.as AudioDeviceConnected: false
+09-13 11:05:48.535  5302  6036 I SodaSpeechRecognizer: Initialize Soda with language pack directory
+09-13 11:05:48.535  5302  6036 I RecognitionServiceImpl: Log languagePackInfo and personalizationInfo to westWorld 
+logger.
+09-13 11:05:48.535  5302  6036 I SodaSpeechRecognizer: SodaDetectionHandler.blockingReconnect
+09-13 11:05:48.540  1512   380 I PAL: SoundTriggerEngineGsl: StopRecognition: 1194: Enter
+09-13 11:05:48.540  1512   380 I PAL: SoundTriggerEngineGsl: ProcessStopRecognition: 1161: Enter
+09-13 11:05:48.543  1512   380 I PAL: SoundTriggerEngineGsl: ProcessStopRecognition: 1184: Exit, status = 0
+09-13 11:05:48.543  1512   380 I PAL: SoundTriggerEngineGsl: StopRecognition: 1229: Exit, status = 0
+09-13 11:05:48.553  1512   380 I PAL: SoundTriggerEngineGsl: StartRecognition: 996: Enter
+09-13 11:05:48.553  1512   380 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 939: Enter
+09-13 11:05:48.554  2573  3322 D AudioService.NtAudioRecordControlImpl: doUpdate: [RECORD_CHANGED] show(false=>false) 
+speakerMode(true=>true) isVoip (false=>false) hasConnectedDevice (false=>false) micMode (0=>0)
+09-13 11:05:48.562  1512   380 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 965: Resize mmap buffer size to 
+163840
+09-13 11:05:48.605  1512   380 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 986: Exit, status 0
+09-13 11:05:48.605  1512   380 I PAL: SoundTriggerEngineGsl: StartRecognition: 1028: Exit, status = 0
+09-13 11:05:48.607  1512   380 D AGM: graph: print_graph_alias: 2334 GKV Alias 208 | 
+DeviceTX_Handset_Mic_Instance_Instance_1_DevicePP_Tx_Voice_Recognition_StreamTX_Voice_Recognition_Record
+09-13 11:05:48.757  5302 10699 I RecognitionServiceImpl: RecognitionService#onMicrophoneOpened
+09-13 11:05:48.766 28970 29010 I ReactNativeJS: [stt] recognition started
+09-13 11:05:49.793  5302  5840 I SodaSpeechRecognizer: Offline recognizer - start detection
+09-13 11:05:49.797  5302  5840 I SodaSpeechRecognizer: #handleStart
+09-13 11:05:52.168  1638  1922 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 1 
+to 0
+09-13 11:05:52.829 28970 29010 I ReactNativeJS: [devAskPoller] started ÔåÆ :8791
+09-13 11:05:52.939  5302  5302 I AiAi    : AiAiSpeechRecognitionService#onStopListening
+09-13 11:05:52.939  5302  5302 I RecognitionServiceImpl: RecognitionService#onStopListening
+09-13 11:05:52.939  5302  5302 I RecognitionClient: #stopListening
+09-13 11:05:52.939  5302  5302 I RecognitionServiceImpl: RecognitionService#onMicrophoneCloseRequested
+09-13 11:05:52.945  5302 10699 D AudioRecord: stop(2282): mActive:1
+09-13 11:05:52.945  5302  5840 I SodaSpeechRecognizer: Audio process finished, transcription completed.
+09-13 11:05:52.953  5302   382 I SodaSpeechRecognizer: #handleFinalResult: 1 hyp
+09-13 11:05:52.953  5302   382 I RecognitionClient: #onResults empty final recognition results
+09-13 11:05:52.954  5302   382 I RecognitionClient: #onResults withSpeech: false
+09-13 11:05:52.954  5302  5840 I SodaSpeechRecognizer: #handleStop: MIC_END_OF_DATA
+09-13 11:05:52.954  5302  5840 I RecognitionClient: #onRecognitionFinished
+09-13 11:05:52.954  5302  5840 W RecognitionClient: #onRecognitionFinished no speech - erroring
+09-13 11:05:52.954 28970 28970 D ExpoSpeechService: onPartialResults(), results: []
+09-13 11:05:52.955  5302  5840 W RecognitionClient: #onError space agsa_transcription_NO_SPEECH_DETECTED code -1!
+09-13 11:05:52.955  5302  5840 W RecognitionServiceImpl: Speech recognition error type NO_SPEECH_DETECTED with error 
+code -1
+09-13 11:05:52.955  5302  5840 I SodaSpeechRecognizer: #handleStop: scheduleSodaTimeout
+09-13 11:05:52.957 28970 28970 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-13 11:05:52.957 28970 29010 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-99.0', 
+'partial=false', 'svc=com.google.android.as'
+09-13 11:05:52.963  2573  3174 I AudioService.NtAudioRecordControlImpl: notifyCommunicationDeviceChanged device:2
+09-13 11:05:52.965  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : 
+com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService and for client system
+09-13 11:05:52.965  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for 
+service: com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionServiceafter removal is 0
+09-13 11:05:52.966  1512  3316 I PAL: SoundTriggerEngineGsl: StopRecognition: 1194: Enter
+09-13 11:05:52.966  1512  3316 I PAL: SoundTriggerEngineGsl: ProcessStopRecognition: 1161: Enter
+09-13 11:05:52.967  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service 
+: com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService
+09-13 11:05:52.967  5302  5302 I AiAi    : AiAiSpeechRecognitionService#onDestroy
+09-13 11:05:52.967  2573  2573 I RemoteSpeechRecognitionService: Connection to speech recognition service lost, but no 
+#startListening has been invoked yet.
+09-13 11:05:52.967  5302  5302 I RecognitionServiceImpl: RecognitionService#onDestroy
+09-13 11:05:52.969  1512  3316 I PAL: SoundTriggerEngineGsl: ProcessStopRecognition: 1184: Exit, status = 0
+09-13 11:05:52.969  1512  3316 I PAL: SoundTriggerEngineGsl: StopRecognition: 1229: Exit, status = 0
+09-13 11:05:52.984  1512  3316 I PAL: SoundTriggerEngineGsl: StartRecognition: 996: Enter
+09-13 11:05:52.984  1512  3316 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 939: Enter
+09-13 11:05:52.987 28970 29010 W ReactNativeJS: '[stream-queue] preload failed, play from uri:', [Error: Cannot 
+complete operation because audio is not enabled.]
+09-13 11:05:52.987 28970 29010 W ReactNativeJS: '[stream-queue] preload failed, play from uri:', [Error: Cannot 
+complete operation because audio is not enabled.]
+09-13 11:05:52.991  1512  3316 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 965: Resize mmap buffer size to 
+163840
+09-13 11:05:53.013  2573  3322 D AudioService.NtAudioRecordControlImpl: doUpdate: [SPEAKER_CHANGED] show(false=>false) 
+speakerMode(true=>true) isVoip (false=>false) hasConnectedDevice (false=>false) micMode (0=>0)
+09-13 11:05:53.016  1512  3316 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 986: Exit, status 0
+09-13 11:05:53.016  1512  3316 I PAL: SoundTriggerEngineGsl: StartRecognition: 1028: Exit, status = 0
+09-13 11:05:53.021  5302 10699 D AudioRecord: stop(2282): mActive:0
+09-13 11:05:53.021  5302 10699 D AudioRecord: stop(2282): mActive:0
+09-13 11:05:53.024  5302 10699 D AudioRecord: ~AudioRecord(2282): releasing session id 12817
+09-13 11:05:53.025  2573  4070 I AudioService.NtAudioRecordControlImpl: notifyNtAudioRecordControlRecordEvent return - 
+invalid config or state
+09-13 11:05:53.027  2573  4070 D AS.AudioService: AudioRecordStatus: pid = 5302; uid = 10127; sessionId = 12817; 
+source = 6 [STOP]; pkgName = com.google.android.as; attribuitionTag = 
+09-13 11:05:53.029  5302 10699 D AudioRecord: ~AudioRecord: disconnect to audio service mAudioManager.clear() 
+09-13 11:05:53.029  2573  4070 D AudioService.NtAudioRecordControlImpl: getAppName: pid = 5302, onlyPackageName = 
+true, name = com.google.android.as
+09-13 11:05:53.029  2573  4070 I AudioService.NtAudioRecordControlImpl: upadateRecordingApps mRecordingApps=[]
+09-13 11:05:53.029  2573  4070 E AudioService.NtAudioRecordControlImpl: isInWhiteList: whiteList is empty !!!
+09-13 11:05:53.029  2573  4070 D AudioService.NtAudioRecordControlImpl: onTrackStateChange: [STOP] inWhiteList = 
+false; pid= 5302; uid = 10127
+09-13 11:05:53.029  2573  4070 I AudioService.NtAudioRecordControlImpl: notifyNtAudioRecordControlRecordEvent return - 
+invalid config or state
+09-13 11:05:53.080  2573  3322 D AudioService.NtAudioRecordControlImpl: doUpdate: [RECORD_CHANGED] show(false=>false) 
+speakerMode(true=>true) isVoip (false=>false) hasConnectedDevice (false=>false) micMode (0=>0)
+09-13 11:05:53.104  2573  3174 I AudioService.NtAudioRecordControlImpl: notifyCommunicationDeviceChanged device:2
+09-13 11:05:53.154  2573  3322 D AudioService.NtAudioRecordControlImpl: doUpdate: [SPEAKER_CHANGED] show(false=>false) 
+speakerMode(true=>true) isVoip (false=>false) hasConnectedDevice (false=>false) micMode (0=>0)
+09-13 11:05:53.528  1638  1922 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 0 
+to 1
+09-13 11:05:55.751  1638  1922 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 1 
+to 2
+
+

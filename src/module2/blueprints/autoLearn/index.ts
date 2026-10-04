@@ -110,6 +110,14 @@ export function detectMissingSlotFromFollowUp(userText: string): string | null {
   if (/\b(speisekarte|menü|menu|karte)\b/iu.test(t)) {
     return 'menu_url';
   }
+  if (/\b(wie\s+teuer|was\s+kostet|preis(?:e)?|€|euro)\b/iu.test(t)) {
+    return 'item_price';
+  }
+  if (
+    /\b(rezension|review|bewertung|was\s+sagen\s+die\s+leute|loben)\b/iu.test(t)
+  ) {
+    return 'review_item_evidence';
+  }
   if (/\b(buch|reserv|ticket\s*link|wo\s+buch)\b/iu.test(t)) {
     return 'booking_url';
   }
@@ -156,6 +164,10 @@ function briefForSlot(slot: string): string {
       return 'Öffnungszeiten live prüfen und nur nennen wenn belegt.';
     case 'menu_url':
       return 'Speisekarte/Menü-URL suchen und Button anbieten wenn belegt.';
+    case 'item_price':
+      return 'Preis zum genannten Produkt/Gericht/Verleih nur mit Beleg (Website/Menü/Review).';
+    case 'review_item_evidence':
+      return 'Review-Belege zum genannten Item (Gericht/Produkt) in Stichpunkte — nichts erfinden.';
     case 'booking_url':
       return 'Buchungs-/Ticket-Link suchen und Button anbieten wenn belegt.';
     default:

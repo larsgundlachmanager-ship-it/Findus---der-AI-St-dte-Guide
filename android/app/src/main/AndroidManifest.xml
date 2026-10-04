@@ -50,7 +50,13 @@
   <queries>
     <intent>
       <action android:name="android.intent.action.SET_ALARM"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SET_ALARM"/>
       <category android:name="android.intent.category.DEFAULT"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SHOW_ALARMS"/>
     </intent>
     <intent>
       <action android:name="android.intent.action.SHOW_ALARMS"/>
@@ -58,6 +64,13 @@
     </intent>
     <intent>
       <action android:name="android.intent.action.SET_TIMER"/>
+      <category android:name="android.intent.category.DEFAULT"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.DISMISS_ALARM"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.DISMISS_ALARM"/>
       <category android:name="android.intent.category.DEFAULT"/>
     </intent>
     <package android:name="com.google.android.deskclock"/>

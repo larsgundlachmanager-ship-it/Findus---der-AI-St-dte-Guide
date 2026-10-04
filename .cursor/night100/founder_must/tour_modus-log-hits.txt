@@ -1,0 +1,1 @@
+09-07 05:26:15.763 26214 26252 W ReactNativeJS: '[cityCatalog] Browse-Pack appen fehlgeschlagen:', 'Error: Stadt-Datei nicht ladbar: appen.json (fetch HTTP 400 | FS HTTP 400 | sdk: Object not found)'

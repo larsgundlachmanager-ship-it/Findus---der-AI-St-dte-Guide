@@ -617,6 +617,38 @@ export async function presentCheckpointHelp(
     .events.find((e) => e.id === trigger.eventId);
   if (!event || event.status !== 'active') return;
 
+  if (event.meta?.packRemind === true) {
+    const listId = String(event.meta.packListId || '');
+    const itemId = String(event.meta.packItemId || '');
+    try {
+      const { usePackListStore } = require('../../store/usePackListStore') as {
+        usePackListStore: {
+          getState: () => {
+            getList: (id: string) => {
+              items: Array<{ id: string; done: boolean }>;
+            } | null;
+          };
+        };
+      };
+      const item = usePackListStore
+        .getState()
+        .getList(listId)
+        ?.items.find((i) => i.id === itemId);
+      if (item?.done) return;
+    } catch {
+      /* speak anyway */
+    }
+    const speech = (event.detail || trigger.title || '').trim();
+    if (!speech) return;
+    await presentConciergeResponse({
+      speechText: speech,
+      cardTitle: 'Packliste',
+      visualBullets: [trigger.title],
+      quickActions: [],
+    });
+    return;
+  }
+
   // Reiner Wecker: ÖPNV-Lage am verknüpften Leave-Event prüfen — kein „losgehen“-Speech
   if (event.kind === 'alarm') {
     const leaveBy = metaNum(event.meta, 'leaveByMs');
@@ -1137,11 +1169,13 @@ export async function probeAlternativeIfNeeded(
       metaStr(event.meta, 'line') ||
       metaStr(event.meta, 'firstTransitLine') ||
       event.title;
+    const status = connectionStatusOf(event);
     const pick = await recalculateMissedConnection({
       from: { lat: gps.lat, lng: gps.lng },
       to: { lat: dest.lat, lng: dest.lng },
       preferLine,
       missedLineLabel: preferLine,
+      reason: status === 'cancelled' ? 'cancelled' : 'too_slow',
     });
     if (!pick.primary) return;
     const next = pick.primary;
@@ -1154,7 +1188,7 @@ export async function probeAlternativeIfNeeded(
       10;
 
     // Silent rebook: UI + optional short ping, no Plan-B interrogation
-    if (pick.mode === 'silent_same_line') {
+    if (pick.mode === 'silent_same_line' || pick.mode === 'silent_best') {
       const { leaveByMs } = useLogisticsTriggerStore.getState().upsertDepartureWatch({
         eventId: event.id,
         title: event.title,

@@ -39,7 +39,7 @@ const de: Dict = {
   triggers: 'Trigger',
   facts: 'Fakten',
   loadingCities: 'Städte werden geladen…',
-  downloadingCity: 'Stadt wird heruntergeladen…',
+  downloadingCity: 'Stadtgeschichte…',
   continueWith: 'Weiter mit',
   locatingGps: 'Standort wird ermittelt…',
   gpsReady: 'Standort gefunden',

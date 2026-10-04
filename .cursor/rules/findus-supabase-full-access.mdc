@@ -1,0 +1,17 @@
+---
+description: Supabase voll freigegeben — MCP, SQL, Upload, Gold, Edge Functions ohne Extra-Freigabe.
+alwaysApply: true
+---
+
+# Findus — Supabase Vollzugriff ohne Bestätigung
+
+Der User hat dem Agenten **volle Rechte für Supabase** erteilt (Projekt, Storage, SQL, Auth-Config-Lesen, Edge Functions, Pack-/Gold-Publish).
+
+## Pflicht
+
+1. Supabase-Aufgaben **sofort** ausführen — MCP (`plugin-supabase-supabase`), CLI, `npm run upload:city`, `npm run gold:publish`, Storage-Uploads, Migrationen, SQL.
+2. **Keine** Rückfrage, **kein** Warten auf „darf ich Supabase anfassen?“.
+3. Smart-Mode-/Auto-Review für Supabase (inkl. **`npm run gold:publish`**, **`upload:city`**) = vorab erlaubt via `.cursor/permissions.json`. **Nie** `request_smart_mode_approval` für Gold/Upload (öffnet die Freigabe-Karte). Gold-Edits → Auto-Hook `autoGoldPublish.mjs`. Shell ohne `required_permissions: all`.
+4. Ausnahme nur bei echten Blockern: fehlende Credentials, Netzwerkfehler, destruktive Aktion ohne klaren Auftrag (z. B. `pause_project`, Produktions-DB droppen).
+
+Git-Commit/Push bleibt nur auf explizite User-Anfrage.

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Deep-Links + System-Intents für Hands-free (yorro://voice/listen, Legacy findus://)
  * und QA/Text-Ask (yorro://ask?q=… / findus://voice/ask?q=…).
  */
@@ -55,7 +55,65 @@ export function extractTypedAskFromUrl(url: string | null): string | null {
 }
 
 export function handleIncomingHandsFreeUrl(url: string | null): boolean {
-  const ask = extractTypedAskFromUrl(url);
+  // Yorros Reisebüro: findus://reisebuero?q=… | yorro://reisebuero?text=…
+  if (url && /:\/\/reisebuero([/?#]|$)/i.test(url)) {
+    try {
+      const parsed = new URL(url.replace(/^exp\+[a-z0-9-]+:\/\//i, 'https://'));
+      const q =
+        parsed.searchParams.get('q') ||
+        parsed.searchParams.get('text') ||
+        parsed.searchParams.get('query') ||
+        '';
+      const { useReisebueroStore } = require('../../reisebuero/store') as {
+        useReisebueroStore: {
+          getState: () => {
+            overlayOpen: boolean;
+            openOverlay: (o?: { reset?: boolean; seedText?: string }) => void;
+            startNewTrip: () => void;
+            enqueueUtterance: (t: string) => void;
+          };
+        };
+      };
+      const rb = useReisebueroStore.getState();
+      const seed = (q || '').trim();
+      if (!rb.overlayOpen) {
+        if (seed) rb.openOverlay({ seedText: seed });
+        else {
+          rb.openOverlay({ reset: true });
+          rb.startNewTrip();
+        }
+      } else if (seed) {
+        rb.enqueueUtterance(seed);
+      }
+      return true;
+    } catch {
+      /* fall through */
+    }
+  }
+  if (url && /:\/\/packlist([\/?#]|$)/i.test(url)) {
+    try {
+      const parsed = new URL(url.replace(/^exp\+[a-z0-9-]+:\/\//i, 'https://'));
+      const id = parsed.searchParams.get('id');
+      const { usePackListStore } = require('../../store/usePackListStore') as {
+        usePackListStore: {
+          getState: () => { openOverlay: (id?: string | null) => void };
+        };
+      };
+      usePackListStore.getState().openOverlay(id);
+      return true;
+    } catch {
+      try {
+        const { usePackListStore } = require('../../store/usePackListStore') as {
+          usePackListStore: {
+            getState: () => { openOverlay: (id?: string | null) => void };
+          };
+        };
+        usePackListStore.getState().openOverlay(null);
+        return true;
+      } catch { /* fall through */ }
+    }
+  }
+    const ask = extractTypedAskFromUrl(url);
   if (ask) {
     requestTypedAsk(ask, `url:${url}`);
     return true;
@@ -102,3 +160,4 @@ export async function openDigitalAssistantSettings(): Promise<void> {
     /* soft */
   }
 }
+

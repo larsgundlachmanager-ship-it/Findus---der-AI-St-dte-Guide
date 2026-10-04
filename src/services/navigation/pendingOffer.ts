@@ -6,7 +6,7 @@ import {
 import { isStopOrClearNavigationIntent } from './hardNavOverride';
 
 const AFFIRM =
-  /^(ja|jo|jap|jep|yes|yep|ok|okay|klar|gerne|los|zeig|zeige|bring|führ|fuehr|mach|natürlich|natuerlich|schon|sicher|mach\s+(ihn|den|mir)|anmachen|den\s+ersten|die\s+erste|option\s*1|nummer\s*1)(?:\s+bitte)?\s*[.!]?$/iu;
+  /^(ja|jo|jap|jep|yes|yep|ok|okay|klar|gerne|los|zeig|zeige|bring|führ|fuehr|mach|natürlich|natuerlich|schon|sicher|mach\s+(ihn|den|mir)|anmachen|den\s+ersten|die\s+erste|option\s*1|nummer\s*1|fahr\s+hin|losfahren|starten|start(?:e)?(?:\s+die\s+nav(?:igation)?)?)(?:\s+bitte)?\s*[.!]?$/iu;
 
 const NAV_INTENT =
   /\b(zeig(?:e| mir)?|bring(?: mich)?|führ(?: mich)?|fuehr(?: mich)?|navigier|navigation|kompass|bahnsteig|hin|dort|dahin|komm|anmachen|nehmen\s+wir)\b/iu;
@@ -43,6 +43,17 @@ function nameMatchesOffer(text: string, offer: PendingNavOffer): boolean {
   if (tokens.some((tok) => t.includes(tok))) return true;
   const first = tokens[0];
   if (first && first.length >= 4 && t.includes(first)) return true;
+  try {
+    const { fuzzyResolveCityName } = require('./fuzzyCityResolve') as {
+      fuzzyResolveCityName: (s: string) => string | null;
+    };
+    for (const tok of t.split(/\s+/).filter((w) => w.length >= 5)) {
+      const city = fuzzyResolveCityName(tok);
+      if (city && name.includes(city.toLowerCase())) return true;
+    }
+  } catch {
+    /* soft */
+  }
   return false;
 }
 

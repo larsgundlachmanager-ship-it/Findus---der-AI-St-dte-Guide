@@ -1,9 +1,11 @@
 /**
- * researchBudgetSec — Hybrid: Code-Floor + LLM ±2 s (RFC v2.1).
+ * researchBudgetSec — Hybrid: Pace-Heuristik + Code-Floor + LLM (Autonomy Reboot).
+ * Cap 22 s für heavy; Call-3 bleibt Fallback, nicht Standard.
  */
 
 import type { ManagerPace } from '../../router/types';
 import { clampPace } from '../../router/paceBudget';
+import { resolvePaceAwareResearchBudgetSec } from './bridgePace';
 
 export type ResearchBudgetInput = {
   lane?: string | null;
@@ -11,6 +13,9 @@ export type ResearchBudgetInput = {
   needsResearch?: string | null;
   blueprintId?: string | null;
   llmResearchBudgetSec?: number | null;
+  userText?: string | null;
+  execution?: string | null;
+  jobHint?: string | null;
 };
 
 export type ResearchBudgetResult = {
@@ -61,16 +66,25 @@ function paceFromSec(sec: number): ManagerPace {
 export function resolveResearchBudget(
   opts: ResearchBudgetInput,
 ): ResearchBudgetResult {
-  const baseSec = baseSecFromTable(opts);
+  const tableBase = baseSecFromTable(opts);
+  const paced = resolvePaceAwareResearchBudgetSec({
+    userText: opts.userText || '',
+    execution: opts.execution,
+    lane: opts.lane,
+    jobHint: opts.jobHint,
+    llmSec: opts.llmResearchBudgetSec,
+    codeFloorSec: tableBase,
+  });
+  const baseSec = Math.max(tableBase, Math.min(paced, 22));
   const llm =
     typeof opts.llmResearchBudgetSec === 'number' &&
     Number.isFinite(opts.llmResearchBudgetSec)
       ? Math.round(opts.llmResearchBudgetSec)
       : baseSec;
-  const delta = Math.max(-2, Math.min(2, llm - baseSec));
-  const finalSec = Math.max(0, Math.min(12, baseSec + delta));
+  const delta = Math.max(-3, Math.min(3, llm - baseSec));
+  const finalSec = Math.max(0, Math.min(22, baseSec + delta));
   const bridgeTargetWords = Math.round(
-    Math.max(12, Math.min(48, 8 + finalSec * 2.5)),
+    Math.max(12, Math.min(64, 8 + finalSec * 2.5)),
   );
   const pace = paceFromSec(finalSec);
   const fastDeadlineMs = Math.max(1500, finalSec * 1000);

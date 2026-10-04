@@ -1,9 +1,10 @@
 /**
- * Offline-Basiskarte: Ozean-Hintergrund + Weltpaket als ShapeSources.
+ * Offline-Basiskarte: Land-Hintergrund ab Frame 0 + Weltpaket als ShapeSources.
  * Stadt-Extract liegt darüber; keine HTTP-Kacheln.
+ * Kein Ozean-First (sonst Kaltstart „schwarz → hell“ auf langsamen Geräten).
  */
 
-import { HOME_MAP_OCEAN } from './homeMapStyle';
+import { HOME_MAP_BG } from './homeMapStyle';
 
 export const OFFLINE_HOME_MAP_STYLE = {
   version: 8,
@@ -14,7 +15,7 @@ export const OFFLINE_HOME_MAP_STYLE = {
     {
       id: 'background',
       type: 'background',
-      paint: { 'background-color': HOME_MAP_OCEAN },
+      paint: { 'background-color': HOME_MAP_BG },
     },
   ],
 } as const;

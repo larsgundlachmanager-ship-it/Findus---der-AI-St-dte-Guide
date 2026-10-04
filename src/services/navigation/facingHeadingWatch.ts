@@ -4,9 +4,10 @@
  * Android: natives TYPE_ROTATION_VECTOR wie Google Maps
  * (Display-Remap + True-North-Deklination). Kein Magnet-Snap.
  * iOS / Fallback: DeviceMotion, sonst Gyro+Mag.
+ * Hintergrund: Sensoren pausieren (AppState), Resume ohne Neu-Desire.
  */
 
-import { Platform } from 'react-native';
+import { AppState, Platform, type NativeEventSubscription } from 'react-native';
 import {
   Accelerometer,
   DeviceMotion,
@@ -22,6 +23,8 @@ import {
 import { noteFacingSensorHeading } from './liveDeviceHeading';
 import {
   isNativeMapCompassActive,
+  pauseNativeMapCompassForBackground,
+  resumeNativeMapCompassFromBackground,
   startNativeMapCompass,
   stopNativeMapCompass,
 } from './nativeMapCompass';
@@ -39,6 +42,11 @@ let lastGyro: { x: number; y: number; z: number } | null = null;
 let lastGyroAt = 0;
 let fusedDeg: number | null = null;
 let burstSub: { remove: () => void } | null = null;
+/** Watch einmalig - Native zuerst, sonst DeviceMotion/Gyro+Mag. */
+let started = false;
+let lastMotionAt = 0;
+let backgroundPaused = false;
+let appStateSub: NativeEventSubscription | null = null;
 
 function noteBurstFromAccel(x: number, y: number, z: number): void {
   const mag = Math.sqrt(x * x + y * y + z * z);
@@ -152,13 +160,68 @@ function stopFallbackSensors(): void {
   lastGyroAt = 0;
 }
 
+function pauseFallbackSensorsOnly(): void {
+  motionSub?.remove();
+  motionSub = null;
+  stopFallbackSensors();
+  stopMotionBurstWatch();
+}
+
+async function restartAfterBackground(): Promise<void> {
+  await resumeNativeMapCompassFromBackground();
+  if (isNativeMapCompassActive()) return;
+  try {
+    DeviceMotion.setUpdateInterval(MOTION_INTERVAL_MS);
+    motionSub = DeviceMotion.addListener((m) => {
+      const rot = m.rotation;
+      if (!rot || !Number.isFinite(rot.alpha)) return;
+      const orient =
+        typeof m.orientation === 'number' && Number.isFinite(m.orientation)
+          ? m.orientation
+          : 0;
+      pushRotationVector(rot.alpha, orient);
+    });
+    setTimeout(() => {
+      if (isNativeMapCompassActive()) return;
+      if (Date.now() - lastMotionAt > 700) {
+        void startFallbackSensors();
+      }
+    }, 800);
+  } catch {
+    await startFallbackSensors();
+  }
+}
+
+function ensureFacingAppStatePause(): void {
+  if (appStateSub) return;
+  appStateSub = AppState.addEventListener('change', (next) => {
+    if (next === 'background' || next === 'inactive') {
+      if (!started || backgroundPaused) return;
+      backgroundPaused = true;
+      void pauseNativeMapCompassForBackground();
+      pauseFallbackSensorsOnly();
+      return;
+    }
+    if (next === 'active' && backgroundPaused) {
+      backgroundPaused = false;
+      if (!started) return;
+      void restartAfterBackground();
+    }
+  });
+}
+
 export async function startFacingHeadingWatch(): Promise<boolean> {
   if (started) return true;
   started = true;
+  ensureFacingAppStatePause();
+  if (AppState.currentState !== 'active') {
+    backgroundPaused = true;
+    return true;
+  }
   if (Platform.OS === 'android' || Platform.OS === 'ios') {
     const native = await startNativeMapCompass();
     if (native) {
-      void startMotionBurstWatch();
+      // Kein Accel-Burst parallel zum Native-Kompass (Session-Last / 20 ms).
       return true;
     }
   }
@@ -189,6 +252,7 @@ export async function startFacingHeadingWatch(): Promise<boolean> {
 
 export function stopFacingHeadingWatch(): void {
   started = false;
+  backgroundPaused = false;
   stopMotionBurstWatch();
   void stopNativeMapCompass();
   motionSub?.remove();

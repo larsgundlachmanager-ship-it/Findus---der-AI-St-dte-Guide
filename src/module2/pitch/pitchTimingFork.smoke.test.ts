@@ -60,11 +60,56 @@ assert.ok(
   ),
 );
 assert.ok(pitchTimingNowActions(opt).some((a) => a.type === 'START_NAVIGATION'));
-assert.ok(/Timeline|Bescheid|los/i.test(pitchTimingLaterSpeech(opt.name)));
+assert.ok(/eingeplant|Tisch|vorbereiten/i.test(pitchTimingLaterSpeech(opt.name)));
 
 const dining = pitchDiningForkActions(opt);
-assert.ok(dining.some((a) => a.type === 'START_NAVIGATION' && /Route/i.test(a.label)));
-assert.ok(dining.some((a) => a.type === 'OPEN_URL' && /reservier|Speisekarte/i.test(a.label)));
-assert.ok(/Route|Tisch|reserv/i.test(pitchDiningForkSpeech(opt.name)));
+assert.ok(dining.some((a) => a.type === 'START_NAVIGATION' && /Jetzt/i.test(a.label)));
+assert.ok(
+  dining.some(
+    (a) =>
+      a.type === 'SET_DEPARTURE_REMINDER' &&
+      (a.payload as { pitchTiming?: string }).pitchTiming === 'later',
+  ),
+);
+assert.ok(/jetzt|einplanen|Tisch|Zeitpunkt/i.test(pitchDiningForkSpeech(opt.name)));
+
+assert.equal(
+  resolvePitchTimingMode({
+    userText: 'morgen lecker Pannfisch essen',
+    pitchKind: 'food',
+  }),
+  'dining_fork',
+);
+
+assert.equal(
+  resolvePitchTimingMode({
+    visitAtMs: Date.now() + 3 * 60 * 60_000,
+    userText: 'Olaf der Flipper heute Abend',
+    pitchKind: 'event',
+  }),
+  'later',
+);
+
+// Freitagabend → einplanen, kein Sofort-„Jetzt hin?“
+{
+  const fri = new Date();
+  fri.setDate(fri.getDate() + ((5 - fri.getDay() + 7) % 7 || 7));
+  fri.setHours(19, 0, 0, 0);
+  assert.equal(
+    resolvePitchTimingMode({
+      visitAtMs: fri.getTime(),
+      userText: 'Freitagabend essen gehen',
+      pitchKind: 'food',
+    }),
+    'later',
+  );
+  assert.equal(
+    resolvePitchTimingMode({
+      userText: 'Freitagabend essen gehen',
+      pitchKind: 'food',
+    }),
+    'later',
+  );
+}
 
 console.log('pitchTimingFork.smoke: ok');

@@ -1,0 +1,15 @@
+---
+description: Nacht Live-QA auf dem Handy — Fragen stellen, Screenshots, Fixes, Publish ohne Extra-Freigabe.
+alwaysApply: true
+---
+
+# Findus — Nacht Live-QA ohne Bestätigung
+
+Wenn der User eine Live-QA / 100-Fragen / Durchtest auf dem Handy beauftragt:
+
+1. Sofort Ask-Server, `adb reverse`, Tippfeld/Deep-Link/`findus://ask`, Screenshots, UI-Dump, Speech/Stichpunkte/Buttons prüfen — **nur auf dem QA-Handy** (`FINDUS_QA_SERIAL` / `scripts/deviceQa/_device_ids.py`), nie auf dem Nothing (siehe `findus-device-routing.mdc`).
+2. Bei FAIL: direkt fixen (Owner-Gold / Code), `gold:publish` / Pack-Upload, Retest (max. 4 Versuche).
+3. **Keine** Rückfrage pro Frage, kein Warten auf „darf ich tippen?“.
+4. Smart-Mode für Device-QA-Scripts (`scripts/deviceQa/*`, adb ask) ist vorab erlaubt — bei Block Approval-Retry.
+
+Git-Commit/Push nur auf explizite Anfrage.

@@ -1,0 +1,823 @@
+# bike log start 2026-09-12T13:24:36.790463+00:00 serial=ce12171cccf9c0810c
+--------- beginning of main
+--------- beginning of system
+09-12 15:24:36.712  3649 10304 W ActivityManager: Slow operation: 55ms so far, now at startProcess: returned from zygote!
+09-12 15:24:36.713  3649 10304 W ActivityManager: Slow operation: 55ms so far, now at startProcess: done updating battery stats
+09-12 15:24:36.713  3649 10304 W ActivityManager: Slow operation: 56ms so far, now at startProcess: building log message
+09-12 15:24:36.713  3649 10304 I ActivityManager: Start proc 4262:com.samsung.SMT/1000 for service com.samsung.SMT/.SamsungTTSService
+09-12 15:24:36.713  3649 10304 W ActivityManager: Slow operation: 56ms so far, now at startProcess: starting to update pids map
+09-12 15:24:36.713  3649 10304 W ActivityManager: Slow operation: 56ms so far, now at startProcess: done updating pids map
+09-12 15:24:36.713  3649 10304 W ActivityManager: Slow operation: 56ms so far, now at startProcess: done starting proc!
+09-12 15:24:36.784  3649 10304 I ActivityManager: DSS on for com.samsung.SMT and scale is 1.0
+09-12 15:24:37.102  3649  5016 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process0
+09-12 15:24:37.174  3649  5016 W ActivityManager: Slow operation: 73ms so far, now at startProcess: returned from zygote!
+09-12 15:24:37.175  3649  5016 W ActivityManager: Slow operation: 74ms so far, now at startProcess: done updating battery stats
+09-12 15:24:37.175  3649  5016 W ActivityManager: Slow operation: 74ms so far, now at startProcess: building log message
+09-12 15:24:37.175  3649  5016 I ActivityManager: Start proc 4334:com.android.chrome:sandboxed_process0/u0i72 for webview_service com.apalon.weatherlive.free/org.chromium.content.app.SandboxedProcessService0
+09-12 15:24:37.175  3649  5016 W ActivityManager: Slow operation: 74ms so far, now at startProcess: starting to update pids map
+09-12 15:24:37.175  3649  5016 W ActivityManager: Slow operation: 74ms so far, now at startProcess: done updating pids map
+09-12 15:24:37.175  3649  5016 W ActivityManager: Slow operation: 75ms so far, now at startProcess: done starting proc!
+09-12 15:24:37.368  3649  5016 W ActivityManager: Slow operation: 97ms so far, now at getContentProviderImpl: incProviderCountLocked
+09-12 15:24:37.369  3649  5016 W ActivityManager: Slow operation: 97ms so far, now at getContentProviderImpl: before updateLruProcess
+09-12 15:24:37.369  3649  5016 W ActivityManager: Slow operation: 98ms so far, now at getContentProviderImpl: after updateLruProcess
+09-12 15:24:37.369  3649  5016 W ActivityManager: Slow operation: 98ms so far, now at getContentProviderImpl: before updateOomAdj
+09-12 15:24:37.369  3649  5016 W ActivityManager: Slow operation: 98ms so far, now at getContentProviderImpl: after updateOomAdj
+09-12 15:24:37.381  3649  5016 W ActivityManager: Slow operation: 110ms so far, now at getContentProviderImpl: done!
+09-12 15:24:37.389  3649  5036 I ActivityManager: DSS on for com.apalon.weatherlive.free and scale is 1.0
+09-12 15:24:38.022  2950  3019 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-12 15:24:38.403  3649  4391 W ActivityManager: Slow operation: 57ms so far, now at startProcess: returned from zygote!
+09-12 15:24:38.403  3649  4391 W ActivityManager: Slow operation: 57ms so far, now at startProcess: done updating battery stats
+09-12 15:24:38.404  3649  4391 W ActivityManager: Slow operation: 57ms so far, now at startProcess: building log message
+09-12 15:24:38.404  3649  4391 I ActivityManager: Start proc 4456:com.android.chrome:webview_service/u0a139 for service com.android.chrome/org.chromium.android_webview.services.ComponentsProviderService
+09-12 15:24:38.404  3649  4391 W ActivityManager: Slow operation: 58ms so far, now at startProcess: starting to update pids map
+09-12 15:24:38.404  3649  4391 W ActivityManager: Slow operation: 58ms so far, now at startProcess: done updating pids map
+09-12 15:24:38.404  3649  4391 W ActivityManager: Slow operation: 59ms so far, now at startProcess: done starting proc!
+09-12 15:24:38.441  3649  5036 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:24:39.665  3649  4391 W ActivityManager: Slow operation: 67ms so far, now at startProcess: returned from zygote!
+09-12 15:24:39.666  3649  4391 W ActivityManager: Slow operation: 67ms so far, now at startProcess: done updating battery stats
+09-12 15:24:39.666  3649  4391 W ActivityManager: Slow operation: 68ms so far, now at startProcess: building log message
+09-12 15:24:39.666  3649  4391 I ActivityManager: Start proc 4558:com.android.vending/u0a46 for service com.android.vending/com.google.android.finsky.billing.iab.InAppBillingService
+09-12 15:24:39.666  3649  4391 W ActivityManager: Slow operation: 68ms so far, now at startProcess: starting to update pids map
+09-12 15:24:39.666  3649  4391 W ActivityManager: Slow operation: 68ms so far, now at startProcess: done updating pids map
+09-12 15:24:39.666  3649  4391 W ActivityManager: Slow operation: 68ms so far, now at startProcess: done starting proc!
+09-12 15:24:39.667  3649 10304 I ActivityManager: Process ACMS.Process (pid 3102) has died: fore SVC (93,1790)
+09-12 15:24:39.671  3649  4391 I ActivityManager: DSS on for com.android.vending and scale is 1.0
+09-12 15:24:40.544  3649 10304 I ActivityManager: Start proc 4602:com.sec.android.app.myfiles/u0a65 for broadcast com.sec.android.app.myfiles/.receiver.MyFilesReceiver
+09-12 15:24:40.558  3649 10304 I ActivityManager: DSS on for com.sec.android.app.myfiles and scale is 1.0
+09-12 15:24:44.406  3649  5042 I ActivityManager: Start proc 4859:com.facebook.appmanager/u0a112 for content provider com.facebook.appmanager/com.facebook.oxygen.appmanager.firstparty.crashreporter.FirstPartyCrashReporterProvider
+09-12 15:24:44.440  3649 10304 I ActivityManager: DSS on for com.facebook.appmanager and scale is 1.0
+09-12 15:24:46.020  3649 10304 E ActivityManager: Activity Manager Crash. UID:10107 PID:3999 TRANS:23
+09-12 15:24:46.020  3649 10304 E ActivityManager: java.lang.IllegalStateException: stableCount < 0: -1
+09-12 15:24:46.020  3649 10304 E ActivityManager: 	at com.android.server.am.ActivityManagerService.refContentProvider(ActivityManagerService.java:15456)
+09-12 15:24:46.020  3649 10304 E ActivityManager: 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:469)
+09-12 15:24:46.020  3649 10304 E ActivityManager: 	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:3869)
+09-12 15:24:46.020  3649 10304 E ActivityManager: 	at android.os.Binder.execTransact(Binder.java:682)
+09-12 15:24:46.027  3649 10304 I ActivityManager: KPU : put [com.samsung.android.securitylogagent] : 0 K
+09-12 15:24:46.028  3649 10304 I ActivityManager: Killing 2989:com.samsung.android.securitylogagent/1000 (adj 906): DHA:empty #25
+09-12 15:24:46.604  3649  4391 I ActivityManager: Start proc 4905:com.android.vending:background/u0a46 for service com.android.vending/com.google.frameworks.client.data.android.server.play.BackgroundProcessEndpointService
+09-12 15:24:46.648  3649  4092 I ActivityManager: DSS on for com.android.vending and scale is 1.0
+09-12 15:24:47.596  3649  4092 I ActivityManager: KPU : put [com.samsung.android.da.daagent] : 5918 K
+09-12 15:24:47.596  3649  4092 I ActivityManager: Killing 1955:com.samsung.android.da.daagent/1000 (adj 906): DHA:empty #25
+09-12 15:24:47.598  3649  4092 I ActivityManager: KPU : put [com.samsung.android.bbc.bbcagent] : 5322 K
+09-12 15:24:47.599  3649  4092 I ActivityManager: Killing 1936:com.samsung.android.bbc.bbcagent/1000 (adj 906): DHA:empty #25
+09-12 15:24:47.599  3649  4092 I ActivityManager: KPU : put [com.samsung.aasaservice] : 4383 K
+09-12 15:24:47.600  3649  4092 I ActivityManager: Killing 1871:com.samsung.aasaservice/1000 (adj 906): DHA:empty #25
+09-12 15:24:48.631  3649  3659 I ActivityManager: KPU : put [com.samsung.android.stickercenter] : 4335 K
+09-12 15:24:48.632  3649  3659 I ActivityManager: Killing 2110:com.samsung.android.stickercenter/1000 (adj 906): DHA:empty #25
+09-12 15:24:49.118  3649  3659 W ActivityManager: Scheduling restart of crashed service com.samsung.android.stickercenter/.StickerCenterService in 1000ms
+09-12 15:24:50.145  3649  3672 I ActivityManager: Start proc 5020:com.samsung.android.stickercenter/1000 for service com.samsung.android.stickercenter/.StickerCenterService
+09-12 15:24:50.182  3649  5036 I ActivityManager: DSS on for com.samsung.android.stickercenter and scale is 1.0
+09-12 15:24:50.291  3649  5016 I ActivityManager: KPU : put [com.samsung.android.provider.stickerprovider] : 5433 K
+09-12 15:24:50.291  3649  5016 I ActivityManager: Killing 2065:com.samsung.android.provider.stickerprovider/u0a229 (adj 906): DHA:empty #25
+09-12 15:24:50.341  3649  3672 I ActivityManager: Start proc 5040:com.sec.android.provider.badge/u0a3 for broadcast com.sec.android.provider.badge/.BadgeCountReceiver
+09-12 15:24:50.380  3649  4092 I ActivityManager: DSS on for com.sec.android.provider.badge and scale is 1.0
+09-12 15:24:50.530  3649  4092 I ActivityManager: KPU : put [com.samsung.knox.securefolder] : 13295 K
+09-12 15:24:50.530  3649  4092 I ActivityManager: Killing 2124:com.samsung.knox.securefolder/u0a66 (adj 906): DHA:empty #25
+09-12 15:24:51.601  3649  3649 I ActivityManager: Start proc 5077:com.google.android.apps.photos/u0a151 for service com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.MediaMonitorJobSchedulerService
+09-12 15:24:51.674  3649  5016 I ActivityManager: DSS on for com.google.android.apps.photos and scale is 1.0
+09-12 15:24:55.458  3649  3672 I ActivityManager: Waited long enough for: ServiceRecord{df0553a u0 com.android.providers.media/.MediaScannerService}
+09-12 15:24:56.456  3649 10304 W ActivityManager: Slow operation: 65ms so far, now at startProcess: returned from zygote!
+09-12 15:24:56.456  3649 10304 W ActivityManager: Slow operation: 65ms so far, now at startProcess: done updating battery stats
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 66ms so far, now at startProcess: building log message
+09-12 15:24:56.457  3649 10304 I ActivityManager: Start proc 5199:com.facebook.system/u0a17 for content provider com.facebook.system/com.facebook.oxygen.installer.api.AppManagerApiProvider
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 66ms so far, now at startProcess: starting to update pids map
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 66ms so far, now at startProcess: done updating pids map
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 67ms so far, now at startProcess: done starting proc!
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 68ms so far, now at getContentProviderImpl: after start process
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 68ms so far, now at getContentProviderImpl: updating data structures
+09-12 15:24:56.457  3649 10304 W ActivityManager: Slow operation: 68ms so far, now at getContentProviderImpl: done!
+09-12 15:24:56.497  3649  5042 I ActivityManager: DSS on for com.facebook.system and scale is 1.0
+09-12 15:24:58.248  3890  5264 W chromium: [WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+09-12 15:24:58.344  4334  4559 W chromium: [WARNING:runtime_features.cc(550)] Fenced frames cannot be enabled in this configuration. Use --enable-features=FencedFrames instead.
+09-12 15:24:58.352  4334  4559 W chromium: [WARNING:runtime_features.cc(575)] Topics cannot be enabled in this configuration. Use --enable-features=BrowsingTopics in addition.
+09-12 15:24:58.352  4334  4559 W chromium: [WARNING:runtime_features.cc(596)] SharedStorage cannot be enabled in this configuration. Use --enable-features=SharedStorageAPI in addition.
+09-12 15:25:06.125  3649  5042 I ActivityManager: KPU : put [com.samsung.android.app.assistantmenu] : 5721 K
+09-12 15:25:06.125  3649  5042 I ActivityManager: Killing 1995:com.samsung.android.app.assistantmenu/1000 (adj 906): DHA:empty #25
+09-12 15:25:06.125  3649  5042 I ActivityManager: KPU : put [com.enhance.gameservice] : 10070 K
+09-12 15:25:06.125  3649  5042 I ActivityManager: Killing 1677:com.enhance.gameservice/u0a114 (adj 906): DHA:empty #25
+09-12 15:25:06.126  3649  5042 I ActivityManager: KPU : put [com.samsung.android.sm.provider] : 7292 K
+09-12 15:25:06.126  3649  5042 I ActivityManager: Killing 32657:com.samsung.android.sm.provider/1000 (adj 906): DHA:empty #25
+09-12 15:25:10.157  2950  3019 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-12 15:25:14.869  2950  3019 I ReactNativeJS: '[auth] oauth redirectTo=', 'findus://auth/callback'
+09-12 15:25:15.044  3649  4415 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x50800000 cmp=ComponentInfo{com.android.chrome/com.google.android.apps.chrome.IntentDispatcher}} from uid 10000
+09-12 15:25:15.100  3649  4415 I ActivityManager: Start proc 5378:com.android.chrome/u0a139 for activity com.android.chrome/com.google.android.apps.chrome.IntentDispatcher
+09-12 15:25:15.120  3649  4415 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:25:15.244  2950  3019 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-12 15:25:15.335  3649  5016 I ActivityManager: Start proc 5408:com.sec.android.app.chromecustomizations/u0a95 for content provider com.sec.android.app.chromecustomizations/com.sec.samsung.android.chromecustomizations.chromecustomizationprovider
+09-12 15:25:15.341  3649  4415 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x5a080000 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity}} from uid 10139
+09-12 15:25:15.360  3649  4415 I ActivityManager: DSS on for com.sec.android.app.chromecustomizations and scale is 1.0
+09-12 15:25:15.725  3649  5016 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process0
+09-12 15:25:15.748  3649  5016 I ActivityManager: Start proc 5441:com.android.chrome:sandboxed_process0/u0i73 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService0
+09-12 15:25:15.808  3649  4415 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:25:15.899  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity: +530ms (total +812ms)
+09-12 15:25:16.108  3649  4415 I ActivityManager: Start proc 5489:com.android.chrome:privileged_process0/u0a139 for service com.android.chrome/org.chromium.content.app.PrivilegedProcessService0
+09-12 15:25:16.139  3649  4092 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:25:16.315  5489  5509 W chromium: [WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+09-12 15:25:16.422  5378  5475 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:16.695  5378  5484 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:16.705  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:17.015  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:17.048  5378  5378 E chromium: [ERROR:account_info_fetcher.cc(62)] OnGetTokenFailure: Invalid credentials (credentials rejected by server).
+09-12 15:25:17.049  5378  5378 W chromium: [WARNING:account_fetcher_service.cc(416)] Failed to get UserInfo for 112518243811399337088
+09-12 15:25:17.126  3649  8589 I ActivityManager: KPU : put [com.sec.android.widgetapp.samsungapps] : 4779 K
+09-12 15:25:17.126  3649  8589 I ActivityManager: Killing 2144:com.sec.android.widgetapp.samsungapps/u0a22 (adj 906): DHA:empty #25
+09-12 15:25:17.126  3649  8589 I ActivityManager: KPU : put [com.samsung.android.knox.containeragent] : 7648 K
+09-12 15:25:17.126  3649  8589 I ActivityManager: Killing 2037:com.samsung.android.knox.containeragent/1250 (adj 906): DHA:empty #25
+09-12 15:25:17.676  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:17.842  5378  5474 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:17.938  3649 10304 I ActivityManager: Start proc 5571:com.android.providers.partnerbookmarks/u0a136 for content provider com.android.providers.partnerbookmarks/.PartnerBookmarksProvider
+09-12 15:25:17.972  3649  8589 I ActivityManager: DSS on for com.android.providers.partnerbookmarks and scale is 1.0
+09-12 15:25:18.121  5378  5474 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:18.227  3649 10304 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process1
+09-12 15:25:18.236  5378  5474 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:18.259  3649 10304 I ActivityManager: Start proc 5590:com.android.chrome:sandboxed_process1/u0i74 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService1
+09-12 15:25:18.269  3649 10304 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process2
+09-12 15:25:18.317  3649 10304 I ActivityManager: Start proc 5603:com.android.chrome:sandboxed_process2/u0i75 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService2
+09-12 15:25:18.318  3649 10304 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done starting proc!
+09-12 15:25:18.346  3649  5042 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:25:18.627  3649  5042 I ActivityManager: Killing 5590:com.android.chrome:sandboxed_process1/u0a139i74 (adj 0): isolated not needed
+09-12 15:25:18.687  5378  5378 W chromium: [WARNING:compositor_view.cc(366)] Child process died (type=6) pid=5590)
+09-12 15:25:18.702  3649 10304 I ActivityManager: Killing 5603:com.android.chrome:sandboxed_process2/u0a139i75 (adj 0): isolated not needed
+09-12 15:25:18.725  5378  5378 W chromium: [WARNING:compositor_view.cc(366)] Child process died (type=6) pid=5603)
+09-12 15:25:18.778  3649  4415 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process3
+09-12 15:25:18.804  3649  4415 I ActivityManager: Start proc 5632:com.android.chrome:sandboxed_process3/u0i76 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService3
+09-12 15:25:18.830  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:18.838  3649  4415 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:25:19.023  3649  4415 I ActivityManager: KPU : put [com.sec.android.app.sbrowser] : 35696 K
+09-12 15:25:19.024  3649  4415 I ActivityManager: Killing 3550:com.sec.android.app.sbrowser/u0a168 (adj 906): DHA:empty #25
+09-12 15:25:19.294  5378  5378 W chromium: [WARNING:capture_device_ranking.h(255)] Can't initialize the value of media.audio_input.user_preference_ranking because media.default_audio_capture_device isn't registered or is empty
+09-12 15:25:19.294  5378  5378 W chromium: [WARNING:capture_device_ranking.h(255)] Can't initialize the value of media.video_input.user_preference_ranking because media.default_video_capture_Device isn't registered or is empty
+09-12 15:25:19.451  5378  5378 W chromium: [WARNING:capture_device_ranking.h(255)] Can't initialize the value of media.audio_input.user_preference_ranking because media.default_audio_capture_device isn't registered or is empty
+09-12 15:25:19.452  5378  5378 W chromium: [WARNING:capture_device_ranking.h(255)] Can't initialize the value of media.video_input.user_preference_ranking because media.default_video_capture_Device isn't registered or is empty
+09-12 15:25:19.547  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:19.790  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:22.051  5378  5378 W chromium: [WARNING:instance_id_android.cc(101)] Non-zero TTL requested for InstanceID token, while TTLs are not supported by Android Firebase IID API.
+09-12 15:25:22.052  5378  5483 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:22.236  5378  5475 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:25.383  5378  5378 E chromium: [ERROR:account_info_fetcher.cc(62)] OnGetTokenFailure: Invalid credentials (credentials rejected by server).
+09-12 15:25:25.383  5378  5378 W chromium: [WARNING:account_fetcher_service.cc(416)] Failed to get UserInfo for 112518243811399337088
+09-12 15:25:26.254  5378  5474 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:25:29.560  3649 10453 I ActivityManager: START u0 {act=com.google.android.gms.ui.UNPACKING_REDIRECT typ=null flg=0x0 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.common.UnpackingRedirectActivity}} from uid 10139
+09-12 15:25:29.621  3649  8589 I ActivityManager: Start proc 5685:com.google.android.gms.ui/u0a24 for activity com.google.android.gms/.auth.uiflows.common.UnpackingRedirectActivity
+09-12 15:25:29.657  3649  8589 I ActivityManager: DSS on for com.google.android.gms and scale is 1.0
+09-12 15:25:30.163  3649 10453 I ActivityManager: START u0 {act=null typ=null flg=0x2000000 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.common.FilteringRedirectActivity}} from uid 10024
+09-12 15:25:30.284  3649  4415 I ActivityManager: START u0 {act=null typ=null flg=0x0 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.controller.ControllerLauncherActivity}} from uid 10024
+09-12 15:25:30.507  3649  3681 I ActivityManager: Displayed com.google.android.gms/.auth.uiflows.controller.ControllerLauncherActivity: +164ms (total +900ms)
+09-12 15:25:30.518  3649  4415 I ActivityManager: START u0 {act=null typ=null flg=0x2000000 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.minutemaid.MinuteMaidActivity}} from uid 10024
+09-12 15:25:30.913  3649 10453 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process0
+09-12 15:25:30.935  3649 10453 I ActivityManager: Start proc 5751:com.android.chrome:sandboxed_process0/u0i77 for webview_service com.google.android.gms/org.chromium.content.app.SandboxedProcessService0
+09-12 15:25:30.970  3649  4415 I ActivityManager: DSS on for com.google.android.gms and scale is 1.0
+09-12 15:25:31.373  3649  3681 I ActivityManager: Displayed com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity: +836ms
+09-12 15:25:31.594  5685  5801 W chromium: [WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+09-12 15:25:31.676  5751  5789 W chromium: [WARNING:runtime_features.cc(550)] Fenced frames cannot be enabled in this configuration. Use --enable-features=FencedFrames instead.
+09-12 15:25:31.676  5751  5789 W chromium: [WARNING:runtime_features.cc(575)] Topics cannot be enabled in this configuration. Use --enable-features=BrowsingTopics in addition.
+09-12 15:25:31.676  5751  5789 W chromium: [WARNING:runtime_features.cc(596)] SharedStorage cannot be enabled in this configuration. Use --enable-features=SharedStorageAPI in addition.
+09-12 15:25:31.692  3649  3672 I ActivityManager: KPU : put [com.samsung.android.lool] : 7649 K
+09-12 15:25:31.692  3649  3672 I ActivityManager: Killing 1626:com.samsung.android.lool/1000 (adj 906): DHA:empty #25
+09-12 15:25:31.693  3649  3672 I ActivityManager: KPU : put [com.sec.android.app.soundalive] : 5562 K
+09-12 15:25:31.693  3649  3672 I ActivityManager: Killing 2595:com.sec.android.app.soundalive/u0a74 (adj 906): DHA:empty #25
+09-12 15:25:31.848  3649 10453 I ActivityManager: Killing 5632:com.android.chrome:sandboxed_process3/u0a139i76 (adj 0): isolated not needed
+09-12 15:25:31.893  3649  5016 I ActivityManager: Killing 5441:com.android.chrome:sandboxed_process0/u0a139i73 (adj 0): isolated not needed
+09-12 15:25:32.282  5751  5812 E chromium: [ERROR:tile_manager.cc(999)] WARNING: tile memory limits exceeded, some content may not draw
+09-12 15:25:32.284  5751  5812 E chromium: [ERROR:tile_manager.cc(999)] WARNING: tile memory limits exceeded, some content may not draw
+09-12 15:25:36.523  3649  3679 W ActivityManager: Slow operation: 57ms so far, now at startProcess: returned from zygote!
+09-12 15:25:36.523  3649  3679 W ActivityManager: Slow operation: 57ms so far, now at startProcess: done updating battery stats
+09-12 15:25:36.523  3649  3679 W ActivityManager: Slow operation: 57ms so far, now at startProcess: building log message
+09-12 15:25:36.523  3649  3679 I ActivityManager: Start proc 5836:com.samsung.android.samsungpassautofill/u0a242 for service com.samsung.android.samsungpassautofill/.AutofillServiceMain
+09-12 15:25:36.523  3649  3679 W ActivityManager: Slow operation: 57ms so far, now at startProcess: starting to update pids map
+09-12 15:25:36.523  3649  3679 W ActivityManager: Slow operation: 57ms so far, now at startProcess: done updating pids map
+09-12 15:25:36.523  3649  3679 W ActivityManager: Slow operation: 58ms so far, now at startProcess: done starting proc!
+09-12 15:25:36.566  3649  5016 I ActivityManager: DSS on for com.samsung.android.samsungpassautofill and scale is 1.0
+09-12 15:25:36.780  3649  3659 I ActivityManager: Start proc 5857:com.samsung.android.authfw/1201 for service com.samsung.android.authfw/.pass.PassService
+09-12 15:25:36.827  3649  5016 I ActivityManager: DSS on for com.samsung.android.authfw and scale is 1.0
+09-12 15:25:37.341  3649  3659 I ActivityManager: Start proc 5914:com.samsung.android.samsungpass/u0a58 for content provider com.samsung.android.samsungpass/.websignin.signindb.EasySigninProvider
+09-12 15:25:37.347  3649  5042 I ActivityManager: DSS on for com.samsung.android.samsungpass and scale is 1.0
+09-12 15:25:38.065  3649  3679 I ActivityManager: KPU : put [com.samsung.android.sm.devicesecurity] : 14305 K
+09-12 15:25:38.065  3649  3679 I ActivityManager: Killing 313:com.samsung.android.sm.devicesecurity/5012 (adj 906): DHA:empty #25
+09-12 15:25:38.139  3649  9890 I ActivityManager: KPU : put [com.samsung.android.scloud] : 28454 K
+09-12 15:25:38.139  3649  9890 I ActivityManager: Killing 3133:com.samsung.android.scloud/5009 (adj 906): DHA:empty #25
+09-12 15:25:38.139  3649  9890 I ActivityManager: KPU : put [com.osp.app.signin] : 5931 K
+09-12 15:25:38.140  3649  9890 I ActivityManager: Killing 3459:com.osp.app.signin/u0a59 (adj 906): DHA:empty #25
+09-12 15:25:38.140  3649  9890 I ActivityManager: KPU : put [com.samsung.android.mobileservice] : 37366 K
+09-12 15:25:38.140  3649  9890 I ActivityManager: Killing 3507:com.samsung.android.mobileservice/u0a234 (adj 906): DHA:empty #25
+09-12 15:25:38.249  3649  3660 W ActivityManager: Exception when unbinding service com.osp.app.signin/com.msc.sa.service.RequestService
+09-12 15:25:38.249  3649  3660 W ActivityManager: android.os.DeadObjectException
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at android.os.BinderProxy.transactNative(Native Method)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at android.os.BinderProxy.transact(Binder.java:763)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at android.app.IApplicationThread$Stub$Proxy.scheduleUnbindService(IApplicationThread.java:1575)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at com.android.server.am.ActiveServices.removeConnectionLocked(ActiveServices.java:2928)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at com.android.server.am.ActiveServices.killServicesLocked(ActiveServices.java:3338)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at com.android.server.am.ActivityManagerService.cleanUpApplicationRecordLocked(ActivityManagerService.java:22399)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at com.android.server.am.ActivityManagerService.handleAppDiedLocked(ActivityManagerService.java:7070)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at com.android.server.am.ActivityManagerService.appDiedLocked(ActivityManagerService.java:7329)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at com.android.server.am.ActivityManagerService$AppDeathRecipient.binderDied(ActivityManagerService.java:2032)
+09-12 15:25:38.249  3649  3660 W ActivityManager: 	at android.os.BinderProxy.sendDeathNotice(Binder.java:843)
+09-12 15:25:38.295  3649 10304 W ActivityManager: Scheduling restart of crashed service com.samsung.android.mobileservice/com.samsung.android.samsungaccount.mobileservice.RequestService in 1000ms
+09-12 15:25:40.349  3649  3660 W ActivityManager: Unable to start service Intent { act=com.google.firebase.MESSAGING_EVENT pkg=com.samsung.android.samsungpass } U=0: not found
+09-12 15:25:44.488  3649  4154 I ActivityManager: KPU : put [com.samsung.android.stickercenter] : 4226 K
+09-12 15:25:44.488  3649  4154 I ActivityManager: Killing 5020:com.samsung.android.stickercenter/1000 (adj 906): DHA:empty #25
+09-12 15:25:45.169  2950  3019 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 465 neue Mappings → Master (4319 Textquellen)
+09-12 15:25:45.506  3649  3672 I ActivityManager: KPU : put [com.sec.android.app.myfiles] : 12221 K
+09-12 15:25:45.508  3649  3672 I ActivityManager: Killing 4602:com.sec.android.app.myfiles/u0a65 (adj 906): DHA:empty #25
+09-12 15:25:45.509  3649  3672 I ActivityManager: KPU : put [com.facebook.system] : 5315 K
+09-12 15:25:45.509  3649  3672 I ActivityManager: Killing 5199:com.facebook.system/u0a17 (adj 906): DHA:empty #25
+09-12 15:25:45.509  3649  3672 I ActivityManager: KPU : put [com.sec.android.provider.badge] : 4806 K
+09-12 15:25:45.509  3649  3672 I ActivityManager: Killing 5040:com.sec.android.provider.badge/u0a3 (adj 906): DHA:empty #25
+09-12 15:25:45.736  5685  5685 E chromium: [ERROR:aw_browser_terminator.cc(165)] Renderer process (5751) crash detected (code -1).
+09-12 15:25:45.747  3649  8261 I ActivityManager: Killing 5751:com.android.chrome:sandboxed_process0/u0a24i77 (adj 0): isolated not needed
+09-12 15:25:47.477  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:25:47.477  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:25:48.206  2950  3019 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 91 neu, 0 aktualisiert (4319 Textquellen)
+09-12 15:25:48.963  2950  3019 I ReactNativeJS: '[auth] oauth redirectTo=', 'findus://auth/callback'
+09-12 15:25:49.049  3649  3660 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x50800000 cmp=ComponentInfo{com.android.chrome/com.google.android.apps.chrome.IntentDispatcher}} from uid 10000
+09-12 15:25:49.119  3649 10304 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x5a080000 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity}} from uid 10139
+09-12 15:25:49.226  3649  5016 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process4
+09-12 15:25:49.235  3649  5016 I ActivityManager: Start proc 6015:com.android.chrome:sandboxed_process4/u0i78 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService4
+09-12 15:25:49.276  3649  5016 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:25:49.284  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity: +137ms (total +194ms)
+09-12 15:25:49.719  3649  3660 I ActivityManager: START u0 {act=null typ=null flg=0x0 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.settings.SettingsActivity}} from uid 10139
+09-12 15:25:50.021  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.settings.SettingsActivity: +252ms
+09-12 15:25:50.453  3649  8590 I ActivityManager: Killing 6015:com.android.chrome:sandboxed_process4/u0a139i78 (adj 0): isolated not needed
+09-12 15:25:53.392  3649  8590 I ActivityManager: START u0 {act=android.settings.SYNC_SETTINGS typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.Settings$UserAndAccountDashboardActivity}} from uid 10139
+09-12 15:25:53.442  3649  8590 I ActivityManager: Start proc 6045:com.android.settings/1000 for activity com.android.settings/.Settings$UserAndAccountDashboardActivity
+09-12 15:25:53.463  3649  3660 I ActivityManager: DSS on for com.android.settings and scale is 1.0
+09-12 15:25:54.470  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=1033 extra=com.android.settings
+09-12 15:25:54.470  3649  3681 I ActivityManager: Displayed com.android.settings/.Settings$UserAndAccountDashboardActivity: +1s33ms
+09-12 15:26:00.392  3649  5016 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.SubSettings}} from uid 1000
+09-12 15:26:00.593  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=170 extra=com.android.settings
+09-12 15:26:00.593  3649  3681 I ActivityManager: Displayed com.android.settings/.SubSettings: +170ms
+09-12 15:26:03.346  3649 10304 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.SubSettings}} from uid 1000
+09-12 15:26:03.704  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=339 extra=com.android.settings
+09-12 15:26:03.704  3649  3681 I ActivityManager: Displayed com.android.settings/.SubSettings: +339ms
+09-12 15:26:09.204  3649  3659 I ActivityManager: START u0 {act=android.settings.SYNC_SETTINGS typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.Settings$UserAndAccountDashboardActivity}} from uid 10139
+09-12 15:26:09.377  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=150 extra=com.android.settings
+09-12 15:26:09.377  3649  3681 I ActivityManager: Displayed com.android.settings/.Settings$UserAndAccountDashboardActivity: +150ms
+09-12 15:26:10.936  3649 10453 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.SubSettings}} from uid 1000
+09-12 15:26:11.050  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=91 extra=com.android.settings
+09-12 15:26:11.050  3649  3681 I ActivityManager: Displayed com.android.settings/.SubSettings: +91ms
+09-12 15:26:13.407  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:26:13.407  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:26:14.022  3649  3672 I ActivityManager: KPU : put [com.samsung.android.calendar] : 16269 K
+09-12 15:26:14.022  3649  3672 I ActivityManager: Killing 3163:com.samsung.android.calendar/u0a154 (adj 906): DHA:empty #25
+09-12 15:26:14.826  2950  3019 I ReactNativeJS: '[auth] oauth redirectTo=', 'findus://auth/callback'
+09-12 15:26:14.906  3649 10453 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x50800000 cmp=ComponentInfo{com.android.chrome/com.google.android.apps.chrome.IntentDispatcher}} from uid 10000
+09-12 15:26:14.970  3649  8181 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x5a080000 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity}} from uid 10139
+09-12 15:26:15.078  3649  3660 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process5
+09-12 15:26:15.089  3649  3660 I ActivityManager: Start proc 6129:com.android.chrome:sandboxed_process5/u0i79 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService5
+09-12 15:26:15.135  3649  3660 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:26:15.145  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity: +152ms (total +204ms)
+09-12 15:26:15.667  3649 10304 I ActivityManager: START u0 {act=null typ=null flg=0x0 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.settings.SettingsActivity}} from uid 10139
+09-12 15:26:15.886  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.settings.SettingsActivity: +176ms
+09-12 15:26:16.308  3649 10304 I ActivityManager: Killing 6129:com.android.chrome:sandboxed_process5/u0a139i79 (adj 0): isolated not needed
+09-12 15:26:16.345  5378  5473 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:26:17.984  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:26:17.984  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:26:19.286  2950  3019 I ReactNativeJS: '[auth] oauth redirectTo=', 'findus://auth/callback'
+09-12 15:26:19.349  3649 10453 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x50800000 cmp=ComponentInfo{com.android.chrome/com.google.android.apps.chrome.IntentDispatcher}} from uid 10000
+09-12 15:26:19.407  3649  3660 I ActivityManager: START u0 {act=android.intent.action.VIEW typ=null flg=0x5a080000 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity}} from uid 10139
+09-12 15:26:19.498  3649 10453 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process6
+09-12 15:26:19.506  3649 10453 I ActivityManager: Start proc 6173:com.android.chrome:sandboxed_process6/u0i80 for webview_service com.android.chrome/org.chromium.content.app.SandboxedProcessService6
+09-12 15:26:19.543  3649 10453 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:26:19.547  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabActivity: +113ms (total +167ms)
+09-12 15:26:19.837  3649 10453 I ActivityManager: START u0 {act=null typ=null flg=0x0 cmp=ComponentInfo{com.android.chrome/org.chromium.chrome.browser.settings.SettingsActivity}} from uid 10139
+09-12 15:26:19.982  5378  5474 W chromium: [WARNING:ev_root_ca_metadata.cc(119)] Not implemented
+09-12 15:26:19.987  3649  3681 I ActivityManager: Displayed com.android.chrome/org.chromium.chrome.browser.settings.SettingsActivity: +122ms
+09-12 15:26:20.445  3649 10304 I ActivityManager: Killing 6173:com.android.chrome:sandboxed_process6/u0a139i80 (adj 0): isolated not needed
+09-12 15:26:21.429  3649  3660 I ActivityManager: START u0 {act=android.settings.SYNC_SETTINGS typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.Settings$UserAndAccountDashboardActivity}} from uid 10139
+09-12 15:26:21.697  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=217 extra=com.android.settings
+09-12 15:26:21.697  3649  3681 I ActivityManager: Displayed com.android.settings/.Settings$UserAndAccountDashboardActivity: +217ms
+09-12 15:26:23.493  3649  3659 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.SubSettings}} from uid 1000
+09-12 15:26:23.628  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=103 extra=com.android.settings
+09-12 15:26:23.628  3649  3681 I ActivityManager: Displayed com.android.settings/.SubSettings: +103ms
+09-12 15:26:25.576  3649  3659 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.SubSettings}} from uid 1000
+09-12 15:26:25.825  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=228 extra=com.android.settings
+09-12 15:26:25.825  3649  3681 I ActivityManager: Displayed com.android.settings/.SubSettings: +228ms
+09-12 15:26:34.705  3649 10304 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x0 cmp=ComponentInfo{com.android.settings/com.android.settings.SubSettings}} from uid 1000
+09-12 15:26:34.825  3649  3681 I ActivityManager: Complete : feature=APPL app_id=com.android.server.ssrm value=97 extra=com.android.settings
+09-12 15:26:34.825  3649  3681 I ActivityManager: Displayed com.android.settings/.SubSettings: +97ms
+09-12 15:26:37.026  3649  5012 I ActivityManager: START u0 {act=com.google.android.gms.ui.UNPACKING_REDIRECT typ=null flg=0x0 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.common.UnpackingRedirectActivity}} from uid 1000
+09-12 15:26:37.081  3649  5012 I ActivityManager: START u0 {act=null typ=null flg=0x2000000 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.common.FilteringRedirectActivity}} from uid 10024
+09-12 15:26:37.117  3649  5012 I ActivityManager: START u0 {act=null typ=null flg=0x0 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.uiflows.removeaccount.GetAccountRemovalAllowedActivity}} from uid 10024
+09-12 15:26:37.180  3649 10304 I ActivityManager: START u0 {act=null typ=null flg=0x2000000 cmp=ComponentInfo{com.google.android.gms/com.google.android.gms.auth.login.ConfirmAccountDeletionActivity}} from uid 10024
+09-12 15:26:37.337  3649  3681 I ActivityManager: Displayed com.google.android.gms/.auth.login.ConfirmAccountDeletionActivity: +122ms (total +288ms)
+09-12 15:26:49.243  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:26:49.243  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:27:30.405  2950  3019 I ReactNativeJS: '[auth] magic-link redirectTo=', 'findus://auth/callback'
+09-12 15:27:30.589  3649  3672 I ActivityManager: Start proc 6531:com.samsung.android.mobileservice/u0a234 for broadcast com.samsung.android.mobileservice/com.samsung.android.sdk.smp.SmpReceiver
+09-12 15:27:30.621  3649 10304 I ActivityManager: DSS on for com.samsung.android.mobileservice and scale is 1.0
+09-12 15:27:32.963  3649  3660 I ActivityManager: KPU : put [com.samsung.dcmservice] : 4972 K
+09-12 15:27:32.963  3649  3660 I ActivityManager: Killing 3292:com.samsung.dcmservice/5004 (adj 906): DHA:empty #25
+09-12 15:27:32.996  3649  5016 W ActivityManager: Scheduling restart of crashed service com.samsung.dcmservice/.DCMService in 1000ms
+09-12 15:27:34.038  3649  3672 I ActivityManager: Start proc 6601:com.samsung.dcmservice/5004 for service com.samsung.dcmservice/.DCMService
+09-12 15:27:34.076  3649  3659 I ActivityManager: DSS on for com.samsung.dcmservice and scale is 1.0
+09-12 15:27:34.182  3649  5016 I ActivityManager: KPU : put [com.samsung.enhanceservice] : 5605 K
+09-12 15:27:34.183  3649  5016 I ActivityManager: Killing 3269:com.samsung.enhanceservice/5004 (adj 906): DHA:empty #25
+09-12 15:27:34.213  3649  3659 W ActivityManager: Scheduling restart of crashed service com.samsung.enhanceservice/.EnhanceService in 1000ms
+09-12 15:27:35.247  3649  3672 I ActivityManager: Start proc 6619:com.samsung.enhanceservice/5004 for service com.samsung.enhanceservice/.EnhanceService
+09-12 15:27:35.282  3649  3660 I ActivityManager: DSS on for com.samsung.enhanceservice and scale is 1.0
+09-12 15:27:35.363  3649  3660 I ActivityManager: KPU : put [com.samsung.cmh:CMH] : 20094 K
+09-12 15:27:35.363  3649  3660 I ActivityManager: Killing 3020:com.samsung.cmh:CMH/5004 (adj 906): DHA:empty #25
+09-12 15:27:35.646  2950  3019 I ReactNativeJS: '[auth] magic-link redirectTo=', 'findus://auth/callback'
+09-12 15:28:26.999  2950  3019 I ReactNativeJS: '[auth] magic-link redirectTo=', 'findus://auth/callback'
+09-12 15:28:45.768  2950  3019 I ReactNativeJS: '[auth] magic-link redirectTo=', 'findus://auth/callback'
+09-12 15:29:13.729  3649  3673 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x10200000 cmp=ComponentInfo{com.sec.android.app.launcher/com.sec.android.app.launcher.activities.LauncherActivity}} from uid 1000
+09-12 15:29:13.789  3649  8590 W ActivityManager: Unable to start service Intent { act=com.android.launcher3.WINDOW_OVERLAY dat=app://com.sec.android.app.launcher:10080?v=0 pkg=com.google.android.googlequicksearchbox } U=0: not found
+09-12 15:29:15.560  3649  3649 E ActivityManager: TouchDown intent received, starting ActiveLaunch
+09-12 15:29:15.592  3649  3649 I ActivityManager: Start proc 6693:com.samsung.android.messaging/u0a43 for activity com.samsung.android.messaging/com.android.mms.ui.ConversationComposer
+09-12 15:29:15.618  3649  8181 I ActivityManager: DSS on for com.samsung.android.messaging and scale is 1.0
+09-12 15:29:16.417  3649  8181 I ActivityManager: Start proc 6722:com.sec.android.provider.badge/u0a3 for content provider com.sec.android.provider.badge/.BadgeProvider
+09-12 15:29:16.451  3649  8590 I ActivityManager: DSS on for com.sec.android.provider.badge and scale is 1.0
+09-12 15:29:16.457  3649  8590 I ActivityManager: KPU : put [com.android.vending:background] : 68194 K
+09-12 15:29:16.457  3649  8590 I ActivityManager: Killing 4905:com.android.vending:background/u0a46 (adj 906): DHA:empty #25
+09-12 15:29:19.072  3649 10453 I ActivityManager: Start proc 6741:com.samsung.android.communicationservice/5002 for service com.samsung.android.communicationservice/.ITransactionManagerService
+09-12 15:29:19.106  3649 10453 I ActivityManager: DSS on for com.samsung.android.communicationservice and scale is 1.0
+09-12 15:29:19.119  3649 10453 I ActivityManager: Killing 6693:com.samsung.android.messaging/u0a43 (adj 900): AL_Kill : over 3 sec
+09-12 15:29:19.537  3649  5016 I ActivityManager: KPU : put [com.android.providers.partnerbookmarks] : 4828 K
+09-12 15:29:19.538  3649  5016 I ActivityManager: Killing 5571:com.android.providers.partnerbookmarks/u0a136 (adj 906): DHA:empty #25
+09-12 15:29:20.496  3649  3649 E ActivityManager: Checking for the Active launch isPkgEverLaunched :false, isPkgStopped : true
+09-12 15:29:25.544  3649 10453 I ActivityManager: START u0 {act=null typ=null flg=0x0 cmp=ComponentInfo{com.samsung.android.app.galaxyfinder/com.samsung.android.app.galaxyfinder.GalaxyFinderActivity}} from uid 10080
+09-12 15:29:25.577  3649 10453 I ActivityManager: Start proc 6767:com.samsung.android.app.galaxyfinder/u0a47 for activity com.samsung.android.app.galaxyfinder/.GalaxyFinderActivity
+09-12 15:29:25.593  3649  5016 I ActivityManager: DSS on for com.samsung.android.app.galaxyfinder and scale is 1.0
+09-12 15:29:25.777  3649 10453 I ActivityManager: Start proc 6792:com.samsung.android.app.galaxyfinder:local/u0a47 for service com.samsung.android.app.galaxyfinder/.service.LocalIndexService
+09-12 15:29:25.798  3649 10453 I ActivityManager: DSS on for com.samsung.android.app.galaxyfinder and scale is 1.0
+09-12 15:29:25.976  3649  3681 I ActivityManager: Displayed com.samsung.android.app.galaxyfinder/.GalaxyFinderActivity: +406ms
+09-12 15:29:26.859  3649 10453 I ActivityManager: Start proc 6860:com.samsung.android.email.provider/u0a69 for content provider com.samsung.android.email.provider/.devicesearch.DeviceSearchIndexProvider
+09-12 15:29:26.890  3649  5016 I ActivityManager: DSS on for com.samsung.android.email.provider and scale is 1.0
+09-12 15:29:27.348  3649 10304 I ActivityManager: Start proc 6909:com.samsung.android.messaging/u0a43 for content provider com.samsung.android.messaging/com.android.mms.search.DeviceSearchProvider
+09-12 15:29:27.365  3649  8181 I ActivityManager: DSS on for com.samsung.android.messaging and scale is 1.0
+09-12 15:29:27.626  3649  3659 W ActivityManager: Slow operation: 51ms so far, now at startProcess: returned from zygote!
+09-12 15:29:27.626  3649  3659 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done updating battery stats
+09-12 15:29:27.626  3649  3659 W ActivityManager: Slow operation: 51ms so far, now at startProcess: building log message
+09-12 15:29:27.626  3649  3659 I ActivityManager: Start proc 6938:com.samsung.android.voc/2000 for content provider com.samsung.android.voc/.sfinder.SamsungMembersIndexProvider
+09-12 15:29:27.626  3649  3659 W ActivityManager: Slow operation: 51ms so far, now at startProcess: starting to update pids map
+09-12 15:29:27.626  3649  3659 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done updating pids map
+09-12 15:29:27.626  3649  3659 W ActivityManager: Slow operation: 52ms so far, now at startProcess: done starting proc!
+09-12 15:29:27.627  3649  3659 W ActivityManager: Slow operation: 52ms so far, now at getContentProviderImpl: after start process
+09-12 15:29:27.627  3649  3659 W ActivityManager: Slow operation: 52ms so far, now at getContentProviderImpl: updating data structures
+09-12 15:29:27.627  3649  3659 W ActivityManager: Slow operation: 53ms so far, now at getContentProviderImpl: done!
+09-12 15:29:27.689  3649  4154 I ActivityManager: DSS on for com.samsung.android.voc and scale is 1.0
+09-12 15:29:28.114  3649  3659 I ActivityManager: Start proc 6996:com.sec.android.app.myfiles/u0a65 for content provider com.sec.android.app.myfiles/.module.search.DeviceSearch.DeviceSearchIndexProvider
+09-12 15:29:28.128  3649 10453 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process0
+09-12 15:29:28.175  3649 10453 I ActivityManager: Start proc 7010:com.android.chrome:sandboxed_process0/u0i81 for webview_service com.samsung.android.email.provider/org.chromium.content.app.SandboxedProcessService0
+09-12 15:29:28.181  3649  5012 I ActivityManager: DSS on for com.sec.android.app.myfiles and scale is 1.0
+09-12 15:29:28.239  3649 11358 I ActivityManager: DSS on for com.samsung.android.email.provider and scale is 1.0
+09-12 15:29:28.532  3649 10453 I ActivityManager: Start proc 7047:com.sec.android.app.sbrowser/u0a168 for content provider com.sec.android.app.sbrowser/.pwa_store.WebappIndexProvider
+09-12 15:29:28.553  3649  4154 I ActivityManager: DSS on for com.sec.android.app.sbrowser and scale is 1.0
+09-12 15:29:32.795  3649  3672 I ActivityManager: Start proc 7184:com.samsung.android.SettingsReceiver/1000 for broadcast com.samsung.android.SettingsReceiver/.SettingsServiceReceiver
+09-12 15:29:32.832  3649  8181 I ActivityManager: DSS on for com.samsung.android.SettingsReceiver and scale is 1.0
+09-12 15:29:32.918  3649 10453 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x10000000 cmp=ComponentInfo{com.samsung.android.email.provider/com.samsung.android.email.ui.activity.MessageListXL}} from uid 10047
+09-12 15:29:33.003  3649  5012 I ActivityManager: START u0 {act=com.samsung.android.email.ui.SELECT_ACCOUNT_GLOBAL typ=null flg=0x34000000 cmp=ComponentInfo{com.samsung.android.email.provider/com.samsung.android.email.ui.setup.activity.GlobalActivity}} from uid 10069
+09-12 15:29:33.578  3649  3681 I ActivityManager: Displayed com.samsung.android.email.provider/com.samsung.android.email.ui.setup.activity.GlobalActivity: +505ms (total +626ms)
+09-12 15:29:35.883  3649  5016 I ActivityManager: Process com.samsung.android.app.galaxyfinder:local (pid 6792) has died: cch+2CEM (130,1747)
+09-12 15:29:39.345  3649 11358 I ActivityManager: START u0 {act=null typ=null flg=0x10804000 cmp=ComponentInfo{com.android.systemui/com.android.systemui.recents.RecentsActivity}} from uid 10005
+09-12 15:29:39.703  3649  3681 I ActivityManager: Displayed com.android.systemui/.recents.RecentsActivity: +273ms
+09-12 15:29:41.630  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:29:41.630  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:29:47.705  3649  4154 I ActivityManager: KPU : put [com.sec.android.app.chromecustomizations] : 4468 K
+09-12 15:29:47.705  3649  4154 I ActivityManager: Killing 5408:com.sec.android.app.chromecustomizations/u0a95 (adj 906): DHA:empty #25
+09-12 15:29:47.705  3649  4154 I ActivityManager: KPU : put [com.google.android.apps.photos] : 94466 K
+09-12 15:29:47.706  3649  4154 I ActivityManager: Killing 5077:com.google.android.apps.photos/u0a151 (adj 906): DHA:empty #25
+09-12 15:29:47.707  3649  4154 I ActivityManager: KPU : put [com.facebook.katana] : 218888 K
+09-12 15:29:47.707  3649  4154 I ActivityManager: Killing 3999:com.facebook.katana/u0a107 (adj 906): DHA:empty #25
+09-12 15:29:48.859  3649  4154 I ActivityManager: START u0 {act=android.content.pm.action.REQUEST_PERMISSIONS typ=null flg=0x0 cmp=ComponentInfo{com.google.android.packageinstaller/com.android.packageinstaller.permission.ui.GrantPermissionsActivity}} from uid 10000
+09-12 15:29:48.860  3649  4154 W ActivityManager: REQUEST_PERMISSIONS Action.
+09-12 15:29:48.924  3649  4154 I ActivityManager: Start proc 7365:com.google.android.packageinstaller/u0a32 for activity com.google.android.packageinstaller/com.android.packageinstaller.permission.ui.GrantPermissionsActivity
+09-12 15:29:48.930  3649  3672 I ActivityManager: KPU : put [com.android.chrome] : 134325 K
+09-12 15:29:48.930  3649  3672 I ActivityManager: Killing 5378:com.android.chrome/u0a139 (adj 906): DHA:empty #25
+09-12 15:29:48.931  3649  3672 I ActivityManager: KPU : put [com.google.android.gms.ui] : 131544 K
+09-12 15:29:48.931  3649  3672 I ActivityManager: Killing 5685:com.google.android.gms.ui/u0a24 (adj 906): DHA:empty #25
+09-12 15:29:48.946  3649  3660 I ActivityManager: DSS on for com.google.android.packageinstaller and scale is 1.0
+09-12 15:29:49.089  3649  8261 I ActivityManager: KPU : put [com.facebook.appmanager] : 21962 K
+09-12 15:29:49.089  3649  8261 I ActivityManager: Killing 4859:com.facebook.appmanager/u0a112 (adj 906): DHA:empty #25
+09-12 15:29:49.093  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 5378
+09-12 15:29:49.120  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 5685
+09-12 15:29:49.182  3649  3681 I ActivityManager: Displayed com.google.android.packageinstaller/com.android.packageinstaller.permission.ui.GrantPermissionsActivity: +274ms
+09-12 15:29:49.213  3649 11358 I ActivityManager: Process com.android.chrome:privileged_process0 (pid 5489) has died: fore SVC (128,1682)
+09-12 15:29:50.280  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:29:50.280  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:29:50.292  3649  8590 I ActivityManager: KPU : put [com.android.printspooler] : 5603 K
+09-12 15:29:50.292  3649  8590 I ActivityManager: Killing 2966:com.android.printspooler/u0a147 (adj 906): DHA:empty #25
+09-12 15:29:53.606  3649 11358 I ActivityManager: START u0 {act=android.content.pm.action.REQUEST_PERMISSIONS typ=null flg=0x0 cmp=ComponentInfo{com.google.android.packageinstaller/com.android.packageinstaller.permission.ui.GrantPermissionsActivity}} from uid 10000
+09-12 15:29:53.607  3649 11358 W ActivityManager: REQUEST_PERMISSIONS Action.
+09-12 15:29:54.427  2950  3019 W ReactNativeJS: '[nightly-cache] collect failed:', { [Error: Call to function 'NativeDatabase.prepareAsync' has been rejected.
+09-12 15:29:54.427  2950  3019 W ReactNativeJS: → Caused by: Error code : no such table: landmark_cache] code: 'ERR_INTERNAL_SQLITE_ERROR' }
+09-12 15:30:00.526  2950  3019 W ReactNativeJS: '[fallback] Gemini-Pro', 'Flash überfordert (generic)'
+09-12 15:30:00.873  2950  3019 W ReactNativeJS: [gemini] gemini-2.5-pro nicht verfügbar, nächstes Modell…
+09-12 15:30:04.040  2950  3019 W ReactNativeJS: [gemini] finishReason=MAX_TOKENS — Antwort evtl. abgeschnitten
+09-12 15:30:04.278  2950  3019 W ReactNativeJS: [gemini] gemini-2.5-flash nicht verfügbar, nächstes Modell…
+09-12 15:30:04.929  3649  3888 W ActivityManager: Slow operation: 51ms so far, now at startProcess: building log message
+09-12 15:30:04.931  3649  3888 I ActivityManager: Start proc 7469:com.sec.android.app.soundalive/u0a74 for content provider com.sec.android.app.soundalive/.compatibility.SAContentProvider
+09-12 15:30:04.931  3649  3888 W ActivityManager: Slow operation: 53ms so far, now at startProcess: starting to update pids map
+09-12 15:30:04.931  3649  3888 W ActivityManager: Slow operation: 53ms so far, now at startProcess: done updating pids map
+09-12 15:30:04.931  3649  3888 W ActivityManager: Slow operation: 53ms so far, now at startProcess: done starting proc!
+09-12 15:30:04.931  3649  3888 W ActivityManager: Slow operation: 61ms so far, now at getContentProviderImpl: after start process
+09-12 15:30:04.931  3649  3888 W ActivityManager: Slow operation: 61ms so far, now at getContentProviderImpl: updating data structures
+09-12 15:30:04.931  3649  3888 W ActivityManager: Slow operation: 61ms so far, now at getContentProviderImpl: done!
+09-12 15:30:04.951  3649  8261 I ActivityManager: DSS on for com.sec.android.app.soundalive and scale is 1.0
+09-12 15:30:25.405  3649  8590 I ActivityManager: KPU : put [com.samsung.android.mobileservice] : 38117 K
+09-12 15:30:25.406  3649  8590 I ActivityManager: Killing 6531:com.samsung.android.mobileservice/u0a234 (adj 906): DHA:empty #25
+09-12 15:31:15.924  3649  3678 I ActivityManager: Start proc 7620:com.samsung.android.sm.provider/1000 for content provider com.samsung.android.lool/com.samsung.android.sm.database.SmProvider
+09-12 15:31:15.956  3649 10453 I ActivityManager: DSS on for com.samsung.android.lool and scale is 1.0
+09-12 15:31:36.716  3649 10453 I ActivityManager: KPU : put [com.samsung.dcmservice] : 5281 K
+09-12 15:31:36.716  3649 10453 I ActivityManager: Killing 6601:com.samsung.dcmservice/5004 (adj 906): DHA:empty #25
+09-12 15:31:49.051  3649  3672 I ActivityManager: Start proc 7657:com.samsung.android.networkdiagnostic/5017 for broadcast com.samsung.android.networkdiagnostic/.receiver.NetworkDiagnosticReceiver
+09-12 15:31:49.090  3649  5024 I ActivityManager: DSS on for com.samsung.android.networkdiagnostic and scale is 1.0
+09-12 15:31:49.407  3649  8261 I ActivityManager: KPU : put [com.samsung.enhanceservice] : 5793 K
+09-12 15:31:49.407  3649  8261 I ActivityManager: Killing 6619:com.samsung.enhanceservice/5004 (adj 906): DHA:empty #25
+09-12 15:32:28.241  3649  3672 I ActivityManager: Start proc 7877:com.enhance.gameservice/u0a114 for broadcast com.enhance.gameservice/.GameServiceReceiver
+09-12 15:32:28.264  3649  8590 I ActivityManager: DSS on for com.enhance.gameservice and scale is 1.0
+09-12 15:32:28.404  3649  8590 I ActivityManager: Start proc 7896:com.samsung.android.knox.containeragent/1250 for broadcast com.samsung.android.knox.containeragent/.switcher.knoxusage.KnoxUsageReceiver
+09-12 15:32:28.422  3649 10453 I ActivityManager: DSS on for com.samsung.android.knox.containeragent and scale is 1.0
+09-12 15:32:28.634  3649  8216 I ActivityManager: KPU : put [com.sec.android.provider.badge] : 4747 K
+09-12 15:32:28.634  3649  8216 I ActivityManager: Killing 6722:com.sec.android.provider.badge/u0a3 (adj 906): DHA:empty #25
+09-12 15:33:28.151  2950  3019 W ReactNativeJS: 'MapLibre warning', 'Request failed due to a permanent error: stream was reset: CANCEL ', { level: 'warning',
+09-12 15:33:28.151  2950  3019 W ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-12 15:33:28.151  2950  3019 W ReactNativeJS:   message: 'Request failed due to a permanent error: stream was reset: CANCEL ' }
+09-12 15:33:35.481  3649  3671 I ActivityManager: KPU : put [com.samsung.android.authfw] : 23252 K
+09-12 15:33:35.482  3649  3671 I ActivityManager: Killing 5857:com.samsung.android.authfw/1201 (adj 906): DHA:empty #25
+09-12 15:33:35.519  3649 11358 W ActivityManager: Scheduling restart of crashed service com.samsung.android.authfw/.pass.PassService in 1000ms
+09-12 15:33:36.563  3649  3672 I ActivityManager: Start proc 8021:com.samsung.android.authfw/1201 for service com.samsung.android.authfw/.pass.PassService
+09-12 15:33:36.571  3649 11358 I ActivityManager: DSS on for com.samsung.android.authfw and scale is 1.0
+09-12 15:33:37.056  3649 11358 I ActivityManager: KPU : put [com.samsung.android.samsungpass] : 16995 K
+09-12 15:33:37.056  3649 11358 I ActivityManager: Killing 5914:com.samsung.android.samsungpass/u0a58 (adj 906): DHA:empty #25
+09-12 15:33:47.643  2950  3019 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-12 15:33:47.643  2950  3019 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-12 15:33:47.643  2950  3019 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-12 15:33:47.643  2950  3019 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-12 15:33:47.643  2950  3019 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-12 15:33:47.643  2950  3019 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-12 15:33:47.917  2950  3019 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-12 15:33:47.917  2950  3019 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-12 15:33:47.917  2950  3019 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-12 15:33:47.918  2950  3019 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-12 15:33:47.918  2950  3019 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-12 15:33:47.918  2950  3019 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-12 15:33:57.748  2950  3019 W ReactNativeJS: [cityCatalog] public fetch appen.json: HTTP 400
+09-12 15:33:58.398  2950  3019 W ReactNativeJS: '[cityCatalog] download appen.json:', 'Object not found'
+09-12 15:33:58.399  2950  3019 W ReactNativeJS: '[cityCatalog] Browse-Pack appen fehlgeschlagen:', 'Error: Stadt-Datei nicht ladbar: appen.json (fetch HTTP 400 | FS HTTP 400 | sdk: Object not found)'
+09-12 15:34:37.748  2950  3019 I ReactNativeJS: '[boot] phase=', 'onboarding', '__DEV__=', false, 'setup=', true
+09-12 15:34:38.510  2950  3019 I ReactNativeJS: '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+09-12 15:34:38.512  2950  3019 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:34:38.640  2950  3019 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:34:38.807  2950  3019 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-12 15:34:40.007  2950  3019 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+09-12 15:34:40.007  2950  3019 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+09-12 15:34:55.289  2950  3019 I ReactNativeJS: '[places] new-text', 'Arena OR Stadion OR Theater OR Konzertha', 12
+09-12 15:35:00.305  3649  3649 I ActivityManager: Start proc 8228:com.instagram.android/u0a108 for service com.instagram.android/androidx.work.impl.background.systemjob.SystemJobService
+09-12 15:35:00.341  3649  5024 I ActivityManager: DSS on for com.instagram.android and scale is 1.0
+09-12 15:35:08.952  3649  8590 I ActivityManager: Start proc 8392:com.facebook.katana/u0a107 for content provider com.facebook.katana/.liteprovider.usdid.UsdidValuesProvider
+09-12 15:35:08.986  3649  8216 I ActivityManager: DSS on for com.facebook.katana and scale is 1.0
+09-12 15:35:11.980  3649  8216 I ActivityManager: KPU : put [com.android.settings] : 78129 K
+09-12 15:35:11.981  3649  8216 I ActivityManager: Killing 6045:com.android.settings/1000 (adj 906): DHA:empty #25
+09-12 15:35:11.982  3649  8216 I ActivityManager: KPU : put [com.samsung.android.samsungpassautofill] : 6974 K
+09-12 15:35:11.983  3649  8216 I ActivityManager: Killing 5836:com.samsung.android.samsungpassautofill/u0a242 (adj 906): DHA:empty #25
+09-12 15:35:12.281  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 6045
+09-12 15:35:17.455  3649  4092 I ActivityManager: Start proc 8540:com.facebook.appmanager/u0a112 for content provider com.facebook.appmanager/com.facebook.oxygen.appmanager.firstparty.crashreporter.FirstPartyCrashReporterProvider
+09-12 15:35:17.488  3649  8590 I ActivityManager: DSS on for com.facebook.appmanager and scale is 1.0
+09-12 15:35:17.971  3649  4092 E ActivityManager: Activity Manager Crash. UID:10107 PID:8392 TRANS:23
+09-12 15:35:17.971  3649  4092 E ActivityManager: java.lang.IllegalStateException: stableCount < 0: -1
+09-12 15:35:17.971  3649  4092 E ActivityManager: 	at com.android.server.am.ActivityManagerService.refContentProvider(ActivityManagerService.java:15456)
+09-12 15:35:17.971  3649  4092 E ActivityManager: 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:469)
+09-12 15:35:17.971  3649  4092 E ActivityManager: 	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:3869)
+09-12 15:35:17.971  3649  4092 E ActivityManager: 	at android.os.Binder.execTransact(Binder.java:682)
+09-12 15:35:18.936  3649 10453 I ActivityManager: Start proc 8579:com.facebook.system/u0a17 for content provider com.facebook.system/com.facebook.oxygen.installer.api.AppManagerApiProvider
+09-12 15:35:18.967  3649  8590 I ActivityManager: DSS on for com.facebook.system and scale is 1.0
+09-12 15:35:21.117  3649  3672 I ActivityManager: Start proc 8631:com.sec.android.provider.badge/u0a3 for broadcast com.sec.android.provider.badge/.BadgeCountReceiver
+09-12 15:35:21.145  3649  8590 I ActivityManager: DSS on for com.sec.android.provider.badge and scale is 1.0
+09-12 15:35:29.987  3649  3671 W ActivityManager: Slow operation: 51ms so far, now at startProcess: returned from zygote!
+09-12 15:35:29.987  3649  3671 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done updating battery stats
+09-12 15:35:29.987  3649  3671 W ActivityManager: Slow operation: 51ms so far, now at startProcess: building log message
+09-12 15:35:29.987  3649  3671 I ActivityManager: Start proc 8689:com.android.printspooler/u0a147 for service com.android.printspooler/.model.PrintSpoolerService
+09-12 15:35:29.987  3649  3671 W ActivityManager: Slow operation: 51ms so far, now at startProcess: starting to update pids map
+09-12 15:35:29.987  3649  3671 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done updating pids map
+09-12 15:35:29.987  3649  3671 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done starting proc!
+09-12 15:35:30.007  3649  8590 I ActivityManager: DSS on for com.android.printspooler and scale is 1.0
+09-12 15:35:35.163  3649  4416 I ActivityManager: KPU : put [com.sec.android.app.myfiles] : 13488 K
+09-12 15:35:35.163  3649  4416 I ActivityManager: Killing 6996:com.sec.android.app.myfiles/u0a65 (adj 906): DHA:empty #25
+09-12 15:35:39.436  3649  4391 I ActivityManager: KPU : put [com.android.chrome:webview_service] : 28353 K
+09-12 15:35:39.436  3649  4391 I ActivityManager: Killing 4456:com.android.chrome:webview_service/u0a139 (adj 906): DHA:empty #25
+09-12 15:35:39.437  3649  4391 I ActivityManager: KPU : put [com.sec.android.app.sbrowser] : 36322 K
+09-12 15:35:39.437  3649  4391 I ActivityManager: Killing 7047:com.sec.android.app.sbrowser/u0a168 (adj 906): DHA:empty #25
+09-12 15:36:06.567  3649  4391 I ActivityManager: KPU : put [android.process.media] : 19406 K
+09-12 15:36:06.569  3649  4391 I ActivityManager: Killing 422:android.process.media/u0a40 (adj 906): DHA:empty #25
+09-12 15:36:21.002  2950  3019 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-12 15:36:25.562  2950  3019 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)
+09-12 15:36:29.367  2950  3019 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 0 neu, 0 aktualisiert (4319 Textquellen)
+09-12 15:36:31.537  2950  3019 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-12 15:36:32.034  3649  3694 I ActivityManager: Start proc 8814:com.android.defcontainer/u0a11 for service com.android.defcontainer/.DefaultContainerService
+09-12 15:36:32.034  3649  3694 I ActivityManager: Start proc 8814:com.android.defcontainer/u0a11 for service com.android.defcontainer/.DefaultContainerService
+09-12 15:36:32.059  3649  4416 I ActivityManager: DSS on for com.android.defcontainer and scale is 1.0
+09-12 15:36:34.328  3649  3672 W ActivityManager: Slow operation: 54ms so far, now at startProcess: returned from zygote!
+09-12 15:36:34.328  3649  3672 W ActivityManager: Slow operation: 54ms so far, now at startProcess: done updating battery stats
+09-12 15:36:34.328  3649  3672 W ActivityManager: Slow operation: 54ms so far, now at startProcess: building log message
+09-12 15:36:34.329  3649  3672 I ActivityManager: Start proc 8839:com.samsung.android.sm.devicesecurity/5012 for broadcast com.samsung.android.sm.devicesecurity/.AppVerificationReceiver
+09-12 15:36:34.329  3649  3672 W ActivityManager: Slow operation: 55ms so far, now at startProcess: starting to update pids map
+09-12 15:36:34.329  3649  3672 W ActivityManager: Slow operation: 55ms so far, now at startProcess: done updating pids map
+09-12 15:36:34.329  3649  3672 W ActivityManager: Slow operation: 56ms so far, now at startProcess: done starting proc!
+09-12 15:36:34.346  3649  8181 I ActivityManager: DSS on for com.samsung.android.sm.devicesecurity and scale is 1.0
+09-12 15:36:34.464  3649  3672 I ActivityManager: Start proc 8856:com.samsung.android.lool/1000 for broadcast com.samsung.android.lool/com.samsung.android.sm.ui.security.NotificationReceiver
+09-12 15:36:34.498  3649  8590 I ActivityManager: DSS on for com.samsung.android.lool and scale is 1.0
+09-12 15:36:53.374  3649  4154 I ActivityManager: KPU : put [com.samsung.android.voc] : 47984 K
+09-12 15:36:53.374  3649  4154 I ActivityManager: Killing 6938:com.samsung.android.voc/2000 (adj 906): DHA:empty #25
+09-12 15:36:53.958  3649  3672 I ActivityManager: Force stopping de.findus.app appid=10000 user=-1: installPackageLI
+09-12 15:36:53.962  3649  3672 I ActivityManager: Killing 2950:de.findus.app/u0a0 (adj 0): stop de.findus.app,installPackageLI
+09-12 15:36:53.968  3649  3672 W ActivityManager: Scheduling restart of crashed service de.findus.app/.FindusLocationGuardService in 1000ms
+09-12 15:36:53.969  3649  3672 W ActivityManager: Scheduling restart of crashed service de.findus.app/expo.modules.location.services.LocationTaskService in 1479364ms
+09-12 15:36:53.970  3649  3672 W ActivityManager: Force removing ActivityRecord{5fc1543 u0 de.findus.app/.MainActivity t48}: app died, no saved state
+09-12 15:36:54.162  3649  3672 I ActivityManager:   Force stopping service ServiceRecord{fa4e913 u0 de.findus.app/.FindusLocationGuardService}
+09-12 15:36:54.162  3649  3672 I ActivityManager:   Force stopping service ServiceRecord{7c4b725 u0 de.findus.app/expo.modules.location.services.LocationTaskService}
+09-12 15:36:54.909  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 2950
+09-12 15:36:54.967  3649  8589 I ActivityManager: Process com.samsung.SMT (pid 4262) has died: fore SVC (466,1653)
+09-12 15:36:55.052  3649  3672 I ActivityManager: Start proc 8927:de.findus.app/u0a0 for broadcast de.findus.app/expo.modules.taskManager.TaskBroadcastReceiver
+09-12 15:36:55.079  3649  7758 I ActivityManager: DSS on for de.findus.app and scale is 1.0
+09-12 15:36:55.518  3649  3694 I ActivityManager: Force stopping de.findus.app appid=10000 user=0: pkg removed
+09-12 15:36:55.518  3649  3694 I ActivityManager: Killing 8927:de.findus.app/u0a0 (adj 0): stop de.findus.app,pkg removed
+09-12 15:36:55.728  3649  3649 I ActivityManager: Start proc 8988:com.android.keychain/1000 for service com.android.keychain/.KeyChainService
+09-12 15:36:55.732  3649  5025 I ActivityManager: Force stopping de.findus.app appid=10000 user=0: from pid 8986
+09-12 15:36:56.200  3649  8589 I ActivityManager: DSS on for com.android.keychain and scale is 1.0
+09-12 15:36:56.289  3649 10297 I ActivityManager: Start proc 9006:com.samsung.android.bbc.bbcagent/1000 for broadcast com.samsung.android.bbc.bbcagent/.bbccontroller.receiver.PackageEventReceiver
+09-12 15:36:56.305  3649  4390 I ActivityManager: DSS on for com.samsung.android.bbc.bbcagent and scale is 1.0
+09-12 15:36:56.520  3649  7758 I ActivityManager: Start proc 9046:com.samsung.android.da.daagent/1000 for broadcast com.samsung.android.da.daagent/.receiver.DualAppPackageEventReceiver
+09-12 15:36:56.551  3649  4154 I ActivityManager: DSS on for com.samsung.android.da.daagent and scale is 1.0
+09-12 15:36:56.912  3649  3672 I ActivityManager: Start proc 9071:com.samsung.android.app.assistantmenu/1000 for broadcast com.samsung.android.app.assistantmenu/.AssistantMenuReceiver
+09-12 15:36:56.925  3649  8589 I ActivityManager: DSS on for com.samsung.android.app.assistantmenu and scale is 1.0
+09-12 15:36:57.121  3649  4390 I ActivityManager: Start proc 9094:com.samsung.android.app.watchmanagerstub/u0a113 for broadcast com.samsung.android.app.watchmanagerstub/com.sec.android.applicationmgr.WMStubBroadCastReceiver
+09-12 15:36:57.162  3649  4092 I ActivityManager: DSS on for com.samsung.android.app.watchmanagerstub and scale is 1.0
+09-12 15:36:57.286  3649  3672 I ActivityManager: Start proc 9122:com.samsung.android.provider.stickerprovider/u0a229 for broadcast com.samsung.android.provider.stickerprovider/.StickerBroadcastReceiver
+09-12 15:36:57.290  3649 12104 I ActivityManager: KPU : put [com.android.chrome:sandboxed_process0] : 32215 K
+09-12 15:36:57.291  3649 12104 I ActivityManager: Killing 7010:com.android.chrome:sandboxed_process0/u0a69i81 (adj 906): DHA:empty #25
+09-12 15:36:57.301  3649 12104 I ActivityManager: DSS on for com.samsung.android.provider.stickerprovider and scale is 1.0
+09-12 15:36:57.320  3649 12104 W ActivityManager: Scheduling restart of crashed service com.samsung.android.email.provider/org.chromium.content.app.SandboxedProcessService0 in 1000ms
+09-12 15:36:57.384  3649 12104 I ActivityManager: START u0 {act=android.intent.action.MAIN typ=null flg=0x10200000 cmp=ComponentInfo{de.findus.app/de.findus.app.MainActivity}} from uid 2000
+09-12 15:36:57.384  3649 12104 E ActivityManager: getPackageFromAppProcesses, return null :9065
+09-12 15:36:57.411  3649 10304 I ActivityManager: Start proc 9139:de.findus.app/u0a0 for activity de.findus.app/.MainActivity
+09-12 15:36:57.437  3649 12104 I ActivityManager: Start proc 9153:com.samsung.android.stickercenter/1000 for service com.samsung.android.stickercenter/.StickerCenterService
+09-12 15:36:57.442  3649 12104 I ActivityManager: DSS on for de.findus.app and scale is 1.0
+09-12 15:36:57.491  3649  4154 I ActivityManager: Start proc 9167:com.samsung.android.securitylogagent/1000 for broadcast com.samsung.android.securitylogagent/com.samsung.android.apppermissionmonitor.APMApplist$APMPackageRemove
+09-12 15:36:57.492  3649  4154 I ActivityManager: KPU : put [com.samsung.android.email.provider] : 87634 K
+09-12 15:36:57.492  3649  4154 I ActivityManager: Killing 6860:com.samsung.android.email.provider/u0a69 (adj 906): DHA:empty #25
+09-12 15:36:57.493  3649 10304 I ActivityManager: DSS on for com.samsung.android.stickercenter and scale is 1.0
+09-12 15:36:57.509  3649  4154 I ActivityManager: DSS on for com.samsung.android.securitylogagent and scale is 1.0
+09-12 15:36:57.592  3649 10304 I ActivityManager: KPU : put [com.google.android.packageinstaller] : 20030 K
+09-12 15:36:57.593  3649 10304 I ActivityManager: Killing 7365:com.google.android.packageinstaller/u0a32 (adj 906): DHA:empty #25
+09-12 15:36:57.659  3649 10304 I ActivityManager: KPU : put [com.samsung.android.authfw] : 22212 K
+09-12 15:36:57.659  3649 10304 I ActivityManager: Killing 8021:com.samsung.android.authfw/1201 (adj 906): DHA:empty #25
+09-12 15:36:57.688  3649 10304 I ActivityManager: Start proc 9203:com.samsung.cmh:CMH/5004 for broadcast com.samsung.cmh/.core.ClearDataReceiver
+09-12 15:36:57.691  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 6860
+09-12 15:36:57.707  3649  8181 I ActivityManager: DSS on for com.samsung.cmh and scale is 1.0
+09-12 15:36:57.717  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 7365
+09-12 15:36:57.780  3649  4390 I ActivityManager: KPU : put [com.google.process.gapps] : 8401 K
+09-12 15:36:57.780  3649  4390 I ActivityManager: Killing 3820:com.google.process.gapps/u0a24 (adj 906): DHA:empty #25
+09-12 15:36:57.829  3649  3681 I ActivityManager: Displayed de.findus.app/.MainActivity: +422ms
+09-12 15:36:57.933  3649  3801 I ActivityManager: Start proc 9258:com.samsung.knox.securefolder/u0a66 for broadcast com.samsung.knox.securefolder/.containeragent.detector.KnoxPackageStateReceiver
+09-12 15:36:57.939  3649  3801 I ActivityManager: KPU : put [com.samsung.android.communicationservice] : 8505 K
+09-12 15:36:57.939  3649  3801 I ActivityManager: Killing 6741:com.samsung.android.communicationservice/5002 (adj 906): DHA:empty #25
+09-12 15:36:58.006  3649  3801 I ActivityManager: DSS on for com.samsung.knox.securefolder and scale is 1.0
+09-12 15:36:58.131  3649  3801 W ActivityManager: Slow operation: 125ms so far, now at attachApplicationLocked: before bindApplication
+09-12 15:36:58.133  3649  3801 W ActivityManager: Slow operation: 127ms so far, now at attachApplicationLocked: immediately before bindApplication
+09-12 15:36:58.136  3649  3801 W ActivityManager: Slow operation: 130ms so far, now at attachApplicationLocked: immediately after bindApplication
+09-12 15:36:58.136  3649  3801 W ActivityManager: Slow operation: 130ms so far, now at attachApplicationLocked: after updateLruProcessLocked
+09-12 15:36:58.155  3649  3801 W ActivityManager: Slow operation: 149ms so far, now at attachApplicationLocked: after mServices.attachApplicationLocked
+09-12 15:36:58.162  3649  3801 W ActivityManager: Slow operation: 156ms so far, now at attachApplicationLocked: after sendPendingBroadcastsLocked
+09-12 15:36:58.164  3649  5016 W ActivityManager: Scheduling restart of crashed service com.samsung.android.communicationservice/.ITransactionManagerService in 1000ms
+09-12 15:36:58.175  3649  4416 I ActivityManager: KPU : put [com.samsung.android.SettingsReceiver] : 4873 K
+09-12 15:36:58.176  3649  4416 I ActivityManager: Killing 7184:com.samsung.android.SettingsReceiver/1000 (adj 906): DHA:empty #25
+09-12 15:36:58.341  3649  4390 I ActivityManager: Start proc 9282:com.samsung.android.scloud/5009 for content provider com.samsung.android.scloud/.cloudagent.CloudProvider
+09-12 15:36:58.363  3649  7758 I ActivityManager: DSS on for com.samsung.android.scloud and scale is 1.0
+09-12 15:36:58.373  3649  7758 I ActivityManager: KPU : put [com.samsung.android.messaging] : 28083 K
+09-12 15:36:58.373  3649  7758 I ActivityManager: Killing 6909:com.samsung.android.messaging/u0a43 (adj 906): DHA:empty #25
+09-12 15:36:58.555  3649  3672 I ActivityManager: Start proc 9303:com.sec.android.widgetapp.samsungapps/u0a22 for broadcast com.sec.android.widgetapp.samsungapps/.PackageChangeReceiver
+09-12 15:36:58.560  3649  4416 I ActivityManager: KPU : put [com.sec.android.app.soundalive] : 5632 K
+09-12 15:36:58.561  3649  4416 I ActivityManager: Killing 7469:com.sec.android.app.soundalive/u0a74 (adj 906): DHA:empty #25
+09-12 15:36:58.569  3649  4416 I ActivityManager: DSS on for com.sec.android.widgetapp.samsungapps and scale is 1.0
+09-12 15:36:58.833  3649  3672 I ActivityManager: Start proc 9329:com.samsung.aasaservice/1000 for broadcast com.samsung.aasaservice/.AASAUpdateReceiver
+09-12 15:36:58.837  3649  4416 I ActivityManager: KPU : put [com.facebook.system] : 5517 K
+09-12 15:36:58.837  3649  4416 I ActivityManager: Killing 8579:com.facebook.system/u0a17 (adj 906): DHA:empty #25
+09-12 15:36:58.855  3649  4416 I ActivityManager: DSS on for com.samsung.aasaservice and scale is 1.0
+09-12 15:36:58.903  9139  9201 I ReactNativeJS: Bridgeless mode is enabled
+09-12 15:36:59.008  3649  4416 I ActivityManager: Start proc 9356:ACMS.Process/1000 for broadcast com.samsung.android.app.mirrorlink/com.samsung.android.mirrorlink.acms.receivers.AcmsPackageEventListener
+09-12 15:36:59.011  3649  4416 I ActivityManager: KPU : put [com.sec.android.provider.badge] : 5015 K
+09-12 15:36:59.011  3649  4416 I ActivityManager: Killing 8631:com.sec.android.provider.badge/u0a3 (adj 906): DHA:empty #25
+09-12 15:36:59.044  3649  4416 I ActivityManager: Start proc 9372:com.samsung.enhanceservice/5004 for service com.samsung.enhanceservice/.EnhanceService
+09-12 15:36:59.077  3649  8590 I ActivityManager: Start proc 9388:com.samsung.dcmservice/5004 for service com.samsung.dcmservice/.DCMService
+09-12 15:36:59.078  3649  4416 I ActivityManager: DSS on for com.samsung.android.app.mirrorlink and scale is 1.0
+09-12 15:36:59.109  3649  3649 I ActivityManager: Start proc 9402:com.google.android.play.games/u0a210 for service com.google.android.play.games/com.google.android.libraries.internal.growth.growthkit.internal.jobs.impl.GrowthKitJobService
+09-12 15:36:59.109  3649 12018 I ActivityManager: DSS on for com.samsung.enhanceservice and scale is 1.0
+09-12 15:36:59.119  3649  4416 I ActivityManager: DSS on for com.samsung.dcmservice and scale is 1.0
+09-12 15:36:59.132  3649  4390 I ActivityManager: DSS on for com.google.android.play.games and scale is 1.0
+09-12 15:36:59.349  3649  4390 I ActivityManager: Start proc 9433:com.google.process.gapps/u0a24 for content provider com.google.android.gsf/.gservices.GservicesProvider
+09-12 15:36:59.370  3649 11358 I ActivityManager: DSS on for com.google.android.gsf and scale is 1.0
+09-12 15:36:59.484  3649  4416 I ActivityManager: KPU : put [com.facebook.katana] : 217549 K
+09-12 15:36:59.485  3649  4416 I ActivityManager: Killing 8392:com.facebook.katana/u0a107 (adj 906): DHA:empty #25
+09-12 15:36:59.518  3649  9890 I ActivityManager: KPU : put [com.instagram.android] : 153492 K
+09-12 15:36:59.518  3649  9890 I ActivityManager: Killing 8228:com.instagram.android/u0a108 (adj 906): DHA:empty #25
+09-12 15:36:59.533  9139  9201 I ReactNativeJS: Running "main"
+09-12 15:36:59.565  9139  9201 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+09-12 15:36:59.568  9139  9201 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:36:59.758  3649  3801 W ActivityManager: Slow operation: 102ms so far, now at startProcess: returned from zygote!
+09-12 15:36:59.758  3649  3801 W ActivityManager: Slow operation: 102ms so far, now at startProcess: done updating battery stats
+09-12 15:36:59.758  3649  3801 W ActivityManager: Slow operation: 102ms so far, now at startProcess: building log message
+09-12 15:36:59.758  3649  3801 I ActivityManager: Start proc 9495:com.samsung.android.calendar/u0a154 for broadcast com.samsung.android.calendar/com.android.calendar.update.UpdateReceiver
+09-12 15:36:59.759  3649  3801 W ActivityManager: Slow operation: 102ms so far, now at startProcess: starting to update pids map
+09-12 15:36:59.759  3649  3801 W ActivityManager: Slow operation: 103ms so far, now at startProcess: done updating pids map
+09-12 15:36:59.759  3649  3801 W ActivityManager: Slow operation: 104ms so far, now at startProcess: done starting proc!
+09-12 15:36:59.796  3649 11358 I ActivityManager: DSS on for com.samsung.android.calendar and scale is 1.0
+09-12 15:36:59.987  3649  4390 W ActivityManager: Slow operation: 52ms so far, now at startProcess: returned from zygote!
+09-12 15:36:59.987  3649  4390 W ActivityManager: Slow operation: 52ms so far, now at startProcess: done updating battery stats
+09-12 15:36:59.987  3649  4390 W ActivityManager: Slow operation: 52ms so far, now at startProcess: building log message
+09-12 15:36:59.987  3649  4390 I ActivityManager: Start proc 9555:com.osp.app.signin/u0a59 for service com.osp.app.signin/com.msc.sa.service.RequestService
+09-12 15:36:59.987  3649  4390 W ActivityManager: Slow operation: 52ms so far, now at startProcess: starting to update pids map
+09-12 15:36:59.987  3649  4390 W ActivityManager: Slow operation: 52ms so far, now at startProcess: done updating pids map
+09-12 15:36:59.987  3649  4390 W ActivityManager: Slow operation: 52ms so far, now at startProcess: done starting proc!
+09-12 15:37:00.033  9139  9201 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-12 15:37:00.040  3649  3801 I ActivityManager: DSS on for com.osp.app.signin and scale is 1.0
+09-12 15:37:00.573  3649  3801 I ActivityManager: Start proc 9626:com.samsung.android.mobileservice/u0a234 for service com.samsung.android.mobileservice/com.samsung.android.samsungaccount.mobileservice.RequestService
+09-12 15:37:00.592  3649  3801 I ActivityManager: KPU : put [com.android.defcontainer] : 4741 K
+09-12 15:37:00.592  3649  3801 I ActivityManager: Killing 8814:com.android.defcontainer/u0a11 (adj 906): DHA:empty #25
+09-12 15:37:00.635  3649  4415 I ActivityManager: KPU : put [com.android.chrome:sandboxed_process0] : 51682 K
+09-12 15:37:00.635  3649  4415 I ActivityManager: Killing 4334:com.android.chrome:sandboxed_process0/u0a219i72 (adj 906): DHA:empty #25
+09-12 15:37:00.654  3649  4415 I ActivityManager: DSS on for com.samsung.android.mobileservice and scale is 1.0
+09-12 15:37:00.707  3649  4415 W ActivityManager: Slow operation: 54ms so far, now at attachApplicationLocked: before bindApplication
+09-12 15:37:00.717  3649  4415 W ActivityManager: Slow operation: 64ms so far, now at attachApplicationLocked: immediately before bindApplication
+09-12 15:37:00.721  3649  4415 W ActivityManager: Slow operation: 68ms so far, now at attachApplicationLocked: immediately after bindApplication
+09-12 15:37:00.721  3649  4415 W ActivityManager: Slow operation: 68ms so far, now at attachApplicationLocked: after updateLruProcessLocked
+09-12 15:37:00.724  3649  4415 W ActivityManager: Slow operation: 71ms so far, now at attachApplicationLocked: after mServices.attachApplicationLocked
+09-12 15:37:00.838  3649 11358 W ActivityManager: Scheduling restart of crashed service com.apalon.weatherlive.free/org.chromium.content.app.SandboxedProcessService0 in 1000ms
+09-12 15:37:00.905  3890  3890 E chromium: [ERROR:aw_browser_terminator.cc(165)] Renderer process (4334) crash detected (code -1).
+09-12 15:37:00.941  3649 11358 I ActivityManager: KPU : put [com.apalon.weatherlive.free] : 145370 K
+09-12 15:37:00.941  3649 11358 I ActivityManager: Killing 3890:com.apalon.weatherlive.free/u0a219 (adj 906): DHA:empty #25
+09-12 15:37:01.104  9139  9201 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-12 15:37:01.107  9139  9201 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+09-12 15:37:01.173  3649 12018 W ActivityManager: Slow operation: 70ms so far, now at startProcess: returned from zygote!
+09-12 15:37:01.173  3649 12018 W ActivityManager: Slow operation: 70ms so far, now at startProcess: done updating battery stats
+09-12 15:37:01.173  3649 12018 W ActivityManager: Slow operation: 70ms so far, now at startProcess: building log message
+09-12 15:37:01.173  3649 12018 I ActivityManager: Start proc 9676:com.apalon.weatherlive.free/u0a219 for broadcast com.apalon.weatherlive.free/com.apalon.weatherlive.location.TrackLocationReceiver
+09-12 15:37:01.173  3649 12018 W ActivityManager: Slow operation: 70ms so far, now at startProcess: starting to update pids map
+09-12 15:37:01.173  3649 12018 W ActivityManager: Slow operation: 70ms so far, now at startProcess: done updating pids map
+09-12 15:37:01.173  3649 12018 W ActivityManager: Slow operation: 95ms so far, now at startProcess: done starting proc!
+09-12 15:37:01.204  3649  5042 I ActivityManager: DSS on for com.apalon.weatherlive.free and scale is 1.0
+09-12 15:37:01.235  9139  9201 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-12 15:37:01.238  9139  9201 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:37:01.710  3649  5042 I ActivityManager: KPU : put [com.android.keychain] : 0 K
+09-12 15:37:01.711  3649  5042 I ActivityManager: Killing 8988:com.android.keychain/1000 (adj 906): DHA:empty #25
+09-12 15:37:03.314  3649 11358 I ActivityManager: KPU : put [com.samsung.android.networkdiagnostic] : 9243 K
+09-12 15:37:03.315  3649 11358 I ActivityManager: Killing 7657:com.samsung.android.networkdiagnostic/5017 (adj 906): DHA:empty #25
+09-12 15:37:03.913  3649  8589 I ActivityManager: KPU : put [com.facebook.appmanager] : 24400 K
+09-12 15:37:03.915  3649  8589 I ActivityManager: Killing 8540:com.facebook.appmanager/u0a112 (adj 906): DHA:empty #25
+09-12 15:37:04.707  3649  8589 W ActivityManager: Slow operation: 67ms so far, now at startProcess: returned from zygote!
+09-12 15:37:04.707  3649  8589 W ActivityManager: Slow operation: 67ms so far, now at startProcess: done updating battery stats
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 68ms so far, now at startProcess: building log message
+09-12 15:37:04.708  3649  8589 I ActivityManager: Start proc 9853:com.facebook.katana/u0a107 for content provider com.facebook.katana/com.facebook.platform.common.provider.PlatformProviderBase
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 68ms so far, now at startProcess: starting to update pids map
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 68ms so far, now at startProcess: done updating pids map
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 68ms so far, now at startProcess: done starting proc!
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 86ms so far, now at getContentProviderImpl: after start process
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 86ms so far, now at getContentProviderImpl: updating data structures
+09-12 15:37:04.708  3649  8589 W ActivityManager: Slow operation: 86ms so far, now at getContentProviderImpl: done!
+09-12 15:37:04.750  3649  5036 I ActivityManager: DSS on for com.facebook.katana and scale is 1.0
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 84ms so far, now at startProcess: returned from zygote!
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 84ms so far, now at startProcess: done updating battery stats
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 84ms so far, now at startProcess: building log message
+09-12 15:37:06.703  3649  8589 I ActivityManager: Start proc 9953:android.process.media/u0a40 for content provider com.android.providers.media/.MediaProvider
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 84ms so far, now at startProcess: starting to update pids map
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 84ms so far, now at startProcess: done updating pids map
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 85ms so far, now at startProcess: done starting proc!
+09-12 15:37:06.703  3649  8589 W ActivityManager: Slow operation: 86ms so far, now at getContentProviderImpl: after start process
+09-12 15:37:06.704  3649  8589 W ActivityManager: Slow operation: 86ms so far, now at getContentProviderImpl: updating data structures
+09-12 15:37:06.704  3649  8589 W ActivityManager: Slow operation: 87ms so far, now at getContentProviderImpl: done!
+09-12 15:37:06.729  3649  5036 I ActivityManager: DSS on for com.android.providers.media and scale is 1.0
+09-12 15:37:06.789  3649  5016 I ActivityManager: KPU : put [com.samsung.android.app.watchmanagerstub] : 0 K
+09-12 15:37:06.790  3649  5016 I ActivityManager: Killing 9094:com.samsung.android.app.watchmanagerstub/u0a113 (adj 906): DHA:empty #25
+09-12 15:37:07.477  3649  3659 I ActivityManager: KPU : put [com.samsung.android.lool] : 0 K
+09-12 15:37:07.478  3649  3659 I ActivityManager: Killing 8856:com.samsung.android.lool/1000 (adj 906): DHA:empty #25
+09-12 15:37:10.782  3649  5036 I ActivityManager: SA, print process name forked by webview_zygote : com.android.chrome:sandboxed_process0
+09-12 15:37:10.806  3649  5036 I ActivityManager: Start proc 10123:com.android.chrome:sandboxed_process0/u0i82 for webview_service com.apalon.weatherlive.free/org.chromium.content.app.SandboxedProcessService0
+09-12 15:37:10.806  9139  9201 I ReactNativeJS: '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+09-12 15:37:10.862  9139  9201 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:37:10.878  3649  8589 I ActivityManager: DSS on for com.apalon.weatherlive.free and scale is 1.0
+09-12 15:37:11.370  3649  8589 I ActivityManager: Start proc 10162:com.android.chrome:webview_service/u0a139 for service com.android.chrome/org.chromium.android_webview.services.ComponentsProviderService
+09-12 15:37:11.398  3649  5036 I ActivityManager: DSS on for com.android.chrome and scale is 1.0
+09-12 15:37:15.225  3649  4196 I ActivityManager: Process ACMS.Process (pid 9356) has died: fore SVC (103,1770)
+09-12 15:37:16.335  3649  5016 I ActivityManager: Start proc 10352:com.facebook.appmanager/u0a112 for content provider com.facebook.appmanager/com.facebook.oxygen.appmanager.firstparty.crashreporter.FirstPartyCrashReporterProvider
+09-12 15:37:16.349  3649 11358 I ActivityManager: DSS on for com.facebook.appmanager and scale is 1.0
+09-12 15:37:16.376  3649  5036 I ActivityManager: KPU : put [com.samsung.cmh:CMH] : 0 K
+09-12 15:37:16.376  3649  5036 I ActivityManager: Killing 9203:com.samsung.cmh:CMH/5004 (adj 906): DHA:empty #25
+09-12 15:37:16.377  3649  5036 I ActivityManager: KPU : put [com.samsung.android.securitylogagent] : 0 K
+09-12 15:37:16.377  3649  5036 I ActivityManager: Killing 9167:com.samsung.android.securitylogagent/1000 (adj 906): DHA:empty #25
+09-12 15:37:17.335  3649  4196 I ActivityManager: KPU : put [com.samsung.android.scloud] : 0 K
+09-12 15:37:17.335  3649  4196 I ActivityManager: Killing 9282:com.samsung.android.scloud/5009 (adj 906): DHA:empty #25
+09-12 15:37:17.454  3649 11358 E ActivityManager: Activity Manager Crash. UID:10107 PID:9853 TRANS:23
+09-12 15:37:17.454  3649 11358 E ActivityManager: java.lang.IllegalStateException: stableCount < 0: -1
+09-12 15:37:17.454  3649 11358 E ActivityManager: 	at com.android.server.am.ActivityManagerService.refContentProvider(ActivityManagerService.java:15456)
+09-12 15:37:17.454  3649 11358 E ActivityManager: 	at android.app.IActivityManager$Stub.onTransact(IActivityManager.java:469)
+09-12 15:37:17.454  3649 11358 E ActivityManager: 	at com.android.server.am.ActivityManagerService.onTransact(ActivityManagerService.java:3869)
+09-12 15:37:17.454  3649 11358 E ActivityManager: 	at android.os.Binder.execTransact(Binder.java:682)
+09-12 15:37:17.463  3649 11358 I ActivityManager: KPU : put [com.samsung.aasaservice] : 0 K
+09-12 15:37:17.463  3649 11358 I ActivityManager: Killing 9329:com.samsung.aasaservice/1000 (adj 906): DHA:empty #25
+09-12 15:37:19.721  3649  3672 W ActivityManager: Slow operation: 130ms so far, now at startProcess: returned from zygote!
+09-12 15:37:19.721  3649  3672 W ActivityManager: Slow operation: 130ms so far, now at startProcess: done updating battery stats
+09-12 15:37:19.723  3649  3672 W ActivityManager: Slow operation: 131ms so far, now at startProcess: building log message
+09-12 15:37:19.723  3649  3672 I ActivityManager: Start proc 10409:com.sec.android.provider.badge/u0a3 for broadcast com.sec.android.provider.badge/.BadgeCountReceiver
+09-12 15:37:19.723  3649  3672 W ActivityManager: Slow operation: 132ms so far, now at startProcess: starting to update pids map
+09-12 15:37:19.723  3649  3672 W ActivityManager: Slow operation: 132ms so far, now at startProcess: done updating pids map
+09-12 15:37:19.723  3649  3672 W ActivityManager: Slow operation: 133ms so far, now at startProcess: done starting proc!
+09-12 15:37:19.723  3649 10297 I ActivityManager: DSS on for com.sec.android.provider.badge and scale is 1.0
+09-12 15:37:19.925  3649 10297 I ActivityManager: KPU : put [com.samsung.enhanceservice] : 0 K
+09-12 15:37:19.925  3649 10297 I ActivityManager: Killing 9372:com.samsung.enhanceservice/5004 (adj 906): DHA:empty #25
+09-12 15:37:20.841  9139  9201 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+09-12 15:37:20.842  9139  9201 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+09-12 15:37:25.034  3649 10297 I ActivityManager: Start proc 10527:com.facebook.system/u0a17 for content provider com.facebook.system/com.facebook.oxygen.installer.api.AppManagerApiProvider
+09-12 15:37:25.040  3649 11358 I ActivityManager: DSS on for com.facebook.system and scale is 1.0
+09-12 15:37:26.348 10123 10237 W chromium: [WARNING:runtime_features.cc(550)] Fenced frames cannot be enabled in this configuration. Use --enable-features=FencedFrames instead.
+09-12 15:37:26.348 10123 10237 W chromium: [WARNING:runtime_features.cc(575)] Topics cannot be enabled in this configuration. Use --enable-features=BrowsingTopics in addition.
+09-12 15:37:26.349 10123 10237 W chromium: [WARNING:runtime_features.cc(596)] SharedStorage cannot be enabled in this configuration. Use --enable-features=SharedStorageAPI in addition.
+09-12 15:37:26.414  9676 10578 W chromium: [WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+09-12 15:37:41.677  3649  4392 I ActivityManager: KPU : put [com.samsung.dcmservice] : 0 K
+09-12 15:37:41.677  3649  4392 I ActivityManager: Killing 9388:com.samsung.dcmservice/5004 (adj 906): DHA:empty #25
+09-12 15:37:42.222  3649  4392 I ActivityManager: KPU : put [com.samsung.android.bbc.bbcagent] : 5533 K
+09-12 15:37:42.223  3649  4392 I ActivityManager: Killing 9006:com.samsung.android.bbc.bbcagent/1000 (adj 906): DHA:empty #25
+09-12 15:37:46.907  3649  3672 I ActivityManager: KPU : put [com.samsung.android.da.daagent] : 5743 K
+09-12 15:37:46.907  3649  3672 I ActivityManager: Killing 9046:com.samsung.android.da.daagent/1000 (adj 906): DHA:empty #25
+09-12 15:38:00.044  3649  3672 I ActivityManager: Start proc 10693:com.whatsapp/u0a172 for broadcast com.whatsapp/.alarmservice.AlarmBroadcastReceiver
+09-12 15:38:00.072  3649  4392 I ActivityManager: DSS on for com.whatsapp and scale is 1.0
+09-12 15:38:02.689  3649  3672 W ActivityManager: Slow operation: 73ms so far, now at startProcess: returned from zygote!
+09-12 15:38:02.689  3649  3672 W ActivityManager: Slow operation: 73ms so far, now at startProcess: done updating battery stats
+09-12 15:38:02.690  3649  3672 W ActivityManager: Slow operation: 73ms so far, now at startProcess: building log message
+09-12 15:38:02.690  3649  3672 I ActivityManager: Start proc 10740:com.samsung.android.lool/1000 for broadcast com.samsung.android.lool/com.samsung.android.sm.ui.security.NotificationReceiver
+09-12 15:38:02.690  3649  3672 W ActivityManager: Slow operation: 74ms so far, now at startProcess: starting to update pids map
+09-12 15:38:02.690  3649  3672 W ActivityManager: Slow operation: 74ms so far, now at startProcess: done updating pids map
+09-12 15:38:02.690  3649  3672 W ActivityManager: Slow operation: 74ms so far, now at startProcess: done starting proc!
+09-12 15:38:02.691  3649  3660 I ActivityManager: KPU : put [com.samsung.android.stickercenter] : 4250 K
+09-12 15:38:02.692  3649  3660 I ActivityManager: Killing 9153:com.samsung.android.stickercenter/1000 (adj 906): DHA:empty #25
+09-12 15:38:02.696  3649  4392 I ActivityManager: DSS on for com.samsung.android.lool and scale is 1.0
+09-12 15:38:02.842  3649  3660 W ActivityManager: Scheduling restart of crashed service com.samsung.android.stickercenter/.StickerCenterService in 1000ms
+09-12 15:38:02.924  3649  8590 I ActivityManager: KPU : put [com.samsung.android.sm.provider] : 9416 K
+09-12 15:38:02.924  3649  8590 I ActivityManager: Killing 7620:com.samsung.android.sm.provider/1000 (adj 906): DHA:empty #25
+09-12 15:38:03.447  3649  9890 I ActivityManager: KPU : put [com.samsung.android.provider.stickerprovider] : 5378 K
+09-12 15:38:03.448  3649  9890 I ActivityManager: Killing 9122:com.samsung.android.provider.stickerprovider/u0a229 (adj 906): DHA:empty #25
+09-12 15:38:05.866  3649  3672 I ActivityManager: Start proc 10782:com.facebook.katana:fdidsync/u0a107 for broadcast com.facebook.katana/com.facebook.fdidlite.FDIDSyncLiteReceiver
+09-12 15:38:05.900  3649  5018 I ActivityManager: DSS on for com.facebook.katana and scale is 1.0
+09-12 15:38:06.368  3649  8590 I ActivityManager: Start proc 10810:com.instagram.android/u0a108 for broadcast com.instagram.android/com.instagram.common.analytics.phoneid.InstagramPhoneIdRequestReceiver
+09-12 15:38:06.377  3649  8590 I ActivityManager: KPU : put [com.samsung.knox.securefolder] : 12875 K
+09-12 15:38:06.377  3649  8590 I ActivityManager: Killing 9258:com.samsung.knox.securefolder/u0a66 (adj 906): DHA:empty #25
+09-12 15:38:06.392  3649  8590 I ActivityManager: DSS on for com.instagram.android and scale is 1.0
+09-12 15:38:07.223  9139  9201 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-12 15:38:09.204  9139  9201 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)
+09-12 15:38:10.667  3649  4416 I ActivityManager: KPU : put [com.enhance.gameservice] : 11952 K
+09-12 15:38:10.667  3649  4416 I ActivityManager: Killing 7877:com.enhance.gameservice/u0a114 (adj 906): DHA:empty #25
+09-12 15:38:12.025  9139  9201 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 0 neu, 0 aktualisiert (4319 Textquellen)
+09-12 15:38:13.450  9139  9201 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-12 15:38:27.165  3649 11358 I ActivityManager: Force stopping de.findus.app appid=10000 user=0: from pid 11012
+09-12 15:38:27.166  3649 11358 I ActivityManager: Killing 9139:de.findus.app/u0a0 (adj 0): stop de.findus.app,from pid 11012
+09-12 15:38:27.167  3649 11358 W ActivityManager: Scheduling restart of crashed service de.findus.app/.FindusLocationGuardService in 1000ms
+09-12 15:38:27.168  3649 11358 W ActivityManager: Scheduling restart of crashed service de.findus.app/expo.modules.location.services.LocationTaskService in 134642ms
+09-12 15:38:27.168  3649 11358 W ActivityManager: Force removing ActivityRecord{ea17580 u0 de.findus.app/.MainActivity t59}: app died, no saved state
+09-12 15:38:27.206  3649 11358 I ActivityManager:   Force stopping service ServiceRecord{d65a386 u0 de.findus.app/.FindusLocationGuardService}
+09-12 15:38:27.206  3649 11358 I ActivityManager:   Force stopping service ServiceRecord{ad9a6a0 u0 de.findus.app/expo.modules.location.services.LocationTaskService}
+09-12 15:38:27.455  3649  3681 W ActivityManager: setHasOverlayUi called on unknown pid: 9139
+09-12 15:38:27.969  3649 12104 I ActivityManager: START u0 {act=null typ=null flg=0x10000000 cmp=ComponentInfo{de.findus.app/de.findus.app.MainActivity}} from uid 2000
+09-12 15:38:28.005  3649  5018 I ActivityManager: Start proc 11042:de.findus.app/u0a0 for activity de.findus.app/.MainActivity
+09-12 15:38:28.026  3649  4173 I ActivityManager: DSS on for de.findus.app and scale is 1.0
+09-12 15:38:28.316  3649  3681 I ActivityManager: Displayed de.findus.app/.MainActivity: +315ms
+09-12 15:38:29.408 11042 11061 I ReactNativeJS: Bridgeless mode is enabled
+09-12 15:38:29.983 11042 11061 I ReactNativeJS: Running "main"
+09-12 15:38:30.000 11042 11061 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+09-12 15:38:30.002 11042 11061 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:38:30.319 11042 11061 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-12 15:38:30.889 11042 11061 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-12 15:38:30.892 11042 11061 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+09-12 15:38:30.986 11042 11061 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-12 15:38:30.988 11042 11061 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:38:43.497 11042 11061 I ReactNativeJS: '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+09-12 15:38:43.567 11042 11061 I ReactNativeJS: [devAskPoller] started → :8791
+09-12 15:39:20.281 11042 11061 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+09-12 15:39:20.281 11042 11061 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+09-12 15:39:25.436  3649  8590 W ActivityManager: Slow operation: 51ms so far, now at startProcess: returned from zygote!
+09-12 15:39:25.436  3649  8590 W ActivityManager: Slow operation: 51ms so far, now at startProcess: done updating battery stats
+09-12 15:39:25.437  3649  8590 W ActivityManager: Slow operation: 51ms so far, now at startProcess: building log message
+09-12 15:39:25.437  3649  8590 I ActivityManager: Start proc 11522:com.samsung.SMT/1000 for service com.samsung.SMT/.SamsungTTSService
+09-12 15:39:25.437  3649  8590 W ActivityManager: Slow operation: 52ms so far, now at startProcess: starting to update pids map
+09-12 15:39:25.437  3649  8590 W ActivityManager: Slow operation: 52ms so far, now at startProcess: done updating pids map
+09-12 15:39:25.437  3649  8590 W ActivityManager: Slow operation: 52ms so far, now at startProcess: done starting proc!
+09-12 15:39:25.478  3649  5018 I ActivityManager: DSS on for com.samsung.SMT and scale is 1.0
+09-12 15:39:25.919  3649  5018 W ActivityManager: Slow operation: 63ms so far, now at getContentProviderImpl: incProviderCountLocked
+09-12 15:39:25.922  3649  5018 W ActivityManager: Slow operation: 66ms so far, now at getContentProviderImpl: before updateLruProcess
+09-12 15:39:25.922  3649  5018 W ActivityManager: Slow operation: 66ms so far, now at getContentProviderImpl: after updateLruProcess
+09-12 15:39:25.922  3649  5018 W ActivityManager: Slow operation: 66ms so far, now at getContentProviderImpl: before updateOomAdj
+09-12 15:39:25.922  3649  5018 W ActivityManager: Slow operation: 66ms so far, now at getContentProviderImpl: after updateOomAdj
+09-12 15:39:25.922  3649  5018 W ActivityManager: Slow operation: 66ms so far, now at getContentProviderImpl: done!
+09-12 15:39:49.950  3649  3679 I ActivityManager: Start proc 11680:com.samsung.android.samsungpassautofill/u0a242 for service com.samsung.android.samsungpassautofill/.AutofillServiceMain
+09-12 15:39:50.008  3649 11358 I ActivityManager: DSS on for com.samsung.android.samsungpassautofill and scale is 1.0
+09-12 15:39:50.189  3649  5018 I ActivityManager: Start proc 11705:com.samsung.android.authfw/1201 for service com.samsung.android.authfw/.pass.PassService
+09-12 15:39:50.240  3649  5018 I ActivityManager: DSS on for com.samsung.android.authfw and scale is 1.0
+09-12 15:39:50.843  3649 11358 I ActivityManager: Start proc 11762:com.samsung.android.samsungpass/u0a58 for content provider com.samsung.android.samsungpass/.websignin.signindb.EasySigninProvider
+09-12 15:39:50.891  3649  4415 I ActivityManager: DSS on for com.samsung.android.samsungpass and scale is 1.0
+09-12 15:40:13.479  3649  4415 I ActivityManager: KPU : put [com.osp.app.signin] : 6282 K
+09-12 15:40:13.481  3649  4415 I ActivityManager: Killing 9555:com.osp.app.signin/u0a59 (adj 906): DHA:empty #25
+09-12 15:40:13.490  3649  4415 I ActivityManager: KPU : put [com.samsung.android.calendar] : 16508 K
+09-12 15:40:13.491  3649  4415 I ActivityManager: Killing 9495:com.samsung.android.calendar/u0a154 (adj 906): DHA:empty #25
+09-12 15:40:13.493  3649  4415 I ActivityManager: KPU : put [com.samsung.android.app.assistantmenu] : 6279 K
+09-12 15:40:13.493  3649  4415 I ActivityManager: Killing 9071:com.samsung.android.app.assistantmenu/1000 (adj 906): DHA:empty #25
+read: unexpected EOF!
+
+# bike log end lines=820 hits=25

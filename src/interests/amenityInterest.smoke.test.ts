@@ -106,6 +106,22 @@ assert(isNonStoryTouristNoisePoi(dentist), 'zahnarzt ohne story nicht auf Karte'
 assert(isNonStoryTouristNoisePoi(toilet), 'toilette ohne story nicht auf Karte');
 assert(!isNonStoryTouristNoisePoi(theater), 'theater-story bleibt auf der Karte');
 assert(!isNonStoryTouristNoisePoi(tennis), 'tennis-venue bleibt auf der Karte');
+const mistaggedStory = poi({
+  name: 'Museum mit Noise-Tags',
+  category: 'museum',
+  tags_json: JSON.stringify([
+    'museum',
+    'story',
+    'must_have',
+    'tier4',
+    'amenity_skip',
+    'offline_lookup',
+  ]),
+});
+assert(
+  !isNonStoryTouristNoisePoi(mistaggedStory),
+  'Story gewinnt gegen versehentliches amenity_skip/tier4',
+);
 assert(amenitySkipBlocksProactive(toilet, profileYes), 'toilet always blocked');
 assert(
   !amenitySkipBlocksProactive(theater, profileYes),

@@ -7,6 +7,7 @@ import {
   FINDUS_ANSWER_FIRST_BLOCK,
   FINDUS_FEW_SHOT_DISCLAIMER,
   FINDUS_WOVEN_PITCH_SPEECH_BLOCK,
+  FINDUS_SPEECH_CULTURE_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import type { PitchCandidate, PitchRequest } from './types';
 import { travelHintFromMeters, userDeclaredCar } from '../router/placeGoQuery';
@@ -17,6 +18,11 @@ import { getCachedUserProfile } from '../../services/userProfileService';
 import {
   buildPersonalityMatrixPromptBlock,
 } from '../../services/persona/personalityMatrixPrompt';
+import { diversifyPitchBullets } from './diversifyPitchBullets';
+import { stripSearchProcessFromSpeech } from './searchProcessSpeechStrip';
+
+export { diversifyPitchBullets };
+export { stripSearchProcessFromSpeech };
 
 function hoursHint(c: PitchCandidate, visitAtMs?: number): string | null {
   return hoursPitchHint(
@@ -36,28 +42,32 @@ Länge je speechPitch: 140–280 Zeichen. 1–2 knackige Sätze — Warum hingeh
 
 ${matrixBlock}
 
+${FINDUS_SPEECH_CULTURE_BLOCK}
+
 ${FINDUS_WOVEN_PITCH_SPEECH_BLOCK}
 
 ${FINDUS_ANSWER_FIRST_BLOCK}
 
 HARD-MATCH PITCH-BLAUPAUSE (Struktur, Wortlaut frei):
-1) User-Wunsch + warum DIESERort: Beleg aus Daten/Tags/Insider/hardEvidence — nichts erfinden.
-2) Konkret zum Wunsch + Gerichtspreis NUR wenn dish_price in den Daten. Distanz aus dist_km einweben (nie weglassen). Fahrzeit NUR wenn car=yes und drive_min gesetzt — sonst nur Kilometer, keine erfundenen Minuten.
+1) User-Wunsch + warum DIESERort: Beleg aus why_chosen / Daten/Tags/Insider/hardEvidence — nichts erfinden. why_chosen ist verbindlich (Preis, Pool, Distanz, Review) — im Pitch einweben.
+2) Konkret zum Wunsch + Gerichtspreis NUR wenn dish_price in den Daten. Distanz: nur bei here_now / nahe GPS einweben. Bei city_best / Tagesplan in anderer Stadt: KEINE GPS-Heimat-Kilometer („24 km entfernt“) — die Anreise ist schon separat geplant.
 3) Gastro: Review-Ambiente aus insider/hookNotes (gemütlich, Portionen, Service, Spezialität) ehrlich einweben — den Laden schmackhaft machen, nichts erfinden.
-4) Hotel: Buchbarkeit/Preis klar. Zeit-ehrlich: Abend-Termin ≠ jetzt los.
+4) BEIDE Optionen vollwertig: jede speechPitch und der spokenFlow verkaufen Ort A UND Ort B appetitlich (Gericht/Wunsch + belegte Stärke + kurzes Warum-es-zu-dir-passt aus Prefs/Profil/why_chosen). Nie A warm und B nur als trockener Name. Unterschiedliche Gründe — nie denselben Hook zweimal.
+5) Hotel: Buchbarkeit/Preis klar. Zeit-ehrlich: Abend-Termin ≠ jetzt los.
 Die beiden Pitches MÜSSEN sich inhaltlich unterscheiden. Nie „Soll ich raussuchen?“.
 Öffnungszeiten NICHT im normalen Pitch — nur wenn hours_frame=closed oder hours_frame=closes_soon. Gastro: kein Wetter im Pitch (Wetter war die Bridge). Sight/Outdoor: Kleidung/Wetter nur wenn Aktivität draußen und es kohärent hilft — nie erzwingen, nie bei Indoor-Museum Pflicht-Outfit. Kein Meta über den vorherigen Essenswunsch.
 Preis: nur dish_price / belegtes Gerichts-€. Nie priceLevel raten, nie ~9 € erfinden, nie price_total als Gericht. Keine Adresse/Telefon/Meta („Option A“, „Erstens“, „Und falls der nicht sitzt“).
-Empfehlung nur wenn einer klar besser ist (in summary), sonst neutral.
-MODUS city_best / „am besten“: Lead mit warum DIESE Option zum Wunsch (Gericht/Küche) die stärkere ist — nur rating, ratingCount, insider/Reviews, hard_match. Nichts erfinden. Nähe allein reicht nicht.
-WUNSCH NICHT BELEGT (soft_fail, kein hard_match auf dem Gericht): ehrlich — Wunsch so nicht belegt → nächste Stufe derselben Familie (Pannfisch → Fischlokal), nie die Gegen-Diät (Fisch-Wunsch ≠ vegan). Immer konkrete Orte, nie leere Absage.
+Empfehlung nur wenn einer klar besser ist (in summary), sonst beide als starke Wahl mit eigenen Gründen — nie „nimm egal welchen“.
+MODUS city_best / „am besten“ / Hard-Amenity (AYCE, Spezial): Favorit ZUERST mit konkreten Gründen (Beleg, Küche, Preis wenn belegt, Review-Tenor) — dann Alternative GENAU SO stark mit anderen Gründen. Rating nur als Wort (top/gut/okay bewertet), NIE „4,5 Sterne bei 9650 Bewertungen“. Insider/Reviews/hard_match. Nichts erfinden. Nähe allein reicht nicht — nie „nimm den näheren, weil näher“. Keine Heimat-GPS-km.
+WUNSCH NICHT BELEGT (soft_fail / Cascade soft_miss): finale Antwort — Top-Option(en) mit Beleg. VERBOTEN in Speech: Such-Prozess („in 10 km nichts“, „in 20 km erweitert“, „ringweise“, „nicht nur Datensatz“, „soll ich weiter suchen?“). Distanz nur als kurze Lage am Ort (z. B. „liegt etwas weiter raus“), nie als Recherche-Log. Nie Gegen-Diät.
 BENANNTER LADEN (must venue): Nur diesen Ort pitchen. Nicht durch Nearby-Alternativen ersetzen, weil er nicht in der GPS-Stadt liegt. Reviews, belegte Gerichte, belegte Preise. Wie man hinkommt. Kurze Frage ob Tisch reservieren. Keine erfundenen Euro. Kein „liegt nicht in … deshalb woanders“.
 JETZT ZU (open=false / hours_frame=closed): nicht „los jetzt“. Struktur: gerade geschlossen → dieselben Orte für morgen (Uhr wenn belegt).
-Ohne Auto (car=no): Distanz in km, keine Auto-Kurzfahrt. „Ihr habt Zeit / kein Problem was zu finden“ NUR bei soft_fail, zu, oder viel zu weit — sonst Wunsch würdigen.
+Ohne Auto (car=no): Distanz in km nur bei here_now. „Ihr habt Zeit / kein Problem was zu finden“ NUR bei soft_fail, zu, oder viel zu weit — sonst Wunsch würdigen.
 IMMER eine Antwort mit Orten, sobald der Katalog welche hat.
-Stichpunkte: max 3 — Wunsch-Beleg (Gericht/Amenity/Preis), Öffnung wenn relevant, Distanz höchstens 1×. KEINE Roh-Sterne, KEINE „X Sterne bei Y Bewertungen“, KEINE doppelte km-Angabe.
+Stichpunkte: max 3 — Wunsch-Beleg (Gericht/Amenity/Preis), Öffnung wenn relevant, Distanz höchstens 1× und nur wenn hier_now. KEINE Roh-Sterne, KEINE „X Sterne bei Y Bewertungen“, KEINE doppelte km-Angabe. Sterne nur als „top/gut/okay bewertet“.
+TYPISCH HAMBURGERISCH / Franzbrötchen: wenn Call-1/Wunsch das nennt → Orte pitchen die das belegen (Bäcker/Café mit Franzbrötchen), nicht generisches „Frühstück“.
 
-spokenFlow: EIN mündlicher Fließtext für beide Orte. Nach bereits gesprochener Bridge ohne zweites Intro und ohne Wetter. Entweder Ort A (Fakten im Satz) — oder Ort B (Fakten im Satz) — kurze Wahlfrage. Umgangssprache, zackig, keine Liste.
+spokenFlow: EIN mündlicher Fließtext für beide Orte. Nach bereits gesprochener Bridge ohne zweites Intro und ohne Wetter. Entweder Ort A (Wunsch + schmackhafte Belege + warum zu dir) — oder Ort B (andere Belege + anderes Warum-zu-dir) — kurze Wahlfrage. Beide klingen wie Top-Wahl, nie Katalog. Umgangssprache, zackig, keine Liste.
 
 ${FINDUS_FEW_SHOT_DISCLAIMER}
 
@@ -94,6 +104,41 @@ function nearbyLookPrefix(c: PitchCandidate): string | null {
     );
   } catch {
     return null;
+  }
+}
+
+
+function fitPitchBullets(raw: string[]): string[] {
+  let maxChars = 56;
+  let maxCount = 3;
+  try {
+    const { peekBulletUiBudget } = require('../reboot/pipeline/bulletUiBudget') as {
+      peekBulletUiBudget: () => { bulletMaxChars: number; bulletCount: number };
+    };
+    const b = peekBulletUiBudget();
+    maxChars = b.bulletMaxChars || 56;
+    maxCount = b.bulletCount || 3;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { rewriteBulletToFit } = require('../../services/concierge/visualBullets') as {
+      rewriteBulletToFit: (t: string, max: number) => string;
+    };
+    const { isMetaStructureBullet } = require('../speech/draftToHumanSpeech') as {
+      isMetaStructureBullet: (t: string) => boolean;
+    };
+    return raw
+      .map((t) => String(t || '').trim())
+      .filter((t) => t && !isMetaStructureBullet(t))
+      .map((t) => rewriteBulletToFit(t, maxChars))
+      .filter(Boolean)
+      .slice(0, maxCount);
+  } catch {
+    return raw
+      .map((t) => String(t || '').trim().slice(0, maxChars))
+      .filter(Boolean)
+      .slice(0, maxCount);
   }
 }
 
@@ -175,8 +220,8 @@ function fallbackPitch(
     detour,
   ]
     .filter(Boolean)
-    .slice(0, 3) as string[];
-  return { speechPitch: withLook, bullets };
+    .slice(0, 6) as string[];
+  return { speechPitch: withLook, bullets: fitPitchBullets(bullets) };
 }
 
 function parseJson(raw: string): Record<string, unknown> | null {
@@ -207,6 +252,17 @@ export async function generatePitchSpeech(opts: {
   shortlist?: PitchCandidate[];
   softFail: boolean;
   softFailReason?: string;
+  criteriaChecklist?: Array<{
+    key: string;
+    label: string;
+    status: string;
+    remaining: number;
+  }>;
+  /** Phase 4: belegte Gründe pro Name */
+  whyByName?: Record<
+    string,
+    Array<{ id: string; label: string; evidence: string }>
+  >;
   signal?: AbortSignal;
 }): Promise<{ summary: string; cards: PitchedCard[]; spokenText: string }> {
   const top = opts.top.slice(0, 2);
@@ -225,6 +281,11 @@ export async function generatePitchSpeech(opts: {
           : hours
             ? 'closes_soon'
             : 'open_ok';
+      const why =
+        opts.whyByName?.[c.name]
+          ?.map((w) => `${w.label}:${w.evidence}`)
+          .slice(0, 5)
+          .join(' · ') || '';
       return `${i + 1}. ${c.name} | rating=${c.rating ?? 'n/a'} | ratingCount=${c.ratingCount ?? 'n/a'} | dist_m=${Math.round(
         c.distFromAnchorM ?? 0,
       )}${hint ? ` | dist_km=${hint.distLabel}${hasCar ? ` | walk_min=${hint.walkMinutes} | drive_min=${hint.driveMinutes}` : ''} | eta_speech=${hint.speech}` : ''} | detour_min≈${(c.detourMinApprox ?? 0).toFixed(1)} | tags=${(
@@ -235,7 +296,7 @@ export async function generatePitchSpeech(opts: {
         c.hardEvidence?.length
           ? ` | hard_match=${c.hardEvidence.slice(0, 4).join('+')}`
           : ' | hard_match=none'
-      }${
+      }${why ? ` | why_chosen=${why}` : ''}${
         c.openNow === false || c.closedOnVisitDay === true
           ? ' | closed_now=yes suggest=tomorrow'
           : ''
@@ -260,9 +321,14 @@ export async function generatePitchSpeech(opts: {
     .join('\n');
 
   let summary = opts.softFail
-    ? opts.softFailReason ||
-      'Nichts Perfektes — hier zwei Alternativen mit besseren Chancen.'
+    ? stripSearchProcessFromSpeech(
+        opts.softFailReason ||
+          'Hier zwei Alternativen, die am besten passen.',
+      )
     : '';
+  if (/\b(?:km|ringweise|Datensatz|erweitert|weiter suchen)\b/iu.test(summary)) {
+    summary = 'Hier zwei Alternativen, die am besten passen.';
+  }
   let cards: PitchedCard[] = top.map((c) => {
     const fb = fallbackPitch(c, opts.softFail, opts.req.visitAtMs);
     return { candidate: c, speechPitch: fb.speechPitch, bullets: fb.bullets };
@@ -279,17 +345,47 @@ export async function generatePitchSpeech(opts: {
         buildDiningResearchPack: (o: unknown) => unknown;
         formatResearchPackForPrompt: (p: unknown) => string;
       };
-      const {
-        getCall1AnswerContract,
-        formatCall1AnswerContractForPrompt,
-      } = require('../reboot/pipeline/call1AnswerContract') as {
-        getCall1AnswerContract: (t: string) => unknown;
-        formatCall1AnswerContractForPrompt: (c: unknown) => string;
-      };
-      const contract = getCall1AnswerContract(
-        `${opts.req.title} ${opts.req.context}`,
-      );
-      researchBlock = formatCall1AnswerContractForPrompt(contract);
+      // Order-Ticket / authorIntent schlägt paralleles AnswerContract-Re-Detect
+      if (opts.req.authorIntent || opts.req.forbidSoftFill || opts.req.orderNeed) {
+        try {
+          const { formatCall1OrderTicketForPrompt } = require('../router/call1OrderTicket') as {
+            formatCall1OrderTicketForPrompt: (o: unknown) => string;
+          };
+          researchBlock = formatCall1OrderTicketForPrompt({
+            must: opts.req.call1MustHaves ?? [],
+            avoid: (opts.req.call1MustHaves ?? []).filter((m) =>
+              /avoid_|kein |ohne |not_/i.test(m),
+            ),
+            search: {
+              mode: opts.req.forbidSoftFill ? 'hard' : 'normal',
+              stages: opts.req.searchStages ?? ['pack', 'neighbor', 'metro', 'web'],
+              maxRadiusKm: opts.req.maxRadiusKm ?? 40,
+              forbidSoftFill: Boolean(opts.req.forbidSoftFill),
+            },
+            need: opts.req.orderNeed ?? { maps: true },
+            ui: opts.req.orderUi ?? {},
+            bulletBudget: opts.req.bulletBudget ?? {
+              max: 3,
+              maxLines: 2,
+              maxChars: 72,
+            },
+          });
+        } catch {
+          researchBlock = '';
+        }
+      } else {
+        const {
+          getCall1AnswerContract,
+          formatCall1AnswerContractForPrompt,
+        } = require('../reboot/pipeline/call1AnswerContract') as {
+          getCall1AnswerContract: (t: string) => unknown;
+          formatCall1AnswerContractForPrompt: (c: unknown) => string;
+        };
+        const contract = getCall1AnswerContract(
+          `${opts.req.title} ${opts.req.context}`,
+        );
+        researchBlock = formatCall1AnswerContractForPrompt(contract);
+      }
       if (opts.req.kind === 'food' || opts.req.kind === 'bar') {
         let ambient: Record<string, string | number | boolean | null> = {};
         try {
@@ -333,12 +429,29 @@ export async function generatePitchSpeech(opts: {
           ? `CALL1_INTENT (befolgen — das will der User JETZT):\n${opts.req.authorIntent}`
           : '',
         `MUST_HAVES: ${
-          (opts.req.call1MustHaves ?? []).join(', ') ||
-          opts.req.wishes
-            .filter((w) => w.hardness === 'must')
-            .map((w) => `${w.kind ?? 'x'}:${w.text}`)
-            .join(' | ') ||
-          '—'
+          (() => {
+            try {
+              const { humanizePitchLabels } = require('./pitchLabelHumanize') as {
+                humanizePitchLabels: (a: string[]) => string[];
+              };
+              const raw =
+                (opts.req.call1MustHaves ?? []).length > 0
+                  ? opts.req.call1MustHaves!
+                  : opts.req.wishes
+                      .filter((w) => w.hardness === 'must')
+                      .map((w) => w.text);
+              return humanizePitchLabels(raw).join(', ') || '—';
+            } catch {
+              return (
+                (opts.req.call1MustHaves ?? []).join(', ') ||
+                opts.req.wishes
+                  .filter((w) => w.hardness === 'must')
+                  .map((w) => w.text)
+                  .join(' | ') ||
+                '—'
+              );
+            }
+          })()
         }`,
         researchBlock,
         'RANKING: Favorit = beste Passung aus Hard-Match, Reviews/Tags, Distanz, Preis, Öffnung. Alternative = nächstbeste. Nur Orte aus ORTE — nichts erfinden.',
@@ -346,7 +459,23 @@ export async function generatePitchSpeech(opts: {
           ? `BRIDGE SCHON GESPROCHEN (nicht wiederholen, flüssig anschließen):\n${opts.req.continueFromBridge}\nsummary leer lassen. spokenFlow beginnt bei den Orten — kein zweites Wunsch-Intro, kein Wetter, kein Taxi/Steak-Meta.`
           : 'Keine Bridge vorher. spokenFlow startet bei den Orten (Gastro: kein Wetter-Beat). Entweder/Oder.',
         `MODUS: ${opts.req.searchMode}`,
-        opts.softFail ? `SOFT_FAIL: ${opts.softFailReason ?? 'yes'}` : '',
+        opts.softFail
+          ? `SOFT_FAIL (intern): ${opts.softFailReason ?? 'yes'}\nSpeech = nur finale Option(en). VERBOTEN vorlesen: km-Ringe, „nichts in X km“, Expand/Datensatz/ringweise, „weiter suchen?“.`
+          : '',
+        (() => {
+          try {
+            const { formatCascadeForPrompt } = require('./criteriaCascade') as {
+              formatCascadeForPrompt: (
+                c: NonNullable<typeof opts.criteriaChecklist>,
+              ) => string;
+            };
+            return opts.criteriaChecklist?.length
+              ? formatCascadeForPrompt(opts.criteriaChecklist as never)
+              : '';
+          } catch {
+            return '';
+          }
+        })(),
         `ORTE (bereits gerankt, #1 = beste Entscheidung):\n${catalog}`,
       ]
         .filter(Boolean)
@@ -460,10 +589,17 @@ export async function generatePitchSpeech(opts: {
         ]
           .filter((b) => !/\b\d+[.,]\d+\s*★|\bsterne?\b|\bbewertungen?\b/iu.test(b))
           .filter((b, i, arr) => arr.indexOf(b) === i)
-          .slice(0, 3);
-        next.push({ candidate: c, speechPitch: speech, bullets });
+          .slice(0, 6);
+        next.push({
+          candidate: c,
+          speechPitch: speech,
+          bullets: fitPitchBullets(bullets),
+        });
       }
-      if (next.length) cards = next;
+      if (next.length) {
+        diversifyPitchBullets(next);
+        cards = next;
+      }
     }
   } catch {
     /* fallback already set */
@@ -511,6 +647,8 @@ export async function generatePitchSpeech(opts: {
   return {
     summary,
     cards,
-    spokenText: parts.join(' ').replace(/\s+/g, ' ').trim(),
+    spokenText: stripSearchProcessFromSpeech(
+      parts.map((p) => stripSearchProcessFromSpeech(p)).join(' ').replace(/\s+/g, ' ').trim(),
+    ),
   };
 }

@@ -55,7 +55,7 @@ function isEventQuery(text: string): boolean {
     };
     return isEventResearchQuery(text);
   } catch {
-    return /\b(was\s+geht|heute\s+abend|heut\s+abend|events?|veranstaltung|party|konzert|festival|nightlife|nachtleben|ausgehen|feiern|tanzen|disco|club)\b/iu.test(
+    return /\b(was\s+geht|heute\s+abend|heut\s+abend|events?|veranstaltung|party|konzert|festival|nightlife|nachtleben|ausgehen|feiern|tanzen|disco|club|theater|theatre|theaterstück|schauspiel|musical|bühne|buehne|vorstellung)\b/iu.test(
       text,
     );
   }
@@ -73,6 +73,17 @@ const TIME_FOLLOW_RE =
 /** Event-Follow-up: Vertiefen / Bestätigen ohne neues Keyword „Festival“. */
 const EVENT_DEEPEN_FOLLOW_RE =
   /\b(erzähl|erzaehl|mehr\s+dazu|mehr\s+darüber|mehr\s+darueber|mehr\s+programm|läuft|laeuft|wirklich|tatsächlich|tatsaechlich|programm|flyer|pdf|eintritt|details?|darüber|darueber)\b/iu;
+
+/** Hotel-Follow-up: Ordinal / Verifikation am offenen Hotel-Auftrag. */
+const HOTEL_ORDINAL_FOLLOW_RE =
+  /\b(?:erstes?|zweites?|drittes?|1\.|2\.|option\s*[12]|das\s+(?:erste|zweite)\s+hotel|jenes\s+hotel|dieses\s+hotel|das\s+hotel)\b/iu;
+
+const HOTEL_VERIFY_FOLLOW_RE =
+  /\b(?:wirklich|tatsächlich|tatsaechlich|hab(?:en|t)\s+(?:die|der|das))\b.*\b(?:pool|sauna|hotel|zimmer)\b|\b(?:pool|sauna)\b.*\b(?:wirklich|tatsächlich|tatsaechlich)\b/iu;
+
+/** Hotel-Retry am offenen Auftrag — Stadt (Amsterdam) behalten, kein GPS-Heimat. */
+const HOTEL_RETRY_FOLLOW_RE =
+  /\b(?:nochmal|noch\s*mal|erneut|wieder|nochmals|konkret)\b[\s\S]{0,48}\b(?:hotel|unterkunft|übernacht|uebernacht|pool|stay)\b|\b(?:hotel|unterkunft|pool)\b[\s\S]{0,48}\b(?:nochmal|noch\s*mal|erneut|suchen|raussuchen)\b/iu;
 
 /** Pitch-Follow-up: Ablehnung / mehr Optionen / Timing-Antwort nach Fork. */
 const PITCH_FOLLOW_RE =
@@ -111,6 +122,16 @@ export function detectLiveInventoryKind(
     /* soft */
   }
 
+  // Phase 6: SUP/Verleih → Activity-Inventory (nicht Dining-Pitch)
+  try {
+    const { isActivitySportQuery } = require('../../services/research/activitySportQuery') as {
+      isActivitySportQuery: (s: string) => boolean;
+    };
+    if (isActivitySportQuery(t)) return 'activity_rental';
+  } catch {
+    /* soft */
+  }
+
   const eventQ = isEventQuery(t);
   const foodTonight =
     kind === 'food' && FOOD_NOT_EVENT_RE.test(t) && !EVENT_OVERRIDE_RE.test(t);
@@ -138,6 +159,14 @@ export function isInventoryFollowUp(text: string): boolean {
   const t = (text || '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
   try {
+    const { looksLikePitchMenuFollowUp } = require('../pitch/pitchMenuFollowUp') as {
+      looksLikePitchMenuFollowUp: (s: string) => boolean;
+    };
+    if (looksLikePitchMenuFollowUp(t)) return false;
+  } catch {
+    /* soft */
+  }
+  try {
     const { isStickyVenueTaskIntent } = require('../pitch/shouldHandoffPitch') as {
       isStickyVenueTaskIntent: (s: string) => boolean;
     };
@@ -146,10 +175,17 @@ export function isInventoryFollowUp(text: string): boolean {
     /* soft */
   }
   try {
-    const { shouldPreserveFlightTripSession } = require('../../services/flights/flightTripIntent') as {
+    const {
+      shouldPreserveFlightTripSession,
+      isBareClockStickyFlightFollowUp,
+      hasStickyFlightRoot,
+    } = require('../../services/flights/flightTripIntent') as {
       shouldPreserveFlightTripSession: (s: string) => boolean;
+      isBareClockStickyFlightFollowUp: (s: string) => boolean;
+      hasStickyFlightRoot: () => boolean;
     };
     if (shouldPreserveFlightTripSession(t)) return false;
+    if (hasStickyFlightRoot() && isBareClockStickyFlightFollowUp(t)) return false;
   } catch {
     /* soft */
   }
@@ -197,6 +233,9 @@ export function isInventoryFollowUp(text: string): boolean {
   if (pending?.kind === 'pitch_choice' && PITCH_FOLLOW_RE.test(t)) {
     return true;
   }
+  if (pending?.kind === 'activity_rental' && PITCH_FOLLOW_RE.test(t)) {
+    return true;
+  }
   if (
     pending?.kind === 'pitch_choice' &&
     PITCH_TIMING_FOLLOW_RE.test(t) &&
@@ -208,6 +247,14 @@ export function isInventoryFollowUp(text: string): boolean {
     return true;
   }
   if (
+    pending?.kind === 'hotel' &&
+    (HOTEL_ORDINAL_FOLLOW_RE.test(t) ||
+      HOTEL_VERIFY_FOLLOW_RE.test(t) ||
+      HOTEL_RETRY_FOLLOW_RE.test(t))
+  ) {
+    return true;
+  }
+  if (
     pending &&
     t.length <= 40 &&
     BARE_CLOCK_FOLLOW_RE.test(t)
@@ -216,8 +263,12 @@ export function isInventoryFollowUp(text: string): boolean {
       const { getFlightTripSession } = require('../../services/flights/flightTripSession') as {
         getFlightTripSession: () => { pendingAsk?: string | null } | null;
       };
+      const { hasStickyFlightRoot } = require('../../services/flights/flightTripIntent') as {
+        hasStickyFlightRoot: () => boolean;
+      };
       const flightAsk = getFlightTripSession()?.pendingAsk;
-      if (flightAsk === 'when' || flightAsk === 'which' || flightAsk === 'luggage') {
+      // Jede offene Flug-Ask + Sticky Taxi-Root: Uhr gehört zum Flieger, nicht Pitch
+      if (flightAsk || hasStickyFlightRoot()) {
         return false;
       }
     } catch {
@@ -226,7 +277,8 @@ export function isInventoryFollowUp(text: string): boolean {
     if (
       pending.kind === 'pitch_choice' ||
       pending.kind === 'hotel' ||
-      pending.kind === 'events'
+      pending.kind === 'events' ||
+      pending.kind === 'activity_rental'
     ) {
       return true;
     }
@@ -237,7 +289,8 @@ export function isInventoryFollowUp(text: string): boolean {
     !TIME_FOLLOW_RE.test(t) &&
     !EVENT_DEEPEN_FOLLOW_RE.test(t) &&
     !PITCH_FOLLOW_RE.test(t) &&
-    !BARE_CLOCK_FOLLOW_RE.test(t)
+    !BARE_CLOCK_FOLLOW_RE.test(t) &&
+    !(pending?.kind === 'hotel' && HOTEL_RETRY_FOLLOW_RE.test(t))
   ) {
     return false;
   }
@@ -246,6 +299,7 @@ export function isInventoryFollowUp(text: string): boolean {
     TIME_FOLLOW_RE.test(t) ||
     EVENT_DEEPEN_FOLLOW_RE.test(t) ||
     (Boolean(pending) && PITCH_FOLLOW_RE.test(t)) ||
+    (pending?.kind === 'hotel' && HOTEL_RETRY_FOLLOW_RE.test(t)) ||
     (Boolean(pending) && t.length <= 40 && BARE_CLOCK_FOLLOW_RE.test(t))
   );
 }
@@ -261,6 +315,16 @@ export function resolveLiveInventoryUserText(userText: string): {
 } {
   const t = (userText || '').replace(/\s+/g, ' ').trim();
   const pending = getLastLiveInventory();
+  try {
+    const { looksLikePitchMenuFollowUp } = require('../pitch/pitchMenuFollowUp') as {
+      looksLikePitchMenuFollowUp: (s: string) => boolean;
+    };
+    if (looksLikePitchMenuFollowUp(t)) {
+      return { text: t, inherited: false, kind: null };
+    }
+  } catch {
+    /* soft */
+  }
   if (pending && isInventoryFollowUp(t)) {
     if (AFFIRM_RE.test(t)) {
       return {
@@ -291,6 +355,28 @@ export function resolveLiveInventoryUserText(userText: string): {
         kind: pending.kind,
       };
     }
+    if (PITCH_FOLLOW_RE.test(t) && pending.kind === 'activity_rental') {
+      try {
+        const { pushActivityReject } = require('../context/shortTermContext') as {
+          pushActivityReject: (n: string) => void;
+        };
+        const rejectName =
+          t.match(
+            /\b(?:mag\s+ich\s+nicht|gefällt\s+mir\s+nicht|gefaellt\s+mir\s+nicht)\b/iu,
+          ) && pending.activityVenues?.[0]?.name
+            ? pending.activityVenues[0]!.name
+            : null;
+        if (rejectName) pushActivityReject(rejectName);
+      } catch {
+        /* soft */
+      }
+      const merged = `${pending.query}. Feedback: ${t}. Andere Verleiher — Abgelehntes weglassen.`;
+      return {
+        text: merged.replace(/\s+/g, ' ').trim().slice(0, 480),
+        inherited: true,
+        kind: pending.kind,
+      };
+    }
     const merged = `${pending.query} ${t}`;
     return {
       text: merged.replace(/\s+/g, ' ').trim(),
@@ -310,10 +396,38 @@ export function mustSkipChatLane(
   analysis?: {
     chatLane?: string | null;
     blueprintId?: string | null;
+    /** Call-1 execution — chat_lane darf nicht von Heuristik gestohlen werden */
+    execution?: string | null;
   },
 ): boolean {
   const lane = analysis?.chatLane || '';
-  if (lane === 'pitch') return true;
+  const execution = String(analysis?.execution || '').toLowerCase();
+
+  // Mission place/amenity/hotel/events: nie inventing chat — auch bei Call-1 chat_lane
+  try {
+    const { resolveMissionExecutionSoft } = require('../mission/missionFamilyRouting') as {
+      resolveMissionExecutionSoft: (t: string) => {
+        execution: string | null;
+        family: string;
+      };
+    };
+    const soft = resolveMissionExecutionSoft(userText);
+    if (
+      soft.execution === 'pitch_module' ||
+      soft.execution === 'events_research'
+    ) {
+      return true;
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Call-1 hat bewusst chat/fanout gewählt → kein Pitch-Steal (Autonomy Reboot).
+  // Ausnahme: Mission-Find oben (pitch/events).
+  if (execution === 'chat_lane' || execution === 'task_fanout') {
+    return false;
+  }
+  if (lane === 'pitch' || execution === 'pitch_module') return true;
   const bp = String(analysis?.blueprintId || '');
   if (bp === 'hotel' || bp.startsWith('hotel/')) return true;
   if (bp === 'live_events' || bp.startsWith('live_events')) return true;
@@ -323,9 +437,21 @@ export function mustSkipChatLane(
     resolved.kind === 'pitch_choice' ||
     resolved.kind === 'events'
   ) {
+    // Follow-up auf offenes Inventar — ok zu skippen
+    if (resolved.inherited) return true;
+    // Frische Direct-Detect ohne Call-1-Pitch → Call-1 frei lassen
+    if (execution && execution !== 'pitch_module' && execution !== 'events_research') {
+      return false;
+    }
     return true;
   }
-  if (shouldHandoffToPitchModuleSafe(resolved.text)) return true;
+  if (shouldHandoffToPitchModuleSafe(resolved.text)) {
+    // Heuristik allein stehlt nicht mehr — nur wenn Call-1 pitch/events meint
+    if (!execution || execution === 'pitch_module' || execution === 'events_research') {
+      return true;
+    }
+    return false;
+  }
   try {
     const { isExplicitNavIntent } = require('../../services/intent/poiInfoVsNav') as {
       isExplicitNavIntent: (s: string) => boolean;

@@ -10,6 +10,7 @@
 
 import { NativeModules, Platform } from 'react-native';
 import { scheduleWakeAlarm } from './notifications/notificationService';
+import { buildWakeConfirmSpeech, formatWakeClockDe } from './alarms/wakeConfirmSpeech';
 
 export type NativeAlarmTier = 'intent_launcher' | 'kotlin' | 'notification';
 
@@ -44,6 +45,7 @@ type FindusAlarmNative = {
     status: string;
     detail?: string;
     triggerAtMs?: number;
+    clockSynced?: boolean;
   }>;
   setAlarmClockIntent?: (
     hour: number,
@@ -53,6 +55,7 @@ type FindusAlarmNative = {
     ok: boolean;
     status: string;
     detail?: string;
+    clockSynced?: boolean;
   }>;
 };
 
@@ -95,8 +98,8 @@ function formatClock(hour: number, minute: number): string {
   return `${hour}:${minute.toString().padStart(2, '0')} Uhr`;
 }
 
-function successSpeech(hour: number, minute: number, _tier: NativeAlarmTier): string {
-  return `Ich habe deinen Wecker auf ${formatClock(hour, minute)} gestellt.`;
+function successSpeech(wakeAtMs: number, _tier: NativeAlarmTier): string {
+  return buildWakeConfirmSpeech({ wakeAtMs, ok: true });
 }
 
 function nativeModule(): FindusAlarmNative | null {
@@ -104,36 +107,75 @@ function nativeModule(): FindusAlarmNative | null {
   return m?.setAlarm ? m : null;
 }
 
-/** Versuch 1: Expo IntentLauncher → SET_ALARM + SKIP_UI */
+/** Expo IntentLauncher → SET_ALARM nur an echte Uhr-Apps (nie Sleep-as-Android). */
 async function tryIntentLauncher(
   hour: number,
   minute: number,
   label: string,
-): Promise<{ ok: boolean; detail?: string }> {
+  opts?: { skipUi?: boolean },
+): Promise<{ ok: boolean; detail?: string; viaIntent?: boolean }> {
   if (Platform.OS !== 'android') {
     return { ok: false, detail: 'ios_unsupported' };
   }
-  try {
-    const IntentLauncher = await import('expo-intent-launcher');
-    await IntentLauncher.startActivityAsync('android.intent.action.SET_ALARM', {
-      extra: {
-        'android.intent.extra.alarm.HOUR': hour,
-        'android.intent.extra.alarm.MINUTES': minute,
-        'android.intent.extra.alarm.MESSAGE': label,
-        'android.intent.extra.alarm.SKIP_UI': true,
-        'android.intent.extra.alarm.VIBRATE': true,
-      },
-    });
-    return { ok: true, detail: 'intent_launcher_skip_ui' };
-  } catch (err) {
-    const detail = err instanceof Error ? err.message : String(err ?? 'intent_failed');
-    console.warn('[alarmService] IntentLauncher failed:', detail);
-    return { ok: false, detail };
+  const skipUi = opts?.skipUi !== false;
+  const extra = {
+    'android.intent.extra.alarm.HOUR': Math.floor(hour),
+    'android.intent.extra.alarm.MINUTES': Math.floor(minute),
+    'android.intent.extra.alarm.MESSAGE': label,
+    'android.intent.extra.alarm.SKIP_UI': skipUi === true,
+    'android.intent.extra.alarm.VIBRATE': true,
+  };
+
+  // Explizit — sonst greift oft com.urbandroid.sleep (Chooser/Sleep statt Google Clock).
+  const targets: Array<{ packageName: string; className: string }> = [
+    {
+      packageName: 'com.google.android.deskclock',
+      className: 'com.android.deskclock.HandleSetApiCalls',
+    },
+    {
+      packageName: 'com.google.android.deskclock',
+      className: 'com.android.deskclock.HandleApiCalls',
+    },
+    {
+      packageName: 'com.android.deskclock',
+      className: 'com.android.deskclock.HandleSetApiCalls',
+    },
+    {
+      packageName: 'com.sec.android.app.clockpackage',
+      className: 'com.sec.android.app.clockpackage.alarm.activity.AlarmCheckDialogActivity',
+    },
+  ];
+
+  const IntentLauncher = await import('expo-intent-launcher');
+  let lastDetail = 'no_clock_target';
+  for (const target of targets) {
+    try {
+      await IntentLauncher.startActivityAsync('android.intent.action.SET_ALARM', {
+        packageName: target.packageName,
+        className: target.className,
+        category: 'android.intent.category.DEFAULT',
+        extra,
+      });
+      return {
+        ok: true,
+        viaIntent: true,
+        detail: `intent_launcher_${target.packageName.split('.').pop()}_skipUi=${skipUi}`,
+      };
+    } catch (err) {
+      lastDetail =
+        err instanceof Error ? err.message : String(err ?? 'intent_failed');
+      console.warn(
+        '[alarmService] IntentLauncher target failed:',
+        target.className,
+        lastDetail,
+      );
+    }
   }
+  return { ok: false, detail: lastDetail };
 }
 
-/** Versuch 1: Kotlin AlarmManager.setAlarmClock (+ optional Clock-Sync) */
-async function tryKotlinModule(
+/** Kotlin: nur AlarmManager (kein Clock-Listeneintrag). */
+async function tryKotlinAlarmManager(
   hour: number,
   minute: number,
   label: string,
@@ -146,7 +188,6 @@ async function tryKotlinModule(
     return { ok: false, detail: 'native_module_missing' };
   }
 
-  // Primär: AlarmManager (Statusleisten-Wecker, kein OEM-Chooser)
   try {
     const res = await mod.setAlarm(hour, minute, label);
     if (res?.ok) {
@@ -160,31 +201,34 @@ async function tryKotlinModule(
     console.warn('[alarmService] Kotlin setAlarm failed:', err);
   }
 
-  // Optional: AlarmClock SKIP_UI (OEM-Uhr)
-  if (typeof mod.setAlarmClockIntent === 'function') {
-    try {
-      const clockRes = await mod.setAlarmClockIntent(hour, minute, label);
-      if (clockRes?.ok) {
-        return {
-          ok: true,
-          detail: clockRes.detail,
-          status: clockRes.status || 'alarm_clock',
-        };
-      }
-      return {
-        ok: false,
-        detail: clockRes?.detail || 'kotlin_failed',
-        status: clockRes?.status,
-      };
-    } catch (err) {
-      const detail =
-        err instanceof Error ? err.message : String(err ?? 'kotlin_error');
-      console.warn('[alarmService] setAlarmClockIntent failed:', detail);
-      return { ok: false, detail };
-    }
-  }
-
   return { ok: false, detail: 'kotlin_failed' };
+}
+
+/** Kotlin: Google Clock HandleSetApiCalls (braucht sichtbare Activity). */
+async function tryKotlinClockIntent(
+  hour: number,
+  minute: number,
+  label: string,
+): Promise<{ ok: boolean; detail?: string }> {
+  if (Platform.OS !== 'android') {
+    return { ok: false, detail: 'ios_unsupported' };
+  }
+  const mod = nativeModule();
+  if (!mod || typeof mod.setAlarmClockIntent !== 'function') {
+    return { ok: false, detail: 'clock_intent_missing' };
+  }
+  try {
+    const clockRes = await mod.setAlarmClockIntent(hour, minute, label);
+    if (clockRes?.ok) {
+      return { ok: true, detail: clockRes.detail || 'alarm_clock' };
+    }
+    return { ok: false, detail: clockRes?.detail || 'clock_intent_failed' };
+  } catch (err) {
+    const detail =
+      err instanceof Error ? err.message : String(err ?? 'clock_intent_error');
+    console.warn('[alarmService] setAlarmClockIntent failed:', detail);
+    return { ok: false, detail };
+  }
 }
 
 /** Versuch 3: In-App Local Notification */
@@ -215,8 +259,10 @@ async function tryLocalNotification(
 }
 
 /**
- * Stellt einen echten Native-Wecker mit 3-stufiger Fallback-Kette.
- * Erfolg → speech bestätigt; Misserfolg → Berechtigungs-Hinweis.
+ * Stellt einen echten Native-Wecker.
+ * Android: Kotlin FindusAlarm (Google Clock startActivity + AlarmManager).
+ * Kein expo-intent-launcher — der wartet auf Activity-Result und kann hängen.
+ * iOS: Mitteilung. LLM darf Erfolg erst nach ok=true behaupten.
  */
 export async function setNativeAlarm(
   input: SetNativeAlarmInput,
@@ -244,7 +290,7 @@ export async function setNativeAlarm(
         minute,
         wakeAtMs,
         label,
-        speech: successSpeech(hour, minute, 'notification'),
+        speech: successSpeech(wakeAtMs, 'notification'),
       };
     }
     return {
@@ -255,10 +301,19 @@ export async function setNativeAlarm(
     };
   }
 
-  // Tier 1 — Kotlin AlarmManager (zuverlässig)
-  const t1 = await tryKotlinModule(hour, minute, label);
-  if (t1.ok) {
-    void tryIntentLauncher(hour, minute, label);
+  // Primär: derselbe SET_ALARM-Befehl wie Gemini/ADB (HandleSetApiCalls → Clock-Liste)
+  console.warn(
+    '[alarmService] setNativeAlarm android',
+    hour,
+    minute,
+    'mod=',
+    !!nativeModule(),
+  );
+
+  const clockOnly = await tryKotlinClockIntent(hour, minute, label);
+  if (clockOnly.ok) {
+    // Backup Statusleisten-Wecker — Clock-Eintrag ist schon da
+    await tryKotlinAlarmManager(hour, minute, label);
     return {
       ok: true,
       tier: 'kotlin',
@@ -266,27 +321,46 @@ export async function setNativeAlarm(
       minute,
       wakeAtMs,
       label,
-      detail: t1.detail,
-      speech: successSpeech(hour, minute, 'kotlin'),
+      detail: clockOnly.detail,
+      speech: successSpeech(wakeAtMs, 'kotlin'),
     };
   }
 
-  // Tier 2 — IntentLauncher (SET_ALARM + SKIP_UI)
-  const t2 = await tryIntentLauncher(hour, minute, label);
-  if (t2.ok) {
-    return {
-      ok: true,
-      tier: 'intent_launcher',
-      hour,
-      minute,
-      wakeAtMs,
-      label,
-      detail: t2.detail,
-      speech: successSpeech(hour, minute, 'intent_launcher'),
-    };
+  // Fallback: setAlarm (Clock + AlarmManager kombiniert)
+  const mod = nativeModule();
+  if (mod) {
+    try {
+      const res = await mod.setAlarm(hour, minute, label);
+      console.warn('[alarmService] setAlarm result', res);
+      if (res?.ok && res.clockSynced === true) {
+        return {
+          ok: true,
+          tier: 'kotlin',
+          hour,
+          minute,
+          wakeAtMs,
+          label,
+          detail: res.detail,
+          speech: successSpeech(wakeAtMs, 'kotlin'),
+        };
+      }
+      if (res?.ok) {
+        return {
+          ok: true,
+          tier: 'kotlin',
+          hour,
+          minute,
+          wakeAtMs,
+          label,
+          detail: `${res.detail || 'alarm_manager'} + clock_app_not_synced`,
+          speech: `Interner Wecker um ${formatWakeClockDe(wakeAtMs)} steht — in der Uhr-App konnte ich ihn nicht eintragen.`,
+        };
+      }
+    } catch (err) {
+      console.warn('[alarmService] setAlarm failed:', err);
+    }
   }
 
-  // Tier 3 — Local Notification
   const t3 = await tryLocalNotification(wakeAtMs, label);
   if (t3.ok) {
     return {
@@ -297,14 +371,14 @@ export async function setNativeAlarm(
       wakeAtMs,
       label,
       detail: t3.detail,
-      speech: successSpeech(hour, minute, 'notification'),
+      speech: successSpeech(wakeAtMs, 'notification'),
     };
   }
 
   return {
     ok: false,
-    reason: t3.reason || t1.detail || t2.detail || 'permission',
-    detail: [t1.detail, t2.detail, t3.detail].filter(Boolean).join(' | '),
+    reason: t3.reason || clockOnly.detail || 'permission',
+    detail: [clockOnly.detail, t3.detail].filter(Boolean).join(' | '),
     speech: PERMISSION_SPEECH,
   };
 }

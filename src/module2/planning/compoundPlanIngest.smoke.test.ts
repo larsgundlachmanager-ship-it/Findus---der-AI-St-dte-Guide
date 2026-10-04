@@ -34,6 +34,12 @@ assert(
   ),
   'weather+eta no ingest',
 );
+assert(
+  shouldIngestCompoundPlan(
+    'Ich möchte am Montag nach Hamburg, gegen 9 los, typisch frühstücken, abends Pannfisch mit Blick, Michel rauf und Must-Haves — stell mir den Tag zusammen',
+  ),
+  'spoken day-plan wish without exact weave slots still ingests',
+);
 
 const plan = buildCompoundPlanFromUtterance({
   userText: HAMBURG,
@@ -45,9 +51,24 @@ const plan = buildCompoundPlanFromUtterance({
 
 assert(plan != null, 'plan built');
 assert(plan!.destinationCity === 'Hamburg', `dest=${plan!.destinationCity}`);
+{
+  const { offsetDateKey } = require('../../utils/dateKeys') as {
+    offsetDateKey: (n: number) => string;
+  };
+  assert(
+    plan!.targetDate === offsetDateKey(1),
+    `morgen beats sticky dayKeyHint, got ${plan!.targetDate}`,
+  );
+}
 assert(
   plan!.openWishesQueue.length >= 4,
   `wishes=${plan!.openWishesQueue.length} ${plan!.openWishesQueue.map((w) => w.title).join(' | ')}`,
+);
+assert(
+  plan!.openWishesQueue.filter((w) =>
+    /frühstück|fruehstueck/i.test(`${w.title} ${w.context}`),
+  ).length === 1,
+  'exactly one breakfast wish',
 );
 assert(
   plan!.openWishesQueue.some((w) =>
@@ -61,6 +82,20 @@ assert(
   ),
   'meal/michel wish',
 );
+{
+  const meal = plan!.openWishesQueue.find((w) =>
+    /pann|fisch|essen|abend/i.test(`${w.title} ${w.context}`),
+  );
+  assert(Boolean(meal), 'compound meal wish');
+  assert(
+    /elbblick|sonnenuntergang|sunset/i.test(meal!.context),
+    `meal context has elbblick/sunset: ${meal!.context}`,
+  );
+  assert(
+    !plan!.openWishesQueue.some((w) => /sonnenuntergang/i.test(w.title)),
+    'no separate sunset wish when meal present',
+  );
+}
 assert(
   plan!.openWishesQueue.some((w) =>
     /anreise|hamburg|los/i.test(`${w.title} ${w.context}`),

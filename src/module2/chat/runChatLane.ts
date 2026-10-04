@@ -16,6 +16,7 @@ import {
   FINDUS_TYPICAL_SPEECH_MAX_CHARS,
   FINDUS_CORE_WOVEN_SPEECH_BLOCK,
   FINDUS_LIVE_CHAT_HUMAN_BLOCK,
+  FINDUS_FACT_CHIP_BULLETS_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import {
   isCelestialOrSkyQuery,
@@ -70,6 +71,9 @@ export type ChatLaneInput = {
     turnsForCall2: number;
     inheritLiveInventory?: boolean;
   } | null;
+  /** Call-1 execution / lane — Heuristik darf chat nicht stehlen */
+  execution?: string | null;
+  chatLane?: string | null;
 };
 
 export type ChatLaneResult = {
@@ -432,12 +436,18 @@ export async function runChatLane(
     const { mustSkipChatLane } = require('../router/liveInventoryGate') as {
       mustSkipChatLane: (
         t: string,
-        a?: { chatLane?: string | null; blueprintId?: string | null },
+        a?: {
+          chatLane?: string | null;
+          blueprintId?: string | null;
+          execution?: string | null;
+        },
       ) => boolean;
     };
     if (
       mustSkipChatLane(userText, {
         blueprintId: input.blueprintId,
+        chatLane: input.chatLane,
+        execution: input.execution,
       })
     ) {
       // Neues Thema: Inventory-Heuristik darf Call-1 chat_lane nicht stehlen.
@@ -460,6 +470,102 @@ export async function runChatLane(
           needsResearch: input.needsResearch || 'deep',
           celestial: false,
           nextHandoff: kind === 'events' ? 'events' : 'pitch',
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Kreuzfahrt Inklusiv-FAQ (AIDA / Mein Schiff) — vor Quick-Pitch
+  try {
+    const {
+      looksLikeCruiseInclusionAsk,
+      buildCruiseInclusionsAnswer,
+    } = require('../planning/cruiseInclusionsFaq') as {
+      looksLikeCruiseInclusionAsk: (t: string) => boolean;
+      buildCruiseInclusionsAnswer: (t: string) => Promise<{
+        speech: string;
+        bullets: string[];
+        buttons: Array<{ id: string; label: string; url: string }>;
+      } | null>;
+    };
+    if (looksLikeCruiseInclusionAsk(userText)) {
+      const faq = await buildCruiseInclusionsAnswer(userText);
+      if (faq) {
+        return {
+          speech: faq.speech,
+          bullets: faq.bullets,
+          buttons: asButtons(
+            faq.buttons.map((b) => ({
+              id: b.id,
+              label: b.label,
+              url: b.url,
+            })),
+          ),
+          bridgeSpoken: null,
+          blueprintId: 'planning::cruise_inclusions_faq_v1',
+          personaVariant: input.personaVariant || 'default',
+          needsResearch: 'pack',
+          celestial: false,
+          nextHandoff: null,
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Kreuzfahrt Quick-Pitch / Schiff-Fit (shared Search-SSOT mit Reisebüro)
+  try {
+    const { buildCruiseQuickPitchFromText } = require('../planning/cruiseQuickPitch') as {
+      buildCruiseQuickPitchFromText: (t: string) => {
+        speech: string;
+        bullets: string[];
+        buttons: Array<{ id: string; label: string; url: string }>;
+        suggestReisebuero: boolean;
+        shipNames?: string[];
+      } | null;
+    };
+    const { isCruiseQuickPitch } = require('../../reisebuero/handoff') as {
+      isCruiseQuickPitch: (t: string) => boolean;
+    };
+    const { looksLikeCruiseShipFitAsk } = require('../../reisebuero/research/cruiseShipFit') as {
+      looksLikeCruiseShipFitAsk: (t: string) => boolean;
+    };
+    if (isCruiseQuickPitch(userText) || looksLikeCruiseShipFitAsk(userText)) {
+      const pitch = buildCruiseQuickPitchFromText(userText);
+      if (pitch) {
+        const shipFit = Boolean(pitch.shipNames && pitch.shipNames.length);
+        const buttons = asButtons([
+          ...pitch.buttons.map((b) => ({
+            id: b.id,
+            label: b.label,
+            url: b.url,
+          })),
+          ...(pitch.suggestReisebuero
+            ? [
+                {
+                  id: 'cruise_as_trip',
+                  label: 'Als Reise planen',
+                  textPrompt:
+                    'Plane uns die Kreuzfahrt komplett mit Flug und Hotel',
+                },
+              ]
+            : []),
+        ]);
+        return {
+          speech: pitch.speech,
+          bullets: pitch.bullets,
+          buttons,
+          bridgeSpoken: null,
+          blueprintId: shipFit
+            ? 'planning::cruise_ship_fit_v1'
+            : 'planning::cruise_quick_pitch_v1',
+          personaVariant: input.personaVariant || 'default',
+          needsResearch: 'quick',
+          celestial: false,
+          nextHandoff: null,
         };
       }
     }
@@ -501,7 +607,7 @@ export async function runChatLane(
     if (wxFast?.speech?.trim()) {
       const bridge = sanitizeBridgeText(input.bridgeFromRouter);
       const speech = wxFast.speech.slice(0, FINDUS_TYPICAL_SPEECH_MAX_CHARS);
-      const bullets = wxFast.bullets.slice(0, 3);
+      const bullets = wxFast.bullets.slice(0, 4);
       let cardTitle: string | null = null;
       try {
         const { deriveSpickzettelTitle } = require('../../services/concierge/spickzettelTitle') as {
@@ -785,7 +891,7 @@ export async function runChatLane(
         const tom = formatTomorrowWeatherChat(snap);
         if (!tom.speech.trim()) return false;
         speech = tom.speech.slice(0, FINDUS_TYPICAL_SPEECH_MAX_CHARS);
-        bullets = tom.bullets.slice(0, 3);
+        bullets = tom.bullets.slice(0, 4);
         weatherOkOutdoor = weatherOkOutdoorFromSnap(snap);
         wantsReminder = false;
         localShowHint = null;
@@ -804,7 +910,7 @@ export async function runChatLane(
         cityHint: input.cityHint,
       });
       speech = wx.speech.slice(0, FINDUS_TYPICAL_SPEECH_MAX_CHARS);
-      bullets = wx.bullets.slice(0, 3);
+      bullets = wx.bullets.slice(0, 4);
       weatherOkOutdoor = weatherOkOutdoorFromSnap(snap);
       wantsReminder = false;
       localShowHint = null;
@@ -874,7 +980,50 @@ export async function runChatLane(
       'Kompakt: max 1–2 Sätze Speech. Stichpunkte: klare Ziffern (ca. 2300, nicht „2“ + „297“).',
       /\d+\s*(?:\+|plus|minus|-)\s*\d+/iu.test(userText)
         ? 'Rechenfrage: nur die Ergebniszahl, kein Theater.'
-        : '',
+        : /\bwie\s+alt\s+ist\b/iu.test(userText)
+          ? (() => {
+              let humor = false;
+              try {
+                const { getCachedUserProfile } = require('../../services/userProfileService') as {
+                  getCachedUserProfile: () => { humorOk?: boolean } | null;
+                };
+                humor = Boolean(getCachedUserProfile()?.humorOk);
+              } catch {
+                humor = false;
+              }
+              return [
+                'Alter-Frage: Speech nur „N Jahre alt.“',
+                'Titel = Alter vom [Person/Amt] (z. B. Alter vom Papst Leo XIV) — nie = Stichpunkt.',
+                'Stichpunkte: 1) N Jahre alt 2) geboren am: Datum in Ort wenn belegt',
+                humor
+                  ? '3) optional ein belegter Fun-Fakt wenn er zur Persona passt — sonst weglassen.'
+                  : '3) kein erzwungener Fun-Fakt (Humor aus).',
+                'Speech liest Bullets nicht vor.',
+              ].join(' ');
+            })()
+          : /\b(hektar|quadrat|fläche|flaeche|wie\s+(?:groß|gross)|tennis|alster)\b/iu.test(userText)
+            ? (() => {
+                let humor = false;
+                try {
+                  const { getCachedUserProfile } = require('../../services/userProfileService') as {
+                    getCachedUserProfile: () => { humorOk?: boolean } | null;
+                  };
+                  humor = Boolean(getCachedUserProfile()?.humorOk);
+                } catch {
+                  humor = false;
+                }
+                return [
+                  'Größen-/Maß-Frage: Speech knapper Kernsatz mit Ziffern (nie nur ausgeschrieben).',
+                  'Titel = Größe der/des [Ort] (z. B. Größe der Alster) — nie = Stichpunkt, nie Speech-Kopie.',
+                  'Stichpunkte: 1) Maßzahl zuerst (z. B. 1,6 km² oder Außenalster: 1,6 km²)',
+                  '2) zweite belegte Teilfläche/Maße wenn vorhanden (Binnenalster / Einzelfeld)',
+                  humor
+                    ? '3) optional ein belegter Fun-Fakt wenn Persona/Humor passt — sonst weglassen.'
+                    : '3) kein erzwungener Fun-Fakt (Humor aus).',
+                  'Speech liest Bullets nicht vor.',
+                ].join(' ');
+              })()
+            : '',
     ]
       .filter(Boolean)
       .join(' ');
@@ -931,7 +1080,17 @@ export async function runChatLane(
         companionBlock ? '' : FINDUS_BRIDGE_CONTINUITY_BLOCK,
         companionBlock
           ? ''
-          : 'Trivia/Fakten: direkte Zahl/Name zuerst; 1–2 belegte Fun-Facts ok; KEINE Regie/Stimm-Anweisungen im Text; Bridge nicht wiederholen.',
+          : 'Trivia/Fakten: Bridge hat die Antwort schon eingeleitet — Call-2 hängt NUR den Kern an (Alter = „N Jahre alt.“; Rechnung = nur Zahl). Kein Meta, keine spannende Frage, keine Bio/Geburtsdatum außer gefragt. Amtstitel selbst auflösen. Bridge nicht wiederholen. Stichpunkte: 1–3 klare Fakten (Zahl zuerst).',
+        companionBlock
+          ? ''
+          : /\b(papst|pope)\b/iu.test(userText)
+            ? 'Papst: LIVE googlen — aktueller Papst ist Leo XIV (nicht Franziskus, außer User fragt historisch). Follow-up „ist das der aktuelle?“ / „wer ist Papst?“ = Name + ggf. Alter. Nie leere Speech, nie Klärfrage welchen Papst.'
+            : '',
+        companionBlock
+          ? ''
+          : /(?:älteste|aelteste)/iu.test(userText)
+            ? 'Älteste Person/Mensch: lebende Rekordhalter:in LIVE googlen. Call-1-Lead „Der derzeit älteste lebende Mensch der Welt ist“ — Call-2 Name. Nie „wen meinst du?“. Stichpunkte: Alter + Geburtsdatum.'
+            : '',
         companionBlock ? '' : WEITERDENKEN,
         companionBlock ? '' : cityRegelwerk,
         companionBlock ? '' : input.cityHint ? `Ort: ${input.cityHint}` : '',
@@ -945,7 +1104,7 @@ export async function runChatLane(
           : '',
         '',
         'SPEECH: ...',
-        'BULLET: ...',
+        'BULLET: ... (genau 3 Zeilen BULLET:; kurze vollständige Fakten zur Frage — Name/Zahl zuerst; je max ~56 Zeichen; kein abgeschnittener Fließtext; 1–2 Extra-Fakten über Speech ok wenn belegt)',
         companionBlock ? '' : 'WANT_REMINDER: yes|no',
         companionBlock ? '' : 'LOCAL_SHOW: ...|none',
         '',
@@ -973,10 +1132,27 @@ export async function runChatLane(
         .trim()
         .slice(0, FINDUS_TYPICAL_SPEECH_MAX_CHARS);
       speech = stripChatLaneMeta(speech);
-      bullets = [...text.matchAll(/BULLET:\s*(.+)/giu)]
-        .map((m) => stripChatLaneMeta(m[1]!.trim()).slice(0, 100))
-        .filter(Boolean)
-        .slice(0, 3);
+      try {
+        const {
+          rewriteBulletToFit,
+          BULLET_SURFACE_MAX_CHARS,
+        } = require('../../services/concierge/visualBullets') as {
+          rewriteBulletToFit: (s: string, n: number) => string;
+          BULLET_SURFACE_MAX_CHARS: { default: number };
+        };
+        const cap = BULLET_SURFACE_MAX_CHARS.default;
+        bullets = [...text.matchAll(/BULLET:\s*(.+)/giu)]
+          .map((m) =>
+            rewriteBulletToFit(stripChatLaneMeta(m[1]!.trim()), cap),
+          )
+          .filter(Boolean)
+          .slice(0, 3);
+      } catch {
+        bullets = [...text.matchAll(/BULLET:\s*(.+)/giu)]
+          .map((m) => stripChatLaneMeta(m[1]!.trim()).slice(0, 72))
+          .filter(Boolean)
+          .slice(0, 3);
+      }
       wantsReminder = /\bWANT_REMINDER:\s*yes\b/i.test(text);
       const showM = text.match(/LOCAL_SHOW:\s*(.+)/i);
       const showRaw = showM?.[1]?.trim() || '';
@@ -994,6 +1170,7 @@ export async function runChatLane(
       FINDUS_SPEECH_LENGTH_BLOCK,
       FINDUS_CORE_WOVEN_SPEECH_BLOCK,
       FINDUS_BRIDGE_CONTINUITY_BLOCK,
+      FINDUS_FACT_CHIP_BULLETS_BLOCK,
       FINDUS_JUST_DO_IT_BLOCK,
       buildPersonalityMatrixPromptBlock(getCachedUserProfile()),
       liveTurn ? FINDUS_LIVE_CHAT_HUMAN_BLOCK : '',
@@ -1006,7 +1183,10 @@ export async function runChatLane(
       placeGo || forbidQuick
         ? '- speech: durchgehender Fließtext (Persona aus Einstellungen), klare Empfehlung + was einen erwartet + Distanz wenn bekannt. Gesamtpaket, nicht aufblähen. 1–3 bullets. Nie „Soll ich raussuchen?“.'
         : `- speech: durchgehender Fließtext, mündlich, Persona aus den Einstellungen. ${FINDUS_SPEECH_LENGTH_BLOCK}`,
-      '- bullets: max 3, Zahlen als Ziffern (27. März 1986, 39 Jahre). Speech darf ausschreiben. Alter-Frage → Alter-Stichpunkt.',
+      quick
+        ? '- QUICK-LOOKUP/Trivia: BRIDGE_ALREADY war Antwort-Einleitung — speech hängt nur den gefragten Kern an (Alter-Frage → „X Jahre“ + Name). Keine Bio/Geburtsdatum/Karriere außer Profil detailed oder User fragt danach. Keine Klärfrage. Max ~2 Sätze. bullets = FACT-CHIPS (Alter zuerst), keine Speech-Kopie.'
+        : '',
+      '- bullets: FACT-CHIPS (siehe STICHPUNKTE = FACT-CHIPS) — parallel zur speech, nie Speech zusammenfassen. 2–4 Chips (Programm bis 7). Bullet 1 = direkte Antwort; Rest = scanbare Extra-Fakten. Zahlen als Ziffern. Je max ~56 Zeichen / ~2 UI-Zeilen, nie mitten abbrechen. Alter → Alter zuerst.',
       '- actions nur echte URLs oder Erinnern mit konkretem Ort/Zeit (sonst kein Reminder)',
       /fähr|faehr|ferry/iu.test(userText)
         ? '- Fähre/Tickets: actions OPEN_URL zur belegten Reederei-/Ticketseite aus TOOL_CONTEXT (nicht bahn.de-Tafeln).'
@@ -1035,12 +1215,17 @@ export async function runChatLane(
       const raw = await generateGeminiText(prompt, {
         task: 'generic',
         tier: needsResearch === 'deep' ? 'pro' : 'lite',
-        maxTokens: 1200,
+        maxTokens: quick ? 500 : 1200,
         temperature: 0.45,
         responseJson: true,
         jsonMimeOnly: true,
         useFindusSystem: false,
-        enableGoogleSearch: /\b(wetter|temperatur)\b/iu.test(userText),
+        enableGoogleSearch:
+          quick ||
+          isQuickLookupQuery(userText) ||
+          /\b(wetter|temperatur|einwohner|papst|pope|älteste|aelteste)\b/iu.test(
+            userText,
+          ),
         signal: input.signal,
       });
       const parsed = parseJsonObject(raw || '');
@@ -1231,7 +1416,7 @@ export async function runChatLane(
   }
   if (offer?.kind === 'pitch' && !nextHandoff) nextHandoff = 'pitch';
   if (eventDeep && !nextHandoff) nextHandoff = 'events';
-  if (placeGo && !nextHandoff) nextHandoff = 'pitch';
+  // placeGo → kein Auto-Pitch-Handoff (Call-1 frei / Autonomy Reboot)
 
   try {
     setLastTopic(

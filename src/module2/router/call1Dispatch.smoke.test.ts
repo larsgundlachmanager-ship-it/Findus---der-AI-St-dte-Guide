@@ -73,10 +73,10 @@ assert.equal(
 
 assert.equal(
   shouldSpeakManagerBridge(
-    baseAnalysis({ session: 'continue', bridge: 'Noch da.' }),
+    baseAnalysis({ session: 'continue', bridge: 'Noch da — ich halte den SUP-Faden.' }),
   ),
-  false,
-  'no bridge on continue',
+  true,
+  'Call-1 bridge speaks on continue',
 );
 
 assert.equal(
@@ -147,46 +147,55 @@ assert.equal(
 assert.equal(
   finalizeCall1Execution(
     baseAnalysis({
-      execution: 'plan_module',
       chatLane: 'plan',
       session: 'new',
     }),
     'In zwei Wochen fahre ich für ein Wochenende nach Lissabon',
   ),
   'reisebuero',
-  'named weekend trip → reisebuero not local plan',
+  'named weekend trip (no explicit exec) → reisebuero soft',
 );
 
 assert.equal(
   finalizeCall1Execution(
     baseAnalysis({
-      execution: 'flight_advisor',
+      execution: 'plan_module',
+      chatLane: 'plan',
+      session: 'new',
+    }),
+    'In zwei Wochen fahre ich für ein Wochenende nach Lissabon',
+  ),
+  'plan_module',
+  'explicit plan_module wins over reisebuero soft',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
       chatLane: 'plan',
       session: 'new',
     }),
     'Plane mir einen Wochenendurlaub nach Lissabon: Flug Hamburg, Hotel und grobes Programm',
   ),
   'reisebuero',
-  'Wochenendurlaub+Flug → reisebuero beats flight_advisor',
+  'Wochenendurlaub+Flug (no explicit) → reisebuero soft',
 );
 
 assert.equal(
   finalizeCall1Execution(
     baseAnalysis({
-      execution: 'reisebuero',
       chatLane: 'plan',
       session: 'new',
     }),
     'Samstagabend wäre cool Live Musik — was kannst du mir vorschlagen?',
   ),
   'plan_walkthrough',
-  'stay-day fill does not open reisebuero',
+  'stay-day fill (no explicit) → plan_walkthrough soft',
 );
 
 assert.equal(
   finalizeCall1Execution(
     baseAnalysis({
-      execution: 'reisebuero',
       chatLane: 'pitch',
       session: 'new',
       jobHint: 'stay_search',
@@ -194,20 +203,33 @@ assert.equal(
     'Hotel Freitag bis Sonntag mit Pool und Sauna unter 500 Euro',
   ),
   'pitch_module',
-  'local hotel amenities → pitch not reisebuero',
+  'local hotel amenities (no explicit) → pitch soft',
 );
 
 assert.equal(
   finalizeCall1Execution(
     baseAnalysis({
-      execution: 'plan_module',
+      execution: 'reisebuero',
+      chatLane: 'plan',
+      session: 'new',
+      jobHint: 'stay_search',
+    }),
+    'Hotel Freitag bis Sonntag mit Pool und Sauna unter 500 Euro',
+  ),
+  'reisebuero',
+  'local hotel: explicit reisebuero wins (soft enrich only)',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
       chatLane: 'plan',
       session: 'new',
     }),
     'Ich plane ein Wochenende in London — Hotel mit guter Lage',
   ),
   'reisebuero',
-  'wochenende + named city → reisebuero',
+  'wochenende + named city (no explicit) → reisebuero soft',
 );
 
 assert.equal(
@@ -220,6 +242,32 @@ assert.equal(
   ),
   'events_research',
   'named schedule → events_research',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'reisebuero',
+      chatLane: 'plan',
+      session: 'new',
+    }),
+    'Wir sind vom 16. bis 20. in Korbach — was für Events gibt es da?',
+  ),
+  'events_research',
+  'date window + city + Events → events_research (not reisebuero)',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'reisebuero',
+      chatLane: 'plan',
+      session: 'new',
+    }),
+    'Wir sind vom 16. bis 20. in Korbach und wollen wissen was da los ist',
+  ),
+  'events_research',
+  'date window + was da los → events_research',
 );
 
 assert.equal(
@@ -337,6 +385,46 @@ assert.equal(
   'nav_execute',
   'explicit nav beats pitch/pack story',
 );
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      chatLane: 'chat',
+      session: 'new',
+    }),
+    'Ich möchte gerne morgen abend all xou can eat essen gehen',
+  ),
+  'pitch_module',
+  'ayce essen gehen: soft pitch when no explicit exec',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      execution: 'chat_lane',
+      chatLane: 'chat',
+      session: 'new',
+    }),
+    'Ich möchte gerne morgen abend all xou can eat essen gehen',
+  ),
+  'pitch_module',
+  'ayce: safety overrides explicit chat_lane (no Goldschätzchen soft-fill)',
+);
+
+assert.equal(
+  finalizeCall1Execution(
+    baseAnalysis({
+      chatLane: 'chat',
+      session: 'new',
+      blueprintId: 'weather',
+    }),
+    'Wo kann ich heute Abend all you can eat essen gehen?',
+  ),
+  'pitch_module',
+  'AYCE tonight soft beats weather blueprint when no explicit',
+);
+
+
 
 assert.equal(
   shouldSpeakManagerBridge(

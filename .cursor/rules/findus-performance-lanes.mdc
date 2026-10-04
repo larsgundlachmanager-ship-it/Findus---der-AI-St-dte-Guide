@@ -19,6 +19,8 @@ SSOT-Gate: `src/services/boot/interactiveBootGate.ts` (`mic > overlays > mapCore
 
 ## Pflicht
 
+Mic, Zurück, Timeline und Einstellungen haben **immer** Vorrang vor Fog, Orte-Nachladen und Hydrate. Das gilt für die ganze Zeit, in der sie offen sind — kein Failsafe darf das Laden wieder starten, solange Mic zuhört/spricht oder Timeline/Einstellungen sichtbar sind. Zurück parkt das Laden bei jedem Druck. Die Karte selbst (Pan, GPS-Puck) bleibt anfassbar.
+
 - Settings/Timeline: Place-Popup **sofort schließen**; Chrome-zIndex **über** Map-Popup (`placePopup < hud < overlay`). Place-Popup nie `absoluteFill` über Dock/Mic.
 - Mic: `setIsListening(true)` sync im Press-In; Map-Polish/Hydrate erst danach.
 - Ambient/Live-Research: bei `isGenerating` / Mic / Speaking **keine** neue Recherche.

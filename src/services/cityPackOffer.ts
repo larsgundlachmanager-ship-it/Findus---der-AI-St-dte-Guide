@@ -113,6 +113,12 @@ export async function maybeCityPackOfferForText(
     /* soft */
   }
   try {
+    const { isFlightTripQuery } = await import('../flights/flightTripIntent');
+    if (isFlightTripQuery(text)) return null;
+  } catch {
+    /* soft */
+  }
+  try {
     const { isSupermarketOfferQuery } = await import(
       './research/supermarketProspectGates'
     );
@@ -238,31 +244,37 @@ let lastSwitchPrompt: {
     cityId: string;
     accepted: boolean;
     soft: boolean;
+    blocked?: boolean;
+    lane?: string;
   };
 } | null = null;
 
 /**
- * Hotel/Recherche in fremder Stadt.
- * Soft (kein Pack): still Arbeitsstadt setzen — kein Popup, keine Switch-Speech.
- * Katalog-Pack: Speech + Wechsel-Popup.
- * null = gleiche Stadt / keine Zielstadt / Amenity-Müll.
+ * Hotel/Recherche in fremder Stadt — Vier-Lane-Gesetz (cityResearchLane).
+ *
+ * - installed / ghost / travel_plan / reisebuero → cityHint, Home bleibt
+ * - requires_download → Speech + Download-Karte; Pack auf Disk ohne Profil-Wechsel
+ * - Soft/Geist: nie Popup, nie auswählbar machen (nur Such-Bias)
+ * null = keine Zielstadt / Amenity-Müll / gleiche Stadt ohne Offer
  */
 export async function promptDestinationCitySwitch(opts: {
   text: string;
   intent?: DestinationSwitchIntent;
+  /** true = nur Such-Bias, nie Download-Karte (Reisebüro / Caller) */
+  searchBiasOnly?: boolean;
 }): Promise<{
   cityName: string;
   cityId: string;
   accepted: boolean;
   soft: boolean;
+  /** requires_download abgelehnt → Caller stoppt Recherche */
+  blocked?: boolean;
+  lane?: string;
 } | null> {
-  const offer = await maybeCityPackOfferForText(opts.text, {
-    evenIfCached: true,
-    intent: opts.intent ?? 'research',
-  });
-  if (!offer) return null;
+  const { resolveCityResearchLane } = await import('./cityResearchLane');
+  const lane = await resolveCityResearchLane(opts.text);
 
-  const key = `${offer.city.id}:${opts.intent ?? 'research'}`;
+  const key = `${lane.kind}:${lane.cityId || 'x'}:${opts.intent ?? 'research'}:${opts.searchBiasOnly ? 'bias' : 'gate'}`;
   if (
     lastSwitchPrompt &&
     lastSwitchPrompt.key === key &&
@@ -271,34 +283,81 @@ export async function promptDestinationCitySwitch(opts: {
     return lastSwitchPrompt.result;
   }
 
-  try {
-    const { clearCityPackOffer } = await import(
-      '../module2/context/shortTermContext'
-    );
-    clearCityPackOffer();
-  } catch {
-    /* soft */
+  if (
+    lane.kind === 'exempt' &&
+    (lane.reason === 'no_city' ||
+      lane.reason === 'amenity_blob' ||
+      lane.reason === 'outfit_weather')
+  ) {
+    return null;
   }
 
-  // Soft-Stadt ohne Datensatz: still im Hintergrund — nie Popup.
-  if (offer.soft) {
-    await acceptCityPackOffer(offer.city.id, offer.city.name);
+  // Reiseplan / gleiche Stadt / installed: Bias, Home unverändert
+  // searchBiasOnly überspringt KEINE Download-Pflicht (nur Caller-Hinweis)
+  if (lane.kind === 'exempt' || lane.kind === 'installed') {
+    if (!lane.cityName || !lane.cityId) return null;
     const result = {
-      cityName: offer.city.name,
-      cityId: offer.city.id,
+      cityName: lane.cityName,
+      cityId: lane.cityId,
       accepted: true,
-      soft: true,
+      soft: lane.kind === 'exempt',
+      lane: lane.kind,
     };
     lastSwitchPrompt = { key, atMs: Date.now(), result };
     return result;
   }
 
+  // Geist: Recherche OK, still — nie Soft-Working / nie Popup
+  if (lane.kind === 'ghost') {
+    const result = {
+      cityName: lane.cityName!,
+      cityId: lane.cityId!,
+      accepted: true,
+      soft: true,
+      lane: 'ghost',
+    };
+    lastSwitchPrompt = { key, atMs: Date.now(), result };
+    return result;
+  }
+
+  // requires_download — einziges Mal: Download erzwingen
+  const city = lane.catalog;
+  if (!city || !lane.cityName || !lane.cityId) return null;
+
+  try {
+    const { clearCityPackOffer, noteCityPackOffer } = await import(
+      '../module2/context/shortTermContext'
+    );
+    clearCityPackOffer();
+    const profile = getCachedUserProfile();
+    const speechHint = destinationSwitchSpeech({
+      cityName: lane.cityName,
+      activeName: String(profile?.cityName || '').trim() || null,
+      firstName: String(profile?.firstName || '').trim() || null,
+      intent: 'download',
+    });
+    noteCityPackOffer({
+      cityId: lane.cityId,
+      cityName: lane.cityName,
+      speechHint,
+    });
+  } catch {
+    /* soft */
+  }
+
+  const speechHint = destinationSwitchSpeech({
+    cityName: lane.cityName,
+    activeName: String(getCachedUserProfile()?.cityName || '').trim() || null,
+    firstName: String(getCachedUserProfile()?.firstName || '').trim() || null,
+    intent: 'download',
+  });
+
   try {
     const { enqueueSpeech } = await import('../module2/speech/speechQueue');
     enqueueSpeech({
       kind: 'main',
-      text: offer.speechHint,
-      turnId: `city_switch_${offer.city.id}`,
+      text: speechHint,
+      turnId: `city_download_${lane.cityId}`,
     });
   } catch {
     /* soft */
@@ -306,15 +365,12 @@ export async function promptDestinationCitySwitch(opts: {
 
   let accepted = false;
   try {
-    const { getCachedUserProfile: profileNow } = await import(
-      './userProfileService'
-    );
     const { presentCityPackSwitchCard } = await import(
       './cityProximityService'
     );
-    const profile = profileNow();
+    const profile = getCachedUserProfile();
     const decision = await presentCityPackSwitchCard({
-      target: offer.city,
+      target: city,
       activeId: profile?.cityId,
       activeName: String(profile?.cityName || '').trim() || 'deiner Stadt',
       softTarget: false,
@@ -325,14 +381,32 @@ export async function promptDestinationCitySwitch(opts: {
   }
 
   if (accepted) {
-    await acceptCityPackOffer(offer.city.id, offer.city.name);
+    // Nur auf Disk — Selected-/Home-Stadt (Modul 1) bleibt
+    try {
+      const { ensureBrowseCityPackOnDevice } = await import(
+        './cityCatalogService'
+      );
+      await ensureBrowseCityPackOnDevice(lane.cityId);
+    } catch {
+      /* soft — Fallback Full-Install ohne Profil-Zwang */
+      try {
+        await installCityPack(lane.cityId, {
+          checkRemote: true,
+          reason: 'install',
+        });
+      } catch {
+        /* soft */
+      }
+    }
   }
 
   const result = {
-    cityName: offer.city.name,
-    cityId: offer.city.id,
+    cityName: lane.cityName,
+    cityId: lane.cityId,
     accepted,
     soft: false,
+    blocked: !accepted,
+    lane: 'requires_download',
   };
   lastSwitchPrompt = { key, atMs: Date.now(), result };
   return result;

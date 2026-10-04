@@ -63,6 +63,14 @@ async function speakLeaveLine(planLabel: string, arriveLocal: string): Promise<v
 export async function tickDeadlineWatcher(): Promise<void> {
   const now = Date.now();
   if (now - lastTickMs < TICK_GAP_MS) return;
+  try {
+    const { isOpenQuietActive } = require('../navigation/modulePriorityPolicy') as {
+      isOpenQuietActive: (n?: number) => boolean;
+    };
+    if (isOpenQuietActive(now)) return;
+  } catch {
+    /* soft */
+  }
   lastTickMs = now;
   if (firing) return;
 

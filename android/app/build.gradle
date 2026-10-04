@@ -91,8 +91,8 @@ android {
         applicationId 'de.findus.app'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 53
-        versionName "2.0.26"
+        versionCode 138
+        versionName "2.0.111"
     }
     signingConfigs {
         debug {
@@ -133,12 +133,12 @@ android {
             } else if (isEas) {
                 // Cloud build without local keystore.properties (gitignored).
                 // Configure Play upload key via: npx eas-cli credentials -p android
-                // Until then Gradle must still configure — EAS may also patch signing later.
-                logger.warn("EAS_BUILD without keystore.properties / ANDROID_KEYSTORE_PATH — using debug signing. Run 'eas credentials -p android' to attach your Play upload key.")
+                // Until then Gradle must still configure Ã¢â‚¬â€ EAS may also patch signing later.
+                logger.warn("EAS_BUILD without keystore.properties / ANDROID_KEYSTORE_PATH Ã¢â‚¬â€ using debug signing. Run 'eas credentials -p android' to attach your Play upload key.")
                 signingConfig signingConfigs.debug
             } else {
                 throw new GradleException(
-                    "Missing android/keystore.properties — required for Play upload signing."
+                    "Missing android/keystore.properties Ã¢â‚¬â€ required for Play upload signing."
                 )
             }
             shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
@@ -205,3 +205,4 @@ dependencies {
         implementation jscFlavor
     }
 }
+

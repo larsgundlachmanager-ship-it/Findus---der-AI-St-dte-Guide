@@ -54,21 +54,19 @@ export async function commitHandsFreeNavStart(
     resetHandsFreeEta('walk');
   }
   try {
+    // Route-Loading reicht — volles isGenerating blockiert Mic/Chrome und stapelt bei Mode-Switch.
     useFinnusStore.getState().setNavRouteLoading(true);
-    useFinnusStore.getState().setIsGenerating(true);
   } catch {
-    useFinnusStore.setState({ navRouteLoading: true, isGenerating: true });
+    useFinnusStore.setState({ navRouteLoading: true });
   }
   try {
     const res = await resolveAndStartNavigation(input, opts);
     return res;
   } finally {
     try {
-      useFinnusStore.getState().setIsGenerating(false);
       const st = useFinnusStore.getState();
       if (!st.navActive) st.setNavRouteLoading(false);
     } catch {
-      useFinnusStore.setState({ isGenerating: false });
       const st = useFinnusStore.getState();
       if (!st.navActive) {
         useFinnusStore.setState({ navRouteLoading: false });

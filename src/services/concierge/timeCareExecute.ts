@@ -77,12 +77,189 @@ export async function executeTransitAndOptionalWake(
     care?.kind === 'wake';
 
   const departureMs = extractTransitDepartureMs(t);
+
+  // Härten: Ziel + Bahn/Zug → Live-Verbindung + Timeline (auch bei genannter Uhrzeit).
+  try {
+    const {
+      wantsDestinationJourney,
+      prepareTransitFollowUp,
+    } = await import('../transit/transitAdvisor');
+    let normalizeTrainScheduleQuery = (s: string) => s;
+    try {
+      ({ normalizeTrainScheduleQuery } = require('../../module2/timeline/travelScheduleHarden') as {
+        normalizeTrainScheduleQuery: (s: string) => string;
+      });
+    } catch {
+      /* soft */
+    }
+    if (wantsDestinationJourney(t)) {
+      const follow = await prepareTransitFollowUp(normalizeTrainScheduleQuery(t));
+      if (follow) {
+        const liveDep =
+          follow.advice.departures?.find((d) => !d.cancelled)?.when ??
+          follow.advice.departures?.[0]?.when ??
+          null;
+        const depMs =
+          liveDep instanceof Date && Number.isFinite(liveDep.getTime())
+            ? liveDep.getTime()
+            : departureMs;
+        const walkMin =
+          follow.advice.walkMinutes != null &&
+          Number.isFinite(follow.advice.walkMinutes)
+            ? Math.max(3, Math.round(follow.advice.walkMinutes))
+            : DEFAULT_TRANSIT_WALK_MIN;
+        let leaveSpeech = '';
+        let leaveBullets: string[] = [];
+        if (depMs != null) {
+          const leave = computeLeaveByMs({
+            departureMs: depMs,
+            walkEtaMinutes: walkMin,
+            safetyBufferMin: DEFAULT_SAFETY_BUFFER_MIN,
+            minLeadMs: 30_000,
+          });
+          if (leave) {
+            try {
+              const { registerDepartureWatch } = await import(
+                '../logistics/logisticsTriggerEngine'
+              );
+              registerDepartureWatch({
+                eventId: `voice-transit:${depMs}`,
+                title: transitModeFromText(t) === 'bus' ? 'Bus' : 'Bahn',
+                departureMs: depMs,
+                walkEtaMin: walkMin,
+                mode: transitModeFromText(t) === 'bus' ? 'bus' : 'train',
+                detail: t.slice(0, 120),
+                scheduleOsPush: true,
+              });
+            } catch {
+              /* soft */
+            }
+            leaveSpeech = ` Leave-by ${formatClockDe(leave.leaveByMs)}.`;
+            leaveBullets = [
+              `🚪 Leave-by ${formatClockDe(leave.leaveByMs)}`,
+              `Fuß ~${walkMin} Min`,
+            ];
+          }
+        }
+        try {
+          const { requestOpenPlanCalendar } =
+            require('../../module2/timeline/planCalendarUiStore') as {
+              requestOpenPlanCalendar: () => void;
+            };
+          requestOpenPlanCalendar();
+        } catch {
+          /* soft */
+        }
+        const speechCore = /timeline|eingetragen|kalender/i.test(follow.reply)
+          ? follow.reply
+          : `${follow.reply} Liegt in der Timeline.`;
+        return {
+          kind:
+            care?.kind === 'compound_wake_transit'
+              ? 'compound_wake_transit'
+              : 'transit_leave',
+          speech: `${speechCore}${leaveSpeech}`.trim(),
+          bullets: [
+            follow.advice.stationName
+              ? `🚏 ${follow.advice.stationName}`
+              : 'ÖPNV',
+            follow.advice.arrivalLabel
+              ? `→ ${follow.advice.arrivalLabel}`
+              : '',
+            ...leaveBullets,
+          ]
+            .filter(Boolean)
+            .slice(0, 4),
+          quickActions: (() => {
+            const acts: QuickAction[] = follow.offerNavigation
+              ? [
+                  {
+                    type: 'START_NAVIGATION' as const,
+                    label: follow.advice.hasJourneyNav
+                      ? 'ÖPNV starten'
+                      : `Route ${follow.advice.stationName}`,
+                    payload: {
+                      destLat: follow.advice.stationPoi.lat,
+                      destLng: follow.advice.stationPoi.lng,
+                      destName: follow.advice.stationName,
+                      targetPoiId: follow.advice.stationPoi.id,
+                      journeyNav: follow.advice.hasJourneyNav === true,
+                    },
+                  },
+                ]
+              : [];
+            try {
+              const dest = (
+                follow.advice.arrivalLabel ||
+                follow.advice.destinationHint ||
+                ''
+              ).trim();
+              const from = (follow.advice.stationName || '').trim();
+              const dep =
+                follow.advice.departures?.find((d) => !d.cancelled)?.when ??
+                follow.advice.departures?.[0]?.when ??
+                null;
+              if (dest && from) {
+                const {
+                  buildDbBookingOpenUrl,
+                } = require('../transit/transitTicketFareParse') as {
+                  buildDbBookingOpenUrl: (o: {
+                    fromName: string;
+                    toName: string;
+                    departAt?: Date | null;
+                    line?: string | null;
+                    userText?: string | null;
+                  }) => { url: string; label: string } | null;
+                };
+                const book = buildDbBookingOpenUrl({
+                  fromName: from,
+                  toName: dest,
+                  departAt: dep instanceof Date ? dep : null,
+                  line: follow.advice.departures?.[0]?.line ?? null,
+                  userText: t,
+                });
+                if (book) {
+                  acts.push({
+                    type: 'OPEN_URL' as const,
+                    label: `🎫 ${book.label}`,
+                    payload: { url: book.url },
+                  });
+                }
+              }
+            } catch {
+              /* soft */
+            }
+            return acts;
+          })(),
+          cardTitle: wantWake ? 'Bahn + Wecker' : 'Verbindung',
+        };
+      }
+      // Soft: Ziel genannt, aber keine Live-Verbindung — ehrlich statt stillem Leave-by
+      try {
+        const { explainDestinationJourneyMiss } = await import('../transit/transitAdvisor');
+        const miss = await explainDestinationJourneyMiss(t);
+        return {
+          kind: 'transit_leave',
+          speech: miss.speech,
+          bullets: miss.bullets,
+          quickActions: [],
+          cardTitle: 'Verbindung',
+        };
+      } catch {
+        /* soft */
+      }
+    }
+  } catch {
+    /* soft → Leave-by / Live-Fallback */
+  }
+
   if (departureMs == null) {
     // Live-ÖPNV-Pfad (Haltestelle / nächste Bahn)
     try {
       const { prepareTransitFollowUp } = await import('../transit/transitAdvisor');
       const follow = await prepareTransitFollowUp(t);
       if (!follow) return null;
+
 
       // Compound ohne Uhr: nach Leave-by aus Catch-my-Bus Wecker setzen
       if (wantWake) {
@@ -144,6 +321,9 @@ export async function executeTransitAndOptionalWake(
             : 'ÖPNV',
           follow.advice.walkMinutes != null
             ? `Fuß ~${follow.advice.walkMinutes} Min`
+            : '',
+          follow.advice.arrivalLabel
+            ? `→ ${follow.advice.arrivalLabel}`
             : '',
         ].filter(Boolean),
         quickActions: follow.offerNavigation

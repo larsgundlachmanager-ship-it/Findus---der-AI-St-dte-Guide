@@ -1,0 +1,13 @@
+Minimieren
+Gehe zu Einstellungen > Telefoninfo > Softwareinformationen und tippe dort 7-mal hintereinander auf Buildnummer. Anschließend findest du ganz unten im Hauptmenü der Einstellungen die Entwickleroptionen, in denen du USB-Debugging aktivieren kannst.
+Die Chats deiner Organisation werden nicht zur Optimierung unserer Modelle verwendet. Gemini ist eine KI und kann Fehler machen, auch bei Informationen über Personen. Datenschutz und Gemini
+Frag Gemini
+Ziehpunkt
+Gute Antwort
+Schlechte Antwort
+Text kopieren
+Mögliche Aktionen
+Anhören
+Anhang hinzufügen
+Mikrofon
+Open Gemini Live

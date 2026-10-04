@@ -1,6 +1,7 @@
 /**
  * Günstige Flüge: Google-Suche (Grounding) mit Google Flights + Skyscanner als Ziel.
  * Danach Buchungs-Buttons (Kiwi vorgefüllt, optional Airline) — kein Google-Flights-Klick.
+ * Qualität: 1–2 sinnvolle Optionen, keine Horror-Dauer/Overnight-Layover.
  */
 
 import type { QuickAction } from '../../types/concierge';
@@ -20,16 +21,23 @@ import {
   isAirlineBookUrl,
   parseResearchDateKey,
 } from './cheapFlightBook';
+import { isSaneFlightOption } from './cheapFlightQuality';
+export { isSaneFlightOption, MAX_GOOD_FLIGHT_DURATION_MIN } from './cheapFlightQuality';
 
 export type CheapFlightResearch = {
   speech: string;
   bullets: string[];
   dateKey: string | null;
+  returnDateKey: string | null;
   priceEur: number | null;
   airline: string | null;
   ident: string | null;
   clockHm: string | null;
   airlineUrl: string | null;
+  /** Umstiege — nur belegt, sonst null. */
+  stops: number | null;
+  /** Flugdauer Minuten — nur belegt. */
+  durationMin: number | null;
   evidenced: boolean;
   actions: QuickAction[];
 };
@@ -77,6 +85,25 @@ function parseClockHm(raw: unknown): string | null {
   return `${String(h).padStart(2, '0')}:${m[2]}`;
 }
 
+function parseStops(raw: unknown): number | null {
+  if (typeof raw === 'number' && Number.isFinite(raw) && raw >= 0 && raw <= 4) {
+    return Math.round(raw);
+  }
+  return null;
+}
+
+function parseDurationMin(raw: unknown): number | null {
+  if (
+    typeof raw === 'number' &&
+    Number.isFinite(raw) &&
+    raw > 0 &&
+    raw < 48 * 60
+  ) {
+    return Math.round(raw);
+  }
+  return null;
+}
+
 function pickAirlineUrl(
   fromJson: unknown,
   grounding: string[],
@@ -86,11 +113,18 @@ function pickAirlineUrl(
   return grounding.find((u) => isAirlineBookUrl(u)) ?? null;
 }
 
+function formatDuration(min: number): string {
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return h > 0 ? `Dauer ca. ${h} Std${m ? ` ${m} Min` : ''}` : `Dauer ca. ${m} Min`;
+}
+
 export async function researchCheapFlights(opts: {
   originIata: string;
   destIata: string;
   destCity?: string | null;
   dateKey?: string | null;
+  returnDateKey?: string | null;
   monthHint?: string | null;
   userText?: string | null;
 }): Promise<CheapFlightResearch | null> {
@@ -99,27 +133,34 @@ export async function researchCheapFlights(opts: {
   const to = opts.destIata.trim().toUpperCase();
   const dest = (opts.destCity || to).trim();
   const when =
-    opts.dateKey ||
-    (opts.monthHint ? `im ${opts.monthHint}` : 'flexibler Zeitraum, günstigster Tag');
+    opts.dateKey && opts.returnDateKey
+      ? `Hin ${opts.dateKey}, Rück ${opts.returnDateKey}`
+      : opts.dateKey ||
+        (opts.monthHint ? `im ${opts.monthHint}` : 'flexibler Zeitraum, günstigster Tag');
   const gUrl = buildGoogleFlightsSearchUrl({
     originIata: from,
     destIata: to,
     dateKey: opts.dateKey,
+    returnDateKey: opts.returnDateKey,
   });
   const sUrl = buildSkyscannerSearchUrl({
     originIata: from,
     destIata: to,
-    dateKey: opts.dateKey,
+    dateKey: opts.dateKey
   });
 
   const prompt = [
     FINDUS_FEW_SHOT_DISCLAIMER,
     `Recherche günstige Linienflüge ${from} → ${to} (${dest}), ${when}.`,
-    'Ablauf (Struktur, Wortlaut frei): Google-Suche mit Ziel Google Flights und Skyscanner → günstigster belegter Tag/Preis/Airline → denselben Tag bei der Airline nur wenn eine Quelle das hergibt.',
+    'Ablauf (Struktur, Wortlaut frei): Google-Suche mit Ziel Google Flights und Skyscanner → 1–2 gute belegte Verbindungen (Preis + Dauer + Stops).',
+    'Qualität (hart): bevorzuge Direkt oder max. 1 Stop. Gesamtflugzeit typisch unter ~12–14 Std für diese Distanz. VERBOTEN als Hauptpitch: 20+ Std, 50-Std-Monster, Overnight-Layover-Horror, 3+ Stops — außer es gibt wirklich nichts Besseres, dann ehrlich sagen und die beste erträgliche Alternative nennen.',
+    'Pitch genau 1–2 Optionen (beste günstige + ggf. etwas teurer aber deutlich kürzer/direkt). Nie zwei Städte als Optionen.',
     'Du klickst keine JavaScript-Kalender. Du nutzt Google-Suche/Grounding. Nichts erfinden. evidenced=true nur bei belegtem Preis oder Tag aus der Suche.',
+    'Stichpunkte (max 3): Zeiten · Stops/Direkt · Dauer — nur Belegtes.',
+    'Speech Ende (Struktur): kurz andeuten, dass wir danach Hotel/Rest im Planer klären können — Wortlaut frei, kein Permission-Quiz.',
     gUrl ? `Google-Flights-Suche: ${gUrl}` : '',
     sUrl ? `Skyscanner-Suche: ${sUrl}` : '',
-    'JSON: {"speech":"Antwort zuerst: belegter Best-Preis für die Reisenden, ggf. vs. billigste und kürzeste Verbindung (Dauer+Preis nur belegt). Buchen über die Buttons, kein Google-Flights-Klick. Nie nur ein Ab-Teaser.","bullets":["max 3"],"cheapestDay":"YYYY-MM-DD"|null,"priceEur":null,"airline":null,"ident":null,"clockHm":null,"airlineUrl":null,"evidenced":false}',
+    'JSON: {"speech":"Antwort zuerst: 1–2 gute Verbindungen mit Preis/Dauer/Stops (belegt). Buttons zum Buchen. Nie Orts-Pitch.","bullets":["Zeiten …","Stops …","Dauer …"],"cheapestDay":"YYYY-MM-DD"|null,"returnDay":"YYYY-MM-DD"|null,"priceEur":null,"airline":null,"ident":null,"clockHm":null,"stops":null,"durationMin":null,"airlineUrl":null,"option2":{"priceEur":null,"stops":null,"durationMin":null,"clockHm":null,"airline":null}|null,"evidenced":false}',
   ]
     .filter(Boolean)
     .join('\n');
@@ -127,7 +168,7 @@ export async function researchCheapFlights(opts: {
   const raw = await generateGeminiText(prompt, {
     task: 'generic',
     enableGoogleSearch: true,
-    maxTokens: 800,
+    maxTokens: 900,
     temperature: 0.2,
     useFindusSystem: false,
   });
@@ -139,44 +180,80 @@ export async function researchCheapFlights(opts: {
 
   const dateKey =
     parseResearchDateKey(parsed?.cheapestDay) || opts.dateKey || null;
-  const priceEur = parsePriceEur(parsed?.priceEur);
+  const returnDateKey =
+    parseResearchDateKey(parsed?.returnDay) || opts.returnDateKey || null;
+  let priceEur = parsePriceEur(parsed?.priceEur);
   const airline =
     typeof parsed?.airline === 'string' && parsed.airline.trim().length >= 2
       ? parsed.airline.trim().slice(0, 40)
       : null;
   const ident = parseIdent(parsed?.ident);
   const clockHm = parseClockHm(parsed?.clockHm);
+  let stops = parseStops(parsed?.stops);
+  let durationMin = parseDurationMin(parsed?.durationMin);
+
+  // Wenn Primary Horror ist und Option2 besser: Primary-Fakten aus option2 übernehmen
+  const opt2 =
+    parsed?.option2 && typeof parsed.option2 === 'object'
+      ? (parsed.option2 as Record<string, unknown>)
+      : null;
+  if (
+    opt2 &&
+    !isSaneFlightOption({ durationMin, stops }) &&
+    isSaneFlightOption({
+      durationMin: parseDurationMin(opt2.durationMin),
+      stops: parseStops(opt2.stops),
+    })
+  ) {
+    durationMin = parseDurationMin(opt2.durationMin) ?? durationMin;
+    stops = parseStops(opt2.stops) ?? stops;
+    priceEur = parsePriceEur(opt2.priceEur) ?? priceEur;
+  }
+
   const evidenced = Boolean(dateKey || priceEur || ident);
   const airlineUrl = pickAirlineUrl(parsed?.airlineUrl, grounding);
-  const bullets = Array.isArray(parsed?.bullets)
+  let bullets = Array.isArray(parsed?.bullets)
     ? (parsed.bullets as unknown[])
         .map((b) => String(b).trim())
         .filter(Boolean)
         .slice(0, 3)
     : [];
+  if (bullets.length < 2) {
+    const syn: string[] = [];
+    if (clockHm) syn.push(`Abflug ca. ${clockHm}`);
+    if (stops != null) syn.push(stops === 0 ? 'Direktflug' : `${stops} Stop${stops === 1 ? '' : 's'}`);
+    if (durationMin != null) syn.push(formatDuration(durationMin));
+    if (priceEur != null) syn.push(`ab ca. ${priceEur} €`);
+    if (syn.length) bullets = syn.slice(0, 3);
+  }
 
   const actions = dateKey
     ? buildCheapFlightBookActions({
         originIata: from,
         destIata: to,
         dateKey,
+        returnDateKey,
         ident,
         clockHm,
         airlineUrl,
         airlineName: airline,
         userText: opts.userText,
+        kiwiPriceEur: priceEur,
       })
     : [];
 
   return {
-    speech: speech.slice(0, 900),
+    speech: speech.slice(0, 1000),
     bullets,
     dateKey,
+    returnDateKey,
     priceEur,
     airline,
     ident,
     clockHm,
     airlineUrl,
+    stops,
+    durationMin,
     evidenced,
     actions,
   };

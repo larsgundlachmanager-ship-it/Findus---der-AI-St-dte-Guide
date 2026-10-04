@@ -20,6 +20,8 @@ const finished = {
 };
 
 assert(!profileHasFinishedSetup(draft), 'draft unfinished');
+assert(draft.voiceId === 'sebastian', 'default voice sebastian');
+assert(draft.coreRole === 'classic_guide', 'default role classic guide');
 assert(profileHasFinishedSetup(finished), 'finished');
 
 const older = '2026-01-01T00:00:00.000Z';

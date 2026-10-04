@@ -14,6 +14,20 @@ export async function startLiveSpeechSession(
 ): Promise<void> {
   // Dieselbe fused Session (Bridge = Satz 1) nicht ein zweites Mal öffnen.
   if (pump.hasStarted()) return;
+  // Ideal: Bridge dieses Turns schon committed → Main nur hinter die Queue, keine Dual-Session.
+  // TTS_SENTENCE_PIPELINE_LOCK — Pipeline nicht umbauen.
+  try {
+    const { fusedBridgeCommitted } = require('../speech/fusedTurnSpeech') as {
+      fusedBridgeCommitted: () => boolean;
+    };
+    if (fusedBridgeCommitted()) {
+      if (!pump.markStarted()) return;
+      enqueueSpeech({ kind: 'main', text: firstSentence, turnId });
+      return;
+    }
+  } catch {
+    /* soft */
+  }
   if (!pump.markStarted()) return;
   // Eine Session: Fast-Hook = oft die Bridge. Kein Wait auf eine zweite Playback.
   // TTS_SENTENCE_PIPELINE_LOCK

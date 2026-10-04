@@ -122,9 +122,13 @@ assert(
 assert(!machineGateSlot('x', 'kurz'), 'gate reject short');
 
 // --- Bridge sanitize ---
-assert(sanitizeBridgeText('ich schau mal') == null, 'wait bridge killed');
-assert(sanitizeBridgeText('ich check das kurz') == null, 'check bridge killed');
-assert(sanitizeBridgeText('Moment ich bin dran') == null, 'dran bridge killed');
+assert(Boolean(sanitizeBridgeText('ich schau mal')), 'wait bridge kept (Call 1)');
+assert(Boolean(sanitizeBridgeText('ich check das kurz')), 'check bridge kept');
+assert(Boolean(sanitizeBridgeText('Moment ich bin dran')), 'dran bridge kept');
+assert(
+  Boolean(sanitizeBridgeText('Klar, ich guck kurz nach dem Wetter.')),
+  'weather bridge kept',
+);
 assert(
   Boolean(sanitizeBridgeText('Wir wollen nicht, dass du frierst.')),
   'content bridge kept',

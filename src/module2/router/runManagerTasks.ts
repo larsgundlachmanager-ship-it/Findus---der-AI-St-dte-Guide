@@ -9,6 +9,7 @@ import { runFactLanes } from '../reboot/factLaneRegistry';
 import { classifyJob } from '../jobs/classifyJob';
 import type { FindusJobId } from '../jobs/types';
 import type { ManagerAnalysis, ManagerTask, ManagerTaskResult } from './types';
+import { resolveCall1TaskHonor } from './call1TaskHonor';
 import {
   wantsLiveChatVoiceCommand,
   wantsStopLiveChatVoiceCommand,
@@ -70,6 +71,28 @@ async function runOneTask(opts: {
   } catch {
     /* soft */
   }
+  try {
+    const {
+      looksLikeDeepWebManagerTask,
+      deepWebTaskBudgetMs,
+    } = require('./call1DeepWebWorker') as {
+      looksLikeDeepWebManagerTask: (
+        t: { id?: string; brief?: string; lane?: string },
+        u?: string,
+      ) => boolean;
+      deepWebTaskBudgetMs: (o?: { researchBudgetSec?: number | null }) => number;
+    };
+    if (looksLikeDeepWebManagerTask(opts.task, opts.userText)) {
+      cap = Math.max(
+        cap,
+        deepWebTaskBudgetMs({
+          researchBudgetSec: opts.analysis.researchBudgetSec,
+        }),
+      );
+    }
+  } catch {
+    /* soft */
+  }
 
   if (opts.signal?.aborted) {
     return {
@@ -80,6 +103,252 @@ async function runOneTask(opts: {
       buttons: [],
       elapsedMs: 0,
     };
+  }
+
+  // Call-1 Worker-Hooks: Memory-Recall / Deep-Web (Brief-fähig)
+  try {
+    const brief = String(opts.task.brief || opts.userText || '');
+    const { wantsMemoryRecall, researchMemoryRecall } = require('./call1MemoryRecallWorker') as {
+      wantsMemoryRecall: (s: string) => boolean;
+      researchMemoryRecall: (o: {
+        userText: string;
+        signal?: AbortSignal;
+      }) => Promise<{
+        spokenDraft: string;
+        bullets: string[];
+        ok: boolean;
+      }>;
+    };
+    if (
+      wantsMemoryRecall(opts.userText) ||
+      /memory_recall|gestern\s+essen|call1Worker:\s*memory_recall/i.test(brief)
+    ) {
+      const mem = await researchMemoryRecall({
+        userText: opts.userText,
+        signal: opts.signal,
+      });
+      return {
+        task: opts.task,
+        status: 'ok',
+        draftText: mem.spokenDraft,
+        bullets: mem.bullets,
+        buttons: [],
+        meta: { call1Worker: 'memory_recall' },
+        elapsedMs: Date.now() - started,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const brief = String(opts.task.brief || '');
+    const { wantsDeepWebBooking, researchDeepWebBooking } = require('./call1DeepWebWorker') as {
+      wantsDeepWebBooking: (s: string) => boolean;
+      researchDeepWebBooking: (o: {
+        userText: string;
+        cityHint?: string | null;
+        wantBookingLink?: boolean;
+        authorIntent?: string | null;
+        mustKeys?: string[] | null;
+        budgetMs?: number;
+        signal?: AbortSignal;
+      }) => Promise<{
+        ok: boolean;
+        spokenDraft: string;
+        bullets: string[];
+        buttons: Array<{ id: string; label: string; url?: string }>;
+        passes?: number;
+      }>;
+    };
+    const briefWantsDeep =
+      /deep_web|charter|wangerooge|insel\s+flug|wantBookingLink/i.test(brief);
+    if (briefWantsDeep || wantsDeepWebBooking(opts.userText)) {
+      const wantBook =
+        Boolean(opts.task.filters?.wantBookingLink) ||
+        /wantBookingLink/i.test(brief) ||
+        wantsDeepWebBooking(opts.userText);
+      const mustKeys = String(opts.task.filters?.mustKeys || '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+      const deep = await researchDeepWebBooking({
+        userText: opts.userText,
+        cityHint: opts.city,
+        wantBookingLink: wantBook,
+        authorIntent: opts.analysis.authorIntent || opts.analysis.intentSummary,
+        mustKeys: mustKeys.length ? mustKeys : null,
+        budgetMs: Math.max(8_000, cap - 400),
+        signal: opts.signal,
+      });
+      return {
+        task: opts.task,
+        status: 'ok',
+        draftText: deep.spokenDraft,
+        bullets: deep.bullets,
+        buttons: deep.buttons.map((b) => ({
+          id: b.id,
+          label: b.label,
+          url: b.url,
+          payload: {
+            kind: 'deep_link' as const,
+            url: b.url!,
+            destName: b.label,
+          },
+        })),
+        meta: {
+          call1Worker: 'deep_web',
+          controlDistanceThin: !deep.ok,
+          deepWebPasses: deep.passes ?? 1,
+        },
+        elapsedMs: Date.now() - started,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Call-1 Worker-Hooks: Identify / Map-Pin / Voice / Device
+  try {
+    const brief = String(opts.task.brief || opts.userText || '');
+    const { wantsIdentifyNearby, researchIdentifyNearby } = require('./call1IdentifyNearbyWorker') as {
+      wantsIdentifyNearby: (s: string) => boolean;
+      researchIdentifyNearby: (o: {
+        userText: string;
+        cityHint?: string | null;
+        rucksack?: unknown;
+        signal?: AbortSignal;
+      }) => Promise<{
+        spokenDraft: string;
+        bullets: string[];
+        buttons: Module2ActionButton[];
+      }>;
+    };
+    if (
+      wantsIdentifyNearby(opts.userText) ||
+      /identify_nearby/i.test(brief)
+    ) {
+      const idn = await researchIdentifyNearby({
+        userText: opts.userText,
+        cityHint: opts.city,
+        rucksack: opts.rucksack,
+        signal: opts.signal,
+      });
+      return {
+        task: opts.task,
+        status: 'ok',
+        draftText: idn.spokenDraft,
+        bullets: idn.bullets,
+        buttons: idn.buttons,
+        meta: { call1Worker: 'identify_nearby' },
+        elapsedMs: Date.now() - started,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const brief = String(opts.task.brief || opts.userText || '');
+    const { wantsMapPin, researchMapPin } = require('./call1MapPinWorker') as {
+      wantsMapPin: (s: string) => boolean;
+      researchMapPin: (o: {
+        userText: string;
+        cityHint?: string | null;
+        lat?: number | null;
+        lng?: number | null;
+        signal?: AbortSignal;
+      }) => Promise<{
+        spokenDraft: string;
+        bullets: string[];
+        buttons: Module2ActionButton[];
+      }>;
+    };
+    if (wantsMapPin(opts.userText) || /map_pin/i.test(brief)) {
+      const gps = opts.rucksack?.gpsHistory?.at(-1);
+      const pin = await researchMapPin({
+        userText: opts.userText,
+        cityHint: opts.city,
+        lat: gps?.lat ?? null,
+        lng: gps?.lng ?? null,
+        signal: opts.signal,
+      });
+      return {
+        task: opts.task,
+        status: 'ok',
+        draftText: pin.spokenDraft,
+        bullets: pin.bullets,
+        buttons: pin.buttons,
+        meta: { call1Worker: 'map_pin' },
+        elapsedMs: Date.now() - started,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const brief = String(opts.task.brief || opts.userText || '');
+    const {
+      wantsVoiceSettings,
+      wantsDeviceTravelMode,
+      researchVoiceSettings,
+      researchDeviceTravelMode,
+    } = require('./call1VoiceDeviceWorker') as {
+      wantsVoiceSettings: (s: string) => boolean;
+      wantsDeviceTravelMode: (s: string) => boolean;
+      researchVoiceSettings: (o: {
+        userText: string;
+        signal?: AbortSignal;
+      }) => Promise<{
+        spokenDraft: string;
+        bullets: string[];
+        buttons: Module2ActionButton[];
+        kind: string;
+      }>;
+      researchDeviceTravelMode: (o: {
+        userText: string;
+        signal?: AbortSignal;
+      }) => Promise<{
+        spokenDraft: string;
+        bullets: string[];
+        buttons: Module2ActionButton[];
+        kind: string;
+      }>;
+    };
+    if (wantsVoiceSettings(opts.userText) || /voice_settings/i.test(brief)) {
+      const voice = await researchVoiceSettings({
+        userText: opts.userText,
+        signal: opts.signal,
+      });
+      if (voice.kind === 'voice') {
+        return {
+          task: opts.task,
+          status: 'ok',
+          draftText: voice.spokenDraft,
+          bullets: voice.bullets,
+          buttons: voice.buttons,
+          meta: { call1Worker: 'voice_settings' },
+          elapsedMs: Date.now() - started,
+        };
+      }
+    }
+    if (wantsDeviceTravelMode(opts.userText) || /device_action/i.test(brief)) {
+      const device = await researchDeviceTravelMode({
+        userText: opts.userText,
+        signal: opts.signal,
+      });
+      if (device.kind === 'device') {
+        return {
+          task: opts.task,
+          status: 'ok',
+          draftText: device.spokenDraft,
+          bullets: device.bullets,
+          buttons: device.buttons,
+          meta: { call1Worker: 'device_action' },
+          elapsedMs: Date.now() - started,
+        };
+      }
+    }
+  } catch {
+    /* soft */
   }
 
   if (opts.task.lane === 'instagram') {
@@ -124,43 +393,65 @@ async function runOneTask(opts: {
     }
   }
 
-  let jobHint = (opts.analysis.jobHint ||
-    classifyJob(opts.userText).jobId) as FindusJobId;
-  let secondaryJobIds: FindusJobId[] = [];
+  const forceRaw =
+    wantsLiveChatVoiceCommand(opts.userText) ||
+    wantsStopLiveChatVoiceCommand(opts.userText);
+  const honor = resolveCall1TaskHonor({
+    task: opts.task,
+    userText: opts.userText,
+    analysis: opts.analysis,
+    forceRawUserText: forceRaw,
+  });
+
+  let jobHint = honor.jobHint;
+  let secondaryJobIds: FindusJobId[] = honor.secondaryJobIds;
   let thinkAhead = opts.task.thinkAhead
     ? (['outfit_from_plan_and_weather'] as const).slice()
     : [];
   let skipTimeout = false;
+
+  // Call-1 Brief/Lane klar → kein Re-Classify am Rohsatz (sonst klaut Taxi Dining).
+  if (!honor.honoredCall1) {
+    try {
+      const { dispatchJobsForUtterance } = require('../reboot/pipeline/dispatchJobs') as {
+        dispatchJobsForUtterance: (s: string) => FindusJobId[];
+      };
+      const ids = dispatchJobsForUtterance(opts.userText);
+      if (ids.length) {
+        jobHint = ids[0]!;
+        secondaryJobIds = ids.slice(1);
+        skipTimeout = ids.length > 1;
+      }
+    } catch {
+      /* soft — classifyJob fallback */
+    }
+    if (!opts.analysis.jobHint) {
+      try {
+        jobHint = classifyJob(opts.userText).jobId;
+      } catch {
+        /* soft */
+      }
+    }
+  }
+
   try {
-    const { dispatchJobsForUtterance } = require('../reboot/pipeline/dispatchJobs') as {
-      dispatchJobsForUtterance: (s: string) => FindusJobId[];
-    };
     const { orchestrateUtterance } = require('../reboot/pipeline/orchestrateSlots') as {
       orchestrateUtterance: (s: string) => { thinkAhead: string[] };
     };
     const { thinkAheadToLaneHints } = require('../reboot/pipeline/thinkAheadCode') as {
       thinkAheadToLaneHints: (ids: string[]) => string[];
     };
-    const ids = dispatchJobsForUtterance(opts.userText);
-    if (ids.length) {
-      jobHint = ids[0]!;
-      secondaryJobIds = ids.slice(1);
-      skipTimeout = ids.length > 1;
-    }
     thinkAhead = [
       ...thinkAhead,
-      ...thinkAheadToLaneHints(orchestrateUtterance(opts.userText).thinkAhead as never),
+      ...thinkAheadToLaneHints(
+        orchestrateUtterance(honor.classifyText).thinkAhead as never,
+      ),
     ];
   } catch {
-    /* soft — classifyJob fallback */
+    /* soft */
   }
 
-  // Live-Chat-Kurzbefehl ohne Task-Suffix; sonst Brief für Lane-Kontext
-  const laneUserText =
-    wantsLiveChatVoiceCommand(opts.userText) ||
-    wantsStopLiveChatVoiceCommand(opts.userText)
-      ? opts.userText
-      : `${opts.userText}\n\n[TASK ${opts.task.id}] ${opts.task.brief}`;
+  const laneUserText = honor.laneUserText;
   const work = (async (): Promise<ManagerTaskResult> => {
     try {
       const { result } = await runFactLanes({
@@ -172,6 +463,18 @@ async function runOneTask(opts: {
         subject: opts.subject,
         city: opts.city,
         signal: opts.signal,
+        call1DestCity:
+          opts.analysis.cityScope?.researchCity ||
+          opts.analysis.frame?.destCity ||
+          opts.analysis.cityScope?.cityId ||
+          opts.city ||
+          null,
+        call1MustHaves: [
+          ...(opts.analysis.mustHaves ?? []),
+          ...(opts.analysis.frame?.mustHaves ?? []),
+        ],
+        call1Criteria: opts.analysis.criteria ?? null,
+        authorIntent: opts.analysis.authorIntent ?? null,
       });
       return {
         task: opts.task,
@@ -183,7 +486,10 @@ async function runOneTask(opts: {
           label: b.label,
           payload: b.payload,
         })),
-        meta: result.meta as Record<string, unknown> | undefined,
+        meta: {
+          ...(result.meta as Record<string, unknown> | undefined),
+          honoredCall1: honor.honoredCall1,
+        },
         agent: result.agent,
         elapsedMs: Date.now() - started,
       };
@@ -230,10 +536,10 @@ function mergeResults(
 ): AgentResult {
   const ok = results.filter((r) => r.status === 'ok' && r.draftText.trim());
   const timed = results.filter((r) => r.status === 'timeout');
-  const parts = ok.map(
-    (r) =>
-      `### ${r.task.id} (${r.task.lane}${r.task.thinkAhead ? ', thinkAhead' : ''})\n${r.task.brief}\n${r.draftText}`,
-  );
+  const parts = ok.map((r) => {
+    const honor = r.meta?.honoredCall1 === true ? ', honoredCall1' : '';
+    return `### ${r.task.id} (${r.task.lane}${r.task.thinkAhead ? ', thinkAhead' : ''}${honor})\n${r.task.brief}\n${r.draftText}`;
+  });
   if (timed.length) {
     parts.push(
       `### LÜCKEN (Timeout)\n${timed.map((t) => t.task.id).join(', ')} — nicht erfinden.`,
@@ -338,6 +644,7 @@ function mergeResults(
       openLoops: analysis.openLoops,
       needsLiveResearch: analysis.lanePlan === 'fast_then_spoken_slow',
       concrete_place: ok.some((r) => r.meta?.concrete_place === true),
+      honoredCall1: ok.some((r) => r.meta?.honoredCall1 === true),
       pendingSilentSlow: analysis.tasks
         .filter((t) => t.priority === 'silent_slow')
         .map((t) => t.id),
@@ -432,6 +739,28 @@ export async function runManagerTaskFanout(opts: {
           /nav_|aldi|lidl/i.test(task.id)
         ) {
           slotMs = Math.max(slotMs, 12_000);
+        }
+        try {
+          const {
+            looksLikeDeepWebManagerTask,
+            deepWebTaskBudgetMs,
+          } = require('./call1DeepWebWorker') as {
+            looksLikeDeepWebManagerTask: (
+              t: { id?: string; brief?: string; lane?: string },
+              u?: string,
+            ) => boolean;
+            deepWebTaskBudgetMs: (o?: { researchBudgetSec?: number | null }) => number;
+          };
+          if (looksLikeDeepWebManagerTask(task, opts.userText)) {
+            slotMs = Math.max(
+              slotMs,
+              deepWebTaskBudgetMs({
+                researchBudgetSec: opts.analysis.researchBudgetSec,
+              }),
+            );
+          }
+        } catch {
+          /* soft */
         }
       } catch {
         /* soft */

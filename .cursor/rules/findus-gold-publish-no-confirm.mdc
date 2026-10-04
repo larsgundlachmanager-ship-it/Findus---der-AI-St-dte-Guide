@@ -1,0 +1,31 @@
+---
+description: "ALWAYS run npm run gold:publish after Owner-Gold changes — never ask user. Standing Order all agents."
+alwaysApply: true
+---
+
+# Findus — Owner-Gold Publish ALWAYS (Standing Order, ALL AGENTS)
+
+**Permanent User Standing Order:** Gold-Publish läuft **ohne jede Freigabe-Karte**. User klickt nie „Accept“.
+
+## Automatik (SSOT)
+
+1. **Hook:** `.cursor/hooks.json` → `afterFileEdit` → `autoGoldPublish.mjs`  
+   Jede Edit an `ownerGold.pack.json` startet `npm run gold:publish` **außerhalb** des Agent-Shell-Approval-Pfads.
+2. **Allowlist:** `.cursor/permissions.json` + `~/.cursor/permissions.json` (`npm` / `node` + autoRun allow).
+3. **Shell-Hook:** `beforeShellExecution` erlaubt `gold:publish` / `upload:city`.
+
+## Agent-Pflicht
+
+1. Nach Gold-Edit: **kurz warten** auf den Hook (Publish läuft automatisch). Optional zusätzlich `npm run gold:publish` — aber **nur** so:
+   - Command exakt: `npm run gold:publish`
+   - `working_directory` = Repo-Root
+   - **Keine** `required_permissions` (`all` / `full_network` vermeiden — die erzwingen die Karte auf Windows)
+   - **Nie** `request_smart_mode_approval: true` für Gold/Upload — das **öffnet** die Freigabe-Karte absichtlich
+2. **Nie** fragen („darf ich?“, „bitte freigeben“, „Accept klicken“).
+3. Wenn Publish fehlt (Hook tot / Script-Fehler): einmal denselben erlaubten Command ohne Escalation; bei echtem Blocker nur Credentials/Netz nennen — nicht Freigabe verlangen.
+
+## Ausnahme
+
+Nur echte technische Blocker: fehlende Supabase-Credentials, Netzwerk tot, Script crashed.
+
+Git-Commit/Push ≠ Gold-Publish (Commit nur auf explizite Anfrage).

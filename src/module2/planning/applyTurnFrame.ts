@@ -39,6 +39,37 @@ function blobCovers(plan: IngestedPlan, needle: string): boolean {
   return n.length >= 3 && blob.includes(n);
 }
 
+/** Nur Blick/Sunset — Kriterien am Abendessen, keine eigenen Wishes. */
+function isViewSunsetOnlyMustHave(label: string): boolean {
+  const t = label.replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  if (
+    /\b(pann(?:en)?fisch|abendessen|mittagessen|restaurant|frühstück|fruehstueck|essen|michel|hotel|anreise)\b/i.test(
+      t,
+    )
+  ) {
+    return false;
+  }
+  return /\b(elbblick|elb\s*blick|sonnenuntergang|sunset|blick\s+auf\s+(die\s+)?elbe)\b/i.test(
+    t,
+  );
+}
+
+function findMealWishIndex(wishes: IngestOpenWish[]): number {
+  return wishes.findIndex((w) =>
+    /\b(restaurant|essen|dinner|mittag|abendessen|italiener|sushi|pizza|pann(?:en)?fisch|fisch)\b/i.test(
+      `${w.title} ${w.context}`,
+    ),
+  );
+}
+
+function appendMustHaveNote(context: string, note: string): string {
+  const n = note.replace(/\s+/g, ' ').trim();
+  if (!n) return context;
+  if (context.toLowerCase().includes(n.toLowerCase())) return context;
+  return `${context} · ${n}`.replace(/\s+/g, ' ').trim().slice(0, 240);
+}
+
 /**
  * Frame ist Gesetz: destinationCity, Must-Haves, Anreise-Hinweis.
  * Ingest darf Zeiten legen, nicht die Zielstadt überschreiben.
@@ -62,15 +93,25 @@ export function applyTurnFrameToPlan(
   if (dest) {
     next = { ...next, destinationCity: dest };
   }
+  let wishes = [...next.openWishesQueue];
   const extra: IngestOpenWish[] = [];
   for (const mh of frame.mustHaves) {
-    if (!blobCovers(next, mh)) extra.push(wishFromMustHave(mh, dest));
+    if (blobCovers({ ...next, openWishesQueue: wishes }, mh)) continue;
+    if (isViewSunsetOnlyMustHave(mh)) {
+      const mealIdx = findMealWishIndex(wishes);
+      if (mealIdx >= 0) {
+        wishes[mealIdx] = {
+          ...wishes[mealIdx]!,
+          context: appendMustHaveNote(wishes[mealIdx]!.context, mh),
+        };
+        continue;
+      }
+    }
+    extra.push(wishFromMustHave(mh, dest));
   }
-  if (extra.length) {
-    next = {
-      ...next,
-      openWishesQueue: [...next.openWishesQueue, ...extra],
-    };
-  }
+  next = {
+    ...next,
+    openWishesQueue: [...wishes, ...extra],
+  };
   return next;
 }

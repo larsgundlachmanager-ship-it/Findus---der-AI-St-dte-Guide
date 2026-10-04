@@ -45,6 +45,22 @@ create index if not exists weather_cache_expires_at_idx
 alter table public.weather_cache enable row level security;
 -- No anon/authenticated policies: only service_role via weather-forecast Edge Function.
 
+-- Shared Regen-Radar Nowcast: 1 Bright-Sky / ~1 km Zelle / TTL (~5 Min)
+create table if not exists public.rain_nowcast_cache (
+  cache_key text primary key,
+  lat double precision not null,
+  lng double precision not null,
+  payload jsonb not null,
+  fetched_at timestamptz not null default now(),
+  expires_at timestamptz not null
+);
+
+create index if not exists rain_nowcast_cache_expires_at_idx
+  on public.rain_nowcast_cache (expires_at);
+
+alter table public.rain_nowcast_cache enable row level security;
+-- service_role only via rain-nowcast Edge Function
+
 -- V7.0 Monthly City Clean-Up registry (server metadata check only — no client polling)
 create table if not exists public.city_cleanup_registry (
   city_id text primary key,

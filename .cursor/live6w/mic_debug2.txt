@@ -1,0 +1,27 @@
+nodes=61
+True|Kostenlos Boot auf der Elbe? Tippen: Tipps. Wischen: nächste Karte. Unten: Timel|
+False||Kostenlos Boot auf der Elbe?
+False||Mit dem normalen HVV-Ticket kannst du di
+True|⛅ Wechselhaft · 16°. Tippen: Wetter und Tipps. Wischen: nächste Karte.|
+False||⛅ Wechselhaft · 16°
+False||bis 20° · Regen ab 20:00
+True|Kostenlos Boot auf der Elbe? Tippen: Tipps. Wischen: nächste Karte. Unten: Timel|
+False||Kostenlos Boot auf der Elbe?
+False||Mit dem normalen HVV-Ticket kannst du di
+True|Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pin|
+False||0 von 33 Orten · 0 % erkundet
+True|Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte fol|
+False||
+True|Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung|
+True|Kompass kalibrieren|
+True|Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat|
+False||
+True|Timeline und Routenplanung|
+False||
+False||Timeline
+True|Orte finden|
+False||
+False||Orte
+True|Einstellungen|
+False||
+False||Einst.

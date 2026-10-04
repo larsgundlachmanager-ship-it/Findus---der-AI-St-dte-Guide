@@ -1,0 +1,81 @@
+﻿==== after-settings-2.xml ====
+T: &#127749; 19:47 Sonnenuntergang
+T: noch 1 Std 48 Min ┬À voraussichtlich Regen
+T: Schnell nach Hamburg?
+T: N├ñchste Z├╝ge oft alle ~30 Min ┬À Fahrzeit ca. 40ÔÇô50 Min bis HH.
+T: Tages-Zusammenfassung
+T: 0 von 29 Orten ┬À 5 % erkundet
+T: ´àô
+T: ´åƒ
+T: ¯╗ƒ
+T: Timeline
+T: ¯╣ñ
+T: Orte
+T: ¯╣¡
+T: Einst.
+D: &#127749; 19:47 Sonnenuntergang. Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Schnell nach Hamburg? Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Tages-Zusammenfassung. Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers.
+D: Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix ÔÇö Karte folgt deiner Bewegung.
+D: Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung.
+D: Kompass kalibrieren
+D: Mikrofon ÔÇö halten spricht, tippen schreibt, rechts fixieren, links Live-Chat
+D: Timeline und Routenplanung
+D: Orte finden
+D: Einstellungen
+
+==== deeplink-0.xml ====
+T: &#127749; 19:47 Sonnenuntergang
+T: noch 1 Std 48 Min ┬À voraussichtlich Regen
+T: Schnell nach Hamburg?
+T: N├ñchste Z├╝ge oft alle ~30 Min ┬À Fahrzeit ca. 40ÔÇô50 Min bis HH.
+T: Tages-Zusammenfassung
+T: 0 von 29 Orten ┬À 5 % erkundet
+T: ´àô
+T: ´åƒ
+T: ¯╗ƒ
+T: Timeline
+T: ¯╣ñ
+T: Orte
+T: ¯╣¡
+T: Einst.
+D: &#127749; 19:47 Sonnenuntergang. Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Schnell nach Hamburg? Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Tages-Zusammenfassung. Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers.
+D: Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix ÔÇö Karte folgt deiner Bewegung.
+D: Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung.
+D: Kompass kalibrieren
+D: Mikrofon ÔÇö halten spricht, tippen schreibt, rechts fixieren, links Live-Chat
+D: Timeline und Routenplanung
+D: Orte finden
+D: Einstellungen
+
+==== deeplink-5.xml ====
+T: &#127749; 19:47 Sonnenuntergang
+T: noch 1 Std 48 Min ┬À voraussichtlich Regen
+T: Schnell nach Hamburg?
+T: N├ñchste Z├╝ge oft alle ~30 Min ┬À Fahrzeit ca. 40ÔÇô50 Min bis HH.
+T: Tages-Zusammenfassung
+T: 0 von 29 Orten ┬À 5 % erkundet
+T: ´àô
+T: ´åƒ
+T: ¯╗ƒ
+T: Timeline
+T: ¯╣ñ
+T: Orte
+T: ¯╣¡
+T: Einst.
+D: &#127749; 19:47 Sonnenuntergang. Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Schnell nach Hamburg? Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Tages-Zusammenfassung. Tippen: Tipps. Wischen: n├ñchste Karte. Unten: Timeline ┬À Orte ┬À Einst.
+D: Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers.
+D: Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix ÔÇö Karte folgt deiner Bewegung.
+D: Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung.
+D: Kompass kalibrieren
+D: Mikrofon ÔÇö halten spricht, tippen schreibt, rechts fixieren, links Live-Chat
+D: Timeline und Routenplanung
+D: Orte finden
+D: Einstellungen
+

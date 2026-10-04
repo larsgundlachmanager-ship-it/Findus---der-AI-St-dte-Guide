@@ -53,6 +53,10 @@ assert(
   'kein fireEarlyFloskelBridge-Aufruf',
 );
 assert(
+  !/pickFloskelForUserText/.test(turn),
+  'kein Floskel-Fallback im Concierge-Turn',
+);
+assert(
   turn.includes('KEIN Pre-Call-1 Bypass') ||
     turn.includes('Manager-Verfassung'),
   'Manager-Verfassung Kommentar',
@@ -109,7 +113,7 @@ assert(turn.includes('formatOwnerGoldCatalogForCall1'), 'Katalog im Turn');
 assert(analyze.includes('selectedGoldKeys'), 'selectedGoldKeys Schema');
 assert(analyze.includes('bridgeComplete'), 'bridgeComplete Schema');
 assert(think.includes('KLÄRUNG ODER RECHERCHE') || think.includes('bridgeComplete'), 'Clarify before research');
-assert(think.includes('Kontext-first') || think.includes('heiterem Himmel'), 'Context before clarify');
+assert(policy.includes('Kontext-Anker') || think.includes('Kontext-first'), 'Context before clarify');
 assert(analyze.includes('Klärfrage') || analyze.includes('Blocker-Slot'), 'Clarify in Call-1 schema');
 assert(policy.includes('KLÄRFRAGE'), 'Clarify in bridge policy');
 assert(goldPack.includes('missing_blocker_slot_clarify_v1'), 'Owner-Gold clarify blueprint');

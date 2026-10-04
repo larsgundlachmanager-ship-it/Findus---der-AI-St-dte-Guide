@@ -19,7 +19,14 @@ function detectCinemaPhaseLite(text: string): 'orient' | 'showtimes' {
     return 'showtimes';
   }
   if (
-    /\b(welche\s+filme|was\s+(?:kannst|läuf|läuft|empfehl)|empfehlen|ins\s+kino|kino\s+gehen|kinobesuch|kinoabend|kinoprogramm|was\s+läuft|aktuell(?:es)?\s+programm|programm(?:vorschau)?)\b/iu.test(
+    /\b(welche\s+filme|was\s+läuft|was\s+laeuft|kinoprogramm|filme\s+(?:laufen|gibt)|aktuell(?:es)?\s+programm|programm(?:vorschau)?)\b/iu.test(
+      t,
+    )
+  ) {
+    return 'showtimes';
+  }
+  if (
+    /\b(was\s+(?:kannst|läuf|läuft|empfehl)|empfehlen|ins\s+kino|kino\s+gehen|kinobesuch|kinoabend)\b/iu.test(
       t,
     )
   ) {
@@ -30,16 +37,24 @@ function detectCinemaPhaseLite(text: string): 'orient' | 'showtimes' {
 }
 
 assert(
-  detectCinemaPhaseLite('was läuft aktuell im Kino') === 'orient',
-  'was läuft aktuell → orient',
+  detectCinemaPhaseLite('was läuft aktuell im Kino') === 'showtimes',
+  'was läuft aktuell → showtimes',
 );
 assert(
-  detectCinemaPhaseLite('welche Filme laufen heute im Kino') === 'orient',
-  'welche Filme → orient',
+  detectCinemaPhaseLite('Welche Filme laufen aktuell?') === 'showtimes',
+  'welche Filme aktuell → showtimes',
 );
 assert(
-  detectCinemaPhaseLite('Kinoprogramm heute') === 'orient',
-  'Kinoprogramm → orient preview',
+  detectCinemaPhaseLite('welche Filme laufen heute im Kino') === 'showtimes',
+  'welche Filme heute → showtimes',
+);
+assert(
+  detectCinemaPhaseLite('Welche Filme laufen dann morgen?') === 'showtimes',
+  'welche Filme morgen → showtimes',
+);
+assert(
+  detectCinemaPhaseLite('Kinoprogramm heute') === 'showtimes',
+  'Kinoprogramm heute → showtimes',
 );
 assert(
   detectCinemaPhaseLite('Spider-Man Spielzeiten') === 'showtimes',

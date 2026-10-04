@@ -29,11 +29,13 @@ export const HOME_MAP_TYPE_FILTER_IDS = [
   'cafe',
   'museum',
   'kultur',
+  'historie',
   'hotel',
   'einkaufen',
   'freizeit',
   'natur',
   'aktivitaet',
+  'notfall',
   'alltag',
 ] as const;
 
@@ -60,11 +62,13 @@ export const HOME_MAP_FILTER_CHIPS: HomeMapFilterChip[] = [
   { id: 'cafe', label: 'Café', color: HOME_MAP_TYPE_COLORS.cafe },
   { id: 'museum', label: 'Museum', color: HOME_MAP_TYPE_COLORS.museum },
   { id: 'kultur', label: 'Kultur', color: HOME_MAP_TYPE_COLORS.kultur },
+  { id: 'historie', label: 'Historie', color: HOME_MAP_TYPE_COLORS.historie },
   { id: 'hotel', label: 'Hotel', color: HOME_MAP_TYPE_COLORS.hotel },
   { id: 'einkaufen', label: 'Einkaufen', color: HOME_MAP_TYPE_COLORS.einkaufen },
   { id: 'freizeit', label: 'Freizeit', color: HOME_MAP_TYPE_COLORS.freizeit },
   { id: 'natur', label: 'Natur', color: HOME_MAP_TYPE_COLORS.natur },
   { id: 'aktivitaet', label: 'Aktivitäten', color: HOME_MAP_TYPE_COLORS.aktivitaet },
+  { id: 'notfall', label: 'Notfall', color: HOME_MAP_TYPE_COLORS.notfall },
   { id: 'alltag', label: 'Alltag', color: HOME_MAP_TYPE_COLORS.alltag },
 ];
 
@@ -149,4 +153,23 @@ export function poiPassesHomeMapFilter(
   if (opts.enabled.size >= HOME_MAP_FILTER_IDS.length) return true;
   const ids = homeMapFilterIdsForPoi(poi, opts);
   return ids.some((id) => opts.enabled.has(id));
+}
+
+/** MapLibre: sichtbar wenn mindestens ein Chip-Tag des Features an ist. */
+export function mapPlaceVisibilityFilter(
+  flags: Record<HomeMapFilterId, boolean>,
+): unknown {
+  const on = HOME_MAP_FILTER_IDS.filter((id) => flags[id]);
+  if (on.length === 0) return ['==', 1, 0];
+  if (on.length >= HOME_MAP_FILTER_IDS.length) return ['literal', true];
+  return ['any', ...on.map((id) => ['in', id, ['get', 'tags']])];
+}
+
+export function combineMapLayerFilters(
+  ...parts: unknown[]
+): unknown {
+  const exprs = parts.filter((p) => p != null);
+  if (exprs.length === 0) return ['literal', true];
+  if (exprs.length === 1) return exprs[0];
+  return ['all', ...exprs];
 }

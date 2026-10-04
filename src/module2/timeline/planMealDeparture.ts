@@ -1,6 +1,6 @@
 /**
  * Abfahrt zum Essen: Leave-by aus GPS + Modus, Nav-Trigger + Erinnerungen.
- * Ankunft ~5 Min vor Termin; Reisezeit aufrunden; bis 2 realistische Modi.
+ * Anreise = Gap-Fill (Fuß/Rad/ÖPNV) + Journey-Refine — keine Ein-Zeilen-Schätzung.
  */
 
 import { haversineMeters } from '../../db/database';
@@ -18,6 +18,8 @@ import {
   type FuturePlanTransport,
 } from './futurePlanState';
 import { markFresh } from './planLiveEdits';
+import { applyGapFillTravelLegs } from './gapFillTravel';
+import { isLiveNavLegId } from './syncLiveNavToPlan';
 
 const DINING_ARRIVE_EARLY_MIN = 5;
 
@@ -108,7 +110,6 @@ export function computeDiningDepartureOptions(opts: {
     });
   }
 
-  // Realistischste zuerst: kürzere Reise, aber Fuß bevorzugen wenn ≤ 25 Min
   const ranked = [...candidates].sort((a, b) => {
     const score = (o: DepartureModeOption) => {
       let s = o.travelMin;
@@ -123,9 +124,38 @@ export function computeDiningDepartureOptions(opts: {
   return ranked.slice(0, 2);
 }
 
+function findApproachLegForStop(stopId: string): FuturePlanStop | null {
+  const stops = useFuturePlanStore.getState().plan.stops;
+  const direct =
+    stops.find((s) => s.id === `nav_here_${stopId}`) ||
+    stops.find(
+      (s) =>
+        s.kind === 'nav_leg' &&
+        !isLiveNavLegId(s.id) &&
+        (s.id === `leave_${stopId}_walk` ||
+          s.id === `leave_${stopId}_bike` ||
+          s.id === `leave_${stopId}_transit` ||
+          s.id.endsWith(`_${stopId}`)),
+    );
+  if (direct) return direct;
+  const group = stops.find(
+    (s) =>
+      s.kind === 'nav_leg' &&
+      (s.groupId === `nav_here_${stopId}` ||
+        s.groupId?.endsWith(`_${stopId}`)),
+  );
+  if (!group?.groupId) return null;
+  const members = stops
+    .filter((s) => s.groupId === group.groupId && s.kind === 'nav_leg')
+    .sort(
+      (a, b) => (a.plannedStartMs ?? 0) - (b.plannedStartMs ?? 0),
+    );
+  return members[0] ?? group;
+}
+
 /**
- * Trägt Nav-Trigger ein + Departure-Watch (30-Min + 5-Min Reminder).
- * Gibt Buttons für Modus-Wahl zurück.
+ * Trägt Gap-Fill-Anreise + Departure-Watch ein.
+ * ÖPNV → Bein-Gruppe nach Refine; Fuß/Rad → geroutetes Nav-Leg.
  */
 export function applyDiningDeparturePlan(opts: {
   stopId: string;
@@ -146,6 +176,14 @@ export function applyDiningDeparturePlan(opts: {
     appointmentMs: opts.appointmentMs,
   });
   if (!options.length) {
+    // Trotzdem Gap-Fill versuchen (GPS evtl. später)
+    try {
+      applyGapFillTravelLegs({
+        preferredTransport: opts.preferredTransport ?? null,
+      });
+    } catch {
+      /* soft */
+    }
     return { options: [], primary: null, buttons: [], speechFacts: [] };
   }
 
@@ -153,31 +191,60 @@ export function applyDiningDeparturePlan(opts: {
     (opts.preferredTransport &&
       options.find((o) => o.transport === opts.preferredTransport)) ||
     options[0]!;
-  const primary = preferred;
+  let primary = preferred;
 
-  // Alte Abfahrt-Legs zu diesem Stop entfernen
+  // Alte Schätz-Leave-Legs weg — Gap-Fill ist SSOT
   const store = useFuturePlanStore.getState();
   const cleaned = store.plan.stops.filter(
     (s) => !(s.kind === 'nav_leg' && s.id.startsWith(`leave_${opts.stopId}_`)),
   );
-  store.setPlan({ ...store.plan, stops: cleaned });
+  if (cleaned.length !== store.plan.stops.length) {
+    store.setPlan({ ...store.plan, stops: cleaned });
+  }
 
-  const leaveStop: FuturePlanStop = {
-    id: `leave_${opts.stopId}_${primary.transport}`,
-    title: `${primary.emoji} Los → ${opts.venueTitle.replace(/^Essen:\s*/i, '')}`,
-    lat: opts.destLat,
-    lng: opts.destLng,
-    plannedStartMs: primary.leaveByMs,
-    plannedEndMs: opts.appointmentMs - DINING_ARRIVE_EARLY_MIN * 60_000,
-    bufferMin: 0,
-    transport: primary.transport,
-    kind: 'nav_leg',
-    status: 'pending_change',
-    notes: `ca. ${primary.travelMin} Min · Ankunft ~${formatHm(opts.appointmentMs - DINING_ARRIVE_EARLY_MIN * 60_000)}`,
-    emoji: primary.emoji,
-  };
-  store.upsertStop(leaveStop);
-  markFresh([leaveStop.id, opts.stopId]);
+  try {
+    applyGapFillTravelLegs({
+      preferredTransport: preferred.transport,
+    });
+  } catch {
+    /* soft */
+  }
+
+  const approach = findApproachLegForStop(opts.stopId);
+  if (approach?.plannedStartMs != null) {
+    const travelMin = Math.max(
+      1,
+      Math.round(
+        ((approach.plannedEndMs ?? approach.plannedStartMs) -
+          approach.plannedStartMs) /
+          60_000,
+      ),
+    );
+    primary = {
+      transport: approach.transport || preferred.transport,
+      travelMin,
+      leaveByMs: approach.plannedStartMs,
+      label:
+        approach.transport === 'transit'
+          ? 'ÖPNV'
+          : approach.transport === 'bike'
+            ? 'Fahrrad'
+            : 'zu Fuß',
+      emoji:
+        approach.emoji ||
+        (approach.transport === 'transit'
+          ? '🚌'
+          : approach.transport === 'bike'
+            ? '🚲'
+            : '🚶'),
+    };
+  }
+
+  markFresh([
+    approach?.id,
+    approach?.groupId,
+    opts.stopId,
+  ].filter(Boolean) as string[]);
 
   // Erinnerungen: Prio 1–2 → 30 Min Lead; Prio 3–4 → 5; Prio 5–6 → kein Push
   try {
@@ -198,7 +265,6 @@ export function applyDiningDeparturePlan(opts: {
       .getState()
       .plan.stops.find((s) => s.id === opts.stopId);
     const prio = (mealStop?.planPriority ?? 3) as number;
-    // Niedrige Prio: kein OS-Push-Spam
     if (prio <= 4) {
       const warnLeadMin = prio <= 2 ? 30 : 5;
       void registerDepartureWatch({
@@ -216,7 +282,6 @@ export function applyDiningDeparturePlan(opts: {
         scheduleOsPush: true,
       });
     }
-    // Legacy dining_* Event streichen (SSOT = plan_)
     try {
       const { useLogisticsTriggerStore } = require('../../store/useLogisticsTriggerStore') as {
         useLogisticsTriggerStore: {
@@ -257,7 +322,7 @@ export function applyDiningDeparturePlan(opts: {
       (o) =>
         `${o.emoji} ${o.label}: ~${o.travelMin} Min → Los ${formatHm(o.leaveByMs)}`,
     ),
-    `Primär eingetragen: ${primary.emoji} ${primary.label} ab ${formatHm(primary.leaveByMs)} (grün/Trigger).`,
+    `Primär eingetragen: ${primary.emoji} ${primary.label} ab ${formatHm(primary.leaveByMs)} (Detail-Route folgt).`,
   ];
 
   return { options, primary, buttons, speechFacts };

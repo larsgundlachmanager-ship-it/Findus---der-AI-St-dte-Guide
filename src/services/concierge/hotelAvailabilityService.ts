@@ -28,6 +28,8 @@ export type HotelLiveStay = {
   supplier?: string | null;
   /** Expedia Property-ID für /go/hotel/info/… (Zimmerwahl) */
   expediaPropertyId?: string | null;
+  /** Erstes Hotelbild wenn Stay22 liefert */
+  photoUrl?: string | null;
 };
 
 export type HotelAvailabilityResult = {
@@ -500,7 +502,14 @@ function mapStay(
       extractExpediaPropertyId: (u: string) => string | null;
       buildExpediaHotelPropertyDeepLink: (
         id: string,
-        o: { checkin: string; checkout: string; adults?: number },
+        o: {
+          checkin: string;
+          checkout: string;
+          adults?: number;
+          hotelName?: string | null;
+          city?: string | null;
+          priceEur?: number | null;
+        },
       ) => string;
     };
     const candidates = [
@@ -528,10 +537,17 @@ function mapStay(
       stayDates?.checkin &&
       stayDates?.checkout
     ) {
+      const locRaw = raw.location as { city?: unknown } | undefined;
+      const cityHint =
+        String((raw as { city?: unknown }).city ?? locRaw?.city ?? '').trim() ||
+        null;
       bookUrl = buildExpediaHotelPropertyDeepLink(expediaPropertyId, {
         checkin: stayDates.checkin,
         checkout: stayDates.checkout,
         adults: stayDates.adults,
+        hotelName: name,
+        city: cityHint,
+        priceEur: priceTotal,
       });
       supplier = supplier || 'expedia';
     }
@@ -556,6 +572,27 @@ function mapStay(
         .filter(Boolean)
         .slice(0, 24)
     : [];
+  let photoUrl: string | null = null;
+  const imgCandidates = [
+    raw.image,
+    raw.photo,
+    raw.thumbnail,
+    raw.mainImage,
+    raw.main_photo,
+    raw.hotel_photo,
+    Array.isArray(raw.images) ? raw.images[0] : null,
+    Array.isArray(raw.photos) ? raw.photos[0] : null,
+  ];
+  for (const c of imgCandidates) {
+    if (typeof c === 'string' && /^https?:\/\//i.test(c)) {
+      photoUrl = c;
+      break;
+    }
+    if (c && typeof c === 'object' && typeof (c as { url?: string }).url === 'string') {
+      photoUrl = (c as { url: string }).url;
+      break;
+    }
+  }
   if (!bookUrl) return null;
   return {
     id: String(raw.id ?? name),
@@ -571,6 +608,7 @@ function mapStay(
     amenities,
     supplier,
     expediaPropertyId,
+    photoUrl,
   };
 }
 
@@ -592,7 +630,8 @@ async function stay22Search(params: {
     checkout: params.checkout,
     adults: String(params.adults ?? 2),
     children: '0',
-    rooms: '1',
+    // ~2 adults per room — Stay22 often needs rooms >= ceil(adults/2)
+    rooms: String(Math.max(1, Math.ceil((params.adults ?? 2) / 2))),
     currency: 'EUR',
     pageSize: String(params.pageSize ?? 20),
     // API unterstützt aktuell nur en — `de` kommt als leere results[] zurück
@@ -631,8 +670,30 @@ async function stay22Search(params: {
   const apiKey = env.stay22ApiKey();
   if (apiKey) headers['X-API-KEY'] = apiKey;
 
+  const abortAfterMs = (ms: number): AbortSignal => {
+    if (
+      typeof AbortSignal !== 'undefined' &&
+      typeof (AbortSignal as { timeout?: (n: number) => AbortSignal }).timeout ===
+        'function'
+    ) {
+      return (AbortSignal as { timeout: (n: number) => AbortSignal }).timeout(ms);
+    }
+    const ctrl = new AbortController();
+    setTimeout(() => {
+      try {
+        ctrl.abort();
+      } catch {
+        /* soft */
+      }
+    }, ms);
+    return ctrl.signal;
+  };
+
   try {
-    const res = await fetch(`${API}?${q.toString()}`, { headers });
+    const res = await fetch(`${API}?${q.toString()}`, {
+      headers,
+      signal: abortAfterMs(14_000),
+    });
     if (!res.ok) {
       return {
         stays: [],
@@ -713,8 +774,42 @@ export async function searchStay22HotelsInCity(opts: {
     city && !/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(city) ? city : undefined,
   );
 
+  // Client-Filter amenityHint (pool/tennis/sauna…) — Soft-Boost, kein Total-Kill
+  const hintRaw = String(opts.amenityHint || '')
+    .toLowerCase()
+    .replace(/[^a-zäöüß0-9\s]/gi, ' ')
+    .trim();
+  const hintTokens = hintRaw.split(/\s+/).filter((t) => t.length >= 3);
+  const amenityScore = (s: HotelLiveStay): number => {
+    if (!hintTokens.length) return 0;
+    const blob = `${s.name} ${(s.amenities ?? []).join(' ')}`.toLowerCase();
+    let n = 0;
+    for (const t of hintTokens) {
+      if (blob.includes(t)) n += 3;
+      if (t === 'pool' && /schwimm|swimming/.test(blob)) n += 2;
+      if (t === 'tennis' && /padel|court/.test(blob)) n += 1;
+      if (t === 'sauna' && /wellness|spa|thermal/.test(blob)) n += 1;
+      if (t === 'spa' && /wellness|sauna|thermal/.test(blob)) n += 2;
+    }
+    return n;
+  };
+  if (hintTokens.length && bookable.length) {
+    const withHit = bookable.filter((s) => amenityScore(s) > 0);
+    const ranked = (withHit.length ? withHit : bookable)
+      .slice()
+      .sort(
+        (a, b) =>
+          amenityScore(b) - amenityScore(a) ||
+          (a.priceTotal ?? 9e9) - (b.priceTotal ?? 9e9),
+      );
+    bookable.length = 0;
+    bookable.push(...ranked);
+  }
+
   if (lodging === 'apartment' || lodging === 'any') {
     bookable.sort((a, b) => {
+      const am = amenityScore(b) - amenityScore(a);
+      if (am !== 0) return am;
       const score = (s: HotelLiveStay) => {
         const blob = `${s.name} ${s.supplier ?? ''}`.toLowerCase();
         let n = 0;

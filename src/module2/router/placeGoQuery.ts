@@ -16,7 +16,7 @@ const PLACE_TYPE_RE =
   /\b(strand|park|aussicht|museum|kirche|café|cafe|kino|restaurant|bar|hotel|apotheke|toilette|klo|wc|ladestation|steckdose|atm|geldautomat|supermarkt|bäcker|baecker|bäckerei|drogerie|arzt|klinik|krankenhaus|hafen|markt|aussichtspunkt|sehenswürdigkeit|sehenswuerdigkeit|badestelle|freibad|tankstelle|parkplatz|parkhaus|parken|picknick|picnic|grillplatz|liegewiese)\b/iu;
 
 const AMENITY_RE =
-  /\b(toilette|klo|wc|pinkeln|geldautomat|atm|bargeld|ladestation|powerbank|steckdose|laden\s+(?:mein\s+)?handy|wlan|wifi|apotheke)\b/iu;
+  /\b(toilette|klo|wc|pinkeln|geldautomat|atm|bargeld|ladestation|powerbank|steckdose|laden\s+(?:mein\s+)?handy|wlan|wifi|apotheke|briefkasten|postkasten|mailbox|packstation|paketautomat|post_box)\b/iu;
 
 const DISTANCE_RE =
   /\b(wie\s+weit|entfernung|entfernt|fahrzeit|gehzeit|minuten\s+(?:hin|bis|fahrt|fu[sß])|wie\s+lange\s+(?:brauche|bin)\s+ich|wie\s+lange\s+(?:ist|dauert)\s+(?:der\s+weg|die\s+fahrt|es\s+(?:hin|zu)))\b/iu;

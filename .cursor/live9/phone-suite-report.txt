@@ -1,0 +1,62 @@
+PASS ayce_no_goldsch
+fr., 11. sept.
+17° bewölkt
+lieblingssongs
+bibliothek
+im laufe der jahre
+am leuchtturm
+PASS ayce_not_events
+FAIL hotel_ui
+fr 11.09.
+00:09
+&#128205;
+heisterhoop 12
+aufenthalt
+10:55
+&#128205;
+heisterhoop 10
+aufenthalt
+12:49
+jetzt
+15:18
+16:14
+&#128652;
+▸ öpnv nach ziel
+tippen für die schritte
+15:30
+16:33
+&#128652;
+▸ öpnv nach broderick irish pub
+tippen für die schritte
+❔ los zu 1 · prisdorf
+&#128694;
+&#128690;
+&#128652;
+&
+PASS taxi_ui
+fr 11.09.
+00:09
+&#128205;
+heisterhoop 12
+aufenthalt
+10:55
+&#128205;
+heisterhoop 10
+aufenthalt
+12:50
+jetzt
+15:18
+16:14
+&#128652;
+▸ öpnv nach ziel
+tippen für die schritte
+15:30
+16:33
+&#128652;
+▸ öpnv nach broderick irish pub
+tippen für die schritte
+❔ los zu 1 · prisdorf
+&#128694;
+&#128690;
+&#128652;
+&

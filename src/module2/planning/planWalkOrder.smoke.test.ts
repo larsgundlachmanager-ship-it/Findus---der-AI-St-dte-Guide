@@ -27,17 +27,23 @@ const evening = {
 };
 const michel = { title: 'Michel', context: 'raufgehen Eintritt', estimatedTime: null };
 const rest = { title: 'Café-Meeting', context: 'laptop', estimatedTime: '14:00' };
+const tour = { title: 'Hamburg erkunden', context: 'Must-Haves Tour', estimatedTime: '11:30' };
 
 assert(pitchWalkRank(breakfast) === 0, `breakfast rank ${pitchWalkRank(breakfast)}`);
-assert(pitchWalkRank(evening) === 1, `evening rank ${pitchWalkRank(evening)}`);
-assert(pitchWalkRank(michel) === 2, `michel rank ${pitchWalkRank(michel)}`);
+assert(pitchWalkRank(michel) === 1, `michel/landmark rank ${pitchWalkRank(michel)}`);
+assert(pitchWalkRank(evening) === 2, `evening rank ${pitchWalkRank(evening)}`);
 assert(pitchWalkRank(rest) === 3, `rest rank ${pitchWalkRank(rest)}`);
+assert(pitchWalkRank(tour) === 3, `tour last rank ${pitchWalkRank(tour)}`);
 
-const ordered = [evening, michel, rest, breakfast].sort(
+const ordered = [evening, michel, rest, breakfast, tour].sort(
   (a, b) => pitchWalkRank(a) - pitchWalkRank(b),
 );
 assert(ordered[0] === breakfast, 'walk starts at breakfast');
-assert(ordered[1] === evening, 'then evening');
-assert(ordered[2] === michel, 'then landmark');
+assert(ordered[1] === michel, 'then landmark');
+assert(ordered[2] === evening, 'then evening meal');
+assert(
+  ordered.slice(3).every((w) => pitchWalkRank(w) === 3),
+  'rest/tour last',
+);
 
 console.log('planWalkOrder.smoke.test.ts ok');

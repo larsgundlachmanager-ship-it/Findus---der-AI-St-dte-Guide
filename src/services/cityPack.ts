@@ -28,6 +28,10 @@ import {
   AREA_STORY_MIN_M,
   isStoryTriggerPoi,
 } from './geo/triggerRadius';
+import {
+  collectTags,
+  shouldSkipApproachAndSubs,
+} from './cityPackTags';
 
 type PlaceFactsPack = {
   origin?: string;
@@ -76,6 +80,8 @@ type CitySpot = {
   /** story = Trigger/Narration; directory = Offline-Katalog ohne Wegweiser-Spam */
   pack_role?: 'story' | 'directory' | string;
   place_tier?: number;
+  /** Karten-Malerei: story_fill | building_focus | icon_only */
+  map_paint?: 'story_fill' | 'building_focus' | 'icon_only' | string;
   relevance?: string[];
   polygon?: Array<{ lat: number; lng: number } | GeoLatLng>;
   polygonCoordinates?: GeoLatLng[];
@@ -260,53 +266,28 @@ function centroidOf(polygon: GeoLatLng[]): { lat: number; lng: number } {
   return { lat, lng };
 }
 
-function collectTags(spot: CitySpot): string[] {
-  const tags = new Set<string>();
-  for (const t of spot.tags ?? []) tags.add(String(t).toLowerCase());
-  for (const t of spot.facts?.tags ?? []) tags.add(String(t).toLowerCase());
-  if (spot.category) tags.add(spot.category.toLowerCase());
-  if (spot.pack_role) tags.add(String(spot.pack_role).toLowerCase());
-  if (spot.place_tier != null) tags.add(`tier${spot.place_tier}`);
-  if (
-    spot.pack_role === 'directory' ||
-    Number(spot.place_tier) === 4
-  ) {
-    tags.add('directory');
-    tags.add('tier4');
-    tags.add('offline_lookup');
-    tags.add('amenity_skip');
-  }
-  if (spot.facts?.famousPersonConnected) {
-    tags.add('promi');
-    tags.add(`famous:${spot.facts.famousPersonConnected}`);
-  }
+/** „OSM Toilette“ / „OpenStreetMap …“ → nutzerfreundlicher Name. */
+export function sanitizeMapPlaceName(name: string): string {
+  let n = name.trim();
+  if (!n) return n;
+  n = n.replace(/^(?:osm|openstreetmap)\s*[-:|]?\s*/i, '');
+  n = n.replace(/\s*\((?:osm|openstreetmap)\)\s*$/i, '');
+  n = n.replace(/\bosm\b/gi, '').replace(/\s{2,}/g, ' ').trim();
+  if (/^toilets?$/i.test(n) || /^toilette$/i.test(n)) return 'Toilette';
+  if (/^öffentliche\s+toilette$/i.test(n)) return 'Toilette';
+  return n || name.trim();
+}
 
-  const ot =
-    spot.booking?.openTableId?.trim() || spot.openTableId?.trim() || '';
-  const qd = spot.booking?.quandooId?.trim() || spot.quandooId?.trim() || '';
-  const rm = spot.booking?.resmioId?.trim() || spot.resmioId?.trim() || '';
-  const bookUrl =
-    spot.booking?.url?.trim() ||
-    spot.bookingUrl?.trim() ||
-    spot.booking_url?.trim() ||
-    '';
-  if (ot) {
-    tags.add('opentable');
-    tags.add(`ot:${ot}`);
-  }
-  if (qd) {
-    tags.add('quandoo');
-    tags.add(`qd:${qd}`);
-  }
-  if (rm) {
-    tags.add('resmio');
-    tags.add(`rm:${rm}`);
-  }
-  if (bookUrl && /^https?:\/\//i.test(bookUrl)) {
-    tags.add(`booking_url:${bookUrl}`);
-  }
-
-  return [...tags];
+export function sanitizeMapPlaceCategory(
+  category: string | null | undefined,
+  nameHint?: string | null,
+): string | null {
+  const raw = (category ?? '').trim();
+  const blob = `${raw} ${nameHint ?? ''}`.toLowerCase();
+  if (/toilette|\bwc\b|toilets?|restroom/.test(blob)) return 'Toilette';
+  if (!raw) return null;
+  const cleaned = sanitizeMapPlaceName(raw);
+  return cleaned || raw;
 }
 
 /**
@@ -453,6 +434,9 @@ export function mapCityPackToRemote(
     tags: string[],
     category: string | null,
   ) => {
+    // Directory / Hard-Amenity: keine Approaches (kein M1-Wegweiser an Tankstelle).
+    if (shouldSkipApproachAndSubs(tags, spot)) return;
+
     const approaches =
       spot.approach_triggers ?? spot.approachTriggers ?? [];
     for (const a of approaches) {
@@ -547,19 +531,24 @@ export function mapCityPackToRemote(
 
     let lat: number | undefined;
     let lng: number | undefined;
-    // Reihenfolge: Spot-Lat → Trigger → Polygon-Zentroid → gps_entrance gewinnt zuletzt.
+    // Pin: Entrance > Spot-Lat > Gebäude-Zentroid > Approach-Trigger.
+    // Trigger darf Gebäude-Pin nicht versetzen (Meyers/Hotels sonst daneben).
     if (typeof spot.lat === 'number' && typeof spot.lng === 'number') {
       lat = spot.lat;
       lng = spot.lng;
     }
-    if (typeof trigger?.lat === 'number' && typeof trigger?.lng === 'number') {
+    if (polygon && (lat == null || lng == null)) {
+      const c = centroidOf(polygon);
+      lat = c.lat;
+      lng = c.lng;
+    }
+    if (
+      (lat == null || lng == null) &&
+      typeof trigger?.lat === 'number' &&
+      typeof trigger?.lng === 'number'
+    ) {
       lat = trigger.lat;
       lng = trigger.lng;
-    }
-    if (polygon) {
-      const c = centroidOf(polygon);
-      lat = lat ?? c.lat;
-      lng = lng ?? c.lng;
     }
     // Nav-/Karten-Pin: gps_entrance / nav_target Sub-POI schlägt alles andere.
     const subsEarly = spot.sub_pois ?? spot.subPois ?? [];
@@ -596,7 +585,12 @@ export function mapCityPackToRemote(
 
     const spotKey = spot.id ?? spot.name;
     const tags = collectTags(spot);
-    const category = spot.category ?? spot.district ?? null;
+    const rawName = String(spot.name ?? '').trim();
+    const displayName = sanitizeMapPlaceName(rawName) || rawName || spotKey;
+    const category = sanitizeMapPlaceCategory(
+      spot.category ?? spot.district ?? null,
+      displayName,
+    );
     const areaId = nextPoiId++;
     spotKeyToAreaId.set(spotKey, areaId);
 
@@ -638,7 +632,7 @@ export function mapCityPackToRemote(
     const rawAreaR = trigger?.radius_m ?? (polygon ? 40 : 80);
     pois.push({
       id: areaId,
-      name: spot.name,
+      name: displayName,
       lat,
       lng,
       radius_meters: storyArea ? Math.max(rawAreaR, AREA_STORY_MIN_M) : rawAreaR,

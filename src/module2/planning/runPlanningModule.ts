@@ -20,6 +20,7 @@ import {
   usePlanCalendarUiStore,
 } from '../timeline/planCalendarUiStore';
 import { setActiveTaskOverride } from './planSessionState';
+import { buildCommittedPlanStopFromPitchCard, openWishesQueueAfterPitchReject } from './planPitchCommit';
 import type { IngestOpenWish } from './planningTypes';
 import { useFuturePlanStore } from '../timeline/futurePlanState';
 import { applyGapFillTravelLegs } from '../timeline/gapFillTravel';
@@ -55,6 +56,7 @@ import {
 import {
   looksLikePlanEditUtterance,
   looksLikeClearDayPlan,
+  looksLikeWholePlanDayShift,
 } from './planEditDetect';
 import { looksLikePlanWalkthroughUtterance } from './planUtteranceGate';
 import { sanitizePlanSpeech } from './planSpeechSanitize';
@@ -532,7 +534,12 @@ export async function runPlanningModule(input: {
   const session = usePlanSessionStore.getState();
 
   // Wochentag/Plan-Tag während aktiver Session → Timeline-Tag mitziehen
-  if (session.active && session.plan) {
+  // Whole-day shift: Stops zuerst verschieben (planLiveEdits) — nicht vorher leeren Tag öffnen
+  if (
+    session.active &&
+    session.plan &&
+    !looksLikeWholePlanDayShift(text)
+  ) {
     try {
       const { normalizeTargetDate } = require('./planningLlmIngestion') as {
         normalizeTargetDate: (raw: unknown, utterance: string) => string;
@@ -740,6 +747,29 @@ export async function runPlanningModule(input: {
       return { ok: true };
     }
 
+    // passt / ja → Favorit committen (URLs aus Pitch-Karte)
+    if (pending) {
+      try {
+        const { isPlanConfirmYes } = require('./planConfirmAck') as {
+          isPlanConfirmYes: (s: string) => boolean;
+        };
+        if (
+          isPlanConfirmYes(text) ||
+          /\b(passt|nehme\s+(die[sn]?|den)|die\s+erste)\b/i.test(text)
+        ) {
+          const title =
+            pending.options.find((o) => o.id === pending.selectedOptionId)
+              ?.title ?? pending.options[0]?.title;
+          if (title) {
+            await handlePlanCalendarDirect({ kind: 'pick', title });
+            return { ok: true };
+          }
+        }
+      } catch {
+        /* soft */
+      }
+    }
+
     // Medaille / Option A/B
     if (/\b(🥇|gold|erste[rn]?|option\s*a|favorit)\b/i.test(text) && pending) {
       const title = pending.options[0]?.title;
@@ -900,29 +930,33 @@ function wishFromStop(
   };
 }
 
-/** Instant Cover vor Analyze/Research — gleiche Härte wie Concierge-Bridge. */
+/** Instant Cover vor Analyze/Research — Contextual-Bridge, nie Floskel. */
 export function speakOpenPlanInstantBridge(seed: string): void {
-  try {
-    const { pickFloskelForUserText } = require('../../services/speech/floskelEngine') as {
-      pickFloskelForUserText: (s: string) => { phrase: string };
-    };
-    const phrase = pickFloskelForUserText(seed).phrase?.trim();
-    if (!phrase) return;
-    const { enqueueSpeech } = require('../speech/speechQueue') as {
-      enqueueSpeech: (o: {
-        kind: 'bridging' | 'main';
-        text: string;
-        turnId: string;
-      }) => void;
-    };
-    enqueueSpeech({
-      kind: 'bridging',
-      text: phrase,
-      turnId: `open_plan_bridge_${Date.now()}`,
-    });
-  } catch {
-    /* soft */
-  }
+  const t = (seed || '').replace(/\s+/g, ' ').trim();
+  if (t.length < 4) return;
+  void (async () => {
+    try {
+      const { generateContextualBridge } = require('../../services/speech/contextualBridge') as {
+        generateContextualBridge: (o: { userText: string }) => Promise<string | null>;
+      };
+      const phrase = (await generateContextualBridge({ userText: t }))?.trim();
+      if (!phrase) return;
+      const { enqueueSpeech } = require('../speech/speechQueue') as {
+        enqueueSpeech: (o: {
+          kind: 'bridging' | 'main';
+          text: string;
+          turnId: string;
+        }) => void;
+      };
+      enqueueSpeech({
+        kind: 'bridging',
+        text: phrase,
+        turnId: `open_plan_bridge_${Date.now()}`,
+      });
+    } catch {
+      /* soft — lieber still als Floskel */
+    }
+  })();
 }
 
 /** UI: User tippt offenen Plan → Override für Auto-Schleife. */
@@ -1143,6 +1177,21 @@ export async function handlePlanCalendarDirect(input: {
       session.resolveConfirm(true);
       return true;
     }
+    // Pitch-Auswahl bestaetigen (passt) → Favorit/Selection committen inkl. URLs
+    const pendingAccept = usePlanCalendarUiStore.getState().pendingChoice;
+    if (pendingAccept) {
+      const sel =
+        pendingAccept.options.find(
+          (o) => o.id === pendingAccept.selectedOptionId,
+        ) ?? pendingAccept.options[0];
+      if (sel?.title) {
+        return handlePlanCalendarDirect({
+          kind: 'pick',
+          title: sel.title,
+          stopId: sel.id,
+        });
+      }
+    }
     usePlanCalendarUiStore.getState().clearPendingChoice();
     usePlanCalendarUiStore.getState().clearShortAnswers();
     return true;
@@ -1159,14 +1208,9 @@ export async function handlePlanCalendarDirect(input: {
       session.resolveConfirm(false);
       return true;
     }
-    // „Neu suchen“ → Re-Research aktueller Wunsch
+    // „Neu suchen“ → Re-Pitch SAME Slot (kein zweites Breakfast/Meal)
     const pending = usePlanCalendarUiStore.getState().pendingChoice;
     const stepKey = pending?.stepKey;
-    clearChoiceStops(stepKey);
-    usePlanCalendarUiStore.getState().clearPendingChoice();
-    usePlanCalendarUiStore.getState().clearShortAnswers();
-    usePlanCalendarUiStore.getState().clearMirroredActions();
-
     const wishStop = stepKey
       ? useFuturePlanStore.getState().plan.stops.find((s) => s.id === stepKey)
       : null;
@@ -1188,8 +1232,48 @@ export async function handlePlanCalendarDirect(input: {
             estimatedTime: null,
           }
         : null;
+    if (wish && stepKey) {
+      try {
+        usePlanSessionStore.getState().setRepitchingStepKey(stepKey);
+      } catch {
+        /* soft */
+      }
+      // Queue: gleiche Wish-Identitaet behalten (kein Duplikat)
+      try {
+        const plan = usePlanSessionStore.getState().plan;
+        if (plan) {
+          usePlanSessionStore.getState().setPlan({
+            ...plan,
+            openWishesQueue: openWishesQueueAfterPitchReject(
+              plan.openWishesQueue,
+              wish,
+            ),
+          });
+        }
+      } catch {
+        /* soft */
+      }
+    }
+    clearChoiceStops(stepKey);
+    usePlanCalendarUiStore.getState().clearPendingChoice();
+    usePlanCalendarUiStore.getState().clearShortAnswers();
+    usePlanCalendarUiStore.getState().clearMirroredActions();
     if (wish) {
-      void executeDeepResearchAndPitch(wish);
+      try {
+        await executeDeepResearchAndPitch(wish);
+      } finally {
+        try {
+          usePlanSessionStore.getState().setRepitchingStepKey(null);
+        } catch {
+          /* soft */
+        }
+      }
+    } else {
+      try {
+        usePlanSessionStore.getState().setRepitchingStepKey(null);
+      } catch {
+        /* soft */
+      }
     }
     return true;
   }
@@ -1240,35 +1324,52 @@ export async function handlePlanCalendarDirect(input: {
       cleanTitle,
     );
 
-    useFuturePlanStore.getState().upsertStopOnDay(dayKey, {
-      id: committedId,
-      title: cleanTitle,
-      lat,
-      lng,
-      plannedStartMs: startMs,
-      plannedEndMs:
-        isHotelPick || startMs == null ? null : startMs + 60 * 60_000,
-      bufferMin: 10,
-      transport: 'walk',
-      kind: 'stop',
-      status: 'planned',
-      planPriority: 4,
-      mapsUrl: choiceStop?.mapsUrl ?? opt?.mapsUrl ?? null,
-      menuUrl: choiceStop?.menuUrl ?? opt?.menuUrl ?? null,
-      reserveUrl:
-        choiceStop?.reserveUrl ??
+    const sessionWishForCommit =
+      groupId
+        ? usePlanSessionStore.getState().plan?.openWishesQueue.find(
+            (w) => w.id === groupId || w.title === groupId,
+          )
+        : null;
+    const committed = buildCommittedPlanStopFromPitchCard(
+      {
+        name: cleanTitle,
+        lat,
+        lng,
+        placeId: opt?.placeId ?? null,
+        mapsUrl: choiceStop?.mapsUrl ?? opt?.mapsUrl ?? null,
+        menuUrl: choiceStop?.menuUrl ?? opt?.menuUrl ?? null,
+        websiteUrl: choiceStop?.websiteUrl ?? opt?.websiteUrl ?? null,
+        reserveUrl: choiceStop?.reserveUrl ?? null,
+        notes: choiceStop?.notes ?? null,
+        bullets: opt?.bullets ?? null,
+      },
+      {
+        id: groupId,
+        title: sessionWishForCommit?.title ?? cleanTitle,
+        priority: (sessionWishForCommit?.priority ??
+          choiceStop?.planPriority ??
+          4) as 4 | 5 | 6,
+        estimatedTime: sessionWishForCommit?.estimatedTime ?? null,
+      },
+      dayKey,
+      {
+        committedId,
+        startMs,
+        isHotel: isHotelPick,
+        cleanTitle,
+      },
+    );
+    if (!committed.reserveUrl) {
+      committed.reserveUrl =
         (/friseur|haar|salon|barber/i.test(cleanTitle)
           ? `https://www.google.com/search?q=${encodeURIComponent(`${cleanTitle} Termin buchen`)}`
           : /essen|restaurant|burger|pizza|café|cafe|osteria|trattoria/i.test(
                 cleanTitle,
               )
             ? `https://www.google.com/search?q=${encodeURIComponent(`${cleanTitle} Tisch reservieren`)}`
-            : null),
-      notes: choiceStop?.notes,
-      emoji: '📍',
-      planTaskId: groupId,
-      userFixedTime: false,
-    });
+            : null);
+    }
+    useFuturePlanStore.getState().upsertStopOnDay(dayKey, committed);
 
     clearChoiceStops(groupId);
     if (groupId) {

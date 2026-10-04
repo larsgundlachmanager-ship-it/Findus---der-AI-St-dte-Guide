@@ -54,4 +54,20 @@ export {
   flushTurnLatency,
   getCall3Rate,
 } from './turnLatencyMetrics';
+export {
+  beginPaceTurn,
+  flushPaceTurnSample,
+  notePaceBridgeStarted,
+  notePaceBridgeEnded,
+  notePaceCall2Ready,
+  notePaceUsedCall3,
+  shouldForceCall2FromPace,
+} from './paceTurnSession';
+export {
+  bridgeBudgetSecFor,
+  inferPaceBrick,
+  paceSignalKey,
+  BRIDGE_TO_CALL2_GAP_MAX_MS,
+  resolvePaceAwareResearchBudgetSec,
+} from './bridgePace';
 export { enrichTurnRucksackWithLtm } from './turnRucksack';

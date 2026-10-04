@@ -1,6 +1,6 @@
 /**
  * GPS-Trail für Fog-of-War / Discovery-Map.
- * Reveal: 50 m Radius / 100 m Durchmesser, als vereinigte Fläche (fogCoverage.ts).
+ * Reveal: 60 m Radius / 120 m Durchmesser, als vereinigte Fläche (fogCoverage.ts).
  * Lücken zwischen Bändern bis 20 m schließen. Fixes ≤ 5 Min auseinander verbinden.
  */
 
@@ -12,8 +12,8 @@ export type WalkTrackPoint = { lat: number; lng: number; at: number };
 const PATH = `${FileSystem.documentDirectory}findus-walk-track.json`;
 const MIN_STEP_M = 5;
 const MAX_POINTS = 5_000;
-/** Fog-/Explore-Radius um User und Laufspur. */
-export const WALK_REVEAL_RADIUS_M = 42;
+/** Fog-/Explore-Radius um User und Laufspur (GPS-Punkt). */
+export const WALK_REVEAL_RADIUS_M = 60;
 /**
  * Zwischen zwei Fixes Lücke füllen — nur wenn ≤ 5 Minuten.
  * Längere Pausen (Auto, Zug, Flug) erzeugen KEINE Linie.
@@ -189,6 +189,11 @@ function interpolateGap(
   return out;
 }
 
+/** ~30 km/h — ab hier kein Gap-Fill (sonst Punkt-Sturm im Bus). */
+const TRANSIT_SKIP_GAP_MS = 8.3;
+/** Echter Teleport / stale Last-Known — nicht Fog-malen. */
+const TELEPORT_REJECT_M = 2_500;
+
 /** Neuen Fix anhängen, wenn ≥ MIN_STEP_M vom letzten Punkt. */
 export function recordWalkFix(lat: number, lng: number): WalkTrackPoint[] {
   if (!loaded) void loadWalkTrack();
@@ -197,15 +202,26 @@ export function recordWalkFix(lat: number, lng: number): WalkTrackPoint[] {
   const last = points[points.length - 1];
   if (last) {
     const d = haversineMeters(last.lat, last.lng, lat, lng);
-    if (d < MIN_STEP_M) return points;
-    // Nav-Watcher / stale Last-Known: kein 20-km-Teleport in den Nebel malen
     const dt = now - last.at;
-    if (d > GAP_FILL_MAX_M && dt >= 0 && dt < 60_000) {
+    const speedMs = dt > 0 ? d / (dt / 1000) : 0;
+    // Bei Tempo: seltener Punkte (15 m), kein Interpolieren.
+    const minStep = speedMs >= TRANSIT_SKIP_GAP_MS ? MIN_STEP_M * 3 : MIN_STEP_M;
+    if (d < minStep) return points;
+    // Stale Last-Known / Teleport — nicht in den Nebel.
+    if (d > TELEPORT_REJECT_M && dt >= 0 && dt < 30_000) {
       return points;
     }
-    const gap = interpolateGap(last, { lat, lng, at: now });
-    if (gap.length) {
-      points = [...points, ...gap].slice(-MAX_POINTS);
+    // Fuß: Lücken ≤ 60 m füllen. Tempo/große Sprünge: nur Endpunkt (kein Punkt-Sturm).
+    const mayFillGap =
+      speedMs < TRANSIT_SKIP_GAP_MS &&
+      d <= GAP_FILL_MAX_M &&
+      dt >= 0 &&
+      dt < 60_000;
+    if (mayFillGap) {
+      const gap = interpolateGap(last, { lat, lng, at: now });
+      if (gap.length) {
+        points = [...points, ...gap].slice(-MAX_POINTS);
+      }
     }
   }
   points = [...points, { lat, lng, at: now }].slice(-MAX_POINTS);

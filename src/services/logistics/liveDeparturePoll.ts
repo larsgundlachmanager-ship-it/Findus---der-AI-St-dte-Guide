@@ -42,6 +42,56 @@ function matchLine(a: string, b: string): boolean {
 /**
  * Tick: fällige nextPollAtMs → Live-Departures → Delay/Cancel/Platform.
  */
+
+function applyLiveDepartureToTour(opts: {
+  lineHint: string;
+  whenMs: number;
+  delaySec: number | null;
+  platform: string | null;
+}): void {
+  try {
+    const { useFinnusStore } = require('../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => {
+          multiStopTour: {
+            stops: Array<{
+              line?: string | null;
+              role?: string | null;
+              vehicleStartMs?: number | null;
+              delaySec?: number | null;
+              platform?: string | null;
+              done?: boolean;
+            }>;
+          } | null;
+          setMultiStopTour: (t: unknown) => void;
+        };
+      };
+    };
+    const st = useFinnusStore.getState();
+    const tour = st.multiStopTour;
+    if (!tour?.stops?.length) return;
+    const open = tour.stops.find(
+      (s) =>
+        !s.done &&
+        (s.role === 'board' || s.role === 'alight' || Boolean(s.line)) &&
+        matchLine(String(s.line || ''), opts.lineHint),
+    );
+    if (!open) return;
+    const nextStops = tour.stops.map((s) => {
+      if (s !== open) return s;
+      return {
+        ...s,
+        vehicleStartMs: opts.whenMs,
+        delaySec: opts.delaySec ?? s.delaySec ?? null,
+        platform: opts.platform ?? s.platform ?? null,
+      };
+    });
+    st.setMultiStopTour({ ...tour, stops: nextStops });
+  } catch {
+    /* soft */
+  }
+}
+
 export async function pollLiveDeparturesForWatches(opts?: {
   nowMs?: number;
   force?: boolean;
@@ -129,6 +179,12 @@ export async function pollLiveDeparturesForWatches(opts?: {
           : metaNum(event.meta, 'delayMin') ?? 0;
       const prevDelay = metaNum(event.meta, 'delayMin') ?? 0;
       const platform = best.platform?.trim() || null;
+      applyLiveDepartureToTour({
+        lineHint,
+        whenMs: best.when.getTime(),
+        delaySec: best.delaySec ?? null,
+        platform,
+      });
       const prevPlatform = metaStr(event.meta, 'platform');
       const untilDepMs = best.when.getTime() - now;
       const depStillLive = untilDepMs > -2 * 60_000;

@@ -81,11 +81,19 @@ const picked = pickSoonestCatchable(
 
 assert(picked.pick != null, 'eine Verbindung');
 assert(
-  picked.pick!.firstTransitDeparture!.getHours() === 20 &&
-    picked.pick!.firstTransitDeparture!.getMinutes() === 43,
-  '20:43 noch nicht weg — knapp halten, nicht auf 21:17 springen',
+  picked.pick!.firstTransitDeparture!.getHours() === 21 &&
+    picked.pick!.firstTransitDeparture!.getMinutes() === 17,
+  '20:43 zu knapp → erste bequeme 21:17, nicht Sprint',
 );
-assert(picked.tight === true, '20:43 ist knapp (Sprint)');
+assert(picked.tight === false, '21:17 ist bequem');
+assert(
+  picked.ordered.some(
+    (it) =>
+      it.firstTransitDeparture!.getHours() === 20 &&
+      it.firstTransitDeparture!.getMinutes() === 43,
+  ),
+  'Sprint 20:43 bleibt als Alternative in der Liste',
+);
 
 const justInTime = pickSoonestCatchable(
   [

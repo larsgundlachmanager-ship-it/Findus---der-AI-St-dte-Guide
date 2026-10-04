@@ -1,6 +1,7 @@
 /**
  * Ambient „was heute geht“: nach ~10 Min App offen + 60 s Stille,
- * max. alle 8 Stunden eine belegte Event-Ansage (~5 km, Audience-Fit).
+ * max. alle 2 Stunden eine belegte Event-Ansage (~5 km, Audience-Fit;
+ * motivierend: Was · Preis · Wo · Anreise · Warum).
  */
 
 import { AppState, type AppStateStatus } from 'react-native';
@@ -13,6 +14,10 @@ import {
   type TemporaryLiveSpot,
 } from './temporaryLiveSpots';
 import {
+  buildEventOfferKey,
+  canEventPitch,
+  EVENT_PITCH_COOLDOWN_MS,
+  eventPitchQuotaExhausted,
   loadEventPitchMemory,
   noteEventPitchSpoken,
   softSkipTagsForUser,
@@ -22,8 +27,8 @@ import { allowProactiveVoice } from '../ui/nachtruhePolicy';
 
 const APP_OPEN_MIN_MS = 10 * 60_000;
 const SILENCE_MIN_MS = 60_000;
-/** Harte Obergrenze: höchstens eine Ansage alle 8 Stunden. */
-export const AMBIENT_EVENT_PITCH_COOLDOWN_MS = 8 * 60 * 60_000;
+/** @deprecated Prefer EVENT_PITCH_COOLDOWN_MS — same value. */
+export const AMBIENT_EVENT_PITCH_COOLDOWN_MS = EVENT_PITCH_COOLDOWN_MS;
 
 let bootstrapped = false;
 let foregroundSinceMs = Date.now();
@@ -33,12 +38,18 @@ let researchInFlight = false;
 
 function isConversationBusy(): boolean {
   const s = useFinnusStore.getState();
+  const card = s.activeConciergeCard;
+  const cardBusy = Boolean(
+    card &&
+      ((card.visualBullets?.length ?? 0) > 0 ||
+        (card.quickActions?.length ?? 0) > 0),
+  );
   return (
     s.isPlayingAudio ||
     s.isAudiblySpeaking ||
     s.isListening ||
     s.isGenerating ||
-    Boolean(s.activeConciergeCard)
+    cardBusy
   );
 }
 
@@ -78,7 +89,7 @@ export function noteAmbientConversationActivity(): void {
 }
 
 /**
- * GPS-Tick: ggf. pitchen, was im Umkreis (~5 km) heute geht (max. 1× / 8 h).
+ * GPS-Tick: ggf. pitchen, was im Umkreis (~5 km) heute geht (max. 1× / 2 h).
  */
 export async function tickAmbientEventPitch(
   lat: number,
@@ -92,6 +103,14 @@ export async function tickAmbientEventPitch(
   if (researchInFlight) return;
   if (!allowProactiveVoice(now)) return;
   try {
+    const { isOpenQuietActive } = require('../navigation/modulePriorityPolicy') as {
+      isOpenQuietActive: (n?: number) => boolean;
+    };
+    if (isOpenQuietActive(now)) return;
+  } catch {
+    /* soft */
+  }
+  try {
     const { isProactiveAlertEnabled } = require('../notifications/proactiveAlerts') as {
       isProactiveAlertEnabled: (k: 'ambientEvents') => boolean;
     };
@@ -103,7 +122,8 @@ export async function tickAmbientEventPitch(
   if (silenceSinceMs == null || now - silenceSinceMs < SILENCE_MIN_MS) return;
   if (isConversationBusy()) return;
 
-  const speakGate = canSpeakExploreEvent('main', now);
+  // 'other' — Ambient ist kein Hauptort (Open-Quiet + 60s nach M2 bleiben)
+  const speakGate = canSpeakExploreEvent('other', undefined, now);
   if (!speakGate.ok) return;
 
   const profile = getCachedUserProfile();
@@ -125,16 +145,27 @@ export async function tickAmbientEventPitch(
     } catch {
       memory = null;
     }
-    if (
-      memory?.lastPitchAtMs != null &&
-      now - memory.lastPitchAtMs < AMBIENT_EVENT_PITCH_COOLDOWN_MS
-    ) {
+    if (eventPitchQuotaExhausted(memory, now)) {
       return;
     }
     if (isConversationBusy()) {
       pitchedThisForeground = false;
       return;
     }
+
+    // Nähe-Arena/Theater zuerst (enger Radius) — teilt 8h-Quota
+    try {
+      const { useFinnusStore } = require('../../store/useFinnusStore') as {
+        useFinnusStore: { getState: () => { navActive?: boolean } };
+      };
+      if (useFinnusStore.getState().navActive) return;
+      const { tryVenueWalkByPitch } = await import('./venueWalkByPitch');
+      const walked = await tryVenueWalkByPitch({ lat, lng, now });
+      if (walked) return;
+    } catch {
+      /* soft — Stadt-Ambient weiter */
+    }
+
     const mem = memory ?? (await loadEventPitchMemory());
     const cityHint =
       profile.cityName?.trim() || profile.cityId?.trim() || null;
@@ -142,21 +173,35 @@ export async function tickAmbientEventPitch(
       pitchedThisForeground = false;
       return;
     }
-    const spots = await researchTemporaryLiveSpots({
-      lat,
-      lng,
-      cityHint,
-      timeoutMs: 12_000,
-      maxDistanceM: 5_000,
-      forAmbientPitch: true,
-      user: {
-        age: profile.age,
-        travelParty: profile.travelParty ?? null,
-        nightlifeOk: Boolean(profile.mustHaveStyles?.includes('nightlife')),
-        aboutMe: profile.aboutMe?.trim() || null,
-        softSkipTags: softSkipTagsForUser(mem, profile),
-      },
-    });
+    const spots = await (async () => {
+      const rings = [5_000, 15_000, 30_000] as const;
+      for (const maxDistanceM of rings) {
+        const found = await researchTemporaryLiveSpots({
+          lat,
+          lng,
+          cityHint,
+          timeoutMs: 12_000,
+          maxDistanceM,
+          forAmbientPitch: true,
+          user: {
+            age: profile.age,
+            travelParty: profile.travelParty ?? null,
+            nightlifeOk: Boolean(profile.mustHaveStyles?.includes('nightlife')),
+            aboutMe: profile.aboutMe?.trim() || null,
+            softSkipTags: softSkipTagsForUser(mem, profile),
+          },
+        });
+        if (found.length) {
+          if (maxDistanceM > 5_000 && __DEV__) {
+            console.warn(
+              `[ambientEvent] expand ring=${maxDistanceM}m hits=${found.length}`,
+            );
+          }
+          return found;
+        }
+      }
+      return [] as Awaited<ReturnType<typeof researchTemporaryLiveSpots>>;
+    })();
     if (!spots.length) {
       // Session verbraucht (kein Research-Spam); 8h-Cooldown nur bei echter Ansage
       return;
@@ -166,24 +211,35 @@ export async function tickAmbientEventPitch(
       return;
     }
 
-    const spot = spots[0]!;
+    let spot: TemporaryLiveSpot | null = null;
     const clockNow = new Date(now);
-    if (
-      !isUpcomingForUnsolicitedPitch(
-        `${spot.whenLabel} ${spot.name} ${spot.hook}`,
-        clockNow,
-        { kindHint: spot.kindHint },
-      )
-    ) {
-      return;
+    for (const candidate of spots) {
+      if (
+        !isUpcomingForUnsolicitedPitch(
+          `${candidate.whenLabel} ${candidate.name} ${candidate.hook}`,
+          clockNow,
+          { kindHint: candidate.kindHint },
+        )
+      ) {
+        continue;
+      }
+      const offerKey = buildEventOfferKey({
+        venueName: candidate.name,
+        whenLabel: candidate.whenLabel,
+        titleOrHook: candidate.hook,
+      });
+      if (
+        !canEventPitch(mem, now, {
+          venueName: candidate.name,
+          offerKey,
+        }).ok
+      ) {
+        continue;
+      }
+      spot = candidate;
+      break;
     }
-    const lastName = (mem.lastPitchName || '').trim().toLowerCase();
-    if (
-      lastName &&
-      lastName === spot.name.trim().toLowerCase() &&
-      mem.lastPitchAtMs != null &&
-      now - mem.lastPitchAtMs < AMBIENT_EVENT_PITCH_COOLDOWN_MS
-    ) {
+    if (!spot) {
       return;
     }
     const speech = formatTemporaryLiveSpeech(spot, clockNow);

@@ -29,12 +29,12 @@ function looksLikeNavDistanceSpeech(speech: string): boolean {
 }
 
 /**
- * Nur Meter, die nach Route-Enrich im Store/Meta stehen — nicht während Loading.
+ * Meter aus Store/Meta — auch während Loading, wenn Progressive-Meta schon da
+ * (sonst Call-2 nach Bridge stumm bis Enrich fertig).
  */
 export function getCommittedRoutePhrase(): CommittedRoutePhrase | null {
   try {
     const store = useFinnusStore.getState();
-    if (store.navRouteLoading) return null;
     let meta: { distanceM: number; etaMin: number } | null = null;
     try {
       const { getLastProgressiveStartMeta } = require('./handsFreeNav/startNav') as {

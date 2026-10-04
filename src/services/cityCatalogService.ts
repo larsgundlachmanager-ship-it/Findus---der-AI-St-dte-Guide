@@ -819,6 +819,31 @@ export async function ensureBrowseCityPackOnDevice(
   browseEnsureInFlightId = id;
   browseEnsureInFlight = (async () => {
     try {
+      const { peekMapPinIndex, loadMapPinIndex, writeMapPinIndex } = await import(
+        './homeMap/mapPinIndex'
+      );
+      // Hot path: Index schon warm → kein Mega-JSON auf dem JS-Thread.
+      if ((peekMapPinIndex(id)?.length ?? 0) > 0) {
+        await registerCoverageFromLocalPacks({ cityIds: [id] });
+        return true;
+      }
+      // Slim pins.json only — kein Full-Pack auf Mic/Polish.
+      const existing = await loadMapPinIndex(id);
+      if (existing.length > 0) {
+        await registerCoverageFromLocalPacks({ cityIds: [id] });
+        return true;
+      }
+      // Volles Pack-JSON nur hinter mapIdle (nie Mic/Polish).
+      await new Promise<void>((resolve) => {
+        try {
+          const { runMapIdleWhenFree } = require('./boot/interactiveBootGate') as {
+            runMapIdleWhenFree: (fn: () => void) => void;
+          };
+          runMapIdleWhenFree(() => resolve());
+        } catch {
+          resolve();
+        }
+      });
       let pack: CityPack | null = null;
       if (await isCityPackCachedOnDevice(id)) {
         pack = await loadCityPackLocalOnly(id);
@@ -829,12 +854,14 @@ export async function ensureBrowseCityPackOnDevice(
       const mapped = mapCityPackToRemote(pack);
       if (!mapped.pois.length) return false;
       try {
-        const { writeMapPinIndex } = await import('./homeMap/mapPinIndex');
         await writeMapPinIndex(id, mapped.pois);
       } catch {
         /* soft */
       }
-      await registerCoverageFromLocalPacks({ cityIds: [id] });
+      await registerCoverageFromLocalPacks({
+        cityIds: [id],
+        allowFullPackParse: true,
+      });
       if (__DEV__) {
         console.log(
           `[cityCatalog] Browse-Pack bereit (ohne Aktiv-Switch): ${id} (${mapped.pois.length} Orte)`,
@@ -1054,19 +1081,78 @@ export async function loadCityPackLocalOnly(
 }
 
 /**
- * Gemeindegrenzen aus allen lokalen Packs registrieren — nicht nur der
+ * Gemeindegrenzen aus lokalen Packs registrieren — nicht nur der
  * aktiven Modul-1-Stadt. Sonst fehlen Offline-Nachbarn (z. B. Tornesch)
  * auf der Rubbelkarte, weil Nominatim offline ausfällt und `_coverage`
  * sonst nur in `mapCityPackToRemote` landet.
+ *
+ * Default: nur Slim-Disk-Coverage (hydrate). Volles Pack-JSON nur mit
+ * `allowFullPackParse` und nur hinter Idle/Hydrate — nie Mic/Polish.
  */
+const pendingCoverageFullParse = new Set<string>();
+
+function scheduleCoverageFullParseWhenIdle(cityIds: readonly string[]): void {
+  const fresh: string[] = [];
+  for (const raw of cityIds) {
+    const id = raw.trim().toLowerCase();
+    if (!id || pendingCoverageFullParse.has(id)) continue;
+    pendingCoverageFullParse.add(id);
+    fresh.push(id);
+  }
+  if (!fresh.length) return;
+  try {
+    const { runMapIdleWhenFree } = require('./boot/interactiveBootGate') as {
+      runMapIdleWhenFree: (fn: () => void) => void;
+    };
+    runMapIdleWhenFree(() => {
+      void registerCoverageFromLocalPacks({
+        cityIds: fresh,
+        allowFullPackParse: true,
+        yieldEvery: 1,
+      })
+        .catch(() => undefined)
+        .finally(() => {
+          for (const id of fresh) pendingCoverageFullParse.delete(id);
+        });
+    });
+  } catch {
+    for (const id of fresh) pendingCoverageFullParse.delete(id);
+  }
+}
+
+function canParseFullPackCoverageNow(): boolean {
+  try {
+    const { isMicActive, isLaneFree } = require('./boot/interactiveBootGate') as {
+      isMicActive: () => boolean;
+      isLaneFree: (lane: string) => boolean;
+    };
+    if (isMicActive()) return false;
+    return isLaneFree('mapIdle') || isLaneFree('hydrate');
+  } catch {
+    return false;
+  }
+}
+
 export async function registerCoverageFromLocalPacks(opts?: {
   cityIds?: readonly string[];
+  /** Max. Packs in diesem Lauf (Rest idle nachziehen). */
+  limit?: number;
+  /** Zwischen Packs Yield — JS-Thread atmen lassen. */
+  yieldEvery?: number;
+  /**
+   * Volles Pack-JSON lesen. Default false = nur Disk-Coverage.
+   * true nur aus mapIdle/hydrate (Install/Idle-Leiter).
+   */
+  allowFullPackParse?: boolean;
 }): Promise<string[]> {
   const {
+    hydrateCityCoverageBounds,
     registerCoverageBoundsFromPack,
     hasDetailedCityBoundaryPolygon,
     resolveCityCoverageBoundsSync,
   } = await import('./discovery/cityCoverageBounds');
+  // Pflicht: Cache von Disk — sonst leerer Sync-Peek → Full-JSON-Sturm.
+  await hydrateCityCoverageBounds();
   const ids = (
     opts?.cityIds?.length
       ? opts.cityIds.map((id) => id.trim().toLowerCase())
@@ -1074,13 +1160,56 @@ export async function registerCoverageFromLocalPacks(opts?: {
           .filter((r) => r.hasPack)
           .map((r) => r.id.toLowerCase())
   ).filter((id) => id && !id.includes('.'));
+  const maxLoad =
+    typeof opts?.limit === 'number' && opts.limit > 0
+      ? Math.floor(opts.limit)
+      : Number.POSITIVE_INFINITY;
+  const yieldEvery = Math.max(1, Math.floor(opts?.yieldEvery ?? 1));
+  if (opts?.allowFullPackParse === true && !canParseFullPackCoverageNow()) {
+    await new Promise<void>((resolve) => {
+      try {
+        const { runMapIdleWhenFree } = require('./boot/interactiveBootGate') as {
+          runMapIdleWhenFree: (fn: () => void) => void;
+        };
+        runMapIdleWhenFree(() => resolve());
+      } catch {
+        resolve();
+      }
+    });
+  }
+  const allowFull =
+    opts?.allowFullPackParse === true && canParseFullPackCoverageNow();
   const registered: string[] = [];
+  const needsFull: string[] = [];
+  let loaded = 0;
   for (const id of ids) {
     const existing = resolveCityCoverageBoundsSync(id);
-    if (hasDetailedCityBoundaryPolygon(existing?.polygon)) continue;
+    // Schon im Cache (Disk/Pack) → kein erneutes Full-JSON.
+    if (
+      existing &&
+      (hasDetailedCityBoundaryPolygon(existing.polygon) ||
+        existing.source === 'pack' ||
+        existing.source === 'nominatim')
+    ) {
+      continue;
+    }
+    if (!allowFull) {
+      needsFull.push(id);
+      continue;
+    }
+    if (loaded >= maxLoad) {
+      needsFull.push(id);
+      break;
+    }
     const pack = await loadCityPackLocalOnly(id);
+    loaded += 1;
     const cov = pack?._coverage;
-    if (!cov) continue;
+    if (!cov) {
+      if (loaded % yieldEvery === 0) {
+        await new Promise<void>((r) => setTimeout(r, 0));
+      }
+      continue;
+    }
     if (
       ![cov.latMin, cov.latMax, cov.lngMin, cov.lngMax].every(
         (n) => typeof n === 'number' && Number.isFinite(n),
@@ -1098,6 +1227,12 @@ export async function registerCoverageFromLocalPacks(opts?: {
       polygon: cov.polygon,
     });
     if (got) registered.push(id);
+    if (loaded % yieldEvery === 0) {
+      await new Promise<void>((r) => setTimeout(r, 0));
+    }
+  }
+  if (needsFull.length) {
+    scheduleCoverageFullParseWhenIdle(needsFull);
   }
   return registered;
 }
@@ -1352,11 +1487,15 @@ export async function installCityPack(
       const preview = chooseUpdatePath(sideVer, remoteVer, patches);
       const storePois = useFinnusStore.getState().pois;
       const active = await readActiveInstall();
+      const storeMatches = poisLookLikeCity(id, storePois);
+      // Fast-Path nur wenn Store wirklich DIESE Stadt hält —
+      // sonst bleiben Danzig-Stories in „X von Y Orten“ obwohl Prisdorf aktiv ist.
       const alreadyOn =
         preview.kind === 'skip' &&
         sideVer > 0 &&
-        ((active?.cityId === id && active.version === sideVer) ||
-          poisLookLikeCity(id, storePois));
+        active?.cityId === id &&
+        active.version === sideVer &&
+        (storePois.length === 0 || storeMatches);
       if (alreadyOn) {
         if (__DEV__) {
           console.log(`[cityCatalog] Aktuell — Switch ohne Download: ${id} v${sideVer}`);
@@ -1365,10 +1504,30 @@ export async function installCityPack(
         // Coverage trotzdem aus lokalem Pack — sonst fehlt die Gemeindegrenze
         // auf der Homemap (kein mapCityPackToRemote in diesem Fast-Path).
         void registerCoverageFromLocalPacks({ cityIds: [id] }).catch(() => undefined);
+        // Immer Disk → Store im Fast-Path — sonst bleiben fremde Stories im Zähler
+        // obwohl active.json schon die richtige Stadt zeigt.
         let pois = storePois;
-        if (pois.length === 0) {
-          pois = await getAllPois();
-          useFinnusStore.getState().setPois(pois);
+        try {
+          const local = await loadCityPackLocalOnly(id);
+          if (local) {
+            const mapped = mapCityPackToRemote(local);
+            const firstWave = mapped.pois.filter((p) => {
+              const kind = p.kind ?? 'legacy';
+              if (kind === 'approach' || kind === 'sub') return false;
+              return !(p.tags_json ?? '').toLowerCase().includes('directory');
+            });
+            pois = firstWave.length > 0 ? firstWave : mapped.pois;
+            useFinnusStore.getState().setPois(pois);
+            await replacePoisAndFacts(mapped.pois, mapped.facts);
+          } else if (pois.length === 0 || !storeMatches) {
+            pois = await getAllPois();
+            useFinnusStore.getState().setPois(pois);
+          }
+        } catch {
+          if (pois.length === 0 || !storeMatches) {
+            pois = await getAllPois();
+            useFinnusStore.getState().setPois(pois);
+          }
         }
         const meta = peekCityIndexCache()?.find((c) => c.id === id);
         return {

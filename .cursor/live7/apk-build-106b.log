@@ -1,0 +1,38 @@
+ ??  [33mApplying gradle plugin[0m '[32mexpo-dev-launcher-gradle-plugin[0m' (expo-dev-launcher@5.0.35)
+
+Using expo modules
+  - [32mexpo-application[0m (6.0.2)
+  - [32mexpo-asset[0m (11.0.5)
+  - [32mexpo-av[0m (15.0.2)
+  - [32mexpo-battery[0m (9.0.2)
+  - [32mexpo-constants[0m (17.0.8)
+  - [32mexpo-crypto[0m (14.0.2)
+  - [32mexpo-dev-client[0m (5.0.20)
+  - [32mexpo-dev-launcher[0m (5.0.35)
+  - [32mexpo-dev-menu[0m (6.0.25)
+  - [32mexpo-file-system[0m (18.0.12)
+  - [32mexpo-font[0m (13.0.4)
+  - [32mexpo-haptics[0m (14.0.1)
+  - [32mexpo-intent-launcher[0m (12.0.2)
+  - [32mexpo-json-utils[0m (0.14.0)
+  - [32mexpo-linking[0m (7.0.5)
+  - [32mexpo-localization[0m (16.0.1)
+  - [32mexpo-location[0m (18.0.10)
+  - [32mexpo-manifests[0m (0.15.8)
+  - [32mexpo-modules-core[0m (2.2.3)
+  - [32mexpo-network[0m (7.0.5)
+  - [32mexpo-notifications[0m (0.29.14)
+  - [32mexpo-sensors[0m (14.0.2)
+  - [32mexpo-speech[0m (13.0.1)
+  - [32mexpo-speech-recognition[0m (1.1.1)
+  - [32mexpo-sqlite[0m (15.1.4)
+  - [32mexpo-task-manager[0m (12.0.6)
+  - [32mexpo-web-browser[0m (14.0.2)
+  - [32mfindus-espeak[0m (1.0.0)
+  - [32mfindus-map-native[0m (1.0.0)
+  - [32munimodules-app-loader[0m (5.0.1)
+
+Android gradle plugin: 8.6.0
+Gradle: 8.10.2
+env: load .env
+env: export EXPO_PUBLIC_OPENAI_API_KEY EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_CITY_ID EXPO_PUBLIC_KOKORO_MODEL_URL EXPO_PUBLIC_KOKORO_VOICE_URL GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GEMINI_API_KEY GETYOURGUIDE_PARTNER_ID MUSEMENT_AFFILIATE_ID UBER_CLIENT_ID VIATOR_PARTNER_ID ECONOMY_BOOKINGS_REFERRAL_URL BOUNCE_AFFILIATE_URL STAY22_AFFILIATE_ID EXPO_PUBLIC_FLIGHTAWARE_API_KEY EXPO_PUBLIC_DB_CLIENT_ID EXPO_PUBLIC_DB_CLIENT_SECRET EXPO_PUBLIC_TRANSITOUS_BASE_URL EXPO_PUBLIC_CARTESIA_API_KEY SUPABASE_SERVICE_ROLE_KEY EXPO_PUBLIC_EXPEDIA_CAMREF EXPO_PUBLIC_EXPEDIA_CREATIVEREF EXPO_PUBLIC_EXPEDIA_SITE_ID FINDUS_PACK_COST EXPO_PUBLIC_PROTOMAPS_API_KEY EXPO_PUBLIC_MAP_VECTOR_TILES EXPO_PUBLIC_TRAVELPAYOUTS_MARKER EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN GIGSBERG_API_KEY EXPO_PUBLIC_GIGSBERG_API_KEY

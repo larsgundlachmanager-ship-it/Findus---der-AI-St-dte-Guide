@@ -20,7 +20,10 @@ function aff(): typeof import('./affiliateService') {
 
 function safeHollow(url: string): boolean {
   try {
-    return safeHollow(url);
+    const { isHollowPartnerUrl } = require('./hollowPartnerUrl') as {
+      isHollowPartnerUrl: (u: string) => boolean;
+    };
+    return isHollowPartnerUrl(url);
   } catch {
     return !/^https?:\/\//i.test(url);
   }
@@ -37,6 +40,42 @@ function cityFromProfile(): string {
   }
 }
 
+/** Dates/Pax for Airbnb deep-link — only when text has an explicit stay window. */
+function airbnbStayPrefillFromText(text?: string | null): {
+  checkin?: string | null;
+  checkout?: string | null;
+  adults?: number | null;
+} {
+  const blob = String(text || '').trim();
+  if (!blob) return {};
+  try {
+    const {
+      hasExplicitStayDates,
+      parseHotelStayDates,
+      parseHotelAdults,
+    } = require('../concierge/hotelAvailabilityService') as {
+      hasExplicitStayDates: (t?: string | null) => boolean;
+      parseHotelStayDates: (t?: string | null) => {
+        checkin: string;
+        checkout: string;
+      };
+      parseHotelAdults: (t?: string | null) => number;
+    };
+    const adults = parseHotelAdults(blob);
+    if (!hasExplicitStayDates(blob)) {
+      return adults > 0 ? { adults } : {};
+    }
+    const { checkin, checkout } = parseHotelStayDates(blob);
+    return {
+      checkin: checkin || null,
+      checkout: checkout || null,
+      adults: adults > 0 ? adults : null,
+    };
+  } catch {
+    return {};
+  }
+}
+
 export type HelpFirstMomentKind =
   | 'airport_access'
   | 'hotel_night'
@@ -47,7 +86,11 @@ export type HelpFirstMomentKind =
   | 'travel_insurance'
   | 'roadtrip_car'
   | 'camping'
+  | 'airbnb_stay'
   | 'spain_package'
+  | 'club_magic_life'
+  | 'lidl_reisen'
+  | 'cruise_package'
   | 'package_holiday'
   | 'landmark_ticket'
   | 'hotel_transfer'
@@ -79,10 +122,17 @@ const LUGGAGE_RE =
   /\b(gepäck|gepaeck|koffer(?:n|s)?|früheincheck|frueheincheck|spätabflug|spaetabflug)\b/iu;
 const CAMPING_RE =
   /\b(camping|campingplatz|camper|wohnwagen|wohnmobil|glamping|stellplatz|zeltplatz)\b/iu;
+const AIRBNB_RE = /\bairbnb\b/iu;
 const SOLMAR_RE =
   /\b(solmar|busreise\s+spanien|spanien\s+bus|bus\s+nach\s+spanien|costa\s+blanca|costa\s+brava|costa\s+dorada|pauschalreise\s+spanien|spanien\s+pauschal|spanienurlaub)\b/iu;
+const MAGIC_LIFE_RE =
+  /\b(magic\s*life|cluburlaub|club\s+all[\s-]?inclusive|club\s*urlaub)\b/iu;
+/** Explizit Lidl Reisen / Lidl Urlaub. */
+const LIDLI_RE = /\b(lidl\s*reisen|lidl\s*urlaub)\b/iu;
+const CRUISE_RE =
+  /\b(kreuzfahrt|flusskreuzfahrt|familienkreuzfahrt|minikreuzfahrt|\baida\b|mein\s*schiff|cruise)\b/iu;
 const PACKAGE_HOLIDAY_RE =
-  /\b(ab[\s-]?in[\s-]?den[\s-]?urlaub|invia|weg\.de|pauschalreise|last\s*minute|lastminute|all[\s-]?inclusive|pauschal\s+buchen|urlaub\s+pauschal)\b/iu;
+  /\b(ab[\s-]?in[\s-]?den[\s-]?urlaub|invia|weg\.de|pauschalreise|last\s*minute|lastminute|all[\s-]?inclusive|pauschal\s+buchen|urlaub\s+pauschal|günstige?\s+pauschal|guenstige?\s+pauschal)\b/iu;
 const LANDMARK_TICKET_RE =
   /\b(eintritt|ticket|tickets|rauf\b|hoch\s+(auf|zum)|turm|aussicht(?:splattform)?|michel|dom\b|museum|sehenswürdigkeit|sightseeing|führung|tour\b|tickets?\s+für|rauf\s+auf)\b/iu;
 const HOTEL_TRANSFER_RE =
@@ -220,7 +270,16 @@ export function detectHelpFirstMoments(opts: {
       kind: 'camping',
       priority: 2,
       promptHint:
-        'FLOW Camping: Platz suchen/buchen → camping.info Button. Hilfe-Ton, kein Pitch.',
+        'FLOW Camping: Platz suchen/buchen → camping.info + Camping-and-Co vergleichen (Primär = Pick). Hilfe-Ton, kein Pitch.',
+    });
+  }
+
+  if (AIRBNB_RE.test(blob)) {
+    out.push({
+      kind: 'airbnb_stay',
+      priority: 2,
+      promptHint:
+        'FLOW Airbnb (nur bei explizitem Wort): Airbnb-Suche öffnen + Live-Vergleich Stay22/Expedia ohne Fake-Airbnb-Preise. Same-House nur bei belegter Identity.',
     });
   }
 
@@ -233,12 +292,39 @@ export function detectHelpFirstMoments(opts: {
     });
   }
 
+  if (MAGIC_LIFE_RE.test(blob)) {
+    out.push({
+      kind: 'club_magic_life',
+      priority: 2,
+      promptHint:
+        'FLOW Club/Magic Life: Magic Life + CHECK24 parallel vergleichen (Club/AI). Hilfe-Ton, kein Pitch.',
+    });
+  }
+
+  if (LIDLI_RE.test(blob)) {
+    out.push({
+      kind: 'lidl_reisen',
+      priority: 2,
+      promptHint:
+        'FLOW Lidl Reisen: Lidl-Button anbieten (günstig/Last-Minute/Flyer). Hilfe-Ton, kein Pitch.',
+    });
+  }
+
+  if (CRUISE_RE.test(blob)) {
+    out.push({
+      kind: 'cruise_package',
+      priority: 2,
+      promptHint:
+        'FLOW Kreuzfahrt: Lidl Kreuzfahrt + AIDA + CHECK24 Kreuzfahrt parallel (Vergleich). Hilfe-Ton, kein Pitch.',
+    });
+  }
+
   if (PACKAGE_HOLIDAY_RE.test(blob)) {
     out.push({
       kind: 'package_holiday',
       priority: 2,
       promptHint:
-        'FLOW Pauschal/Last-Minute/Kurztrip: CHECK24 primär; ab-in-den-urlaub/weg.de wenn Brand genannt. Hilfe-Ton, kein Pitch.',
+        'FLOW Pauschal/Last-Minute/Kurztrip: CHECK24 primär + Lidl Reisen parallel (Vergleich); ab-in-den-urlaub/weg.de wenn Brand genannt. Hilfe-Ton, kein Pitch.',
     });
   }
 
@@ -420,16 +506,135 @@ export function buildHelpFirstPlanActions(opts: {
       case 'travel_insurance':
         pushUniqueAction(actions, aff().buildTravelInsuranceAction());
         break;
-      case 'camping':
-        pushUniqueAction(
-          actions,
-          aff().buildCampingInfoAction({ cityOrQuery: city || undefined }),
-        );
+      case 'camping': {
+        const { buildCampingBookingActions } = require('./campingPartnerPick') as {
+          buildCampingBookingActions: (o: {
+            city?: string | null;
+            userText?: string | null;
+          }) => Array<{ type: 'OPEN_URL'; label: string; payload: { url: string } }>;
+        };
+        for (const a of buildCampingBookingActions({
+          city: city || undefined,
+          userText: opts.planBlob,
+        })) {
+          if (actions.length >= 2) break;
+          pushUniqueAction(actions, a as QuickAction);
+        }
         break;
+      }
+      case 'airbnb_stay': {
+        const { buildAirbnbAction } = require('./airbnbDeepLink') as {
+          buildAirbnbAction: (o: {
+            city: string;
+            checkin?: string | null;
+            checkout?: string | null;
+            adults?: number | null;
+          }) => { type: 'OPEN_URL'; label: string; payload: { url: string } };
+        };
+        if (city) {
+          const stay = airbnbStayPrefillFromText(opts.planBlob);
+          pushUniqueAction(
+            actions,
+            buildAirbnbAction({
+              city,
+              checkin: stay.checkin,
+              checkout: stay.checkout,
+              adults: stay.adults,
+            }) as QuickAction,
+          );
+        }
+        break;
+      }
       case 'spain_package':
         pushUniqueAction(actions, aff().buildSolmarAction());
         break;
-      case 'package_holiday':
+      case 'club_magic_life': {
+        const { buildMagicLifeAction } = require('./magicLifeAffiliate') as {
+          buildMagicLifeAction: (o?: {
+            cityOrQuery?: string | null;
+          }) => QuickAction;
+        };
+        pushUniqueAction(
+          actions,
+          buildMagicLifeAction({ cityOrQuery: city || undefined }),
+        );
+        // Parallel-Vergleich: CHECK24 Pauschal
+        pushUniqueAction(
+          actions,
+          aff().buildPackageHolidayAction({
+            cityOrQuery: city || undefined,
+            speechOrBlob: 'check24 pauschal',
+            label: 'Pauschal CHECK24',
+          }),
+        );
+        break;
+      }
+      case 'lidl_reisen': {
+        try {
+          const { buildLidlReisenAction } = require('./lidlReisenAffiliate') as {
+            buildLidlReisenAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildLidlReisenAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
+        break;
+      }
+      case 'cruise_package': {
+        try {
+          const { buildLidlReisenCruiseAction } = require('./lidlReisenAffiliate') as {
+            buildLidlReisenCruiseAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildLidlReisenCruiseAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
+        try {
+          const { buildAidaAction } = require('./aidaAffiliate') as {
+            buildAidaAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildAidaAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
+        try {
+          const { buildAwinClickUrl } = require('./awinClick') as {
+            buildAwinClickUrl: (o: {
+              merchantId: string;
+              destinationUrl: string;
+            }) => string;
+          };
+          pushUniqueAction(actions, {
+            type: 'OPEN_URL',
+            label: 'CHECK24 Kreuzfahrt',
+            payload: {
+              url: buildAwinClickUrl({
+                merchantId: '9364',
+                destinationUrl: 'https://kreuzfahrt.check24.de/',
+              }),
+            },
+          } as QuickAction);
+        } catch {
+          /* soft */
+        }
+        break;
+      }
+      case 'package_holiday': {
         pushUniqueAction(
           actions,
           aff().buildPackageHolidayAction({
@@ -437,7 +642,22 @@ export function buildHelpFirstPlanActions(opts: {
             speechOrBlob: opts.planBlob,
           }),
         );
+        // Lidl immer parallel zur Pauschal-Lane (CHECK24 + Lidl, max 2)
+        try {
+          const { buildLidlReisenAction } = require('./lidlReisenAffiliate') as {
+            buildLidlReisenAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildLidlReisenAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
         break;
+      }
       case 'dining_reserve':
         // Plan-Pfad: ohne belegte Venue-ID keinen Fake-OpenTable
         break;
@@ -516,16 +736,135 @@ export function buildHelpFirstTurnActions(opts: {
       case 'travel_insurance':
         pushUniqueAction(actions, aff().buildTravelInsuranceAction());
         break;
-      case 'camping':
-        pushUniqueAction(
-          actions,
-          aff().buildCampingInfoAction({ cityOrQuery: city || undefined }),
-        );
+      case 'camping': {
+        const { buildCampingBookingActions } = require('./campingPartnerPick') as {
+          buildCampingBookingActions: (o: {
+            city?: string | null;
+            userText?: string | null;
+          }) => Array<{ type: 'OPEN_URL'; label: string; payload: { url: string } }>;
+        };
+        for (const a of buildCampingBookingActions({
+          city: city || undefined,
+          userText: blob,
+        })) {
+          if (actions.length >= 2) break;
+          pushUniqueAction(actions, a as QuickAction);
+        }
         break;
+      }
+      case 'airbnb_stay': {
+        const { buildAirbnbAction } = require('./airbnbDeepLink') as {
+          buildAirbnbAction: (o: {
+            city: string;
+            checkin?: string | null;
+            checkout?: string | null;
+            adults?: number | null;
+          }) => { type: 'OPEN_URL'; label: string; payload: { url: string } };
+        };
+        const dest = city || place;
+        if (dest) {
+          const stay = airbnbStayPrefillFromText(blob);
+          pushUniqueAction(
+            actions,
+            buildAirbnbAction({
+              city: dest,
+              checkin: stay.checkin,
+              checkout: stay.checkout,
+              adults: stay.adults,
+            }) as QuickAction,
+          );
+        }
+        break;
+      }
       case 'spain_package':
         pushUniqueAction(actions, aff().buildSolmarAction());
         break;
-      case 'package_holiday':
+      case 'club_magic_life': {
+        const { buildMagicLifeAction } = require('./magicLifeAffiliate') as {
+          buildMagicLifeAction: (o?: {
+            cityOrQuery?: string | null;
+          }) => QuickAction;
+        };
+        pushUniqueAction(
+          actions,
+          buildMagicLifeAction({ cityOrQuery: city || undefined }),
+        );
+        pushUniqueAction(
+          actions,
+          aff().buildPackageHolidayAction({
+            cityOrQuery: city || undefined,
+            speechOrBlob: 'check24 pauschal',
+            label: 'Pauschal CHECK24',
+          }),
+        );
+        break;
+      }
+      case 'lidl_reisen': {
+        try {
+          const { buildLidlReisenAction } = require('./lidlReisenAffiliate') as {
+            buildLidlReisenAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildLidlReisenAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
+        break;
+      }
+      case 'cruise_package': {
+        try {
+          const { buildLidlReisenCruiseAction } = require('./lidlReisenAffiliate') as {
+            buildLidlReisenCruiseAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildLidlReisenCruiseAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
+        try {
+          const { buildAidaAction } = require('./aidaAffiliate') as {
+            buildAidaAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildAidaAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
+        try {
+          const { buildAwinClickUrl } = require('./awinClick') as {
+            buildAwinClickUrl: (o: {
+              merchantId: string;
+              destinationUrl: string;
+            }) => string;
+          };
+          pushUniqueAction(actions, {
+            type: 'OPEN_URL',
+            label: 'CHECK24 Kreuzfahrt',
+            payload: {
+              url: buildAwinClickUrl({
+                merchantId: '9364',
+                destinationUrl: 'https://kreuzfahrt.check24.de/',
+              }),
+            },
+          } as QuickAction);
+        } catch {
+          /* soft */
+        }
+        break;
+      }
+      case 'package_holiday': {
         pushUniqueAction(
           actions,
           aff().buildPackageHolidayAction({
@@ -533,7 +872,21 @@ export function buildHelpFirstTurnActions(opts: {
             speechOrBlob: blob,
           }),
         );
+        try {
+          const { buildLidlReisenAction } = require('./lidlReisenAffiliate') as {
+            buildLidlReisenAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => QuickAction;
+          };
+          pushUniqueAction(
+            actions,
+            buildLidlReisenAction({ cityOrQuery: city || undefined }),
+          );
+        } catch {
+          /* soft */
+        }
         break;
+      }
       case 'dining_reserve': {
         const otRaw = (opts.openTableIdOrUrl || '').trim();
         if (otRaw) {

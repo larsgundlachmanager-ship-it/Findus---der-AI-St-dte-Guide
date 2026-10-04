@@ -1,18 +1,41 @@
 /**
  * Modul-Priorität & Cooldowns nach User-Frage (Modul 2).
- * Mic → nur Modul 2 · danach: Modul 1/4 nach 60s.
+ * Mic → nur Modul 2 · danach: Modul 1/4 nach 60s (Wegweiser/Ambient).
+ * Hauptort (main): Open-Quiet gilt nicht · nach M2/Planung schon nach 30s.
  * Nach M1/Nav: 15s Stille für Fremd-Module · nach Busy: 10s.
  * Gleicher Ort Wegweiser→Haupt: 5s · zwei verschiedene Orte: 10s.
+ * App-Öffnen / Resume: 5 Min Open-Quiet (Ambient/Welcome/Akku — nicht Hauptort).
  */
 
 import { useFinnusStore } from '../../store/useFinnusStore';
+import {
+  OPEN_QUIET_MS,
+  bootstrapOpenQuietGate,
+  getOpenQuietRemainingMs,
+  isOpenQuietActive,
+  noteAppOpenedQuiet,
+  resetOpenQuietGateForTests,
+} from './openQuietGate';
+
+export {
+  OPEN_QUIET_MS,
+  bootstrapOpenQuietGate,
+  getOpenQuietRemainingMs,
+  isOpenQuietActive,
+  noteAppOpenedQuiet,
+  resetOpenQuietGateForTests,
+};
 
 /** Nach Modul-2-Ende bis Modul 4 (Wetter etc.) sprechen darf. */
 export const MODULE4_AFTER_M2_MS = 60_000;
-/** Nach Modul-2-Ende bis Modul 1 (Explore) wieder darf. */
+/** Nach Modul-2-Ende bis Modul 1 (Wegweiser / Ambient) wieder darf. */
 export const MODULE1_AFTER_M2_MS = 60_000;
 /** Nach Planungs-Session bis Modul 1 — gleich wie nach M2. */
 export const MODULE1_AFTER_PLANNING_MS = 60_000;
+/** Hauptort vor dir: nach M2/Planung schon nach 30 s (nicht 60 s / Open-Quiet). */
+export const MODULE1_MAIN_AFTER_M2_MS = 30_000;
+/** Nach Planung → Hauptort — gleich wie nach M2. */
+export const MODULE1_MAIN_AFTER_PLANNING_MS = MODULE1_MAIN_AFTER_M2_MS;
 /** Nach Modul-1- oder Nav-Sprechen: Fremd-Module (Regen, Presence) warten. */
 export const MODULE1_AFTER_OWN_SPEECH_MS = 15_000;
 /** Nach Busy (reden/denken) mindestens so lange Stille. */
@@ -157,6 +180,13 @@ function isTimelineBlockingProactive(): boolean {
 /** Ungefragt (Regen, Presence, Welcome, Akku): Busy, Timeline, Pausen. */
 export function canSpeakUnsolicited(nowMs = Date.now()): SpeakGate {
   noteBusyTransition(nowMs);
+  if (isOpenQuietActive(nowMs)) {
+    return {
+      ok: false,
+      reason: 'open_quiet',
+      remainingMs: getOpenQuietRemainingMs(nowMs),
+    };
+  }
   if (isFindusBusy()) return { ok: false, reason: 'busy' };
   if (isTimelineBlockingProactive()) return { ok: false, reason: 'timeline' };
   if (lastBusyEndedAtMs != null && nowMs - lastBusyEndedAtMs < BUSY_AFTER_MS) {
@@ -181,6 +211,13 @@ function remaining(untilMs: number, nowMs: number): number {
 }
 
 export function canModule4Speak(nowMs = Date.now()): SpeakGate {
+  if (isOpenQuietActive(nowMs)) {
+    return {
+      ok: false,
+      reason: 'open_quiet',
+      remainingMs: getOpenQuietRemainingMs(nowMs),
+    };
+  }
   if (isModule2Busy()) return { ok: false, reason: 'module2_busy' };
   if (isTimelineBlockingProactive()) return { ok: false, reason: 'timeline' };
   if (lastOwnSpeechAtMs != null) {
@@ -207,6 +244,13 @@ export function canModule4Speak(nowMs = Date.now()): SpeakGate {
 }
 
 export function canModule1Speak(nowMs = Date.now()): SpeakGate {
+  if (isOpenQuietActive(nowMs)) {
+    return {
+      ok: false,
+      reason: 'open_quiet',
+      remainingMs: getOpenQuietRemainingMs(nowMs),
+    };
+  }
   if (isModule2Busy()) return { ok: false, reason: 'module2_busy' };
   if (isTimelineBlockingProactive()) return { ok: false, reason: 'timeline' };
 
@@ -237,35 +281,49 @@ export function canModule1Speak(nowMs = Date.now()): SpeakGate {
 
 /**
  * Feingranulare Modul-1-Pausen:
+ * - Hauptort: kein Open-Quiet; nach M2/Planung ≥ 30 s
  * - zwei Wegweiser ≥ 45 s
  * - Wegweiser → zugehöriger Haupt ≥ 5 s
- * - Wegweiser → anderer Haupt ≥ 20 s
+ * - Wegweiser → anderer Haupt ≥ 10 s
  * - nach Haupt ≥ 10 s
  */
-export function canSpeakExploreEvent(
-  kind: 'approach' | 'main' | 'other',
-  opts?: { spotKey?: string | null; relatedToLastWegweiser?: boolean },
-  nowMs = Date.now(),
+function canSpeakHauptort(
+  opts: { spotKey?: string | null; relatedToLastWegweiser?: boolean } | undefined,
+  nowMs: number,
 ): SpeakGate {
+  if (isModule2Busy()) return { ok: false, reason: 'module2_busy' };
+  if (isTimelineBlockingProactive()) return { ok: false, reason: 'timeline' };
+
   const related =
     opts?.relatedToLastWegweiser === true ||
     (!!opts?.spotKey &&
       !!lastWegweiserSpotKey &&
       opts.spotKey === lastWegweiserSpotKey);
 
-  // Gleicher Spot: Wegweiser → Haupt nur 5 s — nicht die Own-Speech-Silence
-  if (kind === 'main' && related && lastWegweiserAtMs != null) {
-    if (isModule2Busy()) return { ok: false, reason: 'module2_busy' };
-    if (module2SpeechEndedAtMs != null) {
-      const elapsed = nowMs - module2SpeechEndedAtMs;
-      if (elapsed < MODULE1_AFTER_M2_MS) {
-        return {
-          ok: false,
-          reason: 'cooldown_30s_after_m2',
-          remainingMs: MODULE1_AFTER_M2_MS - elapsed,
-        };
-      }
+  if (module2SpeechEndedAtMs != null) {
+    const elapsed = nowMs - module2SpeechEndedAtMs;
+    if (elapsed < MODULE1_MAIN_AFTER_M2_MS) {
+      return {
+        ok: false,
+        reason: 'cooldown_30s_after_m2',
+        remainingMs: MODULE1_MAIN_AFTER_M2_MS - elapsed,
+      };
     }
+  }
+
+  if (planningEndedAtMs != null) {
+    const elapsed = nowMs - planningEndedAtMs;
+    if (elapsed < MODULE1_MAIN_AFTER_PLANNING_MS) {
+      return {
+        ok: false,
+        reason: 'cooldown_30s_after_planning',
+        remainingMs: MODULE1_MAIN_AFTER_PLANNING_MS - elapsed,
+      };
+    }
+  }
+
+  // Gleicher Spot: Wegweiser → Haupt nur 5 s — nicht Own-Speech / Open-Quiet
+  if (related && lastWegweiserAtMs != null) {
     const sinceW = nowMs - lastWegweiserAtMs;
     if (sinceW < WEGWEISER_TO_MAIN_MS) {
       return {
@@ -275,6 +333,30 @@ export function canSpeakExploreEvent(
       };
     }
     return { ok: true };
+  }
+
+  if (lastWegweiserAtMs != null) {
+    const sinceW = nowMs - lastWegweiserAtMs;
+    if (sinceW < WEGWEISER_TO_OTHER_MAIN_MS) {
+      return {
+        ok: false,
+        reason: 'wegweiser_to_other_10s',
+        remainingMs: WEGWEISER_TO_OTHER_MAIN_MS - sinceW,
+      };
+    }
+  }
+
+  return { ok: true };
+}
+
+export function canSpeakExploreEvent(
+  kind: 'approach' | 'main' | 'other',
+  opts?: { spotKey?: string | null; relatedToLastWegweiser?: boolean },
+  nowMs = Date.now(),
+): SpeakGate {
+  // Hauptort vor dir: Open-Quiet umgehen, 30 s nach M2 reicht
+  if (kind === 'main') {
+    return canSpeakHauptort(opts, nowMs);
   }
 
   const base = canModule1Speak(nowMs);
@@ -301,17 +383,7 @@ export function canSpeakExploreEvent(
     return { ok: true };
   }
 
-  if (lastWegweiserAtMs != null) {
-    const sinceW = nowMs - lastWegweiserAtMs;
-    if (sinceW < WEGWEISER_TO_OTHER_MAIN_MS) {
-      return {
-        ok: false,
-        reason: 'wegweiser_to_other_20s',
-        remainingMs: WEGWEISER_TO_OTHER_MAIN_MS - sinceW,
-      };
-    }
-  }
-
+  // kind === 'other' (Ambient / Venue-Walk-By): nur Base-Gates
   return { ok: true };
 }
 

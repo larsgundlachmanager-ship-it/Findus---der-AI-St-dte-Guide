@@ -11,11 +11,13 @@ import {
   Text,
   TextInput,
   View,
+  unstable_batchedUpdates,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSystemSafePad } from '../hooks/useSystemSafePad';
 import { useKeyboardInset } from '../hooks/useKeyboardInset';
 import { colors, spacing } from '../constants/theme';
+import { PackListsSettingsBlock } from '../components/settings/PackListsSettingsBlock';
 import { UI_LAYER } from '../constants/uiLayers';
 import { CityCatalogCard } from '../components/CityCatalogCard';
 import { t } from '../i18n';
@@ -73,7 +75,6 @@ import { AgeLifeSlider } from '../onboarding/AgeLifeSlider';
 import { PersonalityMatrixStep } from '../onboarding/PersonalityMatrixStep';
 import { SwipeBackView } from '../components/SwipeBackView';
 import { useFinnusStore } from '../store/useFinnusStore';
-import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { useGpsStore } from '../store/useGpsStore';
 import {
   LazyHelpCatalogBrowser,
@@ -269,6 +270,10 @@ export const SettingsScreen = React.memo(
   ) {
   const [draft, setDraft] = useState(profile);
   const [openSection, setOpenSection] = useState<SettingsSection | null>(null);
+  /** Nach erstem Öffnen Body warm halten — Premount mountet nur die Liste. */
+  const [warmedSections, setWarmedSections] = useState<
+    Partial<Record<SettingsSection, true>>
+  >({});
   const [openSetup, setOpenSetup] = useState<SetupSubSection | null>(null);
   const [openPersonal, setOpenPersonal] = useState<PersonalSubSection | null>(
     null,
@@ -299,6 +304,8 @@ export const SettingsScreen = React.memo(
   const [muteStatusLine, setMuteStatusLine] = useState(() =>
     describeMuteSession(),
   );
+  /** false im Open-Frame 0 — Accordion-Bodies erst nach Chrome-Paint. */
+  const [chromeReady, setChromeReady] = useState(false);
   const lang = draft.language;
   const safePad = useSystemSafePad();
   const kbInset = useKeyboardInset();
@@ -310,47 +317,62 @@ export const SettingsScreen = React.memo(
   useEffect(() => {
     if (visible) {
       noteUiVisible('settings');
-      setDraft({ ...profile, speechRate: 1 });
-      if (initialFocus === 'voice') {
-        setOpenSection('character');
-        setOpenCharacter('voice');
-        setOpenPersonal(null);
-        setOpenSetup('voice');
-        setOpenGeneral(null);
-      } else if (initialFocus === 'mic') {
-        setOpenSection('general');
-        setOpenGeneral('audio');
-        setOpenSetup('audio');
-        setOpenPersonal(null);
-        setOpenCharacter(null);
-      } else {
-        setOpenSection(null);
-        setOpenSetup(null);
-        setOpenPersonal(null);
-        setOpenCharacter(null);
-        setOpenGeneral(null);
-      }
-      setOpenDev(null);
-      setOpenInternal(null);
-      setShowLegal(false);
       recordLastAction('settings_open');
-      void hydrateMuteSession().then((s) =>
-        setMuteStatusLine(describeMuteSession(s)),
-      );
+      setChromeReady(false);
+      // Frame 0 = nur Visibility (Chrome). Draft/Accordion/Mute erst danach.
+      let cancelled = false;
+      let heavyRaf = 0;
       const paint = requestAnimationFrame(() => {
-        if (initialFocus === 'voice') {
-          prioritizeSettingsSection('character');
-        } else if (initialFocus === 'mic') {
-          prioritizeSettingsSection('general');
-        } else {
-          startDefaultSettingsPrefetch();
-        }
+        if (cancelled) return;
+        // Ein Batch nach erstem Chrome-Paint — keine Hydrate-Jank auf Tap.
+        unstable_batchedUpdates(() => {
+          setChromeReady(true);
+          setDraft({ ...profile, speechRate: 1 });
+          if (initialFocus === 'voice') {
+            setOpenSection('character');
+            setOpenCharacter('voice');
+            setOpenPersonal(null);
+            setOpenSetup('voice');
+            setOpenGeneral(null);
+          } else if (initialFocus === 'mic') {
+            setOpenSection('general');
+            setOpenGeneral('audio');
+            setOpenSetup('audio');
+            setOpenPersonal(null);
+            setOpenCharacter(null);
+          } else {
+            setOpenSection(null);
+            setOpenSetup(null);
+            setOpenPersonal(null);
+            setOpenCharacter(null);
+            setOpenGeneral(null);
+          }
+          setOpenDev(null);
+          setOpenInternal(null);
+          setShowLegal(false);
+        });
+        heavyRaf = requestAnimationFrame(() => {
+          if (cancelled) return;
+          void hydrateMuteSession().then((s) =>
+            setMuteStatusLine(describeMuteSession(s)),
+          );
+          if (initialFocus === 'voice') {
+            prioritizeSettingsSection('character');
+          } else if (initialFocus === 'mic') {
+            prioritizeSettingsSection('general');
+          } else {
+            startDefaultSettingsPrefetch();
+          }
+        });
       });
       return () => {
+        cancelled = true;
         cancelAnimationFrame(paint);
+        if (heavyRaf) cancelAnimationFrame(heavyRaf);
         cancelSettingsPrefetch();
       };
     }
+    setChromeReady(false);
     cancelSettingsPrefetch();
     recordLastAction('settings_close');
     // eslint-disable-next-line react-hooks/exhaustive-deps -- nur visible/focus
@@ -703,9 +725,59 @@ export const SettingsScreen = React.memo(
     }
     // UI zuerst schließen — Speichern darf nicht hinter Disk/SQLite hängen.
     const snapshot = draft;
+    const prevCityId = (profile.cityId || '').trim().toLowerCase();
+    const nextCityId = (snapshot.cityId || '').trim().toLowerCase();
+    const cityChanged =
+      Boolean(nextCityId) && nextCityId !== prevCityId;
+    // Sofort Ladebalken — bevor Settings zu ist (Klick angekommen).
+    if (cityChanged && snapshot.cityId) {
+      try {
+        const { beginCityCommitProgress } = require('../services/cityCommitProgress');
+        beginCityCommitProgress({
+          cityId: snapshot.cityId,
+          cityName: snapshot.cityName || snapshot.cityId,
+        });
+      } catch {
+        /* soft */
+      }
+    }
     onClose();
     void saveUserProfile(snapshot)
-      .then((saved) => onSaved(saved))
+      .then(async (saved) => {
+        onSaved(saved);
+        if (!cityChanged || !snapshot.cityId) return;
+        try {
+          const { commitManualCitySelection } = await import(
+            '../services/citySelectionCommit'
+          );
+          let lat: number | null = null;
+          let lng: number | null = null;
+          try {
+            const { loadCityCatalog } = await import(
+              '../services/cityCatalogService'
+            );
+            const catalog = await loadCityCatalog(null, {
+              fresh: false,
+              skipBucketListing: true,
+            });
+            const hit = catalog.find((c) => c.id === snapshot.cityId);
+            if (hit) {
+              lat = typeof hit.lat === 'number' ? hit.lat : null;
+              lng = typeof hit.lng === 'number' ? hit.lng : null;
+            }
+          } catch {
+            /* soft */
+          }
+          await commitManualCitySelection({
+            cityId: snapshot.cityId,
+            cityName: snapshot.cityName || snapshot.cityId,
+            lat,
+            lng,
+          });
+        } catch (err) {
+          console.warn('[settings] city commit failed:', err);
+        }
+      })
       .catch((err) => {
         console.warn('[settings] save failed:', err);
       });
@@ -731,12 +803,25 @@ export const SettingsScreen = React.memo(
     ]);
   };
 
-  // Overlay statt RN-Modal — Tree bleibt mounted (Reopen = show, kein Cold-Mount).
+
+  useEffect(() => {
+    if (!openSection) return;
+    setWarmedSections((w) =>
+      w[openSection] ? w : { ...w, [openSection]: true },
+    );
+  }, [openSection]);
+
+  // Warm-Keep ohne absoluteFill (Android Fabric + MapLibre → sonst Blackscreen).
+  // Premount hält Chrome-Shell im 0×0-Slot; Tap = Style-Flip, kein 3s-Kaltstart.
+  // Accordion-Bodies nur bei visible+chromeReady (keepBodyMounted).
   return (
     <View
-      style={[styles.overlayRoot, !visible && styles.overlayHidden]}
+      style={visible ? styles.overlayRoot : styles.rootWarmKeep}
       pointerEvents={visible ? 'auto' : 'none'}
+      collapsable={false}
       accessibilityViewIsModal={visible}
+      accessibilityElementsHidden={!visible}
+      importantForAccessibility={visible ? 'yes' : 'no-hide-descendants'}
     >
       <SafeAreaView
         style={[
@@ -813,38 +898,22 @@ export const SettingsScreen = React.memo(
               open={openSection === 'city'}
               hideHeader={openSection === 'city'}
               onToggle={() => toggleSection('city')}
+              keepBodyMounted={chromeReady && !!warmedSections.city}
             >
               {() => (
               <CityEditor
                 lang={lang}
                 selectedId={draft.cityId}
                 selectedName={draft.cityName}
-                onInstalled={(cityId, cityName, coords) => {
-                  useUserMemoryStore.getState().clearHotelsOutsideCity(cityId);
-                  persistPatch({
+                onSelectDraft={(cityId, cityName) => {
+                  // Nur Draft — Pack/Welcome/Soft-City erst bei Speichern.
+                  patch({
                     cityId,
                     cityName,
                     wantToExperience: '',
                     avoidExperience: '',
                   });
                   setOpenSection('city');
-                  void import('../services/softWorkingCity')
-                    .then((m) =>
-                      m.setSoftWorkingCity({
-                        id: cityId,
-                        name: cityName,
-                        lat: coords?.lat ?? null,
-                        lng: coords?.lng ?? null,
-                        soft: m.isSoftCityId(cityId),
-                        source: m.isSoftCityId(cityId)
-                          ? 'gps_soft'
-                          : 'manual',
-                      }),
-                    )
-                    .catch(() => undefined);
-                  void import('../services/memory/travelPrefsReview')
-                    .then((m) => m.maybeOfferTravelPrefsAfterCity(cityId))
-                    .catch(() => undefined);
                 }}
               />
               )}
@@ -857,6 +926,7 @@ export const SettingsScreen = React.memo(
               open={openSection === 'travel'}
               hideHeader={openSection === 'travel'}
               onToggle={() => toggleSection('travel')}
+              keepBodyMounted={chromeReady && !!warmedSections.travel}
             >
               {() => (
               <>
@@ -885,13 +955,14 @@ export const SettingsScreen = React.memo(
               }}
               style={styles.accordion}
               accessibilityRole="button"
-              accessibilityLabel="Yorro Reisebüro öffnen"
+              accessibilityLabel="Yorros Reisebüro öffnen"
             >
               <View style={styles.accordionHeader}>
-                <Text style={styles.accordionTitle}>Yorro Reisebüro</Text>
+                <Text style={styles.accordionTitle}>Yorros Reisebüro</Text>
                 <Text style={styles.chevron}>▸</Text>
               </View>
             </Pressable>
+            <PackListsSettingsBlock />
             </SettingsSlot>
 
             <GroupGap />
@@ -903,6 +974,7 @@ export const SettingsScreen = React.memo(
               open={openSection === 'personal'}
               hideHeader={openSection === 'personal'}
               onToggle={() => toggleSection('personal')}
+              keepBodyMounted={chromeReady && !!warmedSections.personal}
             >
               {() => (
               <>
@@ -950,6 +1022,7 @@ export const SettingsScreen = React.memo(
               open={openSection === 'character'}
               hideHeader={openSection === 'character'}
               onToggle={() => toggleSection('character')}
+              keepBodyMounted={chromeReady && !!warmedSections.character}
             >
               {() => (
               <>
@@ -1046,6 +1119,7 @@ export const SettingsScreen = React.memo(
               open={openSection === 'general'}
               hideHeader={openSection === 'general'}
               onToggle={() => toggleSection('general')}
+              keepBodyMounted={chromeReady && !!warmedSections.general}
             >
               {() => (
               <>
@@ -2161,6 +2235,8 @@ function Accordion({
   tone = 'default',
   hidden = false,
   hideHeader = false,
+  /** Body bleibt gemountet (versteckt) — Open = Visibility, kein Cold-Mount. */
+  keepBodyMounted = false,
 }: {
   title: string;
   open: boolean;
@@ -2169,8 +2245,10 @@ function Accordion({
   tone?: 'default' | 'developer';
   hidden?: boolean;
   hideHeader?: boolean;
+  keepBodyMounted?: boolean;
 }) {
   if (hidden) return null;
+  const showBody = open || keepBodyMounted;
   return (
     <View
       style={[
@@ -2197,8 +2275,16 @@ function Accordion({
           <Text style={styles.chevron}>{open ? '▾' : '▸'}</Text>
         </Pressable>
       )}
-      {open ? (
-        <View style={[styles.accordionBody, hideHeader && styles.accordionBodyPinned]}>
+      {showBody ? (
+        <View
+          style={[
+            styles.accordionBody,
+            hideHeader && styles.accordionBodyPinned,
+            !open && styles.accordionBodyKeptHidden,
+          ]}
+          pointerEvents={open ? 'auto' : 'none'}
+          collapsable={false}
+        >
           {renderLazyBody(children)}
         </View>
       ) : null}
@@ -2428,7 +2514,7 @@ function ContactEditor({
       />
       <TextInput
         style={styles.input}
-        placeholder="Handy (z. B. +49 170 …)"
+        placeholder="Handynummer (z. B. +49 170 …)"
         placeholderTextColor={colors.textMuted}
         value={draft.phoneNumber ?? ''}
         onChangeText={(phoneNumber) => onChange({ phoneNumber })}
@@ -2784,16 +2870,13 @@ function StorageEditor({
 function CityEditor({
   lang,
   selectedId,
-  onInstalled,
+  onSelectDraft,
 }: {
   lang: AppLanguage;
   selectedId: string | null;
   selectedName: string | null;
-  onInstalled: (
-    cityId: string,
-    cityName: string,
-    coords?: { lat: number | null; lng: number | null },
-  ) => void;
+  /** Nur UI-Draft — Commit (Pack/Welcome) passiert beim Speichern. */
+  onSelectDraft: (cityId: string, cityName: string) => void;
 }) {
   const [cities, setCities] = useState<CityCatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -2808,21 +2891,10 @@ function CityEditor({
   const handleSelect = (city: CityCatalogItem) => {
     if (installingId === city.id) return;
     setInstallingId(city.id);
-    onInstalled(city.id, city.name, {
-      lat: typeof city.lat === 'number' ? city.lat : null,
-      lng: typeof city.lng === 'number' ? city.lng : null,
-    });
+    onSelectDraft(city.id, city.name);
     setQuery('');
     setSearchFocused(false);
     Keyboard.dismiss();
-    try {
-      const { noteManualCityFocus } = require('../services/cityProximityService') as {
-        noteManualCityFocus: (id: string) => void;
-      };
-      noteManualCityFocus(city.id);
-    } catch {
-      /* soft */
-    }
     try {
       const { triggerHapticPulse } = require('../services/navigation/haptics') as {
         triggerHapticPulse: (k?: 'single' | 'double' | 'heavy') => void;
@@ -2831,32 +2903,10 @@ function CityEditor({
     } catch {
       /* soft */
     }
-    void import('../services/cityWelcomeService')
-      .then((m) => m.speakCityWelcomeForCity(city, { preferSwitch: true }))
-      .catch(() => undefined);
-    // Pack nach dem ersten Paint — Hero/✓ sofort, SQLite im Hintergrund.
-    void (async () => {
-      await new Promise<void>((r) => setTimeout(r, 0));
-      try {
-        const result = await installCityPack(city.id, {
-          checkRemote: true,
-          reason: 'switch',
-        });
-        if (result.cityName && result.cityName !== city.name) {
-          onInstalled(city.id, result.cityName, {
-            lat: typeof city.lat === 'number' ? city.lat : null,
-            lng: typeof city.lng === 'number' ? city.lng : null,
-          });
-        }
-      } catch (err) {
-        Alert.alert(
-          t(lang, 'cityInstallFailed'),
-          err instanceof Error ? err.message : String(err),
-        );
-      } finally {
-        setInstallingId((cur) => (cur === city.id ? null : cur));
-      }
-    })();
+    // Kurzer ✓-Impuls — kein Pack-/Welcome-I/O auf dem Tap.
+    setTimeout(() => {
+      setInstallingId((cur) => (cur === city.id ? null : cur));
+    }, 280);
   };
 
   // Cache + GPS-Nähe sofort; volles Bucket-Listing nur im Hintergrund (abbruchbar).
@@ -2949,6 +2999,10 @@ function CityEditor({
       {gpsReady && !keyboardUp ? (
         <Text style={styles.citySearchMeta}>{t(lang, 'gpsReady')}</Text>
       ) : null}
+      <Text style={styles.hint}>
+        Tippen wählt die Stadt vor. Speichern übernimmt Pack und Willkommen —
+        vorher nur anschauen.
+      </Text>
 
       {featured && !searching && !keyboardUp ? (
         <>
@@ -2962,6 +3016,7 @@ function CityEditor({
             lang={lang}
             selected={selectedId === featured.id}
             variant="hero"
+            busy={installingId === featured.id}
             onPress={() => void handleSelect(featured)}
           />
         </>
@@ -2984,6 +3039,7 @@ function CityEditor({
                 lang={lang}
                 selected={selectedId === city.id}
                 variant="grid"
+                busy={installingId === city.id}
                 onPress={() => void handleSelect(city)}
               />
             </View>
@@ -3574,7 +3630,7 @@ function buildSettingsExtraHelpEntries(
     {
       id: 'settings-contact',
       title: 'Einstellungen: Kontakt für Reservierungen',
-      what: 'Name, E-Mail, optional Handy für Reservierungs-Kontexte.',
+      what: 'Name, E-Mail, optional Handynummer für Reservierungs-Kontexte.',
       how: 'Persönliche Informationen → Kontakt. Yorro bucht nichts heimlich.',
       optimal: 'E-Mail gültig halten für Rückfragen vom Restaurant.',
       keywords: ['kontakt', 'reservierung', 'email', 'telefon', 'name'],
@@ -3628,8 +3684,15 @@ const styles = StyleSheet.create({
     zIndex: UI_LAYER.overlay,
     elevation: UI_LAYER.overlay,
   },
-  overlayHidden: {
+  /** Geschlossen: kein absoluteFill — nur 0×0 Warm-Keep (Mic/Karte bleiben tippbar). */
+  rootWarmKeep: {
+    position: 'absolute',
+    width: 0,
+    height: 0,
     opacity: 0,
+    elevation: 0,
+    zIndex: -1,
+    overflow: 'hidden',
   },
   safe: { flex: 1, backgroundColor: colors.bg },
   bodyScroll: { flex: 1 },
@@ -3759,6 +3822,14 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colors.border,
     paddingTop: 12,
+  },
+  accordionBodyKeptHidden: {
+    height: 0,
+    overflow: 'hidden',
+    opacity: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderTopWidth: 0,
   },
   saverSwitchRow: {
     flexDirection: 'row',

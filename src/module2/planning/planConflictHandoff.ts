@@ -50,7 +50,27 @@ export function detectPlanTimeConflict(userText: string): {
         (s.planPriority != null && s.planPriority <= 2)),
   );
 
-  for (const s of hard) {
+  // Soft-timed (Frühstück/Ankunft) blockieren denselben Slot wie Hard
+  let softTimed: typeof plan.stops = [];
+  try {
+    const { softTimedIntervalsFromStops } = require('./planHardLock') as {
+      softTimedIntervalsFromStops: (
+        stops: typeof plan.stops,
+      ) => Array<{ start: number; end: number }>;
+    };
+    const ivs = softTimedIntervalsFromStops(plan.stops);
+    softTimed = plan.stops.filter((s) => {
+      if (s.kind === 'nav_leg' || s.plannedStartMs == null) return false;
+      if (hard.some((h) => h.id === s.id)) return false;
+      const end = s.plannedEndMs ?? s.plannedStartMs + 45 * 60_000;
+      return ivs.some((iv) => s.plannedStartMs! < iv.end && end > iv.start);
+    });
+  } catch {
+    softTimed = [];
+  }
+
+  const blockers = [...hard, ...softTimed];
+  for (const s of blockers) {
     const start = s.plannedStartMs!;
     const end = s.plannedEndMs ?? start + 90 * 60_000;
     // Kollision: Wunschzeit innerhalb ±60 Min um Anker oder überlappt

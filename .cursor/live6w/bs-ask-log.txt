@@ -1,0 +1,39 @@
+--------- beginning of system
+09-13 23:25:58.407 19930 19930 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-13 23:25:58.458 19930 19930 D SceneManager: init SceneManager
+09-13 23:25:58.505 19930 19965 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+09-13 23:25:58.516 19930 19930 D NtViewImpl: init NtViewImpl
+09-13 23:25:58.576 19930 19930 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-13 23:25:58.613 19930 19930 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-13 23:25:58.986 19930 20044 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=56a6912f mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={420dpi always-compat} mLoaders=[]}
+09-13 23:26:22.426 19930 19930 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+--------- beginning of main
+09-13 23:26:58.606 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.592 19930 19936 I de.findus.app: Background young concurrent mark compact GC freed 47MB AllocSpace bytes, 13(936KB) LOS objects, 68% free, 26MB/84MB, paused 1.129ms,1.708ms total 110.378ms
+09-13 23:27:10.617 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:15.009 19930 19970 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-13 23:27:15.628 19930 19970 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)
+09-13 23:27:16.601 19930 19970 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 0 neu, 0 aktualisiert (4319 Textquellen)
+09-13 23:27:16.970 19930 19970 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-13 23:27:20.067 19930 19936 I de.findus.app: Background concurrent mark compact GC freed 145MB AllocSpace bytes, 13(1320KB) LOS objects, 66% free, 48MB/144MB, paused 843us,1.833ms total 106.246ms
+09-13 23:27:20.098 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.123 19930 19950 I de.findus.app: Waiting for a blocking GC ProfileSaver
+09-13 23:27:20.140 19930 19950 I de.findus.app: WaitForGcToComplete blocked ProfileSaver on Background for 16.745ms
+09-13 23:28:39.617 19930 19942 W System  : A resource failed to call close. 
+09-13 23:28:39.619 19930 19942 W System  : A resource failed to call close. 
+09-13 23:28:39.621 19930 19942 W System  : A resource failed to call close. 
+09-13 23:28:39.646 19930 19930 W unknown:BridgelessReact: ReactHost{0}.onHostPause(activity)
+09-13 23:28:39.646 19930 19930 W unknown:BridgelessReact: ReactContext.onHostPause()
+09-13 23:28:39.649 19930 19930 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+09-13 23:28:39.649 19930 19930 W unknown:BridgelessReact: ReactContext.onHostResume()
+09-13 23:28:39.692 19930 19979 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:28:39.693 19930 19970 I ReactNativeJS: '[auth] handleRedirect', 'findus://voice/ask?q=Wie%20spaet%20ist%20es%20jetzt'

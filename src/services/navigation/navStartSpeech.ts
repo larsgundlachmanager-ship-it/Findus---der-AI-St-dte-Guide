@@ -1,10 +1,11 @@
 /**
  * Nav-Start Speech — Struktur-Blaupause (stadt-agnostisch).
  *
- * Slot-Reihenfolge:
- * 1) Kurzer Start (ohne Zielnamen-Dump)
- * 2) Sofort erste visuelle Richtung / Facing / erste Abbiegung
- * 3) Knackige ETA in Minuten (nie Meter in der Speech)
+ * Explizites „navigiere / bring mich“:
+ * Call 1 — Zusage + navigiere dich zu [Ziel] (Karte parallel schon sichtbar)
+ * Call 2 — nur Dauer („dauert etwa X Minuten“); Ankunftsuhr NUR wenn ETA > 60 Min
+ *
+ * Coach-Opening (Route ready): gleiche knappe Struktur, optional erster Blick.
  *
  * Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals
  * den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an
@@ -12,95 +13,158 @@
  */
 
 import { scrubRoboticNavSpeak, type SpatialRelation } from './spatialOrientation';
+import { resolveNavDestSpeechName } from './navDestSpeechName';
 
-export type NavStartSpeechInput = {
-  /** Sichtbarer Anker / erste Abbiege-Beschreibung (OSM/Shop/Kurve). */
-  firstVisual: string | null;
-  /** Relative Lage zum Blick (wenn Kompass da). */
-  relation?: SpatialRelation | null;
-  /** Committed Fuß/Rad-ETA in Minuten — nur nach echter Route. */
+export type NavTravelSpeechMode = 'foot' | 'bike' | 'drive';
+
+export type ExplicitNavCommitSpeechInput = {
+  destName: string;
   etaMin: number | null;
-  /** Optional: Straßen-/Allee-Hinweis ohne Zielnamen. */
-  pathHint?: string | null;
+  mode?: NavTravelSpeechMode | null;
+  /** HH:MM — nur bei ETA > 60 Min sprechen */
+  arriveHm?: string | null;
+  /** Call-1 Bridge schon gesprochen → nur Call-2 (Dauer) */
+  bridgeAlreadySpoken?: boolean;
 };
 
-const START_OPENERS = [
-  'Alles klar — los.',
-  'Okay — los.',
-  'Gut, los.',
-];
-
-function pickOpener(): string {
-  return START_OPENERS[Date.now() % START_OPENERS.length]!;
+/** Zielname für Speech — Adresse/PLZ nie vorlesen. */
+export function speechSafeNavDestName(destName: string): string {
+  return resolveNavDestSpeechName({ query: destName, geoLabel: destName });
 }
 
-function softEtaLine(etaMin: number): string {
-  const rounded = Math.max(1, Math.round(etaMin));
-  if (rounded <= 2) return 'Gleich bist du da.';
-  if (rounded <= 4) return 'Noch so zwei, drei Minuten.';
-  if (rounded <= 7) return `Noch so ${rounded} Minuten.`;
-  if (rounded <= 15) return `Dann noch rund ${rounded} Minuten.`;
-  if (rounded < 60) {
-    return `Dann noch etwa ${rounded} Minuten — wir nehmen’s ruhig.`;
-  }
+export type NavStartSpeechInput = {
+  firstVisual: string | null;
+  relation?: SpatialRelation | null;
+  etaMin: number | null;
+  pathHint?: string | null;
+  destName?: string | null;
+  mode?: NavTravelSpeechMode | null;
+  arriveHm?: string | null;
+};
+
+function formatArriveHm(fromMs?: number | null): string | null {
+  if (fromMs == null || !Number.isFinite(fromMs)) return null;
   try {
-    const { formatDurationMinutesDe } = require('./travelEta') as {
-      formatDurationMinutesDe: (m: number, s?: 'short' | 'speech') => string;
-    };
-    return `Dann noch ${formatDurationMinutesDe(rounded, 'speech')} — wir nehmen’s ruhig.`;
+    return new Date(fromMs).toLocaleTimeString('de-DE', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   } catch {
-    const h = Math.floor(rounded / 60);
-    const rest = rounded % 60;
-    const label =
-      rest === 0
-        ? h === 1
-          ? 'etwa 1 Stunde'
-          : `etwa ${h} Stunden`
-        : h === 1
-          ? `etwa 1 Stunde ${rest} Minuten`
-          : `etwa ${h} Stunden ${rest} Minuten`;
-    return `Dann noch ${label} — wir nehmen’s ruhig.`;
+    return null;
   }
+}
+
+/** Ankunftsuhr aus jetzt + ETA-Minuten. */
+export function arriveHmFromEtaMin(etaMin: number | null | undefined): string | null {
+  if (etaMin == null || !Number.isFinite(etaMin) || etaMin <= 0) return null;
+  return formatArriveHm(Date.now() + Math.round(etaMin) * 60_000);
+}
+
+function travelVerb(mode: NavTravelSpeechMode | null | undefined): string {
+  if (mode === 'bike') return 'radelst';
+  if (mode === 'drive') return 'bist';
+  return 'läufst';
 }
 
 /**
- * Baut die Start-Ansage: Opener → visuelle Richtung → ETA.
- * Kein Stall-Hinweis („gleich wo's langgeht“), kein Dest-Namen-Dump als Opener.
+ * Call 1 — kurze Zusage inkl. Ziel (Say–Do nur wenn Nav wirklich startet).
+ * Struktur: Alles klar → ich navigiere dich zu [Ziel].
+ * Sofort nach Geocode/Namen — nicht auf volle Route warten.
+ * Karte parallel (Fuß/Rad/ÖPNV); Timeline still (kein Speech über Plan).
+ */
+export function buildExplicitNavBridgeSpeech(destName: string): string {
+  const name = speechSafeNavDestName(destName) || 'dein Ziel';
+  return scrubRoboticNavSpeak(`Alles klar — ich navigiere dich zu ${name}.`);
+}
+
+/**
+ * Call 2 — nur Dauer; Ankunft nur wenn länger als 60 Min.
+ * Kein zweites „Alles klar“, kein Modus-Essay — Route ist schon auf der Karte.
+ */
+export function buildExplicitNavEtaSpeech(opts: {
+  etaMin: number | null;
+  mode?: NavTravelSpeechMode | null;
+  arriveHm?: string | null;
+}): string {
+  const eta = opts.etaMin;
+  if (eta == null || !Number.isFinite(eta) || eta <= 0) {
+    return '';
+  }
+  const rounded = Math.max(1, Math.round(eta));
+  void travelVerb(opts.mode);
+  const arrive = (opts.arriveHm || '').trim();
+
+  if (rounded > 60) {
+    let dur: string;
+    try {
+      const { formatDurationMinutesDe } = require('./travelEta') as {
+        formatDurationMinutesDe: (m: number, s?: 'short' | 'speech') => string;
+      };
+      dur = formatDurationMinutesDe(rounded, 'speech');
+    } catch {
+      const h = Math.floor(rounded / 60);
+      const rest = rounded % 60;
+      dur =
+        rest === 0
+          ? h === 1
+            ? 'etwa 1 Stunde'
+            : `etwa ${h} Stunden`
+          : h === 1
+            ? `etwa 1 Stunde ${rest} Minuten`
+            : `etwa ${h} Stunden ${rest} Minuten`;
+    }
+    if (arrive) {
+      return scrubRoboticNavSpeak(
+        `Dauert etwa ${dur} — Ankunft gegen ${arrive}.`,
+      );
+    }
+    return scrubRoboticNavSpeak(`Dauert etwa ${dur}.`);
+  }
+
+  return scrubRoboticNavSpeak(`Dauert etwa ${rounded} Minuten.`);
+}
+
+/** Call 1 (+ optional Call 2) für expliziten Nav-Start — kein Pack, keine Meta. */
+export function buildExplicitNavCommitSpeech(
+  opts: ExplicitNavCommitSpeechInput,
+): string {
+  const eta = buildExplicitNavEtaSpeech({
+    etaMin: opts.etaMin,
+    mode: opts.mode,
+    arriveHm: opts.arriveHm,
+  });
+  if (opts.bridgeAlreadySpoken) return eta;
+  return scrubRoboticNavSpeak(
+    `${buildExplicitNavBridgeSpeech(opts.destName)} ${eta}`,
+  );
+}
+
+/**
+ * Coach-Opening nach Route-Ready — gleiche knappe Struktur wie Explicit-Nav.
+ * firstVisual nur als optionaler Blick, nie Pack-/Meta-Gelaber.
  */
 export function buildNavStartSpeech(opts: NavStartSpeechInput): string {
-  const parts: string[] = [pickOpener()];
+  const dest = (opts.destName || '').trim();
+  const parts: string[] = [];
+
+  if (dest) {
+    parts.push(buildExplicitNavBridgeSpeech(dest));
+  } else {
+    parts.push('Alles klar — Navigation startet.');
+  }
 
   const visual = (opts.firstVisual ?? '').trim();
-  const pathHint = (opts.pathHint ?? '').trim();
-  const rel = opts.relation;
-
-  // pathHint war oft ein Straßenname — nur noch als visueller Anker ohne „Straße entlang“
-  const hintLooksStreet =
-    /\b(straße|strasse|weg|allee|gasse|platz|ring|damm|chaussee)\b/iu.test(pathHint);
-  const safeHint = pathHint && !hintLooksStreet ? pathHint : '';
-
-  if (visual) {
+  if (visual && visual.length < 90 && !/SICHTBARKEIT|PACK-DATENSATZ|TOPIC-LOCK/i.test(visual)) {
     parts.push(visual);
-  } else if (rel) {
-    if (rel.side === 'behind') {
-      parts.push('Dreh dich kurz um — der Weg liegt hinter dir.');
-    } else if (rel.side === 'left' || rel.side === 'right') {
-      parts.push(
-        safeHint
-          ? `Schau ${rel.shortPhrase} Richtung ${safeHint} — da geht’s entlang.`
-          : `Dreh dich leicht ${rel.shortPhrase} und lauf dann geradeaus.`,
-      );
-    } else {
-      parts.push('Lauf einfach weiter, so wie du jetzt schaust.');
-    }
-  } else {
-    parts.push('Schau kurz, wohin der Weg vor dir führt — genau da entlang.');
   }
 
-  const eta = opts.etaMin;
-  if (typeof eta === 'number' && Number.isFinite(eta) && eta >= 5) {
-    parts.push(softEtaLine(eta));
-  }
+  parts.push(
+    buildExplicitNavEtaSpeech({
+      etaMin: opts.etaMin,
+      mode: opts.mode,
+      arriveHm: opts.arriveHm,
+    }),
+  );
 
   return scrubRoboticNavSpeak(parts.join(' ').replace(/\s+/g, ' ').trim());
 }
@@ -139,7 +203,9 @@ export function buildFirstVisualDirection(opts: {
         `Gleich an ${land} vorbei — dort ${side} abbiegen.`,
       );
     }
-    return scrubRoboticNavSpeak(`Lauf einfach geradeaus — auf ${land} zu.`);
+    return scrubRoboticNavSpeak(
+      `Lauf geradeaus Richtung ${land} — danach geht's ${side}.`,
+    );
   }
 
   if (turn && turn !== 'geradeaus') {
@@ -152,7 +218,7 @@ export function buildFirstVisualDirection(opts: {
     if (near) {
       return scrubRoboticNavSpeak(`Gleich ${side} abbiegen.`);
     }
-    return scrubRoboticNavSpeak('Lauf einfach geradeaus.');
+    return scrubRoboticNavSpeak(`Erst geradeaus — bald ${side} abbiegen.`);
   }
 
   if (land) {

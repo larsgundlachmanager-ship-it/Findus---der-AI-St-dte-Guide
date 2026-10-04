@@ -32,7 +32,7 @@ const VOICE_ALIASES: Record<string, VoiceId> = {
   victoria: 'viktoria',
 };
 
-function matchVoiceId(text: string): VoiceId | null {
+export function matchVoiceId(text: string): VoiceId | null {
   const t = text.toLowerCase();
   const ranked = [...CARTESIA_VOICES].sort(
     (a, b) => b.name.length - a.name.length || b.id.length - a.id.length,
@@ -49,7 +49,7 @@ function matchVoiceId(text: string): VoiceId | null {
   return null;
 }
 
-function wantsVoiceChange(text: string): boolean {
+export function wantsVoiceChange(text: string): boolean {
   return /\b(stimme|voice|sprich|reden|umschalten|sprecher(?:in)?)\b/i.test(
     text,
   );
@@ -57,11 +57,19 @@ function wantsVoiceChange(text: string): boolean {
 
 /** Frage nach Erklärung / Hilfe — nicht sofort Stimme umschalten. */
 function wantsSelfExplain(text: string): boolean {
+  // Wetter/Fakten nie als Hilfe-Katalog
+  if (
+    /\b(wetter|regen|temperatur|grad|einwohner|wie\s+(?:hoch|groß|gross|alt|viel|viele)|was\s+ist\s+\d)\b/iu.test(
+      text,
+    )
+  ) {
+    return false;
+  }
   return (
     /\b(was kannst du|was kannst du alles|wer bist du|erkl[aä]r(?:e|t)?|anleitung|wie (?:ände|funktioniert|geht|nutze|mache|stell)|hilfe[- ]?(katalog|app|stimme|wecker|navigation|kalender|einstellung)?)\b/i.test(
       text,
     ) ||
-    /\b(was ist|wozu|wofür)\b.+\b(findus|kalender|wecker|stimme|modul)\b/i.test(
+    /\b(was ist|wozu|wofür)\b.+\b(findus|yorro|kalender|wecker|stimme|modul)\b/i.test(
       text,
     )
   );

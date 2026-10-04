@@ -246,6 +246,14 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
     'wandern',
     'reisebus',
   ]);
+  const cityMobAllowed = new Set(['foot', 'bike', 'public_transit', 'car']);
+  merged.cityMobilityModes = Array.isArray(parsed.cityMobilityModes)
+    ? parsed.cityMobilityModes
+        .map(String)
+        .filter((id): id is import('../types/userProfile').MobilityMode =>
+          cityMobAllowed.has(id),
+        )
+    : base.cityMobilityModes ?? [];
   merged.travelModes = Array.isArray(parsed.travelModes)
     ? parsed.travelModes
         .map(String)
@@ -368,6 +376,18 @@ function normalizeProfile(parsed: Partial<UserProfile>): UserProfile {
     /* soft */
   }
   merged.voicePinnedByUser = !!parsed.voicePinnedByUser;
+  if (
+    !merged.voicePinnedByUser &&
+    merged.voiceId === 'alina' &&
+    (merged.coreRole === 'classic_guide' || merged.coreRole == null)
+  ) {
+    merged.voiceId = 'sebastian';
+  }
+  if (!merged.coreRole) {
+    merged.coreRole = 'classic_guide';
+    merged.vibeTone = merged.vibeTone ?? 'balanced';
+    merged.knowledgeStyle = merged.knowledgeStyle ?? 'clear_essence';
+  }
   merged.humorOk = !!parsed.humorOk;
   merged.geekMode = !!parsed.geekMode;
   merged.freeChatOk = !!parsed.freeChatOk;
@@ -578,7 +598,7 @@ export async function getVoiceSettingsForTour(): Promise<{
   }
   const profile = await loadUserProfile();
   return {
-    voiceId: profile?.voiceId ?? 'alina',
+    voiceId: profile?.voiceId ?? 'sebastian',
     speechRate: 1,
   };
 }

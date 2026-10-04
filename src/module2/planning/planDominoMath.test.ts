@@ -9,6 +9,7 @@ import {
   hardIntervalsFromStops,
   isHardFixedStop,
   isSoftMovableStop,
+  softTimedIntervalsFromStops,
 } from './planHardLock';
 import { planStopsOverlap } from './planTimeOverlap';
 import type { FuturePlanStop } from '../timeline/futurePlanState';
@@ -92,5 +93,63 @@ assert(
     slot! >= sacred.plannedEndMs! + 10 * 60_000,
   'Slot überlappt Sacred nicht',
 );
+
+const breakfast = stop({
+  id: 'wish_bf',
+  title: 'Frühstück',
+  plannedStartMs: Date.UTC(2026, 7, 24, 10, 0, 0),
+  plannedEndMs: Date.UTC(2026, 7, 24, 10, 45, 0),
+  kind: 'wish',
+  planPriority: 5,
+  notes: 'Frühstück nach Ankunft',
+});
+const softIv = softTimedIntervalsFromStops([breakfast, softWish]);
+assert(
+  softIv.length === 1,
+  'nur Frühstück-Wish als soft-timed (Eis ohne Meal-Keyword)',
+);
+const tourSlot = findFreeSlotStartMs({
+  preferredStartMs: Date.UTC(2026, 7, 24, 9, 30, 0),
+  durationMs: 90 * 60_000,
+  hardIntervals: [],
+  extraIntervals: softIv,
+  dayStartMs: dayStart,
+  dayEndMs: dayEnd,
+});
+assert(tourSlot != null, 'Tour-Slot existiert');
+assert(
+  tourSlot! >= breakfast.plannedEndMs!,
+  'Tour erst nach Frühstück',
+);
+
+
+{
+  const { resolveOverlapsQuietlyOnStops } = require('./planQuietOverlap') as typeof import('./planQuietOverlap');
+  const bfStart = Date.UTC(2026, 7, 24, 10, 0, 0);
+  const bfEnd = Date.UTC(2026, 7, 24, 10, 45, 0);
+  const prefer = Date.UTC(2026, 7, 24, 9, 30, 0);
+  const quiet = resolveOverlapsQuietlyOnStops([
+    stop({
+      id: 'wish_bf_q',
+      title: 'Frühstück',
+      kind: 'wish',
+      plannedStartMs: bfStart,
+      plannedEndMs: bfEnd,
+      planPriority: 5,
+      notes: 'Frühstück',
+    }),
+    stop({
+      id: 'tour_q',
+      title: 'Tour',
+      plannedStartMs: prefer,
+      plannedEndMs: prefer + 90 * 60_000,
+      planPriority: 6,
+    }),
+  ]);
+  const tourQ = quiet.stops.find((s) => s.id === 'tour_q');
+  assert(tourQ?.plannedStartMs != null && tourQ.plannedStartMs >= bfEnd, 'quiet OnStops: Tour nach Frühstück');
+  assert(!quiet.stillOverlapping, 'quiet OnStops: no banner overlap');
+  console.log('planDominoMath quiet-resolve: OK');
+}
 
 console.log('planDominoMath.test.ts OK');

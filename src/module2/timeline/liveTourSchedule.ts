@@ -7,6 +7,7 @@ import type { FuturePlanStop, FuturePlanTransport } from './futurePlanState';
 import { concreteHaltLabel, tidyHaltName } from '../../services/transit/haltName';
 import {
   STATION_ARRIVE_BEFORE_MIN,
+  stationArriveBufferMin,
   stationArriveByMs,
 } from '../../services/transit/stationArriveBuffer';
 
@@ -36,6 +37,8 @@ export type LiveTourStopIn = {
   vehicleStartMs?: number | null;
   path?: Array<{ lat: number; lng: number }> | null;
   notes?: string | null;
+  /** Live-Pacing-Hinweis (Aufholen / nächste Verbindung). */
+  liveHint?: string | null;
   mapsUrl?: string | null;
   menuUrl?: string | null;
   reserveUrl?: string | null;
@@ -112,11 +115,8 @@ export function pathTitleForLeg(
   if (transport === 'transit') {
     const line = (extra?.line ?? '').trim();
     const head = (extra?.headsign ?? '').trim();
-    const ride = line
-      ? head
-        ? `${line} Richtung ${head}`
-        : line
-      : 'ÖPNV';
+    // Einmal „Linie nach Ziel“ — nicht zusätzlich „Richtung …“ woanders wiederholen.
+    const ride = line ? (head ? `${line} nach ${head}` : line) : 'ÖPNV';
     const bits = [ride];
     const n = extra?.stationCount;
     if (n != null && n >= 1) {
@@ -176,14 +176,24 @@ function paceMPerMin(transport: FuturePlanTransport, walkM?: number, bikeM?: num
 
 function boardingBadge(
   platform?: string | null,
-  _vehicleMode?: string | null,
+  vehicleMode?: string | null,
 ): string | null {
   const p = (platform ?? '').trim();
   if (!p) return null;
-  // „Steig“ klingt komisch — immer Gleis, auch wenn die Quelle Bussteig sagt.
-  const asGleis = p.replace(/^(?:bus)?steig\b/i, 'Gleis').trim();
-  if (/\b(gleis|kante|abschnitt|abfahrbereich)\b/i.test(asGleis)) return asGleis;
-  return `Gleis ${asGleis}`;
+  const bus = /^(BUS|FERRY)$/i.test(String(vehicleMode || '').trim());
+  // Nur belegte Labels — Bus ohne Steig/Abfahrtsbereich → kein Fake-Gleis.
+  if (/\b(gleis|steig|kante|abschnitt|abfahr(?:ts)?bereich|gate|bay)\b/i.test(p)) {
+    if (bus && /^gleis\b/i.test(p)) {
+      return p.replace(/^gleis\b/i, 'Abfahrtsbereich').trim();
+    }
+    return p;
+  }
+  if (bus) {
+    // Busbahnhof-Buchstaben (A/B/C) = Abfahrtsbereich; nackte Ziffern weglassen.
+    if (/^[A-Za-z]$/.test(p)) return `Abfahrtsbereich ${p.toUpperCase()}`;
+    return null;
+  }
+  return `Gleis ${p}`;
 }
 
 function pathLengthM(
@@ -253,6 +263,8 @@ function stripEmojiName(name: string): string {
 }
 
 function hideMapsOnStop(s: LiveTourStopIn): boolean {
+  // Gastro-Ziel: Speisekarte statt Google Maps (App nicht verlassen)
+  if (s.menuUrl && String(s.menuUrl).trim()) return true;
   return (
     s.role === 'walk' ||
     s.role === 'alight' ||
@@ -284,21 +296,26 @@ function nextUpcomingBoardMs(
   return null;
 }
 
-/** Fußweg zum Halt so legen, dass man mind. 3 Min vor Abfahrt da ist. */
+/** Fußweg zum Halt so legen, dass man mit Stations-Puffer vor Abfahrt da ist. */
 function clampWalkArriveBeforeBoard(opts: {
   leaveMs: number;
   arriveMs: number;
   etaMin: number;
   boardMs: number | null;
   nowMs: number;
+  bufferMin?: number;
 }): { leaveMs: number; arriveMs: number } {
   const { etaMin, boardMs, nowMs } = opts;
+  const bufferMin =
+    opts.bufferMin != null && Number.isFinite(opts.bufferMin)
+      ? Math.max(0, Math.round(opts.bufferMin))
+      : STATION_ARRIVE_BEFORE_MIN;
   let leaveMs = opts.leaveMs;
   let arriveMs = opts.arriveMs;
   if (boardMs == null || !Number.isFinite(boardMs)) {
     return { leaveMs, arriveMs };
   }
-  const arriveBy = stationArriveByMs(boardMs, STATION_ARRIVE_BEFORE_MIN);
+  const arriveBy = stationArriveByMs(boardMs, bufferMin);
   if (arriveMs > arriveBy) {
     arriveMs = arriveBy;
     leaveMs = arriveMs - etaMin * 60_000;
@@ -317,6 +334,10 @@ function clampWalkArriveBeforeBoard(opts: {
   return { leaveMs, arriveMs };
 }
 
+function platformLabel(platform?: string | null, vehicleMode?: string | null): string {
+  return boardingBadge(platform, vehicleMode) ?? '';
+}
+
 function stopNotes(opts: {
   s: LiveTourStopIn;
   next: LiveTourStopIn | undefined;
@@ -327,59 +348,86 @@ function stopNotes(opts: {
 }): string {
   const { s, next, isLast, waitMin, dwell, stopEnd } = opts;
   if (isLast || s.role === 'dest') {
-    return waitMin > 0
-      ? `Ankunft · Tour fertig ~${clockHm(stopEnd)}`
-      : `Ankunft · Tour fertig ~${clockHm(stopEnd)}`;
+    return `Ankunft · Tour fertig ~${clockHm(stopEnd)}`;
   }
-  const nextLine = (next?.line || s.line || '').trim();
-  const nextHead = (next?.headsign || '').trim();
-  const ride = nextLine
-    ? nextHead
-      ? `${nextLine} nach ${nextHead}`
-      : nextLine
-    : '';
-  if (s.role === 'walk' || s.role === 'board') {
-    const plat = (s.platform || '').trim();
-    const gleis = plat
-      ? (() => {
-          const asGleis = plat.replace(/^(?:bus)?steig\b/i, 'Gleis').trim();
-          return /gleis|kante|abschnitt|abfahrbereich/i.test(asGleis)
-            ? asGleis
-            : `Gleis ${asGleis}`;
-        })()
+  const gleis = platformLabel(s.platform, s.vehicleMode || next?.vehicleMode);
+  const delay =
+    typeof s.delaySec === 'number' && s.delaySec >= 60
+      ? `+${Math.round(s.delaySec / 60)} Min`
       : '';
-    const delay =
-      typeof s.delaySec === 'number' && s.delaySec >= 60
-        ? `+${Math.round(s.delaySec / 60)} Min`
-        : '';
+  const liveHint = (s.liveHint || '').trim();
+  const waitBit = waitMin > 0 ? `${waitMin} Min warten` : '';
+  // Einstieg: nur Warten + Gleis — Linie steht auf dem Fahrbein (kein Doppel-RB61).
+  if (s.role === 'walk' || s.role === 'board') {
+    if (liveHint) {
+      return [liveHint, gleis, delay].filter(Boolean).join(' · ');
+    }
     if (waitMin > 0) {
-      return [ride ? `${waitMin} Min warten auf ${ride}` : `${waitMin} Min warten`, gleis, delay]
+      return [waitBit, gleis, delay].filter(Boolean).join(' · ');
+    }
+    return ['Einstieg', gleis, delay].filter(Boolean).join(' · ');
+  }
+  if (s.role === 'transfer') {
+    const nextMode = String(next?.vehicleMode || s.vehicleMode || '').toUpperCase();
+    const busBit = nextMode === 'BUS' ? 'Bus' : '';
+    if (liveHint) {
+      return [liveHint, gleis].filter(Boolean).join(' · ');
+    }
+    if (waitMin > 0) {
+      return [waitBit, busBit ? `Einstieg ${busBit}` : 'Einstieg', gleis]
         .filter(Boolean)
         .join(' · ');
     }
-    return [ride ? `Einstieg in ${ride}` : 'Einstieg', gleis, delay]
+    return ['Umstieg', busBit ? `Einstieg ${busBit}` : null, gleis]
       .filter(Boolean)
       .join(' · ');
   }
-  if (s.role === 'alight' || s.role === 'transfer') {
-    const waitBit = waitMin > 0 ? `${waitMin} Min warten` : '';
-    const nextRide =
-      next &&
-      (next.role === 'alight' || next.role === 'board') &&
-      (next.line || '').trim() &&
-      (next.line || '').trim() !== (s.line || '').trim();
-    if (nextRide && ride) {
-      return [waitBit, `dann ${ride}`].filter(Boolean).join(' · ');
-    }
+  if (s.role === 'alight') {
+    // Wartezeit gehört zum nächsten Einstieg nach dem Fußweg — hier nur Rolle.
     if (next?.role === 'dest' || next?.role === 'walk' || !next) {
-      return [waitBit, 'Aussteigen · weiter zu Fuß'].filter(Boolean).join(' · ');
+      return ['Aussteigen · weiter zu Fuß', gleis].filter(Boolean).join(' · ');
     }
-    if (s.role === 'transfer') {
-      return [waitBit, 'Umsteigen · zu Fuß'].filter(Boolean).join(' · ');
+    if (next?.role === 'transfer' || next?.role === 'board') {
+      return ['Aussteigen · Umstieg', gleis].filter(Boolean).join(' · ');
     }
-    return [waitBit, 'Aussteigen'].filter(Boolean).join(' · ') || 'Aussteigen';
+    if (waitMin > 0) {
+      return [waitBit, 'Aussteigen · Umstieg', gleis].filter(Boolean).join(' · ');
+    }
+    return ['Aussteigen · Umstieg', gleis].filter(Boolean).join(' · ');
   }
   return `ca. ${dwell} Min vor Ort`;
+}
+
+/** Abfahrt, auf die dieser Halt wartet — nicht die übernächste Bahn/Bus. */
+function boardDepForStop(
+  s: LiveTourStopIn,
+  next: LiveTourStopIn | undefined,
+  stops: LiveTourStopIn[],
+  i: number,
+): number | null {
+  if (s.role === 'walk' || s.role === 'board' || s.role === 'transfer') {
+    const own = s.vehicleStartMs;
+    if (own != null && Number.isFinite(own)) return own;
+  }
+  if (s.role === 'alight') {
+    // Nach Ausstieg folgt Fußweg → Warten am Umstiegshalt, nicht hier.
+    if (
+      next?.role === 'walk' ||
+      next?.role === 'transfer' ||
+      next?.role === 'dest' ||
+      !next
+    ) {
+      return null;
+    }
+  }
+  return (
+    nextUpcomingBoardMs(stops, i) ??
+    (next
+      ? isTransitStop(next)
+        ? (next.vehicleStartMs ?? next.startMs ?? null)
+        : (s.vehicleStartMs ?? next.startMs ?? null)
+      : (s.vehicleStartMs ?? null))
+  );
 }
 
 function slugName(name: string, fallback: number): string {
@@ -533,7 +581,7 @@ export function buildLiveTourSchedule(opts: {
   const hasTransit = stops.some((s) => isTransitStop(s));
   const groupId = hasTransit ? 'live_journey' : undefined;
   const groupLabel = hasTransit
-    ? (tripTitle?.trim() || `Fahrt nach ${stripEmojiName(destName)}`)
+    ? (tripTitle?.trim() || `Fahrt zu ${stripEmojiName(destName)}`)
     : undefined;
 
   const deferWalk =
@@ -556,139 +604,185 @@ export function buildLiveTourSchedule(opts: {
   for (let i = 0; i < stops.length; i += 1) {
     const s = stops[i]!;
     const next = stops[i + 1];
-    const legTransport = incomingTransport(s, transport);
-    let distanceM: number | null = null;
-    let etaMin = 4;
-    if (typeof s.durationSec === 'number' && Number.isFinite(s.durationSec) && s.durationSec > 0) {
-      etaMin = Math.max(1, Math.round(s.durationSec / 60));
-    }
-    if (typeof s.distanceM === 'number' && Number.isFinite(s.distanceM) && s.distanceM > 0) {
-      distanceM = Math.round(s.distanceM);
-    }
-    if (
-      i === 0 &&
-      !hasTransit &&
-      liveEtaMin != null &&
-      liveEtaMin > 0 &&
-      legTransport !== 'transit'
-    ) {
-      etaMin = Math.max(etaMin, liveEtaMin);
-      distanceM = liveDistanceM ?? distanceM;
-    } else if (
-      distanceM == null &&
-      from &&
-      Number.isFinite(from.lat) &&
-      Number.isFinite(from.lng)
-    ) {
-      const walkPath = legTransport === 'transit' ? null : i === 0 ? null : s.path;
-      const tr = travelBetweenStops(from, s, legTransport, walkPath, pace);
-      distanceM = tr.distanceM;
-      if (!(typeof s.durationSec === 'number' && s.durationSec > 0)) {
-        etaMin = tr.etaMin;
+    const isLast = i === stops.length - 1;
+
+    // Ankunft am aktuellen Ort (i===0: von GPS/Origin; sonst schon per vorherigem Weg).
+    let arriveMs = t;
+    let boardMs: number | null = null;
+    let arriveBufferMin = 0;
+    if (i === 0) {
+      const legTransport = incomingTransport(s, transport);
+      let distanceM: number | null = null;
+      let etaMin = 4;
+      if (typeof s.durationSec === 'number' && Number.isFinite(s.durationSec) && s.durationSec > 0) {
+        etaMin = Math.max(1, Math.round(s.durationSec / 60));
       }
-    } else if (
-      distanceM != null &&
-      !(typeof s.durationSec === 'number' && s.durationSec > 0)
-    ) {
-      etaMin = Math.max(
-        2,
-        Math.round(
-          distanceM / paceMPerMin(legTransport, walkMPerMin, bikeMPerMin),
-        ),
-      );
-    }
-
-    if (legTransport === 'transit') {
-      distanceM = null;
-    }
-
-    let leaveMs = t;
-    let arriveMs = t + etaMin * 60_000;
-    if (
-      s.startMs != null &&
-      Number.isFinite(s.startMs) &&
-      s.endMs != null &&
-      Number.isFinite(s.endMs) &&
-      s.endMs > s.startMs
-    ) {
-      leaveMs = s.startMs;
-      arriveMs = s.endMs;
-      if (!(typeof s.durationSec === 'number' && s.durationSec > 0)) {
-        etaMin = Math.max(1, Math.round((arriveMs - leaveMs) / 60_000));
+      if (typeof s.distanceM === 'number' && Number.isFinite(s.distanceM) && s.distanceM > 0) {
+        distanceM = Math.round(s.distanceM);
       }
-    }
-    const boardMs =
-      legTransport === 'transit'
-        ? null
-        : (s.vehicleStartMs ??
-          (next && isTransitStop(next)
-            ? (next.vehicleStartMs ?? next.startMs ?? null)
-            : null) ??
-          (i === 0 ? firstTrainMs : null));
-    if (boardMs != null) {
-      const clamped = clampWalkArriveBeforeBoard({
-        leaveMs,
-        arriveMs,
-        etaMin,
-        boardMs,
-        nowMs,
-      });
-      leaveMs = clamped.leaveMs;
-      arriveMs = clamped.arriveMs;
-      if (arriveMs > leaveMs) {
-        etaMin = Math.max(1, Math.round((arriveMs - leaveMs) / 60_000));
+      if (
+        !hasTransit &&
+        liveEtaMin != null &&
+        liveEtaMin > 0 &&
+        legTransport !== 'transit'
+      ) {
+        etaMin = Math.max(etaMin, liveEtaMin);
+        distanceM = liveDistanceM ?? distanceM;
+      } else if (
+        distanceM == null &&
+        from &&
+        Number.isFinite(from.lat) &&
+        Number.isFinite(from.lng)
+      ) {
+        const tr = travelBetweenStops(from, s, legTransport, null, pace);
+        distanceM = tr.distanceM;
+        if (!(typeof s.durationSec === 'number' && s.durationSec > 0)) {
+          etaMin = tr.etaMin;
+        }
       }
-    }
-
-    const title = pathTitleForLeg(legTransport, distanceM, etaMin, {
-      line: s.line,
-      headsign: s.headsign,
-      stationCount: s.stationCount,
-      delaySec: s.delaySec,
-    });
-    out.push({
-      id: i === 0 ? LIVE_NAV_LEG_ID : tourLegId(i),
-      title,
-      lat: s.lat,
-      lng: s.lng,
-      plannedStartMs: leaveMs,
-      plannedEndMs: arriveMs,
-      bufferMin: 0,
-      transport: legTransport,
-      kind: 'nav_leg',
-      status: i === 0 ? 'pending_change' : 'planned',
-      emoji: legTransport === 'transit' ? '🚆' : emojiForTransport(legTransport),
-      routeEstimate:
-        (typeof s.durationSec === 'number' && s.durationSec > 0) ||
-        (typeof s.distanceM === 'number' && s.distanceM > 0) ||
-        (Array.isArray(s.path) && s.path.length >= 2) ||
-        (i === 0 && liveDistanceM != null)
-          ? 'routed'
-          : 'fallback',
-      hardAnchor: false,
-      badge: boardingBadge(s.platform, s.vehicleMode),
-      groupId,
-      groupLabel,
-    });
-
-    const nextDep =
-      nextUpcomingBoardMs(stops, i) ??
-      (next
-        ? isTransitStop(next)
+      let leaveMs = t;
+      arriveMs = t + etaMin * 60_000;
+      if (
+        s.endMs != null &&
+        Number.isFinite(s.endMs) &&
+        s.endMs > leaveMs
+      ) {
+        arriveMs = s.endMs as number;
+      }
+      boardMs =
+        s.vehicleStartMs ??
+        (next && isTransitStop(next)
           ? (next.vehicleStartMs ?? next.startMs ?? null)
-          : (s.vehicleStartMs ?? next.startMs ?? null)
-        : (s.vehicleStartMs ?? null));
-    const waitMin = waitMinUntil(arriveMs, nextDep ?? null);
+          : null) ??
+        firstTrainMs;
+      arriveBufferMin = stationArriveBufferMin({
+        name: s.name,
+        mode: s.vehicleMode,
+      });
+      if (boardMs != null && legTransport !== 'transit') {
+        const clamped = clampWalkArriveBeforeBoard({
+          leaveMs,
+          arriveMs,
+          etaMin,
+          boardMs,
+          nowMs,
+          bufferMin: arriveBufferMin,
+        });
+        arriveMs = clamped.arriveMs;
+      }
+    } else if (s.endMs != null && Number.isFinite(s.endMs) && (s.endMs as number) > t - 60_000) {
+      arriveMs = Math.max(t, s.endMs as number);
+    }
+
+    const nextDep = boardDepForStop(s, next, stops, i);
+    const waitMin = (() => {
+      const until = nextDep ?? null;
+      if (until == null || !Number.isFinite(until)) return 0;
+      const fromWait = Math.max(arriveMs, nowMs);
+      return waitMinUntil(fromWait, until);
+    })();
     const exploreDwell =
       !hasTransit && !isTransitStop(s) && s.role !== 'dest'
         ? dwellMinForLiveTourStop(s)
         : 0;
     const dwell = waitMin > 0 ? waitMin : exploreDwell;
     const stopEnd = arriveMs + dwell * 60_000;
-    const isLast = i === stops.length - 1;
     const isTransit = isTransitStop(s);
+    if (boardMs == null) {
+      boardMs =
+        s.role === 'walk' || s.role === 'board' || s.role === 'transfer'
+          ? (s.vehicleStartMs ??
+            (next && isTransitStop(next)
+              ? (next.vehicleStartMs ?? next.startMs ?? null)
+              : null) ??
+            (i === 0 ? firstTrainMs : null))
+          : null;
+      arriveBufferMin = stationArriveBufferMin({
+        name: s.name,
+        mode: s.vehicleMode,
+      });
+    }
+    const stopBuffer =
+      (s.role === 'walk' || s.role === 'board' || s.role === 'transfer') &&
+      boardMs != null
+        ? arriveBufferMin
+        : 0;
+
+    // 0) Fußweg zum ersten Halt (Leave-by), danach Ort → Weg.
+    if (i === 0) {
+      const approach = incomingTransport(s, transport);
+      if (approach !== 'transit' && from) {
+        let distanceM: number | null =
+          typeof s.distanceM === 'number' && Number.isFinite(s.distanceM) && s.distanceM > 0
+            ? Math.round(s.distanceM)
+            : null;
+        let etaMin = 4;
+        if (typeof s.durationSec === 'number' && Number.isFinite(s.durationSec) && s.durationSec > 0) {
+          etaMin = Math.max(1, Math.round(s.durationSec / 60));
+        }
+        if (
+          !hasTransit &&
+          liveEtaMin != null &&
+          liveEtaMin > 0
+        ) {
+          etaMin = Math.max(etaMin, liveEtaMin);
+          distanceM = liveDistanceM ?? distanceM;
+        } else if (distanceM == null) {
+          const tr = travelBetweenStops(from, s, approach, null, pace);
+          distanceM = tr.distanceM;
+          if (!(typeof s.durationSec === 'number' && s.durationSec > 0)) {
+            etaMin = tr.etaMin;
+          }
+        }
+        let leaveMs = t;
+        let approachArrive = arriveMs;
+        if (boardMs != null) {
+          const clamped = clampWalkArriveBeforeBoard({
+            leaveMs,
+            arriveMs: approachArrive,
+            etaMin,
+            boardMs,
+            nowMs,
+            bufferMin: arriveBufferMin,
+          });
+          leaveMs = clamped.leaveMs;
+          approachArrive = clamped.arriveMs;
+          arriveMs = approachArrive;
+        } else {
+          approachArrive = leaveMs + etaMin * 60_000;
+          arriveMs = approachArrive;
+        }
+        out.push({
+          id: LIVE_NAV_LEG_ID,
+          title: pathTitleForLeg(approach, distanceM, etaMin),
+          lat: s.lat,
+          lng: s.lng,
+          plannedStartMs: leaveMs,
+          plannedEndMs: approachArrive,
+          bufferMin: 0,
+          transport: approach,
+          kind: 'nav_leg',
+          status: 'pending_change',
+          emoji: emojiForTransport(approach),
+          notes: null,
+          routeEstimate:
+            (typeof s.durationSec === 'number' && s.durationSec > 0) ||
+            (typeof s.distanceM === 'number' && s.distanceM > 0) ||
+            liveDistanceM != null
+              ? 'routed'
+              : 'fallback',
+          hardAnchor: false,
+          badge: null,
+          groupId,
+          groupLabel,
+        });
+      }
+    }
+
+    // 1) Ort
     out.push({
       id: upcoming.length === 0 ? LIVE_NAV_DEST_ID : tourStopId(s, i),
+
       title: `${i + 1} · ${concreteHaltLabel({
         name: tidyHaltName(stripEmojiName(s.name) || s.name) || s.name,
         mode: s.vehicleMode,
@@ -700,7 +794,7 @@ export function buildLiveTourSchedule(opts: {
       lng: s.lng,
       plannedStartMs: arriveMs,
       plannedEndMs: stopEnd,
-      bufferMin: 0,
+      bufferMin: stopBuffer,
       transport: isTransit ? 'transit' : 'walk',
       kind: 'stop',
       status: 'planned',
@@ -716,7 +810,107 @@ export function buildLiveTourSchedule(opts: {
       groupLabel,
     });
 
-    t = Math.max(stopEnd, arriveMs);
+    // 2) Weg zum nächsten Ort
+    if (next) {
+      const legTransport = incomingTransport(next, transport);
+      let distanceM: number | null = null;
+      let etaMin = 4;
+      if (typeof next.durationSec === 'number' && Number.isFinite(next.durationSec) && next.durationSec > 0) {
+        etaMin = Math.max(1, Math.round(next.durationSec / 60));
+      }
+      if (typeof next.distanceM === 'number' && Number.isFinite(next.distanceM) && next.distanceM > 0) {
+        distanceM = Math.round(next.distanceM);
+      } else if (
+        Number.isFinite(s.lat) &&
+        Number.isFinite(s.lng) &&
+        Number.isFinite(next.lat) &&
+        Number.isFinite(next.lng)
+      ) {
+        const walkPath = legTransport === 'transit' ? null : next.path;
+        const tr = travelBetweenStops(
+          { lat: s.lat, lng: s.lng },
+          next,
+          legTransport,
+          walkPath,
+          pace,
+        );
+        distanceM = tr.distanceM;
+        if (!(typeof next.durationSec === 'number' && next.durationSec > 0)) {
+          etaMin = tr.etaMin;
+        }
+      }
+      if (legTransport === 'transit') {
+        distanceM = null;
+      }
+
+      let leaveMs = Math.max(stopEnd, arriveMs);
+      let legArriveMs = leaveMs + etaMin * 60_000;
+      if (
+        next.startMs != null &&
+        Number.isFinite(next.startMs) &&
+        next.endMs != null &&
+        Number.isFinite(next.endMs) &&
+        next.endMs > next.startMs
+      ) {
+        leaveMs = next.startMs as number;
+        legArriveMs = Math.max(leaveMs + 30_000, next.endMs as number);
+        if (leaveMs < arriveMs && legTransport !== 'transit') {
+          leaveMs = Math.max(stopEnd, arriveMs);
+          legArriveMs = Math.max(leaveMs + 30_000, legArriveMs);
+        }
+        if (!(typeof next.durationSec === 'number' && next.durationSec > 0)) {
+          etaMin = Math.max(1, Math.round((legArriveMs - leaveMs) / 60_000));
+        }
+      }
+
+      const title = pathTitleForLeg(legTransport, distanceM, etaMin, {
+        line: next.line ?? s.line,
+        headsign: next.headsign ?? s.headsign,
+        stationCount: next.stationCount,
+        delaySec: next.delaySec ?? s.delaySec,
+      });
+      const transitClockNotes =
+        legTransport === 'transit' &&
+        next.startMs != null &&
+        Number.isFinite(next.startMs) &&
+        next.endMs != null &&
+        Number.isFinite(next.endMs) &&
+        next.endMs > next.startMs
+          ? `${clockHm(next.startMs)}–${clockHm(next.endMs)} · ~${formatMin(etaMin)}`
+          : null;
+
+      out.push({
+        id: tourLegId(i + 1),
+        title,
+        lat: next.lat,
+        lng: next.lng,
+        plannedStartMs: leaveMs,
+        plannedEndMs: legArriveMs,
+        bufferMin: 0,
+        transport: legTransport,
+        kind: 'nav_leg',
+        status: i === 0 ? 'pending_change' : 'planned',
+        emoji: legTransport === 'transit' ? '🚆' : emojiForTransport(legTransport),
+        notes: transitClockNotes,
+        routeEstimate:
+          (typeof next.durationSec === 'number' && next.durationSec > 0) ||
+          (typeof next.distanceM === 'number' && next.distanceM > 0) ||
+          (Array.isArray(next.path) && next.path.length >= 2)
+            ? 'routed'
+            : 'fallback',
+        hardAnchor: false,
+        badge:
+          legTransport === 'transit'
+            ? boardingBadge(next.platform ?? s.platform, next.vehicleMode ?? s.vehicleMode)
+            : null,
+        groupId,
+        groupLabel,
+      });
+
+      t = legArriveMs;
+    } else {
+      t = Math.max(stopEnd, arriveMs);
+    }
     from = { lat: s.lat, lng: s.lng };
   }
 

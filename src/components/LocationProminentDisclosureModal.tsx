@@ -102,8 +102,8 @@ export function LocationProminentDisclosureHost() {
 const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    zIndex: UI_LAYER.overlay + 30,
-    elevation: UI_LAYER.overlay + 30,
+    zIndex: UI_LAYER.askSheet + 200,
+    elevation: UI_LAYER.askSheet + 200,
   },
   backdropHit: {
     ...StyleSheet.absoluteFillObject,

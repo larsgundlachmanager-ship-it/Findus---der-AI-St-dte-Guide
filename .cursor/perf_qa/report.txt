@@ -1,0 +1,11 @@
+PERF QA Chrome + M2
+Note: chrome ms = tap→first uiautomator dump with overlay markers (dump overhead dominates).
+
+PASS-SLOW  settings: ok=True ms=8231 err=None
+PASS-SLOW  timeline: ok=True ms=10985 err=None
+PASS-SLOW  orte: ok=True ms=14419 err=None
+
+PASS  ask: bridge_ms=None tts_ms=None ui_answered=True total=28155
+  ui: noch 4 Std 7 Min · voraussichtlich Regen | tippen für Tipps | 0 von 29 Orten · 0 % erkundet | Uhrzeit | • 15:40 | Timeline | Orte | Einst.
+
+shots: C:\Users\larsf\Findus 2.0\.cursor\perf_qa

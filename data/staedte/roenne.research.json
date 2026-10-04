@@ -1,0 +1,155 @@
+{
+  "city_id": "roenne",
+  "city": "Rønne",
+  "region": "Bornholm, Denmark",
+  "spots": [
+    {
+      "name": "Sankt Nicolai Kirke",
+      "aliases": ["Skt. Nicolai Kirke", "St. Nicolas Church", "Nikolauskirche Rønne"],
+      "category": "kirche",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Die weiße Nikolaikirche mit grünem Kupferturm thront über dem Hafen und begrüßt Fährgäste seit dem Mittelalter. Erbaut um 1275, kreuzförmig umgebaut, große Renovierung bis 1918. Im Inneren: gotländisches Taufbecken aus dem 14. Jahrhundert, typisch bornholmer Kanzel, Boden aus Paradisbakke-Granit (1982–83).",
+      "deep_data_pool": [
+        "Ursprung um 1275; heutige Gestalt nach Umbau/Renovierung bis 1918.",
+        "Lage: Kirkepladsen 20, 3700 Rønne — Hügel direkt über dem Hafen.",
+        "Taufbecken aus Gotland, 14. Jahrhundert.",
+        "Boden aus Paradisbakke-Granit bei Restaurierung 1982–83.",
+        "Wird häufig für Konzerte genutzt (gute Akustik).",
+        "Visuell: weißer Mauerbau, schlanker grüner Kupferspitzturm, orangerote Ziegel, Fachwerkdetail am Turm."
+      ],
+      "sources": ["https://visit-bornholm.com/de/kirchen/nicolai-kirke"]
+    },
+    {
+      "name": "Rønne Havn",
+      "aliases": ["Rønne Harbour", "Fährhafen Rønne", "Bornholmslinjen"],
+      "category": "hafen",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Haupt­hafen Bornholms: Fähre, Fischerei, Yacht und Güter. Tor zur Insel mit Verbindungen nach Ystad (~80 Min), Køge (~5,5 h) und Sassnitz (~3 h 20). Bunte Hafenhäuser und rote Schuppen prägen das Ufer.",
+      "deep_data_pool": [
+        "Größter Hafen Bornholms — Handel, Passagiere, Fährverkehr.",
+        "LIVE: Fahrplan und Preise über Bornholmslinjen prüfen.",
+        "Ystad-Route ca. 80 Minuten; Sassnitz ca. 3 h 20; Køge ca. 5,5 h.",
+        "Altstadt und Museen sind vom Hafen zu Fuß erreichbar.",
+        "Visuell: Holzstege, Fischkutter, farbige Hafenhäuser, Kirche über dem Becken."
+      ],
+      "sources": ["https://visit-bornholm.com/de/haefen/ronne-havn", "https://www.bornholmslinjen.com/timetable"]
+    },
+    {
+      "name": "Bornholms Museum",
+      "aliases": ["Bornholm Museum", "Bornholms Museum Rønne"],
+      "category": "museum",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Inselmuseum in der Sankt Mortens Gade: Archäologie inklusive Goldgubber von Sorte Muld, Seefahrt, Standuhren, Alltag — und die sowjetische Bombardierung Rønnes im Mai 1945 sowie Besatzung bis 1946. Museumsverein 1893, Eröffnung 1894 im alten Krankenhaus.",
+      "deep_data_pool": [
+        "Einziges Haus, das die ganze Inselgeschichte unter einem Dach erzählt.",
+        "Goldgubber aus Sorte Muld (über 1.800 ausgestellte Exemplare).",
+        "WW2/Kalter Krieg: deutsche Besatzung, sowjetische Bombardierung Mai 1945, Besatzung bis 1946.",
+        "Fællesbillet LIVE prüfen — oft kombiniert mit Hjorths Fabrik und Erichsens Gård.",
+        "Vom Fährhafen ca. 10 Minuten zu Fuß; Treppen erschweren Barrierefreiheit.",
+        "Adresse: Sankt Mortens Gade / Zentrum Rønne."
+      ],
+      "sources": ["https://www.bornholm.de/bornholms-museum/"]
+    },
+    {
+      "name": "Rønne Bagfyr",
+      "aliases": ["Rønne Fyr", "Leuchtturm Rønne", "Rønne Lighthouse"],
+      "category": "aussicht",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Weißer Leuchtturm von 1880 auf dem Hügel über dem Hafenbecken. Heute kein Navigationslicht mehr, aber Wahrzeichen und Aussicht über Hafen und Ostsee.",
+      "deep_data_pool": [
+        "Erbaut 1880 als Bagfyr (Heckfeuer) über dem Hafen.",
+        "Nicht mehr als Navigationsfeuer in Betrieb — Symbol und Aussichtspunkt.",
+        "Visuell: weißer Turm, vom Hafen und der Fähre gut zu sehen."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Hjorths Fabrik",
+      "aliases": ["Hjorts Stentøj", "Hjorth Ceramic Museum", "Keramikmuseum Rønne"],
+      "category": "museum",
+      "place_tier": 2,
+      "must_have": true,
+      "general_info": "Historische Keramikfabrik und Museum: Hjorths Stentøj machte Bornholmer Keramik bekannt. Werkstattgeschichte, Ausstellungen, Design.",
+      "deep_data_pool": [
+        "Teil der Bornholms Museumsorganisation.",
+        "LIVE: Öffnung und Fællesbillet mit Bornholms Museum prüfen.",
+        "Wenige Gehminuten vom Bornholms Museum."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Erichsens Gård",
+      "aliases": ["Erichsens Gaard", "Erichsen House"],
+      "category": "museum",
+      "place_tier": 2,
+      "general_info": "Historisches Bürgerhaus-Museum in Rønne — Alltag und Stadtgeschichte im Originalambiente.",
+      "deep_data_pool": [
+        "Teil der gemeinsamen Museumslandschaft Rønne.",
+        "LIVE: Öffnungszeiten und Kombiticket prüfen."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Forsvarsmuseum Rønne",
+      "aliases": ["Defence Museum", "Verteidigungsmuseum", "Kastellet Rønne"],
+      "category": "museum",
+      "place_tier": 2,
+      "general_info": "Militär- und Verteidigungsmuseum an historischen Befestigungen: Wälle, Gräben, Inselverteidigung.",
+      "deep_data_pool": [
+        "Themen: Festungsanlagen und Militärgeschichte Bornholms.",
+        "Visuell: Wallanlagen und Gräben rund um das Museumsgelände."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Store Torv",
+      "aliases": ["Großer Markt Rønne", "Store Torv Rønne"],
+      "category": "altstadt",
+      "place_tier": 2,
+      "general_info": "Zentraler Marktplatz der Altstadt — Ausgangspunkt für Gassen mit historischen Häusern.",
+      "deep_data_pool": [
+        "Altstadt zu Fuß vom Hafen erreichbar.",
+        "Nahe Lille Torv und Laksegade mit Fachwerk und bunten Fassaden."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Lille Torv",
+      "aliases": ["Kleiner Markt Rønne"],
+      "category": "altstadt",
+      "place_tier": 2,
+      "general_info": "Kleiner Marktplatz in der Altstadt — Teil des historischen Kerns mit engen Gassen.",
+      "deep_data_pool": [
+        "Zusammen mit Store Torv und Laksegade typisches Altstadt-Flair."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Laksegade",
+      "aliases": ["Laksegade Rønne"],
+      "category": "altstadt",
+      "place_tier": 2,
+      "general_info": "Charakteristische Altstadtgasse mit historischen Häusern — Fotospot und Spazierroute.",
+      "deep_data_pool": [
+        "Teil der fußläufigen Altstadt-Runde vom Hafen."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    },
+    {
+      "name": "Gamle Havnesmedje",
+      "aliases": ["Old Harbour Smithy", "Hafenschmiede 1735"],
+      "category": "denkmal",
+      "place_tier": 2,
+      "general_info": "Historisches Hafengebäude von 1735 — Spur alter Handwerkskunst und Hafenbetrieb.",
+      "deep_data_pool": [
+        "Erbaut 1735 am Hafen; früher Lager und Hafenbetrieb.",
+        "Erinnert an maritime Handwerkstradition Bornholms."
+      ],
+      "sources": ["https://visitbornholm.com/en/cities-places/cities/ronne"]
+    }
+  ]
+}

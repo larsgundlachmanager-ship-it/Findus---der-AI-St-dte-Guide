@@ -32,6 +32,8 @@ export type PresentToUiOpts = {
   cardTitle?: string | null;
   /** Keine Auto-Stichpunkte aus Speech (Chat-Lane: Card erst nach hörbarem Audio) */
   skipBulletDerive?: boolean;
+  /** Nur Speech — kein Spickzettel (Hard-Nav ETA: HUD zeigt Minuten schon) */
+  skipConciergeCard?: boolean;
 };
 
 function uiPromptForAction(
@@ -75,7 +77,7 @@ export async function presentToUi(
   // Ein Tick Luft — Settings/Mic/Timeline nicht hinter großen Store-Writes
   await new Promise<void>((r) => setTimeout(r, 0));
 
-  const opts: PresentToUiOpts =
+  let opts: PresentToUiOpts =
     typeof userTextOrOpts === 'string'
       ? { userText: userTextOrOpts }
       : userTextOrOpts ?? {};
@@ -83,6 +85,7 @@ export async function presentToUi(
   let outSpeech = speech;
   let outBullets = [...bullets];
   let navStarted = false;
+  let wakeOverrideActions: QuickAction[] | null = null;
 
   try {
     const { stripPermissionLookupAsks } = require('../../services/concierge/justDoItPolicy') as {
@@ -91,6 +94,51 @@ export async function presentToUi(
     outSpeech = stripPermissionLookupAsks(outSpeech);
   } catch {
     /* soft */
+  }
+
+  // Wake darf nie nur LLM-„gestellt“ sein — Native zuerst (Safety-Net).
+  try {
+    const {
+      ensureWakeNativeBeforePresent,
+      looksLikeFakeWakeClaim,
+    } = await import('../../services/alarms/ensureWakeNativePresent');
+    const ensured = await ensureWakeNativeBeforePresent(userText, outSpeech);
+    if (ensured) {
+      outSpeech = ensured.speech;
+      outBullets = (ensured.bullets ?? []).slice(0, 3);
+      wakeOverrideActions = ensured.quickActions ?? [];
+      if (!opts.cardTitle) {
+        opts = { ...opts, cardTitle: ensured.cardTitle };
+      }
+    } else if (looksLikeFakeWakeClaim(outSpeech)) {
+      outSpeech =
+        'Wecker ging gerade nicht — tipp nochmal oder nutz die Uhr-App.';
+      outBullets = [];
+      wakeOverrideActions = [];
+    }
+  } catch (err) {
+    console.warn('[presentToUi] ensure wake native failed', err);
+  }
+  if (!opts.skipBulletDerive && !outBullets.filter(Boolean).length && outSpeech) {
+    try {
+      const { normalizeTriviaFactBullets } = require('../../module2/chat/instantFactFormat') as {
+        normalizeTriviaFactBullets: (o: {
+          userText?: string | null;
+          speech?: string | null;
+          bullets?: string[] | null;
+        }) => string[];
+      };
+      const fromTrivia = normalizeTriviaFactBullets({
+        userText,
+        speech: outSpeech,
+        bullets,
+      });
+      if (fromTrivia.length) {
+        outBullets = fromTrivia.slice(0, 3);
+      }
+    } catch {
+      /* soft */
+    }
   }
   if (!opts.skipBulletDerive && !outBullets.filter(Boolean).length && outSpeech) {
     try {
@@ -144,6 +192,8 @@ export async function presentToUi(
         adults?: number;
         destLat?: number;
         destLng?: number;
+        pickupTimeLabel?: string;
+        pickupDateIso?: string;
         action?: string;
         data?: Record<string, unknown>;
         keepCard?: boolean;
@@ -274,37 +324,97 @@ export async function presentToUi(
       if ((p.kind === 'uber' || p.kind === 'book_uber') && (p.lat != null || p.destLat != null) && (p.lng != null || p.destLng != null)) {
         const uberLat = Number(p.destLat ?? p.lat);
         const uberLng = Number(p.destLng ?? p.lng);
+        const destName = (p.label ?? p.destName ?? 'Ziel').trim();
+        const pickupTimeLabel =
+          typeof p.pickupTimeLabel === 'string' ? p.pickupTimeLabel.trim() : '';
+        const pickupDateIso =
+          typeof p.pickupDateIso === 'string' ? p.pickupDateIso.trim() : '';
+        const existingUrl = typeof p.url === 'string' ? p.url.trim() : '';
+        const existingIsScheduledUber =
+          /m\.uber\.com/i.test(existingUrl) &&
+          (/\/go\/reserve/i.test(existingUrl) || /[?&]pickup_time=/i.test(existingUrl));
         try {
           const { buildUberRideAction } = require('../../services/affiliate/affiliateService') as {
             buildUberRideAction: (
               lat: number,
               lng: number,
               name: string,
+              targetPoiId?: string | number,
+              opts?: {
+                dropoffFormattedAddress?: string | null;
+                pickupTimeLabel?: string | null;
+                pickupDateIso?: string | null;
+              },
             ) => {
               type: 'BOOK_UBER';
               label: string;
               payload: Record<string, unknown>;
             };
           };
-          const destName = (p.label ?? p.destName ?? 'Ziel').trim();
-          const act = buildUberRideAction(uberLat, uberLng, destName);
+          const act = buildUberRideAction(uberLat, uberLng, destName, undefined, {
+            pickupTimeLabel: pickupTimeLabel || undefined,
+            pickupDateIso: pickupDateIso || undefined,
+            dropoffFormattedAddress: destName,
+          });
+          // Prefer rebuilt URL when schedule present; else keep prebuilt reserve/pickup_time URL.
+          const rebuiltUrl =
+            typeof act.payload.url === 'string' ? String(act.payload.url).trim() : '';
+          const url =
+            (pickupTimeLabel && rebuiltUrl) ||
+            (existingIsScheduledUber ? existingUrl : '') ||
+            rebuiltUrl ||
+            existingUrl;
+          const labelHasTime = /\d{1,2}:\d{2}/.test(b.label || '');
           return {
             type: 'BOOK_UBER' as const,
-            label: b.label || act.label,
-            payload: act.payload,
+            label: labelHasTime && b.label ? b.label : act.label || b.label,
+            payload: {
+              ...act.payload,
+              ...(url ? { url } : {}),
+              ...(pickupTimeLabel ? { pickupTimeLabel } : {}),
+              ...(pickupDateIso ? { pickupDateIso, dateIso: pickupDateIso } : {}),
+            },
           };
         } catch {
+          if (existingUrl && /^https?:\/\//i.test(existingUrl)) {
+            return {
+              type: 'OPEN_URL' as const,
+              label: b.label || '🚗 Uber',
+              payload: {
+                url: existingUrl,
+                destName,
+                ...(pickupTimeLabel ? { pickupTimeLabel } : {}),
+                ...(pickupDateIso ? { pickupDateIso } : {}),
+              },
+            };
+          }
+          // setPickup only as last resort when no scheduled pickup time
+          if (!pickupTimeLabel) {
+            return {
+              type: 'OPEN_URL' as const,
+              label: b.label || '🚗 Uber',
+              payload: {
+                url: `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Blatitude%5D=${uberLat}&dropoff%5Blongitude%5D=${uberLng}`,
+                destName,
+              },
+            };
+          }
           return {
             type: 'OPEN_URL' as const,
             label: b.label || '🚗 Uber',
             payload: {
-              url: `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff%5Blatitude%5D=${uberLat}&dropoff%5Blongitude%5D=${uberLng}`,
-              destName: (p.label ?? p.destName ?? 'Ziel').trim(),
+              url: 'https://m.uber.com/ul/',
+              destName,
+              pickupTimeLabel,
+              ...(pickupDateIso ? { pickupDateIso } : {}),
             },
           };
         }
       }
-      if (p.kind === 'switch_nav_mode' && p.preferBike === true) {
+      if (
+        (p.kind === 'switch_nav_mode' && p.preferBike === true) ||
+        (p.kind === 'switch_nav_mode' && p.preferWalk === true)
+      ) {
         try {
           const {
             getActiveNavDestination,
@@ -316,7 +426,33 @@ export async function presentToUi(
               poiId?: number;
             } | null;
           };
-          const dest = getActiveNavDestination();
+          let dest = getActiveNavDestination();
+          try {
+            const {
+              resolveActiveNavTravelBucket,
+            } = require('../../services/navigation/switchActiveNavTravelMode') as {
+              resolveActiveNavTravelBucket: () => string | null;
+            };
+            // Endziel aus ÖPNV-Tour bevorzugen — getActive kann nur nächster Halt sein
+            if (resolveActiveNavTravelBucket() === 'transit') {
+              const tour = useFinnusStore.getState().multiStopTour;
+              const last = tour?.stops?.[tour.stops.length - 1];
+              if (
+                last &&
+                Number.isFinite(last.lat) &&
+                Number.isFinite(last.lng)
+              ) {
+                dest = {
+                  lat: last.lat,
+                  lng: last.lng,
+                  name: last.name,
+                  poiId: last.poiId > 0 ? last.poiId : undefined,
+                };
+              }
+            }
+          } catch {
+            /* soft */
+          }
           if (
             dest &&
             Number.isFinite(dest.lat) &&
@@ -324,12 +460,18 @@ export async function presentToUi(
           ) {
             return {
               type: 'START_NAVIGATION' as const,
-              label: b.label || 'Navigation auf Rad',
+              label:
+                b.label ||
+                (p.preferWalk === true
+                  ? 'Navigation zu Fuß'
+                  : 'Navigation auf Rad'),
               payload: {
                 destLat: dest.lat,
                 destLng: dest.lng,
                 destName: dest.name,
-                preferBike: true,
+                preferBike: p.preferBike === true,
+                preferWalk: p.preferWalk === true,
+                replaceRoute: true,
                 keepCard: true,
               },
             };
@@ -555,7 +697,8 @@ export async function presentToUi(
     });
 
     const cardId = `m2_${Date.now()}`;
-    let finalActions = quickActions;
+    let finalActions =
+      wakeOverrideActions != null ? wakeOverrideActions : quickActions;
     const startDeep = opts.startActionDeep !== false;
     let deepJobs: import('../../services/actionBoard/types').DeepJob[] = [];
     try {
@@ -578,6 +721,16 @@ export async function presentToUi(
         },
       );
       finalActions = boarded.response.quickActions;
+      try {
+        const { mergePreserveFlightBookActions } = require('./preserveFlightBookActions') as typeof import('./preserveFlightBookActions');
+        finalActions = mergePreserveFlightBookActions(
+          quickActions,
+          finalActions,
+          { userText, cardTitle: opts.cardTitle },
+        );
+      } catch {
+        /* soft */
+      }
       deepJobs = boarded.deepJobs ?? [];
     } catch {
       /* board optional */
@@ -628,37 +781,61 @@ export async function presentToUi(
       } catch {
         safe = actions;
       }
-      store.setActiveConciergeCard({
-        id: cardId,
-        createdAtMs: Date.now(),
-        speechText: outSpeech,
-        visualBullets: clampVisualBullets(outBullets, {
-          speechText: outSpeech,
+      let cardTitle = 'Spickzettel';
+      try {
+        const { deriveSpickzettelTitle } = require('../../services/concierge/spickzettelTitle') as {
+          deriveSpickzettelTitle: (o: {
+            userText?: string | null;
+            speech?: string | null;
+            bullets?: string[] | null;
+            explicit?: string | null;
+          }) => string;
+        };
+        cardTitle = deriveSpickzettelTitle({
           userText,
-        }),
-        quickActions: safe,
-        cardTitle: (() => {
-          try {
-            const { deriveSpickzettelTitle } = require('../../services/concierge/spickzettelTitle') as {
-              deriveSpickzettelTitle: (o: {
-                userText?: string | null;
-                speech?: string | null;
-                bullets?: string[] | null;
-                explicit?: string | null;
-              }) => string;
-            };
-            return deriveSpickzettelTitle({
-              userText,
-              speech: outSpeech,
-              bullets: outBullets,
-              explicit: opts.cardTitle,
-            });
-          } catch {
-            const t = (opts.cardTitle || '').trim();
-            return t && !/^yorro\b/i.test(t) ? t : 'Spickzettel';
-          }
-        })(),
+          speech: outSpeech,
+          bullets: outBullets,
+          explicit: opts.cardTitle,
+        });
+      } catch {
+        const t = (opts.cardTitle || '').trim();
+        cardTitle = t && !/^yorro\b/i.test(t) ? t : 'Spickzettel';
+      }
+      let visualBullets = clampVisualBullets(outBullets, {
+        speechText: outSpeech,
+        userText,
       });
+      try {
+        const {
+          finalizeOutfitWeatherBullets,
+          isOutfitWeatherTurn,
+          stripOutfitWeatherTourActions,
+        } = require('../../services/concierge/outfitWeatherPresent') as typeof import('../../services/concierge/outfitWeatherPresent');
+        if (isOutfitWeatherTurn(userText, cardTitle)) {
+          visualBullets = finalizeOutfitWeatherBullets(outBullets, outSpeech, {
+            userText,
+          });
+          safe = stripOutfitWeatherTourActions(safe);
+        }
+      } catch {
+        /* soft */
+      }
+      if (opts.skipConciergeCard) {
+        try {
+          store.setActiveConciergeCard(null);
+        } catch {
+          /* soft */
+        }
+      } else {
+        store.setActiveConciergeCard({
+          id: cardId,
+          createdAtMs: Date.now(),
+          speechText: outSpeech,
+          visualBullets,
+          quickActions: safe,
+          cardTitle,
+        });
+      }
       if (startDeep && deepJobs.length > 0) {
         try {
           const { startActionBoardDeep } = require('../../services/actionBoard') as typeof import('../../services/actionBoard');
@@ -757,6 +934,22 @@ export async function presentToUi(
     publishCard(actions);
   } catch {
     /* UI optional */
+  }
+  try {
+    const { noteLastReplayableSpeech } = require('../../services/speech/lastReplayableSpeech') as {
+      noteLastReplayableSpeech: (o: {
+        speech: string;
+        bullets?: string[] | null;
+        cardTitle?: string | null;
+      }) => void;
+    };
+    noteLastReplayableSpeech({
+      speech: outSpeech,
+      bullets: outBullets,
+      cardTitle: opts.cardTitle ?? null,
+    });
+  } catch {
+    /* soft */
   }
   return { speech: outSpeech, navStarted };
 }

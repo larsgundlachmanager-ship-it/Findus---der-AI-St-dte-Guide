@@ -43,9 +43,17 @@ assert(g.streets.features.some((f) => f.properties?.n === 'Öl Mühle'), 'Straß
 
 {
   const core = cityMapExtractToGeojson(extract, 'core');
-  assert(core.hasRoads, 'Core hat Straßen');
+  assert(core.hasRoads, 'Core hat Hauptstraßen');
   assert(core.buildings.features.length === 0, 'Core ohne Gebäude');
   assert(core.housenumbers.features.length === 0, 'Core ohne Hausnummern');
+  const streetOnly: CityMapExtract = {
+    ...extract,
+    roads: [{ k: 1, c: [[53.68, 9.76], [53.681, 9.761]] }],
+  };
+  const coreStreet = cityMapExtractToGeojson(streetOnly, 'core');
+  assert(!coreStreet.hasRoads, 'Core filtert Nebenstraßen (k=1)');
+  const fullStreet = cityMapExtractToGeojson(streetOnly, 'full');
+  assert(fullStreet.hasRoads, 'Full behält Nebenstraßen');
 }
 
 {
@@ -64,6 +72,34 @@ assert(g.streets.features.some((f) => f.properties?.n === 'Öl Mühle'), 'Straß
     tw[0]?.geometry.type === 'LineString' &&
       tw[0].geometry.coordinates.length >= 3,
     'gemergte Linie länger',
+  );
+}
+
+{
+  // Schon geschlossen A→B→A = nur 2 Ecken → MapLibre JNI-Crash vermeiden
+  const degenerate: CityMapExtract = {
+    ...extract,
+    buildings: [],
+    parks: [
+      [
+        [53.68, 9.76],
+        [53.6801, 9.761],
+        [53.68, 9.76],
+      ],
+      [
+        [53.681, 9.76],
+        [53.6811, 9.76],
+        [53.6811, 9.761],
+        [53.681, 9.761],
+      ],
+    ],
+  };
+  const d = cityMapExtractToGeojson(degenerate);
+  assert(d.parks.features.length === 1, 'degenerierter Park-Ring rausgefiltert');
+  const ring = d.parks.features[0]?.geometry;
+  assert(
+    ring?.type === 'Polygon' && (ring.coordinates[0]?.length ?? 0) >= 4,
+    'gültiger Park ≥4 Punkte',
   );
 }
 

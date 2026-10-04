@@ -18,6 +18,8 @@ export type GpsStoreState = {
 
 /** ~0.8 m at mid-latitudes — skip store notify for jitter. */
 const EPS_DEG = 0.000008;
+/** Accuracy-only churn must not notify map subscribers. */
+const ACC_EPS_M = 8;
 
 export const useGpsStore = create<GpsStoreState>((set, get) => ({
   lat: null,
@@ -34,7 +36,11 @@ export const useGpsStore = create<GpsStoreState>((set, get) => ({
     const nextAcc =
       typeof fix.accuracy === 'number' ? fix.accuracy : prev.accuracyM;
     if (samePos) {
-      // Refresh staleness without notifying lat/lng subscribers.
+      const prevAcc = prev.accuracyM;
+      const accMeaningful =
+        typeof nextAcc === 'number' &&
+        (prevAcc == null || Math.abs(prevAcc - nextAcc) >= ACC_EPS_M);
+      if (!accMeaningful) return;
       set({ atMs: Date.now(), accuracyM: nextAcc });
       return;
     }

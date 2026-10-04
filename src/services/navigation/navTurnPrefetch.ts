@@ -138,8 +138,17 @@ export async function playPrefetchedNavTurnIfReady(
       slot.played = true;
       return true;
     }
+    // ENOENT / corrupt: Slot weg → Caller fällt auf Live-TTS zurück.
+    await deleteUri(slot.uri);
+    slots.delete(key);
   } catch (err) {
     if (__DEV__) console.warn('[nav-prefetch] play failed:', err);
+    try {
+      await deleteUri(slot.uri);
+    } catch {
+      /* soft */
+    }
+    slots.delete(key);
   }
   return false;
 }

@@ -125,6 +125,9 @@ export {
   initMapMatchEngine,
   resetMapMatchEngine,
   detectMissedTurn,
+  getRemainingRouteCoords,
+  getMapMatchAlongM,
+  getProjectionIndex,
 } from './mapMatchEngine';
 export {
   classifyTurnWaypoint,
@@ -198,6 +201,8 @@ export {
   resetBoardingDetector,
   getNavPhase,
   shouldPauseTurnByTurn,
+  takeAlightAdvancePending,
+  assessAlightReady,
 } from './boardingDetector';
 export {
   resolveAndStartNavigation,

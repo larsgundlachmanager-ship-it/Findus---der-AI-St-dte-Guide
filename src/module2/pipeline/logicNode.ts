@@ -78,6 +78,9 @@ export function runLogicNode(opts: {
   const collision = detectCollision(opts.futurePlan);
   const skipPlanHints = opts.results.some(
     (r) =>
+      r.agent === 'trigger' ||
+      r.meta?.timeTrigger === true ||
+      r.meta?.alarmActuallySet === true ||
       r.meta?.amenityNav === true ||
       r.meta?.autoStartNav === true ||
       r.meta?.forceAutoNav === true ||

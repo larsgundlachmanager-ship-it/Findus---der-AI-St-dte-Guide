@@ -1,22 +1,34 @@
 /**
- * Wann die Abbiege-Ansage starten muss: fertig 2 s vor der Gabelung.
- * Distanz = (Redezeit + 2) × Tempo. TTS-Prefetch davor.
- * Reine Mathematik — kein React Native.
+ * Wann die Abbiege-Ansage starten muss.
+ *
+ * Ziel: fertig ca. 5 s vor der Gabelung — nicht erst in der Kurve.
+ * Lieber etwas früher als zu spät.
+ *
+ * Beispiel zu Fuß (~1,25 m/s), Cue ~4 s Redezeit:
+ *   Start bei (4 + 5) × 1,25 ≈ 11 m → fertig ~5 s vor der Kurve.
+ * Beispiel Rad (~5 m/s), Cue ~4 s:
+ *   Start bei (4 + 5) × 5 ≈ 45 m.
  */
 
 import type { TransportMode } from './navigationTypes';
 
-export const FINISH_BEFORE_TURN_SEC = 2;
-export const FINAL_FLOOR_M = 8;
-export const FINAL_CEILING_WALK_M = 80;
-export const FINAL_CEILING_BIKE_M = 220;
+/** Soll-Ende der Ansage vor dem Maneuver (Sekunden). */
+export const FINISH_BEFORE_TURN_SEC = 5;
+export const FINAL_FLOOR_M = 18;
+/** Zu Fuß früher ansagen — genug Zeit zum Hören + reagieren. */
+export const FINAL_CEILING_WALK_M = 160;
+export const FINAL_CEILING_BIKE_M = 280;
+
+/** Konservativ: eher zu lange schätzen → früher starten. */
+const WORDS_PER_SEC = 2.3;
+const SPEECH_OVERHEAD_SEC = 0.55;
 
 const DEFAULT_WALK_MPS = 1.25;
 const DEFAULT_BIKE_MPS = 5.0;
 
 export function estimateSpeechSec(text: string): number {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
-  return Math.min(12, Math.max(1.8, words / 2.6 + 0.4));
+  return Math.min(12, Math.max(1.8, words / WORDS_PER_SEC + SPEECH_OVERHEAD_SEC));
 }
 
 function speedMps(

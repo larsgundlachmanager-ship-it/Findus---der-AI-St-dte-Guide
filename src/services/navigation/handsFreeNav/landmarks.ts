@@ -14,7 +14,7 @@ import {
 import type { NavWaypoint } from '../navigationTypes';
 import {
   classifyTurnWaypoint,
-  countNearbyRoads,
+  countNearbyRoadsWithinM,
 } from '../turnComplexityClassifier';
 import { registerClassifiedTurns } from '../lookAheadBuffer';
 import type { ClassifiedTurn } from '../turnComplexityClassifier';
@@ -91,7 +91,20 @@ export async function polishAllTurnsOsmFirst(opts: {
     if (!isTurnManeuver(wp.maneuver)) continue;
     const prev = i > 0 ? raw[i - 1] : null;
     const next = i + 1 < raw.length ? raw[i + 1] : null;
-    const nearbyRoadCount = countNearbyRoads(raw, i, 2);
+    const nearbyRoadCount = countNearbyRoadsWithinM(raw, i, 20);
+    let chainGapM: number | null = null;
+    try {
+      const { findChainedNextTurn } = require('../chainedTurnCue') as {
+        findChainedNextTurn: (
+          wps: NavWaypoint[],
+          idx: number,
+        ) => { gapM: number } | null;
+      };
+      // Dense/raw indices differ — chain from this raw turn via maneuver scan.
+      chainGapM = findChainedNextTurn(raw, i)?.gapM ?? null;
+    } catch {
+      chainGapM = null;
+    }
     const c = classifyTurnWaypoint(i, {
       wp,
       prev,
@@ -99,6 +112,7 @@ export async function polishAllTurnsOsmFirst(opts: {
       landmark: null,
       roadName: wp.roadName ?? null,
       nearbyRoadCount,
+      chainGapM,
       isUrban: true,
     });
     classified.push(c);
@@ -144,7 +158,7 @@ export async function polishAllTurnsOsmFirst(opts: {
           const visual = await fetchOsmVisualLandmark({
             lat: wp.lat,
             lng: wp.lng,
-            radiusM: 45,
+            radiusM: 5,
             headingDeg: c.headingDeg,
           });
           if (visual?.labelDe) {
@@ -163,13 +177,13 @@ export async function polishAllTurnsOsmFirst(opts: {
             } else {
               landmark = visual.labelDe;
             }
+            (wp as { _landmarkDistM?: number })._landmarkDistM =
+              visual.distanceM;
           }
         } catch {
           /* soft */
         }
       }
-      if (!landmark) return;
-
       let bestIdx = -1;
       let bestD = 40;
       for (let d = 0; d < dense.length; d++) {
@@ -181,6 +195,88 @@ export async function polishAllTurnsOsmFirst(opts: {
       }
       if (bestIdx < 0) return;
       const turn = turnWord(wp.maneuver);
+      const road = (wp.roadName || dense[bestIdx]?.roadName || '').trim() || null;
+      const complex =
+        c.complexity === 'complex' ||
+        dense[bestIdx]?.turnComplexity === 'complex';
+
+      try {
+        const {
+          isWeakVisualLandmark,
+          isTrafficRelevantLandmark,
+          shouldSpeakLandmarkOnTurn,
+        } = require('../visualLandmarkQuality') as {
+          isWeakVisualLandmark: (l: string | null | undefined) => boolean;
+          isTrafficRelevantLandmark: (l: string | null | undefined) => boolean;
+          shouldSpeakLandmarkOnTurn: (o: {
+            landmark: string | null | undefined;
+            isComplexTurn?: boolean;
+            distanceM?: number | null;
+          }) => boolean;
+        };
+        const landDist =
+          typeof (wp as { _landmarkDistM?: number })._landmarkDistM === 'number'
+            ? (wp as { _landmarkDistM?: number })._landmarkDistM!
+            : null;
+        if (isWeakVisualLandmark(landmark)) {
+          landmark = null;
+        } else if (
+          !shouldSpeakLandmarkOnTurn({
+            landmark,
+            isComplexTurn: complex,
+            distanceM: landDist,
+          })
+        ) {
+          landmark = null;
+        } else if (
+          !complex &&
+          landmark &&
+          !isTrafficRelevantLandmark(landmark)
+        ) {
+          landmark = null;
+        }
+      } catch {
+        /* soft */
+      }
+
+      // Einfach: nur Verkehrs-Landmarke ≤5 m; sonst Cache-Phrase.
+      if (!landmark) {
+        if (turn === 'geradeaus') return;
+        dense[bestIdx] = {
+          ...dense[bestIdx],
+          landmark: null,
+          visibleLandmark: null,
+          cue: scrubRoboticNavSpeak(buildTurnWithoutLandmark(turn, road)),
+        };
+        return;
+      }
+      if (!complex) {
+        // Einfache Kreuzung mit Ampel/Brücke… — eine Final-Ansage inkl. Anker.
+        if (turn === 'geradeaus') return;
+        const forkish = /fork|keep/i.test(wp.maneuver ?? '');
+        dense[bestIdx] = {
+          ...dense[bestIdx],
+          landmark,
+          visibleLandmark: landmark,
+          turnComplexity: dense[bestIdx]?.turnComplexity ?? 'simple',
+          cue: scrubRoboticNavSpeak(
+            buildLandmarkFirstCue({
+              landmark,
+              relation: {
+                side: 'front',
+                bearingRelDeg: 0,
+                sidePhrase: 'voraus',
+                shortPhrase: 'vor dir',
+              },
+              turn,
+              roadName: null,
+              visualKind: forkish ? 'fork' : null,
+            }),
+          ),
+        };
+        return;
+      }
+      const forkish = /fork|keep/i.test(wp.maneuver ?? '');
       const cue =
         turn !== 'geradeaus'
           ? scrubRoboticNavSpeak(
@@ -193,11 +289,11 @@ export async function polishAllTurnsOsmFirst(opts: {
                   shortPhrase: 'vor dir',
                 },
                 turn,
-                // Landmarke da → keine Straße vorlesen
                 roadName: null,
+                visualKind: forkish ? 'fork' : 'complex',
               }),
             )
-          : buildTurnWithoutLandmark(turn, null);
+          : buildTurnWithoutLandmark(turn, road);
       dense[bestIdx] = {
         ...dense[bestIdx],
         landmark,

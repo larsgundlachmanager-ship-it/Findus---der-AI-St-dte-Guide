@@ -59,7 +59,7 @@ function extractTimes(speech: string): string[] {
 function extractQuantities(speech: string): string[] {
   const out: string[] = [];
   const re =
-    /\b(\d{1,3}\s*(?:–|-|bis\s+)?\d{0,3}\s*(?:Min(?:uten)?|Std\.?|Stunden?|km|m|€|Euro|Pkt\.?|Punkte?)|ca\.\s*\d{1,3}\s*(?:Min|km|Pkt|Punkte)|~\s*\d{1,3}\s*(?:Min|km))\b/giu;
+    /\b(\d{1,3}(?:[.,]\d{1,3})?\s*(?:–|-|bis\s+)?\d{0,3}(?:[.,]\d{1,3})?\s*(?:Min(?:uten)?|Std\.?|Stunden?|km\s*[²2]?|km2|ha|hektar|m\s*[²2]?|m2|m|€|Euro|Pkt\.?|Punkte?)|ca\.\s*\d{1,3}(?:[.,]\d{1,3})?\s*(?:Min|km|ha|Pkt|Punkte)|~\s*\d{1,3}(?:[.,]\d{1,3})?\s*(?:Min|km|ha))\b/giu;
   let m: RegExpExecArray | null;
   while ((m = re.exec(speech))) {
     let q = clean(m[1]).replace(/\s+/g, ' ');

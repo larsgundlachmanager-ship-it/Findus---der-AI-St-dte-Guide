@@ -12,6 +12,7 @@ export type LearnedRuleIntentFamily =
   | 'knowledge'
   | 'planning'
   | 'booking'
+  | 'packing'
   | 'general';
 
 /** Was die Antwort strukturell liefern / betonen soll. */
@@ -28,7 +29,16 @@ export type LearnedRuleExpect =
   | 'alternatives'
   | 'times_hours'
   | 'menu'
-  | 'tickets';
+  | 'tickets'
+  | 'sky_conditions'
+  | 'temp_range'
+  | 'rain_timing'
+  | 'clothing_tip'
+  | 'casual_tone'
+  | 'woven_clothing'
+  | 'brief_speech'
+  | 'complete_sentences'
+  | 'pack_prefs';
 
 /** Was die Antwort vermeiden / zurückstellen soll. */
 export type LearnedRuleAvoid =
@@ -39,7 +49,17 @@ export type LearnedRuleAvoid =
   | 'permission_questions'
   | 'meta_app_pitch'
   | 'vague_filler'
-  | 'nav_auto_start';
+  | 'nav_auto_start'
+  | 'station_board_fallback'
+  | 'aushang'
+  | 'invent_storm'
+  | 'dry_list'
+  | 'sun_as_day_at_night'
+  | 'parenthetical_aside'
+  | 'new_pitch'
+  | 'boilerplate_opener'
+  | 'essay'
+  | 'pack_unwanted_items';
 
 export type LearnedRule = {
   id: string;
@@ -76,6 +96,15 @@ export const LEARNED_RULE_EXPECT_LABELS: Record<LearnedRuleExpect, string> = {
   times_hours: 'Öffnungs-/Uhrzeiten wenn belegt',
   menu: 'Speisekarte/Angebot wenn URL belegt',
   tickets: 'Ticket-Info/Link wenn belegt',
+  sky_conditions: 'Himmel/Bedingungen nur belegt',
+  temp_range: 'Temperaturspanne nennen wenn belegt',
+  rain_timing: 'Regen-Zeitfenster wenn belegt',
+  clothing_tip: 'Kleidungstipp aus belegtem Wetter',
+  casual_tone: 'lockerer Alltagston',
+  woven_clothing: 'Kleidung im Fließtext weben, keine Klammern',
+  brief_speech: 'kurz und verdichtet — wenige Sätze, kein Aufblasen',
+  complete_sentences: 'vollständige Fließtext-Sätze, kein Telegramm-Stakkato',
+  pack_prefs: 'persönliche Pack-Prefs (nie/immer) respektieren',
 };
 
 export const LEARNED_RULE_AVOID_LABELS: Record<LearnedRuleAvoid, string> = {
@@ -85,6 +114,16 @@ export const LEARNED_RULE_AVOID_LABELS: Record<LearnedRuleAvoid, string> = {
   fake_promises: 'nichts erfinden / keine Fake-Versprechen',
   permission_questions: 'keine „Soll ich…?“-Permission-Fragen',
   meta_app_pitch: 'kein App-/Mikro-Selbstvorschlag',
-  vague_filler: 'kein vages Vorgeplänkel statt Antwort',
+  vague_filler: 'kein vages Vorgeplänkel / keine Warte-Meta („gleich fertig“)',
   nav_auto_start: 'Navigation nicht ungefragt starten',
+  station_board_fallback: 'kein Aushang/Bahnhof als Wetter-Fallback',
+  aushang: 'kein „schau am Aushang“',
+  invent_storm: 'kein erfundenes Unwetter',
+  dry_list: 'keine trockene Aufzählungsliste vorlesen',
+  sun_as_day_at_night: 'nach Sunset/vor Sunrise keine Sonne als Tag-Wetter',
+  parenthetical_aside: 'keine Outfit-/Tipp-Parenthesen im Speech',
+  new_pitch: 'kein neuer Auswahl-Pitch nach klarer Entscheidung',
+  boilerplate_opener: 'kein App-Opener („Also in X sieht es so aus“, „Zusammengefasst“)',
+  essay: 'kein Essay / keine unnötige Länge',
+  pack_unwanted_items: 'keine unerwünschten Pack-Items (User-Prefs)',
 };

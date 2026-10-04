@@ -43,6 +43,27 @@ export const DIRECTORY_ONLY_CATEGORIES = new Set([
   'service',
   'toilette',
   'gepaeck',
+  'waschsalon',
+  'parkplatz',
+  'ladestation',
+  'packstation',
+  'wechselstube',
+  'autoverleih',
+  'rollerverleih',
+  'fahrradverleih',
+  'radwerkstatt',
+  'bootsverleih',
+  'camping',
+  'strand',
+  'picnic',
+  'eisdiele',
+  'nightclub',
+  'coworking',
+  'veterinär',
+  'trinkwasser',
+  'atm',
+  'briefkasten',
+  'haltestelle',
   'transit',
   'bahnhof',
   'tourist_info',
@@ -114,15 +135,28 @@ export const STORY_DISCOVERY_QUERIES = [
   { q: 'Souvenir OR Andenken OR Geschenkeladen OR Marzipan', categoryHint: 'souvenir', tier: 2 },
   { q: 'Wochenmarkt OR Bauernmarkt', categoryHint: 'markt', tier: 3 },
   { q: 'Öffentliche Toilette OR WC', categoryHint: 'toilette', tier: 4 },
-  { q: 'Gepäckaufbewahrung OR Luggage storage', categoryHint: 'gepaeck', tier: 4 },
+  { q: 'Gepäckaufbewahrung OR Luggage storage OR Schließfach', categoryHint: 'gepaeck', tier: 4 },
+  { q: 'Waschsalon OR Laundry OR Laundromat', categoryHint: 'waschsalon', tier: 4 },
+  { q: 'Parkplatz OR Parkhaus OR Parking', categoryHint: 'parkplatz', tier: 4 },
+  { q: 'Ladestation OR EV charging OR E-Ladesäule', categoryHint: 'ladestation', tier: 4 },
+  { q: 'Fahrradverleih OR Bike rental OR Mietrad', categoryHint: 'fahrradverleih', tier: 4 },
+  { q: 'Autoverleih OR Car rental OR Mietwagen', categoryHint: 'autoverleih', tier: 4 },
+  { q: 'Campingplatz OR Campsite', categoryHint: 'camping', tier: 4 },
+  { q: 'Strand OR Beach', categoryHint: 'strand', tier: 4 },
+  { q: 'Wechselstube OR Currency exchange', categoryHint: 'wechselstube', tier: 4 },
 ];
 
-/** Orientierungs-Mindestzahlen Story (nicht hart prune — eher Warnung/Rückfrage). */
+/**
+ * Story-Mindestzahlen = Value-for-Money (User zahlt für Pack-Download).
+ * Echte Story-Orte (tief), keine Hotel/Shop-Stubs. Vor Upload: minStory erreichen.
+ */
 export const STORY_COUNT_GUIDANCE = {
-  village: { minStory: 12, radiusM: 3500 },
-  town: { minStory: 25, radiusM: 6000 },
-  city: { minStory: 45, radiusM: 10000 },
-  metro: { minStory: 80, radiusM: 15000 },
+  village: { minStory: 15, targetStory: 20, radiusM: 3500 },
+  town: { minStory: 28, targetStory: 35, radiusM: 6000 },
+  city: { minStory: 50, targetStory: 60, radiusM: 10000 },
+  /** Insel / große Fläche (Bornholm, Sylt, Rügen …) */
+  island: { minStory: 60, targetStory: 75, radiusM: 22000 },
+  metro: { minStory: 80, targetStory: 100, radiusM: 15000 },
 };
 
 export function citySizeHint(packOrName) {
@@ -143,6 +177,9 @@ export function citySizeHint(packOrName) {
   ) {
     return 'city';
   }
+  if (/bornholm|sylt|r[üu]gen|fehmarn|f[öo]hr|amrum|usedom|norderney|juist|langeoog|spiekeroog/i.test(name)) {
+    return 'island';
+  }
   if (/wangerooge|prisdorf|tornesch/i.test(name)) return 'town';
   const n = Number(packOrName?._pack_index?.total || 0);
   if (n >= 250) return 'metro';
@@ -159,6 +196,18 @@ export function suggestedDiscoveryRadius(packOrName) {
 export function suggestedMinStory(packOrName) {
   const size = citySizeHint(packOrName);
   return STORY_COUNT_GUIDANCE[size]?.minStory || 20;
+}
+
+/** Soft-Ziel über minStory — genug Inhalt fürs Geld. */
+export function suggestedTargetStory(packOrName) {
+  const size = citySizeHint(packOrName);
+  return STORY_COUNT_GUIDANCE[size]?.targetStory || suggestedMinStory(packOrName);
+}
+
+/** True wenn Pack unter Value-Mindestzahl Stories liegt. */
+export function packStoryBelowValueFloor(pack) {
+  const stories = (pack?.spots || []).filter((s) => s.pack_role !== 'directory');
+  return stories.length < suggestedMinStory(pack);
 }
 
 export function defaultRoleAndTier(category, { forceStory = false } = {}) {

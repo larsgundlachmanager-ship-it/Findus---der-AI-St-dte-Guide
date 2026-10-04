@@ -31,6 +31,11 @@ import {
 import { useFinnusStore } from '../store/useFinnusStore';
 import type { QuickAction } from '../types/concierge';
 import {
+  BULLET_SURFACE_MAX_CHARS,
+  MAX_VISUAL_BULLETS,
+  rewriteBulletToFit,
+} from '../services/concierge/visualBullets';
+import {
   BULLETS_ENTERING,
   BULLETS_EXITING,
 } from './liveStage/stageTransitions';
@@ -51,22 +56,29 @@ function navActionFromOption(option: {
   return { name, lat, lng, action: act };
 }
 
-function medalFor(option: LivePitchState['options'][number]): string {
-  if (option.role === 'favorite') return '🥇';
+function medalFor(
+  option: LivePitchState['options'][number],
+  index: number,
+): string {
   if (option.role === 'out_of_box') return '✨';
+  if (option.role === 'favorite' || index === 0) return '🥇';
   return '🥈';
 }
 
 function ChoiceButton({
   option,
+  index,
   selected,
   onSelect,
   compact,
+  showChooseHint,
 }: {
   option: LivePitchState['options'][number];
+  index: number;
   selected: boolean;
   onSelect: () => void;
   compact?: boolean;
+  showChooseHint: boolean;
 }) {
   return (
     <Pressable
@@ -81,25 +93,32 @@ function ChoiceButton({
       accessibilityState={{ selected }}
       accessibilityLabel={`Wähle ${option.name}`}
     >
-      <Text style={styles.choiceMedal}>{medalFor(option)}</Text>
+      <Text style={styles.choiceMedal}>{medalFor(option, index)}</Text>
       <Text
         style={[styles.choiceName, selected && styles.choiceNameSelected]}
         numberOfLines={2}
       >
         {option.name}
       </Text>
-      {(option.bullets ?? []).slice(0, 3).map((b, i) => (
+      {(option.bullets ?? [])
+        .slice(0, MAX_VISUAL_BULLETS)
+        .map((b) => rewriteBulletToFit(b, BULLET_SURFACE_MAX_CHARS.pitch))
+        .filter(Boolean)
+        .map((b, i) => (
         <Text
           key={`${option.id}_b_${i}`}
           style={styles.choiceBullet}
           numberOfLines={2}
+          ellipsizeMode="clip"
         >
           {b}
         </Text>
       ))}
+      {selected || showChooseHint ? (
       <Text style={styles.choiceHint} numberOfLines={1}>
-        {selected ? 'Gewählt · Route startet' : 'Tippen zum Wählen'}
+        {selected ? 'Gewählt' : 'Tippen zum Wählen'}
       </Text>
+      ) : null}
     </Pressable>
   );
 }
@@ -143,6 +162,71 @@ function ActionCluster({
       try {
         if (act.type === 'START_NAVIGATION') {
           const payload = act.payload ?? {};
+          const legs = payload.multiStop;
+          if (Array.isArray(legs) && legs.length >= 2) {
+            try {
+              const { startMultiStopTour } = await import(
+                '../services/navigation/multiStopTour'
+              );
+              const stops = legs.map((leg, i) => ({
+                poiId: leg.poiId ?? -1 - i,
+                name: leg.name,
+                lat: leg.lat,
+                lng: leg.lng,
+                done: false as const,
+              }));
+              const result = await startMultiStopTour({
+                kind: 'custom',
+                title: `${stops[0]!.name} → ${stops[stops.length - 1]!.name}`,
+                targetDistanceM: null,
+                targetDurationMin: null,
+                estimatedDistanceM: 0,
+                stops,
+                currentIndex: 0,
+                liveMeta: {
+                  requestId: `pitch_ms_${Date.now()}`,
+                  hardArriveByMs: null,
+                  softDurationMin: null,
+                  bufferMin: 8,
+                  plannedArriveByMs: Date.now() + stops.length * 15 * 60_000,
+                  startedAtMs: Date.now(),
+                  denserStops: false,
+                  mobility: 'walk',
+                },
+              });
+              if (!result.ok) {
+                try {
+                  useFinnusStore.getState().setNavRouteLoading(false);
+                } catch {
+                  /* soft */
+                }
+                alertActionError(result.reply || 'Route konnte nicht starten.');
+              } else if (result.reply?.trim()) {
+                try {
+                  const { enqueueSpeech } = await import(
+                    '../module2/speech/speechQueue'
+                  );
+                  enqueueSpeech({
+                    kind: 'main',
+                    text: result.reply.slice(0, 420),
+                    turnId: `pitch_ms_${Date.now()}`,
+                  });
+                } catch {
+                  /* soft */
+                }
+              }
+            } catch (err) {
+              try {
+                useFinnusStore.getState().setNavRouteLoading(false);
+              } catch {
+                /* soft */
+              }
+              alertActionError(
+                err instanceof Error ? err.message : 'Multi-Stop fehlgeschlagen.',
+              );
+            }
+            return;
+          }
           const lat = payload.destLat;
           const lng = payload.destLng;
           const name = (
@@ -164,6 +248,16 @@ function ActionCluster({
               { name, lat, lng },
               pitchNavIntentFromPayload(payload),
             );
+            if (result.ok) {
+              try {
+                const { requestClosePlanCalendar } = require('../module2/timeline/planCalendarUiStore') as {
+                  requestClosePlanCalendar: () => void;
+                };
+                requestClosePlanCalendar();
+              } catch {
+                /* soft */
+              }
+            }
             if (!result.ok) {
               try {
                 useFinnusStore.getState().setNavRouteLoading(false);
@@ -226,12 +320,7 @@ function ActionCluster({
         align === 'right' && styles.actionClusterRight,
       ]}
     >
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.actionClusterInner}
-      >
+      <View style={styles.actionClusterInner}>
         {actions.map((act, i) => {
           const isNav = act.type === 'START_NAVIGATION';
           const disabled = isNav && navBusy;
@@ -254,7 +343,7 @@ function ActionCluster({
             </Pressable>
           );
         })}
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -271,18 +360,55 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
   const { width } = useWindowDimensions();
   const stackVertical = width < 360 || options.length > 2;
   const [navBusy, setNavBusy] = useState(false);
+  const [showChooseHint, setShowChooseHint] = useState(true);
   const navStartedFor = useRef<string | null>(null);
+
+  React.useEffect(() => {
+    void import('../services/ui/hudHintPrefs').then((m) =>
+      m.loadHudHintPrefs().then(() => {
+        setShowChooseHint(m.shouldShowPitchChooseHint());
+      }),
+    );
+  }, [requestId]);
 
   const onPick = useCallback(
     (id: string) => {
+      void import('../services/ui/hudHintPrefs').then((m) =>
+        m.markPitchChooseUsed().then(() => setShowChooseHint(false)),
+      );
       void import('../services/handsFree/scheduleMicAfterAsk')
         .then((m) => m.abortListenSessionForUiChoice('pitch_choice'))
         .catch(() => undefined);
       // Vor Collapse die Option lesen (selectOption lässt nur noch die Wahl stehen).
-      const opt = useLivePitchStore.getState().options.find((o) => o.id === id);
-      const pitchRequestId = useLivePitchStore.getState().requestId;
+      const storeBefore = useLivePitchStore.getState();
+      const opt = storeBefore.options.find((o) => o.id === id);
+      const pitchKind = storeBefore.pitchKind;
+      const visitAtMs = storeBefore.visitAtMs;
+      const visitFar =
+        typeof visitAtMs === 'number' &&
+        Number.isFinite(visitAtMs) &&
+        visitAtMs > Date.now() + 30 * 60_000;
+      const hasFollowOn =
+        opt?.followOnStop &&
+        Number.isFinite(opt.followOnStop.lat) &&
+        Number.isFinite(opt.followOnStop.lng);
+      // Gastro/Kino/Event später: Timing-Fork / Timeline — kein Auto-Nav.
+      // Ausnahme Multi-Lane Fetch→Spot: sofort Tour starten.
+      const deferAutoNav =
+        !hasFollowOn &&
+        (pitchKind === 'food' ||
+          pitchKind === 'bar' ||
+          pitchKind === 'cinema' ||
+          pitchKind === 'event' ||
+          visitFar);
       selectOption(id);
       if (!opt) return;
+
+      // selectOption hat Speech + Fork-Buttons gesetzt — Slot darf nicht überschreiben.
+      if (deferAutoNav) {
+        setNavBusy(false);
+        return;
+      }
 
       const nav = navActionFromOption(opt);
       const canNav =
@@ -301,29 +427,25 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
         setNavBusy(true);
       }
 
-      const hasProgram = (opt.actions ?? []).some(
-        (a) =>
-          a.type === 'OPEN_URL' &&
-          /programm|website|pdf|ticket|probe|infos/i.test(a.label),
-      );
-
-      // Nur sagen „starte Route“, wenn wir sie wirklich starten
+      // Kurzes Ack ohne UI-Meta („Infos bleiben unten“ / Programm-Regie).
+      const followHint = hasFollowOn
+        ? String(opt.followOnStop?.enjoyHint || opt.followOnStop?.name || '').trim()
+        : '';
       const ackVariants = !canNav
         ? [
-            `Super Wahl — ${opt.name}. Programm und Infos hast du unten.`,
-            `Gute Wahl: ${opt.name}. Die Infos liegen bereit.`,
+            `Super Wahl — ${opt.name}.`,
+            `Gute Wahl: ${opt.name}.`,
           ]
-        : hasProgram
+        : hasFollowOn
           ? [
-              `Super Wahl — ${opt.name}. Ich starte die Route; Programm und Infos bleiben unten.`,
-              `Gute Wahl: ${opt.name}. Route läuft an — und unten findest du das Programm.`,
-              `${opt.name} — starke Wahl. Ich leg die Verbindung los; Programm ist verlinkt.`,
+              `Super — dann holen wir bei ${opt.name} etwas und danach geht’s weiter${followHint ? ` zum ${followHint}` : ''}.`,
+              `Gute Wahl: ${opt.name}. Route startet, der nächste Stopp ist schon eingeplant.`,
             ]
           : [
-              `Super Wahl — ${opt.name}. Ich starte die Route.`,
-              `Gute Wahl: ${opt.name}. Die Verbindung läuft an.`,
-              `${opt.name} — starke Wahl. Route startet jetzt.`,
-            ];
+            `Super Wahl — ${opt.name}. Ich starte die Route.`,
+            `Gute Wahl: ${opt.name}. Die Verbindung läuft an.`,
+            `${opt.name} — starke Wahl. Route startet jetzt.`,
+          ];
       const ack =
         ackVariants[
           Math.abs(id.split('').reduce((a, c) => a + c.charCodeAt(0), 0)) %
@@ -336,10 +458,56 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
         navStartedFor.current = id;
         void (async () => {
           try {
-            const result = await startPitchNavigation(
-              { name: nav.name, lat: nav.lat, lng: nav.lng },
-              pitchNavIntentFromPayload(nav.action?.payload),
-            );
+            let result: { ok: boolean; message?: string };
+            if (hasFollowOn && opt.followOnStop) {
+              const { startMultiStopTour } = await import(
+                '../services/navigation/multiStopTour'
+              );
+              const stops = [
+                {
+                  poiId: -1,
+                  name: opt.name,
+                  lat: opt.lat,
+                  lng: opt.lng,
+                  done: false as const,
+                },
+                {
+                  poiId: -2,
+                  name: opt.followOnStop.name,
+                  lat: opt.followOnStop.lat,
+                  lng: opt.followOnStop.lng,
+                  done: false as const,
+                },
+              ];
+              const tour = await startMultiStopTour({
+                kind: 'custom',
+                title: `${stops[0]!.name} → ${stops[1]!.name}`,
+                targetDistanceM: null,
+                targetDurationMin: null,
+                estimatedDistanceM: 0,
+                stops,
+                currentIndex: 0,
+                liveMeta: {
+                  requestId: `ml_follow_${Date.now()}`,
+                  hardArriveByMs: null,
+                  softDurationMin: null,
+                  bufferMin: 8,
+                  plannedArriveByMs: Date.now() + 40 * 60_000,
+                  startedAtMs: Date.now(),
+                  denserStops: false,
+                  mobility: 'walk',
+                },
+              });
+              result = {
+                ok: tour.ok,
+                message: tour.ok ? tour.reply : tour.reply,
+              };
+            } else {
+              result = await startPitchNavigation(
+                { name: nav.name, lat: nav.lat, lng: nav.lng },
+                pitchNavIntentFromPayload(nav.action?.payload),
+              );
+            }
             if (!result.ok) {
               try {
                 useFinnusStore.getState().setNavRouteLoading(false);
@@ -348,6 +516,14 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
               }
               if (result.message) alertActionError(result.message);
             } else {
+              try {
+                const { requestClosePlanCalendar } = require('../module2/timeline/planCalendarUiStore') as {
+                  requestClosePlanCalendar: () => void;
+                };
+                if (skipCannedAck) requestClosePlanCalendar();
+              } catch {
+                /* soft */
+              }
               setTimeout(() => {
                 try {
                   useLivePitchStore.getState().clear(true);
@@ -355,27 +531,6 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
                   /* soft */
                 }
               }, 3000);
-              setTimeout(() => {
-                void import('../module2/pitch/pitchDeepAppend')
-                  .then(({ getPitchSession }) => {
-                    const session = getPitchSession(pitchRequestId || '');
-                    if (
-                      session?.kind !== 'food' &&
-                      session?.kind !== 'bar'
-                    ) {
-                      return;
-                    }
-                    return import('../services/concierge/autoReservationFollowUp').then(
-                      (m) =>
-                        m.presentPlaceReservationAsk({
-                          name: opt.name,
-                          lat: nav.lat,
-                          lng: nav.lng,
-                        }),
-                    );
-                  })
-                  .catch(() => undefined);
-              }, 4500);
             }
           } catch {
             try {
@@ -401,7 +556,7 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
         .catch(() => undefined);
       }
 
-      if (!skipCannedAck) {
+      if (!skipCannedAck && !hasFollowOn) {
         void import('../module2/router/compoundFollowUp')
           .then((m) =>
             m.continueTourFromPickedSpot({
@@ -450,7 +605,12 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
           <Text style={styles.title} numberOfLines={2}>
             {title}
           </Text>
-          <Pressable onPress={clear} hitSlop={10} accessibilityLabel="Schließen">
+          <Pressable onPress={() => {
+              clear();
+              void import('../services/actionHandlerService')
+                .then(({ dismissConciergeCard }) => dismissConciergeCard())
+                .catch(() => undefined);
+            }} hitSlop={10} accessibilityLabel="Schließen">
             <Text style={styles.close}>✕</Text>
           </Pressable>
         </View>
@@ -476,9 +636,11 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
               <View key={o.id} style={styles.sliderPage}>
                 <ChoiceButton
                   option={o}
+                  index={idx}
                   selected={selected === o.id}
                   onSelect={() => onPick(o.id)}
                   compact
+                  showChooseHint={showChooseHint}
                 />
                 <ActionCluster
                   actions={pitchChoiceVisibleActions(o, selected === o.id)}
@@ -495,15 +657,19 @@ export const PitchChoiceSlot = React.memo(function PitchChoiceSlot() {
               {a ? (
                 <ChoiceButton
                   option={a}
+                  index={0}
                   selected={selected === a.id}
                   onSelect={() => onPick(a.id)}
+                  showChooseHint={showChooseHint}
                 />
               ) : null}
               {b ? (
                 <ChoiceButton
                   option={b}
+                  index={1}
                   selected={selected === b.id}
                   onSelect={() => onPick(b.id)}
+                  showChooseHint={showChooseHint}
                 />
               ) : null}
             </View>
@@ -628,10 +794,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: spacing.sm,
     marginTop: spacing.sm,
+    width: '100%',
   },
   actionCluster: {
     flex: 1,
+    width: 0,
     minWidth: 0,
+    overflow: 'hidden',
     alignItems: 'flex-start',
   },
   actionClusterRight: {
@@ -639,18 +808,20 @@ const styles = StyleSheet.create({
   },
   actionClusterInner: {
     flexDirection: 'row',
-    flexWrap: 'nowrap',
+    flexWrap: 'wrap',
     gap: 6,
     alignItems: 'center',
     paddingVertical: 2,
+    maxWidth: '100%',
   },
   actionBtn: {
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 999,
     backgroundColor: 'rgba(196, 163, 90, 0.28)',
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: 'rgba(196, 163, 90, 0.55)',
+    maxWidth: '100%',
   },
   actionBtnPressed: {
     backgroundColor: 'rgba(196, 163, 90, 0.42)',
@@ -659,7 +830,7 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 12,
     fontWeight: '700',
-    maxWidth: 130,
+    maxWidth: 140,
   },
   sliderRow: {
     gap: spacing.sm,

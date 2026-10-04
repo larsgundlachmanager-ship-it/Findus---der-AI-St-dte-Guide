@@ -67,7 +67,7 @@ class VoicePreloaderService {
       voiceId ??
       this.activePersona ??
       getCachedUserProfile()?.voiceId ??
-      'alina';
+      'sebastian';
     this.activePersona = persona;
     useFinnusStore.getState().setTtsReady(true);
     useFinnusStore.getState().setTtsStatusMessage(null);

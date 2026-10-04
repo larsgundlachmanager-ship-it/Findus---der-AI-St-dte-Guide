@@ -23,7 +23,7 @@ function uniq(list: string[]): string[] {
   return out;
 }
 
-function extractMustHaves(text: string): string[] {
+export function extractMustHaves(text: string): string[] {
   const t = text.toLowerCase();
   const found: string[] = [];
   const pairs: Array<[RegExp, string]> = [
@@ -250,7 +250,9 @@ function scoreJobs(text: string): Hit[] {
       /\bverkehrsmittel/u.test(t) ||
       /\bmit\s+(?:dem\s+)?(?:bus|zug|bahn|öpnv|oepnv)\b/u.test(t) ||
       (/\b(bus|zug|bahn)\b/u.test(t) &&
-        /\b(nacht|fährt|faehrt|ticket|haltestelle|linie)\b/u.test(t)));
+        /\b(nacht|fährt|faehrt|ticket|haltestelle|linie|früher|frueher|später|spaeter)\b/u.test(
+          t,
+        )));
   if (transitMode) {
     add('transit_live', 16);
   }
@@ -383,12 +385,16 @@ function scoreJobs(text: string): Hit[] {
     add('museum_theme', 8);
   }
 
-  // Sight / identify
+  // Sight / identify — „wie alt ist“ nur lokal/deixis, nicht Papst/Personen-Trivia
   if (
-    /\b(was\s+ist\s+das|was\s+für\s+ein\s+gebäude|goldene\s+kuppel|wie\s+alt\s+ist\s+die\s+brücke|wie\s+alt\s+ist)\b/u.test(
+    /\b(was\s+ist\s+das|was\s+für\s+ein\s+gebäude|goldene\s+kuppel|wie\s+alt\s+ist\s+die\s+brücke)\b/u.test(
       t,
     ) ||
-    /\b(wo\s+bin\s+ich|wo\s+stehe\s+ich|was\s+ist\s+das\s+hier)\b/u.test(t)
+    /\b(wo\s+bin\s+ich|wo\s+stehe\s+ich|was\s+ist\s+das\s+hier)\b/u.test(t) ||
+    (/\bwie\s+alt\s+ist\b/u.test(t) &&
+      /\b(brücke|kirche|turm|denkmal|gebäude|haus|museum|schloss)\b/u.test(
+        t,
+      ))
   ) {
     add('poi_identify', 16);
   } else if (

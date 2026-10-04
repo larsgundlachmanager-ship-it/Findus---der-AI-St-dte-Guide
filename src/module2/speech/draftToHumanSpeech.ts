@@ -7,12 +7,13 @@
  */
 
 import { isProtectedDot } from '../../services/audio/punctuationChunker';
+import { stripInternalWorkerSpeech } from './speechHumanOnly';
 
 const INSTRUCTION_LINE =
   /\b(kurz sagen|kurz nachfragen|kurz bestätigen|nicht wörtlich|nicht abdriften|Zeitersparnis nennen|Action-Buttons|Blind-Optionen|keine Meta|max\s*\d+\s*Sätze|nicht jetzt automatisch|Feintuning und Buchen|nur wenn du willst|darauf eingehen|nicht als neuen Wunsch|Bitte prüfen|FLOW\s*:|FAKTEN\s+(BESTÄTIGUNG|BRÜCKE|Planung)|Live-Bau|Hybrid\s*Phase|blau = noch|Blau aufgelöst|Optionen bauen|Plan sortieren|Wege berechnen|Gap-?Fill|Hintergrund)\b/i;
 
 const META_LINE =
-  /^(FLOW\b|FAKTEN\b|FLOW\s+(TON|GUARD)|User-Kontext|Constraints bindend|Aktueller Wunsch:|Live-Bau:|Scope:|Planungstag:|Offene Pläne|Schon abgelehnt|Nicht nochmal:|Label:|Status:|Hybrid\b|Ablehnungsrunde|Buchungen\/|Wege gesetzt|Nav-Trigger|Ort-Kontext:|GPS\s*~|Disclaimer|FEW.SHOT|FINDUS_|PHASE\s*\d|STRUKTUR-BLAUPAUSE|MODUL\s*5\s*VOICE|Timeline|nächster Schritt|zwei Optionen|2 Optionen)\b/i;
+  /^(FLOW\b|FAKTEN\b|FLOW\s+(TON|GUARD)|User-Kontext|Constraints bindend|Aktueller Wunsch:|Live-Bau:|Scope:|Planungstag:|Offene Pläne|Schon abgelehnt|Nicht nochmal:|Label:|Status:|Hybrid\b|Ablehnungsrunde|Buchungen\/|Wege gesetzt|Nav-Trigger|Ort-Kontext:|GPS\s*~|Disclaimer|FEW.SHOT|FINDUS_|PHASE\s*\d|STRUKTUR-BLAUPAUSE|MODUL\s*5\s*VOICE|Timeline|nächster Schritt|zwei Optionen|2 Optionen|SICHTBARKEIT\b|PACK-DATENSATZ\b|TOPIC-LOCK\b|LIVE-HINTS\b|LIVE-ANREICHERUNG\b|User sieht den Ort|KEINE Formulierungen|Nutze diese Fakten|Erfinde nichts|Allgemeine Beschreibung)\b/i;
 
 const PROCESS_SPEECH =
   /\b(zwei Optionen|2 Optionen|Optionen bauen|ich bau(e)?|Plan sortier|sortier(e)? den Plan|Wege gesetzt|Gap-?Fill|Hybrid\s*Phase|PHASE\s*\d|Timeline öffnen|nächster Schritt im Plan|Fortbewegung umgestellt)\b/i;
@@ -45,11 +46,34 @@ function cleanInline(s: string): string {
     .trim();
 }
 
+/**
+ * Call-2 / Gold-Struktur-Chips — nie Spickzettel oder Pitch-UI.
+ * SSOT für visualBullets + Pitch (humanizeBullets nutzt isInstructionOrMeta).
+ */
+export function isMetaStructureBullet(text: string): boolean {
+  const t = String(text ?? '').replace(/\s+/g, ' ').trim();
+  if (!t) return true;
+  if (
+    /unverträglichkeit(?:en)?\s*vermeiden|mehrteilige\s+(?:antwort|frage)|needed[_\s-]?slots|geländer|expect\s*=|avoid\s*=/iu.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  if (
+    /^(unverträglichkeit(?:en)?|mehrteilig(?:e)?|vermeiden|struktur|call\s*2)\b/iu.test(t)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 function isInstructionOrMeta(text: string): boolean {
   const t = text.trim();
   if (!t) return true;
   if (/^FLOW\b/i.test(t)) return true;
   if (/L[ÜU]CKEN\s*\(Timeout\)|nicht erfinden/i.test(t)) return true;
+  if (isMetaStructureBullet(t)) return true;
   if (META_LINE.test(t)) return true;
   if (INSTRUCTION_LINE.test(t)) return true;
   if (PROCESS_SPEECH.test(t) && t.length < 80) return true;
@@ -198,15 +222,23 @@ export function humanizeAgentDraft(
   const managerMode = opts?.managerMode !== false;
   const maxChars = opts?.maxChars ?? 1400;
   const maxParts = opts?.maxParts ?? (managerMode ? 8 : 10);
-  const raw = (draft || '').replace(/\r/g, '').trim();
+  let raw = stripInternalWorkerSpeech((draft || '').replace(/\r/g, '').trim());
+  // Prompt-Echo „...“ nie als „Punkt Punkt … Greifbares“
+  if (/^(?:\.{2,}|…+)$/u.test(raw)) raw = '';
+  raw = raw.replace(/^(?:\.{2,}|…+)\s*/u, '').trim();
   if (!raw) {
-    return 'Dazu hab ich gerade nichts Greifbares. Sag nochmal, worum es geht.';
+    // Leer → still (speechQueue / fused Bridge entscheiden über Fallback)
+    return '';
   }
 
   // Auch „FAKTEN: x. FLOW: y“ ohne Newline auftrennen
   const normalized = raw
     .replace(/\s+FLOW\s*:/gi, '\nFLOW:')
-    .replace(/\s+FAKTEN\s+/gi, '\nFAKTEN ');
+    .replace(/\s+FAKTEN\s+/gi, '\nFAKTEN ')
+    .replace(/\s+SICHTBARKEIT\s*:/gi, '\nSICHTBARKEIT:')
+    .replace(/\s+PACK-DATENSATZ\b/gi, '\nPACK-DATENSATZ')
+    .replace(/\s+TOPIC-LOCK\s*:/gi, '\nTOPIC-LOCK:')
+    .replace(/\s+LIVE-ANREICHERUNG\s*:/gi, '\nLIVE-ANREICHERUNG:');
 
   const lines = normalized
     .split('\n')
@@ -215,6 +247,20 @@ export function humanizeAgentDraft(
 
   const parts: string[] = [];
   for (const line of lines) {
+    if (
+      /^(SICHTBARKEIT|PACK-DATENSATZ|TOPIC-LOCK|LIVE-ANREICHERUNG|LIVE-HINTS|FAKTEN Knowledge)\b/i.test(
+        line,
+      )
+    ) {
+      continue;
+    }
+    if (
+      /User sieht den Ort|KEINE Formulierungen|Nutze diese Fakten|Erfinde nichts darüber/i.test(
+        line,
+      )
+    ) {
+      continue;
+    }
     const human = extractHumanFromLine(line);
     if (!human) continue;
     if (parts.some((p) => p.toLowerCase() === human.toLowerCase())) continue;
@@ -245,15 +291,20 @@ export function humanizeAgentDraft(
       '',
     );
 
-  // Safety: nie FLOW/FAKTEN-Labels im Endtext
+  // Safety: nie FLOW/FAKTEN/Pack-Meta im Endtext
   out = out
     .replace(/\bFAKTEN(?:\s+[A-Za-zÄÖÜäöü\-]+)?\s*:\s*/gi, '')
     .replace(/\bFLOW\s*:\s*/gi, '')
+    .replace(/\bSICHTBARKEIT\b[^.!?]*/gi, '')
+    .replace(/\bPACK-DATENSATZ\b[^.!?]*/gi, '')
+    .replace(/\bTOPIC-LOCK\b[^.!?]*/gi, '')
+    .replace(/\bUser sieht den Ort\b[^.!?]*/gi, '')
+    .replace(/\bKEINE Formulierungen\b[^.!?]*/gi, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
 
-  if (!out) {
-    return 'Dazu hab ich gerade nichts Greifbares. Sag nochmal, worum es geht.';
+  if (!out || /^(?:\.{2,}|…+)$/u.test(out)) {
+    return '';
   }
 
   if (out.length > maxChars) {

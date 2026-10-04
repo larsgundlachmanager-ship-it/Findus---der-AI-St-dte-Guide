@@ -172,6 +172,8 @@ export function searchCityIndex(opts: {
     limit,
   );
   if (addresses.length) return addresses.slice(0, limit);
+  // Straße+Hausnummer: nie auf Pack-POI ausweichen (sonst „nächster Laden“ statt Adresse).
+  if (parseStreetHouseQuery(query)) return [];
   return searchPois(query, opts.pois || [], origin, limit);
 }
 

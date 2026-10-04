@@ -1,0 +1,613 @@
+--------- beginning of main
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 95 property count:2
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 102 
+09-12 11:50:54.246  1512  1624 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:50:54.246  1512  1624 D AGM: metadata: 
+09-12 11:50:54.246  1512  1624 I PAL: ResourceManager: freeFrontEndIds: 7339: stream type 1, freeing 121
+09-12 11:50:54.246  1512  1624 D AGM: session: session_close: 1328 enter
+09-12 11:50:54.246  1512  1624 D AGM: graph: graph_close: 762 entry handle 0x247534c
+09-12 11:50:54.247  1512  1624 D AGM: graph: graph_close: 783 exit, ret 0
+09-12 11:50:54.247  1512  1624 D AGM: session: session_close: 1379 exit, ret 0
+09-12 11:50:54.247  1512  1624 I PAL: API: pal_stream_stop: 442: Exit. status 0
+09-12 11:50:54.247  1512  1624 I PAL: API: pal_stream_close: 285: Enter. Stream handle :0xb4000071fd0ebb90K
+09-12 11:50:54.247  1512  1624 I AGM: API: agm_session_aif_connect: 625 disconnecting aifid:23 with session id=126
+09-12 11:50:54.247  1512  1624 D AGM: graph: graph_stop: 928 entry graph_handle 0x347534c
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 80 GKV size:4
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 83 key:0xa1000000, value:0xa100000e 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 83 key:0xab000000, value:0x1 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 83 key:0xa2000000, value:0xa2000001 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 83 key:0xac000000, value:0xac000002 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 87 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: CKV count:4
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 90 key:0xa4000000, value:0x0 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 90 key:0x10000, value:0x0 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 90 key:0xd2000000, value:0x0 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 90 key:0xbe000000, value:0x3 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 92 
+09-12 11:50:54.247  1512  1624 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 95 property count:3
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 102 
+09-12 11:50:54.248  1512  1624 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:50:54.248  1512  1624 D AGM: metadata: 
+09-12 11:50:54.249  1512  1624 D AGM: graph: graph_stop: 976 exit, ret 0
+09-12 11:50:54.250  1512  1624 I AGM: device: device_set_metadata: 708 Setting device metadata for MI2S-LPAIF-RX-PRIMARY
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 80 GKV size:0
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 87 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: CKV count:0
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 92 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 95 property count:2
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 102 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:50:54.251  1512  1624 D AGM: metadata: 
+09-12 11:50:54.251  1512  1624 I AGM: session: session_obj_set_sess_aif_metadata: 1856 Setting metadata for sess_id 126, aif id 23
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 80 GKV size:0
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 87 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: CKV count:0
+--------- beginning of kernel
+09-12 11:50:53.944  1624  1624 I tfa98xx_mute(): tfa98xx_mute[0x34]: state: 1, stream : 0
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 92 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 95 property count:1
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:50:53.944  1624  1624 I tfa98xx_mute(): tfa98xx_mute[0x35]: state: 1, stream : 0
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 102 
+09-12 11:50:54.251  1512  1624 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:50:54.251  1512  1624 D AGM: metadata: 
+09-12 11:50:54.251  1512  1624 I AGM: session: session_obj_set_sess_aif_metadata: 1861 Exit
+09-12 11:50:54.251  1512  1624 D AGM: session: session_close: 1328 enter
+09-12 11:50:54.251  1512  1624 D AGM: graph: graph_close: 762 entry handle 0x347534c
+09-12 11:50:54.252  1512  1624 D AGM: graph: graph_close: 783 exit, ret 0
+09-12 11:50:54.252  1512  1624 D AGM: session: session_close: 1379 exit, ret 0
+09-12 11:50:54.252  1512  1624 I PAL: ResourceManager: freeFrontEndIds: 7339: stream type 1, freeing 126
+09-12 11:50:54.252  1512  1624 I PAL: Device: close: 555: Enter. deviceCount 1 for device id 3 (PAL_DEVICE_OUT_SPEAKER)
+09-12 11:50:54.253  1512  1624 I PAL: Device: close: 569: Exit. deviceCount 0 for device id 3 (PAL_DEVICE_OUT_SPEAKER), exit status 0
+09-12 11:50:54.253  1512  1624 I PAL: ResourceManager: GetConcurrencyInfo: 5502: stream type 1 Tx conc 0, Rx conc 0, concurrency allowed
+09-12 11:50:54.253  1512  1624 I PAL: ResourceManager: GetConcurrencyInfo: 5502: stream type 1 Tx conc 0, Rx conc 0, concurrency allowed
+09-12 11:50:54.253  1512  1624 I PAL: ResourceManager: GetConcurrencyInfo: 5502: stream type 1 Tx conc 0, Rx conc 0, concurrency allowed
+09-12 11:50:54.253  1512  1624 I PAL: ResourceManager: deregisterStream: 3703: stream type 1
+09-12 11:50:54.253  1512  1624 I PAL: API: pal_stream_close: 324: Exit. status 0
+09-12 11:50:54.253  1512  1624 D AHAL: AudioStream: Standby: 2628: Exit ret: 0
+09-12 11:50:54.253  1512  1624 D AHAL: AudioStream: astream_out_standby: 800: Exit ret: 0
+09-12 11:50:54.288  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A112EB42A6 hal_ts 93294399141623 lux=63.006 Channel0-5=4262.0,1905.0,102.0,1845.0,517.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.331  2331  2331 I adbd    : adbd service requested 'shell,v2,TERM=dumb,raw:uiautomator dump /sdcard/Download/ui.xml'
+09-12 11:50:54.359  2573  6166 I ActivityManager: Broadcasting: Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x400000 }
+--------- beginning of system
+09-12 11:50:54.359  2573  6166 I ActivityManager: Enqueued broadcast Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x400000 }: 0
+09-12 11:50:54.363  5291  5291 I MediaServiceV2: Creating work for intent Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x1400010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaServiceV2 }
+09-12 11:50:54.364  5291  5291 I MediaServiceV2: Work enqueued for intent: Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x1400010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaServiceV2 }
+09-12 11:50:54.365  2573  2738 I ActivityManager: Broadcast completed: result=0
+09-12 11:50:54.380  5291  5449 W JobInfo : Requested important-while-foreground flag for job11222 is ignored and takes no effect
+09-12 11:50:54.380  5291  5449 D WM-SystemJobScheduler: Scheduling work ID ce3a3e62-5ac0-4a3a-b352-7780a26cae0dJob ID 11222
+09-12 11:50:54.386  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.providers.media.module/androidx.work.impl.background.systemjob.SystemJobService and for client system
+09-12 11:50:54.386  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.providers.media.module/androidx.work.impl.background.systemjob.SystemJobServiceare :1
+09-12 11:50:54.386  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : systemare :37
+09-12 11:50:54.389  5291  5291 D WM-SystemJobService: onStartJob for WorkGenerationalId(workSpecId=ce3a3e62-5ac0-4a3a-b352-7780a26cae0d, generation=0)
+09-12 11:50:54.390  5291  5449 D WM-GreedyScheduler: Ignoring {WorkSpec: 78ff8dad-ba79-4ec4-85af-c11e3218c040}. Requires device idle.
+09-12 11:50:54.390  5291  5449 D WM-GreedyScheduler: Ignoring {WorkSpec: 9a71ad1b-b525-46aa-8474-2e955c1ef05e}. Requires device idle.
+09-12 11:50:54.390  5291  5449 D WM-GreedyScheduler: Ignoring {WorkSpec: aa434154-407f-45b1-a0b8-86daf6eb3b71}. Requires device idle.
+09-12 11:50:54.390  5291  5449 D WM-GreedyScheduler: Starting work for ce3a3e62-5ac0-4a3a-b352-7780a26cae0d
+09-12 11:50:54.392  5291  5449 D WM-Processor: Processor: processing WorkGenerationalId(workSpecId=ce3a3e62-5ac0-4a3a-b352-7780a26cae0d, generation=0)
+09-12 11:50:54.392  5291  5507 D WM-Processor: Work WorkGenerationalId(workSpecId=ce3a3e62-5ac0-4a3a-b352-7780a26cae0d, generation=0) is already enqueued for processing
+09-12 11:50:54.394  5291  5291 D WM-WorkerWrapper: Starting work for com.android.providers.media.MediaServiceV2
+09-12 11:50:54.394  5291 14093 I MediaServiceV2: Work initiated for action [ android.intent.action.MEDIA_SCANNER_SCAN_FILE ]
+09-12 11:50:54.402  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1130B7C09 hal_ts 93294509133446 lux=74.656 Channel0-5=5050.0,2261.0,121.0,2169.0,617.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.417  5291 14093 I MediaServiceV2: Work ended for action [ android.intent.action.MEDIA_SCANNER_SCAN_FILE ]
+09-12 11:50:54.418  5291  5509 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=ce3a3e62-5ac0-4a3a-b352-7780a26cae0d, tags={ com.android.providers.media.MediaServiceV2 } ]
+09-12 11:50:54.421  5291  5291 D WM-Processor: Processor ce3a3e62-5ac0-4a3a-b352-7780a26cae0d executed; reschedule = false
+09-12 11:50:54.422  5291  5291 D WM-SystemJobService: ce3a3e62-5ac0-4a3a-b352-7780a26cae0d executed on JobScheduler
+09-12 11:50:54.424  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.providers.media.module/androidx.work.impl.background.systemjob.SystemJobService and for client system
+09-12 11:50:54.424  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.providers.media.module/androidx.work.impl.background.systemjob.SystemJobServiceafter removal is 0
+09-12 11:50:54.424  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 36
+09-12 11:50:54.424  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.providers.media.module/androidx.work.impl.background.systemjob.SystemJobService
+09-12 11:50:54.426  5291  5509 D WM-GreedyScheduler: Cancelling work ID ce3a3e62-5ac0-4a3a-b352-7780a26cae0d
+09-12 11:50:54.429  5291  5509 D WM-GreedyScheduler: Ignoring {WorkSpec: 78ff8dad-ba79-4ec4-85af-c11e3218c040}. Requires device idle.
+09-12 11:50:54.429  5291  5509 D WM-GreedyScheduler: Ignoring {WorkSpec: 9a71ad1b-b525-46aa-8474-2e955c1ef05e}. Requires device idle.
+09-12 11:50:54.429  5291  5509 D WM-GreedyScheduler: Ignoring {WorkSpec: aa434154-407f-45b1-a0b8-86daf6eb3b71}. Requires device idle.
+09-12 11:50:54.452 14089 14089 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+09-12 11:50:54.460 14089 14089 I AndroidRuntime: Using default boot image
+09-12 11:50:54.460 14089 14089 I AndroidRuntime: Leaving lock profiling enabled
+09-12 11:50:54.463 14089 14089 I app_process: Using generational CollectorTypeCMC GC.
+09-12 11:50:54.508  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1132BB5F7 hal_ts 93294619132508 lux=84.753 Channel0-5=5733.0,2573.0,136.0,2450.0,706.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.509  1974  3888 D StNfcHal: (#05297) Rx 6f 02 27 (hidden)
+09-12 11:50:54.509  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:54.517 14089 14089 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so:libofflineproc_jni.so
+09-12 11:50:54.525 14089 14089 D nativeloader: Load libicu_jni.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+09-12 11:50:54.526 14089 14089 D app_process: u_setTimeZoneFilesDirectory("/apex/com.android.tzdata/etc/tz/versioned/9/icu") succeeded. 
+09-12 11:50:54.526 14089 14089 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt76l.dat
+09-12 11:50:54.526 14089 14089 D nativeloader: Load libjavacore.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+09-12 11:50:54.527 14089 14089 D nativeloader: Load libopenjdk.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+09-12 11:50:54.528 14089 14089 I app_process: Priority-to-niceness mapping: 19, 16, 13, 10, 0, -2, -4, -5, -6, -8
+09-12 11:50:54.555 14089 14089 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+09-12 11:50:54.555 14089 14089 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+09-12 11:50:54.560 14089 14089 W PlatformAconfigPackage: android.os.flagging.AconfigStorageReadException: ERROR_CANNOT_READ_STORAGE_FILE: Fail to mmap storage
+09-12 11:50:54.560 14089 14089 I AconfigPackage: com.android.wifi.flags is mapped to com.android.wifi
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.permission.flags is mapped to com.android.permission
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.permissioncontroller.flags is mapped to com.android.permission
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.adservices.ondevicepersonalization.flags is mapped to com.android.ondevicepersonalization
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.ipsec.flags is mapped to com.android.ipsec
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.uwb.flags is mapped to com.android.uwb
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.ranging.flags is mapped to com.android.uwb
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.signature.flags is mapped to com.android.mediaprovider
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.providers.media.flags is mapped to com.android.mediaprovider
+09-12 11:50:54.561 14089 14089 I AconfigPackage: android.graphics.pdf.flags is mapped to com.android.mediaprovider
+09-12 11:50:54.561 14089 14089 I AconfigPackage: android.graphics.pdf.flags.readonly is mapped to com.android.mediaprovider
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.media.extractor.flags is mapped to com.android.media
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.media.metrics.flags is mapped to com.android.media
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.media.mainline.flags is mapped to com.android.media
+09-12 11:50:54.561 14089 14089 I AconfigPackage: com.android.rkpd.flags is mapped to com.android.rkpd
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.org.conscrypt.flags is mapped to com.android.conscrypt
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.org.conscrypt.net.flags is mapped to com.android.conscrypt
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.art.flags is mapped to com.android.art
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.art.rw.flags is mapped to com.android.art
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.libcore is mapped to com.android.art
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.bluetooth.flags is mapped to com.android.bt
+09-12 11:50:54.562 14089 14089 I AconfigPackage: android.uprobestats.mainline.flags is mapped to com.android.uprobestats
+09-12 11:50:54.562 14089 14089 I AconfigPackage: android.media.swcodec.flags is mapped to com.android.media.swcodec
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.cellbroadcastreceiver.flags is mapped to com.android.cellbroadcast
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.healthfitness.flags is mapped to com.android.healthfitness
+09-12 11:50:54.562 14089 14089 I AconfigPackage: android.provider.flags is mapped to com.android.configinfrastructure
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.server.deviceconfig is mapped to com.android.configinfrastructure
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.adservices.flags is mapped to com.android.adservices
+09-12 11:50:54.562 14089 14089 I AconfigPackage: com.android.sdksandbox.flags is mapped to com.android.adservices
+09-12 11:50:54.562 14089 14089 I AconfigPackage: android.app.sdksandbox.flags is mapped to com.android.adservices
+09-12 11:50:54.563 14089 14089 I AconfigPackage: android.os.profiling is mapped to com.android.profiling
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.nfc.module.flags is mapped to com.android.nfcservices
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.devicelock.flags is mapped to com.android.devicelock
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.icu is mapped to com.android.i18n
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.system.virtualmachine.flags is mapped to com.android.virt
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.adbd.flags is mapped to com.android.adbd
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.appsearch.flags is mapped to com.android.appsearch
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.tethering.mainline.beta is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: android.net.http is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.tethering.readonly.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: android.net.vcn is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.net.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.tethering.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.tethering.beta.test is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.nearby.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.net.thread.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.net.ct.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: android.net.http.flags is mapped to com.android.tethering
+09-12 11:50:54.563 14089 14089 I AconfigPackage: com.android.os.statsd.flags is mapped to com.android.os.statsd
+09-12 11:50:54.564 14089 14089 E FeatureFlagsImplExport: android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.xr cannot be found on the device
+09-12 11:50:54.565 14089 14089 D UiAutomationConnection: Created on user UserHandle{0}
+09-12 11:50:54.565 14089 14089 I UiAutomation: Initialized for user 0 on display 0
+09-12 11:50:54.565 14089 14089 W UiAutomation: Created with deprecatead constructor, assumes DEFAULT_DISPLAY
+09-12 11:50:54.566  2573  6166 D AccessibilityManagerService: changeCurrentUserForTestAutomationIfNeededLocked(0): ignoring because device doesn't support visible background users
+09-12 11:50:54.566  2573  6166 I UiAutomationManager: Registering UiTestAutomationService (id=com.android.server.accessibility/UiAutomation, flags=0x0) when called by user 0
+09-12 11:50:54.566  2573  6166 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+09-12 11:50:54.567  2573  6166 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-12 11:50:54.577  2573  6166 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+09-12 11:50:54.578  2573  6166 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-12 11:50:54.587  2573  2573 D BatterySaverPolicy: accessibility changed to true, updating policy.
+09-12 11:50:54.588  2573  2573 D AS.AudioService: Accessibility volume enabled = false
+09-12 11:50:54.592  5310 19204 I ewrk    : (REDACTED) HDM. appOpsListener %s %s
+09-12 11:50:54.592  5310 19204 I ewrk    : (REDACTED) HDM. Ignoring irrelevant audio permission changes for package %s
+09-12 11:50:54.593  1691 30217 V audio_utils::mutex: mutex_impl: audio_mutex initialized: ret:0  order:6
+09-12 11:50:54.619  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1134BEFF2 hal_ts 93294729132248 lux=93.563 Channel0-5=6329.0,2841.0,151.0,2696.0,784.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.672  1638  1808 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 70000 us
+09-12 11:50:54.730  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1136C2A0E hal_ts 93294839133706 lux=118.163 Channel0-5=7993.0,3581.0,191.0,3396.0,1012.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.834  1974  3888 D StNfcHal: (#05298) Rx 6f 02 0f (hidden)
+09-12 11:50:54.834  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:54.840  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1138C640B hal_ts 93294949133550 lux=151.085 Channel0-5=10220.0,4547.0,236.0,4364.0,1331.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.950  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A113AC9E04 hal_ts 93295059133185 lux=158.758 Channel0-5=10739.0,4771.0,245.0,4593.0,1404.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: Connected to unknown network * ID: 20 SSID: "ESSPrisdorf" PROVIDER-NAME: null BSSID: null FQDN: null HOME-PROVIDER-NETWORK: false PRIO: 0 HIDDEN: false PMF: false CarrierId: -1 SubscriptionId: -1 SubscriptionGroup: null Currently Connected: true User Selected: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  NetworkSelectionStatus NETWORK_SELECTION_ENABLED
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  hasEverConnected: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  hasNeverDetectedCaptivePortal: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  hasEverValidatedInternetAccess: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  mCandidateSecurityParams: Security Parameters:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Type: 2
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Enabled: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  KeyMgmt: WPA_PSK
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Protocols: WPA RSN
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  AuthAlgorithms:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  PairwiseCiphers: TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupCiphers: WEP40 WEP104 TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupMgmtCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  SuiteBCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  RequirePmf: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsAddedByAutoUpgrade: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaeH2eOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaePkOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  mLastUsedSecurityParams: Security Parameters:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Type: 2
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Enabled: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  KeyMgmt: WPA_PSK
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Protocols: WPA RSN
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  AuthAlgorithms:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  PairwiseCiphers: TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupCiphers: WEP40 WEP104 TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupMgmtCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  SuiteBCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  RequirePmf: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsAddedByAutoUpgrade: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaeH2eOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaePkOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  numAssociation 6
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  validatedInternetAccess shared trusted
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  macRandomizationSetting: 3
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  mRandomizedMacAddress: e2:15:14:49:6e:0b
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  randomizedMacExpirationTimeMs: 2026-09-13T11:22:12.530
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  randomizedMacLastModifiedTimeMs: <none>
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  persistentMacRandomizationSeed: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  mIsSendDhcpHostnameEnabled: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  deletionPriority: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  KeyMgmt: WPA_PSK Protocols: WPA RSN
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  AuthAlgorithms:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  PairwiseCiphers: TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupCiphers: WEP40 WEP104 TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupMgmtCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  SuiteBCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  PSK/SAE: *
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: SecurityParams List:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: Security Parameters:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Type: 2
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Enabled: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  KeyMgmt: WPA_PSK
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Protocols: WPA RSN
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  AuthAlgorithms:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  PairwiseCiphers: TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupCiphers: WEP40 WEP104 TKIP CCMP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupMgmtCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  SuiteBCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  RequirePmf: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsAddedByAutoUpgrade: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaeH2eOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaePkOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: Security Parameters:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Type: 4
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Enabled: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  KeyMgmt: SAE
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  Protocols: RSN
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  AuthAlgorithms:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  PairwiseCiphers: CCMP GCMP_256 GCMP_128
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupCiphers: CCMP GCMP_256 GCMP_128
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  GroupMgmtCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  SuiteBCiphers:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  RequirePmf: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsAddedByAutoUpgrade: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaeH2eOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  IsSaePkOnlyMode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: 
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: Enterprise config:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  ocsp: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  trust_on_first_use: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  user_approve_no_ca_cert: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  selected_rcoi: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  minimum_tls_version: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  enable_conservative_peer_mode: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  tofu_dialog_state: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  tofu_connection_state: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: IP config:
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: IP assignment: DHCP
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: Proxy settings: NONE
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  cuid=1000 cname=android.uid.system:1000 luid=1000 lname=android.uid.system:1000 lcuid=1000 allowAutojoin=true mAllowedAutoJoinInAdvancedProtection=true noInternetAccessExpected=false mostRecentlyConnected=false 
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: lastConnected: 2026-09-12T11:22:12.561 
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: 
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: numRebootsSinceLastUse: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: recentFailure: Association Rejection code: 0, last update time: 0
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: bssidAllowlist unset
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: vendorData unset
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: IsDppConfigurator: true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: HasEncryptedPreSharedKey: false
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  setWifi7Enabled=true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  mIsAllowedToUpdateByOtherUsers=true
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory:  mCreatorUserId=-2
+09-12 11:50:55.040  2573  3155 W WifiNetworkFactory: :74:42:7f:a3:c2:c6. Ignoring...
+09-12 11:50:55.046  3985  3985 W dataInfoSend: type=1400 audit(0.0:126288034): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:55.046  3985  3985 W dataInfoSend: type=1400 audit(0.0:126288035): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:55.046  3985  3985 W dataInfoSend: type=1400 audit(0.0:126288036): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:55.046  3985  3985 W dataInfoSend: type=1400 audit(0.0:126288037): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:55.046  3985  3985 W dataInfoSend: type=1400 audit(0.0:126288038): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:55.051  2573  3155 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-12 11:50:55.052  2573  4732 D NtSmartWifiMonitor: get rssi = -62, frequecy=5580, datastall=0, current state=6
+09-12 11:50:55.052  2573  4732 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-62, -60, -62]
+09-12 11:50:55.052  3616  3616 D QtiLinkBandwidthEstimator-0: handleMessage: 4
+09-12 11:50:55.052  3616  3616 D QtiLinkBandwidthEstimator-1: handleMessage: 4
+09-12 11:50:55.053  2573  4195 D NtSmartWifi: handleMessage EVENT_LINK_QUALITY_CHANGED ...
+09-12 11:50:55.053  2573  4195 D NtSmartWifi: enableSufficientCheckWhenScreenOn, true,  mSmartWifiEnabled=true, screenOn= true
+09-12 11:50:55.054  2573  4194 D NtWifiBtCoExManager: handleMessage: WIFI_STATE_CHANGED
+09-12 11:50:54.742 23561 23561 W audit   : audit_lost=126048795 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:50:54.742 23561 23561 E audit   : rate limit exceeded
+09-12 11:50:54.743 10283 10283 I [binder][0x1a113e4fad6][09:50:55.049494] qca6750: [10283:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-12 11:50:55.059  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A113CCD7FE hal_ts 93295169132873 lux=151.322 Channel0-5=10236.0,4553.0,236.0,4373.0,1332.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.060  3493  4459 D QCNEJ/NativeAidlConnector: -> SND notifyDefaultNetworkChanged(1)
+09-12 11:50:55.060  3493  4459 D cneJni  : sendDefaultNwMsg start
+09-12 11:50:55.060  3519  4470 D txpwrJni: sendNetworkInfo start
+09-12 11:50:55.061  3519  4470 D txpwrJni: sendNetworkInfo RatType 0
+09-12 11:50:55.062 22982 23092 I BugleConnectivity: Connection state change: onCapabilitiesChanged, data connection: WIFI, manual connection eligibility: false, ntn roaming: false
+09-12 11:50:55.063 22982 23092 I BugleConnectivity: New default data network: wifi
+09-12 11:50:55.064  5335  6273 I BugleRcsEngine: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference [CONTEXT log_prefix="RcsEngineImpl[DUAL_REG]:[cefce6db-7860]>Handler" thread_id=60 ]
+09-12 11:50:55.064  5335  6273 I BugleRcsEngine: Cannot use CS.apk as it's battery optimized [CONTEXT thread_id=60 ]
+09-12 11:50:55.065  3493  4459 D cneJni  : sendWifiStatus start
+09-12 11:50:55.065  2573  3162 D ConnectivityService: NetReassign [no changes] [c 0] [a 1] [i 1]
+09-12 11:50:55.065  3775 10752 I NearbyMediums: Wifi changed new SSID: "ESSPrisdorf"
+09-12 11:50:55.065  3775 10752 I NearbyMediums: WifiLanConnectivityInfo is not changed, skip notify.
+09-12 11:50:55.066  5335  6176 I BugleRcsEngine: Connected state: [1], networkType: [WIFI] [CONTEXT thread_id=55 ]
+09-12 11:50:55.067  3775  7331 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+09-12 11:50:55.067  3775  7331 W .gms.persistent: Large reply transaction of 2097152 bytes, interface descriptor , code 1
+09-12 11:50:55.073  3775  7331 I NullBinder: NullBinder for android.net.action.RECOMMEND_NETWORKS triggering remote TransactionTooLargeException due to Service without Chimera impl, calling uid: 1000, calling pid: 0
+09-12 11:50:55.073  3775  7331 W .gms.persistent: Large reply transaction of 2097152 bytes, interface descriptor , code 1
+09-12 11:50:55.101  1974  3888 D StNfcHal: (#05299) Rx 6f 02 27 (hidden)
+09-12 11:50:55.101  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:55.169  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A113ED11F2 hal_ts 93295279132248 lux=145.394 Channel0-5=9835.0,4380.0,227.0,4199.0,1272.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:54.882     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 2 (binder:1699_1-1848)
+09-12 11:50:55.280  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1140D4C08 hal_ts 93295389133394 lux=141.846 Channel0-5=9595.0,4275.0,223.0,4094.0,1238.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.348  1699  1934 D DisplayModeController: setDesiredMode 4630946978939328130 {mode={fps=60.00 Hz, modePtr={id=2, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}}, emitEvent=false, force=false}
+09-12 11:50:55.355  1638  1638 W SDM     : HWDeviceDRM::GetSupportedBitClkRate: Requested rate not supported: 0
+09-12 11:50:55.356  1638  1638 I SDM     : HWDeviceDRM::UpdateMixerAttributes: Mixer WxH 1080x2392-0 for Peripheral
+09-12 11:50:55.357  1638  1638 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 0 to 2
+09-12 11:50:55.053  1042  1042 D [FTS_TS]fts_panel_notifier_callback: Notification type:4, early_trigger:1, esd_recoverying:0
+09-12 11:50:55.053  1042  1042 D [FTS_TS]fts_panel_notifier_callback: shashank:Received fps change old fps:120 new fps:60
+09-12 11:50:55.053  1042  1042 I goodix_fp: [info] goodix_panel_state_chg_callback go to the goodix_fb_state_chg_callback type = 4
+09-12 11:50:55.053  1042  1042 I goodix_fp: goodix_panel_state_chg_callback defalut
+09-12 11:50:55.054  1042  1042 I [drm:dsi_display_set_mode [msm_drm]] [msm-dsi-info]: mdp_transfer_time=0, hactive=1080, vactive=2392, fps=60, clk_rate=0
+09-12 11:50:55.055  1042  1042 I [drm:send_refreshrate_cmd [msm_drm]] [msm-dsi-info]: send fps cmd, fps = 60, last_fps = 120
+09-12 11:50:55.063  1042  1042 D [FTS_TS]fts_panel_notifier_callback: Notification type:4, early_trigger:0, esd_recoverying:0
+09-12 11:50:55.063  1042  1042 D [FTS_TS]fts_panel_notifier_callback: shashank:Received fps change old fps:120 new fps:60
+09-12 11:50:55.389  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1142D8636 hal_ts 93295499135789 lux=137.943 Channel0-5=9331.0,4162.0,216.0,3979.0,1199.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.426  1974  3888 D StNfcHal: (#0529A) Rx 6f 02 0f (hidden)
+09-12 11:50:55.427  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:55.441  1638  1808 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 70000 us
+09-12 11:50:55.503  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1144DBFFC hal_ts 93295609132769 lux=130.817 Channel0-5=8849.0,3950.0,207.0,3772.0,1131.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.560  3775 11662 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-12 11:50:55.560  3775 10752 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-12 11:50:55.598 14089 14089 W libc    : Access denied finding property "qemu.sf.lcd_density"
+09-12 11:50:55.598 14089 14089 W libc    : Access denied finding property "qemu.sf.lcd_density"
+09-12 11:50:55.609  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1146DF9FA hal_ts 93295719132664 lux=98.412 Channel0-5=6657.0,2986.0,155.0,2840.0,834.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.619 14089 14089 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2e0de; boundsInParent: Rect(0, 0 - 1080, 0); boundsInScreen: Rect(0, 1157 - 1080, 1157); boundsInWindow: Rect(0, 1157 - 1080, 1157); packageName: com.google.android.googlequicksearchbox; className: android.widget.FrameLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: null; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; granularScrollingSupported: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-12 11:50:55.622 14089 14089 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@4bd9d; boundsInParent: Rect(0, 0 - 0, 0); boundsInScreen: Rect(557, 1919 - 557, 1919); boundsInWindow: Rect(557, 1919 - 557, 1919); packageName: com.google.android.googlequicksearchbox; className: androidx.compose.ui.platform.ComposeView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: com.google.android.googlequicksearchbox:id/assistant_robin_floaty_more_button_compose_id; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; granularScrollingSupported: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-12 11:50:55.635 14089 14089 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@32fb3; boundsInParent: Rect(0, 0 - 0, 0); boundsInScreen: Rect(105, 2116 - 105, 2116); boundsInWindow: Rect(105, 2116 - 105, 2116); packageName: com.google.android.googlequicksearchbox; className: android.widget.ScrollView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: com.google.android.googlequicksearchbox:id/assistant_robin_floaty_scrollable_area; uniqueId: null; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; granularScrollingSupported: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-12 11:50:55.646 14089 14089 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@36bc3; boundsInParent: Rect(0, 0 - 126, 126); boundsInScreen: Rect(681, 2140 - 807, 2266); boundsInWindow: Rect(681, 2140 - 807, 2266); packageName: com.google.android.googlequicksearchbox; className: android.view.View; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: com.google.android.googlequicksearchbox:id/assistant_robin_mic_background_pulse; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; granularScrollingSupported: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-12 11:50:55.647 14089 14089 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@36f84; boundsInParent: Rect(0, 0 - 126, 126); boundsInScreen: Rect(681, 2140 - 807, 2266); boundsInWindow: Rect(681, 2140 - 807, 2266); packageName: com.google.android.googlequicksearchbox; className: android.view.View; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; containerTitle: null; viewIdResName: com.google.android.googlequicksearchbox:id/assistant_robin_mic_background; uniqueId: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; granularScrollingSupported: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]; isTextSelectable: false
+09-12 11:50:55.655 14089 14089 W AccessibilityNodeInfoDumper: Fetch time: 52ms
+09-12 11:50:55.658  2573  6166 V AccessibilityManagerService: onUserStateChangedLocked for userId: 0, forceUpdate: false
+09-12 11:50:55.659  2573  6166 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+09-12 11:50:55.660  2573  6166 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+09-12 11:50:55.664 14089 14101 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+09-12 11:50:55.664 14089 14103 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+09-12 11:50:55.664 14089 14089 D AndroidRuntime: Shutting down VM
+09-12 11:50:55.665 14089 14111 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+09-12 11:50:55.670  2573  2573 D BatterySaverPolicy: accessibility changed to false, updating policy.
+09-12 11:50:55.368     0     0 E [    C3] [soft_i][0x1a1149c0050][09: 50:55.674207] qca6750: [0:E:QDF] htc_rx_completion_handler: Received initial wake up
+09-12 11:50:55.368 12742 12742 I [kworke][0x1a1149c0e7f][09:50:55.674396] qca6750: [12742:I:PMO] pmo_core_psoc_send_host_wakeup_ind_to_fw: Host wakeup indication sent to fw
+09-12 11:50:55.376     0     0 I [    C3] [soft_i][0x1a1149e4afb][09: 50:55.682029] qca6750: [0:I:WMA] WLAN triggered wakeup: BPF_ALLOW (39), vdev: 0 (STA)
+09-12 11:50:55.376     0     0 I [    C3] [soft_i][0x1a1149e5332][09: 50:55.682139] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-12 11:50:55.692  1600  1618 E NtChgAidl: NtChgAidl: InGameStatus: 0
+09-12 11:50:55.693  1974  3888 D StNfcHal: (#0529B) Rx 6f 02 27 (hidden)
+09-12 11:50:55.693  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:55.387  1618  1618 I NtChg   : T0-6:[50,350,370,390,410,430,500],chg_series:8,is_changed:0,TeBoT0-6:[50,330,350,370,410,430,500],TRegion:4,Temp:388,tzname:shell_max,Ibat:2500,onlineI:-400,param_type:6,AbnormalStatus:0,tzn:3,g_cp_mode:5,vbat:0,pr_id:6,OnGameStatus:0
+09-12 11:50:55.719  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1148E33F2 hal_ts 93295829132248 lux=76.548 Channel0-5=5178.0,2318.0,120.0,2228.0,641.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.780  1638  1808 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 69999 us
+09-12 11:50:55.830  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A114AE6E37 hal_ts 93295939135841 lux=68.048 Channel0-5=4603.0,2051.0,105.0,1999.0,570.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:55.940  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A114CEA801 hal_ts 93296049133029 lux=65.874 Channel0-5=4456.0,1982.0,100.0,1942.0,553.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.018  1974  3888 D StNfcHal: (#0529C) Rx 6f 02 0f (hidden)
+09-12 11:50:56.018  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:56.050  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A114EEE1F1 hal_ts 93296159132196 lux=65.667 Channel0-5=4442.0,1977.0,99.0,1936.0,552.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.054  3985  3985 W dataInfoSend: type=1400 audit(0.0:126290945): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:56.054  3985  3985 W dataInfoSend: type=1400 audit(0.0:126290946): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:56.054  3985  3985 W dataInfoSend: type=1400 audit(0.0:126290947): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:56.054  3985  3985 W dataInfoSend: type=1400 audit(0.0:126290948): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:56.054  3985  3985 W dataInfoSend: type=1400 audit(0.0:126290949): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:55.751 23561 23561 W audit   : audit_lost=126051701 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:50:55.751 23561 23561 E audit   : rate limit exceeded
+09-12 11:50:56.062  2331  2331 I adbd    : adbd service requested 'sync:'
+09-12 11:50:56.160  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1150F1BED hal_ts 93296269131987 lux=69.866 Channel0-5=4726.0,2108.0,107.0,2048.0,584.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.202  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.auth.GetToken and for client com.google.android.gms.persistent
+09-12 11:50:56.203  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.auth.GetTokenafter removal is 0
+09-12 11:50:56.203  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.google.android.gms.persistentafter removal is 7
+09-12 11:50:56.203  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.auth.GetToken
+09-12 11:50:56.270  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1152F5634 hal_ts 93296379135685 lux=73.798 Channel0-5=4992.0,2230.0,114.0,2156.0,618.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.286  1974  3888 D StNfcHal: (#0529D) Rx 6f 02 27 (hidden)
+09-12 11:50:56.287  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:56.379  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1154F9005 hal_ts 93296489133237 lux=68.713 Channel0-5=4648.0,2071.0,105.0,2019.0,576.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.094 12742 12742 I [kworke][0x1a11570bf15][09:50:56.400377] qca6750: [12742:I:PMO] pmo_core_psoc_send_host_wakeup_ind_to_fw: Host wakeup indication sent to fw
+09-12 11:50:56.125     0     0 E [    C3] [soft_i][0x1a11579a8c1][09: 50:56.430800] qca6750: [0:E:DP] dp_tx_update_peer_stats: Release source:3 is not from TQM
+09-12 11:50:56.489  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1156FCA73 hal_ts 93296599138966 lux=66.525 Channel0-5=4500.0,2003.0,101.0,1959.0,558.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.602  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A115900489 hal_ts 93296709140112 lux=64.795 Channel0-5=4383.0,1951.0,96.0,1912.0,550.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.610  1974  3888 D StNfcHal: (#0529E) Rx 6f 02 0f (hidden)
+09-12 11:50:56.611  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:56.709  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A115B03EFF hal_ts 93296819146258 lux=60.286 Channel0-5=4078.0,1816.0,81.0,1791.0,522.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.820  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A115D07800 hal_ts 93296929132977 lux=39.931 Channel0-5=3810.0,1700.0,72.0,1677.0,496.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:56.878  1974  3888 D StNfcHal: (#0529F) Rx 6f 02 27 (hidden)
+09-12 11:50:56.879  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:56.930  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A115F0B203 hal_ts 93297039133133 lux=39.470 Channel0-5=3766.0,1683.0,70.0,1658.0,489.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.039  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11610EBF9 hal_ts 93297149132612 lux=60.996 Channel0-5=4126.0,1838.0,86.0,1807.0,522.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.074  3985  3985 W dataInfoSend: type=1400 audit(0.0:126293854): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:57.074  3985  3985 W dataInfoSend: type=1400 audit(0.0:126293855): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:57.074  3985  3985 W dataInfoSend: type=1400 audit(0.0:126293856): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:57.074  3985  3985 W dataInfoSend: type=1400 audit(0.0:126293857): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:57.074  3985  3985 W dataInfoSend: type=1400 audit(0.0:126293858): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:56.771 23561 23561 W audit   : audit_lost=126054605 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:50:56.771 23561 23561 E audit   : rate limit exceeded
+09-12 11:50:57.099  3298  3418 D MobileConnectionRepositoryEx: [1] smoothSignal: last level: 3 smooth level: -1 new level: 2
+09-12 11:50:57.100  3298  3418 D MobileConnectionRepositoryEx: [1] smoothSignal: begin signal smooth
+09-12 11:50:57.100  3298  3418 D MobileConnectionRepositoryEx: [1] smoothSignal: last level: 2 smooth level: 3 new level: 2
+09-12 11:50:57.100  3298  3418 D MobileConnectionRepositoryEx: [1] smoothSignal: smoothing, new level < smooth level.
+09-12 11:50:57.100  3616  3616 D QtiLinkBandwidthEstimator-0: handleMessage: 5
+09-12 11:50:57.101  3616  4004 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+09-12 11:50:57.108  2573  3162 E ConnectivityService: [130 CELLULAR]: ignoring attempt to change owner from -1 to 10307
+09-12 11:50:57.109  3298  3444 D MobileConnectionRepositoryEx: [1] smoothConnection: true delayTime 0
+09-12 11:50:57.110  3493  4506 D QCNEJ/WwanInfoRelay: onCapabilitiesChanged: 130 [ Transports: CELLULAR Capabilities: SUPL&XCAP&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&NOT_ROAMING&NOT_CONGESTED&NOT_SUSPENDED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED LinkUpBandwidth>=10247Kbps LinkDnBandwidth>=10546Kbps Specifier: <TelephonyNetworkSpecifier [mSubId = 1]> AdminUids: [10307] SubscriptionIds: {1} UnderlyingNetworks: Null]
+09-12 11:50:57.111  3519  4470 I txpwradmin:WwanStaInfo: cacheWwanInfo subId = 1 slotId = 0
+09-12 11:50:57.112  3519  4470 D txpwrJni: sendNetworkInfo start
+09-12 11:50:57.112  3519  4470 D txpwrJni: sendNetworkInfo RatType 0
+09-12 11:50:57.112  3493  4506 I QCNEJ/WwanInfoRelay: cacheWwanInfo subId = 1 phoneId = 0 slotId = 0
+09-12 11:50:57.113  2573  3162 E ConnectivityService: [113 CELLULAR]: ignoring attempt to change owner from -1 to 10307
+09-12 11:50:57.117  3493  4506 D cneJni  : sendWwanStatus start
+09-12 11:50:57.149  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A116312645 hal_ts 93297259136571 lux=64.204 Channel0-5=4343.0,1933.0,95.0,1896.0,543.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.203  1974  3888 D StNfcHal: (#052A0) Rx 6f 02 0f (hidden)
+09-12 11:50:57.204  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:57.207 12371 13634 D BufferPoolAccessor2.0: bufferpool2 0xb4000079956fca38 : 0(0 size) total buffers - 0(0 size) used buffers - 585/590 (recycle/alloc) - 6/1160 (fetch/transfer)
+09-12 11:50:57.207 12371 13634 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+09-12 11:50:57.208  2148  3304 D BufferPoolAccessor2.0: bufferpool2 0xb400006e6b5d4558 : 0(0 size) total buffers - 0(0 size) used buffers - 576/581 (recycle/alloc) - 6/581 (fetch/transfer)
+09-12 11:50:57.208  2148  3304 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+09-12 11:50:57.259  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A116515FEE hal_ts 93297369132039 lux=64.973 Channel0-5=4395.0,1955.0,98.0,1917.0,547.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.371  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1167199ED hal_ts 93297479131987 lux=73.709 Channel0-5=4986.0,2220.0,113.0,2161.0,619.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.470  1974  3888 D StNfcHal: (#052A1) Rx 6f 02 27 (hidden)
+09-12 11:50:57.471  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:57.480  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11691D3FC hal_ts 93297589132769 lux=67.929 Channel0-5=4595.0,2048.0,104.0,1996.0,569.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.590  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A116B20E25 hal_ts 93297699134904 lux=62.740 Channel0-5=4244.0,1890.0,95.0,1850.0,523.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.615  3775 10752 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-12 11:50:57.615  3775 11662 I NearbySharing: Network state changed: NetworkState(isRestricted=false, isOnline=true, isCongested=false, isMetered=false, isWifiConnected=true)
+09-12 11:50:57.702  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A116D247F3 hal_ts 93297809132300 lux=64.455 Channel0-5=4360.0,1941.0,99.0,1898.0,539.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.795  1974  3888 D StNfcHal: (#052A2) Rx 6f 02 0f (hidden)
+09-12 11:50:57.795  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:57.809  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A116F281F1 hal_ts 93297919132196 lux=63.420 Channel0-5=4290.0,1912.0,98.0,1867.0,529.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:57.919  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11712BC01 hal_ts 93298029133029 lux=66.126 Channel0-5=4473.0,1995.0,103.0,1941.0,550.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.030  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11732F630 hal_ts 93298139135477 lux=72.852 Channel0-5=4928.0,2201.0,114.0,2129.0,607.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.062  1974  3888 D StNfcHal: (#052A3) Rx 6f 02 27 (hidden)
+09-12 11:50:58.062  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:57.767 10283 10283 I [binder][0x1a1175ab0c2][09:50:58.072719] qca6750: [10283:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-12 11:50:58.074  2573  3155 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-12 11:50:58.075  2573  4732 D NtSmartWifiMonitor: get rssi = -62, frequecy=5580, datastall=0, current state=6
+09-12 11:50:58.075  2573  4732 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-62]
+09-12 11:50:58.076  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.chimera.PersistentApiService and for client com.google.android.apps.youtube.music
+09-12 11:50:58.076  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.chimera.PersistentApiServiceafter removal is 68
+09-12 11:50:58.078  3775  3775 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.common.telemetry.service.START dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-12 11:50:58.090  3985  3985 W dataInfoSend: type=1400 audit(0.0:126296763): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:58.090  3985  3985 W dataInfoSend: type=1400 audit(0.0:126296764): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:58.090  3985  3985 W dataInfoSend: type=1400 audit(0.0:126296765): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:58.090  3985  3985 W dataInfoSend: type=1400 audit(0.0:126296766): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:58.090  3985  3985 W dataInfoSend: type=1400 audit(0.0:126296767): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:57.788 23561 23561 W audit   : audit_lost=126057509 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:50:57.788 23561 23561 E audit   : rate limit exceeded
+09-12 11:50:58.120  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.gass.GassService and for client com.google.android.apps.youtube.music
+09-12 11:50:58.120  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.gass.GassServiceafter removal is 0
+09-12 11:50:58.121  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.google.android.apps.youtube.musicafter removal is 5
+09-12 11:50:58.121  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.gass.GassService
+09-12 11:50:58.140  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A117532FED hal_ts 93298249131987 lux=71.610 Channel0-5=4844.0,2164.0,112.0,2092.0,596.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.184  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:50:58.187  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:50:58.187  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={10174} in 5ms
+09-12 11:50:58.190  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:50:58.192  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:50:58.192  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={20174} in 5ms
+09-12 11:50:58.208  2148  3304 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 0
+09-12 11:50:58.250  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1177369ED hal_ts 93298359131987 lux=71.891 Channel0-5=4863.0,2173.0,113.0,2100.0,598.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.360  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11793A3F2 hal_ts 93298469132248 lux=66.333 Channel0-5=4487.0,2001.0,103.0,1948.0,551.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.387  1974  3888 D StNfcHal: (#052A4) Rx 6f 02 0f (hidden)
+09-12 11:50:58.387  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:58.470  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A117B3DE1B hal_ts 93298579134383 lux=70.827 Channel0-5=4791.0,2138.0,112.0,2072.0,588.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.236     0     0 E [    C0] [soft_i][0x1a117e41a8f][09: 50:58.541758] qca6750: [0:E:QDF] htc_rx_completion_handler: Received initial wake up
+09-12 11:50:58.236  6218  6218 I [kworke][0x1a117e42ffc][09:50:58.542042] qca6750: [6218:I:PMO] pmo_core_psoc_send_host_wakeup_ind_to_fw: Host wakeup indication sent to fw
+09-12 11:50:58.244     0     0 I [    C0] [soft_i][0x1a117e67a3e][09: 50:58.549860] qca6750: [0:I:WMA] WLAN triggered wakeup: BPF_ALLOW (39), vdev: 0 (STA)
+09-12 11:50:58.244     0     0 I [    C0] [soft_i][0x1a117e68b86][09: 50:58.550090] qca6750: [0:I:WMA] wma_wake_event_packet: Wake event packet:
+09-12 11:50:58.580  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A117D41804 hal_ts 93298689133185 lux=79.800 Channel0-5=5398.0,2419.0,128.0,2315.0,665.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.601  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:50:58.603  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:50:58.603  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={10162} in 5ms
+09-12 11:50:58.606  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:50:58.607  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:50:58.608  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={20162} in 4ms
+09-12 11:50:58.655  1974  3888 D StNfcHal: (#052A5) Rx 6f 02 27 (hidden)
+09-12 11:50:58.656  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:58.671  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.PersistentDirectBootAwareApiService and for client com.google.android.googlequicksearchbox:interactor
+09-12 11:50:58.671  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.PersistentDirectBootAwareApiServiceare :58
+09-12 11:50:58.671  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.google.android.googlequicksearchbox:interactorare :4
+09-12 11:50:58.689  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A117F452FC hal_ts 93298799146102 lux=83.363 Channel0-5=5639.0,2530.0,135.0,2410.0,693.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.801  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A118148CA5 hal_ts 93298909141571 lux=85.093 Channel0-5=5756.0,2582.0,138.0,2460.0,709.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.909  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11834C615 hal_ts 93299019134071 lux=93.992 Channel0-5=6358.0,2854.0,151.0,2709.0,787.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:58.978  1974  3888 D StNfcHal: (#052A6) Rx 6f 02 0f (hidden)
+09-12 11:50:58.979  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:59.019  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A118550006 hal_ts 93299129133289 lux=97.097 Channel0-5=6568.0,2948.0,159.0,2794.0,814.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.106  3985  3985 W dataInfoSend: type=1400 audit(0.0:126299672): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:59.110  3985  3985 W dataInfoSend: type=1400 audit(0.0:126299673): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:59.110  3985  3985 W dataInfoSend: type=1400 audit(0.0:126299674): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:59.110  3985  3985 W dataInfoSend: type=1400 audit(0.0:126299675): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:59.110  3985  3985 W dataInfoSend: type=1400 audit(0.0:126299676): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:50:58.806 23561 23561 W audit   : audit_lost=126060413 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:50:58.806 23561 23561 E audit   : rate limit exceeded
+09-12 11:50:59.129  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1187539F8 hal_ts 93299239132560 lux=96.934 Channel0-5=6557.0,2943.0,159.0,2790.0,814.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.240  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1189573EB hal_ts 93299349131883 lux=102.744 Channel0-5=6950.0,3117.0,166.0,2957.0,866.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.246  1974  3888 D StNfcHal: (#052A7) Rx 6f 02 27 (hidden)
+09-12 11:50:59.248  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:59.349  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A118B5AE1F hal_ts 93299459134591 lux=105.434 Channel0-5=7132.0,3199.0,171.0,3032.0,891.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.460  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A118D5E801 hal_ts 93299569133029 lux=123.514 Channel0-5=8355.0,3739.0,196.0,3554.0,1062.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.571  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A118F621FB hal_ts 93299679132716 lux=126.072 Channel0-5=8528.0,3816.0,202.0,3625.0,1084.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.575  1974  3888 D StNfcHal: (#052A8) Rx 6f 02 0f (hidden)
+09-12 11:50:59.575  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:59.679  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119165C08 hal_ts 93299789133394 lux=125.421 Channel0-5=8484.0,3796.0,201.0,3608.0,1080.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.409  1527  1527 E healthd : soc_b:100, soc:69, soc_c:69, Vol:4183, Cur:1933,chg_s:1,t_l:46,b_s:2,OffTlast:0,lcd_off:0,Vu:4600,Vw:0,pid:1527,brightness:4.407380,rmCap:3001
+09-12 11:50:59.410  1527  1527 E healthd : battery l=69 v=4183 t=35.0 h=2 st=2 c=1933641 fc=4339000 cc=116 chg=a
+09-12 11:50:59.717  1600  1600 E NtChgAidl: NtChgAidl: mBattTempRegion _aidl_return:0
+09-12 11:50:59.730  1600  1600 E NtChgAidl: NtChgAidl: mBattTempRegion _aidl_return:0
+09-12 11:50:59.424  1527  1527 E healthd : soc_b:100, soc:69, soc_c:69, Vol:4182, Cur:1898,chg_s:1,t_l:46,b_s:2,OffTlast:0,lcd_off:0,Vu:4600,Vw:0,pid:1527,brightness:4.407380,rmCap:3001
+09-12 11:50:59.424  1527  1527 W HealthLoop: debug.tracing.screen_brightness:4.407380
+09-12 11:50:59.789  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119369622 hal_ts 93299899134748 lux=123.071 Channel0-5=8325.0,3726.0,198.0,3539.0,1056.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:50:59.839  1974  3888 D StNfcHal: (#052A9) Rx 6f 02 27 (hidden)
+09-12 11:50:59.840  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:50:59.902  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11956CFF2 hal_ts 93300009132248 lux=124.579 Channel0-5=8427.0,3773.0,200.0,3581.0,1072.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.009  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119770A09 hal_ts 93300119133446 lux=125.466 Channel0-5=8487.0,3799.0,201.0,3607.0,1081.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.027  3828  3874 I NT-WPOffsetInterpolator: setWallpaperOffsets mCurrentOffset = 1.0E-9
+09-12 11:51:00.028  3828  3874 I NT-WPOffsetInterpolator: setWallpaperOffsets mCurrentOffset = 0.0
+09-12 11:51:00.038  3298  3298 D LightBarController: updateStatus= numStacks: 1, size: 0, appearance: 0
+09-12 11:51:00.055  1699  1699 E SurfaceFlinger: Out of order buffers detected for RequestedLayerState{com.nothing.launcher/com.android.searchlauncher.SearchLauncher#12667 parentId=126} producedId=256 frameNumber=656 -> producedId=256 frameNumber=86
+09-12 11:51:00.074  2573  3281 D ConnectivityService: Returning BLOCKED NetworkInfo to uid=10174
+09-12 11:51:00.119  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119974409 hal_ts 93300229133446 lux=122.066 Channel0-5=8257.0,3698.0,196.0,3509.0,1048.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.129  1638  1808 I SDM     : DisplayBase::CommitThread: Received idle timeout, panel: video, timeout: 70000 us
+09-12 11:50:59.837 23561 23561 W audit   : audit_lost=126063317 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:50:59.837 23561 23561 E audit   : rate limit exceeded
+09-12 11:51:00.138  3985  3985 W dataInfoSend: type=1400 audit(0.0:126302581): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:00.138  3985  3985 W dataInfoSend: type=1400 audit(0.0:126302582): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:00.138  3985  3985 W dataInfoSend: type=1400 audit(0.0:126302583): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:00.138  3985  3985 W dataInfoSend: type=1400 audit(0.0:126302584): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:00.138  3985  3985 W dataInfoSend: type=1400 audit(0.0:126302585): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:00.163  1974  3888 D StNfcHal: (#052AA) Rx 6f 02 0f (hidden)
+09-12 11:51:00.164  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:00.229  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119B77E28 hal_ts 93300339135060 lux=122.967 Channel0-5=8318.0,3723.0,197.0,3536.0,1057.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.252  2331  2331 I adbd    : adbd service requested 'sync:'
+09-12 11:51:00.340  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119D7B7F7 hal_ts 93300449132508 lux=122.938 Channel0-5=8316.0,3722.0,197.0,3536.0,1054.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.432  1974  3888 D StNfcHal: (#052AB) Rx 6f 02 27 (hidden)
+09-12 11:51:00.432  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:00.451  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A119F7F214 hal_ts 93300559134019 lux=123.100 Channel0-5=8327.0,3727.0,197.0,3541.0,1057.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.559  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11A182CDC hal_ts 93300669144435 lux=123.914 Channel0-5=8382.0,3750.0,198.0,3565.0,1065.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.669  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11A3866BC hal_ts 93300779142769 lux=122.834 Channel0-5=8309.0,3718.0,194.0,3536.0,1054.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.756  1974  3888 D StNfcHal: (#052AC) Rx 6f 02 0f (hidden)
+09-12 11:51:00.756  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:00.779  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11A58A049 hal_ts 93300889136779 lux=113.905 Channel0-5=7705.0,3450.0,179.0,3283.0,973.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:00.881  2573  3281 W ActivityManager: Background start not allowed: service Intent { xflg=0x4 cmp=com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.BackgroundThreadNotifierIntentService (has extras) } to com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.BackgroundThreadNotifierIntentService from pid=316 uid=10162 pkg=com.google.android.apps.photos startFg?=false
+09-12 11:51:00.885  2573  3281 W ActivityManager: Background start not allowed: service Intent { xflg=0x4 cmp=com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.BackgroundThreadNotifierIntentService (has extras) } to com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.BackgroundThreadNotifierIntentService from pid=316 uid=10162 pkg=com.google.android.apps.photos startFg?=false
+09-12 11:51:00.888  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11A78D9EC hal_ts 93300999131935 lux=102.093 Channel0-5=6906.0,3095.0,161.0,2945.0,867.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.004  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11A991409 hal_ts 93301109133446 lux=95.737 Channel0-5=6476.0,2905.0,151.0,2763.0,809.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.024  1974  3888 D StNfcHal: (#052AD) Rx 6f 02 27 (hidden)
+09-12 11:51:01.024  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:01.102  2573  3155 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-12 11:51:00.794 10283 10283 I [binder][0x1a11ad188eb][09:51:01.099815] qca6750: [10283:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-12 11:51:01.104  2573  4732 D NtSmartWifiMonitor: get rssi = -63, frequecy=5580, datastall=0, current state=6
+09-12 11:51:01.104  2573  4732 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-62, -63]
+09-12 11:51:01.109  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11AB94E26 hal_ts 93301219134956 lux=88.345 Channel0-5=5976.0,2682.0,140.0,2553.0,743.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.174  3985  3985 W dataInfoSend: type=1400 audit(0.0:126305490): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:01.174  3985  3985 W dataInfoSend: type=1400 audit(0.0:126305491): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:01.174  3985  3985 W dataInfoSend: type=1400 audit(0.0:126305492): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:01.174  3985  3985 W dataInfoSend: type=1400 audit(0.0:126305493): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:01.174  3985  3985 W dataInfoSend: type=1400 audit(0.0:126305494): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:00.870 23561 23561 W audit   : audit_lost=126066221 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:51:00.870 23561 23561 E audit   : rate limit exceeded
+09-12 11:51:01.220  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11AD98804 hal_ts 93301329133185 lux=88.848 Channel0-5=6010.0,2697.0,142.0,2567.0,748.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.330  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11AF9C1F1 hal_ts 93301439132196 lux=92.381 Channel0-5=6249.0,2806.0,147.0,2665.0,778.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.349  1974  3888 D StNfcHal: (#052AE) Rx 6f 02 0f (hidden)
+09-12 11:51:01.349  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:01.440  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11B19FBEB hal_ts 93301549131883 lux=95.367 Channel0-5=6451.0,2896.0,152.0,2749.0,803.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.550  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A11B3A3632 hal_ts 93301659135581 lux=96.505 Channel0-5=6528.0,2931.0,155.0,2780.0,813.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:01.577  2331  2331 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '500''
+09-12 11:51:01.616  1974  3888 D StNfcHal: (#052AF) Rx 6f 02 27 (hidden)
+09-12 11:51:01.616  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:01.325   798   798 I logd    : logdr: UID=2000 GID=2000 PID=14120 n tail=500 logMask=99 pid=0 start=0ns deadline=0ns

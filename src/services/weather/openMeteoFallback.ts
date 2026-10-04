@@ -24,7 +24,11 @@ export type OpenMeteoFallback = {
   rainWindows: Array<{ startMs: number; endMs: number; pop: number }>;
   dayHighC: number | null;
   tomorrowSummary: string | null;
+  day2Summary?: string | null;
+  windSpeedMs?: number | null;
+  windGustMs?: number | null;
   nightLowC: number | null;
+  skyHours?: Array<{ ms: number; code: number }>;
 };
 
 type OpenMeteoJson = {
@@ -32,6 +36,7 @@ type OpenMeteoJson = {
     temperature_2m?: number;
     weather_code?: number;
     precipitation?: number;
+    wind_speed_10m?: number;
     time?: string;
   };
   /** Legacy Open-Meteo (`current_weather=true`) — Shared-Cache/Edge */
@@ -46,6 +51,7 @@ type OpenMeteoJson = {
     temperature_2m?: number[];
     precipitation_probability?: number[];
     precipitation?: number[];
+    weather_code?: number[];
   };
   daily?: {
     time?: string[];
@@ -213,12 +219,12 @@ export function parseOpenMeteoForecast(
   const dailyMin = data.daily?.temperature_2m_min ?? [];
   const dailyCode = data.daily?.weather_code ?? [];
   const dailyPop = data.daily?.precipitation_probability_max ?? [];
-  let tomorrowSummary: string | null = null;
-  if (dailyTimes.length >= 2) {
-    const hi = Number(dailyMax[1]);
-    const lo = Number(dailyMin[1]);
-    const codeT = Number(dailyCode[1]);
-    const popT = Number(dailyPop[1]);
+  const dailySummaryAt = (idx: number): string | null => {
+    if (dailyTimes.length <= idx) return null;
+    const hi = Number(dailyMax[idx]);
+    const lo = Number(dailyMin[idx]);
+    const codeT = Number(dailyCode[idx]);
+    const popT = Number(dailyPop[idx]);
     const bits: string[] = [];
     if (Number.isFinite(lo) && Number.isFinite(hi)) {
       bits.push(`${Math.round(lo)}–${Math.round(hi)}°`);
@@ -229,8 +235,15 @@ export function parseOpenMeteoForecast(
     if (Number.isFinite(popT) && popT >= 30) {
       bits.push(`Regenrisiko ${Math.round(popT)}%`);
     }
-    if (bits.length) tomorrowSummary = bits.join(', ');
-  }
+    return bits.length ? bits.join(', ') : null;
+  };
+  const tomorrowSummary = dailySummaryAt(1);
+  const day2Summary = dailySummaryAt(2);
+  const windSpeedMs =
+    typeof data.current?.wind_speed_10m === 'number' &&
+    Number.isFinite(data.current.wind_speed_10m)
+      ? data.current.wind_speed_10m
+      : null;
   const promptBlock = [
     '=== WETTER (Open-Meteo Fallback) ===',
     summaryLine,
@@ -238,6 +251,8 @@ export function parseOpenMeteoForecast(
     precip != null ? `Niederschlag jetzt: ${precip} mm` : null,
     dayHigh != null ? `Tageshoch bis Abend ca. ${Math.round(dayHigh)}°.` : null,
     tomorrowSummary,
+    day2Summary,
+    windSpeedMs != null ? `Wind ~${Math.round(windSpeedMs)} m/s` : null,
   ]
     .filter(Boolean)
     .join('\n');
@@ -256,7 +271,17 @@ export function parseOpenMeteoForecast(
     rainWindows,
     dayHighC: dayHigh,
     tomorrowSummary,
+    day2Summary,
+    windSpeedMs,
+    windGustMs: null,
     nightLowC: nightLow,
+    skyHours: (data.hourly?.time ?? [])
+      .map((iso, i) => ({
+        ms: Date.parse(iso ?? ''),
+        code: Number(data.hourly?.weather_code?.[i]),
+      }))
+      .filter((h) => Number.isFinite(h.ms) && Number.isFinite(h.code))
+      .slice(0, 48),
   };
 }
 
@@ -298,7 +323,7 @@ export async function fetchOpenMeteoFallback(opts: {
     );
     u.searchParams.set(
       'hourly',
-      'temperature_2m,precipitation_probability,precipitation',
+      'temperature_2m,precipitation_probability,precipitation,weather_code',
     );
     u.searchParams.set(
       'daily',

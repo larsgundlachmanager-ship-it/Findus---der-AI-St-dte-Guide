@@ -9,6 +9,11 @@ import {
   eveningCutoffMs,
   pop01ToPct,
 } from './weatherRainOutlook';
+import {
+  RAIN_END_MIN_DRY_GAP_MS,
+  findSeriesRainEndMs,
+  mergeRainWindowsByDryGap,
+} from './rainIncomingPolicy';
 
 export type OwmMinutely = { dt: number; precipitation: number };
 export type OwmHourly = {
@@ -28,6 +33,8 @@ export type OwmOneCallRaw = {
     sunset?: number;
     weather?: Array<{ id: number; description: string }>;
     rain?: { '1h'?: number };
+    wind_speed?: number;
+    wind_gust?: number;
   };
   minutely?: OwmMinutely[];
   hourly?: OwmHourly[];
@@ -62,10 +69,20 @@ export type OwmOneCallResult = {
   rawHourly: OwmHourly[];
   /** Sonnenuntergang heute (ms), aus current.sunset */
   sunsetMs: number | null;
+  /** Sonnenaufgang heute (ms), aus current.sunrise */
+  sunriseMs: number | null;
   /** Tageshoch bis Abend */
   dayHighC: number | null;
   /** Morgen kurz, nur belegt */
   tomorrowSummary?: string | null;
+  /** Übermorgen / Tag+2 kurz, nur belegt */
+  day2Summary?: string | null;
+  /** Wind m/s (current), nur belegt */
+  windSpeedMs?: number | null;
+  /** Böen m/s, nur belegt */
+  windGustMs?: number | null;
+  /** Stunden-Codes für Tages-Zeitfenster */
+  skyHours?: Array<{ ms: number; code: number }>;
 };
 
 const FETCH_MS = 10_000;
@@ -106,6 +123,38 @@ function owmSkyBit(id: number | null | undefined): string | null {
   return null;
 }
 
+function buildDailySummaryFromDay(day: {
+  temp?: { min?: number; max?: number };
+  weather?: Array<{ id?: number; description?: string }>;
+  pop?: number;
+} | undefined): string | null {
+  if (!day?.temp) return null;
+  const lo = day.temp.min;
+  const hi = day.temp.max;
+  const wid = day.weather?.[0]?.id ?? null;
+  const popPct =
+    typeof day.pop === 'number' && Number.isFinite(day.pop)
+      ? Math.round(day.pop * 100)
+      : null;
+  const bits: string[] = [];
+  if (
+    typeof lo === 'number' &&
+    typeof hi === 'number' &&
+    Number.isFinite(lo) &&
+    Number.isFinite(hi)
+  ) {
+    bits.push(`${Math.round(lo)}–${Math.round(hi)}°`);
+  } else if (typeof hi === 'number' && Number.isFinite(hi)) {
+    bits.push(`bis ${Math.round(hi)}°`);
+  }
+  const sky = owmSkyBit(wid);
+  if (sky) bits.push(sky);
+  if (popPct != null && popPct >= 30) {
+    bits.push(`Regenrisiko ${popPct}%`);
+  }
+  return bits.length ? bits.join(', ') : null;
+}
+
 function buildTomorrowSummary(opts: {
   daily?: Array<{
     dt?: number;
@@ -115,38 +164,15 @@ function buildTomorrowSummary(opts: {
   }>;
   hourly: OwmHourly[];
   nowMs: number;
+  dayIndex?: number;
 }): string | null {
-  const day = opts.daily?.[1];
-  if (day?.temp) {
-    const lo = day.temp.min;
-    const hi = day.temp.max;
-    const wid = day.weather?.[0]?.id ?? null;
-    const popPct =
-      typeof day.pop === 'number' && Number.isFinite(day.pop)
-        ? Math.round(day.pop * 100)
-        : null;
-    const bits: string[] = [];
-    if (
-      typeof lo === 'number' &&
-      typeof hi === 'number' &&
-      Number.isFinite(lo) &&
-      Number.isFinite(hi)
-    ) {
-      bits.push(`${Math.round(lo)}–${Math.round(hi)}°`);
-    } else if (typeof hi === 'number' && Number.isFinite(hi)) {
-      bits.push(`bis ${Math.round(hi)}°`);
-    }
-    const sky = owmSkyBit(wid);
-    if (sky) bits.push(sky);
-    if (popPct != null && popPct >= 30) {
-      bits.push(`Regenrisiko ${popPct}%`);
-    }
-    if (bits.length) return bits.join(', ');
-  }
+  const idx = opts.dayIndex ?? 1;
+  const fromDaily = buildDailySummaryFromDay(opts.daily?.[idx]);
+  if (fromDaily) return fromDaily;
 
-  // Fallback: Hourly 24–48 h
-  const start = opts.nowMs + 20 * 3600_000;
-  const end = opts.nowMs + 44 * 3600_000;
+  // Fallback: Hourly window for dayIndex (1=morgen, 2=übermorgen)
+  const start = opts.nowMs + (20 + (idx - 1) * 24) * 3600_000;
+  const end = opts.nowMs + (44 + (idx - 1) * 24) * 3600_000;
   const slice = opts.hourly.filter((h) => {
     const t = h.dt * 1000;
     return t >= start && t <= end;
@@ -250,20 +276,26 @@ export function parseOpenWeatherOneCallData(
       pop: Math.round(winPop * 100),
     });
   }
+  // Kurz-Pausen zwischen Stundenfenstern mergen (≥30 Min Pause = neues Fenster)
+  const rainWindowsMerged = mergeRainWindowsByDryGap(rainWindows);
+  rainWindows.length = 0;
+  rainWindows.push(...rainWindowsMerged);
 
-  /** Ende des nassen Blocks aus minutely (Wolke schneller/langsamer → neuer Fetch). */
+  /** Ende des nassen Blocks — kurze Trockenlöcher (<30 Min) zählen nicht. */
   let rainEndsAtMs: number | null = null;
   if (minutely.length) {
     const fromIdx = rainStartIdx >= 0 ? rainStartIdx : 0;
-    let seenWet = rainStartIdx >= 0;
-    for (let j = fromIdx; j < minutely.length; j++) {
-      const wet = (minutely[j]!.precipitation ?? 0) >= PRECIP_MIN_MM;
-      if (wet) seenWet = true;
-      else if (seenWet) {
-        rainEndsAtMs = minutely[j]!.dt * 1000;
-        break;
-      }
-    }
+    const series = minutely.map((m) => ({
+      atMs: m.dt * 1000,
+      wet: (m.precipitation ?? 0) >= PRECIP_MIN_MM,
+    }));
+    rainEndsAtMs = findSeriesRainEndMs({
+      samples: series,
+      fromIdx,
+      minDryGapMs: RAIN_END_MIN_DRY_GAP_MS,
+    });
+    const seenWet =
+      rainStartIdx >= 0 || series.slice(fromIdx).some((s) => s.wet);
     if (seenWet && rainEndsAtMs == null) {
       const last = minutely[minutely.length - 1]!;
       rainEndsAtMs = last.dt * 1000 + 60_000;
@@ -301,18 +333,17 @@ export function parseOpenWeatherOneCallData(
 
   // Wenn's schon nass ist, Ende ab jetzt (nicht ab einem späteren Minutely-Start).
   if (rainingNow && minutely.length && rainStartIdx > 0) {
-    let seenWet = false;
-    let endFromNow: number | null = null;
-    for (let j = 0; j < minutely.length; j++) {
-      const wet = (minutely[j]!.precipitation ?? 0) >= PRECIP_MIN_MM;
-      if (wet) seenWet = true;
-      else if (seenWet) {
-        endFromNow = minutely[j]!.dt * 1000;
-        break;
-      }
-    }
+    const series = minutely.map((m) => ({
+      atMs: m.dt * 1000,
+      wet: (m.precipitation ?? 0) >= PRECIP_MIN_MM,
+    }));
+    const endFromNow = findSeriesRainEndMs({
+      samples: series,
+      fromIdx: 0,
+      minDryGapMs: RAIN_END_MIN_DRY_GAP_MS,
+    });
     if (endFromNow != null) rainEndsAtMs = endFromNow;
-    else if (seenWet) {
+    else if (series.some((s) => s.wet)) {
       const last = minutely[minutely.length - 1]!;
       rainEndsAtMs = last.dt * 1000 + 60_000;
     }
@@ -412,7 +443,24 @@ export function parseOpenWeatherOneCallData(
     daily: data.daily,
     hourly,
     nowMs: now,
+    dayIndex: 1,
   });
+  const day2Summary = buildTomorrowSummary({
+    daily: data.daily,
+    hourly,
+    nowMs: now,
+    dayIndex: 2,
+  });
+  const windSpeedMs =
+    typeof data.current?.wind_speed === 'number' &&
+    Number.isFinite(data.current.wind_speed)
+      ? data.current.wind_speed
+      : null;
+  const windGustMs =
+    typeof data.current?.wind_gust === 'number' &&
+    Number.isFinite(data.current.wind_gust)
+      ? data.current.wind_gust
+      : null;
 
   const promptBlock = [
     '=== OPENWEATHER ONE CALL 3.0 ===',
@@ -439,6 +487,12 @@ export function parseOpenWeatherOneCallData(
       : '',
     dayHigh != null ? `Tageshoch bis Abend ca. ${Math.round(dayHigh)}°.` : '',
     tomorrowSummary ? `Morgen: ${tomorrowSummary}` : '',
+    day2Summary ? `Übermorgen: ${day2Summary}` : '',
+    windSpeedMs != null
+      ? `Wind ~${Math.round(windSpeedMs)} m/s${
+          windGustMs != null ? `, Böen ~${Math.round(windGustMs)} m/s` : ''
+        }`
+      : '',
   ]
     .filter(Boolean)
     .join('\n');
@@ -462,8 +516,21 @@ export function parseOpenWeatherOneCallData(
     sunsetMs: data.current?.sunset
       ? data.current.sunset * 1000
       : null,
+    sunriseMs: data.current?.sunrise
+      ? data.current.sunrise * 1000
+      : null,
     dayHighC: dayHigh,
     tomorrowSummary,
+    day2Summary,
+    windSpeedMs,
+    windGustMs,
+    skyHours: hourly
+      .map((h) => ({
+        ms: h.dt * 1000,
+        code: h.weather?.[0]?.id ?? -1,
+      }))
+      .filter((h) => h.code >= 0)
+      .slice(0, 48),
   };
 }
 

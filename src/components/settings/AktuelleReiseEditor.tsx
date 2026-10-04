@@ -12,7 +12,11 @@ import {
   patchFromMustHaveStyles,
   patchFromTourLength,
   TOUR_LENGTH_OPTIONS,
+  TRAVEL_MODE_EMOJI,
+  TRAVEL_MODE_OPTIONS,
+  TRAVEL_PARTY_EMOJI,
   TRAVEL_PARTY_OPTIONS,
+  type TravelModeId,
 } from '../../constants/conciergePrefs';
 import { CHARACTER_CATEGORIES } from '../../constants/onboardingOptions';
 import {
@@ -96,6 +100,30 @@ export function AktuelleReiseEditor({
   const motives = draft.motives ?? [];
   const mustHaves = draft.mustHaveStyles ?? [];
   const periodPreset = matchTravelPeriodPreset(draft.travelPeriod);
+  const travelModes = draft.travelModes ?? [];
+  const cityModes: MobilityMode[] =
+    draft.cityMobilityModes?.length
+      ? draft.cityMobilityModes
+      : draft.mobilityMode
+        ? [draft.mobilityMode]
+        : [];
+
+  const toggleTravelMode = (id: TravelModeId) => {
+    const next = travelModes.includes(id)
+      ? travelModes.filter((x) => x !== id)
+      : [...travelModes, id];
+    onChange({ travelModes: next });
+  };
+
+  const toggleCityMobility = (id: MobilityMode) => {
+    const next = cityModes.includes(id)
+      ? cityModes.filter((x) => x !== id)
+      : [...cityModes, id];
+    onChange({
+      cityMobilityModes: next,
+      mobilityMode: next[0] ?? null,
+    });
+  };
 
   const motiveOptions = useMemo(
     () =>
@@ -237,13 +265,40 @@ export function AktuelleReiseEditor({
         <EqualChipRow count={TRAVEL_PARTY_OPTIONS.length}>
           {TRAVEL_PARTY_OPTIONS.map((o) => {
             const on = draft.travelParty === o.id;
+            const emoji = TRAVEL_PARTY_EMOJI[o.id as TravelParty] ?? '';
             return (
               <Pressable
                 key={o.id}
                 onPress={() => onChange({ travelParty: o.id as TravelParty })}
                 style={[styles.chip, on && styles.chipOn]}
               >
-                <Text style={styles.chipLabel}>{o.label}</Text>
+                <Text style={styles.chipLabel}>
+                  {emoji ? `${emoji} ` : ''}
+                  {o.label}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </EqualChipRow>
+      </View>
+
+      <View style={styles.group}>
+        <Text style={styles.label}>Wie kommst du zur Stadt?</Text>
+        <Text style={styles.hint}>Mehrfachauswahl — Anreise / Ankunft.</Text>
+        <EqualChipRow count={TRAVEL_MODE_OPTIONS.length}>
+          {TRAVEL_MODE_OPTIONS.map((o) => {
+            const on = travelModes.includes(o.id);
+            const emoji = TRAVEL_MODE_EMOJI[o.id] ?? '';
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => toggleTravelMode(o.id)}
+                style={[styles.chip, on && styles.chipOn]}
+              >
+                <Text style={styles.chipLabel}>
+                  {emoji ? `${emoji} ` : ''}
+                  {o.label}
+                </Text>
               </Pressable>
             );
           })}
@@ -252,16 +307,26 @@ export function AktuelleReiseEditor({
 
       <View style={styles.group}>
         <Text style={styles.label}>
-          Wie bewegst du dich in der Stadt während der aktuellen Reise?
+          Wie bewegst du dich in der Stadt?
         </Text>
         <Text style={styles.hint}>
-          Deine Präferenz — plus, womit du gerade unterwegs bist.
+          Mehrfachauswahl — plus, womit du gerade unterwegs bist.
         </Text>
-        <ChipRow
-          options={MOBILITY_OPTIONS}
-          value={draft.mobilityMode}
-          onSelect={(mobilityMode: MobilityMode) => onChange({ mobilityMode })}
-        />
+        <EqualChipRow count={MOBILITY_OPTIONS.length}>
+          {MOBILITY_OPTIONS.map((o) => {
+            const on = cityModes.includes(o.id);
+            return (
+              <Pressable
+                key={o.id}
+                onPress={() => toggleCityMobility(o.id)}
+                style={[styles.chip, on && styles.chipOn]}
+              >
+                <Text style={styles.chipLabel}>{o.label}</Text>
+                {o.hint ? <Text style={styles.chipHint}>{o.hint}</Text> : null}
+              </Pressable>
+            );
+          })}
+        </EqualChipRow>
         <Text style={[styles.subLabel, { marginTop: spacing.sm }]}>
           Jetzt unterwegs mit
         </Text>

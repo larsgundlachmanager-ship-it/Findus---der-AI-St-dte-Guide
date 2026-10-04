@@ -50,8 +50,8 @@ export const MAP_STICKY_PACK_SLOTS = 1;
 /** Slots 2–3: Viewport-Städte wandern dynamisch mit (Hamburg→Berlin→…). */
 export const MAP_BROWSE_PACK_SLOTS = 2;
 
-/** Pin-Indexes warm im RAM (mehr als Paint-Limit — schneller Stadtwechsel). */
-export const MAP_PIN_INDEX_WARM_LIMIT = 8;
+/** Pin-Indexes warm im RAM (Viewport + Sticky — nicht 8 Städte puffern). */
+export const MAP_PIN_INDEX_WARM_LIMIT = 3;
 
 const DOC = FileSystem.documentDirectory;
 const DIR = DOC ? `${DOC}cities/` : null;
@@ -59,11 +59,25 @@ const mem = new Map<string, MapPin[]>();
 
 function pathFor(cityId: string): string | null {
   if (!DIR) return null;
-  return `${DIR}${cityId.toLowerCase()}.pins.json`;
+  // v3: liked nur harte M1-Signale (nicht jedes Story-Restaurant).
+  return `${DIR}${cityId.toLowerCase()}.pins.v3.json`;
 }
 
 export function evictMapPinIndex(cityId: string): void {
   mem.delete(cityId.trim().toLowerCase());
+}
+
+export function listWarmMapPinCityIds(): string[] {
+  return [...mem.keys()];
+}
+
+/** Nur Keep-Städte behalten (Background-Trim). */
+export function trimMapPinIndexesToKeep(keep: Set<string>): void {
+  for (const id of [...mem.keys()]) {
+    if (keep.has(id)) continue;
+    mem.delete(id);
+  }
+  retainWarmPinIndexes(keep);
 }
 
 export async function deleteMapPinIndexFile(cityId: string): Promise<void> {
@@ -82,18 +96,30 @@ function isStoryKind(kind: string | null | undefined): boolean {
   return k !== 'approach' && k !== 'sub' && k !== 'directory';
 }
 
-/** Schneller Liked-Hint aus Pack-Tags (kein Profil-Gate). */
+/**
+ * Offline-Schätzung „Modul-1 würde auslösen“ → Karten-Fill (lila).
+ * Kein nacktes `story` — sonst Restaurants/Shops mit Story-Tag als Masse-Fill.
+ * Live-Prefs filtert die Active-Stadt strenger (`isModul1AutoTriggerMapPoi`).
+ */
 function isLikedPinSource(p: PinSource): boolean {
   const tags = String(p.tags_json ?? '').toLowerCase();
   if (!tags) return false;
-  if (tags.includes('directory') || tags.includes('amenity_skip')) return false;
-  return (
+  if (tags.includes('map_icon_only')) return false;
+  const directoryish =
+    tags.includes('directory') ||
+    tags.includes('amenity_skip') ||
+    tags.includes('tier4') ||
+    tags.includes('offline_lookup');
+  const hardTrigger =
     tags.includes('module1') ||
     tags.includes('"modul1"') ||
+    tags.includes('must_have') ||
     tags.includes('tier1') ||
-    tags.includes('tier2') ||
-    tags.includes('must_have')
-  );
+    tags.includes('map_story_fill') ||
+    tags.includes('landmark') ||
+    tags.includes('historical_core');
+  if (directoryish && !hardTrigger) return false;
+  return hardTrigger;
 }
 
 function slimPinRing(
@@ -158,6 +184,90 @@ export function peekMapPinIndex(cityId: string): MapPin[] | null {
   return hit ?? null;
 }
 
+const pendingPinRebuild = new Set<string>();
+
+function canParseFullPackNow(): boolean {
+  try {
+    const {
+      isMicActive,
+      isLaneFree,
+    } = require('../boot/interactiveBootGate') as {
+      isMicActive: () => boolean;
+      isLaneFree: (lane: string) => boolean;
+    };
+    if (isMicActive()) return false;
+    // Nur Idle/Hydrate — nie Mic/Polish-Hot-Path.
+    return isLaneFree('mapIdle') || isLaneFree('hydrate');
+  } catch {
+    return false;
+  }
+}
+
+function schedulePinIndexRebuildWhenIdle(cityId: string): void {
+  const id = cityId.trim().toLowerCase();
+  if (!id || pendingPinRebuild.has(id)) return;
+  if (mem.has(id) && (mem.get(id)?.length ?? 0) > 0) return;
+  pendingPinRebuild.add(id);
+  try {
+    const { runMapIdleWhenFree } = require('../boot/interactiveBootGate') as {
+      runMapIdleWhenFree: (fn: () => void) => void;
+    };
+    runMapIdleWhenFree(() => {
+      void rebuildPinIndexFromCachedPack(id, { force: true })
+        .catch(() => undefined)
+        .finally(() => {
+          pendingPinRebuild.delete(id);
+        });
+    });
+  } catch {
+    pendingPinRebuild.delete(id);
+  }
+}
+
+async function readSlimPinIndexFromDisk(id: string): Promise<MapPin[] | null> {
+  const p = pathFor(id);
+  if (!p) return null;
+  try {
+    const info = await FileSystem.getInfoAsync(p);
+    if (!info.exists || (info.size ?? 0) < 2) return null;
+    const raw = await FileSystem.readAsStringAsync(p);
+    const parsed = JSON.parse(raw) as MapPin[];
+    if (!Array.isArray(parsed)) return null;
+    return parsed.map((pin) => ({
+      ...pin,
+      liked: pin.liked === 1 ? 1 : 0,
+      story: pin.story === 1 ? 1 : 0,
+    }));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Pin-Index: RAM → Slim `.pins.json`.
+ * Volles Pack-JSON nur mit `allowFullPackRebuild` und nur wenn Idle/Hydrate frei
+ * (sonst Schedule hinter mapIdle).
+ */
+export async function loadMapPinIndex(
+  cityId: string,
+  opts?: { allowFullPackRebuild?: boolean },
+): Promise<MapPin[]> {
+  const id = cityId.trim().toLowerCase();
+  const hit = mem.get(id);
+  if (hit) return hit;
+  const fromDisk = await readSlimPinIndexFromDisk(id);
+  if (fromDisk) {
+    mem.set(id, fromDisk);
+    return fromDisk;
+  }
+  const wantRebuild = opts?.allowFullPackRebuild === true;
+  if (wantRebuild && canParseFullPackNow()) {
+    return rebuildPinIndexFromCachedPack(id);
+  }
+  schedulePinIndexRebuildWhenIdle(id);
+  return [];
+}
+
 export async function writeMapPinIndex(
   cityId: string,
   pois: PinSource[],
@@ -200,40 +310,23 @@ async function persistPinIndex(id: string, pins: MapPin[]): Promise<void> {
   }
 }
 
-export async function loadMapPinIndex(cityId: string): Promise<MapPin[]> {
-  const id = cityId.trim().toLowerCase();
-  const hit = mem.get(id);
-  if (hit) return hit;
-  const p = pathFor(id);
-  if (p) {
-    try {
-      const info = await FileSystem.getInfoAsync(p);
-      if (info.exists) {
-        const raw = await FileSystem.readAsStringAsync(p);
-        const parsed = JSON.parse(raw) as MapPin[];
-        if (Array.isArray(parsed)) {
-          const normalized = parsed.map((pin) => ({
-            ...pin,
-            liked: pin.liked === 1 ? 1 : 0,
-            story: pin.story === 1 ? 1 : 0,
-          }));
-          mem.set(id, normalized);
-          return normalized;
-        }
-      }
-    } catch {
-      /* rebuild from pack */
-    }
+async function rebuildPinIndexFromCachedPack(
+  cityId: string,
+  opts?: { force?: boolean },
+): Promise<MapPin[]> {
+  if (!opts?.force && !canParseFullPackNow()) {
+    schedulePinIndexRebuildWhenIdle(cityId);
+    return mem.get(cityId) ?? [];
   }
-  const rebuilt = await rebuildPinIndexFromCachedPack(id);
-  return rebuilt;
-}
-
-async function rebuildPinIndexFromCachedPack(cityId: string): Promise<MapPin[]> {
   try {
-    const { loadCityPackCachedOrRemote } = await import('../cityCatalogService');
+    // Nur Disk — nie Remote. Frischer Pull nur bei echtem Stadtwechsel/Download.
+    const { loadCityPackLocalOnly } = await import('../cityCatalogService');
     const { mapCityPackToRemote } = await import('../cityPack');
-    const pack = await loadCityPackCachedOrRemote(cityId);
+    const pack = await loadCityPackLocalOnly(cityId);
+    if (!pack) {
+      mem.set(cityId, []);
+      return [];
+    }
     const mapped = mapCityPackToRemote(pack);
     await writeMapPinIndex(cityId, mapped.pois);
     try {
@@ -335,7 +428,9 @@ export async function loadNeighborPinsInViewport(opts: {
     1,
     Math.min(6, opts.maxCities ?? MAP_VIEWPORT_PACK_CITY_LIMIT),
   );
-  const active = (opts.activeCityId ?? '').trim().toLowerCase();
+  // soft_gdynia belegt keinen Paint-Slot — Browse-Packs (danzig) bekommen Budget.
+  const rawActive = (opts.activeCityId ?? '').trim().toLowerCase();
+  const active = rawActive.startsWith('soft_') ? '' : rawActive;
   const sticky = (opts.stickyCityId ?? '').trim().toLowerCase() || null;
   const padded = padView(opts.view, opts.bufferFactor ?? 0.35);
   const known = listKnownCityCoverageBounds();
@@ -447,23 +542,35 @@ export async function warmNearbyPinIndexes(opts: {
   push(sticky);
   push(active);
 
+  // Ohne GPS: nur Sticky/Active — kein 8-Pack-JSON-Sturm beim Boot.
+  if (lat == null || lng == null) {
+    for (const id of ordered.slice(0, 1)) {
+      const cached = await isCityPackCachedOnDevice(id);
+      if (!cached) continue;
+      await loadMapPinIndex(id, { allowFullPackRebuild: true });
+    }
+    retainWarmPinIndexes(new Set(ordered.slice(0, 1)));
+    return;
+  }
+
   const cities = listKnownCityCoverageBounds()
     .filter((b) => {
       if (ordered.includes(b.cityId)) return false;
-      if (lat == null || lng == null) return false;
       return overlaps(b, view);
     })
     .sort((a, b) => distToViewCenterM(a, view) - distToViewCenterM(b, view));
 
   for (const b of cities) {
-    if (ordered.length >= MAP_PIN_INDEX_WARM_LIMIT) break;
+    if (ordered.length >= Math.min(3, MAP_PIN_INDEX_WARM_LIMIT)) break;
     ordered.push(b.cityId);
   }
 
-  for (const id of ordered.slice(0, MAP_PIN_INDEX_WARM_LIMIT)) {
+  for (const id of ordered.slice(0, Math.min(3, MAP_PIN_INDEX_WARM_LIMIT))) {
     const cached = await isCityPackCachedOnDevice(id);
     if (!cached) continue;
-    await loadMapPinIndex(id);
+    // Yield zwischen Städten — sonst friert der erste Pan nach Splash.
+    await new Promise<void>((r) => setTimeout(r, 48));
+    await loadMapPinIndex(id, { allowFullPackRebuild: true });
   }
   retainWarmPinIndexes(
     new Set([

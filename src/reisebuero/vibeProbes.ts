@@ -112,6 +112,12 @@ export function probeDirection(key: string): string {
       return 'Wetter: eher warm / egal — kurz';
     case 'ideaHook':
       return 'Eine passende Idee als Frage, nur wenn der Vibe sitzt — User darf nein sagen';
+    case 'purpose':
+      return 'Reiseart: was soll der Urlaub werden — entspannen, Stadt, Strand, Event…';
+    case 'extraWishes':
+      return 'Was ist wichtig: Prioritäten / Musts für die Recherche';
+    case 'highlight':
+      return 'Highlight: die eine Sache, die sitzen muss';
     default:
       return '';
   }

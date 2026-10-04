@@ -64,6 +64,24 @@ assert(
 );
 assert(looksLikeStreetAddress('Hauptstraße 3a'), 'Hauptstraße');
 assert(looksLikeStreetAddress('Bahnhofstr. 12'), 'Bahnhofstr.');
+assert(looksLikeStreetAddress('Kleiner Sand 50, Uetersen'), 'Kleiner Sand 50');
+assert(looksLikeStreetAddress('Kleiner Sand 50 in Uetersen'), 'Kleiner Sand in Stadt');
+assert(
+  extractStreetAddressFromUtterance(
+    'Bring mich zu Kleiner Sand 50, Uetersen',
+  ) === 'Kleiner Sand 50, Uetersen',
+  'Kleiner Sand aus Satz',
+);
+assert(
+  extractStreetAddressFromUtterance(
+    'navigiere zu Kleiner Sand 50 in Uetersen',
+  ) === 'Kleiner Sand 50 in Uetersen',
+  'Kleiner Sand mit in',
+);
+assert(
+  parseStreetHouseQuery('Kleiner Sand 50, Uetersen')?.street === 'Kleiner Sand',
+  'parse Kleiner Sand',
+);
 assert(!looksLikeStreetAddress('Heisterhof'), 'no number → not address');
 assert(!looksLikeStreetAddress('Hotel 12 Apostel'), 'hotel false positive');
 assert(!looksLikeStreetAddress('Bus Linie 12'), 'bus false positive');

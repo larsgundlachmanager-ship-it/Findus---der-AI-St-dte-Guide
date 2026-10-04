@@ -1,0 +1,339 @@
+JAVA_HOME=C:\Program Files\Microsoft\jdk-17.0.19.10-hotspot\
+ANDROID_HOME=C:\Users\larsf\AppData\Local\Android\Sdk
+GRADLE_USER_HOME=C:\Users\larsf\.gradle
+NODE=v22.14.0 (portable)
+Sync Android app iconsƒ?Ý
+Sync Android icons from C:\Users\larsf\Findus 2.0\assets\adaptive-icon.png
+Done â€” mipmaps updated under android/app/src/main/res/
+Starte Release-Build (assembleRelease)ƒ?Ý
+Starting a Gradle Daemon, 1 busy Daemon could not be reused, use --status for details
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-dev-launcher-gradle-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-dev-launcher-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-dev-launcher-gradle-plugin:classes UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:jar UP-TO-DATE
+
+> Configure project :app
+ ??  [33mApplying gradle plugin[0m '[32mexpo-dev-launcher-gradle-plugin[0m' (expo-dev-launcher@5.0.35)
+
+> Configure project :expo
+
+Using expo modules
+  - [32mexpo-application[0m (6.0.2)
+  - [32mexpo-asset[0m (11.0.5)
+  - [32mexpo-av[0m (15.0.2)
+  - [32mexpo-battery[0m (9.0.2)
+  - [32mexpo-constants[0m (17.0.8)
+  - [32mexpo-crypto[0m (14.0.2)
+  - [32mexpo-dev-client[0m (5.0.20)
+  - [32mexpo-dev-launcher[0m (5.0.35)
+  - [32mexpo-dev-menu[0m (6.0.25)
+  - [32mexpo-file-system[0m (18.0.12)
+  - [32mexpo-font[0m (13.0.4)
+  - [32mexpo-haptics[0m (14.0.1)
+  - [32mexpo-intent-launcher[0m (12.0.2)
+  - [32mexpo-json-utils[0m (0.14.0)
+  - [32mexpo-linking[0m (7.0.5)
+  - [32mexpo-localization[0m (16.0.1)
+  - [32mexpo-location[0m (18.0.10)
+  - [32mexpo-manifests[0m (0.15.8)
+  - [32mexpo-modules-core[0m (2.2.3)
+  - [32mexpo-network[0m (7.0.5)
+  - [32mexpo-notifications[0m (0.29.14)
+  - [32mexpo-sensors[0m (14.0.2)
+  - [32mexpo-speech[0m (13.0.1)
+  - [32mexpo-speech-recognition[0m (1.1.1)
+  - [32mexpo-sqlite[0m (15.1.4)
+  - [32mexpo-task-manager[0m (12.0.6)
+  - [32mexpo-web-browser[0m (14.0.2)
+  - [32mfindus-espeak[0m (1.0.0)
+  - [32mfindus-map-native[0m (1.0.0)
+  - [32munimodules-app-loader[0m (5.0.1)
+
+
+> Configure project :react-native-reanimated
+Android gradle plugin: 8.6.0
+Gradle: 8.10.2
+
+> Task :expo-constants:createExpoConfig
+env: load .env
+env: export EXPO_PUBLIC_OPENAI_API_KEY EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_CITY_ID EXPO_PUBLIC_KOKORO_MODEL_URL EXPO_PUBLIC_KOKORO_VOICE_URL GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GEMINI_API_KEY GETYOURGUIDE_PARTNER_ID MUSEMENT_AFFILIATE_ID UBER_CLIENT_ID VIATOR_PARTNER_ID ECONOMY_BOOKINGS_REFERRAL_URL BOUNCE_AFFILIATE_URL STAY22_AFFILIATE_ID EXPO_PUBLIC_FLIGHTAWARE_API_KEY EXPO_PUBLIC_DB_CLIENT_ID EXPO_PUBLIC_DB_CLIENT_SECRET EXPO_PUBLIC_TRANSITOUS_BASE_URL EXPO_PUBLIC_CARTESIA_API_KEY SUPABASE_SERVICE_ROLE_KEY EXPO_PUBLIC_EXPEDIA_CAMREF EXPO_PUBLIC_EXPEDIA_CREATIVEREF EXPO_PUBLIC_EXPEDIA_SITE_ID FINDUS_PACK_COST EXPO_PUBLIC_PROTOMAPS_API_KEY EXPO_PUBLIC_MAP_VECTOR_TILES EXPO_PUBLIC_TRAVELPAYOUTS_MARKER EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN GIGSBERG_API_KEY EXPO_PUBLIC_GIGSBERG_API_KEY
+
+BUILD SUCCESSFUL in 2m 44s
+19 actionable tasks: 5 executed, 14 up-to-date
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :expo-dev-launcher-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:processResources UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:classes UP-TO-DATE
+> Task :gradle-plugin:react-native-gradle-plugin:jar UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:compileKotlin UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-dev-launcher-gradle-plugin:classes UP-TO-DATE
+> Task :expo-dev-launcher-gradle-plugin:jar UP-TO-DATE
+
+> Configure project :app
+ ??  [33mApplying gradle plugin[0m '[32mexpo-dev-launcher-gradle-plugin[0m' (expo-dev-launcher@5.0.35)
+
+> Configure project :expo
+
+Using expo modules
+  - [32mexpo-application[0m (6.0.2)
+  - [32mexpo-asset[0m (11.0.5)
+  - [32mexpo-av[0m (15.0.2)
+  - [32mexpo-battery[0m (9.0.2)
+  - [32mexpo-constants[0m (17.0.8)
+  - [32mexpo-crypto[0m (14.0.2)
+  - [32mexpo-dev-client[0m (5.0.20)
+  - [32mexpo-dev-launcher[0m (5.0.35)
+  - [32mexpo-dev-menu[0m (6.0.25)
+  - [32mexpo-file-system[0m (18.0.12)
+  - [32mexpo-font[0m (13.0.4)
+  - [32mexpo-haptics[0m (14.0.1)
+  - [32mexpo-intent-launcher[0m (12.0.2)
+  - [32mexpo-json-utils[0m (0.14.0)
+  - [32mexpo-linking[0m (7.0.5)
+  - [32mexpo-localization[0m (16.0.1)
+  - [32mexpo-location[0m (18.0.10)
+  - [32mexpo-manifests[0m (0.15.8)
+  - [32mexpo-modules-core[0m (2.2.3)
+  - [32mexpo-network[0m (7.0.5)
+  - [32mexpo-notifications[0m (0.29.14)
+  - [32mexpo-sensors[0m (14.0.2)
+  - [32mexpo-speech[0m (13.0.1)
+  - [32mexpo-speech-recognition[0m (1.1.1)
+  - [32mexpo-sqlite[0m (15.1.4)
+  - [32mexpo-task-manager[0m (12.0.6)
+  - [32mexpo-web-browser[0m (14.0.2)
+  - [32mfindus-espeak[0m (1.0.0)
+  - [32mfindus-map-native[0m (1.0.0)
+  - [32munimodules-app-loader[0m (5.0.1)
+
+
+> Configure project :react-native-reanimated
+Android gradle plugin: 8.6.0
+Gradle: 8.10.2
+WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 36
+
+This Android Gradle plugin (8.6.0) was tested up to compileSdk = 35.
+
+You are strongly encouraged to update your project to use a newer
+Android Gradle plugin that has been tested with compileSdk = 36.
+
+If you are already using the latest version of the Android Gradle plugin,
+you may need to wait until a newer version with support for compileSdk = 36 is available.
+
+For more information refer to the compatibility table:
+https://d.android.com/r/tools/api-level-support
+
+To suppress this warning, add/update
+    android.suppressUnsupportedCompileSdk=36
+to this project's gradle.properties.
+WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 36
+
+This Android Gradle plugin (8.6.0) was tested up to compileSdk = 35.
+
+You are strongly encouraged to update your project to use a newer
+Android Gradle plugin that has been tested with compileSdk = 36.
+
+If you are already using the latest version of the Android Gradle plugin,
+you may need to wait until a newer version with support for compileSdk = 36 is available.
+
+For more information refer to the compatibility table:
+https://d.android.com/r/tools/api-level-support
+
+To suppress this warning, add/update
+    android.suppressUnsupportedCompileSdk=36
+to this project's gradle.properties.
+
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:generateAutolinkingNewArchitectureFiles UP-TO-DATE
+> Task :app:generateAutolinkingPackageList UP-TO-DATE
+> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :app:generateCodegenArtifactsFromSchema SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:generateReleaseBuildConfig UP-TO-DATE
+> Task :expo:generateExpoModulesPackageListTask UP-TO-DATE
+> Task :expo:preBuild UP-TO-DATE
+> Task :expo:preReleaseBuild UP-TO-DATE
+> Task :expo:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-application:preBuild UP-TO-DATE
+> Task :expo-application:preReleaseBuild UP-TO-DATE
+> Task :expo-application:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-asset:preBuild UP-TO-DATE
+> Task :expo-asset:preReleaseBuild UP-TO-DATE
+> Task :expo-asset:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-av:preBuild UP-TO-DATE
+> Task :expo-av:preReleaseBuild UP-TO-DATE
+> Task :expo-av:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-battery:preBuild UP-TO-DATE
+> Task :expo-battery:preReleaseBuild UP-TO-DATE
+> Task :expo-battery:writeReleaseAarMetadata UP-TO-DATE
+
+> Task :expo-constants:createExpoConfig
+env: load .env
+env: export EXPO_PUBLIC_OPENAI_API_KEY EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_CITY_ID EXPO_PUBLIC_KOKORO_MODEL_URL EXPO_PUBLIC_KOKORO_VOICE_URL GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GEMINI_API_KEY GETYOURGUIDE_PARTNER_ID MUSEMENT_AFFILIATE_ID UBER_CLIENT_ID VIATOR_PARTNER_ID ECONOMY_BOOKINGS_REFERRAL_URL BOUNCE_AFFILIATE_URL STAY22_AFFILIATE_ID EXPO_PUBLIC_FLIGHTAWARE_API_KEY EXPO_PUBLIC_DB_CLIENT_ID EXPO_PUBLIC_DB_CLIENT_SECRET EXPO_PUBLIC_TRANSITOUS_BASE_URL EXPO_PUBLIC_CARTESIA_API_KEY SUPABASE_SERVICE_ROLE_KEY EXPO_PUBLIC_EXPEDIA_CAMREF EXPO_PUBLIC_EXPEDIA_CREATIVEREF EXPO_PUBLIC_EXPEDIA_SITE_ID FINDUS_PACK_COST EXPO_PUBLIC_PROTOMAPS_API_KEY EXPO_PUBLIC_MAP_VECTOR_TILES EXPO_PUBLIC_TRAVELPAYOUTS_MARKER EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN GIGSBERG_API_KEY EXPO_PUBLIC_GIGSBERG_API_KEY
+
+> Task :expo-constants:preBuild
+> Task :expo-constants:preReleaseBuild
+> Task :expo-constants:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-crypto:preBuild UP-TO-DATE
+> Task :expo-crypto:preReleaseBuild UP-TO-DATE
+> Task :expo-crypto:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-dev-client:preBuild UP-TO-DATE
+> Task :expo-dev-client:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-client:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-dev-launcher:preBuild UP-TO-DATE
+> Task :expo-dev-launcher:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-launcher:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-dev-menu:preBuild UP-TO-DATE
+> Task :expo-dev-menu:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-menu:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-dev-menu-interface:preBuild UP-TO-DATE
+> Task :expo-dev-menu-interface:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-menu-interface:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-file-system:preBuild UP-TO-DATE
+> Task :expo-file-system:preReleaseBuild UP-TO-DATE
+> Task :expo-file-system:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-font:preBuild UP-TO-DATE
+> Task :expo-font:preReleaseBuild UP-TO-DATE
+> Task :expo-font:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-haptics:preBuild UP-TO-DATE
+> Task :expo-haptics:preReleaseBuild UP-TO-DATE
+> Task :expo-haptics:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-intent-launcher:preBuild UP-TO-DATE
+> Task :expo-intent-launcher:preReleaseBuild UP-TO-DATE
+> Task :expo-intent-launcher:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-json-utils:preBuild UP-TO-DATE
+> Task :expo-json-utils:preReleaseBuild UP-TO-DATE
+> Task :expo-json-utils:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-linking:preBuild UP-TO-DATE
+> Task :expo-linking:preReleaseBuild UP-TO-DATE
+> Task :expo-linking:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-localization:preBuild UP-TO-DATE
+> Task :expo-localization:preReleaseBuild UP-TO-DATE
+> Task :expo-localization:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-location:preBuild UP-TO-DATE
+> Task :expo-location:preReleaseBuild UP-TO-DATE
+> Task :expo-location:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-manifests:preBuild UP-TO-DATE
+> Task :expo-manifests:preReleaseBuild UP-TO-DATE
+> Task :expo-manifests:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-modules-core:preBuild UP-TO-DATE
+> Task :expo-modules-core:preReleaseBuild UP-TO-DATE
+> Task :expo-modules-core:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-network:preBuild UP-TO-DATE
+> Task :expo-network:preReleaseBuild UP-TO-DATE
+> Task :expo-network:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-notifications:preBuild UP-TO-DATE
+> Task :expo-notifications:preReleaseBuild UP-TO-DATE
+> Task :expo-notifications:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-sensors:preBuild UP-TO-DATE
+> Task :expo-sensors:preReleaseBuild UP-TO-DATE
+> Task :expo-sensors:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-speech:preBuild UP-TO-DATE
+> Task :expo-speech:preReleaseBuild UP-TO-DATE
+> Task :expo-speech:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-speech-recognition:preBuild UP-TO-DATE
+> Task :expo-speech-recognition:preReleaseBuild UP-TO-DATE
+> Task :expo-speech-recognition:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-sqlite:preBuild UP-TO-DATE
+> Task :expo-sqlite:preReleaseBuild UP-TO-DATE
+> Task :expo-sqlite:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-task-manager:preBuild UP-TO-DATE
+> Task :expo-task-manager:preReleaseBuild UP-TO-DATE
+> Task :expo-task-manager:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-updates-interface:preBuild UP-TO-DATE
+> Task :expo-updates-interface:preReleaseBuild UP-TO-DATE
+> Task :expo-updates-interface:writeReleaseAarMetadata UP-TO-DATE
+> Task :expo-web-browser:preBuild UP-TO-DATE
+> Task :expo-web-browser:preReleaseBuild UP-TO-DATE
+> Task :expo-web-browser:writeReleaseAarMetadata UP-TO-DATE
+> Task :findus-espeak:preBuild UP-TO-DATE
+> Task :findus-espeak:preReleaseBuild UP-TO-DATE
+> Task :findus-espeak:writeReleaseAarMetadata UP-TO-DATE
+> Task :findus-map-native:preBuild UP-TO-DATE
+> Task :findus-map-native:preReleaseBuild UP-TO-DATE
+> Task :findus-map-native:writeReleaseAarMetadata UP-TO-DATE
+> Task :llama.rn:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :llama.rn:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :llama.rn:preBuild UP-TO-DATE
+> Task :llama.rn:preReleaseBuild UP-TO-DATE
+> Task :llama.rn:writeReleaseAarMetadata UP-TO-DATE
+> Task :maplibre_maplibre-react-native:preBuild UP-TO-DATE
+> Task :maplibre_maplibre-react-native:preReleaseBuild UP-TO-DATE
+> Task :maplibre_maplibre-react-native:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-async-storage_async-storage:preBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:preReleaseBuild UP-TO-DATE
+> Task :react-native-async-storage_async-storage:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-reanimated:assertLatestReactNativeWithNewArchitectureTask SKIPPED
+> Task :react-native-reanimated:assertMinimalReactNativeVersionTask SKIPPED
+> Task :react-native-reanimated:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-reanimated:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-reanimated:prepareReanimatedHeadersForPrefabs UP-TO-DATE
+> Task :react-native-reanimated:prepareWorkletsHeadersForPrefabs UP-TO-DATE
+> Task :react-native-reanimated:preBuild UP-TO-DATE
+> Task :react-native-reanimated:preReleaseBuild UP-TO-DATE
+> Task :react-native-reanimated:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-safe-area-context:preBuild UP-TO-DATE
+> Task :react-native-safe-area-context:preReleaseBuild UP-TO-DATE
+> Task :react-native-safe-area-context:writeReleaseAarMetadata UP-TO-DATE
+> Task :react-native-webview:generateCodegenSchemaFromJavaScript UP-TO-DATE
+> Task :react-native-webview:generateCodegenArtifactsFromSchema UP-TO-DATE
+> Task :react-native-webview:preBuild UP-TO-DATE
+> Task :react-native-webview:preReleaseBuild UP-TO-DATE
+> Task :react-native-webview:writeReleaseAarMetadata UP-TO-DATE
+> Task :unimodules-app-loader:preBuild UP-TO-DATE
+> Task :unimodules-app-loader:preReleaseBuild UP-TO-DATE
+> Task :unimodules-app-loader:writeReleaseAarMetadata UP-TO-DATE
+> Task :app:checkReleaseAarMetadata UP-TO-DATE
+
+> Task :app:createBundleReleaseJsAndAssets
+env: load .env
+env: export EXPO_PUBLIC_OPENAI_API_KEY EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_CITY_ID EXPO_PUBLIC_KOKORO_MODEL_URL EXPO_PUBLIC_KOKORO_VOICE_URL GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GEMINI_API_KEY GETYOURGUIDE_PARTNER_ID MUSEMENT_AFFILIATE_ID UBER_CLIENT_ID VIATOR_PARTNER_ID ECONOMY_BOOKINGS_REFERRAL_URL BOUNCE_AFFILIATE_URL STAY22_AFFILIATE_ID EXPO_PUBLIC_FLIGHTAWARE_API_KEY EXPO_PUBLIC_DB_CLIENT_ID EXPO_PUBLIC_DB_CLIENT_SECRET EXPO_PUBLIC_TRANSITOUS_BASE_URL EXPO_PUBLIC_CARTESIA_API_KEY SUPABASE_SERVICE_ROLE_KEY EXPO_PUBLIC_EXPEDIA_CAMREF EXPO_PUBLIC_EXPEDIA_CREATIVEREF EXPO_PUBLIC_EXPEDIA_SITE_ID FINDUS_PACK_COST EXPO_PUBLIC_PROTOMAPS_API_KEY EXPO_PUBLIC_MAP_VECTOR_TILES EXPO_PUBLIC_TRAVELPAYOUTS_MARKER EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN GIGSBERG_API_KEY EXPO_PUBLIC_GIGSBERG_API_KEY
+Starting Metro Bundler
+warning: Bundler cache is empty, rebuilding (this may take a minute)

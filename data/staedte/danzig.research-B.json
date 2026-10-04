@@ -1,0 +1,643 @@
+{
+  "notes": [
+    "Deep Research B für Danzig/Gdańsk, Polen, Stand 20.09.2026. Alle 16 Pflicht-IDs und alle 13 gewünschten Zusatz-IDs sind enthalten.",
+    "Dauerhafte Fakten wurden gegen offizielle Seiten der Stadt Gdańsk, ihrer Museen und Kulturhäuser, der regionalen Tourismusorganisation sowie der jeweiligen Betreiber geprüft.",
+    "Öffnungszeiten, Eintritt, Programme, Gottesdienste, Veranstaltungen, Baustellen, Zugänge, Tierbestand, Badebedingungen und Aussichtsbetrieb stehen ausschließlich als LIVE-Hinweise im Datenpool.",
+    "Keine Dialoge, keine festen Vorleseskripte. Jeder Ort besitzt mindestens acht eigenständige Deep-Einträge; Tier-1-Kandidaten sind auf mindestens 2200 Zeichen, Tier-2-Kandidaten auf mindestens 1200 Zeichen Textpool ausgelegt."
+  ],
+  "sources": [
+    "https://visitgdansk.com/res/28570074/28570078/Folder_2025_DL_DE.pdf",
+    "https://visitgdansk.com/en/gotycka-architektura-w-gdansku",
+    "https://visitgdansk.com/en/droga-krolewska",
+    "https://visitgdansk.com/oliwa?setLanguage=en",
+    "https://muzeumgdansk.pl/en/oddzialy-muzeum/uphagen-house/",
+    "https://muzeumgdansk.pl/en/oddzialy-muzeum/museum-of-amber/",
+    "https://muzeumgdansk.pl/en/",
+    "https://nmm.pl/en/soldek/",
+    "https://nmm.pl/en/soldek/historia-statku/",
+    "https://kartaturysty.visitgdansk.com/en/partners/museum-of-gdansk---wisloujscie-fortress-9663",
+    "https://kartaturysty.visitgdansk.com/en/partners/museum-of-gdansk--museum-of-gdansk-science-756693",
+    "https://kartaturysty.visitgdansk.com/en/partners/baltic-sea-cultural-centre-32002408",
+    "https://kartaturysty.visitgdansk.com/en/partners/museum-of-gdansk--foregate-complex-1420180",
+    "https://kartaturysty.visitgdansk.com/en/partners/national-museum-in-gdansk-%E2%80%93-green-gate-branch-10588",
+    "https://pomorskie.travel/en/articles/st-dominics-fair-in-gdansk/",
+    "https://gdansk.gedanopedia.pl/gdansk/?title=JARMARK_%C5%9AW._DOMINIKA",
+    "https://operabaltycka.pl/en",
+    "https://pomorskie.travel/en/punkty-poi/opera-baltycka-w-gdansku/",
+    "https://filharmonia.gda.pl/filharmonia/historia-filharmonii",
+    "https://zoo.gdansk.pl/en/homepage/",
+    "https://www.gdansk.pl/turystyka-w-gdansku/oliwskie-zoo,a,3661",
+    "https://www.oliviastar.pl/en/"
+  ],
+  "spots": [
+    {
+      "id": "danzig_speicherinsel",
+      "name": "Speicherinsel",
+      "general_info": "Die Speicherinsel zwischen Mottlau und Neuer Mottlau war das große Lager- und Umschlagviertel des frühneuzeitlichen Danzig. Kriegszerstörung, archäologische Spuren und heutige Neubauten machen den Wandel des Hafenraums sichtbar.",
+      "deep_data_pool": [
+        {"text": "Die Wyspa Spichrzów entstand als funktionaler Hafenraum gegenüber der Rechtstadt. Auf engem Gelände standen über Jahrhunderte zahlreiche Speicher für Getreide und andere Handelswaren, die vom Fluss auf Schiffe oder aus dem Hinterland in die Stadt gelangten.", "tags": ["geschichte", "hafen", "handel"]},
+        {"text": "Die Insellage diente nicht nur dem Umschlag. Wasserarme trennten das leicht brennbare Speicherviertel von dichter Wohnbebauung; dennoch blieben Feuer eine ständige Gefahr. Viele Speicher erhielten eigene Namen und bildhafte Zeichen, die auch ohne Lesekenntnisse verständlich waren.", "tags": ["stadtgeschichte", "brandschutz"]},
+        {"text": "Danzigs Getreidehandel verband das Weichselhinterland mit Ost- und Nordsee. Die Speicherinsel war deshalb kein lokaler Vorratsplatz, sondern Teil einer internationalen Logistikkette aus Flussschifffahrt, Hafenarbeit, Kaufmannskapital und seegängigen Frachtern.", "tags": ["handel", "einordnung"]},
+        {"text": "1945 wurde der historische Speicherbestand nahezu vollständig zerstört. Einzelne Mauern, Keller und der Speicher Blaues Lamm blieben als Zeugnisse erhalten. Der heutige Eindruck ist daher eine Mischung aus Rekonstruktion, moderner Neubebauung und wenigen originalen Resten.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Der Speicher Blaues Lamm gilt als besonders wertvoller erhaltener Bau. Das Archäologische Museum vermittelt dort Stadtarchäologie und rekonstruiert unter anderem eine Gasse des hansischen Danzig mit Werkstätten und Verkaufsständen; konkrete Ausstellungen sind veränderlich.", "tags": ["museum", "archaeologie"]},
+        {"text": "Visuell: Von der Langen Brücke blickt man über die Mottlau auf eine lange Uferkante mit giebelständigen Fassaden. Historisierende Giebel stehen neben klar modernen Häusern; zwischen den Blöcken führen Stege und Straßen zur Neuen Mottlau.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Krantor, Sołdek, Ołowianka und Speicherinsel erklären gemeinsam die Arbeitsteilung des Hafens: Lasten wurden gehoben, gelagert, auf Fluss- und Seeschiffe verteilt und später museal dokumentiert. Die heutige Fußgängerbrücke verkürzt diese historische Hafenrunde.", "tags": ["quer", "stadtraum"]},
+        {"text": "Die heutige Bebauung ist keine lückenlose Kopie des Vorkriegszustands. Fassadenrhythmus und Giebelformen greifen historische Motive auf, während Grundrisse, Hotels, Wohnungen und öffentliche Uferwege zeitgenössisch sind. Diese Spannung gehört zur Geschichte des Wiederaufbaus.", "tags": ["architektur", "quellenkritik"]},
+        {"text": "Die Insel ist als zusammenhängender Stadtraum größer als ein einzelner Navigationspunkt. Für die historische Lesbarkeit eignen sich besonders die Uferseite zur Rechtstadt, der Bereich des Blauen Lamms und die Übergänge über Alte und Neue Mottlau.", "tags": ["orientierung", "besuch"]},
+        {"text": "LIVE: Zugänge, Brückenbetrieb, Baustellen, Nutzungen einzelner Speicher, Ausstellungen im Blauen Lamm, Gastronomie und Uferveranstaltungen aktuell prüfen. Aus dem historischen Namen niemals eine frei zugängliche Speicherbesichtigung ableiten.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Sind die heutigen Häuser auf der Speicherinsel original?", "a": "Nur wenige historische Reste überstanden 1945; der heutige Bestand verbindet erhaltene Substanz, Rekonstruktion und moderne Neubauten."},
+        {"q": "Warum lagen die Speicher auf einer Insel?", "a": "Die Lage war günstig für den Wassertransport und trennte das brandgefährdete Lagerquartier teilweise von der dichten Rechtstadt."}
+      ]
+    },
+    {
+      "id": "danzig_so_dek",
+      "name": "Museumsschiff Sołdek",
+      "general_info": "Die Sołdek war das erste nach dem Zweiten Weltkrieg in Polen gebaute und in Dienst gestellte Hochseeschiff. Der Dampf-Ruderkohlenfrachter liegt heute als Museumsschiff an der Ołowianka.",
+      "deep_data_pool": [
+        {"text": "Die Sołdek war der Prototyp des Frachterschiffstyps B-30. Ein polnisches Konstruktionsteam unter Henryk Giełdzik entwickelte den Entwurf; gebaut wurde das Schiff in der 1947 gegründeten Danziger Werft, die damit den Wiederaufbau des polnischen Schiffbaus demonstrierte.", "tags": ["geschichte", "schiffbau"]},
+        {"text": "Die Kiellegung fand am 3. April 1948 auf Helling A2 statt, der Stapellauf am 6. November 1948. Für den Rumpf wurden Schweiß- und Niettechnik kombiniert; nach Museumsangaben kamen ungefähr 300000 Niete zum Einsatz.", "tags": ["technik", "bau"]},
+        {"text": "Namensgeber war der als vorbildlicher Arbeiter ausgezeichnete Schiffbauzeichner Stanisław Sołdek; seine Frau Helena taufte das Schiff. Die Benennung gehört zum politischen Arbeitskult der frühen Volksrepublik und sollte industrielle Leistung personifizieren.", "tags": ["name", "zeitgeschichte"]},
+        {"text": "Im Oktober 1949 begann der reguläre Dienst. Bis Anfang 1981 absolvierte das Schiff 1479 Reisen, lief mehr als 60 Häfen an und transportierte über 3,5 Millionen Tonnen Ladung, vor allem Kohle und Eisenerz.", "tags": ["betrieb", "handel"]},
+        {"text": "Erhalten sind der genietete und geschweißte Rumpf, vier Laderäume, Ladegeschirr, Mannschafts- und Offiziersbereiche, Brücke und Maschinenraum. Die Dampfmaschine macht eine Antriebstechnik erfahrbar, die bei heutigen Frachtern weitgehend verschwunden ist.", "tags": ["technik", "innenraum"]},
+        {"text": "Visuell: Das schwarze Frachtschiff liegt längs vor den Backsteingebäuden des Maritimen Museums auf Ołowianka. Erkennbar sind der erhöhte Achterbereich, vier Ladeluken, Masten mit Ladebäumen und der kompakte Brückenaufbau.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Gegenüber stehen Krantor und Lange Brücke, südlich beginnt die Speicherinsel. Das Schiff verbindet den mittelalterlich-frühneuzeitlichen Hafenhandel im Stadtbild mit der sozialistischen Werft- und Seefahrtsgeschichte des 20. Jahrhunderts.", "tags": ["quer", "hafen"]},
+        {"text": "Die Ausstellung Sołdek und seine Zeit ordnet Konstruktion, Besatzung, Ladung und Nachkriegswirtschaft mit Dokumenten, Fotografien, Werkzeugen sowie Kohle- und Erzproben ein. Die konkrete mediale Präsentation kann verändert werden.", "tags": ["ausstellung", "arbeitsgeschichte"]},
+        {"text": "Ein historisches Arbeitsschiff besitzt steile Treppen, enge Durchgänge, Schwellen und technische Räume. Die körperliche Erfahrung ist Teil des Museumswerts, begrenzt aber die Zugänglichkeit; Außenansicht und Innenbesuch sind zu unterscheiden.", "tags": ["barrierefreiheit", "sicherheit"]},
+        {"text": "LIVE: Öffnung, Eintritt, Besucherroute, Wartungsphasen, Zugänglichkeit, Foto- und Sicherheitsregeln sowie aktuelle Ausstellungen ausschließlich beim Nationalen Maritimen Museum prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Was war die Sołdek?", "a": "Ein dampfbetriebener Kohle- und Erzfrachter und das erste nach dem Krieg in Polen gebaute Hochseeschiff, das in Dienst ging."},
+        {"q": "Kann man den Maschinenraum sehen?", "a": "Er gehört grundsätzlich zum musealen Rundgang; aktuelle Route und Zugänglichkeit müssen live geprüft werden."}
+      ]
+    },
+    {
+      "id": "danzig_ostseeoper",
+      "name": "Ostseeoper",
+      "general_info": "Die Opera Bałtycka ist Gdańsks Opern- und Ballettbühne. Ihre institutionellen Wurzeln reichen in die unmittelbare Nachkriegszeit; seit 1993 arbeitet sie wieder selbständig von der Philharmonie getrennt.",
+      "deep_data_pool": [
+        {"text": "Als Ausgangspunkt gilt das 1949 von Iwo Gall gegründete Musik- und Schauspielstudio. Im selben Jahr entstand ein Opernstudio bei der Baltischen Philharmonie; diese Initiativen schufen nach den Kriegszerstörungen wieder professionelles Musiktheater in der Region.", "tags": ["geschichte", "nachkrieg"]},
+        {"text": "1953 wurden Opernstudio und Philharmonie zur Staatlichen Baltischen Oper und Philharmonie zusammengeführt. Das Modell verband Musiktheater und symphonischen Betrieb organisatorisch, ehe beide Sparten in den 1990er Jahren wieder getrennte Wege gingen.", "tags": ["institution", "musikgeschichte"]},
+        {"text": "Seit 1993 besteht die Oper als selbständige Institution. Die Philharmonie entwickelte parallel ihren eigenen Standort auf Ołowianka. Diese Trennung erklärt, warum Ostseeoper und Ostseephilharmonie heute verschiedene Häuser mit eigener Leitung und Programmplanung sind.", "tags": ["institution", "quer"]},
+        {"text": "Das Repertoire umfasst Oper, Ballett und musiktheatrale Formate. Einzelne Inszenierungen, Ensembles und Spielzeiten sind nicht dauerhaft; stabil ist die Rolle als öffentliches Musiktheater der Woiwodschaft Pommern.", "tags": ["kultur", "funktion"]},
+        {"text": "Das Haus liegt an der Aleja Zwycięstwa zwischen Innenstadt und Wrzeszcz, nicht im historischen Rechtstadt-Kern. Straßenbahntrasse, breite Magistrale und der anschließende Stadtpark prägen die Umgebung stärker als die Backsteingotik der Altstadt.", "tags": ["stadtraum", "orientierung"]},
+        {"text": "Visuell: Der Bau wirkt als kompakter Theaterkomplex mit markantem Eingangsbereich an der Hauptverkehrsachse. Er ist kein historisches Opernhaus des 18. oder 19. Jahrhunderts; seine Gestalt gehört zur Nachkriegsmoderne und zu späteren Umbauten.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Für Danzigs Musiklandschaft ergänzt die Oper die Baltische Philharmonie auf Ołowianka und die historischen Sakralräume mit Konzertnutzung. Die Häuser unterscheiden sich in Akustik, Auftrag und Bühnentechnik.", "tags": ["quer", "kultur"]},
+        {"text": "Bei einem Besuch entscheidet die konkrete Produktion über Sprache, Übertitel, Dauer, Altersempfehlung und Pause. Aus dem Gattungsnamen Oper lassen sich keine verlässlichen Angaben zu einer einzelnen Vorstellung ableiten.", "tags": ["besuch", "quellenkritik"]},
+        {"text": "LIVE: Spielplan, Besetzung, Karten, Preise, Einlass, Übertitel, Führungen, Barrierefreiheit und Bauarbeiten ausschließlich auf der offiziellen Seite der Opera Bałtycka prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Sind Oper und Philharmonie dasselbe Haus?", "a": "Nein. Beide waren lange organisatorisch verbunden, sind seit den 1990er Jahren aber getrennte Institutionen an verschiedenen Standorten."}
+      ]
+    },
+    {
+      "id": "danzig_brigittenkirche_sw_brygidy",
+      "name": "Brigittenkirche (św. Brygidy)",
+      "general_info": "Die Brigittenkirche verbindet mittelalterliche Klostertradition mit der politischen Geschichte der Solidarność. Im Inneren steht ein monumentaler, über Jahre entstandener Bernstein-Altar.",
+      "deep_data_pool": [
+        {"text": "Der Ort entwickelte sich im Umfeld einer älteren Kapelle und eines Brigittenklosters. Die spätmittelalterliche Backsteinkirche wurde mehrfach verändert; Reformation, Kriege, Aufhebung des Klosters und wechselnde Nutzungen hinterließen unterschiedliche historische Schichten.", "tags": ["geschichte", "kloster"]},
+        {"text": "Im Zweiten Weltkrieg wurde die Kirche schwer beschädigt und verfiel in der Nachkriegszeit weiter. Der Wiederaufbau begann erst in der zweiten Hälfte des 20. Jahrhunderts und gab dem Sakralbau schrittweise seine heutige Gestalt zurück.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "In den 1980er Jahren wurde St. Brigitten zu einem wichtigen kirchlichen Bezugspunkt der Solidarność-Bewegung und für streikende Werftarbeiter. Geistliche Unterstützung, Gottesdienste und Erinnerungszeichen verbinden den Ort mit Opposition gegen das kommunistische Regime.", "tags": ["solidarnosc", "zeitgeschichte"]},
+        {"text": "Der monumentale Bernstein-Altar greift Danzigs lange Bernsteinhandwerkstradition auf. Bernstein, Metall und religiöse Bildprogramme verbinden lokales Material mit katholischer Erinnerung; der Altar entstand über Jahre und ist kein mittelalterliches Original.", "tags": ["kunst", "bernstein"]},
+        {"text": "Die politische Bedeutung darf nicht auf ein einzelnes Ereignis reduziert werden. Kirche, nahe Werft, Katharinenkirche und Altstadt bilden einen Raum, in dem mittelalterliche Stadtgeschichte, Kriegsfolgen und die Umbrüche des 20. Jahrhunderts eng beieinanderliegen.", "tags": ["einordnung", "stadtraum"]},
+        {"text": "Visuell: Von außen erscheint ein massiver Backsteinbau mit hohem Dach und gotisch geprägten Fenstern. Im Inneren zieht der helle, goldfarbene Bernsteinaufbau hinter dem Altar den Blick an; Form und Material unterscheiden ihn deutlich vom Mauerwerk.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Das Europäische Solidarność-Zentrum und das Denkmal der gefallenen Werftarbeiter erklären die politische Bewegung institutionell und dokumentarisch. St. Brigitten zeigt ihre religiöse, seelsorgerische und symbolische Dimension.", "tags": ["quer", "erinnerungskultur"]},
+        {"text": "Die Kirche ist ein aktiver Gottesdienstraum, kein reines Museum. Liturgie, Gebet und kirchliche Veranstaltungen haben Vorrang; historische und künstlerische Besichtigung muss sich in diesen Gebrauch einfügen.", "tags": ["sakralraum", "respekt"]},
+        {"text": "LIVE: Gottesdienste, Besuchszeiten, Eintritt oder Spendenregelung, Zugang zum Bernstein-Altar, Führungen, liturgische Sperrungen und Restaurierungen aktuell bei der Gemeinde prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Warum ist die Kirche mit Solidarność verbunden?", "a": "Sie unterstützte in den 1980er Jahren streikende Werftarbeiter und wurde ein religiöser Bezugspunkt der oppositionellen Bewegung."},
+        {"q": "Ist der Bernstein-Altar mittelalterlich?", "a": "Nein. Er ist ein modernes, über Jahre geschaffenes Werk, das Danzigs Bernsteintradition religiös deutet."}
+      ]
+    },
+    {
+      "id": "danzig_katharinenkirche",
+      "name": "Katharinenkirche",
+      "general_info": "St. Katharinen gilt als älteste Pfarrkirche der Danziger Altstadt. Backsteingotik, ein 76 Meter hoher Turm, Glockenspiel und die Verbindung zu Johannes Hevelius prägen den Ort.",
+      "deep_data_pool": [
+        {"text": "Die Anfänge der Pfarrkirche werden in das frühe 13. Jahrhundert gesetzt; Visit Gdańsk nennt 1239 als Abschluss eines ersten Baus. Die heutige Gestalt entstand jedoch durch zahlreiche mittelalterliche Erweiterungen und spätere Veränderungen.", "tags": ["geschichte", "mittelalter"]},
+        {"text": "St. Katharinen war Pfarrkirche der Altstadt, während die Marienkirche die Rechtstadt dominierte. Diese Unterscheidung hilft, die historisch getrennten städtischen Kerne Danzigs zu verstehen, die heute leicht als eine einzige Altstadt wahrgenommen werden.", "tags": ["stadtraum", "kirchengeschichte"]},
+        {"text": "Der ungefähr 76 Meter hohe Turm bildet einen markanten Orientierungspunkt. Sein Glockenspiel beziehungsweise Carillon knüpft an Danzigs historische Klangkultur an; Instrument, Spielbetrieb und Konzertzeiten haben sich über die Jahrhunderte verändert.", "tags": ["turm", "carillon"]},
+        {"text": "Johannes Hevelius wurde in der Kirche bestattet. Der Astronom, Brauer und Ratsherr arbeitete nur wenige Straßen entfernt; Grab und Epitaph machen St. Katharinen zu einem zentralen Hevelius-Ort.", "tags": ["hevelius", "grab"]},
+        {"text": "Der Turm beherbergt das Museum der Danziger Wissenschaft, früher Turmuhrenmuseum. Seine Sammlung umfasst mechanische und elektromechanische Turmuhrwerke; 2011 wurde dort eine auf Pulsarsignalen basierende Uhr installiert.", "tags": ["museum", "wissenschaft"]},
+        {"text": "1945 erlitt die Kirche schwere Schäden. Ein weiterer Einschnitt war der Brand von 2006, der Dach und Turmbereiche traf. Restaurierung und Wiederaufbau gehören damit selbst zur modernen Geschichte des Bauwerks.", "tags": ["zweiter_weltkrieg", "denkmalpflege"]},
+        {"text": "Visuell: Der große Backsteinbau steht nördlich der Großen Mühle. Der hohe Westturm mit mehrteiliger Haube überragt die niedrigere Altstadt; lange gotische Fenster und Strebepfeiler gliedern die Seitenwände.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Große Mühle, Altstädtisches Rathaus, Hevelius-Denkmal und St. Katharinen bilden einen dichten Rundgang zu Wassertechnik, Stadtverwaltung, Astronomie und Religion der Altstadt.", "tags": ["quer", "stadtraum"]},
+        {"text": "Der Aufstieg im Turm und der Museumsbesuch sind von der liturgischen Nutzung des Kirchenraums zu unterscheiden. Treppen, Höhenlage und technische Bereiche können die Zugänglichkeit begrenzen.", "tags": ["besuch", "barrierefreiheit"]},
+        {"text": "LIVE: Gottesdienste, Turm- und Museumsöffnung, Carillon-Konzerte, Eintritt, Aufstieg, Restaurierungen und Barrierefreiheit aktuell bei Kirche und Museum Gdańsk prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Was hat Johannes Hevelius mit der Kirche zu tun?", "a": "Er gehörte zur Altstadtgemeinde und wurde in St. Katharinen bestattet; Grab und Epitaph erinnern an ihn."},
+        {"q": "Ist das Glockenspiel immer zu hören?", "a": "Spielzeiten und Konzerte sind veränderlich und müssen live geprüft werden."}
+      ]
+    },
+    {
+      "id": "danzig_konigliche_kapelle_danzig",
+      "name": "Königliche Kapelle Danzig",
+      "general_info": "Die barocke Königliche Kapelle entstand im 17. Jahrhundert neben der Marienkirche als katholischer Gottesdienstraum. König Johann III. Sobieski unterstützte ihren Bau.",
+      "deep_data_pool": [
+        {"text": "Nach der Reformation stand die Marienkirche der lutherischen Gemeinde zur Verfügung. Für die katholische Minderheit entstand deshalb unmittelbar daneben eine eigene Kapelle; ihre Lage erzählt vom konfessionell geteilten Stadtleben.", "tags": ["geschichte", "konfession"]},
+        {"text": "Der Bau wurde in den 1670er und 1680er Jahren verwirklicht und von König Johann III. Sobieski unterstützt. Der Name Königliche Kapelle bezeichnet diese Patronage, nicht eine private Schlosskapelle in einer königlichen Residenz.", "tags": ["sobieski", "name"]},
+        {"text": "Die Fassade wird häufig mit dem königlichen Baumeister Tylman van Gameren und die plastische Ausstattung mit Andreas Schlüter in Verbindung gebracht. Zuschreibungen einzelner Entwurfsanteile sollten in Spezialfragen quellenkritisch behandelt werden.", "tags": ["architektur", "barock"]},
+        {"text": "Drei charakteristische Kuppeln und die reich gegliederte Fassade setzen einen barocken Akzent neben die monumentale Backsteingotik der Marienkirche. Gerade dieser Kontrast macht die Kapelle im dichten Stadtraum leicht lesbar.", "tags": ["architektur", "stadtraum"]},
+        {"text": "Die Kapelle diente katholischen Gottesdiensten, als die benachbarte Hauptkirche protestantisch war. Sie dokumentiert damit nicht nur Kunstgeschichte, sondern auch die rechtlichen und sozialen Grenzen religiöser Gemeinschaften im frühneuzeitlichen Danzig.", "tags": ["religion", "stadtgeschichte"]},
+        {"text": "Visuell: Der kleine Bau steht an der Südseite des Marienkirchenkomplexes. Eine helle, plastisch gegliederte Front und drei kupfergedeckte Kuppeln heben sich von den riesigen roten Backsteinflächen der Basilika ab.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Marienkirche, Königliche Kapelle und Frauengasse erlauben auf wenigen Metern den Vergleich von mittelalterlicher Stadtkirche, barocker katholischer Repräsentation und bürgerlicher Wohn- und Handelskultur.", "tags": ["quer", "architektur"]},
+        {"text": "Der Innenraum ist ein aktiver Sakralraum und nicht automatisch außerhalb von Gottesdiensten geöffnet. Die berühmte Außenwirkung ist unabhängig davon vom öffentlichen Stadtraum aus gut verständlich.", "tags": ["besuch", "sakralraum"]},
+        {"text": "Die kleine Kapelle reagiert architektonisch auf einen außergewöhnlichen Maßstabskonflikt: Sie musste neben der riesigen Marienkirche sichtbar und würdig erscheinen, ohne deren Volumen nachzuahmen. Kuppelgruppe, plastische Fassade und enger Vorplatz erzeugen deshalb Wirkung aus Gliederung und Silhouette statt aus Größe.", "tags": ["architektur", "einordnung"]},
+        {"text": "LIVE: Gottesdienste, Innenzugang, Führungen, Restaurierungen und eventuelle Besuchsbeschränkungen aktuell bei der zuständigen katholischen Gemeinde prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Warum steht neben der Marienkirche noch eine Kapelle?", "a": "Sie entstand als katholischer Gottesdienstraum, als die Marienkirche von der lutherischen Gemeinde genutzt wurde."}
+      ]
+    },
+    {
+      "id": "danzig_johanneskirche",
+      "name": "Johanneskirche",
+      "general_info": "Die gotische Johanneskirche ist zugleich Sakralraum und Kulturzentrum. Nach jahrzehntelanger Sicherung und Restaurierung wird sie für Gottesdienste, Konzerte, Ausstellungen und Festivals genutzt.",
+      "deep_data_pool": [
+        {"text": "Die Kirche entstand im Mittelalter für das nördliche Rechtstadtviertel und wurde schrittweise zu einer großen dreischiffigen Hallenkirche ausgebaut. Ihre Baugeschichte ist an unregelmäßigen Mauerzügen, Anbauten und unterschiedlichen Gewölbeabschnitten ablesbar.", "tags": ["geschichte", "backsteingotik"]},
+        {"text": "Der Baugrund nahe der Mottlau war schwierig. Historische statische Probleme und geneigte Bauteile gehören zur Überlieferung der Kirche; Sicherung und Restaurierung mussten deshalb Architektur und Untergrund gemeinsam berücksichtigen.", "tags": ["baugeschichte", "technik"]},
+        {"text": "1945 brannte die Kirche aus und verlor große Teile von Dach, Gewölben und Ausstattung. Sie blieb lange als gesicherte Ruine stehen, ehe ein schrittweiser Wiederaufbau begann.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Seit 1995 nutzt das Baltische Kulturzentrum den Ort und entwickelte das Centrum św. Jana. Die Doppelfunktion aus religiösem Raum und Kulturstätte ist bewusst: historische Substanz bleibt sichtbar, während moderne Veranstaltungstechnik zurückhaltend integriert wurde.", "tags": ["kulturzentrum", "nachnutzung"]},
+        {"text": "Konzerte profitieren vom großen gotischen Innenraum, zugleich stellen Akustik, Denkmalschutz und liturgische Nutzung besondere Anforderungen. Programm und Bestuhlung verändern den Raumeindruck stärker als in einem reinen Museum.", "tags": ["musik", "nutzung"]},
+        {"text": "Visuell: Die Kirche liegt etwas zurückgesetzt zwischen Świętojańska und dem Mottlauufer. Hohe Backsteinwände, Strebepfeiler und ein massiver Westturm kennzeichnen den Bau; restaurierte und sichtbar gealterte Flächen liegen nebeneinander.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Frauentor, Johannistor, Häkertor und Johanneskirche zeigen, wie Pfarrbezirke und Wassertore die Rechtstadt mit dem Hafen verbanden. Der Kulturstandort setzt diese Beziehung heute mit Veranstaltungen fort.", "tags": ["quer", "stadtraum"]},
+        {"text": "Die Restaurierung ist Teil der Aussage: Der Ort präsentiert keinen vermeintlich unversehrten mittelalterlichen Zustand, sondern macht Verlust, Sicherung und Wiedergewinnung nach 1945 sichtbar.", "tags": ["denkmalpflege", "quellenkritik"]},
+        {"text": "Zur historischen Ausstattung gehört ein großer steinerner Hauptaltar aus der frühen Neuzeit, der nach Kriegsschäden restauriert wurde. Einzelne Kunstwerke wurden ausgelagert, geborgen oder später zurückgeführt; deshalb muss bei Objektgeschichten zwischen ursprünglichem Standort, Kriegsverlust und heutiger Präsentation unterschieden werden.", "tags": ["kunst", "wiederaufbau"]},
+        {"text": "LIVE: Veranstaltungen, Gottesdienste, Ausstellungen, Eintritt, Innenzugang, Proben, Bestuhlung und barrierefreie Wege beim Baltischen Kulturzentrum beziehungsweise der Gemeinde prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Ist St. Johann Kirche oder Konzertsaal?", "a": "Beides: Der restaurierte Sakralraum wird religiös und als Kulturzentrum für Konzerte, Ausstellungen und Festivals genutzt."}
+      ]
+    },
+    {
+      "id": "danzig_stockturm",
+      "name": "Stockturm",
+      "general_info": "Der Stockturm gehört mit der Peinkammer zum Vorwerk des Langgasser Tores. Aus einem mittelalterlichen Verteidigungsbau wurde ein Gerichts- und Gefängniskomplex; heute nutzt ihn das Museum Gdańsk.",
+      "deep_data_pool": [
+        {"text": "Das Vorwerk sicherte seit dem späten Mittelalter den westlichen Zugang zur Rechtstadt. Stockturm und Peinkammer bildeten mit Mauern und Durchgängen eine vorgelagerte Verteidigungszone vor dem eigentlichen Langgasser Tor.", "tags": ["geschichte", "befestigung"]},
+        {"text": "Als die Befestigung militärisch an Bedeutung verlor, erhielt der Komplex Justizfunktionen. In Peinkammer und Stockturm wurden Angeklagte verhört, verurteilt und inhaftiert; Hinrichtungen gehörten zum Strafsystem der vormodernen Stadt.", "tags": ["justiz", "stadtgeschichte"]},
+        {"text": "Umbauten um 1600 gaben Teilen des Ensembles eine spätgotisch-renaissancezeitliche Erscheinung. Hohe Giebel, Backstein und dekorative Steinformen verbinden Wehrarchitektur mit städtischer Repräsentation.", "tags": ["architektur", "renaissance"]},
+        {"text": "Der Name Stockturm verweist auf Haft und Strafvollzug, nicht auf einen Aussichtsturm. Historische deutsche und polnische Bezeichnungen können je nach Quelle Stockturm, Gefängnisturm beziehungsweise Wieża Więzienna lauten.", "tags": ["name", "quellenkritik"]},
+        {"text": "Der Komplex erlitt 1945 Schäden und wurde wiederaufgebaut. Heute behandelt eine Ausstellung unter anderem die Rekonstruktion des zerstörten Danzig; konkrete Ausstellungstitel und Zugänge können wechseln.", "tags": ["wiederaufbau", "museum"]},
+        {"text": "Visuell: Der schlanke hohe Turm steht am Kohlenmarkt unmittelbar westlich des Goldenen Tores. Staffelgiebel, steiles Dach und der verbindende niedrigere Bau der Peinkammer unterscheiden ihn vom hellen Renaissancebogen des Tores.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hohes Tor, Stockturm, Peinkammer und Goldenes Tor bilden eine Folge von Verteidigung, Kontrolle und repräsentativem Eintritt. Erst dahinter beginnt die Lange Gasse als Kern der Königlichen Route.", "tags": ["quer", "koenigliche_route"]},
+        {"text": "Die Aussichtsmöglichkeit im Turm ist eine heutige Museumsnutzung und kein Beleg für die ursprüngliche Hauptfunktion. Enge historische Treppen und wechselnde Ausstellungsbereiche können den Besuch einschränken.", "tags": ["besuch", "barrierefreiheit"]},
+        {"text": "Die räumliche Nähe von Gericht, Folterkammer, Haft und öffentlichem Stadttor machte Strafgewalt sichtbar. Eine heutige Darstellung sollte diese Institutionen historisch erklären, ohne Leid als Gruselkulisse zu vermarkten; erhaltene Räume sind Quellen zur Rechts- und Sozialgeschichte, keine Belege für populäre Einzellegenden.", "tags": ["justizgeschichte", "einordnung"]},
+        {"text": "LIVE: Öffnung, Ausstellungen, Turmaufstieg, Eintritt, Restaurierung und Barrierefreiheit aktuell beim Museum Gdańsk prüfen; historische Strafräume nicht als jederzeit frei zugänglich darstellen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "War der Stockturm Teil der Stadtmauer?", "a": "Ja. Er gehörte zum Vorwerk des Langgasser Tores und wurde später als Gefängnis- und Justizkomplex genutzt."}
+      ]
+    },
+    {
+      "id": "danzig_frauentor",
+      "name": "Frauentor",
+      "general_info": "Das Frauentor schließt die Frauengasse zur Mottlau ab. Das spätmittelalterliche Wassertor verbindet Wehrfunktion, Hafenverkehr und die heute besonders anschauliche Stadtraumfolge zur Marienkirche.",
+      "deep_data_pool": [
+        {"text": "Das Frauentor gehört zu den Danziger Wassertoren, die Straßen der Rechtstadt mit den Anlegestellen an der Mottlau verbanden. Waren, Menschen und Hafenarbeit bewegten sich durch solche Tore zwischen Stadthäusern und Flusskai.", "tags": ["geschichte", "hafen"]},
+        {"text": "Der Backsteinbau entstand in seiner gotischen Form im späten Mittelalter. Anders als ein freistehendes Landtor ist er als breiter Baukörper in die Uferfront eingebunden und konnte zugleich Durchgang, Schutz und Nutzräume aufnehmen.", "tags": ["architektur", "befestigung"]},
+        {"text": "Der deutsche Name Frauentor und das polnische Brama Mariacka beziehen sich auf die zur Marienkirche führende Straße. Die Übersetzung Frauengasse/Frauentor ist historisch gebräuchlich, während heutige Wegweiser meist Mariacka verwenden.", "tags": ["name", "orientierung"]},
+        {"text": "1945 wurde das Tor schwer beschädigt und anschließend rekonstruiert. Seine heutige Geschlossenheit ist daher Ergebnis des Danziger Wiederaufbaus und nicht vollständig unveränderte mittelalterliche Substanz.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Auf der Stadtseite öffnet sich die Frauengasse mit ihren Beischlägen, schmalen Fassaden und Bernsteinläden. Auf der Wasserseite liegt die Lange Brücke; der Torbogen rahmt dadurch zwei sehr unterschiedliche Stadträume.", "tags": ["stadtraum", "handel"]},
+        {"text": "Visuell: Vom Mottlauufer erkennt man einen massiven roten Backsteinbau mit mittigem Spitzbogendurchgang und steilem Dach. Durch den Bogen steigt die gepflasterte Frauengasse direkt auf den großen Turm der Marienkirche zu.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Das Frauentor ist der stärkste räumliche Auftakt zur Frauengasse. Johannistor und Häkertor zeigen nördlich weitere Varianten derselben historischen Verbindung zwischen Rechtstadt und Hafen.", "tags": ["quer", "wassertore"]},
+        {"text": "Das Tor ist vor allem Durchgang und Außenarchitektur; Innenräume können institutionell genutzt oder nicht öffentlich sein. Eine historische Torbezeichnung bedeutet keine reguläre Museumsöffnung.", "tags": ["besuch", "quellenkritik"]},
+        {"text": "Die benachbarte Frauengasse ist für erhöhte steinerne Beischläge und Wasserspeier bekannt. Das Tor bündelt diese lange Perspektive: Wer vom Kai durch den Bogen blickt, sieht nicht nur ein Einzeldenkmal, sondern eine rekonstruierte Folge aus Hafenrand, Bürgerhäusern und der Marienkirche als städtischem Zielpunkt.", "tags": ["stadtraum", "perspektive"]},
+        {"text": "LIVE: Durchgangssperrungen, Baustellen, Innenraumnutzung, Veranstaltungen an der Langen Brücke und Zugangslage aktuell prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Warum heißt es Frauentor?", "a": "Es führt in die Frauengasse zur Marienkirche; polnisch heißen Tor und Straße Brama Mariacka und ulica Mariacka."}
+      ]
+    },
+    {
+      "id": "danzig_johannistor",
+      "name": "Johannistor",
+      "general_info": "Das Johannistor ist ein rekonstruiertes Danziger Wassertor am Ende der Świętojańska. Es verband das Viertel um St. Johann mit der Mottlau und ihren Hafenanlagen.",
+      "deep_data_pool": [
+        {"text": "Wie die übrigen Wassertore entstand das Johannistor als Schnittstelle zwischen Stadtstraße und Flusshafen. Es regelte den Durchgang durch die uferseitige Befestigung und bot zugleich Räume innerhalb eines breiten Torhauses.", "tags": ["geschichte", "hafen"]},
+        {"text": "Der Name leitet sich von der nahe gelegenen Johanneskirche und der zu ihr führenden Straße ab. Polnisch lautet die Bezeichnung Brama Świętojańska; historische Karten und deutschsprachige Literatur verwenden Johannistor.", "tags": ["name", "orientierung"]},
+        {"text": "Der mittelalterliche Bau wurde über die Jahrhunderte verändert und verlor zeitweise seinen ursprünglichen Charakter. Die heutige Erscheinung beruht wesentlich auf der Rekonstruktion nach den Zerstörungen von 1945.", "tags": ["wiederaufbau", "quellenkritik"]},
+        {"text": "Wassertore waren keine isolierten Monumente. Zusammen mit Kai, Brücken, Gassen, Speichern und Kränen bildeten sie ein logistisches System, das Warenbewegung in den dicht bebauten Stadtkern ermöglichte.", "tags": ["handel", "stadtstruktur"]},
+        {"text": "Die heutige Uferzone dient überwiegend dem Fußverkehr, der Gastronomie und Kultur. Diese Nutzung unterscheidet sich grundlegend vom historischen Arbeitskai, dessen Lärm, Gerüche und Transportaufgaben den Ort prägten.", "tags": ["hafenarbeit", "heute"]},
+        {"text": "Visuell: Das Tor steht an der Langen Brücke nördlich des Frauentors. Ein breiter Backsteinbau mit zentralem Durchgang markiert das Ende der Świętojańska; landwärts weist die Straße zur großen Johanneskirche.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Johannistor und Johanneskirche bilden eine klare Achse vom Wasser zum Pfarrzentrum. Das nahe Häkertor und das Frauentor zeigen, wie dicht die Zugänge zur Mottlau aufeinanderfolgten.", "tags": ["quer", "stadtraum"]},
+        {"text": "Innenräume des rekonstruierten Tores werden unterschiedlich genutzt und sind kein verlässlicher öffentlicher Museumsbereich. Die historische Funktion lässt sich vor allem an Lage, Durchgang und Uferbezug erklären.", "tags": ["besuch", "nutzung"]},
+        {"text": "Die regelmäßige Folge der Wassertore widerspricht dem Bild einer geschlossenen, vom Hafen getrennten Mauer. Die Uferbefestigung war durch kontrollierte Öffnungen porös: Jede größere Ost-West-Straße benötigte ihren Zugang zu Schiffen und Kaianlagen, während Tore nachts und in Gefahrensituationen Kontrolle ermöglichten.", "tags": ["befestigung", "stadtstruktur"]},
+        {"text": "LIVE: Aktuelle Innenraumnutzung, Durchgang, Baustellen, Uferveranstaltungen und mögliche Sperrungen vor Ort beziehungsweise bei der Stadt prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Was war ein Wassertor?", "a": "Ein Tor in der uferseitigen Befestigung, das eine Stadtstraße direkt mit Kai und Hafenverkehr verband."}
+      ]
+    },
+    {
+      "id": "danzig_hakertor",
+      "name": "Häkertor",
+      "general_info": "Das Häkertor, polnisch Brama Straganiarska, ist eines der nördlichen gotischen Wassertore der Rechtstadt. Es erschloss die Straganiarska zum Mottlauufer.",
+      "deep_data_pool": [
+        {"text": "Das Tor entstand im Spätmittelalter innerhalb der uferseitigen Befestigung Danzigs. Es verband eine dicht bebaute Handelsstraße mit dem Flusskai und gehörte damit zur alltäglichen Hafenlogistik.", "tags": ["geschichte", "befestigung"]},
+        {"text": "Die polnische Bezeichnung Brama Straganiarska bezieht sich auf die Straße Straganiarska und deren Markt- beziehungsweise Budenmilieu. Der historische deutsche Name Häkertor ist in älterer Literatur und deutschen Stadtplänen verbreitet.", "tags": ["name", "handel"]},
+        {"text": "Der kompakte Backsteinbau diente nicht nur als Durchfahrt. Obergeschosse boten nutzbare Räume, wie es für Danziger Wassertore typisch war; Nutzung und Bewohner wechselten im Lauf der Zeit.", "tags": ["architektur", "nutzung"]},
+        {"text": "Joseph von Eichendorff wohnte 1821 zeitweise in einem der Danziger Wassertore; lokale Erinnerung verbindet ihn mit dem Häkertor. Solche biografischen Bezüge sollten nicht mit einer dauerhaft eingerichteten Dichterwohnung verwechselt werden.", "tags": ["literatur", "quellenkritik"]},
+        {"text": "Der Bau wurde im Krieg beschädigt und anschließend rekonstruiert. Wiederaufbau ergänzte die historische Substanz und stellte die charakteristische Uferfront wieder her.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Visuell: Das Tor steht nördlich von Johannis- und Frauentor am Ende der Straganiarska. Der rote Backsteinbau besitzt einen spitzbogigen Durchgang und einen kräftigen, beinahe wohnhausartigen Oberbau.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Zusammen mit Johannistor, Frauentor, Krantor und Grünem Tor bildet es eine Folge unterschiedlicher Torhäuser entlang der Mottlau. Die Abstände zeigen, wie eng Hafen und Straßennetz verzahnt waren.", "tags": ["quer", "wassertore"]},
+        {"text": "Das Tor ist hauptsächlich von außen und als Durchgang erfahrbar. Wohnungen oder institutionelle Räume im Obergeschoss begründen keine allgemeine Innenbesichtigung.", "tags": ["besuch", "respekt"]},
+        {"text": "Die Straganiarska führt landwärts in ein Quartier aus Handelsgassen und Kirchen. Dadurch lässt sich am Häkertor besonders gut erkennen, dass die Tore nicht nur Verteidigungsobjekte waren: Sie waren alltägliche Gelenke zwischen Warenkai, Marktständen, Wohnhäusern und den Pfarrbezirken der dicht bebauten Rechtstadt.", "tags": ["alltag", "stadtraum"]},
+        {"text": "Der heutige Uferraum ist durch Promenade und touristische Nutzung stark beruhigt. Historisch lagen hier Arbeitsflächen mit Lastenträgern, Booten, Fässern und zeitweiligen Hindernissen; eine romantische stille Wasserfront wäre für die Handelsstadt eine irreführende Rückprojektion.", "tags": ["hafenarbeit", "einordnung"]},
+        {"text": "LIVE: Durchgang, Innenraumnutzung, Bauarbeiten und Veranstaltungen am Kai aktuell prüfen; einen Eichendorff-Innenraum nur mit aktuell bestätigtem Zugang nennen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Ist das Häkertor ein Museum?", "a": "Es ist vor allem historisches Torhaus und Durchgang; eine reguläre öffentliche Innenbesichtigung darf nicht vorausgesetzt werden."}
+      ]
+    },
+    {
+      "id": "danzig_leuchtturm_nowy_port_neufahrwasser",
+      "name": "Leuchtturm Nowy Port (Neufahrwasser)",
+      "general_info": "Der Backsteinleuchtturm von Nowy Port markierte seit dem späten 19. Jahrhundert die Hafeneinfahrt. Von seinem Standort sind Hafenkanal, Westerplatte und die frühere Mündungslage gut lesbar.",
+      "deep_data_pool": [
+        {"text": "Der heutige Turm wurde in den 1890er Jahren errichtet und ersetzte ältere Leuchtfeuer im Hafenbereich. Seine Form wird häufig mit dem Leuchtturm von Cleveland am Eriesee in Verbindung gebracht.", "tags": ["geschichte", "seezeichen"]},
+        {"text": "Nowy Port hieß deutsch Neufahrwasser und entwickelte sich an der Hafeneinfahrt. Der Leuchtturm leitete Schiffe durch einen strategisch und wirtschaftlich zentralen Zugang zum Danziger Hafen.", "tags": ["hafen", "name"]},
+        {"text": "Am Turm befand sich eine Zeitballanlage. Ein weithin sichtbarer Ball wurde zu einer festgelegten Zeit fallen gelassen, damit Schiffe ihre Chronometer korrigieren konnten; genaue Betriebsphasen gehören in eine vertiefte Technikgeschichte.", "tags": ["technik", "zeitmessung"]},
+        {"text": "Am 1. September 1939 lag der Leuchtturm im Kampfgebiet um Westerplatte und Nowy Port. Von deutscher Seite wurden polnische Stellungen beschossen; der Ort ist deshalb auch Teil der Geschichte des Kriegsbeginns.", "tags": ["zweiter_weltkrieg", "westerplatte"]},
+        {"text": "Der Turm verlor seine aktive Leuchtfeuerfunktion, als moderne Hafenentwicklung und neue Navigationsanlagen andere Standorte erforderlich machten. Der Denkmalwert liegt heute in Architektur, Technik- und Kriegsgeschichte.", "tags": ["navigation", "denkmal"]},
+        {"text": "Visuell: Der achteckige rote Backsteinturm steht nahe dem Hafenkanal. Eine helle Laterne und Galerie schließen ihn ab; von außen wirkt er eher wie ein schlanker historistischer Stadtturm als ein weißer Küstenleuchtturm.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Auf der gegenüberliegenden Seite liegt Westerplatte, weiter landeinwärts die Festung Weichselmünde. Zusammen zeigen die Orte die Verschiebung der Mündung, Hafenverteidigung und Navigation über mehrere Jahrhunderte.", "tags": ["quer", "hafen"]},
+        {"text": "Der Blick von oben ist wetter- und zugangsabhängig. Treppen im historischen Turm und die Lage in einem aktiven Hafenumfeld begrenzen die Barrierefreiheit; Außenansicht und Turmaufstieg sind getrennte Angebote.", "tags": ["aussicht", "barrierefreiheit"]},
+        {"text": "Die Position am Hafenkanal macht den Turm zu einem guten Lesepunkt für Danzigs maritime Geografie. Westerplatte liegt jenseits des Fahrwassers, offene Bucht und innerer Hafen in verschiedenen Richtungen; Schiffe passieren einen industriell geprägten Verkehrsraum und nicht eine unbebaute Naturküste.", "tags": ["geografie", "orientierung"]},
+        {"text": "LIVE: Öffnung, Eintritt, Zeitballvorführungen, Turmaufstieg, Wetter, Hafenbeschränkungen und Anreise aktuell beim Betreiber prüfen. Aussicht und Vorführung nie garantieren.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Was war der Zeitball?", "a": "Ein sichtbares Zeitsignal, mit dem Schiffe ihre Chronometer für die Navigation kontrollieren konnten."},
+        {"q": "Ist der Leuchtturm noch aktiv?", "a": "Er ist heute vor allem Denkmal und Aussichtsort; aktuelle nautische Funktionen müssen separat geprüft werden."}
+      ]
+    },
+    {
+      "id": "danzig_festung_weichselmunde",
+      "name": "Festung Weichselmünde",
+      "general_info": "Die Festung Weichselmünde kontrollierte über Jahrhunderte die frühere Weichselmündung und Hafenzufahrt. Ringförmiger Kern, Leuchtturm, Bastionen und Außenschanzen bewahren mehrere Epochen des Festungsbaus.",
+      "deep_data_pool": [
+        {"text": "Der Name Wisłoujście bedeutet Weichselmündung. Als die Hauptmündung unmittelbar nördlich der Anlage lag, konnte die Festung ein- und auslaufende Schiffe kontrollieren und damit Handel, Zoll und militärische Sicherheit Danzigs schützen.", "tags": ["geografie", "hafen"]},
+        {"text": "Im Zentrum steht ein mittelalterlicher Turm, der auch als Leuchtfeuer diente. Spätere Ringmauern, Kasematten, Bastionen und Erdwälle legten sich in mehreren Phasen darum; die Festung ist deshalb kein Bau aus nur einem Jahrhundert.", "tags": ["architektur", "seezeichen"]},
+        {"text": "Renaissancezeitliche und frühneuzeitliche Ausbauten passten die Anlage an Feuerwaffen an. Niedrigere massive Werke und Bastionen ersetzten die reine Höhenwirkung mittelalterlicher Türme durch überlappende Schussfelder.", "tags": ["festungsbau", "technik"]},
+        {"text": "Die Anlage lag an einem strategischen Knoten des polnisch-litauischen Seehandels. Eine mehrere hundert Mann starke Besatzung, Geschütze und repräsentielle Zeremonien signalisierten sowohl Verteidigungsbereitschaft als auch städtische und staatliche Macht.", "tags": ["militaer", "repräsentation"]},
+        {"text": "Verlagerungen von Flussarmen und Küstenlinie veränderten die Umgebung. Die heutige Lage weiter im Hafeninneren darf deshalb nicht auf die historische Situation übertragen werden; die Festung stand ursprünglich viel unmittelbarer an der Mündung.", "tags": ["landschaft", "quellenkritik"]},
+        {"text": "Visuell: Der Kern wirkt wie ein runder, von Backsteinmauern und bastionären Erdwällen umgebener Komplex. Der zentrale Turm ragt über Dächer und Kasematten; Gräben, Vegetation und Hafenwasser begrenzen die Blickachsen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Leuchtturm Nowy Port, Westerplatte und Weichselmünde erzählen drei verschiedene Systeme der Hafenkontrolle: Navigation, Küstenverteidigung und im 20. Jahrhundert befestigte Militärstellung.", "tags": ["quer", "hafen"]},
+        {"text": "Die Festung ist zugleich bedeutender Fledermauslebensraum. Denkmalschutz, Naturschutz und Sanierung müssen daher aufeinander abgestimmt werden; einzelne Bereiche können saisonal oder baulich gesperrt sein.", "tags": ["natur", "denkmalpflege"]},
+        {"text": "Ein Besuch erschließt sich nicht allein vom Eingang: Kernwerk, Bastionen und Außengelände liegen auf unterschiedlichen Ebenen. Historische Treppen, unebene Wege und Baustellen können die Zugänglichkeit begrenzen.", "tags": ["besuch", "barrierefreiheit"]},
+        {"text": "LIVE: Öffnung nach Restaurierungsphasen, Führungen, Wasseranreise, Eintritt, Fledermausschutz, Baustellen und zugängliche Bereiche ausschließlich beim Museum Gdańsk prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Warum liegt die Festung heute nicht direkt an der offenen See?", "a": "Flussmündung, Küstenlinie und Hafenanlagen haben sich seit ihrer Entstehung stark verlagert."},
+        {"q": "War der mittlere Turm ein Leuchtturm?", "a": "Er diente historisch auch als Leuchtfeuer und wurde später in immer größere Festungswerke eingebunden."}
+      ]
+    },
+    {
+      "id": "danzig_dominikermarkt",
+      "name": "Dominikermarkt",
+      "general_info": "Der St.-Dominiks-Markt ist eine jahrhundertealte Danziger Handels- und Festtradition. Seine Wurzeln werden mit einem päpstlichen Ablassprivileg von 1260 verbunden; direkte Marktbelege sind jünger.",
+      "deep_data_pool": [
+        {"text": "1260 erlaubte Papst Alexander IV. den Danziger Dominikanern, am Fest ihres Ordensgründers einen hunderttägigen Ablass zu gewähren. Mit dem religiösen Besuch entwickelte sich Handel; die Tradition datiert ihren Beginn daher auf dieses Jahr.", "tags": ["geschichte", "religion"]},
+        {"text": "Quellenkritisch wichtig: Die frühesten erhaltenen direkten Nachrichten über den Markt stammen erst aus der zweiten Hälfte des 14. Jahrhunderts. 1260 bezeichnet den traditionsbildenden Ausgangspunkt, nicht einen vollständig dokumentierten modernen Marktstart.", "tags": ["quellenkritik", "mittelalter"]},
+        {"text": "Im 16. Jahrhundert beschrieb der päpstliche Nuntius Giulio Ruggieri internationale Kaufleute, Hunderte Schiffe und Waren wie Wein, Seide, Öl, Gewürze, Zinn und englisches Tuch. Dazu kamen Schausteller und Theatergruppen.", "tags": ["handel", "international"]},
+        {"text": "Mit dem Wachstum verteilte sich der Markt über verschiedene Plätze und Straßen. Namen wie Kohlenmarkt, Holzmarkt oder Heumarkt erinnern an spezialisierte Handelsflächen; der Dominikermarkt war nie auf einen einzigen heutigen Punkt beschränkt.", "tags": ["stadtraum", "markt"]},
+        {"text": "Kriege, Seuchen und politische Umbrüche beeinflussten die Durchführung. Der Zweite Weltkrieg unterbrach die Tradition für Jahrzehnte; 1972 wurde der Markt in der Volksrepublik wiederbelebt, seit 1991 trägt er wieder den Namen St.-Dominiks-Markt.", "tags": ["zweiter_weltkrieg", "wiederbelebung"]},
+        {"text": "Der Hahn wurde nach der Wiederbelebung zum Erkennungszeichen. Symbolik, Eröffnungszeremonien, Standorte und Themenbereiche können sich jedoch von Ausgabe zu Ausgabe verändern.", "tags": ["symbol", "veranstaltung"]},
+        {"text": "Visuell: Während der Veranstaltung füllen Buden und Menschen mehrere Straßen der Innenstadt; außerhalb dieser Wochen existiert kein dauerhaft aufgebauter historischer Markt. Der Ort ist daher eine räumlich verteilte Tradition, kein einzelnes Gebäude.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Nikolaikirche und Dominikanertradition erklären den religiösen Ursprung, die historischen Marktstraßen den Handel. Krantor und Speicherinsel zeigen, wie Waren in die Hafenstadt gelangten.", "tags": ["quer", "handel"]},
+        {"text": "Antiquitäten, Handwerk, Gastronomie und Bühnenprogramm gehören häufig zum heutigen Markt, sind aber nicht stabil. Einzelne Anbieter, Preise und Angebotsarten dürfen nicht aus früheren Ausgaben fortgeschrieben werden.", "tags": ["heute", "quellenkritik"]},
+        {"text": "LIVE: Ob und wann der Markt stattfindet, Flächenplan, Öffnungszeiten, Aussteller, Programm, Eintrittsbereiche, Verkehrssperrungen und Sicherheitsregeln ausschließlich beim offiziellen Veranstalter prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Findet der Dominikermarkt das ganze Jahr statt?", "a": "Nein. Es ist eine zeitlich begrenzte Veranstaltung; aktuelle Termine und Flächen müssen live geprüft werden."},
+        {"q": "Ist der Markt sicher seit 1260 belegt?", "a": "Die Tradition knüpft an das Ablassprivileg von 1260 an, direkte erhaltene Marktbelege sind jedoch erst aus späterer Zeit bekannt."}
+      ]
+    },
+    {
+      "id": "danzig_uphagenhaus_danzig",
+      "name": "Uphagenhaus Danzig",
+      "general_info": "Das Uphagenhaus an der Langen Gasse vermittelt die Wohn- und Wirtschaftsräume eines wohlhabenden Danziger Bürgerhauses des späten 18. Jahrhunderts. Es wurde nach 1945 sorgfältig rekonstruiert.",
+      "deep_data_pool": [
+        {"text": "Der Kaufmann und Ratsherr Johann Uphagen erwarb das Grundstück 1775. Es reichte als langes Durchgangsgrundstück von der Długa bis zur Ogarna; Vorderhaus, Seitenflügel und Hinterbereiche trennten repräsentatives Wohnen, Alltag und Hauswirtschaft.", "tags": ["geschichte", "buergerhaus"]},
+        {"text": "Uphagen ließ das Haus nach seinem Geschmack umbauen und ausstatten. Er verfügte, dass die Einrichtung möglichst zusammenbleiben sollte; die ungewöhnlich lange Bindung an die Familie schuf eine gute Grundlage für die spätere museale Rekonstruktion.", "tags": ["uphagen", "innenraum"]},
+        {"text": "1911 öffnete das Haus als Museum. Es gehörte damit zu den frühen europäischen Bürgerhausmuseen, die nicht nur Kunstobjekte, sondern die räumliche Ordnung eines historischen Haushalts zeigten.", "tags": ["museumsgeschichte", "wohnen"]},
+        {"text": "1944 wurde die Ausstattung inventarisiert und ausgelagert. 1945 brannte das Gebäude aus und stürzte weitgehend ein; gerettete Teile, Fotografien und Inventare ermöglichten später eine quellenbasierte Rekonstruktion.", "tags": ["zweiter_weltkrieg", "verluste"]},
+        {"text": "Besuchsräume umfassen Diele und Treppe, Teezimmer, Salon, großen Speisesaal, kleinere Kabinette sowie Wirtschaftsbereiche. Die Abfolge macht soziale Repräsentation, Privatheit und Dienstarbeit innerhalb eines schmalen Stadthauses sichtbar.", "tags": ["innenraum", "alltag"]},
+        {"text": "Dekor, Wandbespannungen, Holzarbeiten und Möbel vermitteln den Geschmack eines wohlhabenden aufgeklärten Bürgers. Nicht jedes heute sichtbare Stück stand ununterbrochen seit dem 18. Jahrhundert am Ort; Originale, Rückführungen und Rekonstruktionen sind zu unterscheiden.", "tags": ["kunst", "quellenkritik"]},
+        {"text": "Visuell: Die schmale Fassade fügt sich in die Häuserzeile der Długa ein. Erst im Inneren wird die große Grundstückstiefe sichtbar: Räume, Treppen und Nebenflügel ziehen sich weit hinter der Straßenfront entlang.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Lange Gasse, Goldenes Tor und Rechtstädtisches Rathaus zeigen die öffentliche Repräsentationsachse; das Uphagenhaus öffnet dazu die private und wirtschaftliche Innenseite eines Patrizierhaushalts.", "tags": ["quer", "koenigliche_route"]},
+        {"text": "Historische Treppen und schmale Raumfolgen können die Barrierefreiheit begrenzen. Die Länge des Hauses ist selbst ein wichtiges Exponat und erklärt die dichte Grundstücksstruktur der Rechtstadt.", "tags": ["architektur", "barrierefreiheit"]},
+        {"text": "LIVE: Öffnung, Eintritt, zugängliche Räume, Sonderausstellungen, Führungen, Restaurierungen und Barrierefreiheit aktuell beim Museum Gdańsk prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Ist die Einrichtung vollständig original?", "a": "Gerettete Originale, historische Dokumentation und sorgfältige Rekonstruktion wirken zusammen; das Haus brannte 1945 weitgehend aus."}
+      ]
+    },
+    {
+      "id": "danzig_johannes_hevelius_monument",
+      "name": "Johannes-Hevelius-Denkmal",
+      "general_info": "Das Denkmal vor dem Altstädtischen Rathaus erinnert an Johannes Hevelius, Danziger Astronom, Brauer, Instrumentenbauer und Ratsherr. Eine benachbarte Wandmalerei greift seine Himmelskarten auf.",
+      "deep_data_pool": [
+        {"text": "Johannes Hevelius wurde 1611 in Danzig geboren und arbeitete hier bis zu seinem Tod 1687. Er verband astronomische Beobachtung mit städtischem Amt, Brauereibesitz und dem Bau großer eigener Instrumente.", "tags": ["hevelius", "biografie"]},
+        {"text": "Auf den Dächern seiner Häuser in der Altstadt richtete Hevelius eine umfangreiche Sternwarte ein. Seine Beobachtungen von Mond, Kometen und Sternen sowie seine Kartenwerke machten Danzig zu einem wichtigen Ort der europäischen Astronomie.", "tags": ["astronomie", "wissenschaft"]},
+        {"text": "Hevelius veröffentlichte 1647 die Selenographia mit detaillierten Mondkarten. Spätere Werke beschrieben Sterne und Sternbilder; mehrere von ihm eingeführte Sternbilder werden bis heute verwendet.", "tags": ["mond", "karten"]},
+        {"text": "Ein Brand zerstörte 1679 Häuser, Instrumente und Teile seiner Bibliothek. Hevelius setzte seine Arbeit fort, konnte die frühere Ausstattung aber nur teilweise ersetzen. Der Verlust zeigt die materielle Verletzlichkeit frühneuzeitlicher Forschung.", "tags": ["brand", "wissenschaftsgeschichte"]},
+        {"text": "Das heutige bronzene Sitzbild ist ein modernes Denkmal und kein Porträt aus Hevelius' Lebenszeit. Es stellt ihn mit astronomischen Attributen dar und setzt ihn in Beziehung zum Altstädtischen Rathaus, wo er als Ratsherr wirkte.", "tags": ["denkmal", "kunst"]},
+        {"text": "Visuell: Die sitzende Bronzeplastik steht auf dem Platz vor dem roten Altstädtischen Rathaus. Hevelius blickt in Richtung einer Hauswand, auf der ein großformatiges Sternkartenmotiv den wissenschaftlichen Kontext ergänzt.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: St. Katharinen bewahrt sein Grab, das Wissenschaftsmuseum im Turm behandelt Zeitmessung, und die Große Mühle erinnert an die technische Infrastruktur seines Altstadtviertels. Das Denkmal ist der leicht zugängliche Ausgangspunkt.", "tags": ["quer", "stadtraum"]},
+        {"text": "Die häufige Bezeichnung als Astronom unterschlägt seine soziale Stellung. Brauwesen und Ratstätigkeit finanzierten und verankerten seine Forschung in der städtischen Elite Danzigs.", "tags": ["einordnung", "stadtgeschichte"]},
+        {"text": "Hevelius arbeitete vor der allgemeinen Durchsetzung des Teleskops als Messinstrument für alle astronomischen Aufgaben und verteidigte präzise Beobachtungen mit großen offenen Visierinstrumenten. Zugleich nutzte er Fernrohre; die vereinfachte Gegenüberstellung von altem bloßem Auge und moderner Optik beschreibt seine Praxis daher nicht angemessen.", "tags": ["wissenschaftsgeschichte", "instrumente"]},
+        {"text": "LIVE: Temporäre Veranstaltungen, Baustellen, Zugänglichkeit des Platzes und Führungen aktuell prüfen. Das frei sichtbare Außendenkmal besitzt keine eigenen regulären Öffnungszeiten.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Wo arbeitete Hevelius?", "a": "Er betrieb eine private Dachsternwarte auf seinen Häusern in der Danziger Altstadt und war zugleich Brauer und Ratsherr."}
+      ]
+    },
+    {
+      "id": "danzig_olivaer_dom",
+      "name": "Olivaer Dom",
+      "general_info": "Der Dom zu Oliwa geht auf das Zisterzienserkloster zurück. Der ungewöhnlich lange Kirchenbau, barocke Ausstattung und die große Orgel bilden das historische Zentrum des Stadtteils Oliwa.",
+      "deep_data_pool": [
+        {"text": "Die Kirche entstand im Umfeld des im 12. Jahrhundert gegründeten Zisterzienserklosters Oliwa. Brände und Kriege führten zu wiederholtem Wiederaufbau; mittelalterliche Bauformen und barocke Ausstattung überlagern sich.", "tags": ["geschichte", "zisterzienser"]},
+        {"text": "Mit rund 107 Metern Außenlänge gilt sie als längste Kirche Polens. Der langgestreckte Grundriss folgt der Klostertradition und wirkt trotz der relativ schmalen Fassade im Inneren außergewöhnlich tief.", "tags": ["architektur", "dimension"]},
+        {"text": "Die Westfront wird von zwei etwa 46 Meter hohen Türmen gerahmt. Ihre schlanken Helme und der helle Fassadenbereich unterscheiden den Dom deutlich von den massiven Backsteinkirchen der Danziger Innenstadt.", "tags": ["architektur", "visuell"]},
+        {"text": "Im Inneren stehen zahlreiche barocke und Rokokoaltäre. Der Hauptaltar von 1688 verbindet Architektur, Skulptur und illusionistische Öffnung zu einer repräsentativen Inszenierung des wiedererstarkten Klosters.", "tags": ["kunst", "barock"]},
+        {"text": "Die große Orgel entwickelte sich im 18. Jahrhundert und wurde später verändert und erweitert. Berühmt sind der reich geschnitzte Prospekt und bewegliche Dekorationselemente; technischer Zustand und Konzertpraxis gehören zur lebendigen Nutzung.", "tags": ["orgel", "musik"]},
+        {"text": "1807 und 1925 erhielt die Kirche neue kirchliche Funktionen; heute ist sie Kathedrale der Erzdiözese Gdańsk. Der Begriff Dom beschreibt damit ihre heutige Stellung, während ihre Baugeschichte klösterlich begann.", "tags": ["kirchengeschichte", "name"]},
+        {"text": "Visuell: Vom Park und Vorplatz führt der Blick auf eine schmale helle Doppelturmfassade. Erst beim Betreten wird die enorme Längsausdehnung des gewölbten Innenraums sichtbar.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Oliwa-Park, ehemalige Klostergebäude und Dom bilden ein zusammengehöriges Ensemble. Der Park war nicht bloß Stadtgrün, sondern Teil der repräsentativen und wirtschaftlichen Klosterlandschaft.", "tags": ["quer", "ensemble"]},
+        {"text": "Orgelvorführungen sind kulturelle Angebote innerhalb eines aktiven Sakralraums. Gottesdienst, Andacht und liturgische Sperrung haben Vorrang; spontane Konzertgarantien sind unzulässig.", "tags": ["sakralraum", "respekt"]},
+        {"text": "Der Dom war Schauplatz wichtiger kirchlicher und politischer Erinnerung in Pommern; Grabmäler und Epitaphien verweisen auf Äbte und regionale Eliten. Für Einzelpersonen und Datierungen sollte jeweils die Beschriftung oder eine Fachquelle herangezogen werden, statt jede sichtbare Grabplatte pauschal den Zisterziensern zuzuschreiben.", "tags": ["erinnerung", "quellenkritik"]},
+        {"text": "LIVE: Gottesdienste, Orgelvorführungen, Konzerte, Eintritt, Innenzugang, Turm- oder Museumsbereiche und Restaurierungen bei Dom und Veranstaltern prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Warum ist der Dom so lang?", "a": "Sein Grundriss entwickelte sich aus der mittelalterlichen Klosterkirche der Zisterzienser und erreicht außen ungefähr 107 Meter."}
+      ]
+    },
+    {
+      "id": "danzig_park_oliwa",
+      "name": "Park Oliwski",
+      "general_info": "Der Oliwaer Park entwickelte sich aus der Gartenlandschaft des Zisterzienserklosters. Formale Achsen, Wasserläufe, landschaftliche Partien und Pflanzenhäuser rahmen den benachbarten Dom.",
+      "deep_data_pool": [
+        {"text": "Die Gartenentwicklung ist eng mit dem Zisterzienserkloster verbunden. Nutzflächen, Fischteiche und Wasserläufe wurden später zu repräsentativen Gartenräumen umgestaltet; der heutige Park bewahrt daher mehrere Funktions- und Stilepochen.", "tags": ["geschichte", "kloster"]},
+        {"text": "Im 18. Jahrhundert entstanden formale Partien nach französischem Vorbild mit geschnittenen Hecken, Achsen und Wasserbecken. Später kamen landschaftlichere Bereiche mit geschwungenen Wegen und malerischen Baumgruppen hinzu.", "tags": ["gartenkunst", "barock"]},
+        {"text": "Eine berühmte Blickachse, der sogenannte Fürstenblick, nutzte Kanal und geschnittene Vegetation, um den Blick scheinbar bis zur Danziger Bucht zu öffnen. Stadtwachstum und Vegetation veränderten diese historische Fernwirkung.", "tags": ["sichtachse", "landschaft"]},
+        {"text": "Der Potok Oliwski und weitere Wasserführungen strukturieren den Park. Wasser war bereits für Klosterwirtschaft und Mühlenlandschaft wichtig und wurde später zugleich gestalterisches Element.", "tags": ["wasser", "technikgeschichte"]},
+        {"text": "Botanische Sammlungen, Palmenhaus und weitere Gartenbereiche ergänzen den historischen Park. Pflanzenbestand, Gewächshauszugang und einzelne Attraktionen verändern sich und sind nicht als unveränderlicher Bestand zu behandeln.", "tags": ["botanik", "sammlung"]},
+        {"text": "Visuell: Nahe dem Dom liegen geometrische Wege, Hecken und Wasserflächen; weiter außen wird der Park lockerer und waldartiger. Die Doppeltürme des Doms erscheinen immer wieder als Orientierungspunkt zwischen den Bäumen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Dom, Abtspalast, Park und Oliwaer Mühlenlandschaft erklären gemeinsam, wie ein Kloster Religion, Repräsentation, Gartenkunst und wassergetriebene Wirtschaft verband.", "tags": ["quer", "ensemble"]},
+        {"text": "Der Park ist öffentlicher Erholungsraum und historisches Gartendenkmal. Große Veranstaltungen, intensive Nutzung oder Sturm können empfindliche Flächen zeitweise unzugänglich machen.", "tags": ["nutzung", "denkmalpflege"]},
+        {"text": "Der Abtspalast am Park erinnert daran, dass die Anlage nicht nur der stillen klösterlichen Einkehr diente. Äbte empfingen Gäste und demonstrierten Rang; formale Gartenräume bildeten dafür eine kontrollierte Bühne. Die späteren landschaftlichen Partien ergänzten diese Repräsentation um bewusst natürlich wirkende Szenen.", "tags": ["gartenkunst", "repraesentation"]},
+        {"text": "LIVE: Öffnung, Palmenhaus, Botanischer Garten, Baustellen, Veranstaltungen, Beleuchtung, Toiletten und wetterbedingte Sperrungen aktuell bei der Stadt prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Gehörte der Park zum Kloster?", "a": "Ja. Er entwickelte sich aus klösterlichen Nutz- und Gartenflächen und wurde später repräsentativ erweitert."}
+      ]
+    },
+    {
+      "id": "danzig_goldenes_tor",
+      "name": "Goldenes Tor",
+      "general_info": "Das Goldene Tor bildet den repräsentativen westlichen Eingang zur Langen Gasse. Der manieristische Bau des frühen 17. Jahrhunderts ersetzte ein gotisches Tor und eröffnet die Königliche Route.",
+      "deep_data_pool": [
+        {"text": "Das Tor wurde 1612 bis 1614 nach Entwurf Abraham van den Blocks errichtet und ersetzte das mittelalterliche Langgasser Tor. Es gehört zur Blütezeit Danziger Architektur zwischen niederländischem Manierismus und städtischer Repräsentation.", "tags": ["geschichte", "manierismus"]},
+        {"text": "Der Bau ähnelt einem triumphbogenartigen Stadttor mit mehreren Durchgängen, Säulen und reich gegliederten Geschossen. Seine Aufgabe war weniger moderne Verteidigung als die zeremonielle Inszenierung des Zugangs zur Rechtstadt.", "tags": ["architektur", "funktion"]},
+        {"text": "Auf der Attika stehen allegorische Figuren bürgerlicher Tugenden. Sie verkörpern Ideale wie Frieden, Freiheit, Wohlstand, Ruhm, Eintracht, Gerechtigkeit, Frömmigkeit und Vernunft; heutige Figuren sind Rekonstruktionen.", "tags": ["skulptur", "symbolik"]},
+        {"text": "Inschriften und Bildprogramm formulierten ein Selbstbild der wohlhabenden, politisch selbstbewussten Stadt. Das Tor verherrlicht damit nicht bloß Monarchen, obwohl königliche Einzüge die Route passierten.", "tags": ["stadtgeschichte", "repraesentation"]},
+        {"text": "1945 wurde das Tor weitgehend zerstört und nach dem Krieg rekonstruiert. Die heutige Erscheinung beruht auf historischer Dokumentation, erhaltenen Fragmenten und Wiederaufbauleistungen.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Visuell: Die helle steinerne Fassade steht direkt östlich von Stockturm und Peinkammer. Durch drei hohe Öffnungen fällt der Blick in die schmale, farbig giebelständige Häuserfolge der Długa.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hohes Tor, Vorwerk mit Stockturm und Goldenes Tor bilden drei unmittelbar aufeinanderfolgende Schwellen. Hinter dem Goldenen Tor wird aus Verteidigungsraum die repräsentative Stadtachse.", "tags": ["quer", "koenigliche_route"]},
+        {"text": "Die Königliche Route führte weiter über Długa und Długi Targ zum Grünen Tor. Der Name beschreibt zeremonielle Einzüge, nicht eine dauerhaft dem König vorbehaltene Straße.", "tags": ["orientierung", "name"]},
+        {"text": "Skulpturen, Inschriften und Fassadenseiten unterscheiden sich zur Stadt- und Außenseite. Ein kurzer Blick nur aus der Długa erfasst daher nicht das gesamte politische Bildprogramm.", "tags": ["kunst", "besuch"]},
+        {"text": "Das Goldene Tor steht nicht allein, sondern direkt hinter dem älteren Vorwerk. Diese enge Staffelung erklärt den Wandel der Befestigung: Der mittelalterlich geprägte Kontroll- und Gefängniskomplex blieb bestehen, während die Stadt davor beziehungsweise dahinter einen neuen repräsentativen Eingang mit humanistischem Tugendprogramm errichtete.", "tags": ["befestigung", "stadtgeschichte"]},
+        {"text": "LIVE: Durchgangssperrungen, Fassadenarbeiten, Innenraumnutzung und Veranstaltungen am Kohlenmarkt aktuell prüfen; eine allgemeine Innenbesichtigung nicht voraussetzen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Ist das Tor aus Gold?", "a": "Nein. Der Name bezeichnet den repräsentativen Rang; der Bau besteht aus Stein und verputztem Mauerwerk mit reichem Figurenschmuck."}
+      ]
+    },
+    {
+      "id": "danzig_grunes_tor",
+      "name": "Grünes Tor",
+      "general_info": "Das Grüne Tor schließt den Langen Markt zur Mottlau ab. Der repräsentative Bau der 1560er Jahre verband mehrere Durchfahrten mit Räumen für Herrschaft und später Kultur.",
+      "deep_data_pool": [
+        {"text": "Das Tor wurde in den 1560er Jahren anstelle eines älteren Koggentores errichtet. Es markiert die Wasserseite der Königlichen Route und gehört zu den frühesten großen Bauten niederländisch beeinflusster Renaissance in Danzig.", "tags": ["geschichte", "renaissance"]},
+        {"text": "Mehrere breite Durchgänge führten vom Langen Markt zur Grünen Brücke und auf die Speicherinsel. Der Bau ist daher zugleich Tor, Brückenhaus und repräsentativer Abschluss eines städtischen Platzraums.", "tags": ["architektur", "stadtraum"]},
+        {"text": "Die Obergeschosse waren als standesgemäße Unterkunft für polnische Könige gedacht. Tatsächlich diente das Haus nur begrenzt als königliche Residenz; der Anspruch ist wichtiger als eine Vorstellung regelmäßiger Hofhaltung.", "tags": ["koenigliche_route", "quellenkritik"]},
+        {"text": "Die Fassade verbindet Backsteinflächen mit hellen Steinrahmungen, Giebeln und zahlreichen Fenstern. Ihre Palastwirkung unterscheidet das Grüne Tor von kompakteren gotischen Wassertoren wie Frauentor oder Häkertor.", "tags": ["architektur", "vergleich"]},
+        {"text": "1945 schwer beschädigt, wurde der Bau rekonstruiert. Heute dient er als Kultur- und Ausstellungsort des Nationalmuseums; Ausstellungsräume und institutionelle Nutzung können wechseln.", "tags": ["wiederaufbau", "museum"]},
+        {"text": "Visuell: Am Ostende des Długi Targ spannt sich die lange Fassade mit vier Durchgängen quer vor die Mottlau. Durch die Bögen sieht man Brücke, Fluss und die Giebel der Speicherinsel.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Goldenes Tor und Grünes Tor sind die beiden repräsentativen Endpunkte der Königlichen Route. Das eine öffnet die Stadt vom Land, das andere zum Hafen- und Speicherraum.", "tags": ["quer", "koenigliche_route"]},
+        {"text": "Der Name Grün ist historisch, aber seine genaue Herleitung wird unterschiedlich erklärt. Unbelegte Geschichten über grüne Farbe oder Baumaterial sollten nicht als sichere Ursache ausgegeben werden.", "tags": ["name", "quellenkritik"]},
+        {"text": "Die Durchgänge gehören zum alltäglichen Fußweg; Ausstellungen liegen in darüberliegenden Räumen. Zugänglichkeit und Öffnung des Kulturorts sind deshalb von der Passierbarkeit des Tores zu trennen.", "tags": ["besuch", "orientierung"]},
+        {"text": "Die Grüne Brücke führt unmittelbar zur Speicherinsel. Damit endet die zeremonielle Route nicht an einem abgeschlossenen Palast, sondern an der wirtschaftlichen Lebensader der Stadt. Repräsentation, Flussverkehr und Lagerhäuser treffen hier räumlich aufeinander und erklären den Wohlstand, den die Fassaden am Langen Markt ausstellen.", "tags": ["handel", "einordnung"]},
+        {"text": "LIVE: Ausstellungen, Öffnung, Eintritt, Brücken- und Durchgangssperrungen, Veranstaltungen und Barrierefreiheit beim Nationalmuseum und der Stadt prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Haben polnische Könige hier gewohnt?", "a": "Die Räume waren dafür vorgesehen, wurden aber nicht als regelmäßige dauerhafte Königsresidenz genutzt."}
+      ]
+    },
+    {
+      "id": "danzig_lange_gasse",
+      "name": "Lange Gasse",
+      "general_info": "Długa und der anschließende Lange Markt bilden Danzigs Königliche Route. Patrizierhäuser, Rathaus, Artushof und Tore verdichten hier Handel, Stadtregierung und zeremonielle Repräsentation.",
+      "deep_data_pool": [
+        {"text": "Die Długa führt vom Goldenen Tor bis zum Rechtstädtischen Rathaus und geht dort in den Długi Targ über. Beide Abschnitte bilden eine zusammenhängende Hauptachse, werden historisch aber als Straße und Markt unterschieden.", "tags": ["orientierung", "stadtraum"]},
+        {"text": "Wohlhabende Kaufleute und Amtsträger errichteten schmale, tiefe Giebelhäuser entlang der Route. Aufwendige Fassaden machten Rang, internationale Kontakte und wirtschaftlichen Erfolg im öffentlichen Raum sichtbar.", "tags": ["handel", "architektur"]},
+        {"text": "Polnische Könige zogen bei Besuchen vom westlichen Stadteingang über diese Achse ein. Der moderne Name Königliche Route beschreibt diese zeremonielle Funktion; Alltag, Handel und Stadtpolitik waren jedoch ebenso prägend.", "tags": ["koenigliche_route", "geschichte"]},
+        {"text": "Rechtstädtisches Rathaus, Artushof und Neptunbrunnen konzentrieren kommunale Regierung, kaufmännische Gesellschaft und städtische Symbolik am Langen Markt. Die Straße ist deshalb selbst ein Geschichtsraum, nicht nur Verbindung zwischen Einzeldenkmälern.", "tags": ["stadtregierung", "symbolik"]},
+        {"text": "1945 wurde ein großer Teil der Häuser zerstört. Der Wiederaufbau rekonstruierte besonders die repräsentativen Fassaden, während Grundrisse und rückwärtige Bereiche teils verändert wurden. Der heutige Eindruck ist eine kuratierte historische Stadtsilhouette.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Fassaden zeigen Gotik, Renaissance, Manierismus, Barock und historisierende Rekonstruktion. Jahreszahlen an Häusern können Bau-, Umbau- oder Wiederaufbauphasen bezeichnen und sind nicht automatisch das Alter aller Bauteile.", "tags": ["architektur", "quellenkritik"]},
+        {"text": "Visuell: Vom Goldenen Tor zieht eine leicht geschwungene Folge schmaler, farbiger Giebel ostwärts. Rathausturm und später das Grüne Tor setzen Orientierungspunkte; Erdgeschosse sind heute stark durch Läden und Gastronomie geprägt.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Uphagenhaus zeigt bürgerliches Wohnen, Rathaus die Stadtregierung, Artushof die Elitegesellschaft und Grünes Tor den Übergang zum Hafen. Ein Rundgang entlang der Achse verbindet diese Funktionen ohne Ortswechsel.", "tags": ["quer", "stadtraum"]},
+        {"text": "Die Straße ist überwiegend Fußgängerraum, aber Lieferverkehr, Veranstaltungen und hohe Besuchsdichte können Wege verändern. Beischläge, Schwellen und Pflaster beeinflussen die Barrierefreiheit.", "tags": ["besuch", "barrierefreiheit"]},
+        {"text": "LIVE: Veranstaltungen, Sperrungen, Baustellen, Märkte, einzelne Hausöffnungen und Gastronomie aktuell prüfen. Aus einer historischen Fassade keine frei zugängliche Innenausstattung ableiten.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Sind Lange Gasse und Langer Markt dasselbe?", "a": "Sie bilden dieselbe Hauptachse, sind aber zwei Abschnitte: Długa westlich des Rathauses und Długi Targ östlich davon."}
+      ]
+    },
+    {
+      "id": "danzig_shakespeare_theater",
+      "name": "Danziger Shakespeare-Theater",
+      "general_info": "Das 2014 eröffnete Shakespeare-Theater steht am Ort der frühneuzeitlichen Fechtschule, in der englische Wandertruppen auftraten. Renato Rizzis dunkler Ziegelbau besitzt ein bewegliches Dach.",
+      "deep_data_pool": [
+        {"text": "Im 17. Jahrhundert bestand in Danzig eine Fechtschule, die zugleich als öffentlicher Veranstaltungs- und Theaterraum diente. Englische Wandertruppen brachten dort Stücke des elisabethanischen und jakobäischen Repertoires zur Aufführung.", "tags": ["geschichte", "theater"]},
+        {"text": "Archäologische und archivalische Forschung half, Lage und Grundform der Fechtschule zu bestimmen. Der Neubau ist keine einfache Rekonstruktion, sondern eine zeitgenössische Antwort auf diesen historischen Spielort.", "tags": ["archaeologie", "quellenkritik"]},
+        {"text": "Jerzy Limon und die Stiftung Theatrum Gedanense trieben das Projekt seit den 1990er Jahren voran. Aus Shakespeare-Woche und Festival entwickelte sich eine dauerhafte Institution mit internationalem Austausch.", "tags": ["institution", "festival"]},
+        {"text": "Der italienische Architekt Renato Rizzi entwarf einen massiven dunklen Ziegelkomplex. Außenmauern umschließen Theater, Höfe und Umgang; die reduzierte Form nimmt Material und Maßstab der historischen Stadt auf, ohne alte Fassaden zu kopieren.", "tags": ["architektur", "moderne"]},
+        {"text": "Das bewegliche Dach kann den Bühnenraum zum Himmel öffnen. Flexible Galerien und Bühnenanordnungen erlauben Annäherungen an frühneuzeitliche Theaterformen ebenso wie moderne Inszenierungen.", "tags": ["buehnentechnik", "architektur"]},
+        {"text": "Das Haus wurde 2014 eröffnet. Es dient nicht nur Shakespeare-Aufführungen, sondern Theater, Festivals, Bildung und internationalen Gastspielen; der Name bezeichnet den programmatischen Schwerpunkt, keine exklusive Beschränkung.", "tags": ["kultur", "nutzung"]},
+        {"text": "Visuell: Der fast fensterlose dunkle Ziegelkörper steht nahe dem Kohlenmarkt. Hohe Mauern und klare geometrische Volumen wirken bewusst streng; Dachflügel und Innenhöfe erschließen sich erst bei geöffnetem Haus.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Stockturm und Goldenes Tor zeigen historische Rekonstruktion, das Shakespeare-Theater eine moderne, materialbewusste Ergänzung. Beide stehen an derselben westlichen Stadtkante und machen verschiedene Denkmalstrategien vergleichbar.", "tags": ["quer", "stadtraum"]},
+        {"text": "Das offene Dach ist wetter- und produktionsabhängig. Sein Vorhandensein bedeutet nicht, dass jede Vorstellung unter freiem Himmel stattfindet oder das Dach bei jeder Führung bewegt wird.", "tags": ["besuch", "quellenkritik"]},
+        {"text": "LIVE: Spielplan, Sprache, Übertitel, Dachöffnung, Führungen, Tickets, Barrierefreiheit und Festivaltermine ausschließlich beim Theater prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Ist das Gebäude eine Rekonstruktion der alten Fechtschule?", "a": "Nein. Es ist ein moderner Bau am historischen Ort, der Maßstab und Spielidee der früheren Bühne aufgreift."}
+      ]
+    },
+    {
+      "id": "danzig_ostsee_philharmonie",
+      "name": "Polnische Baltische Philharmonie",
+      "general_info": "Die Baltische Philharmonie nutzt ein umgebautes ehemaliges Elektrizitätswerk auf Ołowianka. Die Institution entstand 1945 und arbeitet seit den 1990er Jahren wieder unabhängig von der Oper.",
+      "deep_data_pool": [
+        {"text": "1945 formierte Roman Kuklewicz in Sopot ein Städtisches Symphonieorchester. Das erste Konzert der späteren Baltischen Philharmonie fand am 29. September 1945 statt; gespielt wurden Werke von Chopin und Moniuszko.", "tags": ["geschichte", "nachkrieg"]},
+        {"text": "1949 wurde das gewachsene Orchester verstaatlicht. 1953 vereinigte man Philharmonie und Opernstudio zur Staatlichen Baltischen Oper und Philharmonie; die institutionelle Trennung erfolgte in den 1990er Jahren.", "tags": ["institution", "musikgeschichte"]},
+        {"text": "Der heutige Sitz liegt auf Ołowianka in einem ehemaligen städtischen Elektrizitätswerk. Die industrielle Backsteinarchitektur wurde für Konzertsäle, Proben, Verwaltung und öffentliche Bereiche umgebaut.", "tags": ["industriearchitektur", "umnutzung"]},
+        {"text": "Die Lage am Wasser macht den Komplex zu einem sichtbaren Teil des historischen Hafenpanoramas. Energieversorgung, maritime Museen und Konzertbetrieb liegen auf derselben Insel und zeigen die Umnutzung technischer Stadtinfrastruktur.", "tags": ["stadtraum", "technikgeschichte"]},
+        {"text": "Die Philharmonie trägt den Namen Frédéric Chopins und ist zentrale symphonische Institution der Region. Gastspiele, Festivals und weitere Formate ergänzen das Orchesterprogramm, sind aber spielzeitabhängig.", "tags": ["kultur", "funktion"]},
+        {"text": "Visuell: Der lange rote Backsteinkomplex mit hohen Rundbogenfenstern und Schornstein steht auf Ołowianka gegenüber der Rechtstadt. Abends kann die Uferfront beleuchtet sein; dies ist kein dauerhaft garantiertes Merkmal.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Sołdek und Nationales Maritimes Museum vermitteln Schiffbau und Hafen, die Philharmonie die kulturelle Nachnutzung der Insel. Eine Fußgängerbrücke verbindet Ołowianka mit dem Innenstadtbereich.", "tags": ["quer", "insel"]},
+        {"text": "Konzertsaal und Außenkomplex sind unterschiedlich zugänglich. Ohne Veranstaltung oder Führung kann das Gebäudeinnere geschlossen sein, obwohl Ufer und Fassaden sichtbar bleiben.", "tags": ["besuch", "orientierung"]},
+        {"text": "Der Umbau bewahrt die industrielle Fernwirkung, verlangt innen aber völlig andere Bedingungen: Akustik, Schwingungsentkopplung, Bühnentechnik und Publikumswege ersetzen die Prozesse der Stromerzeugung. Der Ort ist daher ein Beispiel adaptiver Wiederverwendung und kein unverändert erhaltenes Kraftwerksinterieur.", "tags": ["umnutzung", "architektur"]},
+        {"text": "LIVE: Konzertprogramm, Karten, Saal, Einlass, Führungen, Brückenbetrieb, Gastronomie und Barrierefreiheit bei der Philharmonie prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "War das Gebäude immer eine Philharmonie?", "a": "Nein. Es war ein Elektrizitätswerk und wurde für den heutigen Kulturbetrieb umgebaut."}
+      ]
+    },
+    {
+      "id": "danzig_hevelianum",
+      "name": "Hevelianum",
+      "general_info": "Das Hevelianum verbindet Wissenschaftszentrum, Kulturort und Festungslandschaft auf dem Gradowa-Hügel. Historische Militärbauten rahmen interaktive Ausstellungen und Aussichtspunkte.",
+      "deep_data_pool": [
+        {"text": "Der Gradowa-Hügel sicherte die westliche Annäherung an Danzig. Befestigungen wurden über Jahrhunderte ausgebaut; besonders im 19. Jahrhundert entstanden Kasematten, Wälle und militärische Funktionsbauten.", "tags": ["geschichte", "festung"]},
+        {"text": "Die Höhenlage erlaubte Kontrolle über Verkehrswege und Stadt. Belagerungen und wechselnde Militärtechnik veränderten das System; die erhaltene Landschaft ist das Ergebnis mehrerer Ausbauphasen, kein einheitlicher Bau.", "tags": ["militaer", "stadtgeografie"]},
+        {"text": "Nach Ende der militärischen Nutzung wurden Anlagen schrittweise gesichert und für Bildung, Freizeit und Kultur geöffnet. Das Hevelianum nutzt historische Räume, ohne ihre ursprüngliche Wehrfunktion zu verschweigen.", "tags": ["umnutzung", "denkmalpflege"]},
+        {"text": "Interaktive Ausstellungen behandeln Naturwissenschaft, Technik und Umwelt. Name und Wissenschaftsprofil erinnern an Johannes Hevelius; seine historische Sternwarte stand jedoch in der Altstadt und nicht auf diesem Hügel.", "tags": ["wissenschaft", "quellenkritik"]},
+        {"text": "Kasematten und Erdwerke beeinflussen Temperatur, Licht und Wegeführung. Die räumliche Erfahrung unterscheidet sich von einem Neubau-Museum und macht Festungsarchitektur körperlich erfahrbar.", "tags": ["architektur", "innenraum"]},
+        {"text": "Visuell: Der grüne Hügel erhebt sich direkt hinter Hauptbahnhof und Busbahnhof. Backsteinportale, niedrige Kasematten und grasbewachsene Wälle liegen entlang ansteigender Wege; oben öffnen sich Blicke über Innenstadt und Werft.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hauptbahnhof, Altstadt und frühere Werft sind aus erhöhter Lage räumlich verständlich. Das Hevelius-Denkmal und St. Katharinen ergänzen die Wissenschaftsgeschichte, ohne denselben historischen Standort zu bilden.", "tags": ["quer", "aussicht"]},
+        {"text": "Außengelände und Ausstellungen haben unterschiedliche Zugänge. Steigungen, Kopfsteinpflaster und historische Schwellen können trotz angepasster Routen relevant sein.", "tags": ["barrierefreiheit", "besuch"]},
+        {"text": "Die grüne Oberfläche ist selbst Teil der Festungsarchitektur. Erdüberdeckungen schützten gemauerte Räume vor Beschuss, regulierten aber auch Temperatur und Feuchtigkeit. Was heute wie Parklandschaft wirkt, war als technisch geformtes Verteidigungsgelände mit freien Schussfeldern und kontrollierten Wegen geplant.", "tags": ["festungsbau", "landschaft"]},
+        {"text": "LIVE: Ausstellungen, Öffnung, Eintritt, Aussichtszugänge, Veranstaltungen, Baustellen und barrierefreie Route beim Hevelianum prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Stand Hevelius' Sternwarte hier?", "a": "Nein. Seine Sternwarte lag auf Häusern in der Altstadt; das Zentrum trägt seinen Namen als wissenschaftliches Erbe."}
+      ]
+    },
+    {
+      "id": "danzig_strand_brzezno",
+      "name": "Strand Brzeźno",
+      "general_info": "Brzeźno ist ein städtischer Ostseestrand an der Danziger Bucht. Die rund 140 Meter lange Seebrücke, Promenade und Küstenwege machen ihn zu einem wichtigen Erholungsort.",
+      "deep_data_pool": [
+        {"text": "Brzeźno entwickelte sich vom Fischerdorf zum Badeort und später zum Danziger Stadtteil. Küstenlage und Verkehrsanbindung machten den Strand zu einem der bekanntesten städtischen Badeplätze.", "tags": ["geschichte", "badeort"]},
+        {"text": "Die Danziger Bucht ist geschützter als offene Ostseeküste, bleibt aber von Wind, Wellen, Strömung und wechselnder Wasserqualität geprägt. Ruhiges Aussehen ersetzt keine aktuelle Badefreigabe.", "tags": ["natur", "sicherheit"]},
+        {"text": "Die heutige Seebrücke ragt ungefähr 140 Meter in die Bucht. Sie ist Aussichtspunkt und Spazierweg, nicht mit der deutlich längeren Seebrücke im benachbarten Sopot zu verwechseln.", "tags": ["seebruecke", "orientierung"]},
+        {"text": "Promenade und Küstenwege verbinden Brzeźno mit weiteren Stränden und Grünräumen Richtung Jelitkowo und Nowy Port. Distanzen und Baustellen müssen für konkrete Routen aktuell geprüft werden.", "tags": ["aktivitaet", "stadtraum"]},
+        {"text": "Sandstrand, Dünenvegetation und befestigte Freizeitbereiche liegen eng zusammen. Dünen schützen die Küste und dürfen nicht abseits freigegebener Wege betreten werden.", "tags": ["kuestenschutz", "natur"]},
+        {"text": "Visuell: Von der Promenade öffnet sich ein breiter Sandstreifen zur Bucht. Die hölzerne beziehungsweise helle Seebrücke bildet den stärksten Orientierungspunkt; am Horizont können Hafenanlagen und Schiffe sichtbar sein.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Nach Westen liegen Hafen und Nowy Port, nach Südosten folgen weitere Stadtstrände bis Sopot. Der Strand zeigt die Freizeitseite derselben Bucht, deren Hafen- und Militärgeschichte an Westerplatte sichtbar wird.", "tags": ["quer", "kueste"]},
+        {"text": "Badeaufsicht, Hundebereiche, Sportangebote, Toiletten und Gastronomie sind saisonal oder veränderlich. Ein historisch etablierter Badestrand ist nicht automatisch jederzeit beaufsichtigt.", "tags": ["besuch", "quellenkritik"]},
+        {"text": "Die Strandbreite und Sandverteilung sind keine völlig stabilen Naturgrößen. Wellen, Stürme, Küstenströmung und Unterhaltungsmaßnahmen verändern das Profil; Seebrücke, Promenade und Schutzbauten greifen zugleich in die Dynamik ein. Historische Fotos können deshalb eine andere Wasserlinie und andere Freizeitarchitektur zeigen.", "tags": ["kuestendynamik", "einordnung"]},
+        {"text": "Der Name Brzeźno bezeichnet den ganzen Stadtteil und nicht nur die Badestelle. Wohnquartiere, Park und Küstenpromenade liegen hinter dem Strand; bei Navigation sollte zwischen Strandzugang, Seebrücke und einem allgemeinen Stadtteilpunkt unterschieden werden.", "tags": ["orientierung", "stadtraum"]},
+        {"text": "LIVE: Wasserqualität, Badeflaggen, Algen, Quallen, Sturm, Eis, Aufsicht, Hunderegeln, Seebrückenzugang, Toiletten und Gastronomie bei Stadt und Rettungsdiensten prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Kann man dort immer baden?", "a": "Nein. Wasserqualität, Wetter, Strömung und Badefreigabe müssen am Besuchstag geprüft werden."}
+      ]
+    },
+    {
+      "id": "danzig_zoo_oliwa",
+      "name": "Zoo Gdańsk-Oliwa",
+      "general_info": "Der 1954 eröffnete Zoo liegt im bewaldeten Tal Dolina Leśnego Młyna am Rand des Dreistadt-Landschaftsparks. Mit rund 125 Hektar gehört er zu den flächengrößten Zoos Polens.",
+      "deep_data_pool": [
+        {"text": "Die Initiative entstand Ende der 1940er Jahre und wurde stark von Einwohnern unterstützt. Ende 1953 stimmte die Stadt zu; 1954 eröffnete der Garten auf einem park- und waldreichen Gelände in Oliwa.", "tags": ["geschichte", "stadtgesellschaft"]},
+        {"text": "Frühe Tierbestände kamen teilweise als Spenden aus der Bevölkerung. Aus bescheidenen Anfängen entwickelte sich ein wissenschaftlich geführter Zoo mit Tierhäusern, großen Gehegen und internationaler Zusammenarbeit.", "tags": ["entwicklung", "tierhaltung"]},
+        {"text": "Die offizielle Betreiberseite nennt rund 125 Hektar. Ältere touristische Quellen nennen 136 Hektar; für stabile Daten ist die aktuelle Betreiberangabe vorzuziehen und die Differenz nicht künstlich aufzulösen.", "tags": ["dimension", "quellenkritik"]},
+        {"text": "Der Zoo ist Mitglied der European Association of Zoos and Aquaria und beteiligt sich an europäischen Erhaltungszuchtprogrammen. Die Funktion umfasst damit Freizeit, Bildung, Forschung und Artenschutz.", "tags": ["artenschutz", "institution"]},
+        {"text": "Das Gelände liegt in einem Tal am Rand des Landschaftsparks. Lange Wege und die große Fläche prägen den Besuch stärker als in einem kompakten Innenstadtzoo; Tierhäuser verteilen sich über das Areal.", "tags": ["landschaft", "besuch"]},
+        {"text": "Visuell: Waldhänge, breite Wege, Wiesen und großräumige Gehege bestimmen das Bild. Der Eingang liegt am Ende der Karwieńska; vom Oliwaer Zentrum ist der Zoo nicht direkt am Dompark gelegen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Oliwaer Dom und Park zeigen die historische Klosterlandschaft, der Zoo die spätere Freizeit- und Naturnutzung des bewaldeten Hinterlands. Für beides sollte wegen der Distanzen genügend Zeit eingeplant werden.", "tags": ["quer", "oliwa"]},
+        {"text": "Tierarten, Individuenzahlen, Fütterungen und sichtbare Tiere ändern sich. Selbst offizielle Bestandszahlen sind Momentaufnahmen und dürfen nicht als mehrjährig feste Packfakten verwendet werden.", "tags": ["tiere", "quellenkritik"]},
+        {"text": "Erhaltungszucht bedeutet nicht, dass jede gehaltene Art unmittelbar wieder ausgewildert wird. Zoos koordinieren genetisch geeignete Populationen, tauschen Tiere und führen Zuchtbücher; konkrete Programme hängen von Art, Lebensraumprojekten und internationalen Entscheidungen ab und müssen aktuell belegt werden.", "tags": ["artenschutz", "einordnung"]},
+        {"text": "LIVE: Öffnung, Eintritt, Tierbestand, Fütterungen, Wege, Baustellen, Gastronomie, Barrierefreiheit und wetterbedingte Einschränkungen ausschließlich beim Zoo prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Wie groß ist der Zoo?", "a": "Der Betreiber nennt rund 125 Hektar; ältere touristische Angaben können wegen anderer Abgrenzungen höher ausfallen."}
+      ]
+    },
+    {
+      "id": "danzig_olivia_star",
+      "name": "Olivia Star",
+      "general_info": "Olivia Star ist das Hochhaus des Olivia Business Centre in Oliwa. Eine öffentliche Aussichtsebene im 32. Stock eröffnet den Blick über Dreistadt, Moränenhügel und Danziger Bucht.",
+      "deep_data_pool": [
+        {"text": "Das Hochhaus gehört zum modernen Bürokomplex Olivia Business Centre zwischen Universität, Bahnhof Oliwa und großen Verkehrsachsen. Es steht damit für den Wandel Oliwas zu einem wichtigen Wirtschaftsstandort der Dreistadt.", "tags": ["stadtentwicklung", "wirtschaft"]},
+        {"text": "Mit einer Gesamthöhe von ungefähr 180 Metern prägt Olivia Star die jüngere Skyline. Höhenangaben können Antennen oder bauliche Spitze unterschiedlich behandeln; für die Besuchserfahrung ist die öffentlich genutzte Ebene maßgeblich.", "tags": ["architektur", "dimension"]},
+        {"text": "Die Aussichtsebene liegt im 32. Stock. Betreiberangaben beschreiben Blickhöhen um 130 bis 140 Meter; diese Werte beziehen sich je nach Bereich auf Deck, Restaurant oder Höhe über Grund.", "tags": ["aussicht", "quellenkritik"]},
+        {"text": "Von oben lassen sich Moränenzüge, Danziger Bucht und die lineare Struktur der Dreistadt erkennen. Sicht bis Hel ist wetterabhängig und darf trotz Betreiberwerbung nicht garantiert werden.", "tags": ["geografie", "sicht"]},
+        {"text": "Gastronomie, Veranstaltungsflächen und ein tropischer Innengarten ergänzen den Bürokomplex. Angebote, Betreiber und Zugangssysteme sind veränderlich und gehören nicht als dauerhafte Detaildaten in den Pack.", "tags": ["nutzung", "heute"]},
+        {"text": "Visuell: Der schlanke gläserne Turm ragt deutlich über die umgebenden Bürohäuser und Wohnquartiere. Im Sockelbereich ist der konkrete Besuchereingang weniger offensichtlich als die weithin sichtbare Silhouette.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Der Blick ergänzt den historischen Turmaufstieg in St. Katharinen und den Gradowa-Hügel um eine moderne Hochhausperspektive. Oliwaer Dom und Park liegen südwestlich, die Bucht nordöstlich.", "tags": ["quer", "aussicht"]},
+        {"text": "Es handelt sich um ein aktives Büro- und Gastronomiegebäude, nicht um einen frei begehbaren Aussichtsturm. Zugang kann an Ticket, Reservierung, Sicherheitskontrolle oder Veranstaltungsbetrieb gebunden sein.", "tags": ["besuch", "sicherheit"]},
+        {"text": "Die Aussicht macht die polyzentrische Struktur der Dreistadt verständlich: Gdańsk, Sopot und Gdynia bilden kein einziges historisches Zentrum, sondern eine lange, durch Bahn und Hauptstraßen verbundene Siedlungsachse zwischen bewaldeten Moränen und Küste. Dunst kann diese Zusammenhänge stärker begrenzen als die Gebäudehöhe.", "tags": ["geografie", "dreistadt"]},
+        {"text": "LIVE: Öffnung der Aussichtsebene, Tickets, Reservierung, Altersregeln, Gastronomie, Veranstaltungen, Sicherheitskontrolle, Barrierefreiheit und Sichtbedingungen beim Betreiber prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Kann man einfach bis ganz nach oben fahren?", "a": "Der öffentliche Zugang betrifft eine ausgewiesene Aussichtsebene; Öffnung, Ticket und Reservierung müssen live geprüft werden."}
+      ]
+    },
+    {
+      "id": "danzig_forum_gdansk",
+      "name": "Forum Gdańsk",
+      "general_info": "Forum Gdańsk ist ein modernes Einkaufs- und Stadtquartier am historischen Heumarkt. Es überbaut Verkehrsräume, integriert den Radunia-Kanal und verbindet Innenstadt, Hauptbahnhof und südliche Viertel.",
+      "deep_data_pool": [
+        {"text": "Der Standort liegt an der westlichen Kante der historischen Innenstadt beim Targ Sienny und Targ Rakowy. Diese Märkte gehörten zur Handelslandschaft vor den Rechtstadttoren und wurden später stark durch Straßen und Bahn geprägt.", "tags": ["geschichte", "stadtraum"]},
+        {"text": "Das im 21. Jahrhundert eröffnete Forum kombiniert Einkaufszentrum, öffentliche Plätze, Wege, Kultur- und Verkehrsfunktionen. Es ist kein rekonstruiertes Altstadtquartier, sondern eine großmaßstäbliche moderne Neuordnung.", "tags": ["stadtentwicklung", "architektur"]},
+        {"text": "Ein Abschnitt des Radunia-Kanals wurde in die Anlage integriert. Der historische Kanal versorgte Danzig mit Wasser und Antriebskraft; seine sichtbare Führung schafft eine Verbindung zur Großen Mühle und Altstadttechnik.", "tags": ["wasser", "technikgeschichte"]},
+        {"text": "Der Komplex umfasst zahlreiche Läden, Gastronomie, Kino und Grünflächen. Offizielle touristische Unterlagen nennen Größenordnungen, doch Mieterzahl und Angebote wechseln und sind daher LIVE-Daten.", "tags": ["nutzung", "ephemeral"]},
+        {"text": "Das erhaltene ehemalige Gebäude der Elisabethschwestern und der Kulturort Kunszt Wodny sind in das Quartier eingebunden. Dadurch stehen historische Einzelbauten neben großformatiger Gegenwartsarchitektur.", "tags": ["denkmal", "kultur"]},
+        {"text": "Visuell: Terrassierte moderne Baukörper steigen westlich der Altstadt an. Offene Plätze, Brücken und der Wasserlauf gliedern den Komplex; vom Hohen Tor führt ein kurzer Übergang über stark befahrene Verkehrsachsen.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: Hohes Tor und Königliche Route zeigen den historischen Eintritt in die Stadt, Forum die heutige Ankunfts- und Einkaufslandschaft. Der Radunia-Kanal verbindet es thematisch mit Großer Mühle und klösterlicher Wasserwirtschaft.", "tags": ["quer", "orientierung"]},
+        {"text": "Öffentlicher Stadtraum und private Centerflächen greifen ineinander. Wege können länger offen sein als Geschäfte; Hausordnung, Veranstaltung und Sicherheitsbetrieb unterscheiden sich von einem vollständig kommunalen Platz.", "tags": ["besuch", "quellenkritik"]},
+        {"text": "Das Projekt war städtebaulich umstritten, weil es eine sehr große private Handelsfläche an sensibler Innenstadtlage mit öffentlichen Wegen und Infrastruktur verknüpft. Für die Einordnung ist deshalb sowohl die neue Durchwegung als auch die Frage wichtig, wie historische Topografie und öffentlicher Raum in den Komplex integriert wurden.", "tags": ["stadtplanung", "einordnung"]},
+        {"text": "LIVE: Geschäfte, Gastronomie, Kino, Öffnungszeiten, Veranstaltungen, Parken, Wege, Aufzüge und Baustellen beim Forum und den jeweiligen Betreibern prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Ist Forum Gdańsk Teil der historischen Altstadt?", "a": "Es liegt direkt an deren westlicher Kante auf historischen Markt- und Verkehrsflächen, ist aber ein moderner Komplex."}
+      ]
+    },
+    {
+      "id": "danzig_grosse_muhle",
+      "name": "Große Mühle",
+      "general_info": "Die Große Mühle ist ein monumentaler gotischer Zweckbau am Radunia-Kanal. Der Deutsche Orden ließ sie im 14. Jahrhundert errichten; heute beherbergt sie das Bernsteinmuseum.",
+      "deep_data_pool": [
+        {"text": "Die Mühle entstand im 14. Jahrhundert unter der Herrschaft des Deutschen Ordens. Ihre Größe verband Getreidemahlen, Lagerung und wirtschaftliche Kontrolle in einem außergewöhnlich massiven Backsteinbau.", "tags": ["geschichte", "deutscher_orden"]},
+        {"text": "Der Radunia-Kanal führte Wasser aus dem Umland durch die Altstadt. Beidseitige Wasserläufe konnten zahlreiche Wasserräder antreiben; die Mühle war damit Teil eines größeren Systems aus Kanal, Wehren und Gewerbebauten.", "tags": ["wasserbau", "technik"]},
+        {"text": "Das steile Satteldach und die enorme Gebäudelänge schufen große Speicherflächen über den Mahlwerken. Architektur und Produktion waren unmittelbar verbunden: Tragwerk, Böden und Wasserführung dienten dem industriellen Prozess.", "tags": ["architektur", "wirtschaft"]},
+        {"text": "Über Jahrhunderte wurde die Anlage technisch verändert und weiter genutzt. Moderne Antriebe ersetzten schließlich Teile der historischen Wasserkraft, ohne die mittelalterliche Gebäudeform vollständig zu beseitigen.", "tags": ["technikgeschichte", "kontinuitaet"]},
+        {"text": "1945 brannte die Mühle aus; Außenmauern blieben stehen. Der Wiederaufbau stellte die monumentale Hülle her, während Innenstruktur und heutige Nutzung neu geordnet wurden.", "tags": ["zweiter_weltkrieg", "wiederaufbau"]},
+        {"text": "Seit 2021 nutzt das Museum Gdańsk die Große Mühle als Bernsteinmuseum. Die Ausstellung behandelt Entstehung, Gewinnung, Eigenschaften und Verarbeitung des Bernsteins sowie Kunst- und Gebrauchsobjekte.", "tags": ["museum", "bernstein"]},
+        {"text": "Visuell: Der langgestreckte rote Backsteinbau steht auf einer Insel im Radunia-Kanal. Ein riesiges steiles Dach mit vielen kleinen Öffnungen dominiert; Wasserläufe begleiten beide Längsseiten.", "tags": ["visuell", "wegweiser"]},
+        {"text": "Quer: St. Katharinen, Hevelius-Denkmal und Altstädtisches Rathaus liegen unmittelbar daneben. Gemeinsam zeigen sie Technik, Religion, Wissenschaft und Stadtregierung der Altstadt.", "tags": ["quer", "stadtraum"]},
+        {"text": "Die heutige Museumseinrichtung ist modern und darf nicht mit erhaltener vollständiger mittelalterlicher Mühlentechnik verwechselt werden. Bauhülle, Wasserlage und archäologische Spuren tragen die Technikgeschichte.", "tags": ["quellenkritik", "innenraum"]},
+        {"text": "Die enorme Leistung beruhte nicht auf einem einzelnen riesigen Mühlrad, sondern auf mehreren Rädern und Mahlgängen. Wasserverteilung, Getriebe und Lagerorganisation mussten als System funktionieren. Die Große Mühle war damit eher ein mittelalterlicher Produktionskomplex als die romantische Einzelmühle eines ländlichen Baches.", "tags": ["technik", "einordnung"]},
+        {"text": "LIVE: Museumsöffnung, Eintritt, Ausstellungen, Aufzüge, Kanalbaustellen und Barrierefreiheit beim Museum Gdańsk prüfen.", "tags": ["live_hint", "ephemeral"]}
+      ],
+      "faqs": [
+        {"q": "Mahlt die Große Mühle noch Getreide?", "a": "Nein. Sie ist heute ein Museumsbau; ihre historische Wasser- und Mahltechnik wird als Geschichte vermittelt."}
+      ]
+    }
+  ],
+  "new_places": [],
+  "offline_qa": [
+    {
+      "q": "Wie hängen Rechtstadt und Altstadt in Gdańsk zusammen?",
+      "a": "Die Rechtstadt um Długa, Rathaus und Marienkirche sowie die nördlich anschließende Altstadt um Katharinenkirche und Große Mühle waren historisch unterschiedliche Stadtbereiche; touristisch werden sie heute oft gemeinsam als Innenstadt wahrgenommen.",
+      "tags": ["orientierung", "stadtgeschichte"]
+    },
+    {
+      "q": "Sind die historischen Fassaden vollständig original?",
+      "a": "Viele zentrale Bauten und Häuser wurden 1945 schwer beschädigt oder zerstört und danach anhand von Quellen, Fragmenten und denkmalpflegerischen Entscheidungen rekonstruiert.",
+      "tags": ["wiederaufbau", "quellenkritik"]
+    }
+  ],
+  "city_facts_non_place": [
+    "Die deutschsprachige Bezeichnung Danzig und die polnische Bezeichnung Gdańsk meinen dieselbe Stadt; heutige amtliche Namen und Wegweiser sind polnisch.",
+    "Rechtstadt, Altstadt, Speicherinsel, Ołowianka, Oliwa, Nowy Port und Brzeźno sind räumlich unterschiedliche Bereiche; Entfernungen und Verkehr dürfen nicht aus der gemeinsamen Stadtzugehörigkeit unterschätzt werden.",
+    "LIVE: Fahrpläne, Tarife, Hafen- und Brückenbetrieb, Veranstaltungsdaten, Eintritt, Gottesdienste und saisonale Küstenbedingungen immer aktuell recherchieren."
+  ]
+}

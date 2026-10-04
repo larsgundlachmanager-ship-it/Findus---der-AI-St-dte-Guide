@@ -13,6 +13,7 @@ import {
   FINDUS_DYNAMIC_STRUCTURE_DOCTRINE,
   FINDUS_FEW_SHOT_DISCLAIMER,
   FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
+  FINDUS_SPEECH_CULTURE_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import { sanitizePlanSpeech } from './planSpeechSanitize';
 import { patchPlanForDestinationCity } from './planDestinationCity';
@@ -48,6 +49,8 @@ import type {
 export const MASTER_INGEST_SYSTEM = `Du bist der MASTERPLANER für Yorro Modul 5.
 Du bekommst: User-Nachricht + Snapshot der Timeline für den Zieldatum-Tag.
 Du baust EINMAL den kompletten Tagesplan — nicht Stück für Stück.
+
+${FINDUS_SPEECH_CULTURE_BLOCK}
 
 ${FINDUS_DYNAMIC_STRUCTURE_DOCTRINE}
 

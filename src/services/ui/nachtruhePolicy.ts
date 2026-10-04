@@ -2,8 +2,10 @@
  * Nachtruhe-Policy (SSOT)
  *
  * Aktiv-Fenster 9:00–21:30: nur Vorschläge „was man machen könnte“.
- * Außerhalb (21:30–9:00): Nachtruhe — keine proaktiven Tips/Reminder
- * (User-Initiiertes bleibt, z. B. Wetter tippen → nur Wetter, kein Plan-Pitch).
+ * Außerhalb (21:30–9:00): Nachtruhe — keine proaktiven Tips/Reminder/Alleinansagen.
+ * User-Initiiertes (Mic, Tippfeld, Buttons) ist nie durch Nachtruhe gesperrt:
+ * Concierge, Recherche, Pitch, Nav, Events auf Nachfrage laufen normal.
+ * Proaktiv only: ambientEventPitch, venueWalkByPitch, Soft-HUD, Aktivitäts-Trigger.
  */
 
 /** Start inklusiv (Minuten seit Mitternacht). */
@@ -118,8 +120,14 @@ export function allowActivitySoftTips(nowMs = Date.now()): boolean {
 }
 
 export function allowProactiveVoice(nowMs = Date.now()): boolean {
-  // In Nachtruhe keine proaktive Stimme (außer kritische Caller mit force)
+  // In Nachtruhe keine proaktive Stimme (außer kritische Caller mit force).
+  // Nicht für runConciergeTurn / Pitch — die rufen diese Funktion nicht.
   return isActivitySuggestionWindow(nowMs);
+}
+
+/** Mic/Tippfeld/Concierge — immer erlaubt (Nachtruhe gilt nur für Proaktiv). */
+export function allowsUserInitiatedConcierge(): boolean {
+  return true;
 }
 
 /** Kritische Voice-Ausnahmen in Nachtruhe (Deadline Score ≥ 88). */

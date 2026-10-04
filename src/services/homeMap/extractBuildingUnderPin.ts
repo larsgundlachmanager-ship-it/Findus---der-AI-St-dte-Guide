@@ -7,6 +7,7 @@ import {
   approxPolygonAreaM2,
   distanceToPolygonM,
   isAxisAlignedBoxPolygon,
+  isNearRectanglePolygon,
   pointInPolygon,
   type GeoLatLng,
 } from '../geo/polygon';
@@ -17,9 +18,9 @@ export type LatLngRing = Array<[number, number]>;
 const MAX_MATCH_M = 38;
 const MAX_AREA_M2 = 12_000;
 
-/** Natur/Fläche — nie auf ein Nachbarhaus snappen. */
+/** Natur/Fläche — nie auf ein Nachbarhaus snappen; nie Pack-Zone zeichnen. */
 const NON_BUILDING_PLACE_RE =
-  /\b(wald|moor|fluss|bach|ufer|feldmark|wiese|see\b|teich|auen|niederung|park\b|garten|aussicht|wanderung|jagd|angel|brücke|bruecke|unterführung|unterfuehrung)\b/i;
+  /\b(wald|moor|fluss|bach|ufer|feldmark|wiese|see\b|teich|auen|niederung|park\b|garten|aussicht|wanderung|jagd|angel|brücke|bruecke|unterführung|unterfuehrung|spielplatz|playground|gewerbegebiet|industriegebiet|zonenweg|straßenverzeichnis|strassenverzeichnis|dorfgeschichte)\b/i;
 
 function toGeo(ring: LatLngRing): GeoLatLng[] {
   return ring.map(([latitude, longitude]) => ({ latitude, longitude }));
@@ -103,14 +104,15 @@ export function findExtractBuildingUnderPin(
 }
 
 /**
- * Pack-Ring ist keine echte OSM-Hülle (Achsen-Box oder zu wenige Ecken) →
+ * Pack-Ring ist keine echte OSM-Hülle (Achsen-Box, Raute oder zu wenige Ecken) →
  * braucht Tile/Extract-Snap auf den gerenderten Gebäudeumriss.
  */
 export function packRingNeedsTileSnap(
   ring: LatLngRing | null | undefined,
 ): boolean {
   if (!ring || ring.length < 3) return true;
-  if (isAxisAlignedBoxPolygon(toGeo(ring))) return true;
+  const geo = toGeo(ring);
+  if (isAxisAlignedBoxPolygon(geo) || isNearRectanglePolygon(geo)) return true;
   const uniq = new Set<string>();
   for (const [la, ln] of ring) {
     if (!Number.isFinite(la) || !Number.isFinite(ln)) continue;
@@ -120,7 +122,8 @@ export function packRingNeedsTileSnap(
 }
 
 /**
- * Pack-Ring behalten, wenn er zum Pin passt — sonst Extract-Gebäude (sichtbare Umrisse).
+ * Pack nur behalten, wenn er dasselbe Haus wie der sichtbare Karten-Umriss ist.
+ * Sonst immer Extract/Tile unter dem Pin — sonst Quadrate neben dem echten Gebäude.
  */
 export function resolvePlaceFillRing(
   lat: number,
@@ -131,35 +134,59 @@ export function resolvePlaceFillRing(
 ): LatLngRing | null {
   const pack = packRing && packRing.length >= 3 ? closeRing(packRing) : null;
   const blob = `${opts?.name ?? ''} ${opts?.category ?? ''}`;
+  // Offene Flächen: kein Fill (auch nicht das hässliche Pack-Polygon).
   if (isMapCrossingPoi(blob) || NON_BUILDING_PLACE_RE.test(blob)) {
-    return pack;
+    return null;
   }
 
   const packGeo = pack ? toGeo(pack) : null;
-  // Box ODER zu wenige Ecken (< 6 unique) = keine echte OSM-Hülle → snappen.
   const packIsBox = !!pack && packRingNeedsTileSnap(pack);
   const pinInPack = !!packGeo && pointInPolygon(lat, lng, packGeo);
-  // Nur bei klarem Pack-Fehler Extract erzwingen — und dann Pin im Haus.
-  const packBroken = !pack || packIsBox || !pinInPack;
+  // Immer Prefer-Contain: sichtbares Haus unter dem Pin schlägt Pack-Viereck.
   const extract = findExtractBuildingUnderPin(lat, lng, buildings, {
-    requireContain: packBroken,
+    requireContain: true,
   });
+  // Fallback: nahe Gebäude nur wenn Pack fehlt/Box/Pin außerhalb.
+  const extractNear =
+    extract ??
+    (!pack || packIsBox || !pinInPack
+      ? findExtractBuildingUnderPin(lat, lng, buildings, {
+          requireContain: false,
+        })
+      : null);
 
-  if (!pack) return extract;
-  if (!extract) return pack;
+  if (!pack) return extractNear;
+  if (!extractNear) return pack;
 
   const packC = ringCentroid(pack);
+  const extractC = ringCentroid(extractNear);
   const packPinDist = metersBetween(lat, lng, packC.lat, packC.lng);
-  const extractArea = areaM2(extract);
+  const extractArea = areaM2(extractNear);
   const packArea = areaM2(pack);
+  const centroidDist = metersBetween(
+    packC.lat,
+    packC.lng,
+    extractC.lat,
+    extractC.lng,
+  );
+  const areaRatio =
+    packArea > 0 && extractArea > 0
+      ? Math.max(packArea, extractArea) / Math.min(packArea, extractArea)
+      : 99;
 
-  if (packIsBox) return extract;
-  if (!pinInPack) return extract;
-  if (packPinDist > 55) return extract;
+  if (packIsBox) return extractNear;
+  if (!pinInPack) return extractNear;
+  if (packPinDist > 55) return extractNear;
+
+  // Pin steckt im gerenderten Haus → Pack nur wenn er dasselbe Haus beschreibt.
+  if (extract && pointInPolygon(lat, lng, toGeo(extract))) {
+    if (centroidDist <= 14 && areaRatio <= 2.4) return pack;
+    return extract;
+  }
 
   // Shared-Riesen-Footprint (Feuerwehr für Stadtgeschichte): Extract-Haus unter Pin.
   if (packArea > 2_800 && extractArea > 0 && extractArea < packArea * 0.55) {
-    return extract;
+    return extractNear;
   }
 
   return pack;

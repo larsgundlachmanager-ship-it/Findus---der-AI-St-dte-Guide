@@ -1,0 +1,515 @@
+--------- beginning of main
+09-12 11:47:03.654  1512 23371 I AGM: session: session_obj_set_sess_aif_metadata: 1861 Exit
+09-12 11:47:03.655  1512 23371 E AGM: session: session_stop: 1260 session not in STARTED state, current state:4
+09-12 11:47:03.655  1512 23371 D AGM: session: session_close: 1328 enter
+09-12 11:47:03.655  1512 23371 D AGM: graph: graph_close: 762 entry handle 0x147534c
+09-12 11:47:03.656  1512 23371 D AGM: graph: graph_close: 783 exit, ret 0
+09-12 11:47:03.656  1512 23371 D AGM: session: session_close: 1379 exit, ret 0
+09-12 11:47:03.664  1512 23371 I PAL: ResourceManager: freeFrontEndIds: 7339: stream type 17, freeing 115
+09-12 11:47:03.666  1512 23371 I PAL: SoundTriggerEngineGsl: UpdateState: 585: Engine state transitioned from 1 to 0
+09-12 11:47:03.666  1512 23371 D PAL: HotwordInterface: SetParameter: 167: Unsupported param id 4
+09-12 11:47:03.666  1512 23371 I PAL: SoundTriggerEngineGsl: ReconfigureDetectionGraph: 1153: Exit, status = 0
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: TransitTo: 1783: Stream instance 1: state transitioned from ST_STATE_LOADED to ST_STATE_IDLE
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: HandleConcurrentStream: 639: Exit, status 0
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: HandleConcurrentStream: 613: Enter
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: GetCurrentCaptureProfile: 1748: cap_prof DUAL_MIC_48KHZ_16BIT_RAW_NLPI: dev_id=0x1a, chs=2, sr=48000, snd_name=va-mic-dmic, ec_ref=0
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 1797: StIdle: handle event 15 for stream instance 1
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: GetCurrentCaptureProfile: 1748: cap_prof DUAL_MIC_48KHZ_16BIT_RAW_NLPI: dev_id=0x1a, chs=2, sr=48000, snd_name=va-mic-dmic, ec_ref=0
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 1968: current capture profile SINGLE_MIC_16KHZ_16BIT_RAW_LPI: dev_id=0x1a, chs=1, sr=16000, ec_ref=0
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 1975: new capture profile DUAL_MIC_48KHZ_16BIT_RAW_NLPI: dev_id=0x1a, chs=2, sr=48000, ec_ref=0
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 1982: Select available caputre device 40
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: GetCurrentCaptureProfile: 1748: cap_prof DUAL_MIC_48KHZ_16BIT_RAW_NLPI: dev_id=0x1a, chs=2, sr=48000, snd_name=va-mic-dmic, ec_ref=0
+09-12 11:47:03.666  1512 23371 I PAL: Device: setDeviceAttributes: 430: DeviceAttributes for Device Id 40 updated
+09-12 11:47:03.666  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 1997: devicepp selector: DUAL_MIC_48KHZ_16BIT_RAW_NLPI
+09-12 11:47:03.666  1512 23371 I PAL: SoundTriggerEngineGsl: LoadSoundModel: 745: Enter
+09-12 11:47:03.666  1512 23371 I PAL: ResourceManager: allocateFrontEndIds: 7095: allocateFrontEndIds: front end 115
+09-12 11:47:03.666  1512 23371 I PAL: PayloadBuilder: populateStreamKV: 3021: stream type 17
+09-12 11:47:03.666  1512 23371 I PAL: PayloadBuilder: getSelectorValues: 2890: VUI module type:HOTWORD
+09-12 11:47:03.666  1512 23371 I PAL: PayloadBuilder: getSelectorValues: 2853: Instance: 1
+09-12 11:47:03.666  1512 23371 I PAL: PayloadBuilder: findKVs: 2727: key: 0xbc000000 value: 0xbc000002
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: findKVs: 2727: key: 0xb1000000 value: 0xb1000003
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: findKVs: 2727: key: 0xab000000 value: 0x1
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: populateStreamCkv: 3369: stream channels 1
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: populateDeviceKV: 3145: Enter device id:40
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: findKVs: 2740: key: 0xa3000000 value: 0xa3000006
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: populateDeviceKV: 3173: Exit device id:40, status 0
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: populateDevicePPKV: 3305: Tx device id:40
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: getSelectorValues: 2919: stream type: 17
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: getSelectorValues: 2914: devicePP_type:DUAL_MIC_48KHZ_16BIT_RAW_NLPI
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: findKVs: 2727: key: 0xa3000000 value: 0xa3000006
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: findKVs: 2727: key: 0xad000000 value: 0xad00000e
+09-12 11:47:03.667  1512 23371 I PAL: PayloadBuilder: populateDevicePPCkv: 3525: channels 2, id 40
+09-12 11:47:03.667  1512 23371 I AGM: device: device_set_metadata: 708 Setting device metadata for CODEC_DMA-LPAIF_VA-TX-0
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 80 GKV size:1
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 83 key:0xa3000000, value:0xa3000006 
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 87 
+09-12 11:47:03.667  1512 23371 D AGM: metadata: CKV count:0
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 92 
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 95 property count:2
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:47:03.667  1512 23371 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 102 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:47:03.668  1512 23371 D AGM: metadata: 
+09-12 11:47:03.668  1512 23371 I AGM: session: session_obj_set_sess_aif_metadata: 1856 Setting metadata for sess_id 115, aif id 11
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 80 GKV size:2
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 83 key:0xa3000000, value:0xa3000006 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 83 key:0xad000000, value:0xad00000e 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 87 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: CKV count:1
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 90 key:0xa9000000, value:0x2 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 92 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 95 property count:1
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 102 
+09-12 11:47:03.668  1512 23371 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:47:03.668  1512 23371 D AGM: metadata: 
+09-12 11:47:03.668  1512 23371 I AGM: session: session_obj_set_sess_aif_metadata: 1861 Exit
+09-12 11:47:03.668  1512 23371 D agm_server_wrapper: Aif id 11 already added to session list of 115
+09-12 11:47:03.668  1512 23371 I AGM: API: agm_session_aif_connect: 625 connecting aifid:11 with session id=115
+09-12 11:47:03.668  1512 23371 D PAL: HotwordInterface: SetParameter: 167: Unsupported param id 3
+09-12 11:47:03.668  1512 23371 I PAL: SoundTriggerEngineGsl: UpdateSessionPayload: 1804: Enter, param : 0
+09-12 11:47:03.669  1512 23371 I PAL: PayloadBuilder: payloadSVAConfig: 1915: PID 0x800104c, payload 0xb40000732d1bf0f0K size 53112
+09-12 11:47:03.669  1512 23371 I PAL: SessionAlsaPcm: setParameters: 2693: customPayloadSize = 53112
+09-12 11:47:03.669  1512 23371 I PAL: SoundTriggerEngineGsl: UpdateState: 585: Engine state transitioned from 0 to 1
+09-12 11:47:03.669  1512 23371 I PAL: SoundTriggerEngineGsl: LoadSoundModel: 793: Exit, status = 0
+09-12 11:47:03.669  1512 23371 I PAL: StreamSoundTrigger: TransitTo: 1783: Stream instance 1: state transitioned from ST_STATE_IDLE to ST_STATE_LOADED
+09-12 11:47:03.669  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 2053: StLoaded: handle event 3 for stream instance 1
+09-12 11:47:03.669  1512 23371 I PAL: Device: setDeviceAttributes: 430: DeviceAttributes for Device Id 40 updated
+09-12 11:47:03.669  1512 23371 I PAL: Device: open: 510: Enter. deviceCount 0 for device id 40 (PAL_DEVICE_IN_HANDSET_VA_MIC)
+09-12 11:47:03.669  1512 23371 I PAL: SessionAlsaUtils: setDeviceMediaConfig: 1074: CODEC_DMA-LPAIF_VA-TX-0 rate ch fmt data_fmt 48000 2 2 1
+09-12 11:47:03.669  1512 23371 D audio_route: Apply path: va-mic-dmic
+09-12 11:47:03.671  1512 23371 I PAL: Device: open: 545: Exit. deviceCount 1 for device id 40 (PAL_DEVICE_IN_HANDSET_VA_MIC), exit status: 0
+09-12 11:47:03.671  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 2163: Start device 40-PAL_DEVICE_IN_HANDSET_VA_MIC
+09-12 11:47:03.671  1512 23371 I PAL: SessionAlsaUtils: setDeviceMediaConfig: 1074: CODEC_DMA-LPAIF_VA-TX-0 rate ch fmt data_fmt 48000 2 2 1
+09-12 11:47:03.671  1512 23371 I PAL: StreamSoundTrigger: ProcessEvent: 2174: device started
+09-12 11:47:03.671  1512 23371 I PAL: SoundTriggerEngineGsl: StartRecognition: 996: Enter
+09-12 11:47:03.671  1512 23371 D PAL: HotwordInterface: SetParameter: 167: Unsupported param id 2
+09-12 11:47:03.671  1512 23371 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 939: Enter
+09-12 11:47:03.671  1512 23371 I PAL: ResourceManager: acquireWakeLock: 1312: Acquiring wake lock audio_pal_wl
+09-12 11:47:03.671  1512 23371 I PAL: SoundTriggerEngineGsl: UpdateSessionPayload: 1804: Enter, param : 3
+09-12 11:47:03.671  1512 23371 I PAL: PayloadBuilder: payloadSVAConfig: 1915: PID 0x8001044, payload 0xb40000726d1c13d0K size 24
+09-12 11:47:03.671  1512 23371 I PAL: SessionAlsaPcm: setParameters: 2693: customPayloadSize = 53136
+09-12 11:47:03.671  1512 23371 I PAL: SoundTriggerEngineGsl: UpdateConfigsToSession: 929: Exit, status 0
+09-12 11:47:03.674  1512 23371 D agm_client_wrapper: agm_session_open called with handle = b0612330 , *handle = 0
+09-12 11:47:03.688  3603 26223 D DetectSceneService: activeAuidoPids = :9005
+09-12 11:47:03.688  3603 26223 D AudioEffectControlService: getSettingsAudioEffectEnableStatus bAudioEffectStatus = true from preset_preference
+09-12 11:47:03.688  3603 26223 D AudioEffectControlService: getSettingsAudioEffectEnableStatus  audioeffectStatus is Off 
+09-12 11:47:03.689  3603 26223 D AudioEffectControlService: wiredHeadset off
+09-12 11:47:03.689  3603 26223 D AudioEffectControlService: getSettingsAudioEffectEnableStatus  audioeffectStatus always return true when Speaker
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 9005 processName = de.findus.app
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 32339 processName = com.snapchat.android
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 32736 processName = com.android.vending
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 32748 processName = com.google.android.googlequicksearchbox:googleapp
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 13039 processName = com.google.android.inputmethod.latin
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 22952 processName = com.google.android.gms
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3775 processName = com.google.android.gms.persistent
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 28535 processName = com.google.android.googlequicksearchbox:search
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5310 processName = com.google.android.googlequicksearchbox:interactor
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3828 processName = com.nothing.launcher
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5911 processName = com.nothing.cardservice
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5752 processName = com.nothing.hearthstone
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 316 processName = com.google.android.apps.photos
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 16314 processName = com.whatsapp
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 10318 processName = com.android.chrome
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 26999 processName = com.google.android.dialer
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 7776 processName = com.google.android.calculator
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 18016 processName = com.instagram.android
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 8725 processName = com.instagram.android:sandboxed_process0:com.facebook.browser.helium.content.SandboxedProcessService0:2
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 2617 processName = com.instagram.android:zygote_warmer:com.facebook.browser.helium.preload.AppZygoteWarmerService
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5291 processName = com.google.android.providers.media.module
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 27156 processName = com.urbandroid.sleep
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 30947 processName = com.google.android.tts
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 30306 processName = com.google.android.adservices.api
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 1325 processName = com.nothing.camera
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5142 processName = com.google.android.apps.maps
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 9444 processName = com.appseleration.android.selfcare
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5406 processName = com.android.companiondevicemanager
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 27235 processName = com.google.android.apps.turbo
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 26967 processName = com.android.settings
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3490 processName = com.android.bluetooth
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 22982 processName = com.google.android.apps.messaging
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5499 processName = com.expedia.bookings
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5302 processName = com.google.android.as
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4577 processName = com.google.android.gms.unstable
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 7410 processName = com.amazon.avod.thirdpartyclient
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 7213 processName = com.amazon.mShop.android.shopping
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3816 processName = com.netflix.mediaclient
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 6861 processName = com.google.android.apps.youtube.music
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4226 processName = com.google.android.rkpdapp
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5140 processName = android.process.media
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 31226 processName = com.android.vending:background
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3813 processName = com.google.android.apps.adm
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5274 processName = com.google.android.apps.walletnfcrel
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5245 processName = com.google.android.projection.gearhead:car
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4809 processName = com.google.android.youtube
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4691 processName = com.google.android.gm
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4719 processName = com.google.android.as.oss
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3869 processName = com.google.android.keep
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3821 processName = com.google.android.apps.turbo:aab
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 29079 processName = com.nothing.logkit
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 32667 processName = de.komoot.android
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5335 processName = com.google.android.apps.messaging:rcs
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4215 processName = com.google.android.ext.services
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 20861 processName = com.google.android.apps.chromecast.app
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 9127 processName = com.google.android.googlequicksearchbox:trusted_disable_art_image_:com.google.android.apps.gsa.hotword.hotworddetectionservice.GsaHotwordDetectionService:hotword_detector_0
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5698 processName = com.nothing.ntgamedashboard
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 5380 processName = com.nothing.experience
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 4813 processName = com.qualcomm.location
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3658 processName = .dataservices
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 20806 processName = com.qti.qcc
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3657 processName = com.qualcomm.qtil.aptxui
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3603 processName = com.nothing.audioeffect
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3616 processName = com.android.phone
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3589 processName = vendor.qti.frameworks.utils
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3585 processName = com.nothing.thirdparty
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3545 processName = org.codeaurora.ims
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3563 processName = com.android.se
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3521 processName = com.qualcomm.qtil.aptxals
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3519 processName = .qms
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3532 processName = com.android.nfc
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3518 processName = com.qti.phone
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3493 processName = .qtidataservices
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3475 processName = com.android.networkstack.process
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3298 processName = com.android.systemui
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 3264 processName = com.nothing.proxy
+09-12 11:47:03.690  3603 26223 D DetectSceneService: pid = 2573 processName = system
+09-12 11:47:03.691  3603 26223 D AudioEffectControlService: setMode mode = 1
+09-12 11:47:03.691  3603 26223 D AudioEffectControlService: wiredHeadset off
+09-12 11:47:03.692  2573  4070 D AS.AudioService: checkUpdateMicModeDB: parameters = AudioEffect_set_config:MUSICÀ€
+09-12 11:47:03.692  3603 26223 D AudioManager: setAudioEffectParameters,keyValuePairs:AudioEffect_set_config:MUSICÀ€
+09-12 11:47:03.692  2573  4070 D AS.AudioService: AudioEffect enter setAudioEffectParametersAudioEffect_set_config:MUSICÀ€
+09-12 11:47:03.692  2573  4070 D AS.AudioService: AudioEffect setAudioEffectParameters config:MUSICÀ€
+09-12 11:47:03.692  2573  4070 D AS.AudioService: enter AudioEffect setAudioEffectConfig
+09-12 11:47:03.693  1512  1624 D EffectAACSound: AACSound_command cmdCode=EFFECT_CMD_SET_PARAM cmd:0x10012de0 data:MUSIC p->psize:4 p->vsize:6
+09-12 11:47:03.694  1512 23371 D AGM: graph: graph_open: 549 entry
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 80 GKV size:5
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 83 key:0xbc000000, value:0xbc000002 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 83 key:0xb1000000, value:0xb1000003 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 83 key:0xab000000, value:0x1 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 83 key:0xa3000000, value:0xa3000006 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 83 key:0xad000000, value:0xad00000e 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 87 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: CKV count:2
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 90 key:0xd4000000, value:0x1 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 90 key:0xa9000000, value:0x2 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 92 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 95 property count:4
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 100 0x1 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:47:03.694  1512 23371 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:47:03.695  1512 23371 D AGM: metadata: metadata_print: 102 
+09-12 11:47:03.695  1512 23371 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:47:03.695  1512 23371 D AGM: metadata: 
+09-12 11:47:03.695  1512 23371 D AGM: graph: print_graph_alias: 2334 GKV Alias 307 | DeviceTX_VoiceActivation_Mic_Instance_Instance_1_DevicePP_Tx_RAW_NLPI_StreamTX_Voice_UI_Stream_Config_Hotword
+09-12 11:47:03.695  1512 23371 D AGM: graph: graph_open: 677 miid 43b0 mid 7001024 tag c0000005
+09-12 11:47:03.695  1512 23371 D AGM: graph: graph_open: 629 miid 4648 mid 7001004 tag c000000f
+09-12 11:47:03.695  1512 23371 I GPR:    : vendor/qcom/proprietary/args/gpr/core/src/gpr_drv.c:__gpr_cmd_register_v2:931 GPR Register: Source Port is 8209 heap_index: 0
+09-12 11:47:03.700  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.700  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.700  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.700  1512 23371 D AGM: graph: graph_open: 709 graph_handle 0x147534c
+09-12 11:47:03.700  1512 23371 D AGM: graph: graph_open: 745 exit, ret 0
+09-12 11:47:03.700  1512 23371 D agm_client_wrapper: agm_session_open Received handle = 0x71b0612330 , *handle = b4000071fd0de290
+09-12 11:47:03.700  1512 23371 D PLUGIN: pcm: agm_pcm_hw_params: 500 agm_pcm_hw_params: mode: 268435467
+09-12 11:47:03.700  1512 23371 D AGM: graph: configure_buffer_params: 200 Enter
+09-12 11:47:03.700  1512 23371 D AGM: graph: configure_buffer_params: 263 Capture sess buf_sz 160 num_bufs 1024
+09-12 11:47:03.701  1512 23371 D AGM: graph: configure_buffer_params: 316 exit, ret 0
+09-12 11:47:03.701  1512 23371 D AGM: graph: graph_fill_buf_info: 2007 metadata b4000073bd1263f0
+09-12 11:47:03.701  1512 23371 D AGM: graph: graph_fill_buf_info: 2008 shmem_buf_info size 163840 - addr 0x746d1e9000
+09-12 11:47:03.701  1512 23371 D AGM: graph: graph_fill_buf_info: 2007 metadata b4000073bd125c90
+09-12 11:47:03.701  1512 23371 D AGM: graph: graph_fill_buf_info: 2008 shmem_buf_info size 16 - addr 0x7473cbe000
+09-12 11:47:03.701  1512 23371 E PLUGIN: pcm: agm_pcm_mmap: 865 agm_pcm_mmap: boundary: 0x50000000, size_frames: 0x14000
+09-12 11:47:03.701  1512 23371 D AGM: graph: configure_buffer_params: 196 configure buf params already done
+09-12 11:47:03.701  1512 23371 D AGM: graph: graph_fill_buf_info: 2007 metadata b4000073bd1263f0
+09-12 11:47:03.701  1512 23371 D AGM: graph: graph_fill_buf_info: 2008 shmem_buf_info size 163840 - addr 0x746d1e9000
+09-12 11:47:03.701  1512 23371 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 965: Resize mmap buffer size to 163840
+09-12 11:47:03.701  1512 23371 I PAL: ResourceManager: voteSleepMonitor: 2142: Voting done for lpi use case, lpi votes 1, nlpi votes : 0
+09-12 11:47:03.702  1512 23371 D AGM: graph: graph_set_config: 1111 entry graph_handle 0x147534c
+--------- beginning of kernel
+09-12 11:47:03.395 23371 23371 I adsp_sleepmon: Audio: num_sessions=1,num_lpi_sessions=1,timer_pending=1
+09-12 11:47:03.704  1512 23371 D AGM: graph: graph_set_config: 1119 exit, graph handle 0x147534c, ret 0
+09-12 11:47:03.705  1512 23371 D AGM: graph: graph_prepare: 807 entry graph_handle 0x147534c
+09-12 11:47:03.705  1512 23371 D AGM: graph_module: configure_hw_ep_media_config: 697 entry mod tag c0000005 miid 43b0 mid 7001024
+09-12 11:47:03.705  1512 23371 D AGM: graph_module: configure_hw_ep_media_config: 727 rate 48000 bw 16 ch 2, data_fmt 1
+09-12 11:47:03.705  1512 23371 D AGM: graph_module: configure_hw_ep_media_config: 737 exit, ret 0
+09-12 11:47:03.705  1512 23371 D AGM: graph_module: configure_codec_dma_ep: 314 cdc_dma intf cfg lpaif 3 indx 1 ch_msk 3
+09-12 11:47:03.706  1512 23371 D AGM: graph_module: configure_codec_dma_ep: 329 exit, ret 0
+09-12 11:47:03.706  1512 23371 D AGM: graph_module: configure_output_media_format: 820 entry mod tag c000000f miid 4648 mid 7001004
+09-12 11:47:03.706  1512 23371 D AGM: graph_module: configure_output_media_format: 951 exit, ret 0
+09-12 11:47:03.706  1512 23371 D AGM: graph: configure_buffer_params: 196 configure buf params already done
+09-12 11:47:03.706  1974  3888 D StNfcHal: (#04F3D) Rx 6f 02 0f (hidden)
+09-12 11:47:03.706  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:47:03.707  1512 23371 D AGM: graph: graph_prepare: 885 exit, ret 0
+09-12 11:47:03.707  1512 23371 D AGM: graph: graph_start: 899 entry graph_handle 0x147534c
+09-12 11:47:03.709  1512 23371 D AGM: graph: graph_start: 912 exit, ret 0
+09-12 11:47:03.709  1512  1624 D EffectAACSound: AACSound_command cmdCode=EFFECT_CMD_SET_PARAM AAC_SET_CONFIG: data:MUSIC
+09-12 11:47:03.710  1512  1624 D EffectAACSound: AACSound_command cmdCode=EFFECT_CMD_GET_PARAM sLatestRetVal:0
+09-12 11:47:03.710  2573  4070 D AS.AudioService: AudioEffect.command_ return replybuffer=0 length= 4
+09-12 11:47:03.710  3603 26223 D AudioEffectControlService: AudioEffect_set_config:MUSIC
+09-12 11:47:03.710  2573  4070 D AS.AudioService: checkUpdateMicModeDB: parameters = AudioEffect_set_param:id=6,param=1
+09-12 11:47:03.710  3603 26223 D AudioManager: setAudioEffectParameters,keyValuePairs:AudioEffect_set_param:id=6,param=1
+09-12 11:47:03.710  2573  4070 D AS.AudioService: AudioEffect enter setAudioEffectParametersAudioEffect_set_param:id=6,param=1
+09-12 11:47:03.710  2573  4070 D AS.AudioService: AudioEffect setAudioEffectParameters:id=6,param=1
+09-12 11:47:03.710  2573  4070 D AS.AudioService: AudioEffect setAudioEffectParameters,id_val:id=6,param=1id_val.length:2
+09-12 11:47:03.710  2573  4070 D AS.AudioService: AudioEffect setAudioEffectParameters id:6
+09-12 11:47:03.710  2573  4070 D AS.AudioService: AudioEffect setAudioEffectParameters value:1.0
+09-12 11:47:03.710  2573  4070 D AS.AudioService: enter AudioEffect setAudioEffectParam
+09-12 11:47:03.710  1512  1624 D EffectAACSound: AACSound_command cmdCode=EFFECT_CMD_SET_PARAM cmd:0x10012de1 p->psize:4 p->vsize:8
+09-12 11:47:03.711  1512  1624 D EffectAACSound: AACSound_command set mHandle id:0x00000006 val:1.000000
+09-12 11:47:03.711  1512  1624 D EffectAACSound: AACSound_command set mHeadsetHandle id:0x00000006 val:1.000000 align_ret:0
+09-12 11:47:03.712  1512 10530 D EffectAACSound: AACSound_saveAACParams AAC_PARAM_ID_ENABLE_AAC:1.000000
+09-12 11:47:03.712  1512  1624 D EffectAACSound: AACSound_command cmdCode=EFFECT_CMD_GET_PARAM sLatestRetVal:0
+09-12 11:47:03.713  2573  4070 D AS.AudioService: AudioEffect.command_ return replybuffer=0 length= 4
+09-12 11:47:03.714  3603 26223 D AudioEffectControlService: AudioEffect_set_param:id=6,param=1
+09-12 11:47:03.728  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00B10625F hal_ts 93063839138119 lux=204.896 Channel0-5=13860.0,6118.0,302.0,5960.0,1842.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:47:03.737  1550 10382 I WifiHAL : event received NL80211_CMD_VENDOR, vendor_id = 0x1374, subcmd = 0xa
+09-12 11:47:03.737  4184  4184 I wpa_supplicant: wlan0: CTRL-EVENT-AVOID-FREQ ranges=2412-2452
+09-12 11:47:03.737  2160  2160 I cnss-daemon: nl80211 response handler invoked
+09-12 11:47:03.737  2160  2160 I cnss-daemon: nl80211_response_handler: cmd 103, vendorID 4980, subcmd 10  received
+09-12 11:47:03.748  1512 23371 D PLUGIN: pcm: agm_pcm_plugin_reset: 462 agm_pcm_plugin_reset: reset hw_ptr to 0 
+09-12 11:47:03.748  1512 23371 I PAL: SoundTriggerEngineGsl: UpdateState: 585: Engine state transitioned from 1 to 2
+09-12 11:47:03.748  1512 23371 I PAL: ResourceManager: releaseWakeLock: 1334: Releasing wake lock audio_pal_wl
+09-12 11:47:03.748  1512 23371 I PAL: SoundTriggerEngineGsl: ProcessStartRecognition: 986: Exit, status 0
+09-12 11:47:03.748  1512 23371 I PAL: SoundTriggerEngineGsl: StartRecognition: 1028: Exit, status = 0
+09-12 11:47:03.748  1512 23371 I PAL: StreamSoundTrigger: TransitTo: 1783: Stream instance 1: state transitioned from ST_STATE_LOADED to ST_STATE_ACTIVE
+09-12 11:47:03.749  1512 23371 I PAL: StreamSoundTrigger: HandleConcurrentStream: 634: LPI->NLPI switch takes 116ms
+09-12 11:47:03.749  1512 23371 I PAL: StreamSoundTrigger: HandleConcurrentStream: 639: Exit, status 0
+09-12 11:47:03.749  1512 23371 I PAL: API: pal_stream_open: 269: Exit. Value of stream_handle 0xb4000071fd0ec0d0K, status 0
+09-12 11:47:03.749  1512 23371 D AHAL: AudioStream: GetBufferSize: 3195: type 2
+09-12 11:47:03.749  1512 23371 D AHAL: AudioStream: Open: 3607: fragment_size_ 15360 fragments_ 2
+09-12 11:47:03.749  1512 23371 D AHAL: AudioStream: Open: 3637: Exit ret: 0
+09-12 11:47:03.749  1512 23371 D AHAL: AudioStream: ~AutoPerfLock: 273: (release) perf_lock_handle: 0xdc38, count: 1
+09-12 11:47:03.749  1512 23371 D AHAL: AudioStream: ~AutoPerfLock: 277: Releasing perf_lock_handle: 0xdc38
+09-12 11:47:03.750  1512 23371 D AHAL: AudioStream: AutoPerfLock: 263: (Acquired) perf_lock_handle: 0xdc39, count: 1
+09-12 11:47:03.750  1512 23371 I PAL: API: pal_stream_start: 340: Enter. Stream handle 0xb4000071fd0ec0d0K
+09-12 11:47:03.751  1512 10531 I PAL: PayloadBuilder: findKVs: 2740: key: 0xa3000000 value: 0xa3000009
+09-12 11:47:03.751  1512 23371 E PAL: SpeakerProtection: spkrProtProcessingMode: 2580: Try read RDC from MTP
+09-12 11:47:03.751  1512 10531 I AGM: device: device_set_metadata: 708 Setting device metadata for MI2S-LPAIF-TX-PRIMARY
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 80 GKV size:1
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 83 key:0xa3000000, value:0xa3000009 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 87 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: CKV count:1
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 90 key:0xbf000000, value:0x2 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 92 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 95 property count:1
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 102 
+09-12 11:47:03.751  1512 10531 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:47:03.751  1512 10531 D AGM: metadata: 
+09-12 11:47:03.751  1512 10531 I PAL: SessionAlsaUtils: setDeviceMediaConfig: 1074: MI2S-LPAIF-TX-PRIMARY rate ch fmt data_fmt 48000 2 10 1
+09-12 11:47:03.751  1512 10531 I PAL: ResourceManager: allocateFrontEndIds: 7170: allocateFrontEndIds: front end 121
+09-12 11:47:03.752  1512 10531 D agm_server_wrapper: Aif id 24 already added to session list of 121
+09-12 11:47:03.752  1512 10531 I AGM: API: agm_session_aif_connect: 625 connecting aifid:24 with session id=121
+09-12 11:47:03.752  1512 23371 E PAL: SpeakerProtection: spkrProtProcessingMode: 2591: Device 0 cal value is 5853, send 0x5da5e to algo
+09-12 11:47:03.753  1512 10531 D agm_client_wrapper: agm_session_open called with handle = b02c4c30 , *handle = 0
+09-12 11:47:03.753  1512 23371 E PAL: SpeakerProtection: spkrProtProcessingMode: 2591: Device 1 cal value is 5902, send 0x5e6e9 to algo
+09-12 11:47:03.754  1512 23371 I PAL: Device: updateCustomPayload: 463: customPayloadSize = 32
+09-12 11:47:03.754  1512 23371 E PAL: SpeakerProtection: spkrProtProcessingMode: 2640: set miid : 0x4337(17207), ret = 0
+09-12 11:47:03.754  1512 23371 E PAL: SpeakerProtection: spkrProtProcessingMode: 2661: set pcm id : 126, ret = 0
+09-12 11:47:03.754  1512 23371 I PAL: SessionAlsaUtils: setDeviceMediaConfig: 1074: MI2S-LPAIF-RX-PRIMARY rate ch fmt data_fmt 48000 2 10 1
+09-12 11:47:03.754  1512 23371 I PAL: ResourceManager: voteSleepMonitor: 2142: Voting done for nlpi use case, lpi votes 1, nlpi votes : 1
+09-12 11:47:03.448 23371 23371 I adsp_sleepmon: Audio: num_sessions=2,num_lpi_sessions=1,timer_pending=0
+09-12 11:47:03.757  1512 23371 D agm_client_wrapper: agm_session_open called with handle = b0612bd0 , *handle = 0
+09-12 11:47:03.761  1512 10531 D AGM: graph: graph_open: 549 entry
+09-12 11:47:03.761  1512 23371 D AGM: graph: graph_open: 549 entry
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 80 GKV size:1
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 83 key:0xa3000000, value:0xa3000009 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 87 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: CKV count:1
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 80 GKV size:4
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 90 key:0xbf000000, value:0x2 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 83 key:0xa1000000, value:0xa1000001 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 92 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 83 key:0xab000000, value:0x1 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 83 key:0xa2000000, value:0xa2000001 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 95 property count:1
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 83 key:0xac000000, value:0xac000002 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 87 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: CKV count:4
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 90 key:0xa4000000, value:0xf 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 102 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 90 key:0x10000, value:0x0 
+09-12 11:47:03.761  1512 10531 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:47:03.761  1512 10531 D AGM: metadata: 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 90 key:0xd2000000, value:0x0 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 90 key:0xbe000000, value:0x3 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 92 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 95 property count:4
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 100 0x1 
+09-12 11:47:03.761  1512 10531 D AGM: graph: print_graph_alias: 2334 GKV Alias 11 | DeviceTX_VI_TX
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:47:03.761  1512 10531 D AGM: graph: graph_open: 677 miid 4589 mid 700100b tag c0000005
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 102 
+09-12 11:47:03.761  1512 10531 I GPR:    : vendor/qcom/proprietary/args/gpr/core/src/gpr_drv.c:__gpr_cmd_register_v2:931 GPR Register: Source Port is 8210 heap_index: 0
+09-12 11:47:03.761  1512 23371 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:47:03.761  1512 23371 D AGM: metadata: 
+09-12 11:47:03.762  1512 23371 D AGM: graph: print_graph_alias: 2334 GKV Alias 126 | StreamRX_PCM_Deep_Buffer_DeviceRX_Speaker_Instance_Instance_1_DevicePP_Rx_Audio_MBDRC
+09-12 11:47:03.762  1512 23371 D AGM: graph: graph_open: 629 miid 4001 mid 7001000 tag c0000002
+09-12 11:47:03.762  1512 23371 D AGM: graph: graph_open: 677 miid 4023 mid 700100a tag c0000004
+09-12 11:47:03.762  1512 23371 D AGM: graph: graph_open: 629 miid 4019 mid 7001019 tag c0000006
+09-12 11:47:03.762  1512 23371 D AGM: graph: graph_open: 629 miid 4003 mid 7001005 tag c000000e
+09-12 11:47:03.762  1512 23371 D AGM: graph: graph_open: 629 miid 4004 mid 7001003 tag c0000010
+09-12 11:47:03.762  1512 23371 D AGM: graph: graph_open: 629 miid 4163 mid 7001032 tag c0000013
+09-12 11:47:03.764   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for ./libtfadsp_tx.so with       fopen:40us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.764   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for ./libtfadsp_tx.so with       fopen:7us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.764   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib64/rfs/dsp/adsp/./libtfadsp_tx.so with       fopen:22us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.764   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib64/rfs/dsp/./libtfadsp_tx.so with       fopen:5us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.764   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/adsp/adsp/./libtfadsp_tx.so with       fopen:8us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.768   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/adsp/./libtfadsp_tx.so with       fopen:1633us, read:465us, rpc_alloc:2259us,       mmap:388us fd 0xc error_code 0x0
+09-12 11:47:03.768   474  1971 I audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:1159: Successfully opened file /vendor/lib/rfsa/adsp/./libtfadsp_tx.so
+09-12 11:47:03.771  1512 10531 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.771  1512 23371 I GPR:    : vendor/qcom/proprietary/args/gpr/core/src/gpr_drv.c:__gpr_cmd_register_v2:931 GPR Register: Source Port is 8211 heap_index: 0
+09-12 11:47:03.772  1512 10531 D AGM: graph: graph_open: 709 graph_handle 0x247534c
+09-12 11:47:03.772  1512 10531 D AGM: graph: graph_open: 745 exit, ret 0
+09-12 11:47:03.772  1512 10531 D agm_client_wrapper: agm_session_open Received handle = 0x71b02c4c30 , *handle = b4000071fd0dafd0
+09-12 11:47:03.772  1512 10531 D PLUGIN: pcm: agm_pcm_hw_params: 500 agm_pcm_hw_params: mode: 268435456
+09-12 11:47:03.772  1512 10531 D audio_route: Apply path: vi-feedback
+09-12 11:47:03.772  1512 10531 D AGM: graph: graph_prepare: 807 entry graph_handle 0x247534c
+09-12 11:47:03.773  1512 10531 D AGM: graph_module: configure_hw_ep_media_config: 697 entry mod tag c0000005 miid 4589 mid 700100b
+09-12 11:47:03.773  1512 10531 D AGM: graph_module: configure_hw_ep_media_config: 727 rate 48000 bw 32 ch 2, data_fmt 1
+09-12 11:47:03.773  1512 10531 D AGM: graph_module: configure_hw_ep_media_config: 737 exit, ret 0
+09-12 11:47:03.773   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for ./libtfadsp_rx.so with       fopen:19us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.773   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for ./libtfadsp_rx.so with       fopen:4us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.773   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib64/rfs/dsp/adsp/./libtfadsp_rx.so with       fopen:8us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.773   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib64/rfs/dsp/./libtfadsp_rx.so with       fopen:6us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.773   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/adsp/adsp/./libtfadsp_rx.so with       fopen:4us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.774  1512 10531 D AGM: graph_module: configure_i2s_ep: 418 exit, ret 0
+09-12 11:47:03.775  1512 10531 D AGM: graph: graph_prepare: 885 exit, ret 0
+09-12 11:47:03.775  1512 10531 D AGM: graph: graph_start: 899 entry graph_handle 0x247534c
+09-12 11:47:03.775   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/adsp/./libtfadsp_rx.so with       fopen:31us, read:1703us, rpc_alloc:59us,       mmap:406us fd 0xc error_code 0x0
+09-12 11:47:03.776   474  1971 I audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:1159: Successfully opened file /vendor/lib/rfsa/adsp/./libtfadsp_rx.so
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for ./CFCM.so.1 with       fopen:21us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for ./CFCM.so.1 with       fopen:4us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib64/rfs/dsp/adsp/./CFCM.so.1 with       fopen:7us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib64/rfs/dsp/./CFCM.so.1 with       fopen:6us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/adsp/adsp/./CFCM.so.1 with       fopen:4us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/adsp/./CFCM.so.1 with       fopen:5us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/dsp/adsp/./CFCM.so.1 with       fopen:2us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.776   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/lib/rfsa/dsp/./CFCM.so.1 with       fopen:2us, read:0us, rpc_alloc:0us,       mmap:0us fd 0x0 error_code 0x2
+09-12 11:47:03.777  1512 10531 D AGM: graph: graph_start: 912 exit, ret 0
+09-12 11:47:03.777   474  1971 D audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:381: apps_std_fopen_fd done for /vendor/dsp/adsp/./CFCM.so.1 with       fopen:894us, read:208us, rpc_alloc:52us,       mmap:372us fd 0xe error_code 0x0
+09-12 11:47:03.777   474  1971 I audioadsprpcd: vendor/qcom/proprietary/adsprpc/src/apps_std_imp.c:1132: Successfully opened file /vendor/dsp/adsp/./CFCM.so.1
+09-12 11:47:03.471 10531 10531 I tfa98xx_mute(): tfa98xx_mute[0x34]: state: 0, stream : 1
+09-12 11:47:03.471 10531 10531 I tfa98xx_mute(): tfa98xx_mute[0x35]: state: 0, stream : 1
+09-12 11:47:03.784  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.784  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.784  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.784  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.784  1512 23371 D AGM: graph: graph_open: 709 graph_handle 0x347534c
+09-12 11:47:03.784  1512 23371 D AGM: graph: graph_open: 745 exit, ret 0
+09-12 11:47:03.784  1512 23371 D AGM: graph: graph_set_config: 1111 entry graph_handle 0x347534c
+09-12 11:47:03.785  1512 23371 D AGM: graph: graph_set_config: 1119 exit, graph handle 0x347534c, ret 0
+09-12 11:47:03.785  1512 23371 D agm_client_wrapper: agm_session_open Received handle = 0x71b0612bd0 , *handle = b4000071fd0deb50
+09-12 11:47:03.785  1512 23371 D PLUGIN: pcm: agm_pcm_hw_params: 500 agm_pcm_hw_params: mode: 0
+09-12 11:47:03.785  1512 23371 I PAL: Session: updateCustomPayload: 617: customPayloadSize = 32
+09-12 11:47:03.785  1512 23371 D AGM: graph: graph_set_config: 1111 entry graph_handle 0x347534c
+09-12 11:47:03.785  1512 23371 D AGM: graph: graph_set_config: 1119 exit, graph handle 0x347534c, ret 0
+09-12 11:47:03.786  1512 23371 I PAL: Session: updateCustomPayload: 617: customPayloadSize = 40
+09-12 11:47:03.786  1512 23371 D AGM: graph: graph_set_config: 1111 entry graph_handle 0x347534c
+09-12 11:47:03.786  1512 23371 D AGM: graph: graph_set_config: 1119 exit, graph handle 0x347534c, ret 0
+09-12 11:47:03.790  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.790  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.790  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.790  1512 23371 E ACDB    : vendor/qcom/proprietary/args/acdb/src/acdb_command.c:AcdbCmdGetProcSubgraphCalDataPersist:8250 Error[19]: No calibration found
+09-12 11:47:03.791  1512 23371 D AGM: graph: graph_prepare: 807 entry graph_handle 0x347534c
+09-12 11:47:03.791  1512 23371 D AGM: graph_module: configure_pcm_shared_mem_ep: 1761 entry mod tag c0000002 miid 4001 mid 7001000
+09-12 11:47:03.791  1512 23371 D AGM: graph_module: configure_pcm_shared_mem_ep: 1837 exit, ret 0
+09-12 11:47:03.791  1512 23371 D AGM: graph_module: configure_hw_ep_media_config: 697 entry mod tag c0000004 miid 4023 mid 700100a
+09-12 11:47:03.791  1512 23371 D AGM: graph_module: configure_hw_ep_media_config: 727 rate 48000 bw 32 ch 2, data_fmt 1
+09-12 11:47:03.791  1512 23371 D AGM: graph_module: configure_hw_ep_media_config: 737 exit, ret 0
+09-12 11:47:03.792  1512 23371 D AGM: graph_module: configure_i2s_ep: 418 exit, ret 0
+09-12 11:47:03.792  1512 23371 D AGM: graph_module: configure_output_media_format: 820 entry mod tag c000000e miid 4003 mid 7001005
+09-12 11:47:03.793  1512 23371 D AGM: graph_module: configure_output_media_format: 951 exit, ret 0
+09-12 11:47:03.793  1512 23371 D AGM: graph_module: configure_output_media_format: 820 entry mod tag c0000010 miid 4004 mid 7001003
+09-12 11:47:03.793  1512 23371 D AGM: graph_module: configure_output_media_format: 951 exit, ret 0
+09-12 11:47:03.793  1512 23371 D AGM: graph_module: configure_spr: 1965 SPR module IID 4163
+09-12 11:47:03.793  1512 23371 D AGM: graph_module: configure_spr: 1988 HW EP module IID 4023
+09-12 11:47:03.794  1512 23371 D AGM: graph: configure_buffer_params: 200 Enter
+09-12 11:47:03.794  1512 23371 D AGM: graph: configure_buffer_params: 263 Playback sess buf_sz 15360 num_bufs 2
+09-12 11:47:03.794  1512 23371 E AGM: graph: configure_buffer_params: 296 Unsupported buffer mode : 0, Default to Blocking
+09-12 11:47:03.795  1512 23371 D AGM: graph: configure_buffer_params: 316 exit, ret 0
+09-12 11:47:03.798  1512 23371 D AGM: graph: graph_prepare: 885 exit, ret 0
+09-12 11:47:03.798  1512 23371 D AGM: graph: graph_start: 899 entry graph_handle 0x347534c
+09-12 11:47:03.800  1512 23371 D AGM: graph: graph_start: 912 exit, ret 0
+09-12 11:47:03.495 23371 23371 I tfa98xx_mute(): tfa98xx_mute[0x34]: state: 0, stream : 0
+09-12 11:47:03.496 23371 23371 I tfa98xx_adsp_send_calib_values(): Device0 0x34 cal value is 0x383582,value:5853
+09-12 11:47:03.496 23371 23371 I tfa98xx_adsp_send_calib_values(): Device1 0x35 cal value is 0x386793,value:5902
+09-12 11:47:03.496 23371 23371 I tfa98xx 13-0034: tfa98xx_adsp_send_calib_values: finally send values to adsp
+09-12 11:47:03.497 23371 23371 E mtk_spk_send_ipi_buf_to_dsp(): [mtk_spk_send_ipi_buf_to_dsp]you need to define this func in other module!
+09-12 11:47:03.806  3985  3985 W dataInfoSend: type=1400 audit(0.0:125983656): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:47:03.806  3985  3985 W dataInfoSend: type=1400 audit(0.0:125983657): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:47:03.806  3985  3985 W dataInfoSend: type=1400 audit(0.0:125983658): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:47:03.806  3985  3985 W dataInfoSend: type=1400 audit(0.0:125983659): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:47:03.806  3985  3985 W dataInfoSend: type=1400 audit(0.0:125983660): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:47:03.502 23561 23561 W audit   : audit_lost=125744972 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:47:03.502 23561 23561 E audit   : rate limit exceeded
+09-12 11:47:03.510 23371 23371 D Active_profile: receiver, next_profile:speaker
+09-12 11:47:03.511 23371 23371 D         : Startup of device [P] is a warmstart
+--------- beginning of system
+09-12 11:47:03.824  2573  3177 I AS.AudioService: onUpdateContextualVolumes: absolute volume driving streams 3 avrcp supported: false
+09-12 11:47:03.838  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00B309B8D hal_ts 93063949127181 lux=205.015 Channel0-5=13868.0,6122.0,302.0,5964.0,1842.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:47:03.548 23371 23371 I tfa98xx 13-0034: tfa_dev_start success (0)
+09-12 11:47:03.548 23371 23371 I tfa98xx_mute(): tfa98xx_mute[0x35]: state: 0, stream : 0
+09-12 11:47:03.548 23371 23371 I tfa98xx_adsp_send_calib_values(): The calibration value was sent to host DSP.
+09-12 11:47:03.549 23371 23371 D Active_profile: speaker, next_profile:speaker
+09-12 11:47:03.549 23371 23371 D         : Startup of device [S] is a warmstart
+09-12 11:47:03.862  1512 23371 I PAL: StreamSoundTrigger: setECRef_l: 664: Enter, enable 1, cached rx device Null, requested rx device PAL_DEVICE_OUT_SPEAKER
+09-12 11:47:03.863  1512 23371 I PAL: StreamSoundTrigger: setECRef_l: 667: No need to set ec ref
+09-12 11:47:03.863  1512 23371 I PAL: StreamSoundTrigger: setECRef_l: 691: Exit, status 0
+09-12 11:47:03.863  1512 23371 I PAL: API: pal_stream_start: 388: Exit. status 0
+09-12 11:47:03.863  1512 23371 I AHAL: AudioStream: configurePalOutputStream: 3848: notify GEF client of device config
+09-12 11:47:03.555 23371 23371 I tfa98xx 13-0035: tfa_dev_start success (0)
+09-12 11:47:03.865  1512 23371 D generic_effect_ar: gef_device_config_cb: stream type=8 sample_rate=48000 device=2
+09-12 11:47:03.865  1512 23371 D AHAL: AudioStream: ~AutoPerfLock: 273: (release) perf_lock_handle: 0xdc39, count: 1
+09-12 11:47:03.866  1512 23371 D AHAL: AudioStream: ~AutoPerfLock: 277: Releasing perf_lock_handle: 0xdc39
+09-12 11:47:03.867  1691  2496 D AudioFlinger: write() process 263 ms, mBufferMs 40
+09-12 11:47:03.869  9005 10529 D AudioTrack: updateStateToService: AudioTrackStatus state:0
+09-12 11:47:03.870  2573  4070 D AS.AudioService: AudioTrackStatus: pid = 9005; uid = 10536; sessionId = 7537; streamType = 3; state = 0; pkgName = de.findus.app
+09-12 11:47:03.872  2573  4070 D NtAudioGlyphServiceImpl: addAudioLightRequest for uid:10536 pid:9005 pkgName:de.findus.app audioType:3 addby: 2 sessionId:7537 with lightId:107 csvId:-1 noAudio:false
+09-12 11:47:03.873  2573  4070 D NtAudioGlyphServiceImpl: AudioLightRequests[1]+ AudioLightRequest@619a983{Id:107,uid:10536,pid:9005,noAudio:false,csvId:-1,pkg:de.findus.app,session:-1,addby:2}
+09-12 11:47:03.873  2573  4070 D AS.AudioService: [reportAudioTrackStatusChanged]start broadcast, pid = 9005, uid = 10536, status = 0, streamType = 3, pkgName = de.findus.app, sessionId = 7537
+09-12 11:47:03.874  2573  4070 D AS.AudioService: [reportAudioTrackStatusChanged]finish broadcast
+09-12 11:47:03.874  2573  3319 D NtAudioGlyphServiceImpl: invalidateAudioLightRequests size#1 current null target null
+09-12 11:47:03.638     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 2 (rcu_preempt-14)
+09-12 11:47:03.948  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00B50D64D hal_ts 93064059137181 lux=204.837 Channel0-5=13856.0,6118.0,300.0,5960.0,1840.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:47:03.955  1691  2496 D AudioFlinger: mixer(0xb40000727ff9e760) throttle end: throttle time(25)
+09-12 11:47:03.974  1974  3888 D StNfcHal: (#04F3E) Rx 6f 02 27 (hidden)
+09-12 11:47:03.974  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:47:03.998  1514  4041 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_WAKE_IND: 0xFD
+09-12 11:47:03.998  1514  4041 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK ON
+09-12 11:47:03.998  1514  4041 D vendor.qti.bluetooth@1.1-wake_lock: Acquire wakelock is acquired 
+09-12 11:47:03.998  1514  4041 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Writing IBS_WAKE_ACK
+09-12 11:47:04.039  1514  4041 I vendor.qti.bluetooth@1.1-ibs_handler: ProcessIbsCmd: Received IBS_SLEEP_IND: 0xFE
+09-12 11:47:04.040  1514  4041 D vendor.qti.bluetooth@1.1-ibs_handler: SerialClockVote: vote for UART CLK OFF
+09-12 11:47:04.058  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00B71101E hal_ts 93064169134733 lux=204.896 Channel0-5=13860.0,6120.0,302.0,5960.0,1842.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:47:04.168  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00B914A70 hal_ts 93064279139004 lux=204.926 Channel0-5=13862.0,6120.0,302.0,5962.0,1842.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:47:04.190  1514  3851 D vendor.qti.bluetooth@1.1-wake_lock: Release wakelock is released 
+09-12 11:47:04.278  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00BB184C8 hal_ts 93064389143588 lux=204.956 Channel0-5=13864.0,6120.0,302.0,5964.0,1842.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:47:04.299  1974  3888 D StNfcHal: (#04F3F) Rx 6f 02 0f (hidden)
+09-12 11:47:04.299  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:47:04.351  2573  4070 D NtGnssRecord: MaxCN0:0
+09-12 11:47:04.380  2331  2331 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '500''
+09-12 11:47:04.388  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A00BD1BE76 hal_ts 93064499139317 lux=204.896 Channel0-5=13860.0,6120.0,302.0,5960.0,1842.0 gain=64.0,4.0 scale=0.07880 lcd_type 0x13

@@ -353,6 +353,25 @@ export function takeLastGeminiGroundingUrls(): string[] {
   return urls;
 }
 
+/** MAX_TOKENS: am letzten Satzende kappen, damit Speech nicht mittendrin stirbt. */
+function softTrimMaxTokensText(text: string, finishReason?: string): string {
+  const raw = (text || '').trim();
+  if (!raw) return raw;
+  if (finishReason !== 'MAX_TOKENS') return raw;
+  const m = raw.match(/^([\s\S]*?[.!?…])(?:\s+[^.!?…]+)?$/);
+  if (m?.[1] && m[1].length >= Math.min(40, raw.length * 0.55)) {
+    return m[1].trim();
+  }
+  const last = Math.max(
+    raw.lastIndexOf('. '),
+    raw.lastIndexOf('! '),
+    raw.lastIndexOf('? '),
+    raw.lastIndexOf('。'),
+  );
+  if (last >= 40) return raw.slice(0, last + 1).trim();
+  return raw;
+}
+
 function extractTextFromRest(data: unknown): string {
   const root = data as {
     candidates?: Array<{
@@ -378,11 +397,12 @@ function extractTextFromRest(data: unknown): string {
     );
   }
   const parts = cand?.content?.parts ?? [];
-  return parts
+  const joined = parts
     .filter((p) => !p.thought)
     .map((p) => p.text ?? '')
     .join('')
     .trim();
+  return softTrimMaxTokensText(joined, cand?.finishReason);
 }
 
 async function postGenerate(
@@ -456,7 +476,7 @@ async function generateViaRest(
 
   // Thinking zählt gegen maxOutputTokens. Story-Calls (≥2k) → Cap ≥8192.
   // flash-latest lehnt thinkingBudget:0 ab (400) → Retry ohne Config + hohes Cap.
-  const requested = options?.maxTokens ?? 1024;
+  const requested = options?.maxTokens ?? 1536;
   const maxOut =
     requested >= 2000
       ? Math.max(requested, GEMINI_STORY_MAX_OUTPUT_TOKENS)
@@ -606,7 +626,7 @@ async function generateViaSdk(
       systemInstruction: systemText,
       temperature: options?.temperature ?? GEMINI_TEMPERATURE,
       maxOutputTokens: Math.max(
-        options?.maxTokens ?? 1024,
+        options?.maxTokens ?? 1536,
         options?.maxTokens && options.maxTokens >= 2000
           ? GEMINI_STORY_MAX_OUTPUT_TOKENS
           : 0,

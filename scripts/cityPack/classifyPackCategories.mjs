@@ -27,7 +27,9 @@ import {
   stubNarration,
   suggestedDiscoveryRadius,
   suggestedMinStory,
+  suggestedTargetStory,
 } from './placeCategoryPolicy.mjs';
+import { stampMapPaintOnPack } from './mapPaintPolicy.mjs';
 import { runQualityGate } from './qualityGate.mjs';
 
 loadEnvFile();
@@ -333,16 +335,24 @@ async function processCity(cityId, radiusM) {
   }
   const radius = radiusM || suggestedDiscoveryRadius(pack);
   const minStory = suggestedMinStory(pack);
-  console.log(`[classify] ${cityId} radius=${radius}m minStory≈${minStory}`);
+  const targetStory = suggestedTargetStory(pack);
+  console.log(
+    `[classify] ${cityId} radius=${radius}m minStory≈${minStory} target≈${targetStory}`,
+  );
   const recl = reclassifyExisting(pack);
+  const paint = stampMapPaintOnPack(pack);
+  console.log(
+    `[classify] map_paint story_fill=${paint.storyFill} building_focus=${paint.buildingFocus} icon_only=${paint.iconOnly}`,
+  );
   refreshIndex(pack);
+  // Discovery bis Soft-Ziel — Value-for-Money, keine Stub-Hotels.
   const skipDiscover =
     hasFlag('skip-discover') ||
-    (!hasFlag('force-discover') && (pack._pack_index?.story || 0) >= minStory);
+    (!hasFlag('force-discover') && (pack._pack_index?.story || 0) >= targetStory);
   let disc = { added: 0, near: 0 };
   if (skipDiscover) {
     console.log(
-      `[classify] skip Places discovery (story=${pack._pack_index.story} ≥ ${minStory}; --force-discover zum Erzwingen)`,
+      `[classify] skip Places discovery (story=${pack._pack_index.story} ≥ target ${targetStory}; --force-discover zum Erzwingen)`,
     );
   } else {
     disc = await discoverStoryCategories(pack, radius);
@@ -351,7 +361,11 @@ async function processCity(cityId, radiusM) {
   const gate = runQualityGate(pack, { strict: false });
   if (pack._pack_index.story < minStory) {
     console.warn(
-      `[classify] WARN story=${pack._pack_index.story} < guidance ${minStory} — Discovery verbreitern / Research-Rückfragen`,
+      `[classify] WARN value-floor story=${pack._pack_index.story} < min ${minStory} (Ziel ${targetStory}) — Discovery / Research`,
+    );
+  } else if (pack._pack_index.story < targetStory) {
+    console.warn(
+      `[classify] WARN soft-target story=${pack._pack_index.story} < ${targetStory} — optional mehr Landmarken`,
     );
   }
   console.log(

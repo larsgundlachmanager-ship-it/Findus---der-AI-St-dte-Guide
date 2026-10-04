@@ -428,6 +428,28 @@ const ICONS = {
       fillPoly(c, [[16, 50], [48, 22], [80, 50], [72, 70], [24, 70]], W);
     },
   ],
+  luggage: [
+    [0x6a, 0x5a, 0x48],
+    (c) => {
+      rect(c, 28, 34, 68, 78);
+      rect(c, 38, 22, 58, 34);
+      rect(c, 44, 48, 52, 64);
+    },
+  ],
+  laundry: [
+    [0x4a, 0x7a, 0x8a],
+    (c) => {
+      rect(c, 22, 22, 74, 78);
+      fillCircle(c, 48, 52, 16, W);
+      fillCircle(c, 48, 52, 8, [0x4a, 0x7a, 0x8a]);
+    },
+  ],
+  charging: [
+    [0x2e, 0x8b, 0x57],
+    (c) => {
+      fillPoly(c, [[52, 16], [34, 48], [48, 48], [40, 78], [66, 42], [52, 42]], W);
+    },
+  ],
 };
 
 function userArrow() {

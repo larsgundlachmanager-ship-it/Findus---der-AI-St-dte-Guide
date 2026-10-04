@@ -272,17 +272,134 @@ export async function runTaxiRideshare(opts: {
   }
 
   const buttons: AgentResult['buttons'] = [];
+  let pickupTimeLabel: string | null = null;
+  let pickupDateIso: string | null = null;
+  try {
+    const { extractClockHm } = require('../../services/flights/flightTripIntent') as {
+      extractClockHm: (s: string) => string | null;
+    };
+    pickupTimeLabel = extractClockHm(text);
+  } catch {
+    /* soft */
+  }
+  if (/\bmorgen\b/iu.test(text)) {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    pickupDateIso = d.toISOString().slice(0, 10);
+  } else if (/\bheute\b/iu.test(text) && pickupTimeLabel) {
+    pickupDateIso = new Date().toISOString().slice(0, 10);
+  }
+  // Offener Flug-Trip: Leave-by als Schedule, wenn User keine eigene Uhr nannte
+  if (!pickupTimeLabel) {
+    try {
+      const { getFlightTripSession } = require('../../services/flights/flightTripSession') as {
+        getFlightTripSession: () => { selectedIdent?: string | null } | null;
+      };
+      const { readFlightTripClocks } = require('../../services/flights/flightTimeline') as {
+        readFlightTripClocks: (ident: string) => {
+          leaveMs: number | null;
+        } | null;
+      };
+      const { dateKeyFromMs } = require('../../utils/dateKeys') as {
+        dateKeyFromMs: (ms: number) => string;
+      };
+      const sess = getFlightTripSession();
+      const ident = sess?.selectedIdent?.trim();
+      if (ident) {
+        const clocks = readFlightTripClocks(ident);
+        const leave = clocks?.leaveMs;
+        if (leave != null && leave > Date.now() + 5 * 60_000) {
+          const d = new Date(leave);
+          pickupTimeLabel = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+          pickupDateIso = dateKeyFromMs(leave);
+          if (
+            (lat == null || lng == null) &&
+            /flughafen|airport/iu.test(text + ' ' + (destName || ''))
+          ) {
+            const { useFuturePlanStore } = require('../timeline/futurePlanState') as {
+              useFuturePlanStore: {
+                getState: () => {
+                  plan: {
+                    stops: Array<{
+                      id: string;
+                      lat?: number | null;
+                      lng?: number | null;
+                      title?: string;
+                    }>;
+                  };
+                };
+              };
+            };
+            const airport = useFuturePlanStore
+              .getState()
+              .plan.stops.find((s) => s.id === `ft:${ident}:airport`);
+            if (airport?.lat != null && airport.lng != null) {
+              lat = airport.lat;
+              lng = airport.lng;
+              if (!resolved || isVagueTaxiDest(resolved)) {
+                resolved =
+                  airport.title
+                    ?.replace(/^Ankunft\s+/i, '')
+                    .replace(/\s+·\s+.*$/, '')
+                    .trim() || resolved;
+              }
+            }
+          }
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
   if (lat != null && lng != null) {
-    buttons.push({
-      id: 'taxi_uber',
-      label: shortenActionLabel('🚗 Uber'),
-      payload: {
-        kind: 'book_uber',
-        destLat: lat,
-        destLng: lng,
-        destName: resolved || destName || 'Ziel',
-      },
-    });
+    try {
+      const { buildUberRideAction } = require('../../services/affiliate/affiliateService') as {
+        buildUberRideAction: (
+          destLat: number,
+          destLng: number,
+          destName: string,
+          targetPoiId?: string | number,
+          opts?: {
+            pickupTimeLabel?: string | null;
+            pickupDateIso?: string | null;
+          },
+        ) => {
+          type: string;
+          label: string;
+          payload: Record<string, unknown>;
+        };
+      };
+      const uber = buildUberRideAction(lat, lng, resolved || destName || 'Ziel', undefined, {
+        pickupTimeLabel,
+        pickupDateIso,
+      });
+      buttons.push({
+        id: 'taxi_uber',
+        label: shortenActionLabel(uber.label || '🚗 Uber'),
+        payload: {
+          kind: 'book_uber',
+          destLat: lat,
+          destLng: lng,
+          destName: resolved || destName || 'Ziel',
+          ...(typeof uber.payload?.url === 'string' ? { url: uber.payload.url } : {}),
+          ...(pickupTimeLabel ? { pickupTimeLabel } : {}),
+          ...(pickupDateIso ? { pickupDateIso } : {}),
+        },
+      });
+    } catch {
+      buttons.push({
+        id: 'taxi_uber',
+        label: shortenActionLabel(
+          pickupTimeLabel ? `🚗 Uber · ${pickupTimeLabel}` : '🚗 Uber',
+        ),
+        payload: {
+          kind: 'book_uber',
+          destLat: lat,
+          destLng: lng,
+          destName: resolved || destName || 'Ziel',
+        },
+      });
+    }
   }
   if (taxiPhone) {
     buttons.push({
@@ -293,6 +410,10 @@ export async function runTaxiRideshare(opts: {
   }
 
   const destBit = resolved || destName || 'dein Ziel';
+  const scheduleBit =
+    pickupTimeLabel != null
+      ? `Vorbestellung${pickupDateIso ? ` ${pickupDateIso}` : ''} um ${pickupTimeLabel}`
+      : '';
   const durBit =
     driveMin != null
       ? `Fahrt mit dem Auto: ${formatDurationMinutesDe(driveMin, 'speech')}${
@@ -302,12 +423,14 @@ export async function runTaxiRideshare(opts: {
         ? 'Fahrtdauer gerade nicht sauber geladen'
         : '';
   const arrivalBit =
-    driveMin != null
+    driveMin != null && !pickupTimeLabel
       ? `Ankunft ungefähr ${new Date(Date.now() + driveMin * 60_000).toLocaleTimeString(
           'de-DE',
           { hour: '2-digit', minute: '2-digit' },
         )} wenn ihr jetzt losfahrt (ohne Wartezeit auf den Wagen — die ist nicht belegbar)`
-      : '';
+      : pickupTimeLabel
+        ? `Geplante Abholung um ${pickupTimeLabel}${pickupDateIso ? ` (${pickupDateIso})` : ''} — Uber-Link mit Zeit`
+        : '';
   const taxiBit = taxiPhone
     ? `Taxi-Zentrale: ${taxiName || 'Taxi'} ${taxiPhone}`
     : 'Keine belegte Taxinummer in der Nähe';
@@ -318,19 +441,23 @@ export async function runTaxiRideshare(opts: {
     draftText: [
       'FAKTEN Taxi/Uber (nicht wörtlich vorlesen):',
       `Ziel: ${destBit}`,
+      scheduleBit,
       durBit,
       arrivalBit,
-      'Uber: Deep-Link zur Produktwahl (Preis + wann ein Wagen da wäre auf der Seite). Wartezeit nicht erfinden.',
+      pickupTimeLabel
+        ? 'Uber: Schedule-/Deep-Link mit Abholzeit (Reserve). Keine Fake-Bestätigung ohne App.'
+        : 'Uber: Deep-Link zur Produktwahl (Preis + wann ein Wagen da wäre auf der Seite). Wartezeit nicht erfinden.',
       taxiBit,
-      'FLOW: Die Bridge hat den Auftrag schon zugesagt. Haupt-Speech = Fortsetzung: wir fahren mit dem Taxi/Uber zum aktiven Ziel. Uber-Link zuerst (Pickup = aktueller Standort, Dropoff = Restaurant/Adresse). Fahrtdauer wenn belegt. Taxinummer nur als Alternative zum selbst Anrufen. ÖPNV-Route ist beendet. Nicht die Taxizentrale als Ziel vorlesen. Keine Permission-Frage.',
+      'FLOW: Die Bridge hat den Auftrag schon zugesagt. Haupt-Speech = Fortsetzung: Taxi/Uber zum Ziel. Bei Vorbestellung Uhrzeit nennen + Uber-Button. Taxinummer nur als Alternative. Keine Permission-Frage.',
     ]
       .filter(Boolean)
       .join('\n'),
     bullets: [
       destBit,
-      driveMin != null
-        ? `Auto ${formatDurationMinutesDe(driveMin, 'short')}`
-        : '',
+      scheduleBit ||
+        (driveMin != null
+          ? `Auto ${formatDurationMinutesDe(driveMin, 'short')}`
+          : ''),
       taxiPhone ? taxiName || 'Taxi anrufen' : 'Uber buchen',
     ].filter(Boolean).slice(0, 3),
     buttons,
@@ -342,6 +469,8 @@ export async function runTaxiRideshare(opts: {
       driveMin,
       taxiPhone: taxiPhone || null,
       taxiName: taxiName || null,
+      pickupTimeLabel,
+      pickupDateIso,
     },
   };
 }

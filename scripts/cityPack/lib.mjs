@@ -142,19 +142,43 @@ export function savePack(pack, { bumpVersion = true } = {}) {
     pack.data_version = Number(pack.data_version || 0) + 1;
   }
   const file = path.join(STAEDTE_DIR, `${pack.city_id}.json`);
+  const tmp = `${file}.${process.pid}.${Date.now()}.tmp`;
   const body = JSON.stringify(pack, null, 2);
   let lastErr;
-  for (let attempt = 0; attempt < 8; attempt++) {
+  for (let attempt = 0; attempt < 12; attempt++) {
     try {
-      fs.writeFileSync(file, body, 'utf8');
+      fs.writeFileSync(tmp, body, 'utf8');
+      try {
+        fs.renameSync(tmp, file);
+      } catch {
+        // Windows: Ziel oft gelockt → Copy + unlink
+        fs.copyFileSync(tmp, file);
+        try {
+          fs.unlinkSync(tmp);
+        } catch {
+          /* ignore */
+        }
+      }
       return file;
     } catch (err) {
       lastErr = err;
       const code = err && err.code;
-      if (code !== 'UNKNOWN' && code !== 'EBUSY' && code !== 'EPERM') throw err;
-      const waitMs = 150 * (attempt + 1);
+      if (code !== 'UNKNOWN' && code !== 'EBUSY' && code !== 'EPERM') {
+        try {
+          fs.unlinkSync(tmp);
+        } catch {
+          /* ignore */
+        }
+        throw err;
+      }
+      const waitMs = 200 * (attempt + 1);
       Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, waitMs);
     }
+  }
+  try {
+    fs.unlinkSync(tmp);
+  } catch {
+    /* ignore */
   }
   throw lastErr;
 }

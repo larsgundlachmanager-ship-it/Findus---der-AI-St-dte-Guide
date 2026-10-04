@@ -22,6 +22,13 @@ import { UI_LAYER } from '../constants/uiLayers';
 import { useFinnusStore } from '../store/useFinnusStore';
 import type { FindusMood } from './AudioWave';
 import {
+  resolveMicVisualState,
+  type MicVisualState,
+} from '../utils/micVisualState';
+
+export type { MicVisualState } from '../utils/micVisualState';
+export { resolveMicVisualState } from '../utils/micVisualState';
+import {
   loadMicHintPrefs,
   markMicHoldUsed,
   markMicLockUsed,
@@ -77,9 +84,6 @@ function MouthIcon({ size, color }: { size: number; color: string }) {
   );
 }
 
-/** Visuelle Mic-Zustände (Priorität: listening/locked > thinking > speaking > idle). */
-export type MicVisualState = 'idle' | 'thinking' | 'speaking' | 'listening' | 'locked';
-
 const STATE_INDEX: Record<MicVisualState, number> = {
   idle: 0,
   thinking: 1,
@@ -127,28 +131,6 @@ interface Props {
   partialText?: string;
   /** Kleineres Mic, kein Hint-Text — z. B. Plan-Kalender */
   compact?: boolean;
-}
-
-function resolveMicVisualState(opts: {
-  isListening: boolean;
-  isMicLocked: boolean;
-  isSpeaking: boolean;
-  isGenerating: boolean;
-  isFinalizing: boolean;
-  mood?: FindusMood;
-}): MicVisualState {
-  // Aufnahme schlägt Denken — sonst bleibt der Button blau während Lock/Hold.
-  if (opts.isMicLocked) return 'locked';
-  if (opts.isListening || opts.mood === 'listening') return 'listening';
-  if (
-    opts.isGenerating ||
-    opts.isFinalizing ||
-    opts.mood === 'thinking'
-  ) {
-    return 'thinking';
-  }
-  if (opts.isSpeaking || opts.mood === 'speaking') return 'speaking';
-  return 'idle';
 }
 
 const LevelBar = React.memo(function LevelBar({

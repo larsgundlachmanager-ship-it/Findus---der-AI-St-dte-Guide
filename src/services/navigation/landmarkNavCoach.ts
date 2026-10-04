@@ -51,6 +51,8 @@ type CoachSession = {
 
 let session: CoachSession | null = null;
 let enrichEpoch = 0;
+/** Überlebt Session-Reset bis Route ready — verhindert Doppel-ETA. */
+let navOpeningSpokenLatch = false;
 
 export function beginLandmarkNavCoach(opts: {
   destinationName: string;
@@ -62,7 +64,7 @@ export function beginLandmarkNavCoach(opts: {
     destinationName: opts.destinationName,
     destLat: opts.destLat,
     destLng: opts.destLng,
-    openingSpoken: false,
+    openingSpoken: navOpeningSpokenLatch,
     routeReady: false,
     enrichEpoch: myEpoch,
     lastWrongWayAt: 0,
@@ -216,6 +218,7 @@ export async function enrichNavigationRoute(opts: {
 
 export function resetLandmarkNavCoach(): void {
   session = null;
+  navOpeningSpokenLatch = false;
   enrichEpoch += 1;
   clearNavTurnPrefetch();
   resetLookAheadBuffer();
@@ -241,11 +244,12 @@ async function speakNav(text: string): Promise<void> {
 export async function speakNavOpeningIfNeeded(
   destinationName: string,
 ): Promise<void> {
-  if (!session || session.openingSpoken) return;
+  if (!session || session.openingSpoken || navOpeningSpokenLatch) return;
   // Kritisch: nie vor committed Route sprechen (kein Luftlinien-ETA)
   if (!session.routeReady) return;
 
   session.openingSpoken = true;
+  navOpeningSpokenLatch = true;
 
   const explain = await shouldExplainHandsFreeNav();
   if (explain) {
@@ -276,6 +280,23 @@ export async function speakNavOpeningIfNeeded(
       raw != null && Number.isFinite(raw) ? Math.max(1, Math.round(raw)) : null;
   } catch {
     /* soft */
+  }
+  // Speech-ETA = Live-HUD (store/phrase), nicht stale session.etaMin allein
+  try {
+    const { resolveNavSpeechEtaMin } = require('./navHudEta') as {
+      resolveNavSpeechEtaMin: (o?: {
+        phraseEtaMin?: number | null;
+        storeEtaMin?: number | null;
+      }) => number | null;
+    };
+    const hudEta = resolveNavSpeechEtaMin({
+      phraseEtaMin: phraseEta,
+      storeEtaMin: storeEta,
+    });
+    if (hudEta != null) etaMin = hudEta;
+    else if (storeEta != null) etaMin = storeEta;
+  } catch {
+    if (storeEta != null) etaMin = storeEta;
   }
 
   let relation: import('./spatialOrientation').SpatialRelation | null = null;
@@ -326,7 +347,16 @@ export async function speakNavOpeningIfNeeded(
     /* soft */
   }
 
-  const { buildFirstVisualDirection, buildNavStartSpeech } = require('./navStartSpeech') as {
+  const { buildNavStartSpeech, buildFirstVisualDirection } = require('./navStartSpeech') as {
+    buildNavStartSpeech: (o: {
+      firstVisual: string | null;
+      relation?: import('./spatialOrientation').SpatialRelation | null;
+      etaMin: number | null;
+      pathHint?: string | null;
+      destName?: string | null;
+      mode?: 'foot' | 'bike' | 'drive' | null;
+      arriveHm?: string | null;
+    }) => string;
     buildFirstVisualDirection: (o: {
       turn: string | null;
       landmark: string | null;
@@ -334,36 +364,56 @@ export async function speakNavOpeningIfNeeded(
       relation?: import('./spatialOrientation').SpatialRelation | null;
       distanceToFirstTurnM?: number | null;
     }) => string | null;
-    buildNavStartSpeech: (o: {
-      firstVisual: string | null;
-      relation?: import('./spatialOrientation').SpatialRelation | null;
-      etaMin: number | null;
-      pathHint?: string | null;
-    }) => string;
   };
 
-  const ft = session.firstTurn;
-  const firstVisual = buildFirstVisualDirection({
-    turn: ft?.turn ?? null,
-    landmark: ft?.landmark || session.startLandmark,
-    roadName: null,
-    relation,
-    distanceToFirstTurnM: ft?.distanceM ?? null,
-  });
-
-  void destinationName; // Ziel liegt in HUD — Opener dump’t Namen nicht
+  let mode: 'foot' | 'bike' | 'drive' | null = null;
+  try {
+    const {
+      resolveActiveTravelMode,
+    } = require('./travelModeContext') as {
+      resolveActiveTravelMode: () => { mode: string };
+    };
+    const m = resolveActiveTravelMode().mode;
+    mode = m === 'bike' || m === 'drive' || m === 'foot' ? m : 'foot';
+  } catch {
+    mode = 'foot';
+  }
+  let arriveHm: string | null = null;
+  if (etaMin != null && etaMin > 60) {
+    try {
+      const { arriveHmFromEtaMin } = require('./navStartSpeech') as {
+        arriveHmFromEtaMin: (m: number | null) => string | null;
+      };
+      arriveHm = arriveHmFromEtaMin(etaMin);
+    } catch {
+      arriveHm = null;
+    }
+  }
+  const firstVisual =
+    session.firstTurn != null
+      ? buildFirstVisualDirection({
+          turn: session.firstTurn.turn,
+          landmark: session.firstTurn.landmark,
+          roadName: session.firstTurn.roadName,
+          relation,
+          distanceToFirstTurnM: session.firstTurn.distanceM,
+        })
+      : null;
   await speakNav(
     buildNavStartSpeech({
       firstVisual,
       relation,
       etaMin,
-      // Keine Straßennamen in der Start-Ansage
       pathHint: null,
+      destName: destinationName,
+      mode,
+      arriveHm,
     }),
   );
 }
 
 export function markNavOpeningSpoken(): void {
+  navOpeningSpokenLatch = true;
   if (session) session.openingSpoken = true;
 }
 

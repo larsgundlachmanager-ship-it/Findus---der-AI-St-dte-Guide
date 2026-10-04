@@ -83,12 +83,16 @@ export function isInterestVisitVenue(poi: Poi): boolean {
 /** Apotheke, Arzt, Toilette, Directory ohne Story — touristisch egal. */
 export function isNonStoryTouristNoisePoi(poi: Poi): boolean {
   const tags = parseTags(poi.tags_json);
-  const packStory =
-    tags.includes('story') &&
+  // Story gewinnt gegen versehentliches directory/amenity_skip/tier4.
+  // Directory mit story_enriched bleibt Noise (kein Modul-1-Fill).
+  if (
+    (tags.includes('story') || tags.includes('story_enriched')) &&
     !tags.includes('directory') &&
-    !tags.includes('amenity_skip') &&
-    !tags.includes('tier4');
-  if (packStory) return false;
+    !tags.includes('tier4') &&
+    !tags.includes('offline_lookup')
+  ) {
+    return false;
+  }
   if (isHardAmenityNoise(poi)) return true;
   if (
     tags.includes('directory') ||

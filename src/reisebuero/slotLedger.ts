@@ -7,6 +7,7 @@ import type {
   SlotSource,
 } from './types';
 import { EMPTY_LEDGER } from './types';
+import { looksLikeTripTypePurpose, looksLikeWishDumpPurpose } from './tripPurpose';
 
 export function entry<T>(
   value: T,
@@ -17,8 +18,9 @@ export function entry<T>(
 }
 
 function rank(src: SlotSource): number {
-  if (src === 'user') return 3;
-  if (src === 'profile') return 2;
+  if (src === 'user') return 4;
+  if (src === 'profile') return 3;
+  if (src === 'shelf') return 2;
   if (src === 'inferred') return 1;
   return 0;
 }
@@ -53,7 +55,42 @@ export function mergeLedger(prev: ReiseLedger, patch: Partial<ReiseLedger>): Rei
       };
       return;
     }
-    if (key === 'lodgingKind') {
+    if (key === 'intentNotes') {
+      const prevArr = prev.intentNotes;
+      const nextArr = n as ReiseLedger['intentNotes'];
+      if (!nextArr) {
+        out.intentNotes = prevArr;
+        return;
+      }
+      const merged = [...(prevArr?.value ?? [])];
+      for (const line of nextArr.value) {
+        const clean = line.replace(/\s+/g, ' ').trim().slice(0, 160);
+        if (!clean || merged.some((x) => x.toLowerCase() === clean.toLowerCase())) continue;
+        merged.push(clean);
+      }
+      out.intentNotes = {
+        value: merged.slice(-12),
+        source: nextArr.source,
+        hardness: 'wish',
+      };
+      return;
+    }
+    if (key === 'boardPins') {
+      const prevArr = prev.boardPins;
+      const nextArr = n as ReiseLedger['boardPins'];
+      if (!nextArr) {
+        out.boardPins = prevArr;
+        return;
+      }
+      const { mergeBoardPinLists } = require('./boardPins') as typeof import('./boardPins');
+      out.boardPins = {
+        value: mergeBoardPinLists(prevArr?.value, nextArr.value),
+        source: nextArr.source,
+        hardness: 'wish',
+      };
+      return;
+    }
+if (key === 'lodgingKind') {
       const nextKind = n as ReiseLedger['lodgingKind'];
       const prevKind = prev.lodgingKind;
       if (
@@ -79,6 +116,34 @@ export function mergeLedger(prev: ReiseLedger, patch: Partial<ReiseLedger>): Rei
       }
       if (prevFlex?.value === 'exact' && nextFlex && nextFlex.value !== 'exact') {
         out.dateFlex = prevFlex;
+        return;
+      }
+    }
+    if (key === 'purpose') {
+      const nextPurp = n as ReiseLedger['purpose'];
+      const prevPurp = prev.purpose;
+      if (
+        prevPurp?.value &&
+        looksLikeTripTypePurpose(prevPurp.value) &&
+        nextPurp?.value &&
+        looksLikeWishDumpPurpose(nextPurp.value)
+      ) {
+        return;
+      }
+    }
+    if (key === 'partyStyle') {
+      const nextStyle = n as ReiseLedger['partyStyle'];
+      const prevStyle = prev.partyStyle;
+      if (nextStyle?.value && prevStyle?.value) {
+        const bits = [
+          ...prevStyle.value.split(',').map((s) => s.trim()),
+          ...nextStyle.value.split(',').map((s) => s.trim()),
+        ].filter(Boolean);
+        out.partyStyle = {
+          value: [...new Set(bits)].join(', '),
+          source: nextStyle.source,
+          hardness: nextStyle.hardness,
+        };
         return;
       }
     }

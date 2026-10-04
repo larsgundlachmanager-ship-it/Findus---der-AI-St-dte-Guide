@@ -10,7 +10,26 @@
 
 import { looksLikeAddressOrCoordBullet } from '../../utils/addressPrivacy';
 import type { Poi, PoiWithFacts } from '../../db/types';
-import { parkingCostHintFromPoi } from './homeMapMobilityAmenity';
+/** Park-Hinweis (ohne Mobility-Store-Import — Smoke-tauglich). */
+function parkingCostHintFromPoi(poi: Poi): string | null {
+  const blob = `${poi.name ?? ''} ${poi.category ?? ''} ${poi.tags_json ?? ''}`.toLowerCase();
+  if (!/\b(parkplatz|parkhaus|parking|p\+\s*r)\b/i.test(blob)) return null;
+  if (/\bkostenlos|gratis|free parking|ohne gebühr|ohne parkgebühr\b/i.test(blob)) {
+    return 'Kostenlos parken';
+  }
+  const hourly = blob.match(/(\d+[,.]?\d*)\s*€\s*(?:\/|pro)\s*stunde/i);
+  if (hourly) {
+    return `ca. ${hourly[1]!.replace('.', ',')} €/Std.`;
+  }
+  if (/\bgebührenpflichtig|parkticket|parkgebühr|münze|automat\b/i.test(blob)) {
+    return 'Gebührenpflichtig';
+  }
+  if (/\bp\+r\b|park\s+and\s+ride/i.test(blob)) {
+    return 'P+R — oft günstiger fürs Pendeln';
+  }
+  return null;
+}
+
 
 /**
  * Kuratierte Anzeige-Labels für Facet-/Specialty-Tags (Gastro + Hotel + Museum +
@@ -46,11 +65,19 @@ const FACET_LABELS: Record<string, string> = {
   wagyu: 'Wagyu',
   fleckvieh: 'Fleckvieh',
   zugrestaurant: 'Zugrestaurant',
+  afterwork: 'Afterwork',
+  after_work: 'Afterwork',
+  gemütlich: 'gemütlich',
+  gemuetlich: 'gemütlich',
+  all_you_can_eat: 'All you can eat',
+  allyoucaneat: 'All you can eat',
+  // 'laut' absichtlich ohne Label — nur Filter, kein Werbe-Stichpunkt
   // Getränke
   weißbier: 'Weißbier',
   weissbier: 'Weißbier',
   craftbeer: 'Craft Beer',
   cocktail: 'Cocktails',
+  wein: 'Wein',
   // Ambiente / Arbeiten
   wlan: 'WLAN',
   steckdose: 'Steckdosen',
@@ -92,7 +119,7 @@ const FACET_META_TAGS = new Set([
   'sourced_osm',
 ]);
 
-/** Facet-/Specialty-Stichpunkt aus tags_json bauen ("Gäste nennen oft: …"). */
+/** Facet-/Specialty-Stichpunkt — klar, ohne „Gäste nennen oft“. */
 function facetBulletFromPoi(poi: Poi | null | undefined): string | null {
   const raw = poi?.tags_json ?? '';
   if (!raw) return null;
@@ -104,11 +131,26 @@ function facetBulletFromPoi(poi: Poi | null | undefined): string | null {
     return null;
   }
   if (!tags.length) return null;
-  const fromReviews = tags.includes('review_facet');
+  const nameCat = `${poi?.name ?? ''} ${poi?.category ?? ''}`.toLowerCase();
+  // Bahnhof/Halt: keine Review-Facets („ruhig“ verwirrt).
+  if (/\bbahnhof\b|haltepunkt|haltestelle|\böpnv\b/.test(nameCat)) return null;
+  if (/\btoilette\b|\bwc\b|geldautomat|\batm\b|parkplatz|p\+r/.test(nameCat)) {
+    return null;
+  }
+  const wineBeerGarden =
+    /\bbiergarten|weingarten|wein[-\s]*&\s*bier|weinbar\b/.test(nameCat) ||
+    tags.includes('biergarten');
   const labels: string[] = [];
   const seen = new Set<string>();
   for (const t of tags) {
     if (FACET_META_TAGS.has(t)) continue;
+    if (t === 'ruhig' && labels.length === 0) continue;
+    if (
+      wineBeerGarden &&
+      /^(pizza|asiatisch|burger|sushi|döner|doener|pasta)$/.test(t)
+    ) {
+      continue;
+    }
     const label = FACET_LABELS[t];
     if (!label) continue;
     const key = label.toLowerCase();
@@ -118,14 +160,112 @@ function facetBulletFromPoi(poi: Poi | null | undefined): string | null {
     if (labels.length >= 3) break;
   }
   if (!labels.length) return null;
-  const lead = fromReviews ? 'Gäste nennen oft' : 'Bekannt für';
-  let line = `${lead}: ${labels.join(', ')}`;
-  // Bei Überlänge Tags reduzieren statt mitten im Wort schneiden.
+  let line = labels.join(' · ');
   while (line.length > 72 && labels.length > 1) {
     labels.pop();
-    line = `${lead}: ${labels.join(', ')}`;
+    line = labels.join(' · ');
   }
   return line.length <= 74 ? line : null;
+}
+
+/** Wenn Pack-Fakten fehlen/leer: Typ-Stichpunkte statt leeres Popup. */
+function categoryFallbackBullets(poi: Poi | null | undefined): string[] {
+  if (!poi) return [];
+  const name = (poi.name ?? '').trim();
+  const blob = `${name} ${poi.category ?? ''} ${poi.tags_json ?? ''}`.toLowerCase();
+  if (/\btoilette\b|\bwc\b|restroom/.test(blob)) {
+    const inMarket =
+      /marktkauf|edeka|frischecenter|supermarkt|einkaufszentrum|mall/i.test(blob);
+    const clean =
+      blob.match(/sauberkeit[^a-z0-9]*(sehr\s+sauber|sauber|okay|dreckig|verschmutzt)/i)?.[1] ||
+      blob.match(/\bclean(?:liness)?[^a-z0-9]*(excellent|good|ok|bad)/i)?.[1] ||
+      null;
+    const where = inMarket
+      ? 'Öffentliche Toilette im Marktkauf / Center'
+      : 'Öffentliche Toilette';
+    if (clean) {
+      return [where, `Sauberkeit: ${clean}`];
+    }
+    return [where, 'Im Center oder daneben — Öffnung über den Button'];
+  }
+  if (/\bgeldautomat\b|\batm\b|bankomat/.test(blob)) {
+    return ['Geldautomat', 'Bargeld abheben'];
+  }
+  if (/\bkindergarten\b|\bkita\b|krippe/.test(blob)) {
+    return ['Kindergarten / Kita', 'Betreuung vor Ort'];
+  }
+  if (/feuerlösch|feuerloesch|gemeindeteich/.test(blob)) {
+    return [
+      'Feuerlösch- und Gemeindeteich',
+      'Jugendfeuerwehr übt hier im Sommer',
+    ];
+  }
+  if (/\bbahnhof\b|haltepunkt/.test(blob)) {
+    return ['Haltepunkt', 'Live-Abfahrten über den Button'];
+  }
+  if (/bus_stop|\bbus\b|bushaltestelle/.test(blob) && !/bahnhof|haltepunkt/.test(blob)) {
+    return ['Bushaltestelle', 'Live-Abfahrten über den Button'];
+  }
+  if (/\bhotel\b|motel|pension|unterkunft/.test(blob)) {
+    return ['Hotel', 'Übernachtung vor Ort'];
+  }
+  if (
+    /supermarket|supermarkt|edeka|rewe|aldi|lidl|frischecenter|marktkauf|food\s*plus|netto|penny/.test(
+      blob,
+    )
+  ) {
+    return ['Supermarkt', 'Einkaufen in der Nähe'];
+  }
+  if (/convenience|kiosk|späti|spaeti/.test(blob)) {
+    return ['Kiosk / Nahversorgung', 'Kurzer Einkaufsstopp'];
+  }
+  if (/mcdonald|burger\s*king|fast.?food|imbiss/.test(blob)) {
+    return ['Schnellimbiss', 'Essen to go'];
+  }
+  if (/tankstelle|fuel|petrol/.test(blob)) {
+    return ['Tankstelle', 'Tanken und Shop'];
+  }
+  if (/aussicht|viewpoint|blitzblick|panorama/.test(blob)) {
+    return ['Aussichtspunkt', 'Kurzer Stopp mit Blick'];
+  }
+  if (/\bpark\b|stadtpark|volkspark|grünanlage|gruenanlage|gehege|wald|forest|wood/.test(blob)) {
+    return ['Park / Grünfläche', 'Zum Spazieren und Durchatmen'];
+  }
+  if (/\bkino\b|cinema|filmtheater/.test(blob)) {
+    return ['Kino', 'Filme und Vorstellungen vor Ort'];
+  }
+  if (/theater|theatre|schauspiel|oper/.test(blob)) {
+    return ['Theater', 'Aufführungen und Spielplan vor Ort'];
+  }
+  if (/museum|galerie|kunsthalle/.test(blob)) {
+    return ['Museum', 'Lokalgeschichte und Ausstellung vor Ort'];
+  }
+  if (/spielplatz|playground/.test(blob)) {
+    return ['Spielplatz', 'Platz zum Spielen und Toben'];
+  }
+  if (/café|cafe|kaffee|coffee/.test(blob)) {
+    return ['Café', 'Kaffee und Pause'];
+  }
+  if (/biergarten|weingarten|restaurant|gasthof|bistro|pizzeria/.test(blob)) {
+    return ['Gastronomie', 'Essen und Trinken vor Ort'];
+  }
+  if (/briefkasten|post_box|mailbox/.test(blob)) {
+    return ['Briefkasten', 'Briefe einwerfen'];
+  }
+  if (/packstation|parcel|paketautomat/.test(blob)) {
+    return ['Paketautomat', 'Pakete abholen oder einliefern'];
+  }
+  if (/apotheke|pharmacy/.test(blob)) {
+    return ['Apotheke', 'Medikamente und Beratung'];
+  }
+  if (/bank|sparkasse/.test(blob) && !/geldautomat|atm/.test(blob)) {
+    return ['Bank', 'Filiale vor Ort'];
+  }
+  const cat = categoryLabelForPoi(poi);
+  // Nur Identität — keine UI-Meta („Route starten“, „über die Buttons“).
+  if (cat && cat !== 'Ort') return [cat];
+  if (name) return [name.length > 40 ? name.slice(0, 37) + '…' : name];
+  return [];
 }
 
 const TAG_RE =
@@ -136,7 +276,7 @@ const RECOGNIZE_RE =
 const GENERIC_JARGON_RE =
   /technisches denkmal der infrastruktur|kein besucherzentrum|orientierungswahrzeichen(?!.*wand)|mit eigener geschichte vor ort|zentrumsanker|transformationsgeschichte/i;
 const QUIZ_RE = /schätzfrage:|quiz:|\(antwort:/i;
-const GPS_RE = /gps-eingang|osm way|osm \w+ \d{5,}|sourced_osm|koordinaten\s*~/i;
+const GPS_RE = /gps-eingang|osm way|osm \w+ \d{5,}|sourced_osm|koordinaten\s*~|osm:?\w+|parcel_locker|map_outline|offline_lookup|tier4|amenity_skip/i;
 const LIVE_HEAD_RE = /^live:\s/i;
 const OPS_FILLER_RE =
   /^(?:aktuell\s+)?pädagogischer betrieb\b|keine öffentlichen toiletten|live öffnung|live zeiten prüfen/i;
@@ -251,9 +391,13 @@ function compactLine(text: string, max: number): string {
   let t = text
     .replace(/\s+/g, ' ')
     .replace(/^[—–•·]+\s*/, '')
+    // Interne OSM-/Pack-Tags nie in Stichpunkten.
+    .replace(/\s*[—–-]\s*OSM\s*[\w:_-]*/gi, '')
+    .replace(/\b(?:OSM\s+)?parcel_locker\b/gi, '')
+    .replace(/\bosm:(?:node|way|relation)_\d+\b/gi, '')
     .replace(/\s*\([^)]{12,}\)/g, '')
     .replace(
-      /\s*(?:lokales infrastruktur-kunstprojekt|kein street-art-viertel[^.]*|oft interessanter als[^.]*|kein besucherzentrum|und denk daran:|das ist der visuelle aufhänger|oft übersehen)\s*/gi,
+      /\s*(?:lokales infrastruktur-kunstprojekt|kein street-art-viertel[^.]*|oft interessanter als[^.]*|kein besucherzentrum|und denk daran:|das ist der visuelle aufhänger|oft übersehen|zum kurzen stopp)\s*/gi,
       ' ',
     )
     .replace(/\s*—\s*,/g, ' — ')
@@ -292,6 +436,10 @@ function isNoise(question: string | null, text: string): boolean {
   const stripped = stripLocationLead(text);
   if (stripped.length < 18 && STREET_DOMINATED_RE.test(text)) return true;
   if (/^zentrumsanker\b/i.test(text)) return true;
+  if (/^adresse\s*\(/i.test(text) || /^google maps:/i.test(text)) return true;
+  if (/mehr infos und route im popup/i.test(text)) return true;
+  if (/zum kurzen stopp/i.test(text)) return true;
+  if (/\bosm\b|parcel_locker/i.test(text)) return true;
   return false;
 }
 
@@ -490,7 +638,7 @@ export function buildHomeMapPlaceBullets(
   if (facetBullet) return [facetBullet];
   const parkHint = poi ? parkingCostHintFromPoi(poi) : null;
   if (parkHint) return [compactLine(parkHint, WHAT_MAX)];
-  return [];
+  return categoryFallbackBullets(poi);
 }
 
 export function categoryLabelForPoi(poi: {
@@ -508,6 +656,9 @@ export function categoryLabelForPoi(poi: {
   const blob = `${name} ${poi.tags_json ?? ''}`.toLowerCase();
   if (/museum/.test(blob)) return 'Museum';
   if (/kirche|dom|kapelle/.test(blob)) return 'Kirche';
+  if (/schriftzug|foto.?spot|photospot|photo.?spot|instagram|aussichtspunkt/.test(blob)) {
+    return 'Fotospot';
+  }
   if (/café|cafe|kaffee/.test(blob)) return 'Café';
   if (/restaurant|imbiss|bistro|gasthof/.test(blob)) return 'Restaurant';
   if (/park|garten/.test(blob)) return 'Park';
@@ -526,8 +677,12 @@ export function categoryLabelForPoi(poi: {
   if (/praxis|arzt|zahn|gesundheit/.test(blob)) return 'Gesundheit';
   if (/feuerwehr/.test(blob)) return 'Feuerwehr';
   if (/kindergarten|kita/.test(blob)) return 'Kita';
-  if (/denkmal|ehrendenkmal|krieger/.test(blob)) return 'Denkmal';
+  // „Denkmal“ nur wenn kein Fotospot/Schriftzug — sonst falsch gelabelt.
+  if (/denkmal|ehrendenkmal|krieger/.test(blob) && !/schriftzug|foto/.test(blob)) {
+    return 'Denkmal';
+  }
   if (/parkplatz|p\+r|parking/.test(blob)) return 'Parkplatz';
+  if (/toilette|\bwc\b|toilets?|restroom/.test(blob)) return 'Toilette';
   if (/freizeit|sport|minigolf/.test(blob)) return 'Freizeit';
   return 'Ort';
 }
@@ -539,6 +694,7 @@ function categoryFromName(blob: string): string | null {
   if (/zahnarzt|zahnärztin|zahnaerztin|\barztpraxis\b|\barzt\b|ärztin|aerztin|praxis/.test(t)) {
     return 'Gesundheit';
   }
+  if (/schriftzug|foto.?spot|photospot|photo.?spot/.test(t)) return 'Fotospot';
   if (/brücke|bruecke|unterführung/.test(t)) return 'Brücke';
   if (/kirche|kapelle|\bdom\b/.test(t)) return 'Kirche';
   if (/museum/.test(t)) return 'Museum';
@@ -547,7 +703,16 @@ function categoryFromName(blob: string): string | null {
     return 'Bahnhof';
   }
   if (/feuerwehr/.test(t)) return 'Feuerwehr';
-  if (/krieger|ehrenmal|denkmal/.test(t)) return 'Denkmal';
-  if (/gasthof|restaurant/.test(t)) return 'Restaurant';
+  if (/krieger|ehrenmal|denkmal/.test(t) && !/schriftzug|foto/.test(t)) return 'Denkmal';
+  if (/gasthof|restaurant|bistro|pizzeria/.test(t)) return 'Restaurant';
+  if (/supermarket|supermarkt|edeka|rewe|aldi|lidl|frischecenter|food\s*plus/.test(t)) {
+    return 'Supermarkt';
+  }
+  if (/\bpark\b|gehege|stadtpark|wald|forest/.test(t)) return 'Park';
+  if (/\bkino\b|cinema/.test(t)) return 'Kino';
+  if (/theater|theatre/.test(t)) return 'Theater';
+  if (/mcdonald|burger\s*king|fast.?food/.test(t)) return 'Imbiss';
+  if (/café|cafe|kaffee/.test(t)) return 'Café';
+  if (/toilette|\bwc\b|toilets?|restroom/.test(t)) return 'Toilette';
   return null;
 }

@@ -39,10 +39,10 @@ export function weatherOpenerFromMatrix(opts: {
     case 'nerd':
       return city ? `Datenlage für ${city}:` : 'Kurz die Wetterlage:';
     case 'innocent_child':
-      return city ? `Schau mal, in ${city}:` : 'Schau mal, heute:';
+      return city ? `Heute in ${city}:` : 'Heute bei dir:';
     case 'classic_guide':
     default:
-      return city ? `Also, in ${city} sieht es so aus:` : 'Also, kurz für heute:';
+      return city ? `In ${city} heute:` : 'Heute bei dir:';
   }
 }
 

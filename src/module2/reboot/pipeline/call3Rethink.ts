@@ -31,6 +31,8 @@ const CALL3_REASONS = new Set([
   'missing_must_fact',
   'missing_must_action',
   'completeness_gap',
+  'rental_prices',
+  'price_eur',
 ]);
 
 export function shouldRunCall3Rethink(tail: Call2TailV1 | null): boolean {

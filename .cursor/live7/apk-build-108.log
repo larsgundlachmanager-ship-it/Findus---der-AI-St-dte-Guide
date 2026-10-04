@@ -1,0 +1,218 @@
+ ??  [33mApplying gradle plugin[0m '[32mexpo-dev-launcher-gradle-plugin[0m' (expo-dev-launcher@5.0.35)
+
+Using expo modules
+  - [32mexpo-application[0m (6.0.2)
+  - [32mexpo-asset[0m (11.0.5)
+  - [32mexpo-av[0m (15.0.2)
+  - [32mexpo-battery[0m (9.0.2)
+  - [32mexpo-constants[0m (17.0.8)
+  - [32mexpo-crypto[0m (14.0.2)
+  - [32mexpo-dev-client[0m (5.0.20)
+  - [32mexpo-dev-launcher[0m (5.0.35)
+  - [32mexpo-dev-menu[0m (6.0.25)
+  - [32mexpo-file-system[0m (18.0.12)
+  - [32mexpo-font[0m (13.0.4)
+  - [32mexpo-haptics[0m (14.0.1)
+  - [32mexpo-intent-launcher[0m (12.0.2)
+  - [32mexpo-json-utils[0m (0.14.0)
+  - [32mexpo-linking[0m (7.0.5)
+  - [32mexpo-localization[0m (16.0.1)
+  - [32mexpo-location[0m (18.0.10)
+  - [32mexpo-manifests[0m (0.15.8)
+  - [32mexpo-modules-core[0m (2.2.3)
+  - [32mexpo-network[0m (7.0.5)
+  - [32mexpo-notifications[0m (0.29.14)
+  - [32mexpo-sensors[0m (14.0.2)
+  - [32mexpo-speech[0m (13.0.1)
+  - [32mexpo-speech-recognition[0m (1.1.1)
+  - [32mexpo-sqlite[0m (15.1.4)
+  - [32mexpo-task-manager[0m (12.0.6)
+  - [32mexpo-web-browser[0m (14.0.2)
+  - [32mfindus-espeak[0m (1.0.0)
+  - [32mfindus-map-native[0m (1.0.0)
+  - [32munimodules-app-loader[0m (5.0.1)
+
+Android gradle plugin: 8.6.0
+Gradle: 8.10.2
+env: load .env
+env: export EXPO_PUBLIC_OPENAI_API_KEY EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_CITY_ID EXPO_PUBLIC_KOKORO_MODEL_URL EXPO_PUBLIC_KOKORO_VOICE_URL GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GEMINI_API_KEY GETYOURGUIDE_PARTNER_ID MUSEMENT_AFFILIATE_ID UBER_CLIENT_ID VIATOR_PARTNER_ID ECONOMY_BOOKINGS_REFERRAL_URL BOUNCE_AFFILIATE_URL STAY22_AFFILIATE_ID EXPO_PUBLIC_FLIGHTAWARE_API_KEY EXPO_PUBLIC_DB_CLIENT_ID EXPO_PUBLIC_DB_CLIENT_SECRET EXPO_PUBLIC_TRANSITOUS_BASE_URL EXPO_PUBLIC_CARTESIA_API_KEY SUPABASE_SERVICE_ROLE_KEY EXPO_PUBLIC_EXPEDIA_CAMREF EXPO_PUBLIC_EXPEDIA_CREATIVEREF EXPO_PUBLIC_EXPEDIA_SITE_ID FINDUS_PACK_COST EXPO_PUBLIC_PROTOMAPS_API_KEY EXPO_PUBLIC_MAP_VECTOR_TILES EXPO_PUBLIC_TRAVELPAYOUTS_MARKER EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN GIGSBERG_API_KEY EXPO_PUBLIC_GIGSBERG_API_KEY
+env: load .env
+env: export EXPO_PUBLIC_OPENAI_API_KEY EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_CITY_ID EXPO_PUBLIC_KOKORO_MODEL_URL EXPO_PUBLIC_KOKORO_VOICE_URL GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GOOGLE_MAPS_API_KEY EXPO_PUBLIC_GEMINI_API_KEY GETYOURGUIDE_PARTNER_ID MUSEMENT_AFFILIATE_ID UBER_CLIENT_ID VIATOR_PARTNER_ID ECONOMY_BOOKINGS_REFERRAL_URL BOUNCE_AFFILIATE_URL STAY22_AFFILIATE_ID EXPO_PUBLIC_FLIGHTAWARE_API_KEY EXPO_PUBLIC_DB_CLIENT_ID EXPO_PUBLIC_DB_CLIENT_SECRET EXPO_PUBLIC_TRANSITOUS_BASE_URL EXPO_PUBLIC_CARTESIA_API_KEY SUPABASE_SERVICE_ROLE_KEY EXPO_PUBLIC_EXPEDIA_CAMREF EXPO_PUBLIC_EXPEDIA_CREATIVEREF EXPO_PUBLIC_EXPEDIA_SITE_ID FINDUS_PACK_COST EXPO_PUBLIC_PROTOMAPS_API_KEY EXPO_PUBLIC_MAP_VECTOR_TILES EXPO_PUBLIC_TRAVELPAYOUTS_MARKER EXPO_PUBLIC_TRAVELPAYOUTS_TOKEN GIGSBERG_API_KEY EXPO_PUBLIC_GIGSBERG_API_KEY
+Starting Metro Bundler
+warning: Bundler cache is empty, rebuilding (this may take a minute)
+| (node:13556) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:20816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:4276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:26872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:21656) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:5852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:30764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:21696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+| (node:30568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+| (Use `node --trace-warnings ...` to show where the warning was created)
+Android Bundled 99373ms index.ts (2428 modules)
+Writing bundle output to: android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle
+Writing sourcemap output to: android\app\build\intermediates\sourcemaps\react\release\index.android.bundle.packager.map
+Copying 103 asset files
+Done writing bundle output
+Done writing sourcemap output
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:3973:16: warning: the variable "SharedArrayBuffer" was not declared in function "from"
+    if (typeof SharedArrayBuffer !== 'undefined' && (isInstance(value, Shared...
+               ^~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:7861:23: warning: the variable "DebuggerInternal" was not declared in function "__shouldPauseOnThrow"
+        return typeof DebuggerInternal !== 'undefined' && DebuggerInternal.sh...
+                      ^~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:18216:7: warning: the variable "setTimeout" was not declared in function "logCapturedError"
+      setTimeout(function () {
+      ^~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:16450:31: warning: the variable "nativeFabricUIManager" was not declared in anonymous function " 391#"
+  var _nativeFabricUIManage = nativeFabricUIManager,
+                              ^~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:16478:21: warning: the variable "clearTimeout" was not declared in anonymous function " 391#"
+    cancelTimeout = clearTimeout;
+                    ^~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:16491:51: warning: the variable "RN$enableMicrotasksInReact" was not declared in anonymous function " 391#"
+... "undefined" !== typeof RN$enableMicrotasksInReact && !!RN$enableMicrotask...
+                           ^~~~~~~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:16492:47: warning: the variable "queueMicrotask" was not declared in anonymous function " 391#"
+...otask = "function" === typeof queueMicrotask ? queueMicrotask : scheduleTi...
+                                 ^~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:20913:30: warning: the variable "__REACT_DEVTOOLS_GLOBAL_HOOK__" was not declared in anonymous function " 391#"
+  if ("undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__) {
+                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:22347:5: warning: the variable "setImmediate" was not declared in function "handleResolved"
+    setImmediate(function () {
+    ^~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25613:5: warning: the variable "fetch" was not declared in anonymous function " 614#"
+    fetch,
+    ^~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25614:5: warning: the variable "Headers" was not declared in anonymous function " 614#"
+    Headers,
+    ^~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25615:5: warning: the variable "Request" was not declared in anonymous function " 614#"
+    Request,
+    ^~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25616:5: warning: the variable "Response" was not declared in anonymous function " 614#"
+    Response
+    ^~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25773:24: warning: the variable "FileReader" was not declared in function "readBlobAsArrayBuffer"
+      var reader = new FileReader();
+                       ^~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25828:44: warning: the variable "URLSearchParams" was not declared in anonymous function " 625#"
+...e if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body...
+                                 ^~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25947:26: warning: the variable "AbortController" was not declared in anonymous function " 631#"
+          var ctrl = new AbortController();
+                         ^~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:26081:23: warning: the variable "XMLHttpRequest" was not declared in anonymous function " 635#"
+        var xhr = new XMLHttpRequest();
+                      ^~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:25626:71: warning: the variable "self" was not declared in anonymous function " 617#"
+...undefined' && globalThis || typeof self !== 'undefined' && self ||
+                                      ^~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:28468:26: warning: the variable "navigator" was not declared in anonymous function " 794#"
+  "undefined" !== typeof navigator && undefined !== navigator.scheduling && u...
+                         ^~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:28578:37: warning: the variable "MessageChannel" was not declared in anonymous function " 794#"
+  };else if ("undefined" !== typeof MessageChannel) {
+                                    ^~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:28593:34: warning: the variable "nativeRuntimeScheduler" was not declared in anonymous function " 794#"
+... = "undefined" !== typeof nativeRuntimeScheduler ? nativeRuntimeScheduler....
+                             ^~~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:38442:34: warning: the variable "requestAnimationFrame" was not declared in function "start 9#"
+...    this._animationFrame = requestAnimationFrame(this.onUpdate.bind(this));
+                              ^~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:57382:25: warning: the variable "Atomics" was not declared in anonymous function " 1854#"
+    '%Atomics%': typeof Atomics === 'undefined' ? undefined : Atomics,
+                        ^~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:57397:30: warning: the variable "Float16Array" was not declared in anonymous function " 1854#"
+    '%Float16Array%': typeof Float16Array === 'undefined' ? undefined : Float...
+                             ^~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:57400:38: warning: the variable "FinalizationRegistry" was not declared in anonymous function " 1854#"
+...lizationRegistry%': typeof FinalizationRegistry === 'undefined' ? undefine...
+                              ^~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:57440:25: warning: the variable "WeakRef" was not declared in anonymous function " 1854#"
+    '%WeakRef%': typeof WeakRef === 'undefined' ? undefined : WeakRef,
+                        ^~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:58405:14: warning: the variable "document" was not declared in anonymous function " 1899#"
+  if (typeof document === 'object') {
+             ^~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:101350:30: warning: the variable "Worker" was not declared in function "_startWorkerHeartbeat"
+        this.workerRef = new Worker(objectUrl);
+                             ^~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:101498:20: warning: the variable "WebSocket" was not declared in function "detectEnvironment"
+        if (typeof WebSocket !== 'undefined') {
+                   ^~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:101725:27: warning: the variable "TextEncoder" was not declared in function "_encodeJsonUserBroadcastPush"
+        var encoder = new TextEncoder();
+                          ^~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:101818:27: warning: the variable "TextDecoder" was not declared in function "_binaryDecode"
+        var decoder = new TextDecoder();
+                          ^~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:103978:12: warning: the variable "btoa" was not declared in arrow function "arrayBufferToBase64"
+    return btoa(binary);
+           ^~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:103984:26: warning: the variable "atob" was not declared in function "LongPoll 1#"
+        this.authToken = atob(protocols[1].slice(AUTH_TOKEN_PREFIX.length));
+                         ^~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:104149:20: warning: the variable "CloseEvent" was not declared in function "close 3#"
+        if (typeof CloseEvent !== "undefined") {
+                   ^~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:104768:16: warning: the variable "location" was not declared in function "protocol"
+        return location.protocol.match(/^https/) ? "wss" : "ws";
+               ^~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:106798:27: warning: the variable "ReadableStream" was not declared in function "?anon_0_ 269#"
+              if ((typeof ReadableStream !== "undefined" && body instanceof R...
+                          ^~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:107950:20: warning: the variable "Buffer" was not declared in function "toBase64"
+        if (typeof Buffer !== "undefined") return Buffer.from(data).toString(...
+                   ^~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:112892:16: warning: the variable "crypto" was not declared in function "generatePKCEVerifier"
+    if (typeof crypto === 'undefined') {
+               ^~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:121451:7: warning: the variable "__magic__" was not declared in function "polyfillGlobalThis"
+      __magic__.globalThis = __magic__;
+      ^~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:121654:16: warning: the variable "PublicKeyCredential" was not declared in function "deserializeCredentialCreationOptions"
+    if (typeof PublicKeyCredential !== 'undefined' && 'parseCreationOptionsFr...
+               ^~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:122523:37: warning: the variable "AbortSignal" was not declared in function "identifyRegistrationError"
+      if (options.signal instanceof AbortSignal) {
+                                    ^~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:415191:11: warning: the variable "_WORKLET" was not declared in function "assertEasingIsWorklet"
+      if (_WORKLET) {
+          ^~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:417436:12: warning: the variable "__reanimatedLoggerConfig" was not declared in function "replaceLoggerImplementation"
+        ...__reanimatedLoggerConfig,
+           ^~~~~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:418037:26: warning: Direct call to eval(), but lexical scope is not supported.
+            workletFun = eval('(' + initData.code + '\n)');
+                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:418060:112: warning: the variable "_toString" was not declared in function "valueUnpacker"
+...recognized by value unpacker: "${_toString(objectToUnpack)}".`);
+                                    ^~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:435445:27: warning: the variable "HTMLElement" was not declared in function "findDescendantWithExitingAnimation"
+    if (!(node instanceof HTMLElement)) {
+                          ^~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:435471:24: warning: the variable "MutationObserver" was not declared in function "addHTMLMutationObserver"
+    var observer = new MutationObserver(mutationsList => {
+                       ^~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:435516:41: warning: the variable "getComputedStyle" was not declared in function "fixElementPosition"
+...entBorderTopValue = parseInt(getComputedStyle(parent).borderTopWidth);
+                                ^~~~~~~~~~~~~~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:439488:5: warning: the variable "jest" was not declared in arrow function "beforeTest"
+    jest.useFakeTimers();
+    ^~~~
+android\app\build\generated\assets\createBundleReleaseJsAndAssets\index.android.bundle:440064:26: warning: the variable "_getAnimationTimestamp" was not declared in function "computeEasingProgress"
+      var elapsedTime = (_getAnimationTimestamp() - startingTimestamp) / 1000;
+                         ^~~~~~~~~~~~~~~~~~~~~~

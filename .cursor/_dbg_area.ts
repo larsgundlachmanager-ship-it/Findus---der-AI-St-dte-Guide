@@ -1,0 +1,10 @@
+﻿import { normalizeTriviaFactBullets } from '../src/module2/chat/instantFactFormat';
+const user = 'Wie groß ist die Alster?';
+const speech = 'Die Außenalster hat rund 1,6 km².';
+const reUser = /\b(wie\s+(?:gro[sß]s?|gross)|fl[aä]che|flaeche|quadrat|hektar|km\s*[²2]|km2)\b/iu;
+const reArea = /(\d{1,4}(?:[.,]\d{1,3})?)\s*(km\s*[²2]|km2|quadratkilometer|hektar|ha)(?=\s|[.,!?;:]|$)/iu;
+console.log('user match', reUser.test(user));
+console.log('area', speech.match(reArea));
+const idx = speech.indexOf('km');
+console.log('around km', JSON.stringify(speech.slice(idx, idx+6)), [...speech.slice(idx, idx+4)].map(c=>c.codePointAt(0)));
+console.log('out', normalizeTriviaFactBullets({ userText: user, speech, bullets: [] }));

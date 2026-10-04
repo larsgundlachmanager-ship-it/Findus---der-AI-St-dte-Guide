@@ -51,9 +51,17 @@ assert(
   'Rad unterwegs: sofort Radroute',
 );
 assert(
-  navStart.includes('skipMobilityAsk: false') ||
-    navStart.includes('const skipMobilityAsk = false'),
-  'Kurze Luftlinie: Live-Guard nach Route-ETA falls OSRM länger ist',
+  navStart.includes('skipMobilityAsk: true'),
+  'Karten-Navigation: explizit, kein zweites Mobility-Ask',
+);
+assert(
+  navStart.includes('setNavRouteLoading(false)') &&
+    navStart.includes('setIsGenerating(false)'),
+  'Loading/Busy nach Nav-Start immer freigeben',
+);
+assert(
+  navStart.includes('resolveMapDropName') || navStart.includes('isGenericMapPointLabel'),
+  'Gebäude-Name statt Punkt auf der Karte',
 );
 assert(
   navStart.includes('presentMapNavMobilityAsk'),
@@ -73,7 +81,7 @@ assert(
 );
 assert(
   navStart.includes('startTransitHandsFree'),
-  'Ab 3 km Luftlinie ÖPNV direkt, wenn Pref kein Taxi',
+  'Ab 1,8 km Luftlinie ÖPNV direkt, wenn Pref kein Taxi',
 );
 assert(
   navStart.includes('Popup-Koordinaten sind SSOT') ||
@@ -97,9 +105,12 @@ assert(
   'Kein Meta-„unten auswählen“ in der Speech',
 );
 assert(
-  ask.includes('klingt gut'),
-  'Live-Guard nennt den Ort und die Zeiten, nicht die UI',
+  ask.includes('Alles klar') || ask.includes('plane die Route'),
+  'Live-Guard bestätigt Ziel und Zeiten, nicht die UI',
 );
+assert(ask.includes('transferLabelDe') || ask.includes('umsteigen'), 'ÖPNV nennt Umstiege');
+assert(ask.includes('speakAskWhenIdle') || ask.includes('isFusedTurnLive'), 'Call-1 nicht abwürgen');
+assert(ask.includes('zu Fuß'), 'Fuß-Karte klar gekennzeichnet');
 
 const pitchNav = readFileSync(
   join(process.cwd(), 'src/module2/pitch/pitchStartNav.ts'),
@@ -111,6 +122,13 @@ assert(
   pitchNav.includes("commitMode: mode"),
   'Fuß/Rad-Wahl geht über denselben Map-Commit',
 );
+assert(
+  pitchNav.includes('addOptimizedTourStop') &&
+    pitchNav.includes('insertStop'),
+  'Pitch bei aktiver Nav: Insert, kein Replace',
+);
+assert(pitchNav.includes('modeSwitch'), 'Moduswahl insertet nicht');
+assert(pitchNav.includes('forceStart: true'), 'ÖPNV-Tap startet Journey sofort');
 
 const slot = readFileSync(
   join(process.cwd(), 'src/components/PitchChoiceSlot.tsx'),
@@ -143,6 +161,7 @@ const jr = readFileSync(
   'utf8',
 );
 assert(jr.includes('startNav: !defer'), 'ÖPNV nicht loslaufen wenn die Bahn noch wartet');
+assert(jr.includes('forceStart?: boolean'), 'explizite ÖPNV-Wahl kann sofort starten');
 assert(!jr.includes('requestOpenPlanCalendar'), 'Karte bleibt, Timeline nicht auto-auf');
 assert(jr.includes('stationPlaceName'), 'Haltestelle/Bahnhof im Namen');
 assert(jr.includes('foldTinyTransfers'), 'Mini-Umstieg nicht als zweites Pinneberg');

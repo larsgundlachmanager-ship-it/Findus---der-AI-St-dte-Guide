@@ -208,3 +208,35 @@ export function starBullet(rating: number | null | undefined): string | null {
   const word = rating >= 4.5 ? 'Top' : rating >= 4.0 ? 'Gut' : rating >= 3.5 ? 'Okay' : 'Schwach';
   return `${n}★ ${word}`;
 }
+
+/**
+ * Kein Roh-STT in Timeline-Notes — kurze strukturierte Notiz.
+ * „ich habe überlegt irgendwie morgen…“ → raus.
+ */
+export function sanitizeWishNotes(raw: string | null | undefined): string {
+  const t = String(raw || '').replace(/\s+/g, ' ').trim();
+  if (!t) return '';
+  if (
+    /^(ich|wir)\s+(habe|haben|hab|würde|wuerde|überlegt|ueberlegt|dachte)\b/iu.test(
+      t,
+    ) &&
+    t.length > 80 &&
+    !/\b(\d{1,2}\s*uhr|\d{1,2}:\d{2}|€|euro|eintritt)\b/iu.test(t)
+  ) {
+    const parts = t.split('|').map((p) => p.trim()).filter(Boolean);
+    const keep = parts.filter(
+      (p) =>
+        p.length < 90 &&
+        !/^(ich|wir)\s+(habe|haben|überlegt)/iu.test(p),
+    );
+    return keep.slice(0, 2).join(' · ').slice(0, 160);
+  }
+  return t
+    .replace(
+      /^(ich habe überlegt|ich würde gerne|keine ahnung|irgendwie)\b[\s,]*/giu,
+      '',
+    )
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 160);
+}

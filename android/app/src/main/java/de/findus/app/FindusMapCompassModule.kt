@@ -32,6 +32,8 @@ class FindusMapCompassModule(
   private var vectorSensor: Sensor? = null
   private var gameSensor: Sensor? = null
   private var listening = false
+  /** JS hat start() gerufen — nach Pause wieder anmelden. */
+  private var wantListening = false
 
   private var lastLat = Float.NaN
   private var lastLng = Float.NaN
@@ -59,9 +61,18 @@ class FindusMapCompassModule(
     reactContext.addLifecycleEventListener(this)
   }
 
-  override fun onHostResume() = Unit
+  override fun onHostResume() {
+    UiThreadUtil.runOnUiThread {
+      if (wantListening && !listening) {
+        registerSensors(resetSmoother = false)
+      }
+    }
+  }
 
-  override fun onHostPause() = Unit
+  override fun onHostPause() {
+    // Sensoren aus im Hintergrund — Lock/State behalten für Resume.
+    UiThreadUtil.runOnUiThread { pauseSensorsOnly() }
+  }
 
   override fun onHostDestroy() {
     UiThreadUtil.runOnUiThread { stopListening() }
@@ -86,6 +97,15 @@ class FindusMapCompassModule(
   fun stop(promise: Promise) {
     UiThreadUtil.runOnUiThread {
       stopListening()
+      promise.resolve(true)
+    }
+  }
+
+  /** Hintergrund: Sensoren aus, wantListening bleibt (Resume ohne neues Desire). */
+  @ReactMethod
+  fun pause(promise: Promise) {
+    UiThreadUtil.runOnUiThread {
+      pauseSensorsOnly()
       promise.resolve(true)
     }
   }
@@ -181,6 +201,24 @@ class FindusMapCompassModule(
   }
 
   private fun startListening(): Boolean {
+    wantListening = true
+    return registerSensors(resetSmoother = true)
+  }
+
+  /** Nur Sensoren abmelden — wantListening/Lock bleiben (Background-Pause). */
+  private fun pauseSensorsOnly() {
+    try {
+      sensorManager?.unregisterListener(this)
+    } catch (_: Exception) {
+      /* soft */
+    }
+    listening = false
+    sensorManager = null
+    vectorSensor = null
+    gameSensor = null
+  }
+
+  private fun registerSensors(resetSmoother: Boolean): Boolean {
     if (listening) return true
     val sm = reactContext.getSystemService(Context.SENSOR_SERVICE) as? SensorManager
       ?: return false
@@ -191,15 +229,19 @@ class FindusMapCompassModule(
     sensorManager = sm
     vectorSensor = sensor
     gameSensor = sm.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR)
-    smoothedDeg = null
-    lastRvDeg = null
-    lastGameYaw = null
-    lastSampleAt = 0L
-    lastEmitAt = 0L
-    lastEmittedDeg = null
-    lockTrueDeg = null
-    lockGameYaw = null
-    locked = false
+    if (resetSmoother) {
+      smoothedDeg = null
+      lastRvDeg = null
+      lastGameYaw = null
+      lastSampleAt = 0L
+      lastEmitAt = 0L
+      lastEmittedDeg = null
+      if (!wantLock) {
+        lockTrueDeg = null
+        lockGameYaw = null
+        locked = false
+      }
+    }
     val ok = sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME)
     if (ok && gameSensor != null) {
       sm.registerListener(this, gameSensor, SensorManager.SENSOR_DELAY_GAME)
@@ -209,6 +251,7 @@ class FindusMapCompassModule(
   }
 
   private fun stopListening() {
+    wantListening = false
     try {
       sensorManager?.unregisterListener(this)
     } catch (_: Exception) {

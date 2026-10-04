@@ -1,6 +1,7 @@
 /**
  * Fehlende / Kasten-Footprints für Homescreen-Orte aus OSM nachziehen.
- * Cache in AsyncStorage (osmBuildingFootprint) + optional SQLite polygon_json.
+ * Pack-Ring first: valider Umriss im Pack → kein Overpass.
+ * Lücke → Overpass → sofort SQLite (`updatePoiPolygonJson`); AsyncStorage nur Cache.
  */
 
 import type { Poi } from '../../db/types';

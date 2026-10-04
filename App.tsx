@@ -40,6 +40,7 @@ import {
   type UserProfile,
 } from './src/types/userProfile';
 import {
+  getCachedUserProfile,
   loadUserProfile,
   saveUserProfile,
   subscribeUserProfile,
@@ -56,6 +57,7 @@ import { hydrateAffiliateRedirectAck } from './src/services/affiliate/affiliateD
 import { startFindusHealthMonitor } from './src/services/findusHealthService';
 import { startWeatherMonitor } from './src/services/weatherService';
 import { startSurvivalModeMonitor } from './src/services/battery/survivalMode';
+import { bootstrapOpenQuietGate } from './src/services/navigation/modulePriorityPolicy';
 import { startGrowthMonitor } from './src/runtime/growthModule';
 import {
   startRucksackWriters,
@@ -82,6 +84,8 @@ import {
 } from './src/components/SplashScreenController';
 import { UI_LAYER } from './src/constants/uiLayers';
 import { warmupHomeMapDuringIntro, noteSplashMapWarmup } from './src/services/homeMap/warmupHomeMap';
+import { beginYorroProtomapsStyleWarm } from './src/services/homeMap/yorroProtomapsBasemapStyle';
+import { isVectorBasemapEnabled } from './src/services/homeMap/mapTileConfig';
 import {
   noteSplashBootMinimal,
   noteSplashSkipMap,
@@ -97,6 +101,7 @@ import { warmMicrophonePipeline } from './src/services/sttService';
 import { scheduleIdleUiPrefetch } from './src/services/ui/idlePrefetch';
 import { LocationProminentDisclosureHost } from './src/components/LocationProminentDisclosureModal';
 import { CitySwitchPromptHost } from './src/components/CitySwitchPrompt';
+import { CityCommitProgressHost } from './src/components/CityCommitProgressHost';
 import {
   maybeSpeakWelcomeBack,
   touchActiveDay,
@@ -157,7 +162,7 @@ export default function App() {
   const [bootReady, setBootReady] = useState(false);
   const [splashDone, setSplashDone] = useState(false);
   const [bootVoiceId, setBootVoiceId] = useState<UserProfile['voiceId']>(
-    'alina',
+    'sebastian',
   );
   const [targetPhase, setTargetPhase] = useState<Exclude<AppPhase, 'booting'>>(
     'onboarding',
@@ -181,11 +186,21 @@ export default function App() {
       ).ErrorUtils;
       const prev = EU?.getGlobalHandler?.();
       EU?.setGlobalHandler?.((error, isFatal) => {
+        const msg = String(error?.message || error);
+        const stack = String((error as Error)?.stack || '').slice(0, 800);
         console.warn(
           '[app] js global error',
           !!isFatal,
-          String(error?.message || error).slice(0, 200),
+          msg.slice(0, 200),
+          stack,
         );
+        // Metro/Hermes: kaputter dependencyMap-Eintrag — fatal Destroy = Blackscreen.
+        // Nicht den ReactHost killen; Fehler loggen und UI am Leben lassen.
+        if (/Requiring unknown module ["']undefined["']/i.test(msg)) {
+          console.warn('[app] swallowed unknown-module undefined (keep UI alive)');
+          prev?.(error, false);
+          return;
+        }
         prev?.(error, isFatal);
       });
     } catch {
@@ -238,13 +253,38 @@ export default function App() {
 
   const boot = useCallback(async () => {
     if (bootInFlight.current) return bootInFlight.current;
-    setBootReady(false);
     setError(null);
     const run = (async () => {
     try {
-      // Warmup parallel — Boot/UI nicht auf Extract/Disk warten.
+      // Uhr sofort — Failsafe zählt nicht erst nach DB.
+      noteSplashStarted();
+      // Cache-Profil sofort → Home unter Splash, Mic/Timeline tippbar sobald Vorhang weg.
+      const cached = getCachedUserProfile();
+      if (profileHasFinishedSetup(cached) && cached) {
+        setProfile({
+          ...cached,
+          setupComplete: true,
+          firstMapWelcomeDone: true,
+          completedAt: cached.completedAt ?? new Date().toISOString(),
+        });
+        setBootVoiceId(cached.voiceId ?? 'sebastian');
+        setTargetPhase('ready');
+        noteSplashBootMinimal();
+        setBootReady(true);
+      } else {
+        setBootReady(false);
+      }
+      // Protomaps-Style sofort — vor DB/Extract, Peek für Map-Mount.
+      if (isVectorBasemapEnabled()) {
+        beginYorroProtomapsStyleWarm();
+      }
+      // Warmup parallel — Vector: Style länger unter Splash mitnehmen (kein Extract).
       const warm = warmupHomeMapDuringIntro();
-      await Promise.race([warm, new Promise((r) => setTimeout(r, 300))]);
+      const warmBudgetMs = isVectorBasemapEnabled() ? 1_000 : 300;
+      await Promise.race([
+        warm,
+        new Promise((r) => setTimeout(r, warmBudgetMs)),
+      ]);
       let dbErr: unknown;
       for (let attempt = 0; attempt < 4; attempt += 1) {
         try {
@@ -275,7 +315,6 @@ export default function App() {
       }
       if (dbErr) throw dbErr;
 
-      noteSplashStarted();
       const existing = await loadUserProfile();
       let resolved = existing;
       if (!profileHasFinishedSetup(resolved)) {
@@ -309,7 +348,7 @@ export default function App() {
           await saveUserProfile(restored);
         }
         setProfile(restored);
-        setBootVoiceId(restored.voiceId ?? 'alina');
+        setBootVoiceId(restored.voiceId ?? 'sebastian');
         setTargetPhase('ready');
         // Pack-Sync nach Interactive Window — nicht mit Mic kämpfen
       } else if (existing?.setupComplete) {
@@ -320,11 +359,11 @@ export default function App() {
         const nextDraft: UserProfile = {
           ...base,
           language: 'de',
-          voiceId: base.voiceId || 'alina',
+          voiceId: base.voiceId || 'sebastian',
         };
         if (!existing) {
           nextDraft.language = 'de';
-          nextDraft.voiceId = 'alina';
+          nextDraft.voiceId = 'sebastian';
         }
         setBootVoiceId(nextDraft.voiceId);
         setDraft(nextDraft);
@@ -338,6 +377,10 @@ export default function App() {
       // Mic + Overlays + lokale POIs sofort — nicht hinter Interactive Window.
       void warmMicrophonePipeline().catch(() => undefined);
       scheduleIdleUiPrefetch();
+      // Coverage-Disk-Cache früh — sonst registerCoverage parst alle Packs.
+      void import('./src/services/discovery/cityCoverageBounds')
+        .then((m) => m.hydrateCityCoverageBounds())
+        .catch(() => undefined);
       void (async () => {
         try {
           const pois = await getAllPois();
@@ -346,24 +389,18 @@ export default function App() {
           console.warn('[app] early pois:', err);
         }
       })();
-      void import('./src/services/homeMap/mapPinIndex')
-        .then((m) => {
-          const cityId =
-            resolved?.cityId || existing?.cityId || null;
-          return m.warmNearbyPinIndexes({
-            activeCityId: cityId,
-            lat: null,
-            lng: null,
-          });
-        })
-        .catch(() => undefined);
-      // Timeline-Persist früh (Leeren/Close brauchen State) — leicht, mit Yield.
-      void import('./src/module2/timeline/planPersistence')
-        .then(async (m) => {
+      // Pin-Index / Timeline-Hydrate erst nach Interactive Window —
+      // sonst friert JSON-Parse Mic/Timeline direkt nach Splash.
+      void (async () => {
+        try {
+          await waitUntilInteractiveSettled();
+          const m = await import('./src/module2/timeline/planPersistence');
           await m.hydratePlanTimeline();
           m.startPlanTimelinePersistWatchers();
-        })
-        .catch(() => undefined);
+        } catch {
+          /* soft */
+        }
+      })();
 
       const deferredCityId =
         (resolved?.cityId || existing?.cityId || undefined) ?? undefined;
@@ -380,6 +417,11 @@ export default function App() {
               () => initMultilingualPhoneticEngine(),
               () => useUserMemoryStore.getState().hydrate(),
               () => useShoppingTaskStore.getState().hydrate(),
+              () => {
+                void import('./src/store/usePackListStore').then((m) =>
+                  m.usePackListStore.getState().hydrate(),
+                );
+              },
               () => useTripModeStore.getState().hydrate(),
               () => useReservationMemoryStore.getState().hydrate(),
               () => useSessionPlanStore.getState().hydrate(),
@@ -524,6 +566,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    bootstrapOpenQuietGate();
+  }, []);
+
+  useEffect(() => {
     return startSurvivalModeMonitor();
   }, []);
 
@@ -539,6 +585,9 @@ export default function App() {
     void loadPoiTeaserLocks();
     void loadConversationThreads();
     void useOpenQuestionStore.getState().hydrate();
+    void import('./src/module2/router/missionFollowThrough')
+      .then((m) => m.ensureFollowThroughHydrated())
+      .catch(() => undefined);
   }, []);
 
   useEffect(() => {
@@ -557,6 +606,21 @@ export default function App() {
   useEffect(() => {
     if (splashDone) return;
     noteSplashMapWarmup(8_000);
+  }, [splashDone]);
+
+  // Hart: nach 5 s Splash trotzdem heben — Controller kann hängen.
+  // Kein early Settle: Interactive Window muss Hydrate/Fog parken (Mic/Timeline zuerst).
+  useEffect(() => {
+    if (splashDone) return;
+    const t = setTimeout(() => {
+      if (splashDone) return;
+      noteSplashBootMinimal();
+      markSplashInteractive();
+      setSplashDone(true);
+      void warmMicrophonePipeline().catch(() => undefined);
+      scheduleIdleUiPrefetch();
+    }, 5_000);
+    return () => clearTimeout(t);
   }, [splashDone]);
 
   useEffect(() => {
@@ -736,8 +800,33 @@ export default function App() {
 
   useEffect(() => {
     const onUrl = ({ url }: { url: string }) => {
-      void import('./src/services/handsFree/handsFreeLinking').then((m) => {
-        m.handleIncomingHandsFreeUrl(url);
+      void import('./src/services/account/findusAuth').then(async (auth) => {
+        if (auth.isAuthCallbackUrl(url)) {
+          const user = await auth.handleAuthRedirectUrl(url);
+          if (user) {
+            console.log('[auth] App deep-link session', user.email);
+          }
+          return;
+        }
+        // Packliste (falls Linking-Datei gelockt / soft-fail)
+        if (/:\/\/packlist([/?#]|$)/i.test(url)) {
+          try {
+            const parsed = new URL(
+              url.replace(/^exp\+[a-z0-9-]+:\/\//i, 'https://'),
+            );
+            const id = parsed.searchParams.get('id');
+            const { usePackListStore } = await import(
+              './src/store/usePackListStore'
+            );
+            usePackListStore.getState().openOverlay(id);
+            return;
+          } catch {
+            /* fall through */
+          }
+        }
+        void import('./src/services/handsFree/handsFreeLinking').then((m) => {
+          m.handleIncomingHandsFreeUrl(url);
+        });
       });
     };
     const sub = Linking.addEventListener('url', onUrl);
@@ -812,26 +901,33 @@ export default function App() {
       } catch {
         /* soft */
       }
-      await touchActiveDay();
       const { peekPostTourQuestion } = await import(
         './src/services/onboarding/pendingPostTourQuestion'
       );
       // Hilfe-Chip nach Erklärung: echte Recherche statt Welcome-Rede
-      if (peekPostTourQuestion()) return;
+      if (peekPostTourQuestion()) {
+        await touchActiveDay();
+        return;
+      }
 
       await waitUntilInteractiveSettled();
       const { peekInteractiveBootGate } = await import(
         './src/services/boot/interactiveBootGate'
       );
-      if (peekInteractiveBootGate().micActive) return;
+      if (peekInteractiveBootGate().micActive) {
+        await touchActiveDay();
+        return;
+      }
 
       const { maybeSpeakFirstMapWelcome } = await import(
         './src/services/onboarding/firstMapWelcomeService'
       );
       const didFirst = await maybeSpeakFirstMapWelcome(profile);
       if (!didFirst) {
+        // Vor touchActiveDay: sonst wäre lastActiveDay schon „heute“ und Welcome nie.
         await maybeSpeakWelcomeBack();
       }
+      await touchActiveDay();
       try {
         const { bootstrapColdStartCityCheck } = await import(
           './src/services/cityProximityService'
@@ -865,46 +961,42 @@ export default function App() {
   const handleReset = () => {
     setDraft(createDefaultProfile());
     setProfile(null);
-    setBootVoiceId('alina');
+    setBootVoiceId('sebastian');
     setTargetPhase('onboarding');
     setPhase('onboarding');
-    startVoiceBuffer({ speechRate: 1, priorityVoiceId: 'alina' });
+    startVoiceBuffer({ speechRate: 1, priorityVoiceId: 'sebastian' });
     void prefetchOnboardingAudioBundle(INTRO_WELCOME_DE, 1);
   };
 
-  const handleSplashFinish = useCallback(() => {
-    setSplashDone(true);
+  const handleSplashInteractive = useCallback(() => {
+    // Vorhang beginnt zu fallen — Mic/Dock tippbar; Interactive Window startet.
     markSplashInteractive();
+  }, []);
+
+  const handleSplashFinish = useCallback(() => {
+    markSplashInteractive();
+    // Settle NICHT hier — sonst dump Hydrate/Fog sofort und Mic/Timeline frieren.
+    // armSettleTimer in markSplashInteractive hebt nach INTERACTIVE_WINDOW_MS.
+    noteSplashBootMinimal();
+    setSplashDone(true);
+    // Mic sofort nach Vorhang — Boot hat schon gewärmt; hier nur nachziehen.
     void warmMicrophonePipeline().catch(() => undefined);
-    // Pin-Index früh für atomaren Places-Reveal
-    void import('./src/services/homeMap/mapPinIndex')
-      .then((m) => {
-        const { getCachedUserProfile } = require('./src/services/userProfileService') as {
-          getCachedUserProfile: () => { cityId?: string | null } | null;
-        };
-        const { useGpsStore } = require('./src/store/useGpsStore') as {
-          useGpsStore: { getState: () => { lat: number | null; lng: number | null } };
-        };
-        const cityId = getCachedUserProfile()?.cityId ?? null;
-        const { lat, lng } = useGpsStore.getState();
-        return m.warmNearbyPinIndexes({
-          activeCityId: cityId,
-          lat,
-          lng,
-        });
-      })
-      .catch(() => undefined);
+    scheduleIdleUiPrefetch();
+    // Pin-Index NICHT hier — JSON-Parse friert Pan direkt nach Splash.
+    // Warmup läuft idle/hydrate (HomePresenceMap + Gate).
     void getNetworkStateAsync().then((state) => {
       if (state.type === 'WIFI') {
-        void prefetchVoiceSamples(bootVoiceId);
-        try {
-          const { prefetchCommonLatencyAcks } = require('./src/services/speech/floskelEngine') as {
-            prefetchCommonLatencyAcks: () => void;
-          };
-          prefetchCommonLatencyAcks();
-        } catch {
-          /* soft */
-        }
+        setTimeout(() => {
+          void prefetchVoiceSamples(bootVoiceId);
+          try {
+            const { prefetchCommonLatencyAcks } = require('./src/services/speech/floskelEngine') as {
+              prefetchCommonLatencyAcks: () => void;
+            };
+            prefetchCommonLatencyAcks();
+          } catch {
+            /* soft */
+          }
+        }, 1_200);
       }
     });
   }, [bootVoiceId]);
@@ -952,22 +1044,35 @@ export default function App() {
     );
   }
 
+  // Splash weg + Boot noch nicht ready → kein leerer Dunkel-Root (wirkt wie Blackscreen).
+  const showBootFallback = splashDone && !content && phase !== 'error';
+
   return (
     <SafeAreaProvider>
       <AppErrorBoundary>
         <View style={styles.root}>
           {content}
+          {showBootFallback ? (
+            <View style={styles.bootFallback} pointerEvents="none">
+              <Text style={styles.errorTitle}>Yorro startet…</Text>
+              <Text style={styles.errorText}>Einen Moment noch.</Text>
+              <StatusBar style="light" />
+            </View>
+          ) : null}
           {!splashDone ? (
-            <View style={styles.splashOverlay} pointerEvents="auto">
+            <View style={styles.splashOverlay} pointerEvents="box-none">
               <SplashScreenController
                 onFinish={handleSplashFinish}
+                onInteractive={handleSplashInteractive}
                 priorityVoiceId={bootVoiceId}
               />
             </View>
           ) : null}
           {/* Overlays im selben Root — kein RN-Modal (Android-Fragmente) */}
-          <LocationProminentDisclosureHost />
           <CitySwitchPromptHost />
+          <CityCommitProgressHost />
+          {/* Standort-Weiter immer zuletzt/oben — sonst blockieren Switch/HUD die Taps */}
+          <LocationProminentDisclosureHost />
         </View>
       </AppErrorBoundary>
     </SafeAreaProvider>

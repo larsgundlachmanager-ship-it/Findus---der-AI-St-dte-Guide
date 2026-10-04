@@ -1,8 +1,16 @@
 /**
  * Android-Kompass wie Google Maps: natives TYPE_ROTATION_VECTOR.
+ * Hintergrund: Sensoren pausieren (AppState + Android onHostPause), Resume behält Lock.
  */
 
-import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
+import {
+  AppState,
+  NativeEventEmitter,
+  NativeModules,
+  Platform,
+  type AppStateStatus,
+  type NativeEventSubscription,
+} from 'react-native';
 import {
   iosLockCompass,
   iosNudgeCompass,
@@ -17,6 +25,8 @@ import { noteFacingSensorHeading, noteHeadingAccuracy } from './liveDeviceHeadin
 type NativeMapCompass = {
   start?: () => Promise<boolean>;
   stop?: () => Promise<boolean>;
+  /** Sensoren aus, Desire/Lock bleiben (App-Hintergrund). */
+  pause?: () => Promise<boolean>;
   reset?: () => Promise<boolean>;
   lock?: () => Promise<boolean>;
   unlock?: () => Promise<boolean>;
@@ -27,11 +37,21 @@ type NativeMapCompass = {
 const Native = NativeModules.FindusMapCompass as NativeMapCompass | undefined;
 
 let sub: { remove: () => void } | null = null;
+/** Sensoren laufen gerade. */
 let running = false;
+/** JS will Kompass — auch wenn Background-Pause. */
+let desired = false;
+let backgroundPaused = false;
 let pendingLock = false;
+let appStateSub: NativeEventSubscription | null = null;
+let lastAppState: AppStateStatus = AppState.currentState;
 
 export function isNativeMapCompassActive(): boolean {
   return running;
+}
+
+export function isNativeMapCompassDesired(): boolean {
+  return desired;
 }
 
 export function isNativeMapCompassLocked(): boolean {
@@ -47,17 +67,27 @@ function applyPendingLock(): void {
   }
 }
 
-export async function startNativeMapCompass(): Promise<boolean> {
-  if (Platform.OS === 'ios') {
-    if (running) return true;
-    const ok = await startIosNativeCompass(({ deg, accuracy }) => {
-      noteFacingSensorHeading(deg);
-      if (Number.isFinite(accuracy)) noteHeadingAccuracy(accuracy);
-    });
-    running = ok;
-    return ok;
-  }
-  if (Platform.OS !== 'android' || !Native?.start) return false;
+function ensureAppStatePause(): void {
+  if (appStateSub) return;
+  lastAppState = AppState.currentState;
+  appStateSub = AppState.addEventListener('change', (next) => {
+    const prev = lastAppState;
+    lastAppState = next;
+    if (
+      (next === 'background' || next === 'inactive') &&
+      prev === 'active'
+    ) {
+      void pauseNativeMapCompassForBackground();
+      return;
+    }
+    if (next === 'active' && prev !== 'active') {
+      void resumeNativeMapCompassFromBackground();
+    }
+  });
+}
+
+async function actuallyStartAndroid(): Promise<boolean> {
+  if (!Native?.start) return false;
   if (running) {
     applyPendingLock();
     return true;
@@ -84,23 +114,97 @@ export async function startNativeMapCompass(): Promise<boolean> {
   }
 }
 
+async function actuallyStopAndroid(opts?: {
+  keepListener?: boolean;
+  /** true = nur Sensoren (Background); false = volles stop inkl. Desire-Clear auf Native. */
+  sensorsOnly?: boolean;
+}): Promise<void> {
+  running = false;
+  if (!opts?.keepListener) {
+    try {
+      sub?.remove();
+    } catch {
+      /* soft */
+    }
+    sub = null;
+  }
+  try {
+    if (opts?.sensorsOnly && Native?.pause) {
+      await Native.pause();
+    } else {
+      await Native?.stop?.();
+    }
+  } catch {
+    /* soft */
+  }
+}
+
+export async function startNativeMapCompass(): Promise<boolean> {
+  desired = true;
+  ensureAppStatePause();
+  const state = AppState.currentState;
+  if (state !== 'active') {
+    backgroundPaused = true;
+    running = false;
+    return true;
+  }
+  backgroundPaused = false;
+  if (Platform.OS === 'ios') {
+    if (running) return true;
+    const ok = await startIosNativeCompass(({ deg, accuracy }) => {
+      noteFacingSensorHeading(deg);
+      if (Number.isFinite(accuracy)) noteHeadingAccuracy(accuracy);
+    });
+    running = ok;
+    return ok;
+  }
+  if (Platform.OS !== 'android') return false;
+  return actuallyStartAndroid();
+}
+
 export async function stopNativeMapCompass(): Promise<void> {
+  desired = false;
+  backgroundPaused = false;
   if (Platform.OS === 'ios') {
     running = false;
     await stopIosNativeCompass();
     return;
   }
-  running = false;
-  try {
-    sub?.remove();
-  } catch {
-    /* soft */
+  await actuallyStopAndroid();
+}
+
+/** App in den Hintergrund — Sensoren aus, Desire behalten. */
+export async function pauseNativeMapCompassForBackground(): Promise<void> {
+  if (!desired || backgroundPaused) return;
+  backgroundPaused = true;
+  if (Platform.OS === 'ios') {
+    if (!running) return;
+    running = false;
+    await stopIosNativeCompass();
+    return;
   }
-  sub = null;
-  try {
-    await Native?.stop?.();
-  } catch {
-    /* soft */
+  if (Platform.OS === 'android') {
+    // Listener behalten — Resume ohne Re-Subscribe-Sturm.
+    await actuallyStopAndroid({ keepListener: true, sensorsOnly: true });
+  }
+}
+
+/** Zurück in den Vordergrund — wenn gewünscht, Sensoren wieder an. */
+export async function resumeNativeMapCompassFromBackground(): Promise<void> {
+  if (!desired) return;
+  backgroundPaused = false;
+  if (AppState.currentState !== 'active') return;
+  if (Platform.OS === 'ios') {
+    if (running) return;
+    const ok = await startIosNativeCompass(({ deg, accuracy }) => {
+      noteFacingSensorHeading(deg);
+      if (Number.isFinite(accuracy)) noteHeadingAccuracy(accuracy);
+    });
+    running = ok;
+    return;
+  }
+  if (Platform.OS === 'android') {
+    await actuallyStartAndroid();
   }
 }
 
@@ -158,8 +262,9 @@ export function setNativeMapCompassFix(
   lng: number,
   altM?: number | null,
 ): void {
-  if (!running) return;
+  if (!running && !desired) return;
   if (Platform.OS === 'ios') {
+    if (!running) return;
     iosSetCompassFix(lat, lng, altM);
     return;
   }

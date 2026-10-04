@@ -56,14 +56,11 @@ function hourAngle(h: number, phi: number, dec: number): number {
   );
 }
 
-/**
- * Sonnenuntergang des lokalen Kalender-Tages (ms Unix).
- * null in Polar-Nacht / Polartag.
- */
-export function computeSunsetMs(
+function computeSolarEventMs(
   lat: number,
   lng: number,
   atMs: number,
+  kind: 'sunrise' | 'sunset',
 ): number | null {
   if (!Number.isFinite(lat) || !Number.isFinite(lng) || !Number.isFinite(atMs)) {
     return null;
@@ -82,10 +79,58 @@ export function computeSunsetMs(
     (Math.cos(phi) * Math.cos(dec));
   if (cosHa <= -1 || cosHa >= 1) return null;
   const w = hourAngle(h0, phi, dec);
-  const a = approxTransit(w, lw, n);
-  const Jset = solarTransitJ(a, M, L);
-  const ms = fromJulian(Jset);
+  const a = approxTransit(kind === 'sunrise' ? -w : w, lw, n);
+  const J = solarTransitJ(a, M, L);
+  const ms = fromJulian(J);
   return Number.isFinite(ms) ? ms : null;
+}
+
+/**
+ * Sonnenuntergang des lokalen Kalender-Tages (ms Unix).
+ * null in Polar-Nacht / Polartag.
+ */
+export function computeSunsetMs(
+  lat: number,
+  lng: number,
+  atMs: number,
+): number | null {
+  return computeSolarEventMs(lat, lng, atMs, 'sunset');
+}
+
+/** Sonnenaufgang des lokalen Kalender-Tages (ms Unix). */
+export function computeSunriseMs(
+  lat: number,
+  lng: number,
+  atMs: number,
+): number | null {
+  return computeSolarEventMs(lat, lng, atMs, 'sunrise');
+}
+
+/**
+ * Zwischen Sonnenuntergang und Sonnenaufgang (Nacht).
+ * Ohne Solar-Zeiten: grober Stunden-Fallback (21–6).
+ */
+export function isSunDownNow(opts: {
+  nowMs: number;
+  sunsetMs?: number | null;
+  sunriseMs?: number | null;
+}): boolean {
+  const now = opts.nowMs;
+  const rise =
+    typeof opts.sunriseMs === 'number' && Number.isFinite(opts.sunriseMs)
+      ? opts.sunriseMs
+      : null;
+  const set =
+    typeof opts.sunsetMs === 'number' && Number.isFinite(opts.sunsetMs)
+      ? opts.sunsetMs
+      : null;
+  if (rise != null && set != null && rise < set) {
+    return now < rise || now >= set;
+  }
+  if (set != null && now >= set) return true;
+  if (rise != null && now < rise) return true;
+  const h = new Date(now).getHours();
+  return h >= 21 || h < 6;
 }
 
 function sameLocalDay(aMs: number, bMs: number): boolean {

@@ -34,6 +34,18 @@ function haversineStop(
   return 2 * R * Math.asin(Math.min(1, Math.sqrt(x)));
 }
 
+/** „Bahnhof Pinneberg“ / „Bf. Pinneberg“ / „Pinneberg“ → gleicher Kern. */
+function haltCoreKey(name: string): string {
+  return tidyHaltName(name)
+    .toLowerCase()
+    .replace(
+      /\b(bahnhof|busbahnhof|bhf|bf\.?|hbf|haltepunkt|haltestelle|zob)\b/giu,
+      ' ',
+    )
+    .replace(/[^a-z0-9äöüß]+/giu, '')
+    .trim();
+}
+
 export function foldTinyTransfers<T extends JourneyTourStop>(stops: T[]): T[] {
   const out: T[] = [];
   for (const s of stops) {
@@ -42,14 +54,26 @@ export function foldTinyTransfers<T extends JourneyTourStop>(stops: T[]): T[] {
       Boolean(prev) &&
       tidyHaltName(prev!.name).toLowerCase() ===
         tidyHaltName(s.name).toLowerCase();
+    const sameCore =
+      Boolean(prev) &&
+      haltCoreKey(prev!.name) !== '' &&
+      haltCoreKey(prev!.name) === haltCoreKey(s.name);
     const tinyWalk =
       (s.role === 'walk' || s.role === 'transfer') &&
       prev &&
       (prev.role === 'alight' || prev.role === 'walk') &&
       (sameHalt ||
+        // Bahnhof/Bf. Varianten nur bei kurzem Gleiswechsel falten
+        (sameCore && (s.distanceM == null || s.distanceM < 180)) ||
         (haversineStop(prev, s) < 140 &&
           (s.distanceM == null || s.distanceM < 220)));
-    if (tinyWalk && prev) {
+    // Echter Umstieg zu Fuß (anderer Halt, ≥220 m) bleibt sichtbar.
+    const realTransferWalk =
+      s.role === 'transfer' &&
+      !sameHalt &&
+      typeof s.distanceM === 'number' &&
+      s.distanceM >= 220;
+    if (tinyWalk && prev && !realTransferWalk) {
       prev.notes = [prev.notes, s.notes].filter(Boolean).join(' · ');
       if (s.line) prev.line = prev.line || s.line;
       if (s.headsign) prev.headsign = prev.headsign || s.headsign;
@@ -95,11 +119,14 @@ export function collapseJourneyTourStops<T extends JourneyTourStop>(
     speakOnStart: `Letzter Fußweg zu ${dest.name}.`,
   } as T;
   const last = head[head.length - 1];
-  if (
+  // Nur kollabieren wenn wirklich derselbe Punkt UND kein eigener Fußweg.
+  // Sonst verschluckt der Alight den letzten Walk → Fuß nach ÖPNV stirbt.
+  const walkPathLen = walkToDest?.path?.length ?? 0;
+  const nearSame =
     last &&
     Math.abs(last.lat - dest.lat) < 1e-4 &&
-    Math.abs(last.lng - dest.lng) < 1e-4
-  ) {
+    Math.abs(last.lng - dest.lng) < 1e-4;
+  if (nearSame && walkPathLen < 3) {
     last.role = 'dest';
     last.name = dest.name;
     return foldTinyTransfers(head);

@@ -7,7 +7,7 @@ import { placeNameKey } from '../../services/timeline/placeLabelClean';
 import { isSameDwellPlace } from '../../services/timeline/dwellPlaceDedupe';
 import {
   getVisitsForDate,
-  removeVisitIds,
+  patchVisitEntries,
   type VisitLogEntry,
 } from '../../services/timeline/visitLog';
 import {
@@ -15,7 +15,7 @@ import {
   type HistoricalEntry,
 } from './historicalTimelineState';
 
-const SAME_WINDOW_MS = 90 * 60_000;
+const SAME_WINDOW_MS = 3 * 60 * 60_000;
 
 function titlesMatch(a: string, b: string): boolean {
   const ka = placeNameKey(a);
@@ -31,8 +31,15 @@ function samePlaceVisitHist(
   v: VisitLogEntry,
   h: HistoricalEntry,
 ): boolean {
+  if (!titlesMatch(v.name, h.title) && !(v.lat != null && h.lat != null)) {
+    if (Math.abs(v.arrivedAtMs - h.atMs) > SAME_WINDOW_MS) return false;
+  }
+  if (titlesMatch(v.name, h.title)) {
+    // Gleiche Adresse: auch über 90 Min — außer klar anderer Tag-Slot
+    if (Math.abs(v.arrivedAtMs - h.atMs) > 12 * 60 * 60_000) return false;
+    return true;
+  }
   if (Math.abs(v.arrivedAtMs - h.atMs) > SAME_WINDOW_MS) return false;
-  if (titlesMatch(v.name, h.title)) return true;
   if (
     v.lat != null &&
     v.lng != null &&
@@ -51,6 +58,10 @@ function samePlaceHist(
   a: HistoricalEntry,
   b: HistoricalEntry,
 ): boolean {
+  if (titlesMatch(a.title, b.title)) {
+    if (Math.abs(a.atMs - b.atMs) > 12 * 60 * 60_000) return false;
+    return true;
+  }
   if (Math.abs(a.atMs - b.atMs) > SAME_WINDOW_MS) return false;
   return isSameDwellPlace(
     { title: a.title, lat: a.lat, lng: a.lng, atMs: a.atMs },
@@ -59,9 +70,14 @@ function samePlaceHist(
 }
 
 function samePlaceVisit(a: VisitLogEntry, b: VisitLogEntry): boolean {
+  if (a.poiId != null && b.poiId != null && a.poiId === b.poiId) {
+    return Math.abs(a.arrivedAtMs - b.arrivedAtMs) <= 12 * 60 * 60_000;
+  }
+  if (titlesMatch(a.name, b.name)) {
+    // Gleiche Adresse hintereinander / am Tag → mergen (nicht nur ±90 Min)
+    return Math.abs(a.arrivedAtMs - b.arrivedAtMs) <= 12 * 60 * 60_000;
+  }
   if (Math.abs(a.arrivedAtMs - b.arrivedAtMs) > SAME_WINDOW_MS) return false;
-  if (a.poiId != null && b.poiId != null && a.poiId === b.poiId) return true;
-  if (titlesMatch(a.name, b.name)) return true;
   if (
     a.lat != null &&
     a.lng != null &&
@@ -119,13 +135,49 @@ export function cleanupTimelineDuplicates(dateKey: string): {
     keptHist.push(h);
   }
 
-  // 3) Visit↔Visit Duplikate (behalte ersten, merge dwell)
+  // 3) Visit↔Visit Duplikate (gleiche Adresse mergen: früheste Ankunft + spätestes Ende)
   const dropVisitIds = new Set<string>();
   const keptVisits: VisitLogEntry[] = [];
+  const mergeInto = new Map<string, VisitLogEntry>();
   for (const v of visits) {
-    const dup = keptVisits.find((k) => samePlaceVisit(k, v));
+    // Fremder Ort zwischen zwei gleichen Adressen → kein Merge
+    const dup = keptVisits.find((k) => {
+      if (!samePlaceVisit(k, v)) return false;
+      const between = visits.filter(
+        (x) =>
+          x.arrivedAtMs > k.arrivedAtMs &&
+          x.arrivedAtMs < v.arrivedAtMs &&
+          !dropVisitIds.has(x.id),
+      );
+      if (between.some((x) => !samePlaceVisit(k, x))) return false;
+      return true;
+    });
     if (dup) {
       dropVisitIds.add(v.id);
+      const arrived = Math.min(dup.arrivedAtMs, v.arrivedAtMs);
+      const leftCandidates = [dup.leftAtMs, v.leftAtMs].filter(
+        (x): x is number => x != null && Number.isFinite(x),
+      );
+      const leftAtMs =
+        dup.leftAtMs == null || v.leftAtMs == null
+          ? null
+          : leftCandidates.length
+            ? Math.max(...leftCandidates)
+            : null;
+      const dwellMin =
+        leftAtMs != null
+          ? Math.max(1, Math.round((leftAtMs - arrived) / 60_000))
+          : Math.max(dup.dwellMin ?? 0, v.dwellMin ?? 0) || null;
+      mergeInto.set(dup.id, {
+        ...dup,
+        arrivedAtMs: arrived,
+        leftAtMs,
+        dwellMin,
+        lat: dup.lat ?? v.lat,
+        lng: dup.lng ?? v.lng,
+      });
+      const idx = keptVisits.findIndex((k) => k.id === dup.id);
+      if (idx >= 0) keptVisits[idx] = mergeInto.get(dup.id)!;
       continue;
     }
     keptVisits.push(v);
@@ -136,8 +188,8 @@ export function cleanupTimelineDuplicates(dateKey: string): {
       .getState()
       .hydrateEntries(histAll.filter((e) => !dropHistIds.has(e.id)));
   }
-  if (dropVisitIds.size > 0) {
-    removeVisitIds([...dropVisitIds]);
+  if (dropVisitIds.size > 0 || mergeInto.size > 0) {
+    patchVisitEntries(mergeInto, [...dropVisitIds]);
   }
 
   // 4) FuturePlan-Duplikate (gleicher Name / nahe Koords / überlappende Zeit)

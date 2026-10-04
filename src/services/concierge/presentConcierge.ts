@@ -32,7 +32,6 @@ import {
   buildExpediaAccommodationAction,
   buildTourBookingAction,
   buildTravelInsuranceAction,
-  buildCampingInfoAction,
   buildSolmarAction,
   buildPackageHolidayAction,
   buildCheck24CarRentalAction,
@@ -157,8 +156,19 @@ export function toConciergeCardState(
   response: GeminiConciergeResponse,
   opts?: { id?: string },
 ): ConciergeCardState {
+  let cardTitle = response.cardTitle;
+  try {
+    const { sanitizeCardTitle } = require('./spickzettelTitle') as {
+      sanitizeCardTitle: (s: string | null | undefined) => string | null;
+    };
+    cardTitle = sanitizeCardTitle(cardTitle) ?? undefined;
+  } catch {
+    const t = String(cardTitle ?? '').trim();
+    if (!t || /^[\[\]{}]+$/u.test(t)) cardTitle = undefined;
+  }
   return {
     ...response,
+    cardTitle,
     id:
       opts?.id ??
       `cc_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 7)}`,
@@ -178,7 +188,7 @@ export function speechCommitsToNavigation(speech: string): boolean {
     /\b(kompass|navigation|route|führ|fuehr|hinnavig|anmachen)\b/iu.test(t);
 
   const commits =
-    /\b(ich\s+starte\s+die\s+navigation|ich\s+(führ|fuehr|bring|schalt|mach|start)(?:e|en)?|führ\s+dich\s+hin|fuehr\s+dich\s+hin|folge(?:\s+\w+){0,3}\s+dem\s+pfeil|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft|ist\s+an)|schalt(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|mach(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|route\s+(?:startet|läuft|laeuft)|gleich\s+los|direkt\s+los)\b/iu.test(
+    /\b(ich\s+starte\s+die\s+navigation|ich\s+(führ|fuehr|bring|schalt|mach|start)(?:e|en)?|führ\s+dich\s+hin|fuehr\s+dich\s+hin|folge(?:\s+\w+){0,3}\s+dem\s+pfeil|kompass\s+(?:ist\s+)?(?:an|aktiv)|navigation\s+(?:startet|läuft|laeuft|ist\s+an)|schalt(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|mach(?:e|)\s+(?:dir\s+)?(?:sofort\s+)?den\s+kompass|route\s+(?:startet|läuft|laeuft)|starte?\s+(?:eine\s+|die\s+)?route|gleich\s+los|direkt\s+los)\b/iu.test(
       t,
     );
 
@@ -235,8 +245,18 @@ export async function autoStartNavigationIfCommitted(
     /* soft */
   }
 
-  // Reine Faktenfragen nie auto-nav — außer Fact-Lane erzwingt Unique-Ziel
+  // Reine Faktenfragen / Wetter nie auto-nav — außer Fact-Lane erzwingt Unique-Ziel
   if (userText && shouldBlockAutoNavigation(userText) && !force) return NO;
+  try {
+    const { looksLikeOutfitOrWeatherUtterance } = require('../../module2/planning/planUtteranceGate') as {
+      looksLikeOutfitOrWeatherUtterance: (s: string) => boolean;
+    };
+    if (userText && looksLikeOutfitOrWeatherUtterance(userText) && !force) {
+      return NO;
+    }
+  } catch {
+    /* soft */
+  }
 
   // Kalender offen / pending choice: nie auto-nav — außer User sagt „jetzt sofort los“
   try {
@@ -329,11 +349,20 @@ export async function autoStartNavigationIfCommitted(
           lng: anchor.lng,
         });
       } else if (named || userExplicit) {
-        // Name ohne lokale Coords → commitHandsFreeNavStart resolvt Pack/Geocode
+        // Name ohne Coords: Geocode/FOSSGIS parallel — Speech nicht blockieren (Live: 30s).
         const { commitHandsFreeNavStart } = await import(
           '../navigation/handsFreeNav'
         );
-        const started = await commitHandsFreeNavStart(
+        try {
+          useFinnusStore.getState().setNavRouteLoading(true);
+          useFinnusStore.getState().patchNavigation({
+            navVisible: true,
+            navTargetName: named || userText,
+          });
+        } catch {
+          /* soft */
+        }
+        void commitHandsFreeNavStart(
           {
             poiId: null,
             name: named || userText,
@@ -341,31 +370,14 @@ export async function autoStartNavigationIfCommitted(
             lng: null,
           },
           { skipClosingGate: true },
-        );
-        if (started.ok) {
-          const speechHasEta =
-            /\b\d{1,3}\s*(?:min(?:ute)?n?)\b/iu.test(response.speechText || '');
-          if (speechHasEta) {
-            try {
-              const { markNavOpeningSpoken } = require('../navigation/landmarkNavCoach') as {
-                markNavOpeningSpoken: () => void;
-              };
-              markNavOpeningSpoken();
-            } catch {
-              /* soft */
-            }
-          }
+        ).then((started) => {
           if (__DEV__) {
             console.log(
-              `[concierge] auto-start nav (explicit resolve) via=${started.via} name=${started.name}`,
+              `[concierge] auto-start nav (explicit resolve) ok=${started.ok} via=${(started as { via?: string }).via}`,
             );
           }
-          return YES;
-        }
-        if (started.needsConfirm) {
-          return { started: false, confirmSpeech: started.message };
-        }
-        return NO;
+        }).catch(() => {});
+        return YES;
       } else {
         return NO;
       }
@@ -382,32 +394,36 @@ export async function autoStartNavigationIfCommitted(
     return NO;
   }
 
-  // Laufende Nav: bei neuem expliziten Ziel / Force → Retarget (nicht Fake-Success)
-  if (store.navActive) {
+  // Laufende Nav / gerade gestartet: gleiches Ziel → nicht nochmal awaiten
+  // (sonst Call-2 hängt an FOSSGIS — Live: ~30s Stille nach „Alles klar“).
+  if (store.navActive || store.navRouteLoading) {
     const navActionPeek = navActions[0];
     const offerPeek = useFinnusStore.getState().pendingNavOffer;
     const nextName = (
       navActionPeek?.payload.destName ||
       navActionPeek?.label ||
       offerPeek?.name ||
+      store.navTargetName ||
       ''
     )
       .trim()
       .toLowerCase();
-    const curName = (store.navTargetName || '').trim().toLowerCase();
+    const curName = (store.navTargetName || offerPeek?.name || '')
+      .trim()
+      .toLowerCase();
     const sameDest =
-      nextName.length >= 2 &&
-      curName.length >= 2 &&
-      (nextName === curName ||
-        nextName.includes(curName) ||
-        curName.includes(nextName));
-    if (sameDest && (commits || userExplicit || force || uniqueAmenityGo)) {
+      !nextName ||
+      !curName ||
+      nextName === curName ||
+      nextName.includes(curName) ||
+      curName.includes(nextName);
+    if (sameDest && (commits || userExplicit || force || uniqueAmenityGo || store.navRouteLoading)) {
       return YES;
     }
-    if (!commits && !userExplicit && !uniqueAmenityGo && !force) {
+    if (store.navActive && !commits && !userExplicit && !uniqueAmenityGo && !force) {
       return NO;
     }
-    // sonst unten commitHandsFreeNavStart (Retarget)
+    // sonst unten Retarget
   }
 
   const navAction = navActions[0];
@@ -1372,7 +1388,7 @@ export async function enrichWithConciergeOffers(
     }
   }
 
-  // Camping — camping.info (AWIN mid=44063)
+  // Camping — camping.info + Camping-and-Co (pickAffiliateOffer)
   const offerCamping = /\b(camping|campingplatz|camper|wohnwagen|wohnmobil|glamping|stellplatz|zeltplatz)\b/iu.test(
     response.speechText,
   );
@@ -1380,22 +1396,100 @@ export async function enrichWithConciergeOffers(
     const hasCamp = actions.some(
       (a) =>
         a.type === 'OPEN_URL' &&
-        /camping\.info|awin1\.com.*44063/i.test(a.payload.url ?? ''),
+        /camping\.info|camping-and-co\.com|awin1\.com.*(44063|16438|13348)/i.test(
+          a.payload.url ?? '',
+        ),
     );
     if (!hasCamp) {
+      const { buildCampingBookingActions } = require('../affiliate/campingPartnerPick') as {
+        buildCampingBookingActions: (o: {
+          city?: string | null;
+          campsiteName?: string | null;
+          arrival?: string | null;
+          departure?: string | null;
+          adults?: number | null;
+          userText?: string | null;
+        }) => Array<{ type: 'OPEN_URL'; label: string; payload: { url: string } }>;
+      };
       const city = getCachedUserProfile()?.cityName?.trim() || null;
       const campsite = extractCampingplatzName(response.speechText);
       const arrival = parseTravelDateYmd(response.speechText);
       const departure = arrival ? addDaysYmd(arrival, 2) : null;
-      actions.push(
-        buildCampingInfoAction({
-          cityOrQuery: campsite ? null : city,
-          campsiteName: campsite,
-          arrival,
-          departure,
-          adults: 2,
-        }),
-      );
+      for (const a of buildCampingBookingActions({
+        city: campsite ? null : city,
+        campsiteName: campsite,
+        arrival,
+        departure,
+        adults: 2,
+        userText: response.speechText,
+      })) {
+        actions.push(a as QuickAction);
+      }
+    }
+  }
+
+  // Airbnb — nur bei explizitem Wort in Speech
+  if (/\bairbnb\b/iu.test(response.speechText)) {
+    const hasAbnb = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /airbnb\.(com|de|at|ch)/i.test(a.payload.url ?? ''),
+    );
+    if (!hasAbnb) {
+      try {
+        const { buildAirbnbAction } = require('../affiliate/airbnbDeepLink') as {
+          buildAirbnbAction: (o: {
+            city: string;
+            checkin?: string | null;
+            checkout?: string | null;
+            adults?: number | null;
+          }) => { type: 'OPEN_URL'; label: string; payload: { url: string } };
+        };
+        const city = getCachedUserProfile()?.cityName?.trim() || null;
+        if (city) {
+          let checkin: string | null = null;
+          let checkout: string | null = null;
+          let adults: number | null = 2;
+          try {
+            const {
+              hasExplicitStayDates,
+              parseHotelStayDates,
+              parseHotelAdults,
+            } = require('./hotelAvailabilityService') as {
+              hasExplicitStayDates: (t?: string | null) => boolean;
+              parseHotelStayDates: (t?: string | null) => {
+                checkin: string;
+                checkout: string;
+              };
+              parseHotelAdults: (t?: string | null) => number;
+            };
+            const pax = parseHotelAdults(response.speechText);
+            if (pax > 0) adults = pax;
+            if (hasExplicitStayDates(response.speechText)) {
+              const d = parseHotelStayDates(response.speechText);
+              checkin = d.checkin || null;
+              checkout = d.checkout || null;
+            }
+          } catch {
+            /* soft */
+          }
+          if (!checkin) {
+            const arrival = parseTravelDateYmd(response.speechText);
+            checkin = arrival;
+            checkout = arrival ? addDaysYmd(arrival, 3) : null;
+          }
+          actions.push(
+            buildAirbnbAction({
+              city,
+              checkin,
+              checkout,
+              adults,
+            }) as QuickAction,
+          );
+        }
+      } catch {
+        /* soft */
+      }
     }
   }
 
@@ -1423,14 +1517,85 @@ export async function enrichWithConciergeOffers(
       response.speechText,
     );
   if (offerReservix) {
-    const hasReservix = actions.some(
+    const hasTicketPartner = actions.some(
       (a) =>
         a.type === 'OPEN_URL' &&
-        /reservix\.(de|at|ch)|awin1\.com.*31293/i.test(a.payload.url ?? ''),
+        /reservix\.(de|at|ch)|adticket\.de|gigsberg\.(com|co\.uk)|awin1\.com.*31293|awin1\.com.*18490/i.test(
+          a.payload.url ?? '',
+        ),
     );
-    if (!hasReservix) {
+    if (!hasTicketPartner) {
       const city = getCachedUserProfile()?.cityName?.trim() || null;
-      actions.push(buildReservixAction({ cityOrQuery: city }));
+      const preferAdticket = /\badticket\b|ad[\s-]?ticket/i.test(
+        response.speechText,
+      );
+      const preferGigsberg = /\bgigsberg\b/i.test(response.speechText);
+      if (preferGigsberg) {
+        try {
+          const { buildGigsbergAction } = require('../affiliate/gigsbergAffiliate') as {
+            buildGigsbergAction: (o?: {
+              cityOrQuery?: string | null;
+            }) => {
+              type: 'OPEN_URL';
+              label: string;
+              payload: { url: string };
+            };
+          };
+          actions.push(buildGigsbergAction({ cityOrQuery: city }));
+        } catch {
+          actions.push(
+            preferAdticket
+              ? buildReservixAction({ cityOrQuery: city, brand: 'adticket' })
+              : buildReservixAction({ cityOrQuery: city }),
+          );
+        }
+      } else {
+        actions.push(
+          preferAdticket
+            ? buildReservixAction({ cityOrQuery: city, brand: 'adticket' })
+            : buildReservixAction({ cityOrQuery: city }),
+        );
+      }
+    }
+  }
+
+  // Magic Life — Club-/All-inclusive (AWIN mid=15933) + parallel CHECK24
+  const offerMagicLife =
+    /\b(magic\s*life|cluburlaub|club\s+all[\s-]?inclusive|club\s*urlaub)\b/iu.test(
+      response.speechText,
+    );
+  if (offerMagicLife) {
+    const hasMagicLife = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /magiclife\.com|awin1\.com.*15933/i.test(a.payload.url ?? ''),
+    );
+    const city = getCachedUserProfile()?.cityName?.trim() || null;
+    if (!hasMagicLife) {
+      const { buildMagicLifeAction } = require('../affiliate/magicLifeAffiliate') as {
+        buildMagicLifeAction: (o?: {
+          cityOrQuery?: string | null;
+        }) => QuickAction;
+      };
+      actions.push(buildMagicLifeAction({ cityOrQuery: city }));
+    }
+    const hasCheck24Pkg = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /check24\.(de|net)|awin1\.com.*9364/i.test(a.payload.url ?? ''),
+    );
+    if (!hasCheck24Pkg) {
+      const pkgDate = parseTravelDateYmd(response.speechText);
+      actions.push(
+        buildPackageHolidayAction({
+          cityOrQuery: city,
+          speechOrBlob: 'check24 pauschal',
+          departureDate: pkgDate,
+          airport: parseOriginIata(response.speechText),
+          adults: 2,
+          label: 'Pauschal CHECK24',
+        }),
+      );
     }
   }
 
@@ -1450,9 +1615,9 @@ export async function enrichWithConciergeOffers(
     }
   }
 
-  // Pauschal / Last Minute / Kurztrips — CHECK24 (9364) primär
+  // Pauschal / Last Minute / Kurztrips — CHECK24 primär (Lidl parallel separat)
   const offerPackageHoliday =
-    /\b(check[\s-]?24|ab[\s-]?in[\s-]?den[\s-]?urlaub|invia|weg\.de|pauschalreise|last\s*minute|lastminute|all[\s-]?inclusive|pauschal\s+buchen|urlaub\s+pauschal)\b/iu.test(
+    /\b(check[\s-]?24|ab[\s-]?in[\s-]?den[\s-]?urlaub|invia|weg\.de|pauschalreise|last\s*minute|lastminute|all[\s-]?inclusive|pauschal\s+buchen|urlaub\s+pauschal|günstige?\s+pauschal|guenstige?\s+pauschal)\b/iu.test(
       response.speechText,
     );
   if (offerPackageHoliday) {
@@ -1463,9 +1628,9 @@ export async function enrichWithConciergeOffers(
           a.payload.url ?? '',
         ),
     );
+    const city = getCachedUserProfile()?.cityName?.trim() || null;
+    const pkgDate = parseTravelDateYmd(response.speechText);
     if (!hasPackagePartner) {
-      const city = getCachedUserProfile()?.cityName?.trim() || null;
-      const pkgDate = parseTravelDateYmd(response.speechText);
       actions.push(
         buildPackageHolidayAction({
           cityOrQuery: city,
@@ -1475,6 +1640,103 @@ export async function enrichWithConciergeOffers(
           adults: 2,
         }),
       );
+    }
+  }
+
+  // Lidl Reisen — parallel zu jeder Pauschal-Lane (+ explizit Lidl-Brand)
+  const offerLidlReisen =
+    offerPackageHoliday ||
+    /\b(lidl\s*reisen|lidl\s*urlaub)\b/iu.test(response.speechText);
+  if (offerLidlReisen) {
+    const hasLidl = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /lidl-reisen\.de|awin1\.com.*11773/i.test(a.payload.url ?? ''),
+    );
+    if (!hasLidl) {
+      try {
+        const city = getCachedUserProfile()?.cityName?.trim() || null;
+        const { buildLidlReisenAction } = require('../affiliate/lidlReisenAffiliate') as {
+          buildLidlReisenAction: (o?: {
+            cityOrQuery?: string | null;
+          }) => QuickAction;
+        };
+        actions.push(buildLidlReisenAction({ cityOrQuery: city }));
+      } catch {
+        /* soft */
+      }
+    }
+  }
+
+  // Kreuzfahrt — Lidl /kreuzfahrten + AIDA (9144) + CHECK24 Kreuzfahrt
+  const offerCruise =
+    /\b(kreuzfahrt|flusskreuzfahrt|familienkreuzfahrt|minikreuzfahrt|\baida\b|mein\s*schiff)\b/iu.test(
+      response.speechText,
+    );
+  if (offerCruise) {
+    const city = getCachedUserProfile()?.cityName?.trim() || null;
+    const hasLidlCruise = actions.some((a) => {
+      if (a.type !== 'OPEN_URL') return false;
+      const u = a.payload.url ?? '';
+      return /kreuzfahrten/i.test(u) && /11773|lidl-reisen/i.test(u);
+    });
+    if (!hasLidlCruise) {
+      try {
+        const { buildLidlReisenCruiseAction } = require('../affiliate/lidlReisenAffiliate') as {
+          buildLidlReisenCruiseAction: (o?: {
+            cityOrQuery?: string | null;
+          }) => QuickAction;
+        };
+        actions.push(buildLidlReisenCruiseAction({ cityOrQuery: city }));
+      } catch {
+        /* soft */
+      }
+    }
+    const hasAida = actions.some(
+      (a) =>
+        a.type === 'OPEN_URL' &&
+        /aida\.de|awin1\.com.*9144/i.test(a.payload.url ?? ''),
+    );
+    if (!hasAida) {
+      try {
+        const { buildAidaAction } = require('../affiliate/aidaAffiliate') as {
+          buildAidaAction: (o?: {
+            cityOrQuery?: string | null;
+          }) => QuickAction;
+        };
+        actions.push(buildAidaAction({ cityOrQuery: city }));
+      } catch {
+        /* soft */
+      }
+    }
+    const hasC24Cruise = actions.some((a) => {
+      if (a.type !== 'OPEN_URL') return false;
+      const u = a.payload.url ?? '';
+      return /kreuzfahrt\.check24|kreuzfahrt%2Echeck24|check24.*kreuzfahrt/i.test(
+        u,
+      );
+    });
+    if (!hasC24Cruise) {
+      try {
+        const { buildAwinClickUrl } = require('../affiliate/awinClick') as {
+          buildAwinClickUrl: (o: {
+            merchantId: string;
+            destinationUrl: string;
+          }) => string;
+        };
+        actions.push({
+          type: 'OPEN_URL',
+          label: 'CHECK24 Kreuzfahrt',
+          payload: {
+            url: buildAwinClickUrl({
+              merchantId: '9364',
+              destinationUrl: 'https://kreuzfahrt.check24.de/',
+            }),
+          },
+        });
+      } catch {
+        /* soft */
+      }
     }
   }
 
@@ -1567,8 +1829,21 @@ export async function enrichWithConciergeOffers(
           a.payload.url ?? a.payload.gygTourSlug ?? '',
         )),
   );
+  let suppressTours = false;
+  try {
+    const { isOutfitWeatherTurn } = require('./outfitWeatherPresent') as {
+      isOutfitWeatherTurn: (u?: string | null, title?: string | null) => boolean;
+    };
+    suppressTours = isOutfitWeatherTurn(
+      response.speechText,
+      response.cardTitle,
+    );
+  } catch {
+    suppressTours = /^\s*wetter\b/iu.test(String(response.cardTitle ?? ''));
+  }
   const offerTours =
-    ctx?.wantsTours === true || hasExistingTourLink || speechWantsTickets;
+    !suppressTours &&
+    (ctx?.wantsTours === true || hasExistingTourLink || speechWantsTickets);
 
   const city =
     ctx?.tourDestination?.trim() ||
@@ -1686,7 +1961,11 @@ export async function enrichWithConciergeOffers(
     offerInsurance ||
     offerCamping ||
     offerSolmar ||
-    offerWegDe
+    offerWegDe ||
+    offerMagicLife ||
+    offerPackageHoliday ||
+    offerLidlReisen ||
+    offerCruise
   ) {
     primaryIntent.push('OPEN_URL', 'OPEN_GYG_WIDGET');
   }
@@ -1708,7 +1987,11 @@ export async function enrichWithConciergeOffers(
     !offerInsurance &&
     !offerCamping &&
     !offerSolmar &&
-    !offerWegDe
+    !offerWegDe &&
+    !offerMagicLife &&
+    !offerPackageHoliday &&
+    !offerLidlReisen &&
+    !offerCruise
   ) {
     const keepEventUrls = Boolean(ctx.eventResearch?.events?.length);
     actions = actions.filter(
@@ -1809,6 +2092,14 @@ export async function enrichWithConciergeOffers(
   let speechText = enriched.speechText.trim();
   if (!speechText && ctx?.fallbackSpeech?.trim()) {
     speechText = ctx.fallbackSpeech.trim();
+  }
+  try {
+    const { scrubAffiliateMonetizationSpeech } = require('../../module2/chat/bridgeGlue') as {
+      scrubAffiliateMonetizationSpeech: (t: string | null | undefined) => string;
+    };
+    speechText = scrubAffiliateMonetizationSpeech(speechText);
+  } catch {
+    /* soft */
   }
 
   return {
@@ -1929,6 +2220,44 @@ export function transitAdviceToConcierge(
       ]
     : [];
 
+  // Fernverkehr / Ziel-Journey: bahn.de Buchungs-Deep-Link (kein Fake-Preis)
+  try {
+    const dest = (advice.arrivalLabel || advice.destinationHint || '').trim();
+    const from = (advice.stationName || '').trim();
+    const firstDep =
+      advice.departures.find((d) => !d.cancelled) ?? advice.departures[0];
+    if (dest && from && advice.hasJourneyNav) {
+      const { buildDbBookingOpenUrl } = require('../transit/transitTicketFareParse') as {
+        buildDbBookingOpenUrl: (o: {
+          fromName: string;
+          toName: string;
+          departAt?: Date | null;
+          line?: string | null;
+          userText?: string | null;
+        }) => { url: string; label: string } | null;
+      };
+      const book = buildDbBookingOpenUrl({
+        fromName: from,
+        toName: dest,
+        departAt: firstDep?.when ?? null,
+        line: firstDep?.line ?? null,
+        userText: `${from} Bahn nach ${dest}`,
+      });
+      if (book) {
+        actions.push({
+          type: 'OPEN_URL',
+          label: book.label || '🎫 Ticket',
+          payload: { url: book.url },
+        });
+        if (!/buchen|ticket|bahn\.de/i.test(speechText)) {
+          // Speech bleibt frei — Button trägt den Kauf; kurzer Hinweis nur wenn Platz
+        }
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
   return {
     speechText,
     cardTitle: 'Nächste Bahn',
@@ -2044,6 +2373,12 @@ export async function presentConciergeResponse(
     userText?: string;
     /** Guardrails / Judge bereits angewendet */
     alreadyGuarded?: boolean;
+    /** Replay: letzte Antwort nicht überschreiben */
+    skipNoteReplayable?: boolean;
+    /** Nach echtem Wecker/Timer: kein Reminder-Button nachschieben */
+    skipButlerRemind?: boolean;
+    /** Just-Do-It hat Native-Wecker schon gestellt — kein zweites background_tasks */
+    skipAlarmBackgroundTasks?: boolean;
   },
 ): Promise<void> {
   const store = useFinnusStore.getState();
@@ -2068,27 +2403,61 @@ export async function presentConciergeResponse(
     response = guarded.response;
   }
 
-  // Bridge darf ausreden — nicht hart killen (sonst fällt Yorro sich ins Wort).
+  // Bridge/Call-2 dürfen ausreden — nie hart killen (sonst Mid-Sentence-Abort).
+  // Fused Turn: Call-2 klebt an dieselbe Session — nie auf Call-1-Ende warten.
+  let fusedTurnLive = false;
   try {
     const { hadRecentLatencyAck } = require('../speech/floskelEngine') as {
       hadRecentLatencyAck: (ms?: number) => boolean;
     };
-    const { stopSpeaking } = await import('../ttsService');
     const {
       isAudiblyPlaying,
       getActiveTtsSessionCount,
     } = await import('../AudioVoiceService');
-    if (hadRecentLatencyAck(12_000) || isAudiblyPlaying()) {
+    try {
+      const { isFusedTurnLive } = require('../../module2/speech/fusedTurnSpeech') as {
+        isFusedTurnLive: () => boolean;
+      };
+      fusedTurnLive = isFusedTurnLive();
+    } catch {
+      fusedTurnLive = false;
+    }
+    let streamBusy = false;
+    try {
+      const { isStreamingAudioQueueBusy } = require('../audio/streamingAudioQueueService') as {
+        isStreamingAudioQueueBusy: () => boolean;
+      };
+      streamBusy = isStreamingAudioQueueBusy();
+    } catch {
+      /* soft */
+    }
+    if (!fusedTurnLive) {
+    const live =
+      hadRecentLatencyAck(12_000) ||
+      isAudiblyPlaying() ||
+      getActiveTtsSessionCount() > 0 ||
+      streamBusy;
+    if (live) {
       const deadline = Date.now() + 8_000;
       while (
         Date.now() < deadline &&
-        (isAudiblyPlaying() || getActiveTtsSessionCount() > 0)
+        (isAudiblyPlaying() ||
+          getActiveTtsSessionCount() > 0 ||
+          streamBusy)
       ) {
         await new Promise((r) => setTimeout(r, 80));
+        try {
+          const { isStreamingAudioQueueBusy } = require('../audio/streamingAudioQueueService') as {
+            isStreamingAudioQueueBusy: () => boolean;
+          };
+          streamBusy = isStreamingAudioQueueBusy();
+        } catch {
+          streamBusy = false;
+        }
       }
-    } else {
-      await stopSpeaking();
     }
+    }
+    // Kein stopSpeaking hier — würde Call-2/Nav-parallel TTS abwürgen.
   } catch {
     /* ignore */
   }
@@ -2176,7 +2545,33 @@ export async function presentConciergeResponse(
   }
 
   // Zero-Fake: Turnierplan-Chips ohne URL etc. weg
-  const cleanedActions = stripUnbackedActions(response.quickActions);
+  let cleanedActions = stripUnbackedActions(response.quickActions);
+  try {
+    const {
+      isOutfitWeatherTurn,
+      stripOutfitWeatherTourActions,
+    } = require('./outfitWeatherPresent') as typeof import('./outfitWeatherPresent');
+    if (isOutfitWeatherTurn(opts?.userText, response.cardTitle)) {
+      cleanedActions = stripOutfitWeatherTourActions(cleanedActions);
+    }
+  } catch {
+    /* soft */
+  }
+  try {
+    const { finalizeOutfitWeatherBullets, isOutfitWeatherTurn } = require('./outfitWeatherPresent') as typeof import('./outfitWeatherPresent');
+    if (isOutfitWeatherTurn(opts?.userText, response.cardTitle)) {
+      response = {
+        ...response,
+        visualBullets: finalizeOutfitWeatherBullets(
+          response.visualBullets,
+          response.speechText,
+          { userText: opts?.userText },
+        ),
+      };
+    }
+  } catch {
+    /* soft */
+  }
   response = {
     ...response,
     speechText: stripOrphanButtonClaims(
@@ -2192,24 +2587,117 @@ export async function presentConciergeResponse(
   };
 
   // Native Background-Tasks (Wecker) VOR der Stimme — Speech an echtes Ergebnis koppeln
+  let wakeVoiceStyle: import('../alarms/wakeConfirmSpeech').WakeVoiceStyle =
+    'normal';
   try {
-    const { applyBackgroundTasks } = await import('./backgroundTasks');
-    const bg = await applyBackgroundTasks(response, {
-      userText: opts?.userText,
-    });
-    response = bg.response;
-    if (__DEV__ && bg.changed) {
-      console.log(
-        '[present] background-tasks',
-        bg.alarmResults.map((r) => `${r.ok}:${r.tier ?? r.reason}`).join(' | '),
-      );
+    const { parseWakeVoiceStyle } = await import('../alarms/wakeConfirmSpeech');
+    wakeVoiceStyle = parseWakeVoiceStyle(
+      `${opts?.userText ?? ''} ${response.speechText}`,
+    );
+
+    // Wake-Intent: Native immer stellen (LLM darf kein Fake-„gestellt“ ohne Clock).
+    // Early-Just-Do-It setzt skipAlarmBackgroundTasks nachdem Native schon lief.
+    if (!opts?.skipAlarmBackgroundTasks && opts?.userText) {
+      let wakeIntent = false;
+      try {
+        const { isWakeAlarmIntent } = require('../alarms/wakeIntentDetect') as {
+          isWakeAlarmIntent: (s: string) => boolean;
+        };
+        wakeIntent = isWakeAlarmIntent(opts.userText);
+      } catch {
+        /* soft */
+      }
+      if (wakeIntent) {
+        try {
+          const { prepareWakeAlarmFollowUp } = await import(
+            '../alarms/wakeAlarmAdvisor'
+          );
+          const wake = await prepareWakeAlarmFollowUp(opts.userText);
+          if (wake?.speech) {
+            response = {
+              ...response,
+              speechText: wake.speech,
+              visualBullets: (wake.bullets ?? []).slice(0, 1),
+              quickActions: (wake.quickActions ?? []).slice(0, 4),
+              cardTitle: 'Wecker',
+              backgroundTasks: [],
+            };
+            // Native ist durch — Reminder-Doppel unten skippen
+            opts = { ...opts, skipButlerRemind: true, skipAlarmBackgroundTasks: true };
+          }
+        } catch (err) {
+          console.warn('[present] force wake native failed:', err);
+        }
+      }
+    }
+
+    if (!opts?.skipAlarmBackgroundTasks) {
+      const { applyBackgroundTasks } = await import('./backgroundTasks');
+      const bg = await applyBackgroundTasks(response, {
+        userText: opts?.userText,
+      });
+      response = bg.response;
+      if (bg.alarmResults.some((r) => r.ok)) {
+        const sub = String(response.cardSubtitle ?? '').trim();
+        const garbageSub =
+          !sub || /^[\[\]{}]+$/u.test(sub) || /^bescheid\.?$/iu.test(sub);
+        response = {
+          ...response,
+          cardTitle: 'Wecker',
+          ...(garbageSub ? { cardSubtitle: undefined } : {}),
+          speechText: response.speechText
+            .replace(/\b(?:sag(?:e|)\s+(?:ich\s+)?(?:dir|euch)\s+)?bescheid\.?\s*$/giu, '')
+            .replace(/\s+/g, ' ')
+            .trim(),
+          quickActions: response.quickActions.filter(
+            (a) =>
+              a.type !== 'SET_DEPARTURE_REMINDER' &&
+              a.type !== 'SHOW_MORE' &&
+              !/erinner|bescheid/i.test(String(a.label ?? '')),
+          ),
+          // Ein Stichpunkt — nicht Speech + Bullet verdoppeln
+          visualBullets: (response.visualBullets ?? []).slice(0, 1),
+        };
+      }
+      if (__DEV__ && bg.changed) {
+        console.log(
+          '[present] background-tasks',
+          bg.alarmResults.map((r) => `${r.ok}:${r.tier ?? r.reason}`).join(' | '),
+        );
+      }
+    } else {
+      response = {
+        ...response,
+        cardTitle: response.cardTitle || 'Wecker',
+        visualBullets: (response.visualBullets ?? []).slice(0, 1),
+        quickActions: (response.quickActions ?? []).filter(
+          (a) =>
+            a.type !== 'SET_DEPARTURE_REMINDER' &&
+            !/erinner|bescheid/i.test(String(a.label ?? '')),
+        ),
+      };
     }
   } catch (err) {
     console.warn('[present] background-tasks failed:', err);
   }
 
   // Erinnerung: Fake-Claim „ich erinnere dich“ → echt stellen oder ehrlich strippen
+  // Nach echtem Native-Wecker nie Reminder-Doppel (User wollte Wecker, nicht „erinner mich“).
   try {
+    let skipRemindHonesty = Boolean(opts?.skipButlerRemind);
+    if (!skipRemindHonesty && opts?.userText) {
+      try {
+        const { isWakeAlarmIntent } = require('../alarms/wakeIntentDetect') as {
+          isWakeAlarmIntent: (s: string) => boolean;
+        };
+        skipRemindHonesty = isWakeAlarmIntent(opts.userText);
+      } catch {
+        /* soft */
+      }
+    }
+    if (skipRemindHonesty) {
+      /* Wecker-Turn: Reminder-Honesty überspringen */
+    } else {
     const {
       speechClaimsReminderSet,
       buildRemindOnlyQuickAction,
@@ -2285,6 +2773,7 @@ export async function presentConciergeResponse(
         };
       }
     }
+    }
   } catch (err) {
     console.warn('[present] reminder honesty failed:', err);
   }
@@ -2294,10 +2783,25 @@ export async function presentConciergeResponse(
 
   try {
     const title = response.cardTitle || '';
+    const { usePlanCalendarUiStore } = require('../../module2/timeline/planCalendarUiStore') as {
+      usePlanCalendarUiStore: {
+        getState: () => {
+          setShortAnswers: (a: Array<{
+            id: string;
+            label: string;
+            action: 'prompt';
+            prompt: string;
+          }>) => void;
+          clearShortAnswers: () => void;
+        };
+      };
+    };
     if (
       title === 'Aufgabegepäck?' ||
       title === 'Wann fliegst du?' ||
-      title === 'Welche Uhrzeit?'
+      title === 'Welche Uhrzeit?' ||
+      title === 'Welcher Flieger?' ||
+      title === 'Transfer Prefill'
     ) {
       const chips = (response.quickActions ?? [])
         .filter((a) => a.type === 'SHOW_MORE')
@@ -2309,13 +2813,13 @@ export async function presentConciergeResponse(
           prompt: String(a.payload?.textPrompt || a.label),
         }));
       if (chips.length) {
-        const { usePlanCalendarUiStore } = require('../../module2/timeline/planCalendarUiStore') as {
-          usePlanCalendarUiStore: {
-            getState: () => { setShortAnswers: (a: typeof chips) => void };
-          };
-        };
         usePlanCalendarUiStore.getState().setShortAnswers(chips);
+      } else {
+        usePlanCalendarUiStore.getState().clearShortAnswers();
       }
+    } else {
+      // Leave-by / Taxi / Anreise: alte Gepäck-Chips weg
+      usePlanCalendarUiStore.getState().clearShortAnswers();
     }
   } catch {
     /* soft */
@@ -2329,6 +2833,38 @@ export async function presentConciergeResponse(
       navActive: true,
       navVisible: true,
     });
+    // Nav läuft: kein Pack-Spickzettel, keine Getränkekarte/Medaillen
+    response = {
+      ...response,
+      visualBullets: [],
+      quickActions: [],
+      cardTitle: 'Navigation',
+    };
+    try {
+      const { usePlanCalendarUiStore } = require('../../module2/timeline/planCalendarUiStore') as {
+        usePlanCalendarUiStore: {
+          getState: () => {
+            clearShortAnswers?: () => void;
+            setPendingChoice?: (v: null) => void;
+            clearMirroredActions?: () => void;
+          };
+        };
+      };
+      const ui = usePlanCalendarUiStore.getState();
+      ui.clearShortAnswers?.();
+      ui.setPendingChoice?.(null);
+      ui.clearMirroredActions?.();
+    } catch {
+      /* soft */
+    }
+    try {
+      const { useLivePitchStore } = require('../../module2/pitch/publishPitchUi') as {
+        useLivePitchStore: { getState: () => { clear: (force?: boolean) => void } };
+      };
+      useLivePitchStore.getState().clear(true);
+    } catch {
+      /* soft */
+    }
   } else if (navCommit.confirmSpeech) {
     const card = useFinnusStore.getState().activeConciergeCard;
     if (card?.id.startsWith('nav-retarget')) {
@@ -2438,6 +2974,12 @@ export async function presentConciergeResponse(
   const voiceSettings = await getVoiceSettingsForTour();
 
   let speech = response.speechText.trim();
+  const wakeVoiceOpts =
+    wakeVoiceStyle === 'gentle'
+      ? (
+          await import('../alarms/wakeConfirmSpeech')
+        ).wakeVoiceSpeakOptions('gentle')
+      : {};
   if (speech.length < 8) {
     const { generateUniversalFallbackReply } = await import(
       '../../runtime/approachVisualCue'
@@ -2451,24 +2993,117 @@ export async function presentConciergeResponse(
       'Kurz nochmal: wobei kann ich dir gerade helfen?';
   }
 
-  useFinnusStore.getState().setIsGenerating(false);
+  // Generating hier NICHT clearen — sonst Grün-Lücke zwischen Call-1 und Call-2.
+  // Clear erst im finally, wenn Streaming/Queue wirklich idle.
+
+  // Für „nochmal wiederholen“ merken (Display-Text)
+  if (!opts?.skipNoteReplayable && speech.length >= 8) {
+    try {
+      const { noteLastReplayableSpeech } = require('../speech/lastReplayableSpeech') as {
+        noteLastReplayableSpeech: (o: {
+          speech: string;
+          bullets?: string[] | null;
+          cardTitle?: string | null;
+        }) => void;
+      };
+      noteLastReplayableSpeech({
+        speech,
+        bullets: response.visualBullets ?? [],
+        cardTitle: response.cardTitle ?? null,
+      });
+    } catch {
+      /* soft */
+    }
+  }
 
   // Thinking halten — aber Card erst bei hörbarem Audio (nicht vor Synth).
   useFinnusStore.getState().setIsPlayingAudio(true);
 
-  const speakPromise = speakRuntimeText(speech, {
-    voiceId: voiceSettings.voiceId,
-    speechRate: voiceSettings.speechRate,
-  });
+  const speakPromise = fusedTurnLive
+    ? (async () => {
+        try {
+          const { enqueueSpeech } = require('../../module2/speech/speechQueue') as {
+            enqueueSpeech: (o: {
+              kind: 'bridging' | 'main';
+              text: string;
+              turnId: string;
+            }) => string;
+          };
+          const { getFusedTurnId } = require('../../module2/speech/fusedTurnSpeech') as {
+            getFusedTurnId: () => string;
+          };
+          enqueueSpeech({
+            kind: 'main',
+            text: speech,
+            turnId: getFusedTurnId() || `present_${Date.now()}`,
+          });
+        } catch {
+          await speakRuntimeText(speech, {
+            voiceId: voiceSettings.voiceId,
+            speechRate: voiceSettings.speechRate,
+            ...wakeVoiceOpts,
+          });
+        }
+      })()
+    : speakRuntimeText(speech, {
+        voiceId: voiceSettings.voiceId,
+        speechRate: voiceSettings.speechRate,
+        ...wakeVoiceOpts,
+      });
 
   // 3) Spickzettel erst wenn wirklich gesprochen wird — sonst Stichpunkte 20–30 s vor Speech
   if (card) {
     recordFindusActionsTriggered(card.quickActions, Date.now());
     // Card parallel zur Speech: kurz auf Hörstart warten, dann immer zeigen.
-    await waitUntilVoicePlaying(1_200);
-    useFinnusStore.getState().setActiveConciergeCard(card);
+    const pitchWasLive = (() => {
+      try {
+        const { useLivePitchStore } = require('../../module2/pitch/publishPitchUi') as {
+          useLivePitchStore: {
+            getState: () => {
+              requestId: string | null;
+              options: unknown[];
+              loading: boolean;
+              softFail: boolean;
+            };
+          };
+        };
+        const s = useLivePitchStore.getState();
+        return Boolean(
+          s.requestId && (s.options.length > 0 || s.loading || s.softFail),
+        );
+      } catch {
+        return false;
+      }
+    })();
+    if (!fusedTurnLive) {
+      await waitUntilVoicePlaying(1_200);
+    }
+    // Pitch-Auswahl ODER Stichpunkte — nie beides; nach Pitch-✕ nicht wiederbeleben
+    let pitchLive = false;
+    try {
+      const { useLivePitchStore } = require('../../module2/pitch/publishPitchUi') as {
+        useLivePitchStore: {
+          getState: () => {
+            requestId: string | null;
+            options: unknown[];
+            loading: boolean;
+            softFail: boolean;
+          };
+        };
+      };
+      const s = useLivePitchStore.getState();
+      pitchLive = Boolean(
+        s.requestId && (s.options.length > 0 || s.loading || s.softFail),
+      );
+    } catch {
+      pitchLive = false;
+    }
+    const suppressCard = pitchLive || (pitchWasLive && !pitchLive);
+    if (!suppressCard) {
+      useFinnusStore.getState().setActiveConciergeCard(card);
+    }
     // Deep Recharge parallel zum Audio (Pending-Chips → echte Links)
-    if (deepJobs.length > 0) {
+    if (deepJobs.length > 0 && !suppressCard) {
       try {
         const { startActionBoardDeep } = await import('../actionBoard');
         startActionBoardDeep({ jobs: deepJobs, cardId: card.id });
@@ -2485,23 +3120,52 @@ export async function presentConciergeResponse(
   } catch (err: unknown) {
     console.warn('[concierge] TTS failed:', err);
   } finally {
-    // Immer UI-Standby nach Concierge-Speech — sonst klebt „Ich erzähle“
-    // Speech-Ende — kein UI-Clear nötig
-    try {
-      const {
-        markAudiblePlayback,
-        releaseSpeakingUiIfIdle,
-        getActiveTtsSessionCount,
-      } = await import('../AudioVoiceService');
-      markAudiblePlayback(false);
-      if (getActiveTtsSessionCount() === 0) {
-        releaseSpeakingUiIfIdle();
-      } else {
-        useFinnusStore.getState().setIsAudiblySpeaking(false);
-      }
-    } catch {
-      useFinnusStore.getState().setIsPlayingAudio(false);
-      useFinnusStore.getState().setIsAudiblySpeaking(false);
-    }
+    // Fused Call-1→Call-2: Speak-Promise ist nur Enqueue — UI/Generating erst
+    // clearen wenn Streaming/TTS wirklich idle (sonst Call-2 tot / Grün-Lücke).
+    const settleUi = () => {
+      let tries = 0;
+      const tick = () => {
+        tries += 1;
+        try {
+          const {
+            isStreamingAudioQueueBusy,
+          } = require('../audio/streamingAudioQueueService') as {
+            isStreamingAudioQueueBusy: () => boolean;
+          };
+          const { getActiveTtsSessionCount } = require('../AudioVoiceService') as {
+            getActiveTtsSessionCount: () => number;
+          };
+          if (
+            tries < 40 &&
+            (isStreamingAudioQueueBusy() || getActiveTtsSessionCount() > 0)
+          ) {
+            setTimeout(tick, 150);
+            return;
+          }
+        } catch {
+          /* soft */
+        }
+        try {
+          useFinnusStore.getState().setIsGenerating(false);
+        } catch {
+          /* soft */
+        }
+        void import('../AudioVoiceService')
+          .then((m) => {
+            m.markAudiblePlayback(false);
+            m.releaseSpeakingUiIfIdle();
+          })
+          .catch(() => {
+            try {
+              useFinnusStore.getState().setIsPlayingAudio(false);
+              useFinnusStore.getState().setIsAudiblySpeaking(false);
+            } catch {
+              /* soft */
+            }
+          });
+      };
+      tick();
+    };
+    settleUi();
   }
 }

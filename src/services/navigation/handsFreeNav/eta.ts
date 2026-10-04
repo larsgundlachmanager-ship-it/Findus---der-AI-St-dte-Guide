@@ -1,6 +1,6 @@
 /**
  * Route-only ETA: never air-line for user-visible minutes.
- * Pace: profile average until 1 km active distance, then user cruise.
+ * Pace: conservative profile at rest, bounded live pace once clearly moving.
  */
 
 import {
@@ -8,7 +8,23 @@ import {
   getPlanWalkMPerMin,
 } from '../../mobility/paceProfile';
 import type { PaceSample } from './types';
+import {
+  clampLivePaceMps,
+  etaMinutesForPace,
+  LIVE_PACE_MIN_SAMPLES,
+  resolveEtaPaceMPerMin,
+  smoothLivePaceMps,
+} from './etaMath';
 
+export {
+  clampLivePaceMps,
+  etaMinutesForPace,
+  LIVE_PACE_MIN_SAMPLES,
+  resolveEtaPaceMPerMin,
+  smoothLivePaceMps,
+} from './etaMath';
+
+/** Retained for replay/API compatibility; live ETA no longer waits for 1 km. */
 export const PACE_SWITCH_ACTIVE_M = 1000;
 const WALK_MOVING_MPS = 0.6;
 const BIKE_MOVING_MPS = 2.0;
@@ -21,6 +37,7 @@ let lastLat: number | null = null;
 let lastLng: number | null = null;
 let dwellStartedAtMs: number | null = null;
 const cruiseSamples: number[] = [];
+let livePaceMps: number | null = null;
 let mode: 'walk' | 'bike' = 'walk';
 
 function haversineM(
@@ -46,6 +63,7 @@ export function resetHandsFreeEta(transport: 'walk' | 'bike' = 'walk'): void {
   lastLng = null;
   dwellStartedAtMs = null;
   cruiseSamples.length = 0;
+  livePaceMps = null;
   mode = transport;
 }
 
@@ -71,10 +89,13 @@ export function noteHandsFreeEtaGps(opts: {
       activeDistanceM += moved;
       dwellStartedAtMs = null;
       if (dt > 0.4 && dt < 8) {
-        const sample = moved / dt;
-        if (sample >= minMps && sample < (mode === 'bike' ? 18 : 3.5)) {
-          cruiseSamples.push(sample);
+        const positionSpeed = moved / dt;
+        // Heading ticks reuse the same coordinate and must not count as pace.
+        if (moved >= 1 && positionSpeed < (mode === 'bike' ? 18 : 3.5)) {
+          const bounded = clampLivePaceMps(speed, mode);
+          cruiseSamples.push(bounded);
           if (cruiseSamples.length > CRUISE_WINDOW) cruiseSamples.shift();
+          livePaceMps = smoothLivePaceMps(livePaceMps, bounded, mode);
         }
       }
     } else if (speed < minMps * 0.5) {
@@ -85,9 +106,7 @@ export function noteHandsFreeEtaGps(opts: {
   lastLat = opts.lat;
   lastLng = opts.lng;
   lastSampleAtMs = now;
-
-  const moving = speed >= minMps;
-  return { atMs: now, speedMps: speed, moving };
+  return { atMs: now, speedMps: speed, moving: speed >= minMps };
 }
 
 export function getActiveDistanceM(): number {
@@ -105,19 +124,14 @@ export function resolveCruisePaceMPerMin(): {
 } {
   const profile =
     mode === 'bike' ? getPlanBikeMPerMin() : getPlanWalkMPerMin();
-  if (activeDistanceM < PACE_SWITCH_ACTIVE_M || cruiseSamples.length < 5) {
-    return { mPerMin: Math.max(20, profile), source: 'profile' };
-  }
-  const avgMps =
-    cruiseSamples.reduce((a, b) => a + b, 0) / cruiseSamples.length;
-  const mPerMin = Math.round(avgMps * 60);
-  return { mPerMin: Math.max(20, mPerMin), source: 'user_cruise' };
+  return resolveEtaPaceMPerMin({
+    profileMPerMin: profile,
+    livePaceMps,
+    liveSampleCount: cruiseSamples.length,
+    inDwell: isInDwell(),
+  });
 }
 
-/**
- * User-visible ETA from remaining route meters + light buffer.
- * Never use air-line distance here.
- */
 export function etaMinutesFromRoute(opts: {
   remainingRouteM: number;
   lightBufferMin?: number;
@@ -128,11 +142,12 @@ export function etaMinutesFromRoute(opts: {
   mPerMin: number;
 } {
   const { mPerMin, source } = resolveCruisePaceMPerMin();
-  const rem = Math.max(0, opts.remainingRouteM);
-  const weather = opts.weatherMultiplier ?? 1;
-  const lights = Math.max(0, opts.lightBufferMin ?? 0);
-  const base = rem > 0 ? rem / Math.max(20, mPerMin) : 0;
-  const etaMin = Math.max(1, Math.ceil(base * weather + lights));
+  const etaMin = etaMinutesForPace({
+    remainingRouteM: opts.remainingRouteM,
+    mPerMin,
+    lightBufferMin: opts.lightBufferMin,
+    weatherMultiplier: opts.weatherMultiplier,
+  });
   return { etaMin, paceSource: source, mPerMin };
 }
 
@@ -142,7 +157,7 @@ export function initialEtaFromRoutedDistanceM(
   opts?: {
     isBike?: boolean;
     lightBufferMin?: number;
-    /** Google/OSRM duration — Maps-Baseline bevor Pace greift */
+    /** Google/OSRM duration — Maps baseline before live pace takes over. */
     providerDurationSec?: number | null;
   },
 ): number {
@@ -169,7 +184,6 @@ export function initialEtaFromRoutedDistanceM(
         const userKmh = getPlanWalkKmhForSpeech();
         if (impliedKmh > 0.8 && userKmh > 0.8) {
           const ratio = impliedKmh / userKmh;
-          // Nur langsamer als Maps — nie unter Provider-Minuten drücken
           if (ratio > 1.08) {
             baseMin = Math.max(1, Math.ceil(baseMin * ratio));
           }

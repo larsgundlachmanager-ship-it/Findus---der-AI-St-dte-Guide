@@ -40,7 +40,8 @@ export function runtimeModuleLabel(module: RuntimeModule): string {
 
 export function presenceHint(presence: FindusPresence): string | null {
   if (presence === 'offline') return 'Offline — gespeicherte Infos';
-  if (presence === 'degraded') return 'Eingeschränkt — langsamer';
+  // Nicht „Route eingeschränkt“ — App/Netz/GPS hakt (Mikro ist dann orange).
+  if (presence === 'degraded') return 'App etwas eingeschränkt';
   return null;
 }
 

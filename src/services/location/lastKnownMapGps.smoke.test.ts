@@ -21,6 +21,8 @@ assert(
 );
 assert(src.includes('export function seedMapCameraGps'), 'Kamera-Seed SSOT');
 assert(src.includes('export async function hydrateLastKnownMapGps'), 'Cold-Start hydrate');
+assert(src.includes('export async function flushLastMapGpsNow'), 'Flush bei App-Kill');
+assert(src.includes('2_500'), 'GPS Persist schneller als 8s');
 assert(src.includes('@findus/last_map_gps_v1'), 'Persist-Key');
 
 function parseLastMapGps(raw: unknown): {

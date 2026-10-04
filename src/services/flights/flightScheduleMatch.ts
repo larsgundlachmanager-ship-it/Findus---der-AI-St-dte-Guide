@@ -42,7 +42,8 @@ export function clockHmInZone(d: Date, timeZone = 'Europe/Berlin'): string {
 }
 
 function depMinutes(hit: ClockHit, timeZone?: string): number | null {
-  const t = hit.estimatedDeparture ?? hit.scheduledDeparture;
+  // Timetable-Snap: geplante Abflugzeit vor Live-ETA (sonst driftet „18 Uhr“ aus dem ±45-Fenster)
+  const t = hit.scheduledDeparture ?? hit.estimatedDeparture;
   if (!t || !Number.isFinite(t.getTime())) return null;
   if (timeZone) return hmToMinutes(clockHmInZone(t, timeZone));
   return t.getHours() * 60 + t.getMinutes();

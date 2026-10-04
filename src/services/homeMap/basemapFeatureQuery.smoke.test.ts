@@ -5,8 +5,11 @@
 import {
   listBasemapBuildingLayerIds,
   listBasemapPoiLayerIds,
+  firstBasemapRoadLabelLayerId,
   pickBestBuildingRingAt,
+  hasBasemapPoiSymbolNear,
   ringFromGeoJsonFeature,
+  PROTOMAPS_ROAD_LABEL_LAYER_FALLBACK,
 } from './basemapFeatureQuery';
 
 function assert(cond: unknown, msg: string): void {
@@ -21,6 +24,7 @@ const style = {
     { id: 'building-3d', type: 'fill-extrusion' },
     { id: 'building-outline', type: 'line' },
     { id: 'poi-label', type: 'symbol' },
+    { id: 'park-label', type: 'symbol' },
     { id: 'place-city', type: 'symbol' },
     { id: 'road-major', type: 'line' },
   ],
@@ -42,10 +46,60 @@ assert(
 
 const poiIds = listBasemapPoiLayerIds(style);
 assert(
-  poiIds.includes('poi-label') && poiIds.includes('place-city'),
-  'poi/place label layer erkannt',
+  poiIds.includes('poi-label') && poiIds.includes('park-label'),
+  'poi/park label layer erkannt',
 );
+assert(!poiIds.includes('place-city'), 'Stadt-Label-Layer nicht als Shop-Tap');
 assert(!poiIds.includes('road-major'), 'road ist kein poi layer');
+
+{
+  const {
+    pickBasemapPoiAt,
+    pickBasemapPoiKindFallback,
+  } = require('./basemapFeatureQuery') as typeof import('./basemapFeatureQuery');
+  const hit = pickBasemapPoiAt(53.676, 9.763, [
+    {
+      properties: { name: 'team Tankstelle', kind: 'fuel' },
+      geometry: { type: 'Point', coordinates: [9.763, 53.676] },
+    },
+  ]);
+  assert(hit?.name === 'team Tankstelle', 'Basemap-POI Tap → Name');
+  assert(hit?.kind === 'fuel', 'Basemap-POI Tap → kind');
+  const brandHit = pickBasemapPoiAt(53.676, 9.763, [
+    {
+      properties: { brand: "McDonald's", shop: 'fast_food' },
+      geometry: { type: 'Point', coordinates: [9.7632, 53.6761] },
+    },
+  ]);
+  assert(brandHit?.name === "McDonald's", 'Basemap brand → Name');
+  const kindOnly = pickBasemapPoiKindFallback(53.676, 9.763, [
+    {
+      properties: { shop: 'electronics' },
+      geometry: { type: 'Point', coordinates: [9.763, 53.676] },
+    },
+  ]);
+  assert(!!kindOnly?.name, 'Kind-Fallback ohne Name');
+}
+
+assert(
+  firstBasemapRoadLabelLayerId({
+    layers: [
+      { id: 'roads_minor', type: 'line' },
+      { id: 'roads_labels_minor', type: 'symbol' },
+      { id: 'roads_labels_major', type: 'symbol' },
+    ],
+  }) === 'roads_labels_minor',
+  'erster Straßenname-Layer',
+);
+assert(
+  firstBasemapRoadLabelLayerId({ layers: [{ id: 'poi-label', type: 'symbol' }] }) ==
+    null,
+  'kein Straßenlabel → null',
+);
+assert(
+  PROTOMAPS_ROAD_LABEL_LAYER_FALLBACK === 'roads_labels_minor',
+  'Protomaps Fallback-ID',
+);
 
 // ringFromGeoJsonFeature: lng,lat → lat,lng, größter Ring bei MultiPolygon.
 const poly = ringFromGeoJsonFeature({
@@ -141,5 +195,31 @@ const best = pickBestBuildingRingAt(53.6782, 9.75895, [featureA, featureFar]);
 assert(best !== null, 'Gebäude unter Pin gefunden');
 assert(best![0]![0] === 53.6781, 'nahes Gebäude gewählt (nicht das ferne)');
 assert(pickBestBuildingRingAt(53.6782, 9.75895, []) === null, 'leer → null');
+
+const poiHere = {
+  properties: { name: 'Bäcker', kind: 'bakery' },
+  geometry: { type: 'Point', coordinates: [9.75895, 53.6782] },
+};
+const poiFar = {
+  properties: { name: 'Andere', kind: 'cafe' },
+  geometry: { type: 'Point', coordinates: [9.77, 53.69] },
+};
+assert(
+  hasBasemapPoiSymbolNear(53.6782, 9.75895, [poiHere, poiFar]),
+  'nahes Basemap-Symbol zählt',
+);
+assert(
+  !hasBasemapPoiSymbolNear(53.6782, 9.75895, [poiFar]),
+  'fernes Symbol zählt nicht',
+);
+assert(
+  !hasBasemapPoiSymbolNear(53.6782, 9.75895, [
+    {
+      properties: { name: 'Prisdorf', kind: 'village' },
+      geometry: { type: 'Point', coordinates: [9.75895, 53.6782] },
+    },
+  ]),
+  'Ortsname ist kein POI-Icon',
+);
 
 console.log('basemapFeatureQuery.smoke.test.ts OK');

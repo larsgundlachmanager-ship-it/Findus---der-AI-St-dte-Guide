@@ -1,0 +1,4 @@
+PERF QA Chrome + M2
+BLOCKED: home chrome never appeared (splash hang or launcher)
+evidence: C:\Users\larsf\Findus 2.0\.cursor\perf_qa\home-TIMEOUT-sm.png
+blob: see C:\Users\larsf\Findus 2.0\.cursor\perf_qa\home-timeout-blob.txt

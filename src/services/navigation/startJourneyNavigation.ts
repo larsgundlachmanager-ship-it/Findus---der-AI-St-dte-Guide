@@ -22,7 +22,10 @@ import { useFinnusStore } from '../../store/useFinnusStore';
 import type { NavWaypoint } from './navigationTypes';
 import { formatJourneyForConcierge } from '../transit/formatJourneyCard';
 import { tidyHaltName, concreteHaltLabel } from '../transit/haltName';
-import { STATION_ARRIVE_BEFORE_MIN } from '../transit/stationArriveBuffer';
+import {
+  STATION_ARRIVE_BEFORE_MIN,
+  stationArriveBufferMin,
+} from '../transit/stationArriveBuffer';
 import {
   collapseJourneyTourStops,
   foldTinyTransfers,
@@ -85,7 +88,16 @@ function notesForLeg(leg: JourneyLeg): string {
     if (leg.line) bits.push(leg.line);
     if (leg.headsign) bits.push(`nach ${leg.headsign}`);
     const plat = (leg.fromPlatform || '').trim();
-    if (plat) bits.push(`Gleis ${plat}`);
+    if (plat) {
+      const bus = String(leg.mode || '').toUpperCase() === 'BUS';
+      bits.push(
+        /gleis|steig|bussteig|kante/i.test(plat)
+          ? plat
+          : bus
+            ? `Steig ${plat}`
+            : `Gleis ${plat}`,
+      );
+    }
     if (typeof leg.delaySec === 'number' && leg.delaySec >= 60) {
       bits.push(`+${Math.round(leg.delaySec / 60)} Min`);
     }
@@ -325,7 +337,15 @@ export async function buildTourStopsFromJourney(opts: {
   };
 
   let pendingTransfer = false;
-  const legs = opts.itinerary.legs ?? [];
+  let legs = opts.itinerary.legs ?? [];
+  try {
+    const { enrichJourneyPlatforms } = await import(
+      '../transit/enrichJourneyPlatforms'
+    );
+    legs = await enrichJourneyPlatforms(legs);
+  } catch {
+    /* soft — ohne Tafel bleiben Platforms null */
+  }
   for (let li = 0; li < legs.length; li += 1) {
     const leg = legs[li]!;
     if (leg.mode === 'WALK' || leg.mode === 'BIKE') {
@@ -350,11 +370,25 @@ export async function buildTourStopsFromJourney(opts: {
         const stopName = nearDest
           ? opts.destName
           : nextTransit
-            ? stationPlaceName(to.name, nextTransit.mode, {
-                line: nextTransit.line,
-                headsign: nextTransit.headsign,
-                role: 'board',
-              })
+            ? (() => {
+                const base = stationPlaceName(to.name, nextTransit.mode, {
+                  line: nextTransit.line,
+                  headsign: nextTransit.headsign,
+                  role: 'board',
+                });
+                // Nach Bahn → Bus: Einstieg klar als Bus-Halt kennzeichnen.
+                if (
+                  pendingTransfer &&
+                  nextTransit.mode === 'BUS' &&
+                  !/\b(bus|zob|steig)\b/iu.test(base)
+                ) {
+                  const core = tidyHaltName(to.name) || base;
+                  return core.toLowerCase().startsWith('bus')
+                    ? core
+                    : `Busbahnhof ${core.replace(/^(bahnhof|bhf|bf\.?)\s+/iu, '').trim()}`;
+                }
+                return base;
+              })()
             : toName;
         push({
           poiId: -1,
@@ -657,6 +691,8 @@ export async function startJourneyNavigation(opts: {
   tight?: boolean;
   /** Alte Verbindung ersetzen — Timeline bleibt zu. */
   replace?: boolean;
+  /** Explizite ÖPNV-Wahl: sofort zum Halt, Leave-by nicht deferren. */
+  forceStart?: boolean;
 }): Promise<{ ok: boolean; reply: string }> {
   const destName = String(opts.destName || 'Ziel').trim() || 'Ziel';
   const store = useFinnusStore.getState();
@@ -693,7 +729,8 @@ export async function startJourneyNavigation(opts: {
     Date.now() - (recent.__findusLastJourneyAt ?? 0) < 3 * 60_000 &&
     store.navActive &&
     !opts.forceTimeline &&
-    !opts.replace
+    !opts.replace &&
+    !opts.forceStart
   ) {
     return {
       ok: true,
@@ -777,6 +814,7 @@ export async function startJourneyNavigation(opts: {
   }
 
   const defer =
+    opts.forceStart !== true &&
     leave != null &&
     (() => {
       try {
@@ -788,6 +826,12 @@ export async function startJourneyNavigation(opts: {
         return false;
       }
     })();
+
+  const firstHaltName = stops[0]?.name ?? null;
+  const stationBuffer = stationArriveBufferMin({
+    name: firstHaltName,
+    mode: stops[0]?.vehicleMode ?? null,
+  });
 
   const tour: MultiStopTour = {
     kind: 'custom',
@@ -805,7 +849,7 @@ export async function startJourneyNavigation(opts: {
       requestId: `journey_${Date.now()}`,
       hardArriveByMs: leave?.arriveMs ?? endMs,
       softDurationMin: null,
-      bufferMin: STATION_ARRIVE_BEFORE_MIN,
+      bufferMin: stationBuffer || STATION_ARRIVE_BEFORE_MIN,
       plannedArriveByMs: leave?.arriveMs ?? endMs,
       startedAtMs: Date.now(),
       denserStops: false,
@@ -830,16 +874,9 @@ export async function startJourneyNavigation(opts: {
     /* soft */
   }
 
-  try {
-    addJourneyToTimeline({
-      itinerary: opts.itinerary,
-      destName,
-      destLat: opts.destLat,
-      destLng: opts.destLng,
-    });
-  } catch {
-    /* Timeline darf Nav nicht crashen */
-  }
+  // Kein addJourneyToTimeline parallel zum Live-Spiegel — sonst Doppelbeine
+  // (RB71×2, zu Fuß×2, _l* + _h* in derselben live_journey-Gruppe).
+  // Leave-by startet Nav → upsertLiveNavFromStore schreibt die eine klare Linie.
 
   if (leave) {
     try {

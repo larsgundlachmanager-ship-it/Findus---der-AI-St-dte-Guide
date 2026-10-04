@@ -63,6 +63,23 @@ const PLACE_TYPE_FILTERS: Record<string, string[]> = {
   convenience_store: ['["shop"="convenience"]'],
   atm: ['["amenity"="atm"]'],
   drinking_water: ['["amenity"="drinking_water"]'],
+  basketball: [
+    '["leisure"="pitch"]["sport"="basketball"]',
+    '["sport"="basketball"]',
+  ],
+  table_tennis: [
+    '["leisure"="pitch"]["sport"="table_tennis"]',
+    '["leisure"="table_tennis"]',
+    '["sport"="table_tennis"]',
+  ],
+  picnic_site: [
+    '["tourism"="picnic_site"]',
+    '["leisure"="picnic_table"]',
+  ],
+  barbecue: [
+    '["amenity"="bbq"]',
+    '["leisure"="firepit"]',
+  ],
   ice_cream: [
     '["amenity"="ice_cream"]',
     '["shop"="ice_cream"]',
@@ -105,6 +122,10 @@ const PLACE_TYPE_FILTERS: Record<string, string[]> = {
   parcel_locker: ['["amenity"="parcel_locker"]'],
   parking: ['["amenity"="parking"]'],
   museum: ['["tourism"="museum"]'],
+  nightclub: ['["amenity"="nightclub"]', '["leisure"="dance"]'],
+  bar: ['["amenity"="bar"]', '["amenity"="pub"]'],
+  hotel: ['["tourism"="hotel"]', '["tourism"="guest_house"]'],
+  beach: ['["natural"="beach"]'],
   church: ['["amenity"="place_of_worship"]'],
   point_of_interest: [
     '["amenity"~"bakery|cafe|pharmacy|bank|toilets|restaurant|fast_food|hospital|drinking_water"]',

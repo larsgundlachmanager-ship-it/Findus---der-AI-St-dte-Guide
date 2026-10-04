@@ -1,16 +1,34 @@
 /**
- * GPS-genaues Regen-Nowcast (Open-Meteo minutely_15).
+ * GPS-Punkt Regen-Nowcast.
  *
- * Shared-Cache rundet auf ~5 km — hier: exakte lat/lng.
- * DE/Zentraleuropa: DWD ICON-D2 15-Min (Wolken/Niederschlag an deiner Position).
- * Ohne OWM-Key trotzdem lokalere Regenfront als Stunden-% am Viertel-Zentrum.
+ * Primär (DE): Bright Sky `/radar` = DWD RADOLAN/RV, 1 km · 5 Min (+ ~2 h Forecast).
+ * Fallback: Open-Meteo minutely_15 (ICON-D2, 15 Min) — nicht Radar.
+ *
+ * Bias: Start etwas früher warnen, Ende etwas länger halten.
+ * Nie „regnet schon“, wenn der Punkt-Radar noch trocken ist.
  */
 
+import { RAIN_END_MIN_DRY_GAP_MS } from './rainIncomingPolicy';
+
 const FETCH_MS = 7_000;
-/** mm in 15-Min-Bucket ≈ spürbarer Niederschlag */
+/** mm in 15-Min-Bucket ≈ spürbarer Niederschlag (Open-Meteo Fallback) */
 const WET_MM_15 = 0.05;
 /** Wie weit voraus schauen (16×15 Min ≈ 4 h) */
 const FORECAST_STEPS = 16;
+
+/**
+ * Bright Sky `precipitation_5`: Einheit 0.01 mm / 5 Min.
+ * ≥1 = Spurregen (wie leichte Radar-Kante); Peak-Filter killt Rauschen.
+ */
+export const RADAR_WET_UNITS = 1;
+/** Runs mit Peak darunter = Flecken, kein HUD-Schauer. */
+export const RADAR_NOISE_PEAK_MIN = 3;
+/** Countdown: Start so viele ms früher zeigen (nicht „schon nass“). */
+export const RADAR_EARLY_WARN_MS = 2 * 60_000;
+/** Nach Radar-trocken noch so lange „fällt noch“. */
+export const RADAR_LATE_CLEAR_MS = 3 * 60_000;
+/** 3×3 um den GPS-Punkt (1 km Radius). */
+const RADAR_DISTANCE_M = 1000;
 
 export type GpsRainNowcast = {
   fetchedAtMs: number;
@@ -22,6 +40,8 @@ export type GpsRainNowcast = {
   nextRainAtMs: number | null;
   rainEndsAtMs: number | null;
   rainStartsInMin: number | null;
+  /** 'brightsky_rv' | 'open_meteo_15' | null */
+  source?: string | null;
 };
 
 type Minutely15Json = {
@@ -36,26 +56,264 @@ type Minutely15Json = {
   };
 };
 
+export type BrightSkyRadarJson = {
+  radar?: Array<{
+    timestamp?: string;
+    precipitation_5?: number[][];
+  }>;
+  latlon_position?: { x?: number; y?: number };
+  bbox?: number[];
+};
+
+export type RainSample = { atMs: number; precipMm: number };
+
+/**
+ * Punkt-Serie → rainingNow / Start / Ende.
+ * earlyWarn verschiebt nur den Countdown-Start (nicht rainingNow).
+ * lateClear hält rainingNow nach dem letzten nassen Frame.
+ */
+export function timingFromRainSamples(
+  samples: RainSample[],
+  opts: {
+    nowMs: number;
+    stepMs: number;
+    wetMm: number;
+    earlyWarnMs?: number;
+    lateClearMs?: number;
+    /** Optional: Peak-Filter für zusammenhängende Runs (Radar-Rauschen). */
+    noisePeakMin?: number | null;
+  },
+): Pick<
+  GpsRainNowcast,
+  'rainingNow' | 'nextRainAtMs' | 'rainEndsAtMs' | 'rainStartsInMin' | 'currentPrecipMm'
+> {
+  const now = opts.nowMs;
+  const early = opts.earlyWarnMs ?? 0;
+  const late = opts.lateClearMs ?? 0;
+  const noisePeak = opts.noisePeakMin ?? null;
+  const sorted = [...samples]
+    .filter((s) => Number.isFinite(s.atMs) && Number.isFinite(s.precipMm))
+    .sort((a, b) => a.atMs - b.atMs);
+  if (!sorted.length) {
+    return {
+      rainingNow: false,
+      nextRainAtMs: null,
+      rainEndsAtMs: null,
+      rainStartsInMin: null,
+      currentPrecipMm: null,
+    };
+  }
+
+  const wetFlags = sorted.map((s) => s.precipMm >= opts.wetMm);
+  type Run = { startI: number; endI: number; peak: number };
+  const runs: Run[] = [];
+  let i = 0;
+  while (i < wetFlags.length) {
+    if (!wetFlags[i]) {
+      i++;
+      continue;
+    }
+    const startI = i;
+    let peak = sorted[i]!.precipMm;
+    i++;
+    while (i < wetFlags.length && wetFlags[i]) {
+      peak = Math.max(peak, sorted[i]!.precipMm);
+      i++;
+    }
+    runs.push({ startI, endI: i - 1, peak });
+  }
+
+  const significantRaw =
+    noisePeak == null
+      ? runs
+      : runs.filter((r) => r.peak >= noisePeak);
+
+  // Flatterpausen < 30 Min = noch derselbe Schauer (nicht „hört in 36 Min auf“).
+  const significant: Run[] = [];
+  for (const r of significantRaw) {
+    if (!significant.length) {
+      significant.push({ ...r });
+      continue;
+    }
+    const prev = significant[significant.length - 1]!;
+    const gapMs = sorted[r.startI]!.atMs - sorted[prev.endI]!.atMs;
+    if (gapMs < RAIN_END_MIN_DRY_GAP_MS) {
+      prev.endI = r.endI;
+      prev.peak = Math.max(prev.peak, r.peak);
+    } else {
+      significant.push({ ...r });
+    }
+  }
+
+  // Aktueller Frame ≈ letzter Sample ≤ now (+ halber Step Toleranz).
+  let curIdx = -1;
+  for (let k = 0; k < sorted.length; k++) {
+    if (sorted[k]!.atMs <= now + opts.stepMs / 2) curIdx = k;
+  }
+  const currentPrecipMm =
+    curIdx >= 0 ? Math.round(sorted[curIdx]!.precipMm * 1000) / 1000 : null;
+
+  // Aktiver / nächster Run: noch nicht vorbei (inkl. Late-Clear), Start im Horizont.
+  const horizonMs = now + 12 * 60 * 60_000;
+  const active =
+    significant.find((r) => {
+      const startMs = sorted[r.startI]!.atMs;
+      const after = r.endI + 1;
+      const endMs =
+        after < sorted.length
+          ? sorted[after]!.atMs
+          : sorted[r.endI]!.atMs + opts.stepMs;
+      return endMs + late > now && startMs - early <= horizonMs;
+    }) ?? null;
+
+  let radarStartMs: number | null = null;
+  let radarEndMs: number | null = null;
+  if (active) {
+    // Midpoint zwischen letztem trocken / erstem nass (03:20→03:25 ⇒ ~03:22).
+    const si = active.startI;
+    radarStartMs =
+      si > 0
+        ? Math.round((sorted[si - 1]!.atMs + sorted[si]!.atMs) / 2)
+        : sorted[si]!.atMs;
+    const after = active.endI + 1;
+    radarEndMs =
+      after < sorted.length
+        ? Math.round((sorted[active.endI]!.atMs + sorted[after]!.atMs) / 2)
+        : sorted[active.endI]!.atMs + Math.round(opts.stepMs / 2);
+  }
+
+  const warnStartMs =
+    radarStartMs != null ? radarStartMs - early : null;
+  const holdEndMs = radarEndMs != null ? radarEndMs + late : null;
+
+  // „Schon nass“ erst ab echtem Radar-Start; Late-Clear hält bis holdEnd.
+  // Early-Warn nur für Countdown (warnStart), nie für rainingNow.
+  const rainingNow =
+    radarStartMs != null &&
+    holdEndMs != null &&
+    now >= radarStartMs &&
+    now < holdEndMs;
+
+  // Countdown zeigt warnStart (früher); im Early-Fenster tickt bis Radar-Start.
+  let nextRainAtMs: number | null = null;
+  if (rainingNow) {
+    nextRainAtMs = now;
+  } else if (warnStartMs != null && radarStartMs != null) {
+    if (now < warnStartMs) nextRainAtMs = warnStartMs;
+    else if (now < radarStartMs) nextRainAtMs = radarStartMs;
+  }
+
+  const rainEndsAtMs =
+    holdEndMs != null && (rainingNow || nextRainAtMs != null)
+      ? holdEndMs
+      : null;
+
+  const rainStartsInMin =
+    nextRainAtMs != null && !rainingNow
+      ? Math.max(0, Math.round((nextRainAtMs - now) / 60_000))
+      : rainingNow
+        ? 0
+        : null;
+
+  return {
+    rainingNow,
+    nextRainAtMs,
+    rainEndsAtMs,
+    rainStartsInMin,
+    currentPrecipMm: rainingNow
+      ? Math.max(currentPrecipMm ?? 0, 0.05)
+      : currentPrecipMm ?? 0,
+  };
+}
+
+/** Bright Sky Grid → mm am GPS-Pixel. */
+export function precipMmFromRadarUnits(units: number): number {
+  // 1 Unit = 0.01 mm / 5 Min
+  return Math.max(0, units) * 0.01;
+}
+
+export function parseBrightSkyRadarNowcast(
+  data: BrightSkyRadarJson,
+  opts: {
+    lat: number;
+    lng: number;
+    fetchedAtMs?: number;
+    nowMs?: number;
+    earlyWarnMs?: number;
+    lateClearMs?: number;
+  },
+): GpsRainNowcast | null {
+  const frames = data.radar ?? [];
+  if (!frames.length) return null;
+  const pos = data.latlon_position ?? { x: 0, y: 0 };
+  const samples: RainSample[] = [];
+
+  for (const frame of frames) {
+    const atMs = Date.parse(frame.timestamp ?? '');
+    if (!Number.isFinite(atMs)) continue;
+    const grid = frame.precipitation_5;
+    if (!grid?.length) continue;
+    const rows = grid.length;
+    const cols = grid[0]?.length ?? 0;
+    if (!cols) continue;
+    const ix = Math.max(0, Math.min(cols - 1, Math.round(Number(pos.x) || 0)));
+    const iy = Math.max(0, Math.min(rows - 1, Math.round(Number(pos.y) || 0)));
+    const units = Number(grid[iy]?.[ix] ?? 0);
+    samples.push({
+      atMs,
+      precipMm: precipMmFromRadarUnits(Number.isFinite(units) ? units : 0),
+    });
+  }
+  if (!samples.length) return null;
+
+  const now = opts.nowMs ?? Date.now();
+  const timing = timingFromRainSamples(samples, {
+    nowMs: now,
+    stepMs: 5 * 60_000,
+    wetMm: precipMmFromRadarUnits(RADAR_WET_UNITS),
+    earlyWarnMs: opts.earlyWarnMs ?? RADAR_EARLY_WARN_MS,
+    lateClearMs: opts.lateClearMs ?? RADAR_LATE_CLEAR_MS,
+    noisePeakMin: precipMmFromRadarUnits(RADAR_NOISE_PEAK_MIN),
+  });
+
+  return {
+    fetchedAtMs: opts.fetchedAtMs ?? now,
+    lat: opts.lat,
+    lng: opts.lng,
+    weatherCode: null,
+    source: 'brightsky_rv',
+    ...timing,
+  };
+}
+
+/**
+ * Open-Meteo 15-Min Fallback.
+ * rainingNow nur aus Current / vergangenen+aktuellen Buckets — nie aus Zukunft (±20 Min Bug).
+ */
 export function parseGpsRainNowcast(
   data: Minutely15Json,
-  opts: { lat: number; lng: number; fetchedAtMs?: number; nowMs?: number },
+  opts: {
+    lat: number;
+    lng: number;
+    fetchedAtMs?: number;
+    nowMs?: number;
+    earlyWarnMs?: number;
+    lateClearMs?: number;
+  },
 ): GpsRainNowcast | null {
   const times = data.minutely_15?.time ?? [];
   const precips = data.minutely_15?.precipitation ?? [];
   if (!times.length || !precips.length) return null;
 
   const now = opts.nowMs ?? Date.now();
-  const samples: Array<{ atMs: number; precipMm: number; code: number | null }> =
-    [];
+  const samples: RainSample[] = [];
   for (let i = 0; i < times.length; i++) {
     const atMs = Date.parse(times[i] ?? '');
     if (!Number.isFinite(atMs)) continue;
     const precipMm = Number(precips[i] ?? 0);
-    const codeRaw = data.minutely_15?.weather_code?.[i];
     samples.push({
       atMs,
       precipMm: Number.isFinite(precipMm) ? precipMm : 0,
-      code: typeof codeRaw === 'number' ? codeRaw : null,
     });
   }
   if (!samples.length) return null;
@@ -67,71 +325,31 @@ export function parseGpsRainNowcast(
   const weatherCode =
     typeof data.current?.weather_code === 'number'
       ? data.current.weather_code
-      : samples.find((s) => s.atMs >= now - 20 * 60_000)?.code ?? null;
+      : null;
 
-  const near = samples.filter(
-    (s) => s.atMs >= now - 20 * 60_000 && s.atMs <= now + 20 * 60_000,
-  );
-  const rainingNow =
-    (currentPrecip != null && currentPrecip >= 0.1) ||
-    near.some((s) => s.precipMm >= WET_MM_15);
-
-  let nextRainAtMs: number | null = null;
-  let rainEndsAtMs: number | null = null;
-
-  if (rainingNow) {
-    nextRainAtMs = now;
-    for (const s of samples) {
-      if (s.atMs < now - 5 * 60_000) continue;
-      if (s.precipMm < WET_MM_15) {
-        rainEndsAtMs = s.atMs;
-        break;
-      }
-    }
-    if (rainEndsAtMs == null && samples.length) {
-      rainEndsAtMs = samples[samples.length - 1]!.atMs + 15 * 60_000;
-    }
-  } else {
-    for (const s of samples) {
-      if (s.atMs < now - 2 * 60_000) continue;
-      if (s.precipMm >= WET_MM_15) {
-        nextRainAtMs = s.atMs;
-        break;
-      }
-    }
-    if (nextRainAtMs != null) {
-      let seen = false;
-      for (const s of samples) {
-        if (s.atMs < nextRainAtMs) continue;
-        if (s.precipMm >= WET_MM_15) seen = true;
-        else if (seen) {
-          rainEndsAtMs = s.atMs;
-          break;
-        }
-      }
-      if (seen && rainEndsAtMs == null && samples.length) {
-        rainEndsAtMs = samples[samples.length - 1]!.atMs + 15 * 60_000;
-      }
-    }
+  // Current-Hook: wenn API „jetzt“ nass meldet, Sample bei now anreichern.
+  if (currentPrecip != null && currentPrecip >= 0.1) {
+    samples.push({ atMs: now, precipMm: currentPrecip });
   }
 
-  const rainStartsInMin =
-    nextRainAtMs != null && !rainingNow
-      ? Math.max(0, Math.round((nextRainAtMs - now) / 60_000))
-      : rainingNow
-        ? 0
-        : null;
+  const timing = timingFromRainSamples(samples, {
+    nowMs: now,
+    stepMs: 15 * 60_000,
+    wetMm: WET_MM_15,
+    earlyWarnMs: opts.earlyWarnMs ?? RADAR_EARLY_WARN_MS,
+    lateClearMs: opts.lateClearMs ?? RADAR_LATE_CLEAR_MS,
+    noisePeakMin: null,
+  });
 
   return {
     fetchedAtMs: opts.fetchedAtMs ?? now,
     lat: opts.lat,
     lng: opts.lng,
-    currentPrecipMm: currentPrecip,
     weatherCode,
-    rainingNow,
-    nextRainAtMs,
-    rainEndsAtMs,
-    rainStartsInMin,
+    source: 'open_meteo_15',
+    ...timing,
+    currentPrecipMm:
+      currentPrecip != null ? currentPrecip : timing.currentPrecipMm,
   };
 }
 
@@ -144,8 +362,8 @@ export const GPS_NOWCAST_WITHIN_MS = 15 * 60_000;
  */
 export const GPS_RAIN_RISK_POP_MIN = 45;
 
-/** Bei erhöhtem Risiko: frühestens so oft GPS-Nowcast (App muss ohnehin offen sein). */
-export const GPS_RAIN_RISK_PROBE_MS = 15 * 60_000;
+/** Bei erhöhtem Risiko: frühestens so oft Nowcast (Shared-Radar-Takt ~5 Min). */
+export const GPS_RAIN_RISK_PROBE_MS = 5 * 60_000;
 
 /** @deprecated Use GPS_RAIN_RISK_PROBE_MS — Name blieb für Imports. */
 export const GPS_DRY_PROBE_MS = GPS_RAIN_RISK_PROBE_MS;
@@ -199,9 +417,9 @@ export function skyLooksUnsettled(
   if (c >= 200 && c < 700) return true;
   // OWM: stark bewölkt / bedeckt (803–804) — „Wolken und Sonne“ 801–802 nur mit Pop
   if (c >= 803 && c <= 804) return true;
-  // WMO/Open-Meteo: bedeckt / Niederschlag
+  // WMO/Open-Meteo (0–99): bedeckt / Niederschlag — nicht OWM 8xx treffen
   if (c >= 2 && c <= 3) return true;
-  if (c >= 51) return true;
+  if (c >= 51 && c <= 99) return true;
   return false;
 }
 
@@ -273,33 +491,89 @@ export function shouldFetchGpsRainNowcast(opts: {
         });
 
   // Stabil trocken + klarer Himmel + niedrige Pop → nie spekulativ pollen.
+  // Bewölkt/unruhig darf trotz „dayStableDry“/niedriger Pop nachschauen
+  // (lokale Schauer, die OWM-Viertel noch als trocken führen).
   if (
     opts.dayStableDry &&
     pop < GPS_RAIN_RISK_POP_MIN &&
-    (skyLooksClearDry(opts.weatherCode) || pop < 25)
+    skyLooksClearDry(opts.weatherCode)
   ) {
     return false;
   }
 
-  // Risiko zu niedrig (z. B. 20 %) → kein GPS-Check.
-  // Ab ~45–50 % (oder unruhiger Himmel mit mind. 40 %) → periodisch nachsehen.
-  const riskEnough =
-    pop >= GPS_RAIN_RISK_POP_MIN ||
-    (pop >= 40 && skyLooksUnsettled(opts.weatherCode));
-  if (!riskEnough) return false;
-
   const last = opts.lastGpsNowcastAtMs;
   const interval =
     pop >= 70 ? Math.floor(GPS_RAIN_RISK_PROBE_MS * 0.67) : GPS_RAIN_RISK_PROBE_MS;
-  if (last == null || !Number.isFinite(last) || now - last >= interval) {
+  const due =
+    last == null || !Number.isFinite(last) || now - last >= interval;
+
+  // Unbekannter Himmel (frisch / nur GPS): einmal Radar, sonst bleibt Regen unsichtbar.
+  if (
+    due &&
+    (opts.weatherCode == null || !Number.isFinite(opts.weatherCode))
+  ) {
     return true;
   }
-  return false;
+
+  // Ab ~45 % Pop — oder bedeckt/unruhig: GPS-Radar (lokale Schauer).
+  const riskEnough =
+    pop >= GPS_RAIN_RISK_POP_MIN || skyLooksUnsettled(opts.weatherCode);
+  if (!riskEnough) return false;
+  return due;
+}
+
+async function fetchBrightSkyRadarNowcast(opts: {
+  lat: number;
+  lng: number;
+  signal: AbortSignal;
+}): Promise<GpsRainNowcast | null> {
+  const u = new URL('https://api.brightsky.dev/radar');
+  u.searchParams.set('lat', String(opts.lat));
+  u.searchParams.set('lon', String(opts.lng));
+  u.searchParams.set('distance', String(RADAR_DISTANCE_M));
+  u.searchParams.set('format', 'plain');
+  u.searchParams.set('tz', 'Europe/Berlin');
+  const res = await fetch(u.toString(), {
+    signal: opts.signal,
+    headers: {
+      Accept: 'application/json',
+      // Bright Sky verlangt explizit br|zstd|gzip für plain/bytes.
+      'Accept-Encoding': 'gzip',
+    },
+  });
+  if (!res.ok) return null;
+  const data = (await res.json()) as BrightSkyRadarJson;
+  return parseBrightSkyRadarNowcast(data, {
+    lat: opts.lat,
+    lng: opts.lng,
+  });
+}
+
+async function fetchOpenMeteoRainNowcast(opts: {
+  lat: number;
+  lng: number;
+  signal: AbortSignal;
+}): Promise<GpsRainNowcast | null> {
+  const u = new URL('https://api.open-meteo.com/v1/forecast');
+  u.searchParams.set('latitude', String(opts.lat));
+  u.searchParams.set('longitude', String(opts.lng));
+  u.searchParams.set('current', 'precipitation,weather_code');
+  u.searchParams.set('minutely_15', 'precipitation,weather_code');
+  u.searchParams.set('forecast_minutely_15', String(FORECAST_STEPS));
+  u.searchParams.set('timezone', 'auto');
+  u.searchParams.set('cell_selection', 'nearest');
+  const res = await fetch(u.toString(), { signal: opts.signal });
+  if (!res.ok) return null;
+  const data = (await res.json()) as Minutely15Json;
+  return parseGpsRainNowcast(data, {
+    lat: opts.lat,
+    lng: opts.lng,
+  });
 }
 
 /**
- * Exakte GPS-Position → 15-Min-Niederschlag (DWD ICON-D2 in DE).
- * Nicht über Shared-Cell — Absicht: dein Punkt, nicht das Viertel-Zentrum.
+ * Regen-Nowcast: Shared Edge (~1 km Zelle) first, sonst Bright Sky am GPS,
+ * sonst Open-Meteo 15-Min.
  */
 export async function fetchGpsRainNowcast(opts: {
   lat: number;
@@ -308,24 +582,39 @@ export async function fetchGpsRainNowcast(opts: {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), FETCH_MS);
   try {
-    const u = new URL('https://api.open-meteo.com/v1/forecast');
-    u.searchParams.set('latitude', String(opts.lat));
-    u.searchParams.set('longitude', String(opts.lng));
-    u.searchParams.set('current', 'precipitation,weather_code');
-    u.searchParams.set('minutely_15', 'precipitation,weather_code');
-    u.searchParams.set('forecast_minutely_15', String(FORECAST_STEPS));
-    u.searchParams.set('timezone', 'auto');
-    // Nächste Modellzelle am GPS, nicht interpolierte Flächenmitte
-    u.searchParams.set('cell_selection', 'nearest');
-    const res = await fetch(u.toString(), { signal: ctrl.signal });
-    if (!res.ok) return null;
-    const data = (await res.json()) as Minutely15Json;
-    return parseGpsRainNowcast(data, {
+    try {
+      const { fetchSharedRainNowcast } = await import(
+        './fetchSharedRainNowcast'
+      );
+      const shared = await fetchSharedRainNowcast({
+        lat: opts.lat,
+        lng: opts.lng,
+      });
+      if (shared) return shared;
+    } catch {
+      /* shared optional */
+    }
+    const radar = await fetchBrightSkyRadarNowcast({
       lat: opts.lat,
       lng: opts.lng,
+      signal: ctrl.signal,
+    });
+    if (radar) return radar;
+    return await fetchOpenMeteoRainNowcast({
+      lat: opts.lat,
+      lng: opts.lng,
+      signal: ctrl.signal,
     });
   } catch {
-    return null;
+    try {
+      return await fetchOpenMeteoRainNowcast({
+        lat: opts.lat,
+        lng: opts.lng,
+        signal: ctrl.signal,
+      });
+    } catch {
+      return null;
+    }
   } finally {
     clearTimeout(timer);
   }
@@ -346,15 +635,30 @@ export function applyGpsNowcastToTiming<
 >(base: T, nowcast: GpsRainNowcast | null): T {
   if (!nowcast) return base;
   const next = { ...base };
-  // Nowcast kennt die nächsten ~4 h an deinem GPS — Vorrang vor Pop-Stunden.
+  // Nowcast kennt die nächsten ~2–4 h an deinem GPS — Vorrang vor Pop-Stunden.
   next.nextRainAtMs = nowcast.nextRainAtMs;
   next.rainStartsInMin = nowcast.rainStartsInMin;
   next.rainEndsAtMs = nowcast.rainEndsAtMs ?? base.rainEndsAtMs ?? null;
   if (nowcast.currentPrecipMm != null) {
     next.currentPrecipMm = nowcast.currentPrecipMm;
+  } else if (nowcast.rainingNow) {
+    // Minutely nass, current oft 0 — HUD braucht spürbaren Precip-Hint.
+    const prev = next.currentPrecipMm;
+    if (prev == null || !Number.isFinite(prev) || prev < 0.1) {
+      next.currentPrecipMm = 0.15;
+    }
+  } else {
+    // Radar trocken → OWM-„schon nass“-Fake (Weather-Code / Desc) entkräften.
+    next.currentPrecipMm = 0;
   }
   if (nowcast.weatherCode != null && 'currentWeatherId' in next) {
     next.currentWeatherId = nowcast.weatherCode;
+  } else if (!nowcast.rainingNow && 'currentWeatherId' in next) {
+    const wid = next.currentWeatherId;
+    // OWM 2xx–6xx allein würde sonst „Regen noch …“ erzwingen.
+    if (typeof wid === 'number' && wid >= 200 && wid < 700) {
+      next.currentWeatherId = 803; // bedeckt, ohne Precip-Semantik
+    }
   }
   if ('dayStableDry' in next) {
     next.dayStableDry = nowcast.nextRainAtMs == null && !nowcast.rainingNow;

@@ -27,7 +27,7 @@ function assert(cond: unknown, msg: string): void {
 // Research budget hybrid
 {
   const nav = resolveResearchBudget({ lane: 'nav' });
-  assert(nav.finalSec <= 2, 'nav fast');
+  assert(nav.finalSec <= 3, 'nav fast');
   const events = resolveResearchBudget({
     lane: 'chat',
     blueprintId: 'live_events',

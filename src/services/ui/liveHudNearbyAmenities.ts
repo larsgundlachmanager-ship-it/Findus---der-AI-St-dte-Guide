@@ -55,10 +55,13 @@ type Cache = {
 
 const TTL_MS = 5 * 60_000;
 const CELL_M = 160;
-/** Nur zeigen wenn wirklich „um die Ecke“. */
+/** Klo / Trinkwasser: nur wenn in ~15 Min zu Fuß erreichbar (~5 km/h → ~1,25 km). */
+export const MAX_UTILITY_WALK_MIN = 15;
+const UTILITY_RADIUS_M = 1300;
+/** Nur zeigen wenn wirklich erreichbar / sinnvoll nah. */
 const MAX_M: Record<NearbyAmenityKind, number> = {
-  toilet: 420,
-  drinking_water: 480,
+  toilet: UTILITY_RADIUS_M,
+  drinking_water: UTILITY_RADIUS_M,
   ice_cream: 900,
   museum: 1600,
   supermarket: 1200,
@@ -145,11 +148,12 @@ function cardFor(hit: NearbyAmenityHit): NearbyAmenityHudCard {
     return {
       id: `amenity-toilet-${Math.round(hit.distanceM)}`,
       kind: 'toilet',
-      title: `🚻 ${hit.name}`,
-      meta: fitHudMeta(`${dist} · ${walk}`),
+      title: 'Klo?',
+      meta: fitHudMeta(`${hit.name} · ${walk}`),
       tellMorePrompt:
-        `Öffentliche Toilette „${hit.name}“ (~${dist}) — Route dahin und ob sie offen wirkt.`,
-      score: hit.distanceM <= 180 ? 64 : hit.distanceM <= 320 ? 56 : 48,
+        `Öffentliche Toilette „${hit.name}“ (~${dist}, ${walk}) — Route dahin.`,
+      score: hit.walkMin <= 5 ? 64 : hit.walkMin <= 10 ? 56 : 48,
+      navDest: navFromHit(hit),
     };
   }
 
@@ -157,11 +161,12 @@ function cardFor(hit: NearbyAmenityHit): NearbyAmenityHudCard {
     return {
       id: `amenity-water-${Math.round(hit.distanceM)}`,
       kind: 'drinking_water',
-      title: `💧 ${hit.name}`,
-      meta: fitHudMeta(`${dist} · ${walk}`),
+      title: 'Durst?',
+      meta: fitHudMeta(`${hit.name} · ${walk}`),
       tellMorePrompt:
-        `Trinkwasser / Brunnen „${hit.name}“ (~${dist}) — Route und kurz sagen, wie ich hinfinde.`,
-      score: hit.distanceM <= 200 ? 62 : hit.distanceM <= 350 ? 54 : 46,
+        `Trinkwasser / Brunnen „${hit.name}“ (~${dist}, ${walk}) — Route und kurz sagen, wie ich hinfinde.`,
+      score: hit.walkMin <= 5 ? 62 : hit.walkMin <= 10 ? 54 : 46,
+      navDest: navFromHit(hit),
     };
   }
 
@@ -304,11 +309,29 @@ async function searchKind(
 
   if (isVagueAmenityName(name, kind)) return null;
 
+  const walkMin = walkMinutesForDistanceM(best.distanceM);
+  // Klo/Wasser: ohne präzise Nähe oder >15 Min → gar nicht anzeigen
+  if (
+    (kind === 'toilet' || kind === 'drinking_water') &&
+    walkMin > MAX_UTILITY_WALK_MIN
+  ) {
+    return null;
+  }
+  if (
+    (kind === 'toilet' || kind === 'drinking_water') &&
+    (best.lat == null ||
+      best.lng == null ||
+      !Number.isFinite(best.lat) ||
+      !Number.isFinite(best.lng))
+  ) {
+    return null;
+  }
+
   return {
     kind,
     name,
     distanceM: Math.round(best.distanceM),
-    walkMin: walkMinutesForDistanceM(best.distanceM),
+    walkMin,
     lat: best.lat,
     lng: best.lng,
   };

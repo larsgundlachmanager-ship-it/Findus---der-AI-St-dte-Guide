@@ -3,7 +3,7 @@
  */
 
 export function stripChatLaneMeta(text: string): string {
-  return (text || '')
+  let s = (text || '')
     .replace(/\bWANT_REMINDER:\s*(yes|no)\b/giu, ' ')
     .replace(/\bLOCAL_SHOW:\s*(?:none|[^\n]+)/giu, ' ')
     .replace(/\b(?:SPEECH|BULLET):\s*/giu, ' ')
@@ -16,4 +16,8 @@ export function stripChatLaneMeta(text: string): string {
     .replace(/\bKEINE Formulierungen\b[^.!?]*/giu, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+  // Prompt-Echo „...“ / leere Platzhalter nie als Speech
+  if (/^(?:\.{2,}|…+)$/u.test(s)) return '';
+  s = s.replace(/^(?:\.{2,}|…+)\s*/u, '').trim();
+  return s;
 }

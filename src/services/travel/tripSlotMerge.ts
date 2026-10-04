@@ -25,6 +25,9 @@ export type FlightPendingAsk =
   | 'buffer'
   | 'wake'
   | 'hotel'
+  | 'transfer'
+  | 'taxi_book'
+  | 'origin_access'
   | null;
 
 export type TripSlotState = {

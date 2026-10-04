@@ -1,0 +1,156 @@
+{
+  "at": "2026-09-07T07:32:52.888902+00:00",
+  "device": "00143157P001105",
+  "label": "founder_must",
+  "results": [
+    {
+      "id": "flug_morgen_ham",
+      "q": "Hey Yorro, ich will morgen fliegen — guck bei Hamburg Fluege, was geht so Richtung Sueden, und ob ich noch Tickets kriege",
+      "family": "flight",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": false,
+      "buttons_found": [
+        "route"
+      ],
+      "fails": [],
+      "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat | Timeline und Routenplanung | Orte f",
+      "log_hits": ""
+    },
+    {
+      "id": "taxi_vorbestellen_morgen",
+      "q": "Reserviere morgen frueh um 7 Uhr ein Taxi zum Flughafen Hamburg",
+      "family": "taxi",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": false,
+      "buttons_found": [
+        "route"
+      ],
+      "fails": [],
+      "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat | Timeline und Routenplanung | Orte f",
+      "log_hits": ""
+    },
+    {
+      "id": "theater_heute",
+      "q": "Welche Theaterstuecke oder Vorstellungen laufen heute oder die Tage in der Naehe?",
+      "family": "theater",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "fails": [],
+      "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat | Timeline und Routenplanung | Orte f",
+      "log_hits": ""
+    },
+    {
+      "id": "gastro_aussicht_flair",
+      "q": "Restaurant mit schoener Aussicht, gemuetlichem Ambiente und gutem Flair — am besten Terrasse",
+      "family": "dining",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": false,
+      "buttons_ok": true,
+      "buttons_found": [
+        "route"
+      ],
+      "fails": [],
+      "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | Kein Treffer: besten Terrasse, Terrasse, gute Aussicht, terrace, view, ruhig | ✕ | Aussicht, | terrace, | view, | ruhig“. |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung.",
+      "log_hits": ""
+    },
+    {
+      "id": "hotel_suche",
+      "q": "Unterkunftsuche: Hotel oder Apartment fuer Freitag bis Sonntag, zentral, unter 600 Euro",
+      "family": "hotel",
+      "verdict": "PASS",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "hotel",
+        "route"
+      ],
+      "fails": [],
+      "snippet": "🚶 → Hotels in hier | 12 m · ca. 1 Min · Ankunft 09:40 | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps zur Route. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Wegpunkt  Hotels in hier | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Yorro denkt nach — halten zum Sprechen, 2× tippen zum Stoppen, in Gebr",
+      "log_hits": ""
+    },
+    {
+      "id": "hotel_spezifisch",
+      "q": "Spezifisch: Boutique-Hotel mit Spa oder Sauna und Fruehstueck",
+      "family": "hotel",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": false,
+      "buttons_found": [
+        "route"
+      ],
+      "fails": [],
+      "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat | Timeline und Routenplanung | Orte f",
+      "log_hits": ""
+    },
+    {
+      "id": "hotel_fu_buchen",
+      "q": "Zeig mir den Buchungslink vom ersten Hotel",
+      "family": "hotel",
+      "verdict": "PASS",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": true,
+      "buttons_found": [
+        "hotel",
+        "route",
+        "web"
+      ],
+      "fails": [],
+      "snippet": "Näher bei dir | STADT IN DER NÄHE | Prisdorf | Schleswig-Holstein · Deutschland | Freitag Bis Sonntag | 20 km |  | 0.4 km | 263 | Trigger | 152 | Orte | 30 | Stories | 1846 | Fakten | Du bist näher an Prisdorf als an Freitag Bis Sonntag. Pack wechseln und hier weiter entdecken? | Bleiben | Wechseln | ⛅ Wechselhaft · 13°",
+      "log_hits": ""
+    },
+    {
+      "id": "michel_hoehe",
+      "q": "Wie hoch ist der Michel?",
+      "family": "trivia",
+      "verdict": "PASS",
+      "bridge_ok": true,
+      "call2_ok": true,
+      "bullets_ok": true,
+      "buttons_ok": null,
+      "buttons_found": [
+        "hotel",
+        "route",
+        "web"
+      ],
+      "fails": [],
+      "snippet": "Näher bei dir | STADT IN DER NÄHE | Prisdorf | Schleswig-Holstein · Deutschland | Freitag Bis Sonntag | 20 km |  | 0.4 km | 263 | Trigger | 152 | Orte | 30 | Stories | 1846 | Fakten | Du bist näher an Prisdorf als an Freitag Bis Sonntag. Pack wechseln und hier weiter entdecken? | Bleiben | Wechseln | ⛅ Wechselhaft · 13°",
+      "log_hits": ""
+    },
+    {
+      "id": "zahnbuerste_erinnerung",
+      "q": "Was brauche ich noch — eine Zahnbuerste. Kannst du mich daran erinnern, die mitzunehmen?",
+      "family": "reminder",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": true,
+      "buttons_ok": null,
+      "buttons_found": [
+        "route"
+      ],
+      "fails": [],
+      "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | direkt | auf | die | Packliste. |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren",
+      "log_hits": ""
+    }
+  ]
+}

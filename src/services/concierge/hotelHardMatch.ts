@@ -89,7 +89,21 @@ function escapeRe(s: string): string {
  */
 export function parseHotelAmenityNeeds(text: string): HotelAmenityNeed[] {
   const t = text || '';
-  const out: HotelAmenityNeed[] = AMENITY_NEEDS.filter((n) => n.trigger.test(t));
+  let out: HotelAmenityNeed[] = AMENITY_NEEDS.filter((n) => n.trigger.test(t));
+  // „Spa oder Sauna“ → ein kombiniertes Need (OR), nicht beide hart
+  if (
+    /\b(spa|wellness)\b/iu.test(t) &&
+    /\bsauna\b/iu.test(t) &&
+    /\boder\b/iu.test(t)
+  ) {
+    out = out.filter((n) => n.id !== 'spa' && n.id !== 'sauna');
+    out.push({
+      id: 'spa_or_sauna',
+      label: 'Spa/Sauna',
+      trigger: /\b(spa|sauna|wellness)\b/i,
+      evidence: /\b(spa|wellness|sauna|dampfbad|steam|jacuzzi|whirlpool|thermal)\b/i,
+    });
+  }
   const seen = new Set(out.map((n) => n.id));
   for (const m of t.matchAll(
     /\b([A-Za-zÄÖÜäöüß]{2,16}blick|river\s*view|sea\s*view|lake\s*view|harbour\s*view|harbor\s*view)\b/giu,

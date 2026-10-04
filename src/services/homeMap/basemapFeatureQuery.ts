@@ -38,20 +38,84 @@ export function listBasemapBuildingLayerIds(style: BasemapStyleLike): string[] {
   return ids.length ? ids : ['buildings'];
 }
 
-/** POI-/Place-Label-Layer der Basiskarte (für Screen-Tap-Auflösung). */
+/** POI-/Place-/Park-Label-Layer der Basiskarte (für Screen-Tap-Auflösung). */
 export function listBasemapPoiLayerIds(style: BasemapStyleLike): string[] {
   const ids: string[] = [];
   for (const layer of styleLayers(style)) {
     const id = typeof layer.id === 'string' ? layer.id : '';
     const type = typeof layer.type === 'string' ? layer.type : '';
-    if (!id) continue;
+    if (!id || type !== 'symbol') continue;
     const lid = id.toLowerCase();
-    const isPoiLike = lid.includes('poi') || lid.includes('place');
-    const isLabel = type === 'symbol' || lid.includes('label') || lid.includes('name');
-    if (isPoiLike && isLabel) ids.push(id);
+    // Straßen-/Admin-/Hausnummern — nicht tippbar als Ort
+    if (
+      /housenumber|address|boundary|admin|contour|mountain_peak/.test(lid)
+    ) {
+      continue;
+    }
+    if (
+      (/road|street|highway|waterway|transport|rail_label|roads_label/.test(lid) ||
+        (lid.includes('label') &&
+          (lid.includes('road') || lid.includes('street')))) &&
+      !/poi|place|amenity|shop|brand/.test(lid)
+    ) {
+      continue;
+    }
+    // Stadt-/Ort-Labels sind oft aus — trotzdem nicht als Shop-Tap
+    if (
+      /^(places?_?(country|state|city|town|village|suburb|neighbourhood|neighborhood|locality)|place-(city|town|village))/.test(
+        lid,
+      )
+    ) {
+      continue;
+    }
+    const isPoiLike =
+      lid.includes('poi') ||
+      lid.includes('place') ||
+      lid.includes('park') ||
+      lid.includes('wood') ||
+      lid.includes('forest') ||
+      lid.includes('landuse') ||
+      lid.includes('leisure') ||
+      lid.includes('amenity') ||
+      lid.includes('shop') ||
+      lid.includes('brand') ||
+      lid.includes('natural') ||
+      // Protomaps: oft nur „pois“ / generische Symbol-Layer
+      lid === 'pois' ||
+      lid.startsWith('pois_') ||
+      lid.includes('label');
+    if (isPoiLike) ids.push(id);
   }
   return ids;
 }
+
+/**
+ * Erster Straßenname-Layer der Vector-Basemap (Protomaps: `roads_labels_minor`).
+ * Route darunter legen, sonst überdecken LineLayers die Namen.
+ */
+export function firstBasemapRoadLabelLayerId(
+  style: BasemapStyleLike,
+): string | null {
+  for (const layer of styleLayers(style)) {
+    const id = typeof layer.id === 'string' ? layer.id : '';
+    const type = typeof layer.type === 'string' ? layer.type : '';
+    if (!id || type !== 'symbol') continue;
+    const lid = id.toLowerCase();
+    if (
+      lid.includes('roads_labels') ||
+      lid.includes('road_label') ||
+      lid.includes('roads_label') ||
+      (lid.includes('highway') && lid.includes('label')) ||
+      (lid.includes('street') && lid.includes('label') && !lid.includes('place'))
+    ) {
+      return id;
+    }
+  }
+  return null;
+}
+
+export const PROTOMAPS_ROAD_LABEL_LAYER_FALLBACK = 'roads_labels_minor';
+export const EXTRACT_ROAD_LABEL_LAYER_ID = 'extract-roads-label';
 
 function toGeo(ring: LatLngRing): GeoLatLng[] {
   return ring.map(([latitude, longitude]) => ({ latitude, longitude }));
@@ -148,6 +212,7 @@ export function pickBasemapPoiAt(
   lat: number,
   lng: number,
   features: readonly unknown[] | null | undefined,
+  maxDistM = 110,
 ): BasemapPoiHit | null {
   if (!features?.length) return null;
   let best: BasemapPoiHit | null = null;
@@ -155,7 +220,14 @@ export function pickBasemapPoiAt(
   for (const feature of features) {
     const props = featureProps(feature);
     const name = String(
-      props.name ?? props['name:de'] ?? props.pmap_name ?? '',
+      props.name ??
+        props['name:de'] ??
+        props['name:en'] ??
+        props.pmap_name ??
+        props.brand ??
+        props.operator ??
+        props.ref ??
+        '',
     ).trim();
     if (name.length < 2) continue;
     const kind = String(
@@ -165,6 +237,7 @@ export function pickBasemapPoiAt(
         props.tourism ??
         props.leisure ??
         props.railway ??
+        props.brand ??
         '',
     )
       .trim()
@@ -181,7 +254,7 @@ export function pickBasemapPoiAt(
     const dLat = (pt.lat - lat) * 111_320;
     const dLng = (pt.lng - lng) * 111_320 * Math.cos((lat * Math.PI) / 180);
     const dist = Math.hypot(dLat, dLng);
-    if (dist > 48) continue;
+    if (dist > maxDistM) continue;
     const score = 1000 - dist + Math.min(40, name.length);
     if (score > bestScore) {
       bestScore = score;
@@ -189,6 +262,111 @@ export function pickBasemapPoiAt(
     }
   }
   return best;
+}
+
+/** Pixel-Offsets um den Tap — Icons sind klein, ein Punkt reicht oft nicht. */
+export const BASEMAP_POI_TAP_PIXEL_OFFSETS: ReadonlyArray<readonly [number, number]> =
+  [
+    [0, 0],
+    [14, 0],
+    [-14, 0],
+    [0, 14],
+    [0, -14],
+    [10, 10],
+    [-10, 10],
+    [10, -10],
+    [-10, -10],
+  ];
+
+/**
+ * Fallback wenn Tiles Features ohne brauchbaren Namen liefern
+ * (nur kind/shop) — trotzdem Popup, nicht stiller Blank.
+ */
+export function pickBasemapPoiKindFallback(
+  lat: number,
+  lng: number,
+  features: readonly unknown[] | null | undefined,
+): BasemapPoiHit | null {
+  if (!features?.length) return null;
+  for (const feature of features) {
+    const props = featureProps(feature);
+    const kind = String(
+      props.kind ??
+        props.amenity ??
+        props.shop ??
+        props.tourism ??
+        props.leisure ??
+        props.brand ??
+        '',
+    )
+      .trim()
+      .toLowerCase();
+    if (
+      !kind ||
+      /^(locality|neighbourhood|suburb|city|town|village|hamlet|street|road)$/i.test(
+        kind,
+      )
+    ) {
+      continue;
+    }
+    const pt = featurePoint(feature, lat, lng);
+    const label =
+      kind === 'fast_food'
+        ? 'Imbiss'
+        : kind === 'clothes'
+          ? 'Geschäft'
+          : kind.replace(/_/g, ' ');
+    return {
+      name: label.charAt(0).toUpperCase() + label.slice(1),
+      kind,
+      lat: pt.lat,
+      lng: pt.lng,
+    };
+  }
+  return null;
+}
+
+/**
+ * Protomaps zeichnet an diesem Punkt schon ein POI-Symbol/Label.
+ * Eigenes Yorro-Icon nur, wenn das false ist.
+ */
+export function hasBasemapPoiSymbolNear(
+  lat: number,
+  lng: number,
+  features: readonly unknown[] | null | undefined,
+  maxM = 40,
+): boolean {
+  if (!features?.length) return false;
+  for (const feature of features) {
+    const props = featureProps(feature);
+    const kind = String(
+      props.kind ??
+        props.amenity ??
+        props.shop ??
+        props.tourism ??
+        props.leisure ??
+        props.railway ??
+        '',
+    )
+      .trim()
+      .toLowerCase();
+    if (
+      /^(locality|neighbourhood|suburb|city|town|village|hamlet|street|road)$/i.test(
+        kind,
+      )
+    ) {
+      continue;
+    }
+    const name = String(
+      props.name ?? props['name:de'] ?? props.pmap_name ?? '',
+    ).trim();
+    if (kind.length < 2 && name.length < 2) continue;
+    const pt = featurePoint(feature, lat, lng);
+    const dLat = (pt.lat - lat) * 111_320;
+    const dLng = (pt.lng - lng) * 111_320 * Math.cos((lat * Math.PI) / 180);
+    if (Math.hypot(dLat, dLng) <= maxM) return true;
+  }
+  return false;
 }
 
 /**

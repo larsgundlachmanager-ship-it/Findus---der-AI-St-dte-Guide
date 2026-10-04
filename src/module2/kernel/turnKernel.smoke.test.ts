@@ -496,7 +496,7 @@ const ELB =
 
 {
   const pace = resolveTurnBridgePace('Wie wird das Wetter heute?');
-  assert(pace.bridgeMaxWords === 14, `weather has short lookup bridge, got ${pace.bridgeMaxWords}`);
+  assert(pace.bridgeMaxWords === 14, `weather lookup bridge speaks, got ${pace.bridgeMaxWords}`);
   assert(
     classifyUtteranceFamily('Wie wird das Wetter heute?').family === 'weather',
     'wetter family',
@@ -567,8 +567,13 @@ const ELB =
   );
   const pace = resolveTurnBridgePace(neuer);
   assert(
-    pace.pace === 'cover',
-    `person-age must be cover pace for early bridge, got ${pace.pace}`,
+    pace.pace === 'instant' && pace.bridgeMaxWords <= 8,
+    `person-age must be short instant lead, got ${pace.pace}/${pace.bridgeMaxWords}`,
+  );
+  const papstPace = resolveTurnBridgePace('Wie alt ist der Past Leo der 14?');
+  assert(
+    papstPace.pace === 'instant' && papstPace.bridgeMaxWords <= 8,
+    `papst-age short instant, got ${papstPace.pace}/${papstPace.bridgeMaxWords}`,
   );
 }
 

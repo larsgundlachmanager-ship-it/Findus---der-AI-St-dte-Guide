@@ -1,0 +1,1 @@
+09-09 22:53:08.367 19965 20005 I ReactNativeJS: '[devAskPoller] got ask:', 'Wie spaet ist es jetzt'

@@ -114,6 +114,7 @@ function main() {
     try {
       runNode('expandStoryWiki.mjs', ['--city', id], { fatal: false });
       runNode('enrichReviewFacets.mjs', ['--city', id], { fatal: false });
+      runNode('polishMapBullets.mjs', ['--city', id], { fatal: false });
       const gpsArgs = ['--city', id];
       if (id === 'berlin-umland') gpsArgs.push('--skip-map');
       runNode('gpsWegweiserLoop.mjs', gpsArgs, { fatal: true });

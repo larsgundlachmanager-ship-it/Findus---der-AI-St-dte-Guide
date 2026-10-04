@@ -11,6 +11,7 @@ import { shortenActionLabel } from '../concierge/actionLabelShorten';
 import {
   acceptChargePlace,
   formatChargeBullet,
+  isGuaranteedChargeKind,
   kindLabel,
   kindSpeechHint,
   type ChargeKind,
@@ -37,7 +38,7 @@ function formatDist(m: number): string {
   return `${(m / 1000).toFixed(1)} km`;
 }
 
-/** Powerbank vor Device vor Steckdose-Café vor generischem Café; dann Distanz. */
+/** Powerbank → Device → belegte Steckdose → Café → Bäckerei (Soft); dann Distanz. */
 function sortKeyFor(kind: ChargeKind, distanceM: number): number {
   const bias =
     kind === 'powerbank'
@@ -46,7 +47,9 @@ function sortKeyFor(kind: ChargeKind, distanceM: number): number {
         ? 80
         : kind === 'outlet'
           ? 180
-          : 320;
+          : kind === 'cafe'
+            ? 320
+            : 420; // bakery — Soft-Hinweis, nie vor belegte Spots
   return distanceM + bias;
 }
 
@@ -130,7 +133,11 @@ async function gatherChargePlaces(
     if (kind) dedupePush(out, p, kind);
   }
   out.sort((a, b) => a.sortKey - b.sortKey);
-  return out.slice(0, 4);
+  // Belegte Spots zuerst; Soft (Café/Bäckerei) nur auffüllen — nie Soft vor Garantie.
+  const hard = out.filter((p) => isGuaranteedChargeKind(p.kind));
+  const soft = out.filter((p) => !isGuaranteedChargeKind(p.kind));
+  if (hard.length >= 2) return hard.slice(0, 4);
+  return [...hard, ...soft].slice(0, 4);
 }
 
 function toCandidates(ranked: Ranked[]): DiscoveryCandidate[] {
@@ -169,33 +176,22 @@ function buildSpeech(ranked: Ranked[]): string {
   if (!ranked.length) {
     return (
       'In der Nähe finde ich gerade keinen glaubwürdigen Powerbank-Automaten, ' +
-      'keine Ladestation und kein offenes Café zum Aufladen. ' +
+      'keine Ladestation und keine belegte Steckdose. ' +
       'Kein Fake-Tipp — tipp „nochmal suchen“, oder sag Hotel/Bahnhof, wenn du da hinwillst.'
     );
   }
   const top = ranked[0]!;
   const far = top.distanceM >= PLACE_FAR_SPEECH_M;
   if (ranked.length === 1) {
-    const tip =
-      top.kind === 'cafe'
-        ? 'Steckdose oft da, aber nicht garantiert'
-        : kindSpeechHint(top.kind);
+    const tip = kindSpeechHint(top.kind);
     return far
       ? `${top.name} wäre mein Tipp zum Laden — ${tip}, ca. ${formatDist(top.distanceM)}. Tippe die Route, wenn du willst.`
       : `${top.name} liegt gut — ${tip}, ca. ${formatDist(top.distanceM)}. Route startest du mit dem Button.`;
   }
   const second = ranked[1]!;
-  const aTip =
-    top.kind === 'cafe'
-      ? 'Steckdose oft da, nicht garantiert'
-      : kindSpeechHint(top.kind);
-  const bTip =
-    second.kind === 'cafe'
-      ? 'Steckdose oft da, nicht garantiert'
-      : kindSpeechHint(second.kind);
   return (
-    `Entweder ${top.name} — ${aTip}, ca. ${formatDist(top.distanceM)}. ` +
-    `Oder ${second.name} — ${bTip}, ca. ${formatDist(second.distanceM)}. ` +
+    `Entweder ${top.name} — ${kindSpeechHint(top.kind)}, ca. ${formatDist(top.distanceM)}. ` +
+    `Oder ${second.name} — ${kindSpeechHint(second.kind)}, ca. ${formatDist(second.distanceM)}. ` +
     `Was passt dir besser?`
   );
 }
@@ -216,7 +212,8 @@ export function chargeVisualBullets(
 function chargeOptionBullets(c: Ranked): string[] {
   const dist = formatDist(c.distanceM);
   const lines = [`${kindLabel(c.kind)} · ${dist}`];
-  if (c.kind === 'cafe') lines.push('Steckdose nicht garantiert');
+  if (c.kind === 'bakery') lines.push('Oft kurz laden, nicht garantiert');
+  else if (c.kind === 'cafe') lines.push('Steckdose oft, nicht garantiert');
   else if (c.kind === 'outlet') lines.push('Steckdose belegt');
   else if (c.kind === 'powerbank') lines.push('Powerbank-Automat');
   else lines.push('Ladestation');
@@ -250,10 +247,7 @@ export function publishChargePitchUi(ranked: Ranked[]): void {
         role: (i === 0 ? 'favorite' : 'alternative') as
           | 'favorite'
           | 'alternative',
-        speechPitch:
-          c.kind === 'cafe'
-            ? `${c.name}: Café, Steckdose oft da, nicht garantiert.`
-            : `${c.name}: ${kindSpeechHint(c.kind)}.`,
+        speechPitch: `${c.name}: ${kindSpeechHint(c.kind)}.`,
         bullets: chargeOptionBullets(c),
         mapsUrl,
         actions: [

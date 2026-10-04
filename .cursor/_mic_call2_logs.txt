@@ -1,0 +1,15 @@
+﻿--------- beginning of system
+09-23 11:35:38.482  4903  4903 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-23 11:35:38.557  4903  4903 D SceneManager: init SceneManager
+09-23 11:35:38.607  4903  4946 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+09-23 11:35:38.619  4903  4903 D NtViewImpl: init NtViewImpl
+09-23 11:35:38.655  4903  4903 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-23 11:35:38.681  4903  4903 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-23 11:35:39.132  4903  5107 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=56a6912f mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={420dpi always-compat} mLoaders=[]}
+--------- beginning of main
+09-23 11:41:10.348  4903  4950 I ReactNativeJS: [stt] recognition started
+09-23 11:41:10.926  4903  4950 I ReactNativeJS: [devAskPoller] started ÔåÆ :8791
+09-23 11:41:11.104  4903  4903 D ExpoSpeechService: onPartialResults(), results: []
+09-23 11:41:11.104  4903  4903 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-23 11:41:11.105  4903  4950 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=4.8', 'partial=false', 'svc=com.google.android.tts'
+09-23 11:41:11.114  4903  4962 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app

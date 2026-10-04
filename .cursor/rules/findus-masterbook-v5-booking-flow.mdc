@@ -91,7 +91,7 @@ Code: `src/services/flights/inselfliegerAdvisor.ts`
 | Primary only if priced | `price.total` present → book button | ✅ |
 | Sold out / unpriced → alternatives | City search with prices only | ✅ |
 | Affiliate deep link with dates | Stay22 Allez `aid` + checkin/checkout | ✅ |
-| Expedia property + dates | `/go/hotel/info/{id}/{in}/{out}` → Partnerize | ✅ |
+| Expedia property + dates | `{City}-Hotels-{Name}.h{id}.Hotel-Beschreibung?chkin&chkout&rm1&top_dp` (Fallback `/go/hotel/info/…`) → Partnerize | ✅ |
 | Maps-Pitch (Reviews + Flair) | Places Details + Gemini Slow-Lane | ✅ |
 
 ### What does NOT work 1:1
@@ -191,7 +191,7 @@ FreeNow / Bolt: noch keine Builder.
 
 | Step | Status |
 |------|--------|
-| Kiwi Ergebnis-Liste `/de/search/results/{from}/{to}/{date}/no-return/` + adults/bags | ✅ + Travelpayouts `custom_url` |
+| Kiwi Ergebnis-Liste `/de/search/results/{from}/{to}/{date}/anytime|return/` + adults/bags + `stopNumber=0~true` bei Direkt | ✅ + Travelpayouts `custom_url` |
 | Speech: belegter Best-Preis, vergleichen mit Billigst/Kürzest wenn belegt | ✅ Policy |
 | Aviasales `/search/HAM1209ATH2` + `marker=760293` | ✅ |
 

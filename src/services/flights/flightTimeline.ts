@@ -30,6 +30,39 @@ import {
   type AccessLegHint,
 } from './flightTimelineCopy';
 
+/** Pending Welcome-Pickups Prefill — vor OPEN_URL Personen + Abholadresse. */
+export type PendingAirportTransfer = {
+  ident: string;
+  stopId: string;
+  citySlug: string;
+  airportName: string;
+  airportLat: number | null;
+  airportLng: number | null;
+  leaveMs: number | null;
+  passengers: number | null;
+  fromAddress: string | null;
+};
+
+let pendingAirportTransfer: PendingAirportTransfer | null = null;
+
+export function getPendingAirportTransfer(): PendingAirportTransfer | null {
+  return pendingAirportTransfer;
+}
+
+export function setPendingAirportTransfer(
+  next: PendingAirportTransfer | null,
+): void {
+  pendingAirportTransfer = next;
+}
+
+export function rememberTransferPassengers(n: number): void {
+  if (!pendingAirportTransfer) return;
+  pendingAirportTransfer = {
+    ...pendingAirportTransfer,
+    passengers: Math.min(8, Math.max(1, Math.floor(n))),
+  };
+}
+
 function clock(d: Date | number | null | undefined): string {
   if (d == null) return '—';
   const dt = typeof d === 'number' ? new Date(d) : d;
@@ -186,7 +219,7 @@ function writeFlightAccessChoiceChips(opts: {
       id: `${opts.prefix}taxiopt`,
       title: `Taxi · Los ${clock(opts.taxiLeaveMs)}`,
       plannedStartMs: opts.taxiLeaveMs,
-      plannedEndMs: opts.taxiLeaveMs + 12 * 60_000,
+      plannedEndMs: opts.taxiLeaveMs,
       kind: 'wish',
       transport: 'taxi',
       hardAnchor: false,
@@ -209,7 +242,7 @@ function writeFlightAccessChoiceChips(opts: {
       id: `${opts.prefix}oepnvopt`,
       title: `ÖPNV · Los ${clock(opts.transitLeaveMs)}`,
       plannedStartMs: opts.transitLeaveMs,
-      plannedEndMs: opts.transitLeaveMs + 12 * 60_000,
+      plannedEndMs: opts.transitLeaveMs,
       kind: 'wish',
       transport: 'transit',
       hardAnchor: false,
@@ -258,7 +291,7 @@ function writeFlightAccessChoiceChips(opts: {
         id: `${opts.prefix}xferwp`,
         title: `Transfer · Abholung ${clock(opts.taxiLeaveMs)}`,
         plannedStartMs: opts.taxiLeaveMs,
-        plannedEndMs: opts.taxiLeaveMs + 10 * 60_000,
+        plannedEndMs: opts.taxiLeaveMs,
         kind: 'wish',
         transport: 'taxi',
         hardAnchor: false,
@@ -384,22 +417,63 @@ export function upsertFlightTripTimeline(opts: {
   };
 
   if (selectedAccess === 'transit' && (opts.access.transit?.legs?.length ?? 0) >= 1) {
+    const rawLegs = opts.access.transit!.legs;
+    // Sicherheit: absurde End-Fußwege nicht in die Timeline schreiben
+    let legs = rawLegs;
+    const last = legs[legs.length - 1];
+    if (
+      last &&
+      (last.mode === 'WALK' || last.mode === 'BIKE') &&
+      (last.distanceM ?? 0) > 900
+    ) {
+      legs = legs.slice(0, -1);
+    }
     writeTransitAccessLegs({
       prefix: p,
       groupId: accessGroup,
       groupLabel: accessLabel,
-      legs: opts.access.transit!.legs,
+      legs,
       airportLabel: opts.airportName,
       airportMs,
     });
-    // Aktive ÖPNV-Kette + Taxi/Transfer bleiben umwählbar
-    writeFlightAccessChoiceChips({ ...choiceBase, omit: 'transit' });
+    // Gewählte ÖPNV — keine Rivalen-Chips mehr (Watch/Upsert soll sie nicht zurückholen)
   } else if (selectedAccess === 'taxi') {
+    let uberReserveUrl: string | undefined;
+    try {
+      const { buildUberRideAction } = require('../affiliate/affiliateService') as {
+        buildUberRideAction: (
+          lat: number,
+          lng: number,
+          name: string,
+          targetPoiId?: string | number,
+          extra?: {
+            dropoffFormattedAddress?: string | null;
+            pickupTimeLabel?: string;
+            pickupDateIso?: string;
+          },
+        ) => { payload?: { url?: string } };
+      };
+      const act = buildUberRideAction(
+        opts.airportLat,
+        opts.airportLng,
+        opts.airportName,
+        undefined,
+        {
+          dropoffFormattedAddress: opts.airportName,
+          pickupTimeLabel: clock(taxiLeaveMs),
+          pickupDateIso: dateKeyFromMs(taxiLeaveMs),
+        },
+      );
+      const u = act?.payload?.url?.trim();
+      if (u && /^https?:\/\//i.test(u)) uberReserveUrl = u;
+    } catch {
+      /* soft */
+    }
     ft({
       id: `${p}leave`,
       title: `Taxi · Los ${clock(taxiLeaveMs)}`,
       plannedStartMs: taxiLeaveMs,
-      plannedEndMs: airportMs,
+      plannedEndMs: taxiLeaveMs + Math.max(5, opts.access.taxiMin) * 60_000,
       kind: 'nav_leg',
       transport: 'taxi',
       hardAnchor: true,
@@ -408,20 +482,21 @@ export function upsertFlightTripTimeline(opts: {
       emoji: '🚕',
       notes: `${formatDurationMinutesDe(opts.access.taxiMin, 'short')}${
         opts.access.taxiPrice ? ` · ${opts.access.taxiPrice}` : ''
-      } · Uber vorbestellen`,
+      }`,
       lat: opts.airportLat,
       lng: opts.airportLng,
+      reserveUrl: uberReserveUrl,
       groupId: accessGroup,
       groupLabel: accessLabel,
       openCalendar: false,
     });
-    // Aktives Taxi + ÖPNV/Transfer bleiben umwählbar
-    writeFlightAccessChoiceChips({ ...choiceBase, omit: 'taxi' });
   } else {
     // Noch keine Wahl: Taxi | ÖPNV | Transfer als Chips
     writeFlightAccessChoiceChips({ ...choiceBase, omit: null });
   }
 
+  // Ankunft/Check-in/Security = Flug-Gruppe (Terminal-Ankunft).
+  // „Fahrt zum Flughafen“ nur Transfer-Bein (Taxi/ÖPNV/Leave-by).
   addPlanStop({
     id: `${p}airport`,
     title: term
@@ -601,7 +676,7 @@ export function upsertFlightTripTimeline(opts: {
       lat: opts.destAirportLat ?? undefined,
       lng: opts.destAirportLng ?? undefined,
       plannedStartMs: arr.getTime() + 20 * 60_000,
-      plannedEndMs: arr.getTime() + 40 * 60_000,
+      plannedEndMs: arr.getTime() + 20 * 60_000,
       kind: 'stop',
       transport: 'walk',
       hardAnchor: true,
@@ -840,11 +915,36 @@ export async function retargetFlightAccess(
     );
     clearLegs();
     clearFlightAccessOptions(p);
+    let uberReserveUrl: string | undefined;
+    try {
+      const { buildUberRideAction } = require('../affiliate/affiliateService') as {
+        buildUberRideAction: (
+          lat: number,
+          lng: number,
+          name: string,
+          targetPoiId?: string | number,
+          extra?: {
+            dropoffFormattedAddress?: string | null;
+            pickupTimeLabel?: string;
+            pickupDateIso?: string;
+          },
+        ) => { payload?: { url?: string } };
+      };
+      const act = buildUberRideAction(dest.lat, dest.lng, dest.name, undefined, {
+        dropoffFormattedAddress: dest.name,
+        pickupTimeLabel: clock(leaveMs),
+        pickupDateIso: dateKeyFromMs(leaveMs),
+      });
+      const u = act?.payload?.url?.trim();
+      if (u && /^https?:\/\//i.test(u)) uberReserveUrl = u;
+    } catch {
+      /* soft */
+    }
     addPlanStop({
       id: `${p}leave`,
       title: `Taxi · Los ${clock(leaveMs)}`,
       plannedStartMs: leaveMs,
-      plannedEndMs: airport.plannedStartMs,
+      plannedEndMs: leaveMs + taxiMin * 60_000,
       kind: 'nav_leg',
       transport: 'taxi',
       hardAnchor: true,
@@ -853,28 +953,15 @@ export async function retargetFlightAccess(
       emoji: '🚕',
       notes: `${formatDurationMinutesDe(taxiMin, 'short')}${
         taxiPrice ? ` · ${taxiPrice}` : ''
-      } · Uber vorbestellen`,
+      }`,
       lat: dest.lat,
       lng: dest.lng,
+      reserveUrl: uberReserveUrl,
       groupId,
       groupLabel,
       openCalendar: false,
     });
-    // ÖPNV + Transfer bleiben als Umwahl unter derselben Gruppe
-    writeFlightAccessChoiceChips({
-      prefix: p,
-      groupId,
-      groupLabel,
-      airportName: dest.name,
-      airportLat: dest.lat,
-      airportLng: dest.lng,
-      taxiLeaveMs: leaveMs,
-      taxiMin,
-      taxiPrice,
-      transitLeaveMs,
-      transitMin,
-      omit: 'taxi',
-    });
+    // Gewählte Anreise bleibt — rivalisierende Optionen weg
     shiftMealsBeforeLeave(leaveMs, prevLeaveMs);
     return;
   }
@@ -888,7 +975,16 @@ export async function retargetFlightAccess(
     });
     clearLegs();
     clearFlightAccessOptions(p);
-    const legs = cmp.transit?.legs ?? [];
+    const legsRaw = cmp.transit?.legs ?? [];
+    let legs = legsRaw;
+    const lastLeg = legs[legs.length - 1];
+    if (
+      lastLeg &&
+      (lastLeg.mode === 'WALK' || lastLeg.mode === 'BIKE') &&
+      (lastLeg.distanceM ?? 0) > 900
+    ) {
+      legs = legs.slice(0, -1);
+    }
     if (legs.length >= 1) {
       writeTransitAccessLegs({
         prefix: p,
@@ -899,23 +995,7 @@ export async function retargetFlightAccess(
         airportMs: airport.plannedStartMs,
       });
       const start = legs[0]!.startTime.getTime();
-      writeFlightAccessChoiceChips({
-        prefix: p,
-        groupId,
-        groupLabel,
-        airportName: dest.name,
-        airportLat: dest.lat,
-        airportLng: dest.lng,
-        taxiLeaveMs: snapMsToQuarterHour(
-          airport.plannedStartMs - cmp.taxiMin * 60_000,
-          'nearest',
-        ),
-        taxiMin: cmp.taxiMin,
-        taxiPrice: cmp.taxiPrice,
-        transitLeaveMs: cmp.transitLeaveMs,
-        transitMin: cmp.transitMin,
-        omit: 'transit',
-      });
+      // Gewählte ÖPNV — Taxi/Transfer-Optionen weg
       shiftMealsBeforeLeave(snapMsToQuarterHour(start, 'nearest'), prevLeaveMs);
       return;
     }
@@ -945,23 +1025,7 @@ export async function retargetFlightAccess(
       groupLabel,
       openCalendar: false,
     });
-    writeFlightAccessChoiceChips({
-      prefix: p,
-      groupId,
-      groupLabel,
-      airportName: dest.name,
-      airportLat: dest.lat,
-      airportLng: dest.lng,
-      taxiLeaveMs: snapMsToQuarterHour(
-        airport.plannedStartMs - cmp.taxiMin * 60_000,
-        'nearest',
-      ),
-      taxiMin: cmp.taxiMin,
-      taxiPrice: cmp.taxiPrice,
-      transitLeaveMs: leaveMs,
-      transitMin: cmp.transitMin,
-      omit: 'transit',
-    });
+    // Keine Rivalen-Chips nach ÖPNV-Wahl (auch ohne Ketten-Legs)
     shiftMealsBeforeLeave(leaveMs, prevLeaveMs);
     return;
   }
@@ -1068,8 +1132,12 @@ export async function resumeFlightAccessWish(stopId: string): Promise<boolean> {
           lat: number,
           lng: number,
           name: string,
-          addr?: string,
-          extra?: { pickupTimeLabel?: string },
+          targetPoiId?: string | number,
+          extra?: {
+            dropoffFormattedAddress?: string | null;
+            pickupTimeLabel?: string;
+            pickupDateIso?: string;
+          },
         ) => {
           type: string;
           label: string;
@@ -1091,6 +1159,8 @@ export async function resumeFlightAccessWish(stopId: string): Promise<boolean> {
           o?: { skipAutoNav?: boolean; alreadyGuarded?: boolean },
         ) => Promise<void>;
       };
+      const leaveDateIso =
+        leave?.plannedStartMs != null ? dateKeyFromMs(leave.plannedStartMs) : undefined;
       const actions =
         airport?.lat != null && airport.lng != null
           ? [
@@ -1099,7 +1169,11 @@ export async function resumeFlightAccessWish(stopId: string): Promise<boolean> {
                 airport.lng,
                 airportName,
                 undefined,
-                { pickupTimeLabel: leaveClock ?? undefined },
+                {
+                  dropoffFormattedAddress: airportName,
+                  pickupTimeLabel: leaveClock ?? undefined,
+                  pickupDateIso: leaveDateIso,
+                },
               ),
             ]
           : [];
@@ -1166,27 +1240,106 @@ export async function resumeFlightAccessWish(stopId: string): Promise<boolean> {
     return true;
   }
 
-  // Transfer: nur echte Deep-URL (kein Hollow-Homepage)
-  const url = stop?.mapsUrl?.trim();
-  if (url && /welcomepickups\.com\/.+\/transfer/i.test(url)) {
+  // Transfer: erst Personen + Abholadresse, dann Deep-URL (kein Hollow-Open)
+  if (kind === 'xferwp' || kind === 'xfergt') {
+    removePlanStop(`${p}taxiopt`, { gapFill: false });
+    removePlanStop(`${p}oepnvopt`, { gapFill: false });
+    if (kind === 'xferwp') removePlanStop(`${p}xfergt`, { gapFill: false });
+    if (kind === 'xfergt') removePlanStop(`${p}xferwp`, { gapFill: false });
+
+    const leave = findFlightStop(`${p}leave`);
+    const airportName =
+      airport?.title.replace(/^Ankunft\s+/i, '').replace(/\s+·\s+.*$/, '').trim() ||
+      stop?.title?.replace(/^Transfer\s*·\s*/i, '').trim() ||
+      'Flughafen';
+    const citySlug =
+      airportName
+        .replace(/\b(airport|flughafen|international)\b/gi, '')
+        .trim()
+        .split(/\s+/)[0] || 'city';
+    setPendingAirportTransfer({
+      ident,
+      stopId,
+      citySlug,
+      airportName,
+      airportLat: airport?.lat ?? null,
+      airportLng: airport?.lng ?? null,
+      leaveMs: leave?.plannedStartMs ?? stop?.plannedStartMs ?? null,
+      passengers: null,
+      fromAddress: null,
+    });
     try {
-      const { handleQuickAction } = require('../actionHandlerService') as {
-        handleQuickAction: (a: {
-          type: string;
-          label: string;
-          payload: { url: string };
-        }) => Promise<unknown>;
+      const { presentConciergeResponse } = require('../concierge/presentConcierge') as {
+        presentConciergeResponse: (
+          r: {
+            speechText: string;
+            cardTitle?: string;
+            visualBullets?: string[];
+            quickActions?: Array<{
+              type: string;
+              label: string;
+              payload: Record<string, unknown>;
+            }>;
+          },
+          o?: { skipAutoNav?: boolean; alreadyGuarded?: boolean },
+        ) => Promise<void>;
       };
-      await handleQuickAction({
-        type: 'OPEN_URL',
-        label: stop?.title || 'Transfer buchen',
-        payload: { url },
-      });
+      const { getFlightTripSession, setFlightTripSession } = require('./flightTripSession') as {
+        getFlightTripSession: () => { pendingAsk?: string | null } | null;
+        setFlightTripSession: (s: unknown) => void;
+      };
+      const sess = getFlightTripSession();
+      if (sess) {
+        setFlightTripSession({ ...sess, pendingAsk: 'transfer', updatedAtMs: Date.now() });
+      }
+      await presentConciergeResponse(
+        {
+          speechText:
+            'Transfer mit Welcome Pickups — zu wie vielen seid ihr, und von welcher Adresse soll das Auto abholen?',
+          cardTitle: 'Transfer Prefill',
+          visualBullets: [airportName, 'Personen + Abholadresse'],
+          quickActions: [
+            {
+              type: 'SHOW_MORE',
+              label: '1 Person',
+              payload: { textPrompt: 'Transfer für 1 Person' },
+            },
+            {
+              type: 'SHOW_MORE',
+              label: '2 Personen',
+              payload: { textPrompt: 'Transfer für 2 Personen' },
+            },
+            {
+              type: 'SHOW_MORE',
+              label: '3 Personen',
+              payload: { textPrompt: 'Transfer für 3 Personen' },
+            },
+            {
+              type: 'SHOW_MORE',
+              label: '4 Personen',
+              payload: { textPrompt: 'Transfer für 4 Personen' },
+            },
+          ],
+        },
+        { skipAutoNav: true, alreadyGuarded: true },
+      );
     } catch {
-      /* soft */
+      try {
+        const { enqueueSpeech } = require('../../module2/speech/speechQueue') as {
+          enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
+        };
+        enqueueSpeech({
+          kind: 'main',
+          text: 'Transfer — sag mir kurz, zu wie vielen und von welcher Adresse.',
+          turnId: `ft_xfer_ask_${Date.now()}`,
+        });
+      } catch {
+        /* soft */
+      }
     }
     return true;
   }
+
   try {
     const { enqueueSpeech } = require('../../module2/speech/speechQueue') as {
       enqueueSpeech: (o: { kind: string; text: string; turnId: string }) => void;
@@ -1200,4 +1353,113 @@ export async function resumeFlightAccessWish(stopId: string): Promise<boolean> {
     /* soft */
   }
   return true;
+}
+
+/** Welcome-Pickups URL öffnen, sobald Personen (+ optional Adresse) da sind. */
+export async function completePendingAirportTransfer(opts: {
+  passengers?: number | null;
+  fromAddress?: string | null;
+}): Promise<{ opened: boolean; speech: string; bullets: string[] }> {
+  const pending = getPendingAirportTransfer();
+  if (!pending) {
+    return { opened: false, speech: '', bullets: [] };
+  }
+  const passengers =
+    opts.passengers != null && opts.passengers > 0
+      ? Math.min(8, Math.floor(opts.passengers))
+      : pending.passengers;
+  const fromAddress = (opts.fromAddress || pending.fromAddress || '').trim() || null;
+  const next: PendingAirportTransfer = {
+    ...pending,
+    passengers: passengers ?? pending.passengers,
+    fromAddress,
+  };
+  setPendingAirportTransfer(next);
+
+  if (next.passengers == null || next.passengers < 1) {
+    return {
+      opened: false,
+      speech: 'Zu wie vielen soll das Auto kommen — 1, 2, 3 oder 4?',
+      bullets: ['Personenanzahl'],
+    };
+  }
+  if (!fromAddress) {
+    return {
+      opened: false,
+      speech: `Alles klar, ${next.passengers} ${
+        next.passengers === 1 ? 'Person' : 'Personen'
+      }. Von welcher Adresse soll Welcome Pickups abholen?`,
+      bullets: [`${next.passengers} Personen`, 'Abholadresse'],
+    };
+  }
+
+  try {
+    const { buildWelcomePickupsTransferUrl } = require('../affiliate/partnerTpxDeepLink') as {
+      buildWelcomePickupsTransferUrl: (o: {
+        citySlug: string;
+        dateIso?: string | null;
+        timeHm?: string | null;
+        passengers?: number | null;
+        fromName?: string | null;
+        fromAddress?: string | null;
+        fromType?: 'destination' | null;
+        toName?: string | null;
+        toLat?: number | null;
+        toLng?: number | null;
+        toType?: 'airport' | null;
+      }) => string;
+    };
+    const leaveMs = next.leaveMs;
+    const url = buildWelcomePickupsTransferUrl({
+      citySlug: next.citySlug,
+      dateIso: leaveMs != null ? dateKeyFromMs(leaveMs) : null,
+      timeHm: leaveMs != null ? clock(leaveMs) : null,
+      passengers: next.passengers,
+      fromName: fromAddress,
+      fromAddress,
+      fromType: 'destination',
+      toName: next.airportName,
+      toLat: next.airportLat,
+      toLng: next.airportLng,
+      toType: 'airport',
+    });
+    if (!url || !/welcomepickups\.com\/.+\/transfer/i.test(url)) {
+      return {
+        opened: false,
+        speech: 'Transfer-Link ist gerade nicht sauber — Taxi mit Uber geht als Plan B.',
+        bullets: ['Transfer'],
+      };
+    }
+    const { handleQuickAction } = require('../actionHandlerService') as {
+      handleQuickAction: (a: {
+        type: string;
+        label: string;
+        payload: { url: string };
+      }) => Promise<unknown>;
+    };
+    await handleQuickAction({
+      type: 'OPEN_URL',
+      label: 'Transfer buchen',
+      payload: { url },
+    });
+    clearFlightAccessOptions(flightTripStopPrefix(next.ident));
+    setPendingAirportTransfer(null);
+    return {
+      opened: true,
+      speech: `Öffne Welcome Pickups für ${next.passengers} ${
+        next.passengers === 1 ? 'Person' : 'Personen'
+      } ab ${fromAddress}.`,
+      bullets: [
+        `${next.passengers} Personen`,
+        fromAddress,
+        next.airportName,
+      ],
+    };
+  } catch {
+    return {
+      opened: false,
+      speech: 'Transfer-Link klemmte — sag mir die Adresse nochmal oder nimm Taxi mit Uber.',
+      bullets: ['Transfer'],
+    };
+  }
 }

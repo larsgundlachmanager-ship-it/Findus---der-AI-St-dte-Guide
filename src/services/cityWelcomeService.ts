@@ -1,6 +1,7 @@
 /**
  * Stadt-Begrüßung:
- * - Erster Besuch: Willkommen + narrative Historie (max. ~1200 Zeichen) + was heute abgeht.
+ * - Erster Besuch vor Ort: szenische Welcome-Blaupause (FINDUS_CITY_WELCOME_BLOCK, ~1300 Zeichen).
+ * - Pack remote geöffnet (GPS nicht in der Stadt): kurz pack_remote — Orte auf Karte, kein Tourguide.
  * - Schon mal da (Stempel/Visit-Log/Welcome-Record): kein volles Programm —
  *   kurze Rückkehr (max. ~40 Wörter), max. EIN Vorschlag.
  * - Wiederkehr-Speech frühestens nach 150 h erneut; dazwischen still.
@@ -25,6 +26,13 @@ import { useUserMemoryStore } from '../store/useUserMemoryStore';
 import { useSessionPlanStore } from '../store/useSessionPlanStore';
 import type { PoiHookKind } from './ai/fastHook';
 import type { UserProfile } from '../types/userProfile';
+import { FINDUS_CITY_WELCOME_BLOCK, FINDUS_CITY_PACK_REMOTE_OPEN_BLOCK, FINDUS_SPEECH_CULTURE_BLOCK } from './concierge/findusResponsePolicy';
+import {
+  ensureCityWelcomeFacts,
+  formatWelcomeFactsForPrompt,
+  type CityWelcomeFacts,
+} from './cityWelcomeFacts';
+import { buildPersonalityMatrixPromptBlock } from './persona/personalityMatrixPrompt';
 
 const STATE_PATH = `${FileSystem.documentDirectory}findus-city-welcome.json`;
 const ENTER_RADIUS_KM = 8;
@@ -72,7 +80,7 @@ type WelcomeState = {
   cities: Record<string, CityWelcomeRecord>;
 };
 
-export type CityWelcomeMode = 'first_enter' | 'switch' | 'return';
+export type CityWelcomeMode = 'first_enter' | 'switch' | 'return' | 'pack_remote';
 
 let cached: WelcomeState | null = null;
 let lastCheckAt = 0;
@@ -234,6 +242,15 @@ export async function hasPriorCityVisit(
     }
   }
 
+  try {
+    const { isCityMapGreen } = require('./homeMap/cityDwellTracker') as {
+      isCityMapGreen: (id: string) => boolean;
+    };
+    if (isCityMapGreen(id)) return true;
+  } catch {
+    /* soft */
+  }
+
   return false;
 }
 
@@ -337,6 +354,7 @@ export async function generateLiveCityWelcome(
     mode?: CityWelcomeMode;
     weatherLine?: string | null;
     eventHints?: Array<{ name: string; whenLabel: string; hook: string }>;
+    facts?: CityWelcomeFacts | null;
   },
 ): Promise<string> {
   const mode = opts?.mode ?? 'first_enter';
@@ -345,6 +363,42 @@ export async function generateLiveCityWelcome(
   const offline = await isDeviceOffline().catch(() => false);
   const profile = getCachedUserProfile();
   const userName = profile?.firstName?.trim() || null;
+  const facts =
+    opts?.facts ??
+    (await ensureCityWelcomeFacts(city.id).catch(() => null));
+  const factsBlock = formatWelcomeFactsForPrompt(facts);
+
+  if (mode === 'pack_remote') {
+    if (!offline && hasGeminiApiKey()) {
+      const prompt = [
+        'Du bist Yorro — lockerer Reisebegleiter auf Deutsch.',
+        FINDUS_CITY_PACK_REMOTE_OPEN_BLOCK,
+        `Stadtname: ${name}`,
+        userName ? `User-Vorname (sparsam, optional): ${userName}` : '',
+      ]
+        .filter(Boolean)
+        .join('\n');
+      try {
+        const live = await generateGeminiText(prompt, {
+          task: 'generic',
+          maxTokens: 120,
+          temperature: 0.85,
+        });
+        const cleaned = live
+          .replace(/^["„]|["“]$/g, '')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (cleaned.length >= 12 && cleaned.length <= 280) return cleaned;
+        if (cleaned.length > 280) {
+          return `${cleaned.slice(0, 260).replace(/\s+\S*$/, '')}…`;
+        }
+      } catch (err) {
+        console.warn('[cityWelcome] pack_remote gemini failed:', err);
+      }
+    }
+    const who = userName ? ` ${userName}` : '';
+    return `Viel Spaß beim Erkunden von ${name}${who} — die Orte liegen auf der Karte.`;
+  }
 
   if (mode === 'return') {
     const ctx = await buildReturnContext(city.id);
@@ -441,34 +495,28 @@ export async function generateLiveCityWelcome(
     const weatherLine = (opts?.weatherLine || '').trim();
 
     const prompt = [
-      'Du bist Yorro — lockerer Fußgänger-/Reisebegleiter auf Deutsch.',
-      'Schreib GENAU EINE Stadt-Willkommensnachricht für den ERSTEN Besuch.',
-      'Struktur (zwingend, Wortlaut frei):',
-      `1) Kurz willkommen heißen in ${name}${userName ? ` (Name: ${userName})` : ''}.`,
-      '2) Dann eine spannende, narrative Mini-Geschichte zur Historie des Ortes',
-      '   — packend, bildhaft, direkt ins Geschehen (kein Wikipedia-Ton). Ziel ~1200 Zeichen nur für diesen Historie-Teil.',
-      '3) Abschluss: Wetter jetzt + kurzer Verlauf — NUR wenn Wetter-Fakten unten stehen, nichts erfinden.',
-      '4) Danach max. 1 heutiges Event im Umkreis ~5 km, als Hiebsatz (Zeit + Ort + Was), kein Los-jetzt-Ton.',
-      '   Tagesfeste (Straßenfest, Weinfest, Hafengeburtstag, Umzug) dürfen schon laufen — dann „läuft noch bis“ nur mit belegtem Ende.',
-      '   Kino/Konzert/Auftritt/Finsternis: nur wenn der Start noch kommt. Schon vorbei → weglassen.',
-      '   Kein Event-Stoff unten → weglassen, nicht erfinden, nicht ersetzen.',
-      'Regeln:',
-      '- Du-Form, Alltagsdeutsch, kein Markdown, kein Emoji-Overkill.',
-      '- Keine erfundenen Öffnungszeiten oder Ticketpreise.',
-      '- Historie ~1200 Zeichen; Wetter + Event danach extra. Gesamtlänge MAXIMAL 1600 Zeichen.',
+      'Du bist Yorro — charismatischer Fußgänger-/Reisebegleiter auf Deutsch.',
+      'Schreib GENAU EINE Stadt-Willkommensnachricht für den ERSTEN Besuch / Stadtwechsel.',
+      FINDUS_SPEECH_CULTURE_BLOCK,
+      buildPersonalityMatrixPromptBlock(profile),
+      FINDUS_CITY_WELCOME_BLOCK,
+      factsBlock ||
+        'Keine Pack-Historie geladen — nutze nur allgemein bekannte, sichere Stadt-Fakten; erfinde keine Details.',
+      userName ? `User-Vorname (sparsam, max. 1×): ${userName}` : '',
       `Modus: ${mode === 'switch' ? 'Stadtwechsel' : 'erstes Betreten'}.`,
       `Stadtname: ${name}`,
       `Stadt-ID: ${city.id}`,
-      sym ? `Symbol (optional): ${sym}` : 'Kein Symbol.',
+      sym ? `Symbol (optional, nicht vorlesen): ${sym}` : '',
       profile?.wantToExperience?.trim()
         ? `User-Interesse: ${profile.wantToExperience.trim().slice(0, 100)}`
         : '',
-      weatherLine ? `Wetter-Fakten: ${weatherLine}` : 'Kein Wetter — dann Wetter weglassen.',
+      weatherLine
+        ? `Wetter-Fakten (optional einweben, nicht erfinden): ${weatherLine}`
+        : 'Kein Wetter — Wetter weglassen.',
       eventBlock
-        ? `Heutige Events in ~5 km (belegt):\n${eventBlock}`
-        : 'Keine belegten Events in 5 km — Event-Teil weglassen.',
+        ? `Heutige Events in ~5 km (belegt, optional ein Highlight):\n${eventBlock}`
+        : 'Keine belegten Events — Event weglassen.',
       tripHint,
-      'Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals den genauen Wortlaut.',
     ]
       .filter(Boolean)
       .join('\n');
@@ -484,8 +532,8 @@ export async function generateLiveCityWelcome(
         .replace(/\s+/g, ' ')
         .trim();
       if (cleaned.length >= 40) {
-        return cleaned.length > 1650
-          ? `${cleaned.slice(0, 1600).replace(/\s+\S*$/, '')}…`
+        return cleaned.length > 1350
+          ? `${cleaned.slice(0, 1300).replace(/\s+\S*$/, '')}…`
           : cleaned;
       }
     } catch (err) {
@@ -542,12 +590,16 @@ async function resolveModeForCity(
   city: Pick<CityCatalogItem, 'id' | 'name' | 'lat' | 'lng'>,
   record: CityWelcomeRecord | undefined,
   preferSwitch: boolean,
+  manualPick?: boolean,
 ): Promise<CityWelcomeMode | null> {
   const now = Date.now();
   const prior = await hasPriorCityVisit(city);
 
   if (record) {
-    if (now - record.lastWelcomeAtMs < CITY_RETURN_WELCOME_MS) {
+    if (
+      !manualPick &&
+      now - record.lastWelcomeAtMs < CITY_RETURN_WELCOME_MS
+    ) {
       return null;
     }
     return 'return';
@@ -564,11 +616,17 @@ async function resolveModeForCity(
 /**
  * Begrüßt für eine bekannte Stadt (Onboarding, Switch, GPS-Enter).
  * Gibt false wenn Cooldown / busy / Setup unvollständig.
+ * Manueller Pack-Open ohne GPS vor Ort → kurzes pack_remote (kein Voll-Welcome, kein Record).
  */
 export async function speakCityWelcomeForCity(
   city: Pick<CityCatalogItem, 'id' | 'name' | 'symbol'> &
     Partial<Pick<CityCatalogItem, 'lat' | 'lng'>>,
-  opts?: { preferSwitch?: boolean; forceMode?: CityWelcomeMode },
+  opts?: {
+    preferSwitch?: boolean;
+    forceMode?: CityWelcomeMode;
+    /** Manueller Stadt-Tap in Einstellungen — Rückkehr erlauben, kein 150-h-Stille. */
+    manualPick?: boolean;
+  },
 ): Promise<boolean> {
   if (speaking) return false;
   if (useFinnusStore.getState().isSimulationMode) return false;
@@ -587,25 +645,109 @@ export async function speakCityWelcomeForCity(
     /* soft */
   }
 
+  const physicallyHere = await isPhysicallyInCity(city);
+  const remotePackOpen = opts?.manualPick === true && !physicallyHere;
+
   const state = await loadState();
   const record = state.cities[city.id];
-  const mode =
+
+  // Slim-Historie zuerst — entscheidet, ob Remote nur Kurzgruß oder echte Story.
+  const facts = await ensureCityWelcomeFacts(city.id, {
+    allowFullPack: false,
+  }).catch(() => null);
+
+  const mode: CityWelcomeMode | null =
     opts?.forceMode ??
-    (await resolveModeForCity(
-      {
-        id: city.id,
-        name: city.name,
-        lat: city.lat,
-        lng: city.lng,
-      },
-      record,
-      opts?.preferSwitch === true,
-    ));
+    (remotePackOpen && !(facts?.history || facts?.speech)
+      ? 'pack_remote'
+      : await resolveModeForCity(
+          {
+            id: city.id,
+            name: city.name,
+            lat: city.lat,
+            lng: city.lng,
+          },
+          record,
+          opts?.preferSwitch === true,
+          opts?.manualPick === true,
+        ));
   if (!mode) return false;
 
   speaking = true;
   try {
-    const intro = await generateLiveCityWelcome(city, { mode });
+    const prior = await hasPriorCityVisit(city);
+    // Vorproduzierte Speech nur Erstbesuch/Switch ohne Prior — nie Rückkehr/Remote.
+    let intro = '';
+    if (
+      !prior &&
+      mode !== 'return' &&
+      mode !== 'pack_remote' &&
+      (mode === 'first_enter' || mode === 'switch') &&
+      facts?.speech &&
+      facts.speech.trim().length >= 60
+    ) {
+      const baked = facts.speech.trim();
+      try {
+        const { shouldRejectBakedWelcomeSpeech } = await import(
+          './cityWelcomeSpeechQuality'
+        );
+        if (!shouldRejectBakedWelcomeSpeech(baked, city.id, city.name)) {
+          intro = baked;
+        }
+      } catch {
+        intro = baked;
+      }
+    }
+    // Historie da, aber keine baked speech → lokal backen (kein Gemini-Hang).
+    if (
+      !intro &&
+      (mode === 'first_enter' || mode === 'switch') &&
+      facts?.history &&
+      facts.history.trim().length >= 40
+    ) {
+      try {
+        const { bakeWelcomeSpeechLocal } = await import('./cityWelcomeFacts');
+        intro = bakeWelcomeSpeechLocal({
+          name: city.name,
+          history: facts.history,
+          highlights: facts.highlights || [],
+          todayHint: facts.todayHint,
+        });
+      } catch {
+        /* soft */
+      }
+    }
+    if (!intro) {
+      intro = await generateLiveCityWelcome(city, { mode, facts });
+    }
+
+    try {
+      const { isWelcomeSpeechContaminated } = await import(
+        './cityWelcomeSpeechQuality'
+      );
+      if (
+        mode !== 'pack_remote' &&
+        isWelcomeSpeechContaminated(intro, city.id, city.name)
+      ) {
+        intro = await generateLiveCityWelcome(city, {
+          mode,
+          facts: facts
+            ? { ...facts, speech: undefined }
+            : facts,
+        });
+        if (isWelcomeSpeechContaminated(intro, city.id, city.name)) {
+          const { bakeWelcomeSpeechLocal } = await import('./cityWelcomeFacts');
+          intro = bakeWelcomeSpeechLocal({
+            name: city.name,
+            history: facts?.history || '',
+            highlights: facts?.highlights || [],
+            todayHint: facts?.todayHint,
+          });
+        }
+      }
+    } catch {
+      /* soft */
+    }
     useFinnusStore.getState().addChatMessage({
       role: 'assistant',
       content: intro,
@@ -615,6 +757,9 @@ export async function speakCityWelcomeForCity(
       voiceId: voice.voiceId,
       speechRate: voice.speechRate,
     });
+
+    // Remote-Pack-Open: kein Welcome-Record — volles Programm bleibt für GPS-Ankunft.
+    if (mode === 'pack_remote') return true;
 
     const now = Date.now();
     const poiCount = currentPoiCount();
@@ -634,6 +779,47 @@ export async function speakCityWelcomeForCity(
   } finally {
     speaking = false;
   }
+}
+
+async function isPhysicallyInCity(
+  city: Partial<Pick<CityCatalogItem, 'lat' | 'lng' | 'id'>>,
+): Promise<boolean> {
+  let lat = useFinnusStore.getState().lastGpsLat;
+  let lng = useFinnusStore.getState().lastGpsLng;
+  try {
+    const { useGpsStore } = require('../store/useGpsStore') as {
+      useGpsStore: { getState: () => { lat: number | null; lng: number | null } };
+    };
+    const g = useGpsStore.getState();
+    if (typeof g.lat === 'number') lat = g.lat;
+    if (typeof g.lng === 'number') lng = g.lng;
+  } catch {
+    /* soft */
+  }
+  if (
+    typeof lat !== 'number' ||
+    typeof lng !== 'number' ||
+    !Number.isFinite(lat) ||
+    !Number.isFinite(lng)
+  ) {
+    return false;
+  }
+  let cLat = typeof city.lat === 'number' ? city.lat : null;
+  let cLng = typeof city.lng === 'number' ? city.lng : null;
+  if (cLat == null || cLng == null) {
+    try {
+      const catalog = await loadCityCatalog(null);
+      const hit = catalog.find((c) => c.id === city.id);
+      if (hit && typeof hit.lat === 'number' && typeof hit.lng === 'number') {
+        cLat = hit.lat;
+        cLng = hit.lng;
+      }
+    } catch {
+      return false;
+    }
+  }
+  if (cLat == null || cLng == null) return false;
+  return haversineKm(lat, lng, cLat, cLng) <= ENTER_RADIUS_KM;
 }
 
 /**

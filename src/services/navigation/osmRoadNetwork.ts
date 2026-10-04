@@ -22,7 +22,22 @@ const OVERPASS_ENDPOINTS = [
 ] as const;
 
 const FETCH_MS = 12_000;
+const CACHE_MAX = 48;
 const cache = new Map<string, MapRoad[]>();
+
+function putOsmRoadCache(key: string, roads: MapRoad[]): void {
+  if (cache.has(key)) cache.delete(key);
+  while (cache.size >= CACHE_MAX) {
+    const oldest = cache.keys().next().value;
+    if (oldest == null) break;
+    cache.delete(oldest);
+  }
+  cache.set(key, roads);
+}
+
+export function clearOsmRoadNetworkCache(): void {
+  cache.clear();
+}
 
 const MAJOR_RE = /^(motorway|trunk|primary|secondary)$/;
 const STREET_RE = /^(tertiary|unclassified|residential|living_street)$/;
@@ -159,7 +174,7 @@ export async function fetchOsmRoadsInBbox(opts: {
         name: name.length >= 3 ? name : null,
       });
     }
-    cache.set(key, out);
+    putOsmRoadCache(key, out);
     return out;
   } finally {
     clearTimeout(timer);

@@ -2,6 +2,9 @@
  * Karten-Navigation ab 1,4 km Luftlinie: Live-Guard Fuß vs ÖPNV (+ Taxi wenn Pref).
  *
  * Struktur: Zeiten belegen → kurz fragen → Wahl startet sofort.
+ * Pitch-Karten müssen unterscheidbar sein (Umstiege / Fußdauer) — nicht zwei gleiche „ca. 30 Min“.
+ * Call-1-Bridge nicht abwürgen: Speech erst wenn keine Fuse/Queue läuft.
+ *
  * Dies sind nur abstrakte Beispiele für den logischen Ablauf. Übernimm niemals
  * den genauen Wortlaut. Passe deine Antwort immer dynamisch und organisch an
  * den aktuellen Kontext und die aktuelle Stadt an.
@@ -15,6 +18,7 @@ import { formatDurationMinutesDe } from '../navigation/travelEta';
 import type { HomeMapNavTarget } from './homeMapNavStart';
 
 const TRANSIT_PREFETCH_MS = 4500;
+const SPEECH_IDLE_WAIT_MS = 12_000;
 
 export type MapNavMobilityAskInput = {
   dest: HomeMapNavTarget;
@@ -26,6 +30,13 @@ export type MapNavMobilityAskInput = {
   includeTaxi?: boolean;
   hideWalk?: boolean;
   preferBike?: boolean;
+};
+
+type TransitMeta = {
+  transitMin: number;
+  arriveMs: number | null;
+  transfers: number | null;
+  lineHint: string | null;
 };
 
 function mapsSearchUrl(lat: number, lng: number): string {
@@ -86,52 +97,98 @@ function clockHm(ms: number): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
+/** Exported for smokes — Pitch-Zeile Umstiege. */
+export function transferLabelDe(transfers: number | null | undefined): string {
+  if (transfers == null || !Number.isFinite(transfers)) return 'Verbindung';
+  const n = Math.max(0, Math.round(transfers));
+  if (n <= 0) return 'ohne Umstieg';
+  if (n === 1) return '1× umsteigen';
+  return `${n}× umsteigen`;
+}
+
+function airDistLabel(airMeters?: number): string | null {
+  if (airMeters == null || !Number.isFinite(airMeters) || airMeters < 200) {
+    return null;
+  }
+  if (airMeters >= 1000) {
+    return `ca. ${(airMeters / 1000).toFixed(1).replace('.', ',')} km`;
+  }
+  return `ca. ${Math.round(airMeters)} m`;
+}
+
 function buildAskSpeech(
   destName: string,
   walkMin: number,
-  transitMin: number | null,
-  arriveMs: number | null,
-  opts?: { hideWalk?: boolean; includeTaxi?: boolean; preferBike?: boolean },
+  transit: TransitMeta | null,
+  opts?: {
+    hideWalk?: boolean;
+    includeTaxi?: boolean;
+    preferBike?: boolean;
+    airMeters?: number;
+  },
 ): string {
   const walk = formatDurationMinutesDe(walkMin, 'speech');
-  const place = destName.trim() || 'der Ort';
+  const place = destName.trim() || 'dem Ziel';
   const ride =
-    transitMin != null && transitMin > 0
-      ? formatDurationMinutesDe(transitMin, 'speech')
+    transit != null && transit.transitMin > 0
+      ? formatDurationMinutesDe(transit.transitMin, 'speech')
       : null;
-  const arrive =
-    arriveMs != null && Number.isFinite(arriveMs)
-      ? ` — Ankunft gegen ${clockHm(arriveMs)} Uhr`
+  const transferBit =
+    transit?.transfers != null
+      ? `, ${transferLabelDe(transit.transfers)}`
       : '';
+  const arrive =
+    transit?.arriveMs != null && Number.isFinite(transit.arriveMs)
+      ? ` — Ankunft gegen ${clockHm(transit.arriveMs)} Uhr`
+      : '';
+  const dist = airDistLabel(opts?.airMeters);
+  const distBit = dist ? ` (${dist})` : '';
+
   if (opts?.hideWalk) {
     if (ride) {
       return opts.includeTaxi
-        ? `${place} — mit dem ÖPNV ${ride}${arrive}. Taxi geht auch.`
-        : `${place} — mit dem ÖPNV ${ride}${arrive}.`;
+        ? `Alles klar — ich plane dich nach ${place}. Mit dem ÖPNV ${ride}${transferBit}${arrive}. Taxi geht auch.`
+        : `Alles klar — ich plane dich nach ${place}. Mit dem ÖPNV ${ride}${transferBit}${arrive}.`;
     }
-    return `${place} — ich nehme den ÖPNV.`;
+    return `Alles klar — ich plane dich nach ${place} mit dem ÖPNV.`;
   }
   if (ride) {
     const mode = opts?.preferBike ? 'Mit dem Rad' : 'Zu Fuß';
-    return `${place} klingt gut. ${mode} ${walk}. Mit dem ÖPNV ${ride}${arrive}.`;
+    return (
+      `Alles klar — ich plane die Route nach ${place}. ` +
+      `${mode} ${walk}${distBit}. Mit dem ÖPNV ${ride}${transferBit}${arrive}.`
+    );
   }
-  return `${place} klingt gut. Zu Fuß ${walk} — mit dem ÖPNV wären wir deutlich schneller.`;
+  return (
+    `Alles klar — ich plane die Route nach ${place}. ` +
+    `Zu Fuß ${walk}${distBit} — mit dem ÖPNV wären wir meist schneller.`
+  );
 }
 
 function buildOptions(
   dest: HomeMapNavTarget,
   walkMin: number,
-  transitMin: number | null,
-  opts?: { hideWalk?: boolean; includeTaxi?: boolean; preferBike?: boolean },
+  transit: TransitMeta | null,
+  opts?: {
+    hideWalk?: boolean;
+    includeTaxi?: boolean;
+    preferBike?: boolean;
+    airMeters?: number;
+  },
 ): PitchOptionCard[] {
   const mapsUrl = mapsSearchUrl(dest.lat, dest.lng);
-  const walkLabel = formatDurationMinutesDe(walkMin, 'short');
-  const rideLabel =
-    transitMin != null && transitMin > 0
-      ? formatDurationMinutesDe(transitMin, 'short')
+  const walkDur = formatDurationMinutesDe(walkMin, 'short');
+  const rideDur =
+    transit != null && transit.transitMin > 0
+      ? formatDurationMinutesDe(transit.transitMin, 'short')
       : null;
+  const dist = airDistLabel(opts?.airMeters);
   const cards: PitchOptionCard[] = [];
   if (!opts?.hideWalk) {
+    const walkBullets = [
+      opts?.preferBike ? `${walkDur} mit dem Rad` : `${walkDur} zu Fuß`,
+      dist ?? 'direkter Weg',
+    ].slice(0, 2);
     cards.push({
       id: 'map_nav_walk',
       name: opts?.preferBike ? 'Rad' : 'Zu Fuß',
@@ -139,11 +196,22 @@ function buildOptions(
       lng: dest.lng,
       role: 'favorite',
       speechPitch: '',
-      bullets: [walkLabel, dest.name].slice(0, 2),
+      bullets: walkBullets,
       mapsUrl,
       actions: [opts?.preferBike ? bikeAction(dest) : walkAction(dest)],
     });
   }
+  const transfer = transferLabelDe(transit?.transfers ?? null);
+  const arriveBit =
+    transit?.arriveMs != null && Number.isFinite(transit.arriveMs)
+      ? `Ankunft ${clockHm(transit.arriveMs)}`
+      : transit?.lineHint
+        ? String(transit.lineHint)
+        : 'Tür zu Tür';
+  const transitBullets = [
+    rideDur ? `${transfer} · ${rideDur}` : transfer,
+    arriveBit,
+  ].slice(0, 2);
   cards.push({
     id: 'map_nav_transit',
     name: 'ÖPNV',
@@ -151,7 +219,7 @@ function buildOptions(
     lng: dest.lng,
     role: opts?.hideWalk ? 'favorite' : 'alternative',
     speechPitch: '',
-    bullets: [rideLabel ?? 'Verbindung suchen', dest.name].slice(0, 2),
+    bullets: transitBullets,
     mapsUrl,
     actions: [transitAction(dest)],
   });
@@ -163,7 +231,7 @@ function buildOptions(
       lng: dest.lng,
       role: 'alternative',
       speechPitch: '',
-      bullets: [dest.name],
+      bullets: ['direkt', dest.name].slice(0, 2),
       mapsUrl,
       actions: [taxiAction(dest)],
     });
@@ -187,9 +255,72 @@ function bikeAction(dest: HomeMapNavTarget): QuickAction {
   };
 }
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+function speechBusyNow(): boolean {
+  try {
+    const { isSpeechActive } = require('../../module2/speech/speechQueue') as {
+      isSpeechActive: () => boolean;
+    };
+    if (isSpeechActive()) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const { isFusedTurnLive } = require('../../module2/speech/fusedTurnSpeech') as {
+      isFusedTurnLive: () => boolean;
+    };
+    if (isFusedTurnLive()) return true;
+  } catch {
+    /* soft */
+  }
+  try {
+    const st = require('../../store/useFinnusStore') as {
+      useFinnusStore: {
+        getState: () => { isAudiblySpeaking?: boolean; isGenerating?: boolean };
+      };
+    };
+    const g = st.useFinnusStore.getState();
+    if (g.isAudiblySpeaking || g.isGenerating) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
+}
+
+/**
+ * Call-1-Bridge / Haupt-Speech nicht abwürgen — Ask-Stimme erst wenn frei.
+ */
+async function speakAskWhenIdle(text: string, turnId: string): Promise<void> {
+  const trimmed = text.replace(/\s+/g, ' ').trim().slice(0, 420);
+  if (!trimmed) return;
+  const deadline = Date.now() + SPEECH_IDLE_WAIT_MS;
+  while (Date.now() < deadline && speechBusyNow()) {
+    await sleep(250);
+  }
+  if (speechBusyNow()) {
+    if (__DEV__) {
+      console.log('[mobilityAsk] skip voice — Call-1/Haupt-Speech noch aktiv');
+    }
+    return;
+  }
+  try {
+    const { enqueueSpeech } = await import('../../module2/speech/speechQueue');
+    enqueueSpeech({
+      kind: 'main',
+      text: trimmed,
+      turnId,
+    });
+  } catch {
+    /* soft */
+  }
+}
+
 export async function prefetchTransitMin(
   opts: MapNavMobilityAskInput,
-): Promise<{ transitMin: number; arriveMs: number | null } | null> {
+): Promise<TransitMeta | null> {
   try {
     const { planTransitHandsFree } = await import(
       '../navigation/handsFreeNav/transitBridge'
@@ -218,7 +349,15 @@ export async function prefetchTransitMin(
       best.endTime instanceof Date && Number.isFinite(best.endTime.getTime())
         ? best.endTime.getTime()
         : null;
-    return { transitMin, arriveMs };
+    const transfers =
+      typeof best.transfers === 'number' && Number.isFinite(best.transfers)
+        ? Math.max(0, Math.round(best.transfers))
+        : null;
+    const lineHint =
+      typeof best.firstTransitLine === 'string' && best.firstTransitLine.trim()
+        ? best.firstTransitLine.trim().slice(0, 24)
+        : null;
+    return { transitMin, arriveMs, transfers, lineHint };
   } catch {
     return null;
   }
@@ -227,25 +366,31 @@ export async function prefetchTransitMin(
 function publishAsk(
   dest: HomeMapNavTarget,
   walkMin: number,
-  transitMin: number | null,
-  arriveMs: number | null,
-  ui?: { hideWalk?: boolean; includeTaxi?: boolean; preferBike?: boolean },
-): void {
-  const spoken = buildAskSpeech(dest.name, walkMin, transitMin, arriveMs, ui);
+  transit: TransitMeta | null,
+  ui?: {
+    hideWalk?: boolean;
+    includeTaxi?: boolean;
+    preferBike?: boolean;
+    airMeters?: number;
+  },
+): string {
+  const spoken = buildAskSpeech(dest.name, walkMin, transit, ui);
   const result: PitchResult = {
     requestId: `map_nav_mobility_${Date.now()}`,
     softFail: false,
     spokenText: spoken,
     summary: dest.name,
-    options: buildOptions(dest, walkMin, transitMin, ui),
+    options: buildOptions(dest, walkMin, transit, ui),
     uiLayout: 'live_split',
   };
   publishPitchToLive(result, dest.name);
+  return spoken;
 }
 
 /**
  * Live-Guard zeigen + sprechen. Nicht die Route starten.
  * Prefetch blockiert die UI nicht — Ask sofort, Zeiten nachziehen.
+ * Stimme wartet auf freie TTS (kein Call-1-Abbruch).
  */
 export async function presentMapNavMobilityAsk(
   opts: MapNavMobilityAskInput,
@@ -255,6 +400,7 @@ export async function presentMapNavMobilityAsk(
     hideWalk: opts.hideWalk === true,
     includeTaxi: opts.includeTaxi === true,
     preferBike: opts.preferBike === true,
+    airMeters: opts.airMeters,
   };
   if (
     opts.airMeters != null &&
@@ -273,37 +419,42 @@ export async function presentMapNavMobilityAsk(
     /* soft */
   }
 
-  const knownTransit =
+  const knownTransit: TransitMeta | null =
     opts.transitMin != null && opts.transitMin > 0
-      ? Math.max(1, Math.round(opts.transitMin))
+      ? {
+          transitMin: Math.max(1, Math.round(opts.transitMin)),
+          arriveMs: null,
+          transfers: null,
+          lineHint: null,
+        }
       : null;
 
-  // Sofort Ask — Mic/UI nicht 4.5s auf Prefetch warten lassen.
-  publishAsk(opts.dest, walkMin, knownTransit, null, ui);
-  try {
-    const { enqueueSpeech } = await import('../../module2/speech/speechQueue');
-    enqueueSpeech({
-      kind: 'main',
-      text: buildAskSpeech(opts.dest.name, walkMin, knownTransit, null, ui).slice(
-        0,
-        420,
-      ),
-      turnId: `map_nav_mobility_${Date.now()}`,
-    });
-  } catch {
-    /* soft */
+  const turnId = `map_nav_mobility_${Date.now()}`;
+  // Sofort UI — Stimme erst wenn Call-1 fertig UND Prefetch kurz Zeit hatte.
+  publishAsk(opts.dest, walkMin, knownTransit, ui);
+
+  const speakFinal = (meta: TransitMeta | null) => {
+    const spoken = publishAsk(opts.dest, walkMin, meta, ui);
+    void speakAskWhenIdle(spoken, turnId);
+  };
+
+  if (knownTransit != null && knownTransit.transfers != null) {
+    speakFinal(knownTransit);
+    return;
   }
 
-  if (knownTransit != null) return;
-
-  void prefetchTransitMin(opts).then((prefetched) => {
-    if (!prefetched?.transitMin) return;
-    publishAsk(
-      opts.dest,
-      walkMin,
-      prefetched.transitMin,
-      prefetched.arriveMs,
-      ui,
-    );
+  const prefetched = await Promise.race([
+    prefetchTransitMin(opts),
+    sleep(1600).then(() => null as TransitMeta | null),
+  ]);
+  if (prefetched?.transitMin) {
+    speakFinal(prefetched);
+    return;
+  }
+  // Prefetch noch offen — UI schon da; Speech mit bisherigem Stand, Update nur UI.
+  speakFinal(knownTransit);
+  void prefetchTransitMin(opts).then((late) => {
+    if (!late?.transitMin) return;
+    publishAsk(opts.dest, walkMin, late, ui);
   });
 }

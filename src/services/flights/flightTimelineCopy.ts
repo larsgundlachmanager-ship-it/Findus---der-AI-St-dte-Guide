@@ -183,6 +183,8 @@ export function accessLegNotes(opts: {
 }): string | undefined {
   const walk = opts.leg.mode === 'WALK' || opts.leg.mode === 'BIKE';
   const bits: string[] = [];
+  const toPlace = tidyTransitPlace(opts.leg.toName);
+  const fromPlace = tidyTransitPlace(opts.leg.fromName);
   const nextRide = (opts.nextLine || '').trim();
   const nextHead = (opts.nextHeadsign || '').trim();
   const ride = nextRide
@@ -190,18 +192,29 @@ export function accessLegNotes(opts: {
       ? `${nextRide} nach ${nextHead}`
       : nextRide
     : '';
+  if (walk && toPlace && !opts.isLastWalk) {
+    bits.push(toPlace);
+  }
   if (walk && ride && !opts.isLastWalk) {
     bits.push(
       opts.waitMin != null && opts.waitMin >= 3
         ? `${opts.waitMin} Min warten auf ${ride}`
         : `Einstieg in ${ride}`,
     );
+  } else if (!walk && toPlace) {
+    bits.push(fromPlace && fromPlace !== toPlace ? `${fromPlace} → ${toPlace}` : toPlace);
+    if (opts.waitMin != null && opts.waitMin >= 3) {
+      bits.push(`${opts.waitMin} Min Umstieg`);
+    }
   } else if (opts.waitMin != null && opts.waitMin >= 3) {
     bits.push(
       opts.isLastWalk || opts.paddedWalk
         ? `${opts.waitMin} Min Puffer bis Terminal`
         : `${opts.waitMin} Min Umstieg`,
     );
+  }
+  if (walk && opts.isLastWalk && toPlace) {
+    bits.push(toPlace);
   }
   return bits.length ? bits.join(' · ') : undefined;
 }

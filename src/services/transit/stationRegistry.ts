@@ -52,6 +52,21 @@ export function getPackTransitStops(): PackTransitStop[] {
   return [...stopsById.values()];
 }
 
+/** Start ohne GPS: Pack-Schienenhalt (Bahnhof/Hbf) vor Bus. */
+export function pickPrimaryPackRailStop(): PackTransitStop | null {
+  const stops = getPackTransitStops();
+  if (!stops.length) return null;
+  const railMode = stops.find((s) =>
+    /\b(rail|train|bahn|s-bahn|regional)\b/i.test(String(s.mode || '')),
+  );
+  if (railMode) return railMode;
+  const named = stops.find((s) =>
+    /\b(bahnhof|hbf|haltepunkt|hauptbahnhof)\b/i.test(s.name),
+  );
+  if (named) return named;
+  return stops[0] ?? null;
+}
+
 export function findNearestPackStop(
   lat: number,
   lng: number,

@@ -20,8 +20,36 @@ export function shouldScrubStickyForNewTopic(
 /** Concierge-Card, Live-Inventory, Sticky-Pitch, Intent-Queue — bei neuem Thema. */
 export async function scrubStickyAfterCall1(
   analysis: ManagerAnalysis,
+  userText?: string,
 ): Promise<void> {
   if (!shouldScrubStickyForNewTopic(analysis)) return;
+
+  // Place-fact / Ort-Follow-up: sticky Ort behalten (Planten → „was kann man da machen?“).
+  const ut = String(userText || '').replace(/\s+/g, ' ').trim();
+  let keepPlace = false;
+  try {
+    const { isQuickLookupQuery } = require('../../services/concierge/celestialSkyQuery') as {
+      isQuickLookupQuery: (s: string) => boolean;
+    };
+    const { looksLikeNamedTriviaSubject } = require('../kernel/turnKernel') as {
+      looksLikeNamedTriviaSubject: (s: string) => boolean;
+    };
+    const worldPerson =
+      looksLikeNamedTriviaSubject(ut) ||
+      /\b(papst|präsident|präsidentin|bundeskanzler|mark\s+forster|manuel\s+neuer)\b/iu.test(
+        ut,
+      );
+    const placeFact =
+      /\b(wie\s+viele|was\s+kann\s+man|was\s+machen|eintritt|öffnungs|park\b|garten|museum|strand|alster|planten|blomen)\b/iu.test(
+        ut,
+      ) ||
+      (isQuickLookupQuery(ut) && !worldPerson);
+    keepPlace = placeFact && !worldPerson;
+  } catch {
+    keepPlace =
+      /\b(wie\s+viele|was\s+kann\s+man|park\b|garten|planten|blomen)\b/iu.test(ut) &&
+      !/\b(papst|präsident)\b/iu.test(ut);
+  }
 
   try {
     const { clearLastLiveInventory } = require('../context/shortTermContext') as {
@@ -40,24 +68,31 @@ export async function scrubStickyAfterCall1(
       setLastMenuUrl,
       clearLastMentionedCity,
       clearCityPackOffer,
+      getShortTerm,
     } = require('../context/shortTermContext') as {
       setLastPlaceName: (n: string | null) => void;
       setLastTopic: (t: string | null) => void;
       setLastMenuUrl: (u: string | null) => void;
       clearLastMentionedCity: () => void;
       clearCityPackOffer: () => void;
+      getShortTerm: () => { lastPlaceName: string | null };
     };
-    setLastPlaceName(null);
+    const stickyPlace = keepPlace
+      ? String(getShortTerm()?.lastPlaceName || '').trim() || null
+      : null;
+    setLastPlaceName(stickyPlace);
     setLastTopic(null);
     setLastMenuUrl(null);
     clearLastMentionedCity();
     clearCityPackOffer();
   } catch {
     try {
-      const { setLastPlaceName } = require('../context/shortTermContext') as {
-        setLastPlaceName: (n: string | null) => void;
-      };
-      setLastPlaceName(null);
+      if (!keepPlace) {
+        const { setLastPlaceName } = require('../context/shortTermContext') as {
+          setLastPlaceName: (n: string | null) => void;
+        };
+        setLastPlaceName(null);
+      }
     } catch {
       /* soft */
     }
@@ -87,6 +122,16 @@ export async function scrubStickyAfterCall1(
       clearIntentQueue: () => void;
     };
     clearIntentQueue();
+  } catch {
+    /* soft */
+  }
+
+  // Root-Ziel der Session bei Topic-Cut zurücksetzen.
+  try {
+    const { clearSessionRootGoal } = require('../context/shortTermContext') as {
+      clearSessionRootGoal: () => void;
+    };
+    clearSessionRootGoal();
   } catch {
     /* soft */
   }

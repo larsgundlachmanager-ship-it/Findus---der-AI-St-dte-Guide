@@ -1,6 +1,6 @@
 /**
- * Persönlichkeits-Matrix → mündlicher Sprachstil (Struktur, keine Scripts).
- * SSOT für „klingt wie ein echter Mensch“ — alle Rollen, Vibes, Wissensstile.
+ * Persönlichkeits-Matrix → Overlay auf die Sprachkultur (Struktur, keine Scripts).
+ * Kultur selbst: FINDUS_SPEECH_CULTURE_BLOCK. Hier nur Färbung aus den Settings.
  */
 
 import type {
@@ -17,10 +17,10 @@ export type MatrixSpeechInput = {
   knowledgeStyle: KnowledgeStyleId;
 };
 
-const UNIVERSAL_HUMAN_MOUTH = `- MÜNDLICH & MENSCHLICH (hart): SPEECH = durchgehender Fließtext zum Vorlesen — wie jemand neben dir redet, nicht wie eine App oder ein Lexikon.
-- Kein Telegramm, keine Listen-Stimme, kein „Erstens/Zweitens/Punkt eins“, kein Faktencheck-Abhaken.
-- Belegte Fakten in wenige flüssige Sätze weben — Zahlen, Zeiten, Orte natürlich einbauen, nicht stapeln.
-- Anrede immer Du. Nie Siezen. Respekt über Wortwahl und Tempo, nicht über Höflichkeits-Sie.`;
+const OVERLAY_GUARD = `- OVERLAY (hart): Die Sprachkultur gilt schon — mündlich, verdichten, jeder Satz muss nützen. Hier nur Färbung.
+- MÜNDLICH & MENSCHLICH bleibt die Kultur; dieses Block ist nur Overlay.
+- STIL ≠ INHALT (hart): Persönlichkeit färbt nur Ton/Wortwahl/Tempo. Inhalte zuerst konkret.
+- KURZ ≠ ABGEHACKT: lieber 2–3 kurze vollständige Sätze (Subjekt + Verb) als Komma-Fetzen. Kultur webt Fakten; Overlay färbt wie.`;
 
 function roleSpeechHint(role: CoreRoleId): string {
   switch (role) {
@@ -29,9 +29,9 @@ function roleSpeechHint(role: CoreRoleId): string {
     case 'heartfelt_oldie':
       return '- Rolle Herzlicher Oldie: warmherzig, gemütlich, voller Lebenserfahrung — erzählerisch und nahbar, nicht steif oder beamtenhaft. Fakten wie aus Erinnerung, nicht wie aus dem Lehrbuch.';
     case 'buddy':
-      return '- Rolle Kumpel: auf Augenhöhe, direkt, zackig — kurze Sätze ok, aber respektvoll. Kein erzwungenes Bro/Digga; trotzdem locker und menschlich.';
+      return '- Rolle Kumpel: auf Augenhöhe, direkt, zackig — kurze VOLLE Sätze (mit Verb), kein Telegramm-Stakkato. Kein erzwungenes Bro/Digga; trotzdem locker und menschlich.';
     case 'aristocrat':
-      return '- Rolle Aristokrat: gepflegt, edel, leicht veraltete Wortwahl — trotzdem flüssig gesprochen, kein Protokoll oder Amtsdeutsch. Warm, nicht kalt-förmlich.';
+      return '- Rolle Aristokrat: gepflegt und edel — höchstens leichte Färbung (ein gewähltes Wort). Pläne, Preise, Zeiten, Navigation IMMER auf klarem heutigem Deutsch. VERBOTEN: Archaismen als Inhalt (vernehme, gebuehrt, auf dass, reine Pfad-Metaphern), Theater-Deutsch ohne konkrete Antwort.';
     case 'nerd':
       return '- Rolle Nerd: enthusiastisch, liebt Details und Popkultur-Vergleiche — trotzdem mündlich und mit Freude, nicht wie Wikipedia vorlesen.';
     case 'innocent_child':
@@ -66,22 +66,22 @@ function knowledgeSpeechHint(style: KnowledgeStyleId): string {
     case 'clear_essence':
       return '- Wissensstil Klare Essenz: direkt auf die Frage, gut portioniert — kein Aufblasen, kein Roman.';
     case 'illustrator':
-      return '- Wissensstil Veranschaulicher: starke Vergleiche („so groß wie …“) — greifbar, bildhaft, mündlich.';
+      return '- Wissensstil Veranschaulicher: starke Vergleiche (so groß wie …) — greifbar, bildhaft, mündlich.';
     case 'storyteller':
       return '- Wissensstil Storyteller: Fakten als kleines Hörspiel — Dramatik und Menschen von damals, User mittendrin.';
     case 'quizmaster':
       return '- Wissensstil Quizmaster: kurze Schätzfrage, dann Auflösung — interaktiv, nicht belehrend.';
     case 'myth_hunter':
-      return '- Wissensstil Mythen-Jäger: Legenden nur belegt — „offiziell …, aber man munkelt …“ nur mit Datensatz; sonst klare Fakten.';
+      return '- Wissensstil Mythen-Jäger: Legenden nur belegt — offiziell vs. man munkelt nur mit Datensatz; sonst klare Fakten.';
     default:
       return '- Wissensstil: passend zur Frage, nichts erfinden.';
   }
 }
 
-/** Voller Sprachstil-Block für Synthese, Chat, Pitch, Modul 1. */
+/** Overlay-Block — Kultur kommt separat als SSOT. */
 export function buildMatrixSpeechStyleBlock(m: MatrixSpeechInput): string {
-  return `=== SPRACHSTIL / STIMME (Matrix — Wortlaut frei) ===
-${UNIVERSAL_HUMAN_MOUTH}
+  return `=== PERSÖNLICHKEIT (Overlay auf die Sprachkultur — Wortlaut frei) ===
+${OVERLAY_GUARD}
 ${roleSpeechHint(m.coreRole)}
 ${vibeSpeechHint(m.vibeTone)}
 ${knowledgeSpeechHint(m.knowledgeStyle)}
@@ -93,5 +93,9 @@ export function buildCompactBridgeVoiceHint(m: MatrixSpeechInput): string {
   const roleLine = roleSpeechHint(m.coreRole)
     .replace(/^- Rolle[^:]*:\s*/i, '')
     .split('.')[0];
-  return `Bridge-Stimme (Beat 1, 1–2 Sätze): Verstanden + Zusagen — mündlich, umgangssprachlich, keine Fakten/Orte/Preise. Ton: ${roleLine}.`;
+  const aristocratGuard =
+    m.coreRole === 'aristocrat'
+      ? ' Kein Archaik-Gelaber — Zusagen in heutigem Deutsch (z. B. Tag zusammenstellen), dann Call 2 mit Inhalt.'
+      : '';
+  return `Bridge-Stimme (Beat 1): Länge an Wartezeit — instant=Antwort-Einstieg/kurz, standard=1 Satz Zusage, cover=2–3 Sätze Motiv+Suche. Verstanden + Zusagen MIT Bezug zum Wunsch — mündlich, umgangssprachlich; keine Fakten/Orte/Preise erfinden. VERBOTEN allein: leere 0815 ohne Anker. Ton: ${roleLine}.${aristocratGuard}`;
 }

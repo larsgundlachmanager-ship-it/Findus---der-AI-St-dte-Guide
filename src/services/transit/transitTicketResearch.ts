@@ -18,7 +18,10 @@ import {
 
 export {
   dbJourneySearchUrl,
+  buildDbJourneySearchUrl,
+  buildDbBookingOpenUrl,
   extractTicketProductName,
+  looksLikeLongDistanceRailBooking,
   pickTransitTicketShopUrls,
   scoreTransitTicketShopUrl,
   wantsTransitTicketFare,
@@ -131,9 +134,20 @@ export async function researchTransitTicketFare(opts: {
   cityHint?: string | null;
 }): Promise<TransitTicketFareHit> {
   const ctx = activeTransitTicketContext();
-  const fromName = ctx?.fromName || 'der Haltestelle';
-  const toName = ctx?.toName || 'Ziel';
+  let fromName = ctx?.fromName || 'der Haltestelle';
+  let toName = ctx?.toName || 'Ziel';
   const line = ctx?.line;
+
+  // Tageskarte / Verbund ohne aktive Nav: Stadt als Kontext (Preis nur belegt)
+  if (
+    (!ctx || fromName === 'der Haltestelle') &&
+    /\b(tageskarte|tagesticket|9-?\s*uhr-?karte|deutschlandticket)\b/iu.test(
+      opts.userText || '',
+    )
+  ) {
+    fromName = (opts.cityHint || 'Verbund').trim() || 'Verbund';
+    toName = 'Tageskarte';
+  }
 
   let googleFare: string | null = null;
   if (
@@ -161,8 +175,13 @@ export async function researchTransitTicketFare(opts: {
   let sources: Array<{ url: string; title?: string | null }> = [];
   try {
     const { runWebResearch } = await import('../research/webResearchService');
+    const dayish = /\b(tageskarte|tagesticket|9-?\s*uhr-?karte)\b/iu.test(
+      opts.userText || '',
+    );
     const q = [
-      'Fahrkarte Einzelkarte Preis kaufen',
+      dayish
+        ? 'Tageskarte 9-Uhr-Karte Preis Ticketshop offiziell'
+        : 'Fahrkarte Einzelkarte Preis kaufen',
       fromName,
       toName,
       line,

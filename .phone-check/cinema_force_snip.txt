@@ -1,0 +1,13 @@
+  // Kino/Filme — nie Tour/Lauf-Tipp (Pack-FAQ „wie weit laufen“)
+  if (
+    /\b(kino|cinema|filmtheater|kinoprogramm|kinoticket)\b/iu.test(userText) ||
+    /\bwelche\s+filme\b/iu.test(userText) ||
+    (/\bfilme?\b/iu.test(userText) &&
+      /\b(laufen|heute|abend|schauen|programm|ticket)\b/iu.test(userText))
+  ) {
+    analysis.blueprintId = 'cinema';
+    analysis.blueprintStage = 'cinema_orient';
+    if (baseline === 'tour_module' || baseline === 'chat_lane' || !explicit) {
+      return apply('pitch_module', 'cinema_force', true);
+    }
+  }

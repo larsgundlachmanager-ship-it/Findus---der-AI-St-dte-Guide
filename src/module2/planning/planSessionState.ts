@@ -35,6 +35,11 @@ type Store = {
   overrideWish: IngestOpenWish | null;
   /** Text-Änderung während Confirm / Step */
   pendingAmendment: string | null;
+  /**
+   * Reject → Re-Pitch derselben Slot-Wish.
+   * waitForPickOrAdvance darf pending=null währenddessen nicht als „gewählt“ werten.
+   */
+  repitchingStepKey: string | null;
   waitingConfirm: boolean;
   waitingLocation: boolean;
   waitingConflict: boolean;
@@ -55,6 +60,7 @@ type Store = {
   clearOverride: () => void;
   setPendingAmendment: (text: string | null) => void;
   takePendingAmendment: () => string | null;
+  setRepitchingStepKey: (stepKey: string | null) => void;
   beginWaitConfirm: (
     timeoutMs?: number,
     timeoutOk?: boolean,
@@ -77,6 +83,7 @@ export const usePlanSessionStore = create<Store>((set, get) => ({
   taskQueue: [],
   overrideWish: null,
   pendingAmendment: null,
+  repitchingStepKey: null,
   waitingConfirm: false,
   waitingLocation: false,
   waitingConflict: false,
@@ -100,6 +107,7 @@ export const usePlanSessionStore = create<Store>((set, get) => ({
   setOverrideWish: (overrideWish) => set({ overrideWish }),
   clearOverride: () => set({ overrideWish: null }),
   setPendingAmendment: (pendingAmendment) => set({ pendingAmendment }),
+  setRepitchingStepKey: (repitchingStepKey) => set({ repitchingStepKey }),
   takePendingAmendment: () => {
     const t = get().pendingAmendment;
     set({ pendingAmendment: null });
@@ -215,6 +223,7 @@ export const usePlanSessionStore = create<Store>((set, get) => ({
       taskQueue: [],
       overrideWish: null,
       pendingAmendment: null,
+      repitchingStepKey: null,
       waitingConfirm: false,
       waitingLocation: false,
       waitingConflict: false,
@@ -244,6 +253,10 @@ export const usePlanSessionStore = create<Store>((set, get) => ({
 
 export function getActiveTaskOverride(): IngestOpenWish | null {
   return usePlanSessionStore.getState().overrideWish;
+}
+
+export function isPlanRepitching(): boolean {
+  return Boolean(usePlanSessionStore.getState().repitchingStepKey);
 }
 
 export function setActiveTaskOverride(wish: IngestOpenWish | null): void {

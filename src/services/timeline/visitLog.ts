@@ -147,6 +147,29 @@ export function removeVisitIds(ids: string[]): void {
   persistSoon();
 }
 
+/** Duplikat-Merge: gepatchte Einträge setzen, Drop-IDs löschen. */
+export function patchVisitEntries(
+  patch: Map<string, VisitLogEntry> | Record<string, VisitLogEntry>,
+  dropIds: string[],
+): void {
+  void hydrateVisitLog();
+  const map =
+    patch instanceof Map
+      ? patch
+      : new Map(Object.entries(patch ?? {}));
+  const drop = new Set(dropIds);
+  let next = entries
+    .filter((e) => !drop.has(e.id))
+    .map((e) => map.get(e.id) ?? e);
+  for (const [id, v] of map) {
+    if (!next.some((e) => e.id === id) && !drop.has(id)) {
+      next.push(v);
+    }
+  }
+  entries = prune(next);
+  persistSoon();
+}
+
 export function listVisitDateKeys(): string[] {
   void hydrateVisitLog();
   const keys = new Set(entries.map((e) => e.dateKey));
@@ -303,7 +326,7 @@ export function upsertVisitFromStamp(opts: {
       (e) =>
         ((opts.poiId != null && e.poiId === opts.poiId) ||
           e.name.toLowerCase() === name.toLowerCase()) &&
-        Math.abs(e.arrivedAtMs - opts.arrivedAtMs) < 30 * 60_000,
+        Math.abs(e.arrivedAtMs - opts.arrivedAtMs) < 6 * 60 * 60_000,
     );
     if (dup) {
       const stillHere = dup.leftAtMs == null;

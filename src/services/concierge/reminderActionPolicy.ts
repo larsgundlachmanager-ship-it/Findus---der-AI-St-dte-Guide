@@ -10,6 +10,11 @@ import type { QuickAction } from '../../types/concierge';
 import { resolveDateTimeMs } from '../time/temporalGerman';
 import { parseTimerDurationMs } from '../alarms/timerService';
 import { shortenActionLabel } from './actionLabelShorten';
+import {
+  isPackItemReminderAnchor,
+  defaultPackItemReminderMs,
+} from './timeCareIntent';
+export { isPackItemReminderAnchor, defaultPackItemReminderMs };
 
 /** Speech bietet Erinnern an (Permission-/Offer-Form). */
 export function speechOffersRemind(text: string): boolean {
@@ -32,6 +37,9 @@ export function userAsksRemind(text: string): boolean {
   if (!t) return false;
   return (
     /\berinner(?:e|ung)?\s+mich\b/iu.test(t) ||
+    /\bdaran\s+erinner(?:e|n)?\b/iu.test(t) ||
+    /\berinner(?:e|n)?(?:\s+\w+){0,6}\s+(?:mich|uns)\b/iu.test(t) ||
+    /\bkannst\s+du\s+mich.{0,24}erinner/iu.test(t) ||
     /\bsag\s+(?:mir\s+)?bescheid\b/iu.test(t) ||
     /\bnicht\s+vergessen\b/iu.test(t) ||
     /\bverpass(?:en)?\s+(?:nicht|ich)\b/iu.test(t) ||
@@ -131,6 +139,13 @@ export function extractConcreteReminderPlace(text: string): string | null {
     if (/^\d/.test(place)) continue;
     return place.slice(0, 48);
   }
+  // Pack-/Einkaufs-Item als Anker („Zahnbürste mitnehmen“)
+  const pack = t.match(
+    /\b((?:eine?\s+)?(?:zahnbürste|zahnbuerste|zahncreme|zahnpasta|shampoo|deo|powerbank|ladekabel|adapter|sonnencreme|medikament(?:e)?|tablette[n]?|pass|ausweis))\b/iu,
+  );
+  if (pack?.[1]) {
+    return pack[1].replace(/^(?:eine?\s+)/iu, '').trim().slice(0, 48);
+  }
   return null;
 }
 
@@ -187,6 +202,8 @@ function formatClockDe(ms: number): string {
 /**
  * Baut einen echten Erinnern-Button — oder null ohne Anker.
  */
+
+
 export function buildRemindOnlyQuickAction(opts: {
   speech?: string;
   userText?: string;
@@ -207,7 +224,18 @@ export function buildRemindOnlyQuickAction(opts: {
     if (!offerOrAsk) return null;
   }
 
-  const anchor = resolveReminderAnchor(opts);
+  let anchor = resolveReminderAnchor(opts);
+  if (
+    anchor.ok &&
+    anchor.atMs == null &&
+    isPackItemReminderAnchor(anchor.place)
+  ) {
+    anchor = {
+      ...anchor,
+      atMs: defaultPackItemReminderMs(opts.nowMs ?? Date.now()),
+      reason: 'time_and_place',
+    };
+  }
   if (!anchor.ok) return null;
 
   const place = anchor.place;

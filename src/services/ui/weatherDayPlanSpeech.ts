@@ -5,10 +5,13 @@
 
 import { buildOutfitAdviceFromWeather } from '../weather/outfitFromWeather';
 import type { WeatherGuideMatrix } from '../persona/weatherGuideVoice';
+import { weatherTimelineLineFromMatrix } from '../persona/weatherGuideVoice';
+import { formatClockSpokenDe } from '../../utils/dateKeys';
+import { isSunDownNow } from '../geo/solarTimes';
 import {
-  weatherOpenerFromMatrix,
-  weatherTimelineLineFromMatrix,
-} from '../persona/weatherGuideVoice';
+  formatRainHudLine,
+  isRainAlreadyFalling,
+} from '../weather/rainIncomingPolicy';
 
 export type WeatherChatSnap = {
   currentTempC?: number | null;
@@ -17,13 +20,20 @@ export type WeatherChatSnap = {
   nextRainProb?: number | null;
   rainStartsInMin?: number | null;
   nextRainAtMs?: number | null;
+  rainEndsAtMs?: number | null;
   summaryLine?: string | null;
   isHeavyRain?: boolean;
   tomorrowSummary?: string | null;
+  day2Summary?: string | null;
+  windSpeedMs?: number | null;
+  windGustMs?: number | null;
   nightLowC?: number | null;
   weatherCode?: number | null;
   sunsetMs?: number | null;
+  sunriseMs?: number | null;
   rainWindows?: Array<{ startMs: number; endMs: number; pop: number }>;
+  /** Stunden-Wettercode (OWM oder WMO) für Zeitfenster-Chips */
+  skyHours?: Array<{ ms: number; code: number }>;
 };
 
 export type InvitePoi = {
@@ -35,11 +45,11 @@ export type InvitePoi = {
   tags_json?: string | null;
 };
 
+/** Urban vs. ländlich — nur wenn belegt; sonst keine Sterne behaupten. */
+export type SkySettlementHint = 'urban' | 'rural' | null;
+
 function formatHm(ms: number): string {
-  return new Date(ms).toLocaleTimeString('de-DE', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return formatClockSpokenDe(ms) || '';
 }
 
 function roundDeg(n: number | null | undefined): number | null {
@@ -81,25 +91,33 @@ export function formatWeatherChat(opts: {
   snap: WeatherChatSnap | null;
   heavy: boolean;
   soon: boolean;
+  nowMs?: number;
+  settlementHint?: SkySettlementHint;
 }): string {
   const snap = opts.snap;
+  const nowMs = opts.nowMs ?? Date.now();
+  const night = isSunDownNow({
+    nowMs,
+    sunsetMs: snap?.sunsetMs,
+    sunriseMs: snap?.sunriseMs,
+  });
   const nowT = roundDeg(snap?.currentTempC);
   const highT = roundDeg(snap?.dayHighC);
-  const sky = skyPhraseFromCode(snap?.weatherCode);
+  const sky = skyPhraseFromCode(snap?.weatherCode, { night });
   const rain = rainHowHard(snap, opts.heavy, opts.soon);
   const tip = clothingTipFromSnap(snap);
   const bits: string[] = [];
-  if (sky && nowT != null && highT != null && highT > nowT + 1) {
+  if (sky && nowT != null && highT != null && highT > nowT + 1 && !night) {
     bits.push(
       `Gerade eher ${sky}, so um die ${nowT} Grad — bis heute Nachmittag Richtung ${highT}.`,
     );
-  } else if (nowT != null && highT != null && highT > nowT + 1) {
+  } else if (nowT != null && highT != null && highT > nowT + 1 && !night) {
     bits.push(
       `Gerade so um die ${nowT} Grad, bis heute Nachmittag Richtung ${highT}.`,
     );
-  } else if (sky && highT != null) {
+  } else if (sky && highT != null && !night) {
     bits.push(`Heute eher ${sky}, Spitze so um die ${highT} Grad.`);
-  } else if (highT != null) {
+  } else if (highT != null && !night) {
     bits.push(`Heute Spitze so um die ${highT} Grad.`);
   } else if (nowT != null) {
     bits.push(
@@ -110,18 +128,30 @@ export function formatWeatherChat(opts: {
   } else if (sky) {
     bits.push(`Gerade eher ${sky}.`);
   }
+  const stars = nightSkyStarsClause(sky, opts.settlementHint ?? null);
+  if (stars) bits.push(stars);
   bits.push(rain);
-  if (tip) bits.push(`Von der Kleidung her: ${tip}.`);
+  if (tip) bits.push(weaveClothingIntoProse(tip));
   const line = bits.filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
-  return line || snap?.summaryLine?.trim() || 'Wetter hab ich gerade nicht frisch.';
+  return (
+    unwrapClothingParentheses(line) ||
+    snap?.summaryLine?.trim() ||
+    'Wetter hab ich gerade nicht frisch.'
+  );
 }
 
-function skyPhraseFromCode(code: number | null | undefined): string | null {
+function skyPhraseFromCode(
+  code: number | null | undefined,
+  opts?: { night?: boolean },
+): string | null {
   if (code == null || !Number.isFinite(code)) return null;
+  const night = Boolean(opts?.night);
   // OpenWeather condition ids (200–804)
   if (code >= 200) {
-    if (code === 800) return 'klar / Sonne';
-    if (code >= 801 && code <= 802) return 'Wolken und Sonne';
+    if (code === 800) return night ? 'klarer Himmel' : 'klar / Sonne';
+    if (code >= 801 && code <= 802) {
+      return night ? 'teilweise bewölkt' : 'Wolken und Sonne';
+    }
     if (code >= 803 && code <= 804) return 'bewölkt';
     if (code >= 200 && code < 300) return 'Gewitter';
     if (code >= 300 && code < 400) return 'Niesel';
@@ -131,14 +161,31 @@ function skyPhraseFromCode(code: number | null | undefined): string | null {
     return null;
   }
   // WMO (Open-Meteo 0–99)
-  if (code === 0) return 'klar / Sonne';
-  if (code <= 3) return 'Wolken und Sonne';
+  if (code === 0) return night ? 'klarer Himmel' : 'klar / Sonne';
+  if (code <= 3) return night ? 'teilweise bewölkt' : 'Wolken und Sonne';
   if (code <= 48) return 'neblig';
   if (code <= 57) return 'Niesel';
   if (code <= 67) return 'Regen';
   if (code <= 77) return 'Schnee';
   if (code <= 82) return 'Schauer';
   if (code <= 99) return 'Gewitter';
+  return null;
+}
+
+/** Sterne nur bei klar + belegtem Settlement-Hint — nie erfinden. */
+function nightSkyStarsClause(
+  sky: string | null | undefined,
+  settlement: SkySettlementHint,
+): string | null {
+  if (!sky || !settlement) return null;
+  const clear = /klarer himmel|klar\b/i.test(sky) && !/wolk|bewölk/i.test(sky);
+  if (!clear) return null;
+  if (settlement === 'rural') {
+    return 'Draußen dürften die Sterne gut zu sehen sein.';
+  }
+  if (settlement === 'urban') {
+    return 'Sterne sind in der Stadt oft kaum zu sehen.';
+  }
   return null;
 }
 
@@ -153,74 +200,165 @@ function clothingTipFromSnap(snap: WeatherChatSnap | null): string {
     (typeof snap?.precipitationMm === 'number' && snap.precipitationMm >= 0.4) ||
     (typeof snap?.nextRainProb === 'number' && snap.nextRainProb >= 40) ||
     (typeof snap?.rainStartsInMin === 'number' && snap.rainStartsInMin <= 180);
-  if (wet) return 'leichte Regenjacke mitnehmen';
+  if (wet) return 'Nimm vorsichtshalber eine leichte Regenjacke mit';
+  const dress = advice.dressForTempC;
+  if (dress != null && dress >= 22) {
+    return advice.morningFresher
+      ? 'Leichte Kleidung reicht — morgens höchstens eine dünne Jacke, die du später ablegen kannst'
+      : 'Leichte Kleidung reicht völlig aus';
+  }
+  if (dress != null && dress >= 18) {
+    return 'Zieh dich eher leicht an, und nimm vorsichtshalber eine dünne Jacke mit';
+  }
+  if (dress != null && dress >= 14) {
+    return 'Am besten eine Übergangsjacke oder Schichten, dann bleibst du flexibel';
+  }
+  if (dress != null && dress >= 8) {
+    return 'Nimm auf jeden Fall einen warmen Pulli oder eine Jacke mit';
+  }
+  if (dress != null) {
+    return 'Zieh dich richtig warm an, es wird kühl';
+  }
   const bit = (advice.clothingBits ?? []).find(Boolean);
-  if (bit) return bit.replace(/\.$/, '').slice(0, 48);
-  const high = roundDeg(snap?.dayHighC);
-  if (high != null && high >= 20) return 'locker und luftig reicht';
-  if (high != null && high >= 14) return 'leichte Lage, evtl. dünne Jacke';
-  return 'Schichten — etwas Wärmeres dabei';
+  if (bit) return expandClothingFragment(bit);
+  return 'Am besten in Schichten anziehen, dann kannst du nachlegen';
 }
 
-/** Morgen-Vorhersage locker — nur mit belegtem tomorrowSummary. */
+/** Stichpunkt-/Hint-Fragmente → kurzer, sprechbarer Satzkern. */
+function expandClothingFragment(raw: string): string {
+  const t = raw.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
+  if (!t) return 'Am besten in Schichten anziehen';
+  if (/leichte\s+kleidung\s+reicht/i.test(t)) return 'Leichte Kleidung reicht völlig aus';
+  if (/eher\s+leicht|kurze\s+hose|t-?shirt/i.test(t)) {
+    return 'Zieh dich eher leicht an — T-Shirt reicht oft';
+  }
+  if (/übergangsjacke|schichten/i.test(t)) {
+    return 'Am besten eine Übergangsjacke oder Schichten';
+  }
+  if (/regenjacke|wind/i.test(t)) {
+    return 'Nimm vorsichtshalber eine Wind- oder Regenjacke mit';
+  }
+  if (/wärmere\s+jacke|pulli/i.test(t)) {
+    return 'Nimm auf jeden Fall einen warmen Pulli oder eine Jacke mit';
+  }
+  if (/richtig\s+warm/i.test(t)) return 'Zieh dich richtig warm an';
+  if (/flexibel/i.test(t)) return 'Am besten in Schichten anziehen, dann bleibst du flexibel';
+  return t;
+}
+
+/**
+ * Kleidung als voller kurzer Satz — kein Telegramm („Am besten leichte Lage“).
+ * Tipps aus clothingTipFromSnap sind schon satzreif.
+ */
+function weaveClothingIntoProse(tip: string): string {
+  const t = tip.replace(/\s+/g, ' ').trim().replace(/\.$/, '');
+  if (!t) return '';
+  // Schon satzreif (Verb / Imperativ / fertiger Hauptsatz)
+  if (
+    /^(nimm|pack|zieh|am besten|leichte\s+kleidung|ich\s+würde|ein\s+schirm)/i.test(
+      t,
+    ) ||
+    /\b(reicht|mitnehmen|einpacken|anziehen|ablegen|mit)\b/i.test(t)
+  ) {
+    const s = t.charAt(0).toUpperCase() + t.slice(1);
+    return /[.!?]$/.test(s) ? s : `${s}.`;
+  }
+  return `Am besten ${t.charAt(0).toLowerCase()}${t.slice(1)}.`;
+}
+
+/** Outfit-Klammern-Asides → eigenen Fließsatz (kein Meta in Parenthesen). */
+export function unwrapClothingParentheses(speech: string): string {
+  if (!speech) return speech;
+  return speech
+    .replace(
+      /\s*\(([^)]*(?:jacke|pulli|schicht|hose|outfit|kleidung|schirm|anzug|schuhe|lagen?)[^)]*)\)/gi,
+      (_m, inner: string) => {
+        const bit = String(inner || '')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .replace(/\.$/, '');
+        if (!bit) return '';
+        return ` ${weaveClothingIntoProse(bit)}`;
+      },
+    )
+    .replace(/\s+/g, ' ')
+    .replace(/\.\s*\./g, '.')
+    .trim();
+}
+
+/** Morgen-Vorhersage — kurz, Answer-First; Chips wie heute. */
 export function formatTomorrowWeatherChat(snap: WeatherChatSnap | null): {
   speech: string;
   bullets: string[];
 } {
   const raw = (snap?.tomorrowSummary ?? '').trim();
-  if (!raw) {
-    return { speech: '', bullets: [] };
+  const highT = roundDeg(snap?.dayHighC);
+  const lowT = roundDeg(snap?.nightLowC);
+  if (!raw && highT == null && !snap?.weatherCode) {
+    return {
+      speech: 'Für morgen hab ich gerade keinen frischen Ausblick.',
+      bullets: ['Morgen-Ausblick fehlt', 'Gleich nochmal versuchen'],
+    };
   }
+
   const tempM = raw.match(/(-?\d+)\s*[–\-]\s*(-?\d+)\s*°/);
   const untilM = raw.match(/bis\s+(-?\d+)\s*°/i);
   const skyM = raw.match(
     /(klar|Sonne|bewölkt|Wolken|Regen|Schauer|Niesel|Gewitter|Schnee|diesig)[^,]*/i,
   );
   const rainM = raw.match(/Regenrisiko\s+(\d+)\s*%/i);
-  const sky = skyM?.[0]?.trim() || 'wechselhaft';
-  let tempBit: string | null = null;
+  const skyFromCode = skyPhraseFromCode(snap?.weatherCode, { night: false });
+  const sky = skyM?.[0]?.trim() || skyFromCode || 'wechselhaft';
+  let lo: number | null = lowT;
+  let hi: number | null = highT;
   if (tempM) {
-    tempBit = `${tempM[1]} bis ${tempM[2]} Grad`;
+    lo = Number(tempM[1]);
+    hi = Number(tempM[2]);
   } else if (untilM) {
-    tempBit = `bis so um die ${untilM[1]} Grad`;
+    hi = Number(untilM[1]);
   }
-  const rainBit =
-    rainM && Number(rainM[1]) >= 30
-      ? Number(rainM[1]) >= 60
-        ? `Mit Regen solltest du rechnen (so um die ${rainM[1]} Prozent).`
-        : `Schauer möglich, so um die ${rainM[1]} Prozent.`
-      : 'Weitgehend trocken sieht gut aus.';
-  const tip = clothingTipFromSnap({
+  const rainPct = rainM ? Number(rainM[1]) : snap?.nextRainProb ?? null;
+  const eveningRain = typeof rainPct === 'number' && rainPct >= 45;
+
+  const skyLc = sky.toLowerCase();
+  let speech: string;
+  if (hi != null) {
+    speech = `Morgen eher ${skyLc}${
+      eveningRain ? ', abends mit Regen' : ''
+    } — Höchstwerte bis so um die ${hi} Grad.`;
+  } else {
+    speech = `Morgen eher ${skyLc}${eveningRain ? ', und Regen ist im Spiel' : ''}.`;
+  }
+
+  const fakeSnap: WeatherChatSnap = {
     ...snap,
-    dayHighC: tempM ? Number(tempM[2]) : untilM ? Number(untilM[1]) : snap?.dayHighC,
-    nextRainProb: rainM ? Number(rainM[1]) : snap?.nextRainProb,
-  });
+    dayHighC: hi ?? snap?.dayHighC,
+    nightLowC: lo ?? snap?.nightLowC,
+    nextRainProb: rainPct ?? snap?.nextRainProb,
+    weatherCode: snap?.weatherCode,
+  };
+  const timeline = buildTomorrowTimelineChips(snap, Date.now());
+  let bullets =
+    timeline.length >= 2
+      ? timeline
+      : buildWeatherFactChips({
+        snap: fakeSnap,
+        dayAhead: true,
+        night: false,
+        skyOverride: sky,
+      });
+  if (!bullets.length) {
+    bullets = [
+      sky.charAt(0).toUpperCase() + sky.slice(1),
+      lo != null && hi != null ? `${lo}° bis ${hi}°` : hi != null ? `bis ${hi}°` : '',
+      clothingChipFromSnap(fakeSnap, eveningRain),
+    ].filter(Boolean);
+  }
 
-  const speech = [
-    `Morgen wird's ${sky.toLowerCase()}`,
-    tempBit ? `Temperaturen liegen ungefähr ${tempBit}` : null,
-    rainBit,
-    tip ? `Von der Kleidung her: ${tip}` : null,
-  ]
-    .filter(Boolean)
-    .join('. ')
-    .replace(/\s+/g, ' ')
-    .replace(/\.\s*\./g, '.')
-    .trim();
-
-  const bullets = [
-    sky.charAt(0).toUpperCase() + sky.slice(1),
-    tempBit
-      ? tempM
-        ? `${tempM[1]}–${tempM[2]}°`
-        : untilM
-          ? `~${untilM[1]}°`
-          : tempBit
-      : raw.split(',')[0]?.trim() || 'Temperatur offen',
-    tip,
-  ].filter(Boolean) as string[];
-
-  return { speech, bullets: bullets.slice(0, 3) };
+  return {
+    speech: unwrapClothingParentheses(speech),
+    bullets: bullets.slice(0, 4),
+  };
 }
 
 function mergeRainWindows(
@@ -257,20 +395,28 @@ function rainTodayLine(
 function outfitLine(snap: WeatherChatSnap | null, nowMs: number): string | null {
   const hour = new Date(nowMs).getHours();
   if (hour >= 11) return null;
-  const advice = buildOutfitAdviceFromWeather({
-    nowTempC: snap?.currentTempC ?? null,
-    dayHighC: snap?.dayHighC ?? null,
-    precipProbPct: snap?.nextRainProb ?? null,
-    hour,
-  });
-  const bits = (advice.clothingBits ?? []).filter(Boolean).slice(0, 2);
-  if (!bits.length) return null;
-  return `Outfit: ${bits.join(', ')}.`;
+  return weaveClothingIntoProse(clothingTipFromSnap(snap));
 }
 
-function humanSkyPhrase(sky: string | null | undefined): string | null {
+function humanSkyPhrase(
+  sky: string | null | undefined,
+  opts?: { night?: boolean },
+): string | null {
   if (!sky) return null;
+  const night = Boolean(opts?.night);
   const s = sky.toLowerCase();
+  if (night) {
+    if (/klarer himmel|klar/.test(s) && !/wolke|bewölk/.test(s)) {
+      return 'klarem Himmel';
+    }
+    if (/teilweise|wolken und|leicht/.test(s)) return 'teilweise bewölktem Himmel';
+    if (/bewölkt|bedeckt/.test(s)) return 'bewölktem Himmel';
+    if (/regen|schauer/.test(s)) return 'nasser Luft';
+    if (/gewitter/.test(s)) return 'Gewitterstimmung';
+    if (/nebel|diesig/.test(s)) return 'diesigem Wetter';
+    if (/schnee/.test(s)) return 'Schneeluft';
+    return sky.replace(/klar\s*\/\s*sonne/i, 'klarem Himmel').replace(/sonne/gi, 'Himmel');
+  }
   if (/klar|sonne/.test(s) && !/wolke/.test(s)) return 'Sonnenschein';
   if (/wolken und sonne|leicht bewölkt/.test(s)) return 'Wolken und Sonne';
   if (/bewölkt|bedeckt/.test(s)) return 'bewölktem Himmel';
@@ -278,19 +424,76 @@ function humanSkyPhrase(sky: string | null | undefined): string | null {
   if (/gewitter/.test(s)) return 'Gewitterstimmung';
   if (/nebel|diesig/.test(s)) return 'diesigem Wetter';
   if (/schnee/.test(s)) return 'Schneeluft';
-  // „bei Wolken und Sonne“ / „bei bewölktem Himmel“
   return sky.replace(/^klar \/ sonne$/i, 'Sonnenschein');
 }
 
-function skyHudAdjective(sky: string | null | undefined): string {
+function skyHudAdjective(
+  sky: string | null | undefined,
+  opts?: { night?: boolean },
+): string {
   if (!sky) return 'wechselhaft';
+  const night = Boolean(opts?.night);
   const s = sky.toLowerCase();
+  if (night) {
+    // Nacht: Sonne/Klar → Sternenhimmel; kein „nass“-Telegramm.
+    if (/klarer himmel|klar/.test(s) && !/wolke|bewölk/.test(s)) {
+      return 'Sternenhimmel';
+    }
+    if (/teilweise|wolken/.test(s)) return 'teilweise bewölkt';
+    if (/bewölkt|bedeckt/.test(s)) return 'bewölkt';
+    if (/regen|schauer|nass|niesel/.test(s)) return 'regnerisch';
+    if (/gewitter/.test(s)) return 'gewittrig';
+    return 'bewölkt';
+  }
   if (/klar|sonne/.test(s) && !/wolke/.test(s)) return 'sonnig';
   if (/wolken und sonne|leicht/.test(s)) return 'wechselhaft';
   if (/bewölkt|bedeckt/.test(s)) return 'bewölkt';
-  if (/regen|schauer|nass/.test(s)) return 'nass';
+  if (/regen|schauer|nass|niesel/.test(s)) return 'regnerisch';
   if (/gewitter/.test(s)) return 'gewittrig';
   return 'wechselhaft';
+}
+
+function sameLocalCalendarDay(aMs: number, bMs: number): boolean {
+  const a = new Date(aMs);
+  const b = new Date(bMs);
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
+
+/** „Regen ab 8 Uhr“ → bei nächstem Kalendertag „… morgen“. Mitternacht = morgen früh. */
+function formatRainAbLabel(startMs: number, nowMs: number): string {
+  const d = new Date(startMs);
+  if (d.getHours() === 0 && d.getMinutes() === 0) {
+    return sameLocalCalendarDay(nowMs, startMs) ? 'Regen ab Mitternacht' : 'Regen morgen früh';
+  }
+  const hm = formatHm(startMs);
+  if (!sameLocalCalendarDay(nowMs, startMs)) {
+    return `Regen ab ${hm} morgen`;
+  }
+  return `Regen ab ${hm}`;
+}
+
+function hudWeatherEmoji(opts: {
+  night: boolean;
+  adj: string;
+  rainingNow: boolean;
+  rainHud: string | null;
+}): string {
+  const { night, adj, rainingNow, rainHud } = opts;
+  if (rainingNow || rainHud) return '🌧';
+  if (night) {
+    if (/stern|klar/i.test(adj)) return '🌙';
+    if (/regen|regnerisch|schauer|gewitter/i.test(adj)) return '🌧';
+    // Bewölkt / wechselhaft nachts: Wolke, nie Sonne.
+    return '☁️';
+  }
+  if (/sonnig|klar/i.test(adj)) return '☀️';
+  if (/bewölkt|wechselhaft|teilweise/i.test(adj)) return '⛅';
+  if (/regen|regnerisch|schauer|gewitter/i.test(adj)) return '🌧';
+  return '🌤';
 }
 
 /**
@@ -306,58 +509,105 @@ export function formatWeatherHudCard(opts: {
   const snap = opts.snap;
   if (!snap) return null;
   const nowMs = opts.nowMs ?? Date.now();
+  const night = isSunDownNow({
+    nowMs,
+    sunsetMs: snap.sunsetMs,
+    sunriseMs: snap.sunriseMs,
+  });
   const nowT = roundDeg(snap.currentTempC);
   const highT = roundDeg(snap.dayHighC);
+  const nightT = roundDeg(snap.nightLowC);
+  const rainOpts = {
+    nowMs,
+    currentPrecipMm: snap.precipitationMm,
+    nextRainAtMs: snap.nextRainAtMs,
+    rainStartsInMin: snap.rainStartsInMin,
+    rainEndsAtMs: snap.rainEndsAtMs,
+    rainWindows: snap.rainWindows,
+    weatherCode: snap.weatherCode,
+    isHeavyRain: snap.isHeavyRain,
+  };
+  const rainHud = formatRainHudLine(rainOpts);
+  const rainingNow = isRainAlreadyFalling(rainOpts);
   const skyRaw =
-    skyPhraseFromCode(snap.weatherCode) ??
+    skyPhraseFromCode(snap.weatherCode, { night }) ??
     (snap.summaryLine
       ? snap.summaryLine
           .replace(/^aktuell\s*-?\d+\s*°\s*[·,|\-–]?\s*/i, '')
           .split(/\s*[·|]\s*/)[0]
           ?.trim()
       : null);
-  const adj = skyHudAdjective(skyRaw);
-  const rainingNow =
-    Boolean(snap.isHeavyRain) ||
-    (typeof snap.precipitationMm === 'number' && snap.precipitationMm >= 0.4);
-  const emoji = rainingNow
-    ? '🌧'
-    : /sonnig|klar/.test(adj)
-      ? '☀️'
-      : /bewölkt|wechselhaft/.test(adj)
-        ? '⛅'
-        : '🌤';
+  let adj = rainingNow
+    ? 'regnerisch'
+    : skyHudAdjective(skyRaw, { night });
+  // Regen erst in Stunden: Himmel = Wolken, nicht „nass/regnerisch“ vortäuschen.
+  if (
+    !rainingNow &&
+    /regnerisch|nass/.test(adj) &&
+    (!rainHud || !/^(Aktuell\s+)?(Starker\s+|Leichter\s+)?Regen(\s+(jetzt|noch |in |bis )|$)/i.test(rainHud))
+  ) {
+    adj = 'bewölkt';
+  }
+  const emoji = hudWeatherEmoji({ night, adj, rainingNow, rainHud });
+
+  // Nach Sonnenuntergang: kein Tageshoch mehr („bis 18°“ wirkt falsch um 23 Uhr).
+  const showHigh =
+    !night && highT != null && (nowT == null || highT >= nowT + 2);
 
   let title: string;
-  if (nowT != null) {
-    title = `${emoji} Heute ${adj} · ${nowT}°`;
+  // Regenradar SSOT: Timing in der Headline — Temp nicht daneben doppeln.
+  if (rainHud) {
+    const headline = rainHud
+      .replace(/^Regen in (\d+) Min/, 'Regen in ~$1 Min')
+      .replace(/^Regen ab (\d{1,2} Uhr(?: \d{1,2})?|Mitternacht)$/, (_m, hm: string) => {
+        const start =
+          typeof snap.nextRainAtMs === 'number' ? snap.nextRainAtMs : null;
+        if (start != null && !sameLocalCalendarDay(nowMs, start)) {
+          if (/mitternacht/i.test(hm) || hm === '0 Uhr') return 'Regen morgen früh';
+          return `Regen ab ${hm} morgen`;
+        }
+        return `Regen ab ${hm}`;
+      });
+    title =
+      nowT != null && !showHigh
+        ? `🌧 ${headline} · ${nowT}°`
+        : `🌧 ${headline}`;
+  } else if (nowT != null) {
+    // Flüssig: „☁️ Bewölkt · 16°“ / „🌙 Sternenhimmel · 12°“ — kein „Jetzt nass“.
+    const skyLabel = adj.charAt(0).toUpperCase() + adj.slice(1);
+    title = `${emoji} ${skyLabel} · ${nowT}°`;
   } else {
-    title = `${emoji} Heute ${adj}`;
+    const skyLabel = adj.charAt(0).toUpperCase() + adj.slice(1);
+    title = `${emoji} ${skyLabel}`;
   }
 
   const metaBits: string[] = [];
-  if (highT != null && (nowT == null || highT >= nowT + 2)) {
+  if (showHigh) {
     metaBits.push(`bis ${highT}°`);
+  } else if (night && nightT != null && (nowT == null || nightT <= nowT - 1)) {
+    metaBits.push(`Nacht um ${nightT}°`);
   }
-  const win = mergeRainWindows(snap.rainWindows ?? [], nowMs)[0];
-  if (rainingNow) {
-    metaBits.push('regnet gerade');
-  } else if (win && win.startMs > nowMs) {
-    metaBits.push(`Regen ab ${formatHm(win.startMs)}`);
-  } else if ((snap.nextRainProb ?? 0) < 30 && !snap.isHeavyRain) {
-    metaBits.push('bleibt trocken');
-  } else if (snap.rainStartsInMin != null && snap.rainStartsInMin <= 90) {
-    metaBits.push(`Regen in ~${snap.rainStartsInMin} Min`);
+  if (!rainHud) {
+    const win = mergeRainWindows(snap.rainWindows ?? [], nowMs)[0];
+    if (win && win.startMs > nowMs) {
+      metaBits.push(formatRainAbLabel(win.startMs, nowMs));
+    } else if ((snap.nextRainProb ?? 0) < 30 && !snap.isHeavyRain) {
+      metaBits.push('bleibt trocken');
+    }
   }
-  const hour = new Date(nowMs).getHours();
-  const nightT = roundDeg(snap.nightLowC);
-  if (!metaBits.length && hour >= 18 && nightT != null) {
-    metaBits.push(`Nacht ${nightT}°`);
+  if (!metaBits.length && night && nightT != null) {
+    metaBits.push(`Nacht um ${nightT}°`);
+  }
+
+  // Nur „bis 18°“ als Meta → ausgeschrieben (nicht mickrig).
+  let meta = metaBits.length ? metaBits.join(' · ') : undefined;
+  if (meta && highT != null && /^bis -?\d+°$/.test(meta)) {
+    meta = `bis zu Temperaturen von ${highT} Grad`;
   }
 
   return {
     title,
-    meta: metaBits.length ? metaBits.join(' · ') : undefined,
+    meta,
   };
 }
 
@@ -366,35 +616,48 @@ export function formatWeatherBriefing(opts: {
   heavy: boolean;
   soon: boolean;
   nowMs?: number;
+  settlementHint?: SkySettlementHint;
 }): { speech: string; bullets: string[] } {
   const nowMs = opts.nowMs ?? Date.now();
   const hour = new Date(nowMs).getHours();
   const snap = opts.snap;
+  const night = isSunDownNow({
+    nowMs,
+    sunsetMs: snap?.sunsetMs,
+    sunriseMs: snap?.sunriseMs,
+  });
   const nowT = roundDeg(snap?.currentTempC);
   const highT = roundDeg(snap?.dayHighC);
   const nightT = roundDeg(snap?.nightLowC);
   const skyRaw =
-    skyPhraseFromCode(snap?.weatherCode) ??
+    skyPhraseFromCode(snap?.weatherCode, { night }) ??
     (snap?.summaryLine
       ? snap.summaryLine
           .replace(/^aktuell\s*-?\d+\s*°\s*[·,|\-–]?\s*/i, '')
           .split(/\s*[·|]\s*/)[0]
           ?.trim()
       : null);
-  const skyHuman = humanSkyPhrase(skyRaw);
-  const skyAdj = skyHudAdjective(skyRaw);
+  const skyHuman = humanSkyPhrase(skyRaw, { night });
+  const skyAdj = skyHudAdjective(skyRaw, { night });
 
   const sentences: string[] = [];
 
   if (nowT != null && skyHuman) {
-    sentences.push(`Aktuell haben wir ${nowT} Grad bei ${skyHuman}.`);
+    sentences.push(
+      night
+        ? `Aktuell so um die ${nowT} Grad bei ${skyHuman}.`
+        : `Aktuell haben wir ${nowT} Grad bei ${skyHuman}.`,
+    );
   } else if (nowT != null) {
-    sentences.push(`Aktuell haben wir so um die ${nowT} Grad.`);
+    sentences.push(`Aktuell so um die ${nowT} Grad.`);
   } else if (skyHuman) {
     sentences.push(`Draußen gerade eher ${skyAdj}.`);
   }
 
-  if (highT != null && (nowT == null || highT > nowT + 1)) {
+  const stars = nightSkyStarsClause(skyRaw, opts.settlementHint ?? null);
+  if (stars) sentences.push(stars);
+
+  if (!night && highT != null && (nowT == null || highT > nowT + 1)) {
     sentences.push(
       `Im weiteren Verlauf des Tages erreichen wir bis zu ${highT} Grad.`,
     );
@@ -419,6 +682,7 @@ export function formatWeatherBriefing(opts: {
   }
   const sunset = snap?.sunsetMs;
   if (
+    !night &&
     typeof sunset === 'number' &&
     Number.isFinite(sunset) &&
     sunset > nowMs &&
@@ -436,23 +700,28 @@ export function formatWeatherBriefing(opts: {
 
   const wear = outfitLine(snap, nowMs);
   if (wear) {
-    sentences.push(
-      wear.replace(/^Outfit:\s*/i, 'Von der Kleidung her: ').replace(/\.$/, '') +
-        '.',
-    );
+    sentences.push(wear);
   }
 
   const speech =
     sentences.filter(Boolean).join(' ').replace(/\s+/g, ' ').trim() ||
-    formatWeatherChat({ snap, heavy: opts.heavy, soon: opts.soon });
+    formatWeatherChat({
+      snap,
+      heavy: opts.heavy,
+      soon: opts.soon,
+      nowMs,
+      settlementHint: opts.settlementHint,
+    });
 
   // Kein „heute heute heute“ — doppeltes heute glätten
-  const speechClean = speech
-    .replace(/\bHeute\s+heute\b/gi, 'Heute')
-    .replace(/\bheute\s+heute\b/gi, 'heute');
+  const speechClean = unwrapClothingParentheses(
+    speech
+      .replace(/\bHeute\s+heute\b/gi, 'Heute')
+      .replace(/\bheute\s+heute\b/gi, 'heute'),
+  );
 
   const bullets: string[] = [];
-  if (nowT != null && highT != null && highT !== nowT) {
+  if (nowT != null && highT != null && highT !== nowT && !night) {
     bullets.push(`${nowT}° jetzt · bis ${highT}°`);
   } else if (nowT != null) {
     bullets.push(`${nowT}° jetzt`);
@@ -562,37 +831,124 @@ function rainStoryLine(
   return null;
 }
 
-function clothingGuideLine(opts: {
+function clothingChipFromSnap(
+  snap: WeatherChatSnap | null,
+  eveningRain: boolean,
+): string {
+  const tip = clothingTipFromSnap(snap);
+  const wet =
+    eveningRain ||
+    Boolean(snap?.isHeavyRain) ||
+    (typeof snap?.nextRainProb === 'number' && snap.nextRainProb >= 40) ||
+    /regenjacke|regenschirm|\bschirm\b/i.test(tip);
+  if (wet) {
+    if (/übergang|schicht/i.test(tip)) return 'Übergangsjacke, abends Regenschirm';
+    if (/leichte|dünne|regenjacke/i.test(tip)) return 'Leichte Jacke, Regenschirm';
+    return 'Regenschirm';
+  }
+  if (/übergang|schicht/i.test(tip)) return 'Übergangsjacke';
+  if (/leichte kleidung|t-?shirt/i.test(tip)) return 'Leichte Kleidung';
+  if (/dünne jacke|leichte jacke/i.test(tip)) return 'Leichte Jacke';
+  if (/warm|pulli/i.test(tip)) return 'Warme Jacke / Pulli';
+  if (/jacke/i.test(tip)) return 'Jacke mitnehmen';
+  return 'Dem Wetter anpassen';
+}
+
+function weatherSkyEmoji(
+  code: number | null | undefined,
+  raining: boolean,
+  night: boolean,
+): string {
+  if (raining) return '🌧️';
+  if (code == null || !Number.isFinite(code)) return night ? '☁️' : '⛅';
+  if (code >= 200) {
+    if (code >= 200 && code < 300) return '⛈️';
+    if (code >= 300 && code < 600) return '🌧️';
+    if (code === 800) return night ? '🌙' : '☀️';
+    if (code >= 801 && code <= 802) return '⛅';
+    return '☁️';
+  }
+  if (code === 0) return night ? '🌙' : '☀️';
+  if (code <= 3) return '⛅';
+  if (code <= 67) return '🌧️';
+  if (code <= 99) return '⛈️';
+  return '⛅';
+}
+
+/** UI-Chips wie Wetter-App: Tagesüber / Abends / Temp / Outfit — max 4. */
+export function buildWeatherFactChips(opts: {
   snap: WeatherChatSnap | null;
-  prob: number;
-  heavy: boolean;
-  nowT: number | null;
-  highT: number | null;
-}): string | null {
-  const tips: string[] = [];
-  if (opts.prob >= 40 || opts.heavy) {
-    tips.push('ich würde auf jeden Fall was Regenfestes einpacken');
-  }
-  if (opts.prob >= 55 || opts.heavy) {
-    tips.push('ein Schirm schadet auch nicht');
-  }
-  if (
-    ((opts.nowT ?? opts.highT ?? 99) <= 17 || (opts.highT ?? 99) <= 18) &&
-    (opts.prob >= 30 || opts.heavy)
-  ) {
-    tips.push('und im Nassen friert man schneller — vielleicht noch ein Pulli');
-  } else {
-    const tip = clothingTipFromSnap(opts.snap);
-    if (tip && opts.prob < 40) {
-      tips.push(tip.replace(/^pack\s+/i, 'pack dir ').replace(/^nimm\s+/i, 'nimm dir '));
+  nowMs?: number;
+  dayAhead?: boolean;
+  night?: boolean;
+  /** Wenn kein weatherCode (z. B. Morgen-Summary-Text). */
+  skyOverride?: string | null;
+}): string[] {
+  const snap = opts.snap;
+  const nowMs = opts.nowMs ?? Date.now();
+  const night = Boolean(opts.night);
+  const dayAhead = Boolean(opts.dayAhead);
+  const highT = roundDeg(snap?.dayHighC);
+  const lowT = roundDeg(snap?.nightLowC);
+  const nowT = roundDeg(snap?.currentTempC);
+  const skyRaw =
+    (opts.skyOverride || '').trim() ||
+    skyPhraseFromCode(snap?.weatherCode, {
+      night: night && !dayAhead,
+    }) ||
+    '';
+  const skyLabel = skyRaw
+    ? skyRaw.charAt(0).toUpperCase() + skyRaw.slice(1)
+    : null;
+  const win = mergeRainWindows(snap?.rainWindows ?? [], nowMs)[0];
+  const rainLater = Boolean(
+    win && win.startMs > nowMs && (snap?.nextRainProb ?? 0) >= 40,
+  );
+  const rainHour = win ? new Date(win.startMs).getHours() : -1;
+  const rainSlotLabel =
+    rainHour >= 17 ? 'Abends Regen' : rainHour >= 12 ? 'Nachmittags Regen' : 'Später Regen';
+  const rainingNow =
+    Boolean(snap?.isHeavyRain) ||
+    (typeof snap?.precipitationMm === 'number' && snap.precipitationMm >= 0.4);
+  const rainLikely =
+    rainLater ||
+    (!win && typeof snap?.nextRainProb === 'number' && snap.nextRainProb >= 45);
+  const chips: string[] = [];
+  if (skyLabel) {
+    const emoji = weatherSkyEmoji(
+      snap?.weatherCode,
+      rainingNow && !rainLikely,
+      night && !dayAhead,
+    );
+    if (dayAhead || (!night && (highT != null || skyLabel))) {
+      chips.push(`${emoji} Tagesüber ${skyLabel}`);
+    } else {
+      chips.push(`${emoji} ${skyLabel}`);
     }
   }
-  if (!tips.length) return null;
-  if (tips.length === 1) {
-    return tips[0]!.charAt(0).toUpperCase() + tips[0]!.slice(1) + '.';
+  if (rainLater) {
+    const when =
+      win && win.startMs > nowMs
+        ? `${rainSlotLabel} ab ${formatHm(win.startMs)}`
+        : rainSlotLabel;
+    chips.push(`🌧️ ${when}`);
+  } else if (rainLikely) {
+    chips.push('🌧️ Regen möglich');
+  } else if ((snap?.nextRainProb ?? 0) < 30 && !rainingNow && chips.length < 3) {
+    chips.push('☀️ Weitgehend trocken');
   }
-  const last = tips.pop()!;
-  return `${tips.join(', ')} — ${last}.`.replace(/^./, (c) => c.toUpperCase());
+  if (lowT != null && highT != null && lowT !== highT) {
+    chips.push(`${lowT}° bis ${highT}°`);
+  } else if (nowT != null && highT != null && nowT !== highT) {
+    chips.push(`${nowT}° bis ${highT}°`);
+  } else if (highT != null) {
+    chips.push(`bis ${highT}°`);
+  } else if (nowT != null) {
+    chips.push(`${nowT}°`);
+  }
+  const wear = clothingChipFromSnap(snap, rainLikely || rainingNow);
+  if (wear) chips.push(wear);
+  return chips.slice(0, 4);
 }
 
 function joinGuideSentences(sentences: Array<string | null | undefined>): string {
@@ -613,8 +969,339 @@ function tempMildLabel(highT: number | null): string | null {
 }
 
 /**
- * Voller Wetterbericht für Voice — Guide-Ton, Fakten nur belegt (Ziffern eher in Bullets).
+ * Wetter Call-2: 1–2 kurze umgangssprachliche Sätze, Answer-First.
+ * Kein Opener („Also in Prisdorf…“ / „Zum Wetter:“) — das war Call 1.
+ * Kleidung nur in Stichpunkten, nicht nochmal in der Speech.
  */
+
+type ForecastDayBit = {
+  label: string;
+  sky: string;
+  rainy: boolean;
+  highC: number | null;
+};
+
+function skyBucket(sky: string): string {
+  const s = sky.toLowerCase();
+  if (/schauer|regen|niesel|gewitter/.test(s)) return 'nass';
+  if (/dicht|bewölkt|bewoelkt|wolken/.test(s) && !/sonne/.test(s)) return 'bewölkt';
+  if (/sonne|klar|wolken und sonne|leicht/.test(s)) return 'sonnig';
+  return s || 'wechselhaft';
+}
+
+function parseDaySummary(raw: string | null | undefined): {
+  sky: string;
+  rainy: boolean;
+  highC: number | null;
+} {
+  const t = (raw || '').trim();
+  const tempM = t.match(/(-?\d+)\s*[–\-]\s*(-?\d+)\s*°/);
+  const untilM = t.match(/bis\s+(-?\d+)\s*°/i);
+  const skyM = t.match(
+    /(klar\s*\/\s*Sonne|klar|Sonne|bewölkt|bewoelkt|Wolken und Sonne|leicht bewölkt|Regen|Schauer|Niesel|Gewitter|Schnee|diesig|neblig|wechselhaft)[^,]*/i,
+  );
+  const rainM = t.match(/Regenrisiko\s+(\d+)\s*%/i);
+  const rainPct = rainM ? Number(rainM[1]) : null;
+  const sky = (skyM?.[0] || 'wechselhaft').trim();
+  const rainy =
+    (typeof rainPct === 'number' && rainPct >= 40) ||
+    /regen|schauer|niesel|gewitter/i.test(sky);
+  let highC: number | null = null;
+  if (tempM) highC = Number(tempM[2]);
+  else if (untilM) highC = Number(untilM[1]);
+  return { sky, rainy, highC };
+}
+
+
+function skyWindowEmoji(code: number | null | undefined): string {
+  if (code == null || !Number.isFinite(code)) return '⛅';
+  if (code >= 200) {
+    if (code >= 200 && code < 300) return '⛈️';
+    if (code >= 520 && code <= 531) return '🌦️';
+    if (code >= 300 && code < 600) return '🌧️';
+    if (code >= 600 && code < 700) return '❄️';
+    if (code === 800) return '☀️';
+    if (code >= 801 && code <= 802) return '⛅';
+    return '☁️';
+  }
+  if (code === 0) return '☀️';
+  if (code <= 2) return '⛅';
+  if (code === 3) return '☁️';
+  if (code <= 48) return '🌫️';
+  if (code <= 67) return '🌧️';
+  if (code <= 77) return '❄️';
+  if (code <= 82) return '🌦️';
+  if (code <= 99) return '⛈️';
+  return '⛅';
+}
+
+/** Morgen-Zeitfenster: Temp-Spanne, dann Icon + Uhr (letzte Phase „ab“). */
+export function buildTomorrowTimelineChips(
+  snap: WeatherChatSnap | null,
+  nowMs = Date.now(),
+): string[] {
+  if (!snap) return [];
+  const raw = (snap.tomorrowSummary || '').trim();
+  const tempM = raw.match(/(-?\d+)\s*[–\-]\s*(-?\d+)\s*°/);
+  const parsed = parseDaySummary(raw);
+  const lo = tempM ? Number(tempM[1]) : null;
+  const hi = parsed.highC;
+  const chips: string[] = [];
+  if (lo != null && hi != null && lo !== hi) chips.push(`🌡️ ${lo}° bis ${hi}°`);
+  else if (hi != null) chips.push(`🌡️ bis ${hi}°`);
+  else if (lo != null) chips.push(`🌡️ ${lo}°`);
+
+  const day = new Date(nowMs);
+  day.setDate(day.getDate() + 1);
+  day.setHours(0, 0, 0, 0);
+  const start = day.getTime();
+  const end = start + 24 * 3600_000;
+  const hours = (snap.skyHours ?? [])
+    .filter((h) => h.ms >= start && h.ms < end)
+    .filter((h) => {
+      const hr = new Date(h.ms).getHours();
+      return hr >= 6 && hr <= 23;
+    })
+    .sort((a, b) => a.ms - b.ms);
+
+  type Win = { emoji: string; startH: number; endH: number };
+  const wins: Win[] = [];
+  for (const h of hours) {
+    const emoji = skyWindowEmoji(h.code);
+    const hr = new Date(h.ms).getHours();
+    const last = wins[wins.length - 1];
+    if (last && last.emoji === emoji && hr <= last.endH + 1) {
+      last.endH = Math.max(last.endH, hr);
+    } else {
+      wins.push({ emoji, startH: hr, endH: hr });
+    }
+  }
+  while (wins.length > 3) {
+    let idx = 1;
+    let best = Infinity;
+    for (let i = 1; i < wins.length; i++) {
+      const len = wins[i]!.endH - wins[i]!.startH;
+      if (len < best) {
+        best = len;
+        idx = i;
+      }
+    }
+    wins[idx - 1]!.endH = Math.max(wins[idx - 1]!.endH, wins[idx]!.endH);
+    wins.splice(idx, 1);
+  }
+  for (let i = 0; i < wins.length; i++) {
+    const w = wins[i]!;
+    const last = i === wins.length - 1;
+    const label = last
+      ? `ab ${w.startH} Uhr`
+      : `${w.startH} bis ${wins[i + 1]!.startH} Uhr`;
+    chips.push(`${w.emoji} ${label}`);
+  }
+  return chips.slice(0, 4);
+}
+
+/**
+ * Heute: Mittag · Nachmittag · Abend (aus Stunden-Matrix).
+ * Max 3 Ablauf-Chips + optional Temp — für Tagesfrage in den Stichpunkten.
+ */
+export function buildTodayDayPartChips(
+  snap: WeatherChatSnap | null,
+  nowMs = Date.now(),
+): string[] {
+  if (!snap) return [];
+  const day = new Date(nowMs);
+  day.setHours(0, 0, 0, 0);
+  const start = day.getTime();
+  const end = start + 24 * 3600_000;
+  const hours = (snap.skyHours ?? [])
+    .filter((h) => h.ms >= start && h.ms < end)
+    .sort((a, b) => a.ms - b.ms);
+
+  const pick = (
+    fromH: number,
+    toH: number,
+  ): { emoji: string; code: number } | null => {
+    const slice = hours.filter((h) => {
+      const hr = new Date(h.ms).getHours();
+      return hr >= fromH && hr < toH;
+    });
+    if (!slice.length) return null;
+    // Mitte des Fensters bevorzugen
+    const mid = slice[Math.floor(slice.length / 2)]!;
+    return { emoji: skyWindowEmoji(mid.code), code: mid.code };
+  };
+
+  const noon = pick(11, 14);
+  const afternoon = pick(14, 17);
+  const evening = pick(17, 22);
+  const chips: string[] = [];
+  if (noon) chips.push(`${noon.emoji} Mittag`);
+  if (afternoon) chips.push(`${afternoon.emoji} Nachmittag`);
+  if (evening) chips.push(`${evening.emoji} Abend`);
+
+  const highT = roundDeg(snap.dayHighC);
+  const nowT = roundDeg(snap.currentTempC);
+  if (chips.length >= 2) {
+    if (nowT != null && highT != null && nowT !== highT) {
+      chips.unshift(`${nowT}° → ${highT}°`);
+    } else if (highT != null) {
+      chips.unshift(`bis ${highT}°`);
+    }
+    return chips.slice(0, 4);
+  }
+  return [];
+}
+
+function weekdayLabelDe(ms: number): string {
+  return new Date(ms).toLocaleDateString('de-DE', { weekday: 'long' });
+}
+
+function joinDayLabels(labels: string[]): string {
+  if (!labels.length) return '';
+  if (labels.length === 1) return labels[0]!;
+  if (labels.length === 2) return `${labels[0]} und ${labels[1]}`;
+  return `${labels.slice(0, -1).join(', ')} und ${labels[labels.length - 1]}`;
+}
+
+function skySpeechPhrase(sky: string): string {
+  const b = skyBucket(sky);
+  if (b === 'bewölkt') return 'dicht bewölkt';
+  if (b === 'sonnig') {
+    if (/wolken und sonne|leicht/i.test(sky)) return 'zeitweiligen Sonnenschein';
+    if (/klar/i.test(sky)) return 'überwiegend klar';
+    return 'zeitweiligen Sonnenschein';
+  }
+  if (b === 'nass') return sky.toLowerCase();
+  return sky.toLowerCase();
+}
+
+/** Allgemeine Vorhersage — Radio-/DWD-Struktur, Slots dynamisch. */
+function formatGeneralForecastSpeech(opts: {
+  snap: WeatherChatSnap;
+  city?: string | null;
+  namedCity?: boolean;
+  nowMs: number;
+}): string | null {
+  const snap = opts.snap;
+  const nowMs = opts.nowMs;
+  const todaySky =
+    skyPhraseFromCode(snap.weatherCode, { night: false }) || 'wechselhaft';
+  const todayRain =
+    (snap.nextRainProb ?? 0) >= 40 ||
+    Boolean(snap.isHeavyRain) ||
+    /regen|schauer/i.test(todaySky);
+  const tom = parseDaySummary(snap.tomorrowSummary);
+  const day2 = parseDaySummary(snap.day2Summary);
+  const hasTom = Boolean((snap.tomorrowSummary || '').trim());
+  const hasDay2 = Boolean((snap.day2Summary || '').trim());
+  if (!hasTom && !hasDay2) return null;
+
+  const days: ForecastDayBit[] = [
+    {
+      label: 'heute',
+      sky: todaySky,
+      rainy: todayRain,
+      highC: roundDeg(snap.dayHighC),
+    },
+  ];
+  if (hasTom) {
+    days.push({
+      label: 'morgen',
+      sky: tom.sky,
+      rainy: tom.rainy,
+      highC: tom.highC,
+    });
+  }
+  if (hasDay2) {
+    days.push({
+      label: `am ${weekdayLabelDe(nowMs + 2 * 24 * 3600_000)}`,
+      sky: day2.sky,
+      rainy: day2.rainy,
+      highC: day2.highC,
+    });
+  }
+
+  // Gruppe nach Himmel-Bucket
+  const groups = new Map<string, ForecastDayBit[]>();
+  for (const d of days) {
+    const key = skyBucket(d.sky);
+    const list = groups.get(key) ?? [];
+    list.push(d);
+    groups.set(key, list);
+  }
+  const ordered = [...groups.entries()].sort((a, b) => b[1].length - a[1].length);
+  const primary = ordered[0];
+  const secondary = ordered.find((g) => g[0] !== primary?.[0]);
+
+  const place =
+    opts.city &&
+    opts.city.length >= 2 &&
+    !/^\d+$/u.test(opts.city) &&
+    !/^(sechzehn|siebzehn|achtzehn|neunzehn|zwanzig|grad)$/iu.test(opts.city)
+      ? ` in ${opts.city}`
+      : '';
+
+  const sentences: string[] = [];
+  if (primary && secondary) {
+    const pLabels = joinDayLabels(primary[1].map((d) => d.label));
+    const sLabels = joinDayLabels(secondary[1].map((d) => d.label));
+    const pPhrase = skySpeechPhrase(primary[1][0]!.sky);
+    const sPhrase = skySpeechPhrase(secondary[1][0]!.sky);
+    // „gibt es … Sonnenschein“ vs „zeigt sich … bewölkt“
+    const sVerb = /sonnenschein|klar/i.test(sPhrase)
+      ? `gibt es ${sLabels} ${sPhrase}`
+      : `zeigt sich ${sLabels} eher ${sPhrase}`;
+    sentences.push(
+      `Während sich das Wetter${place} ${pLabels} ${pPhrase} zeigt, ${sVerb}.`,
+    );
+  } else if (primary) {
+    const pLabels = joinDayLabels(primary[1].map((d) => d.label));
+    const pPhrase = skySpeechPhrase(primary[1][0]!.sky);
+    sentences.push(
+      `Das Wetter${place} zeigt sich ${pLabels} eher ${pPhrase}.`,
+    );
+  }
+
+  const rainyLabels = days.filter((d) => d.rainy).map((d) => d.label);
+  if (rainyLabels.length) {
+    sentences.push(
+      `Dabei muss ${joinDayLabels(rainyLabels)} mit Regenschauern gerechnet werden.`,
+    );
+  }
+
+  const windMs = snap.windSpeedMs;
+  const gustMs = snap.windGustMs;
+  const windy =
+    (typeof windMs === 'number' && windMs >= 8) ||
+    (typeof gustMs === 'number' && gustMs >= 12);
+  const highs = days
+    .map((d) => d.highC)
+    .filter((n): n is number => typeof n === 'number' && Number.isFinite(n));
+  const highAvg =
+    highs.length > 0
+      ? Math.round(highs.reduce((a, b) => a + b, 0) / highs.length)
+      : roundDeg(snap.dayHighC);
+
+  const tailBits: string[] = [];
+  if (windy) {
+    tailBits.push('weht ein böig auffrischender Wind');
+  }
+  if (highAvg != null) {
+    tailBits.push(`werden Höchstwerte um ${highAvg} Grad erreicht`);
+  }
+  if (tailBits.length === 1) {
+    sentences.push(`Dazu ${tailBits[0]}.`);
+  } else if (tailBits.length === 2) {
+    sentences.push(`Dazu ${tailBits[0]} und es ${tailBits[1]}.`);
+  }
+
+  const speech = sentences
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return speech || null;
+}
+
 export function formatWeatherVoiceAnswer(opts: {
   snap: WeatherChatSnap | null;
   cityHint?: string | null;
@@ -624,11 +1311,17 @@ export function formatWeatherVoiceAnswer(opts: {
   userText?: string | null;
   /** User nannte explizit eine Stadt — nicht „du liegst bei …“. */
   namedCity?: boolean;
+  settlementHint?: SkySettlementHint;
 }): { speech: string; bullets: string[] } {
   const snap = opts.snap;
   const nowMs = opts.nowMs ?? Date.now();
   const city = (opts.cityHint || '').replace(/\s+/g, ' ').trim() || null;
   const hour = new Date(nowMs).getHours();
+  const night = isSunDownNow({
+    nowMs,
+    sunsetMs: snap?.sunsetMs,
+    sunriseMs: snap?.sunriseMs,
+  });
   let dayAhead = false;
   try {
     const { weatherAskIsTodayDayAhead } = require('../../module2/planning/planUtteranceGate') as {
@@ -639,6 +1332,14 @@ export function formatWeatherVoiceAnswer(opts: {
     dayAhead = false;
   }
   const namedCity = Boolean(opts.namedCity && city);
+  // Explizite Stadt ohne „heute“: Ortsbezug behalten (nicht Frühmorgens-Tages-Lead ohne Stadt).
+  if (
+    namedCity &&
+    dayAhead &&
+    !/\bheut(?:e|en)\b/i.test(opts.userText ?? '')
+  ) {
+    dayAhead = false;
+  }
   const snapForRain: WeatherChatSnap | null =
     snap && dayAhead
       ? {
@@ -656,115 +1357,169 @@ export function formatWeatherVoiceAnswer(opts: {
   const thunder = isThunderCode(snap.weatherCode);
   const nowT = roundDeg(snap.currentTempC);
   const highT = roundDeg(snap.dayHighC);
-  const lowT = roundDeg(snap.nightLowC);
-  const sky = skyPhraseFromCode(snap.weatherCode);
-  const mild = tempMildLabel(highT);
-
-  const opener = weatherOpenerFromMatrix({
-    matrix: opts.matrix,
-    cityHint: city,
+  const sky = skyPhraseFromCode(snap.weatherCode, {
+    night: night && !dayAhead,
   });
+  const mild = tempMildLabel(highT);
+  const win = mergeRainWindows(snapForRain?.rainWindows ?? [], nowMs)[0];
+  const rainLater = Boolean(
+    win && win.startMs > nowMs && (prob >= 40 || heavy),
+  );
+  const rainHour = win ? new Date(win.startMs).getHours() : -1;
+  const rainWhenWord =
+    rainHour >= 17 ? 'abends' : rainHour >= 12 ? 'nachmittags' : 'später';
 
-  let nowLine: string | null = null;
+  let rainFocus = false;
+  try {
+    const { looksLikeRainAsk } = require('../concierge/outfitWeatherPresent') as {
+      looksLikeRainAsk: (s?: string | null) => boolean;
+    };
+    rainFocus = looksLikeRainAsk(opts.userText);
+  } catch {
+    rainFocus = /\b(regnet|regnen|regen|schauer|schirm)\b/iu.test(
+      opts.userText ?? '',
+    );
+  }
+
+  let generalForecast = false;
+  try {
+    const { weatherAskIsGeneralForecast } = require('../../module2/planning/planUtteranceGate') as {
+      weatherAskIsGeneralForecast: (s: string) => boolean;
+    };
+    generalForecast = weatherAskIsGeneralForecast(opts.userText ?? '');
+  } catch {
+    generalForecast = /\bwettervorhersage\b/iu.test(opts.userText ?? '');
+  }
+
+  if (generalForecast && !rainFocus && !dayAhead) {
+    const radio = formatGeneralForecastSpeech({
+      snap,
+      city,
+      namedCity,
+      nowMs,
+    });
+    if (radio) {
+      const todayParts = buildTodayDayPartChips(snap, nowMs);
+      const timeline = buildTomorrowTimelineChips(snap, nowMs);
+      const bullets =
+        todayParts.length >= 3
+          ? todayParts
+          : timeline.length >= 2
+            ? timeline
+            : buildWeatherFactChips({
+              snap: snapForRain,
+              nowMs,
+              dayAhead: false,
+              night: false,
+            });
+      return { speech: radio, bullets };
+    }
+  }
+
+  const bits: string[] = [];
   if (dayAhead) {
-    if (city && highT != null && sky) {
-      nowLine = `Heute in ${city} ${sky.toLowerCase()} — tagsüber bis ${highT} Grad${mild ? `, ${mild}` : ''}.`;
-    } else if (highT != null && sky) {
-      nowLine = `Heute ${sky.toLowerCase()} — tagsüber bis ${highT} Grad${mild ? `, ${mild}` : ''}.`;
-    } else if (city && highT != null) {
-      nowLine = `Heute in ${city} wird's tagsüber bis ${highT} Grad${mild ? `, ${mild}` : ''}.`;
-    } else if (highT != null) {
-      nowLine = `Heute wird's tagsüber bis ${highT} Grad${mild ? `, ${mild}` : ''}.`;
-    } else if (sky) {
-      nowLine = `Heute ${sky.charAt(0).toLowerCase() + sky.slice(1)} — insgesamt eher entspannt.`;
+    const skyBit = sky ? sky.toLowerCase() : 'wechselhaft';
+    let lead = `Tagesüber eher ${skyBit}`;
+    if (rainLater) {
+      lead += win
+        ? `, ${rainWhenWord} soll's dann regnen (so ab ${formatHm(win.startMs)})`
+        : `, ${rainWhenWord} soll's dann regnen`;
+    } else if (prob >= 55 || heavy) {
+      lead += ', und Regen ist im Spiel';
     }
-  } else if (namedCity && nowT != null && sky) {
-    nowLine = `In ${city} sind es gerade ${nowT} Grad, ${sky.toLowerCase()}`;
-    if (highT != null && highT > nowT + 1) {
-      nowLine += ` — tagsüber geht's Richtung ${highT}${mild ? `, ${mild}` : ''}`;
-    } else if (mild) {
-      nowLine += `, insgesamt ${mild}`;
+    if (highT != null) {
+      lead += ` — Höchstwerte bis so um die ${highT} Grad${mild ? `, ${mild}` : ''}`;
     }
-    nowLine += '.';
-  } else if (nowT != null && sky) {
-    nowLine = `Gerade liegst du bei ${nowT} Grad, ${sky.toLowerCase()}`;
-    if (highT != null && highT > nowT + 1) {
-      nowLine += ` — tagsüber geht's Richtung ${highT}${mild ? `, ${mild}` : ''}`;
-    } else if (mild) {
-      nowLine += `, insgesamt ${mild}`;
+    bits.push(`${lead}.`);
+  } else if (night) {
+    const skyBit = sky ? sky.toLowerCase() : 'ruhig';
+    let nightLead =
+      namedCity && city && nowT != null
+        ? `In ${city} gerade ${nowT} Grad, ${skyBit}`
+        : nowT != null
+          ? `Gerade so um die ${nowT} Grad, ${skyBit}`
+          : `Gerade eher ${skyBit}`;
+    const stars = nightSkyStarsClause(sky, opts.settlementHint ?? null);
+    if (stars) nightLead += ` — ${stars.replace(/\.$/, '')}`;
+    bits.push(`${nightLead}.`);
+  } else {
+    const skyBit = sky ? sky.toLowerCase() : 'wechselhaft';
+    let lead =
+      namedCity && city
+        ? `In ${city} gerade ${skyBit}`
+        : `Gerade eher ${skyBit}`;
+    if (nowT != null) lead += ` bei ${nowT} Grad`;
+    if (highT != null && (nowT == null || highT > nowT + 1)) {
+      lead += ` — tagsüber bis so um die ${highT}${mild ? `, ${mild}` : ''}`;
     }
-    nowLine += '.';
-  } else if (nowT != null && highT != null) {
-    const where = namedCity && city ? `In ${city}` : 'Gerade';
-    nowLine = `${where} so um die ${nowT} Grad, später bis ${highT}${mild ? ` — ${mild}` : ''}.`;
-  } else if (sky) {
-    nowLine = `${sky.charAt(0).toUpperCase() + sky.slice(1)} — insgesamt eher entspannt.`;
-  } else if (prob < 45 && !heavy) {
-    nowLine = 'Sieht erstmal ganz okay aus.';
+    if (rainLater) {
+      lead += win
+        ? `, ${rainWhenWord} wird's nass (ab ${formatHm(win.startMs)})`
+        : `, ${rainWhenWord} wird's nass`;
+    }
+    bits.push(`${lead}.`);
   }
 
-  const dry = describeDrySpell(snapForRain, nowMs);
-  let rainStory: string | null = dry;
-  if (dry && prob >= 55) {
-    rainStory = `${dry.replace(/\.$/, '')} — danach wird's richtig nass.`;
-  } else if (!dry) {
-    rainStory = rainStoryLine(snapForRain, nowMs, heavy, prob);
+  if (rainFocus) {
+    const dry = describeDrySpell(snapForRain, nowMs);
+    const rainStory = dry || rainStoryLine(snapForRain, nowMs, heavy, prob);
+    if (rainStory && bits.length < 2) bits.push(rainStory);
+  } else if (thunder && bits.length < 2) {
+    bits.push('Gewitter sind im Raum — draußen nicht zu lange festnageln.');
   }
-
-  let eveningLine: string | null = null;
-  if (hour >= 14 && sky) {
-    const eveHi = highT ?? nowT;
-    if (eveHi != null) {
-      eveningLine =
-        sky.includes('bewölkt') || sky.includes('Wolken')
-          ? `Am Abend bleibt's eher wolkig, so um die ${eveHi} Grad.`
-          : `Am Abend eher ${sky.toLowerCase()}${eveHi != null ? `, so um die ${eveHi} Grad` : ''}.`;
-    }
-  }
-
-  const wearLine = clothingGuideLine({ snap, prob, heavy, nowT, highT });
-  const thunderLine = thunder
-    ? 'Gewitter sind im Raum — da würd ich draußen nicht zu lange festnageln.'
-    : null;
 
   const timelineLine = weatherTimelineLineFromMatrix(
     opts.timelineHints ?? [],
     opts.matrix,
   );
+  if (timelineLine && bits.length < 2) bits.push(timelineLine);
 
-  let speech = joinGuideSentences([
-    opener,
-    nowLine,
-    rainStory,
-    eveningLine,
-    wearLine,
-    thunderLine,
-    timelineLine,
-  ]);
+  let speech = joinGuideSentences(bits.slice(0, 2));
   if (!speech && snap.summaryLine?.trim()) {
     speech = snap.summaryLine.trim();
   }
+  speech = unwrapClothingParentheses(speech);
+  // Call-2 nie erneut wie Call-1 öffnen („Also…“, „so ist das Wetter in …“)
+  speech = speech
+    .replace(
+      /^(also[,:]?\s+|kurz\s+zum\s+wetter[:\s]+|zum\s+wetter[:\s]+)/iu,
+      '',
+    )
+    .replace(/^so\s+ist\s+das\s+wetter(?:\s+in\s+[^,:.]+)?[,:]?\s*/iu, '')
+    .replace(
+      /^das\s+wetter\s+(?:wird|soll)(?:\s+folgendermaßen)?[,:]?\s*/iu,
+      '',
+    )
+    .replace(
+      /^am\s+\w+\s+soll\s+das\s+wetter(?:\s+in\s+[^,:.]+)?(?:\s+folgendermaßen)?\s+werden[,:]?\s*/iu,
+      '',
+    )
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (speech && !/[.!?…]$/u.test(speech)) speech = `${speech}.`;
 
-  const bullets: string[] = [];
-  if (prob >= 25) bullets.push(`Regen ${Math.round(prob)}%`);
-  if (nowT != null && highT != null && highT !== nowT) {
-    bullets.push(`${nowT}–${highT}°`);
-  } else if (highT != null) {
-    bullets.push(`bis ${highT}°`);
-  } else if (nowT != null) {
-    bullets.push(`${nowT}°`);
-  }
-  if (thunder && bullets.length < 3) bullets.push('Gewitter möglich');
-  const win = mergeRainWindows(snapForRain?.rainWindows ?? [], nowMs)[0];
-  if (win && win.startMs > nowMs && bullets.length < 3) {
-    bullets.push(`Regen ab ${formatHm(win.startMs)}`);
-  }
-  if (bullets.length < 3) {
-    const tip = clothingTipFromSnap(snap);
-    if (tip) bullets.push(tip.charAt(0).toUpperCase() + tip.slice(1));
-  }
+  const bulletsRaw = (() => {
+    if (dayAhead || generalForecast) {
+      const dayParts = buildTodayDayPartChips(snap, nowMs);
+      if (dayParts.length >= 3) return dayParts;
+    }
+    return buildWeatherFactChips({
+      snap: snapForRain,
+      nowMs,
+      dayAhead,
+      night,
+    });
+  })();
+  const bullets = bulletsRaw.map((b) => {
+    try {
+      const { compactBulletDigits } = require('../concierge/bulletDigits');
+      return compactBulletDigits(b);
+    } catch {
+      return b;
+    }
+  });
 
-  return { speech, bullets: bullets.slice(0, 3) };
+  return { speech, bullets };
 }
 
 /**
@@ -783,8 +1538,11 @@ export function formatWeatherPresentation(opts: {
 }
 
 /**
- * Wetter-Ort: explizit → Gespräch/Flug-Ziel → sonst GPS.
- * „hier“ / „vor Ort“ ohne Stadtname → immer GPS.
+ * Wetter-Ort:
+ * - Default = GPS (wo der User steht)
+ * - Explizite Stadt („Wetter in London“) → Geocode
+ * - „da/dort / aktuell da“ → Gesprächsstadt (Sticky), sonst GPS
+ * Sticky/Flugziel allein reicht NICHT mehr.
  */
 export function resolveWeatherPlaceTarget(
   userText: string,
@@ -796,8 +1554,12 @@ export function resolveWeatherPlaceTarget(
       extractCityFromText: (s: string) => string | null;
       getLastMentionedCity: () => string | null;
     };
-    const { weatherAskWantsLocalGps } = require('../../module2/planning/planUtteranceGate') as {
+    const {
+      weatherAskWantsLocalGps,
+      weatherAskWantsConversationPlace,
+    } = require('../../module2/planning/planUtteranceGate') as {
       weatherAskWantsLocalGps: (s: string) => boolean;
+      weatherAskWantsConversationPlace: (s: string) => boolean;
     };
     const explicit = extractCityFromText(text);
     if (explicit) {
@@ -806,20 +1568,22 @@ export function resolveWeatherPlaceTarget(
     if (weatherAskWantsLocalGps(text)) {
       return { city: null, namedCity: false, useGps: true };
     }
-    const sticky = (getLastMentionedCity() || '').trim() || null;
-    if (sticky) {
-      return { city: sticky, namedCity: true, useGps: false };
-    }
-    try {
-      const { getFlightTripSession } = require('../flights/flightTripSession') as {
-        getFlightTripSession: () => { destCity?: string | null } | null;
-      };
-      const flightDest = (getFlightTripSession()?.destCity || '').trim() || null;
-      if (flightDest) {
-        return { city: flightDest, namedCity: true, useGps: false };
+    if (weatherAskWantsConversationPlace(text)) {
+      const sticky = (getLastMentionedCity() || '').trim() || null;
+      if (sticky) {
+        return { city: sticky, namedCity: true, useGps: false };
       }
-    } catch {
-      /* soft */
+      try {
+        const { getFlightTripSession } = require('../flights/flightTripSession') as {
+          getFlightTripSession: () => { destCity?: string | null } | null;
+        };
+        const flightDest = (getFlightTripSession()?.destCity || '').trim() || null;
+        if (flightDest) {
+          return { city: flightDest, namedCity: true, useGps: false };
+        }
+      } catch {
+        /* soft */
+      }
     }
   } catch {
     /* soft */
@@ -907,12 +1671,9 @@ export async function fetchAndFormatWeatherVoice(opts: {
         (opts.cityHint || '').trim() ||
         'hier';
       return {
-        speech: `Zum Wetter in ${cityLabel} krieg ich gerade keinen frischen Live-Abruf. Versuch's in einer Minute nochmal — oder frag mich nach Outfit, dann nutz ich den letzten Stand.`,
-        bullets: [
-          'Live-Wetter kurz nicht da',
-          cityLabel !== 'hier' ? `Ort: ${cityLabel}` : 'GPS / Ort offen',
-          'Gleich nochmal versuchen',
-        ].slice(0, 3),
+        speech:
+          'Wetter hab ich gerade nicht frisch — in einer Minute nochmal versuchen.',
+        bullets: ['Live-Wetter kurz nicht da', 'Gleich nochmal versuchen'],
       };
     }
 
@@ -933,8 +1694,7 @@ export async function fetchAndFormatWeatherVoice(opts: {
 
     if (weatherAskIsFutureDay(text)) {
       const tom = formatTomorrowWeatherChat(cached);
-      if (!tom.speech.trim()) return null;
-      return tom;
+      return tom.speech.trim() ? tom : null;
     }
 
     const { getCachedUserProfile } = require('../userProfileService') as {
@@ -955,13 +1715,25 @@ export async function fetchAndFormatWeatherVoice(opts: {
       matrix,
       timelineHints: (() => {
         try {
-          const { formatWeatherTimelineHints } = require('./weatherPlanTimelineHints') as {
+          // Nur harter Outdoor-Konflikt — kein weicher „bis Mittagessen kein Schirm“-Nachsatz
+          const {
+            evaluatePlanAgainstWeather,
+            formatWeatherTimelineHints,
+          } = require('./weatherPlanTimelineHints') as {
+            evaluatePlanAgainstWeather: (nowMs?: number) => {
+              ok: boolean;
+              riskyStops: unknown[];
+            };
             formatWeatherTimelineHints: (o: {
               nowMs?: number;
               snap?: WeatherChatSnap | null;
             }) => string[];
           };
-          return formatWeatherTimelineHints({ snap: cached });
+          const fit = evaluatePlanAgainstWeather(Date.now());
+          if (fit.ok || !fit.riskyStops.length) return [];
+          return formatWeatherTimelineHints({ snap: cached }).filter((h) =>
+            /bei[ßs]t|Regen|indoor|früher|vorziehen/i.test(h),
+          );
         } catch {
           return [];
         }
@@ -977,10 +1749,15 @@ export async function fetchAndFormatWeatherVoice(opts: {
  * Wetter-Karte: Himmel · Temperatur · Kleidung (Regen im Kleidungstipp).
  */
 export function formatWeatherBullets(snap: WeatherChatSnap | null): string[] {
+  const night = isSunDownNow({
+    nowMs: Date.now(),
+    sunsetMs: snap?.sunsetMs,
+    sunriseMs: snap?.sunriseMs,
+  });
   const nowT = roundDeg(snap?.currentTempC);
   const highT = roundDeg(snap?.dayHighC);
   const sky =
-    skyPhraseFromCode(snap?.weatherCode) ??
+    skyPhraseFromCode(snap?.weatherCode, { night }) ??
     (snap?.summaryLine
       ? snap.summaryLine
           .replace(/^aktuell\s*-?\d+\s*°\s*[·,|\-–]?\s*/i, '')
@@ -989,9 +1766,9 @@ export function formatWeatherBullets(snap: WeatherChatSnap | null): string[] {
       : null);
   const out: string[] = [];
   out.push(sky ? sky.charAt(0).toUpperCase() + sky.slice(1) : 'Himmel unklar');
-  if (nowT != null && highT != null && highT !== nowT) {
+  if (!night && nowT != null && highT != null && highT !== nowT) {
     out.push(`${nowT}–${highT}°`);
-  } else if (highT != null) {
+  } else if (!night && highT != null) {
     out.push(`bis ${highT}°`);
   } else if (nowT != null) {
     out.push(`${nowT}°`);

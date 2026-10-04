@@ -17,6 +17,13 @@ export function tidyHaltName(raw: string): string {
     );
   const isHaltBit =
     /\b(weg|straße|strasse|platz|allee|ring|damm|brücke|bruecke|zob|bhf|hbf|halt|markt|zentrum|schule|kirche|klinik|bahnhof)\b/iu;
+  /** „Pinneberg, Schulenhörn“ — Suburb/Halt ohne Straßenwort behalten. */
+  const isLocalHaltPart = (p: string) =>
+    p.length >= 3 &&
+    p.length <= 40 &&
+    !isAdmin(p) &&
+    !/^(bei|nahe|nähe|naehe|kreis|landkreis)\b/iu.test(p) &&
+    /^[\p{L}\d][\p{L}\d\s.'\-/()]+$/u.test(p);
   for (const p of parts) {
     if (isAdmin(p)) continue;
     if (/^\d{4,5}\b/.test(p)) continue;
@@ -25,7 +32,9 @@ export function tidyHaltName(raw: string): string {
       kept.push(p);
       continue;
     }
-    if (isHaltBit.test(p) || /\d/.test(p)) {
+    // Max. Stadt + ein Halt-Teil (kein Nominatim-Kettenmüll).
+    if (kept.length >= 2) break;
+    if (isHaltBit.test(p) || /\d/.test(p) || isLocalHaltPart(p)) {
       kept.push(p);
     }
     break;

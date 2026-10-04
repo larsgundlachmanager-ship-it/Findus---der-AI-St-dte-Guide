@@ -1,0 +1,3 @@
+--------- beginning of main
+09-07 09:44:24.151 19261 19284 W ReactNativeJS: [gemini] finishReason=MAX_TOKENS â€” Antwort evtl. abgeschnitten
+09-07 09:44:24.152 19261 19284 W ReactNativeJS: [gemini] nutze Fallback-Modell gemini-pro-latest

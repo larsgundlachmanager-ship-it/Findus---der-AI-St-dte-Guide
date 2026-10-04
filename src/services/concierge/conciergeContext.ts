@@ -1254,13 +1254,13 @@ export async function prepareConciergeContext(
       });
     } else {
       parts.push(
-        'Kein lokaler Infra-POI. Pragmatisch antworten (z. B. Prisdorf: oft kein Bus → Bahnhof). Grounding ok.',
+        'Kein lokaler Infra-POI. Pragmatisch antworten (z. B. oft kein Bus → nächster Bahn-Anker). Grounding ok.',
       );
       wantsLiveSearch = true;
     }
     if (/haltestelle|bus/i.test(text)) {
       parts.push(
-        'Hinweis Prisdorf: oft kein regulärer Bus — Bahnhof als ÖPNV-Anker nennen, wenn passend.',
+        'Oft kein regulärer Bus — Bahnhof als ÖPNV-Anker nennen, wenn passend.',
       );
     }
   }
@@ -1417,6 +1417,21 @@ export async function prepareConciergeContext(
     if (block) {
       parts.push(block);
       void noteLearnedRulesMatched(matched).catch(() => {});
+    }
+    try {
+      const {
+        deriveEvidenceNeeds,
+        formatEvidenceNeedsPromptBlock,
+      } = await import('../../module2/evidence/evidenceNeeds');
+      const expects = matched.flatMap((r) => r.expect ?? []);
+      const ev = deriveEvidenceNeeds({
+        userText: text,
+        learnedExpects: expects,
+      });
+      const evBlock = formatEvidenceNeedsPromptBlock(ev);
+      if (evBlock) parts.push(evBlock);
+    } catch {
+      /* soft */
     }
   } catch {
     /* ignore */

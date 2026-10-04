@@ -49,10 +49,10 @@ export const SettingsScreenLazy = React.forwardRef<
     void loadInner().then((cmp) => setInner(() => cmp));
   }, [Inner, props.visible]);
 
+  // Geschlossen: kein Native-Tree (Fabric + MapLibre + Mic sonst SoftException/Blackscreen).
+  // Bundle bleibt via prefetchSettingsScreen warm; Mount erst bei visible.
   if (!props.visible) {
-    if (!cachedInner && !Inner) return null;
-    if (!Inner) return null;
-    return <Inner {...props} ref={ref} />;
+    return null;
   }
   if (!Inner) {
     return (

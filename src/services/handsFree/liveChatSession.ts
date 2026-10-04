@@ -15,8 +15,15 @@ import { classifyLiveChatAddress } from './liveChatAddress';
 import {
   computeEndpointDelayMs,
   looksLikeFinishedUtterance,
+  looksLikeClearSentenceEnd,
   softCommitMsForText,
   MIN_VAD_SILENCE_MS,
+  CAPTURE_ENDPOINT_FLOOR_MS,
+  CAPTURE_ENDPOINT_EXTRA_MS,
+  CAPTURE_MIN_VAD_SILENCE_MS,
+  CAPTURE_SOFT_COMMIT_MS,
+  CAPTURE_MAX_ENDPOINT_DEFERS,
+  CAPTURE_STABLE_FORCE_MS,
   VAD_ECHO_WARMUP_MS,
   VAD_WARMUP_MS,
 } from './liveChatEndpoint';
@@ -54,6 +61,16 @@ type Handlers = {
 };
 
 let handlers: Handlers | null = null;
+/** Reisebüro / Overlay: alle Utterances hierhin, ohne Wake-Filter. */
+export type LiveChatCapture = {
+  onUtterance: (text: string) => Promise<void>;
+  onPartial?: (text: string) => void;
+  skipAck?: boolean;
+  acceptAll?: boolean;
+};
+let capture: LiveChatCapture | null = null;
+/** Tippen: STT pausiert, Session bleibt aktiv. */
+let listenPaused = false;
 let active = false;
 /** Nach Start/Antwort: Follow-ups ohne Keyword bis Idle */
 let openFloor = false;
@@ -69,11 +86,40 @@ let softCommitSnapshot = '';
 /** VAD darf Cut nicht endlos blockieren (Straßenlärm → silence nie „echt“) */
 let endpointDeferCount = 0;
 const MAX_ENDPOINT_DEFERS = 4;
+/** Capture: seit wann das Transkript inhaltlich stabil ist */
+let captureStableAt = 0;
+let captureStableNorm = '';
 
 const listeners = new Set<(active: boolean, phase: LiveChatPhase) => void>();
 
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
+}
+
+/** Nur Buchstaben/Zahlen — STT-Jitter (Groß/Klein, Komma) zählt nicht als Weiterreden. */
+function normTranscript(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9äöüßàáâãåæçèéêëìíîïñòóôõøùúûüýÿ\s]/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/** True = User hat wirklich weitergesprochen (nicht nur STT-Korrektur). */
+function meaningfulTranscriptAdvance(prev: string, next: string): boolean {
+  if (!prev) return true;
+  if (next === prev) return false;
+  const pn = normTranscript(prev);
+  const nn = normTranscript(next);
+  if (!nn || nn === pn) return false;
+  if (nn.startsWith(pn) && nn.length > pn.length) return true;
+  if (pn.startsWith(nn) && pn.length - nn.length <= 6) return false;
+  const pw = pn.split(' ').filter(Boolean);
+  const nw = nn.split(' ').filter(Boolean);
+  if (nw.length > pw.length) return true;
+  if (nw.length < pw.length) return false;
+  if (nw.length === 0) return false;
+  return nw[nw.length - 1] !== pw[pw.length - 1];
 }
 
 /** Session-Override (z. B. Modul 5 Planung = 60s), unabhängig von Prefs. */
@@ -178,6 +224,108 @@ export function getLiveChatHandlers(): Handlers | null {
   return handlers;
 }
 
+export function setLiveChatCapture(next: LiveChatCapture | null): void {
+  capture = next;
+}
+
+export function getLiveChatCapture(): LiveChatCapture | null {
+  return capture;
+}
+
+export function isLiveChatCaptureActive(): boolean {
+  return Boolean(capture?.acceptAll && capture?.onUtterance);
+}
+
+export async function forceLiveChatResumeListening(): Promise<void> {
+  if (!active) return;
+  listenPaused = false;
+  processing = false;
+  setMicVadTtsGate(false);
+  openFloor = true;
+  bumpAddressedActivity();
+  // Reisebüro-Capture: nach TTS immer hart neu starten — „listening aber taub“ ist häufig
+  const captureAll = Boolean(capture?.acceptAll);
+  if (isCurrentlyListening() && !captureAll) {
+    let sttLive = true;
+    let awaitingRestart = false;
+    try {
+      const { isSttRecognitionLive, isSttAwaitingRestart } = require('../sttService') as {
+        isSttRecognitionLive: () => boolean;
+        isSttAwaitingRestart: () => boolean;
+      };
+      sttLive = isSttRecognitionLive();
+      awaitingRestart = isSttAwaitingRestart();
+    } catch {
+      sttLive = true;
+    }
+    // keepAlive-Hold = kurzer Restart, nicht „taub“
+    if (sttLive || awaitingRestart) {
+      setPhase('listening');
+      return;
+    }
+    // „Mic an“ in UI, aber STT tot → hart neu starten
+    if (__DEV__) console.warn('[liveChat] resume: listening but STT deaf — restart');
+    try {
+      await stopListening({ tailMs: 0, finalizeMs: 80 });
+    } catch {
+      /* soft */
+    }
+  } else if (isCurrentlyListening() && captureAll) {
+    try {
+      await stopListening({ tailMs: 0, finalizeMs: 80 });
+    } catch {
+      /* soft */
+    }
+  }
+  await resumeListening(listenGeneration, { echoWarmup: true });
+}
+
+export async function setLiveChatListenPaused(paused: boolean): Promise<void> {
+  listenPaused = Boolean(paused);
+  if (!active) return;
+  if (listenPaused) {
+    clearEndpoint();
+    try {
+      await stopListening({ tailMs: 0, finalizeMs: 120 });
+    } catch {
+      /* soft */
+    }
+    setPhase('idle');
+    return;
+  }
+  // Tippen zu: Capture/Reisebüro darf nicht an processing kleben bleiben
+  if (capture?.acceptAll) {
+    processing = false;
+    setMicVadTtsGate(false);
+    openFloor = true;
+    await resumeListening(listenGeneration, { echoWarmup: true });
+    return;
+  }
+  if (processing) return;
+  await resumeListening(listenGeneration, { echoWarmup: false });
+}
+
+/** Warten bis TTS still (z. B. vor Reisebüro-Mic-Start). */
+export async function waitLiveChatSpeechIdle(opts?: {
+  postIdleMs?: number;
+}): Promise<void> {
+  setMicVadTtsGate(true);
+  await sleep(60);
+  for (let i = 0; i < 80; i += 1) {
+    let on = false;
+    try {
+      const { isSpeechActive } = await import('../../module2/speech/speechQueue');
+      on = isSpeechActive();
+    } catch {
+      on = false;
+    }
+    if (!on) break;
+    await sleep(150);
+  }
+  await sleep(opts?.postIdleMs ?? 450);
+  setMicVadTtsGate(false);
+}
+
 /**
  * Nach Start/Antwort: Mikro erst wenn TTS ruhig (kein Echo der Bestätigung).
  */
@@ -224,18 +372,53 @@ async function resumeListening(
   opts?: { echoWarmup?: boolean },
 ): Promise<void> {
   if (!active || gen !== listenGeneration) return;
+  if (listenPaused) {
+    setPhase('idle');
+    return;
+  }
   if (isCurrentlyListening()) return;
   setPhase('listening');
   armMicVadWarmup(opts?.echoWarmup ? VAD_ECHO_WARMUP_MS : VAD_WARMUP_MS);
   // Während Echo-Warmup TTS-Gate an; sonst aus
   setMicVadTtsGate(Boolean(opts?.echoWarmup));
-  const result = await startListening((partial) => {
-    if (!active || gen !== listenGeneration) return;
-    onPartial(partial);
-  }, { keepAlive: true, replaceActive: true });
-  if (!result.ok) {
-    void stopLiveChatSession('stt_failed');
+  let ok = false;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    if (!active || gen !== listenGeneration || listenPaused) return;
+    const result = await startListening((partial) => {
+      if (!active || gen !== listenGeneration) return;
+      onPartial(partial);
+    }, { keepAlive: true, replaceActive: true });
+    if (result.ok) {
+      ok = true;
+      break;
+    }
+    if (__DEV__) console.warn('[liveChat] STT resume fail', attempt + 1, (result as { reason?: string }).reason ?? result);
+    await sleep(280 + attempt * 220);
   }
+  if (ok) {
+    if (opts?.echoWarmup) {
+      setTimeout(() => {
+        if (active && gen === listenGeneration && !listenPaused) setMicVadTtsGate(false);
+      }, VAD_ECHO_WARMUP_MS);
+    } else {
+      setMicVadTtsGate(false);
+    }
+    return;
+  }
+  // Capture/Reisebüro: Session nicht killen — später nochmal versuchen
+  if (capture?.acceptAll) {
+    if (__DEV__) console.warn('[liveChat] capture STT soft-retry');
+    setPhase('idle');
+    setTimeout(() => {
+      if (!active || gen !== listenGeneration || listenPaused) return;
+      // processing darf Soft-Retry nicht killen (sonst Mic tot nach TTS)
+      if (processing && !capture?.acceptAll) return;
+      processing = false;
+      void resumeListening(gen, { echoWarmup: true });
+    }, 1400);
+    return;
+  }
+  void stopLiveChatSession('stt_failed');
 }
 
 function noteWarmupFromPartial(text: string): void {
@@ -282,11 +465,18 @@ function noteWarmupFromPartial(text: string): void {
 function onPartial(partial: string): void {
   const text = partial.replace(/\s+/g, ' ').trim();
   if (!text) return;
+  if (listenPaused || processing) return;
 
   // Echo der eigenen Stimme → ignorieren
   if (looksLikeFindusEcho(text)) {
     if (__DEV__) console.log('[liveChat] echo ignore', text.slice(0, 48));
     return;
+  }
+
+  try {
+    capture?.onPartial?.(text);
+  } catch {
+    /* soft */
   }
 
   if (text === lastPartial) {
@@ -301,6 +491,21 @@ function onPartial(partial: string): void {
     }
     return;
   }
+
+  // Capture: STT-Jitter (Komma/Großschreibung) darf Endpoint nicht neu starten
+  if (capture?.acceptAll && !meaningfulTranscriptAdvance(lastPartial, text)) {
+    lastPartial = text;
+    if (
+      text.length >= MIN_UTTERANCE_CHARS &&
+      !endpointTimer &&
+      !softCommitTimer &&
+      !processing
+    ) {
+      scheduleEndpoint(text);
+    }
+    return;
+  }
+
   // User redet weiter → Soft-Commit / Endpoint abbrechen
   lastPartial = text;
   endpointDeferCount = 0;
@@ -336,7 +541,19 @@ function scheduleEndpoint(snapshot: string): void {
   clearEndpoint();
   noteTravelModeFromPartial(snapshot);
 
-  const delay = computeEndpointDelayMs(snapshot);
+  let delay = computeEndpointDelayMs(snapshot);
+  // Reisebüro: Denk-/Lufthol-Pausen mitten im Satz nicht als Ende
+  if (capture?.acceptAll) {
+    delay = Math.max(delay + CAPTURE_ENDPOINT_EXTRA_MS, CAPTURE_ENDPOINT_FLOOR_MS);
+    if (!looksLikeClearSentenceEnd(snapshot)) {
+      delay = Math.max(delay, CAPTURE_ENDPOINT_FLOOR_MS + 250);
+    }
+    const norm = normTranscript(snapshot);
+    if (norm !== captureStableNorm) {
+      captureStableNorm = norm;
+      captureStableAt = Date.now();
+    }
+  }
   endpointTimer = setTimeout(() => {
     endpointTimer = null;
     void onStableElapsed(snapshot);
@@ -354,38 +571,74 @@ async function onStableElapsed(snapshot: string): Promise<void> {
   }
 
   // „Ah, geht doch weiter“ — VAD hört noch Stimme → Cut verschieben (mit Cap)
-  // Ausnahme: klare Satzende („…?“ / „Ja.“) → fertig reden erkannt, nicht auf Lärm warten
-  const finished = looksLikeFinishedUtterance(snapshot || now);
-  if (!finished && hasMicVadSamples() && isMicLikelySpeaking()) {
+  // Ausnahme (nur Modul 2): klare Satzende → nicht endlos auf Lärm warten
+  const patient = Boolean(capture?.acceptAll);
+  const finished = patient
+    ? looksLikeClearSentenceEnd(snapshot || now)
+    : looksLikeFinishedUtterance(snapshot || now);
+  const maxDefers = patient ? CAPTURE_MAX_ENDPOINT_DEFERS : MAX_ENDPOINT_DEFERS;
+  const minSilence = patient
+    ? finished
+      ? Math.max(MIN_VAD_SILENCE_MS, 520)
+      : CAPTURE_MIN_VAD_SILENCE_MS
+    : MIN_VAD_SILENCE_MS;
+  // Capture: immer echte Pause — 6 Wörter ≠ Satzende
+  const forceSilence = patient;
+  // STT-Plateau allein darf Stimme nicht überstimmen (sonst Cut mitten im Monolog)
+  const vadSpeaking = hasMicVadSamples() && isMicLikelySpeaking();
+  const stableForced =
+    patient &&
+    !vadSpeaking &&
+    captureStableAt > 0 &&
+    Date.now() - captureStableAt >= CAPTURE_STABLE_FORCE_MS;
+
+  if (
+    !stableForced &&
+    (!finished || forceSilence) &&
+    vadSpeaking
+  ) {
     endpointDeferCount += 1;
-    if (endpointDeferCount < MAX_ENDPOINT_DEFERS) {
+    if (endpointDeferCount < maxDefers) {
       if (__DEV__) console.log('[liveChat] continue-speaking (vad) — defer cut');
       scheduleEndpoint(snapshot || now);
       return;
     }
-    if (__DEV__) {
+    // Capture: VAD-Lärm darf Cut nicht endlos blockieren (früher: Counter reset → nie cut)
+    if (patient) {
+      if (endpointDeferCount >= 18) {
+        if (__DEV__) console.log('[liveChat] capture vad wall — force soft-commit');
+        // fall through → cut
+      } else {
+        if (__DEV__) console.log('[liveChat] capture speaking — defer cut', endpointDeferCount);
+        scheduleEndpoint(snapshot || now);
+        return;
+      }
+    } else if (__DEV__) {
       console.log('[liveChat] vad speaking-cap — force soft-commit');
     }
   }
 
-  // Hybrid: bei verfügbarem VAD Stille abwarten — außer fertige Utterance
+  // Hybrid: bei verfügbarem VAD Stille abwarten — außer fertige Utterance (außer Capture)
   if (
-    !finished &&
+    !stableForced &&
+    (!finished || forceSilence) &&
     hasMicVadSamples() &&
-    endpointDeferCount < MAX_ENDPOINT_DEFERS
+    endpointDeferCount < maxDefers
   ) {
     const silence = getMicSilenceMs();
-    if (silence < MIN_VAD_SILENCE_MS) {
+    if (silence < minSilence) {
       endpointDeferCount += 1;
       endpointTimer = setTimeout(() => {
         endpointTimer = null;
         void onStableElapsed(snapshot);
-      }, Math.max(80, MIN_VAD_SILENCE_MS - silence));
+      }, Math.max(180, minSilence - silence));
       return;
     }
   }
 
   endpointDeferCount = 0;
+  captureStableAt = 0;
+  captureStableNorm = '';
   beginSoftCommit(snapshot || now);
 }
 
@@ -399,12 +652,19 @@ function beginSoftCommit(snapshot: string): void {
     softCommitTimer = null;
   }
   softCommitSnapshot = snapshot;
+  let ms = softCommitMsForText(snapshot);
+  if (capture?.acceptAll) {
+    // Klare Enden (? / Ja.) etwas kürzer, sonst volle Gnadenfrist
+    ms = looksLikeClearSentenceEnd(snapshot)
+      ? Math.max(ms, Math.round(CAPTURE_SOFT_COMMIT_MS * 0.65))
+      : Math.max(ms, CAPTURE_SOFT_COMMIT_MS);
+  }
   softCommitTimer = setTimeout(() => {
     softCommitTimer = null;
     const snap = softCommitSnapshot;
     softCommitSnapshot = '';
     void finalizeSoftCommit(snap);
-  }, softCommitMsForText(snapshot));
+  }, ms);
 }
 
 async function finalizeSoftCommit(snapshot: string): Promise<void> {
@@ -416,10 +676,18 @@ async function finalizeSoftCommit(snapshot: string): Promise<void> {
     scheduleEndpoint(now);
     return;
   }
+  const patient = Boolean(capture?.acceptAll);
+  const maxDefers = patient ? CAPTURE_MAX_ENDPOINT_DEFERS : MAX_ENDPOINT_DEFERS;
   if (hasMicVadSamples() && isMicLikelySpeaking()) {
-    if (!looksLikeFinishedUtterance(snapshot || now)) {
+    // Capture: Stimme → nie cutten, egal ob STT schon „fertig“ aussieht
+    const mayCutWhileSpeaking =
+      !patient && looksLikeFinishedUtterance(snapshot || now);
+    if (!mayCutWhileSpeaking) {
       endpointDeferCount += 1;
-      if (endpointDeferCount < MAX_ENDPOINT_DEFERS) {
+      if (endpointDeferCount < maxDefers || patient) {
+        if (patient && endpointDeferCount >= maxDefers) {
+          endpointDeferCount = Math.max(0, maxDefers - 8);
+        }
         if (__DEV__) console.log('[liveChat] soft-commit aborted — still speaking');
         scheduleEndpoint(snapshot || now);
         return;
@@ -484,6 +752,69 @@ async function cutAndProcess(snapshot: string): Promise<void> {
   }
 
   lastPartial = '';
+
+  // Capture (Reisebüro): NUR Briefing — nie submitUserQuestion / Modul 2
+  if (capture?.acceptAll) {
+    const sink = capture;
+    bumpAddressedActivity();
+    openFloor = true;
+    setPhase('answering');
+    setMicVadTtsGate(true);
+    clearLiveChatTurnContext();
+    try {
+      const { abortActiveModule2Turn } = require('../../module2/pipeline/turnAbort') as {
+        abortActiveModule2Turn: (r?: string) => void;
+      };
+      abortActiveModule2Turn('reisebuero_capture');
+    } catch {
+      /* soft */
+    }
+    const reopenMicAfterSpeech = async () => {
+      if (!active || gen !== listenGeneration) return;
+      // Tippen-Pause darf TTS-Ende nicht „einfrieren“
+      listenPaused = false;
+      for (let i = 0; i < 60; i++) {
+        if (!active || gen !== listenGeneration) return;
+        try {
+          const { isSpeechActive } = await import('../../module2/speech/speechQueue');
+          setMicVadTtsGate(isSpeechActive());
+          if (!isSpeechActive()) break;
+        } catch {
+          break;
+        }
+        await sleep(250);
+      }
+      await sleep(280);
+      if (!active || gen !== listenGeneration) return;
+      openFloor = true;
+      bumpAddressedActivity();
+      processing = false;
+      setMicVadTtsGate(false);
+      listenPaused = false;
+      await resumeListening(gen, { echoWarmup: true });
+      // Falls STT noch nicht läuft: ein zweiter Soft-Kick
+      if (active && gen === listenGeneration && !isCurrentlyListening()) {
+        await sleep(500);
+        if (active && gen === listenGeneration && !listenPaused) {
+          await resumeListening(gen, { echoWarmup: false });
+        }
+      }
+    };
+    try {
+      if (__DEV__) console.log('[liveChat] capture utterance:', transcript.slice(0, 80));
+      await sink.onUtterance(transcript);
+    } catch (err) {
+      console.warn('[liveChat] capture submit failed:', err);
+    }
+    if (active && gen === listenGeneration) {
+      if (!processing && isCurrentlyListening()) return;
+      await reopenMicAfterSpeech();
+    } else {
+      processing = false;
+    }
+    return;
+  }
+
   const useOpenFloor = openFloor && !prefs.requireKeywordEveryTurn;
   const verdict = classifyLiveChatAddress(transcript, {
     openFloor: useOpenFloor,
@@ -654,7 +985,7 @@ export async function startLiveChatSession(
     bumpAddressedActivity();
     return { ok: true, message: 'Live-Chat läuft schon — einfach weiterreden.' };
   }
-  if (!handlers?.submitUserQuestion) {
+  if (!handlers?.submitUserQuestion && !capture?.onUtterance) {
     return {
       ok: false,
       message:
@@ -703,7 +1034,10 @@ export async function startLiveChatSession(
 
   if (__DEV__) console.log('[liveChat] start:', reason);
 
-  void playLiveChatStartCue().catch(() => undefined);
+  // Reisebüro: kein Cue — Greeting-TTS war gerade, Cue killt Android-STT
+  if (reason !== 'reisebuero') {
+    void playLiveChatStartCue().catch(() => undefined);
+  }
 
   const idle = getHandsFreePrefsSync().liveChatIdleSeconds;
   const needKw = getHandsFreePrefsSync().requireKeywordEveryTurn;
@@ -757,11 +1091,17 @@ export async function startLiveChatSession(
 }
 
 export async function stopLiveChatSession(reason = 'manual'): Promise<void> {
-  if (!active && phase === 'idle') return;
+  // Auch im Idle: Lock/STT freigeben — sonst blockiert Reisebüro-Mic den Handler.
+  if (!active && phase === 'idle') {
+    unlockListeningPartialHandler();
+    setMicVadTtsGate(false);
+    return;
+  }
   if (__DEV__) console.log('[liveChat] stop:', reason);
   active = false;
   openFloor = false;
   processing = false;
+  listenPaused = false;
   listenGeneration += 1;
   clearIdle();
   clearEndpoint();
@@ -789,7 +1129,10 @@ export async function stopLiveChatSession(reason = 'manual'): Promise<void> {
     /* soft */
   }
   try {
-    await stopListening({ tailMs: 0, finalizeMs: 400 });
+    await stopListening({
+      tailMs: 0,
+      finalizeMs: reason === 'reisebuero_mic' ? 80 : 400,
+    });
   } catch {
     /* soft */
   }

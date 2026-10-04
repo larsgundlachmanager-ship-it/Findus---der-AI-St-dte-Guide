@@ -21,6 +21,7 @@ import {
   FINDUS_CORE_WOVEN_SPEECH_BLOCK,
   FINDUS_TYPICAL_SPEECH_MAX_CHARS,
   FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
+  FINDUS_FACT_CHIP_BULLETS_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import type { HelpFirstMoment } from '../../services/affiliate/helpFirstMonetization';
 import { chunkTextForTts } from '../speech/ttsChunker';
@@ -80,11 +81,12 @@ Du darfst mitdenken: aus vorhandenen Fakten schließen, Lücken ehrlich benennen
 Backend-Fakten, die die Userfrage NICHT treffen (z. B. Restaurant statt Wetter) → NICHT vorlesen; sag knapp dass du neu suchst oder lass Tail Call-3 nachziehen.
 ${resolveSynthesisPersonaBlock(opts?.rucksack)}
 ${FINDUS_ANSWER_FIRST_BLOCK}
+${FINDUS_FACT_CHIP_BULLETS_BLOCK}
 ${FINDUS_SYNTHESIS_RAIL_BLOCK}
 ${FINDUS_CORE_WOVEN_SPEECH_BLOCK}
 ${bridgeBit}${FINDUS_REBOOT_MANAGER_THINK_AHEAD_BLOCK}
 ${liveBlock}${deepAsk}- Nur belegte Fakten — nichts erfinden.
-- Buttons/Stichpunkte aus den mitgelieferten Actions/Bullets übernehmen oder knapp spiegeln.
+- Buttons aus den mitgelieferten Actions übernehmen oder knapp spiegeln. bullets = FACT-CHIPS (siehe STICHPUNKTE), nie Speech paraphrasieren.
 - Kein Meta (API/Agent/Pack/FAKTEN/FLOW/PACK-DATENSATZ). Keine zweite Bridge.
 - Keine Permission-Fragen („Soll ich suchen?“).
 ${FINDUS_SPEECH_LENGTH_BLOCK}
@@ -134,6 +136,15 @@ export function scrubRebootSpeech(
     .replace(/^(moin|hallo|hi|hey)\s+[A-ZÄÖÜ][\w\-äöüÄÖÜß]{1,20}[,!.\s]+/iu, '')
     .replace(/^(moin|hallo|hi|hey)[,!.\s]+/iu, '');
 
+  try {
+    const { stripCall2SoftAmbiguity } = require('../speech/call2MustFit') as {
+      stripCall2SoftAmbiguity: (s: string) => string;
+    };
+    s = stripCall2SoftAmbiguity(s);
+  } catch {
+    /* soft */
+  }
+
   if (opts.bridgeOneLiner) {
     // Typische Ack-Opener nicht nochmal
     s = s.replace(
@@ -180,10 +191,20 @@ export async function synthesizeRebootTurn(opts: {
   call1WhenBlock?: string | null;
   /** Call-1 criteria Gewichte — verbindlich für Call 2 (keine neuen Orte). */
   call1CriteriaBlock?: string | null;
+  /** Call-1 Referenten (Anaphora) — verbindlich für Call 2. */
+  call1ReferentsBlock?: string | null;
   /** Call-1 Antwort-Struktur (kein Script). */
   call2Brief?: string | null;
   /** Von Call 1 gewählte Owner-Gold Constraints. */
   selectedGoldBlock?: string | null;
+  /** Call-1 kuratierter Kernkontext (kein Roh-Chat). */
+  curatedContext?: string[] | null;
+  /** Voller Task-Brief-Block für Call 2. */
+  call1TaskBriefBlock?: string | null;
+  /** Call-1 Order-Ticket (must/avoid/search/need/ui/bullets). */
+  call1OrderBlock?: string | null;
+  /** Stichpunkt-Budget aus Call-1 Order. */
+  bulletBudgetMax?: number | null;
 }): Promise<SynthesisPayload> {
   const buttons: Module2ActionButton[] = opts.fact.buttons ?? [];
   const budget = opts.speechBudgetChars ?? FINDUS_TYPICAL_SPEECH_MAX_CHARS;
@@ -196,7 +217,7 @@ export async function synthesizeRebootTurn(opts: {
     });
     return {
       spokenChunks: chunkTextForTts(speech),
-      bullets: humanizeBullets(bulletsIn, 3),
+      bullets: humanizeBullets(bulletsIn, opts.bulletBudgetMax ?? 3),
       buttons,
       fullDraftForUi: speech,
     };
@@ -231,16 +252,24 @@ export async function synthesizeRebootTurn(opts: {
     threadBlock = buildCall2HistoryBlock({
       topicScope: opts.topicScope,
       cityKey: opts.cityKey ?? null,
+      curatedContext: opts.curatedContext ?? null,
     });
   } else if (!skipStickyThread) {
     // Kein topicScope ⇒ konservativ neu (kein Tennis→Wetter-Leak).
     threadBlock = buildCall2HistoryBlock({
       topicScope: { mode: 'new', turnsForCall2: 0, inheritLiveInventory: false },
       cityKey: opts.cityKey ?? null,
+      curatedContext: opts.curatedContext ?? null,
     });
   }
 
-  const bulletMaxChars = opts.rucksack?.ui.bulletMaxChars ?? 72;
+  const bulletMaxChars =
+    opts.rucksack?.ui.bulletMaxChars ??
+    /* Call-1 Order budget chars if present via prompt-only path */ 72;
+  const bulletMaxCount = opts.bulletBudgetMax ?? 3;
+  const preferCall2Bullets = Boolean(
+    opts.call1OrderBlock?.trim() || opts.bulletBudgetMax != null,
+  );
 
   const attachCall2Tail = async (
     speechText: string,
@@ -253,7 +282,8 @@ export async function synthesizeRebootTurn(opts: {
           userText: opts.userText,
           speechText,
           bulletMaxChars,
-          agentBullets,
+          // Call-2 schreibt Stichpunkte — Agent-Bullets nicht als Vorlage
+          agentBullets: preferCall2Bullets ? undefined : agentBullets,
         }),
         {
           responseJson: true,
@@ -271,9 +301,11 @@ export async function synthesizeRebootTurn(opts: {
     }
     const bullets = mergeCall2Bullets({
       tailBullets: tail?.bullets ?? [],
-      agentBullets,
+      agentBullets, // Notfall nur wenn Tail leer
       speechText,
       bulletMaxChars,
+      maxCount: bulletMaxCount,
+      preferCall2Only: preferCall2Bullets,
     });
     if (tail?.memory_extract?.length) {
       void upsertUserMemoryFacts({
@@ -309,15 +341,20 @@ export async function synthesizeRebootTurn(opts: {
     opts.call2Brief?.trim()
       ? `CALL1_BRIEF (Struktur, Wortlaut frei): ${opts.call2Brief.trim()}`
       : '',
+    opts.call1TaskBriefBlock?.trim() || '',
     opts.rucksack?.retrievedMemory?.length
       ? `USER-LTM:\n${opts.rucksack.retrievedMemory.map((l) => `- ${l}`).join('\n')}`
       : '',
+    opts.call1OrderBlock?.trim() || '',
     opts.rucksack
-      ? `BULLET_BUDGET: 3 × max ${opts.rucksack.ui.bulletMaxChars} Zeichen`
-      : '',
+      ? `BULLET_BUDGET: ${opts.bulletBudgetMax ?? 3} × max ${opts.rucksack.ui.bulletMaxChars} Zeichen — FACT-CHIPS (Spickzettel), nie Speech-Zusammenfassung, keine Meta-Chips`
+      : opts.bulletBudgetMax
+        ? `BULLET_BUDGET: max ${opts.bulletBudgetMax} — FACT-CHIPS, nicht Speech paraphrasieren`
+        : '',
     `USER: ${opts.userText}`,
     opts.call1WhenBlock?.trim() || '',
     opts.call1CriteriaBlock?.trim() || '',
+    opts.call1ReferentsBlock?.trim() || '',
     (() => {
       try {
         const { formatSynthesisRailsForPrompt } = require('../speech/synthesisRails') as {
@@ -329,6 +366,35 @@ export async function synthesizeRebootTurn(opts: {
       }
     })(),
     (() => {
+      try {
+        const {
+          strengthenCall2Musts,
+          call2MustsAreWeak,
+          formatCall2MustFitRail,
+          parseMustsFromCall1Brief,
+        } = require('../speech/call2MustFit') as {
+          strengthenCall2Musts: (u: string, m: string[]) => string[];
+          call2MustsAreWeak: (m: string[], u: string) => boolean;
+          formatCall2MustFitRail: (o: {
+            musts: string[];
+            avoid?: string[];
+            weak?: boolean;
+          }) => string;
+          parseMustsFromCall1Brief: (b: string | null | undefined) => string[];
+        };
+        const fromBrief = parseMustsFromCall1Brief(opts.call1TaskBriefBlock);
+        const musts = strengthenCall2Musts(opts.userText, fromBrief);
+        return formatCall2MustFitRail({
+          musts,
+          weak: call2MustsAreWeak(musts, opts.userText),
+        });
+      } catch {
+        return '';
+      }
+    })(),
+    // Call-1 Brief/Order schlägt paralleles AnswerContract-Re-Detect
+    (() => {
+      if (opts.call2Brief?.trim() || opts.call1OrderBlock?.trim()) return '';
       try {
         const {
           getCall1AnswerContract,

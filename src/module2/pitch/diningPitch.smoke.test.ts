@@ -98,13 +98,40 @@ assert(
   'steakhouse is steak evidence',
 );
 assert(
-  scoreSpecializedFoodWish('grillhaus fleischerei', {
+  scoreSpecializedFoodWish('grillhaus', {
     text: 'steak',
     hardness: 'must',
     kind: 'dish',
   }) === 1,
   'grillhaus is category-only for steak',
 );
+assert(
+  scoreSpecializedFoodWish('Beisser Steak und Grill Fleischerei', {
+    text: 'steak',
+    hardness: 'must',
+    kind: 'dish',
+  }) === 0,
+  'metzgerei/fleischerei never steak dining',
+);
+
+{
+  const { looksLikeAsianCuisineVenue, looksLikeButcherNotDining } = require('./specializedFoodMatch') as {
+    looksLikeAsianCuisineVenue: (b: string) => boolean;
+    looksLikeButcherNotDining: (b: string) => boolean;
+  };
+  assert(
+    looksLikeAsianCuisineVenue('Speisekontor running sushi buffet asiatisch'),
+    'asian buffet detected',
+  );
+  assert(
+    looksLikeButcherNotDining('Beisser Steak Grill Fleischerei butcher_shop'),
+    'butcher not dining',
+  );
+  assert(
+    !looksLikeButcherNotDining('Block House Steakhouse restaurant'),
+    'steakhouse is dining',
+  );
+}
 assert(
   scoreSpecializedFoodWish('landgasthof restaurant', {
     text: 'steak',
@@ -282,6 +309,12 @@ assert(
   assert(
     seed.some((c) => c.source === 'places' && /gasthof/i.test(c.name)),
     'live places stay in verify seed even if pack ranked first',
+  );
+  assert(
+    !mixLiveResearchSeed(req, [genericPack], [genericPack], 12).some((c) =>
+      /dorfwirtschaft/i.test(c.name),
+    ),
+    'generic pack is not steak fallback',
   );
 }
 

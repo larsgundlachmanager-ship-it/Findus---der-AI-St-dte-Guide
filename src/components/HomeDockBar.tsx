@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { colors, spacing } from '../constants/theme';
 import { UI_LAYER } from '../constants/uiLayers';
 import { useSystemSafePad } from '../hooks/useSystemSafePad';
@@ -25,28 +25,28 @@ type DockAction = 'onTimeline' | 'onPlaces' | 'onSettings';
 const ITEMS: Array<{
   id: 'timeline' | 'places' | 'settings';
   label: string;
-  icon: React.ComponentProps<typeof Feather>['name'];
+  icon: React.ComponentProps<typeof Ionicons>['name'];
   action: DockAction;
   a11y: string;
 }> = [
   {
     id: 'timeline',
     label: 'Timeline',
-    icon: 'clock',
+    icon: 'time-outline',
     action: 'onTimeline',
     a11y: 'Timeline und Routenplanung',
   },
   {
     id: 'places',
     label: 'Orte',
-    icon: 'search',
+    icon: 'search-outline',
     action: 'onPlaces',
     a11y: 'Orte finden',
   },
   {
     id: 'settings',
     label: 'Einst.',
-    icon: 'settings',
+    icon: 'settings-outline',
     action: 'onSettings',
     a11y: 'Einstellungen',
   },
@@ -74,21 +74,23 @@ export const HomeDockBar = React.memo(function HomeDockBar({
         : settingsRef;
   return (
     <View
-      style={[styles.bar, { paddingBottom: Math.max(8, safePad.bottom) }]}
+      style={[styles.bar, { paddingBottom: Math.max(6, safePad.bottom) }]}
       pointerEvents="box-none"
     >
       {ITEMS.map((item) => (
         <Pressable
           key={item.id}
           ref={itemRef(item.id) as React.RefObject<View> | undefined}
+          // Press-In = Frame-1 Open (wie Mic); onPress Guard für kurze Taps ohne PressIn-Hit.
           onPressIn={handlers[item.action]}
+          onPress={handlers[item.action]}
           style={({ pressed }) => [styles.btn, pressed && styles.btnPressed]}
           android_ripple={{ color: 'rgba(255,255,255,0.14)', borderless: false }}
           accessibilityRole="button"
           accessibilityLabel={item.a11y}
           collapsable={false}
         >
-          <Feather name={item.icon} size={20} color={colors.text} />
+          <Ionicons name={item.icon} size={22} color={colors.text} />
           <Text style={styles.label} numberOfLines={1}>
             {item.label}
           </Text>
@@ -101,21 +103,23 @@ export const HomeDockBar = React.memo(function HomeDockBar({
 const styles = StyleSheet.create({
   bar: {
     zIndex: UI_LAYER.hud,
+    elevation: UI_LAYER.hud + 40,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-around',
     paddingHorizontal: spacing.sm,
-    paddingTop: 8,
-    backgroundColor: 'rgba(15, 44, 36, 0.78)',
+    paddingTop: 7,
+    // Deckend — Karte läuft full-bleed darunter; Dock bleibt undurchsichtig.
+    backgroundColor: colors.bg,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.border,
   },
   btn: {
     flex: 1,
     alignItems: 'center',
-    gap: 4,
-    paddingVertical: 6,
-    borderRadius: 12,
+    gap: 3,
+    paddingVertical: 5,
+    borderRadius: 10,
   },
   btnPressed: {
     opacity: 0.8,
@@ -124,5 +128,6 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 10,
     fontWeight: '700',
+    letterSpacing: 0.2,
   },
 });

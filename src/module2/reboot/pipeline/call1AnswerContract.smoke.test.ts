@@ -30,6 +30,20 @@ assert.ok(flight.neededSlots.includes('leave_by_ms'));
 assert.ok(flight.call2Tips.some((t) => /rückwärts|Leave-by/i.test(t)));
 
 assert.equal(detectCall1Situation('Wie ist das Wetter morgen?'), 'weather');
+assert.equal(
+  getCall1AnswerContract('Wie ist das Wetter morgen?').topicCut,
+  true,
+  'weather opener topicCuts sticky nav/pitch',
+);
+assert.equal(
+  detectCall1Situation('Navigiere mich zum Tennis-Club Prisdorf'),
+  'navigation',
+);
+assert.equal(
+  getCall1AnswerContract('Navigiere mich zum Tennis-Club Prisdorf').topicCut,
+  true,
+  'explicit nav topicCut',
+);
 assert.equal(detectCall1Situation('Wecker um 7'), 'alarm_timer');
 assert.equal(
   detectCall1Situation('mag ich nicht', { correction: true }),
@@ -64,6 +78,19 @@ assert.equal(
   ),
   'reisebuero_collect',
 );
+
+assert.equal(
+  detectCall1Situation(
+    'Wir sind vom 16. bis 20. in Korbach, was für Events gibt es da?',
+  ),
+  'stay_day_interactive',
+  'date window events → stay/events, not reisebuero',
+);
+assert.equal(
+  detectCall1Situation('was geht vom 16. bis 20 Oktober in Korbach'),
+  'stay_day_interactive',
+  'was geht window → stay/events path',
+);
 assert.equal(
   detectCall1Situation(
     'Plane mir einen Wochenendurlaub nach Lissabon in zwei Wochen: Flug Hamburg hin und zurueck, Hotel und Programm',
@@ -97,9 +124,17 @@ assert.ok(
 );
 assert.equal(
   detectCall1Situation(
-    'Samstagabend wäre cool Live Musik — was kannst du mir vorschlagen?',
+    'Ich habe Lust heute Abend auf Open Air Kino — welche Filme laufen?',
   ),
-  'stay_day_interactive',
+  'dining_compound',
+  'open air cinema → compound weather gate',
+);
+assert.equal(
+  detectCall1Situation(
+    'Legga Eis to go holen und dann mit Blick auf den Hafen genießen',
+  ),
+  'dining_compound',
+  'eis + hafen → compound',
 );
 assert.ok(
   getCall1AnswerContract(

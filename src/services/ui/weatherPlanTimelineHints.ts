@@ -10,8 +10,6 @@ const OUTDOOR_RE =
   /\b(park|garten|strand|beach|wander|hike|aussicht|markt|platz|outdoor|terrasse|boot|rad|fahrrad|zoo|see|ufer|promenade|skyline|sonnenuntergang|picknick)\b/i;
 const INDOOR_RE =
   /\b(museum|galerie|kirche|dom|restaurant|café|cafe|bistro|hotel|kino|theater|shopping|mall|ausstellung|indoor|bibliothek|therme|spa)\b/i;
-const MEAL_RE =
-  /\b(essen|restaurant|bistro|café|cafe|frühstück|fruehstueck|mittag|abendessen|dinner|lunch|brunch)\b/i;
 
 function formatHm(ms: number): string {
   return new Date(ms).toLocaleTimeString('de-DE', {
@@ -119,20 +117,8 @@ export function formatWeatherTimelineHints(opts: {
   const heavy = Boolean(snap?.isHeavyRain);
   const rainExpected = heavy || prob >= 40 || rainAtMs != null;
 
-  if (rainExpected && rainAtMs != null && rainAtMs > nowMs + 20 * 60_000) {
-    for (const stop of stops) {
-      if (!stop.plannedStartMs || stop.plannedStartMs <= nowMs) continue;
-      const blob = `${stop.title} ${stop.notes ?? ''}`;
-      if (!MEAL_RE.test(blob) || isOutdoorish(stop)) continue;
-      const mealEnd = stop.plannedEndMs ?? stop.plannedStartMs + 75 * 60_000;
-      if (rainAtMs > mealEnd) {
-        hints.push(
-          `Bis ${stop.title} gegen ${formatHm(stop.plannedStartMs)} brauchst du keinen Schirm — danach würd ich aber was Regenfestes dabeihaben.`,
-        );
-        break;
-      }
-    }
-  }
+  // Kein weicher Schirm-/Mahlzeit-Nachsatz bei allgemeiner Wetterfrage —
+  // nur echte Outdoor-Konflikte (Aussage, keine Rückfrage).
 
   for (const s of fit.riskyStops.slice(0, 2)) {
     const hm = s.plannedStartMs ? ` ab ${formatHm(s.plannedStartMs)}` : '';
@@ -140,7 +126,7 @@ export function formatWeatherTimelineHints(opts: {
       ? `Picknick draußen${hm}`
       : `${s.title}${hm}`;
     hints.push(
-      `${label} und Regen — das beißt sich. Sollen wir vorziehen oder lieber drinnen was suchen?`,
+      `${label} und Regen — das beißt sich. Besser vorziehen oder kurz Indoor.`,
     );
   }
 

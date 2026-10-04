@@ -1,0 +1,45 @@
+﻿--------- beginning of main
+09-14 22:03:54.324 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:03:54.324 11170 11240 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 22:03:54.325 11170 11240 I ReactNativeJS: [stt] keep-alive restart (error:no-speech, try 1)
+09-14 22:03:54.428 11170 11240 I ReactNativeJS: [stt] recognition started
+09-14 22:03:56.308 11170 11240 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-14 22:03:56.309 11170 11240 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-14 22:03:56.309 11170 11240 I ReactNativeJS:   'com.google.android.tts',
+09-14 22:03:56.309 11170 11240 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-14 22:03:56.309 11170 11240 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-14 22:03:56.431 11170 11240 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=9.3', 'partial=false', 'svc=com.google.android.tts'
+09-14 22:03:56.432 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:03:56.433 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:03:56.433 11170 11240 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 22:03:56.512 11170 11240 I ReactNativeJS: [stt] recognition started
+09-14 22:04:00.331 11170 11240 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".', 'Error: Requiring unknown module "undefined".\n    at unknownModuleError (address at index.android.bundle:1:78937)\n    at loadModuleImplementation (address at index.android.bundle:1:78746)\n    at guardedLoadModule (address at index.android.bundle:1:78325)\n    at metroRequire (address at index.android.bundle:1:77998)\n    at looksLikeInstantAnswerLeadQuery (address at index.android.bundle:1:2833260)\n    at shouldHandoffToPitchModule (address at index.android.bundle:1:2726760)\n    at shouldHandoffToPitchModuleSafe (address at index.android.bundle:1:2698163)\n    at detectLiveInventoryKind (address at index.android.bundle:1:2698737)\n    at resolveLiveInventoryUserText (address at index.android.bundle:1:2700560)\n    at decideTopicCut (address at index.android.bundle:1:2694400)\n    at buildCityChat'
+09-14 22:04:00.331 11170 11240 W ReactNativeJS: [app] swallowed unknown-module undefined (keep UI alive)
+09-14 22:04:00.331 11170 11240 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-14 22:04:01.341 11170 11240 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-14 22:04:01.342 11170 11240 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-14 22:04:01.342 11170 11240 I ReactNativeJS:   'com.google.android.tts',
+09-14 22:04:01.342 11170 11240 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-14 22:04:01.342 11170 11240 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-14 22:04:01.346 11170 11240 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".', 'Error: Requiring unknown module "undefined".\n    at unknownModuleError (address at index.android.bundle:1:78937)\n    at loadModuleImplementation (address at index.android.bundle:1:78746)\n    at guardedLoadModule (address at index.android.bundle:1:78325)\n    at metroRequire (address at index.android.bundle:1:77998)\n    at looksLikeInstantAnswerLeadQuery (address at index.android.bundle:1:2833260)\n    at shouldHandoffToPitchModule (address at index.android.bundle:1:2726760)\n    at shouldHandoffToPitchModuleSafe (address at index.android.bundle:1:2698163)\n    at detectLiveInventoryKind (address at index.android.bundle:1:2698737)\n    at resolveLiveInventoryUserText (address at index.android.bundle:1:2700560)\n    at decideTopicCut (address at index.android.bundle:1:2694400)\n    at buildCityChat'
+09-14 22:04:01.346 11170 11240 W ReactNativeJS: [app] swallowed unknown-module undefined (keep UI alive)
+09-14 22:04:01.346 11170 11240 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-14 22:04:01.475 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:04:01.477 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:04:01.477 11170 11240 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 22:04:01.574 11170 11240 I ReactNativeJS: [stt] recognition started
+09-14 22:04:04.475 11170 11240 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".', 'Error: Requiring unknown module "undefined".\n    at unknownModuleError (address at index.android.bundle:1:78937)\n    at loadModuleImplementation (address at index.android.bundle:1:78746)\n    at guardedLoadModule (address at index.android.bundle:1:78325)\n    at metroRequire (address at index.android.bundle:1:77998)\n    at looksLikeInstantAnswerLeadQuery (address at index.android.bundle:1:2833260)\n    at shouldHandoffToPitchModule (address at index.android.bundle:1:2726760)\n    at shouldHandoffToPitchModuleSafe (address at index.android.bundle:1:2698163)\n    at detectLiveInventoryKind (address at index.android.bundle:1:2698737)\n    at resolveLiveInventoryUserText (address at index.android.bundle:1:2700560)\n    at decideTopicCut (address at index.android.bundle:1:2694400)\n    at buildCityChat'
+09-14 22:04:04.475 11170 11240 W ReactNativeJS: [app] swallowed unknown-module undefined (keep UI alive)
+09-14 22:04:04.475 11170 11240 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-14 22:04:05.032 11170 11240 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".', 'Error: Requiring unknown module "undefined".\n    at unknownModuleError (address at index.android.bundle:1:78937)\n    at loadModuleImplementation (address at index.android.bundle:1:78746)\n    at guardedLoadModule (address at index.android.bundle:1:78325)\n    at metroRequire (address at index.android.bundle:1:77998)\n    at looksLikeInstantAnswerLeadQuery (address at index.android.bundle:1:2833260)\n    at shouldHandoffToPitchModule (address at index.android.bundle:1:2726760)\n    at shouldHandoffToPitchModuleSafe (address at index.android.bundle:1:2698163)\n    at detectLiveInventoryKind (address at index.android.bundle:1:2698737)\n    at resolveLiveInventoryUserText (address at index.android.bundle:1:2700560)\n    at decideTopicCut (address at index.android.bundle:1:2694400)\n    at buildCityChat'
+09-14 22:04:05.032 11170 11240 W ReactNativeJS: [app] swallowed unknown-module undefined (keep UI alive)
+09-14 22:04:05.033 11170 11240 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-14 22:04:06.362 11170 11240 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-14 22:04:06.364 11170 11240 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-14 22:04:06.364 11170 11240 I ReactNativeJS:   'com.google.android.tts',
+09-14 22:04:06.364 11170 11240 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-14 22:04:06.364 11170 11240 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-14 22:04:06.458 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:04:06.458 11170 11240 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', 'ÔåÆ', 'com.google.android.tts'
+09-14 22:04:06.459 11170 11240 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 22:04:06.551 11170 11240 I ReactNativeJS: [stt] recognition started

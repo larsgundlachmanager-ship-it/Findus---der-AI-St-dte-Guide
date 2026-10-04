@@ -13,6 +13,11 @@ import {
 } from '../planning/planDestinationCity';
 import { looksLikeModul5PlanUtterance } from '../planning/planUtteranceGate';
 import type { ManagerSession } from './types';
+import { heuristicMobilityWorkTasks } from './call1MobilityCompound';
+import {
+  parseCall1Referents,
+  type Call1Referent,
+} from './call1Referents';
 
 export type TurnWhenKind = 'now' | 'clock' | 'day';
 
@@ -33,7 +38,24 @@ export type TurnWorker =
   | 'pitch'
   | 'chat'
   | 'm1'
-  | 'weather';
+  | 'weather'
+  | 'place'
+  | 'fact'
+  | 'events'
+  | 'tour'
+  | 'deep_web'
+  | 'timer_alarm'
+  | 'timeline_reminder'
+  | 'memory_prefs'
+  | 'memory_recall'
+  | 'identify_nearby'
+  | 'map_pin'
+  | 'voice_settings'
+  | 'device_action'
+  | 'm1_poi'
+  | 'reisebuero';
+
+export type TurnWorkExecuteWhen = 'now' | 'later' | 'on_confirm';
 
 export type TurnWorkTask = {
   id: string;
@@ -45,6 +67,8 @@ export type TurnWorkTask = {
   mustHaves?: string[];
   blueprint?: string | null;
   dependsOn?: string | null;
+  /** Wann ausführen — morgen dahin ≠ now */
+  executeWhen?: TurnWorkExecuteWhen | null;
 };
 
 export type TurnFrame = {
@@ -58,6 +82,8 @@ export type TurnFrame = {
   thinkAhead: string[];
   tasks: TurnWorkTask[];
   bridge: string | null;
+  /** Follow-up Entities (Alster, Venue, Flug…) — validiert gegen Verlauf */
+  referents?: Call1Referent[];
 };
 
 const WORKERS: TurnWorker[] = [
@@ -71,6 +97,21 @@ const WORKERS: TurnWorker[] = [
   'chat',
   'm1',
   'weather',
+  'place',
+  'fact',
+  'events',
+  'tour',
+  'deep_web',
+  'timer_alarm',
+  'timeline_reminder',
+  'memory_prefs',
+  'memory_recall',
+  'identify_nearby',
+  'map_pin',
+  'voice_settings',
+  'device_action',
+  'm1_poi',
+  'reisebuero',
 ];
 
 function uniq(list: string[]): string[] {
@@ -144,6 +185,13 @@ function parseWorkTask(raw: unknown, i: number): TurnWorkTask | null {
   const mustHaves = Array.isArray(o.mustHaves)
     ? uniq(o.mustHaves.map((x) => String(x).slice(0, 48))).slice(0, 6)
     : [];
+  const execRaw = String(o.executeWhen || o.execute_when || '')
+    .trim()
+    .toLowerCase();
+  const executeWhen: TurnWorkExecuteWhen | null =
+    execRaw === 'now' || execRaw === 'later' || execRaw === 'on_confirm'
+      ? execRaw
+      : null;
   return {
     id: String(o.id || `w${i + 1}`).slice(0, 40),
     worker,
@@ -157,6 +205,7 @@ function parseWorkTask(raw: unknown, i: number): TurnWorkTask | null {
       typeof o.blueprint === 'string' ? o.blueprint.slice(0, 40) : null,
     dependsOn:
       typeof o.dependsOn === 'string' ? o.dependsOn.slice(0, 40) : null,
+    executeWhen,
   };
 }
 
@@ -172,6 +221,7 @@ export function emptyTurnFrame(partial?: Partial<TurnFrame>): TurnFrame {
     thinkAhead: partial?.thinkAhead ?? [],
     tasks: partial?.tasks ?? [],
     bridge: partial?.bridge ?? null,
+    referents: partial?.referents ?? [],
   };
 }
 
@@ -532,6 +582,24 @@ export function heuristicTurnFrame(
     });
   }
 
+  // Compound Taxi+Venue / Taxi+Flug → work[] mit dependsOn (LLM darf überschreiben)
+  if (!tasks.length || (tasks.length === 1 && tasks[0]?.worker === 'dining')) {
+    const mobility = heuristicMobilityWorkTasks(text);
+    if (mobility.length) {
+      const ids = new Set(tasks.map((x) => x.id));
+      for (const m of mobility) {
+        if (ids.has(m.id)) continue;
+        tasks.push({
+          ...m,
+          destCity: m.destCity ?? destCity,
+          when: m.when ?? when[0] ?? null,
+          mustHaves: m.mustHaves?.length ? m.mustHaves : mustHaves,
+        });
+        ids.add(m.id);
+      }
+    }
+  }
+
   const thinkAhead: string[] = [];
   if (flight) {
     thinkAhead.push(
@@ -655,12 +723,16 @@ export function parseTurnFrameFromLlm(
       ...t,
       destCity: sanitizeCity(t.destCity, gpsCity) || destCity,
     }));
+  const referents = parseCall1Referents(
+    blob.referents ?? parsed.referents,
+  );
   const hasAny =
     Boolean(destCity) ||
     tasks.length > 0 ||
     mustHaves.length > 0 ||
     when.length > 0 ||
-    thinkAhead.length > 0;
+    thinkAhead.length > 0 ||
+    referents.length > 0;
   if (!hasAny) return null;
   return emptyTurnFrame({
     destCity,
@@ -669,6 +741,7 @@ export function parseTurnFrameFromLlm(
     mustHaves,
     thinkAhead,
     tasks,
+    referents,
   });
 }
 
@@ -707,6 +780,11 @@ export function mergeTurnFrame(
     heuristic.when,
   );
 
+  const referents =
+    llm.referents && llm.referents.length
+      ? llm.referents
+      : heuristic.referents ?? [];
+
   return emptyTurnFrame({
     session: llm.session || heuristic.session,
     threadId: llm.threadId || heuristic.threadId,
@@ -720,6 +798,7 @@ export function mergeTurnFrame(
     thinkAhead: llm.thinkAhead.length ? llm.thinkAhead : heuristic.thinkAhead,
     tasks,
     bridge: llm.bridge || heuristic.bridge,
+    referents,
   });
 }
 
@@ -745,6 +824,7 @@ export function formatTurnFrameForPlanPrompt(frame: TurnFrame): string {
     }`,
     whenSlots,
     `thinkAhead: ${frame.thinkAhead.join(' | ') || '—'}`,
+    `referents: ${(frame.referents ?? []).map((r) => `${r.role}:${r.name}`).join(', ') || '—'}`,
     'work:',
     ...frame.tasks.map(
       (t) =>

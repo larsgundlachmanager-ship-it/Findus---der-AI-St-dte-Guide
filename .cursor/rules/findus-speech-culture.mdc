@@ -1,0 +1,40 @@
+---
+description: Sprachkultur zuerst, Persönlichkeit nur Overlay — gilt in jedem Modul
+alwaysApply: true
+---
+
+# Findus — Sprachkultur + Persönlichkeits-Overlay
+
+Yorro spricht **überall** (Modul 1/2/5, Welcome, Chat, Pitch, Planung, **Reisebüro**) menschlich und umgangssprachlich. Die Settings-Persönlichkeit färbt nur den Ton.
+
+## Zwei Schichten (hart)
+
+1. **Sprachkultur** (SSOT `FINDUS_SPEECH_CULTURE_BLOCK` in `findusResponsePolicy.ts`) — wie ein Mensch neben dem User redet. Unveränderlich.
+2. **Persönlichkeit** (Matrix aus Settings via `matrixSpeechStyle.ts`) — Overlay: Rolle / Vibe / Wissensstil / Spleens. Nie die Kultur ersetzen, nie Fakten durch Stil ersetzen.
+
+Alias: `FINDUS_CORE_WOVEN_SPEECH_BLOCK` = Sprachkultur.
+
+## Kultur-Pflichten
+
+- Mündlicher Fließtext, umgangssprachlich, vollständige Sätze (Subjekt + Verb).
+- Mehrere belegte Fakten in **einen** Satz weben — nicht abhaken, nicht Stichpunkte vorlesen, nicht Telegramm.
+- **Nutzen-Test:** jeder Satz muss für DIESE Frage etwas bringen. Keine Füllsätze, kein Meta, keine Bridge-Wiederholung.
+- Speech ≠ Stichpunkte (Chips sind stille UI).
+- Immer Du.
+
+## Nicht
+
+- Pflicht-Sätze / Orts-Hardcodes / Scripts in Prompts.
+- Kernel, TTS-Pipeline oder zweites Map-System als Sprach-Fix.
+- Füllwörter erzwingen („nämlich“, „schau mal“).
+- Persönlichkeit als Ersatz für klare Inhalte (Preise, Zeiten, Nav).
+
+Neue LLM-Lanes: Kultur-Block + Matrix-Overlay importieren, nicht neu formulieren.
+
+## Reisebüro
+
+Collect/Recap/Magazin/Funnel-Asks folgen derselben Kultur. Code-Speech (`recapSpeech`, `buildSpeechSummary800`, Briefing-Fallbacks) **webt** Fakten — kein ` · `-Telegramm in gesprochener Stimme. Flipchart/Labels dürfen Mittepunkte behalten. `FINDUS_REISEBUERO_DEEP_BRIEFING_BLOCK` liegt im Core-Appendix.
+
+## Navigation
+
+Einfache Abbiegung = Cache-Phrase („jetzt rechts“). Sprachkultur **nur** an komplizierten Wegabelungen (complex fork / Kette / Gasse / OSM-Lookahead): Weg teilt sich + Richtung in **einem** Satz. Kein „nimm Gabelung“, kein Meter-Telegramm. `weaveComplexNavCue` in `spatialOrientation.ts`.

@@ -6,6 +6,7 @@
 import { hasClockHint, isWakeAlarmIntent } from './wakeIntentDetect';
 
 const SHOULD_MATCH = [
+  'Ich werde um 9:30 Uhr geweckt werden',
   'Wecke mich um 8 Uhr morgens',
   'weck mich um 7',
   'ich möchte gerne um 8 Uhr morgens geweckt werden',

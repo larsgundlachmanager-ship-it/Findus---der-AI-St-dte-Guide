@@ -1,0 +1,2 @@
+﻿--------- beginning of main
+09-16 20:31:30.103 27839 27918 I ReactNativeJS: '[places] new-text', 'Arena OR Stadion OR Theater OR Konzertha', 12

@@ -30,6 +30,7 @@ Spezifikation für Call 1 → Fanout → Call 2 → Call 3. **Implementierung fo
 | [gap-closures.md](./gap-closures.md) | Ergänzungen aus Test-Suites |
 | [continue-turn-from-choice.md](./continue-turn-from-choice.md) | Tap ohne Mic |
 | [regression-gate.md](./regression-gate.md) | Definition of Done vor Ship |
+| [agent-harden-contract.md](./agent-harden-contract.md) | Härten ohne Rewrite; Compose-Ausnahme; Self-teach |
 
 ## Implementierungs-Reihenfolge
 

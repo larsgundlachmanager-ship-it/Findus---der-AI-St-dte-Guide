@@ -21,6 +21,7 @@ const LOCK = 'TTS_SENTENCE_PIPELINE_LOCK';
 const queue = src('src/services/audio/streamingAudioQueueService.ts');
 const voice = src('src/services/AudioVoiceService.ts');
 const turn = src('src/module2/router/runConciergeTurn.ts');
+const turnSpeech = src('src/module2/router/runConciergeTurnSpeech.ts');
 const pump = src('src/services/audio/liveSentencePump.ts');
 const chunker = src('src/services/audio/punctuationChunker.ts');
 const fused = src('src/module2/speech/fusedTurnSpeech.ts');
@@ -30,7 +31,7 @@ const pipeline = src('src/runtime/audioPipeline.ts');
 for (const [name, text] of [
   ['streamingAudioQueueService', queue],
   ['AudioVoiceService', voice],
-  ['runConciergeTurn', turn],
+  ['runConciergeTurnSpeech', turnSpeech],
   ['fusedTurnSpeech', fused],
   ['liveSentencePump', pump],
   ['punctuationChunker', chunker],
@@ -89,14 +90,15 @@ assert.match(turn, /beginFusedTurnSpeech/);
 assert.match(turn, /getFusedTurnPump/);
 assert.match(queue, /export function warmStreamingPhrases/);
 assert.match(queue, /takeWarmedClip/);
-assert.match(turn, /warmStreamingPhrases/);
+assert.match(turnSpeech, /warmStreamingPhrases/);
 assert.doesNotMatch(
-  turn,
+  turnSpeech,
   /await waitForBridgingToFinish/,
   'do not wait for a second TTS session before the main answer',
 );
-assert.match(turn, /async function startLiveSpeechSession/);
-assert.match(turn, /speakRuntimeSentences/);
+assert.match(turn, /startLiveSpeechSession/);
+assert.match(turnSpeech, /async function startLiveSpeechSession/);
+assert.match(turnSpeech, /speakRuntimeSentences/);
 assert.match(speechQ, /isFusedTurnLive/);
 assert.doesNotMatch(
   turn,
@@ -104,7 +106,7 @@ assert.doesNotMatch(
   'first-hook stream must not wait for live-chat flag',
 );
 assert.doesNotMatch(
-  turn,
+  turnSpeech,
   /else \{\s*enqueueSpeech\(\{\s*kind: 'main',\s*text: t,\s*turnId\s*\}\);/s,
   'M1 follow-up must not enqueue each later sentence as its own job',
 );

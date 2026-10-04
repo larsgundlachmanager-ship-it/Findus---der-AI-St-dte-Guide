@@ -143,8 +143,19 @@ export function parseTripStayUtterance(
       /\b(\d{1,2}|ein|eine|eins|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn)\s*tage?\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\- ]{1,40})/iu,
     );
     if (m2) {
-      dayCount = parseDayCountToken(m2[1]!);
-      cityName = cleanCityName(m2[2]);
+      // „ein Tag länger/früher bleiben“ = Flex, keine Aufenthaltsdauer
+      const tail = (m2[2] || '').toLowerCase();
+      if (
+        /\b(länger|laenger|früher|frueher|vorher|danach|später|spaeter|bleiben|dranhängen|optimal|theoretisch)\b/iu.test(
+          tail,
+        ) ||
+        /\b(tag|tage|nacht|nächte|naechte)s?\s+(länger|laenger|früher|frueher|vorher)\b/iu.test(t)
+      ) {
+        /* skip */
+      } else {
+        dayCount = parseDayCountToken(m2[1]!);
+        cityName = cleanCityName(m2[2]);
+      }
     }
   }
 

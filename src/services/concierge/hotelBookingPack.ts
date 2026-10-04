@@ -119,6 +119,7 @@ export async function buildHotelBookingPack(
       checkout,
       adults,
       expediaPropertyId: stay.expediaPropertyId,
+      priceEur: stay.priceTotal,
     });
   };
 

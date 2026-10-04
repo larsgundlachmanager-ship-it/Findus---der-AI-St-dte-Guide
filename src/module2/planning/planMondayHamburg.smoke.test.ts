@@ -65,6 +65,10 @@ assert(
 
 const slots = extractUtteranceSlots(FULL);
 assert(
+  slots.filter((s) => s.kind === 'breakfast').length === 1,
+  `exactly one breakfast: ${slots.filter((s) => s.kind === 'breakfast').map((s) => s.title).join('|')}`,
+);
+assert(
   slots.some((s) => s.kind === 'travel'),
   `travel: ${slots.map((s) => `${s.kind}:${s.title}`).join(',')}`,
 );
@@ -80,6 +84,21 @@ assert(
   slots.some((s) => /michel/i.test(s.title) || /michel/i.test(s.context)),
   `michel: ${slots.map((s) => `${s.kind}:${s.title}`).join(',')}`,
 );
+{
+  const meal = slots.find((s) => s.kind === 'meal');
+  if (meal) {
+    assert(
+      /sonnenuntergang|sunset|elbblick|blick/i.test(meal.context) ||
+        !/\b(sonnenuntergang|sunset)\b/i.test(FULL),
+      `meal carries view/sunset criteria: ${meal.context}`,
+    );
+  }
+  assert(
+    !slots.some((s) => /sonnenuntergang|sunset/i.test(s.title)) ||
+      !slots.some((s) => s.kind === 'meal'),
+    'no separate sunset sibling when meal present',
+  );
+}
 
 const skeleton = buildSkeletonPlanFromUtterance({
   utterance: FULL,
@@ -100,6 +119,11 @@ assert(
   `skel travel: ${skeleton.openWishesQueue.map((w) => w.title).join(' | ')}`,
 );
 assert(
+  skeleton.openWishesQueue.filter((w) => /frühstück|fruehstueck/i.test(w.title))
+    .length === 1,
+  'skel exactly one breakfast',
+);
+assert(
   skeleton.openWishesQueue.some((w) => /frühstück|fruehstueck/i.test(w.title)),
   'skel breakfast',
 );
@@ -109,6 +133,27 @@ assert(
   ),
   `skel named: ${skeleton.openWishesQueue.map((w) => w.title).join(' | ')}`,
 );
+{
+  const meal = skeleton.openWishesQueue.find((w) =>
+    /pann(?:en)?fisch|abendessen|^essen\b/i.test(w.title) ||
+      (/\bpann(?:en)?fisch\b/i.test(w.context) &&
+        !/frühstück|fruehstueck/i.test(w.title)),
+  );
+  assert(Boolean(meal), `skel meal: ${skeleton.openWishesQueue.map((w) => w.title).join('|')}`);
+  assert(
+    /sonnenuntergang|sunset|blick|elbblick/i.test(meal!.context) ||
+      /sonnenuntergang|sunset|blick|elbblick/i.test(meal!.title),
+    `skel meal has view/sunset in context: ${meal!.context}`,
+  );
+  assert(
+    !skeleton.openWishesQueue.some((w) => /sonnenuntergang/i.test(w.title)),
+    'skel: no separate sunset wish',
+  );
+  assert(
+    skeleton.openWishesQueue.some((w) => /michel/i.test(w.title)),
+    'skel michel landmark slot',
+  );
+}
 
 const frame = heuristicTurnFrame(FULL, 'Prisdorf');
 assert(frame.destCity === 'Hamburg', `frame dest=${frame.destCity}`);
@@ -174,6 +219,19 @@ assert(
   assert(
     shouldForceModul5Handoff(withTour),
     'compound Hamburg day with Tour-word stays M5',
+  );
+}
+
+// Live-PTT 2026-09-02: langer Hamburg-Tag — Plan, keine Nav / kein Theater-Only
+{
+  const ptt =
+    'Ich habe mir überlegt, morgen nach Hamburg reinzufahren. Irgendwie um 9 Uhr los und dann in Hamburg typisch hamburgerisch frühstücken. Abends Hamburger Pannenfisch mit Elbblick zum Sonnenuntergang. Was sind die Must-Haves? Man kann auf den Michel rauf — was ist der Michel, wie teuer? Stell mir einen tollen Tag zusammen.';
+  assert(shouldForceModul5Handoff(ptt), 'ptt day plan → M5');
+  assert(!isExplicitNavIntent(ptt), 'ptt day plan ≠ live nav');
+  assert(looksLikeModul5PlanUtterance(ptt), 'ptt looks like modul 5');
+  assert(
+    destinationCityFromUtterance(ptt, 'Prisdorf') === 'Hamburg',
+    'ptt dest Hamburg',
   );
 }
 

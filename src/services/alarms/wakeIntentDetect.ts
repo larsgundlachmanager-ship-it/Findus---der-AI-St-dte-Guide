@@ -38,7 +38,7 @@ const WAKE_ME =
   /\b(?:weck(?:e|en|st|t)?|hol)\s+(?:mich|uns)\b/iu;
 
 const HAS_CLOCK =
-  /\b(?:um\s+)?\d{1,2}(?::\d{2})?\s*(?:uhr)?\b|\b\d{1,2}[:.]\d{2}\b/i;
+  /\b(?:um\s+)?\d{1,2}(?::\d{2})?\s*(?:uhr)?\b|\b\d{1,2}[:.]\d{2}\b|\bhalb\s+(?:eins|ein|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwoelf|\d{1,2})\b|\b(?:eins|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|elf|zwölf)\s*uhr\b/i;
 
 /** „wann muss ich aufstehen“ ohne Zeit → trotzdem Wake-Flow (fragt nach / rechnet). */
 const ASK_WHEN_WAKE =

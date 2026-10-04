@@ -1,0 +1,194 @@
+--------- beginning of system
+09-14 00:08:09.668 29162 29162 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-14 00:08:09.696 29162 29162 D SceneManager: init SceneManager
+09-14 00:08:09.731 29162 29180 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+09-14 00:08:09.742 29162 29162 D NtViewImpl: init NtViewImpl
+09-14 00:08:09.817 29162 29162 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 00:08:09.858 29162 29162 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-14 00:08:10.219 29162 29232 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=56a6912f mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={420dpi always-compat} mLoaders=[]}
+--------- beginning of main
+09-14 00:11:47.524 29162 29169 W System  : A resource failed to call close. 
+09-14 00:11:47.530 29162 29169 W System  : A resource failed to call close. 
+09-14 00:11:55.862 29162 29184 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-14 00:11:55.863 29162 29184 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-14 00:11:55.863 29162 29184 I ReactNativeJS:   'com.google.android.tts',
+09-14 00:11:55.863 29162 29184 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-14 00:11:55.863 29162 29184 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-14 00:11:55.879 29162 29184 I ReactNativeJS: [devAskPoller] started → :8791
+09-14 00:11:55.883 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:11:55.916 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:11:56.024 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:11:56.025 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:11:56.025 29162 29184 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 00:11:56.029 29162 29162 D ExpoSpeechService: Start recognition.
+09-14 00:11:56.029 29162 29162 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-14 00:11:56.029 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-14 00:11:56.029 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-14 00:11:56.029 29162 29162 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-14 00:11:56.029 29162 29162 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-14 00:11:56.030 29162 29162 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-14 00:11:56.096 29162 29184 I ReactNativeJS: [stt] recognition started
+09-14 00:11:56.591 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:11:56.593 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:11:56.597 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:00.714 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:00.715 29162 29162 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-14 00:12:00.715 29162 29184 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=8.3', 'partial=false', 'svc=com.google.android.tts'
+09-14 00:12:00.716 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:00.948 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:00.948 29162 29184 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 00:12:00.948 29162 29184 I ReactNativeJS: [stt] keep-alive restart (error:no-speech, try 1)
+09-14 00:12:00.956 29162 29162 D ExpoSpeechService: Start recognition.
+09-14 00:12:00.956 29162 29162 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-14 00:12:00.956 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-14 00:12:00.956 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-14 00:12:00.956 29162 29162 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-14 00:12:00.956 29162 29162 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-14 00:12:00.958 29162 29162 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-14 00:12:01.009 29162 29184 I ReactNativeJS: [stt] recognition started
+09-14 00:12:02.366 29162 29184 I ReactNativeJS: [devAskPoller] started → :8791
+09-14 00:12:02.513 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:02.513 29162 29162 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-14 00:12:02.515 29162 29184 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=3.4', 'partial=false', 'svc=com.google.android.tts'
+09-14 00:12:02.520 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:42.283 29162 29184 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-14 00:12:42.284 29162 29184 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-14 00:12:42.284 29162 29184 I ReactNativeJS:   'com.google.android.tts',
+09-14 00:12:42.284 29162 29184 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-14 00:12:42.284 29162 29184 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-14 00:12:42.302 29162 29184 I ReactNativeJS: [devAskPoller] started → :8791
+09-14 00:12:42.306 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:42.342 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:42.435 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:42.436 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:42.436 29162 29184 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 00:12:42.446 29162 29162 D ExpoSpeechService: Start recognition.
+09-14 00:12:42.446 29162 29162 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-14 00:12:42.446 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-14 00:12:42.446 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-14 00:12:42.446 29162 29162 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-14 00:12:42.446 29162 29162 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-14 00:12:42.447 29162 29162 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-14 00:12:42.491 29162 29184 I ReactNativeJS: [stt] recognition started
+09-14 00:12:43.010 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:43.016 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:43.018 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:47.039 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:47.039 29162 29162 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-14 00:12:47.040 29162 29184 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=1.2', 'partial=false', 'svc=com.google.android.tts'
+09-14 00:12:47.042 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:47.272 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:47.272 29162 29184 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 00:12:47.273 29162 29184 I ReactNativeJS: [stt] keep-alive restart (error:no-speech, try 1)
+09-14 00:12:47.273 29162 29162 D ExpoSpeechService: Start recognition.
+09-14 00:12:47.273 29162 29162 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-14 00:12:47.273 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-14 00:12:47.274 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-14 00:12:47.274 29162 29162 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-14 00:12:47.274 29162 29162 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-14 00:12:47.274 29162 29162 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-14 00:12:47.348 29162 29184 I ReactNativeJS: [stt] recognition started
+09-14 00:12:48.791 29162 29184 I ReactNativeJS: [devAskPoller] started → :8791
+09-14 00:12:48.957 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:48.962 29162 29162 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-14 00:12:48.962 29162 29184 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=10.0', 'partial=false', 'svc=com.google.android.tts'
+09-14 00:12:48.968 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:53.182 29162 29184 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-14 00:12:53.183 29162 29184 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-14 00:12:53.183 29162 29184 I ReactNativeJS:   'com.google.android.tts',
+09-14 00:12:53.183 29162 29184 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-14 00:12:53.183 29162 29184 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-14 00:12:53.199 29162 29184 I ReactNativeJS: [devAskPoller] started → :8791
+09-14 00:12:53.202 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:53.206 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:53.302 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:53.303 29162 29184 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-14 00:12:53.303 29162 29184 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-14 00:12:53.311 29162 29162 D ExpoSpeechService: Start recognition.
+09-14 00:12:53.311 29162 29162 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-14 00:12:53.311 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-14 00:12:53.311 29162 29162 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-14 00:12:53.311 29162 29162 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-14 00:12:53.311 29162 29162 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-14 00:12:53.312 29162 29162 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-14 00:12:53.390 29162 29184 I ReactNativeJS: [stt] recognition started
+09-14 00:12:53.898 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:53.904 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:53.907 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:54.945 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:55.001 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:55.123 29162 29162 D ExpoSpeechService: onPartialResults(), results: []
+09-14 00:12:55.496 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie, confidence=0.0, segments=[]}]
+09-14 00:12:55.646 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß, confidence=0.0, segments=[]}]
+09-14 00:12:55.805 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-14 00:12:55.903 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-14 00:12:55.934 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-14 00:12:55.957 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-14 00:12:56.081 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist, confidence=0.0, segments=[]}]
+09-14 00:12:56.204 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist ein, confidence=0.0, segments=[]}]
+09-14 00:12:56.288 29162 29184 I ReactNativeJS: [devAskPoller] started → :8791
+09-14 00:12:56.471 29162 29162 D ExpoSpeechService: onPartialResults(), results: [{transcript=wie groß ist ein Tennisplatz, confidence=0.9141081, segments=[]}, {transcript=wie groß ist ein Tennis Platz, confidence=0.9284234, segments=[]}]
+09-14 00:12:56.471 29162 29162 D ExpoSpeechService: onResults(), results: []
+09-14 00:12:56.472 29162 29184 I ReactNativeJS: '[voice] submit (main):', 'wie groß ist ein Tennis Platz'
+09-14 00:12:56.474 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:56.479 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:56.485 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:12:56.490 29162 29184 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".', 'Error: Requiring unknown module "undefined".\n    at unknownModuleError (address at index.android.bundle:1:77981)\n    at loadModuleImplementation (address at index.android.bundle:1:77790)\n    at guardedLoadModule (address at index.android.bundle:1:77369)\n    at metroRequire (address at index.android.bundle:1:77042)\n    at looksLikeInstantAnswerLeadQuery (address at index.android.bundle:1:2743583)\n    at ?anon_0_ (address at index.android.bundle:1:3088557)\n    at next (native)\n    at asyncGeneratorStep (address at index.android.bundle:1:587620)\n    at _next (address at index.android.bundle:1:587878)\n    at tryCallOne (address at InternalBytecode.js:1:1180)\n    at anonymous (address at InternalBytecode.js:1:1874)'
+09-14 00:12:56.490 29162 29184 W ReactNativeJS: [app] swallowed unknown-module undefined (keep UI alive)
+09-14 00:12:56.490 29162 29184 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: Error: Requiring unknown module "undefined"., stack:
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: unknownModuleError@1:77981
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: loadModuleImplementation@1:77790
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: guardedLoadModule@1:77369
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: metroRequire@1:77042
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: looksLikeInstantAnswerLeadQuery@1:2743583
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: ?anon_0_@1:3088557
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: asyncGeneratorStep@1:587620
+09-14 00:12:56.496 29162 29186 E unknown:ReactNative: _next@1:587878
+09-14 00:12:58.997 29162 29184 W ReactNativeJS: '[app] js global error', true, 'Requiring unknown module "undefined".', 'Error: Requiring unknown module "undefined".\n    at unknownModuleError (address at index.android.bundle:1:77981)\n    at loadModuleImplementation (address at index.android.bundle:1:77790)\n    at guardedLoadModule (address at index.android.bundle:1:77369)\n    at metroRequire (address at index.android.bundle:1:77042)\n    at looksLikeInstantAnswerLeadQuery (address at index.android.bundle:1:2743583)\n    at ?anon_0_ (address at index.android.bundle:1:3121009)\n    at next (native)\n    at asyncGeneratorStep (address at index.android.bundle:1:587620)\n    at _next (address at index.android.bundle:1:587878)\n    at tryCallOne (address at InternalBytecode.js:1:1180)\n    at anonymous (address at InternalBytecode.js:1:1874)'
+09-14 00:12:58.997 29162 29184 W ReactNativeJS: [app] swallowed unknown-module undefined (keep UI alive)
+09-14 00:12:58.997 29162 29184 E ReactNativeJS: Error: Requiring unknown module "undefined".
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: Error: Requiring unknown module "undefined"., stack:
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: unknownModuleError@1:77981
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: loadModuleImplementation@1:77790
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: guardedLoadModule@1:77369
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: metroRequire@1:77042
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: looksLikeInstantAnswerLeadQuery@1:2743583
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: ?anon_0_@1:3121009
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: asyncGeneratorStep@1:587620
+09-14 00:12:58.998 29162 29186 E unknown:ReactNative: _next@1:587878
+09-14 00:12:59.005 29162 29186 D AudioSystem: onNewService: media.audio_policy service obtained 0xb400007a25b4ac00
+09-14 00:12:59.007 29162 29186 D AudioSystem: getService: checking for service media.audio_policy: 0xb400007a25b4ac00
+09-14 00:12:59.016 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:13:00.029 29162 29169 W System  : A resource failed to call close. 
+09-14 00:13:00.058 29162 29162 I ExoPlayerImpl: Init e67e10c [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36]
+09-14 00:13:00.064 29162 29162 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0xb4000079356541b0
+09-14 00:13:00.065 29162 29162 D AudioSystem: getService: checking for service media.audio_flinger: 0xb400007a25a584a0
+09-14 00:13:00.068 29162 29162 I NtAudioManager: getStreamVolume streamType :3, pkg :de.findus.app, index :7
+09-14 00:13:00.081 29162 31165 W WavHeaderReader: Ignoring unknown WAV chunk: 1279873876
+09-14 00:13:00.081 29162 31165 W WavExtractor: Data exceeds input length: 4294967373, 232926
+09-14 00:13:00.093 29162 31164 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 25081, transferType 3, uid 10538, pid 29162
+09-14 00:13:00.098 29162 31164 E AudioTrack: createTrack_l(4592) on outputId 29 : 0xb400007a457c17f0, mCblk = 0x7905157000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 00:13:00.118 29162 29162 W AudioManager: Use of stream types is deprecated for operations other than volume control
+09-14 00:13:00.118 29162 29162 W AudioManager: See the documentation of requestAudioFocus() for what to use instead with android.media.AudioAttributes to qualify your playback use case
+09-14 00:13:00.122 29162 31164 D AudioTrack: start(4592): prior state:STATE_STOPPED
+09-14 00:13:00.350 29162 31174 D AudioTrack: updateStateToService: AudioTrackStatus state:0
+09-14 00:13:02.537 29162 31164 D AudioTrack: stop(4592): prior state:STATE_ACTIVE
+09-14 00:13:02.537 29162 31164 D AudioTrack: stop(4592): called with 116424 frames delivered
+09-14 00:13:02.539 29162 31164 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 00:13:02.973 29162 31201 D AudioTrack: flush(4592): prior state:STATE_STOPPED
+09-14 00:13:02.974 29162 31201 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 00:13:02.974 29162 31201 D AudioTrack: stop(4592): prior state:STATE_FLUSHED
+09-14 00:13:02.974 29162 31201 D AudioTrack: stop(4592): prior state:STATE_FLUSHED
+09-14 00:13:02.974 29162 31201 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 00:13:02.974 29162 31201 D AudioTrack: ~AudioTrack(4592), releasing session id 25081 from 29162 on behalf of 29162
+09-14 00:13:02.984 29162 31164 D AudioTrack: set(): streamType -1, sampleRate 44100, format 0x1, channelMask 0x1, frameCount 14144, flags 0, notificationFrames 0, sessionId 25081, transferType 3, uid 10538, pid 29162
+09-14 00:13:02.992 29162 31164 E AudioTrack: createTrack_l(4593) on outputId 29 : 0xb400007a457f22e0, mCblk = 0x7905157000, mLatency = 429, mAfLatency = 109, frameCount = 14144, mSampleRate = 44100, mFlags = 00000008, mReqFrameCount = 14144, mNotificationFramesAct = 7072
+09-14 00:13:03.020 29162 29162 I ExoPlayerImpl: Release e67e10c [ExoPlayerLib/2.18.1] [Asteroids, A059, Nothing, 36] [goog.exo.core, goog.exo.exoplayer, goog.exo.decoder, goog.exo.okhttp, goog.exo.datasource, goog.exo.extractor]
+09-14 00:13:03.024 29162 31210 D AudioTrack: flush(4593): prior state:STATE_STOPPED
+09-14 00:13:03.024 29162 31210 D AudioTrack: updateStateToService: AudioTrackStatus state:4
+09-14 00:13:03.024 29162 31210 D AudioTrack: stop(4593): prior state:STATE_FLUSHED
+09-14 00:13:03.025 29162 31210 D AudioTrack: stop(4593): prior state:STATE_FLUSHED
+09-14 00:13:03.026 29162 31210 D AudioTrack: updateStateToService: AudioTrackStatus state:1
+09-14 00:13:03.026 29162 31210 D AudioTrack: ~AudioTrack(4593), releasing session id 25081 from 29162 on behalf of 29162
+09-14 00:13:03.028 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app

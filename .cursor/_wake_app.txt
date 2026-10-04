@@ -1,0 +1,16 @@
+﻿--------- beginning of system
+09-14 23:53:38.026 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:08:17.575 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:26:19.944 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:26:46.360 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:26:47.134 11170 11170 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+09-15 00:26:47.977 11170 11170 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+09-15 00:27:10.964 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+--------- beginning of main
+09-15 00:34:21.880 11170 11178 W System  : A resource failed to call close. 
+09-15 00:34:21.880 11170 11178 W System  : A resource failed to call close. 
+09-15 00:34:21.881 11170 11178 W System  : A resource failed to call close. 
+09-15 00:34:57.188 11170 11170 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-15 00:34:57.190 11170 11170 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-15 00:34:57.195 11170 11170 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-15 00:34:57.198 11170 11254 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId 'ff236f13-08ec-4e9a-8cba-5e2bde5fa963'.

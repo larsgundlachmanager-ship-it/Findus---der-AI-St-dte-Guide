@@ -1,13 +1,16 @@
 /**
  * Smoke: Handy-laden akzeptiert nur glaubwürdige Orte — kein Heimat-/Touristen-Junk.
- * Run: npx --yes tsx src/services/navigation/phoneCharge.smoke.test.ts
+ * Run: npx --yes --package tsx@4.19.4 tsx src/services/navigation/phoneCharge.smoke.test.ts
  */
 import assert from 'node:assert/strict';
 import {
   acceptChargePlace,
   formatChargeBullet,
+  isBakeryHost,
+  isGuaranteedChargeKind,
   isPhoneChargeIntent,
   kindLabel,
+  kindSpeechHint,
 } from './chargePlacePolicy';
 
 function place(
@@ -106,6 +109,26 @@ assert.equal(
   'outlet',
 );
 
+// Bäckerei = Soft, nie als belegte Steckdose
+assert.equal(isBakeryHost(place('Bäcker Stüter', ['bakery', 'food'])), true);
+assert.equal(
+  acceptChargePlace(place('Bäcker Stüter', ['bakery', 'food']), 'cafe'),
+  'bakery',
+);
+assert.equal(
+  acceptChargePlace(
+    place('Bäcker Stüter', ['bakery', 'outlet_cafe']),
+    'outlet_cafe',
+  ),
+  null,
+);
+assert.equal(isGuaranteedChargeKind('bakery'), false);
+assert.equal(isGuaranteedChargeKind('outlet'), true);
+assert.match(
+  kindSpeechHint('bakery'),
+  /oft kurz laden|nicht garantiert/i,
+);
+
 const b0 = formatChargeBullet({
   kind: 'powerbank',
   name: 'Batterybar Dom',
@@ -116,10 +139,17 @@ const b1 = formatChargeBullet({
   name: 'Café Pfeiffer',
   distanceM: 2200,
 });
+const b2 = formatChargeBullet({
+  kind: 'bakery',
+  name: 'Bäcker Stüter',
+  distanceM: 300,
+});
 assert.ok(b0.includes(kindLabel('powerbank')));
 assert.ok(b0.includes('Batterybar Dom'));
 assert.ok(b1.includes('Café Pfeiffer'));
-assert.ok(!/Heimat|Spielstadt/i.test(b0 + b1));
+assert.ok(b2.includes('Bäcker Stüter'));
+assert.ok(/oft kurz laden/i.test(b2));
+assert.ok(!/Heimat|Spielstadt/i.test(b0 + b1 + b2));
 
 assert.equal(
   isPhoneChargeIntent(

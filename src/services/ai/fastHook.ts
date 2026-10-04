@@ -84,7 +84,7 @@ const BASE_HOOKS: HookBank = {
     'Unscheinbar, aber wichtig — hier liegt ein Service, den du bald brauchst.',
   ],
   cafe: [
-    'Schau mal! Vor dir duftet schon das Café — kleine Pause gefällig?',
+    'Da vorne duftet schon das Café — kleine Pause gefällig?',
     'Riechst du das auch schon? Genau vor dir wartet ein Spot, der hungrige Seelen rettet.',
   ],
   bakery: [
@@ -98,39 +98,39 @@ const BASE_HOOKS: HookBank = {
     'Blumen voraus — wenn du einen Anlass hast, ist der Laden greifbar nah.',
   ],
   church: [
-    'Schau mal: vor dir steht die Kirche. Pst… Wenn diese alten Mauern sprechen könnten…',
+    'Pst… die Kirche da vorne. Wenn diese alten Mauern sprechen könnten…',
     'Spürst du die Stille? Vor dir liegt ein Ort, der Geschichte flüsternd weitergibt.',
   ],
   museum: [
-    'Schau mal! Vor dir liegt das Museum — hinter der Tür steckt mehr Story, als man glaubt.',
+    'Da vorne liegt das Museum — hinter der Tür steckt mehr Story, als man glaubt.',
     'Bereit für einen kurzen Zeitsprung? Geh einfach drauf zu, ich erzähl dir mehr.',
   ],
   castle: [
-    'Schau mal hoch! Vor dir steht das Schloss — ganz schön mächtig, oder?',
-    'Pass auf: solche Kuh-liss-en vor dir schreibt man nicht jeden Tag.',
+    'Das Schloss da vorne steht ganz schön mächtig, oder?',
+    'Solche Kuh-liss-en vor dir schreibt man nicht jeden Tag.',
   ],
   park: [
-    'Schau mal: vor dir liegt der Park. Tief durchatmen — hier darfst du kurz den Alltag draußen lassen.',
+    'Da vorne liegt der Park. Tief durchatmen — hier darfst du kurz den Alltag draußen lassen.',
     'Grün und Ruhe vor dir — und mehr Geschichte, als der erste Blick verrät.',
   ],
   nature: [
-    'Sag mal — hast du eine Pollenallergie? Hier vor dir blüht’s ordentlich…',
-    'Warst du schon mal in einer Baumschule? Schau mal, was hier vor dir wächst.',
+    'Hier vor dir blüht’s ordentlich — Grün, das man riechen kann.',
+    'Was hier vor dir wächst, ist mehr als nur ein Streifen Natur.',
   ],
   golf: [
-    'Schau mal: vor dir liegen die Greens. Bist du bereit für deinen nächsten Abschlag?',
+    'Da vorne liegen die Greens. Bist du bereit für deinen nächsten Abschlag?',
     'Lass das Handicap zu Hause — wir schauen uns jetzt mal diesen Golfplatz an.',
   ],
   water: [
-    'Schau mal: Wasser voraus! Ich hoffe, du hast die Badehose dabei.',
+    'Wasser voraus — spürst du schon die Brise?',
     'Vor dir glitzert das Wasser — spürst du schon die Brise?',
   ],
   bar: [
-    'Schau mal: vor dir liegt die Bar. Hier geht abends was — merken wir uns.',
+    'Da vorne liegt die Bar. Hier geht abends was — merken wir uns.',
     'Nachtleben-Radar piept. Bereit für den Vibe vor dir?',
   ],
   market: [
-    'Schau mal: vor dir brummt der Markt. Hand aufs Herz — riecht nach Trubel, oder?',
+    'Da vorne brummt der Markt. Hand aufs Herz — riecht nach Trubel, oder?',
     'Markt-Vibes vor dir! Hier läuft der Handel schon seit Generationen.',
   ],
   shop: [
@@ -146,16 +146,16 @@ const BASE_HOOKS: HookBank = {
   ],
   historic: [
     'Du stehst jetzt direkt vor einem Ort der Stille — nimm dir kurz einen Moment.',
-    'Schau mal genau hin: vor dir liegt ein Stück Dorfgeschichte, das man leicht übersieht.',
-    'Pass auf: genau dieser Fleck vor dir steckt voller Geschichte.',
+    'Genau hinsehen: vor dir liegt ein Stück Dorfgeschichte, das man leicht übersieht.',
+    'Genau dieser Fleck vor dir steckt voller Geschichte.',
   ],
   station: [
     'Tüt-tüt! Vor dir liegt der Bahnhof — Einsteigen bitte.',
-    'Schau mal: der Bahnhof vor dir verbindet das Dorf mit der weiten Welt.',
+    'Der Bahnhof vor dir verbindet den Ort mit der weiten Welt.',
   ],
   generic: [
-    'Schau mal genau hin — was du hier siehst, steckt voller Leben.',
-    'Pass auf: was vor dir liegt, ist mehr als der erste Blick verrät. Komm näher, ich bleib bei dir.',
+    'Was du hier siehst, steckt voller Leben.',
+    'Was vor dir liegt, ist mehr als der erste Blick verrät.',
   ],
 };
 
@@ -286,7 +286,7 @@ function amenityDiscoveryHooks(
   if (discovery) {
     return [
       `Da vorne: ${short}. ${discovery}`,
-      `Schau mal Richtung ${short} — ${discovery}`,
+      `Gleich voraus ${short} — ${discovery}`,
     ];
   }
   // Ohne Discovery: still — kein Name-Drop / Abstecher-Fluff
@@ -355,14 +355,9 @@ export function buildWegweiserHook(
     `Schule voraus — ${short}. Dorfgeschichte steckt da oft mehr drin, als man denkt.`,
   ];
 
-  const memorialHooks = /bilsbek|brücke|bruecke/i.test(`${dest} ${poi.name}`)
-    ? [
-        `Siehst du die kleine Bilsbekbrücke da vorne? Fahr oder geh mal genau darauf zu — direkt an der Brücke steht nämlich ein ganz stiller Zeuge unserer Dorfgeschichte: ${short}.`,
-        `Schau mal Richtung Grünanlage an der Brücke: ${short} wartet dort. Wenn du einen Moment hast, erzähl ich dir, warum der Stein so wichtig ist.`,
-      ]
-    : [
+  const memorialHooks = [
         `Da vorne steht ${short}. Ein Ort zum kurzen Innehalten — magst du näher rangehen?`,
-        `Schau mal: ${short}. Wenn du einen Moment hast, steckt da lokale Erinnerung drin.`,
+        `${short} liegt gleich vor dir. Wenn du einen Moment hast, steckt da lokale Erinnerung drin.`,
       ];
 
   const cafeHooks = likesFood
@@ -389,7 +384,7 @@ export function buildWegweiserHook(
   ];
 
   const sportsHooks = [
-    `Schau mal rüber Richtung Feld und Waldrand. Genau da drüben liegt ${short} — und die machen hier deutlich mehr als nur auf dem Hochsitz zu sitzen.`,
+    `Richtung Feld und Waldrand liegt ${short} — und die machen hier deutlich mehr als nur auf dem Hochsitz zu sitzen.`,
     `Sportplatz voraus: ${short}. Warst du eher Kapitän oder Bankdrücker?`,
     `Da vorne liegt ${short}. Kurzer Blick auf den Vereinsgeist?`,
   ];
@@ -402,12 +397,12 @@ export function buildWegweiserHook(
   const genericHooks = likesHistory
     ? [
         `Da vorne liegt ${short}. Unscheinbar? Vielleicht. Geschichte? Definitiv. Kurz reinschnuppern?`,
-        `Schau mal Richtung ${short} — da steckt mehr Story, als der erste Blick verrät.`,
+        `Da vorne liegt ${short} — da steckt mehr Story, als der erste Blick verrät.`,
         `Na, ${short} liegt gleich vor dir. Magst du die kleine Geschichte dazu?`,
       ]
     : [
         `Da vorne: ${short}. Kurzer Stopp mit einer netten Anekdote — interessiert?`,
-        `Schau mal, ${short}. Wenn du Lust hast, erzähl ich dir gleich, warum der Spot tickt.`,
+        `${short} liegt gleich vor dir. Wenn du Lust hast, erzähl ich dir gleich, warum der Spot tickt.`,
         `Hey — ${short} liegt vor dir. Rein oder weiter? Deine Wahl.`,
       ];
 
@@ -510,9 +505,9 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     bakery: ['Bro, Brötchen-Alert. Da duftet’s richtig.'],
     golf: ['Ready für den Abschlag? Die Greens hier haben echten Vibe.'],
     station: ['Tüt-tüt, Einsteigen bitte! Bahnhof-Vibe, wir zoomen rein.'],
-    water: ['Badehose checken — jetzt wird’s erfrischend!'],
+    water: ['Wasser voraus — jetzt wird’s erfrischend!'],
     nature: [
-      'Pollen-Check: Hast du eine Allergie — oder dürfen wir hier tief durchatmen?',
+      'Grün voraus — hier darf man ruhig tief durchatmen.',
     ],
     generic: ['Yo, neuer Spot — kurz reinzoomen, da steckt Story drin.'],
   },
@@ -521,9 +516,9 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     bakery: ['Bro, Brötchen-Alert. Da duftet’s richtig.'],
     golf: ['Ready für den Abschlag? Die Greens hier haben echten Vibe.'],
     station: ['Tüt-tüt, Einsteigen bitte! Bahnhof-Vibe, wir zoomen rein.'],
-    water: ['Badehose checken — jetzt wird’s erfrischend!'],
+    water: ['Wasser voraus — jetzt wird’s erfrischend!'],
     nature: [
-      'Pollen-Check: Hast du eine Allergie — oder dürfen wir hier tief durchatmen?',
+      'Grün voraus — hier darf man ruhig tief durchatmen.',
     ],
     generic: ['Yo, neuer Spot — kurz reinzoomen, da steckt Story drin.'],
   },
@@ -532,7 +527,7 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     church: ['Pst... Wenn diese alten Mauern sprechen könnten...'],
     golf: ['Bereit für den nächsten Abschlag auf diesen Greens?'],
     station: ['Tüt-tüt, Einsteigen bitte — der Bahnhof ruft.'],
-    water: ['Ich hoffe, die Badehose ist dabei — es wird erfrischend!'],
+    water: ['Wasser voraus — es wird erfrischend!'],
     generic: ['Pst... Dieser Ort flüstert bereits, wenn man genau hinhört.'],
   },
   lukas: {
@@ -546,8 +541,8 @@ const VOICE_HOOKS: Partial<Record<VoiceId, Partial<HookBank>>> = {
     cafe: ['Moin — Kaffee-Duft voraus. Kurz reinschauen?'],
     golf: ['Abschlag bereit? Die Greens hier haben Charakter.'],
     station: ['Tüt-tüt, Einsteigen bitte — Bahnhof voraus.'],
-    water: ['Wasser voraus — Badehose parat?'],
-    generic: ['Schau mal — hier steckt eine Geschichte drin.'],
+    water: ['Wasser voraus — spürst du schon die Brise?'],
+    generic: ['Hier steckt eine Geschichte drin.'],
   },
 };
 
@@ -883,14 +878,6 @@ function maybePersonalHook(
     return 'Jetzt wäre ein Kaffee für dich doch was, oder?';
   }
 
-  if (kind === 'water' && roll < 0.55) {
-    return 'Hast du eine Badehose dabei — oder bleiben deine Schuhe an?';
-  }
-
-  if (kind === 'nature' && roll < 0.7) {
-    return 'Hast du eine Pollenallergie — oder dürfen wir deine Nase freilassen?';
-  }
-
   if (kind === 'golf' && roll < 0.55) {
     return 'Ist Golf dein Ding — oder schaust du dir die Greens nur an?';
   }
@@ -927,9 +914,6 @@ export function buildFastHook(
     /(ehrenmal|kriegerdenkmal|gedenkstein|gedenk)/i.test(nameLower) ||
     (poi.category ?? '').toLowerCase() === 'denkmal'
   ) {
-    if (/bilsbek|brücke|bruecke/i.test(nameLower)) {
-      return 'Du stehst jetzt direkt vor dem Kriegerehrenmal hier an der Bilsbekbrücke. Nimm dir ruhig einen kurzen Moment, um das Ganze auf dich wirken zu lassen.';
-    }
     return `Du stehst jetzt direkt vor ${spokenTitle}. Nimm dir ruhig einen kurzen Moment, um das Ganze auf dich wirken zu lassen.`;
   }
 
@@ -942,5 +926,5 @@ export function buildFastHook(
     return factHook.replace(/\bWegweiser\b/gi, '').replace(/\s+/g, ' ').trim();
   }
 
-  return `Schau mal — ${spokenTitle}. Ich erzähl dir gleich, was diesen Spot besonders macht.`;
+  return `${spokenTitle} liegt gleich vor dir. Ich erzähl dir gleich, was diesen Spot besonders macht.`;
 }

@@ -2,9 +2,12 @@
  * Last-Mile: OPEN_URL so weit vorbefüllen, wie der Partner öffentlich erlaubt.
  * Hotels → Property + Check-in/out bis Zimmerwahl.
  * Tisch → Name/E-Mail/Personen/Zeit in Query oder Mailto.
- * Uber → Pickup/Dropoff (Uhrzeit nicht im Deeplink).
+ * Uber → Pickup/Dropoff (Uhrzeit oft bei Reserve).
  * Tickets → Produkt + Datum/Personen (GYG/Tiqets Checkout/Viator), Affiliate bleibt.
  * Uber → Produktwahl jetzt oder Reserve mit Abholzeit.
+ *
+ * Prefill ≠ jedes Portal: TheFork/Quandoo/Hotel-Widgets oft leeres Formular —
+ * Link + Sticky-Root reichen; nie „alles vorausgefüllt“ behaupten.
  */
 
 import type { QuickActionPayload } from '../../types/concierge';
@@ -15,6 +18,60 @@ export type PrefillPatch = {
   checkout?: string;
   adults?: number;
 };
+
+/**
+ * Wie weit ein Portal URL-/Deep-Prefill wirklich annimmt.
+ * - deep: Felder landen oft (Uber Reserve-Zeit, Expedia Dates, GYG)
+ * - best_effort: Params anhängen, Widget kann sie ignorieren (OpenTable teils)
+ * - link_only: Formular oft leer — Auftrag trotzdem nicht vergessen
+ */
+export type BookingPrefillTier = 'deep' | 'best_effort' | 'link_only';
+
+export function bookingPrefillTier(
+  url: string,
+  label = '',
+): BookingPrefillTier {
+  const b = `${label} ${url}`.toLowerCase();
+  if (!url.trim()) return 'link_only';
+  if (/m\.uber\.com|uber\.com\/ul/.test(b)) return 'deep';
+  if (
+    /getyourguide\.com|tiqets\.com|viator\.com|expedia\.|stay22\.com|kiwi\.com|discovercars\.com/.test(
+      b,
+    )
+  ) {
+    return 'deep';
+  }
+  // Tisch-Widgets / TheFork: Query-Params werden sehr oft verworfen
+  if (
+    /thefork|la\s*fourchette|quandoo|resmio|bookatable|sevenrooms|formitable|dish\.co|tischreservierung|reservierungswidget|booking-widget|restaurant-widget/.test(
+      b,
+    )
+  ) {
+    return 'link_only';
+  }
+  if (/opentable/.test(b)) return 'best_effort';
+  if (/booking\.com|hotels\.com|vrbo/.test(b)) return 'best_effort';
+  if (looksLikeHotelBookOpenUrl(label, url)) return 'best_effort';
+  if (looksLikeReservationOpenUrl(label, url)) return 'best_effort';
+  return 'link_only';
+}
+
+/** Author-/Policy-Hint — Wortlaut frei, Struktur bindend. */
+export function bookingPrefillHonestyIntent(
+  tier: BookingPrefillTier = 'link_only',
+): string {
+  if (tier === 'deep') {
+    return 'Prefill stark (z. B. Uber-Zeit/Expedia-Daten): Felder soweit möglich setzen, User kurz prüfen lassen';
+  }
+  if (tier === 'best_effort') {
+    return 'Prefill best-effort: Params anhängen, Widget kann leer bleiben — bekannte Slots in Speech nennen, Root behalten';
+  }
+  return [
+    'Prefill link_only: TheFork/Tisch-/Hotel-Widgets öffnen oft leeres Formular',
+    'Das ist Portal-Grenze, kein vergessener Auftrag — Sticky-Root + Slots behalten',
+    'Ehrlich: Link öffnen, User füllt aus; nie „alles vorausgefüllt / nur noch bestätigen“ lügen',
+  ].join('. ');
+}
 
 function blobOf(label: string, url: string): string {
   return `${label} ${url}`;
@@ -33,7 +90,7 @@ export function looksLikeHotelBookOpenUrl(label: string, url: string): boolean {
 export function looksLikeReservationOpenUrl(label: string, url: string): boolean {
   const b = blobOf(label, url);
   if (/expedia|stay22|booking\.com\/hotel/i.test(b)) return false;
-  return /opentable|quandoo|resmio|bookatable|tischreserv|tisch\s+online|reservier/i.test(
+  return /opentable|quandoo|resmio|bookatable|thefork|la\s*fourchette|tischreserv|tisch\s+online|reservier/i.test(
     b,
   );
 }
@@ -82,7 +139,7 @@ export function applyOpenUrlBookingPrefill(opts: {
               payload.dropoffFormattedAddress || payload.destName,
             pickupMyLocation: true,
             pickupTimeLabel: payload.pickupTimeLabel,
-            pickupDateIso: payload.dateIso,
+            pickupDateIso: payload.pickupDateIso || payload.dateIso,
           }),
         };
       } catch {
@@ -224,6 +281,8 @@ export function applyOpenUrlBookingPrefill(opts: {
             checkin: dates.checkin,
             checkout: dates.checkout,
             adults,
+            hotelName: target.hotelName,
+            city,
           })
         : isExpediaHotelPropertyUrl(url)
           ? injectExpediaStayDates(url, dates.checkin, dates.checkout, adults)
@@ -362,20 +421,24 @@ export function applyOpenUrlBookingPrefill(opts: {
       const dep = u.searchParams.get('departure');
       if (from && to && dep) {
         const { buildKiwiResultsPageUrl } = require('./partnerBookingDeepLink') as {
-          buildKiwiResultsPageUrl: (o: {
-            fromIata: string;
-            toIata: string;
-            dateKey: string;
-            adults?: number;
-          }) => string;
+          buildKiwiResultsPageUrl: (o: Record<string, unknown>) => string;
         };
+        const ret = u.searchParams.get('return');
+        const bags = u.searchParams.get('bags');
+        const stop = u.searchParams.get('stopNumber') || '';
         inner = buildKiwiResultsPageUrl({
           fromIata: from,
           toIata: to,
           dateKey: dep,
-          adults: adults ?? 1,
+          returnDateKey: ret && ret !== 'anytime' ? ret : null,
+          adults: (adults ?? Number(u.searchParams.get('adults') || 1)) || 1,
+          children: Number(u.searchParams.get('children') || 0) || 0,
+          infants: Number(u.searchParams.get('infants') || 0) || 0,
+          bagsPerAdult: bags ? bags.split('_')[0]?.replace(/-$/, '') : undefined,
+          directOnly: /0/.test(stop),
         });
         u = new URL(inner);
+        if (bags) u.searchParams.set('bags', bags);
       }
       if (adults != null) u.searchParams.set('adults', String(adults));
       if (!u.searchParams.get('children')) u.searchParams.set('children', '0');

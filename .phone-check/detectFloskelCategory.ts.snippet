@@ -1,0 +1,145 @@
+/** Text-Heuristik → Kategorie (feinere Mapping als SmartIntent allein) */
+function detectFloskelCategory(userText: string): string {
+  const t = userText.toLowerCase();
+
+  // Genannter Spielplan VOR generic/events — Cover-Ton, kein „Gute Richtung“-Pitch
+  try {
+    const { looksLikeNamedScheduleQuery } = require('../concierge/sportsScheduleQuery') as {
+      looksLikeNamedScheduleQuery: (s: string) => boolean;
+    };
+    if (looksLikeNamedScheduleQuery(userText)) {
+      return 'named_schedule';
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Himmel/Quick-Lookup VOR events („heute Abend“ + Sternschnuppen)
+  try {
+    const { isCelestialOrSkyQuery, isQuickLookupQuery } = require('../concierge/celestialSkyQuery') as {
+      isCelestialOrSkyQuery: (s: string) => boolean;
+      isQuickLookupQuery: (s: string) => boolean;
+    };
+    if (isCelestialOrSkyQuery(userText) || isQuickLookupQuery(userText)) {
+      return 'knowledge';
+    }
+  } catch {
+    /* soft */
+  }
+
+  if (
+    /\b(to\s*go|mitnehm|takeaway)\b/u.test(t) &&
+    /\b(sonnenuntergang|sunset|aussicht)\b/u.test(t)
+  ) {
+    return 'compound_togo_sunset';
+  }
+  if (/\b(speisekarte|menü|menu|karte\s+vom)\b/u.test(t)) return 'menu';
+  if (/\b(öffnungszeit|oeffnungszeit|geöffnet|geoeffnet|bis\s+wann)\b/u.test(t)) {
+    return 'hours';
+  }
+  if (/\b(telefon|nummer|anruf)\b/u.test(t)) return 'phone';
+
+  // Notfall VOR events/dining — Empathie-Cover, kein Event-Ack
+  if (
+    /\b(notfall|rettungsdienst|112|krankenhaus|unfall|notdienst|zahnschmerz|zahnarzt|apotheke|gebrochen|fu[sß]\s+gebrochen|gebrochenen?\s+fu[sß])\b/u.test(
+      t,
+    ) ||
+    /\b(arzt|klinik|chirurgie)\b/u.test(t)
+  ) {
+    return 'safety';
+  }
+
+  if (/\b(party|nachtleben)\b/u.test(t)) return 'nightlife';
+  // Outfit/Wetter VOR „heute Abend“→events — sonst falscher Ack + falsche Erwartung
+  if (
+    /\b(outfit|anziehen|anzieh|kleidung|jacke|pulli|was\s+soll\s+ich\s+an|mitnehmen\s+soll)\b/u.test(
+      t,
+    )
+  ) {
+    return 'weather_outfit';
+  }
+  if (/\b(wetter|regen|schirm|sonne|temperatur|wie\s+kalt|wie\s+warm)\b/u.test(t)) {
+    return 'weather';
+  }
+  if (/\b(gewonnen|gewinn|sieg|geschafft|erste\s+runde)\b/u.test(t)) {
+    return 'cheer';
+  }
+  if (
+    /\b(spikeball|bouldern|surfen|wandern|joggen|kitesurf|beachvolleyball)\b/u.test(
+      t,
+    )
+  ) {
+    return 'activity_sport';
+  }
+
+  // Kino / Hotel / Essen / Diät VOR „heute Abend“→events (sonst falscher Event-Ack)
+  if (/\b(kino|film|vorstellung|kinoprogramm)\b/u.test(t)) return 'cinema';
+  if (/\b(hotel|unterkunft|übernacht|uebernacht)\b/u.test(t)) {
+    return 'accommodation_search';
+  }
+  if (/\b(vegetar|vegan|allerg|gluten|laktos|ohne\s+fleisch|kein\s+fleisch)\b/u.test(t)) {
+    return 'food_allergy';
+  }
+  if (
+    /\b(essen|restaurant|hunger|imbiss|bistro|burger|pizza|amerikan|pizzeria|steak|angus|rind|fisch|speisen)\b/u.test(
+      t,
+    )
+  ) {
+    return 'dining';
+  }
+
+  // Events nur bei klarem Event-Wunsch — nicht allein wegen „heute Abend“ + Essen/Kino
+  if (
+    /\b(was\s+geht|was\s+heute\b[\s\S]{0,48}?\bgeht|events?|veranstaltung|konzert|festival|fest\b)\b/u.test(
+      t,
+    ) ||
+    (/\bheute\s+abend\b/u.test(t) &&
+      !/\b(essen|restaurant|steak|kino|film|hotel|vegetar|vegan)\b/u.test(t))
+  ) {
+    return 'events';
+  }
+
+  if (/\b(geschicht|denkmal|wahrzeichen|wer\s+(war|baute))\b/u.test(t)) {
+    return 'history';
+  }
+  if (/\b(museum|ausstellung)\b/u.test(t)) return 'museum';
+  if (/\b(plan(e|en)|ablauf|tagesplan|optimier|zusammenstell)\b/u.test(t)) {
+    return 'complex_plan';
+  }
+  if (/\b(leave.?by|losgehen|wann\s+muss\s+ich)\b/u.test(t)) return 'leave_by';
+  if (/\b(wecker|aufsteh|weck\s+mich)\b/u.test(t)) return 'wake_alarm';
+  if (/\b(flug|gate|abflug|flughafen)\b/u.test(t)) return 'flight';
+  if (/\b(zug|bus|bahn|öpnv|oepnv|verbindung|verspät|öffentlichen?\s+verkehr)\b/u.test(t)) {
+    return 'transit';
+  }
+  if (/\b(regen).{0,20}\b(unterstell|trocken|indoor|café|cafe)\b/u.test(t)) {
+    return 'rain_shelter';
+  }
+  if (/\b(reserv|buch|tisch\s+für)\b/u.test(t)) return 'reservation';
+  if (/\b(eis|gelato|ice\s*cream|kugel\s+eis|eisdiele)\b/u.test(t)) return 'cafe';
+  if (/\b(café|cafe|kaffee|cappuccino)\b/u.test(t)) return 'cafe';
+  if (/\b(park|garten|grün)\b/u.test(t)) return 'park';
+  if (/\b(bar|kneipe|pub|cocktail)\b/u.test(t)) return 'bar';
+  if (/\b(strand|düne|duene|insel|beach)\b/u.test(t)) return 'beach_island';
+  if (/\b(führ|fuehr|navigier|route|bring\s+mich|kompass)\b/u.test(t)) {
+    return 'nav';
+  }
+  if (/\b(sonnenuntergang|sunset|aussicht|plattform)\b/u.test(t)) {
+    return 'sunset';
+  }
+  if (/\b(wo\s+bin\s+ich|wo\s+stehe\s+ich)\b/u.test(t)) return 'where_am_i';
+  if (/\b(wo\s+(ist|liegt|find)|lage|adresse)\b/u.test(t)) return 'location';
+  if (/\b(pdf|flyer|programmheft)\b/u.test(t)) return 'pdf_flyer';
+  if (/\b(ticket|eintritt|karte\s+kaufen)\b/u.test(t)) return 'ticket';
+  if (/\b(luggage|gepäck|koffer|bounce)\b/u.test(t)) return 'luggage';
+  if (/\b(tour|aktivität|ausflug)\b/u.test(t)) return 'tours';
+  if (/\b(uber|taxi|bolt)\b/u.test(t)) return 'uber_taxi';
+  if (/\b(mietwagen|auto\s+mieten)\b/u.test(t)) return 'car_rental';
+  if (/\b(einkauf|supermarkt|drogerie|besorgen|prospekt|angebot|aktionspreis)\b/u.test(t)) return 'shopping';
+  if (/\b(recherch|webseite|website|nachschau)\b/u.test(t)) return 'research_web';
+  if (/\b(wer\s+hat|was\s+ist\s+findus|programmier|über\s+dich)\b/u.test(t)) {
+    return 'knowledge';
+  }
+  return 'generic';
+}
+

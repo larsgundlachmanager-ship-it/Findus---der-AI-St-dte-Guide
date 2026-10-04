@@ -1,0 +1,4 @@
+Spracherkennung nicht verfügbar
+Auf dem Gerät wurde kein Spracherkennungsdienst gefunden. Bitte prüfe die Google App bzw. „Speech Services by Google“ und erlaube ggf. die Berechtigungen.
+SPÄTER
+EINSTELLUNGEN ÖFFNEN

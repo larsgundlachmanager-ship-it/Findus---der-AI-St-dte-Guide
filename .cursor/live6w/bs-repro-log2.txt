@@ -1,0 +1,449 @@
+--------- beginning of main
+09-13 23:25:58.382 19930 19930 I de.findus.app: Using generational CollectorTypeCMC GC.
+09-13 23:25:58.388 19930 19930 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+--------- beginning of system
+09-13 23:25:58.407 19930 19930 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-13 23:25:58.441 19930 19930 D nativeloader: Configuring clns-9 for other apk /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/lib/arm64:/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/de.findus.app
+09-13 23:25:58.444 19930 19930 I de.findus.app: AssetManager2(0xb400007ac55de0b8) locale list changing from [] to [de-DE]
+09-13 23:25:58.446 19930 19930 I Perf    : Connecting to perf service.
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment: Currently set values for:
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[com.android.angle, com.linecorp.b612.android, com.campmobile.snow, com.google.android.apps.tachyon]
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment:   angle_gl_driver_selection_values=[angle, native, native, native]
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment: de.findus.app is not listed in per-application setting
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment: ANGLE allowlist from config: 
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment: de.findus.app is not listed in ANGLE allowlist or settings, returning default
+09-13 23:25:58.450 19930 19930 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+09-13 23:25:58.456 19930 19930 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+09-13 23:25:58.456 19930 19930 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+09-13 23:25:58.458 19930 19930 D SceneManager: init SceneManager
+09-13 23:25:58.461 19930 19930 W SoLoader: Initializing SoLoader: 0
+09-13 23:25:58.461 19930 19930 W SoLoader: Recording new base apk path: /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk
+09-13 23:25:58.461 19930 19930 W SoLoader: Previously recorded 0 base apk paths.
+09-13 23:25:58.461 19930 19930 I SoLoader: Preparing SO source: DirectorySoSource[root = /vendor/lib64 flags = 2]
+09-13 23:25:58.461 19930 19930 I SoLoader: Preparing SO source: DirectorySoSource[root = /system/lib64 flags = 2]
+09-13 23:25:58.461 19930 19930 I SoLoader: Preparing SO source: DirectApkSoSource[root = [/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a]]
+09-13 23:25:58.463 19930 19930 I SoLoader: Preparing SO source: ApplicationSoSource[DirectorySoSource[root = /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/lib/arm64 flags = 0]]
+09-13 23:25:58.464 19930 19930 I SoLoader: init finish: 4 SO sources prepared
+09-13 23:25:58.464 19930 19930 W SoLoader: SoLoader initialized: 8
+09-13 23:25:58.471 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libc++_shared.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.474 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libjsi.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.478 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libfbjni.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.483 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libreactnative.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Entering merged library JNI_OnLoad.
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing 12 pre-merged libs (including stub)
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libfabricjni_so.  onload_func: 0x788f5222c0
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libmapbufferjni_so.  onload_func: 0x788f56d588
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libreact_devsupportjni_so.  onload_func: 0x788f5e4bf0
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libreact_featureflagsjni_so.  onload_func: 0x788f5ebb40
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libreact_newarchdefaults_so.  onload_func: 0x788f60ee0c
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libreactnativeblob_so.  onload_func: 0x788f697200
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libreactnativejni_so.  onload_func: 0x788f6b5b48
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register librninstance_so.  onload_func: 0x788f6cfd4c
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libturbomodulejsijni_so.  onload_func: 0x788f72f0a0
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libuimanagerjni_so.  onload_func: 0x788f736918
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: Preparing to register libyoga_so.  onload_func: 0x788f73bbc8
+09-13 23:25:58.483 19930 19930 D jni_lib_merge: About to register 11 actual methods.
+09-13 23:25:58.489 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libreact_codegen_safeareacontext.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.490 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libappmodules.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.504 19930 19930 I de.findus.app: AssetManager2(0xb400007ac56138f8) locale list changing from [] to [de-DE]
+09-13 23:25:58.505 19930 19965 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+09-13 23:25:58.506 19930 19930 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+09-13 23:25:58.506 19930 19930 I de.findus.app: AssetManager2(0xb400007ac560f758) locale list changing from [] to [de-DE]
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: QUALCOMM build                   : f1c98d72b3, I45c5214ffd
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Build Date                       : 07/11/25
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: OpenGL ES Shader Compiler Version: E031.47.18.36
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Local Branch                     : 
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Remote Branch                    : refs/tags/AU_LINUX_ANDROID_LA.VENDOR.14.3.0.11.00.00.973.839
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Remote Branch                    : NONE
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Reconstruct Branch               : NOTHING
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Build Config                     : S L 16.1.2 AArch64
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Driver Path                      : /vendor/lib64/egl/libGLESv2_adreno.so
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Driver Version                   : 0800.49
+09-13 23:25:58.507 19930 19965 I AdrenoGLES-0: Process Name                     : de.findus.app
+09-13 23:25:58.508 19930 19930 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+09-13 23:25:58.516 19930 19930 D NtViewImpl: init NtViewImpl
+09-13 23:25:58.518 19930 19930 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Schedule
+09-13 23:25:58.518 19930 19930 W unknown:BridgelessReact: ReactHost{0}.attachSurface(surfaceId = 0)
+09-13 23:25:58.518 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask()
+09-13 23:25:58.518 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Start
+09-13 23:25:58.518 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getJSBundleLoader()
+09-13 23:25:58.519 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactContext(): Creating BridgelessReactContext
+09-13 23:25:58.519 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Creating ReactInstance
+09-13 23:25:58.519 19930 19930 D CompatChangeReporter: Compat change id reported: 377864165; UID 10538; state: ENABLED
+09-13 23:25:58.520 19930 19965 I AdrenoGLES-0: PFP: 0x01100079, ME: 0x00000000
+09-13 23:25:58.520 19930 19930 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+09-13 23:25:58.525 19930 19930 I ContentCaptureHelper: Setting logging level to OFF
+09-13 23:25:58.529 19930 19930 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+09-13 23:25:58.529 19930 19930 W unknown:BridgelessReact: ReactContext.onHostResume()
+09-13 23:25:58.536 19930 19969 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libhermes.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.537 19930 19973 E HWUI    : attachRenderThreadToJvm
+09-13 23:25:58.537 19930 19973 E HWUI    : AM IS NOT NULL!
+09-13 23:25:58.538 19930 19974 E HWUI    : attachRenderThreadToJvm
+09-13 23:25:58.538 19930 19974 E HWUI    : AM IS NOT NULL!
+09-13 23:25:58.540 19930 19965 I AdrenoUtils: <ReadGpuID:366>: Reading chip ID through GSL
+09-13 23:25:58.541 19930 19969 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libhermestooling.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.541 19930 19969 D jni_lib_merge: Entering merged library JNI_OnLoad.
+09-13 23:25:58.542 19930 19969 D jni_lib_merge: Preparing 4 pre-merged libs (including stub)
+09-13 23:25:58.542 19930 19969 D jni_lib_merge: Preparing to register libhermes_executor_so.  onload_func: 0x7892de1780
+09-13 23:25:58.542 19930 19969 D jni_lib_merge: Preparing to register libhermesinstancejni_so.  onload_func: 0x7892de8178
+09-13 23:25:58.542 19930 19969 D jni_lib_merge: Preparing to register libjsijniprofiler_so.  onload_func: 0x7892de8834
+09-13 23:25:58.542 19930 19969 D jni_lib_merge: About to register 3 actual methods.
+09-13 23:25:58.555 19930 19969 D DefaultLocationEngineProvider: DefaultLocationEngine will be used.
+09-13 23:25:58.562 19930 19969 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libexpo-av.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes4.dex): ok
+09-13 23:25:58.568 19930 19969 I TaskService: Registered task with name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-13 23:25:58.571 19930 19969 W LocationTaskConsumer: Foreground location task cannot be started while the app is in the background!
+09-13 23:25:58.576 19930 19930 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-13 23:25:58.589 19930 19930 I TaskService: Handling intent with action 'android.intent.action.BOOT_COMPLETED'.
+09-13 23:25:58.613 19930 19930 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-13 23:25:58.615 19930 19930 D InsetsController: hide(ime(), fromIme=false)
+09-13 23:25:58.615 19930 19930 I ImeTracker: de.findus.app:3aa39410: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-13 23:25:58.671 19930 19969 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libttsespeak.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes4.dex): ok
+09-13 23:25:58.673 19930 19969 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libfindus_espeak.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes4.dex): ok
+09-13 23:25:58.673 19930 19969 I ExpoModulesCore: ✅ AppContext was initialized
+09-13 23:25:58.720 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Loading JS Bundle
+09-13 23:25:58.844 19930 19969 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Calling DevSupportManagerBase.onNewReactContextCreated(reactContext)
+09-13 23:25:58.844 19930 19930 W unknown:BridgelessReact: ReactContext.onHostResume()
+09-13 23:25:58.844 19930 19930 W unknown:BridgelessReact: ReactHost{0}.getOrCreateReactInstanceTask(): Executing ReactInstanceEventListeners
+09-13 23:25:58.845 19930 19969 W unknown:BridgelessReact: ReactHost{0}.startSurface(surfaceId = 0): Execute
+09-13 23:25:58.863 19930 19970 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libexpo-modules-core.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:58.864 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNBackgroundLayerManager
+09-13 23:25:58.865 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.uimanager.LayoutShadowNode
+09-13 23:25:58.866 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class expo.modules.kotlin.views.GroupViewManagerWrapper
+09-13 23:25:58.866 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.annotation.MLRNMarkerViewManager
+09-13 23:25:58.867 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNImageSourceManager
+09-13 23:25:58.867 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNCircleLayerManager
+09-13 23:25:58.867 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNVectorSourceManager
+09-13 23:25:58.867 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNFillLayerManager
+09-13 23:25:58.868 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewManager
+09-13 23:25:58.868 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaViewShadowNode
+09-13 23:25:58.868 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.location.MLRNNativeUserLocationManager
+09-13 23:25:58.869 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNHeatmapLayerManager
+09-13 23:25:58.869 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.light.MLRNLightManager
+09-13 23:25:58.869 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.images.MLRNImagesManager
+09-13 23:25:58.869 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.annotation.MLRNCalloutManager
+09-13 23:25:58.869 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNSymbolLayerManager
+09-13 23:25:58.870 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.th3rdwave.safeareacontext.SafeAreaProviderManager
+09-13 23:25:58.870 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNShapeSourceManager
+09-13 23:25:58.870 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.reactnativecommunity.webview.RNCWebViewManager
+09-13 23:25:58.871 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.sources.MLRNRasterSourceManager
+09-13 23:25:58.871 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.camera.MLRNCameraManager
+09-13 23:25:58.871 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.mapview.MLRNMapViewManager
+09-13 23:25:58.872 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.mapview.MLRNMapViewManager$MapShadowNode
+09-13 23:25:58.872 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNFillExtrusionLayerManager
+09-13 23:25:58.872 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNLineLayerManager
+09-13 23:25:58.872 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.mapview.MLRNAndroidTextureMapViewManager
+09-13 23:25:58.873 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.styles.layers.MLRNRasterLayerManager
+09-13 23:25:58.873 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class org.maplibre.reactnative.components.annotation.MLRNPointAnnotationManager
+09-13 23:25:58.885 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.safeareaview.ReactSafeAreaViewManager
+09-13 23:25:58.885 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.safeareaview.ReactSafeAreaViewShadowNode
+09-13 23:25:58.886 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.modal.ReactModalHostManager
+09-13 23:25:58.887 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageViewManager
+09-13 23:25:58.887 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageShadowNode
+09-13 23:25:58.887 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ReactProgressBarViewManager
+09-13 23:25:58.888 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ProgressBarShadowNode
+09-13 23:25:58.888 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollViewManager
+09-13 23:25:58.889 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.image.ReactImageManager
+09-13 23:25:58.890 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextViewManager
+09-13 23:25:58.890 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextShadowNode
+09-13 23:25:58.892 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollContainerViewManager
+09-13 23:25:58.892 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.unimplementedview.ReactUnimplementedViewManager
+09-13 23:25:58.893 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactScrollViewManager
+09-13 23:25:58.894 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.view.ReactViewManager
+09-13 23:25:58.895 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.drawer.ReactDrawerLayoutManager
+09-13 23:25:58.896 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager
+09-13 23:25:58.896 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager$ReactSwitchShadowNode
+09-13 23:25:58.897 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactVirtualTextViewManager
+09-13 23:25:58.897 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactVirtualTextShadowNode
+09-13 23:25:58.898 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.swiperefresh.SwipeRefreshLayoutManager
+09-13 23:25:58.898 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactRawTextManager
+09-13 23:25:58.898 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactRawTextShadowNode
+09-13 23:25:58.899 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputManager
+09-13 23:25:58.899 19930 19970 W unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputShadowNode
+09-13 23:25:58.901 19930 19970 I ReactNativeJS: Bridgeless mode is enabled
+09-13 23:25:58.901 19930 19970 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+09-13 23:25:58.904 19930 19970 I ExpoModulesCore: ✅ JSI interop was installed
+09-13 23:25:58.904 19930 19970 E AVManager: Cannot install JSI bindings for AV module because JS context is not available
+09-13 23:25:58.905 19930 19970 W ExpoModulesCore: ⚠️ JSI interop was already installed
+09-13 23:25:58.912 19930 19970 I ExpoModulesCore: ✅ Constants were exported
+09-13 23:25:58.981 19930 20044 I de.findus.app: AssetManager2(0xb400007ac5616198) locale list changing from [] to [de-DE]
+09-13 23:25:58.981 19930 20044 I WebViewFactory: Loading com.google.android.webview version 151.0.7922.199 (code 792219903)
+09-13 23:25:58.983 19930 20044 I de.findus.app: AssetManager2(0xb400007ac5615b58) locale list changing from [] to [de-DE]
+09-13 23:25:58.984 19930 20044 I de.findus.app: AssetManager2(0xb400007ac561b2d8) locale list changing from [] to [de-DE]
+09-13 23:25:58.985 19930 20044 I de.findus.app: AssetManager2(0xb400007ac5619cf8) locale list changing from [] to [de-DE]
+09-13 23:25:58.985 19930 20044 I de.findus.app: AssetManager2(0xb400007ac56183f8) locale list changing from [] to [de-DE]
+09-13 23:25:58.986 19930 20044 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=56a6912f mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={420dpi always-compat} mLoaders=[]}
+09-13 23:25:58.987 19930 20044 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+09-13 23:25:58.987 19930 20044 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+09-13 23:25:58.996 19930 20044 D nativeloader: Configuring clns-10 for other apk /data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/lib/arm64:/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand
+09-13 23:25:59.019 19930 20044 I cr_WVCFactoryProvider: version=151.0.7922.199 (792219903) minSdkVersion=29 multiprocess=true packageId=2 splits=<none>
+09-13 23:25:59.022 19930 20044 D nativeloader: Load /data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk!/lib/arm64-v8a/libwebviewchromium.so using class loader ns clns-10 (caller=/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk): ok
+09-13 23:25:59.024 19930 20044 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns clns-10 (caller=/data/app/~~LMWAVqBH4E6aPIiXLLFvXA==/com.google.android.webview-IOELuDVjNGpfP6MD-j5fgw==/base.apk): ok
+09-13 23:25:59.029 19930 19970 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libworklets.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:59.034 19930 19970 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libreanimated.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:59.035 19930 19970 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+09-13 23:25:59.075 19930 20044 I cr_LibraryLoader: Successfully loaded native library
+09-13 23:25:59.077 19930 20044 I cr_CachingUmaRecorder: Flushed 37 samples from 19 histograms, 0 samples were dropped.
+09-13 23:25:59.109 19930 19930 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libmaplibre.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes5.dex): ok
+09-13 23:25:59.140 19930 19970 I ReactNativeJS: Running "main"
+09-13 23:25:59.151 19930 19970 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+09-13 23:25:59.154 19930 19970 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:25:59.292 19930 20083 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libimagepipeline.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes3.dex): ok
+09-13 23:25:59.302 19930 19970 D nativeloader: Load /data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!/lib/arm64-v8a/libexpo-sqlite.so using class loader ns clns-9 (caller=/data/app/~~RXBRSB2aBZqmh9VOxDWc7g==/de.findus.app-bQXM0TDHFRsJld-7PmnApg==/base.apk!classes4.dex): ok
+09-13 23:25:59.311 19930 19970 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-13 23:25:59.312 19930 20084 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.389 19930 19979 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:25:59.628 19930 19970 I ReactNativeJS: [tts] Cartesia sonic-3.5 — Offline-Fallback: expo-speech
+09-13 23:25:59.648 19930 19970 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+09-13 23:25:59.665 19930 19930 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.765 19930 19930 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-13 23:25:59.766 19930 19930 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-13 23:25:59.773 19930 19970 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-13 23:25:59.774 19930 19970 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:25:59.778 19930 19930 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-13 23:25:59.815 19930 19930 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.826 19930 19930 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.829 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.831 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.834 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.836 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.838 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.840 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.842 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.842 19930 20110 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.844 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.846 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.848 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.851 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.853 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.855 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.857 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.859 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.861 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.863 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.866 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.881 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.884 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.889 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.892 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.895 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.897 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.929 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.939 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.939 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.947 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.949 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.951 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.954 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.963 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.979 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.982 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.984 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.991 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.993 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.995 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.997 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:25:59.999 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.001 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.003 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.005 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.007 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.010 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.013 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.016 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.018 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.026 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.028 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.030 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.034 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.037 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.039 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.041 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.041 19930 20070 W HWUI    : Image decoding logging dropped!
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.463 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.464 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.464 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.465 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.465 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.465 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.466 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.467 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.467 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.467 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.467 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.467 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.467 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.468 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.468 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.468 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.468 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.468 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:00.468 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:03.119 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: Unhandled SoftException
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: com.facebook.react.bridge.ReactNoCrashSoftException: Re-dispatched 3 times. This indicates setState (?) is likely being called too many times during mounting.
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:144)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.FabricUIManager$DispatchUIFrameCallback.doFrameGuarded(FabricUIManager.java:1399)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.GuardedFrameCallback.doFrame(GuardedFrameCallback.kt:22)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer.frameCallback$lambda$1(ReactChoreographer.kt:60)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer.$r8$lambda$nSkFhrr5T7rop_XKwzlLov4NLLw(ReactChoreographer.kt:0)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer$$ExternalSyntheticLambda0.doFrame(D8$$SyntheticClass:0)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1730)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1741)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer.doCallbacks(Choreographer.java:1323)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer.doFrame(Choreographer.java:1238)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1708)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Handler.handleCallback(Handler.java:995)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Looper.loopOnce(Looper.java:283)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Looper.loop(Looper.java:392)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at android.app.ActivityThread.main(ActivityThread.java:9248)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at java.lang.reflect.Method.invoke(Native Method)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:611)
+09-13 23:26:03.310 19930 19930 E unknown:MountItemDispatcher: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:944)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: Unhandled SoftException
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: com.facebook.react.bridge.ReactNoCrashSoftException: Re-dispatched 4 times. This indicates setState (?) is likely being called too many times during mounting.
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:144)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.FabricUIManager$DispatchUIFrameCallback.doFrameGuarded(FabricUIManager.java:1399)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.GuardedFrameCallback.doFrame(GuardedFrameCallback.kt:22)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer.frameCallback$lambda$1(ReactChoreographer.kt:60)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer.$r8$lambda$nSkFhrr5T7rop_XKwzlLov4NLLw(ReactChoreographer.kt:0)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer$$ExternalSyntheticLambda0.doFrame(D8$$SyntheticClass:0)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1730)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1741)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer.doCallbacks(Choreographer.java:1323)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer.doFrame(Choreographer.java:1238)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1708)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Handler.handleCallback(Handler.java:995)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Looper.loopOnce(Looper.java:283)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.os.Looper.loop(Looper.java:392)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at android.app.ActivityThread.main(ActivityThread.java:9248)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at java.lang.reflect.Method.invoke(Native Method)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:611)
+09-13 23:26:03.312 19930 19930 E unknown:MountItemDispatcher: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:944)
+09-13 23:26:03.402 19930 19930 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-13 23:26:03.402 19930 19930 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-13 23:26:03.417 19930 19930 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-13 23:26:03.669 19930 20181 D ProfileInstaller: Installing profile for de.findus.app
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.267 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.268 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.268 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:05.627 19930 19979 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId 'a04e51c5-8f3d-4eb3-bece-5b048778d37e'.
+09-13 23:26:13.115 19930 19970 W HWUI    : Image decoding logging dropped!
+09-13 23:26:13.116 19930 19970 W HWUI    : Image decoding logging dropped!
+09-13 23:26:13.137 19930 19970 I ReactNativeJS: '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+09-13 23:26:13.151 19930 19970 I ReactNativeJS: [devAskPoller] started → :8791
+09-13 23:26:13.188 19930 19930 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:26:13.188 19930 19930 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:26:13.198 19930 19930 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:26:13.311 19930 19979 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId '5487a124-40b3-45ec-8141-d5995540a423'.
+09-13 23:26:13.336 19930 19970 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+09-13 23:26:13.336 19930 19970 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+09-13 23:26:17.983 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.983 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.983 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.984 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:17.985 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:22.304 19930 19970 I ReactNativeJS: '[stt] isRecognitionAvailable:', true
+09-13 23:26:22.305 19930 19970 I ReactNativeJS: '[stt] android speech services:', [ 'com.google.android.as',
+09-13 23:26:22.305 19930 19970 I ReactNativeJS:   'com.google.android.tts',
+09-13 23:26:22.305 19930 19970 I ReactNativeJS:   'com.qualcomm.qti.voiceai.speech' ]
+09-13 23:26:22.305 19930 19970 I ReactNativeJS: '[stt] android default service:', 'com.google.android.tts'
+09-13 23:26:22.312 19930 19979 I de.findus.app: AssetManager2(0xb400007ac56c22b8) locale list changing from [] to [de-DE]
+09-13 23:26:22.313 19930 19979 I TextToSpeech: Sucessfully bound to com.google.android.tts
+09-13 23:26:22.313 19930 19979 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:26:22.318 19930 19979 W TextToSpeech: stop failed: not bound to TTS engine
+09-13 23:26:22.328 19930 19930 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:26:22.328 19930 19930 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:26:22.357 19930 19948 I TextToSpeech: Connected to TTS engine
+09-13 23:26:22.417 19930 19979 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:26:22.420 19930 19930 D AutofillManager: view not autofillable - not passing ime action check
+09-13 23:26:22.424 19930 19930 I ImeTracker: de.findus.app:f92d812f: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+09-13 23:26:22.426 19930 19930 D InsetsController: show(ime(), fromIme=false)
+09-13 23:26:22.426 19930 19930 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+09-13 23:26:22.494 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:22.494 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:22.494 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:22.495 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:22.504 19930 20239 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=de.findus.app
+09-13 23:26:22.609 19930 19970 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:26:22.610 19930 19970 W ReactNativeJS: '[stt] recognition order:', 'com.google.android.tts | com.google.android.as | com.qualcomm.qti.voiceai.speech', '→', 'com.google.android.tts'
+09-13 23:26:22.610 19930 19970 W ReactNativeJS: '[stt] androidRecognitionServicePackage:', 'com.google.android.tts'
+09-13 23:26:22.626 19930 19930 D ExpoSpeechService: Start recognition.
+09-13 23:26:22.627 19930 19930 D ExpoSpeechService: androidIntentOptions: {EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS=4500.0, EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS=3000.0, EXTRA_LANGUAGE_MODEL=free_form, EXTRA_PREFER_OFFLINE=false}
+09-13 23:26:22.627 19930 19930 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS with value: 4500.0 (java.lang.Double)
+09-13 23:26:22.627 19930 19930 D ExpoSpeechService: Resolved key EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS -> android.speech.extras.SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS with value: 3000.0 (java.lang.Double)
+09-13 23:26:22.627 19930 19930 D ExpoSpeechService: Resolved key EXTRA_LANGUAGE_MODEL -> android.speech.extra.LANGUAGE_MODEL with value: free_form (java.lang.String)
+09-13 23:26:22.627 19930 19930 D ExpoSpeechService: Resolved key EXTRA_PREFER_OFFLINE -> android.speech.extra.PREFER_OFFLINE with value: false (java.lang.Boolean)
+09-13 23:26:22.627 19930 19930 D ExpoSpeechService: Found service for package com.google.android.tts: com.google.android.apps.speech.tts.googletts.service.GoogleTTSRecognitionService
+09-13 23:26:22.632 19930 19979 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-13 23:26:22.705 19930 19970 I ReactNativeJS: [stt] recognition started
+09-13 23:26:22.710 19930 19930 I ImeTracker: de.findus.app:f92d812f: onShown
+09-13 23:26:22.744 19930 19930 D ExpoSpeechService: onPartialResults(), results: []
+09-13 23:26:22.744 19930 19930 D ExpoSpeechService: onError() - no-speech: No speech was detected. - code: 7
+09-13 23:26:22.745 19930 19970 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=-2.0', 'partial=false', 'svc=com.google.android.tts'
+09-13 23:26:22.825 19930 19930 I ImeTracker: system_server:f88b9df0: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+09-13 23:26:23.500 19930 20070 I TextToSpeech: Setting up the connection to TTS engine...
+09-13 23:26:26.835 19930 19930 I ImeTracker: system_server:9c43b839: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+09-13 23:26:27.350 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:35.279 19930 19970 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-13 23:26:35.894 19930 19970 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)
+09-13 23:26:36.082 19930 19970 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-13 23:26:38.501 19930 19970 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 0 neu, 0 aktualisiert (4319 Textquellen)
+09-13 23:26:39.869 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:39.869 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:39.869 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:39.870 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:39.870 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:52.712 19930 19970 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-13 23:26:52.799 19930 19942 W System  : A resource failed to call close. 
+09-13 23:26:58.606 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.592 19930 19936 I de.findus.app: Background young concurrent mark compact GC freed 47MB AllocSpace bytes, 13(936KB) LOS objects, 68% free, 26MB/84MB, paused 1.129ms,1.708ms total 110.378ms
+09-13 23:27:10.617 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:10.618 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:15.009 19930 19970 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-13 23:27:15.628 19930 19970 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)
+09-13 23:27:16.601 19930 19970 I ReactNativeJS: [poiDatasetScanner] prisdorf: 115 Fremdwörter, 0 neu, 0 aktualisiert (4319 Textquellen)
+09-13 23:27:16.970 19930 19970 I ReactNativeJS: [sync] 746 POIs, 9218 Fakten → SQLite (storage/prisdorf)
+09-13 23:27:20.067 19930 19936 I de.findus.app: Background concurrent mark compact GC freed 145MB AllocSpace bytes, 13(1320KB) LOS objects, 66% free, 48MB/144MB, paused 843us,1.833ms total 106.246ms
+09-13 23:27:20.098 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.099 19930 19942 W System  : A resource failed to call close. 
+09-13 23:27:20.123 19930 19950 I de.findus.app: Waiting for a blocking GC ProfileSaver
+09-13 23:27:20.140 19930 19950 I de.findus.app: WaitForGcToComplete blocked ProfileSaver on Background for 16.745ms

@@ -61,14 +61,14 @@ const COORD_PAIR_RE =
 const ORT_BEI_COORD_RE =
   /\bort\s+bei\s+-?\d{1,3}\.\d{2,}(?:\s*,\s*-?\d{1,3}\.\d{2,})?/giu;
 const FILLER_OPEN_RE =
-  /^(Okay,?\s+hier\s+ist\s+(?:dein|das)\s+Ergebnis[.!]?\s*|Also,?\s+hier\s+(?:kommt|ist)[.!]?\s*|Zusammengefasst:\s*)/iu;
+  /^(Okay,?\s+hier\s+ist\s+(?:dein|das)\s+Ergebnis[.!]?\s*|Also,?\s+hier\s+(?:kommt|ist)[.!]?\s*|Zusammengefasst:\s*|Im\s+Grunde\s+(?:genommen\s*)?[:.]?\s*|Kurz\s+gesagt\s*[:.]?\s*|Also,?\s+in\s+[^,]{2,48}\s+sieht\s+es\s+so\s+aus\s*[:.]?\s*)/iu;
 
 /** Interne Meta-Zeilen, die nie vorgelesen werden dürfen. */
 const INTERNAL_META_RE =
   /(?:^|\n)\s*(?:Speech\s*text|Card\s*title|Visual\s*bullets|Quick\s*actions|Type|Payload|Label|target\s*point|Notiert|STADT[_ ]?KONTEXT[^\n]*)\s*:?\s*[^\n]*/giu;
 
 const INTERNAL_PHRASE_RE =
-  /\b(?:Kurz\s+zu(?:\s+[„"][^„"]*[„"])?[^.!?]{0,120}[.!?]?|Ich\s+habe\s+die\s+Teile\s+geprüft[.!]?|Hab(?:e)?\s+die\s+Teile\s+geprüft[.!]?|die\s+Teile\s+geprüft[.!]?|STADT[_ ]?KONTEXT[_\w]*|Notiert:\s*\S+)\s*/giu;
+  /\b(?:Kurz\s+zu(?:\s+[„"][^„"]*[„"])?[^.!?]{0,120}[.!?]?|Ich\s+habe\s+die\s+Teile\s+geprüft[.!]?|Hab(?:e)?\s+die\s+Teile\s+geprüft[.!]?|die\s+Teile\s+geprüft[.!]?|STADT[_ ]?KONTEXT[_\w]*|Notiert:\s*\S+|ZIELZUSTAND[^.!?]{0,80}[.!]?|call2Brief[^.!?]{0,60}|work\s*\[[^\]]{0,80}\]|keine_venues_in_call1)\s*/giu;
 
 const STANDALONE_CHECK_RE =
   /(?:^|[.!?]\s+)Check\.?(?=\s|$)/giu;
@@ -126,10 +126,15 @@ export function expandGermanAbbreviationsForSpeech(speech: string): string {
   // Distanz-Meter: „500 m“ / „500m“ — `\b` verhindert „am“/„mm“
   t = t.replace(/\b(\d+(?:[.,]\d+)?)\s*m\b/g, '$1 Meter');
 
-  // Währung
-  t = t.replace(/\b(\d+(?:[.,]\d+)?)\s*€/g, '$1 Euro');
+  // Währung — € nie roh an Cartesia (liest es oft als „O“)
+  t = t.replace(/\b(\d+(?:[.,]\d+)?)\s*[-–—]?\s*€/g, '$1 Euro');
   t = t.replace(/€\s*(\d+(?:[.,]\d+)?)/g, '$1 Euro');
   t = t.replace(/\b(\d+(?:[.,]\d+)?)\s*EUR\b/gi, '$1 Euro');
+  t = t.replace(/\u20ac/g, ' Euro');
+  t = t.replace(/\bEUR\b/gi, 'Euro');
+  t = t.replace(/\bEuro(?:\s+Euro)+\b/gi, 'Euro');
+  // „5 Euro O“ falls Symbol schon als Latein-O im Text landete
+  t = t.replace(/\bEuro\s*[Oo]\b/g, 'Euro');
 
   // Freitext-Abkürzungen
   t = t.replace(/\bbzw\.\s*/gi, 'beziehungsweise ');
@@ -278,6 +283,10 @@ export function scrubSpeechForTts(
   }
 
   s = s.replace(FILLER_OPEN_RE, '');
+
+  s = s.replace(/\b(?:Erstens|Zweitens|Drittens)\s*[,:]?\s*/giu, '');
+  s = s.replace(/\bPunkt\s+(?:eins|zwei|drei|\d+)\s*[:.]?\s*/giu, '');
+  s = s.replace(/^(?:Gute|Spannende|Interessante)\s+Frage[.!?]?\s*/iu, '');  
   if (FILLER_OPEN_RE.test(before)) notes.push('filler_stripped');
 
   s = collapseWs(s);
@@ -310,14 +319,6 @@ function clampBullet(b: string): string {
   t = t.replace(PLZ_RE, '');
   t = t.replace(COORD_PAIR_RE, '');
   t = t.replace(ORT_BEI_COORD_RE, '');
-  // Keine ganzen Sätze → am ersten .! ? schneiden wenn zu lang
-  if (/[.!?].+\w/.test(t) && t.length > 48) {
-    const m = t.match(/^[^.!?]{8,48}[.!?]?/);
-    if (m) t = m[0].replace(/[.!?]$/, '').trim();
-  }
-  // Max ~8 Wörter
-  const words = t.split(/\s+/).filter(Boolean);
-  if (words.length > 8) t = words.slice(0, 8).join(' ');
   return collapseWs(t);
 }
 
@@ -374,11 +375,40 @@ export function applyHardGuardrails(
   );
   speechText = bindSpeechToCommittedRoute(speechText);
 
-  const bulletsRaw = filterAddressCoordBullets(
-    (response.visualBullets ?? []).slice(0, 3).map(clampBullet),
-    { allowAddress: userAskedAddress },
-  ).filter(Boolean);
-  const visualBullets = bulletsRaw;
+  let visualBullets: string[] = [];
+  try {
+    const {
+      clampVisualBullets,
+      isProgramBulletCard,
+    } = require('../concierge/visualBullets') as {
+      clampVisualBullets: (
+        b: string[],
+        o?: {
+          userText?: string | null;
+          speechText?: string | null;
+          allowAddress?: boolean;
+          surface?: 'default' | 'program' | 'pitch' | 'module1' | 'nav';
+          maxChars?: number;
+        },
+      ) => string[];
+      isProgramBulletCard: (t: string | null | undefined) => boolean;
+    };
+    const program = isProgramBulletCard(response.cardTitle);
+    visualBullets = clampVisualBullets(
+      (response.visualBullets ?? []).map(clampBullet),
+      {
+        userText: opts?.userText,
+        speechText,
+        allowAddress: userAskedAddress,
+        surface: program ? 'program' : 'default',
+      },
+    );
+  } catch {
+    visualBullets = filterAddressCoordBullets(
+      (response.visualBullets ?? []).map(clampBullet),
+      { allowAddress: userAskedAddress },
+    ).filter(Boolean);
+  }
   if (visualBullets.join('|') !== (response.visualBullets ?? []).join('|')) {
     notes.push('bullets_clamped');
   }

@@ -23,11 +23,13 @@ export type MapMatchState = {
 };
 
 let projectionIndex = 0;
+let lastAlongM = 0;
 let prevDistToCurrentWpM: number | null = null;
 let cachedSpline: SplinePoint[] = [];
 
 export function resetMapMatchEngine(): void {
   projectionIndex = 0;
+  lastAlongM = 0;
   prevDistToCurrentWpM = null;
   cachedSpline = [];
 }
@@ -35,11 +37,51 @@ export function resetMapMatchEngine(): void {
 export function initMapMatchEngine(waypoints: NavWaypoint[]): void {
   cachedSpline = waypointsToSpline(waypoints);
   projectionIndex = 0;
+  lastAlongM = 0;
   prevDistToCurrentWpM = null;
 }
 
 export function getMapMatchSpline(): SplinePoint[] {
   return cachedSpline;
+}
+
+export function getMapMatchAlongM(): number {
+  return lastAlongM;
+}
+
+/**
+ * Remaining route for the map — from current projection forward.
+ * Optional GPS snap only when close (≤ snapMaxM); never prepends a spur back to the route start.
+ */
+export function getRemainingRouteCoords(opts?: {
+  userLat?: number | null;
+  userLng?: number | null;
+  snapMaxM?: number;
+}): Array<{ lat: number; lng: number }> {
+  if (!cachedSpline.length) return [];
+  const idx = Math.max(0, Math.min(projectionIndex, cachedSpline.length - 1));
+  const remaining = cachedSpline.slice(idx).map((p) => ({
+    lat: p.lat,
+    lng: p.lng,
+  }));
+  if (remaining.length < 1) return [];
+
+  const userLat = opts?.userLat;
+  const userLng = opts?.userLng;
+  const snapMaxM = opts?.snapMaxM ?? 8;
+  if (
+    typeof userLat === 'number' &&
+    typeof userLng === 'number' &&
+    Number.isFinite(userLat) &&
+    Number.isFinite(userLng) &&
+    remaining.length >= 1
+  ) {
+    const d = distanceMeters(userLat, userLng, remaining[0]!.lat, remaining[0]!.lng);
+    if (d > 0.5 && d <= snapMaxM) {
+      remaining[0] = { lat: userLat, lng: userLng };
+    }
+  }
+  return remaining;
 }
 
 /**
@@ -69,6 +111,7 @@ export function tickMapMatch(opts: {
 
   if (projection) {
     projectionIndex = projection.index;
+    lastAlongM = projection.alongM;
   }
 
   const advanceM = opts.advanceM ?? SPLINE_ADVANCE_M;

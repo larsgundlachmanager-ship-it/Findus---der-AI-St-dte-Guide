@@ -3,7 +3,9 @@
  * Absenden bleibt dem User / Partner-API vorbehalten (Captcha/Login/Recht).
  *
  * Kette: Partner-API → Web (Prefill) → Anrufen → Mail-Entwurf.
- * Viele Restaurant-Seiten ignorieren URL-Params — dann helfen Call/Mail.
+ * Viele Restaurant-Seiten / TheFork / Quandoo-Widgets ignorieren URL-Params —
+ * dann öffnet ein leeres Formular: Link trotzdem liefern, Slots merken, nicht
+ * so tun als wäre alles vorausgefüllt.
  */
 
 export type ReservationPrefill = {

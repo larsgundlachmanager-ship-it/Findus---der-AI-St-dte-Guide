@@ -89,10 +89,14 @@ export function buildKiwiSearchPageUrl(opts: {
   fromIata: string;
   toIata: string;
   dateKey: string;
+  returnDateKey?: string | null;
   adults?: number;
   children?: number;
   infants?: number;
   bagsPerAdult?: string;
+  cabinBags?: number | null;
+  checkedBags?: number | null;
+  directOnly?: boolean;
 }): string {
   return buildKiwiResultsPageUrl(opts);
 }

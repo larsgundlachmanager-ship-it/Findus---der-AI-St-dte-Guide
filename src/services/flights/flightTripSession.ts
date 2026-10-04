@@ -45,7 +45,9 @@ export function hasFlightTripSession(nowMs = Date.now()): boolean {
       state.destCity ||
       state.clockHm ||
       state.selectedIdent ||
-      state.dateLocked,
+      state.dateLocked ||
+      // Offene Ask (Uhr/Gepäck/…) hält den Root — sonst „um 18 Uhr“ ohne Dest-Feld tot
+      state.pendingAsk,
   );
 }
 

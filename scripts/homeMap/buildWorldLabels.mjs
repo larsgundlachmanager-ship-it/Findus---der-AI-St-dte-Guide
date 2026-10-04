@@ -1,6 +1,6 @@
 /**
  * Offline-Beschriftung + grobe Struktur (Natural Earth): Städte, Flüsse,
- * Fernstraßen, Gebirgsnamen — mit Rank `r` für Zoom-LOD in der App.
+ * Fernstraßen, Gebirgsnamen, Ländernamen — mit Rank `r` für Zoom-LOD in der App.
  * Run: node scripts/homeMap/buildWorldLabels.mjs
  * npm: city:world-labels
  */
@@ -651,6 +651,85 @@ function collectRegions(fc) {
   return { type: 'FeatureCollection', features };
 }
 
+/**
+ * Ländernamen (DE bevorzugt) — Label-Punkt aus Natural Earth.
+ * Rank `r` steuert Zoom-LOD: kleine r = früher / prominenter.
+ */
+function collectCountries(fc) {
+  const rows = [];
+  for (const f of fc?.features ?? []) {
+    const p = f.properties || {};
+    const name = placeName(p);
+    if (!name || name.length > 28) continue;
+    // Mikrostaaten / abhängige Gebiete oft zu dicht neben großen Ländern.
+    const type = String(p.TYPE || p.type || p.featurecla || '').toLowerCase();
+    if (/dependency|lease|indeterminate|disputed/i.test(type)) continue;
+    const lng = Number(
+      p.LABEL_X ?? p.label_x ?? f.geometry?.coordinates?.[0],
+    );
+    const lat = Number(
+      p.LABEL_Y ?? p.label_y ?? f.geometry?.coordinates?.[1],
+    );
+    if (!Number.isFinite(lng) || !Number.isFinite(lat)) continue;
+    // Antarktis / Ozean-Platzhalter überspringen.
+    if (lat < -60) continue;
+    const rank = Number(p.LABELRANK ?? p.labelrank ?? p.SCALERANK ?? 6);
+    if (!Number.isFinite(rank) || rank > 6) continue;
+    rows.push({
+      name,
+      rank: Math.max(1, Math.min(6, Math.round(rank))),
+      lng: round(lng, 3),
+      lat: round(lat, 3),
+    });
+  }
+  rows.sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+  const seen = new Set();
+  const features = [];
+  for (const r of rows) {
+    const key = r.name.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    features.push({
+      type: 'Feature',
+      properties: { n: r.name, r: r.rank },
+      geometry: { type: 'Point', coordinates: [r.lng, r.lat] },
+    });
+    if (features.length >= 120) break;
+  }
+  for (const c of MUST_COUNTRIES) {
+    if (seen.has(c.n.toLowerCase())) continue;
+    seen.add(c.n.toLowerCase());
+    features.push({
+      type: 'Feature',
+      properties: { n: c.n, r: c.r },
+      geometry: { type: 'Point', coordinates: [c.lng, c.lat] },
+    });
+  }
+  return { type: 'FeatureCollection', features };
+}
+
+/** Fallback / Garantie für Europa-Zoom (wie Screenshot). */
+const MUST_COUNTRIES = [
+  { n: 'Deutschland', lng: 10.45, lat: 51.16, r: 1 },
+  { n: 'Frankreich', lng: 2.21, lat: 46.23, r: 1 },
+  { n: 'Spanien', lng: -3.75, lat: 40.46, r: 1 },
+  { n: 'Italien', lng: 12.57, lat: 42.5, r: 1 },
+  { n: 'Großbritannien', lng: -1.5, lat: 52.4, r: 1 },
+  { n: 'Irland', lng: -7.8, lat: 53.2, r: 2 },
+  { n: 'Portugal', lng: -8.2, lat: 39.4, r: 2 },
+  { n: 'Niederlande', lng: 5.3, lat: 52.1, r: 2 },
+  { n: 'Belgien', lng: 4.4, lat: 50.5, r: 3 },
+  { n: 'Schweiz', lng: 8.2, lat: 46.8, r: 3 },
+  { n: 'Österreich', lng: 14.5, lat: 47.6, r: 2 },
+  { n: 'Polen', lng: 19.4, lat: 52.1, r: 1 },
+  { n: 'Tschechien', lng: 15.5, lat: 49.8, r: 3 },
+  { n: 'Dänemark', lng: 9.5, lat: 56.0, r: 2 },
+  { n: 'Norwegen', lng: 8.5, lat: 60.5, r: 1 },
+  { n: 'Schweden', lng: 15.0, lat: 62.0, r: 1 },
+  { n: 'Finnland', lng: 26.0, lat: 64.0, r: 2 },
+  { n: 'Marokko', lng: -6.0, lat: 31.8, r: 2 },
+];
+
 async function main() {
   console.log('[world-labels] download Natural Earth …');
   const places = await fetchJson('ne_50m_populated_places.geojson');
@@ -670,11 +749,26 @@ async function main() {
   } catch (err) {
     console.warn('[world-labels] regions optional', err?.message || err);
   }
+  let countriesRaw = { features: [] };
+  try {
+    // Label-Punkte: NAME_DE + feste Position in der Fläche.
+    countriesRaw = await fetchJson('ne_50m_admin_0_label_points.geojson');
+    console.log('[world-labels] country label points ok');
+  } catch (err) {
+    console.warn('[world-labels] label points fallback countries', err?.message || err);
+    try {
+      countriesRaw = await fetchJson('ne_50m_admin_0_countries.geojson');
+      console.log('[world-labels] countries polygons ok');
+    } catch (err2) {
+      console.warn('[world-labels] countries optional', err2?.message || err2);
+    }
+  }
 
   const cities = mergeMustCities(collectCities(places));
   const riverFc = collectRivers(rivers50, rivers10);
   const roadFc = collectRoads(roads);
   const regionFc = collectRegions(regionsRaw);
+  const countryFc = collectCountries(countriesRaw);
 
   let deRivers = 0;
   let deRoads = 0;
@@ -687,11 +781,12 @@ async function main() {
   }
 
   const bundle = {
-    v: 2,
+    v: 3,
     cities,
     rivers: riverFc,
     roads: roadFc,
     regions: regionFc,
+    countries: countryFc,
   };
   mkdirSync(dirname(OUT), { recursive: true });
   const json = JSON.stringify(bundle);
@@ -709,6 +804,8 @@ async function main() {
     `(DE ${deRoads})`,
     'regions',
     regionFc.features.length,
+    'countries',
+    countryFc.features.length,
   );
 }
 

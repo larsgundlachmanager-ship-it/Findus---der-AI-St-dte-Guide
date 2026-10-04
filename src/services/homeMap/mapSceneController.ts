@@ -14,6 +14,7 @@ import {
   subscribeMapHeading,
 } from '../navigation/liveDeviceHeading';
 import { reclipExtractIfNeeded } from './mapExtractLoader';
+import { isMapUserGesturing } from './mapGestureLane';
 import {
   ensureRegionalFallback,
   prefetchRegionalFallbackForGps,
@@ -93,6 +94,25 @@ export function startMapSceneController(): void {
         lng: s.lng,
         accuracy: s.accuracyM,
       });
+      try {
+        const { noteGpsDeadReckonFix } = require('../navigation/gpsDeadReckoning') as {
+          noteGpsDeadReckonFix: (f: {
+            lat: number;
+            lng: number;
+            speedMs?: number | null;
+          }) => void;
+        };
+        const { getSmoothedSpeedMs } = require('../navigation/transportMode') as {
+          getSmoothedSpeedMs: () => number;
+        };
+        noteGpsDeadReckonFix({
+          lat: s.lat,
+          lng: s.lng,
+          speedMs: getSmoothedSpeedMs(),
+        });
+      } catch {
+        /* soft */
+      }
     }
   });
 
@@ -104,8 +124,14 @@ export function startMapSceneController(): void {
     if (s.navActive) startNavSyncTimer();
     else {
       stopNavSyncTimer();
-      lastNavRouteJson = 'null';
-      useMapRouteStore.getState().setRoute(null);
+      // Tour-Leg-Handoff (ÖPNV→Fuß): kurz navActive=false — Linie behalten.
+      const tourOpen = (useFinnusStore.getState().multiStopTour?.stops ?? []).some(
+        (st) => !st.done,
+      );
+      if (!tourOpen) {
+        lastNavRouteJson = 'null';
+        useMapRouteStore.getState().setRoute(null);
+      }
     }
   });
 
@@ -169,6 +195,24 @@ export function onMapGpsFog(
   lng: number,
   walkTrack: WalkTrackPoint[],
 ): void {
+  if (isMapUserGesturing()) return;
+  // Zwischen Splash-Lift und Final: kein Fog-ShapeSource-Update (Kamera-Snap).
+  try {
+    const { isSplashCurtainUp } = require('./splashReadyGate') as {
+      isSplashCurtainUp: () => boolean;
+    };
+    const { peekMapLoadPhases } = require('./mapLoadPhases') as {
+      peekMapLoadPhases: () => { phase: string };
+    };
+    if (
+      isSplashCurtainUp() &&
+      peekMapLoadPhases().phase !== 'final'
+    ) {
+      return;
+    }
+  } catch {
+    /* soft */
+  }
   scheduleFogRecompute(walkTrack, { lat, lng });
   if (!regionalBootAllowed) return;
   if (useMapExtractStore.getState().extract) return;

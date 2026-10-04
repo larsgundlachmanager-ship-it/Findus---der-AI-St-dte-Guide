@@ -1,0 +1,137 @@
+{
+  "started_at": "2026-09-07T09:43:10.730308+00:00",
+  "device": "00143157P001105",
+  "max_attempts": 4,
+  "by_id": {
+    "flug_morgen_ham": {
+      "q": "Hey Yorro, ich will morgen fliegen — guck bei Hamburg Fluege, was geht so Richtung Sueden, und ob ich noch Tickets kriege",
+      "family": "flight",
+      "final": "FAIL",
+      "attempts": [
+        {
+          "verdict": "FAIL",
+          "bridge_ok": true,
+          "call2_ok": false,
+          "bullets_ok": true,
+          "buttons_ok": false,
+          "buttons_found": [
+            "route"
+          ],
+          "fails": [],
+          "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | direkt | auf | die | Packliste. |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren",
+          "log_hits": "",
+          "attempt": 1,
+          "at": "2026-09-07T09:44:51.167761+00:00"
+        },
+        {
+          "verdict": "FAIL",
+          "bridge_ok": true,
+          "call2_ok": true,
+          "bullets_ok": true,
+          "buttons_ok": false,
+          "buttons_found": [
+            "route"
+          ],
+          "fails": [],
+          "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | Wohin? | ✕ | • Ab HAM |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Karte schließen",
+          "log_hits": "",
+          "attempt": 2,
+          "at": "2026-09-07T09:46:24.559961+00:00"
+        },
+        {
+          "verdict": "FAIL",
+          "bridge_ok": true,
+          "call2_ok": true,
+          "bullets_ok": true,
+          "buttons_ok": false,
+          "buttons_found": [
+            "route"
+          ],
+          "fails": [],
+          "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | Wohin? | ✕ | • Ab HAM |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Karte schließen",
+          "log_hits": "",
+          "attempt": 3,
+          "at": "2026-09-07T09:48:02.489884+00:00"
+        },
+        {
+          "verdict": "FAIL",
+          "bridge_ok": true,
+          "call2_ok": true,
+          "bullets_ok": true,
+          "buttons_ok": false,
+          "buttons_found": [
+            "route"
+          ],
+          "fails": [],
+          "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | Wohin? | ✕ | • Ab HAM |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Karte schließen",
+          "log_hits": "",
+          "attempt": 4,
+          "at": "2026-09-07T09:49:41.368585+00:00"
+        }
+      ]
+    },
+    "taxi_vorbestellen_morgen": {
+      "q": "Reserviere morgen frueh um 7 Uhr ein Taxi zum Flughafen Hamburg",
+      "family": "taxi",
+      "final": "PASS",
+      "attempts": [
+        {
+          "verdict": "FAIL",
+          "bridge_ok": true,
+          "call2_ok": true,
+          "bullets_ok": true,
+          "buttons_ok": false,
+          "buttons_found": [
+            "route"
+          ],
+          "fails": [],
+          "snippet": "⛅ Wechselhaft · 13° | bis 23° · bleibt trocken | 0 % erkundet |  | Wohin? | ✕ | • Ab HAM |  |  | Timeline |  | Orte |  | Einst. | Live-Anzeige. Tippen für Tipps. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung. | Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung. | Kompass kalibrieren | Karte schließen",
+          "log_hits": "09-07 11:51:04.296  8023  8079 W ReactNativeJS: '[stt] error:', 'no-speech', 'No speech was detected.', 'vol=5.6', 'partial=false', 'svc=com.google.android.tts'",
+          "attempt": 1,
+          "at": "2026-09-07T09:51:06.806163+00:00"
+        },
+        {
+          "verdict": "PASS",
+          "bridge_ok": true,
+          "call2_ok": true,
+          "bullets_ok": true,
+          "buttons_ok": true,
+          "buttons_found": [
+            "hotel",
+            "maps",
+            "telefon"
+          ],
+          "fails": [],
+          "snippet": "MO., 7. SEPT. | 21° Teils sonnig | IBIZA Summer Mix 2026 🌴 Deep House - Tech House - Afrohouse - Sunset Vibes - Beach Lounge - Chillout | Deep House &amp; Lounge Music, Cafe del Marina, lounge hits. Chillout, Summer Chill Hits. Beach Music - New Years music - Chill music - Cafe del mar ibiza - Hotel Costas -Soft House - Covers - Summer Vibes - (Bar &amp; Café) Summer  Beach Lounge Music, Ibiza, sunset vibes CURATED BY : Lucas Estrada | 7. JULI 2026 | Schnellansicht | Mo., 7. Sept. | Aktuelle Wetterlage | Spotify | Lieblingssongs | Malle für uns und du | REMIX SCHLAGER HITS 2026 🔥 Deutsche Schl",
+          "log_hits": "",
+          "attempt": 2,
+          "at": "2026-09-07T09:52:24.618333+00:00"
+        }
+      ]
+    },
+    "theater_heute": {
+      "q": "Welche Theaterstuecke oder Vorstellungen laufen heute oder die Tage in der Naehe?",
+      "family": "theater",
+      "final": "PENDING",
+      "attempts": []
+    },
+    "gastro_aussicht_flair": {
+      "q": "Restaurant mit schoener Aussicht, gemuetlichem Ambiente und gutem Flair — am besten Terrasse",
+      "family": "dining",
+      "final": "PENDING",
+      "attempts": []
+    },
+    "hotel_spezifisch": {
+      "q": "Spezifisch: Boutique-Hotel mit Spa oder Sauna und Fruehstueck",
+      "family": "hotel",
+      "final": "PENDING",
+      "attempts": []
+    },
+    "zahnbuerste_erinnerung": {
+      "q": "Was brauche ich noch — eine Zahnbuerste. Kannst du mich daran erinnern, die mitzunehmen?",
+      "family": "reminder",
+      "final": "PENDING",
+      "attempts": []
+    }
+  }
+}

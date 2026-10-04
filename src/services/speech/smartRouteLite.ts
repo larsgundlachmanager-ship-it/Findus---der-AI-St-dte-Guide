@@ -68,7 +68,8 @@ const INTENT_PATTERNS: Array<{ kind: SmartIntentKind; re: RegExp }> = [
   },
   {
     kind: 'events',
-    re: /\b(event|veranstaltung|was\s+geht|heute\s+abend|kino|film|konzert)\b/iu,
+    // „heute Abend“ allein ≠ Event (sonst Wetter/Trivia → complex_plan)
+    re: /\b(event|veranstaltung|was\s+geht|kino|film|konzert|party|festival|nightlife)\b/iu,
   },
   {
     kind: 'flight',
@@ -148,6 +149,15 @@ export function detectSmartIntents(userText: string): SmartIntentKind[] {
   const found: SmartIntentKind[] = [];
   for (const { kind, re } of INTENT_PATTERNS) {
     if (re.test(t) && !found.includes(kind)) found.push(kind);
+  }
+  // Reine Wetterfrage: nicht mit Events/Plan „heute Abend“ multi-intenten
+  if (
+    found.includes('weather') &&
+    !/\b(plan(e|en)|ablauf|tagesplan|party|konzert|was\s+geht|essen|restaurant|navigier)\b/iu.test(
+      t,
+    )
+  ) {
+    return ['weather'];
   }
   return found;
 }

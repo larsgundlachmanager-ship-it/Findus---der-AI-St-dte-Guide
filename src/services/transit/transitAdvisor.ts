@@ -90,7 +90,7 @@ export type TransitAdvice = {
 };
 
 const TRANSIT_QUERY =
-  /\b(wann\s+fährt|wann\s+faehrt|nächste\s+(bahn|zug|bus|s-bahn|regionalbahn)|naechste\s+(bahn|zug|bus)|abfahrt|fahrplan|verbindung|welche\s+(bahn|zug|linie)|nächster\s+zug|naechster\s+zug|wie\s+komm(?:e|)\s+ich\s+(?:nach|zu|mit)\s+(?:dem\s+)?(?:zug|bahn|bus|öpnv|oepnv|s-bahn)|öpnv|oepnv|verspät|verspaet|pünktlich|puenktlich|hat\s+die\s+(bahn|zug)|fällt\s+aus|faellt\s+aus|ausfall|verspätung|verspaetung|wann\s+muss\s+ich\s+los|mit\s+(?:dem\s+)?(?:zug|bahn|bus)|fahrkarte|bahnticket)\b/iu;
+  /\b(wann\s+fährt|wann\s+faehrt|nächste\s+(bahn|zug|bus|s-bahn|regionalbahn)|naechste\s+(bahn|zug|bus)|abfahrt|fahrplan|verbindung|welche\s+(bahn|zug|linie)|nächster\s+zug|naechster\s+zug|wie\s+komm(?:e|)\s+ich\s+(?:nach|zu|mit)\s+(?:dem\s+)?(?:zug|bahn|bus|öpnv|oepnv|s-bahn)|öpnv|oepnv|verspät|verspaet|pünktlich|puenktlich|hat\s+die\s+(bahn|zug)|fällt\s+aus|faellt\s+aus|ausfall|verspätung|verspaetung|wann\s+muss\s+ich\s+los|mit\s+(?:dem\s+)?(?:zug|bahn|bus)|fahrkarte|bahnticket|(?:bahn|zug|bus|verbindung)\s+(?:früher|frueher|später|spaeter)|(?:früher|frueher|später|spaeter)e?\s+(?:bahn|zug|bus|verbindung)|andere\s+verbindung|(?:bahn|zug|ice|ic|re|rb)\s+nach)\b/iu;
 
 /** Explizite Fuß-/Rad-Nav zu Amenity → kein ÖPNV-Short-Circuit. */
 const AMENITY_NAV_RE =
@@ -243,6 +243,212 @@ function extractDestinationHint(text: string): string | null {
     /* soft */
   }
   return dest.slice(0, 60);
+}
+
+/** „von Prisdorf nach Hamburg“ — benannter Startort, nicht nur GPS. */
+export function extractOriginHint(text: string): string | null {
+  const m = text.match(
+    /\bvon\s+([A-ZÄÖÜa-zäöüß][\wäöüß\-]*(?:\s+[A-ZÄÖÜa-zäöüß][\wäöüß\-]*){0,2})(?:\s+(?:nach|richtung|zum|zur)\b)/iu,
+  );
+  const raw = (m?.[1] || '').trim();
+  if (raw.length < 3) return null;
+  if (/^(hier|dort|zu\s*hause|zuhause|gps|mir)\b/iu.test(raw)) return null;
+  if (/^(bahnhof|haltepunkt|station|zug|bahn)\b/iu.test(raw)) return null;
+  return raw.slice(0, 48);
+}
+
+export type JourneyOriginResolved = {
+  lat: number;
+  lng: number;
+  source: 'gps' | 'named' | 'pack_station' | 'city_station' | 'plan_base';
+  label: string;
+};
+
+/**
+ * Start für Live-Bahn: GPS → „von X“ → Pack-Halt → Plan-Base → Stadt-Bahnhof (HAFAS).
+ * Kein GPS mehr als harter Blocker.
+ */
+export async function resolveJourneyOrigin(
+  text: string,
+): Promise<JourneyOriginResolved | null> {
+  const store = useFinnusStore.getState();
+  const gpsLat = store.lastGpsLat;
+  const gpsLng = store.lastGpsLng;
+  const hasGps =
+    gpsLat != null &&
+    gpsLng != null &&
+    Number.isFinite(gpsLat) &&
+    Number.isFinite(gpsLng);
+  const bias = hasGps ? { lat: gpsLat!, lng: gpsLng! } : null;
+  const originHint = extractOriginHint(text);
+
+  if (originHint) {
+    const origin = await resolveNamedPlace(originHint, bias);
+    if (origin) {
+      return {
+        lat: origin.lat,
+        lng: origin.lng,
+        source: 'named',
+        label: origin.label,
+      };
+    }
+  }
+
+  if (hasGps) {
+    return {
+      lat: gpsLat!,
+      lng: gpsLng!,
+      source: 'gps',
+      label: 'Standort',
+    };
+  }
+
+  try {
+    const { pickPrimaryPackRailStop } = await import('./stationRegistry');
+    const rail = pickPrimaryPackRailStop();
+    if (rail) {
+      return {
+        lat: rail.lat,
+        lng: rail.lng,
+        source: 'pack_station',
+        label: rail.name,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
+  const station = await findStationPoi();
+  if (station) {
+    return {
+      lat: station.lat,
+      lng: station.lng,
+      source: 'pack_station',
+      label: station.name,
+    };
+  }
+
+  try {
+    const { readFuturePlanSnapshot } = require('../../module2/timeline/futurePlanState') as {
+      readFuturePlanSnapshot: () => {
+        base?: { lat?: number; lng?: number; label?: string } | null;
+        originBase?: { lat?: number; lng?: number; label?: string } | null;
+      };
+    };
+    const snap = readFuturePlanSnapshot();
+    const base = snap.originBase || snap.base;
+    if (
+      base?.lat != null &&
+      base?.lng != null &&
+      Number.isFinite(base.lat) &&
+      Number.isFinite(base.lng)
+    ) {
+      return {
+        lat: base.lat,
+        lng: base.lng,
+        source: 'plan_base',
+        label: (base.label || 'Start').slice(0, 48),
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
+  const city = cityId();
+  if (city) {
+    const pretty = city
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, (c) => c.toUpperCase());
+    const hit =
+      (await resolveNamedPlace(`${pretty} Bahnhof`, null)) ||
+      (await resolveNamedPlace(pretty, null));
+    if (hit) {
+      return {
+        lat: hit.lat,
+        lng: hit.lng,
+        source: 'city_station',
+        label: hit.label,
+      };
+    }
+  }
+
+  return null;
+}
+
+/** Ehrliche Speech wenn Ziel-Journey scheitert. */
+export async function explainDestinationJourneyMiss(
+  text: string,
+): Promise<{ speech: string; bullets: string[] }> {
+  const dest = extractDestinationHint(text) || 'dein Ziel';
+  const origin = await resolveJourneyOrigin(text);
+  if (!origin) {
+    return {
+      speech: `Für die Verbindung nach ${dest} brauche ich kurz einen Start — sag z. B. „von Prisdorf nach ${dest}“, oder GPS an.`,
+      bullets: ['Startort / GPS'],
+    };
+  }
+  return {
+    speech: `Von ${origin.label} nach ${dest} finde ich gerade keine Live-Verbindung. Uhrzeit oder Ziel nochmal klar sagen — ich such’s gleich nochmal.`,
+    bullets: [`Start ${origin.label}`, `Ziel ${dest}`],
+  };
+}
+
+async function resolveNamedPlace(
+  name: string,
+  bias?: { lat: number; lng: number } | null,
+): Promise<{ lat: number; lng: number; label: string } | null> {
+  const q = name.trim();
+  if (q.length < 3) return null;
+  try {
+    const { searchDbLocations } = await import('./dbRestJourneys');
+    const hits = await searchDbLocations(q, {
+      lat: bias?.lat,
+      lng: bias?.lng,
+      results: 8,
+    });
+    const preferred =
+      hits.find((h) => /bahnhof|haltepunkt|\bhbf\b/i.test(h.name)) ??
+      hits.find((h) =>
+        q
+          .toLowerCase()
+          .split(/\s+/)
+          .filter((t) => t.length >= 4)
+          .every((t) => h.name.toLowerCase().includes(t)),
+      ) ??
+      hits[0];
+    if (preferred) {
+      return { lat: preferred.lat, lng: preferred.lng, label: preferred.name };
+    }
+  } catch {
+    /* geocode fallback */
+  }
+  try {
+    const { geocodePlaceName } = await import('../navigation/googleMapsNav');
+    const g = await geocodePlaceName(q, {
+      biasLat: bias?.lat,
+      biasLng: bias?.lng,
+    });
+    if (g) return { lat: g.lat, lng: g.lng, label: g.label || q };
+  } catch {
+    /* soft */
+  }
+  return null;
+}
+
+function syntheticStationPoi(opts: {
+  name: string;
+  lat: number;
+  lng: number;
+}): Poi {
+  return {
+    id: -Math.abs(Math.round(opts.lat * 1e5 + opts.lng * 1e3)) || -1,
+    name: opts.name,
+    lat: opts.lat,
+    lng: opts.lng,
+    radius_meters: 80,
+    category: 'transit',
+    kind: 'legacy',
+  };
 }
 
 /** Zielort genannt → door-to-door Journey, nicht nur Abfahrtstafel. */
@@ -502,8 +708,9 @@ export async function buildTransitAdvice(
       source = live.source;
     }
   }
-  // Kein Takt-Erfinden, wenn User ein konkretes Ziel genannt hat
-  if (!departures.length && !destinationHint) {
+  // Kein Takt-Erfinden, wenn User ein konkretes Ziel genannt hat — außer Live leer
+  // (dann ehrlicher Takt besser als „keine Verbindung“ + stummer RB61-Button).
+  if (!departures.length) {
     departures = buildTaktDepartures(city, destinationHint);
     source = 'takt';
   }
@@ -794,66 +1001,61 @@ async function tryDestinationJourneyAdvice(
   const destHint = extractDestinationHint(text);
   if (!destHint) return null;
 
-  const store = useFinnusStore.getState();
-  const lat = store.lastGpsLat;
-  const lng = store.lastGpsLng;
-  if (
-    lat == null ||
-    lng == null ||
-    !Number.isFinite(lat) ||
-    !Number.isFinite(lng)
-  ) {
-    return null;
-  }
+  const originResolved = await resolveJourneyOrigin(text);
+  if (!originResolved) return null;
 
-  const station = await findStationPoi();
+  let lat = originResolved.lat;
+  let lng = originResolved.lng;
+  const originHint = extractOriginHint(text);
+
+  let station = await findStationPoi();
+  // Pack ohne Bahnhof oder fremde Stadt: Startbahnhof geocoden / aus Journey
+  if (
+    !station ||
+    (originHint &&
+      haversineMeters(station.lat, station.lng, lat, lng) > 8_000) ||
+    originResolved.source === 'named' ||
+    originResolved.source === 'city_station' ||
+    originResolved.source === 'pack_station'
+  ) {
+    const near =
+      (originResolved.source === 'pack_station' && originResolved.label
+        ? {
+            lat: originResolved.lat,
+            lng: originResolved.lng,
+            label: originResolved.label,
+          }
+        : null) ||
+      (await resolveNamedPlace(`${originHint || originResolved.label || destHint} Bahnhof`, {
+        lat,
+        lng,
+      })) ||
+      (originHint ? await resolveNamedPlace(originHint, { lat, lng }) : null);
+    if (near) {
+      station = syntheticStationPoi({
+        name: near.label,
+        lat: near.lat,
+        lng: near.lng,
+      });
+    } else if (!station) {
+      station = syntheticStationPoi({
+        name: originResolved.label || (originHint ? `${originHint} Bahnhof` : 'Bahnhof'),
+        lat,
+        lng,
+      });
+    }
+  }
   if (!station) return null;
 
   let destLat: number | null = null;
   let destLng: number | null = null;
   let destName = destHint;
 
-  try {
-    const { searchDbLocations } = await import('./dbRestJourneys');
-    const hits = await searchDbLocations(destHint, {
-      lat,
-      lng,
-      results: 8,
-    });
-    const preferred =
-      hits.find((h) => /hauptbahnhof|\bhbf\b/i.test(h.name)) ??
-      hits.find((h) =>
-        destHint
-          .toLowerCase()
-          .split(/\s+/)
-          .filter((t) => t.length >= 4)
-          .every((t) => h.name.toLowerCase().includes(t)),
-      ) ??
-      hits[0];
-    if (preferred) {
-      destLat = preferred.lat;
-      destLng = preferred.lng;
-      destName = preferred.name;
-    }
-  } catch {
-    /* geocode fallback */
-  }
-
-  if (destLat == null || destLng == null) {
-    try {
-      const { geocodePlaceName } = await import('../navigation/googleMapsNav');
-      const g = await geocodePlaceName(destHint, {
-        biasLat: lat,
-        biasLng: lng,
-      });
-      if (g) {
-        destLat = g.lat;
-        destLng = g.lng;
-        destName = g.label || destHint;
-      }
-    } catch {
-      return null;
-    }
+  const destResolved = await resolveNamedPlace(destHint, { lat, lng });
+  if (destResolved) {
+    destLat = destResolved.lat;
+    destLng = destResolved.lng;
+    destName = destResolved.label;
   }
   if (destLat == null || destLng == null) return null;
 
@@ -863,14 +1065,50 @@ async function tryDestinationJourneyAdvice(
 
   const { planJourney } = await import('./journeyPlanner');
   const { journeyPlanTimeOpts } = await import('./journeyWhen');
-  const plan = await planJourney({
+  const timeOpts = journeyPlanTimeOpts(text);
+  let plan = await planJourney({
     from: { lat, lng },
     to: { lat: destLat, lng: destLng },
     travelMode: 'transit',
     numItineraries: 4,
-    ...journeyPlanTimeOpts(text),
+    ...timeOpts,
   });
+  // Soft: door-to-door leer → nochmal ab Bahnhof (HAFAS/Transitous oft besser)
+  if (
+    !plan.itineraries.length &&
+    haversineMeters(lat, lng, station.lat, station.lng) > 120
+  ) {
+    plan = await planJourney({
+      from: { lat: station.lat, lng: station.lng },
+      to: { lat: destLat, lng: destLng },
+      travelMode: 'transit',
+      numItineraries: 4,
+      ...timeOpts,
+    });
+    if (plan.itineraries.length) {
+      lat = station.lat;
+      lng = station.lng;
+    }
+  }
   if (!plan.itineraries.length) return null;
+
+  // Erste Transit-Haltestelle aus Journey als Stationsname (wenn synthetisch)
+  const bestProbe = plan.itineraries[0];
+  const firstBoard = bestProbe?.legs?.find(
+    (l) => l.mode !== 'WALK' && l.mode !== 'BIKE',
+  );
+  if (
+    firstBoard?.fromName &&
+    firstBoard.fromLat != null &&
+    firstBoard.fromLng != null &&
+    (station.id < 0 || /Bahnhof$/i.test(station.name))
+  ) {
+    station = syntheticStationPoi({
+      name: firstBoard.fromName,
+      lat: firstBoard.fromLat,
+      lng: firstBoard.fromLng,
+    });
+  }
 
   const now = Date.now();
   const weather = await resolveWeatherRouting({
@@ -883,26 +1121,16 @@ async function tryDestinationJourneyAdvice(
   );
   const access = walkMinutesForDistance(distanceM, weather);
 
-  const scored = plan.itineraries
-    .map((it) => {
-      const dep = it.firstTransitDeparture ?? it.startTime;
-      const untilDep = (dep.getTime() - now) / 60_000;
-      const catchable = untilDep >= access.minutes + 1;
-      const last = it.legs[it.legs.length - 1];
-      const endDist =
-        last?.toLat != null && last?.toLng != null
-          ? haversineMeters(last.toLat, last.toLng, destLat!, destLng!)
-          : 0;
-      return { it, untilDep, catchable, endDist };
-    })
-    .filter((x) => x.endDist < 2_500)
-    .sort((a, b) => {
-      if (a.catchable !== b.catchable) return a.catchable ? -1 : 1;
-      return a.it.endTime.getTime() - b.it.endTime.getTime();
-    });
-
-  const best = scored[0]?.it;
-  const alt = scored[1]?.it ?? null;
+  const { pickSoonestCatchable } = await import('./pickSoonestJourney');
+  const ranked = pickSoonestCatchable(plan.itineraries, now);
+  const nearDest = (it: (typeof plan.itineraries)[0]) => {
+    const last = it.legs[it.legs.length - 1];
+    if (last?.toLat == null || last?.toLng == null) return true;
+    return haversineMeters(last.toLat, last.toLng, destLat!, destLng!) < 2_500;
+  };
+  const ordered = ranked.ordered.filter(nearDest);
+  const best = ordered[0] ?? null;
+  const alt = ordered[1] ?? null;
   if (!best) return null;
 
   const { rememberJourneyForStart } = await import(
@@ -936,6 +1164,7 @@ async function tryDestinationJourneyAdvice(
       cancelled: false,
       planned: !firstTransit?.realTime,
       platform:
+        firstTransit?.fromPlatform ??
         (firstTransit as { platform?: string | null } | undefined)?.platform ??
         null,
     },
@@ -1008,11 +1237,247 @@ async function tryDestinationJourneyAdvice(
   };
 }
 
+/** „Bahn früher / später / andere Verbindung“ — Live neu planen. */
+export function wantsEarlierOrLaterTransit(text: string): 'earlier' | 'later' | null {
+  const t = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!t) return null;
+  if (!/\b(?:bahn|zug|bus|s-?bahn|öpnv|oepnv|verbindung|abfahrt|fahrt)\b/iu.test(t)) {
+    return null;
+  }
+  if (/\b(?:früher|frueher|vorherige|vorige)\b/iu.test(t)) return 'earlier';
+  if (
+    /\b(?:später|spaeter|andere\s+verbindung)\b/iu.test(t) ||
+    /suche\s+eine\s+spätere\s+öpnv/iu.test(t) ||
+    /suche\s+eine\s+spaetere\s+oepnv/iu.test(t)
+  ) {
+    return 'later';
+  }
+  if (
+    /suche\s+eine\s+frühere\s+öpnv/iu.test(t) ||
+    /suche\s+eine\s+fruehere\s+oepnv/iu.test(t)
+  ) {
+    return 'earlier';
+  }
+  return null;
+}
+
+/**
+ * Follow-up zur gemerkten / aktiven ÖPNV-Reise: früher oder später neu planen.
+ */
+async function tryEarlierLaterJourneyAdvice(
+  text: string,
+): Promise<{
+  advice: TransitAdvice;
+  reply: string;
+  offerNavigation: boolean;
+} | null> {
+  const shift = wantsEarlierOrLaterTransit(text);
+  if (!shift) return null;
+
+  const { peekRememberedJourney } = await import(
+    '../navigation/journeyStartCache'
+  );
+  const remembered = peekRememberedJourney();
+  let destName = remembered?.destName ?? '';
+  let destLat = remembered?.destLat ?? null;
+  let destLng = remembered?.destLng ?? null;
+  let anchorDepMs =
+    remembered?.itinerary
+      ? (remembered.itinerary.firstTransitDeparture ??
+          remembered.itinerary.startTime
+        ).getTime()
+      : null;
+
+  if (destLat == null || destLng == null) {
+    try {
+      const store = useFinnusStore.getState();
+      if (
+        store.navActive &&
+        store.navTargetName &&
+        typeof store.navTargetLat === 'number' &&
+        typeof store.navTargetLng === 'number'
+      ) {
+        destName = String(store.navTargetName);
+        destLat = store.navTargetLat;
+        destLng = store.navTargetLng;
+      }
+    } catch {
+      /* soft */
+    }
+  }
+
+  const hint = extractDestinationHint(text);
+  if ((destLat == null || destLng == null) && hint) {
+    const store = useFinnusStore.getState();
+    const origin =
+      store.lastGpsLat != null && store.lastGpsLng != null
+        ? { lat: store.lastGpsLat, lng: store.lastGpsLng }
+        : null;
+    const resolved = await resolveNamedPlace(hint, origin);
+    if (resolved) {
+      destName = resolved.label;
+      destLat = resolved.lat;
+      destLng = resolved.lng;
+    }
+  }
+
+  if (
+    destLat == null ||
+    destLng == null ||
+    !Number.isFinite(destLat) ||
+    !Number.isFinite(destLng)
+  ) {
+    return null;
+  }
+
+  const store = useFinnusStore.getState();
+  const lat = store.lastGpsLat;
+  const lng = store.lastGpsLng;
+  if (lat == null || lng == null) return null;
+
+  const now = Date.now();
+  let departAt: Date | undefined;
+  if (shift === 'later') {
+    const base =
+      anchorDepMs != null && Number.isFinite(anchorDepMs) ? anchorDepMs : now;
+    departAt = new Date(Math.max(now, base) + 2 * 60_000);
+  } else {
+    // Früher: ab jetzt neu — Picker nimmt nächste bequeme (nicht die gemerkte)
+    departAt = new Date(now);
+  }
+
+  const { planJourney } = await import('./journeyPlanner');
+  const plan = await planJourney({
+    from: { lat, lng },
+    to: { lat: destLat, lng: destLng },
+    travelMode: 'transit',
+    numItineraries: 6,
+    departAt,
+  });
+  if (!plan.itineraries.length) {
+    return {
+      advice: {
+        stationName: destName || 'Ziel',
+        stationPoi: syntheticStationPoi({
+          name: destName || 'Ziel',
+          lat: destLat,
+          lng: destLng,
+        }),
+        distanceM: 0,
+        walkMinutes: 0,
+        departures: [],
+        source: 'journey',
+        destinationHint: destName || null,
+      },
+      reply:
+        `Gerade krieg ich keine andere belegte Verbindung nach ${destName || 'dein Ziel'}. ` +
+        `Kurz nochmal fragen oder in der Bahn-App checken — ich erfinde keine Abfahrt.`,
+      offerNavigation: false,
+    };
+  }
+
+  // Früher: Verbindung mit Abfahrt vor der gemerkten (wenn möglich)
+  let ordered = [...plan.itineraries];
+  if (shift === 'earlier' && anchorDepMs != null && Number.isFinite(anchorDepMs)) {
+    const before = ordered.filter((it) => {
+      const d = (it.firstTransitDeparture ?? it.startTime).getTime();
+      return d < anchorDepMs! - 30_000;
+    });
+    if (before.length) ordered = before;
+  }
+  if (shift === 'later' && anchorDepMs != null && Number.isFinite(anchorDepMs)) {
+    const after = ordered.filter((it) => {
+      const d = (it.firstTransitDeparture ?? it.startTime).getTime();
+      return d > anchorDepMs! + 60_000;
+    });
+    if (after.length) ordered = after;
+  }
+
+  const best = ordered[0]!;
+  const { rememberJourneyForStart } = await import(
+    '../navigation/journeyStartCache'
+  );
+  rememberJourneyForStart({
+    itinerary: best,
+    destName: destName || 'Ziel',
+    destLat,
+    destLng,
+  });
+
+  // Reuse door-to-door formatter via thin advice
+  const firstTransit = best.legs.find(
+    (l) => l.mode !== 'WALK' && l.mode !== 'BIKE',
+  );
+  const depWhen =
+    best.firstTransitDeparture ?? firstTransit?.startTime ?? best.startTime;
+  const line = best.firstTransitLine ?? firstTransit?.line ?? 'Bahn';
+  const direction =
+    firstTransit?.headsign?.trim() ||
+    firstTransit?.toName?.trim() ||
+    destName;
+  const station =
+    firstTransit?.fromName &&
+    firstTransit.fromLat != null &&
+    firstTransit.fromLng != null
+      ? syntheticStationPoi({
+          name: firstTransit.fromName,
+          lat: firstTransit.fromLat,
+          lng: firstTransit.fromLng,
+        })
+      : syntheticStationPoi({
+          name: 'Bahnhof',
+          lat,
+          lng,
+        });
+
+  const weather = await resolveWeatherRouting({
+    lat,
+    lng,
+    stationName: station.name,
+  });
+  const distanceM = Math.round(
+    haversineMeters(lat, lng, station.lat, station.lng),
+  );
+  const access = walkMinutesForDistance(distanceM, weather);
+
+  const advice: TransitAdvice = {
+    stationName: station.name,
+    stationPoi: station,
+    distanceM,
+    walkMinutes: access.minutes,
+    accessMode: access.mode,
+    departures: [
+      {
+        line,
+        direction,
+        when: depWhen,
+        plannedWhen: firstTransit?.scheduledStart ?? depWhen,
+        delaySec: firstTransit?.delaySec ?? best.firstTransitDelaySec,
+        cancelled: false,
+        planned: false,
+        platform: firstTransit?.fromPlatform ?? null,
+      },
+    ],
+    source: 'journey',
+    destinationHint: destName,
+    arrivalWhen: best.endTime,
+    arrivalLabel: destName,
+    journeyMinutes: Math.max(1, Math.round(best.durationSec / 60)),
+  };
+
+  const reply = formatTransitReply(advice, true);
+  return { advice, reply, offerNavigation: true };
+}
+
 export async function prepareTransitFollowUp(text: string): Promise<{
   advice: TransitAdvice;
   reply: string;
   offerNavigation: boolean;
 } | null> {
+  // Früher/später zur gemerkten Reise — Live neu, kein „keine Livepläne“
+  const shifted = await tryEarlierLaterJourneyAdvice(text);
+  if (shifted) return shifted;
+
   // Ziel genannt → Live door-to-door (Ankunft + echte Linie), kein Takt-Fantasie
   if (wantsDestinationJourney(text)) {
     const destJourney = await tryDestinationJourneyAdvice(text);

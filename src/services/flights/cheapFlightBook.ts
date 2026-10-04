@@ -42,36 +42,42 @@ export function buildCheapFlightBookActions(opts: {
   airlineUrl?: string | null;
   airlineName?: string | null;
   adults?: number;
+  children?: number;
+  infants?: number;
+  cabinBags?: number | null;
+  checkedBags?: number | null;
   userText?: string | null;
   kiwiPriceEur?: number | null;
   aviasalesPriceEur?: number | null;
+  returnDateKey?: string | null;
+  /** Brief/Modul-2: nur Direktflüge */
+  directOnly?: boolean;
 }): QuickAction[] {
   const actions: QuickAction[] = [];
   const ident = opts.ident ? preferredIataIdent(opts.ident) : null;
   const adults = opts.adults && opts.adults > 0 ? opts.adults : 1;
-  if (ident && opts.clockHm) {
-    actions.push({
-      type: 'SHOW_MORE',
-      label: `${ident} ${opts.clockHm}`.slice(0, 22),
-      payload: { textPrompt: `Nimm Flug ${ident} um ${opts.clockHm}` },
-    });
-  } else if (ident) {
-    actions.push({
-      type: 'SHOW_MORE',
-      label: ident.slice(0, 22),
-      payload: { textPrompt: `Nimm Flug ${ident}` },
-    });
-  }
+  // Button 1 = Preis-/Buchungs-Link zuerst (OPEN_URL vor Ident-Chips)
   if (
     opts.dateKey &&
     /^[A-Z]{3}$/.test(opts.originIata) &&
     /^[A-Z]{3}$/.test(opts.destIata)
   ) {
+    const wantDirect =
+      opts.directOnly === true ||
+      /\b(direkt(?:flug)?|non[\s-]?stop|ohne\s+(?:stopp|umstieg))\b/iu.test(
+        String(opts.userText || ''),
+      );
     const page = buildKiwiSearchPageUrl({
       fromIata: opts.originIata,
       toIata: opts.destIata,
       dateKey: opts.dateKey,
+      returnDateKey: opts.returnDateKey ?? null,
       adults,
+      children: opts.children ?? 0,
+      infants: opts.infants ?? 0,
+      cabinBags: opts.cabinBags ?? null,
+      checkedBags: opts.checkedBags ?? null,
+      directOnly: wantDirect,
     });
     const kiwiTracked = buildKiwiTravelpayoutsUrl(page, {
       subId: 'cheapflight',
@@ -89,9 +95,7 @@ export function buildCheapFlightBookActions(opts: {
       adults,
     });
     const cheapestAsk = userWantsCheapest(opts.userText);
-    const wantCompare = /\b(vergleich|alternativ|zweite?\s+quelle)\b/iu.test(
-      String(opts.userText || ''),
-    );
+    const wantCompare = true; // Solo-Günstig: immer Kiwi + Vergleich als Promo-Links
     const candidates: AffiliateOfferCandidate[] = [
       {
         id: 'kiwi',
@@ -125,9 +129,15 @@ export function buildCheapFlightBookActions(opts: {
       flightSpreadOver(Math.min(pPrimary, pOther), Math.max(pPrimary, pOther));
 
     const kiwiIsPrimary = primary.id === 'kiwi';
+    const priceLabel =
+      typeof pPrimary === 'number' && pPrimary > 0
+        ? `Ab ${pPrimary} € buchen`
+        : kiwiIsPrimary
+          ? 'Preis · Kiwi'
+          : 'Preis · Aviasales';
     actions.push({
       type: 'OPEN_URL',
-      label: kiwiIsPrimary ? 'Bei Kiwi buchen' : 'Bei Aviasales buchen',
+      label: priceLabel.slice(0, 28),
       payload: { url: primary.url },
     });
     if (wantCompare || cheapestAsk || spreadWide || pPrimary == null) {
@@ -144,6 +154,20 @@ export function buildCheapFlightBookActions(opts: {
       type: 'OPEN_URL',
       label: `Bei ${name}`,
       payload: { url: opts.airlineUrl },
+    });
+  }
+  // Ident-Chips nach Preis-Link
+  if (ident && opts.clockHm) {
+    actions.push({
+      type: 'SHOW_MORE',
+      label: `${ident} ${opts.clockHm}`.slice(0, 22),
+      payload: { textPrompt: `Nimm Flug ${ident} um ${opts.clockHm}` },
+    });
+  } else if (ident) {
+    actions.push({
+      type: 'SHOW_MORE',
+      label: ident.slice(0, 22),
+      payload: { textPrompt: `Nimm Flug ${ident}` },
     });
   }
   return actions.slice(0, 5);

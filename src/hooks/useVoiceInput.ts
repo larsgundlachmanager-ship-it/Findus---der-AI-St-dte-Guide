@@ -740,10 +740,52 @@ export function useVoiceInput(options?: {
           addChatMessage({ role: 'assistant', content: fallback });
           await speakPlain(withSide(fallback), epoch);
         } finally {
-          if (stillCurrent(epoch)) setIsGenerating(false);
+          if (stillCurrent(epoch)) {
+            let tries = 0;
+            const release = () => {
+              tries += 1;
+              if (!stillCurrent(epoch)) return;
+              try {
+                const {
+                  isLiveSpeechTransportBusy,
+                } = require('../utils/phinnosMood') as {
+                  isLiveSpeechTransportBusy: () => boolean;
+                };
+                if (tries < 40 && isLiveSpeechTransportBusy()) {
+                  setTimeout(release, 150);
+                  return;
+                }
+              } catch {
+                /* soft */
+              }
+              setIsGenerating(false);
+            };
+            release();
+          }
         }
       } finally {
-        if (stillCurrent(epoch)) setIsGenerating(false);
+        if (stillCurrent(epoch)) {
+            let tries = 0;
+            const release = () => {
+              tries += 1;
+            if (!stillCurrent(epoch)) return;
+            try {
+              const {
+                isLiveSpeechTransportBusy,
+              } = require('../utils/phinnosMood') as {
+                isLiveSpeechTransportBusy: () => boolean;
+              };
+              if (tries < 40 && isLiveSpeechTransportBusy()) {
+                  setTimeout(release, 150);
+                  return;
+                }
+            } catch {
+              /* soft */
+            }
+            setIsGenerating(false);
+          };
+          release();
+        }
         onUserInputEnd();
       }
     },

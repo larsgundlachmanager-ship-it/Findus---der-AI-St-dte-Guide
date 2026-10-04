@@ -26,6 +26,8 @@ import {
 import type { AgentResult } from '../../types';
 import type { TurnFrame } from '../router/turnFrame';
 import type { IngestedPlan } from './planningTypes';
+import { sanitizeWishNotes } from './planSpeechSanitize';
+import { tryResolveDateKeyFromUserText } from '../../utils/dateKeys';
 
 export type CompoundEnrichTaskResult = {
   draftText?: string;
@@ -35,6 +37,13 @@ export type CompoundEnrichTaskResult = {
   task?: { id?: string; lane?: string; brief?: string };
   status?: string;
 };
+
+/** HH:MM → Minuten seit Mitternacht */
+function hmToMin(hm: string | null | undefined): number | null {
+  const m = String(hm || '').match(/^(\d{1,2}):(\d{2})$/);
+  if (!m) return null;
+  return Number(m[1]) * 60 + Number(m[2]);
+}
 
 /**
  * Schreibt Compound-Skelett in Session + Future-Plan-Timeline (Kalender optional).
@@ -73,8 +82,15 @@ export async function ingestCompoundDayPlan(opts: {
 
   if (opts.skipIfRichSession !== false && isPlanningModuleActive()) {
     const sess = usePlanSessionStore.getState();
+    const fromText = tryResolveDateKeyFromUserText(opts.userText);
+    const sameDay =
+      !fromText ||
+      !sess.plan?.targetDate ||
+      sess.plan.targetDate === fromText ||
+      sess.plan.targetDate === plan.targetDate;
     const existing = sess.plan?.openWishesQueue?.length ?? 0;
-    if (existing >= plan.openWishesQueue.length) {
+    // Sticky-Session nicht behalten, wenn User klar einen anderen Tag meint.
+    if (sameDay && existing >= plan.openWishesQueue.length) {
       return sess.plan;
     }
   }
@@ -105,27 +121,43 @@ export async function ingestCompoundDayPlan(opts: {
         if (isTravelToDestWish(w)) {
           return {
             ...w,
-            context: `${w.context} | ÖPNV ≈${spike.rawMin} Min (Puffer ${spike.bufferedMin} Min, ${spike.source})`.slice(
+            context: `${sanitizeWishNotes(w.context)} | ÖPNV ≈${spike.rawMin} Min (Puffer ${spike.bufferedMin} Min, ${spike.source})`.slice(
               0,
               400,
             ),
           };
         }
-        if (isBreakfastWish(w) && w.estimatedTime) {
+        // Alle Aktivitäten in der Zielstadt erst NACH Ankunft — nicht nur Frühstück.
+        if (
+          w.estimatedTime &&
+          !isTravelToDestWish(w) &&
+          (isBreakfastWish(w) ||
+            /\b(essen|meal|mittag|abend|pannfisch|michel|erkunden|tour|sight)\b/i.test(
+              `${w.title} ${w.context}`,
+            ))
+        ) {
           const travel = plan.openWishesQueue.find((x) => isTravelToDestWish(x));
           const dep = travel?.estimatedTime;
           if (dep) {
-            return {
-              ...w,
-              estimatedTime: arrivalHmAfterTravel(dep, spike.bufferedMin),
-              context: `${w.context} | Ankunft nach ~${spike.bufferedMin} Min ÖPNV`.slice(
-                0,
-                400,
-              ),
-            };
+            const arrival = arrivalHmAfterTravel(dep, spike.bufferedMin);
+            const curMin = hmToMin(w.estimatedTime);
+            const arrMin = hmToMin(arrival);
+            if (curMin != null && arrMin != null && curMin < arrMin) {
+              return {
+                ...w,
+                estimatedTime: arrival,
+                context: `${sanitizeWishNotes(w.context)} | Ankunft nach ~${spike.bufferedMin} Min ÖPNV`.slice(
+                  0,
+                  400,
+                ),
+              };
+            }
           }
         }
-        return w;
+        return {
+          ...w,
+          context: sanitizeWishNotes(w.context),
+        };
       });
       seeded = {
         ...plan,

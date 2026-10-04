@@ -3,19 +3,166 @@
  * HUD-Minuten immer live aus nextRainAtMs (nicht eingefrorener rainStartsInMin).
  */
 
+import { formatClockSpokenDe } from '../../utils/dateKeys';
+
 export type RainWindow = { startMs: number; endMs: number; pop?: number };
 
 /** Schon nass oder Start in unter 2 Min → Voice-Warnung stumm (User merkt es). */
 export const RAIN_ALREADY_FALLING_MAX_MIN = 2;
 
-/** HUD zeigt Countdown bis hier; darunter „Regen jetzt“. */
+/** HUD zeigt Countdown bis hier; darunter „Aktuell Regen“. */
 export const RAIN_HUD_MAX_MIN = 90;
 
+/**
+ * Trockenlücke darunter = noch derselbe Schauer.
+ * Erst ab ≥ dieser Pause gilt „Regen hört auf“ (nicht 5–10 Min Flatterpause).
+ */
+export const RAIN_END_MIN_DRY_GAP_MS = 30 * 60_000;
+
+/**
+ * Nasse Runs zusammenführen, wenn die Pause dazwischen unter minDryGapMs liegt.
+ * `endAtMs` = Zeitpunkt des letzten nassen Samples (oder Fensterende).
+ */
+export function mergeWetRunsByDryGap<T extends { startAtMs: number; endAtMs: number }>(
+  runs: T[],
+  minDryGapMs: number = RAIN_END_MIN_DRY_GAP_MS,
+): T[] {
+  if (!runs.length) return [];
+  const sorted = [...runs].sort((a, b) => a.startAtMs - b.startAtMs);
+  const out: T[] = [{ ...sorted[0]! }];
+  for (let i = 1; i < sorted.length; i++) {
+    const cur = sorted[i]!;
+    const prev = out[out.length - 1]!;
+    const gapMs = cur.startAtMs - prev.endAtMs;
+    if (gapMs < minDryGapMs) {
+      out[out.length - 1] = {
+        ...prev,
+        endAtMs: Math.max(prev.endAtMs, cur.endAtMs),
+      };
+    } else {
+      out.push({ ...cur });
+    }
+  }
+  return out;
+}
+
+/** Hourly-/Fenster-Liste: kurze Pausen mergen. */
+export function mergeRainWindowsByDryGap(
+  windows: RainWindow[] | null | undefined,
+  minDryGapMs: number = RAIN_END_MIN_DRY_GAP_MS,
+): RainWindow[] {
+  if (!windows?.length) return [];
+  const merged = mergeWetRunsByDryGap(
+    windows.map((w) => ({
+      startAtMs: w.startMs,
+      endAtMs: w.endMs,
+      pop: w.pop,
+    })),
+    minDryGapMs,
+  );
+  return merged.map((w) => ({
+    startMs: w.startAtMs,
+    endMs: w.endAtMs,
+    pop: (w as { pop?: number }).pop,
+  }));
+}
+
+/**
+ * Ende eines nassen Blocks in einer Zeitreihe.
+ * Kurze Trockenlöcher (< minDryGapMs) zählen nicht als Ende.
+ * samples chronologisch; wet = Niederschlag spürbar.
+ */
+export function findSeriesRainEndMs(opts: {
+  samples: Array<{ atMs: number; wet: boolean }>;
+  fromIdx?: number;
+  minDryGapMs?: number;
+}): number | null {
+  const samples = opts.samples;
+  if (!samples.length) return null;
+  const minGap = opts.minDryGapMs ?? RAIN_END_MIN_DRY_GAP_MS;
+  const fromIdx = Math.max(0, opts.fromIdx ?? 0);
+  let seenWet = false;
+  for (let j = fromIdx; j < samples.length; j++) {
+    const s = samples[j]!;
+    if (s.wet) {
+      seenWet = true;
+      continue;
+    }
+    if (!seenWet) continue;
+    const dryAt = s.atMs;
+    let resumes = false;
+    for (let k = j; k < samples.length; k++) {
+      const t = samples[k]!;
+      if (t.atMs - dryAt >= minGap) break;
+      if (t.wet) {
+        resumes = true;
+        break;
+      }
+    }
+    if (!resumes) return dryAt;
+  }
+  return null;
+}
+
+
+/**
+ * Intensität für Live-HUD (Fakt, kein Ratschlag).
+ * Nur belegte Codes / mm / isHeavyRain — sonst neutrales „Regen“.
+ */
+export function rainHudIntensityNoun(opts: {
+  weatherCode?: number | null;
+  isHeavyRain?: boolean | null;
+  currentPrecipMm?: number | null;
+}): 'Starker Regen' | 'Leichter Regen' | 'Regen' {
+  if (opts.isHeavyRain) return 'Starker Regen';
+  const mm = opts.currentPrecipMm;
+  if (mm != null && Number.isFinite(mm) && mm > 2) return 'Starker Regen';
+  const c =
+    opts.weatherCode != null && Number.isFinite(opts.weatherCode)
+      ? Math.round(opts.weatherCode)
+      : null;
+  if (c != null) {
+    // WMO / Open-Meteo
+    if (
+      c === 65 ||
+      c === 67 ||
+      c === 81 ||
+      c === 82 ||
+      (c >= 95 && c <= 99)
+    ) {
+      return 'Starker Regen';
+    }
+    if ((c >= 51 && c <= 57) || c === 61 || c === 66 || c === 80) {
+      return 'Leichter Regen';
+    }
+    // OWM
+    if ((c >= 200 && c <= 232) || (c >= 502 && c <= 531)) {
+      return 'Starker Regen';
+    }
+    if ((c >= 300 && c <= 321) || c === 500) return 'Leichter Regen';
+  }
+  if (mm != null && Number.isFinite(mm) && mm >= 0.1 && mm < 0.5) {
+    return 'Leichter Regen';
+  }
+  return 'Regen';
+}
+
+/** Strip emoji / whitespace for rain-line parsers. */
+export function stripRainHudPrefix(line: string): string {
+  return line.replace(/^🌧\s*/u, '').trim();
+}
+
+/** True wenn die HUD-Zeile schon fallenden Regen meint (nicht nur Forecast). */
+export function isRainHudFallingLine(line: string | null | undefined): boolean {
+  if (!line) return false;
+  const t = stripRainHudPrefix(line);
+  return /^(Aktuell\s+)?(Starker\s+|Leichter\s+)?Regen(\s+(jetzt|noch|bis)\b|$)/i.test(
+    t,
+  );
+}
+
 function clockLabel(ms: number): string {
-  return new Date(ms).toLocaleTimeString('de-DE', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return formatClockSpokenDe(ms) || '';
 }
 
 /**
@@ -118,21 +265,34 @@ export function activeRainEndMs(
   },
 ): number | null {
   const now = opts?.nowMs ?? Date.now();
-  if (
+  const merged = mergeRainWindowsByDryGap(windows);
+  const fromWindows = (() => {
+    if (!merged.length) return null;
+    const active = merged.find(
+      (w) => w.startMs <= now + 2 * 60_000 && w.endMs > now,
+    );
+    if (active) return active.endMs;
+    const anchor = opts?.nextRainAtMs ?? now;
+    const upcoming = merged.find(
+      (w) => w.endMs > anchor && w.startMs <= anchor + 30 * 60_000,
+    );
+    return upcoming?.endMs ?? null;
+  })();
+  const fromTip =
     opts?.rainEndsAtMs != null &&
     Number.isFinite(opts.rainEndsAtMs) &&
     opts.rainEndsAtMs > now + 60_000
-  ) {
-    return opts.rainEndsAtMs;
+      ? opts.rainEndsAtMs
+      : null;
+  if (fromTip == null) return fromWindows;
+  if (fromWindows == null) return fromTip;
+  // Tip zu früh (Flatterpause): Fensterende nehmen, wenn es weiterregnet.
+  if (fromWindows > fromTip && fromWindows - fromTip < RAIN_END_MIN_DRY_GAP_MS * 4) {
+    // Wenn Fenster deutlich länger als Tip → Tip war nur kurze Lücke
+    return fromWindows;
   }
-  if (!windows?.length) return null;
-  const active = windows.find((w) => w.startMs <= now + 2 * 60_000 && w.endMs > now);
-  if (active) return active.endMs;
-  const anchor = opts?.nextRainAtMs ?? now;
-  const upcoming = windows.find(
-    (w) => w.endMs > anchor && w.startMs <= anchor + 30 * 60_000,
-  );
-  return upcoming?.endMs ?? null;
+  // Tip später als Fenster → Tip (Radar) gewinnen, außer Fenster endet erst viel später
+  return Math.max(fromTip, fromWindows);
 }
 
 /** Belegte Dauer des nächsten Regenfensters (Minuten). */
@@ -141,11 +301,12 @@ export function rainDurationMin(
   startMs: number | null | undefined,
   nowMs = Date.now(),
 ): number | null {
-  if (!windows?.length) return null;
+  const windowsM = mergeRainWindowsByDryGap(windows);
+  if (!windowsM.length) return null;
   const anchor = startMs ?? nowMs;
   const hit =
-    windows.find((w) => w.endMs > anchor && w.startMs <= anchor + 20 * 60_000) ??
-    windows.find((w) => w.startMs >= anchor - 5 * 60_000);
+    windowsM.find((w) => w.endMs > anchor && w.startMs <= anchor + 20 * 60_000) ??
+    windowsM.find((w) => w.startMs >= anchor - 5 * 60_000);
   if (!hit || hit.endMs <= hit.startMs) return null;
   const from = Math.max(hit.startMs, anchor);
   const mins = Math.round((hit.endMs - from) / 60_000);
@@ -157,9 +318,10 @@ export function rainDurationMin(
 export const RAIN_CLOCK_AFTER_MIN = 60;
 
 /**
- * HUD / Regenradar-Zeile:
- * - fällt: „Regen noch X Min“ (≤60) bzw. „Regen bis HH:MM“ (>60)
- * - kommt: „Regen in X Min“ (≤60) bzw. „Regen ab HH:MM“ (>60)
+ * HUD / Regenradar-Zeile (SSOT Radar-Nowcast Timing) — nur Fakt, kein Schirm/Indoor:
+ * - fällt: „Aktuell [starker/leichter] Regen“ bzw. „… noch X Min“ / „… bis HH:MM“
+ * - kommt ≤60 Min: Countdown „Regen in X Min“ (+ optional „Dauer ca. Y Min“)
+ * - kommt >60 Min: nur „Regen ab HH:MM“ — keine Dauer
  */
 export function formatRainHudLine(opts: {
   nowMs?: number;
@@ -177,6 +339,7 @@ export function formatRainHudLine(opts: {
   const horizon = opts.maxHorizonMin ?? 12 * 60;
   const falling = isRainAlreadyFalling(opts);
   if (falling) {
+    const noun = rainHudIntensityNoun(opts);
     const endMs = activeRainEndMs(opts.rainWindows, {
       nowMs: now,
       rainEndsAtMs: opts.rainEndsAtMs,
@@ -185,28 +348,53 @@ export function formatRainHudLine(opts: {
     if (endMs != null && endMs > now + 60_000) {
       const leftMin = Math.max(1, Math.round((endMs - now) / 60_000));
       if (leftMin <= RAIN_CLOCK_AFTER_MIN) {
-        return `Regen noch ${leftMin} Min`;
+        return `${noun} noch ${leftMin} Min`;
       }
-      return `Regen bis ${clockLabel(endMs)}`;
+      return `${noun} bis ${clockLabel(endMs)}`;
     }
-    return 'Regen jetzt';
+    if (noun === 'Regen') return 'Aktuell Regen';
+    return `Aktuell ${noun.charAt(0).toLowerCase()}${noun.slice(1)}`;
   }
   const mins = minutesUntilIncomingRain(opts);
   if (mins == null) return null;
+  const endMs = activeRainEndMs(opts.rainWindows, {
+    nowMs: now,
+    rainEndsAtMs: opts.rainEndsAtMs,
+    nextRainAtMs: opts.nextRainAtMs,
+  });
+  const durMin =
+    endMs != null && opts.nextRainAtMs != null && Number.isFinite(opts.nextRainAtMs)
+      ? Math.max(1, Math.round((endMs - opts.nextRainAtMs) / 60_000))
+      : rainDurationMin(opts.rainWindows, opts.nextRainAtMs ?? now, now);
   if (mins <= RAIN_CLOCK_AFTER_MIN) {
+    // Countdown bis Start; Dauer nur hier und klar als Länge markiert.
+    if (durMin != null && durMin >= 5 && durMin <= 180) {
+      return `Regen in ${mins} Min · Dauer ca. ${durMin} Min`;
+    }
     return `Regen in ${mins} Min`;
   }
   if (mins > horizon) return null;
   if (opts.nextRainAtMs != null && Number.isFinite(opts.nextRainAtMs)) {
+    // >1 h: nur Start-Uhrzeit — Dauer verwässert den Lesefluss.
     return `Regen ab ${clockLabel(opts.nextRainAtMs)}`;
   }
   return null;
 }
 
-/** True wenn die Zeile akuten Regen meint (jetzt / noch / in ≤60 Min). */
+/** True wenn die Zeile akuten Regen meint (aktuell / noch / in ≤60 Min). */
 export function isRainHudUrgent(line: string | null | undefined): boolean {
   if (!line) return false;
-  return /^(Regen jetzt|Regen noch |Regen in )/i.test(line.trim());
+  const t = stripRainHudPrefix(line);
+  if (isRainHudFallingLine(t)) return true;
+  return /^(Starker\s+|Leichter\s+)?Regen in /i.test(t);
+}
+
+/** True wenn die Zeile belegtes Radar-Timing trägt (auch „ab HH:MM“). */
+export function isRainHudRadarLine(line: string | null | undefined): boolean {
+  if (!line) return false;
+  const t = stripRainHudPrefix(line);
+  if (isRainHudFallingLine(t)) return true;
+  return /^(Starker\s+|Leichter\s+)?Regen (in |ab )/i.test(t);
 }
 
 export function isRainDontCareUtterance(text: string): boolean {

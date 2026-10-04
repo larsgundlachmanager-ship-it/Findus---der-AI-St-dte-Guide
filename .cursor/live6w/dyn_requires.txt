@@ -1,0 +1,10 @@
+services\apkSlim.smoke.test.ts:72:`kein require(data/staedte/*) — hits: ${packRequireHits.join(', ') || 'none'}`,
+services\apkSlim.smoke.test.ts:76:`kein require(Stadt-Cover-PNG) — hits: ${coverRequireHits.join(', ') || 'none'}`,
+module2\chat\runChatLane.ts:485:const { hydrateFlightTripSession, hasFlightTripSession } = require(
+module2\planning\planHandoffGuard.ts:99:const { isVolumeIntent, isLookNearIntent } = require(
+module2\planning\runPlanningModule.ts:230:const { shouldYieldPlanWaitToFlight, isFlightTripQuery } = require(
+module2\planning\runPlanningModule.ts:350:const { tryResolveDateKeyFromUserText, todayDateKey } = require(
+module2\planning\runPlanningModule.ts:367:const { speakContextualBridgeFireAndForget } = require(
+module2\router\call1Dispatch.smoke.test.ts:91:const { setFlightTripSession, resetFlightTripSessionForTests } = require(
+module2\router\choiceTurnContext.ts:61:const { noteLastLiveInventory, getLastLiveInventory } = require(
+module2\router\runConciergeTurn.ts:1516:const { shouldPreserveFlightTripSession, isFlightTripQuery } = require(

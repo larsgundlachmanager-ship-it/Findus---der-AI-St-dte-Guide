@@ -29,6 +29,15 @@ export const TRAVEL_PARTY_OPTIONS: PrefOption<TravelParty>[] = [
   { id: 'friends', label: 'Freundesgruppe', hint: 'Kleine Gruppe' },
 ];
 
+/** Emoji für Travel-Party-Chips (ältere Android-Glyphs, S7-tauglich). */
+export const TRAVEL_PARTY_EMOJI: Record<TravelParty, string> = {
+  solo: '👤',
+  couple: '💑',
+  date: '💘',
+  family: '👪',
+  friends: '👥',
+};
+
 export const MOBILITY_OPTIONS: PrefOption<MobilityMode>[] = [
   { id: 'foot', label: 'Zu Fuß', hint: 'Stadt zu Fuß entdecken' },
   { id: 'bike', label: 'Zweirad', hint: 'Fahrrad / E-Scooter' },
@@ -180,6 +189,15 @@ export const TRAVEL_MODE_OPTIONS: PrefOption<TravelModeId>[] = [
   { id: 'wandern', label: 'Wandern', hint: '' },
   { id: 'reisebus', label: 'Reisebus', hint: '' },
 ];
+
+export const TRAVEL_MODE_EMOJI: Record<TravelModeId, string> = {
+  auto: '🚗',
+  bahn: '🚆',
+  flieger: '✈',
+  fahrrad: '🚲',
+  wandern: '🥾',
+  reisebus: '🚌',
+};
 
 /** Taxi-Prefs (Ja / nur notfalls / Nein). */
 export const TAXI_PREF_OPTIONS: {

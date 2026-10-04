@@ -1,0 +1,83 @@
+{
+  "at": "2026-09-21T09:10:35.696Z",
+  "cities": {
+    "danzig": {
+      "usd": 4.372,
+      "at": "2026-09-20T22:42:30.792Z",
+      "lastSessionUsd": 0.192,
+      "lastCounts": {
+        "textPro": 6,
+        "textId": 0,
+        "detailsEss": 0,
+        "detailsReviews": 0,
+        "geocode": 0,
+        "cacheHit": 0
+      }
+    },
+    "amsterdam": {
+      "usd": 0.192,
+      "at": "2026-09-20T22:43:13.281Z",
+      "lastSessionUsd": 0.192,
+      "lastCounts": {
+        "textPro": 6,
+        "textId": 0,
+        "detailsEss": 0,
+        "detailsReviews": 0,
+        "geocode": 0,
+        "cacheHit": 0
+      }
+    },
+    "kiel": {
+      "usd": 0.192,
+      "at": "2026-09-20T22:43:18.439Z",
+      "lastSessionUsd": 0.192,
+      "lastCounts": {
+        "textPro": 6,
+        "textId": 0,
+        "detailsEss": 0,
+        "detailsReviews": 0,
+        "geocode": 0,
+        "cacheHit": 0
+      }
+    },
+    "bremen": {
+      "usd": 0.192,
+      "at": "2026-09-20T22:43:23.295Z",
+      "lastSessionUsd": 0.192,
+      "lastCounts": {
+        "textPro": 6,
+        "textId": 0,
+        "detailsEss": 0,
+        "detailsReviews": 0,
+        "geocode": 0,
+        "cacheHit": 0
+      }
+    },
+    "roenne": {
+      "usd": 2.416,
+      "at": "2026-09-20T23:18:32.707Z",
+      "lastSessionUsd": 0.015,
+      "lastCounts": {
+        "textPro": 0,
+        "textId": 10,
+        "detailsEss": 3,
+        "detailsReviews": 0,
+        "geocode": 0,
+        "cacheHit": 7
+      }
+    },
+    "bornholm": {
+      "usd": 4.047,
+      "at": "2026-09-21T09:10:35.696Z",
+      "lastSessionUsd": 0.659,
+      "lastCounts": {
+        "textPro": 17,
+        "textId": 25,
+        "detailsEss": 23,
+        "detailsReviews": 0,
+        "geocode": 0,
+        "cacheHit": 2
+      }
+    }
+  }
+}

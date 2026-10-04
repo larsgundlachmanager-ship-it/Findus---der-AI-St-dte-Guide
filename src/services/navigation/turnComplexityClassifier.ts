@@ -30,12 +30,15 @@ export type ClassifyTurnContext = {
   roadName: string | null;
   /** Distinct road names within ~30 m (from nearby steps). */
   nearbyRoadCount?: number;
+  /** Abstand zur nächsten Speak-Abbiegung (m) — eng = Doppel-Abbiegung. */
+  chainGapM?: number | null;
   /** True when reverse-geocode indicates urban area. */
   isUrban?: boolean;
   streetViewAvailable?: boolean;
 };
 
-const COMPLEX_THRESHOLD = 35;
+/** Live: Tip nur bei echt eng/viele Abzweige — nicht jeder Gabel. */
+const COMPLEX_THRESHOLD = 48;
 
 function turnAngleDeg(
   prev: { lat: number; lng: number } | null,
@@ -98,13 +101,33 @@ export function scoreTurnComplexity(ctx: ClassifyTurnContext): {
   }
 
   const roadCount = ctx.nearbyRoadCount ?? 1;
-  if (roadCount >= 3) {
-    score += 30;
+  // Kompliziert nur, wenn zwei Straßen wirklich direkt nebeneinander liegen (≤20 m)
+  // oder drei und mehr. Eine benannte Straße (Bahnhofstraße) bleibt einfach.
+  const tightFork =
+    typeof ctx.chainGapM === 'number' &&
+    Number.isFinite(ctx.chainGapM) &&
+    ctx.chainGapM > 0 &&
+    ctx.chainGapM <= 20;
+  if (roadCount >= 3 && tightFork) {
+    score += 36;
     reasons.push('multi_road_intersection');
+  } else if (roadCount >= 2 && tightFork) {
+    score += 32;
+    reasons.push('nearby_fork_roads');
   }
 
-  if (ctx.isUrban) {
-    score += 20;
+  // Enge Folgekurbel (Doppel-Abbiegung) — Extra-Hinweis lohnt.
+  const chainGap =
+    typeof ctx.chainGapM === 'number' && Number.isFinite(ctx.chainGapM)
+      ? ctx.chainGapM
+      : null;
+  if (chainGap != null && chainGap > 0 && chainGap <= 20) {
+    score += 28;
+    reasons.push('tight_chained_turns');
+  }
+
+  if (ctx.isUrban && tightFork) {
+    score += 8;
     reasons.push('urban_density');
   }
 
@@ -113,9 +136,9 @@ export function scoreTurnComplexity(ctx: ClassifyTurnContext): {
     reasons.push('no_street_view');
   }
 
-  // Safety net: turn without any anchor → complex (don't guess)
-  if (!ctx.landmark && !ctx.roadName) {
-    score += 15;
+  // Ohne Anker allein keine komplizierte Kreuzung.
+  if (!ctx.landmark && !ctx.roadName && tightFork) {
+    score += 8;
     reasons.push('no_anchor');
   }
 
@@ -167,6 +190,29 @@ export function countNearbyRoads(
   for (let i = lo; i <= hi; i++) {
     const r = waypoints[i]?.roadName?.trim();
     if (r && r.length > 2) roads.add(r.toLowerCase());
+  }
+  return roads.size;
+}
+
+/**
+ * Distinct road names within ~20 m of the junction (meter window).
+ * Zwei Straßen direkt nebeneinander → komplex.
+ */
+export function countNearbyRoadsWithinM(
+  waypoints: NavWaypoint[],
+  centerIndex: number,
+  radiusM = 20,
+): number {
+  const center = waypoints[centerIndex];
+  if (!center) return 0;
+  const roads = new Set<string>();
+  for (let i = 0; i < waypoints.length; i++) {
+    const wp = waypoints[i];
+    if (!wp) continue;
+    const r = wp.roadName?.trim();
+    if (!r || r.length < 3) continue;
+    const d = distanceMeters(center.lat, center.lng, wp.lat, wp.lng);
+    if (d <= radiusM) roads.add(r.toLowerCase());
   }
   return roads.size;
 }

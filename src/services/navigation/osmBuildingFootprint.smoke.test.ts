@@ -65,4 +65,20 @@ const picked = pickBestFootprint(
 );
 assert(picked == null, 'bridge must not snap to Kita or Feuerwehr');
 
+assert(
+  packNeedsOsmFootprint({
+    name: 'Stadtgeschichte',
+    lat: 53.6782,
+    lng: 9.75895,
+    polygon_json: JSON.stringify([
+      { latitude: 53.6772, longitude: 9.7572 },
+      { latitude: 53.6772, longitude: 9.7581 },
+      { latitude: 53.6779, longitude: 9.7581 },
+      { latitude: 53.6779, longitude: 9.7572 },
+      { latitude: 53.6772, longitude: 9.7572 },
+    ]),
+  }) === true,
+  'Pin außerhalb Shared-Footprint → Overpass neu',
+);
+
 console.log('osmBuildingFootprint.smoke.test.ts ok');

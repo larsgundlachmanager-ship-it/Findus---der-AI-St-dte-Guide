@@ -24,5 +24,10 @@ assert(
   stripHudCoachMeta('heute bis 22°') === 'heute bis 22°',
   'keep factual meta',
 );
+assert(
+  stripHudCoachMeta('noch 1 Std 42 Min · Regen — Zeit trotzdem merken') ===
+    'noch 1 Std 42 Min · Regen',
+  'strip internal merken note',
+);
 
 console.log('hudCoachMeta.smoke: ok');

@@ -231,7 +231,7 @@ export function ExpressSetupStep({ draft, onChange, onNext }: Props) {
           />
           <TextInput
             style={styles.input}
-            placeholder={isGuest ? 'Handy' : 'Handy *'}
+            placeholder={isGuest ? 'Handynummer' : 'Handynummer *'}
             placeholderTextColor={colors.textMuted}
             value={draft.phoneNumber ?? ''}
             onChangeText={(phoneNumber) => onChange({ phoneNumber })}

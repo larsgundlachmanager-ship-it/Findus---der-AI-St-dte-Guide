@@ -68,7 +68,8 @@ export function extractNamedRestaurantWish(text: string): string | null {
   const patterns: RegExp[] = [
     /(?:für\s+(?:das|den|die|dem)\s+|für\s+)([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,4})/iu,
     /(?:bei|im|in\s+der|in\s+dem|am|zum|zur|zu\s+dem|ins|auf\s+dem|auf\s+der)\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,5})/iu,
-    /(?:ein|eine|das|den|dem|die)\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']{3,}(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,3})(?:\s+(?:haben|essen|probieren|gehen))?/iu,
+    // \b — sonst matcht „ein“ in „kein Asiatisch“ als Venue-Name
+    /\b(?:ein|eine|das|den|dem|die)\s+([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']{3,}(?:\s+[A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']+){0,3})(?:\s+(?:haben|essen|probieren|gehen))?/iu,
     /(?:empfehlung|empfehl)\s+(?:für\s+)?(?:das|den|die)?\s*([A-Za-zÄÖÜäöüß][\wÄÖÜäöüß\-']{3,})/iu,
   ];
   for (const re of patterns) {

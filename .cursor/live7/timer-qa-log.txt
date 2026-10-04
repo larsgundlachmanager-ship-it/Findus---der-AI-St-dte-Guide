@@ -1,0 +1,12 @@
+09-09 22:19:02.903 16522 16575 I ReactNativeJS: Bridgeless mode is enabled
+09-09 22:19:02.904 16522 16575 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+09-09 22:19:03.025 16522 16575 W BridgelessReactContext: [WARNING] Bridgeless doesn't support CatalystInstance. Accessing an API that's not part of the new architecture is not encouraged usage.
+09-09 22:19:03.128 16522 16575 I ReactNativeJS: Running "main"
+09-09 22:19:03.136 16522 16575 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', false
+09-09 22:19:03.139 16522 16575 I ReactNativeJS: [devAskPoller] started â†’ :8791
+09-09 22:19:03.373 16522 16575 I ReactNativeJS: [tts] Cartesia sonic-3.5 â€” Offline-Fallback: expo-speech
+09-09 22:19:03.389 16522 16575 I ReactNativeJS: '[devAskPoller] got ask:', 'Timer 2 Minuten'
+09-09 22:19:03.888 16522 16575 I ReactNativeJS: [tts] Cartesia sonic-3.5 â€” Offline-Fallback: expo-speech
+09-09 22:19:03.889 16522 16575 I ReactNativeJS: '[boot] phase=', 'booting', '__DEV__=', false, 'setup=', true
+09-09 22:19:04.101 16522 16575 I ReactNativeJS: '[Yorro Sync] URL vorhanden:', true
+09-09 22:19:04.102 16522 16575 I ReactNativeJS: [devAskPoller] started â†’ :8791

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Run: npx --yes tsx src/services/homeMap/extractBuildingUnderPin.smoke.test.ts
  */
 
@@ -58,6 +58,30 @@ assert(wrongShared === house, 'Pin außerhalb Shared-Feuerwehr → Haus unter Pi
 const keep = resolvePlaceFillRing(53.6782, 9.75895, house, buildings);
 assert(keep === house, 'Passender Pack-Ring bleibt');
 
+const offsetPack: Array<[number, number]> = [
+  [53.6780, 9.75865],
+  [53.67808, 9.7592],
+  [53.67822, 9.75928],
+  [53.67842, 9.75915],
+  [53.67838, 9.75872],
+  [53.67818, 9.75858],
+  [53.6780, 9.75865],
+];
+const preferTile = resolvePlaceFillRing(53.6782, 9.75895, offsetPack, buildings);
+assert(preferTile === house, 'versetztes Pack-Viereck → Extract-Haus unter Pin');
+assert(!packRingNeedsTileSnap(offsetPack), 'Offset-Pack hat genug Ecken (kein Box-Snap)');
+
+const diamond: Array<[number, number]> = [
+  [53.6782, 9.7587],
+  [53.67805, 9.75895],
+  [53.6782, 9.7592],
+  [53.67835, 9.75895],
+  [53.6782, 9.7587],
+];
+assert(packRingNeedsTileSnap(diamond), 'gedrehte Raute braucht Tile-Snap');
+const fromDiamond = resolvePlaceFillRing(53.6782, 9.75895, diamond, buildings);
+assert(fromDiamond === house, 'Raute → Extract-Haus unter Pin');
+
 const forestPack: Array<[number, number]> = [
   [53.69, 9.75],
   [53.69, 9.752],
@@ -71,7 +95,6 @@ const forest = resolvePlaceFillRing(53.691, 9.751, forestPack, buildings, {
 });
 assert(forest === forestPack, 'Wald nicht auf Nachbarhaus snappen');
 
-// packRingNeedsTileSnap: Boxen + zu grobe Ringe brauchen Snap, echte Umrisse nicht.
 assert(packRingNeedsTileSnap(box), 'Achsen-Box braucht Tile-Snap');
 assert(packRingNeedsTileSnap(null), 'fehlender Ring braucht Tile-Snap');
 assert(

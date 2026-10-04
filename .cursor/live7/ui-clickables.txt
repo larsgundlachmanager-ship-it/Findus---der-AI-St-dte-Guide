@@ -1,0 +1,12 @@
+clickable 11
+(153, 42, 0, 99, '⛅ Wechselhaft · 19°. Tippen: Wetter und Tipps. Wischen: nächste Karte.')
+(153, 42, 996, 99, '&#127749; 19:47 Sonnenuntergang. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.')
+(153, 1038, 0, 99, 'Schnell nach Hamburg? Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst.')
+(244, 0, 1080, 1938, 'Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers.')
+(276, 681, 105, 105, 'Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung.')
+(276, 807, 105, 105, 'Norden oben. Nochmal innerhalb von 5 Sekunden: Karte dreht mit der Blickrichtung.')
+(276, 933, 105, 105, 'Kompass kalibrieren')
+(1804, 367, 346, 347, 'Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat')
+(2196, 21, 346, 133, 'Timeline und Routenplanung')
+(2196, 367, 346, 133, 'Orte finden')
+(2196, 713, 346, 133, 'Einstellungen')

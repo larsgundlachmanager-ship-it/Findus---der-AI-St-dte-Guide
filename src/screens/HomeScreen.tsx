@@ -12,6 +12,7 @@ import {
   HOME_DOCK_BAR_H,
   HOME_MIC_DOCK_GAP,
   HOME_MIC_HINT_RESERVE,
+  homeMapBottomChromePx,
 } from '../components/liveStage';
 import { HomePresenceMap } from '../components/homeMap/HomePresenceMap';
 import { HomeDockBar } from '../components/HomeDockBar';
@@ -80,10 +81,6 @@ type HomeLiveLayerProps = {
   onHudHeight: (h: number) => void;
   mapBottomChrome: number;
   safePadTop: number;
-  isListening: boolean;
-  isMicLocked: boolean;
-  isFinalizing: boolean;
-  isGenerating: boolean;
   onAbortBusy: () => void;
   onFollowUp: (prompt: string) => void;
   onOpenPlanCalendar: () => void;
@@ -118,10 +115,6 @@ const HomeLiveLayer = React.memo(function HomeLiveLayer({
   onHudHeight,
   mapBottomChrome,
   safePadTop,
-  isListening,
-  isMicLocked,
-  isFinalizing,
-  isGenerating,
   onAbortBusy,
   onFollowUp,
   onOpenPlanCalendar,
@@ -132,11 +125,9 @@ const HomeLiveLayer = React.memo(function HomeLiveLayer({
   onCloseGyg,
   onCloseInAppBrowser,
 }: HomeLiveLayerProps) {
-  const isPlayingAudio = useFinnusStore((s) => s.isPlayingAudio);
-  const isAudiblySpeaking = useFinnusStore((s) => s.isAudiblySpeaking);
+  // Voice-Mood nur in HomeChromeLayer (Mic) — hier kein isListening-Abo,
+  // sonst re-rendert die Map-Lane bei jedem Mic-Press.
   const subtitleText = useFinnusStore((s) => s.subtitleText);
-  const navRouteLoading = useFinnusStore(selectNavRouteLoading);
-  const navActive = useFinnusStore((s) => s.navActive);
   const activeConciergeCard = useFinnusStore((s) => s.activeConciergeCard);
   const gygWidget = useFinnusStore((s) => s.gygWidget);
   const inAppBrowser = useFinnusStore((s) => s.inAppBrowser);
@@ -149,16 +140,6 @@ const HomeLiveLayer = React.memo(function HomeLiveLayer({
   const { hasBullets, hasActions } = inspectConciergeCard(activeConciergeCard);
   const mapChromeDim = hasPitch || hasBullets || hasActions;
 
-  const phinnosMood = derivePhinnosMood({
-    isListening,
-    isFinalizing,
-    isGenerating,
-    isPlayingAudio,
-    isAudiblySpeaking,
-    navRouteLoading,
-    navActive,
-  });
-
   return (
     <>
       <HomePresenceMap
@@ -168,10 +149,8 @@ const HomeLiveLayer = React.memo(function HomeLiveLayer({
       />
 
       <LiveStage
-        mood={phinnosMood}
         card={activeConciergeCard}
         subtitleText={subtitleText}
-        isPlayingAudio={isAudiblySpeaking}
         onFollowUp={onFollowUp}
         onAbortBusy={onAbortBusy}
       />
@@ -284,8 +263,9 @@ const HomeChromeLayer = React.memo(function HomeChromeLayer({
           },
         ]}
         pointerEvents="box-none"
+        collapsable={false}
       >
-        <View style={styles.micCenter} pointerEvents="auto">
+        <View style={styles.micCenter} pointerEvents="auto" collapsable={false}>
           <MicButton
             onPressIn={onPressIn}
             onPressOut={onPressOut}
@@ -308,7 +288,7 @@ const HomeChromeLayer = React.memo(function HomeChromeLayer({
         ) : null}
       </View>
 
-      <View style={styles.dockWrap} pointerEvents="box-none">
+      <View style={styles.dockWrap} pointerEvents="box-none" collapsable={false}>
         <HomeDockBar
           onTimeline={onOpenPlanCalendar}
           onPlaces={onPlaces}
@@ -440,6 +420,12 @@ export function HomeScreen({
         const n = m.getActiveTtsSessionCount();
         const hwAudible = await m.probeHardwareAudible();
         if (cancelled) return;
+        // Kein TTS-Owner: Zombie-Sound über Reconcile (nur wenn Queues idle)
+        if (n === 0 && hwAudible) {
+          await m.reconcileSpeakingStandby();
+          deadSessionSince = null;
+          return;
+        }
         if (n === 0 && !hwAudible) {
           if (deadSessionSince == null) deadSessionSince = Date.now();
           if (Date.now() - deadSessionSince >= 400) {
@@ -625,29 +611,58 @@ export function HomeScreen({
   );
 
   const openSettings = useCallback(() => {
+    try {
+      const { noteChromePriority } = require('../services/boot/interactiveBootGate') as {
+        noteChromePriority: () => void;
+      };
+      noteChromePriority();
+    } catch {
+      /* soft */
+    }
     useHomeOverlayStore.getState().openSettings();
     void import('../services/diagnostics/interactionDelay').then((m) =>
       m.noteUiTap('settings'),
     );
-    void markFeatureTipCompleted('tune_profile');
-    void import('../services/onboarding/uiCoachMarks').then((m) =>
-      m.onUserOpenedSettings(),
-    );
+    // Coach/Tips hinter dem ersten Paint — Tap darf nicht warten.
+    queueMicrotask(() => {
+      void markFeatureTipCompleted('tune_profile');
+      void import('../services/onboarding/uiCoachMarks').then((m) =>
+        m.onUserOpenedSettings(),
+      );
+    });
   }, []);
   const openPlanCalendar = useCallback(() => {
+    try {
+      const { noteChromePriority } = require('../services/boot/interactiveBootGate') as {
+        noteChromePriority: () => void;
+      };
+      noteChromePriority();
+    } catch {
+      /* soft */
+    }
+    usePlanCalendarUiStore.getState().setCalendarVisible(true);
     void import('../services/diagnostics/interactionDelay').then((m) =>
       m.noteUiTap('timeline'),
     );
-    usePlanCalendarUiStore.getState().setCalendarVisible(true);
-    void import('../services/onboarding/uiCoachMarks').then((m) =>
-      m.onUserOpenedPlanCalendar(),
-    );
+    queueMicrotask(() => {
+      void import('../services/onboarding/uiCoachMarks').then((m) =>
+        m.onUserOpenedPlanCalendar(),
+      );
+    });
   }, []);
   const openPlaceSeek = useCallback(() => {
+    try {
+      const { noteChromePriority } = require('../services/boot/interactiveBootGate') as {
+        noteChromePriority: () => void;
+      };
+      noteChromePriority();
+    } catch {
+      /* soft */
+    }
+    useHomeOverlayStore.getState().openSeek();
     void import('../services/diagnostics/interactionDelay').then((m) =>
       m.noteUiTap('places'),
     );
-    useHomeOverlayStore.getState().openSeek();
   }, []);
   const closeGyg = useCallback(
     () => useFinnusStore.getState().setGygWidget(null),
@@ -669,7 +684,7 @@ export function HomeScreen({
     [submitUserQuestion],
   );
 
-  const mapBottomChrome = HOME_DOCK_BAR_H + safePad.bottom;
+  const mapBottomChrome = homeMapBottomChromePx(safePad.bottom);
   const onHudHeight = useCallback((h: number) => {
     setHudHeight(h);
   }, []);
@@ -681,10 +696,6 @@ export function HomeScreen({
         onHudHeight={onHudHeight}
         mapBottomChrome={mapBottomChrome}
         safePadTop={safePad.top}
-        isListening={isListening}
-        isMicLocked={isMicLocked}
-        isFinalizing={isFinalizing}
-        isGenerating={isGenerating}
         onAbortBusy={onAbortBusy}
         onFollowUp={onConciergeFollowUp}
         onOpenPlanCalendar={openPlanCalendar}
@@ -752,12 +763,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    zIndex: UI_LAYER.sheet - 1,
-    elevation: UI_LAYER.sheet - 1,
+    zIndex: UI_LAYER.sheet,
+    elevation: UI_LAYER.sheet + 8,
   },
   /** True horizontal center — independent of left/right side content. */
   micCenter: {
     alignItems: 'center',
+    elevation: UI_LAYER.sheet,
+    zIndex: UI_LAYER.sheet,
   },
   /** Simulation FAB overlays left; does not participate in mic centering. */
   micSideLeft: {
@@ -770,8 +783,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: UI_LAYER.hud,
-    elevation: UI_LAYER.hud,
+    zIndex: UI_LAYER.sheet,
+    elevation: UI_LAYER.sheet + 8,
   },
   tourStartCard: {
     position: 'absolute',

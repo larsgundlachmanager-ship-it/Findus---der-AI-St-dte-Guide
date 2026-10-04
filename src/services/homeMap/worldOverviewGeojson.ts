@@ -21,6 +21,8 @@ export type WorldLabelsBundle = {
   roads: GeoJsonFc;
   /** Gebirge / Landschaften (optional, v≥2) */
   regions?: GeoJsonFc;
+  /** Ländernamen DE (optional, v≥3) — Fern-Zoom */
+  countries?: GeoJsonFc;
 };
 
 let cached: WorldOverviewBundle | null = null;
@@ -45,11 +47,13 @@ export function getWorldLabels(): WorldLabelsBundle {
       rivers: { type: 'FeatureCollection', features: [] },
       roads: { type: 'FeatureCollection', features: [] },
       regions: { type: 'FeatureCollection', features: [] },
+      countries: { type: 'FeatureCollection', features: [] },
     };
   }
   labelsCached.cities ??= { type: 'FeatureCollection', features: [] };
   labelsCached.rivers ??= { type: 'FeatureCollection', features: [] };
   labelsCached.roads ??= { type: 'FeatureCollection', features: [] };
   labelsCached.regions ??= { type: 'FeatureCollection', features: [] };
+  labelsCached.countries ??= { type: 'FeatureCollection', features: [] };
   return labelsCached;
 }

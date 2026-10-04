@@ -1,0 +1,71 @@
+﻿--------- beginning of system
+09-14 23:53:38.026 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:08:17.575 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+--------- beginning of events
+09-15 00:26:19.007 11170 11170 I wm_on_top_resumed_lost_called: [224164783,de.findus.app.MainActivity,topStateChangedWhenResumed]
+09-15 00:26:19.029 11170 11170 I wm_on_paused_called: [224164783,de.findus.app.MainActivity,performPause,12]
+09-15 00:26:19.826 11170 11170 I wm_on_resume_called: [224164783,de.findus.app.MainActivity,RESUME_ACTIVITY,79]
+09-15 00:26:19.827 11170 11170 I wm_on_top_resumed_gained_called: [224164783,de.findus.app.MainActivity,topWhenResuming]
+09-15 00:26:19.944 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:26:33.821 11170 11170 I view_enqueue_input_event: [Motion - Cancel,de.findus.app/de.findus.app.MainActivity]
+09-15 00:26:33.854 11170 11170 I wm_on_top_resumed_lost_called: [224164783,de.findus.app.MainActivity,topStateChangedWhenResumed]
+09-15 00:26:34.222 11170 11170 I wm_on_paused_called: [224164783,de.findus.app.MainActivity,performPause,5]
+09-15 00:26:34.251 11170 11170 I viewroot_draw_event: [VRI[MainActivity],Not drawing due to not visible. Reason=!mAppVisible && !mForceDecorViewVisibility]
+09-15 00:26:34.257 11170 11170 I wm_on_stop_called: [224164783,de.findus.app.MainActivity,STOP_ACTIVITY_ITEM,0]
+09-15 00:26:46.039 11170 11170 I wm_on_restart_called: [224164783,de.findus.app.MainActivity,performRestart,0]
+09-15 00:26:46.086 11170 11170 I wm_on_start_called: [224164783,de.findus.app.MainActivity,handleStartActivity,46]
+09-15 00:26:46.119 11170 11170 I wm_on_resume_called: [224164783,de.findus.app.MainActivity,RESUME_ACTIVITY,30]
+09-15 00:26:46.210 11170 11170 I viewroot_draw_event: [VRI[MainActivity],Start draw after previous draw not visible]
+09-15 00:26:46.277 11170 11170 I viewroot_draw_event: [VRI[MainActivity],reportDrawFinished seqId=0]
+09-15 00:26:46.278 11170 11170 I wm_on_top_resumed_gained_called: [224164783,de.findus.app.MainActivity,topStateChangedWhenResumed]
+09-15 00:26:46.360 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-15 00:26:47.134 11170 11170 D InsetsController: Setting requestedVisibleTypes to -1 (was -9)
+09-15 00:26:47.210 11170 13631 I jank_cuj_events_begin_request: [80,1789424807210274000,311447412297652,274772602103149,0@0@de.findus.app]
+09-15 00:26:47.421 11170 13631 I jank_cuj_events_end_request: [80,1789424807420104000,311447622128277,274772811933722]
+09-15 00:26:47.977 11170 11170 D InsetsController: Setting requestedVisibleTypes to -9 (was -1)
+09-15 00:26:47.979 11170 13631 I jank_cuj_events_begin_request: [81,1789424807978757000,311448180781297,274773370586743,1@0@de.findus.app]
+09-15 00:26:48.191 11170 13631 I jank_cuj_events_end_request: [81,1789424808186084000,311448388108120,274773577913617]
+09-15 00:27:10.777 11170 11170 I wm_on_top_resumed_lost_called: [224164783,de.findus.app.MainActivity,topStateChangedWhenResumed]
+09-15 00:27:10.784 11170 11170 I wm_on_paused_called: [224164783,de.findus.app.MainActivity,performPause,3]
+09-15 00:27:10.907 11170 11170 I wm_on_resume_called: [224164783,de.findus.app.MainActivity,RESUME_ACTIVITY,34]
+09-15 00:27:10.907 11170 11170 I wm_on_top_resumed_gained_called: [224164783,de.findus.app.MainActivity,topWhenResuming]
+09-15 00:27:10.964 11170 11170 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+--------- beginning of main
+09-15 00:34:21.880 11170 11178 W System  : A resource failed to call close. 
+09-15 00:34:21.880 11170 11178 W System  : A resource failed to call close. 
+09-15 00:34:21.881 11170 11178 W System  : A resource failed to call close. 
+09-15 00:34:57.188 11170 11170 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-15 00:34:57.190 11170 11170 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-15 00:34:57.195 11170 11170 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-15 00:34:57.198 11170 11254 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId 'ff236f13-08ec-4e9a-8cba-5e2bde5fa963'.
+09-15 00:35:30.979 11170 11178 W System  : A resource failed to call close. 
+09-15 00:35:32.199 11170 11170 I TaskService: Handling intent with task name 'FINDUS_BACKGROUND_LOCATION' and app scoping identifier 'de.findus.app'.
+09-15 00:35:32.200 11170 11170 W JobInfo : Job 'de.findus.app/expo.modules.taskManager.TaskJobService#0' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+09-15 00:35:32.206 11170 11170 I TaskService: Handling job with task name 'FINDUS_BACKGROUND_LOCATION' for app with scoping identifier 'de.findus.app'.
+09-15 00:35:32.818 11170 11254 I TaskService: Finished task 'FINDUS_BACKGROUND_LOCATION' with eventId '38796b07-6074-427b-a049-8f493b80647d'.
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: Unhandled SoftException
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: com.facebook.react.bridge.ReactNoCrashSoftException: Re-dispatched 3 times. This indicates setState (?) is likely being called too many times during mounting.
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:144)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.mounting.MountItemDispatcher.tryDispatchMountItems(MountItemDispatcher.java:154)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.FabricUIManager$DispatchUIFrameCallback.doFrameGuarded(FabricUIManager.java:1399)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.fabric.GuardedFrameCallback.doFrame(GuardedFrameCallback.kt:22)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer.frameCallback$lambda$1(ReactChoreographer.kt:60)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer.$r8$lambda$nSkFhrr5T7rop_XKwzlLov4NLLw(ReactChoreographer.kt:0)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.facebook.react.modules.core.ReactChoreographer$$ExternalSyntheticLambda0.doFrame(D8$$SyntheticClass:0)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1730)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1741)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.view.Choreographer.doCallbacks(Choreographer.java:1323)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.view.Choreographer.doFrame(Choreographer.java:1238)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1708)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.os.Handler.handleCallback(Handler.java:995)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.os.Looper.loopOnce(Looper.java:283)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.os.Looper.loop(Looper.java:392)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at android.app.ActivityThread.main(ActivityThread.java:9248)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at java.lang.reflect.Method.invoke(Native Method)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:611)
+09-15 00:35:32.825 11170 11170 E unknown:MountItemDispatcher: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:944)
+09-15 00:36:04.527 11170 11178 W System  : A resource failed to call close. 
+09-15 00:36:04.528 11170 11178 W System  : A resource failed to call close. 

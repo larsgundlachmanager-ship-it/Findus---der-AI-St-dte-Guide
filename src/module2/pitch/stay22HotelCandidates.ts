@@ -36,13 +36,45 @@ export async function stay22HotelCandidates(
     !/\bhier\b/i.test(cityRaw) &&
     !/nähe|naehe/i.test(cityRaw) &&
     !/^-?\d+\.\d+\s*,\s*-?\d+\.\d+$/.test(cityRaw);
-  const city = namedCity ? cityRaw : '';
+  let city = namedCity ? cityRaw : '';
+  // GPS-Umland ohne Stadthinweis: Stay22 braucht oft eine Stadtadresse
+  if (!city && Number.isFinite(req.anchor.lat) && Number.isFinite(req.anchor.lng)) {
+    try {
+      const { nearestCommercialAirport } = require('../../services/flights/airportIata') as {
+        nearestCommercialAirport: (
+          lat: number,
+          lng: number,
+        ) => { city?: string } | null;
+      };
+      const near = nearestCommercialAirport(req.anchor.lat, req.anchor.lng);
+      if (near?.city) city = near.city;
+    } catch {
+      /* soft — lat/lng alone */
+    }
+  }
 
   const amenityNeeds = parseHotelAmenityNeeds(blob);
   // Wish-Amenities aus PitchRequest nachziehen (falls Parser Text anders schnitt)
   for (const w of req.wishes) {
     if (w.hardness !== 'must') continue;
     if (w.kind !== 'amenity' && w.kind !== 'vibe') continue;
+    if (/spa_or_sauna/i.test(w.text)) {
+      if (!amenityNeeds.some((n) => n.id === 'spa_or_sauna')) {
+        amenityNeeds.push({
+          id: 'spa_or_sauna',
+          label: 'Spa/Sauna',
+          trigger: /\b(spa|sauna|wellness)\b/i,
+          evidence:
+            /\b(spa|wellness|sauna|dampfbad|steam|jacuzzi|whirlpool|thermal)\b/i,
+        });
+      }
+      for (let i = amenityNeeds.length - 1; i >= 0; i--) {
+        if (amenityNeeds[i]!.id === 'spa' || amenityNeeds[i]!.id === 'sauna') {
+          amenityNeeds.splice(i, 1);
+        }
+      }
+      continue;
+    }
     if (amenityNeeds.some((n) => n.trigger.test(w.text))) continue;
     const extra = parseHotelAmenityNeeds(w.text);
     for (const n of extra) {
@@ -89,9 +121,14 @@ export async function stay22HotelCandidates(
   }
 
   const filtered = filterHotelsByAmenityNeeds(stays as never, amenityNeeds);
-  // Hard-Reject: ohne Voll-Match keine Fake-Hotels pitchen
-  const inventory =
+  // Hard-Reject ohne Voll-Match — aber benannte Optionen statt generischer Karte
+  let inventory =
     amenityNeeds.length > 0 ? filtered.matched : (stays as never[]);
+  if (!inventory.length && amenityNeeds.length > 0 && stays.length > 0) {
+    inventory = [...stays].sort(
+      (a, b) => (a.priceTotal ?? 1e9) - (b.priceTotal ?? 1e9),
+    ) as never[];
+  }
   if (!inventory.length) return [];
 
   // Bis zu 8 für Ranking (Preis → Bewertung → Distanz), Pitch nimmt Top 2

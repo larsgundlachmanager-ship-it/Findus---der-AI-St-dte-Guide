@@ -52,51 +52,84 @@ function classifyTurn(turn: string): TurnKind {
 }
 
 const TURN_PHRASES: Record<TurnKind, readonly string[]> = {
-  left: [
-    'Schau nach links. Gleich links abbiegen.',
-    'Links kommt die Abbiegung — gleich da lang.',
-    'Gleich nach links, bleib locker.',
-    'Nächste gehts links.',
-  ],
   right: [
-    'Schau nach rechts. Gleich rechts abbiegen.',
-    'Rechts kommt die Abbiegung — gleich da lang.',
-    'Gleich nach rechts, bleib locker.',
-    'Nächste gehts rechts.',
+    'Jetzt musst du rechts abbiegen.',
+    'Fahr jetzt rechts um die Kurve.',
+    'Gleich rechts abbiegen.',
+    'Jetzt rechts rum.',
+    'Rechts abbiegen, bitte.',
+    'Fahr jetzt rechts ab.',
+    'Gleich rechts um die Kurve.',
+    'Jetzt nach rechts abbiegen.',
+    'Rechts um die Kurve, bitte.',
+    'Jetzt rechts abbiegen.',
+  ],
+  left: [
+    'Jetzt musst du links abbiegen.',
+    'Fahr jetzt links um die Kurve.',
+    'Gleich links abbiegen.',
+    'Jetzt links rum.',
+    'Links abbiegen, bitte.',
+    'Fahr jetzt links ab.',
+    'Gleich links um die Kurve.',
+    'Jetzt nach links abbiegen.',
+    'Links um die Kurve, bitte.',
+    'Jetzt links abbiegen.',
   ],
   slight_left: [
-    'Schau leicht nach links. Gleich halb links halten.',
-    'Leicht links — nicht scharf, nur die Spur.',
-    'Gleich ein bisschen nach links.',
+    'Gleich leicht links.',
+    'Ein bisschen nach links.',
+    'Leicht links halten.',
+    'Nur leicht links.',
+    'Gleich halb links.',
   ],
   slight_right: [
-    'Schau leicht nach rechts. Gleich halb rechts halten.',
-    'Leicht rechts — nicht scharf, nur die Spur.',
-    'Gleich ein bisschen nach rechts.',
+    'Gleich leicht rechts.',
+    'Ein bisschen nach rechts.',
+    'Leicht rechts halten.',
+    'Nur leicht rechts.',
+    'Gleich halb rechts.',
   ],
   uturn: [
-    'Gleich umdrehen, sobald es frei ist.',
-    'Wir müssen wenden — nächste Lücke nehmen.',
+    'Gleich umdrehen, wenn frei ist.',
+    'Wir wenden kurz.',
+    'Umdrehen, sobald frei.',
   ],
   roundabout: [
-    'Kreisverkehr voraus — bleib auf meiner Stimme.',
-    'Gleich in den Kreis — ruhig einfädeln.',
+    'Gleich der Kreisverkehr.',
+    'In den Kreis, ich sag den Abzweig.',
+    'Kreisverkehr voraus.',
   ],
   straight: [
-    'Schau nach vorne. Weiter geradeaus — du bist richtig.',
-    'Geradeaus weiter, alles gut.',
-    'Weiter so, du bist auf dem Weg.',
+    'Weiter geradeaus.',
+    'Geradeaus weiter.',
+    'Weiter so.',
+    'Du bist noch richtig — geradeaus.',
+    'Bleib geradeaus.',
   ],
 };
 
-const LOOK_LEFT = [
-  'Schau nach links. Gleich abbiegen.',
-  'Links halten — gleich da lang.',
+const LOOK_LEFT = TURN_PHRASES.left;
+const LOOK_RIGHT = TURN_PHRASES.right;
+
+/** Nach ≥5 Min Stille einmal „Hey“ — sonst nie. */
+export function heyAfterSilencePhrase(side: 'left' | 'right' | 'straight'): string {
+  if (side === 'left') return 'Hey — jetzt musst du links abbiegen.';
+  if (side === 'right') return 'Hey — fahr jetzt rechts um die Kurve.';
+  return 'Hey — du bist noch richtig, weiter geradeaus.';
+}
+
+const ON_ROUTE_OK = [
+  'Du bist aktuell noch richtig.',
+  'Alles gut — du bist richtig.',
+  'Genau, du bist auf dem Weg.',
+  'Passt — weiter so.',
+  'Du bist richtig unterwegs.',
 ];
-const LOOK_RIGHT = [
-  'Schau nach rechts. Gleich abbiegen.',
-  'Rechts halten — gleich da lang.',
-];
+
+export function confirmOnRoutePhrase(): string {
+  return hashPick(`onroute:${Date.now() % 97}`, ON_ROUTE_OK);
+}
 
 /** Standard-Abbiegehinweis ohne Meterzahl — damit derselbe WAV wiederkommt. */
 export function navTurnPhrase(
@@ -136,11 +169,7 @@ export function reassurePhrase(etaMin: number): string {
 }
 
 const STOPS: Record<number, string> = {
-  8: 'Noch acht Stationen.',
-  5: 'Noch fünf Stationen — entspannt bleiben.',
-  4: 'Noch vier Stationen.',
   3: 'Noch drei Stationen — langsam bereit machen zum Aussteigen.',
-  2: 'Noch zwei Stationen.',
   1: 'Nächste Station müssen wir raus.',
 };
 
@@ -158,10 +187,6 @@ export function remainingStopsPhrase(
 
 export function alightNowPhrase(): string {
   return 'Jetzt müssen wir aussteigen.';
-}
-
-export function confirmOnRoutePhrase(): string {
-  return 'Genau, du bist richtig.';
 }
 
 export function weatherSpokenLine(opts: {

@@ -21,6 +21,7 @@ import {
   savePack,
   STAEDTE_DIR,
 } from './lib.mjs';
+import { isIconOnlyPaint, needsBuildingFootprint, stampMapPaintOnPack } from './mapPaintPolicy.mjs';
 import { fetchJson, sleep, fetchNominatimPolygon } from '../geo/osm.mjs';
 
 const SKIP_NAME_RE =
@@ -129,9 +130,15 @@ function countrycodesForPack(pack) {
   const lat = Number(pack.lat);
   const lng = Number(pack.lng);
   if (id === 'london') return 'gb';
+  if (id === 'amsterdam') return 'nl';
+  if (id === 'danzig' || id === 'gdansk') return 'pl';
+  if (id === 'roenne' || id === 'ronne' || id === 'bornholm') return 'dk';
   if (Number.isFinite(lat) && Number.isFinite(lng)) {
     if (lat >= 51.2 && lat <= 55.5 && lng >= -10.7 && lng <= -5.9) return 'ie';
     if (lat >= 49.8 && lat <= 60.9 && lng >= -8.7 && lng <= 1.85) return 'gb';
+    if (lat >= 54.85 && lat <= 55.4 && lng >= 14.55 && lng <= 15.3) return 'dk';
+    if (lat >= 50.5 && lat <= 53.7 && lng >= 3.2 && lng <= 7.4) return 'nl';
+    if (lat >= 49.0 && lat <= 54.9 && lng >= 14.0 && lng <= 24.2) return 'pl';
   }
   return 'de';
 }
@@ -187,10 +194,34 @@ function alreadyOsm(spot) {
   return trigTags.includes('sourced_osm');
 }
 
-function needsSnap(spot, pack) {
-  if (isMapPointAmenity(spot)) return false;
+function clearFootprint(pack, spot) {
+  delete spot.polygonCoordinates;
+  delete spot.polygon;
+  delete spot.polygonRings;
+  const trigger = (pack.trigger_points || []).find((t) => t.id === spot.id);
+  if (trigger) {
+    delete trigger.polygon;
+    delete trigger.polygonCoordinates;
+  }
+}
+
+function needsSnap(spot, pack, { force = false, allSpots = false } = {}) {
+  if (isMapPointAmenity(spot) || isIconOnlyPaint(spot)) return false;
+  if (!needsBuildingFootprint(spot)) return false;
   const blob = `${spot.id || ''} ${spot.name || ''}`;
   if (SKIP_NAME_RE.test(blob)) return false;
+  // Map-Perfect: jedes Gebäude-Ort nochmal prüfen (auch wenn schon OSM-Tag).
+  if (allSpots) {
+    const poly = spot.polygonCoordinates || spot.polygon;
+    const hasReal =
+      poly &&
+      poly.length >= 4 &&
+      !isAxisBox(poly) &&
+      uniqueCount(poly) >= 6 &&
+      !sharedFootprint(pack, spot);
+    if (hasReal && alreadyOsm(spot) && !force) return false;
+    return true;
+  }
   const poly = spot.polygonCoordinates || spot.polygon;
   const tags = (spot.tags || []).map((t) => String(t).toLowerCase());
   const hasReal =
@@ -200,8 +231,9 @@ function needsSnap(spot, pack) {
     uniqueCount(poly) >= 6;
   // Manuelle GPS-Fixes mit echtem Umriss nicht ans Nachbarhaus snappen.
   // Fehlender/Box-Umriss: trotzdem OSM-Gebäude (sonst nur Punkt).
-  if (tags.includes('gps_manual_fix') && hasReal) return false;
+  if (tags.includes('gps_manual_fix') && hasReal && !force) return false;
   if (sharedFootprint(pack, spot)) return true;
+  if (force) return true;
   if (alreadyOsm(spot) && hasReal) return false;
   if (!poly || poly.length < 4) return true;
   if (isAxisBox(poly)) return true;
@@ -353,18 +385,21 @@ function scoreWay(el, pin, spotName) {
   return { ring: pts, score, dist, source: `OSM way ${el.id} ${t.name || t.building || t.leisure || t.historic || ''}`.trim() };
 }
 
-function pickBest(elements, pin, spotName) {
-  let best = null;
+function pickBest(elements, pin, spotName, used) {
+  const ranked = [];
   for (const el of elements) {
     if (el.type !== 'way') continue;
     const got = scoreWay(el, pin, spotName);
     if (!got) continue;
-    if (!best || got.score > best.score) best = got;
+    const fp = ringFingerprint(got.ring);
+    if (fp && used?.has(fp)) continue;
+    ranked.push(got);
   }
-  return best;
+  ranked.sort((a, b) => b.score - a.score);
+  return ranked[0] || null;
 }
 
-async function osmMapRing(pin, spotName) {
+async function osmMapRing(pin, spotName, used) {
   const dLat = 90 / 111320;
   const dLng = 90 / (111320 * Math.cos((pin.lat * Math.PI) / 180));
   const bbox = [
@@ -399,7 +434,7 @@ async function osmMapRing(pin, spotName) {
           geometry: pts.map((p) => ({ lat: p.lat, lon: p.lng })),
         });
       }
-      return pickBest(fakeWays, pin, spotName);
+      return pickBest(fakeWays, pin, spotName, used);
     } catch (e) {
       lastErr = e;
       const msg = String(e.message || e);
@@ -477,14 +512,19 @@ async function uploadCityPack(cityId) {
   });
 }
 
-async function processCity(cityId, { dry, skipUpload }) {
+async function processCity(cityId, { dry, skipUpload, force, allSpots }) {
   const pack = loadPack(cityId);
   if (!pack) {
     console.warn(`[osm-foot] skip missing ${cityId}`);
     return { cityId, saved: false, rows: [] };
   }
+  const paintStats = stampMapPaintOnPack(pack);
+  console.log(
+    `[osm-foot] map_paint story_fill=${paintStats.storyFill} building_focus=${paintStats.buildingFocus} icon_only=${paintStats.iconOnly} cleared=${paintStats.polysCleared}`,
+  );
   const spots = pack.spots || [];
   const used = new Set();
+  // Shared-Footprints zählen nicht als „belegt“ — jeder Ort braucht sein eigenes Haus.
   for (const s of spots) {
     if (sharedFootprint(pack, s)) continue;
     const fp = ringFingerprint(s.polygonCoordinates || s.polygon);
@@ -492,15 +532,18 @@ async function processCity(cityId, { dry, skipUpload }) {
   }
   const targets = [];
   for (const spot of spots) {
-    if (!needsSnap(spot, pack)) continue;
+    if (!needsSnap(spot, pack, { force, allSpots })) continue;
     const pin = spotPin(pack, spot);
     if (!pin) continue;
-    targets.push({ spot, pin });
+    targets.push({ spot, pin, wasShared: sharedFootprint(pack, spot) });
   }
   if (!targets.length) {
     console.log(`[osm-foot] ${cityId}: alle Spot-Umrisse schon da`);
     return { cityId, saved: false, rows: [] };
   }
+  console.log(
+    `[osm-foot] ${cityId}: ${targets.length} Ziele${force ? ' (--force)' : ''}${allSpots ? ' (--all-spots)' : ''}`,
+  );
 
   const rows = [];
   const bumped = { value: false };
@@ -509,7 +552,7 @@ async function processCity(cityId, { dry, skipUpload }) {
     const t = targets[i];
     try {
       let best = acceptRing(
-        await osmMapRing(t.pin, t.spot.name),
+        await osmMapRing(t.pin, t.spot.name, used),
         t.pin,
         t.spot.name,
         used,
@@ -518,7 +561,14 @@ async function processCity(cityId, { dry, skipUpload }) {
         best = await nominatimNamedRing(pack, t.spot, t.pin, used);
       }
       if (!best) {
-        rows.push({ id: t.spot.id, name: t.spot.name, status: 'KEEP' });
+        // Shared/falsche Hülle nicht stehen lassen → Client tile-snappt aufs echte Haus.
+        if (t.wasShared || force || isAxisBox(t.spot.polygonCoordinates || t.spot.polygon)) {
+          clearFootprint(pack, t.spot);
+          rows.push({ id: t.spot.id, name: t.spot.name, status: 'CLEAR' });
+          osmSinceSave += 1;
+        } else {
+          rows.push({ id: t.spot.id, name: t.spot.name, status: 'KEEP' });
+        }
         continue;
       }
       const applied = applyRing(pack, t.spot, best.ring, t.pin, best.source);
@@ -548,8 +598,11 @@ async function processCity(cityId, { dry, skipUpload }) {
   }
 
   const osmN = rows.filter((r) => r.status === 'OSM').length;
-  console.log(`[osm-foot] ${cityId}: ${osmN}/${targets.length} OSM · ${rows.filter((r) => r.status === 'KEEP').length} keep`);
-  if (!dry && osmN > 0) {
+  const clearN = rows.filter((r) => r.status === 'CLEAR').length;
+  console.log(
+    `[osm-foot] ${cityId}: ${osmN}/${targets.length} OSM · ${clearN} clear · ${rows.filter((r) => r.status === 'KEEP').length} keep`,
+  );
+  if (!dry && (osmN > 0 || clearN > 0)) {
     persistPack(pack, { dry, bumped });
     console.log(`[osm-foot] saved ${cityId} v${pack.data_version}`);
     if (!skipUpload) {
@@ -567,6 +620,8 @@ async function processCity(cityId, { dry, skipUpload }) {
 async function main() {
   const dry = hasFlag('dry');
   const skipUpload = hasFlag('no-upload') || hasFlag('skip-upload');
+  const force = hasFlag('force');
+  const allSpots = hasFlag('all-spots');
   let cities = [];
   if (hasFlag('all')) {
     cities = listCityIds();
@@ -579,7 +634,7 @@ async function main() {
     const id = arg('city');
     if (!id) {
       console.error(
-        'Usage: node scripts/cityPack/snapOsmStoryFootprints.mjs --city <id> | --all [--dry] [--no-upload]',
+        'Usage: node scripts/cityPack/snapOsmStoryFootprints.mjs --city <id> | --all [--dry] [--no-upload] [--force] [--all-spots]',
       );
       process.exit(1);
     }
@@ -587,11 +642,22 @@ async function main() {
   }
 
   const saved = [];
+  const failed = [];
   for (const id of cities) {
-    const r = await processCity(id, { dry, skipUpload });
-    if (r.saved) saved.push(id);
+    try {
+      const r = await processCity(id, { dry, skipUpload, force, allSpots });
+      if (r.saved) saved.push(id);
+    } catch (e) {
+      failed.push(id);
+      console.error(`[osm-foot] FAIL ${id}: ${e.message || e}`);
+      await sleep(2000);
+    }
   }
   console.log(`[osm-foot] done · saved ${saved.length}: ${saved.join(', ') || '—'}`);
+  if (failed.length) {
+    console.error(`[osm-foot] failed ${failed.length}: ${failed.join(', ')}`);
+    process.exitCode = 1;
+  }
 }
 
 main().catch((e) => {

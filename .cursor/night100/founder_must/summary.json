@@ -1,0 +1,14 @@
+{
+  "pass": 3,
+  "fail": 6,
+  "failed_ids": [
+    "flug_morgen_ham",
+    "taxi_vorbestellen_morgen",
+    "theater_heute",
+    "gastro_aussicht_flair",
+    "hotel_spezifisch",
+    "zahnbuerste_erinnerung"
+  ],
+  "at": "2026-09-07T07:32:52.888902+00:00",
+  "n": 9
+}

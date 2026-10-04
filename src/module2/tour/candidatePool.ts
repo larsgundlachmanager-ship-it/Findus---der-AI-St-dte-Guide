@@ -33,6 +33,15 @@ function matchesArea(c: TourCandidate, hint: string | null): boolean {
 export async function collectTourCandidates(
   req: TourRequest,
 ): Promise<TourCandidate[]> {
+  try {
+    const { packCityMismatchesDest } = require('./packCityGuard') as {
+      packCityMismatchesDest: (r: TourRequest) => boolean;
+    };
+    // Heimat-Pack ≠ Zielstadt → keine fremden POIs in den Dest-Tag kippen
+    if (packCityMismatchesDest(req)) return [];
+  } catch {
+    /* soft */
+  }
   const radius = req.radiusM ?? 3000;
   let pois: Awaited<ReturnType<typeof getAllPois>> = [];
   try {
@@ -93,6 +102,14 @@ export async function collectTourCandidates(
 export async function fallbackCityHighlightStops(
   req: TourRequest,
 ): Promise<TourCandidate[]> {
+  try {
+    const { packCityMismatchesDest } = require('./packCityGuard') as {
+      packCityMismatchesDest: (r: TourRequest) => boolean;
+    };
+    if (packCityMismatchesDest(req)) return [];
+  } catch {
+    /* soft */
+  }
   const wide: TourRequest = {
     ...req,
     radiusM: 80_000,

@@ -62,7 +62,7 @@ function situationKeyFromParts(b) {
 
 function normalize(raw) {
   if (!raw || typeof raw !== 'object') return null;
-  const summary = String(raw.summary ?? '').replace(/\s+/g, ' ').trim().slice(0, 200);
+  const summary = String(raw.summary ?? '').replace(/\s+/g, ' ').trim().slice(0, 280);
   if (summary && (SCRIPT_DENY.test(summary) || PLACE_DENY.test(summary))) {
     throw new Error(`Gold summary violates doctrine: ${summary.slice(0, 80)}`);
   }

@@ -23,7 +23,11 @@ const COMMISSION_SCORE: Partial<Record<string, number>> = {
   expedia: 82,
   tiqets: 74,
   camping_info: 71,
+  camping_and_co: 88,
   solmar: 69,
+  magic_life: 80,
+  aida: 85,
+  lidl_reisen: 74,
   weg_de: 73,
   check24: 78,
   ab_in_den_urlaub: 70,
@@ -67,20 +71,20 @@ export function travelpayoutsCandidates(): AffiliateOfferCandidate[] {
   return TRAVELPAYOUTS_PARTNERS.map(enrichPartnerCandidate);
 }
 
-/** Struktur-Hilfe für gesprochene Partner-Erwähnung — keine Stadt-Scripts. */
+/** Struktur-Hilfe für Buchungs-CTAs — Provision nie ansagen. */
 export function buildAffiliateSpeechBlueprint(input: {
   userNeed: string;
   offerLabel: string;
   reasonFromFacts?: string;
 }): string {
   return [
-    'AFFILIATE-SPEECH (Struktur — Wortlaut frei):',
+    'BOOKING-CTA (Struktur — Wortlaut frei):',
     `1) Bedarf spiegeln: ${input.userNeed}`,
     input.reasonFromFacts
       ? `2) Warum passt: ${input.reasonFromFacts}`
       : '2) Nutzen aus belegten Fakten — nichts erfinden.',
-    `3) Natürlich Partner nennen: ${input.offerLabel} — kein „Affiliate-Link“-Jargon.`,
-    '4) Button/Deep-Link nur bei klarem Buchungswunsch oder User-Zustimmung.',
+    `3) Button-Label klar (${input.offerLabel}) — nie Affiliate/Provision/Tracking/„unser Partner“ in der Speech.`,
+    '4) Deep-Link = finales Produkt/Zimmer/Ticket wenn belegt; Suche nur mit ehrlichem Such-Label.',
     FINDUS_FEW_SHOT_DISCLAIMER,
   ].join('\n');
 }

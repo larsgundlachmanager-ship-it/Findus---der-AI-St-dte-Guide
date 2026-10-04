@@ -1,0 +1,736 @@
+{
+  "pinneberg": {
+    "nTransit": 135,
+    "nOsmTransit": 133,
+    "transitSample": [
+      {
+        "id": "pinneberg_osm_transit_243730990",
+        "name": "Kummerfeld, Bornbarg (Süd)",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: Hamburger Verkehrsverbund"
+        ],
+        "nPoly": 5,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_243730990",
+          "map_outline",
+          "sourced_osm",
+          "review_facet"
+        ]
+      },
+      {
+        "id": "pinneberg_osm_transit_270724665",
+        "name": "Rellingen, Mühlenstraße",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop"
+        ],
+        "nPoly": 8,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_270724665",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "pinneberg_osm_transit_277958320",
+        "name": "Halstenbek, Friedenstraße",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop"
+        ],
+        "nPoly": 16,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_277958320",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "pinneberg_osm_transit_288674325",
+        "name": "Borstel, Nedderhulden",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: Hamburger Verkehrsverbund"
+        ],
+        "nPoly": 7,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_288674325",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "pinneberg_osm_transit_288674453",
+        "name": "Borstel, Nedderhulden",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: Hamburger Verkehrsverbund"
+        ],
+        "nPoly": 5,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_288674453",
+          "map_outline",
+          "sourced_osm"
+        ]
+      }
+    ],
+    "namedHalt": [],
+    "googleN": 18,
+    "googleSample": [
+      {
+        "name": "Hotel Cap Polonio",
+        "_google": {
+          "place_id": "ChIJ1S5lkfOAsUcRUZlMd7BOnzA"
+        },
+        "tags": [
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Junge Die Bäckerei.",
+        "_google": {
+          "place_id": "ChIJj6Vud2CAsUcRQeej-9vsfUo"
+        },
+        "tags": [
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Bäckerei & Konditorei Millahn",
+        "_google": {
+          "place_id": "ChIJI8A4EPOAsUcRrC9Z0V7CyK4"
+        },
+        "tags": [
+          "review_facet"
+        ]
+      }
+    ],
+    "facet": [
+      {
+        "name": "Hotel Cap Polonio",
+        "cat": "hotel",
+        "tags": [
+          "hotel",
+          "geschichte",
+          "legendäres_gebäude",
+          "historische_läden",
+          "must_have",
+          "master_report",
+          "prune_pinneberg",
+          "review_facet",
+          "frühstück"
+        ]
+      },
+      {
+        "name": "Die Drostei",
+        "cat": "museum",
+        "tags": [
+          "museum",
+          "barock",
+          "geschichte",
+          "must_have",
+          "master_report",
+          "research_2026",
+          "tier2",
+          "interest:museen",
+          "museen",
+          "touristic",
+          "story",
+          "deep_research_merged",
+          "tier1",
+          "deep_profile",
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Naturschutzgebiet Buttermoor - Butterbargsmoor",
+        "cat": "natur",
+        "tags": [
+          "natur",
+          "interest:natur",
+          "tier2",
+          "story",
+          "prune_hard",
+          "map_point",
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Junge Die Bäckerei.",
+        "cat": "bakerei",
+        "tags": [
+          "cafe",
+          "bakerei",
+          "review_facet",
+          "frühstück"
+        ]
+      },
+      {
+        "name": "Bäcker Schlüter",
+        "cat": "cafe",
+        "tags": [
+          "cafe",
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Bäckerei Dwenger",
+        "cat": "bakerei",
+        "tags": [
+          "cafe",
+          "bakerei",
+          "review_facet"
+        ]
+      }
+    ],
+    "hoursSpots": [
+      {
+        "name": "Stadtmuseum Pinneberg",
+        "cat": "museum",
+        "bullets": [
+          "Keller: historische ILO-Motoren.",
+          "Lokalname: Altes Amtsgericht."
+        ],
+        "factsNow": "Stadtmuseum; LIVE Öffnung. Eintritt oft Spende — frisch prüfen. Teilweise barrierefrei."
+      },
+      {
+        "name": "Samlandmuseum",
+        "cat": "museum",
+        "bullets": [
+          "Adresse: Fahltskamp 30, 25421 Pinneberg (Altes Bürgerhaus).",
+          "Patenschaft Pinneberg–Fischhausen/Samland seit 1951.",
+          "Themen: Bernsteinabbau, Burg Lochstädt-Bestände, ostpreußisches Bildarchiv."
+        ],
+        "factsNow": "Fahltskamp 30 — LIVE Anmeldung/Öffnung und Preise prüfen."
+      },
+      {
+        "name": "Dit und Dat ums Blatt",
+        "cat": "post",
+        "bullets": [
+          "Postfiliale / Annahme",
+          "Öffnung: Mo-Fr 09:00-18:00; Sa 09:00-15:00; Su,PH off"
+        ],
+        "factsNow": "Postfiliale / Annahme"
+      },
+      {
+        "name": "DHL",
+        "cat": "post",
+        "bullets": [
+          "Postfiliale / Annahme",
+          "Öffnung: Mo-Sa 10:30-12:30"
+        ],
+        "factsNow": "Postfiliale / Annahme"
+      },
+      {
+        "name": "Postfiliale Kummerfeld",
+        "cat": "post",
+        "bullets": [
+          "Postfiliale / Annahme",
+          "Öffnung: Mo-Fr 15:00-17:00; Sa 09:00-11:00"
+        ],
+        "factsNow": "Postfiliale / Annahme"
+      },
+      {
+        "name": "Hermes Paketshop",
+        "cat": "post",
+        "bullets": [
+          "Postfiliale / Annahme",
+          "Öffnung: Mo-Fr 09:00-17:30; Sa-Su off"
+        ],
+        "factsNow": "Postfiliale / Annahme"
+      },
+      {
+        "name": "Hermes Paket Shop",
+        "cat": "post",
+        "bullets": [
+          "Postfiliale / Annahme",
+          "Öffnung: Mo-Fr 06:15-18:00; Sa, 06:30-12:00; PH  off"
+        ],
+        "factsNow": "Postfiliale / Annahme"
+      }
+    ],
+    "boxSpots": [
+      {
+        "name": "Deutsches Baumschulmuseum (Ortsteil Thesdorf)",
+        "cat": "museum",
+        "n": 5,
+        "tags": [
+          "museum",
+          "module1",
+          "normalized",
+          "tier2",
+          "interest:museen",
+          "museen",
+          "touristic",
+          "story"
+        ]
+      },
+      {
+        "name": "Bäcker Schlüter",
+        "cat": "cafe",
+        "n": 5,
+        "tags": [
+          "cafe",
+          "directory",
+          "offline_lookup",
+          "optional_live",
+          "amenity_skip",
+          "kulinarik",
+          "master_baseline",
+          "tier4"
+        ]
+      },
+      {
+        "name": "Pinneberg, Flagentwiete",
+        "cat": "bahnhof",
+        "n": 5,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_848760236",
+          "map_outline"
+        ]
+      },
+      {
+        "name": "Briefkasten Deutsche Post",
+        "cat": "briefkasten",
+        "n": 5,
+        "tags": [
+          "briefkasten",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "post_box",
+          "osm:node_3011111386",
+          "sourced_osm"
+        ]
+      },
+      {
+        "name": "Regionalpark Wedeler Au",
+        "cat": "tourist_info",
+        "n": 5,
+        "tags": [
+          "tourist_info",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "osm:node_7282772202",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "name": "Tourist-Info",
+        "cat": "tourist_info",
+        "n": 5,
+        "tags": [
+          "tourist_info",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "osm:node_9905895461",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "name": "Amtliche Bekanntmachungen",
+        "cat": "tourist_info",
+        "n": 5,
+        "tags": [
+          "tourist_info",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "osm:node_12165977565",
+          "map_outline",
+          "sourced_osm"
+        ]
+      }
+    ],
+    "nLive": 5,
+    "torneschTransit": {
+      "provider": "db_rest",
+      "default_ibnr": "8004812",
+      "hafas_base_url": "https://v6.db.transport.rest",
+      "stops": [
+        {
+          "id": "pinneberg_hbf",
+          "name": "Pinneberg",
+          "lat": 53.6549011,
+          "lng": 9.7989172,
+          "ibnr": "8004812",
+          "mode": "rail"
+        },
+        {
+          "id": "pinneberg_thesdorf",
+          "name": "Pinneberg-Thesdorf",
+          "lat": 53.6415612,
+          "lng": 9.8205777,
+          "mode": "rail"
+        }
+      ]
+    }
+  },
+  "tornesch": {
+    "nTransit": 99,
+    "nOsmTransit": 98,
+    "transitSample": [
+      {
+        "id": "tornesch_osm_transit_265620203",
+        "name": "Tornesch, Klaus-Groth-Schule",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: HVV"
+        ],
+        "nPoly": 17,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_265620203",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "tornesch_osm_transit_270894469",
+        "name": "Uetersen, Ostbahnhof",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: Hamburger Verkehrsverbund"
+        ],
+        "nPoly": 9,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_270894469",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "tornesch_osm_transit_270894478",
+        "name": "Uetersen, Buttermarkt",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: Hamburger Verkehrsverbund"
+        ],
+        "nPoly": 5,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_270894478",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "tornesch_osm_transit_277239491",
+        "name": "Elmshorn, Liether Feldstraße",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop"
+        ],
+        "nPoly": 5,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_277239491",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "id": "tornesch_osm_transit_283900932",
+        "name": "Tornesch, Uetersener Straße",
+        "cat": "bahnhof",
+        "bullets": [
+          "Haltepunkt / bus_stop",
+          "Netz: HVV"
+        ],
+        "nPoly": 5,
+        "tags": [
+          "bahnhof",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "transit",
+          "osm:node_283900932",
+          "map_outline",
+          "sourced_osm"
+        ]
+      }
+    ],
+    "namedHalt": [],
+    "googleN": 17,
+    "googleSample": [
+      {
+        "name": "Almthof Erlebnisbauernhof und Hofcafé",
+        "_google": {
+          "place_id": "ChIJXch3HJJ_sUcRLhvJ0gShrFw"
+        },
+        "tags": [
+          "google_places",
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Bäckerei und Café Veloso Tornesch",
+        "_google": {
+          "place_id": "ChIJMwkdvF7Vs0cR-6jnZm6NNBk"
+        },
+        "tags": [
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Bäckerei Allwörden",
+        "_google": {
+          "place_id": "ChIJCQ9CMynVs0cRUs9U_ngK6E8"
+        },
+        "tags": [
+          "review_facet"
+        ]
+      }
+    ],
+    "facet": [
+      {
+        "name": "De Danzenbarg · Grabhuegel",
+        "cat": "denkmal",
+        "tags": [
+          "denkmal",
+          "must_have",
+          "skeleton",
+          "google_places",
+          "tier2",
+          "interest:geschichte",
+          "geschichte",
+          "touristic",
+          "story",
+          "tier1",
+          "master_report",
+          "map_point",
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Almthof Erlebnisbauernhof und Hofcafé",
+        "cat": "freizeitpark",
+        "tags": [
+          "freizeitpark",
+          "must_have",
+          "skeleton",
+          "google_places",
+          "tier2",
+          "interest:freizeitparks",
+          "freizeitparks",
+          "story",
+          "map_point",
+          "review_facet",
+          "pizza"
+        ]
+      },
+      {
+        "name": "Bäckerei und Café Veloso Tornesch",
+        "cat": "bakerei",
+        "tags": [
+          "cafe",
+          "bakerei",
+          "review_facet",
+          "frühstück"
+        ]
+      },
+      {
+        "name": "Bäckerei Eggers",
+        "cat": "bakerei",
+        "tags": [
+          "cafe",
+          "bakerei",
+          "review_facet"
+        ]
+      },
+      {
+        "name": "Bäckerei Allwörden",
+        "cat": "bakerei",
+        "tags": [
+          "cafe",
+          "bakerei",
+          "review_facet",
+          "frühstück"
+        ]
+      },
+      {
+        "name": "Makhan Restaurant",
+        "cat": "restaurant",
+        "tags": [
+          "restaurant",
+          "review_facet"
+        ]
+      }
+    ],
+    "hoursSpots": [
+      {
+        "name": "Tornescher Kirche",
+        "cat": "kirche",
+        "bullets": [
+          "Adresse (Google): Jürgen-Siemsen-Straße 28, 25436 Tornesch.",
+          "Google Maps: https://www.google.com/maps/place/?q=place_id:ChIJU55S9ZDVs0cR6qu683vCHAM"
+        ],
+        "factsNow": "Gemeindekirche — LIVE Öffnung/Gottesdienst."
+      },
+      {
+        "name": "Heimathaus Ostermannscher Hof & Stadtarchiv",
+        "cat": "museum",
+        "bullets": [
+          "Urdorf Esingen vs. Bahn-Zentrum Tornesch.",
+          "Querverbindung: Archiv dokumentiert Brennerei/Chemische Werke."
+        ],
+        "factsNow": "Stadtarchiv + Kulturzentrum — LIVE Öffnung/Anmeldung."
+      },
+      {
+        "name": "Alte Brennerei & Zwangsarbeiter-Gedenkstätte",
+        "cat": "denkmal",
+        "bullets": [
+          "Querverbindung Bahnhof: Industrie folgte der Eisenbahn.",
+          "Gedenkkultur: Tafel 2002; Rundgänge Stadtarchiv."
+        ],
+        "factsNow": "Laborgebäude + Gedenktafel; Mischnutzung — LIVE Öffnung/Gedenken."
+      },
+      {
+        "name": "DHL",
+        "cat": "post",
+        "bullets": [
+          "Postfiliale / Annahme",
+          "Öffnung: Mo-Sa 07:00-22:00"
+        ],
+        "factsNow": "Postfiliale / Annahme"
+      }
+    ],
+    "boxSpots": [
+      {
+        "name": "Briefkasten Deutsche Post",
+        "cat": "briefkasten",
+        "n": 5,
+        "tags": [
+          "briefkasten",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "post_box",
+          "osm:node_3011111386",
+          "sourced_osm"
+        ]
+      },
+      {
+        "name": "Briefkasten Deutsche Post",
+        "cat": "briefkasten",
+        "n": 5,
+        "tags": [
+          "briefkasten",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "post_box",
+          "osm:node_3905639374",
+          "map_outline"
+        ]
+      },
+      {
+        "name": "Tourist-Info",
+        "cat": "tourist_info",
+        "n": 5,
+        "tags": [
+          "tourist_info",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "osm:node_9905895461",
+          "map_outline",
+          "sourced_osm"
+        ]
+      },
+      {
+        "name": "Amtliche Bekanntmachungen",
+        "cat": "tourist_info",
+        "n": 5,
+        "tags": [
+          "tourist_info",
+          "directory",
+          "tier4",
+          "offline_lookup",
+          "osm_map",
+          "osm:node_12165977565",
+          "map_outline",
+          "sourced_osm"
+        ]
+      }
+    ],
+    "nLive": 4,
+    "torneschTransit": null
+  }
+}

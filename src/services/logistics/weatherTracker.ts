@@ -14,8 +14,11 @@ import { getVoiceSettingsForTour, speakAssistantText } from '../ttsService';
 import { noteWeatherSaid, wasWeatherThemeSaidRecently } from './weatherSaidMemory';
 import {
   canIssueProactiveRainWarning,
+  markProactiveRainWarningIssued,
+  noteRainDryState,
   weatherSessionStartedAtMs,
 } from '../weather/rainWarnSessionGate';
+import { isUserOutdoorsForRainWarn } from '../weather/rainWarnOutdoorGate';
 import {
   formatRainHudLine,
   isPrecipWeatherCode,
@@ -175,7 +178,7 @@ export function getWeatherTrackerState(): WeatherTrackerState | null {
   return state;
 }
 
-/** Für HUD / Regenradar — Minuten ≤60, sonst Uhrzeit; später „Regen ab …“. */
+/** Für HUD / Regenradar — ≤60 Min Countdown, darüber nur „Regen ab …“. */
 export function getWeatherHudLine(): string | null {
   if (!state) return null;
   refreshLiveRainMinutes(Date.now());
@@ -229,17 +232,17 @@ async function speakLine(speech: string): Promise<void> {
 }
 
 async function maybeWarn(owm: OwmOneCallResult): Promise<void> {
+  const rainingNowCheck = isRainAlreadyFalling({
+    currentPrecipMm: owm.currentPrecipMm,
+    rainStartsInMin: owm.rainStartsInMin,
+    nextRainAtMs: owm.nextRainAtMs,
+  });
+  noteRainDryState({ rainingNow: rainingNowCheck });
+
   if (!canIssueProactiveRainWarning()) return;
   if (!state || !owm.nextRainAtMs || speaking) return;
-  if (
-    isRainAlreadyFalling({
-      currentPrecipMm: owm.currentPrecipMm,
-      rainStartsInMin: owm.rainStartsInMin,
-      nextRainAtMs: owm.nextRainAtMs,
-    })
-  ) {
-    return;
-  }
+  if (rainingNowCheck) return;
+  if (!isUserOutdoorsForRainWarn()) return;
 
   const store = useFinnusStore.getState();
   const ctx = shouldWeatherStayAlert({
@@ -282,8 +285,8 @@ async function maybeWarn(owm: OwmOneCallResult): Promise<void> {
 
   const speech =
     kind === '5'
-      ? `Gleich wird's nass — in etwa ${mins} Minuten, so ab ${clock}.${durationBit}${outdoorBit} Indoor, oder ist dir das egal?`
-      : `In etwa ${mins} Minuten — so ab ${clock} — sieht's nach Regen aus.${durationBit}${outdoorBit} Ist dir das egal, oder sollen wir kurz Indoor ansteuern?`;
+      ? `Gleich wird's nass — in etwa ${mins} Minuten, so ab ${clock}.${durationBit}${outdoorBit} Indoor suchen, oder ist dir das egal?`
+      : `In etwa ${mins} Minuten — so ab ${clock} — sieht's nach Regen aus.${durationBit}${outdoorBit} Ist dir das egal, oder Indoor suchen?`;
 
   speaking = true;
   try {
@@ -298,6 +301,7 @@ async function maybeWarn(owm: OwmOneCallResult): Promise<void> {
     }
     await speakLine(speech);
     noteWeatherSaid(speech, kind === '5' ? 'regen-5min' : 'regen-30min');
+    markProactiveRainWarningIssued();
     state = {
       ...state,
       warned30ForRainAt: kind === '30' ? rainKey : state.warned30ForRainAt,
@@ -311,17 +315,19 @@ async function maybeWarn(owm: OwmOneCallResult): Promise<void> {
       const { toConciergeCardState } = await import(
         '../concierge/presentConcierge'
       );
-      const bullets = [`Regen ab ~${clock}`, `Noch ca. ${mins} Min`];
-      if (durationMin != null) bullets.push(`Dauer ~${durationMin} Min`);
+      const bullets = [`Regen in ${mins} Minuten`];
+      if (durationMin != null && durationMin >= 1) {
+        bullets.push(`Dauer: ungefähr ${durationMin} Minuten`);
+      }
       useFinnusStore.getState().setActiveConciergeCard(
         toConciergeCardState(
           wrapPlainAsConcierge(speech, {
-            cardTitle: 'Wetter',
+            cardTitle: 'Regenwarnung',
             visualBullets: bullets,
             quickActions: [
               {
                 type: 'SHOW_MORE',
-                label: 'Indoor-Alternative',
+                label: 'Indoor suchen',
                 payload: {
                   textPrompt:
                     'Regen kommt — such eine Indoor-Alternative (Museum, Kino, Aktivität, Café), die ich vor dem Regen erreiche. Dauer des Regens einbauen. Nur wenn ich Unterstand will.',
@@ -366,9 +372,10 @@ function outdoorRainMismatchHint(store: {
 /**
  * Zwischen langen Trocken-Polls: Open-Meteo am GPS.
  * Fängt lokale Schauer, die OWM/Shared noch als „leicht bewölkt“ führen.
+ * Läuft auch wenn OWM-Session-Gate (30 Min) noch sperrt — Radar ist kostenlos.
  */
 async function maybeGpsDryProbeBetweenPolls(now: number): Promise<void> {
-  if (!state) return;
+  if (!state && !useFinnusStore.getState().lastGpsLat) return;
   try {
     const {
       fetchGpsRainNowcast,
@@ -376,29 +383,33 @@ async function maybeGpsDryProbeBetweenPolls(now: number): Promise<void> {
       GPS_RAIN_RISK_PROBE_MS,
       summaryWithGpsRain,
       maxNearTermRainPopPct,
+      applyGpsNowcastToTiming,
     } = await import('../weather/gpsRainNowcast');
+    const st = state;
     if (
       !shouldFetchGpsRainNowcast({
         nowMs: now,
-        nextRainAtMs: state.nextRainAtMs,
-        rainStartsInMin: state.rainStartsInMin,
-        rainingNow: isRainAlreadyFalling({
-          nowMs: now,
-          nextRainAtMs: state.nextRainAtMs,
-          rainStartsInMin: state.rainStartsInMin,
-          currentPrecipMm: state.currentPrecipMm,
-          weatherCode: state.weatherCode,
-        }),
-        currentPrecipMm: state.currentPrecipMm,
+        nextRainAtMs: st?.nextRainAtMs ?? null,
+        rainStartsInMin: st?.rainStartsInMin ?? null,
+        rainingNow: st
+          ? isRainAlreadyFalling({
+              nowMs: now,
+              nextRainAtMs: st.nextRainAtMs,
+              rainStartsInMin: st.rainStartsInMin,
+              currentPrecipMm: st.currentPrecipMm,
+              weatherCode: st.weatherCode,
+            })
+          : false,
+        currentPrecipMm: st?.currentPrecipMm ?? null,
         lastGpsNowcastAtMs: lastGpsNowcastAtMs || null,
-        dayStableDry: state.dayStableDry,
-        nextRainProb: state.nextRainProb,
-        rainWindows: state.rainWindows,
-        weatherCode: state.weatherCode,
+        dayStableDry: st?.dayStableDry ?? null,
+        nextRainProb: st?.nextRainProb ?? null,
+        rainWindows: st?.rainWindows ?? null,
+        weatherCode: st?.weatherCode ?? null,
         maxNearPopPct: maxNearTermRainPopPct({
           nowMs: now,
-          nextRainProb: state.nextRainProb,
-          rainWindows: state.rainWindows,
+          nextRainProb: st?.nextRainProb ?? null,
+          rainWindows: st?.rainWindows ?? null,
         }),
       })
     ) {
@@ -413,51 +424,67 @@ async function maybeGpsDryProbeBetweenPolls(now: number): Promise<void> {
     lastGpsNowcastAtMs = now;
     if (!nowcast) return;
 
-    const wasDry = !isRainAlreadyFalling({
-      nowMs: now,
-      nextRainAtMs: state.nextRainAtMs,
-      rainStartsInMin: state.rainStartsInMin,
-      currentPrecipMm: state.currentPrecipMm,
-      weatherCode: state.weatherCode,
-    });
+    const wasDry = !st
+      ? true
+      : !isRainAlreadyFalling({
+          nowMs: now,
+          nextRainAtMs: st.nextRainAtMs,
+          rainStartsInMin: st.rainStartsInMin,
+          currentPrecipMm: st.currentPrecipMm,
+          weatherCode: st.weatherCode,
+        });
     const wetNow = nowcast.rainingNow;
     const rainSoon =
       nowcast.nextRainAtMs != null &&
       nowcast.nextRainAtMs <= now + 90 * 60_000;
 
-    if (!wetNow && !rainSoon) return;
-
+    const baseSummary = st?.summaryLine ?? '';
+    const timingBase = {
+      nextRainAtMs: st?.nextRainAtMs ?? null,
+      rainStartsInMin: st?.rainStartsInMin ?? null,
+      rainEndsAtMs: st?.rainEndsAtMs ?? null,
+      currentPrecipMm: st?.currentPrecipMm ?? null,
+      currentWeatherId: st?.weatherCode ?? null,
+      dayStableDry: st?.dayStableDry ?? true,
+      summaryLine: baseSummary,
+      currentTemp: (() => {
+        const m = baseSummary.match(/(-?\d+)\s*°/);
+        return m ? Number(m[1]) : null;
+      })(),
+    };
+    const applied = applyGpsNowcastToTiming(timingBase, nowcast);
     const summaryLine = wetNow
       ? summaryWithGpsRain(
           {
-            summaryLine: state.summaryLine,
-            currentTempC: (() => {
-              const m = state.summaryLine.match(/(-?\d+)\s*°/);
-              return m ? Number(m[1]) : null;
-            })(),
+            summaryLine: applied.summaryLine ?? baseSummary,
+            currentTempC: applied.currentTemp,
           },
           nowcast,
         )
-      : state.summaryLine;
+      : applied.summaryLine ?? baseSummary;
 
     state = {
-      ...state,
-      dayStableDry: false,
-      nextRainAtMs: nowcast.nextRainAtMs,
-      rainStartsInMin: nowcast.rainStartsInMin,
-      rainEndsAtMs: nowcast.rainEndsAtMs ?? state.rainEndsAtMs,
-      currentPrecipMm:
-        nowcast.currentPrecipMm ?? (wetNow ? 0.2 : state.currentPrecipMm),
-      weatherCode: nowcast.weatherCode ?? state.weatherCode,
-      nextRainProb: wetNow
-        ? Math.max(state.nextRainProb ?? 0, 90)
-        : state.nextRainProb,
-      summaryLine,
-      // Nass/nah: bald voller OWM; sonst nächster Dry-Probe-Slot.
+      lastCheckAtMs: st?.lastCheckAtMs ?? 0,
       nextCheckAtMs: Math.min(
-        state.nextCheckAtMs,
-        now + (wetNow ? 60_000 : GPS_RAIN_RISK_PROBE_MS),
+        st?.nextCheckAtMs ?? now + GPS_RAIN_RISK_PROBE_MS,
+        now + (wetNow || rainSoon ? 60_000 : GPS_RAIN_RISK_PROBE_MS),
       ),
+      dayStableDry: applied.dayStableDry ?? false,
+      nextRainAtMs: applied.nextRainAtMs,
+      rainStartsInMin: applied.rainStartsInMin ?? null,
+      rainEndsAtMs: applied.rainEndsAtMs ?? null,
+      currentPrecipMm: applied.currentPrecipMm ?? null,
+      weatherCode: applied.currentWeatherId ?? st?.weatherCode ?? null,
+      nextRainProb: wetNow
+        ? Math.max(st?.nextRainProb ?? 0, 90)
+        : st?.nextRainProb ?? null,
+      summaryLine,
+      promptBlock: st?.promptBlock || summaryLine,
+      rainWindows: st?.rainWindows ?? [],
+      warned30ForRainAt: st?.warned30ForRainAt ?? null,
+      warned5ForRainAt: st?.warned5ForRainAt ?? null,
+      offeredShelterForRainAt: st?.offeredShelterForRainAt ?? null,
+      alertMode: st?.alertMode ?? true,
     };
 
     try {
@@ -469,20 +496,30 @@ async function maybeGpsDryProbeBetweenPolls(now: number): Promise<void> {
           fetchedAtMs: now,
           lat,
           lng,
-          currentTemp: prev?.currentTempC ?? null,
+          currentTemp: prev?.currentTempC ?? applied.currentTemp ?? null,
           currentWeatherId: state.weatherCode,
           currentPrecipMm: state.currentPrecipMm,
           nextRainAtMs: state.nextRainAtMs,
-          nextRainProb: wetNow ? 90 : state.nextRainProb ?? prev?.nextRainProb ?? null,
+          nextRainProb: wetNow
+            ? 90
+            : state.nextRainProb ?? prev?.nextRainProb ?? null,
           rainStartsInMin: state.rainStartsInMin,
           rainEndsAtMs: state.rainEndsAtMs,
-          summaryLine: state.summaryLine,
-          promptBlock: state.promptBlock || state.summaryLine,
-          rainWindows: state.rainWindows,
+          summaryLine: state.summaryLine || prev?.summaryLine || '',
+          promptBlock:
+            state.promptBlock ||
+            state.summaryLine ||
+            prev?.promptBlock ||
+            '',
+          rainWindows: state.rainWindows.length
+            ? state.rainWindows
+            : prev?.rainWindows ?? [],
           dayHighC: prev?.dayHighC ?? null,
           tomorrowSummary: prev?.tomorrowSummary ?? null,
           nightLowC: prev?.nightLowC ?? null,
           sunsetMs: prev?.sunsetMs ?? null,
+          sunriseMs:
+            (prev as { sunriseMs?: number | null } | null)?.sunriseMs ?? null,
         },
         prev,
       );
@@ -549,7 +586,7 @@ export async function runWeatherTrackerCheck(opts?: {
     if (gate.reason === 'session_too_short') {
       const wakeAt = weatherSessionStartedAtMs() + WEATHER_LIVE_AFTER_USE_MS;
       if (!state) {
-        // Kein Fake-Trocken — warte auf Session-Gate, HUD bleibt auf Cache.
+        // Kein Fake-Trocken — Cache + GPS-Radar für Live-HUD (OWM wartet).
         state = {
           lastCheckAtMs: 0,
           nextCheckAtMs: wakeAt,
@@ -568,10 +605,32 @@ export async function runWeatherTrackerCheck(opts?: {
           offeredShelterForRainAt: null,
           alertMode: true,
         };
+        try {
+          const { getCachedWeatherSnapshot } = await import('../weatherService');
+          const snap = getCachedWeatherSnapshot();
+          if (snap) {
+            state = {
+              ...state,
+              nextRainAtMs: snap.nextRainAtMs,
+              rainStartsInMin: snap.rainStartsInMin ?? null,
+              rainEndsAtMs: snap.rainEndsAtMs ?? null,
+              currentPrecipMm: snap.precipitationMm,
+              weatherCode: snap.weatherCode,
+              nextRainProb: snap.nextRainProb,
+              summaryLine: snap.summaryLine ?? '',
+              promptBlock: snap.promptBlock ?? snap.summaryLine ?? '',
+              rainWindows: snap.rainWindows ?? [],
+            };
+          }
+        } catch {
+          /* soft */
+        }
       } else if (state.nextCheckAtMs > wakeAt) {
         state = { ...state, nextCheckAtMs: wakeAt };
       }
     }
+    // OWM/Shared wartet — GPS-Regenradar trotzdem für Live-Anzeige.
+    await maybeGpsDryProbeBetweenPolls(now);
     return state;
   }
 
@@ -629,6 +688,7 @@ export async function runWeatherTrackerCheck(opts?: {
           })),
           rawHourly: [],
           sunsetMs: null,
+          sunriseMs: null,
           dayHighC: meteo.dayHighC ?? null,
         };
       }

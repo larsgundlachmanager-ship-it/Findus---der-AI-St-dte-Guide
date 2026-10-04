@@ -205,6 +205,13 @@ export async function* streamingChunksFromTextStream(
       yield c;
       isFirst = false;
     }
+    // Fertige Call-1-Äußerung nicht bis Call-2/Stream-Ende halten.
+    // Kurze Token bleiben im Puffer (Fast-Hook der Gemini-Streams).
+    const utterance = piece.replace(/\s+/g, ' ').trim();
+    if (utterance.length >= 12 && buffer.trim()) {
+      yield buffer.trim();
+      buffer = '';
+    }
   }
   const tail = buffer.trim();
   if (tail) yield tail;

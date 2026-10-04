@@ -34,7 +34,7 @@ const STREET_RE =
   /\b[\wÄÖÜäöüß.\-]*(?:straße|strasse|str\.?|weg|allee|platz|gasse|ring|damm)\s+\d{1,4}[a-zA-Z]?\b/iu;
 
 const CLOCK_RE =
-  /\b(wecker|weck\s+mich|wecke\s+mich|timer|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker)\b/iu;
+  /\b(wecker|weck\s+mich|wecke\s+mich|timer|stell(?:e)?\s+(?:mir\s+)?(?:einen\s+)?wecker|um\s+\d{1,2}(?:[:.]\d{2})?\s+uhr.{0,24}wecker|geweckt\b.{0,40}\d{1,2}|\d{1,2}(?::\d{2})?\s*(?:uhr)?.{0,24}geweckt|auf\s*steh\w*.{0,32}\d{1,2}|weck(?:e|en)?\s+(?:mich|uns))\b/iu;
 
 const WHERE_AM_I_RE =
   /\b(wo\s+bin\s+ich|wo\s+stehe\s+ich|was\s+ist\s+(?:das|hier)|hier\s+(?:für\s+ein\s+ort|für\s+einen\s+ort))\b/iu;
@@ -43,7 +43,7 @@ const M1_RE =
   /\b(mehr\s+(?:historie|dazu)|erzähl.{0,24}(?:geschichte|historie)|stufen|treppen|kirche|turm|denkmal)\b/iu;
 
 const PITCH_RE =
-  /\b(spaghetti[-\s]?eis|eis\s+(?:essen|wäre|waere)|gelato|restaurant|essen|hunger|hotel|übernacht|uebernacht|unterkunft|friseur|frisör|frisoer|café|cafe|pizza|imbiss|picknick|picnic|grillen|grillplatz)\b/iu;
+  /\b(spaghetti[-\s]?eis|eis\s+(?:essen|wäre|waere)|gelato|restaurant|essen|hunger|hotel|übernacht|uebernacht|unterkunft|friseur|frisör|frisoer|café|cafe|pizza|imbiss|picknick|picnic|grillen|grillplatz|all[\s-]*you[\s-]*can[\s-]*eat|allyoucaneat|\bayce\b|buffet)\b/iu;
 
 const CINEMA_RE =
   /\b(kino|kinoprogramm|welche\s+filme|ins\s+kino|filmtheater)\b/iu;

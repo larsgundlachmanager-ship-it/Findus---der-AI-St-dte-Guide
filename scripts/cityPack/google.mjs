@@ -25,6 +25,8 @@ const DETAILS_FIELD_MASK_REVIEWS =
   'id,displayName,types,editorialSummary,rating,userRatingCount,reviews.text,reviews.rating';
 
 const CACHE_PATH = path.join(STAEDTE_DIR, '.places-cache.json');
+const SPEND_PATH = path.join(STAEDTE_DIR, '_google_spend.json');
+const SPEND_BY_CITY_PATH = path.join(STAEDTE_DIR, '_google_spend_by_city.json');
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 const cost = {
@@ -36,7 +38,47 @@ const cost = {
   cacheHit: 0,
 };
 
-function estUsd() {
+function loadPersistedSpendUsd() {
+  try {
+    const j = JSON.parse(fs.readFileSync(SPEND_PATH, 'utf8'));
+    const v = Number(j?.estUsd);
+    return Number.isFinite(v) && v > 0 ? v : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function detectPackCityId() {
+  const env = String(process.env.FINDUS_PACK_CITY || '').trim().toLowerCase();
+  if (env) return env.replace(/[^a-z0-9_-]+/g, '');
+  const argv = process.argv.slice(2);
+  for (let i = 0; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === '--id' || a === '--city') {
+      const v = String(argv[i + 1] || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]+/g, '-');
+      if (v) return v;
+    }
+    const m = /^--(?:id|city)=(.+)$/i.exec(a);
+    if (m?.[1]) {
+      return String(m[1])
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]+/g, '-');
+    }
+  }
+  return '';
+}
+
+/** Aktive Stadt für Live-Preis (env oder --id/--city). */
+let packCityId = detectPackCityId();
+
+/** Basis aus vorherigen Prozessen — damit €25-Cap über city-Loops gilt. */
+let persistedSpendUsd = loadPersistedSpendUsd();
+
+function sessionUsd() {
   return (
     cost.textPro * 0.032 +
     cost.detailsEss * 0.005 +
@@ -45,17 +87,126 @@ function estUsd() {
   );
 }
 
+function estUsd() {
+  return persistedSpendUsd + sessionUsd();
+}
+
+function loadCitySpendLedger() {
+  try {
+    const j = JSON.parse(fs.readFileSync(SPEND_BY_CITY_PATH, 'utf8'));
+    return j && typeof j === 'object' && j.cities && typeof j.cities === 'object' ? j : { cities: {} };
+  } catch {
+    return { cities: {} };
+  }
+}
+
+function persistCitySpend(session) {
+  if (!packCityId || !(session > 0)) return null;
+  try {
+    const ledger = loadCitySpendLedger();
+    const prev = Number(ledger.cities?.[packCityId]?.usd) || 0;
+    const next = Math.round((prev + session) * 1000) / 1000;
+    ledger.cities[packCityId] = {
+      usd: next,
+      at: new Date().toISOString(),
+      lastSessionUsd: Math.round(session * 1000) / 1000,
+      lastCounts: { ...cost },
+    };
+    ledger.at = new Date().toISOString();
+    fs.writeFileSync(SPEND_BY_CITY_PATH, JSON.stringify(ledger, null, 2), 'utf8');
+    return next;
+  } catch {
+    return null;
+  }
+}
+
+function persistSpend() {
+  const session = sessionUsd();
+  const cityTotal = persistCitySpend(session);
+  try {
+    fs.writeFileSync(
+      SPEND_PATH,
+      JSON.stringify(
+        {
+          estUsd: Math.round(estUsd() * 1000) / 1000,
+          at: new Date().toISOString(),
+          session: { ...cost, sessionUsd: Math.round(session * 1000) / 1000 },
+          city: packCityId || null,
+          cityTotalUsd: cityTotal,
+        },
+        null,
+        2,
+      ),
+      'utf8',
+    );
+  } catch {
+    /* soft */
+  }
+}
+
+/** Spend-Zähler für neuen Budget-Lauf zurücksetzen (nur Tooling). */
+export function resetGoogleSpendLedger() {
+  persistedSpendUsd = 0;
+  try {
+    if (fs.existsSync(SPEND_PATH)) fs.unlinkSync(SPEND_PATH);
+  } catch {
+    /* soft */
+  }
+}
+
+/** Stadt für Live-Preis setzen (city:auto / child scripts). */
+export function setPackCityCostLabel(cityId) {
+  const id = String(cityId || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, '');
+  if (id) {
+    packCityId = id;
+    process.env.FINDUS_PACK_CITY = id;
+  }
+}
+
+/** Geschätzte Stadt-Summe (USD) aus Ledger. */
+export function googleCitySpendUsd(cityId = packCityId) {
+  const id = String(cityId || '').trim().toLowerCase();
+  if (!id) return 0;
+  const ledger = loadCitySpendLedger();
+  return Number(ledger.cities?.[id]?.usd) || 0;
+}
+
 function logCost(reason = 'done') {
   const usd = estUsd();
-  if (cost.textPro + cost.textId + cost.detailsEss + cost.detailsReviews + cost.geocode + cost.cacheHit === 0) {
+  const session = sessionUsd();
+  if (
+    cost.textPro +
+      cost.textId +
+      cost.detailsEss +
+      cost.detailsReviews +
+      cost.geocode +
+      cost.cacheHit ===
+      0 &&
+    persistedSpendUsd <= 0
+  ) {
     return;
   }
   console.log(
-    `[places] ${reason} searchPro=${cost.textPro} searchId=${cost.textId} details=${cost.detailsEss} reviews=${cost.detailsReviews} geocode=${cost.geocode} cacheHit=${cost.cacheHit} ≈ $${usd.toFixed(2)}`,
+    `[places] ${reason} searchPro=${cost.textPro} searchId=${cost.textId} details=${cost.detailsEss} reviews=${cost.detailsReviews} geocode=${cost.geocode} cacheHit=${cost.cacheHit} ≈ $${usd.toFixed(2)} (persistedBase=$${persistedSpendUsd.toFixed(2)})`,
   );
+  if (packCityId && session > 0) {
+    const prev = googleCitySpendUsd(packCityId);
+    const cityTotal = Math.round((prev + session) * 1000) / 1000;
+    const eur = (session * 0.92).toFixed(2);
+    const cityEur = (cityTotal * 0.92).toFixed(2);
+    console.log(
+      `[places] LIVE city=${packCityId} +$${session.toFixed(2)} (~€${eur}) | cityTotal=$${cityTotal.toFixed(2)} (~€${cityEur}) | allTime=$${usd.toFixed(2)}`,
+    );
+  }
 }
 
-process.on('exit', () => logCost('exit'));
+process.on('exit', () => {
+  logCost('exit');
+  persistSpend();
+});
 
 /**
  * Budget-Wächter. Cap in EUR aus FINDUS_GOOGLE_BUDGET_EUR (Default 50).
@@ -563,6 +714,9 @@ export const DISCOVERY_QUERIES = [
 
 /** Offline-directory discovery (no deep story required). */
 export const DIRECTORY_QUERIES = [
+  { q: 'Restaurant', categoryHint: 'restaurant', prefer: ['restaurant'] },
+  { q: 'Café OR Cafe OR Bäckerei OR Bakery', categoryHint: 'cafe', prefer: ['cafe', 'bakery'] },
+  { q: 'Museum OR Galerie', categoryHint: 'museum', prefer: ['museum', 'art_gallery'] },
   { q: 'Supermarkt OR Lidl OR Aldi OR Rewe OR Edeka OR Kaufland', categoryHint: 'supermarket', prefer: ['supermarket', 'grocery_or_supermarket'] },
   { q: 'Apotheke', categoryHint: 'apotheke', prefer: ['pharmacy'] },
   { q: 'Krankenhaus OR Klinik OR Notaufnahme', categoryHint: 'gesundheit', prefer: ['hospital'] },
@@ -580,7 +734,16 @@ export const DIRECTORY_QUERIES = [
   { q: 'Drogerie OR dm OR Rossmann', categoryHint: 'einkaufen', prefer: ['store'] },
   { q: 'Feldkreuz OR Wegkreuz OR Bildstock', categoryHint: 'denkmal', prefer: ['place_of_worship'] },
   { q: 'Öffentliche Toilette OR WC', categoryHint: 'toilette', prefer: ['point_of_interest'] },
-  { q: 'Gepäckaufbewahrung OR Luggage storage', categoryHint: 'gepaeck', prefer: ['point_of_interest'] },
+  { q: 'Gepäckaufbewahrung OR Luggage storage OR Schließfach', categoryHint: 'gepaeck', prefer: ['point_of_interest'] },
+  { q: 'Waschsalon OR Laundry OR Laundromat', categoryHint: 'waschsalon', prefer: ['laundry'] },
+  { q: 'Parkplatz OR Parkhaus', categoryHint: 'parkplatz', prefer: ['parking'] },
+  { q: 'Ladestation OR EV charging', categoryHint: 'ladestation', prefer: ['electric_vehicle_charging_station'] },
+  { q: 'Fahrradverleih OR Bike rental OR Mietrad', categoryHint: 'fahrradverleih', prefer: ['bicycle_store'] },
+  { q: 'Autoverleih OR Car rental', categoryHint: 'autoverleih', prefer: ['car_rental'] },
+  { q: 'Campingplatz OR Campsite', categoryHint: 'camping', prefer: ['campground'] },
+  { q: 'Strand OR Beach', categoryHint: 'strand', prefer: ['natural_feature'] },
+  { q: 'Wechselstube OR Currency exchange', categoryHint: 'wechselstube', prefer: ['point_of_interest'] },
+  { q: 'Eisdiele OR Ice cream', categoryHint: 'eisdiele', prefer: ['ice_cream_shop'] },
   { q: 'Tourist Information OR Touristeninformation', categoryHint: 'tourist_info', prefer: ['travel_agency'] },
   { q: 'Wochenmarkt OR Bauernmarkt', categoryHint: 'markt', prefer: ['point_of_interest'] },
   { q: 'Souvenir OR Andenken', categoryHint: 'souvenir', prefer: ['store'] },

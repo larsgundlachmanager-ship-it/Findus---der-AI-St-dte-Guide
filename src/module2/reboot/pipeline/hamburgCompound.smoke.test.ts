@@ -84,6 +84,15 @@ assert(call1OwnsCompoundTurn(HAMBURG), 'hamburg stays with Call-1 jobs');
     !/tryEarlyM5Handoff\s*\(/.test(turnSrc),
     'runConciergeTurn must not call tryEarlyM5Handoff',
   );
+  assert(
+    /compound ingest → auto step-loop/.test(turnSrc) &&
+      /startPlanStepLoop/.test(turnSrc),
+    'compound day plan must auto-start step loop after ingest',
+  );
+  assert(
+    /post-call1 force → runPlanningModule/.test(turnSrc),
+    'force M5 after Call-1 when compound skeleton missing',
+  );
 }
 assert(
   !shouldHandoffToPitchModule(HAMBURG),

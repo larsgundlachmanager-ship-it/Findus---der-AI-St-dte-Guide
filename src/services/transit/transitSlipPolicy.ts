@@ -1,13 +1,20 @@
 /**
  * Fahrplan ≠ Gummi: eine spätere Abfahrt derselben Linie ist die nächste
  * Fahrt, keine 5-Minuten-Verschiebung der verpassten.
+ * Frühere erreichbare Abfahrt → Plan still vorziehen.
  */
 
-export type TransitSlipKind = 'unchanged' | 'live_delay' | 'missed_next';
+export type TransitSlipKind =
+  | 'unchanged'
+  | 'live_delay'
+  | 'missed_next'
+  | 'earlier_available';
 
 const SAME_TRIP_MS = 90_000;
 const MISSED_GRACE_MS = 20_000;
 const DELAY_MIN_SEC = 180;
+/** Früherer Slot mind. so viel vor der geplanten Abfahrt. */
+const EARLIER_MIN_MS = 90_000;
 
 export function classifyTransitSlip(opts: {
   nowMs: number;
@@ -21,6 +28,11 @@ export function classifyTransitSlip(opts: {
   const next = opts.nextDepMs;
   if (!Number.isFinite(armed) || !Number.isFinite(next)) return 'unchanged';
   if (Math.abs(next - armed) < SAME_TRIP_MS) return 'unchanged';
+
+  // Frühere Fahrt als geplant — noch nicht abgefahren → still umbuchen.
+  if (next < armed - EARLIER_MIN_MS && next > now - MISSED_GRACE_MS) {
+    return 'earlier_available';
+  }
 
   const delaySec =
     opts.delaySec != null && Number.isFinite(opts.delaySec)

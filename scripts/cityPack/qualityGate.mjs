@@ -10,6 +10,12 @@ import {
   triggerForSpot,
 } from './lib.mjs';
 import { validateCityPack } from '../geo/validatePack.mjs';
+import {
+  citySizeHint,
+  packStoryBelowValueFloor,
+  suggestedMinStory,
+  suggestedTargetStory,
+} from './placeCategoryPolicy.mjs';
 
 function hasPoly(spot) {
   const p = spot.polygonCoordinates || spot.polygon;
@@ -214,10 +220,25 @@ export function runQualityGate(pack, opts = {}) {
 
   const storyCount = spots.filter((s) => !isDirectorySpot(s)).length;
   const directoryCount = spots.filter((s) => isDirectorySpot(s)).length;
+  const minStory = suggestedMinStory(pack);
+  const targetStory = suggestedTargetStory(pack);
+  const sizeHint = citySizeHint(pack);
+  if (packStoryBelowValueFloor(pack)) {
+    (strict ? errors : warnings).push(
+      `value floor: story=${storyCount} < min ${minStory} (${sizeHint}) — User zahlt für Pack; mehr echte Stories / Research`,
+    );
+  } else if (storyCount < targetStory) {
+    warnings.push(
+      `value target: story=${storyCount} < soft-Ziel ${targetStory} (${sizeHint})`,
+    );
+  }
   const stats = {
     spots: spots.length,
     storySpots: storyCount,
     directorySpots: directoryCount,
+    minStory,
+    targetStory,
+    sizeHint,
     triggers: triggers.length,
     missingTrigger,
     missingNarration,

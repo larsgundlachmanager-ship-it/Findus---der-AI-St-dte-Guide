@@ -57,6 +57,9 @@ export type TurnRucksackV1 = {
     lastPlace: string | null;
     liveInventoryKind: string | null;
   };
+  /** Session Root-Ziel + Faden (Autonomy Reboot) */
+  rootGoal?: string | null;
+  threadSpine?: string | null;
   learnedRules?: Array<{ intentFamily: string; summary: string }>;
   ownerGoldHint?: string | null;
   retrievedMemory?: string[];
@@ -214,6 +217,8 @@ export function buildTurnRucksack(opts: {
       lastPlace: short.lastPlaceName ?? null,
       liveInventoryKind: null,
     },
+    rootGoal: short.rootGoal ?? null,
+    threadSpine: short.threadSpine ?? null,
     learnedRules: rules.length ? rules : undefined,
     ownerGoldHint,
   };

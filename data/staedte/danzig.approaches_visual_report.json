@@ -1,0 +1,274 @@
+{
+  "city": "danzig",
+  "apply": true,
+  "touched": 33,
+  "approachesFixed": 33,
+  "faqAdded": 33,
+  "data_version": 20,
+  "rows": [
+    {
+      "id": "danzig_gdansk_stocznia",
+      "name": "Danziger Werft",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_museum_des_zweiten_weltkriegs",
+      "name": "Museum des Zweiten Weltkriegs",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_nationalmuseum",
+      "name": "Nationalmuseum Danzig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_bernsteinmuseum_danzig",
+      "name": "Bernsteinmuseum Danzig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_artushof_danzig",
+      "name": "Artushof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_europaisches_zentrum_der_solidaritat",
+      "name": "Europäisches Solidarność-Zentrum",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_uphagenhaus_danzig",
+      "name": "Uphagenhaus Danzig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_festung_weichselmunde",
+      "name": "Festung Weichselmünde",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_so_dek",
+      "name": "Museumsschiff Sołdek",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_konigliche_kapelle_danzig",
+      "name": "Königliche Kapelle Danzig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_st_marienkirche",
+      "name": "Marienkirche Danzig",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_brigittenkirche_sw_brygidy",
+      "name": "Brigittenkirche (św. Brygidy)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_johanneskirche",
+      "name": "Johanneskirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_denkmal_fur_die_gefallenen_werftarbeiter_1970",
+      "name": "Denkmal für die gefallenen Werftarbeiter 1970",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_johannes_hevelius_monument",
+      "name": "Johannes Hevelius monument",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_leuchtturm_nowy_port_neufahrwasser",
+      "name": "Leuchtturm Nowy Port (Neufahrwasser)",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_altstadtisches_rathaus",
+      "name": "Altstädtisches Rathaus",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_langer_markt",
+      "name": "Langer Markt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_hohes_tor",
+      "name": "Hohes Tor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_westerplatte",
+      "name": "Westerplatte",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_neptunbrunnen",
+      "name": "Neptunbrunnen",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_krantor",
+      "name": "Krantor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_frauengasse",
+      "name": "Frauengasse",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_katharinenkirche",
+      "name": "Katharinenkirche",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_stockturm",
+      "name": "Stockturm",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_speicherinsel",
+      "name": "Speicherinsel",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_johannistor",
+      "name": "Johannistor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 1,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_frauentor",
+      "name": "Frauentor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 2,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_hakertor",
+      "name": "Häkertor",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_dominikermarkt",
+      "name": "Dominikermarkt",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 2
+    },
+    {
+      "id": "danzig_ostseeoper",
+      "name": "Ostseeoper",
+      "status": "HARDENED",
+      "approaches": 1,
+      "visual_bits": 0,
+      "had_approaches": 1
+    },
+    {
+      "id": "danzig_danzig_hauptbahnhof",
+      "name": "Danzig Hauptbahnhof",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    },
+    {
+      "id": "danzig_motlawa_lange_brucke",
+      "name": "Motława / Lange Brücke",
+      "status": "HARDENED",
+      "approaches": 2,
+      "visual_bits": 0,
+      "had_approaches": 0
+    }
+  ]
+}

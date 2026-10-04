@@ -189,12 +189,17 @@ export function buildUberGoUrl(opts: {
   }
 
   const time = hmm(opts.pickupTimeHm);
+  // Sofort: product-selection. Zukunft: /go/reserve + pickup_time
+  // (nicht /go/reserve/select-time — oft weißer Screen).
   if (time) {
-    const formatted = encodeURIComponent(
-      localPickupFormattedTime(time, opts.pickupDateIso),
-    );
+    const local = localPickupFormattedTime(time, opts.pickupDateIso);
+    const pickupAt = Date.parse(local);
+    const future =
+      Number.isFinite(pickupAt) && pickupAt > Date.now() + 15 * 60_000;
+    const path = future ? 'reserve' : 'product-selection';
+    const formatted = encodeURIComponent(local);
     return encodeUriBrackets(
-      `https://m.uber.com/go/reserve/select-time?${params.join('&')}&pickup_formatted_time=${formatted}`,
+      `https://m.uber.com/go/${path}?${params.join('&')}&pickup_time=${formatted}`,
     );
   }
 
@@ -297,32 +302,90 @@ export function buildDiscoverCarsSearchUrl(opts: DiscoverCarsSearchOpts): string
   return u.toString();
 }
 
-/** Kiwi Ergebnis-Liste: Strecke + Datum + Personen + Gepäck. */
+/** Kiwi: Kabine.Aufgabe pro Erwachsenem, z. B. 1.1 = 1 Hand + 1 Aufgabe. */
+export function formatKiwiBags(opts: {
+  adults: number;
+  /** Pro Erwachsenem, z. B. "0.1" / "1.0" / "1.1". */
+  bagsPerAdult?: string | null;
+  /** Gesamt Handgepaeck (Kabine) — wird auf Erwachsene verteilt. */
+  cabinBags?: number | null;
+  /** Gesamt Aufgabegepaeck — wird auf Erwachsene verteilt. */
+  checkedBags?: number | null;
+}): string | null {
+  const adults = Math.max(1, Math.floor(opts.adults));
+  if (opts.bagsPerAdult != null && String(opts.bagsPerAdult).trim()) {
+    const per = String(opts.bagsPerAdult).trim();
+    return Array.from({ length: adults }, () => per).join('_') + '-';
+  }
+  let cabin = Math.max(0, Math.floor(opts.cabinBags ?? 0));
+  let checked = Math.max(0, Math.floor(opts.checkedBags ?? 0));
+  if (cabin <= 0 && checked <= 0) return null;
+  const parts: string[] = [];
+  for (let i = 0; i < adults; i++) {
+    const c = cabin > 0 ? 1 : 0;
+    const k = checked > 0 ? 1 : 0;
+    cabin -= c;
+    checked -= k;
+    parts.push(`${c}.${k}`);
+  }
+  // Rest auf letzte Person (Kiwi erlaubt >1 selten — lieber verteilen)
+  while (cabin > 0 || checked > 0) {
+    const last = parts[parts.length - 1] || '0.0';
+    const [a, b] = last.split('.').map((n) => Number(n) || 0);
+    const addC = cabin > 0 ? 1 : 0;
+    const addK = checked > 0 ? 1 : 0;
+    cabin -= addC;
+    checked -= addK;
+    parts[parts.length - 1] = `${a + addC}.${b + addK}`;
+  }
+  return parts.join('_') + '-';
+}
+
+/** Kiwi Ergebnis via /deep (IATA) — Pfad /ham/ath/ fuellt Von/Nach NICHT. */
 export function buildKiwiResultsPageUrl(opts: {
   fromIata: string;
   toIata: string;
   dateKey: string;
+  returnDateKey?: string | null;
   adults?: number;
   children?: number;
+  /** Kind unter 1 Jahr */
   infants?: number;
-  /** Kabine.Aufgabe pro Person, z. B. 0.1 = 0 Kabine + 1 Aufgabe. */
+  /** Kabine.Aufgabe pro Person, z. B. 0.1 / 1.0 / 1.1 */
   bagsPerAdult?: string;
+  cabinBags?: number | null;
+  checkedBags?: number | null;
+  /** Brief: Direktflug → stopNumber=0~true */
+  directOnly?: boolean;
 }): string {
-  const from = opts.fromIata.trim().toLowerCase();
-  const to = opts.toIata.trim().toLowerCase();
+  const from = opts.fromIata.trim().toUpperCase();
+  const to = opts.toIata.trim().toUpperCase();
   const date = ymd(opts.dateKey) || opts.dateKey.trim();
+  const retRaw = ymd(opts.returnDateKey || '');
+  // Roundtrip nur mit echtem Rueckdatum; anytime = Einweg / Rueck flexibel
+  const ret = retRaw || 'anytime';
   const adults = clampAdults(opts.adults, 1);
   const children = Math.max(0, Math.floor(opts.children ?? 0));
   const infants = Math.max(0, Math.floor(opts.infants ?? 0));
-  const per = (opts.bagsPerAdult || '0.0').trim() || '0.0';
-  const bags = Array.from({ length: adults }, () => per).join('_');
-  const u = new URL(
-    `https://www.kiwi.com/de/search/results/${encodeURIComponent(from)}/${encodeURIComponent(to)}/${encodeURIComponent(date)}/no-return/`,
-  );
+  const bags = formatKiwiBags({
+    adults,
+    bagsPerAdult: opts.bagsPerAdult,
+    cabinBags: opts.cabinBags,
+    checkedBags: opts.checkedBags,
+  });
+  const u = new URL('https://www.kiwi.com/deep');
+  u.searchParams.set('from', from);
+  u.searchParams.set('to', to);
+  u.searchParams.set('departure', date);
+  u.searchParams.set('return', ret);
   u.searchParams.set('adults', String(adults));
   u.searchParams.set('children', String(children));
   u.searchParams.set('infants', String(infants));
-  u.searchParams.set('bags', bags);
+  if (bags) u.searchParams.set('bags', bags);
+  u.searchParams.set('lang', 'de');
+  if (opts.directOnly) {
+    u.searchParams.set('stopNumber', '0~true');
+  }
   return u.toString();
 }
 
@@ -331,6 +394,7 @@ export function buildAviasalesCompactSearchUrl(opts: {
   fromIata: string;
   toIata: string;
   dateKey: string;
+  returnDateKey?: string | null;
   adults?: number;
   marker?: string | null;
 }): string {

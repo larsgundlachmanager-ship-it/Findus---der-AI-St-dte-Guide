@@ -176,18 +176,22 @@ export function nearestCityName(
   return best && best.km <= 40 ? best.name : null;
 }
 
-/** Städte aus Pack-Index (sync, optional). */
+/**
+ * Städte aus remote Katalog-Cache (sync).
+ * Kein require(data/staedte/*) — Packs/Index bleiben remote, APK bleibt schlank.
+ */
 export function loadNearbyCitiesFromIndex(): NearbyCity[] {
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const index = require('../../../data/staedte/index.json') as {
-      available_cities?: Array<{
+    const { peekCityIndexCache } = require('../cityCatalogService') as {
+      peekCityIndexCache: () => Array<{
         name?: string;
         lat?: number;
         lng?: number;
-      }>;
+      }> | null;
     };
-    return (index.available_cities ?? [])
+    const entries = peekCityIndexCache() ?? [];
+    return entries
       .filter(
         (c) =>
           typeof c.name === 'string' &&
@@ -195,7 +199,7 @@ export function loadNearbyCitiesFromIndex(): NearbyCity[] {
           Number.isFinite(c.lng),
       )
       .map((c) => ({
-        name: c.name!.trim(),
+        name: String(c.name).trim(),
         lat: c.lat!,
         lng: c.lng!,
       }));
@@ -281,7 +285,13 @@ export function spokenCityFromQuery(query: string): string | null {
   };
   for (const name of KNOWN_CITIES) consider(name);
   for (const c of loadNearbyCitiesFromIndex()) consider(c.name);
-  return found?.name ?? null;
+  if (found) return found.name;
+  // STT-Tippfehler als Token („prisodrf“ → Prisdorf) — nicht nur exakter Substring
+  for (const tok of ql.split(/[\s,/-]+/).filter((w) => w.length >= 5)) {
+    const fuzzy = fuzzyResolveCityName(tok);
+    if (fuzzy) return fuzzy;
+  }
+  return null;
 }
 
 /**

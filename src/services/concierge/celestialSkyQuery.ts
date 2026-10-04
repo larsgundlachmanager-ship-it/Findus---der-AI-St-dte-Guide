@@ -13,7 +13,7 @@ const ANTI_NIGHTLIFE_SKY_RE =
 
 /** Trivia-Maße/Identität/Bedeutung. „wo ist [Ort]“ ist KEIN Quick-Lookup. */
 const QUICK_LOOKUP_RE =
-  /\b(wie\s+(?:breit|hoch|alt|tief|groß|gross|viel|viele|heiß|heiss|kalt)|was\s+bedeutet|wer\s+(?:ist|war)|erkläre?\s+(?:mir\s+)?kurz|wann\s+(?:ist|war|sind|wird)\s+(?:die\s+|der\s+|das\s+)?(?:sonnenfinsternis|mondfinsternis|teil(?:weise)?e?\s+sonnenfinsternis|eclipse|sternschnuppe(?:n)?|nordlicht|polarlicht|meteor))\b/iu;
+  /\b(wie\s+(?:breit|hoch|alt|tief|groß|gross|viel|viele|heiß|heiss|kalt|heißt|heisst|nennt)|was\s+bedeutet|wer\s+(?:ist|war|heißt|heisst)|erkläre?\s+(?:mir\s+)?kurz|wann\s+(?:ist|war|sind|wird)\s+(?:die\s+|der\s+|das\s+)?(?:sonnenfinsternis|mondfinsternis|teil(?:weise)?e?\s+sonnenfinsternis|eclipse|sternschnuppe(?:n)?|nordlicht|polarlicht|meteor)|einwohner(?:zahl)?|(?:alt)?(?:älteste|aelteste)\s+(?:lebende[rnms]?\s+|aktuelle[rnms]?\s+)?(?:mensch|person))\b/iu;
 
 const ARITH_LOOKUP_RE =
   /\d+\s*(?:\+|plus|minus|-|–|×|x|\*|\/|:)\s*\d+/iu;
@@ -49,6 +49,15 @@ export function isQuickLookupQuery(text: string): boolean {
   }
   if (NOT_CRYSTAL_CLEAR_RE.test(t)) return false;
   if (ARITH_LOOKUP_RE.test(t)) return t.split(/\s+/).length <= 28;
+  if (
+    /\b(papst|pope)\b/iu.test(t) &&
+    /\b(aktuell\w*|jetzt|heute|noch|leo|franziskus|oberhaupt|kirche|ist\s+das)\b/iu.test(
+      t,
+    ) &&
+    t.split(/\s+/).length <= 28
+  ) {
+    return true;
+  }
   if (!QUICK_LOOKUP_RE.test(t)) return false;
   return t.split(/\s+/).length <= 28;
 }

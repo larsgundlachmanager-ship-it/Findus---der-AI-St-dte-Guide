@@ -205,11 +205,17 @@ export function mergeSubtitleCarry(
   current: string | null,
 ): string | null {
   if (current == null) return current;
-  const cur = current.replace(/\s+/g, ' ').trim();
+  const glue = (s: string) =>
+    s
+      .replace(/([A-Za-zÄÖÜäöüß])(\d)/gu, '$1 $2')
+      .replace(/(\d)([A-Za-zÄÖÜäöüß])/gu, '$1 $2')
+      .replace(/\s+/g, ' ')
+      .trim();
+  const cur = glue(current);
   if (!cur) return cur;
-  const prev = (prior ?? '').replace(/\s+/g, ' ').trim();
+  const prev = glue(prior ?? '');
   if (!prev) return cur;
-  return `${prev} ${cur}`;
+  return glue(`${prev} ${cur}`);
 }
 
 export function createLiveSubtitleFeed(

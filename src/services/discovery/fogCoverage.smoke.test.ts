@@ -6,6 +6,7 @@ import {
   FOG_MERGE_GAP_M,
   buildExploredPolygons,
   buildFogPolygons,
+  fogTrailGeoJSON,
   fogBoundsCacheKey,
   fogTrackCacheKey,
   pointInFogPolygons,
@@ -214,3 +215,15 @@ assert(FOG_MERGE_GAP_M === 20, 'Merge-Lücke 20 m');
 }
 
 console.log('fogCoverage.smoke.test.ts OK');
+
+{
+  const trail = fogTrailGeoJSON([
+    { lat: 53.68, lng: 9.76 },
+    { lat: 53.6802, lng: 9.7602 },
+    { lat: 53.6804, lng: 9.7604 },
+  ]);
+  if (trail.features.length !== 1) throw new Error('FAIL: trail line');
+  if (trail.features[0]?.geometry.type !== 'LineString') {
+    throw new Error('FAIL: trail LineString');
+  }
+}

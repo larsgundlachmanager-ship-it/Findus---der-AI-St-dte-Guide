@@ -39,6 +39,12 @@ assert(canonicalizeLandmarkQuery('Tennisclub Phoenix').matchedLandmark, 'Phoenix
 assert(canonicalizeLandmarkQuery('Tennisclub Phönix').matchedLandmark, 'Phönix matched');
 assert(phoenix.preferredCityId === 'luebeck', 'Phoenix → luebeck');
 
+const tcp = canonicalizeLandmarkQuery('navigiere zum Tennisclub Priester');
+assert(tcp.matchedLandmark, 'Tennisclub Priester STT');
+assert(tcp.preferredCityId === 'prisdorf', 'TCP → prisdorf');
+assert(/Tennis-Club Prisdorf/i.test(tcp.query), 'TCP canon name');
+assert(canonicalizeLandmarkQuery('Tennisclub Prisdorf').matchedLandmark, 'TCP clean');
+
 assert(
   composeGeocodeQuery('Tennisclub Phoenix Lübeck', 'Prisdorf') ===
     'Tennisclub Phoenix Lübeck',

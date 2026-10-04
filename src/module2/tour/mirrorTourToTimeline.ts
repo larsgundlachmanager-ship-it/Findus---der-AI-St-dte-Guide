@@ -8,9 +8,14 @@ import {
   requestOpenPlanCalendar,
   usePlanCalendarUiStore,
 } from '../timeline/planCalendarUiStore';
-import { applyGapFillTravelLegs } from '../timeline/gapFillTravel';
 import { TOUR_BUFFER_MIN } from './exactValidate';
+import {
+  buildTourStopNotes,
+  resolveTourStartMs,
+} from './tourTimelinePlacement';
 import type { TourRequest, TourResult } from './types';
+
+export { buildTourStopNotes, resolveTourStartMs } from './tourTimelinePlacement';
 
 function resolveTourDayKey(explicit?: string | null): string {
   if (explicit && /^\d{4}-\d{2}-\d{2}$/.test(explicit)) return explicit;
@@ -32,71 +37,6 @@ function resolveTourDayKey(explicit?: string | null): string {
     /* soft */
   }
   return todayDateKey();
-}
-
-/**
- * Start der Tour: freie Lücke zwischen Hard-Terminen — nie über Meetings legen.
- * Morgen-Wunsch → eher Vormittag; sonst preferMs / Mittag-Fallback.
- */
-function resolveTourStartMs(
-  dayKey: string,
-  preferMs: number | null | undefined,
-  req: TourRequest,
-  tourDurationMin: number,
-): number {
-  const [y, m, d] = dayKey.split('-').map(Number);
-  const morningHint = /\b(morgen(?:s)?|vormittag|früh|frueh|guten\s+morgen)\b/i.test(
-    `${req.title} ${req.context} ${req.areaHint ?? ''}`,
-  );
-  const defaultPrefer = morningHint
-    ? new Date(y!, m! - 1, d!, 9, 30, 0, 0).getTime()
-    : preferMs != null && Number.isFinite(preferMs)
-      ? preferMs
-      : new Date(y!, m! - 1, d!, 11, 0, 0, 0).getTime();
-
-  try {
-    const {
-      dayBoundsMs,
-      findFreeSlotStartMs,
-      hardIntervalsFromStops,
-    } = require('../planning/planHardLock') as typeof import('../planning/planHardLock');
-    const plan = useFuturePlanStore.getState().getPlanForDay(dayKey);
-    const bounds = dayBoundsMs(dayKey);
-    const free = findFreeSlotStartMs({
-      preferredStartMs: defaultPrefer,
-      durationMs: Math.max(30, tourDurationMin) * 60_000,
-      hardIntervals: hardIntervalsFromStops(plan.stops),
-      dayStartMs: bounds.start,
-      dayEndMs: bounds.end,
-      nowFloorMs:
-        dayKey === todayDateKey()
-          ? Date.now() + 20 * 60_000
-          : bounds.start,
-    });
-    if (free != null) return free;
-  } catch {
-    /* soft */
-  }
-
-  if (preferMs != null && Number.isFinite(preferMs)) return preferMs;
-  try {
-    const plan = useFuturePlanStore.getState().getPlanForDay(dayKey);
-    const stops = [...plan.stops]
-      .filter(
-        (s) =>
-          s.kind !== 'nav_leg' &&
-          s.plannedEndMs != null &&
-          Number.isFinite(s.plannedEndMs),
-      )
-      .sort((a, b) => (a.plannedEndMs ?? 0) - (b.plannedEndMs ?? 0));
-    const last = stops[stops.length - 1];
-    if (last?.plannedEndMs != null) {
-      return last.plannedEndMs + 10 * 60_000;
-    }
-  } catch {
-    /* soft */
-  }
-  return defaultPrefer;
 }
 
 /**
@@ -139,14 +79,13 @@ export function mirrorTourToTimeline(
       20;
   let t = resolveTourStartMs(dk, startMs ?? req.preferStartMs, req, tourMin);
 
-  // Nächster Hard-Termin → Tour darf nicht drüberlaufen
+  // Nächster Hard-/Soft-Block → Tour darf nicht drüberlaufen
   try {
     const {
-      hardIntervalsFromStops,
-      isHardFixedStop,
+      blockIntervalsFromStops,
     } = require('../planning/planHardLock') as typeof import('../planning/planHardLock');
     const plan = useFuturePlanStore.getState().getPlanForDay(dk);
-    const hard = hardIntervalsFromStops(plan.stops).sort(
+    const hard = blockIntervalsFromStops(plan.stops).sort(
       (a, b) => a.start - b.start,
     );
     const next = hard.find((h) => h.start > t);
@@ -160,14 +99,12 @@ export function mirrorTourToTimeline(
         }
       }
     }
-    void isHardFixedStop;
   } catch {
     /* soft */
   }
 
   let inserted = 0;
   const transport = req.mobility === 'bike' ? 'bike' : 'walk';
-  let sumDwell = 0;
 
   for (let i = 0; i < result.stops.length; i++) {
     const s = result.stops[i]!;
@@ -176,19 +113,18 @@ export function mirrorTourToTimeline(
       i < result.legs.length && result.legs[i]?.durationSec != null
         ? Math.max(2, Math.round(result.legs[i]!.durationSec / 60))
         : 8;
-    sumDwell += dwellMin + (i > 0 ? legMin : 0);
 
-    // Hard-Konflikt: Stop überspringen statt drüberbuchen
+    // Hard-/Soft-Konflikt: Stop überspringen statt drüberbuchen
     try {
-      const { hardIntervalsFromStops } =
+      const { blockIntervalsFromStops } =
         require('../planning/planHardLock') as typeof import('../planning/planHardLock');
       const plan = useFuturePlanStore.getState().getPlanForDay(dk);
       const end = t + dwellMin * 60_000;
-      const clash = hardIntervalsFromStops(plan.stops).some(
+      const clash = blockIntervalsFromStops(plan.stops).some(
         (h) => t < h.end && end > h.start,
       );
       if (clash) {
-        const nextHard = hardIntervalsFromStops(plan.stops)
+        const nextHard = blockIntervalsFromStops(plan.stops)
           .filter((h) => h.end > t)
           .sort((a, b) => a.end - b.end)[0];
         if (nextHard) {
@@ -214,7 +150,7 @@ export function mirrorTourToTimeline(
       status: 'planned',
       planPriority: 6,
       emoji: '🗺️',
-      notes: `Tour · ~${result.totalMin || sumDwell} Min`,
+      notes: buildTourStopNotes(dwellMin),
       planTaskId: result.requestId,
     });
     t += (dwellMin + legMin) * 60_000;
@@ -222,7 +158,25 @@ export function mirrorTourToTimeline(
   }
 
   try {
+    const { applyGapFillTravelLegs } = require('../timeline/gapFillTravel') as {
+      applyGapFillTravelLegs: (opts?: {
+        skipQuietResolve?: boolean;
+      }) => unknown;
+    };
     applyGapFillTravelLegs();
+  } catch {
+    /* soft */
+  }
+
+  // Soft-Overlaps vor Kalender-Open still schieben
+  try {
+    const { resolveOverlapsQuietly, speakUnresolvedPlanConflict } =
+      require('../planning/planConflictResolve') as {
+        resolveOverlapsQuietly: (o?: { speakIfStuck?: boolean }) => boolean;
+        speakUnresolvedPlanConflict: () => void;
+      };
+    const still = resolveOverlapsQuietly({ speakIfStuck: false });
+    if (still) speakUnresolvedPlanConflict();
   } catch {
     /* soft */
   }
@@ -240,7 +194,10 @@ export function mirrorTourToTimeline(
     } else {
       usePlanCalendarUiStore.getState().setMirroredActions([]);
     }
-    requestOpenPlanCalendar();
+    // Hard/short Nav: still spiegeln, Timeline NICHT aufklappen.
+    if (req.uiLayout === 'timeline_stack') {
+      requestOpenPlanCalendar();
+    }
   } catch {
     /* soft */
   }

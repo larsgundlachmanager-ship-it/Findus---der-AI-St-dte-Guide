@@ -133,6 +133,31 @@ export function formatPacingSpeech(
       /* keep */
     }
     const untilB = Math.max(1, Math.round(until));
+    try {
+      const { assessLiveJourneyPace } = require('./liveJourneyAdapt') as {
+        assessLiveJourneyPace: (o: {
+          nowMs: number;
+          depMs: number;
+          distanceM: number;
+          bufferMin?: number;
+          paceMPerMin?: number | null;
+          line?: string | null;
+        }) => { tip: string | null; scenario: string };
+      };
+      const distGuess = Math.max(40, Math.round(walk * 70));
+      const adapt = assessLiveJourneyPace({
+        nowMs: Date.now(),
+        depMs: pacing.departure.getTime(),
+        distanceM: distGuess,
+        bufferMin: 3,
+        line: line,
+      });
+      if (adapt.tip && (adapt.scenario === 'catch_up' || adapt.scenario === 'wait_next')) {
+        return adapt.tip;
+      }
+    } catch {
+      /* soft */
+    }
     if (untilB <= 3) {
       return (
         `In ${untilB} Minuten fährt die ${line} — ` +

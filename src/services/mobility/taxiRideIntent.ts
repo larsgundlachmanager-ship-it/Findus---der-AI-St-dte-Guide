@@ -7,7 +7,7 @@ const TAXI_RE =
   /\b(taxi|taxistand|taxizentrale|taxifahrer|mietwagen\s+mit\s+fahrer)\b/iu;
 const RIDE_HAIL_RE = /\b(uber|bolt|freenow|free\s*now)\b/iu;
 const CALL_TAXI_RE =
-  /\b(?:ruf(?:e|en)?|bestell(?:e|en)?|hol(?:e|en)?|organisier(?:e|en)?)\s+(?:mir\s+)?(?:bitte\s+)?(?:ein(?:en)?\s+)?(?:taxi|uber)|(?:taxi|uber)\s+(?:rufen|bestellen|holen|organisieren)\b/iu;
+  /\b(?:ruf(?:e|en)?|bestell(?:e|en)?|reservier(?:e|en)?|vorbestell(?:e|en)?|hol(?:e|en)?|organisier(?:e|en)?)\b[\s\S]{0,48}?\b(?:ein(?:en)?\s+)?(?:taxi|uber)\b|\b(?:taxi|uber)\s+(?:rufen|bestellen|holen|organisieren|reservieren|vorbestellen)\b/iu;
 
 export function wantsTaxiRide(text: string): boolean {
   const t = (text || '').replace(/\s+/g, ' ').trim();

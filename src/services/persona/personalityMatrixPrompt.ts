@@ -157,7 +157,7 @@ export function buildPersonalityMatrixPromptBlock(
   }
 
   return `${speechStyleBlock}
-${antiFluffRule ? `${antiFluffRule}\n` : ''}${tempoRule ? `${tempoRule}\n` : ''}=== PERSÖNLICHKEITS-MATRIX (Feintuning — Wortlaut frei) ===
+${antiFluffRule ? `${antiFluffRule}\n` : ''}${tempoRule ? `${tempoRule}\n` : ''}=== PERSÖNLICHKEITS-MATRIX (Overlay / Feintuning — Wortlaut frei) ===
 ${addressRule}
 - Rolle (Kat. 1): ${roleHint}
 - Vibe (Kat. 2): ${vibeHint}

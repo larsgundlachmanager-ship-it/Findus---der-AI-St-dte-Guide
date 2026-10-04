@@ -65,19 +65,215 @@ export function startPitchDeepAppend(opts: {
     dishWish,
   });
 
-  if (opts.req.kind !== 'food' && opts.req.kind !== 'bar') return;
+  const blob = `${opts.req.title} ${opts.req.context}`;
+  const rentalAsk =
+    /\b(sup|stand[\s-]?up|paddle|verleih|miete|surf(?:brett)?|kajak|kanu|fahrradverleih|bike\s*rental)\b/i.test(
+      blob,
+    );
+
+  const both = opts.options.slice(0, 2);
+
+  // Hotel: Booking-Link für BEIDE Optionen nachziehen
+  if (opts.req.kind === 'hotel') {
+    void (async () => {
+      try {
+        const actionUpdates: Record<string, ReturnType<typeof buildPitchActions>> =
+          {};
+        const bulletUpdates: Record<string, string[]> = {};
+        const priceBits: string[] = [];
+        for (const opt of both) {
+          let booking = String(opt.bookingUrl || '').trim();
+          if (!booking || !isSafeOfferUrl(booking)) {
+            try {
+              const { buildPitchHotelBookingUrl } = require('./pitchBookingUrl') as {
+                buildPitchHotelBookingUrl: (
+                  name: string,
+                  ctx: string,
+                  city?: string | null,
+                ) => string | null;
+              };
+              booking =
+                buildPitchHotelBookingUrl(
+                  opt.name,
+                  `${opts.req.title} ${opts.req.context}`,
+                  opts.req.cityHint,
+                ) || '';
+            } catch {
+              booking = '';
+            }
+          }
+          if (booking && isSafeOfferUrl(booking)) {
+            actionUpdates[opt.id] = buildPitchActions({
+              kind: 'hotel',
+              name: opt.name,
+              lat: opt.lat,
+              lng: opt.lng,
+              mapsUrl: opt.mapsUrl,
+              bookingUrl: booking,
+              websiteUrl: opt.websiteUrl,
+              role: opt.role === 'out_of_box' ? 'alternative' : opt.role,
+              suppressNav: true,
+            });
+          }
+          const priceHint = (opt.bullets ?? []).find((b) => /\d+\s*€|€\s*\d+/u.test(b));
+          if (priceHint) priceBits.push(`${opt.name}: ${priceHint}`);
+          if (priceHint) {
+            bulletUpdates[opt.id] = [priceHint, ...(opt.bullets ?? [])]
+              .filter((b, i, a) => a.indexOf(b) === i)
+              .slice(0, 3);
+          }
+        }
+        if (!Object.keys(actionUpdates).length && !priceBits.length) return;
+        opts.onAppend({
+          requestId: opts.req.requestId,
+          optionId: null,
+          spokenAppend: priceBits.length
+            ? `Noch zu den Preisen: ${priceBits.join(' · ')}.`
+            : '',
+          bulletUpdates,
+          actionUpdates,
+        });
+      } catch {
+        /* soft */
+      }
+    })();
+    return;
+  }
+
+  // Kino: Ticket-Link + Preis für BEIDE Kinos nachziehen
+  if (opts.req.kind === 'cinema') {
+    void (async () => {
+      try {
+        const actionUpdates: Record<string, ReturnType<typeof buildPitchActions>> =
+          {};
+        const bulletUpdates: Record<string, string[]> = {};
+        const priceBits: string[] = [];
+        for (const opt of both) {
+          const ticket = String(opt.ticketUrl || '').trim();
+          const site = String(opt.websiteUrl || '').trim();
+          const link = (ticket && isSafeOfferUrl(ticket) ? ticket : null) ||
+            (site && isSafeOfferUrl(site) ? site : null);
+          if (link) {
+            actionUpdates[opt.id] = buildPitchActions({
+              kind: 'cinema',
+              name: opt.name,
+              lat: opt.lat,
+              lng: opt.lng,
+              mapsUrl: opt.mapsUrl,
+              websiteUrl: opt.websiteUrl,
+              websiteLabel: 'Programm',
+              ticketUrl: ticket && isSafeOfferUrl(ticket) ? ticket : null,
+              role: opt.role === 'out_of_box' ? 'alternative' : opt.role,
+              suppressNav: true,
+            });
+          }
+          const priceHint = (opt.bullets ?? []).find((b) =>
+            /\b(ticket|eintritt|preis|\d+[.,]?\d*\s*€)/iu.test(b),
+          );
+          if (priceHint) {
+            priceBits.push(`${opt.name}: ${priceHint}`);
+            bulletUpdates[opt.id] = [priceHint, ...(opt.bullets ?? [])]
+              .filter((b, i, a) => a.indexOf(b) === i)
+              .slice(0, 3);
+          }
+        }
+        if (!Object.keys(actionUpdates).length && !priceBits.length) return;
+        opts.onAppend({
+          requestId: opts.req.requestId,
+          optionId: null,
+          spokenAppend: priceBits.length
+            ? `Kurz zu den Tickets: ${priceBits.join(' · ')}.`
+            : '',
+          bulletUpdates,
+          actionUpdates,
+        });
+      } catch {
+        /* soft */
+      }
+    })();
+    return;
+  }
+
+  // Gastro-Menü ODER Verleih-Preise (SUP/…) — Call-3-ähnlich nachhängen
+  if (opts.req.kind !== 'food' && opts.req.kind !== 'bar' && !rentalAsk) {
+    return;
+  }
+
+  if (rentalAsk && opts.req.kind !== 'food' && opts.req.kind !== 'bar') {
+    void (async () => {
+      try {
+        const { fetchRentalPriceFromWebsite } = await import(
+          '../../services/research/rentalPriceFromWebsite'
+        );
+        const priceBits: string[] = [];
+        const bulletUpdates: Record<string, string[]> = {};
+        const actionUpdates: Record<string, ReturnType<typeof buildPitchActions>> =
+          {};
+        // Immer beide Optionen parallel
+        await Promise.all(
+          both.map(async (opt) => {
+            const url = String(opt.websiteUrl || opt.menuUrl || '').trim();
+            if (!/^https?:\/\//i.test(url) || !isSafeOfferUrl(url)) return;
+            const hit = await fetchRentalPriceFromWebsite({ url });
+            if (hit?.label) {
+              priceBits.push(`${opt.name}: ${hit.label}`);
+              bulletUpdates[opt.id] = [
+                hit.label,
+                ...(opt.bullets ?? []).slice(0, 2),
+              ].slice(0, 3);
+            }
+            actionUpdates[opt.id] = buildPitchActions({
+              kind: opts.req.kind,
+              name: opt.name,
+              lat: opt.lat,
+              lng: opt.lng,
+              mapsUrl: opt.mapsUrl,
+              menuUrl: opt.menuUrl,
+              websiteUrl: opt.websiteUrl,
+              role: opt.role === 'out_of_box' ? 'alternative' : opt.role,
+              suppressNav: true,
+            });
+          }),
+        );
+        if (!priceBits.length && !Object.keys(actionUpdates).length) return;
+        opts.onAppend({
+          requestId: opts.req.requestId,
+          optionId: null,
+          spokenAppend: priceBits.length
+            ? `Kurz zu den Preisen: ${priceBits.join(' · ')}.`
+            : '',
+          bulletUpdates,
+          actionUpdates,
+        });
+      } catch {
+        /* soft */
+      }
+    })();
+    return;
+  }
 
   void (async () => {
     try {
+      // Top-2 Pitch: IMMER Speisekarte + Preis für beide Optionen nachholen
+      const forceMenu = true;
+      const forcePrice = true;
+
       const { runGastroMenuDeepResearch } = await import(
         '../agents/gastroMenuDeepResearch'
       );
       const queryHint =
         opts.req.kind === 'bar' ? 'Getränkekarte Drinks' : 'Speisekarte Menu';
-      const dishBit = dishWish ? ` ${dishWish} Preis` : '';
+      const dishBit =
+        forcePrice && dishWish
+          ? ` ${dishWish} Preis`
+          : forcePrice
+            ? ' Preis'
+            : dishWish
+              ? ` ${dishWish}`
+              : '';
       const res = await runGastroMenuDeepResearch({
         userText: `${opts.req.title} ${opts.req.context} ${queryHint}${dishBit}`,
-        venues: opts.options.map((c) => ({
+        venues: both.map((c) => ({
           name: c.name,
           websiteUrl: c.websiteUrl ?? null,
           menuUrl: c.menuUrl ?? null,
@@ -113,37 +309,101 @@ export function startPitchDeepAppend(opts: {
         });
       }
 
-      const asMenu = (url: string | null | undefined): string | null => {
+      const asMenu = (url: string | null | undefined, label = ''): string | null => {
         const u = String(url ?? '').trim();
         if (!u || !isSafeOfferUrl(u)) return null;
+        const lab = String(label || '').toLowerCase();
+        if (
+          /\b(speisekarte|menü|menue|karte|menu)\b/i.test(lab) &&
+          !/maps|google/i.test(lab)
+        ) {
+          return u;
+        }
         try {
           const { isMenuAssetUrl } = require('../planning/offerActionUtils') as {
             isMenuAssetUrl: (x: string) => boolean;
           };
           return isMenuAssetUrl(u) ? u : null;
         } catch {
-          return /speisekarte|\/ugd\/|\.pdf/i.test(u) ? u : null;
+          return /speisekarte|\/ugd\/|\.pdf|\/menu/i.test(u) ? u : null;
         }
       };
-      const pickUrlForVenue = (optName: string, index: number): string | null => {
-        const needle = optName.toLowerCase().slice(0, 18);
-        const byName = namedUrls.find((u) =>
-          u.label.toLowerCase().includes(needle),
+
+      const { findDeepestMenuLink } = await import(
+        '../../services/actionBoard/menuDeepLink'
+      );
+      const deepKind = opts.req.kind === 'bar' ? 'drinks' : 'food';
+      const deepHits = await Promise.all(
+        live.options.slice(0, 2).map(async (opt) => {
+          const site = String(opt.websiteUrl || '').trim();
+          if (!site) return { id: opt.id, url: null as string | null };
+          try {
+            const hit = await findDeepestMenuLink({
+              websiteUrl: site,
+              kind: deepKind,
+              signal: opts.req.signal,
+            });
+            return { id: opt.id, url: hit?.url ?? null };
+          } catch {
+            return { id: opt.id, url: null };
+          }
+        }),
+      );
+      const deepById = new Map(deepHits.map((h) => [h.id, h.url]));
+
+      const pickUrlForVenue = (
+        opt: PitchOptionCard,
+        index: number,
+      ): string | null => {
+        const needle = opt.name.toLowerCase().slice(0, 12);
+        const byName = namedUrls.find(
+          (u) =>
+            u.label.toLowerCase().includes(needle) ||
+            needle.length >= 4 && u.url.toLowerCase().includes(needle.slice(0, 6)),
         );
-        const fromNamed = namedUrls[index]?.url ?? namedUrls[0]?.url ?? null;
-        return (
-          asMenu(byName?.url) ||
-          asMenu(fromNamed) ||
-          asMenu(live.options[index]?.menuUrl)
-        );
+        // Button-Payload destName match (beide Optionen)
+        let fromBtnPayload: string | null = null;
+        for (const b of buttons) {
+          const dest =
+            b.payload &&
+            typeof b.payload === 'object' &&
+            'destName' in b.payload
+              ? String((b.payload as { destName?: string }).destName ?? '')
+              : '';
+          const url =
+            b.payload &&
+            typeof b.payload === 'object' &&
+            'url' in b.payload
+              ? String((b.payload as { url?: string }).url ?? '')
+              : '';
+          if (
+            dest &&
+            url &&
+            dest.toLowerCase().includes(needle) &&
+            isSafeOfferUrl(url)
+          ) {
+            fromBtnPayload = asMenu(url, String((b as { label?: string }).label ?? '')) || url;
+            break;
+          }
+        }
+        const fromBtn = asMenu(byName?.url, byName?.label);
+        const fromDeep = deepById.get(opt.id) ?? null;
+        const fromSeed = asMenu(live.options[index]?.menuUrl);
+        const fromSite =
+          opt.websiteUrl && isSafeOfferUrl(opt.websiteUrl) ? opt.websiteUrl : null;
+        return fromDeep || fromBtnPayload || fromBtn || fromSeed || fromSite || null;
       };
 
       const facts = String(res.draftText ?? '');
-      for (let i = 0; i < live.options.length; i++) {
-        const opt = live.options[i]!;
-        const url = pickUrlForVenue(opt.name, i);
+      const usedPriceHints = new Set<string>();
+      const targetOpts = live.options.slice(0, 2);
+      for (let i = 0; i < targetOpts.length; i++) {
+        const opt = targetOpts[i]!;
+        const url = pickUrlForVenue(opt, i);
+        const menuOrSite = url || opt.websiteUrl || null;
         menuUrls[opt.id] = url;
-        if (url) {
+        // Immer Actions für beide Optionen (Link nachholen)
+        if (menuOrSite) {
           actionUpdates[opt.id] = buildPitchActions({
             kind: opts.req.kind,
             name: opt.name,
@@ -158,20 +418,48 @@ export function startPitchDeepAppend(opts: {
             suppressNav: true,
           });
         }
-        const priceRe = new RegExp(
-          `${opt.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^\\n]{0,80}?(\\d+[.,]\\d{2}\\s*€|\\d+\\s*€)`,
+        const esc = opt.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const venueLineRe = new RegExp(
+          `${esc}[^\\n]{0,120}?(\\d+[.,]\\d{2}\\s*€|\\d+\\s*€)`,
           'i',
         );
-        const pm = facts.match(priceRe) || facts.match(/(\d+[.,]\d{2}\s*€)/);
-        if (pm?.[1]) {
-          const hint = dishWish
-            ? `${dishWish} ~${pm[1]}`
-            : `Preis ~${pm[1]}`;
-          priceBits.push(`${opt.name}: ${hint}`);
-          bulletUpdates[opt.id] = [...opt.bullets.slice(0, 2), hint].slice(
-            0,
-            3,
+        const dishPriceRe = dishWish
+          ? new RegExp(
+              `${esc}[^\\n]{0,80}?${dishWish.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^\\n]{0,40}?(\\d+[.,]\\d{2}\\s*€|\\d+\\s*€)`,
+              'i',
+            )
+          : null;
+        // Nie den ersten €-Treffer der ganzen Facts für Option 2 wiederverwenden
+        const pm =
+          facts.match(venueLineRe) ||
+          (dishPriceRe ? facts.match(dishPriceRe) : null);
+        let priceToken = pm?.[1]?.trim() || null;
+        if (priceToken && usedPriceHints.has(`${opt.id}:${priceToken}`)) {
+          priceToken = null;
+        }
+        // Fallback nur wenn genau eine Venue-Zeile mit diesem Namen und Preis
+        if (!priceToken) {
+          const lines = facts.split(/\n+/).filter((ln) =>
+            ln.toLowerCase().includes(opt.name.toLowerCase().slice(0, 8)),
           );
+          for (const ln of lines) {
+            const m = ln.match(/(\d+[.,]\d{2}\s*€|\d+\s*€)/);
+            if (m?.[1] && !usedPriceHints.has(m[1])) {
+              priceToken = m[1];
+              break;
+            }
+          }
+        }
+        if (priceToken) {
+          usedPriceHints.add(priceToken);
+          usedPriceHints.add(`${opt.id}:${priceToken}`);
+          const hint = dishWish ? `${dishWish} ~${priceToken}` : `Preis ~${priceToken}`;
+          priceBits.push(`${opt.name}: ${hint}`);
+          const kept = opt.bullets.filter(
+            (b) =>
+              !/^(ambiente|frische\s+gerichte|freundliche\s+bedienung)/i.test(b),
+          );
+          bulletUpdates[opt.id] = [hint, ...kept].filter(Boolean).slice(0, 3);
         }
       }
 
@@ -180,9 +468,8 @@ export function startPitchDeepAppend(opts: {
         spokenAppend = dishWish
           ? `Kurz zu ${dishWish}: ${priceBits.join(' · ')}.`
           : `Noch zu den Preisen: ${priceBits.join(' · ')}.`;
-      } else if (namedUrls.length || Object.values(menuUrls).some(Boolean)) {
-        spokenAppend = 'Speisekarten habe ich unten verlinkt.';
       }
+      // Auch ohne Preis: Links für beide Optionen trotzdem pushen
       if (!spokenAppend && !Object.keys(actionUpdates).length) return;
 
       opts.onAppend({

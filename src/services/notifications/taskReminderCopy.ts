@@ -7,7 +7,7 @@ const LEAVE_BY_RE =
   /\b(?:bahn|zug|bus|s-?bahn|u-?bahn|tram|straßenbahn|strassenbahn|öpnv|oepnv|abfahrt|anschluss|haltestelle|bahnhof|hbf|flug|flieger|flughafen|gate|boarding|los\s*geh|los\s*muss|aufbruch|leave[-\s]?by)\b/iu;
 
 const TASK_VERB_RE =
-  /\b(?:anruf(?:en)?|call|tabletten?|medikament(?:e)?|pillen?|pack(?:en)?|mail(?:en)?|nachricht|todo|einkauf|mitnehm|abhol|kündig|kuendig|bezahlt?|überweis|ueberweis)\b/iu;
+  /\b(?:anruf(?:en)?|call|tabletten?|medikament(?:e)?|pillen?|pack(?:en)?|packliste|mail(?:en)?|nachricht|todo|einkauf|mitnehm|mitzunehmen|zahnbürste|zahnbuerste|abhol|kündig|kuendig|bezahlt?|überweis|ueberweis)\b/iu;
 
 export function looksLikeLeaveByReminder(text: string): boolean {
   return LEAVE_BY_RE.test((text || '').replace(/\s+/g, ' '));

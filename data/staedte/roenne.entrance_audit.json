@@ -1,0 +1,341 @@
+{
+  "city_id": "roenne",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 120,
+  "country": "Germany",
+  "summary": {
+    "ok": 5,
+    "check": 1,
+    "bad": 5,
+    "errors": 0,
+    "applied": 1,
+    "skipped_directory": 200,
+    "skipped_cached_google": 15
+  },
+  "rows": [
+    {
+      "id": "roenne_r_nne_havn_bornholm",
+      "name": "Rønne Havn",
+      "before": {
+        "lat": 55.09977814,
+        "lng": 14.689844399999998
+      },
+      "google": {
+        "lat": 55.092386999999995,
+        "lng": 14.694310799999998,
+        "place_id": "ChIJH-4NAwMbVUYRaVdLYTDIkh4",
+        "address": "Fiskerivej 1, 3700 Rønne, Denmark"
+      },
+      "delta_m": 870,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_hafen_r_nne",
+      "name": "Rønne Havn",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.09234748,
+        "lng": 14.694241719999999
+      }
+    },
+    {
+      "id": "roenne_bornholms_museum",
+      "name": "Bornholms Museum",
+      "before": {
+        "lat": 55.102483480000004,
+        "lng": 14.70317502
+      },
+      "google": {
+        "lat": 55.102523,
+        "lng": 14.7032441,
+        "place_id": "ChIJL7S2OeMaVUYRTR3s5zc8fTs",
+        "address": "Sankt Mortens Gade 29, 3700 Rønne, Denmark"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_erichsens_gard",
+      "name": "Erichsens Gård",
+      "before": {
+        "lat": 55.10359288000001,
+        "lng": 14.69761732
+      },
+      "google": {
+        "lat": 55.103632399999995,
+        "lng": 14.6976864,
+        "place_id": "ChIJ8WqeXx0bVUYReUFrQmguPYw",
+        "address": "Laksegade 7, 3700 Rønne, Denmark"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_nikolaikirche",
+      "name": "Sankt Nicolai Kirke",
+      "before": {
+        "lat": 55.098925179999995,
+        "lng": 14.69749122
+      },
+      "google": {
+        "lat": 55.098964699999996,
+        "lng": 14.697560300000001,
+        "place_id": "ChIJ0Swdo_0aVUYRmuw2dedpiO0",
+        "address": "Kirkepladsen 20, 3700 Rønne, Denmark"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_st_knuds_kirche",
+      "name": "St. Knuds Kirche",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.10687048,
+        "lng": 14.7518449
+      }
+    },
+    {
+      "id": "roenne_skulptur_nderne",
+      "name": "Skulptur \"Ænderne\"",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.10277498000001,
+        "lng": 14.69914922
+      }
+    },
+    {
+      "id": "roenne_skulptur_sters_br_nden",
+      "name": "Skulptur \"Østersøbrønden\"",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.102395279999996,
+        "lng": 14.708587220000002
+      }
+    },
+    {
+      "id": "roenne_skulptur_peter_mark",
+      "name": "Skulptur \"Peter Mark\"",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.10052718000001,
+        "lng": 14.70088212
+      }
+    },
+    {
+      "id": "roenne_ronne_lighthouse",
+      "name": "Ronne Lighthouse",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.09944178000001,
+        "lng": 14.69596162
+      }
+    },
+    {
+      "id": "roenne_den_nye_rundkirke",
+      "name": "den nye rundkirke",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.092684580000004,
+        "lng": 14.72841372
+      }
+    },
+    {
+      "id": "roenne_n_rrekaas_strand",
+      "name": "Nørrekaas Strand",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.10440638,
+        "lng": 14.6955261
+      }
+    },
+    {
+      "id": "roenne_gall_kken_strand",
+      "name": "Galløkken strand",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.08809888,
+        "lng": 14.70147634
+      }
+    },
+    {
+      "id": "roenne_antoinette_strand",
+      "name": "Antoinette strand",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.12143638,
+        "lng": 14.69927098
+      }
+    },
+    {
+      "id": "roenne_s_fartsmonumentet_over_faldne_bornholmske_s_folk_under_anden_verdenskrig",
+      "name": "Søfartsmonumentet over faldne Bornholmske søfolk under Anden Verdenskrig",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.09724418,
+        "lng": 14.69827862
+      }
+    },
+    {
+      "id": "roenne_rundk_rsel_kunst",
+      "name": "Rundkørsel Kunst",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.10316658000001,
+        "lng": 14.72582202
+      }
+    },
+    {
+      "id": "roenne_r_nne_havn_fyr",
+      "name": "Rønne Havn Fyr",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.09753518,
+        "lng": 14.691239920000001
+      }
+    },
+    {
+      "id": "roenne_kastellet",
+      "name": "Kastellet",
+      "before": {
+        "lat": 55.09243588,
+        "lng": 14.699725820000001
+      },
+      "google": {
+        "lat": 55.0924754,
+        "lng": 14.699794899999999,
+        "place_id": "ChIJU2xIaC0bVUYRYBW-I0rJy0c",
+        "address": "Arsenalvej 8, 3700 Rønne, Denmark"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_hjorths_fabrik_butik_og_museum",
+      "name": "Hjorths Fabrik - Butik og museum",
+      "before": {
+        "lat": 55.10260268,
+        "lng": 14.696566720000002
+      },
+      "google": {
+        "lat": 55.1026422,
+        "lng": 14.6966358,
+        "place_id": "ChIJTSdmUx0bVUYRFtw3ZcZqmF0",
+        "address": "Krystalgade 5, 3700 Rønne, Denmark"
+      },
+      "delta_m": 6,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_strandl_kken",
+      "name": "Strandløkken",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.08520628,
+        "lng": 14.71043094
+      }
+    },
+    {
+      "id": "roenne_store_torvegade_ovf_kystparken",
+      "name": "Store Torvegade ovf. Kystparken",
+      "before": {
+        "lat": 55.1082864,
+        "lng": 14.702317
+      },
+      "google": {
+        "lat": 55.10897,
+        "lng": 14.70284,
+        "place_id": "ChIJ6xlov-EaVUYRIePGVQgxUcY",
+        "address": "3700 Rønne, Denmark"
+      },
+      "delta_m": 83,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "roenne_galleri_rasch",
+      "name": "Galleri Rasch",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.09934,
+        "lng": 14.694795
+      }
+    },
+    {
+      "id": "roenne_r_nne_bagfyr",
+      "name": "Rønne Bagfyr",
+      "before": {
+        "lat": 55.101017,
+        "lng": 14.708328999999999
+      },
+      "google": {
+        "lat": 55.0994813,
+        "lng": 14.696030700000001,
+        "place_id": "ChIJZbXRnOEbVUYR0L5ZaoWsiyQ",
+        "address": "Lygtestræde, 3700 Rønne, Denmark"
+      },
+      "delta_m": 801,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_lille_torv",
+      "name": "Lille Torv",
+      "before": {
+        "lat": 55.101017,
+        "lng": 14.708328999999999
+      },
+      "google": {
+        "lat": 55.100313,
+        "lng": 14.7013294,
+        "place_id": "ChIJT4yD6PwaVUYRczmj_UAGvxc",
+        "address": "Lille Torv 22, 1, 3700 Rønne, Denmark"
+      },
+      "delta_m": 452,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_laksegade",
+      "name": "Laksegade",
+      "before": {
+        "lat": 55.101017,
+        "lng": 14.708328999999999
+      },
+      "google": {
+        "lat": 55.103632399999995,
+        "lng": 14.6976864,
+        "place_id": "ChIJ8WqeXx0bVUYReUFrQmguPYw",
+        "address": "Laksegade 7, 3700 Rønne, Denmark"
+      },
+      "delta_m": 737,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "roenne_gamle_havnesmedje",
+      "name": "Gamle Havnesmedje",
+      "before": {
+        "lat": 55.101017,
+        "lng": 14.708328999999999
+      },
+      "google": {
+        "lat": 55.092386999999995,
+        "lng": 14.694310799999998,
+        "place_id": "ChIJH-4NAwMbVUYRaVdLYTDIkh4",
+        "address": "Fiskerivej 1, 3700 Rønne, Denmark"
+      },
+      "delta_m": 1310,
+      "status": "BAD",
+      "streetview": "OK"
+    }
+  ]
+}

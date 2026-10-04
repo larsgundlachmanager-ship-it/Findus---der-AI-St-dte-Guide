@@ -1,6 +1,6 @@
 /**
  * Modul-5 Walk: Pitch-Reihenfolge nach User-Steps, nicht alles in einem Satz.
- * 0 Frühstück → 1 Abend/Sunset → 2 Landmarke (Q&A oder Ticket) → 3 Rest. Tour danach.
+ * 0 Frühstück → 1 Landmarke (Q&A oder Ticket) → 2 Abend/Sunset-Meal → 3 Rest/Tour zuletzt.
  */
 
 export function looksLikeBreakfastWishText(t: string): boolean {
@@ -45,13 +45,13 @@ export function pitchWalkRank(w: {
 }): number {
   const t = `${w.title} ${w.context}`;
   if (looksLikeBreakfastWishText(t)) return 0;
+  if (looksLikeLandmarkPitchText(t) || looksLikeLandmarkQaText(t)) return 1;
   if (
     looksLikeEveningMealWishText(t) ||
     (Boolean(w.estimatedTime) && (w.estimatedTime as string) >= '17:30')
   ) {
-    return 1;
+    return 2;
   }
-  if (looksLikeLandmarkPitchText(t) || looksLikeLandmarkQaText(t)) return 2;
   return 3;
 }
 

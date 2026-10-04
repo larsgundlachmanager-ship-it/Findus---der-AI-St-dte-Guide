@@ -22,9 +22,24 @@ website/
 docs/
 /data/
 .cursor/
+.phone-check/
+.tmp/
+.tmp-*/
 .tmp-espeak/
 .tmp-subtitle-frames/
+.tmp-screen-review/
 agent-transcripts/
+# Nur Root-Store-Listings (nicht src/store — sonst bricht der JS-Bundle)
+/store/
+tmp-*.png
+tmp-*.jpg
+*.log
+
+# local Android intermediates (EAS re-prebuilds / uses clean tree)
+android/app/.cxx/
+android/.gradle/
+android/app/build/
+android/build/
 
 # Stadt-Cover nur für Upload-Pipelines — App lädt HTTPS-Cover (nicht bundeln)
 assets/onboarding/remote-covers/
@@ -55,3 +70,15 @@ credentials.json
 google-play-*.json
 pc-api-*.json
 
+# Dev-Audio / Drafts — nicht in EAS-Archive (APK schlank)
+src/assets/audio/samples/
+src/assets/audio/_female_audit/
+assets/brand/
+assets/_icon-crops/
+assets/onboarding/map-bg.png
+assets/onboarding/phone-mockup.png
+assets/onboarding/findus-*.png
+assets/onboarding/yorro-*.png
+assets/onboarding/_*-cover-source.png
+assets/icon-*.png
+assets/_*.py

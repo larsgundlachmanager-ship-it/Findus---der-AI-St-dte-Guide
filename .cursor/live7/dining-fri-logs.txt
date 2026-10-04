@@ -1,0 +1,10 @@
+09-09 11:00:21.500  3283  3324 W ActivityManager: pid 3283 system sent binder code 2 with flags 1 to frozen apps and got error -32
+09-09 11:00:21.594 24841  6479 I ReactNativeJS: Bridgeless mode is enabled
+09-09 11:00:21.669  3283  3324 W ActivityManager: pid 3283 system sent binder code 2 with flags 1 to frozen apps and got error -32
+09-09 11:00:21.669  3283  3324 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+09-09 11:00:22.769  6622  6622 D CAMap_ProductConfig: [ProductConfig] <clinit>:991  Get ro.product.device=Asteroids,throwCameraError=false
+09-09 11:00:22.770  6622  6622 E CAMap_DecisionConfig: [DecisionConfig] getFloat:270  error: org.json.JSONException: No value for feature.dualbokeh.isz.zoom.ratio
+09-09 11:00:22.770  6622  6622 E CAMap_DecisionConfig: [DecisionConfig] getBoolean:216  error: org.json.JSONException: No value for feature.algo.aisr.support
+09-09 11:00:22.770  6622  6622 E CAMap_DecisionConfig: [DecisionConfig] getFloat:270  error: org.json.JSONException: No value for feature.isz.adrc.gain.max
+09-09 11:00:22.771  6622  6622 E CAMap_DecisionConfig: [DecisionConfig] getFloat:270  error: org.json.JSONException: No value for beauty.factor.front
+09-09 11:00:22.771  6622  6622 E CAMap_DecisionConfig: [DecisionConfig] getFloat:270  error: org.json.JSONException: No value for beauty.factor.rear

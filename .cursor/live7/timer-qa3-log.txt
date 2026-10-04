@@ -1,0 +1,9 @@
+09-09 22:20:53.024 17490 17511 I ReactNativeJS: '[devAskPoller] got ask:', 'Timer 2 Minuten'
+09-09 22:20:53.049 17490 17511 I ReactNativeJS: '[boot] phase=', 'ready', '__DEV__=', false, 'setup=', true
+09-09 22:20:53.053 17490 17511 I ReactNativeJS: [devAskPoller] started â†’ :8791
+09-09 22:20:53.112 17490 17511 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `addListener` method.
+09-09 22:20:53.112 17490 17511 W ReactNativeJS: `new NativeEventEmitter()` was called with a non-null argument without the required `removeListeners` method.
+09-09 22:20:54.729 17490 17511 W ReactNativeJS: '[timer] start', 120000, 'Timer', 'Timer 2'
+09-09 22:20:54.774 17490 17512 I FindusAlarm: startActivityQuiet ok activity {com.google.android.deskclock/com.android.deskclock.HandleSetApiCalls}
+09-09 22:20:54.774 17490 17512 I FindusAlarm: setTimer clock ok=true SET_TIMER com.google.android.deskclock/com.android.deskclock.HandleSetApiCalls skipUi=true
+09-09 22:20:54.777 17490 17512 I FindusAlarm: setTimer ok=true status=clock_and_alarm_manager secs=120

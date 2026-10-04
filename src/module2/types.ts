@@ -101,6 +101,7 @@ export type ActionPayload =
       /** Aktive Navigation auf Rad/Fuß umstellen (gleiche Destination) */
       kind: 'switch_nav_mode';
       preferBike?: boolean;
+      preferWalk?: boolean;
     }
   | { kind: 'ui'; action: string; data?: Record<string, unknown> }
   | { kind: 'vapi_call'; target: string }

@@ -10,6 +10,18 @@
 export function looksLikeOutfitOrWeatherUtterance(text: string): boolean {
   const t = (text ?? '').replace(/\s+/g, ' ').trim();
   if (!t) return false;
+  // Klarer Gastro-/AYCE-/Restaurant-Wunsch → nie Wetter-Chat klauen
+  // (außer User fragt explizit auch nach Wetter/Anziehen).
+  const diningPrimary =
+    /\b(essen\s+gehen|restaurant|all[\s-]*(?:you|xou|jou)[\s-]*can[\s-]*eat|allyoucaneat|\bayce\b|buffet|pizza|sushi|steak|hunger|speisekarte|wo\s+(?:kann|gibt).{0,48}essen)\b/i.test(
+      t,
+    );
+  const explicitWeatherAsk =
+    /\b(wetter|regnen|regnet|regen|regnerisch|schneit|schneien|schnee|anziehen|outfit|wie\s+kalt|wie\s+warm|was\s+soll\s+ich\s+an)\b/i.test(
+      t,
+    );
+  if (diningPrimary && !explicitWeatherAsk) return false;
+
   return (
     /\b(anzieh(?:en)?|anziehen|outfit|kleidung|was\s+soll\s+ich\s+an|was\s+zieh)\b/i.test(
       t,
@@ -19,9 +31,13 @@ export function looksLikeOutfitOrWeatherUtterance(text: string): boolean {
     ) &&
       /\b(soll|empfehl|brauch|mitnehm|wetter|abend|heute)\b/i.test(t)) ||
     // Verb-Formen: regnen/regnet — sonst Sticky-Pitch (Tennis) nach Regen-Frage.
-    (/\b(wetter|regnen|regnet|regen|regnerisch|schneit|schneien|schnee|temperatur|grad|wie\s+kalt|wie\s+warm)\b/i.test(
+    // Kein nacktes „grad“ (false-positive) — nur mit Wetter-/Temp-Kontext.
+    (/\b(wetter|regnen|regnet|regen|regnerisch|schneit|schneien|schnee|temperatur|wie\s+kalt|wie\s+warm)\b/i.test(
       t,
     ) &&
+      !/\b(plan(e|en|ung)|einplanen|timeline|kalender)\b/i.test(t)) ||
+    (/\b\d+\s*°|\b\d+\s*grad\b|\bgrad\s+(?:warm|kalt|plus|minus)\b/i.test(t) &&
+      !diningPrimary &&
       !/\b(plan(e|en|ung)|einplanen|timeline|kalender)\b/i.test(t))
   );
 }
@@ -119,6 +135,36 @@ export function weatherAskIsFutureDay(text: string): boolean {
   return /\b(morgen|übermorgen|uebermorgen)\b/iu.test(t);
 }
 
+/** Allgemeine Mehrtages-Vorhersage (Radio-Stil) — nicht Slot/Jetzt/Regen-only. */
+export function weatherAskIsGeneralForecast(text: string): boolean {
+  const t = (text ?? '').replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  if (weatherAskIsFutureDay(t)) return false;
+  if (weatherAskIsImmediateNow(t)) return false;
+  if (/\b(anzieh(?:en)?|outfit|kleidung|was\s+soll\s+ich\s+an)\b/iu.test(t)) {
+    return false;
+  }
+  const rainOnly =
+    /\b(regnet|regnen|regen|schauer|schirm)\b/iu.test(t) &&
+    !/\b(wetter|wettervorhersage)\b/iu.test(t);
+  if (rainOnly) return false;
+  if (/\bwettervorhersage\b/iu.test(t)) return true;
+  if (/\bwochenende\b/iu.test(t) && /\bwetter\b/iu.test(t)) return true;
+  if (/\bwie\s+(?:wird|ist)\s+(?:das\s+)?wetter\b/iu.test(t)) {
+    // „heute“ allein = Tagesfrage, kein Mehrtages-Radio
+    if (/\bheut(?:e|en)\b/iu.test(t) && !/\b(morgen|wochenende|tage)\b/iu.test(t)) {
+      return false;
+    }
+    return true;
+  }
+  // Nacktes „Wetter?“ / „Wetter bitte“ ohne Slot
+  return (
+    /\bwetter\b/iu.test(t) &&
+    !/\bheut(?:e|en)\b/iu.test(t) &&
+    t.split(/\s+/).length <= 6
+  );
+}
+
 /**
  * Tipps was nachschlagen -- kein Script, keine Lane.
  * Stadtbummel/Wetter bleibt Antwort; Timeline nur lesen wenn gefüllt.
@@ -129,21 +175,35 @@ export function weatherOutfitLookupTips(text: string): string {
     /\b(anzieh(?:en)?|outfit|kleidung|was\s+soll\s+ich\s+an|was\s+zieh)\b/i.test(
       text ?? '',
     );
+  const rainAsk =
+    /\b(regnet|regnen|regen|regnerisch|niederschlag|schauer)\b/i.test(text ?? '') &&
+    !outfitAsk;
   return [
     'GELÄNDER Wetter/Kleidung (Wortlaut frei, locker wie ein lokaler Freund, keine Timeline öffnen):',
     future
       ? '- Gefragter Tag ist nicht heute — Vorhersage für diesen Tag, nicht den Jetzt-Snap als ganze Antwort.'
       : '- Gefragter Tag: heute, Live-Zahlen.',
     '- Stadt: immer GPS/Standort — außer explizit genannt („Wetter in London“) oder Deixis „da/dort“ (Gesprächsstadt).',
-    '- Speech immer (nur belegt, nie erfinden): Himmel, Temperatur von–bis oder Spitze, wann Regen/Schauer, ein Kleidungstipp — alles in kurzen VOLLEN Sätzen (Subjekt+Verb), kein Komma-Telegramm.',
+    rainAsk
+      ? '- REGEN-FRAGE: Speech ZUERST nur Regen (ja/nein + Timing belegt). Temp optional danach. Kein Outfit-Essay, keine Navigation, kein Extra-Pitch.'
+      : weatherAskIsGeneralForecast(text ?? '')
+        ? '- ALLGEMEINE VORHERSAGE: 2–3 Fließsätze Radio-Stil — Himmel über heute/morgen/Tag+2 kontrastieren, Schauer den Tagen zuordnen, Wind nur belegt+spürbar, Höchst am Ende. Kein Telegramm/Prozent.'
+        : '- Speech immer (nur belegt, nie erfinden): Himmel, Temperatur von–bis oder Spitze, wann Regen/Schauer — kurze VOLLE Sätze. KEINE Kleidungsvorschläge bei reiner Wetterfrage (nur wenn Outfit/Anziehen gefragt).',
     '- Nach Sonnenuntergang / vor Sonnenaufgang: klarer Himmel / Wolken — nie Sonne als Tag-Wetter. Sterne nur ehrlich (Dorf/Land oft, Stadt oft nicht).',
-    '- Kleidung natürlich einweben — keine Parenthesen, kein „(Jacke mitnehmen)“-Meta, kein „leichte Bekleidung reicht“ als Fetzen ohne Satzbau.',
-    '- Stichpunkte dieselben drei: 1) Himmel 2) Temperatur 3) Kleidung (bei Nässe Jacke/Schirm im Tipp).',
-    '- Ton: locker, flüssig — kein Behörden-Wetterbericht, keine Aufzählung wie eine Liste vorlesen. Kurz und knapp JA, abgehackt NEIN.',
+    outfitAsk
+      ? '- Kleidung natürlich einweben — keine Parenthesen, kein Meta-Fetzen.'
+      : '- KEINE Kleidung/Jacke/Schichten ungefragt — nur Wetterfakten.',
+    '- Stichpunkte = FACT-CHIPS (kein Fließtext): z. B. „Wechselhaft · bis 24°“, „Heute kein Regen“, „Jacke“. Max 2–3, je max ~2 UI-Zeilen. Nie gesprochene Sätze 1:1 kopieren („Also, in … sieht es so aus…“).',
+    rainAsk
+      ? '- Regen-Stichpunkte: 1) Regen ja/nein/Timing 2) optional Temp. Titel-Thema = Regen.'
+      : '- Stichpunkte = FACT-CHIPS Himmel/Temp/Regen-Timing — kompakt, keine Prosa, keine ungefragte Kleidung.',
+    '- Ton Speech: locker, flüssig. Stichpunkte: Telegramm-Chips ok. VERBOTEN: Navigation starten aus Wetter-/Regenfrage.',
     '- VERBOTEN: Aushang, schwarzes Brett, Bahnhof, „selber nachgucken“ als Wetter-Antwort; kein Gewitter ohne Beleg.',
     outfitAsk
       ? '- Outfit gefragt: Kleidung etwas präsenter im Fließtext, Wetter kurz als Begründung.'
-      : '- Nur Wetter gefragt: Wetter vorne, Kleidung ein kurzer Tipp im selben Fließtext — Jacke nicht erzwingen wenn mild/trocken.',
+      : rainAsk
+        ? '- Nur Regen gefragt: Regen vorne, fertig — kein ganzer Tages-Wetterbericht.'
+        : '- Nur Wetter gefragt: nur Wetter (Himmel/Temp/Regen-Timing) — keine Kleidungstipps.',
     '- Timeline nur mitdenken wenn dort schon Stops stehen; leer → ignorieren, nichts eintragen.',
   ].join('\n');
 }
@@ -210,19 +270,66 @@ function countClockHints(t: string): number {
   return a.length + b.length;
 }
 
+
+const EVENING_MEAL_RE =
+  /\b(essen(?:\s+gehen)?|abendessen|dinner|restaurant|mittagessen|frühstück(?:en)?|fruehstueck(?:en)?|café|cafe)\b/i;
+const EVENING_CULTURE_RE =
+  /\b(theater|kino|cinema|konzert|musical|oper|museum|ausstellung|show|vorstellung)\b/i;
+
+/** Abend-/Sequenz-Multi-Stop: erst Essen dann Theater usw. — immer Planung. */
+export function looksLikeSequencedMultiStopPlan(text: string): boolean {
+  const t = (text ?? '').replace(/\s+/g, ' ').trim();
+  if (!t || t.length < 12) return false;
+  if (looksLikeOutfitOrWeatherUtterance(t)) return false;
+  const hasSeq =
+    /\b(erst|zuerst|dann|danach|und\s+dann|anschließend|anschliessend|vorher|danach)\b/i.test(
+      t,
+    );
+  if (!hasSeq) return false;
+  const meal = EVENING_MEAL_RE.test(t);
+  const culture = EVENING_CULTURE_RE.test(t);
+  if (meal && culture) return true;
+  // Abend + Essen + Sequenz zu zweitem Stop
+  if (
+    /\b(abend(?:planung)?|heute\s+abend|heute\s+nacht)\b/i.test(t) &&
+    meal &&
+    /\b(dann|danach|und\s+dann).{0,48}\b(theater|kino|museum|konzert|bar|party|spazier\w*|tour|musical)\b/i.test(
+      t,
+    )
+  ) {
+    return true;
+  }
+  // explizit: erst essen … dann …
+  if (
+    /\b(erst|zuerst).{0,40}\b(essen|restaurant|abendessen).{0,48}\b(dann|danach)\b/i.test(
+      t,
+    ) &&
+    /\b(dann|danach).{0,40}\b([\p{L}]{3,})\b/iu.test(t)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 /**
  * Langer, chaotischer Tageswunsch mit mehreren Themen — immer Modul 5.
  * Auch ohne exaktes „und dann“ / „planen“ (STT-Realität).
  */
 export function looksLikeChaoticDayPlanUtterance(text: string): boolean {
   const t = (text ?? '').replace(/\s+/g, ' ').trim();
-  if (!t || t.length < 40) return false;
+  if (!t) return false;
   if (looksLikeOutfitOrWeatherUtterance(t)) return false;
+  if (looksLikeSequencedMultiStopPlan(t)) return true;
+  if (t.length < 40) return false;
 
   const buckets = countNeedBuckets(t);
   const clocks = countClockHints(t);
+  const sections =
+    t.match(
+      /\b(und\s+dann|danach|zuerst|außerdem|ausserdem|vormittag|nachmittag|abends|morgens|mittags|später|spaeter|zwischendurch)\b/gi,
+    )?.length ?? 0;
   const helpPlan =
-    /\b(hilf(st)?\s+mir|organisie|zusammenstell|was\s+mach\s+ich|wie\s+bau|tag\s+durch|durch den tag)\b/i.test(
+    /\b(hilf(st)?\s+mir|organisie|zusammenstell|was\s+mach\s+ich|wie\s+bau|tag\s+durch|durch den tag|stell\s+mir\s+(?:einen\s+)?(?:tollen\s+)?tag)\b/i.test(
       t,
     );
 
@@ -239,10 +346,23 @@ export function looksLikeChaoticDayPlanUtterance(text: string): boolean {
       /* soft */
     }
   }
+  // 2+ Aufgaben + mehrere Zeitabschnitte/Uhrzeiten → Planung (auch lokal)
+  if (buckets >= 2 && (clocks >= 1 || sections >= 2) && t.length >= 50) {
+    return true;
+  }
   // 1 starke Anker-Art + Uhrzeit + weiterer Kontext (lang)
   if (buckets >= 1 && clocks >= 1 && t.length >= 80) return true;
   // 2+ Uhrzeiten im Satz
   if (clocks >= 2) return true;
+  // Mehrere Abschnitte + Tour/Orte → Tag, kein Einzel-Pitch
+  if (
+    sections >= 2 &&
+    buckets >= 1 &&
+    t.length >= 60 &&
+    /\b(tour|rundgang|must[-\s]?haves?|mehrere\s+orte|zwischen)\b/i.test(t)
+  ) {
+    return true;
+  }
   // Explizite Hilfe bei langem Wunschkatalog
   if (helpPlan && buckets >= 1 && t.length >= 60) return true;
   try {
@@ -273,6 +393,7 @@ export function looksLikeSingleJustDoItRequest(text: string): boolean {
   if (looksLikeOutfitOrWeatherUtterance(t)) return false;
   // Chaos schlägt Einzel-Just-Do-It (sonst fasst Manager nur zusammen)
   if (looksLikeChaoticDayPlanUtterance(t)) return false;
+  if (looksLikeSequencedMultiStopPlan(t)) return false;
 
   const hasPlanVerb =
     /\b(plan(e|en|ung|st)?|einplanen|tagesplan|timeline|kalender|durchplanen|organisiere|orga(nisiere)?\s+(mir|den)|mach\s+mir\s+(einen\s+)?plan|ganzer\s+tag|den\s+tag\s+(durch)?planen)\b/i.test(
@@ -393,8 +514,27 @@ export function looksLikeModul5PlanUtterance(text: string): boolean {
 
   if (looksLikeOutfitOrWeatherUtterance(t)) return false;
 
+  // Flug+Taxi / Leave-by — hart vor Destination-Day / Erkunden
+  try {
+    const {
+      blocksExploreDriftForFlight,
+      isFlightTripQuery,
+    } = require('../../services/flights/flightTripIntent') as {
+      blocksExploreDriftForFlight: (s: string) => boolean;
+      isFlightTripQuery: (s: string) => boolean;
+    };
+    if (blocksExploreDriftForFlight(t)) return false;
+    if (isFlightTripQuery(t) && !looksLikeTouristTripUtterance(t)) return false;
+  } catch {
+    /* soft */
+  }
+
+  // Presence-Gap: M5-Tagesplan ok, aber Access-Task kommt via Gap-Engine zuerst
+  // (kein early-return false — Plan darf laufen, Work ordnet Anreise vor)
+
   // Chaos ZUERST — bevor Single-Just-Do-It den Tag killt
   if (looksLikeChaoticDayPlanUtterance(t)) return true;
+  if (looksLikeSequencedMultiStopPlan(t)) return true;
   try {
     const { userWantsDestinationDay } = require('./planDestinationCity') as {
       userWantsDestinationDay: (s: string) => boolean;
@@ -403,18 +543,6 @@ export function looksLikeModul5PlanUtterance(text: string): boolean {
       // Reiner Gastro-/Hotel-Wunsch in anderer Stadt = Pitch, kein M5-Tagesplan.
       if (looksLikeSingleJustDoItRequest(t)) return false;
       return true;
-    }
-  } catch {
-    /* soft */
-  }
-
-  // Flug-Leave-by / Check-in / Security ist die Flug-Blaupause, kein Stadt-Tagesplan.
-  try {
-    const { isFlightTripQuery } = require('../../services/flights/flightTripIntent') as {
-      isFlightTripQuery: (s: string) => boolean;
-    };
-    if (isFlightTripQuery(t) && !looksLikeTouristTripUtterance(t)) {
-      return false;
     }
   } catch {
     /* soft */
@@ -463,7 +591,10 @@ export function looksLikeModul5PlanUtterance(text: string): boolean {
     (/\breservier\b/i.test(t) &&
       /\b(plan|einplanen|timeline|tagesplan|und\s+dann)\b/i.test(t));
   const hasMultiStop =
-    /\b(und\s+dann|danach|zuerst|außerdem|ausserdem|vorher).{0,60}\b(essen|café|cafe|museum|theater|hotel|spazier\w*|party|frühstück|fruehstueck|erkunden)\b/i.test(
+    /\b(und\s+dann|danach|zuerst|erst|außerdem|ausserdem|vorher).{0,60}\b(essen|café|cafe|museum|theater|hotel|spazier\w*|party|frühstück|fruehstueck|erkunden)\b/i.test(
+      t,
+    ) ||
+    /\b(essen|restaurant|abendessen).{0,40}\b(dann|danach).{0,40}\b(theater|kino|museum|konzert)\b/i.test(
       t,
     ) ||
     (/\b(mittag(essen)?|abendessen|frühstück(?:en)?|fruehstueck(?:en)?)\b/i.test(t) &&

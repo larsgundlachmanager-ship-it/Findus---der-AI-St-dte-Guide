@@ -111,4 +111,101 @@ assert(
   'Kita nicht als Geschichte',
 );
 
+
+{
+  const toilet = buildHomeMapPlaceBullets(
+    {
+      id: 9,
+      name: 'Toilette',
+      lat: 53.67,
+      lng: 9.76,
+      radius_meters: 20,
+      category: 'toilette',
+      tags_json: '["toilette"]',
+      facts: [{ id: 1, poi_id: 9, fact_text: '25436 Tornesch' }],
+    },
+    'toilette',
+  );
+  assert(toilet.length >= 1, 'Toilette: Fallback-Stichpunkt');
+  assert(!/25436|Tornesch|Gäste nennen/i.test(toilet.join(' ')), 'Toilette: keine PLZ/Gäste-Floskel');
+}
+
+{
+  const gold = buildHomeMapPlaceBullets(
+    {
+      id: 10,
+      name: 'Goldschätzchen Wein- & Biergarten',
+      lat: 53.67,
+      lng: 9.76,
+      radius_meters: 40,
+      category: 'restaurant',
+      tags_json: '["review_facet","pizza","asiatisch","biergarten","afterwork","gemütlich"]',
+      facts: [
+        { id: 1, poi_id: 10, fact_text: 'Wein- und Biergarten am Peiner Hof' },
+        { id: 2, poi_id: 10, fact_text: 'Gemütliche Stimmung — mittwochs Afterwork' },
+      ],
+    },
+    'restaurant',
+  );
+  const blob = gold.join(' | ');
+  assert(!/Gäste nennen oft/i.test(blob), 'kein Gäste-nennen-oft');
+  assert(!/pizza|asiatisch/i.test(blob), 'Biergarten: keine Pizza/Asiatisch-Facets');
+  assert(/biergarten|afterwork|gemütlich|wein/i.test(blob), 'klare Gastro-Stichpunkte');
+}
+
+
+{
+  const park = buildHomeMapPlaceBullets(
+    {
+      id: 11,
+      name: 'Haun Gehege',
+      lat: 53.67,
+      lng: 9.76,
+      radius_meters: 40,
+      category: 'park',
+      tags_json: '["park","wood"]',
+      facts: [],
+    },
+    'park',
+  );
+  assert(park.length >= 1, 'Park/Basemap: Fallback-Stichpunkt');
+  assert(/park|grün|gehege|spazier/i.test(park.join(' ')), 'Park-Identität');
+}
+{
+  const shop = buildHomeMapPlaceBullets(
+    {
+      id: 12,
+      name: 'Food Plus',
+      lat: 53.67,
+      lng: 9.76,
+      radius_meters: 30,
+      category: 'supermarket',
+      tags_json: '["supermarket"]',
+      facts: [],
+    },
+    'supermarket',
+  );
+  assert(shop.length >= 1, 'Supermarkt-Fallback');
+  assert(/supermarkt|einkauf/i.test(shop.join(' ')), 'Supermarkt-Text');
+  assert(!/route starten|über die buttons/i.test(shop.join(' ')), 'keine UI-Meta-Bullets');
+}
+{
+  const playground = buildHomeMapPlaceBullets(
+    {
+      id: 13,
+      name: 'Spielplatz Schnickenfeld',
+      lat: 53.67,
+      lng: 9.76,
+      radius_meters: 30,
+      category: 'spielplatz',
+      tags_json: '["spielplatz","directory"]',
+      facts: [],
+    },
+    'spielplatz',
+  );
+  assert(playground.length >= 1, 'Spielplatz-Fallback');
+  assert(/spielplatz|spielen/i.test(playground.join(' ')), 'Spielplatz-Text');
+  assert(!/route starten|über die buttons/i.test(playground.join(' ')), 'Spielplatz ohne UI-Meta');
+}
+
 console.log('homeMapPlaceBullets.smoke.test.ts OK');

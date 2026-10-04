@@ -1,0 +1,40 @@
+{
+  "at": "2026-09-12T09:43:34.671764+00:00",
+  "device": "00143157P001105",
+  "label": "six_week_ask_server",
+  "n": 110,
+  "results": [
+    {
+      "id": "vf_ayce_kein_asiatisch",
+      "q": "Ich habe Lust heute Abend All you can eat zu essen, aber kein Asiatisch. Was kannst du mir empfehlen?",
+      "family": "dining_ayce",
+      "verdict": "FAIL",
+      "bridge_ok": true,
+      "call2_ok": false,
+      "bullets_ok": false,
+      "buttons_ok": true,
+      "buttons_found": [
+        "fähre",
+        "route",
+        "ticket"
+      ],
+      "fails": [],
+      "snippet": "Kostenlos Boot auf der Elbe? | Mit dem normalen HVV-Ticket kannst du die typischen Hafenfähren nutzen — kurze Elbfahrt inklusive. | ⛅ Wechselhaft · 16° | bis 20° · Regen ab 20:00 | 0 von 102 Orten · 0 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | ⛅ Wechselhaft · 16°. Tippen: Wetter und Tipps. Wischen: nächste Karte. | Mikrofon — halten spricht, tippen schreibt, rechts fixieren, links Live-Chat | Timeline und Routenplanung | Orte finden | Einstellungen",
+      "tapped": [],
+      "log_hits": "09-12 11:47:29.692 11200 11200 E FeatureFlagsImplExport: android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.xr cannot be found on the device"
+    },
+    {
+      "id": "vf_ayce_stt_oyukin",
+      "q": "Nee, ich moechte gerne heute Abend Oyukin Eat essen, also All you can eat, kein asiatisch",
+      "family": "dining_ayce",
+      "verdict": "FAIL",
+      "error": "NO_SPICKZETTEL",
+      "fails": [
+        "no_spickzettel"
+      ],
+      "snippet": "Minimieren\nGehe zu Einstellungen > Telefoninfo > Softwareinformationen und tippe dort 7-mal hintereinander auf Buildnummer. Anschließend findest du ganz unten im Hauptmenü der Einstellungen die Entwickleroptionen, in den",
+      "tapped": [],
+      "log_hits": ""
+    }
+  ]
+}

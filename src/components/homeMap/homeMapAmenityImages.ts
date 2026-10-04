@@ -36,8 +36,12 @@ export const HOME_MAP_AMENITY_IMAGES: Record<string, number> = {
   'place-bike': require('../../assets/homeMap/place-bike.png'),
   'place-atm': require('../../assets/homeMap/place-atm.png'),
   'place-ferry': require('../../assets/homeMap/place-ferry.png'),
+  'place-luggage': require('../../assets/homeMap/place-luggage.png'),
+  'place-laundry': require('../../assets/homeMap/place-laundry.png'),
+  'place-charging': require('../../assets/homeMap/place-charging.png'),
   'user-arrow': require('../../assets/homeMap/user-arrow.png'),
   'route-chevron': require('../../assets/homeMap/route-chevron.png'),
+  'route-turn-chevron': require('../../assets/homeMap/route-turn-chevron.png'),
   'route-label-pill': require('../../assets/homeMap/route-label-pill.png'),
   'route-pin-now': require('../../assets/homeMap/route-pin-now.png'),
   'route-pin-now-1': require('../../assets/homeMap/route-pin-now-1.png'),
@@ -94,6 +98,9 @@ const ICON_TO_IMAGE: Record<string, string> = {
   nature: 'place-nature',
   historic: 'place-historic',
   activity: 'place-activity',
+  luggage: 'place-luggage',
+  laundry: 'place-laundry',
+  charging: 'place-charging',
 };
 
 export function amenityIconImageName(icon: string | undefined): string {

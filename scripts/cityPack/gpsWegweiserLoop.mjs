@@ -35,6 +35,11 @@ export function runGpsWegweiserLoop(cityId) {
   if (!cityId) throw new Error('city id required');
   console.log(`\n[gps-wegweiser] ▶ ${cityId}`);
   runStep(
+    'stampMapPaint.mjs',
+    ['--city', cityId, '--no-upload'],
+    { fatal: false },
+  );
+  runStep(
     'auditEntrances.mjs',
     ['--city', cityId, '--apply', '--story-only', '--max-delta', '120'],
     { fatal: false },
@@ -46,7 +51,27 @@ export function runGpsWegweiserLoop(cityId) {
   );
   runStep(
     'snapOsmStoryFootprints.mjs',
-    ['--city', cityId, '--no-upload'],
+    ['--city', cityId, '--no-upload', '--all-spots'],
+    { fatal: false },
+  );
+  runStep(
+    'polishMapBullets.mjs',
+    ['--city', cityId],
+    { fatal: false },
+  );
+  runStep(
+    'basemapGap.mjs',
+    ['--city', cityId, '--apply', '--no-upload'],
+    { fatal: false },
+  );
+  runStep(
+    'snapOsmStoryFootprints.mjs',
+    ['--city', cityId, '--no-upload', '--all-spots'],
+    { fatal: false },
+  );
+  runStep(
+    'mapPerfectGate.mjs',
+    ['--city', cityId],
     { fatal: false },
   );
   if (hasFlag('with-offline-map')) {

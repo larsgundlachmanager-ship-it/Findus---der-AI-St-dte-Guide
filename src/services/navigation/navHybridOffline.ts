@@ -129,7 +129,7 @@ async function resolveLandmarkNear(
   try {
     const [localPois, osm] = await Promise.all([
       getAllPois().catch(() => []),
-      fetchOsmVisualLandmark({ lat, lng, radiusM: 40 }).catch(() => null),
+      fetchOsmVisualLandmark({ lat, lng, radiusM: 5 }).catch(() => null),
     ]);
     let bestLocal: string | null = null;
     let bestD = 55;

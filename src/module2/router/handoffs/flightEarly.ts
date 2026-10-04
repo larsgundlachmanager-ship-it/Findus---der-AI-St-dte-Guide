@@ -80,8 +80,8 @@ export async function tryFlightAdvisorHandoff(opts: {
         (() => {
           const dest = parseFlightTripSlots(opts.rewritten).destHint;
           return dest
-            ? `${dest} — ich schau Abflug und Leave-by nach.`
-            : 'Alles klar — ich schau deinen Flug nach.';
+            ? `${dest}, ich schau Abflug und Leave-by nach.`
+            : 'Alles klar, ich schau deinen Flug nach.';
         })();
       flight = {
         speech: bridge,
@@ -92,7 +92,7 @@ export async function tryFlightAdvisorHandoff(opts: {
       };
     } catch {
       flight = {
-        speech: 'Alles klar — ich schau deinen Flug nach.',
+        speech: 'Alles klar, ich schau deinen Flug nach.',
         bullets: [],
         quickActions: [],
         reopenMic: true,
@@ -151,7 +151,7 @@ export async function tryFlightAdvisorHandoff(opts: {
   const logic: LogicNodeOutput = {
     spokenDraft: speech,
     bullets: (flight.bullets ?? []).slice(0, 3),
-    buttons: [],
+    buttons: (flight.quickActions ?? []).slice(0, 5) as never[],
     moneyEur: [],
     warnings: [],
   };

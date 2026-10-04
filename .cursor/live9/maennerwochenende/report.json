@@ -1,0 +1,39 @@
+{
+  "ts": "2026-09-12T16:28:47.664463+00:00",
+  "serial": "00143157P001105",
+  "package": "de.findus.app",
+  "open_path": "cold_then_brief",
+  "ask_server": true,
+  "chunks": [
+    "Maennerwochenende, 3 Personen, langes Wochenende",
+    "Donnerstag 15.10. ab 16:30 Flieger, Bahn ab 14:15 auch ok, Freitag entspannt je nach Preis; zurueck Montag oder besser Dienstag",
+    "Fliegen von Hamburg, Berlin, Bremen oder Hannover — guenstigste",
+    "Warm, max 400 Euro p.P.; All-Inclusive-Hotel am geilsten, sonst Apartment — kein normales Hotel mit Halbpension; guenstiges Bier, Party, Pool",
+    "Bitte Transfer Flughafen zur Unterkunft klar mit Preis; wenn Mietwagen sinnvoll, sag das ehrlich. Wunsch: Padel spielen und gute Clubs — belegt raussuchen. Pauschalreise nur wenn sie wirklich besser passt, sonst einzeln buchen."
+  ],
+  "verdict": "FAIL",
+  "score": "3/8",
+  "checks": {
+    "stay_price_visible": false,
+    "no_ehrlich_als_gap": true,
+    "beats_readable": true,
+    "outbound_visible": true,
+    "transfer_or_rental_visible": false,
+    "wish_evidence_visible": false,
+    "booking_button_if_applicable": false,
+    "multi_options_hint": false
+  },
+  "soft_notes": [
+    "no Check24/package booking button visible (ok if single-book better)",
+    "padel/club/party evidence not visible in UI dump",
+    "multiple options not clearly visible yet"
+  ],
+  "line_count": 26,
+  "snippet": "⛅ Wechselhaft · 19° | Regen ab 07:00 morgen | 🌅 19:47 Sonnenuntergang | noch 1 Std 28 Min · voraussichtlich Regen | Schnell nach Hamburg? | Nächste Züge oft alle ~30 Min · Fahrzeit ca. 40–50 Min bis HH. | 0 von 19 Orten · 5 % erkundet |  |  |  | Timeline |  | Orte |  | Einst. | ⛅ Wechselhaft · 19°. Tippen: Wetter und Tipps. Wischen: nächste Karte. | 🌅 19:47 Sonnenuntergang. Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | Schnell nach Hamburg? Tippen: Tipps. Wischen: nächste Karte. Unten: Timeline · Orte · Einst. | Showing a Map created with MapLibre. Scroll by dragging two fingers. Zoom by pinching two fingers. | Auf meine Position zentrieren. Nochmal innerhalb von 5 Sekunden: Fix — Karte folgt deiner Bewegung.",
+  "artifacts": {
+    "dir": "c:\\Users\\larsf\\Findus 2.0\\.cursor\\live9\\maennerwochenende",
+    "final_png": "c:\\Users\\larsf\\Findus 2.0\\.cursor\\live9\\maennerwochenende\\final.png",
+    "final_xml": "c:\\Users\\larsf\\Findus 2.0\\.cursor\\live9\\maennerwochenende\\final.xml",
+    "final_text": "c:\\Users\\larsf\\Findus 2.0\\.cursor\\live9\\maennerwochenende\\final-text.txt"
+  }
+}

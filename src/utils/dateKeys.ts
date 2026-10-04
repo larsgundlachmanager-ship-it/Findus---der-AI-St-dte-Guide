@@ -198,7 +198,13 @@ export function tryResolveDateKeyFromUserText(
   text: string,
   nowMs = Date.now(),
 ): string | null {
-  const t = text.replace(/\s+/g, ' ').trim();
+  const t = text
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(
+      /\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag)abends?\b/giu,
+      '$1 abend',
+    );
   if (!t) return null;
   if (/\b(übermorgen|uebermorgen)\b/iu.test(t)) {
     return offsetDateKey(2, nowMs);
@@ -250,8 +256,9 @@ export function planningClockContextBlock(nowMs = Date.now()): string {
     second: '2-digit',
   });
   return [
-    `System-Jetzt (UTC ISO): ${iso}`,
+    `System-Jetzt (UTC ISO, nur intern): ${iso}`,
     `System-Jetzt (lokal ${tz}): ${local}`,
+    `Bei „wie spät / Uhrzeit jetzt“: genau EINE lokale Uhrzeit nennen (HH:MM). Kein UTC, keine Zeitzone, kein Doppel.`,
     `Heute YYYY-MM-DD (Plan-Tag, Rollover 02:30): ${planDayKeyFromMs(nowMs)}`,
     `Kalendertag YYYY-MM-DD: ${dateKeyFromMs(nowMs)}`,
     `Morgen YYYY-MM-DD: ${offsetDateKey(1, nowMs)}`,
@@ -268,6 +275,17 @@ export function clockLabel(ms: number | null | undefined): string {
     hour: '2-digit',
     minute: '2-digit',
   });
+}
+
+/** Mündliche Uhr: „8 Uhr“, „8 Uhr 15“, Mitternacht — nie „08:00“. */
+export function formatClockSpokenDe(ms: number | null | undefined): string {
+  if (ms == null || !Number.isFinite(ms)) return '';
+  const d = new Date(ms);
+  const h = d.getHours();
+  const m = d.getMinutes();
+  if (h === 0 && m === 0) return 'Mitternacht';
+  if (m === 0) return `${h} Uhr`;
+  return `${h} Uhr ${m}`;
 }
 
 /**

@@ -1,8 +1,9 @@
 /**
- * Kompass für Karte + Free-Roam.
+ * Kompass-SSOT für Karte + Free-Roam + Nav.
  *
- * Android: natives TYPE_ROTATION_VECTOR (wie Google Maps). iOS: trueHeading.
- * GPS-Kurs nur als Fallback wenn man wirklich geht.
+ * Quelle 1: nativeMapCompass (Android Rotation-Vector / iOS) → noteFacingSensorHeading
+ * Fallback: facingHeadingWatch DeviceMotion/Gyro+Mag, sonst ein Expo-Heading in locationService
+ * GPS-Kurs nur als Display-Fallback bei Tempo (≥2 m/s) bzw. wenn Sensor tot.
  */
 
 import { Platform } from 'react-native';
@@ -28,6 +29,12 @@ import {
 const STALE_MS = 45_000;
 const GPS_COURSE_STALE_MS = 2_400;
 const MOVE_MPS = 0.85;
+/**
+ * Course-over-ground source lock. Separate enter/exit thresholds prevent the
+ * map from flipping between compass and GPS course around walking speed.
+ */
+const COG_ENTER_MPS = 2.35;
+const COG_EXIT_MPS = 1.45;
 const BIAS_LEARN_MPS = 1.05;
 /** UI darf letzten guten Kurs länger halten als der Sensor-Stale. */
 const STICKY_MS = 90_000;
@@ -51,9 +58,31 @@ let activeCityId: string | null = null;
 let cityLockBag: CityCompassLockBag = {};
 let cityLocksHydrated = false;
 let lastGpsNudgeAt = 0;
+let mapDisplayUsesCourse = false;
 
 type HeadingListener = (deg: number) => void;
 const listeners = new Set<HeadingListener>();
+
+/** Session-Tod: Heading-Fan-out drosseln (Native ~30 Hz sonst). */
+let lastEmitAt = 0;
+let lastEmitDeg: number | null = null;
+
+function emitThrottleMs(): number {
+  try {
+    const pause = require('../ui/homeMapPause') as {
+      homeMapShouldPause: () => boolean;
+      homeMapHeadingFollowActive: () => boolean;
+      homeMapLocationFollowActive: () => boolean;
+    };
+    if (pause.homeMapShouldPause()) return 280;
+    if (pause.homeMapHeadingFollowActive() || pause.homeMapLocationFollowActive()) {
+      return 70;
+    }
+  } catch {
+    /* soft */
+  }
+  return 220;
+}
 
 function norm(deg: number): number {
   return ((deg % 360) + 360) % 360;
@@ -62,6 +91,19 @@ function norm(deg: number): number {
 function emit(): void {
   const d = getMapDisplayHeadingDeg();
   if (d == null) return;
+  const now = Date.now();
+  const minMs = emitThrottleMs();
+  const minDeg = minMs >= 200 ? 2.0 : 0.9;
+  if (lastEmitAt > 0 && now - lastEmitAt < minMs) {
+    const jump =
+      lastEmitDeg == null
+        ? 999
+        : Math.abs(shortestAngleDelta(lastEmitDeg, d));
+    if (jump < minDeg) return;
+    if (now - lastEmitAt < minMs * 0.45) return;
+  }
+  lastEmitAt = now;
+  lastEmitDeg = d;
   for (const cb of listeners) cb(d);
 }
 
@@ -263,8 +305,16 @@ export function noteFacingSensorHeading(deg: number): void {
   emit();
 }
 
-/** Expo watchHeadingAsync — auf Android ignorieren, solange der Sensor-Heading frisch ist. */
+/** Expo watchHeadingAsync — nur Fallback wenn Native/Facing tot. Nie parallel zum SSOT. */
 export function noteExpoCompassHeading(deg: number): void {
+  try {
+    const { isNativeMapCompassActive } = require('./nativeMapCompass') as {
+      isNativeMapCompassActive: () => boolean;
+    };
+    if (isNativeMapCompassActive()) return;
+  } catch {
+    /* soft */
+  }
   if (lastFacingSensorAt > 0 && Date.now() - lastFacingSensorAt < 800) return;
   noteLiveDeviceHeading(deg);
 }
@@ -313,15 +363,29 @@ export function getLiveDeviceHeadingDeg(): number | null {
   return headingDeg;
 }
 
-/** Karten-Keil: immer Magnetkompass (Handy-Ausrichtung). GPS-Kurs nur als Fallback. */
+/** Karten-Keil: COG nur klar in Bewegung; eine Quelle per Hysterese halten. */
 export function getMapDisplayHeadingDeg(): number | null {
+  const now = Date.now();
+  const courseFresh =
+    gpsCourseDeg != null && now - gpsCourseAtMs < GPS_COURSE_STALE_MS;
+  if (mapDisplayUsesCourse) {
+    if (!courseFresh || gpsSpeedMs <= COG_EXIT_MPS) {
+      mapDisplayUsesCourse = false;
+    }
+  } else if (courseFresh && gpsSpeedMs >= COG_ENTER_MPS) {
+    mapDisplayUsesCourse = true;
+  }
+  if (mapDisplayUsesCourse && gpsCourseDeg != null) {
+    return gpsCourseDeg;
+  }
   const live = getLiveDeviceHeadingDeg();
   if (live != null) return live;
-  const now = Date.now();
+  // Letzter COG-Fallback nur wenn Sensor tot und man noch erkennbar geht.
   if (
     gpsCourseDeg != null &&
     now - gpsCourseAtMs < GPS_COURSE_STALE_MS &&
-    gpsSpeedMs >= MOVE_MPS
+    gpsSpeedMs >= MOVE_MPS &&
+    (headingDeg == null || now - headingAtMs > STALE_MS)
   ) {
     return gpsCourseDeg;
   }
@@ -369,6 +433,7 @@ export function clearLiveDeviceHeading(): void {
   lastGoodDisplayAt = 0;
   lastFacingSensorAt = 0;
   poorSinceMs = 0;
+  mapDisplayUsesCourse = false;
   // Stadt-Locks bleiben — nur Session-Sensor leeren.
   mapHeadingFilter.reset();
 }

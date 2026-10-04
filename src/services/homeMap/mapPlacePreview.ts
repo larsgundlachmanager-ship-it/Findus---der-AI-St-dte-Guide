@@ -18,6 +18,7 @@ import {
   mapsUrlForGooglePlace,
   pickNearbyListedGooglePlace,
 } from '../research/eventInfoUrl';
+import { isHollowPartnerUrl } from '../affiliate/hollowPartnerUrl';
 
 /** Langer Fingerdruck auf leere Karte â€” kein Pack-POI. */
 export const MAP_DROP_PIN_ID = -2;
@@ -28,17 +29,19 @@ export type MapPlacePreview = {
   category: string;
   bullets: string[];
   websiteUrl?: string | null;
+  /** Echter Ticket-/Produkt-Deep-Link aus dem Pack (kein Partner-Search). */
+  ticketUrl?: string | null;
   extraActions?: Array<{ label: string; url: string }> | null;
-  /** Buttons, die erst beim Tap eine Live-Abfrage auslÃ¶sen (Google-frei). */
+  /** Buttons, die erst beim Tap eine Live-Abfrage auslösen (Google-frei). */
   liveActions?: MapPlaceLiveActionDef[] | null;
-  /** GÃ¤stebewertung aus Pack (0â€“5), wenn belegt. */
+  /** Gästebewertung aus Pack (0–5), wenn belegt. */
   rating?: number | null;
   /** Anzahl Bewertungen aus Pack, wenn belegt. */
   ratingCount?: number | null;
   lat: number;
   lng: number;
   spotKey?: string | null;
-  /** Google-Place-Suche fÃ¼r Maps schon gelaufen (Treffer oder bewusst kein Link). */
+  /** Google-Place-Suche für Maps schon gelaufen (Treffer oder bewusst kein Link). */
   mapsLookedUp?: boolean;
 };
 
@@ -148,14 +151,26 @@ export function instantMapPlacePopup(opts: {
   const facts = teaser
     ? [{ id: 0, poi_id: poi?.id ?? 0, fact_text: teaser }]
     : [];
-  const bullets = buildHomeMapPlaceBullets(
-    poi ? { ...poi, facts } : null,
-    category,
-  );
+  // Auch ohne Teaser/Fakten: Name+Kategorie → Facet-/Fallback-Stichpunkte.
+  const bulletPoi = poi
+    ? { ...poi, facts }
+    : {
+        id: opts.id,
+        name,
+        lat,
+        lng,
+        radius_meters: 30,
+        category: category || null,
+        tags_json: null,
+        facts: [] as Fact[],
+      };
+  const bullets = buildHomeMapPlaceBullets(bulletPoi, category);
   const liveActions = deriveMapPlaceLiveActions({
     name,
     category,
     tagsBlob: poi ? parseTagsBlob(poi) : `${name} ${category}`,
+    websiteUrl: null,
+    ticketUrl: null,
   });
   const { rating, ratingCount } = poi
     ? readRatingFromPoi(poi)
@@ -166,6 +181,7 @@ export function instantMapPlacePopup(opts: {
     category,
     bullets,
     websiteUrl: null,
+    ticketUrl: null,
     extraActions: null,
     liveActions: liveActions.length ? liveActions : null,
     rating,
@@ -246,6 +262,25 @@ function firstWebsiteUrl(poi: Poi, facts: Fact[]): string | null {
   return url;
 }
 
+const TICKET_HOST_RE =
+  /getyourguide\.com|musement\.com|tiqets\.com|viator\.com|klook\.com|reservix\.de|adticket\.de|eventim\.de/i;
+
+/** Nur Produkt-Deep-Links — Search/Home zählen nicht (hollowPartnerUrl). */
+function firstTicketUrl(poi: Poi, facts: Fact[]): string | null {
+  const blob = [
+    poi.teaser_text ?? '',
+    poi.tags_json ?? '',
+    ...facts.map((f) => f.fact_text ?? ''),
+  ].join(' ');
+  const matches = blob.match(/https?:\/\/[^\s)\]>'",]+/gi) ?? [];
+  for (const raw of matches) {
+    const url = raw.replace(/[.,;:!?)]+$/g, '');
+    if (!TICKET_HOST_RE.test(url)) continue;
+    if (!isHollowPartnerUrl(url)) return url;
+  }
+  return null;
+}
+
 function parseTagsBlob(poi: Poi): string {
   const parts: string[] = [poi.name ?? '', poi.category ?? ''];
   const raw = poi.tags_json ?? '';
@@ -297,17 +332,22 @@ function buildFromPoi(poi: Poi, facts: Fact[]): MapPlacePreview {
   const full = { ...poi, facts };
   const category = categoryLabelForPoi(poi);
   const { rating, ratingCount } = readRatingFromPoi(poi);
+  const websiteUrl = firstWebsiteUrl(poi, facts);
+  const ticketUrl = firstTicketUrl(poi, facts);
   const liveActions = deriveMapPlaceLiveActions({
     name: poi.name,
     category,
     tagsBlob: parseTagsBlob(poi),
+    websiteUrl,
+    ticketUrl,
   });
   return {
     id: poi.id,
     name: poi.name,
     category,
     bullets: buildHomeMapPlaceBullets(full, poi.category),
-    websiteUrl: firstWebsiteUrl(poi, facts),
+    websiteUrl,
+    ticketUrl,
     extraActions: null,
     liveActions: liveActions.length ? liveActions : null,
     rating,

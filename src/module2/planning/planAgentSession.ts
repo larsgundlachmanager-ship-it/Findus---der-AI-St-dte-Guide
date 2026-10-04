@@ -8,6 +8,7 @@ import {
   FINDUS_FEW_SHOT_DISCLAIMER,
   FINDUS_HELP_FIRST_MONETIZATION_BLOCK,
   FINDUS_LIVE_CHAT_HUMAN_BLOCK,
+  FINDUS_SPEECH_CULTURE_BLOCK,
 } from '../../services/concierge/findusResponsePolicy';
 import { todayDateKey } from '../../utils/dateKeys';
 import { readRucksackSync } from '../rucksack/rucksackStore';
@@ -37,6 +38,7 @@ const PLAN_AGENT_SYSTEM = `Du bist der Yorro-Planungsassistent für konkrete Tag
 Du führst EINEN durchgängigen Chat. Code führt Tools aus — keine Orte/Zeiten ohne Tool erfinden.
 
 ${FINDUS_DYNAMIC_STRUCTURE_DOCTRINE}
+${FINDUS_SPEECH_CULTURE_BLOCK}
 ${FINDUS_LIVE_CHAT_HUMAN_BLOCK}
 ${FINDUS_HELP_FIRST_MONETIZATION_BLOCK}
 ${FINDUS_PLAN_SMART_OVERVIEW_BLOCK}

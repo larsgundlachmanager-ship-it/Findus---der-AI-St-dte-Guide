@@ -6,7 +6,6 @@
 
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import type { FindusMood } from '../AudioWave';
 import type { ConciergeCardState } from '../../types/concierge';
 import { spacing } from '../../constants/theme';
 import { UI_LAYER } from '../../constants/uiLayers';
@@ -20,7 +19,10 @@ import { useLivePitchStore } from '../../module2/pitch/publishPitchUi';
 import { useSystemSafePad } from '../../hooks/useSystemSafePad';
 import { useUiScaleStore } from '../../services/ui/uiScale';
 
-/** Höhe der Home-Buttons, ohne Home-Indicator. */
+/**
+ * Höhe der Home-Buttons, ohne Home-Indicator.
+ * PaddingTop 7 + btn 5+5 + Icon 22 + Gap 3 + Label ~12 ≈ 54.
+ */
 export const HOME_DOCK_BAR_H = 56;
 /** Spalt zwischen Mic-Unterkante und Dock-Oberkante. */
 export const HOME_MIC_DOCK_GAP = 4;
@@ -33,7 +35,7 @@ export const HOME_MIC_BTN = 84;
 export const HOME_MIC_HIT_PAD = 48;
 export const HOME_MIC_HINT_RESERVE = 8;
 /** Luft zwischen Untertitel-Unterkante und Mic-Oberkante. */
-export const HOME_SUBTITLE_ABOVE_MIC = 22;
+export const HOME_SUBTITLE_ABOVE_MIC = 28;
 
 export const HOME_MIC_CLEARANCE =
   HOME_MIC_BTN +
@@ -41,6 +43,15 @@ export const HOME_MIC_CLEARANCE =
   HOME_MIC_HINT_RESERVE +
   HOME_MIC_DOCK_GAP +
   HOME_SUBTITLE_ABOVE_MIC;
+
+
+/**
+ * Map bis über Mic (Full-Bleed), aber **nicht** unter die Dock-Leiste.
+ * TextureView unter Timeline/Orte/Einst. frisst sonst Android-Taps.
+ */
+export function homeMapBottomChromePx(safeBottom: number, _buttonMul = 1): number {
+  return HOME_DOCK_BAR_H + Math.max(0, safeBottom);
+}
 
 export function homeMicClearancePx(buttonMul = 1): number {
   const mul = Math.max(1, buttonMul);
@@ -55,19 +66,15 @@ export function homeMicClearancePx(buttonMul = 1): number {
 }
 
 type Props = {
-  mood: FindusMood;
   card: ConciergeCardState | null;
   subtitleText: string | null;
-  isPlayingAudio: boolean;
   onFollowUp?: (prompt: string) => void;
   onAbortBusy?: () => void;
 };
 
 export const LiveStage = React.memo(function LiveStage({
-  mood: _mood,
   card,
   subtitleText,
-  isPlayingAudio: _isPlayingAudio,
   onFollowUp,
 }: Props) {
   const { hasBullets, hasActions } = inspectConciergeCard(card);
@@ -95,8 +102,12 @@ export const LiveStage = React.memo(function LiveStage({
       >
         {hasPitch ? <PitchChoiceSlot /> : null}
         {hasBullets && !hasPitch && card ? <BulletsSlot card={card} /> : null}
-        {(hasActions) && card && !hasPitch ? (
-          <ActionsSlot card={card} onFollowUp={onFollowUp} showDismiss />
+        {hasActions && card && !hasPitch ? (
+          <ActionsSlot
+            card={card}
+            onFollowUp={onFollowUp}
+            showDismiss={!hasBullets}
+          />
         ) : null}
         <View style={styles.subtitleReserve} pointerEvents="none">
           {showSubtitles ? <SubtitlesSlot text={subtitleText} /> : null}

@@ -159,16 +159,11 @@ export async function ensureMealHudFresh(opts?: {
         openNow: true,
       });
       const ranked: MealHudSuggestion[] = [];
-      const seenCuisine = new Set<string>();
       for (const h of hits) {
         const name = h.name.trim();
         if (!name || looksLikeStreetLabel(name)) continue;
         const types = h.types ?? [];
         const cuisine = cuisineFromPlace(name, types);
-        if (slot === 'dinner' && cuisine && seenCuisine.has(cuisine) && ranked.length) {
-          continue;
-        }
-        if (cuisine) seenCuisine.add(cuisine);
         ranked.push({
           name,
           walkMin: walkMinutesForDistanceM(h.distanceM),
@@ -179,7 +174,8 @@ export async function ensureMealHudFresh(opts?: {
           cuisine,
           types,
         });
-        if (ranked.length >= 2) break;
+        // Ein Vorschlag reicht — Slot wählt schon die passende Gattung (Bäcker vs. Lunch).
+        if (ranked.length >= 1) break;
       }
       const items = ranked;
 
@@ -190,30 +186,19 @@ export async function ensureMealHudFresh(opts?: {
       }
 
       const primary = items[0]!;
-      const secondary = items[1];
       const title =
-        primary.cuisine && primary.cuisine !== 'Küche vor Ort'
-          ? `Bock auf ${primary.cuisine}?`
-          : slot === 'bakery'
-            ? `🥐 ${primary.name}`
-            : `🍽 ${primary.name}`;
-      const metaLines: string[] = [
-        primary.cuisine && primary.cuisine !== 'Küche vor Ort'
-          ? `${primary.name} · ${primary.walkMin} Min`
-          : `${primary.walkMin} Min zu Fuß${primary.openNow ? ' · offen' : ''}`,
-      ];
-      if (secondary) {
-        metaLines.push(
-          secondary.cuisine
-            ? `oder ${secondary.name} (${secondary.cuisine}, ${secondary.walkMin} Min)`
-            : `oder ${secondary.name} · ${secondary.walkMin} Min`,
-        );
+        slot === 'bakery'
+          ? `🥐 ${primary.name}`
+          : `🍽 ${primary.name}`;
+      const metaParts: string[] = [slotLabel(slot)];
+      if (primary.cuisine && primary.cuisine !== 'Küche vor Ort') {
+        metaParts.push(primary.cuisine);
       }
-      const names = items.map((i) => i.name).join(' oder ');
-      const dirs = items
-        .map((i) => i.cuisine)
-        .filter((c): c is string => Boolean(c))
-        .join(' vs. ');
+      metaParts.push(
+        primary.walkMin <= 1
+          ? '1 Min zu Fuß'
+          : `${primary.walkMin} Min zu Fuß`,
+      );
       cache = {
         slot,
         atMs: nowMs,
@@ -221,11 +206,11 @@ export async function ensureMealHudFresh(opts?: {
         lng,
         items,
         title,
-        meta: fitHudMeta(metaLines.join('\n')),
+        meta: fitHudMeta(metaParts.join(' · ')),
         tellMorePrompt:
-          slot === 'dinner'
-            ? `Abendessen: zwei Richtungen${dirs ? ` (${dirs})` : ''} — ${names}. Sofort Pitch-Modus, kurze Pitches, Route-Buttons. Keine Straßen als Restaurant, keine Frage ob ich noch essen will.`
-            : `Pitch: ${slotLabel(slot)} in meiner Nähe — zeig mir 1–2 Optionen (${names}) mit kurzem Pitch und Route-Button. Sofort Pitch-Modus, keine lange Liste.`,
+          `Pitch: ${slotLabel(slot)} „${primary.name}“` +
+          (primary.cuisine ? ` (${primary.cuisine})` : '') +
+          ` · ${primary.walkMin} Min zu Fuß. Kurzer Pitch + Route-Button. Sofort Pitch-Modus, keine zweite Option, kein „offen“-Hinweis.`,
       };
       notify();
     } catch {

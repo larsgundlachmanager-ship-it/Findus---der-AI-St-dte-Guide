@@ -62,4 +62,19 @@ assert(
   'falsche Nummer kein Treffer',
 );
 
+{
+  const poisOnly = searchCityIndex({
+    query: 'Heisterhoop 12',
+    pois: [
+      {
+        ...steak,
+        name: 'Laden Heisterhoop',
+        teaser_text: 'Heisterhoop 5',
+      } as typeof steak,
+    ],
+    housenumbers: [],
+  });
+  assert(poisOnly.length === 0, 'Adresse ohne Hausnr-Index: kein POI-Fallback');
+}
+
 console.log('searchCityIndex.smoke.test.ts OK');

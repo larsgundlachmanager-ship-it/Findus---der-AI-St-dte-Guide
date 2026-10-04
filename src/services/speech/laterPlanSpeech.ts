@@ -271,9 +271,39 @@ export type TemporaryLiveSpeechSpot = {
   whenLabel: string;
   distanceHintM: number | null;
   hook: string;
+  /** Belegter Preis/Eintritt, z. B. „ab 12 Euro“, „Eintritt frei“. */
+  priceHint?: string | null;
+  /** Kurzer Motivations-Hook (warum hingehen), ohne Werbesprech. */
+  whyHint?: string | null;
 };
 
-/** Umgangssprachliche Ansage — Zeit weben, kein Los-jetzt bei Abend-Events. */
+function travelMinFromMeters(meters: number | null | undefined): number | null {
+  if (meters == null || !Number.isFinite(meters) || meters <= 0) return null;
+  // ~80 m/min Fuß — grobe ETA für Ambient
+  return Math.max(1, Math.round(meters / 80));
+}
+
+function hasPriceInText(text: string): boolean {
+  return /\b(euro|€|eintritt|kostenlos|gratis|frei|ticket)\b/iu.test(text);
+}
+
+function weaveTravelSpeech(
+  meters: number | null | undefined,
+  later: boolean,
+): string {
+  const mins = travelMinFromMeters(meters);
+  if (mins == null) return '';
+  if (later) {
+    if (mins <= 8) return 'zu Fuß bist du in ein paar Minuten da';
+    if (mins <= 25) return `zu Fuß brauchst du so um die ${mins} Minuten`;
+    if (mins <= 45) return `mit dem Rad oder ÖPNV bist du in etwa ${Math.max(8, Math.round(mins / 3))} bis ${mins} Minuten da`;
+    return `die Anreise liegt so bei einer guten halben Stunde plus`;
+  }
+  if (mins <= 5) return 'du bist praktisch schon da';
+  return `in etwa ${mins} Minuten zu Fuß bist du dort`;
+}
+
+/** Motivierende Ambient-Ansage: Was · Preis · Wo · Anreise · Warum. */
 export function formatTemporaryLiveSpeech(
   spot: TemporaryLiveSpeechSpot,
   now = new Date(),
@@ -281,6 +311,8 @@ export function formatTemporaryLiveSpeech(
   const hook = spot.hook.replace(/\s+/g, ' ').trim().replace(/[.!?\s]+$/u, '');
   const name = spot.name.replace(/\s+/g, ' ').trim();
   const when = (spot.whenLabel || '').trim();
+  const price = (spot.priceHint || '').replace(/\s+/g, ' ').trim();
+  const why = (spot.whyHint || '').replace(/\s+/g, ' ').trim().replace(/[.!?\s]+$/u, '');
   const hasName =
     name.length >= 3 && hook.toLowerCase().includes(name.toLowerCase());
   let body = hasName ? hook : `${hook} — ${name}`;
@@ -311,13 +343,26 @@ export function formatTemporaryLiveSpeech(
     body = `Ich hab mal geschaut, was heute noch geht — ${body}`;
   }
 
-  if (later) {
+  // Preis einweben (nur belegt, kein Doppel)
+  if (price && !hasPriceInText(body)) {
+    const p = /euro|€/iu.test(price) ? price : `${price}`;
+    body = `${body}, ${/eintritt|kosten|frei|gratis/iu.test(p) ? p : `Eintritt ${p}`}`;
+  }
+
+  // Anreise / Dauer dahin
+  const travel = weaveTravelSpeech(spot.distanceHintM, later);
+  if (travel && !/\b(minuten|zu fuß|rad|öpnv|anreise)\b/iu.test(body)) {
+    body = `${body} — ${travel}`;
+  } else if (later) {
     const close = formatLaterPlanClosenessSpeech(spot.distanceHintM);
     if (close && !/nicht weit|gut zu erreichen|um die ecke/iu.test(body)) {
       body = `${body}, ${close}`;
     }
-  } else if (spot.distanceHintM != null && spot.distanceHintM > 0) {
-    body = `${body}${colloquialDistanceHint(spot.distanceHintM)}`;
+  }
+
+  // Warum hingehen
+  if (why.length >= 8 && !body.toLowerCase().includes(why.toLowerCase().slice(0, 18))) {
+    body = `${body} — ${decapitalizeLead(why)}`;
   }
 
   body = body.replace(/[,;\s]+$/u, '');
@@ -325,7 +370,7 @@ export function formatTemporaryLiveSpeech(
 
   if (later && !hasInvite(body)) {
     body +=
-      ' Wenn du Lust hast, können wir uns das merken — soll ich den Termin einplanen?';
+      ' Wenn das was für dich ist, können wir es einplanen — soll ich den Termin merken?';
   }
-  return body.replace(/\s+/g, ' ').trim();
+  return body.replace(/\s+/g, ' ').trim().slice(0, 900);
 }

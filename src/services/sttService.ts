@@ -33,6 +33,12 @@ import {
 let permissionsWarmGranted: boolean | null = null;
 let recognitionWarmAvailable: boolean | null = null;
 let audioModeWarm = false;
+/** Android-Permission-Dialog offen — AppState darf Mic nicht abbrechen. */
+let speechPermissionPromptOpen = false;
+
+export function isSpeechPermissionPromptOpen(): boolean {
+  return speechPermissionPromptOpen;
+}
 
 export type SttStartFailureReason = 'unavailable' | 'permission' | 'error';
 
@@ -48,17 +54,16 @@ const RESTART_BASE_DELAY_MS = 220;
 const RESTART_MAX_ATTEMPTS = 8;
 
 /**
- * Bevorzugte Android-Engines — nur wenn wirklich installiert.
- * Nie eine fehlende Package erzwingen (sonst: „No service found for package …“).
- * Google-Engines vor OEM (Qualcomm VoiceAI oft sofort network/code 4 ohne Google-App).
+ * Bevorzugte Android-Engines — nur wenn in getSpeechRecognitionServices().
+ * Nothing: GSA (googlequicksearchbox) ist installiert, aber für Dritt-Apps nicht bindbar
+ * („No service found“). Dann Google TTS RecognitionService (online) vor AS-Offline.
  */
 const ANDROID_PREFERRED_SPEECH_PACKAGES = [
-  'com.google.android.googlequicksearchbox',
   'com.google.android.tts',
-  'com.google.android.as',
 ] as const;
-/** Nur wenn nichts Google-artiges da ist. */
+/** Offline / OEM — oft no-speech ohne Sprachmodell. */
 const ANDROID_LAST_RESORT_SPEECH_PACKAGES = [
+  'com.google.android.as',
   'com.qualcomm.qti.voiceai.speech',
 ] as const;
 
@@ -148,6 +153,7 @@ function pickAndroidRecognitionPackage(forceNext = false): string | undefined {
     const available = new Set(services.map((s) => String(s)));
     const skipEarly = (p: string) =>
       p.toLowerCase().includes('bixby') || failedAndroidPackages.has(p);
+    // Nur Packages die der Process wirklich binden kann (sonst „No service found“).
     const preferred = ANDROID_PREFERRED_SPEECH_PACKAGES.filter(
       (p) => available.has(p) && !failedAndroidPackages.has(p),
     );
@@ -160,22 +166,29 @@ function pickAndroidRecognitionPackage(forceNext = false): string | undefined {
         !preferred.includes(p as never) &&
         !last.includes(p as never),
     );
-    // Nur installierte Packages — sonst lässt Android den Start mit „No service found“ sterben.
-    const order = [...preferred, ...mid, ...last].filter((p) => available.has(p));
+    const order = [...preferred, ...mid, ...last].filter(
+      (p, i, arr) => arr.indexOf(p) === i && available.has(p),
+    );
     if (!order.length) {
-      // System-Default (kein androidRecognitionServicePackage)
       androidServicePackage = null;
       return undefined;
     }
-    if (forceNext || !androidServicePackage) {
-      androidServiceIndex = forceNext
-        ? (androidServiceIndex + 1) % order.length
-        : 0;
-      androidServicePackage = String(order[androidServiceIndex]);
-    } else if (!order.includes(androidServicePackage)) {
-      androidServicePackage = String(order[0]);
-      androidServiceIndex = 0;
+    const usable = order;
+    if (forceNext || !androidServicePackage || !usable.includes(androidServicePackage)) {
+      if (forceNext && androidServicePackage) {
+        const cur = usable.indexOf(androidServicePackage);
+        androidServiceIndex = (cur + 1) % usable.length;
+      } else {
+        androidServiceIndex = 0;
+      }
+      androidServicePackage = String(usable[androidServiceIndex]);
     }
+    console.warn(
+      '[stt] recognition order:',
+      usable.join(' | '),
+      '→',
+      androidServicePackage,
+    );
     return androidServicePackage ?? undefined;
   } catch {
     androidServicePackage = null;
@@ -190,9 +203,11 @@ function startNativeRecognition(): void {
     Platform.OS === 'android'
       ? {
           // Längere Pausen erlauben — Live-Chat braucht Luft
-          EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS: 2_800,
-          EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS: 1_800,
+          EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS: 4_500,
+          EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS: 3_000,
           EXTRA_LANGUAGE_MODEL: 'free_form' as const,
+          // Online-Erkennung erlauben (Google TTS Service) — Nothing hat oft kein DE-Offline-Modell
+          EXTRA_PREFER_OFFLINE: false,
         }
       : undefined;
 
@@ -206,7 +221,7 @@ function startNativeRecognition(): void {
     // continuous:true + System-Intelligence → oft no-speech ohne Partials.
     // Keep-Alive restartet Segmente zuverlässiger.
     continuous: Platform.OS === 'ios',
-    maxAlternatives: 1,
+    maxAlternatives: 3,
     requiresOnDeviceRecognition: false,
     ...(androidPkg
       ? { androidRecognitionServicePackage: androidPkg }
@@ -278,10 +293,21 @@ function wireListeners(): void {
 
   ExpoSpeechRecognitionModule.addListener('result', (event) => {
     const results = event.results ?? [];
+    // Nicht nur längstes: kurze Eigennamen (Policke) verlieren sonst gegen Polizei.
     let best = '';
+    let bestScore = -1;
     for (const r of results) {
       const t = r?.transcript?.trim() ?? '';
-      if (t.length > best.length) best = t;
+      if (!t) continue;
+      const conf =
+        typeof (r as { confidence?: number }).confidence === 'number'
+          ? (r as { confidence: number }).confidence
+          : 0.5;
+      const score = conf * 1000 + Math.min(t.length, 40);
+      if (score > bestScore) {
+        bestScore = score;
+        best = t;
+      }
     }
     if (!best) return;
     gotPartialThisSegment = true;
@@ -334,19 +360,23 @@ function wireListeners(): void {
         androidServiceIndex = 0;
         pickAndroidRecognitionPackage(false);
       }
-      // Stille (vol<0) = Audiokanal, nicht falsche Engine.
+      // Segment ohne Sprache → andere Engine (AS-Offline oft tot). TTS nicht sofort sperren.
       if (
         (event.error === 'no-speech' || event.error === 'speech-timeout') &&
         !gotPartialThisSegment &&
         keepAliveHold
       ) {
-        if (lastVolumeSample < 0 && quietNoSpeechTries < 2) {
-          quietNoSpeechTries += 1;
-          void prepareAudioForMicrophone();
-        } else {
-          quietNoSpeechTries = 0;
-          pickAndroidRecognitionPackage(true);
+        const badSvc = androidServicePackage || '';
+        if (
+          badSvc.includes('.as') ||
+          badSvc.includes('voiceai') ||
+          lastVolumeSample <= -90
+        ) {
+          if (badSvc) failedAndroidPackages.add(badSvc);
         }
+        androidServicePackage = null;
+        quietNoSpeechTries = 0;
+        pickAndroidRecognitionPackage(true);
       }
       if (
         keepAliveHold &&
@@ -469,22 +499,28 @@ async function requestSpeechPermissions(): Promise<boolean> {
 
     if (current.granted) return true;
 
-    const requested = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
-    console.log('[stt] permissions after request:', {
-      granted: requested.granted,
-      status: requested.status,
-      canAskAgain: requested.canAskAgain,
-    });
+    speechPermissionPromptOpen = true;
+    try {
+      const requested = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
+      console.log('[stt] permissions after request:', {
+        granted: requested.granted,
+        status: requested.status,
+        canAskAgain: requested.canAskAgain,
+      });
 
-    if (requested.granted) return true;
+      if (requested.granted) return true;
 
-    const mic = await ExpoSpeechRecognitionModule.requestMicrophonePermissionsAsync();
-    console.log('[stt] microphone-only permission:', {
-      granted: mic.granted,
-      status: mic.status,
-    });
-    return mic.granted;
+      const mic = await ExpoSpeechRecognitionModule.requestMicrophonePermissionsAsync();
+      console.log('[stt] microphone-only permission:', {
+        granted: mic.granted,
+        status: mic.status,
+      });
+      return mic.granted;
+    } finally {
+      speechPermissionPromptOpen = false;
+    }
   } catch (err) {
+    speechPermissionPromptOpen = false;
     console.warn('[stt] permission request failed:', err);
     try {
       const av = await Audio.requestPermissionsAsync();
@@ -576,6 +612,7 @@ export async function startListening(
   if (isStarting || isActive || keepAliveHold) {
     if (options?.replaceActive) {
       keepAliveHold = false;
+      partialHandlerLocked = false;
       await stopListening({ tailMs: 0, finalizeMs: 400 });
     } else {
       return { ok: false, reason: 'error' };
@@ -615,7 +652,9 @@ export async function startListening(
     console.warn('[stt] prepareAudioForMicrophone failed:', err);
   }
 
-  if (!partialHandlerLocked) {
+  // replaceActive = neuer Owner (Reisebüro/Hold) — Lock vom Live-Chat immer brechen
+  if (!partialHandlerLocked || options?.replaceActive) {
+    partialHandlerLocked = false;
     partialHandler = onPartial ?? null;
   }
   committedTranscript = '';
@@ -640,6 +679,18 @@ export async function startListening(
 
   try {
     startNativeRecognition();
+    // Kein start-Event → Engine tot (AS) — nach 1.8s rotieren
+    const startWatchPkg = androidServicePackage;
+    setTimeout(() => {
+      if (!keepAliveHold || stopWaiters.length > 0) return;
+      if (!isStarting || isActive) return;
+      console.warn('[stt] start timeout — rotate engine', startWatchPkg);
+      if (startWatchPkg) failedAndroidPackages.add(startWatchPkg);
+      isStarting = false;
+      androidServicePackage = null;
+      pickAndroidRecognitionPackage(true);
+      queueKeepAliveRestart('start-timeout');
+    }, 1_800);
     return { ok: true };
   } catch (err) {
     console.warn('[stt] start failed:', err);
@@ -734,6 +785,11 @@ export function isCurrentlyListening(): boolean {
 /** Native Erkennung läuft wirklich — keepAlive-Hold zählt nicht. */
 export function isSttRecognitionLive(): boolean {
   return isActive || isStarting;
+}
+
+/** Keep-Alive wartet auf Restart — kein Zombie (kurz kein Native). */
+export function isSttAwaitingRestart(): boolean {
+  return keepAliveHold && restartQueued;
 }
 
 /**

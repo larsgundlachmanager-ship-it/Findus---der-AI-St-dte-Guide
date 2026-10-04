@@ -23,7 +23,7 @@ const REVIEW_FACET_DEFS: FacetDef[] = [
   { tag: 'sushi', re: /\bsushi\b|sashimi|\bmaki\b/i },
   {
     tag: 'asiatisch',
-    re: /asiatisch|\basia\b|thai|vietnam|chinesisch|korea|pho\b|ramen|indisch|indian|\bindia\b|tandoori|curry/i,
+    re: /asiatisch|\basia\b|thai|vietnam|chinesisch|japanisch|korea|pho\b|ramen|indisch|indian|\bindia\b|tandoori|curry|sushi|mongol|hot[\s-]?pot|wok/i,
   },
   {
     tag: 'indisch',
@@ -61,6 +61,17 @@ const REVIEW_FACET_DEFS: FacetDef[] = [
     tag: 'ruhig',
     re: /\bruhig\b|\bquiet\b|zum\s+arbeiten|arbeitsfreundlich|nicht\s+laut|entspannt\s+arbeiten/i,
   },
+  {
+    tag: 'laut',
+    re: /\blaut\b|\blärm|\blaerm|verkehrslärm|durchgangsverkehr|laut(?:er|es)?\s+hauptstra|hauptstra[ßs]e.{0,24}(?:laut|lärm|nerv)|sehr\s+laut|zu\s+laut|lautstarke/,
+    negate: /nicht\s+laut|kein(?:e|en)?\s+lärm|kein(?:e|en)?\s+laerm|trotz\s+hauptstra|trotz\s+verkehr/i,
+  },
+  {
+    tag: 'all_you_can_eat',
+    // STT: you|xou|jou|…
+    re: /all[\s-]*(?:you|xou|jou|ju|yo|u|iu)[\s-]*can[\s-]*eat|allyoucaneat|all-you-can-eat|\bayce\b|essen\s+so\s+viel|unbegrenzt\s+essen|flatrate\s+(?:essen|buffet)/i,
+  },
+
   { tag: 'fleisch', re: /\bfleisch\b|rinder|steak|grillteller|braten/i },
   { tag: 'angus', re: /\b(?:black\s+)?angus\b/i },
   { tag: 'wagyu', re: /\bwagyu\b|\bkobe\b/i },

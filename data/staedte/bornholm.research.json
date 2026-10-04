@@ -1,0 +1,309 @@
+{
+  "city_id": "bornholm",
+  "city": "Bornholm",
+  "region": "Denmark",
+  "spots": [
+    {
+      "name": "Hammershus",
+      "aliases": ["Hammershus Ruin", "Hammershus Slot", "Burgruine Hammershus"],
+      "category": "denkmal",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Nordeuropas größte Burgruine auf einem 74-m-Granitfelsen an der Nordwestspitze. Meistbesuchte Attraktion der Insel (~400.000 Besucher/Jahr). Ruine ganzjährig frei zugänglich; Besucherzentrum Brohuset mit Ausstellung. Dramatische Geschichte u. a. Leonora Christina im 17. Jahrhundert.",
+      "deep_data_pool": [
+        "Lage: Nordwestspitze bei Allinge/Sandvig, Felsen 74 m über der Ostsee.",
+        "Größte mittelalterliche Festungsanlage Nordeuropas.",
+        "Ruine rund um die Uhr frei zugänglich; Brohuset-Ausstellung kostenlos.",
+        "Plane 1–2 Stunden; mit Aufstieg und Aussicht länger.",
+        "Visuell: Mantelturm, Ringmauern, Klippen, Ostsee und grüne Hänge.",
+        "Nahe: Hammerknuden, Hammerfyr, Allinge-Sandvig."
+      ],
+      "sources": ["https://www.bornholm.de/sehenswuerdigkeiten/"]
+    },
+    {
+      "name": "Østerlars Rundkirke",
+      "aliases": ["Osterlars Rundkirche", "Østerlarskirke", "Oesterlars"],
+      "category": "kirche",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Größte und älteste der vier Bornholmer Rundkirchen (ca. 1150), Wehrkirche mit Kalkmalereien um 1350 am Mittelpfeiler. Adresse Vietsvej 25, 3760 Gudhjem. LIVE: Eintritt oft 10–30 DKK, Winterhalbjahr und Gottesdienst ggf. frei.",
+      "deep_data_pool": [
+        "Erbaut um 1150, dem heiligen Laurentius geweiht.",
+        "Vier Rundkirchen auf Bornholm: Østerlars, Olsker, Nylars, Nyker.",
+        "Fresken um 1350 am hohlen Mittelpfeiler; 1889 wiederentdeckt, 1958 restauriert.",
+        "Grabstein Henrik Greser 1370 (Gotland-Kalkstein).",
+        "BAT-Buslinien 1, 3, 4; ab Rønne Linie 3.",
+        "Wenige Kilometer von Gudhjem — Halbtagesausflug mit Hafenort."
+      ],
+      "sources": ["https://www.bornholm.de/oesterlars-rundkirche/"]
+    },
+    {
+      "name": "Dueodde Strand",
+      "aliases": ["Dueodde", "Dueodde Beach"],
+      "category": "strand",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Südspitze Bornholms: kilometerlanger Strand mit extrem feinem weißem Sand (früher für Sanduhren). Holzstege durch die Dünen. Einer der bekanntesten Badestrände Nordeuropas.",
+      "deep_data_pool": [
+        "Feinster Sand — unter den Füßen oft als 'singend' beschrieben.",
+        "Breite Dünenlandschaft mit Holzstegen zum Wasser.",
+        "Flacher Abschnitt der Radroute Bornholm Rundt (Nationalroute 10).",
+        "Visuell: weiße Sandfläche, Dünen, Ostsee, weiter Horizont."
+      ],
+      "sources": ["https://unser-bornholm.de/sehenswurdigkeiten/"]
+    },
+    {
+      "name": "Gudhjem",
+      "aliases": ["Gudhjem Havn", "Gudhjem Hafen"],
+      "category": "hafen",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Dänemarks einzige 'Bergstadt': bunte Häuser am steilen Hang über dem Hafen. Räuchereien (Sol over Gudhjem), Kunst, Fähre nach Christiansø. Ausgangspunkt für Helligdomsklipperne und Bornholms Kunstmuseum.",
+      "deep_data_pool": [
+        "Nordostküste — steile Gassen vom Hafen bergauf.",
+        "Bekannt für geräucherten Hering / Sol over Gudhjem.",
+        "Fähre vom Hafen nach Christiansø (LIVE prüfen).",
+        "Nahe: Helligdomsklipperne, Bornholms Kunstmuseum, Østerlars."
+      ],
+      "sources": ["https://visit-bornholm.com/de/radfahren/routen/route10-bornholm-rundt"]
+    },
+    {
+      "name": "Svaneke",
+      "aliases": ["Svaneke Havn"],
+      "category": "altstadt",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Östlichste Stadt Dänemarks — Fachwerk, Hafen, Braukunst und Handwerk. Architekturpreiswürdiges Stadtbild, gute Restaurants und Ausgangspunkt für Brændesgårdshaven.",
+      "deep_data_pool": [
+        "Ostküste Bornholms, Etappe der Radroute Nationalroute 10.",
+        "Bekannt für Brauerei, Bonbon- und Handwerkstradition.",
+        "Nahe: Freizeitpark Brændesgårdshaven (Joboland)."
+      ],
+      "sources": ["https://visit-bornholm.com/de/radfahren/routen/route10-bornholm-rundt"]
+    },
+    {
+      "name": "Allinge-Sandvig",
+      "aliases": ["Allinge", "Sandvig", "Allinge Sandvig"],
+      "category": "hafen",
+      "place_tier": 2,
+      "must_have": true,
+      "general_info": "Zwillingsorte an der Nordküste — Ausgangspunkt zu Hammershus, Hammerknuden und der Zipline Tovbanen über dem Opalsøen.",
+      "deep_data_pool": [
+        "Anspruchsvollste Rad-Etappe (Anstiege bis 22 %).",
+        "Nahe Hammershus und Hammerfyr.",
+        "Tovbanen: längste Zipline Dänemarks über den Steinbruchsee (Saison LIVE)."
+      ],
+      "sources": ["https://www.bornholm.de/sehenswuerdigkeiten/"]
+    },
+    {
+      "name": "Nylars Rundkirke",
+      "aliases": ["Nylars Rundkirche"],
+      "category": "kirche",
+      "place_tier": 2,
+      "general_info": "Eine der vier Bornholmer Rundkirchen — gilt als besonders gut erhalten. Südwestlich im Inselinneren, Wehrkirchen-Charakter des 12./13. Jahrhunderts.",
+      "deep_data_pool": [
+        "Teil der vier Rundkirchen: Østerlars, Olsker, Nylars, Nyker.",
+        "LIVE: Öffnung und Eintritt vor Ort prüfen."
+      ],
+      "sources": ["https://www.bornholm.de/oesterlars-rundkirche/"]
+    },
+    {
+      "name": "Olsker Rundkirke",
+      "aliases": ["Olsker Rundkirche", "Sankt Ols Kirke"],
+      "category": "kirche",
+      "place_tier": 2,
+      "general_info": "Schlankste der vier Bornholmer Rundkirchen im Norden der Insel.",
+      "deep_data_pool": [
+        "Mittelalterliche Wehrkirche, 12./13. Jahrhundert.",
+        "LIVE: Öffnung und Eintritt prüfen."
+      ],
+      "sources": ["https://www.bornholm.de/oesterlars-rundkirche/"]
+    },
+    {
+      "name": "Nyker Rundkirke",
+      "aliases": ["Nyker Rundkirche"],
+      "category": "kirche",
+      "place_tier": 2,
+      "general_info": "Kleinste der vier Bornholmer Rundkirchen, westlich im Inselinneren.",
+      "deep_data_pool": [
+        "Teil des einzigartigen Rundkirchen-Ensembles der Insel."
+      ],
+      "sources": ["https://www.bornholm.de/oesterlars-rundkirche/"]
+    },
+    {
+      "name": "Helligdomsklipperne",
+      "aliases": ["Helligdommen", "Heiligtumsklippen"],
+      "category": "aussicht",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Steile Granitklippen an der Nordostküste bei Gudhjem — Stege und Pfade entlang der Klippen. Unmittelbar beim Bornholms Kunstmuseum.",
+      "deep_data_pool": [
+        "Dramatische Steilküste mit Stegen und Aussichtspunkten.",
+        "Direkt neben dem Bornholms Kunstmuseum.",
+        "Visuell: rote/graue Granitfelsen, Ostsee, schmale Pfade."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    },
+    {
+      "name": "Bornholms Kunstmuseum",
+      "aliases": ["Bornholm Art Museum", "Kunstmuseum Helligdommen"],
+      "category": "museum",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Kunstmuseum der Bornholmer Malerschule an den Helligdomsklipperne — Architektur und Sammlung mit Blick auf die Steilküste.",
+      "deep_data_pool": [
+        "Lage an den Helligdomsklipperne nördlich von Gudhjem.",
+        "Schwerpunkt Bornholmer Malerschule und moderne Kunst.",
+        "LIVE: Öffnung und Eintritt prüfen."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    },
+    {
+      "name": "Christiansø",
+      "aliases": ["Ertholmene", "Christiansoe"],
+      "category": "denkmal",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Seefestung von 1684 auf den Ertholmene vor Gudhjem — Turmmuseen, enge Gassen, kurze Fähre vom Gudhjem Havn. LIVE: Fährzeiten und Ticket prüfen.",
+      "deep_data_pool": [
+        "Festung ab 1684; zwei Turmmuseen.",
+        "Fähre typischerweise von Gudhjem — LIVE Fahrplan.",
+        "Kleine Inselgruppe Ertholmene vor der Nordostküste."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    },
+    {
+      "name": "Hammerfyr",
+      "aliases": ["Hammeren Fyr", "Hammeren Lighthouse"],
+      "category": "aussicht",
+      "place_tier": 2,
+      "general_info": "Begehbarer Leuchtturm/Aussichtsturm auf dem Hammeren — Ausblick über Nordspitze und Ostsee. Nähe zu Hammershus und Hammerknuden.",
+      "deep_data_pool": [
+        "Auf dem Hammeren-Granitmassiv im Norden.",
+        "LIVE: Öffnung und Besteigung prüfen."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    },
+    {
+      "name": "Hammerknuden",
+      "aliases": ["Hammeren", "Hammerknuden Natur"],
+      "category": "natur",
+      "place_tier": 2,
+      "general_info": "Granit-Halbinsel und Naturschutzgebiet an der Nordspitze — Wanderwege, Klippen, Nähe zu Hammershus und Hammerfyr.",
+      "deep_data_pool": [
+        "Wandergebiet mit Felsküste und Heidelandschaft.",
+        "Teil des Nord-Highlights zusammen mit Hammershus."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    },
+    {
+      "name": "Rønne",
+      "aliases": ["Ronne", "Roenne", "Rønne Havn"],
+      "category": "altstadt",
+      "place_tier": 1,
+      "must_have": true,
+      "general_info": "Hauptstadt und Fährhafen der Insel (Westküste). Fachwerkaltstadt, Sankt Nicolai Kirke, Bornholms Museum, Hjorths Fabrik. Anlaufpunkt der Bornholmslinjen.",
+      "deep_data_pool": [
+        "Fährverbindungen Ystad / Køge / Sassnitz — LIVE Bornholmslinjen.",
+        "Altstadt, Nikolaikirche, Museen fußläufig vom Hafen.",
+        "Start/Ziel der Radroute Bornholm Rundt (104 km)."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    },
+    {
+      "name": "Hasle",
+      "aliases": ["Hasle Havn"],
+      "category": "hafen",
+      "place_tier": 2,
+      "general_info": "Hafenort an der Westküste — Etappe zwischen Rønne und Hammershus, bekannt für Räucherei und Küstenwege (u. a. Richtung Jons Kapel).",
+      "deep_data_pool": [
+        "Westküste, Radroute Nationalroute 10.",
+        "Nahe Jons Kapel und Hammershus-Route."
+      ],
+      "sources": ["https://visit-bornholm.com/de/radfahren/routen/route10-bornholm-rundt"]
+    },
+    {
+      "name": "Nexø",
+      "aliases": ["Nexo", "Neksø"],
+      "category": "hafen",
+      "place_tier": 2,
+      "general_info": "Hafenstadt an der Ostküste Richtung Dueodde — Fischerei, Shopping, flache Radetappe nach Dueodde.",
+      "deep_data_pool": [
+        "Ostküste zwischen Svaneke und Dueodde.",
+        "Nach der sowjetischen Bombardierung 1945 teilweise neu aufgebaut."
+      ],
+      "sources": ["https://visit-bornholm.com/de/radfahren/routen/route10-bornholm-rundt"]
+    },
+    {
+      "name": "Brændesgårdshaven",
+      "aliases": ["Joboland", "Braendesgaardshaven"],
+      "category": "freizeitpark",
+      "place_tier": 2,
+      "general_info": "Freizeitpark bei Svaneke (früher Joboland): Fahrgeschäfte, Wasserpark, Kleintierzoo. Saison typisch Mai–September — LIVE prüfen.",
+      "deep_data_pool": [
+        "Familienziel nahe Svaneke.",
+        "LIVE: Saison und Eintritt prüfen."
+      ],
+      "sources": ["https://www.bornholm.de/sehenswuerdigkeiten/"]
+    },
+    {
+      "name": "Bornholms Middelaldercenter",
+      "aliases": ["Middelaldercenter Østerlars", "Mittelalterzentrum"],
+      "category": "museum",
+      "place_tier": 2,
+      "general_info": "Mittelalterzentrum in Østerlars neben der Rundkirche — lebendige Darstellung, Saison Mai–Oktober. Großes Mittelalterfest Mitte Juli (LIVE).",
+      "deep_data_pool": [
+        "Eintritt LIVE prüfen (oft 90–125 DKK Erwachsene in Saison).",
+        "Direkt bei Østerlars Rundkirke."
+      ],
+      "sources": ["https://www.bornholm.de/sehenswuerdigkeiten/"]
+    },
+    {
+      "name": "Jons Kapel",
+      "aliases": ["Jons Kapel Klippe"],
+      "category": "aussicht",
+      "place_tier": 2,
+      "general_info": "Steilküsten-Kapelle/Klippe an der Westküste zwischen Hasle und Hammershus — Treppen und Aussicht über die Brandung.",
+      "deep_data_pool": [
+        "Dramatische Westküsten-Klippen.",
+        "Teil der Route Richtung Hammershus."
+      ],
+      "sources": ["https://visit-bornholm.com/de/radfahren/routen/route10-bornholm-rundt"]
+    },
+    {
+      "name": "Ekkodalen",
+      "aliases": ["Ekkodalen Almindingen"],
+      "category": "natur",
+      "place_tier": 2,
+      "general_info": "Echo-Tal im Waldgebiet Almindingen im Inselinneren — Wanderwege und Naturerlebnis abseits der Küste.",
+      "deep_data_pool": [
+        "Im zentralen Waldgebiet Almindingen.",
+        "Bekannt für Echo-Effekt und Waldspaziergänge."
+      ],
+      "sources": ["https://unser-bornholm.de/sehenswurdigkeiten/"]
+    },
+    {
+      "name": "Almindingen",
+      "aliases": ["Almindingen Wald", "Almindingen Forest"],
+      "category": "natur",
+      "place_tier": 2,
+      "general_info": "Großes Waldgebiet im Zentrum der Insel — Wandern, Radfahren, Natur (inkl. Ekkodalen).",
+      "deep_data_pool": [
+        "Eines der größten Waldgebiete Dänemarks auf einer Insel.",
+        "Guter Kontrast zur Felsküste und den Sandstränden."
+      ],
+      "sources": ["https://unser-bornholm.de/sehenswurdigkeiten/"]
+    },
+    {
+      "name": "Balka Strand",
+      "aliases": ["Balka Beach"],
+      "category": "strand",
+      "place_tier": 3,
+      "general_info": "Sandstrand an der Südostküste — familienfreundlich, nahe Nexø/Dueodde-Region.",
+      "deep_data_pool": [
+        "Südostküste, flacher Zugang zum Wasser."
+      ],
+      "sources": ["https://www.bornholm.de/"]
+    }
+  ]
+}

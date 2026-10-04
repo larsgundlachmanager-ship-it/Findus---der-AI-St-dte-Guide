@@ -349,7 +349,7 @@ const always = resolveEventProgramLink({
 });
 assert(always.kind === 'search', 'fallback is search');
 assert(/^https:\/\/www\.google\.com\/search\?q=/i.test(always.url), 'google search url');
-assert(/Infos|Programm/i.test(always.label), 'fallback label');
+assert(/Website suchen|Programm|Infos/i.test(always.label), 'fallback label');
 assert(
   decodeURIComponent(always.url).includes('Eppendorfer'),
   'search contains title',

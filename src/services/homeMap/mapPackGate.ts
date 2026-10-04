@@ -1,9 +1,16 @@
 /**
  * Yorro-Karteninhalt (Orte, Icons, Nav-POIs) nur mit lokalem Stadt-Pack.
  * Basiskarte (Vector-Tiles) ist weltweit ohne Pack verfügbar.
+ * Stadtflächen/Katalog-Fills sind bewusst NICHT gated — die bleiben beim
+ * Navi und beim Blick in Nachbarstädte sichtbar.
  */
 
 import { isVectorBasemapEnabled } from './mapTileConfig';
+
+function isSoftOrGhostCityId(cityId: string | null | undefined): boolean {
+  const id = (cityId || '').trim().toLowerCase();
+  return !id || id.startsWith('soft_');
+}
 
 export function isCityPackDownloaded(
   cityId: string | null | undefined,
@@ -59,6 +66,8 @@ export function resolveActivePackCityId(
 ): string {
   const { cityId, viewportLat, viewportLng, locateCity } = input;
   let active = (cityId || '').trim().toLowerCase();
+  // Soft-GPS (soft_gdynia) ist kein Pack — Viewport-Stadt zählt.
+  if (isSoftOrGhostCityId(active)) active = '';
   if (
     locateCity &&
     typeof viewportLat === 'number' &&
@@ -78,11 +87,16 @@ export function resolveActivePackCityId(
  * oder Profil-/Viewport-Stadt ein Pack hat.
  *
  * Wichtig: nie „leer“ bleiben nur weil Coverage noch nicht hydriert ist —
- * Profil-Pack reicht als Fallback (Boot-Race).
+ * Profil-Pack reicht als Fallback (Boot-Race). Soft-GPS (soft_gdynia) zählt
+ * nicht als Profil-Pack — heruntergeladene Packs (z. B. danzig) dürfen trotzdem
+ * browsen, auch wenn GPS woanders ist.
  */
 export function isYorroMapContentAllowed(input: YorroMapContentGateInput): boolean {
   if (!isVectorBasemapEnabled()) return true;
-  if (!input.localPackIds.length) return false;
+  // Boot: Pack-Liste noch leer → Profil erlauben (sonst Orte 30–60 s weg).
+  if (!input.localPackIds.length) {
+    return !!(input.cityId || '').trim();
+  }
 
   const packs = new Set(
     input.localPackIds.map((x) => x.trim().toLowerCase()).filter(Boolean),
@@ -119,6 +133,21 @@ export function isYorroMapContentAllowed(input: YorroMapContentGateInput): boole
     if (packs.has(at.toLowerCase())) return true;
     // Andere Stadt ohne Pack: nur erlauben wenn Profil-Coverage den View trifft
     // (oben schon geprüft) — sonst false (Download-Prompt).
+  }
+
+  // Soft-/Ghost-Profil (soft_gdynia): Packs auf Disk dürfen browsen.
+  // Coverage noch nicht hydriert → nicht leeren (Neighbor-Merge füllt nach).
+  if (packs.size > 0 && isSoftOrGhostCityId(profile)) {
+    if (
+      !input.locateCity ||
+      typeof input.viewportLat !== 'number' ||
+      typeof input.viewportLng !== 'number'
+    ) {
+      return true;
+    }
+    const at = input.locateCity(input.viewportLat, input.viewportLng);
+    if (!at) return true;
+    if (packs.has(at.toLowerCase())) return true;
   }
 
   return false;

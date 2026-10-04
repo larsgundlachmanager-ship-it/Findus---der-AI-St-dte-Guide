@@ -23,8 +23,30 @@ export const VAD_WARMUP_MS = 450;
 /** Längerer Warmup wenn Mic während TTS wieder aufgeht */
 export const VAD_ECHO_WARMUP_MS = 750;
 
+/**
+ * Capture/Reisebüro: Briefing-Sätze brauchen Denk-/Lufthol-Pausen.
+ * Normale Modul-2-Werte bleiben aggressiver.
+ * Lange Monologe (bis ~5 Min) sind ok — Cut nur bei echter Pause, nie wegen Wortzahl.
+ */
+export const CAPTURE_ENDPOINT_FLOOR_MS = 1600;
+export const CAPTURE_ENDPOINT_EXTRA_MS = 900;
+export const CAPTURE_MIN_VAD_SILENCE_MS = 1400;
+export const CAPTURE_SOFT_COMMIT_MS = 900;
+/** Viele Defers: User kann Minuten reden, solange VAD Stimme sieht */
+export const CAPTURE_MAX_ENDPOINT_DEFERS = 240;
+/**
+ * STT oft sekundenlang „stabil“ mitten im Monolog — Force nur als Totzeit-Cap,
+ * und nie während VAD noch Stimme hört (siehe liveChatSession).
+ * 4.5s reicht für Denkpause; längere Monologe wachsen weiter im Transcript.
+ */
+export const CAPTURE_STABLE_FORCE_MS = 4_500;
+
 const OPEN_TRAIL =
-  /\b(und|oder|also|ähm|ah|äh|hm+|dann|weil|dass|daß|mit|von|zu|für|nach|aber|noch|bzw)\s*[.,]?\s*$/iu;
+  /\b(und|oder|also|ähm|ah|äh|hm+|dann|weil|dass|daß|mit|von|zu|für|nach|aber|noch|bzw|halt|mal|vielleicht|eigentlich|irgendwie|einfach|ziemlich)\s*[.,]?\s*$/iu;
+/** Hängendes „so/richtig“ ohne Satzende — mit Punkt darf fertig sein */
+const OPEN_TRAIL_SOFT = /\b(so|richtig)\s*$/iu;
+/** STT liefert oft nur Komma mitten im Gedanken */
+const TRAILING_COMMA = /,\s*$/u;
 const CLEAR_END = /[?!…]\s*$/u;
 const PERIOD_END = /\.\s*$/u;
 const SHORT_ACK =
@@ -42,8 +64,33 @@ const BARE_CLOCK_RE =
 const SHORT_SLOT_ANSWER_RE =
   /^(?:(?:nur\s+)?handgep[äa]ck|(?:mit\s+)?aufgabegep[äa]ck|(?:mit\s+)?koffer|cabin\s*bag|checked\s*bag|öpnv|oepnv|taxi|uber|transfer|heute|morgen|mehr\s+puffer|weniger\s+puffer|puffer\s+passt(?:\s+so)?)\.?$/iu;
 
+/**
+ * Unvollständige Trivia-/Alter-Frames („Wie alt ist“, „Wie alt ist der“) —
+ * STT holt Subjekt noch nach; nicht als fertig endpointen.
+ */
+const INCOMPLETE_TRIVIA_FRAME_RE =
+  /^(?:wie|was|wer)\s+(?:alt|groß|gross|hoch|schwer|lang|breit|tief|weit|teuer)\s+(?:ist|sind|war|waren)(?:\s+(?:der|die|das|den|dem|ein|eine|einer|eines))?\s*[.,]?\s*$/iu;
+/** Hängender Artikel / Präposition ohne Subjekt am Ende */
+const TRAILING_ARTICLE_RE =
+  /\b(?:der|die|das|den|dem|des|ein|eine|einer|eines|einem|einen|vom|zum|zur|im|am|beim)\s*[.,]?\s*$/iu;
+
 function wordCount(text: string): number {
   return text.split(/\s+/).filter(Boolean).length;
+}
+
+/** Noch kein Subjekt — Cut würde Klarfragen wie „Wie alt ist wer?“ auslösen. */
+export function looksLikeIncompleteTriviaFrame(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t) return false;
+  if (INCOMPLETE_TRIVIA_FRAME_RE.test(t)) return true;
+  if (
+    /^(?:wie|was)\s+(?:alt|groß|gross|hoch|schwer)\b/iu.test(t) &&
+    TRAILING_ARTICLE_RE.test(t) &&
+    wordCount(t) <= 6
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /** Adaptive Stable-Zeit bis Soft-Commit / Cut. */
@@ -52,7 +99,10 @@ export function computeEndpointDelayMs(text: string): number {
   if (!t) return ENDPOINT_BASE_MS;
   const words = wordCount(t);
 
-  if (OPEN_TRAIL.test(t)) return ENDPOINT_SLOW_MS;
+  if (looksLikeIncompleteTriviaFrame(t)) return ENDPOINT_SLOW_MS;
+  if (OPEN_TRAIL.test(t) || OPEN_TRAIL_SOFT.test(t) || TRAILING_COMMA.test(t)) {
+    return ENDPOINT_SLOW_MS;
+  }
 
   if (words <= 4 && (CLEAR_END.test(t) || SHORT_ACK.test(t))) {
     return ENDPOINT_FAST_MS;
@@ -82,7 +132,8 @@ export function computeEndpointDelayMs(text: string): number {
 export function looksLikeFinishedUtterance(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t || t.length < 2) return false;
-  if (OPEN_TRAIL.test(t)) return false;
+  if (OPEN_TRAIL.test(t) || OPEN_TRAIL_SOFT.test(t) || TRAILING_COMMA.test(t)) return false;
+  if (looksLikeIncompleteTriviaFrame(t)) return false;
   if (CLEAR_END.test(t)) return true;
   if (SHORT_ACK.test(t) && wordCount(t) <= 4) return true;
   if (BARE_CLOCK_RE.test(t)) return true;
@@ -95,6 +146,22 @@ export function looksLikeFinishedUtterance(text: string): boolean {
   if (words >= 4 && /\b(bitte|danke|heute|jetzt|hier|in\s+der\s+n[aä]he)\b/iu.test(t)) {
     return true;
   }
+  return false;
+}
+
+/**
+ * Capture/Reisebüro: nur echtes Satzende — nicht „ab 6 Wörtern fertig“.
+ * Kurze Acks / ?!… / klarer Punkt; sonst auf echte Pause warten.
+ */
+export function looksLikeClearSentenceEnd(text: string): boolean {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t || t.length < 2) return false;
+  if (OPEN_TRAIL.test(t) || OPEN_TRAIL_SOFT.test(t) || TRAILING_COMMA.test(t)) return false;
+  if (looksLikeIncompleteTriviaFrame(t)) return false;
+  if (CLEAR_END.test(t)) return true;
+  if (SHORT_ACK.test(t) && wordCount(t) <= 4) return true;
+  if (BARE_CLOCK_RE.test(t) || SHORT_SLOT_ANSWER_RE.test(t)) return true;
+  if (PERIOD_END.test(t) && wordCount(t) >= 3) return true;
   return false;
 }
 

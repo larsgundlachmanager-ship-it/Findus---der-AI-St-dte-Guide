@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Interactive map QA taps on the live phone."""
 from __future__ import annotations
 
@@ -6,9 +6,10 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from _device_ids import require_qa_serial
 
 ADB = r"C:\Users\larsf\AppData\Local\Android\Sdk\platform-tools\adb.exe"
-SERIAL = "00143157P001105"
+SERIAL = require_qa_serial()
 OUT = Path(r"C:\Users\larsf\Findus 2.0\.cursor\live7")
 
 

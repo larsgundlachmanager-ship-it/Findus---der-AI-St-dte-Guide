@@ -68,4 +68,20 @@ const last = lastWalkSpeech(facts);
 assert(/300/.test(last) && /DHL/.test(last), `letzter Fußweg: ${last}`);
 assert(/raus|Bahnhof|draußen/i.test(last), `Bahnhof raus: ${last}`);
 
+
+assert(platformSpoken('2', 'Bus') === 'Steig 2', 'Bus → Steig');
+assert(platformSpoken(null, 'Bus') == null, 'ohne Platform → null');
+
+const busFacts = {
+  ...facts,
+  line: 'Bus 745',
+  headsign: 'Renningen',
+  platform: null,
+  vehicle: 'Bus' as const,
+  waitMin: 3,
+};
+const busHalt = haltArrivedSpeech(busFacts);
+assert(!/Gleis/i.test(busHalt), `Bus ohne Platform kein Gleis: ${busHalt}`);
+assert(/Bus 745|745/.test(busHalt), `Bus nennt Linie: ${busHalt}`);
+
 console.log('transitGuideSpeech.smoke.test.ts OK');

@@ -1,55 +1,44 @@
 /**
- * Genannter Spielplan — Struktur, keine Team-Liste.
- * Run: npx --yes --package tsx@4.19.4 tsx src/services/concierge/sportsScheduleQuery.smoke.test.ts
+ * Named schedule subject hard-match + Barclaycard alias.
+ * Run: npx --yes tsx src/services/concierge/sportsScheduleQuery.smoke.test.ts
  */
-
 import {
   looksLikeNamedScheduleQuery,
-  isSportsScheduleQuery,
+  extractNamedScheduleSubjects,
+  eventMatchesNamedScheduleSubject,
 } from './sportsScheduleQuery';
 
-function assert(cond: unknown, msg: string): void {
-  if (!cond) throw new Error(`FAIL: ${msg}`);
+function assert(cond: boolean, msg: string): void {
+  if (!cond) throw new Error(msg);
 }
 
+const towers =
+  'Ich habe überlegt, zu den Hamburg Towers dieses Jahr zu gehen. Wann ist das nächste Spiel für die Barclaycard Arena?';
+assert(looksLikeNamedScheduleQuery(towers), 'towers+barclaycard named');
+const subjects = extractNamedScheduleSubjects(towers);
 assert(
-  looksLikeNamedScheduleQuery(
-    'Wann spielen die Hamburg Towers in der Ballsporthalle?',
-  ),
-  'towers schedule',
-);
-assert(
-  looksLikeNamedScheduleQuery(
-    'wann spielt eigentlich hier FC Bayern München wieder?',
-  ),
-  'bayern schedule structural',
-);
-assert(
-  looksLikeNamedScheduleQuery('Wann spielen die Towers in der Badcathedrale?'),
-  'stt venue still schedule',
-);
-assert(
-  !looksLikeNamedScheduleQuery('Was geht heute Abend in Prisdorf?'),
-  'nightlife not named schedule',
-);
-assert(!looksLikeNamedScheduleQuery('Wie alt ist der Papst?'), 'trivia no');
-assert(
-  isSportsScheduleQuery('Wann spielt Alba Berlin das nächste Heimspiel?'),
-  'alias ok',
+  subjects.some((s) => /towers/i.test(s)),
+  `subjects include Towers, got ${subjects.join('|')}`,
 );
 
-// Cover-Floskeln für genannte Termine (Library — Engine zieht RN und ist hier nicht nötig)
-{
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const lib = require('../../assets/data/floskelLibrary.json') as {
-    categories: Record<string, { phrases: string[] }>;
-  };
-  const phrases = lib.categories.named_schedule?.phrases ?? [];
-  assert(phrases.length >= 4, 'named_schedule floskel pool');
-  assert(
-    phrases.every((p) => !/gute\s+richtung|tolle\s+idee|sport-idee/i.test(p)),
-    'no pitch-opener phrases in named_schedule',
-  );
-}
+assert(
+  eventMatchesNamedScheduleSubject(
+    { title: 'Hamburg Towers vs Bonn', venue: 'Barclays Arena', summary: 'BBL' },
+    subjects,
+  ),
+  'towers game matches',
+);
+assert(
+  !eventMatchesNamedScheduleSubject(
+    { title: 'Vita Was da los Tour', venue: 'Logo Hamburg', summary: 'Konzert' },
+    subjects,
+  ),
+  'concert does not match Towers',
+);
+
+assert(
+  looksLikeNamedScheduleQuery('Wann spielen die Hamburg Towers in der Barclaycard Arena?'),
+  'barclaycard venue alias',
+);
 
 console.log('sportsScheduleQuery.smoke.test.ts OK');

@@ -22,9 +22,19 @@ export function ticketProductKey(url: string): string | null {
   const konf = raw.match(/\/e\/([a-z0-9-]+)\/?(?:[?#]|$)/i);
   if (konf && /gokonfetti/i.test(raw)) return `konfetti:${konf[1]}`;
   const rxGroup = raw.match(/\/group\/(\d+)/i);
-  if (rxGroup && /reservix/i.test(raw)) return `reservix:g${rxGroup[1]}`;
-  const rxTicket = raw.match(/reservix\.de\/tickets\/([^/?#]+)/i);
-  if (rxTicket) return `reservix:${rxTicket[1]!.toLowerCase()}`;
+  if (rxGroup && /reservix|adticket/i.test(raw)) {
+    const brand = /adticket/i.test(raw) ? 'adticket' : 'reservix';
+    return `${brand}:g${rxGroup[1]}`;
+  }
+  const rxTicket = raw.match(/(?:reservix|adticket)\.de\/tickets\/([^/?#]+)/i);
+  if (rxTicket) {
+    const brand = /adticket/i.test(raw) ? 'adticket' : 'reservix';
+    return `${brand}:${rxTicket[1]!.toLowerCase()}`;
+  }
+  const gbShow = raw.match(/gigsberg\.[^/?#]+\/.*?show-(\d+)/i);
+  if (gbShow) return `gigsberg:${gbShow[1]}`;
+  const gbId = raw.match(/gigsberg\.[^/?#]+.*[?&](?:event[_-]?id|id)=(\d+)/i);
+  if (gbId) return `gigsberg:${gbId[1]}`;
   const viator = raw.match(/\/d\d+-[^/?#]+/i);
   if (viator && /viator|tripadvisor/i.test(raw)) {
     return `viator:${viator[0].toLowerCase()}`;

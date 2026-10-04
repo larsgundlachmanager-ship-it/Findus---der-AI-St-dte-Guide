@@ -61,6 +61,8 @@ export type TourStop = {
   /** Abfahrt des nächsten Fahrzeugs an diesem Halt (Warten + Chip). */
   vehicleStartMs?: number | null;
   notes?: string | null;
+  /** Live-Pacing: Aufholen / nächste Verbindung (Timeline). */
+  liveHint?: string | null;
   mapsUrl?: string | null;
   menuUrl?: string | null;
   reserveUrl?: string | null;
@@ -133,6 +135,23 @@ function isPinnedTourEnd(stop: TourStop): boolean {
   return false;
 }
 
+/** Karte + Timeline + Live-Anzeige = dieselbe Tour-Reihenfolge. */
+function mirrorTourToLiveTimeline(): void {
+  try {
+    const {
+      allowLiveNavMirror,
+      upsertLiveNavFromStore,
+    } = require('../../module2/timeline/syncLiveNavToPlan') as {
+      allowLiveNavMirror: () => void;
+      upsertLiveNavFromStore: (o?: { force?: boolean }) => void;
+    };
+    allowLiveNavMirror();
+    upsertLiveNavFromStore({ force: true });
+  } catch {
+    /* soft */
+  }
+}
+
 function pathLengthM(origin: { lat: number; lng: number }, stops: TourStop[]): number {
   let total = 0;
   let prev = origin;
@@ -199,16 +218,92 @@ async function navigateToTourStop(stop: TourStop): Promise<boolean> {
       return true;
     }
   }
+  // Fuß-Etappe zur Haltestelle / Umstieg / Ziel = normale Fußnavi (gelb abbiegen).
+  // Nur alight = ÖPNV-Ride ohne Fuß-Enrich entlang der Linie.
+  const ride = stop.role === 'alight';
   const ok = await startNavigationToCoords({
     name: stop.name,
     lat: stop.lat,
     lng: stop.lng,
     poiId: stop.poiId >= 0 ? stop.poiId : -1,
-    stations: stop.stations,
-    transitRide: stop.role === 'alight',
+    stations: ride ? stop.stations : undefined,
+    transitRide: ride,
+    forceTravelMode: ride ? undefined : 'foot',
+    skipDestVerify: true,
   });
+  // Fuß-Bein: Journey-Path sofort auf die Karte, bis FOSSGIS enrich nachzieht.
+  // Transit-Ride: Stationskette / Journey-Pfad — nie Fuß-OSRM als Kartenlinie.
+  if (ok) {
+    const seedPts = ride
+      ? Array.isArray(stop.stations) && stop.stations.length >= 2
+        ? stop.stations
+        : Array.isArray(stop.path) && stop.path.length >= 3
+          ? stop.path
+          : null
+      : Array.isArray(stop.path) && stop.path.length >= 3
+        ? stop.path
+        : null;
+    if (seedPts) {
+      try {
+        const { seedActiveNavRoute } = require('./navigationService') as {
+          seedActiveNavRoute: (o: {
+            waypoints: Array<{
+              lat: number;
+              lng: number;
+              maneuver: null;
+              roadName: null;
+              landmark: null;
+              cue: null;
+              instruction: null;
+            }>;
+          }) => boolean;
+        };
+        seedActiveNavRoute({
+          waypoints: seedPts.map((p) => ({
+            lat: p.lat,
+            lng: p.lng,
+            maneuver: null,
+            roadName: null,
+            landmark: null,
+            cue: null,
+            instruction: null,
+          })),
+        });
+      } catch {
+        /* soft */
+      }
+    }
+  }
   if (ok) await applyTourStopRuntime(stop);
   return ok;
+}
+
+function againstTravelCue(prev: TourStop | null, next: TourStop): string | null {
+  if (!prev || prev.role !== 'alight') return null;
+  if (next.role !== 'dest' && next.role !== 'walk' && next.role !== 'transfer') {
+    return null;
+  }
+  try {
+    const { bearingDegrees, shortestAngleDelta } = require('./bearing') as {
+      bearingDegrees: (a: number, b: number, c: number, d: number) => number;
+      shortestAngleDelta: (a: number, b: number) => number;
+    };
+    const chain =
+      (Array.isArray(prev.stations) && prev.stations.length >= 2
+        ? prev.stations
+        : Array.isArray(prev.path) && prev.path.length >= 2
+          ? prev.path
+          : null) ?? null;
+    if (!chain || chain.length < 2) return null;
+    const a = chain[chain.length - 2]!;
+    const b = chain[chain.length - 1]!;
+    const vehicle = bearingDegrees(a.lat, a.lng, b.lat, b.lng);
+    const foot = bearingDegrees(prev.lat, prev.lng, next.lat, next.lng);
+    if (Math.abs(shortestAngleDelta(vehicle, foot)) < 120) return null;
+    return 'entgegen der Fahrtrichtung';
+  } catch {
+    return null;
+  }
 }
 
 async function applyTourStopRuntime(stop: TourStop): Promise<void> {
@@ -222,9 +317,24 @@ async function applyTourStopRuntime(stop: TourStop): Promise<void> {
   } catch {
     /* soft */
   }
-  const cue = stop.speakOnStart?.trim();
-  if (!cue) return;
+  let cue = stop.speakOnStart?.trim() || '';
   if (stop.role === 'alight') return;
+  // Nach Ausstieg: optional „entgegen der Fahrtrichtung“ für den Fußweg.
+  try {
+    const tour = useFinnusStore.getState().multiStopTour;
+    const idx = tour?.currentIndex ?? -1;
+    const prev =
+      tour && idx > 0 ? tour.stops[idx - 1] ?? null : null;
+    const against = againstTravelCue(prev, stop);
+    if (against) {
+      cue = cue
+        ? `${cue.replace(/\.?\s*$/, '')} — ${against}.`
+        : `Fußweg ${against}.`;
+    }
+  } catch {
+    /* soft */
+  }
+  if (!cue) return;
   try {
     const { wasTransitGuideSpoken, noteTransitGuideSpoken } = await import(
       './transitGuideCoach'
@@ -279,6 +389,79 @@ export async function startMultiStopTour(
   return { ok: true, reply: formatTourReply(tour) };
 }
 
+/**
+ * GPS schon an/ hinter einem späteren Halt → Tour vorziehen + Journey refresh.
+ * Verhindert stale Prisdorf-Verbindung wenn User schon weiter ist.
+ */
+export async function maybeCatchUpTourProgress(opts?: {
+  lat?: number | null;
+  lng?: number | null;
+}): Promise<boolean> {
+  const store = useFinnusStore.getState();
+  const tour = store.multiStopTour;
+  if (!tour?.stops?.length) return false;
+  const lat =
+    opts?.lat ?? store.lastGpsLat ?? null;
+  const lng =
+    opts?.lng ?? store.lastGpsLng ?? null;
+  if (lat == null || lng == null || !Number.isFinite(lat) || !Number.isFinite(lng)) {
+    return false;
+  }
+  const idx = tour.currentIndex;
+  if (idx < 0 || idx >= tour.stops.length) return false;
+  const cur = tour.stops[idx]!;
+  if (cur.done) return false;
+
+  // Nächsten noch offenen Stop finden, der GPS-nah ist (User schon weiter).
+  let best = -1;
+  let bestD = 95;
+  for (let i = idx + 1; i < tour.stops.length; i += 1) {
+    const s = tour.stops[i]!;
+    if (s.done) continue;
+    const d = haversineMeters(lat, lng, s.lat, s.lng);
+    if (d < bestD) {
+      bestD = d;
+      best = i;
+    }
+  }
+  // Oder: am aktuellen Halt vorbei Richtung Folgestopp (distNext << distCur).
+  if (best < 0 && idx + 1 < tour.stops.length) {
+    const next = tour.stops[idx + 1]!;
+    const dCur = haversineMeters(lat, lng, cur.lat, cur.lng);
+    const dNext = haversineMeters(lat, lng, next.lat, next.lng);
+    if (dCur > 160 && dNext + 80 < dCur && dNext < 220) {
+      best = idx + 1;
+    }
+  }
+  if (best <= idx) return false;
+
+  const stops = tour.stops.map((s, i) =>
+    i < best ? { ...s, done: true } : s,
+  );
+  const nextTour = {
+    ...tour,
+    stops,
+    currentIndex: best,
+    estimatedDistanceM: recomputeTourDistance({
+      ...tour,
+      stops,
+      currentIndex: best,
+    }),
+  };
+  store.setMultiStopTour(nextTour);
+  mirrorTourToLiveTimeline();
+  // Stale Verbindung: Leave-by / Transfer neu anfragen.
+  try {
+    const { requestJourneyRefresh } = require('./journeyLeaveBy') as {
+      requestJourneyRefresh?: (reason?: string) => void;
+    };
+    requestJourneyRefresh?.('progress_past_stop');
+  } catch {
+    /* soft */
+  }
+  return navigateToTourStop(stops[best]!);
+}
+
 export async function advanceMultiStopTour(): Promise<boolean> {
   const store = useFinnusStore.getState();
   const tour = store.multiStopTour;
@@ -294,6 +477,15 @@ export async function advanceMultiStopTour(): Promise<boolean> {
       stops,
       currentIndex: nextIndex,
     });
+    // Sofort Live-ÖPNV aus Timeline — kein Doppel-ÖPNV nach „Tour fertig“.
+    try {
+      const { clearLiveNavFromPlan } = require('../../module2/timeline/syncLiveNavToPlan') as {
+        clearLiveNavFromPlan: (o?: { abandon?: boolean }) => void;
+      };
+      clearLiveNavFromPlan({ abandon: true });
+    } catch {
+      /* soft */
+    }
     setTimeout(() => {
       const cur = useFinnusStore.getState().multiStopTour;
       if (cur && cur.currentIndex >= cur.stops.length) {
@@ -414,11 +606,15 @@ export async function addOptimizedTourStop(
     .filter((s) => !s.done)
     .filter((s) => !sameStop(s, incoming));
 
+  const extras = collectSoftVisitStops(incoming).filter(
+    (s) => !upcoming.some((u) => sameStop(u, s)) && !sameStop(s, incoming),
+  );
+
   const origin = {
     lat: store.lastGpsLat ?? dest?.lat ?? incoming.lat,
     lng: store.lastGpsLng ?? dest?.lng ?? incoming.lng,
   };
-  const ordered = orderStopsEfficiently(origin, [...upcoming, incoming], {
+  const ordered = orderStopsEfficiently(origin, [...upcoming, incoming, ...extras], {
     pinLast: isPinnedTourEnd,
   });
   const currentIndex = donePart.length;
@@ -440,6 +636,7 @@ export async function addOptimizedTourStop(
   store.setMultiStopTour(next);
   store.setStopQueueVisible(true);
   notifyNavRouteGeometryChanged();
+  mirrorTourToLiveTimeline();
   try {
     const { ensureTourAheadRoutes } = require('./tourAheadRouteCache') as {
       ensureTourAheadRoutes: (
@@ -489,10 +686,12 @@ export async function addOptimizedTourStop(
     /* soft */
   }
 
+  // Speech = Live-Tour-Reihenfolge (gleiche SSOT wie Karte/Timeline).
+  const orderLabel = ordered.map((s) => s.name).filter(Boolean).join(' → ');
   const speechHint =
     ordered.length <= 1
       ? `${incoming.name} ist jetzt mit auf der Route.`
-      : `${incoming.name} ist einsortiert — ${ordered.length} Stopps in der besten Reihenfolge.`;
+      : `${incoming.name} ist einsortiert: ${orderLabel}.`;
   return { tour: next, speechHint };
 }
 
@@ -501,7 +700,17 @@ export async function insertTourStop(
   opts?: { position?: 'front' | 'end'; startNow?: boolean },
 ): Promise<MultiStopTour | null> {
   const store = useFinnusStore.getState();
+  const dest = getActiveNavDestination();
   let tour = store.multiStopTour;
+  // Laufende Einzelnavi → Tour anlegen, sonst hängt „Stopp hinzu“ in der Luft.
+  if (!tour?.stops?.length && dest) {
+    tour = ensureTourFromActiveNav({
+      name: dest.name,
+      lat: dest.lat,
+      lng: dest.lng,
+      poiId: dest.poiId,
+    });
+  }
   if (!tour) {
     tour = {
       kind: 'custom',
@@ -514,14 +723,22 @@ export async function insertTourStop(
     };
   }
 
+  const incoming: TourStop = { ...stop, done: false };
+  // Duplikat: nicht nochmal — sonst Timeline 3 / Karte 2 durch Re-Add-Chaos.
+  if (tour.stops.some((s) => !s.done && sameStop(s, incoming))) {
+    store.setStopQueueVisible(true);
+    notifyNavRouteGeometryChanged();
+    return tour;
+  }
+
   const position = opts?.position ?? 'front';
   const stops = [...tour.stops];
   const currentIndex = tour.currentIndex;
 
   if (position === 'front') {
-    stops.splice(currentIndex, 0, { ...stop, done: false });
+    stops.splice(currentIndex, 0, incoming);
   } else {
-    stops.push({ ...stop, done: false });
+    stops.push(incoming);
   }
 
   const next: MultiStopTour = {
@@ -530,6 +747,7 @@ export async function insertTourStop(
       tour.kind === 'jog' || tour.kind === 'explore' || tour.kind === 'meal'
         ? tour.kind
         : 'custom',
+    title: tour.stops.length <= 1 ? 'Tour' : tour.title,
     stops,
     currentIndex,
     estimatedDistanceM: recomputeTourDistance({
@@ -539,12 +757,36 @@ export async function insertTourStop(
     }),
   };
   store.setMultiStopTour(next);
+  store.setStopQueueVisible(true);
+  notifyNavRouteGeometryChanged();
+  mirrorTourToLiveTimeline();
 
   if (opts?.startNow !== false && position === 'front') {
     await navigateToTourStop(stops[currentIndex]!);
     markNavOpeningSpoken();
   }
   return next;
+}
+
+/**
+ * Stopp hinten anhängen — keine Neu-Sortierung.
+ * Fallback wenn Optimize nicht greift; Map/Speech nutzen addOptimizedTourStop.
+ */
+export async function appendTourStop(
+  stop: TourStop,
+  opts?: { startNow?: boolean },
+): Promise<{ tour: MultiStopTour; speechHint: string } | null> {
+  const next = await insertTourStop(stop, {
+    position: 'end',
+    startNow: opts?.startNow === true,
+  });
+  if (!next) return null;
+  const upcoming = next.stops.filter((s) => !s.done).length;
+  const speechHint =
+    upcoming <= 1
+      ? `${stop.name} ist jetzt mit auf der Route.`
+      : `${stop.name} kommt hinten dazu — ${upcoming} Stopps auf der Route.`;
+  return { tour: next, speechHint };
 }
 
 /** Max. Umweg, damit ein Tour-Stop „auf dem Weg“ zu Spontan-Ziel gilt. */
@@ -561,6 +803,77 @@ function sameStop(a: TourStop, b: Pick<TourStop, 'name' | 'lat' | 'lng' | 'poiId
     an.length > 0 &&
     (an.includes(bn) || bn.includes(an))
   );
+}
+
+function stripVisitTitle(name: string): string {
+  return String(name || '')
+    .replace(/^\d+\s*·\s*/, '')
+    .replace(/^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\s*/u, '')
+    .trim();
+}
+
+/** Offene Plan-Besuche ohne feste Uhr in die Tour-Optimierung ziehen. */
+function collectSoftVisitStops(incoming: TourStop): TourStop[] {
+  try {
+    const { useFuturePlanStore } = require('../../module2/timeline/futurePlanState') as {
+      useFuturePlanStore: {
+        getState: () => {
+          plan: {
+            stops: Array<{
+              id: string;
+              title: string;
+              lat?: number;
+              lng?: number;
+              kind?: string;
+              groupId?: string | null;
+              hardAnchor?: boolean;
+              userFixedTime?: boolean;
+              plannedStartMs?: number | null;
+              plannedEndMs?: number | null;
+            }>;
+          };
+        };
+      };
+    };
+    const { isLiveNavLegId } = require('../../module2/timeline/liveTourSchedule') as {
+      isLiveNavLegId: (id: string | null | undefined) => boolean;
+    };
+    const now = Date.now();
+    const out: TourStop[] = [];
+    for (const s of useFuturePlanStore.getState().plan.stops) {
+      if (s.kind === 'nav_leg') continue;
+      if (isLiveNavLegId(s.id)) continue;
+      if (s.groupId === 'live_journey') continue;
+      if (
+        s.id.startsWith('choice_') ||
+        s.id.startsWith('ft:') ||
+        s.id.startsWith('wake_')
+      ) {
+        continue;
+      }
+      if (s.hardAnchor || s.userFixedTime) continue;
+      if (typeof s.lat !== 'number' || typeof s.lng !== 'number') continue;
+      if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
+      if (s.plannedStartMs != null && s.plannedStartMs > now + 6 * 3600_000) {
+        continue;
+      }
+      if (s.plannedEndMs != null && s.plannedEndMs < now - 10 * 60_000) {
+        continue;
+      }
+      const name = stripVisitTitle(s.title);
+      if (!name) continue;
+      out.push({
+        poiId: -1,
+        name,
+        lat: s.lat,
+        lng: s.lng,
+        done: false,
+      });
+    }
+    return out;
+  } catch {
+    return [];
+  }
 }
 
 function isOnWayTo(
@@ -691,10 +1004,18 @@ export async function weaveSpontaneousStop(
     speechHint = `${spontaneous.name} ist als Nächstes geplant. Die Tour bleibt — unterwegs sag ich Bescheid, was dazwischen liegt.`;
   } else {
     const p = spontaneous.priority ?? 'high';
+    const finalName =
+      rest.find((s) => s.role === 'dest')?.name ||
+      rest[rest.length - 1]?.name ||
+      '';
     speechHint =
       p === 'must'
-        ? `${spontaneous.name} ist jetzt oben — ich erinner dich rechtzeitig. Die anderen Stopps bleiben in der Queue.`
-        : `${spontaneous.name} ist jetzt als Nächstes dran. Die Tour mit ${rest.length} weiteren Stopps bleibt.`;
+        ? finalName
+          ? `${spontaneous.name} ist jetzt oben — danach geht’s weiter zu ${finalName}.`
+          : `${spontaneous.name} ist jetzt oben — ich erinner dich rechtzeitig. Die anderen Stopps bleiben in der Queue.`
+        : finalName
+          ? `${spontaneous.name} ist jetzt als Nächstes dran — danach weiter zu ${finalName}.`
+          : `${spontaneous.name} ist jetzt als Nächstes dran. Die Tour mit ${rest.length} weiteren Stopps bleibt.`;
   }
 
   return { tour: next, speechHint };
@@ -745,6 +1066,7 @@ export function removeTourStopAt(index: number): MultiStopTour | null {
     }),
   };
   store.setMultiStopTour(next);
+  mirrorTourToLiveTimeline();
   return next;
 }
 
@@ -766,35 +1088,66 @@ export async function skipUpcomingTourStop(opts: {
   const abs = upcomingAbs[opts.upcomingIndex];
   if (abs == null) return { ok: false, cleared: false };
 
+  const removed = tour.stops[abs]!;
   const wasCurrent = abs === tour.currentIndex;
   const next = removeTourStopAt(abs);
   if (!next?.stops.length) {
     return { ok: true, cleared: true };
   }
-  const remaining = next.stops
-    .slice(next.currentIndex)
+  // Alte Stop-Pfade würden die Via weiterhin auf der Karte zeichnen.
+  const cleaned: MultiStopTour = {
+    ...next,
+    stops: next.stops.map((s, i) =>
+      i >= next.currentIndex && !s.done ? { ...s, path: null } : s,
+    ),
+  };
+  store.setMultiStopTour(cleaned);
+
+  const remaining = cleaned.stops
+    .slice(cleaned.currentIndex)
     .filter((s) => !s.done);
   if (!remaining.length) {
     store.setMultiStopTour(null);
     return { ok: true, cleared: true };
   }
 
-  notifyNavRouteGeometryChanged();
-  scheduleTourDistanceEnrich(next);
   try {
-    const { ensureTourAheadRoutes } = require('./tourAheadRouteCache') as {
+    const {
+      clearTourAheadRouteCache,
+      ensureTourAheadRoutes,
+    } = require('./tourAheadRouteCache') as {
+      clearTourAheadRouteCache: () => void;
       ensureTourAheadRoutes: (s: Array<{ lat: number; lng: number }>) => void;
     };
-    ensureTourAheadRoutes(remaining.map((s) => ({ lat: s.lat, lng: s.lng })));
+    clearTourAheadRouteCache();
+    const origin = {
+      lat: store.lastGpsLat ?? remaining[0]!.lat,
+      lng: store.lastGpsLng ?? remaining[0]!.lng,
+    };
+    ensureTourAheadRoutes([
+      origin,
+      ...remaining.map((s) => ({ lat: s.lat, lng: s.lng })),
+    ]);
   } catch {
     /* soft */
   }
 
-  if (wasCurrent) {
-    await navigateToTourStop(remaining[0]!);
+  scheduleTourDistanceEnrich(cleaned);
+  notifyNavRouteGeometryChanged();
+
+  const dest = getActiveNavDestination();
+  const head = remaining[0]!;
+  const destIsRemoved =
+    !!dest &&
+    haversineMeters(dest.lat, dest.lng, removed.lat, removed.lng) < 90;
+  const destMismatchTour =
+    !!dest && haversineMeters(dest.lat, dest.lng, head.lat, head.lng) > 120;
+  if (wasCurrent || destIsRemoved || destMismatchTour) {
+    await navigateToTourStop(head);
     markNavOpeningSpoken();
+    notifyNavRouteGeometryChanged();
   }
-  return { ok: true, cleared: false, nextName: remaining[0]?.name };
+  return { ok: true, cleared: false, nextName: head.name };
 }
 
 export function reorderTourStops(
@@ -842,6 +1195,7 @@ export function reorderTourStops(
   };
   store.setMultiStopTour(next);
   notifyNavRouteGeometryChanged();
+  mirrorTourToLiveTimeline();
   return next;
 }
 
@@ -856,6 +1210,109 @@ export function reorderUpcomingTourStops(
   return reorderTourStops(base + fromUpcoming, base + toUpcoming);
 }
 
+/**
+ * Timeline-Drag: Besuch-Reihenfolge = Tour-Reihenfolge (ohne Löschen).
+ */
+export function applyUpcomingVisitOrder(
+  visits: Array<{ lat: number; lng: number; name: string }>,
+): MultiStopTour | null {
+  const store = useFinnusStore.getState();
+  const dest = getActiveNavDestination();
+  let tour = store.multiStopTour;
+  if (!tour?.stops?.length && dest) {
+    tour = ensureTourFromActiveNav({
+      name: dest.name,
+      lat: dest.lat,
+      lng: dest.lng,
+      poiId: dest.poiId,
+    });
+  }
+  if (!tour) return null;
+
+  const donePart = tour.stops
+    .slice(0, tour.currentIndex)
+    .map((s) => ({ ...s, done: true as const }));
+  const upcoming = tour.stops
+    .slice(tour.currentIndex)
+    .filter((s) => !s.done);
+  const hasTransit = upcoming.some(
+    (s) => s.role === 'alight' || s.role === 'board',
+  );
+  if (hasTransit) return tour;
+
+  const used = new Set<number>();
+  const ordered: TourStop[] = [];
+  for (const v of visits) {
+    if (!Number.isFinite(v.lat) || !Number.isFinite(v.lng)) continue;
+    const name = stripVisitTitle(v.name);
+    let idx = upcoming.findIndex(
+      (s, i) =>
+        !used.has(i) &&
+        sameStop(s, {
+          name,
+          lat: v.lat,
+          lng: v.lng,
+          poiId: s.poiId,
+        }),
+    );
+    if (idx < 0) {
+      idx = upcoming.findIndex(
+        (s, i) =>
+          !used.has(i) && haversineMeters(s.lat, s.lng, v.lat, v.lng) < 70,
+      );
+    }
+    if (idx >= 0) {
+      used.add(idx);
+      ordered.push(upcoming[idx]!);
+    } else if (name) {
+      ordered.push({
+        poiId: -1,
+        name,
+        lat: v.lat,
+        lng: v.lng,
+        done: false,
+      });
+    }
+  }
+  for (let i = 0; i < upcoming.length; i++) {
+    if (!used.has(i)) ordered.push(upcoming[i]!);
+  }
+  if (ordered.length < 1) return tour;
+
+  const currentIndex = donePart.length;
+  const next: MultiStopTour = {
+    ...tour,
+    stops: [...donePart, ...ordered],
+    currentIndex,
+    estimatedDistanceM: recomputeTourDistance({
+      ...tour,
+      stops: [...donePart, ...ordered],
+      currentIndex,
+    }),
+  };
+  store.setMultiStopTour(next);
+  notifyNavRouteGeometryChanged();
+  mirrorTourToLiveTimeline();
+  const focus = ordered[0];
+  if (
+    focus &&
+    dest &&
+    !sameStop(
+      {
+        poiId: dest.poiId,
+        name: dest.name,
+        lat: dest.lat,
+        lng: dest.lng,
+        done: false,
+      },
+      focus,
+    )
+  ) {
+    void navigateToTourStop(focus);
+  }
+  return next;
+}
+
 export async function navigateToTourStopAt(index: number): Promise<boolean> {
   const store = useFinnusStore.getState();
   const tour = store.multiStopTour;
@@ -864,4 +1321,28 @@ export async function navigateToTourStopAt(index: number): Promise<boolean> {
   if (stop.done) return false;
   store.setMultiStopTour({ ...tour, currentIndex: index });
   return navigateToTourStop(stop);
+}
+
+/**
+ * Zwischenstopp unter aktiver Nav — Intent + insertTourStop (P10 harden).
+ */
+export async function insertZwischenstoppForActiveNav(
+  stop: TourStop,
+  userText?: string | null,
+): Promise<{ tour: MultiStopTour; speechHint: string } | null> {
+  const text = String(userText || stop.name || '').replace(/\s+/g, ' ').trim();
+  const dest = getActiveNavDestination();
+  try {
+    const { isOnRouteZwischenstoppIntent } = require('./onRouteZwischenstopp') as {
+      isOnRouteZwischenstoppIntent: (s: string, nav: boolean) => boolean;
+    };
+    if (text && !isOnRouteZwischenstoppIntent(text, Boolean(dest))) {
+      return null;
+    }
+  } catch {
+    if (!dest) return null;
+  }
+  const appended = await appendTourStop(stop, { startNow: true });
+  if (!appended) return null;
+  return appended;
 }

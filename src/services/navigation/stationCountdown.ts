@@ -1,6 +1,7 @@
 /**
- * ÖPNV-Stations-Takt: nach Losfahren Resthalte+Minuten, dann nur so oft wie der Takt hergibt.
- * Ausstieg: nächste Station beim Verlassen des vorletzten Halts; ~1 Min (S/Bus) bzw. ~5 Min (ICE).
+ * ÖPNV-Stations-Takt: nach Losfahren Resthalte, Countdown nur bei 3 Stationen.
+ * Ausstieg: nächste Station beim Verlassen des vorletzten Halts;
+ * Zeit-Cue ~60 s — nur bei ≤1 Halt Rest; kurzer Hop → Merge.
  */
 
 import { useFinnusStore } from '../../store/useFinnusStore';
@@ -17,6 +18,7 @@ import {
 import type { TransitGuideFacts, TransitVehicleKind } from './transitGuideSpeech';
 import {
   alightLeadSec,
+  shouldMergeNextAndAlight,
   shouldSpeakAlightSoon,
   shouldSpeakRemainingStop,
   type RideCadenceInput,
@@ -28,6 +30,8 @@ let alightNowSpoken = false;
 let lastRemaining: number | null = null;
 let boardedStops: number | null = null;
 let nextStopSpokenAtMs: number | null = null;
+/** Kurzer Hop: nächste Station = Ausstieg schon zusammen gesprochen. */
+let mergedNextAlight = false;
 const CUE_COOLDOWN_MS = 12_000;
 
 export function resetStationCountdownAnnouncements(): void {
@@ -37,6 +41,7 @@ export function resetStationCountdownAnnouncements(): void {
   lastRemaining = null;
   boardedStops = null;
   nextStopSpokenAtMs = null;
+  mergedNextAlight = false;
 }
 
 function vehicleKind(raw: string | null | undefined): TransitVehicleKind {
@@ -108,12 +113,13 @@ export async function onRemainingStationsChanged(
     navPhase?: NavPhase | null;
   },
 ): Promise<void> {
-  if (!isTransitMode(opts.transportMode)) return;
+  // Mode-Dip walk in Bahn: Phase in_transit reicht.
   if (!riding(opts.navPhase ?? null)) return;
 
   if (lastRemaining != null && remaining > lastRemaining) {
     alightNowSpoken = false;
     nextStopSpokenAtMs = null;
+    mergedNextAlight = false;
     boardedStops = remaining;
   }
   lastRemaining = remaining;
@@ -130,7 +136,12 @@ export async function onRemainingStationsChanged(
   }
 
   const store = useFinnusStore.getState();
-  if (store.isPlayingAudio || store.isGenerating) return;
+  if (
+    store.isListening ||
+    store.isPlayingAudio ||
+    store.isAudiblySpeaking ||
+    store.isGenerating
+  ) return;
   if (Date.now() - lastCueAtMs < CUE_COOLDOWN_MS) return;
 
   announced.add(remaining);
@@ -139,6 +150,17 @@ export async function onRemainingStationsChanged(
   if (remaining === 1) {
     nextStopSpokenAtMs = Date.now();
     triggerHapticPulse('double');
+    const leadSec = alightLeadSec(cadence);
+    const merge = shouldMergeNextAndAlight({
+      remainingStops: 1,
+      rideMin: facts.rideMin,
+      leadSec,
+    });
+    if (merge) {
+      mergedNextAlight = true;
+      // Kurzer Hop: eine zusammengesetzte Ansage reicht — kein Extra-60s-Cue.
+      alightNowSpoken = true;
+    }
   }
 
   try {
@@ -154,8 +176,12 @@ export async function maybeSpeakAlightNow(opts: {
   distanceToDestinationM: number | null;
   speedMs: number | null;
   navPhase?: NavPhase | null;
+  /** Distanz zum Ausstieg (Tour-Alight), falls bekannt. */
+  distanceToAlightM?: number | null;
 }): Promise<void> {
-  if (!isTransitMode(opts.transportMode)) return;
+  if (!riding(opts.navPhase ?? null) && !isTransitMode(opts.transportMode)) {
+    return;
+  }
   if (!riding(opts.navPhase ?? null)) return;
   if (opts.remainingStations == null || opts.remainingStations > 1) return;
   if (alightNowSpoken) return;
@@ -164,37 +190,56 @@ export async function maybeSpeakAlightNow(opts: {
     useFinnusStore.getState().navTargetName || '',
   );
   const cadence = cadenceInput(facts);
-  const dist = opts.distanceToDestinationM ?? 9999;
+  const distAlight =
+    opts.distanceToAlightM != null && Number.isFinite(opts.distanceToAlightM)
+      ? opts.distanceToAlightM
+      : opts.distanceToDestinationM ?? 9999;
+  const dist = distAlight;
   const speed =
     typeof opts.speedMs === 'number' && opts.speedMs > 1.5
       ? opts.speedMs
       : isLongHaulFallback(cadence.line)
         ? 40
         : 12;
-  const etaSec = dist / speed;
+  const etaSec = dist / Math.max(0.5, speed);
   const leadSec = alightLeadSec({ ...cadence, etaSec });
-  const due = shouldSpeakAlightSoon({
+  // Nah am Halt / letzter Halt: immer „Jetzt aussteigen“ — nicht nur Zeit-Vorlauf.
+  const nearStop =
+    opts.remainingStations <= 1 &&
+    (dist <= 120 || etaSec <= 45 || opts.remainingStations === 0);
+  const dueSoon = shouldSpeakAlightSoon({
     remainingStops: opts.remainingStations,
     etaSec,
     leadSec,
     nextStopSpokenAtMs,
     nowMs: Date.now(),
     boardedStops,
+    mergedNextAlight,
   });
-  if (!due) return;
-  if (Date.now() - lastCueAtMs < 8_000) return;
+  if (!nearStop && !dueSoon) return;
+  if (Date.now() - lastCueAtMs < 5_000) return;
 
   const store = useFinnusStore.getState();
-  if (store.isPlayingAudio || store.isGenerating) return;
+  if (
+    store.isListening ||
+    store.isPlayingAudio ||
+    store.isAudiblySpeaking ||
+    store.isGenerating
+  ) return;
 
   alightNowSpoken = true;
   lastCueAtMs = Date.now();
   triggerHapticPulse('double');
   try {
-    const leadMin = Math.max(1, Math.round(leadSec / 60));
-    await speakAssistantText(alightSoonCueText(facts, leadMin));
+    // ~60 s vorher oder am Halt: immer Stationsname + jetzt aussteigen.
+    if (nearStop || etaSec <= leadSec + 5 || mergedNextAlight) {
+      const { alightNowCueText } = await import('./transitGuideCoach');
+      await speakAssistantText(alightNowCueText(facts));
+    } else {
+      await speakAssistantText(alightSoonCueText(facts, 1));
+    }
   } catch {
-    /* soft */
+    alightNowSpoken = false;
   }
 }
 

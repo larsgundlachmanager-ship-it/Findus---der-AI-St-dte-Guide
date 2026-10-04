@@ -28,11 +28,27 @@ const INFO_RE =
 const VIEWPOINT_RE = /\b(aussichtspunkt|viewpoint|panorama)\b/i;
 const WATER_RE =
   /\b(trinkwasser|drinking.?water|wasserspender|wasser.?spender|trinkbrunnen|drinking.?fountain|water.?refill|brunnen)\b/i;
+/** Auch Komposita: Zahnarztpraxis, Gemeinschaftspraxis (kein Wortgrenze vor praxis). */
 const DOCTOR_RE =
-  /\b(zahnarzt|zahnärztin|zahnaerztin|arztpraxis|hausarzt|\bärzte\b|\baerzte\b|\barzt\b|ärztin|aerztin|doctors?|dentist|\bpraxis\b)\b/i;
+  /zahnarzt|zahnärztin|zahnaerztin|arztpraxis|hausarztpraxis|gemeinschaftspraxis|hausarzt|\bärzte\b|\baerzte\b|\barzt\b|ärztin|aerztin|doctors?|dentist|praxis/i;
 const LANDSCAPE_NOT_PIN_RE =
   /\b(niederung|auenlandschaft|landschaftsschutz|ffh[- ]?gebiet|naturgebiet|marsch|auen\b)\b/i;
-const BIKE_RE = /\b(fahrradverleih|bike.?rental|bicycle.?rental|mietrad)\b/i;
+const BIKE_RE = /\b(fahrradverleih|bike.?rental|bicycle.?rental|mietrad|radwerkstatt|fahrradladen)\b/i;
+const LUGGAGE_RE =
+  /\b(gepäckaufbewahrung|gepaeckaufbewahrung|gepäck|gepaeck|left.?luggage|luggage.?storage|schließfach|schliessfach|lockers?)\b/i;
+const LAUNDRY_RE =
+  /\b(waschsalon|wäscherei|waescherei|laundry|laundromat|waschmaschine)\b/i;
+const CHARGING_RE =
+  /\b(ladestation|ladesäule|ladesaeule|charging.?station|e-?lade|ev.?charging)\b/i;
+const CAR_RENTAL_RE =
+  /\b(autoverleih|mietwagen|car.?rental|carsharing|car.?sharing|sixt|europcar)\b/i;
+const SCOOTER_RE =
+  /\b(rollerverleih|scooter.?rental|motorcycle.?rental|vespa.?verleih)\b/i;
+const BEACH_RE = /\b(strand|beach|badenstrand|badestrand)\b/i;
+const FX_RE =
+  /\b(wechselstube|geldwechsel|bureau.?de.?change|currency.?exchange)\b/i;
+const ICE_RE = /\b(eisdiele|eiscafé|eiscafe|ice.?cream|gelateria)\b/i;
+const PICNIC_RE = /\b(picknick|picnic)\b/i;
 const FERRY_RE = /\b(fähre|faehre|ferry|anleger)\b/i;
 const SUPERMARKET_RE =
   /\b(supermarkt|supermarket|discounter|verbrauchermarkt|hypermarkt|grocery|edeka|rewe|aldi|lidl|penny|netto|norma|kaufland|marktkauf|famila|konsum|frischecenter)\b/i;
@@ -111,7 +127,10 @@ export type HomeMapPlaceIcon =
   | 'souvenir'
   | 'nature'
   | 'historic'
-  | 'activity';
+  | 'activity'
+  | 'luggage'
+  | 'laundry'
+  | 'charging';
 
 export const HOME_MAP_PLACE_ICON_IDS: HomeMapPlaceIcon[] = [
   'rail',
@@ -146,6 +165,9 @@ export const HOME_MAP_PLACE_ICON_IDS: HomeMapPlaceIcon[] = [
   'nature',
   'historic',
   'activity',
+  'luggage',
+  'laundry',
+  'charging',
 ];
 
 /** Briefkasten, WC, Wasser, Arzt, Apotheke — erst ab Street-Zoom. */
@@ -179,6 +201,9 @@ export const HOME_MAP_STREET_AMENITY_ICONS: HomeMapPlaceIcon[] = [
   'nature',
   'historic',
   'activity',
+  'luggage',
+  'laundry',
+  'charging',
 ];
 
 /** Bahnhof / Bus / Fähre — auch in der Übersicht. */
@@ -192,46 +217,65 @@ export const HOME_MAP_TRANSIT_ICONS: HomeMapPlaceIcon[] = [
 export const HOME_MAP_PARK_ICONS: HomeMapPlaceIcon[] = ['park', 'nature'];
 
 /**
- * Zoom-LOD für Amenity-Icons — Karte nicht mit Alltag/Gastro überladen.
- * transit → highlight → gastroTop → everyday → gastro → micro → park
+ * Zoom-LOD für Amenity-Icons — Tourist-Übersicht nicht überladen.
+ * transitMajor → highlight → gastroTop → everyday → gastro → transitLocal → micro → park
  */
 export type HomeMapIconLod =
+  | 'transitMajor'
   | 'transit'
   | 'highlight'
   | 'gastroTop'
   | 'everyday'
   | 'gastro'
+  | 'transitLocal'
   | 'micro'
+  | 'microWhite'
+  | 'microClose'
+  /** Arzt/Praxis — erst extrem nah (nach Briefkästen). */
+  | 'microClinic'
   | 'park';
 
 export const HOME_MAP_ICON_LOD_ZOOM = {
-  transit: { goneAt: 9.4 },
-  highlight: { goneAt: 11.0 },
-  gastroTop: { goneAt: 11.8 },
-  everyday: { goneAt: 12.6 },
-  gastro: { goneAt: 13.4 },
-  /** Briefkasten/Parken — frueher sichtbar (wie HTML ~13.6). */
-  micro: { goneAt: 13.4 },
-  park: { goneAt: 14.0 },
+  /** Große Bahnhöfe / Hbf — Stadt-Übersicht */
+  transitMajor: { goneAt: 10.0 },
+  /** Alias = transitMajor (ältere Payloads) */
+  transit: { goneAt: 10.0 },
+  highlight: { goneAt: 11.2 },
+  gastroTop: { goneAt: 12.0 },
+  everyday: { goneAt: 13.4 },
+  gastro: { goneAt: 14.0 },
+  /** Bus, U/S-Halt, Haltepunkt — erst Street-Zoom */
+  transitLocal: { goneAt: 14.2 },
+  /** WC / Wasserspender — weiß, früher rund um Bahnhof */
+  microWhite: { goneAt: 13.8 },
+  /** Parken, ATM, Apotheke — nah */
+  micro: { goneAt: 14.8 },
+  /** Briefkasten / Packstation — nah, vor Arzt */
+  microClose: { goneAt: 15.0 },
+  /** Arzt / Praxis — später als Briefkasten, erst wenn’s schon eng rangeht */
+  microClinic: { goneAt: 16.2 },
+  park: { goneAt: 14.5 },
 } as const;
 
+const MICRO_CLOSE_ICONS = new Set<HomeMapPlaceIcon>(['post']);
+const MICRO_CLINIC_ICONS = new Set<HomeMapPlaceIcon>(['doctor']);
+const MICRO_WHITE_ICONS = new Set<HomeMapPlaceIcon>(['toilet', 'water']);
 const MICRO_ICONS = new Set<HomeMapPlaceIcon>([
-  'post',
-  'doctor',
   'parking',
-]);
-const EVERYDAY_ICONS = new Set<HomeMapPlaceIcon>([
   'atm',
   'pharmacy',
-  'toilet',
+  'charging',
+  'luggage',
+]);
+const EVERYDAY_ICONS = new Set<HomeMapPlaceIcon>([
   'supermarket',
   'bakery',
   'cafe',
   'kiosk',
   'fuel',
   'info',
-  'water',
   'bike',
+  'laundry',
 ]);
 const HIGHLIGHT_ICONS = new Set<HomeMapPlaceIcon>([
   'museum',
@@ -264,13 +308,43 @@ export function isGastroMapHighlight(poi: Poi): boolean {
   return false;
 }
 
+export function isTransitIconLod(lod: HomeMapIconLod | string | null | undefined): boolean {
+  return (
+    lod === 'transit' ||
+    lod === 'transitMajor' ||
+    lod === 'transitLocal'
+  );
+}
+
 export function homeMapIconLod(
   icon: HomeMapPlaceIcon | string | null | undefined,
   poi?: Poi | null,
 ): HomeMapIconLod {
   if (!icon) return 'micro';
-  if ((HOME_MAP_TRANSIT_ICONS as string[]).includes(icon)) return 'transit';
+  if (icon === 'bus') return 'transitLocal';
+  if (icon === 'ferry') return 'transitMajor';
+  if (icon === 'rail') {
+    const name = poi?.name ?? '';
+    const blob = poi ? blobOf(poi) : '';
+    // U/S/Tram ohne Bahnhof/Hbf im Namen → erst nah
+    if (
+      /\b(s-?\s*bahn|u-?\s*bahn|sbahn|ubahn|tram|straßenbahn|strassenbahn)\b/i.test(
+        blob,
+      ) &&
+      !/\b(bahnhof|hbf|hauptbahnhof)\b/i.test(name)
+    ) {
+      return 'transitLocal';
+    }
+    // „Haltepunkt X“ ohne Bahnhof-Wort → erst Street-Zoom
+    if (/\bhaltepunkt\b/i.test(name) && !/\b(bahnhof|hbf)\b/i.test(name)) {
+      return 'transitLocal';
+    }
+    return 'transitMajor';
+  }
   if ((HOME_MAP_PARK_ICONS as string[]).includes(icon)) return 'park';
+  if (MICRO_CLINIC_ICONS.has(icon as HomeMapPlaceIcon)) return 'microClinic';
+  if (MICRO_CLOSE_ICONS.has(icon as HomeMapPlaceIcon)) return 'microClose';
+  if (MICRO_WHITE_ICONS.has(icon as HomeMapPlaceIcon)) return 'microWhite';
   if (MICRO_ICONS.has(icon as HomeMapPlaceIcon)) return 'micro';
   if (EVERYDAY_ICONS.has(icon as HomeMapPlaceIcon)) return 'everyday';
   if (HIGHLIGHT_ICONS.has(icon as HomeMapPlaceIcon)) return 'highlight';
@@ -304,12 +378,24 @@ export function isMapCrossingKeepDotPoi(poi: Poi): boolean {
 
 /** Bahnhof, Halt, Parkplatz, Briefkasten, Toilette, … — Icon statt Punkt. */
 export function placeMapIcon(poi: Poi): HomeMapPlaceIcon | null {
-  if (isMapShelterBuildingPoi(poi)) return null;
+  // Historisches Wartehäuschen: eigenes Historic-Icon (kein ÖPNV-Punkt, kein Fill-only).
+  if (isMapShelterBuildingPoi(poi)) return 'historic';
   const blob = blobOf(poi);
   if (isMapCrossingKeepDotPoi(poi)) return null;
-  if (PARKING_RE.test(blob)) return 'parking';
-  if (STREET_AMENITY_RE.test(blob)) return 'post';
+  // Alltags-/Punkt-Amenities vor ÖPNV („… am Bahnhof“ ≠ Halt).
+  if (TOILET_RE.test(blob)) return 'toilet';
+  if (LUGGAGE_RE.test(blob)) return 'luggage';
+  if (LAUNDRY_RE.test(blob)) return 'laundry';
+  if (CHARGING_RE.test(blob)) return 'charging';
+  if (PARKING_RE.test(blob) || /\bparkplatz\b/i.test(blob)) return 'parking';
+  if (STREET_AMENITY_RE.test(blob) || /\bpackstation\b/i.test(blob)) return 'post';
   if (FUEL_RE.test(blob)) return 'fuel';
+  if (FX_RE.test(blob)) return 'atm';
+  if (ICE_RE.test(blob)) return 'cafe';
+  if (PICNIC_RE.test(blob)) return 'park';
+  if (/\b(spielplatz|playground)\b/i.test(blob)) return 'park';
+  if (BEACH_RE.test(blob)) return 'nature';
+  if (CAR_RENTAL_RE.test(blob) || SCOOTER_RE.test(blob)) return 'activity';
   if (DOCTOR_RE.test(blob)) return 'doctor';
   if (PHARMACY_RE.test(blob)) return 'pharmacy';
   if (ATM_RE.test(blob)) return 'atm';
@@ -319,6 +405,12 @@ export function placeMapIcon(poi: Poi): HomeMapPlaceIcon | null {
   if (BAKERY_RE.test(blob)) return 'bakery';
   if (CAFE_RE.test(blob)) return 'cafe';
   if (BAR_RE.test(blob)) return 'bar';
+  // Hotel im Namen/Kategorie vor Restaurant-Tags („Fairway Hotel“ + Tag restaurant).
+  const nameCat = `${poi.name ?? ''} ${poi.category ?? ''}`;
+  if (HOSTEL_RE.test(nameCat)) return 'hostel';
+  if (HOTEL_RE.test(nameCat) || /^hotel\b/i.test(poi.category ?? '')) {
+    return 'hotel';
+  }
   if (RESTAURANT_RE.test(blob)) return 'restaurant';
   if (KITA_RE.test(blob)) return null;
   if (CAMPING_RE.test(blob)) return 'camping';
@@ -327,6 +419,14 @@ export function placeMapIcon(poi: Poi): HomeMapPlaceIcon | null {
   if (MUSEUM_RE.test(blob)) return 'museum';
   if (CINEMA_RE.test(blob)) return 'cinema';
   if (THEATER_RE.test(blob)) return 'theater';
+  if (INFO_RE.test(blob)) return 'info';
+  if (VIEWPOINT_RE.test(blob)) return 'viewpoint';
+  if (WATER_RE.test(blob)) return 'water';
+  if (BIKE_RE.test(blob)) return 'bike';
+  if (FERRY_RE.test(blob)) return 'ferry';
+  // ÖPNV vor Attraction/Denkmal — sonst Story-Tag „denkmal“ → Kamera statt Bahn.
+  if (isTransitMapPoi(poi) && RAIL_STOP_RE.test(blob)) return 'rail';
+  if (isTransitMapPoi(poi) && BUS_STOP_RE.test(blob)) return 'bus';
   if (ATTRACTION_RE.test(blob)) return 'attraction';
   if (HISTORIC_RE.test(blob) && !isTransitMapPoi(poi)) return 'historic';
   if (
@@ -347,15 +447,65 @@ export function placeMapIcon(poi: Poi): HomeMapPlaceIcon | null {
     return 'nature';
   }
   if (ACTIVITY_RE.test(blob)) return 'activity';
-  if (TOILET_RE.test(blob)) return 'toilet';
-  if (INFO_RE.test(blob)) return 'info';
-  if (VIEWPOINT_RE.test(blob)) return 'viewpoint';
-  if (WATER_RE.test(blob)) return 'water';
-  if (BIKE_RE.test(blob)) return 'bike';
-  if (FERRY_RE.test(blob)) return 'ferry';
-  if (isTransitMapPoi(poi) && RAIL_STOP_RE.test(blob)) return 'rail';
-  if (isTransitMapPoi(poi) && BUS_STOP_RE.test(blob)) return 'bus';
+  // Mode/Kleidung oft Basemap-Label — kein Extra-Shop-Quadrat.
+  if (/\b(ernsting|fashion|kleidung|bekleidung|boutique|textil)\b/i.test(blob)) {
+    return 'shop';
+  }
   return null;
+}
+
+/**
+ * Directory-Shops die Protomaps schon als Label zeigt: kein Yorro-Quadrat darüber.
+ * Punkt-Amenities (Toilette, ATM, Packstation, Parken) behalten eigene Icons.
+ */
+const BASEMAP_LABEL_ICON_SUPPRESS = new Set<string>([
+  'supermarket',
+  'shop',
+  'fuel',
+  'bakery',
+  'kiosk',
+  'pharmacy',
+  'cafe',
+  'restaurant',
+  'bar',
+]);
+
+export function shouldSuppressYorroMapIcon(
+  poi: Poi,
+  icon: HomeMapPlaceIcon | string | null | undefined,
+): boolean {
+  if (!icon) return false;
+  // Hard-Amenities: immer unser Icon — Basemap-Piktogramm allein reicht nicht.
+  if (
+    icon === 'doctor' ||
+    icon === 'fuel' ||
+    icon === 'park' ||
+    icon === 'pharmacy' ||
+    icon === 'toilet' ||
+    icon === 'water' ||
+    icon === 'post' ||
+    icon === 'atm' ||
+    icon === 'charging' ||
+    icon === 'luggage'
+  ) {
+    return false;
+  }
+  if (!BASEMAP_LABEL_ICON_SUPPRESS.has(String(icon))) return false;
+  const raw = poi.tags_json ?? '';
+  if (
+    /directory|tier4|offline_lookup|osm_map|amenity_skip|map_outline/i.test(raw)
+  ) {
+    return true;
+  }
+  // Bekannte Alltagsketten auch ohne Tag — Basemap-Label reicht.
+  if (
+    /\b(edeka|rewe|aldi|lidl|penny|marktkauf|frischecenter|ernsting|famila|rossmann|dm\b|budni)\b/i.test(
+      blobOf(poi),
+    )
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /** Echte Punkt-Amenities — nie Gebäude-Fill (Briefkasten, Halt, WC, …). */
@@ -364,6 +514,9 @@ export function isStreetPointAmenity(poi: Poi): boolean {
   return (
     STREET_AMENITY_RE.test(blob) ||
     TOILET_RE.test(blob) ||
+    LUGGAGE_RE.test(blob) ||
+    LAUNDRY_RE.test(blob) ||
+    CHARGING_RE.test(blob) ||
     PARKING_RE.test(blob) ||
     INFO_RE.test(blob) ||
     VIEWPOINT_RE.test(blob) ||
@@ -385,11 +538,17 @@ export function isAlwaysOnMapAmenity(poi: Poi): boolean {
   return (
     STREET_AMENITY_RE.test(blob) ||
     TOILET_RE.test(blob) ||
+    LUGGAGE_RE.test(blob) ||
+    LAUNDRY_RE.test(blob) ||
+    CHARGING_RE.test(blob) ||
     INFO_RE.test(blob) ||
     VIEWPOINT_RE.test(blob) ||
     WATER_RE.test(blob) ||
     ATM_RE.test(blob) ||
     BIKE_RE.test(blob) ||
+    BEACH_RE.test(blob) ||
+    CAR_RENTAL_RE.test(blob) ||
+    SCOOTER_RE.test(blob) ||
     FERRY_RE.test(blob) ||
     PHARMACY_RE.test(blob) ||
     SUPERMARKET_RE.test(blob) ||
@@ -467,8 +626,15 @@ export function homeMapTypeFilterId(poi: Poi): string | null {
     return 'cafe';
   }
   if (/\b(museum)\b/i.test(blob)) return 'museum';
+  // Historie vor Kultur (denkmal/historic ≠ Theater/Kino).
   if (
-    /\b(galerie|kunst|denkmal|kultur|theater|kino|kirche|kapelle|kloster|dom\b|ausstellung)\b/i.test(
+    HISTORIC_RE.test(blob) ||
+    /\b(denkmal|geschichtspfad|heimatstube|ortschronik|archiv)\b/i.test(blob)
+  ) {
+    return 'historie';
+  }
+  if (
+    /\b(galerie|kunst|kultur|theater|kino|kirche|kapelle|kloster|dom\b|ausstellung)\b/i.test(
       blob,
     )
   ) {
@@ -499,10 +665,17 @@ export function homeMapTypeFilterId(poi: Poi): string | null {
   if (/\b(park\b|garten|natur|düne|duene|watt|aussicht|wald|viewpoint)\b/i.test(blob)) {
     return 'natur';
   }
+  // Notfall: WC, Wasser, Arzt, Apotheke — vor Alltag.
   if (
-    /\b(apotheke|kindergarten|kita|schule|supermarkt|alltag|toilette|\bwc\b|tourist.?info)\b/i.test(
-      blob,
-    ) ||
+    TOILET_RE.test(blob) ||
+    WATER_RE.test(blob) ||
+    DOCTOR_RE.test(blob) ||
+    PHARMACY_RE.test(blob)
+  ) {
+    return 'notfall';
+  }
+  if (
+    /\b(kindergarten|kita|schule|supermarkt|alltag|tourist.?info)\b/i.test(blob) ||
     hasOsmOrDirectoryTag(poi)
   ) {
     return 'alltag';

@@ -6,6 +6,25 @@
 import * as FileSystem from 'expo-file-system';
 import type { UserProfile } from '../../types/userProfile';
 import type { TemporaryLiveSpot } from './temporaryLiveSpots';
+import {
+  buildEventOfferKey,
+  EVENT_PITCH_COOLDOWN_MS,
+  migrateLegacyPitches,
+  normalizePitchRecords,
+  type EventPitchRecord,
+} from './eventPitchQuota';
+
+export {
+  EVENT_PITCH_COOLDOWN_MS,
+  MAX_EVENT_PITCHES_PER_WINDOW,
+  buildEventOfferKey,
+  canEventPitch,
+  eventPitchQuotaExhausted,
+  isDuplicateEventPitch,
+  normalizeEventPitchVenue,
+  pitchesInEventWindow,
+  type EventPitchRecord,
+} from './eventPitchQuota';
 
 const PATH = `${FileSystem.documentDirectory}findus-event-pitch-memory.json`;
 
@@ -13,6 +32,7 @@ export type EventPitchMemory = {
   softSkipTags: string[];
   softLikeTags: string[];
   recentPitchTags: string[];
+  recentPitches: EventPitchRecord[];
   lastPitchAtMs: number | null;
   lastPitchName: string | null;
 };
@@ -21,6 +41,7 @@ const EMPTY: EventPitchMemory = {
   softSkipTags: [],
   softLikeTags: [],
   recentPitchTags: [],
+  recentPitches: [],
   lastPitchAtMs: null,
   lastPitchName: null,
 };
@@ -44,7 +65,7 @@ async function read(): Promise<EventPitchMemory> {
     if (!info.exists) return { ...EMPTY };
     const raw = await FileSystem.readAsStringAsync(PATH);
     const parsed = JSON.parse(raw) as Partial<EventPitchMemory>;
-    return {
+    const mem: EventPitchMemory = {
       softSkipTags: Array.isArray(parsed.softSkipTags)
         ? uniq(parsed.softSkipTags.map(String))
         : [],
@@ -54,18 +75,27 @@ async function read(): Promise<EventPitchMemory> {
       recentPitchTags: Array.isArray(parsed.recentPitchTags)
         ? uniq(parsed.recentPitchTags.map(String), 24)
         : [],
+      recentPitches: normalizePitchRecords(parsed.recentPitches),
       lastPitchAtMs:
         typeof parsed.lastPitchAtMs === 'number' ? parsed.lastPitchAtMs : null,
       lastPitchName:
         typeof parsed.lastPitchName === 'string' ? parsed.lastPitchName : null,
     };
+    return migrateLegacyPitches(mem) as EventPitchMemory;
   } catch {
     return { ...EMPTY };
   }
 }
 
 async function write(mem: EventPitchMemory): Promise<void> {
-  await FileSystem.writeAsStringAsync(PATH, JSON.stringify(mem));
+  const now = Date.now();
+  const pruned: EventPitchMemory = {
+    ...mem,
+    recentPitches: mem.recentPitches
+      .filter((p) => now - p.atMs < 24 * 60 * 60_000)
+      .slice(0, 12),
+  };
+  await FileSystem.writeAsStringAsync(PATH, JSON.stringify(pruned));
 }
 
 export async function loadEventPitchMemory(): Promise<EventPitchMemory> {
@@ -93,16 +123,29 @@ export function softSkipTagsForUser(
 }
 
 export async function noteEventPitchSpoken(
-  spot: TemporaryLiveSpot,
+  spot: TemporaryLiveSpot & { offerKey?: string },
 ): Promise<void> {
   const mem = await read();
+  const atMs = Date.now();
+  const venueName = spot.name.slice(0, 80);
+  const offerKey =
+    spot.offerKey?.trim().slice(0, 120) ||
+    buildEventOfferKey({
+      venueName: spot.name,
+      whenLabel: spot.whenLabel,
+      titleOrHook: spot.hook,
+    });
   const tags = [
     ...(spot.audienceTags ?? []),
     spot.kindHint,
   ].filter(Boolean);
   mem.recentPitchTags = uniq([...tags, ...mem.recentPitchTags], 24);
-  mem.lastPitchAtMs = Date.now();
-  mem.lastPitchName = spot.name.slice(0, 80);
+  mem.recentPitches = [
+    { atMs, venueName, offerKey },
+    ...mem.recentPitches.filter((p) => p.atMs !== atMs),
+  ];
+  mem.lastPitchAtMs = atMs;
+  mem.lastPitchName = venueName;
   await write(mem);
 }
 

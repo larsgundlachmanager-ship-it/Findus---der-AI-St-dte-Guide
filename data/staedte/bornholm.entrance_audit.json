@@ -1,0 +1,311 @@
+{
+  "city_id": "bornholm",
+  "apply": true,
+  "storyOnly": true,
+  "maxDelta": 120,
+  "country": "Germany",
+  "summary": {
+    "ok": 5,
+    "check": 3,
+    "bad": 8,
+    "errors": 0,
+    "applied": 3,
+    "skipped_directory": 27,
+    "skipped_cached_google": 2
+  },
+  "rows": [
+    {
+      "id": "bornholm_r_plantage",
+      "name": "Rø Plantage",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.200002154545466,
+        "lng": 14.899063569696969
+      }
+    },
+    {
+      "id": "bornholm_rokkestenen_i_almindingen",
+      "name": "Rokkestenen i Almindingen",
+      "status": "SKIP_CACHED_GOOGLE",
+      "before": {
+        "lat": 55.126031071428564,
+        "lng": 14.895306428571429
+      }
+    },
+    {
+      "id": "bornholm_stadtgeschichte",
+      "name": "Geschichte von Bornholm",
+      "before": {
+        "lat": 55.1603741,
+        "lng": 14.866789260000001
+      },
+      "google": {
+        "lat": 55.160427999999996,
+        "lng": 14.866883600000001,
+        "place_id": "ChIJB3tP5nkOVUYREt-6j7FoS_g",
+        "address": "Bornholm, Denmark"
+      },
+      "delta_m": 8,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_hammershus",
+      "name": "Hammershus",
+      "before": {
+        "lat": 55.27139120769231,
+        "lng": 14.754950699999998
+      },
+      "google": {
+        "lat": 55.2713045,
+        "lng": 14.7553955,
+        "place_id": "ChIJN5AwFiIHVUYRyc2qzE8fcBc",
+        "address": "Langebjergvej 26, 3770 Allinge-Sandvig, Denmark"
+      },
+      "delta_m": 30,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bornholm_sterlars_rundkirke",
+      "name": "Østerlars Rundkirke",
+      "before": {
+        "lat": 55.17149369999999,
+        "lng": 14.961704363829785
+      },
+      "google": {
+        "lat": 55.1714924,
+        "lng": 14.961696199999999,
+        "place_id": "ChIJtRAnPz0MVUYRufwmr_Rc9cM",
+        "address": "Vietsvej 25, 3760 Gudhjem, Denmark"
+      },
+      "delta_m": 1,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_dueodde_fyr",
+      "name": "Dueodde Fyr",
+      "before": {
+        "lat": 54.99186607142857,
+        "lng": 15.07435842857143
+      },
+      "google": {
+        "lat": 54.991792399999994,
+        "lng": 15.0742423,
+        "place_id": "ChIJbWnnQoxrVUYRiyNdxsKsKgE",
+        "address": "Fyrvejen 11, 3730 Nexø, Denmark"
+      },
+      "delta_m": 11,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_dueodde_strand",
+      "name": "Dueodde Strand",
+      "before": {
+        "lat": 54.996051737500004,
+        "lng": 15.078637124999998
+      },
+      "google": {
+        "lat": 54.9952841,
+        "lng": 15.087516199999998,
+        "place_id": "ChIJz8Q_uvVrVUYRo0IbLu6HAL0",
+        "address": "Dueodde, 3730 Bornholm, Denmark"
+      },
+      "delta_m": 573,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_gudhjem_havn",
+      "name": "Gudhjem Havn",
+      "before": {
+        "lat": 55.21093142222222,
+        "lng": 14.9688141
+      },
+      "google": {
+        "lat": 55.2125649,
+        "lng": 14.971635399999997,
+        "place_id": "ChIJH5Yv--ALVUYR5nBJLN330jY",
+        "address": "Ejnar Mikkelsensvej 21, 3760 Gudhjem, Denmark"
+      },
+      "delta_m": 255,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_helligdomsklipperne",
+      "name": "Helligdomsklipperne",
+      "before": {
+        "lat": 55.231,
+        "lng": 14.897
+      },
+      "google": {
+        "lat": 55.2252764,
+        "lng": 14.896284800000002,
+        "place_id": "ChIJ7_XehngJVUYRJsW6_VNuttk",
+        "address": "Helligdomsvej 14, 3760 Gudhjem, Denmark"
+      },
+      "delta_m": 638,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_svaneke",
+      "name": "Svaneke",
+      "before": {
+        "lat": 55.13608436,
+        "lng": 15.14073102
+      },
+      "google": {
+        "lat": 55.1364376,
+        "lng": 15.1408942,
+        "place_id": "ChIJQVgpY6VzVUYR9sNrIM-ru9c",
+        "address": "3740 Svaneke, Denmark"
+      },
+      "delta_m": 41,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bornholm_nylars_rundkirke",
+      "name": "Nylars Rundkirke",
+      "before": {
+        "lat": 55.07397463214287,
+        "lng": 14.814990832142854
+      },
+      "google": {
+        "lat": 55.073974,
+        "lng": 14.8149491,
+        "place_id": "ChIJvY3R9f4QVUYRSqEqXJaS_9Q",
+        "address": "Nylars, Kirkevej 10K, 3720 Nylars, Denmark"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_olsker_rundkirke",
+      "name": "Olsker Rundkirke",
+      "before": {
+        "lat": 55.23222508,
+        "lng": 14.795385240000002
+      },
+      "google": {
+        "lat": 55.2360611,
+        "lng": 14.800384499999998,
+        "place_id": "ChIJVVVVVUUGVUYRFKUT4J4TeLI",
+        "address": "Olsker, Lindesgårdsvej 1, 3770 Allinge-Sandvig, Denmark"
+      },
+      "delta_m": 531,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_sankt_nicolai_kirke",
+      "name": "Sankt Nicolai Kirke",
+      "before": {
+        "lat": 55.098984073913044,
+        "lng": 14.697594430434783
+      },
+      "google": {
+        "lat": 55.098964699999996,
+        "lng": 14.697560300000001,
+        "place_id": "ChIJ0Swdo_0aVUYRmuw2dedpiO0",
+        "address": "Kirkepladsen 20, 3700 Rønne, Denmark"
+      },
+      "delta_m": 3,
+      "status": "OK",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_r_nne_havn",
+      "name": "Rønne Havn",
+      "before": {
+        "lat": 55.09873497272727,
+        "lng": 14.707088690909092
+      },
+      "google": {
+        "lat": 55.092386999999995,
+        "lng": 14.694310799999998,
+        "place_id": "ChIJH-4NAwMbVUYRaVdLYTDIkh4",
+        "address": "Fiskerivej 1, 3700 Rønne, Denmark"
+      },
+      "delta_m": 1077,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_bornholms_museum",
+      "name": "Bornholms Museum",
+      "before": {
+        "lat": 55.10281444285714,
+        "lng": 14.703154423809522
+      },
+      "google": {
+        "lat": 55.102523,
+        "lng": 14.7032441,
+        "place_id": "ChIJL7S2OeMaVUYRTR3s5zc8fTs",
+        "address": "Sankt Mortens Gade 29, 3700 Rønne, Denmark"
+      },
+      "delta_m": 33,
+      "status": "CHECK",
+      "streetview": "OK",
+      "applied": true
+    },
+    {
+      "id": "bornholm_r_nne_bagfyr",
+      "name": "Rønne Bagfyr",
+      "before": {
+        "lat": 55.10083107142857,
+        "lng": 14.69850642857143
+      },
+      "google": {
+        "lat": 55.0994813,
+        "lng": 14.696030700000001,
+        "place_id": "ChIJZbXRnOEbVUYR0L5ZaoWsiyQ",
+        "address": "Lygtestræde, 3700 Rønne, Denmark"
+      },
+      "delta_m": 218,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_hjorths_fabrik",
+      "name": "Hjorths Fabrik",
+      "before": {
+        "lat": 55.099471116666656,
+        "lng": 14.69948421111111
+      },
+      "google": {
+        "lat": 55.1026422,
+        "lng": 14.6966358,
+        "place_id": "ChIJTSdmUx0bVUYRFtw3ZcZqmF0",
+        "address": "Krystalgade 5, 3700 Rønne, Denmark"
+      },
+      "delta_m": 396,
+      "status": "BAD",
+      "streetview": "OK"
+    },
+    {
+      "id": "bornholm_erichsens_gard",
+      "name": "Erichsens Gård",
+      "before": {
+        "lat": 55.10123475714287,
+        "lng": 14.702895064285713
+      },
+      "google": {
+        "lat": 55.103632399999995,
+        "lng": 14.6976864,
+        "place_id": "ChIJ8WqeXx0bVUYReUFrQmguPYw",
+        "address": "Laksegade 7, 3700 Rønne, Denmark"
+      },
+      "delta_m": 425,
+      "status": "BAD",
+      "streetview": "OK"
+    }
+  ]
+}

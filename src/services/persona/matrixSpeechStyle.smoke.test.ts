@@ -18,7 +18,23 @@ const classic = buildMatrixSpeechStyleBlock({
 });
 assert(/MÜNDLICH & MENSCHLICH/i.test(classic), 'universal human mouth');
 assert(/Classic Guide/i.test(classic), 'classic role hint');
+assert(/STIL ≠ INHALT/i.test(classic), 'style must not replace content');
 assert(!/Sag genau/i.test(classic), 'no scripts');
+
+const aristocrat = buildMatrixSpeechStyleBlock({
+  coreRole: 'aristocrat',
+  vibeTone: 'balanced',
+  knowledgeStyle: 'fact_focus',
+});
+assert(/heutigem Deutsch|klarem heutigem/i.test(aristocrat), 'aristocrat modern German');
+assert(/VERBOTEN:.*Archaismen|vernehme/i.test(aristocrat), 'aristocrat no archaic filler');
+
+const aristocratBridge = buildCompactBridgeVoiceHint({
+  coreRole: 'aristocrat',
+  vibeTone: 'balanced',
+  knowledgeStyle: 'fact_focus',
+});
+assert(/heutigem Deutsch|Kein Archaik/i.test(aristocratBridge), 'aristocrat bridge guard');
 
 const seriousFacts = buildMatrixSpeechStyleBlock({
   coreRole: 'classic_guide',

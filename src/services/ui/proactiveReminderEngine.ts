@@ -204,6 +204,14 @@ async function pushReminder(tip: HudTipCandidate): Promise<void> {
 
 async function voiceReminder(tip: HudTipCandidate): Promise<void> {
   if (lastVoiceTipId === tip.id) return;
+  try {
+    const { isOpenQuietActive } = require('../navigation/modulePriorityPolicy') as {
+      isOpenQuietActive: (n?: number) => boolean;
+    };
+    if (isOpenQuietActive()) return;
+  } catch {
+    /* soft */
+  }
   const store = useFinnusStore.getState();
   if (store.isPlayingAudio || store.isListening || store.isGenerating) return;
   if (store.activeConciergeCard) return;
@@ -265,6 +273,16 @@ export async function tickProactiveReminderEngine(opts?: {
 
   // Progressive logistics checkpoints (ICE/Bus/Flug/Zeit/Geo)
   void tickLogisticsTriggerEngine({ force: opts?.force, nowMs: now });
+
+  // Gast: soft Login-Erinnerung (nie während Nav)
+  try {
+    const { maybeSpeakGuestAuthNudge } = require('../account/guestAuthNudge') as {
+      maybeSpeakGuestAuthNudge: (n?: number) => Promise<boolean>;
+    };
+    void maybeSpeakGuestAuthNudge(now);
+  } catch {
+    /* soft */
+  }
 
   // Nice-Info-Szenarien (Gepäck-Morgen, Schirm, Sunset, …) — soft Push, Dedup intern
   try {

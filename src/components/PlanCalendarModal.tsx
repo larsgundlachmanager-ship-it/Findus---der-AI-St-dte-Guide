@@ -15,7 +15,16 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { isPlanPromptLeak } from '../module2/timeline/plannedJourneyGroup';
 import { shouldShowEndClock } from '../services/flights/flightTimelineCopy';
+import {
+  loadHudHintPrefs,
+  markTimelineChoiceUsed,
+  markTimelineGestureUsed,
+  shouldShowTimelineChoiceHint,
+  shouldShowTimelineGestureHint,
+} from '../services/ui/hudHintPrefs';
 import { colors, spacing } from '../constants/theme';
 import { UI_LAYER } from '../constants/uiLayers';
 import { todayDateKey } from '../utils/dateKeys';
@@ -48,6 +57,7 @@ import {
   planStopIdFromTimelineNodeId,
   addPlanStop,
   removePlanStop,
+  removePlanGroup,
   reschedulePlanStop,
   setStopTransport,
   reorderTimedPlanStops,
@@ -58,6 +68,7 @@ import {
   clearLiveNavFromPlan,
   isLiveNavLegId,
   LIVE_NAV_LEG_ID,
+  upcomingIndexForLiveId,
   upsertLiveNavFromStore,
 } from '../module2/timeline/syncLiveNavToPlan';
 import { formatDurationMinutesDe } from '../services/navigation/travelEta';
@@ -80,14 +91,35 @@ import {
 } from '../services/timeline/visitLog';
 import { enqueueSpeech, stopVoiceOnUserTap, isSpeechActive } from '../module2/speech/speechQueue';
 import { clearNavigationHard } from '../services/navigation/hardNavOverride';
-import { reorderUpcomingTourStops } from '../services/navigation/multiStopTour';
+import {
+  applyUpcomingVisitOrder,
+  reorderUpcomingTourStops,
+  skipUpcomingTourStop,
+} from '../services/navigation/multiStopTour';
 import {
   detectOfferKind,
   isSafeOfferUrl,
   offerLabel,
 } from '../module2/planning/offerActionUtils';
 import { shortenActionLabel, stripMapsActionPrefix, MAPS_ACTION_EMOJI } from '../services/concierge/actionLabelShorten';
-import { hasTimeOverlap } from '../module2/planning/planConflictResolve';
+import {
+  hasTimeOverlap,
+  resolveOverlapsQuietly,
+} from '../module2/planning/planConflictResolve';
+function sanitizePlanSubtitle(raw: string | null | undefined): string {
+  let t = String(raw ?? '').replace(/\s+/g, ' ').trim();
+  if (!t) return '';
+  if (/^(?:\u2026|\.\.\.)/.test(t) || /(?:\u2026|\.\.\.)$/.test(t)) {
+    t = t.replace(/^(?:\u2026|\.\.\.)+\s*/u, '').replace(/(?:\u2026|\.\.\.)+$/u, '').trim();
+    if (/^[a-zäöüß]{1,3}[,:;]/u.test(t)) t = t.replace(/^[a-zäöüß]{1,3}[,:;]\s*/u, '');
+  }
+  // Review-Prosa → max eine kurze Zeile, sonst leer (Accordion zeigt Fakten)
+  if (t.length > 90 || /\b(wir|wurde|sahsen|saßen|extrawünsche)\b/iu.test(t)) {
+    return '';
+  }
+  return t;
+}
+
 
 const OPEN_ROW_H = 56;
 const TL_ROW_H = 72;
@@ -104,6 +136,8 @@ function PlaceActionChips({ node }: { node: TimelineNode }) {
       : '';
   const reserveUrl = (node.reserveUrl ?? '').trim();
   const badge = (node.badge ?? '').trim();
+  // Am Ziel: Speisekarte vor Maps — Maps zieht aus der App raus
+  const showMaps = Boolean(mapsUrl) && !menuUrl;
   if (!mapsUrl && !menuUrl && !websiteUrl && !reserveUrl && !badge) return null;
   return (
     <View style={styles.proposalActions}>
@@ -111,22 +145,6 @@ function PlaceActionChips({ node }: { node: TimelineNode }) {
         <View style={styles.proposalActionBtn}>
           <Text style={styles.proposalActionText}>{badge}</Text>
         </View>
-      ) : null}
-      {mapsUrl ? (
-        <Pressable
-          style={styles.proposalActionBtn}
-          hitSlop={6}
-          onPress={(e) => {
-            e?.stopPropagation?.();
-            void Linking.openURL(mapsUrl);
-          }}
-        >
-          <Text style={styles.proposalActionText}>
-            {/lageplan/i.test(mapsUrl)
-              ? 'Lageplan'
-              : `${MAPS_ACTION_EMOJI} Maps`}
-          </Text>
-        </Pressable>
       ) : null}
       {menuUrl ? (
         <Pressable
@@ -139,6 +157,22 @@ function PlaceActionChips({ node }: { node: TimelineNode }) {
         >
           <Text style={styles.proposalActionText}>
             {offerLabel(detectOfferKind(node.title)).label}
+          </Text>
+        </Pressable>
+      ) : null}
+      {showMaps ? (
+        <Pressable
+          style={styles.proposalActionBtn}
+          hitSlop={6}
+          onPress={(e) => {
+            e?.stopPropagation?.();
+            void Linking.openURL(mapsUrl);
+          }}
+        >
+          <Text style={styles.proposalActionText}>
+            {/lageplan/i.test(mapsUrl)
+              ? 'Lageplan'
+              : `${MAPS_ACTION_EMOJI} Maps`}
           </Text>
         </Pressable>
       ) : null}
@@ -164,9 +198,12 @@ function PlaceActionChips({ node }: { node: TimelineNode }) {
           }}
         >
           <Text style={styles.proposalActionText}>
-            {/friseur|haar|salon|barber|termin/i.test(node.title)
-              ? '📅 Termin buchen'
-              : '🍽 Tisch reservieren'}
+            {/uber\.com|m\.uber/i.test(reserveUrl) ||
+            /taxi|uber/i.test(node.title)
+              ? '🚗 Uber vorbestellen'
+              : /friseur|haar|salon|barber|termin/i.test(node.title)
+                ? '📅 Termin buchen'
+                : '🍽 Tisch reservieren'}
           </Text>
         </Pressable>
       ) : null}
@@ -182,6 +219,30 @@ function isMapsQuickAction(a: QuickAction): boolean {
       url,
     ) || /^(?:🗺️|🗺|MAP)\b/iu.test(a.label)
   );
+}
+
+/** Maps / Speisekarte / Website gehören auf die Stop-Karte, nicht ins Top-Chrome. */
+function isCardBoundPlaceLinkAction(a: QuickAction): boolean {
+  if (isMapsQuickAction(a)) return true;
+  if (a.type !== 'OPEN_URL') return false;
+  const label = String(a.label ?? '');
+  const url = String(a.payload?.url ?? '');
+  if (
+    /speisekarte|🍽|🌐|\bwebsite\b|\bmenu\b|lageplan|maps|reservier|tisch\s*buch/i.test(
+      label,
+    )
+  ) {
+    return true;
+  }
+  // URL-Heuristik: Place-Links nie im Top-Strip
+  if (
+    /google\.[^/]*\/maps|maps\.google|maps\.app\.goo\.gl|speisekarte|\/menu\b|tripadvisor|opentable|quandoo/i.test(
+      url,
+    )
+  ) {
+    return true;
+  }
+  return false;
 }
 
 type ViewMode = 'day' | 'month';
@@ -215,11 +276,21 @@ function formatClock(ms: number | null): string {
 function formatDayLabel(dateKey: string): string {
   const [y, m, d] = dateKey.split('-').map(Number);
   const dt = new Date(y!, m! - 1, d!);
-  return dt.toLocaleDateString('de-DE', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'long',
-  });
+  // Kurz + Datum, damit „DO 03.09.“ zwischen den Pfeilen nie abgeschnitten wird
+  const wd = ['SO', 'MO', 'DI', 'MI', 'DO', 'FR', 'SA'][dt.getDay()] ?? '';
+  const dd = String(d!).padStart(2, '0');
+  const mm = String(m!).padStart(2, '0');
+  return `${wd} ${dd}.${mm}.`;
+}
+
+/** Mini-Kalenderblatt mit Tageszahl (wie „Heute“-Emoji), ohne Text-Label. */
+function TodayDayIcon({ day }: { day: number }) {
+  return (
+    <View style={styles.todayDayIcon} accessibilityElementsHidden>
+      <View style={styles.todayDayIconHeader} />
+      <Text style={styles.todayDayIconNum}>{day}</Text>
+    </View>
+  );
 }
 
 function toneStyles(tone: TimelineTone): {
@@ -248,33 +319,22 @@ function kickOpenPlanResearch(stopId: string): void {
   } catch {
     /* soft */
   }
-  // Sync Instant-Bridge (vor async Import) — Concierge-Härte.
-  try {
-    const seed = /:hotel$/i.test(stopId)
-      ? 'Hotel Unterkunft suchen'
-      : /:car$/i.test(stopId)
-        ? 'Mietwagen suchen'
-        : 'Offenen Plan recherchieren';
-    const { pickFloskelForUserText } = require('../services/speech/floskelEngine') as {
-      pickFloskelForUserText: (s: string) => { phrase: string };
-    };
-    const phrase = pickFloskelForUserText(seed).phrase?.trim();
-    if (phrase) {
-      const { enqueueSpeech } = require('../module2/speech/speechQueue') as {
-        enqueueSpeech: (o: {
-          kind: 'bridging' | 'main';
-          text: string;
-          turnId: string;
-        }) => void;
+  // Flug-Anreise-Chips: kein Floskel — direkt umsetzen
+  const skipFloskel = /^ft:[^:]+:(taxiopt|oepnvopt|xferwp|xfergt)$/i.test(stopId);
+  if (!skipFloskel) {
+    try {
+      const seed = /:hotel$/i.test(stopId)
+        ? 'Hotel Unterkunft suchen'
+        : /:car$/i.test(stopId)
+          ? 'Mietwagen suchen'
+          : 'Offenen Plan recherchieren';
+      const { speakOpenPlanInstantBridge } = require('../module2/planning/runPlanningModule') as {
+        speakOpenPlanInstantBridge: (s: string) => void;
       };
-      enqueueSpeech({
-        kind: 'bridging',
-        text: phrase,
-        turnId: `open_plan_bridge_${Date.now()}`,
-      });
+      speakOpenPlanInstantBridge(seed);
+    } catch {
+      /* soft */
     }
-  } catch {
-    /* soft */
   }
   void import('../module2/planning/runPlanningModule').then(async (m) => {
     try {
@@ -334,6 +394,148 @@ function SwipeDeleteTrack({
   );
 }
 
+
+/** Flug/ÖPNV-Gruppenkopf — Rechts-Wischen wie einzelne Orte → Löschen. */
+function GroupAccordionHeader({
+  label,
+  collapsed,
+  showAirportModes,
+  transport,
+  onToggle,
+  onDelete,
+  onSetTransport,
+}: {
+  label: string;
+  collapsed: boolean;
+  showAirportModes: boolean;
+  transport?: FuturePlanTransport | null;
+  onToggle: () => void;
+  onDelete: () => void;
+  onSetTransport?: (mode: FuturePlanTransport) => void;
+}) {
+  const [swipeArmed, setSwipeArmed] = React.useState(false);
+  const swipeX = React.useRef(new Animated.Value(0)).current;
+  const swipeLastDx = React.useRef(0);
+  const swipePan = React.useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => false,
+        onMoveShouldSetPanResponder: (_e, g) =>
+          Math.abs(g.dx) > 28 && Math.abs(g.dx) > Math.abs(g.dy) * 2,
+        onMoveShouldSetPanResponderCapture: (_e, g) =>
+          Math.abs(g.dx) > 36 && Math.abs(g.dx) > Math.abs(g.dy) * 2.2,
+        onPanResponderTerminationRequest: () => false,
+        onPanResponderMove: (_e, g) => {
+          swipeLastDx.current = g.dx;
+          if (g.dx > 0) swipeX.setValue(Math.min(96, g.dx));
+        },
+        onPanResponderRelease: (_e, g) => {
+          const dx = Math.max(g.dx, swipeLastDx.current);
+          swipeLastDx.current = 0;
+          if (dx > 56) {
+            setSwipeArmed(true);
+            Animated.spring(swipeX, {
+              toValue: 88,
+              useNativeDriver: true,
+            }).start();
+            return;
+          }
+          setSwipeArmed(false);
+          Animated.spring(swipeX, {
+            toValue: 0,
+            useNativeDriver: true,
+          }).start();
+        },
+        onPanResponderTerminate: () => {
+          swipeLastDx.current = 0;
+          setSwipeArmed(false);
+          Animated.spring(swipeX, {
+            toValue: 0,
+            useNativeDriver: true,
+          }).start();
+        },
+      }),
+    [swipeX],
+  );
+  const title = label.replace(
+    /^Flug(?:\s+\S+)?\s+nach\s+(.+?)\s+\d{1,2}:\d{2}$/,
+    'Flug nach $1',
+  );
+  return (
+    <SwipeDeleteTrack
+      enabled
+      swipeX={swipeX}
+      panHandlers={swipePan.panHandlers}
+      armed={swipeArmed}
+      onConfirmDelete={onDelete}
+    >
+      <View
+        style={[
+          styles.card,
+          styles.groupAccordionCard,
+          {
+            backgroundColor: colors.bgElevated,
+            borderColor: colors.border,
+          },
+        ]}
+      >
+        <Pressable
+          hitSlop={12}
+          onPress={() => {
+            if (swipeArmed) {
+              setSwipeArmed(false);
+              Animated.spring(swipeX, {
+                toValue: 0,
+                useNativeDriver: true,
+              }).start();
+              return;
+            }
+            onToggle();
+          }}
+          accessibilityRole="button"
+          accessibilityLabel="Abschnitt auf- oder zuklappen. Nach rechts wischen zum Löschen."
+        >
+          <Text style={styles.cardTitle} numberOfLines={2}>
+            {`${collapsed ? '▸' : '▾'} ${title}`}
+          </Text>
+          <Text style={styles.cardSub} numberOfLines={1}>
+            {collapsed ? 'Tippen für die Schritte' : 'Tippen zum Zuklappen'}
+          </Text>
+          {showAirportModes && onSetTransport ? (
+            <View style={[styles.navModeRow, { marginTop: 8 }]}>
+              {(
+                [
+                  ['walk', '🚶'],
+                  ['bike', '🚲'],
+                  ['transit', '🚌'],
+                  ['taxi', '🚕'],
+                ] as const
+              ).map(([mode, emoji]) => {
+                const active =
+                  transport === mode ||
+                  (mode === 'taxi' && transport === 'car');
+                return (
+                  <Pressable
+                    key={mode}
+                    hitSlop={6}
+                    style={[
+                      styles.navModeBtn,
+                      active && styles.navModeBtnActive,
+                    ]}
+                    onPress={() => onSetTransport(mode)}
+                  >
+                    <Text style={styles.navModeBtnText}>{emoji}</Text>
+                  </Pressable>
+                );
+              })}
+            </View>
+          ) : null}
+        </Pressable>
+      </View>
+    </SwipeDeleteTrack>
+  );
+}
+
 function TimelineRowInner({
   node,
   selected,
@@ -374,7 +576,10 @@ function TimelineRowInner({
   const tone = toneStyles(node.tone);
   const axisColor =
     node.lane === 'now' ? colors.thinking : tone.dot;
-  const isFallback = node.routeEstimate === 'fallback' || routeComputing;
+  // Journey-Gruppe = geroutet — kein dauerhaftes „?“ / „~ unterwegs“
+  const isFallback =
+    !node.groupId &&
+    (node.routeEstimate === 'fallback' || Boolean(routeComputing));
   const [navExpanded, setNavExpanded] = React.useState(
     Boolean(node.journeyDetail) || node.kind === 'nav_leg',
   );
@@ -393,7 +598,8 @@ function TimelineRowInner({
   const isFtCommitted = planStopId.startsWith('ft:');
   const compactNav =
     isNav &&
-    (!isFtCommitted ||
+    (Boolean(node.groupId) ||
+      !isFtCommitted ||
       node.transport === 'walk' ||
       node.navRole === 'path');
   const showEndClock = shouldShowEndClock(node.endMs, nextAtMs, node.atMs);
@@ -402,6 +608,7 @@ function TimelineRowInner({
     node.lane === 'future' && !isNav && !node.realityLocked;
   const canSwipeDelete =
     Boolean(onSwipeDelete) &&
+    !isLiveNav &&
     !isChoice &&
     node.kind !== 'reality' &&
     node.lane !== 'now' &&
@@ -418,9 +625,9 @@ function TimelineRowInner({
         ? PanResponder.create({
             onStartShouldSetPanResponder: () => false,
             onMoveShouldSetPanResponder: (_e, g) =>
-              Math.abs(g.dx) > 8 && Math.abs(g.dx) > Math.abs(g.dy),
+              Math.abs(g.dx) > 28 && Math.abs(g.dx) > Math.abs(g.dy) * 2,
             onMoveShouldSetPanResponderCapture: (_e, g) =>
-              Math.abs(g.dx) > 14 && Math.abs(g.dx) > Math.abs(g.dy) * 1.2,
+              Math.abs(g.dx) > 36 && Math.abs(g.dx) > Math.abs(g.dy) * 2.2,
             onPanResponderTerminationRequest: () => false,
             onPanResponderMove: (_e, g) => {
               swipeLastDx.current = g.dx;
@@ -511,7 +718,7 @@ function TimelineRowInner({
         .replace(/^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}❓👉]\s*/u, '')
         .trim();
 
-  // Proposals: Maps/Speisekarte am Top-Board (mirroredActions), nicht unter der Karte
+  // Maps/Speisekarte/Website auf der Stop-Karte (committed + Choice), nicht Top-Board
   const showPlaceActions =
     Boolean(
       node.mapsUrl ||
@@ -520,7 +727,6 @@ function TimelineRowInner({
         node.websiteUrl ||
         node.badge,
     ) &&
-    !isChoice &&
     !isOpenBand &&
     node.lane === 'future';
 
@@ -666,6 +872,15 @@ function TimelineRowInner({
                             .getState()
                             .plan.stops.find((s) => s.id === planStopId) ??
                           airport;
+                        const leaveMs = stop?.plannedStartMs;
+                        const pickupTimeLabel =
+                          leaveMs != null
+                            ? `${String(new Date(leaveMs).getHours()).padStart(2, '0')}:${String(new Date(leaveMs).getMinutes()).padStart(2, '0')}`
+                            : undefined;
+                        const pickupDateIso =
+                          leaveMs != null
+                            ? `${new Date(leaveMs).getFullYear()}-${String(new Date(leaveMs).getMonth() + 1).padStart(2, '0')}-${String(new Date(leaveMs).getDate()).padStart(2, '0')}`
+                            : undefined;
                         void handleQuickAction({
                           type: 'BOOK_UBER',
                           label: 'Uber vorbestellen',
@@ -673,6 +888,14 @@ function TimelineRowInner({
                             destName: airport?.title ?? stop?.title ?? node.title,
                             destLat: airport?.lat ?? stop?.lat,
                             destLng: airport?.lng ?? stop?.lng,
+                            // Zukunft: frisch bauen — stale Sofort-URL weglassen
+                            url:
+                              leaveMs != null && leaveMs > Date.now() + 15 * 60_000
+                                ? undefined
+                                : stop?.reserveUrl || stop?.mapsUrl || undefined,
+                            pickupTimeLabel,
+                            pickupDateIso,
+                            dateIso: pickupDateIso,
                           },
                         });
                       }}
@@ -693,7 +916,9 @@ function TimelineRowInner({
                 numberOfLines={navExpanded ? undefined : 2}
               >
                 {isFallback
-                  ? '~ unterwegs (folgt in Sekunden)'
+                  ? isPlanPromptLeak(node.title)
+                    ? 'Verbindung wird gesucht…'
+                    : '~ unterwegs (folgt in Sekunden)'
                   : node.subtitle}
               </Text>
             ) : isFallback ? (
@@ -826,7 +1051,7 @@ function TimelineRowInner({
                     )
                   : (
                       <Text style={styles.cardSub} numberOfLines={2}>
-                        {node.subtitle}
+                        {sanitizePlanSubtitle(node.subtitle)}
                       </Text>
                     )
                 : null}
@@ -958,11 +1183,24 @@ export const PlanCalendarModal = React.memo(
     {},
   );
   const userToggledGroups = useRef<Record<string, boolean>>({});
-  const [undoDelete, setUndoDelete] = useState<FuturePlanStop | null>(null);
+  const [undoDelete, setUndoDelete] = useState<{
+    label: string;
+    stops: FuturePlanStop[];
+  } | null>(null);
   // Echte Systemuhr: Sync beim Öffnen, dann an volle Minuten gekoppelt (kein 5s-Poll)
   const wallClockMs = useWallClockMs(visible);
 
   const planUpdated = useFuturePlanStore((s) => s.plan.updatedAtMs);
+
+  useEffect(() => {
+    if (!visible) return;
+    try {
+      resolveOverlapsQuietly({ speakIfStuck: false });
+    } catch {
+      /* soft */
+    }
+  }, [visible, dateKey, planUpdated]);
+
   const planDayKey = useFuturePlanStore((s) => s.plan.dayKey);
   const planBase = useFuturePlanStore((s) => {
     if (s.plan.dayKey === dateKey) return s.plan.base;
@@ -978,6 +1216,8 @@ export const PlanCalendarModal = React.memo(
   const shortAnswers = usePlanCalendarUiStore((s) => s.shortAnswers);
   const mirroredActions = usePlanCalendarUiStore((s) => s.mirroredActions);
   const pendingChoice = usePlanCalendarUiStore((s) => s.pendingChoice);
+  const [showTlChoiceHint, setShowTlChoiceHint] = useState(true);
+  const [showTlGestureHint, setShowTlGestureHint] = useState(true);
   const requestedDayKey = usePlanCalendarUiStore((s) => s.requestedDayKey);
   const requestedDayAtMs = usePlanCalendarUiStore((s) => s.requestedDayAtMs);
   const routeComputingIds = usePlanCalendarUiStore((s) => s.routeComputingIds);
@@ -1088,16 +1328,27 @@ export const PlanCalendarModal = React.memo(
     });
   }, [visible, timelineBodyReady]);
 
-  // Duplikate (Visit/Hist/Plan) bei Öffnen und Tagwechsel
+  // Duplikate nach Body-Ready — ein Frame später (Chrome zuerst).
   useEffect(() => {
-    if (!visible || !dateKey) return;
-    try {
-      cleanupTimelineDuplicates(dateKey);
-      setVisitTick((n) => n + 1);
-    } catch {
-      /* soft */
-    }
-  }, [visible, dateKey]);
+    if (!visible || !timelineBodyReady || !dateKey) return;
+    const raf = requestAnimationFrame(() => {
+      try {
+        cleanupTimelineDuplicates(dateKey);
+        setVisitTick((n) => n + 1);
+      } catch {
+        /* soft */
+      }
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [visible, timelineBodyReady, dateKey]);
+
+  useEffect(() => {
+    if (!visible || !timelineBodyReady) return;
+    void loadHudHintPrefs().then(() => {
+      setShowTlChoiceHint(shouldShowTimelineChoiceHint());
+      setShowTlGestureHint(shouldShowTimelineGestureHint());
+    });
+  }, [visible, timelineBodyReady]);
 
   useEffect(() => {
     if (!visible) {
@@ -1115,18 +1366,13 @@ export const PlanCalendarModal = React.memo(
     const dk =
       prefer && /^\d{4}-\d{2}-\d{2}$/.test(prefer) ? prefer : todayDateKey();
     setDateKey(dk);
-    try {
-      cleanupTimelineDuplicates(dk);
-    } catch {
-      /* soft */
-    }
   }, [visible, planDayKey]);
 
-  // Tages-Timeline und Plan-Store = derselbe Tag
+  // Tages-Timeline und Plan-Store = derselbe Tag — erst nach Body-Ready
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || !timelineBodyReady) return;
     ensureDay(dateKey);
-  }, [visible, dateKey, ensureDay]);
+  }, [visible, timelineBodyReady, dateKey, ensureDay]);
 
   // Store-Tag folgt Agent/Wecker → UI-Tag mitziehen (außer User hat ‹/› benutzt)
   // Agent-requestDayKey hat Vorrang — sonst überschreibt planDayKey „morgen“ wieder.
@@ -1226,21 +1472,13 @@ export const PlanCalendarModal = React.memo(
       const next = { ...prev };
       for (const [id, g] of Object.entries(groupHeads)) {
         if (
-          g.count >= 2 &&
+          (g.count >= 2 || id === 'live_journey') &&
           next[id] === undefined &&
           userToggledGroups.current[id] == null
         ) {
-          // Geplante ÖPNV/Flug-Gruppen zu — Live-Fahrt bleibt offen.
-          if (id !== 'live_journey') {
-            next[id] = true;
-            changed = true;
-          } else if (
-            g.endMs != null &&
-            g.endMs < Date.now() - 5 * 60_000
-          ) {
-            next[id] = true;
-            changed = true;
-          }
+          // Auch Live-ÖPNV zu — nur Kopf „Fahrt zu … · Zeiten“, Schritte per Tippen.
+          next[id] = true;
+          changed = true;
         }
       }
       return changed ? next : prev;
@@ -1385,7 +1623,8 @@ export const PlanCalendarModal = React.memo(
     setDateKey(todayDateKey());
 
     let cancelled = false;
-    const t = setTimeout(() => {
+    let tries = 0;
+    const scrollToCurrent = () => {
       if (cancelled) return;
       const y = monthBlockY.current[centerMonthKey];
       if (y != null) {
@@ -1393,8 +1632,14 @@ export const PlanCalendarModal = React.memo(
           y: Math.max(0, y - 8),
           animated: false,
         });
+        return;
       }
-    }, 40);
+      tries += 1;
+      if (tries < 12) {
+        setTimeout(scrollToCurrent, 50);
+      }
+    };
+    const t = setTimeout(scrollToCurrent, 40);
 
     return () => {
       cancelled = true;
@@ -1481,7 +1726,17 @@ export const PlanCalendarModal = React.memo(
 
   const toggleMonthDay = useCallback(() => {
     void stopVoiceOnUserTap();
-    setViewMode((m) => (m === 'day' ? 'month' : 'day'));
+    setViewMode((m) => {
+      if (m === 'day') {
+        // Immer auf aktuellen Monat landen (nicht auf dem zuletzt geblätterten Tag).
+        userPickedDayRef.current = false;
+        setDateKey(todayDateKey());
+        setMonthRadiusBefore(0);
+        setMonthRadiusAfter(1);
+        return 'month';
+      }
+      return 'day';
+    });
   }, []);
 
   const openDayFromMonth = useCallback((dk: string) => {
@@ -1575,6 +1830,11 @@ export const PlanCalendarModal = React.memo(
                       : 'accept',
               title,
             }).then((ok) => {
+              if (a.action === 'plan_pick' || a.action === 'plan_accept') {
+                void markTimelineChoiceUsed().then(() =>
+                  setShowTlChoiceHint(false),
+                );
+              }
               if (!ok) {
                 onShortAnswerPrompt?.(
                   a.action === 'plan_reject'
@@ -1743,6 +2003,40 @@ export const PlanCalendarModal = React.memo(
       const id = planStopIdFromTimelineNodeId(node.id) ?? node.id;
       if (isLiveNavLegId(id)) {
         applyLiveNavTransport(mode);
+        void (async () => {
+          try {
+            const { getActiveNavDestination } = require('../services/navigation/navigationService') as {
+              getActiveNavDestination: () => {
+                name: string;
+                lat: number;
+                lng: number;
+              } | null;
+            };
+            let dest = getActiveNavDestination();
+            if (!dest) {
+              const tour = useFinnusStore.getState().multiStopTour;
+              const upcoming = (tour?.stops ?? []).filter((s) => !s.done);
+              const last =
+                [...upcoming].reverse().find((s) => s.role === 'dest') ??
+                upcoming[upcoming.length - 1];
+              if (last) dest = { name: last.name, lat: last.lat, lng: last.lng };
+            }
+            if (!dest) return;
+            const { startPitchNavigation } = await import(
+              '../module2/pitch/pitchStartNav'
+            );
+            await startPitchNavigation(
+              { name: dest.name, lat: dest.lat, lng: dest.lng },
+              mode === 'transit'
+                ? { preferTransit: true }
+                : mode === 'bike'
+                  ? { preferBike: true }
+                  : { preferWalk: true },
+            );
+          } catch {
+            /* soft */
+          }
+        })();
         return;
       }
       if (id.startsWith('ft:') && /:(leave|leg\d+)$/i.test(id)) {
@@ -1768,6 +2062,15 @@ export const PlanCalendarModal = React.memo(
             useFuturePlanStore
               .getState()
               .plan.stops.find((s) => s.id.endsWith(':leave'));
+          const leaveMs = stop?.plannedStartMs;
+          const pickupTimeLabel =
+            leaveMs != null
+              ? `${String(new Date(leaveMs).getHours()).padStart(2, '0')}:${String(new Date(leaveMs).getMinutes()).padStart(2, '0')}`
+              : undefined;
+          const pickupDateIso =
+            leaveMs != null
+              ? `${new Date(leaveMs).getFullYear()}-${String(new Date(leaveMs).getMonth() + 1).padStart(2, '0')}-${String(new Date(leaveMs).getDate()).padStart(2, '0')}`
+              : undefined;
           usePlanCalendarUiStore.getState().setMirroredActions([
             {
               type: 'BOOK_UBER',
@@ -1776,6 +2079,10 @@ export const PlanCalendarModal = React.memo(
                 destName: stop?.title ?? 'Flughafen',
                 destLat: stop?.lat,
                 destLng: stop?.lng,
+                url: stop?.reserveUrl || undefined,
+                pickupTimeLabel,
+                pickupDateIso,
+                dateIso: pickupDateIso,
               },
             },
           ]);
@@ -1871,6 +2178,7 @@ export const PlanCalendarModal = React.memo(
 
   const onSwipeDeleteNode = useCallback((node: TimelineNode) => {
     void stopVoiceOnUserTap();
+    void markTimelineGestureUsed().then(() => setShowTlGestureHint(false));
     const raw =
       planStopIdFromTimelineNodeId(node.id) ||
       (node.id.startsWith('plan_') ? node.id.slice('plan_'.length) : node.id);
@@ -1878,6 +2186,46 @@ export const PlanCalendarModal = React.memo(
     if (!id) return;
     if (isLiveNavLegId(id) || node.groupId === 'live_journey') {
       setSelectedStopId((cur) => (cur === id ? null : cur));
+      // Ein Stop streichen — Rest der Tour bleibt. Nur wenn nichts übrig: ganze Nav weg.
+      try {
+        const tour = useFinnusStore.getState().multiStopTour;
+        if (tour?.stops?.length) {
+          const upcoming = tour.stops
+            .slice(tour.currentIndex)
+            .filter((s) => !s.done)
+            .map((s) => ({
+              name: s.name,
+              poiId: s.poiId,
+              lat: s.lat,
+              lng: s.lng,
+            }));
+          const stopSnap = useFuturePlanStore
+            .getState()
+            .plan.stops.find((s) => s.id === id);
+          const idx = upcomingIndexForLiveId(id, upcoming, {
+            lat: stopSnap?.lat ?? null,
+            lng: stopSnap?.lng ?? null,
+            title: stopSnap?.title ?? node.title ?? null,
+          });
+          if (idx != null && upcoming.length > 0) {
+            void skipUpcomingTourStop({ upcomingIndex: idx }).then((r) => {
+              if (r.cleared) {
+                clearLiveNavFromPlan({ abandon: true });
+                void clearNavigationHard({ silent: true });
+                return;
+              }
+              try {
+                upsertLiveNavFromStore({ force: true });
+              } catch {
+                /* soft */
+              }
+            });
+            return;
+          }
+        }
+      } catch {
+        /* soft — Fallback: ganze Fahrt beenden */
+      }
       clearLiveNavFromPlan({ abandon: true });
       void clearNavigationHard({ silent: true });
       return;
@@ -1888,11 +2236,46 @@ export const PlanCalendarModal = React.memo(
     removePlanStop(id);
     setSelectedStopId((cur) => (cur === id ? null : cur));
     if (snap) {
-      setUndoDelete(snap);
+      setUndoDelete({ label: snap.title, stops: [snap] });
       setTimeout(() => {
-        setUndoDelete((cur) => (cur?.id === id ? null : cur));
+        setUndoDelete((cur) =>
+          cur?.stops.length === 1 && cur.stops[0]?.id === id ? null : cur,
+        );
       }, 7000);
     }
+    try {
+      usePlanCalendarUiStore.getState().setFocusedStopId(null);
+    } catch {
+      /* soft */
+    }
+  }, []);
+
+  const onDeleteGroup = useCallback((groupId: string, label: string) => {
+    void stopVoiceOnUserTap();
+    if (!groupId || groupId === 'live_journey') return;
+    const snaps = removePlanGroup(groupId);
+    if (!snaps.length) return;
+    setSelectedStopId((cur) =>
+      cur && snaps.some((s) => s.id === cur) ? null : cur,
+    );
+    setCollapsedGroups((prev) => {
+      if (!(groupId in prev)) return prev;
+      const next = { ...prev };
+      delete next[groupId];
+      return next;
+    });
+    delete userToggledGroups.current[groupId];
+    const shortLabel =
+      label.replace(
+        /^Flug(?:\s+\S+)?\s+nach\s+(.+?)\s+\d{1,2}:\d{2}$/,
+        'Flug nach $1',
+      ) || 'Abschnitt';
+    setUndoDelete({ label: shortLabel, stops: snaps });
+    setTimeout(() => {
+      setUndoDelete((cur) =>
+        cur?.stops[0]?.id === snaps[0]?.id ? null : cur,
+      );
+    }, 7000);
     try {
       usePlanCalendarUiStore.getState().setFocusedStopId(null);
     } catch {
@@ -1935,7 +2318,7 @@ export const PlanCalendarModal = React.memo(
           openHoverIdx.current = next;
           const pastList =
             from * OPEN_ROW_H + g.dy > openPlanDragCount * OPEN_ROW_H + 24;
-          const overTrash = pastList || g.dy > OPEN_ROW_H * 2.5;
+          const overTrash = pastList;
           openTrashRef.current = overTrash;
           setOpenDragOverTrash(overTrash);
         },
@@ -1952,11 +2335,13 @@ export const PlanCalendarModal = React.memo(
           if (from == null) return;
           if (trash) {
             void stopVoiceOnUserTap();
+            void markTimelineGestureUsed().then(() => setShowTlGestureHint(false));
             removeOpenPlan(planId);
             return;
           }
           if (to != null && from !== to) {
             void stopVoiceOnUserTap();
+            void markTimelineGestureUsed().then(() => setShowTlGestureHint(false));
             reorderOpenPlan(planId, to);
           }
         },
@@ -1978,8 +2363,8 @@ export const PlanCalendarModal = React.memo(
         (n) =>
           n.lane === 'future' &&
           n.kind !== 'nav_leg' &&
-          n.groupId !== 'live_journey' &&
-          n.isProposal !== true,
+          n.isProposal !== true &&
+          (!n.groupId || n.groupId === 'live_journey'),
       ),
     [nodes],
   );
@@ -1989,23 +2374,39 @@ export const PlanCalendarModal = React.memo(
       const node = timelineReorderable[from];
       const dest = timelineReorderable[to];
       if (!node || !dest) return;
+      const next = [...timelineReorderable];
+      const [moved] = next.splice(from, 1);
+      if (!moved) return;
+      next.splice(to, 0, moved);
+      const visits = next
+        .map((n) => {
+          const id = planStopIdFromTimelineNodeId(n.id) ?? n.id;
+          const stop = useFuturePlanStore
+            .getState()
+            .plan.stops.find((s) => s.id === id);
+          const lat = stop?.lat;
+          const lng = stop?.lng;
+          if (typeof lat !== 'number' || typeof lng !== 'number') return null;
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+          return {
+            lat,
+            lng,
+            name: (stop?.title ?? n.title ?? '').replace(/^\d+\s*·\s*/, ''),
+          };
+        })
+        .filter((v): v is { lat: number; lng: number; name: string } => v != null);
+      if (visits.length >= 2) {
+        try {
+          applyUpcomingVisitOrder(visits);
+          upsertLiveNavFromStore({ force: true });
+        } catch {
+          /* soft */
+        }
+      }
       const fromId = planStopIdFromTimelineNodeId(node.id) ?? node.id;
       const toId = planStopIdFromTimelineNodeId(dest.id) ?? dest.id;
       const fromLive = isLiveNavLegId(fromId) && fromId !== LIVE_NAV_LEG_ID;
       const toLive = isLiveNavLegId(toId) && toId !== LIVE_NAV_LEG_ID;
-      if (fromLive && toLive) {
-        const live = timelineReorderable.filter((n) => {
-          const id = planStopIdFromTimelineNodeId(n.id) ?? n.id;
-          return isLiveNavLegId(id) && id !== LIVE_NAV_LEG_ID;
-        });
-        const a = live.findIndex((n) => n.id === node.id);
-        const b = live.findIndex((n) => n.id === dest.id);
-        if (a >= 0 && b >= 0 && a !== b) {
-          reorderUpcomingTourStops(a, b);
-          upsertLiveNavFromStore({ force: true });
-        }
-        return;
-      }
       if (!fromLive && !toLive) {
         const planish = timelineReorderable.filter((n) => {
           const id = planStopIdFromTimelineNodeId(n.id) ?? n.id;
@@ -2048,6 +2449,7 @@ export const PlanCalendarModal = React.memo(
           tlDragY.setValue(0);
           if (from == null || to == null || from === to) return;
           void stopVoiceOnUserTap();
+          void markTimelineGestureUsed().then(() => setShowTlGestureHint(false));
           applyTimelineReorder(from, to);
         },
         onPanResponderTerminate: () => {
@@ -2060,42 +2462,37 @@ export const PlanCalendarModal = React.memo(
     [applyTimelineReorder, tlDragY, timelineReorderable.length],
   );
 
-  if (!visible) {
-    /* keep mounted — Overlay unsichtbar, Dock sofort wieder da */
-  }
-
   const todayKey = todayDateKey();
   const isPastDay = dateKey < todayKey;
   /** Vergangenheit = nur Zeitleiste; Planung/Offene Pläne nur heute + Zukunft. */
   const visibleOpenPlans = isPastDay ? [] : openPlans;
   const showPlanningChrome = !isPastDay;
-  const leftAnswers = showPlanningChrome
-    ? shortAnswers.slice(0, Math.ceil(shortAnswers.length / 2))
-    : [];
-  const rightAnswers = showPlanningChrome
-    ? shortAnswers.slice(Math.ceil(shortAnswers.length / 2))
-    : [];
+  // Ein „Neu suchen“ (oder ein Chip) bleibt links — nie L+R denselben Label.
+  const uniqueAnswers = showPlanningChrome ? shortAnswers : [];
+  const leftAnswers =
+    uniqueAnswers.length <= 1
+      ? uniqueAnswers
+      : uniqueAnswers.slice(0, Math.ceil(uniqueAnswers.length / 2));
+  const rightAnswers =
+    uniqueAnswers.length <= 1
+      ? []
+      : uniqueAnswers.slice(Math.ceil(uniqueAnswers.length / 2));
+  // Banner nur nach quiet resolve — Tone/Status allein reichen nicht
+  const hasOverlapConflict = showPlanningChrome && hasTimeOverlap();
   const conflictCount = nodes.filter((n) => n.tone === 'conflict').length;
   const openConflictCount = visibleOpenPlans.filter(
     (p) => p.status === 'conflict',
   ).length;
-  const hasOverlapConflict =
-    showPlanningChrome &&
-    (conflictCount + openConflictCount > 0 || hasTimeOverlap());
 
-  if (!visible) {
-    return (
-      <View
-        style={[styles.overlay, styles.overlayHidden]}
-        pointerEvents="none"
-      />
-    );
-  }
-
+  // Warm-Keep wie Settings: 0×0 ohne absoluteFill (Fabric+MapLibre Blackscreen-Fix).
+  // Premount hält Top-Bar; Body erst bei timelineBodyReady — Tap = Style-Flip.
   return (
     <View
-      style={[styles.overlay, !visible && styles.overlayHidden]}
+      style={visible ? styles.overlay : styles.rootWarmKeep}
       pointerEvents={visible ? 'auto' : 'none'}
+      collapsable={false}
+      accessibilityElementsHidden={!visible}
+      importantForAccessibility={visible ? 'yes' : 'no-hide-descendants'}
     >
       <SwipeBackView
         enabled={visible}
@@ -2105,11 +2502,11 @@ export const PlanCalendarModal = React.memo(
         edgeTopInset={56}
       >
         <View style={styles.topBar}>
-          {/* ← Datum → …… Heute · Monat/Tag · ✕ */}
+          {/* ‹ Datum › links · breite Aktions-Buttons · ✕ rechts */}
           <Pressable
             onPress={onPrev}
-            hitSlop={16}
-            style={[styles.navBtn, styles.navBtnPrev]}
+            hitSlop={12}
+            style={styles.navBtn}
             accessibilityRole="button"
             accessibilityLabel="Vorheriger Tag"
           >
@@ -2120,62 +2517,71 @@ export const PlanCalendarModal = React.memo(
               ? formatMonthTitleDe(monthKeyFromDateKey(dateKey))
               : formatDayLabel(dateKey)}
           </Text>
-          <Pressable onPress={onNext} hitSlop={12} style={styles.navBtn}>
+          <Pressable
+            onPress={onNext}
+            hitSlop={12}
+            style={styles.navBtn}
+            accessibilityRole="button"
+            accessibilityLabel="Nächster Tag"
+          >
             <Text style={styles.navBtnText}>›</Text>
           </Pressable>
 
-          <View style={styles.topSpacer} />
-
-          <Pressable
-            onPress={goToday}
-            hitSlop={8}
-            style={styles.todayBtn}
-            accessibilityRole="button"
-            accessibilityLabel="Heute"
-          >
-            <Text style={styles.todayBtnText}>Heute</Text>
-          </Pressable>
-          {showPlanningChrome ? (
+          <View style={styles.topBarActions}>
+            {showPlanningChrome ? (
+              <Pressable
+                onPress={() => {
+                  // Clear zuerst — nicht hinter stopVoice warten (sonst tot bei JS-Last).
+                  const result = clearDayPlan(dateKey);
+                  void stopVoiceOnUserTap();
+                  if (result.speech) {
+                    enqueueSpeech({
+                      kind: 'main',
+                      text: result.speech,
+                      turnId: `m5_clear_${Date.now()}`,
+                    });
+                  }
+                }}
+                hitSlop={6}
+                style={styles.clearDayBtn}
+                accessibilityRole="button"
+                accessibilityLabel="Tag leeren"
+              >
+                <Feather name="trash-2" size={17} color="#fff" />
+              </Pressable>
+            ) : (
+              <View style={styles.topBarActionSlot} />
+            )}
             <Pressable
-              onPress={() => {
-                // Clear zuerst — nicht hinter stopVoice warten (sonst tot bei JS-Last).
-                const result = clearDayPlan(dateKey);
-                void stopVoiceOnUserTap();
-                if (result.speech) {
-                  enqueueSpeech({
-                    kind: 'main',
-                    text: result.speech,
-                    turnId: `m5_clear_${Date.now()}`,
-                  });
-                }
-              }}
-              hitSlop={8}
-              style={styles.clearDayBtn}
+              onPress={goToday}
+              hitSlop={6}
+              style={styles.todayBtn}
               accessibilityRole="button"
-              accessibilityLabel="Heutige Planung löschen"
+              accessibilityLabel="Heute"
             >
-              <Text style={styles.clearDayBtnText}>Leeren</Text>
+              <TodayDayIcon
+                day={Number(todayDateKey().split('-')[2]) || new Date().getDate()}
+              />
             </Pressable>
-          ) : null}
-          <Pressable
-            onPress={toggleMonthDay}
-            hitSlop={8}
-            style={styles.viewToggle}
-            accessibilityRole="button"
-            accessibilityLabel={
-              viewMode === 'day' ? 'Monatsansicht öffnen' : 'Tagesansicht öffnen'
-            }
-          >
-            <Text style={styles.viewToggleText}>
-              {viewMode === 'day' ? 'Monat' : 'Tag'}
-            </Text>
-          </Pressable>
+            <Pressable
+              onPress={toggleMonthDay}
+              hitSlop={6}
+              style={styles.viewToggle}
+              accessibilityRole="button"
+              accessibilityLabel={
+                viewMode === 'day' ? 'Monatsansicht öffnen' : 'Tagesansicht öffnen'
+              }
+            >
+              <Feather name="calendar" size={17} color={colors.text} />
+            </Pressable>
+          </View>
+
           <Pressable
             onPress={() => {
               onClose();
               void stopVoiceOnUserTap();
             }}
-            hitSlop={20}
+            hitSlop={12}
             style={styles.closeBtn}
             accessibilityRole="button"
             accessibilityLabel="Timeline schließen"
@@ -2186,6 +2592,7 @@ export const PlanCalendarModal = React.memo(
 
         {(navActive || multiStopCount > 0) &&
         !hasLiveJourney &&
+        !nodes.some((n) => n.groupId && /^voice_oepnv_|^nav_here_|^nav_/.test(String(n.groupId))) &&
         (navTargetName?.trim() || multiStopCount > 0) ? (
           <View style={styles.routeStripWrap}>
             <View
@@ -2212,7 +2619,9 @@ export const PlanCalendarModal = React.memo(
                     liveLeaveArrive ? styles.routeStripKickerReminder : null,
                   ]}
                 >
-                  {collapsedGroups.live_journey ? '▸' : '▾'}{' '}
+                  <Text style={{ fontSize: 16, fontWeight: '900' }}>
+                    {collapsedGroups.live_journey ? '▸' : '▾'}
+                  </Text>{' '}
                   {liveLeaveArrive ? '⏰ Erinnerung · ÖPNV' : liveRouteLabel.startsWith('Fahrt') || liveRouteLabel.startsWith('Reise') ? 'Fahrt' : 'Aktive Route'}
                 </Text>
                 <Text style={styles.routeStripTitle} numberOfLines={2}>
@@ -2245,23 +2654,19 @@ export const PlanCalendarModal = React.memo(
               </Pressable>
             </View>
           </View>
-        ) : viewMode === 'day' ? (
+        ) : viewMode === 'day' && nodes.length === 0 && !pendingChoice ? (
           <Text style={styles.routeHint} numberOfLines={2}>
-            Route planen: sag Yorro wohin — sie erscheint in dieser Timeline,
-            nicht extra auf dem Homescreen.
+            Tippe einen Eintrag oder sag Yorro, wohin — der Plan landet hier.
           </Text>
         ) : null}
 
         {hasOverlapConflict ? (
           <View style={styles.conflictBannerWrap}>
             <Text style={styles.conflictBanner} numberOfLines={2}>
-              {conflictCount + openConflictCount > 0
-                ? `${conflictCount + openConflictCount} Zeitkonflikt${
-                    conflictCount + openConflictCount === 1 ? '' : 'e'
-                  }`
+              {conflictCount + openConflictCount > 1
+                ? `${conflictCount + openConflictCount} Zeitkonflikte`
                 : 'Zeitkonflikt'}{' '}
-              — nach Regeln lösen (6 frei, 5 fragen, 4 nur schieben, 3 fragen,
-              1–2 heilig).
+              — Termine überlappen. Tippe „Konflikt lösen“ oder schiebe einen Punkt.
             </Text>
             <View style={styles.conflictBtnRow}>
               <Pressable
@@ -2300,14 +2705,18 @@ export const PlanCalendarModal = React.memo(
           </View>
         ) : null}
 
-        {showPlanningChrome && mirroredActions.length > 0 ? (
+        {showPlanningChrome &&
+        mirroredActions.some((a) => !isCardBoundPlaceLinkAction(a)) ? (
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.mirrorRow}
             style={styles.mirrorScroll}
           >
-            {mirroredActions.slice(0, 6).map((a: QuickAction, i) => {
+            {mirroredActions
+              .filter((a) => !isCardBoundPlaceLinkAction(a))
+              .slice(0, 6)
+              .map((a: QuickAction, i) => {
               const maps = isMapsQuickAction(a);
               const label = maps
                 ? stripMapsActionPrefix(a.label)
@@ -2355,7 +2764,9 @@ export const PlanCalendarModal = React.memo(
               : ''}
             {pendingChoice.selectedOptionId
               ? ' — Auswahl aktiv'
-              : ' — tippe 🥇 oder 🥈 in der Timeline zum Übernehmen'}
+              : showTlChoiceHint
+                ? ' — tippe 🥇 oder 🥈 in der Timeline zum Übernehmen'
+                : ''}
           </Text>
         ) : null}
 
@@ -2471,10 +2882,12 @@ export const PlanCalendarModal = React.memo(
                 <View style={styles.openTitleRow}>
                   <Text style={styles.openTitle}>Offene Pläne</Text>
                 </View>
+                {showTlGestureHint ? (
                 <Text style={styles.openHint}>
                   Lange drücken und schieben = Reihenfolge · nach rechts
                   wischen = löschen
                 </Text>
+                ) : null}
                 {visibleOpenPlans.map((p, idx) => {
                   const tone = toneStyles(
                     p.status === 'pending_change'
@@ -2616,7 +3029,7 @@ export const PlanCalendarModal = React.memo(
               <Text style={styles.empty}>Noch nichts für diesen Tag.</Text>
             ) : (
               <>
-              {timelineReorderable.length > 1 ? (
+              {timelineReorderable.length > 1 && showTlGestureHint ? (
                 <Text style={styles.openHint}>
                   Lange drücken und nach oben/unten schieben ändert die
                   Reihenfolge. Nach rechts wischen löscht.
@@ -2714,7 +3127,7 @@ export const PlanCalendarModal = React.memo(
                             style={[
                               styles.card,
                               styles.routeStrip,
-                              styles.routeStripReminder,
+                              liveLeaveArrive ? styles.routeStripReminder : null,
                               { marginHorizontal: 0, marginBottom: 0, flex: 1 },
                             ]}
                           >
@@ -2735,15 +3148,43 @@ export const PlanCalendarModal = React.memo(
                               <Text
                                 style={[
                                   styles.routeStripKicker,
-                                  styles.routeStripKickerReminder,
+                                  liveLeaveArrive
+                                    ? styles.routeStripKickerReminder
+                                    : null,
                                 ]}
                               >
-                                {collapsed ? '▸' : '▾'} Erinnerung · ÖPNV
+                                <Text style={{ fontSize: 16, fontWeight: '900' }}>
+                                  {collapsed ? '▸' : '▾'}
+                                </Text>{' '}
+                                {liveLeaveArrive
+                                  ? 'Erinnerung · ÖPNV'
+                                  : liveRouteLabel.startsWith('Fahrt') ||
+                                      liveRouteLabel.startsWith('Reise')
+                                    ? 'Fahrt'
+                                    : 'Aktive Route'}
                               </Text>
                               <Text style={styles.routeStripTitle} numberOfLines={2}>
                                 {liveRouteLabel}
                                 {liveLeaveArrive ? ` · ${liveLeaveArrive}` : ''}
                               </Text>
+                              <View style={[styles.navModeRow, { marginTop: 8 }]}>
+                                {(
+                                  [
+                                    ['walk', '🚶'],
+                                    ['bike', '🚲'],
+                                    ['transit', '🚌'],
+                                  ] as const
+                                ).map(([mode, emoji]) => (
+                                  <Pressable
+                                    key={mode}
+                                    hitSlop={6}
+                                    style={styles.navModeBtn}
+                                    onPress={() => setNavLegTransport(n, mode)}
+                                  >
+                                    <Text style={styles.navModeBtnText}>{emoji}</Text>
+                                  </Pressable>
+                                ))}
+                              </View>
                             </Pressable>
                             <Pressable
                               onPress={endLiveJourney}
@@ -2755,69 +3196,22 @@ export const PlanCalendarModal = React.memo(
                             </Pressable>
                           </View>
                         ) : (
-                        <View
-                          style={[
-                            styles.card,
-                            {
-                              backgroundColor: colors.bgElevated,
-                              borderColor: colors.border,
-                            },
-                          ]}
-                        >
-                          <Pressable
-                            hitSlop={12}
-                            onPress={() => {
-                              const id = n.groupId!;
-                              userToggledGroups.current[id] = true;
-                              setCollapsedGroups((prev) => ({
-                                ...prev,
-                                [id]: !prev[id],
-                              }));
-                            }}
-                          >
-                            <Text style={styles.cardTitle} numberOfLines={2}>
-                              {`${collapsed ? '▸' : '▾'} ${g.label.replace(/^Flug(?:\s+\S+)?\s+nach\s+(.+?)\s+\d{1,2}:\d{2}$/, 'Flug nach $1')}`}
-                            </Text>
-                            <Text style={styles.cardSub} numberOfLines={1}>
-                              {collapsed
-                                ? 'Tippen für die Schritte'
-                                : 'Tippen zum Zuklappen'}
-                            </Text>
-                          </Pressable>
-                          {n.groupId.includes('toAirport') ? (
-                            <View style={[styles.navModeRow, { marginTop: 8 }]}>
-                              {(
-                                [
-                                  ['walk', '🚶'],
-                                  ['bike', '🚲'],
-                                  ['transit', '🚌'],
-                                  ['taxi', '🚕'],
-                                ] as const
-                              ).map(([mode, emoji]) => {
-                                const active =
-                                  n.transport === mode ||
-                                  (mode === 'taxi' && n.transport === 'car');
-                                return (
-                                  <Pressable
-                                    key={mode}
-                                    hitSlop={6}
-                                    style={[
-                                      styles.navModeBtn,
-                                      active && styles.navModeBtnActive,
-                                    ]}
-                                    onPress={() =>
-                                      setNavLegTransport(n, mode)
-                                    }
-                                  >
-                                    <Text style={styles.navModeBtnText}>
-                                      {emoji}
-                                    </Text>
-                                  </Pressable>
-                                );
-                              })}
-                            </View>
-                          ) : null}
-                        </View>
+                        <GroupAccordionHeader
+                          label={g.label}
+                          collapsed={collapsed}
+                          showAirportModes={n.groupId.includes('toAirport')}
+                          transport={n.transport}
+                          onToggle={() => {
+                            const id = n.groupId!;
+                            userToggledGroups.current[id] = true;
+                            setCollapsedGroups((prev) => ({
+                              ...prev,
+                              [id]: !prev[id],
+                            }));
+                          }}
+                          onDelete={() => onDeleteGroup(n.groupId!, g.label)}
+                          onSetTransport={(mode) => setNavLegTransport(n, mode)}
+                        />
                         )}
                       </View>
                     ) : null}
@@ -2902,15 +3296,35 @@ export const PlanCalendarModal = React.memo(
                       onSelect={onSelectNode}
                       onSwipeDelete={onSwipeDeleteNode}
                       onNavTransport={
-                        n.kind === 'nav_leg' ? setNavLegTransport : undefined
+                        // Mode-Icons nur außerhalb von ÖPNV-Gruppen (Accordion = Kochlounge-Stil)
+                        n.kind === 'nav_leg' && !n.groupId
+                          ? setNavLegTransport
+                          : undefined
                       }
                       onNavStart={
                         n.kind === 'nav_leg' ? tryStartNavFromLeg : undefined
                       }
                       routeComputing={(() => {
+                        // Echte Journey-Gruppe: kein Spinner/„?“ mehr
+                        if (
+                          n.groupId &&
+                          n.routeEstimate === 'routed'
+                        ) {
+                          return false;
+                        }
+                        if (n.groupId && n.routeEstimate !== 'fallback') {
+                          return false;
+                        }
                         const nid =
                           planStopIdFromTimelineNodeId(n.id) ?? n.id;
                         if (routeComputingIds[nid]) return true;
+                        if (
+                          n.groupId &&
+                          routeComputingIds[n.groupId]
+                        ) {
+                          // Gruppe schon geroutet → Computing-Flag stale
+                          return n.routeEstimate === 'fallback';
+                        }
                         const m = /^ft:([^:]+):/i.exec(nid);
                         if (!m) return false;
                         return Object.keys(routeComputingIds).some((k) =>
@@ -2932,33 +3346,38 @@ export const PlanCalendarModal = React.memo(
         {undoDelete ? (
           <View style={styles.undoBar}>
             <Text style={styles.undoBarText} numberOfLines={1}>
-              „{undoDelete.title}“ gelöscht
+              „{undoDelete.label}“ gelöscht
+              {undoDelete.stops.length > 1
+                ? ` (${undoDelete.stops.length})`
+                : ''}
             </Text>
             <Pressable
               onPress={() => {
                 const snap = undoDelete;
                 setUndoDelete(null);
-                addPlanStop({
-                  id: snap.id,
-                  title: snap.title,
-                  lat: snap.lat,
-                  lng: snap.lng,
-                  plannedStartMs: snap.plannedStartMs,
-                  plannedEndMs: snap.plannedEndMs,
-                  transport: snap.transport,
-                  kind: snap.kind,
-                  hardAnchor: snap.hardAnchor,
-                  notes: snap.notes,
-                  bufferMin: snap.bufferMin,
-                  emoji: snap.emoji,
-                  journeyDetail: snap.journeyDetail,
-                  userFixedTime: snap.userFixedTime,
-                  planPriority: snap.planPriority,
-                  groupId: snap.groupId,
-                  groupLabel: snap.groupLabel,
-                  mapsUrl: snap.mapsUrl,
-                  openCalendar: false,
-                });
+                for (const s of snap.stops) {
+                  addPlanStop({
+                    id: s.id,
+                    title: s.title,
+                    lat: s.lat,
+                    lng: s.lng,
+                    plannedStartMs: s.plannedStartMs,
+                    plannedEndMs: s.plannedEndMs,
+                    transport: s.transport,
+                    kind: s.kind,
+                    hardAnchor: s.hardAnchor,
+                    notes: s.notes,
+                    bufferMin: s.bufferMin,
+                    emoji: s.emoji,
+                    journeyDetail: s.journeyDetail,
+                    userFixedTime: s.userFixedTime,
+                    planPriority: s.planPriority,
+                    groupId: s.groupId,
+                    groupLabel: s.groupLabel,
+                    mapsUrl: s.mapsUrl,
+                    openCalendar: false,
+                  });
+                }
               }}
               hitSlop={8}
             >
@@ -3066,9 +3485,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.55)',
     justifyContent: 'flex-end',
   },
-  overlayHidden: {
+  /** Geschlossen: kein absoluteFill — 0×0 Warm-Keep (Mic/Dock bleiben tippbar). */
+  rootWarmKeep: {
+    position: 'absolute',
+    width: 0,
+    height: 0,
     opacity: 0,
-    pointerEvents: 'none',
+    elevation: 0,
+    zIndex: -1,
+    overflow: 'hidden',
   },
   sheet: {
     flex: 1,
@@ -3082,7 +3507,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    gap: 4,
+    width: '100%',
+    gap: 6,
     paddingHorizontal: spacing.sm,
     paddingTop: spacing.sm,
     paddingBottom: spacing.sm,
@@ -3090,10 +3516,27 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     zIndex: 80,
   },
+  /** Müll · Heute · Kalender — gleich breit, füllen den Rest bis ✕. */
+  topBarActions: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    minWidth: 0,
+    marginLeft: 4,
+  },
+  topBarActionSlot: {
+    flex: 1,
+    height: 36,
+    minWidth: 40,
+  },
   viewToggle: {
-    paddingHorizontal: 10,
-    paddingVertical: 7,
+    flex: 1,
+    height: 36,
+    minWidth: 40,
     borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.surface,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
@@ -3113,10 +3556,6 @@ const styles = StyleSheet.create({
     zIndex: 60,
     elevation: 60,
   },
-  navBtnPrev: {
-    // über SwipeBack-Edge liegen (Edge startet erst unter Top-Bar)
-    marginLeft: 2,
-  },
   navBtnText: {
     color: colors.text,
     fontSize: 22,
@@ -3125,19 +3564,22 @@ const styles = StyleSheet.create({
   },
   dayTitle: {
     color: colors.text,
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '700',
     flexShrink: 1,
-    maxWidth: 168,
-  },
-  topSpacer: {
-    flex: 1,
-    minWidth: 8,
+    minWidth: 72,
+    maxWidth: 110,
+    textAlign: 'center',
+    letterSpacing: 0.15,
+    marginHorizontal: 4,
   },
   todayBtn: {
-    paddingHorizontal: 10,
-    paddingVertical: 7,
+    flex: 1,
+    height: 36,
+    minWidth: 40,
     borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.thinking,
   },
   todayBtnText: {
@@ -3145,12 +3587,34 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
-  clearDayBtn: {
-    paddingHorizontal: 10,
-    paddingVertical: 7,
-    borderRadius: 10,
+  todayDayIcon: {
+    width: 18,
+    height: 18,
+    borderRadius: 3,
+    backgroundColor: '#fff',
+    overflow: 'hidden',
+    alignItems: 'center',
+  },
+  todayDayIconHeader: {
+    width: '100%',
+    height: 4,
     backgroundColor: colors.danger,
-    marginLeft: 6,
+  },
+  todayDayIconNum: {
+    marginTop: -1,
+    fontSize: 11,
+    fontWeight: '800',
+    lineHeight: 13,
+    color: colors.thinking,
+  },
+  clearDayBtn: {
+    flex: 1,
+    height: 36,
+    minWidth: 40,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.danger,
   },
   clearDayBtnText: {
     color: '#fff',
@@ -3218,7 +3682,7 @@ const styles = StyleSheet.create({
   },
   routeStripKicker: {
     color: colors.accent,
-    fontSize: 10,
+    fontSize: 13,
     fontWeight: '800',
     letterSpacing: 0.4,
     textTransform: 'uppercase',
@@ -3247,6 +3711,11 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontSize: 12,
     fontWeight: '700',
+  },
+  groupAccordionCard: {
+    flex: 1,
+    marginHorizontal: 0,
+    marginBottom: 0,
   },
   routeHint: {
     color: colors.textMuted,
@@ -3393,10 +3862,11 @@ const styles = StyleSheet.create({
     paddingVertical: 48,
   },
   closeBtn: {
-    width: 40,
-    height: 40,
+    width: 36,
+    height: 36,
     alignItems: 'center',
     justifyContent: 'center',
+    flexShrink: 0,
     zIndex: 80,
   },
   closeText: {
@@ -3552,6 +4022,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 2,
+    zIndex: 2,
+    elevation: 2,
   },
   axisEmoji: {
     fontSize: 12,

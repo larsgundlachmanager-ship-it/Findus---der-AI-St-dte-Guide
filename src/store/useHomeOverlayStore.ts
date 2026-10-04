@@ -103,8 +103,9 @@ export const useHomeOverlayStore = create<HomeOverlayState>((set, get) => ({
   questionVisible: false,
   questionSubtitle: HOME_QUESTION_DEFAULT_SUBTITLE,
   openSettings: () => {
-    dismissPlacePopupForChrome();
+    // Busy zuerst — sonst freigibt dismissPlacePopup kurz die Map-Lane.
     holdOverlayBusy();
+    dismissPlacePopupForChrome();
     try {
       const {
         noteUiTap,
@@ -126,8 +127,8 @@ export const useHomeOverlayStore = create<HomeOverlayState>((set, get) => ({
     });
   },
   openSeek: () => {
-    dismissPlacePopupForChrome();
     holdOverlayBusy();
+    dismissPlacePopupForChrome();
     set({ seekVisible: true, seekMounted: true });
   },
   closeSeek: () => {
@@ -146,7 +147,17 @@ export const useHomeOverlayStore = create<HomeOverlayState>((set, get) => ({
       passportTab: tab ?? 'discover',
     }),
   closePassport: () => set({ passportVisible: false }),
-  openQuestion: (subtitle) =>
-    set({ questionVisible: true, questionSubtitle: subtitle }),
-  closeQuestion: () => set({ questionVisible: false }),
+  openQuestion: (subtitle) => {
+    holdOverlayBusy();
+    dismissPlacePopupForChrome();
+    set({ questionVisible: true, questionSubtitle: subtitle });
+  },
+  closeQuestion: () => {
+    set({ questionVisible: false });
+    const s = get();
+    releaseOverlayBusyIfIdle({
+      settingsVisible: s.settingsVisible,
+      seekVisible: s.seekVisible,
+    });
+  },
 }));

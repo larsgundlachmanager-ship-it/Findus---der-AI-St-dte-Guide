@@ -45,6 +45,12 @@ export function pitchHeadlineFromContext(opts: {
     if (topic) return topic.slice(0, 28);
   }
 
+  if (
+    /\b(vegan|vegetarisch|kein\s+fleisch|ohne\s+fleisch)\b/iu.test(raw)
+  ) {
+    return city ? `Vegan in ${city}`.slice(0, 36) : 'Vegan';
+  }
+
   if (city && /\b(heute|abend|geht|los)\b/iu.test(raw)) {
     return `Heute in ${city}`.slice(0, 36);
   }

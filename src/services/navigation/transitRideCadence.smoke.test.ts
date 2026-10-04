@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Run: npx --yes tsx src/services/navigation/transitRideCadence.smoke.test.ts
  */
 import {
@@ -6,6 +6,7 @@ import {
   isDenseLocalRide,
   isLongHaulRide,
   midRideStopMarks,
+  shouldMergeNextAndAlight,
   shouldSpeakAlightSoon,
   shouldSpeakRemainingStop,
 } from './transitRideCadence';
@@ -23,14 +24,24 @@ const sbahnMany = {
 };
 assert(!isDenseLocalRide(sbahnMany), 'S-Bahn 8 Halt / 12 Min ist nicht dicht');
 assert(
-  JSON.stringify(midRideStopMarks(sbahnMany)) === JSON.stringify([5, 3]),
-  `S-Bahn Mid-Marks 5+3, war ${midRideStopMarks(sbahnMany)}`,
+  JSON.stringify(midRideStopMarks(sbahnMany)) === JSON.stringify([3]),
+  `S-Bahn Mid-Marks nur 3, war ${midRideStopMarks(sbahnMany)}`,
 );
-assert(shouldSpeakRemainingStop(5, sbahnMany), '5 Halte sagen');
+assert(!shouldSpeakRemainingStop(5, sbahnMany), 'kein 5er-Countdown');
 assert(shouldSpeakRemainingStop(3, sbahnMany), '3 Halte sagen');
 assert(shouldSpeakRemainingStop(1, sbahnMany), 'nächste Station sagen');
 assert(!shouldSpeakRemainingStop(4, sbahnMany), 'keine 4er-Ansage');
-assert(alightLeadSec(sbahnMany) === 65, 'S-Bahn ~1 Min Vorlauf');
+assert(alightLeadSec(sbahnMany) === 60, 'S-Bahn: ~60 s Vorlauf');
+assert(
+  !shouldSpeakAlightSoon({
+    remainingStops: 2,
+    etaSec: 100,
+    leadSec: 60,
+    nextStopSpokenAtMs: null,
+    nowMs: Date.now(),
+  }),
+  'kein Zeit-Cue solange noch 2+ Halte',
+);
 
 const shortHop = {
   line: 'S21',
@@ -40,7 +51,8 @@ const shortHop = {
   boardedStops: 5,
 };
 assert(isDenseLocalRide(shortHop), '1-Min-Takt: dicht');
-assert(midRideStopMarks(shortHop).length === 0, 'kein 5/3 bei 1-Min-Takt');
+assert(alightLeadSec(shortHop) === 60, 'dicht: ~60 s Vorlauf');
+assert(midRideStopMarks(shortHop).length === 0, 'kein Mid bei 1-Min-Takt');
 assert(shouldSpeakRemainingStop(1, shortHop), 'nur nächste Station');
 assert(!shouldSpeakRemainingStop(5, shortHop), '5 nicht extra nach Losfahren-Takt');
 
@@ -48,11 +60,28 @@ const oneStop = {
   line: 'RB61',
   vehicle: 'Bahn' as const,
   remainingStops: 1,
-  rideMin: 2,
+  rideMin: 1,
   boardedStops: 1,
 };
 assert(midRideStopMarks(oneStop).length === 0, 'eine Station: keine Mid-Marks');
 assert(shouldSpeakRemainingStop(1, oneStop), 'sofort nächste Station');
+assert(alightLeadSec(oneStop) === 60, 'Mini-Hop: 60 s Vorlauf');
+assert(
+  shouldMergeNextAndAlight({
+    remainingStops: 1,
+    rideMin: 1,
+    leadSec: 60,
+  }),
+  'kurzer Hop: Merge nächste+Ausstieg',
+);
+assert(
+  !shouldMergeNextAndAlight({
+    remainingStops: 1,
+    rideMin: 5,
+    leadSec: 60,
+  }),
+  'langer Hop: kein Merge',
+);
 
 const ice = {
   line: 'ICE 615',
@@ -63,26 +92,37 @@ const ice = {
 };
 assert(isLongHaulRide(ice), 'ICE ist Fernverkehr');
 assert(midRideStopMarks(ice).length === 0, 'ICE keine Halt-Zähl-Kette');
-assert(alightLeadSec(ice) === 300, 'ICE 5 Min Vorlauf');
+assert(alightLeadSec(ice) === 90, 'ICE ~90 s Vorlauf');
 assert(
   shouldSpeakAlightSoon({
     remainingStops: 1,
-    etaSec: 290,
-    leadSec: 300,
+    etaSec: 80,
+    leadSec: 90,
     nextStopSpokenAtMs: Date.now() - 10 * 60_000,
     nowMs: Date.now(),
   }),
-  'ICE ~5 Min vorher Ausstieg',
+  'ICE ~90 s vorher Ausstieg',
 );
 assert(
   !shouldSpeakAlightSoon({
     remainingStops: 1,
-    etaSec: 70,
-    leadSec: 65,
+    etaSec: 50,
+    leadSec: 60,
     nextStopSpokenAtMs: Date.now() - 8_000,
     nowMs: Date.now(),
   }),
-  'S-Bahn nicht doppelt 8s nach nächste-Station',
+  'nicht doppelt 8s nach nächste-Station',
+);
+assert(
+  !shouldSpeakAlightSoon({
+    remainingStops: 1,
+    etaSec: 50,
+    leadSec: 60,
+    nextStopSpokenAtMs: Date.now() - 60_000,
+    nowMs: Date.now(),
+    mergedNextAlight: true,
+  }),
+  'nach Merge kein 60s-Cue bei eta 50',
 );
 
 const bus = {

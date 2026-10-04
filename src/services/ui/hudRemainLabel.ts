@@ -11,6 +11,18 @@ export function formatHudRemain(remainMs: number): string {
   return `noch ${hours} Std ${mins} Min`;
 }
 
+/** Küchen-Timer: Sekunden-Countdown `M:SS` / `H:MM:SS`. */
+export function formatTimerCountdown(remainMs: number): string {
+  const totalSec = Math.max(0, Math.ceil(remainMs / 1000));
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  if (h > 0) {
+    return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
 export function sameLocalCalendarDay(aMs: number, bMs: number): boolean {
   const a = new Date(aMs);
   const b = new Date(bMs);

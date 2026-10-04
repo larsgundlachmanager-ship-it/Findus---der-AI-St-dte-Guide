@@ -20,14 +20,17 @@ import {
 import { getEsimAffiliateUrl } from '../affiliate/affiliateService';
 import { parseBackgroundTasks } from './backgroundTasks';
 import { clampVisualBullets } from './visualBullets';
+import { sanitizeCardTitle } from './spickzettelTitle';
 
 export {
   MAX_VISUAL_BULLETS,
+  MAX_PROGRAM_LIST_BULLETS,
   MAX_BULLET_CHARS,
   BULLET_SURFACE_MAX_CHARS,
   estimateBulletMaxChars,
   rewriteBulletToFit,
   isWeakOrMetaBullet,
+  isProgramBulletCard,
   clampVisualBullets,
 } from './visualBullets';
 export type { BulletSurface } from './visualBullets';
@@ -296,11 +299,13 @@ export function parseConciergeResponse(
   }
 
   const cardTitle =
-    o.cardTitle != null
-      ? String(o.cardTitle).trim()
-      : o.card_title != null
-        ? String(o.card_title).trim()
-        : undefined;
+    sanitizeCardTitle(
+      o.cardTitle != null
+        ? String(o.cardTitle).trim()
+        : o.card_title != null
+          ? String(o.card_title).trim()
+          : undefined,
+    ) ?? undefined;
 
   const backgroundTasks = parseBackgroundTasks(
     o.backgroundTasks ?? o.background_tasks ?? o.backgroundTask,
@@ -368,12 +373,12 @@ Regeln:
 - NIEMALS Versprecher, Tippfehler oder STT-Fehler des Users korrigieren oder kommentieren — einfach verstehen und antworten.
 - WECKER (STRENG): Nie nur „Wecker ist gestellt“ / „ich wecke dich“ im speechText. Bei klarer Uhrzeit IMMER background_tasks mit type SET_NATIVE_ALARM (time "HH:MM", label). Die App ruft den echten Android-Wecker + Timeline; speechText darf Erfolg erst nach Native-Success. Ohne Task = Lüge. Auch „muss um X aufstehen“ / „geweckt werden“ / „wach sein“ zählen als Wecker.
 - PROACTIVE REASONING: Zeitlücken erkennen (Checkout vs. späteres Event/Tennis) → Unterkunft/Transport/Plan im speechText mitdenken und ggf. BOOK_STAY22 / Hotel-Nachfrage anbieten.
-- visualBullets = bei Fakten-/Zahlen-/Punkte-/Regel-Fragen PFLICHT (1–3), sonst optional; die App baut Memory-Stichpunkte nach dem Text nach. Je max. 1 kurze Zeile, keine Meta-Chips.
+- visualBullets = bei Fakten-/Zahlen-/Punkte-/Regel-Fragen PFLICHT (1–3), sonst optional; die App baut Memory-Stichpunkte nach dem Text nach. Je max. ~2 UI-Zeilen, kurz genug dass nichts abgeschnitten wird, keine Meta-Chips.
 - KEINE Adressen, Hausnummern, PLZ oder GPS/Koordinaten in visualBullets — außer der User fragt explizit danach (dann VOLL: Straße + Nr. + Ort, nicht nur Straßenname).
-- Stichpunkte: IMMER Ziffern bei Maßen/Punkten (z. B. „132 m hoch“, „452 Stufen“, „1. Runde · 110 Pkt“) — nie „ausgeschrieben“, nie leere Labels.
+- Stichpunkte: IMMER Ziffern bei Maßen/Punkten (z. B. „132 m hoch“, „452 Stufen“, „1. Runde · 110 Pkt“) — nie „ausgeschrieben“, nie leere Labels. Deutsche Tausender (45.000) als EIN Stichpunkt — nie „45“ und „000“ splitten.
 - Faktenfragen: Bullet 1 = direkte Lösung; Bullet 2–3 = vorausdenken (nächste belegte Stufe/Runde/Variante) — siehe Policy.
 - quickActions: LEER lassen oder nur System (Wecker/Timer). ActionBoard baut Buttons (Route, Speisekarte, Hotel, eSIM…) — erfinde KEINE Labels/URLs. Namen der Orte nur in speechText.
-- Bei Geschichte/Historie: visualBullets = 1–3 Fakten MIT Jahreszahl wenn bekannt (z. B. „1844 · Bahnanschluss“), je 1 Zeile, KEINE Meta-Chips wie „Lebendig“ / Ortsname allein.
+- Bei Geschichte/Historie: visualBullets = 1–3 Fakten MIT Jahreszahl wenn bekannt (z. B. „1844 · Bahnanschluss“), je max. ~2 UI-Zeilen, KEINE Meta-Chips wie „Lebendig“ / Ortsname allein.
 - Buttons 1:1 zum Text: Wahl → Speisekarte oder 2 Routen; Tour/Kurs/Verleih/Buchungsportal → OPEN_URL wenn URL belegt; Bahnhof → Linien; Geschichte → Folge-Thema.
 - ZERO-FAKE: Kein Button „Turnierplan“/„Spielplan“/Ansetzung ohne echte abrufbare URL. Geschlossene Club-/Login-Pläne → ehrlich sagen (schwarzes Brett) + KEIN Button. Keine erfundenen Portal-Partnerschaften (Mietrad o. ä.).
 - Bei zwei Ort-Optionen („Welchen nehmen wir?“): GENAU 2× START_NAVIGATION mit denselben Ortsnamen wie im speechText.

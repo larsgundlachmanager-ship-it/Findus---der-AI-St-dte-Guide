@@ -1,0 +1,45 @@
+﻿{
+  "id": "b693e82d-1aa1-45f7-89e3-e4a8449adc03",
+  "status": "ERRORED",
+  "platform": "IOS",
+  "error": {
+    "errorCode": "UNKNOWN_ERROR",
+    "message": "Unknown error. See logs of the Bundle JavaScript build phase for more information."
+  },
+  "artifacts": {},
+  "initiatingActor": {
+    "id": "8e5fce10-da00-4785-9de7-93b88f4572da",
+    "displayName": "findus.ai"
+  },
+  "logFiles": [
+    "https://storage.googleapis.com/eas-workflows-production/logs/208487d8-640a-47d8-b77e-5ece29680839/b693e82d-1aa1-45f7-89e3-e4a8449adc03/2026-09-04T08%3A38%3A15Z-34522290-2dad-4590-a111-65b5f0dd7b0f.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20260904%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260904T091816Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=8265121f848448566be9735a76c2eb274af81eeb1639286b8b96898e861ecfa1f6c7e538a010cbd5127b0b0a6bb120c45aad904429b117b17916b42358c55d8e2cd2342705a22e2dd54c960675469e8f59a61cc50ddfd707db7303542f458dff49bd1401341f9d4c1ca9cc5a67e414c0fa46efa7d5b52976e53b87de8ccf7aa307c8d8c893a94a396c7097d218e20ab4336abf63e7e596e9f2e60932c867f1066b0f13e34c6787ed405d24b0fe0f4a9ba976a276c5714e37664dbe2eb670f97edb44b0cd137bf99b1851d5bcdaad3c63d80c7bdc44d0640e8449f3378c5cc9ce7422a2b1efe05a8919e1d0a1c6e1ee38d66c3d25a18e827386aa032564a7ed1b"
+  ],
+  "app": {
+    "id": "208487d8-640a-47d8-b77e-5ece29680839",
+    "name": "Findus",
+    "slug": "findus",
+    "ownerAccount": {
+      "id": "129f1796-9175-4d14-9a75-8acd3cb185e1",
+      "name": "findusai"
+    }
+  },
+  "distribution": "STORE",
+  "buildProfile": "production",
+  "appIdentifier": "de.findus.app",
+  "sdkVersion": "52.0.0",
+  "appVersion": "2.0.65",
+  "appBuildVersion": "30",
+  "gitCommitHash": "432081c48b79249975ca1d36ffa8d3922fab9c15",
+  "gitCommitMessage": "Fix pure nav stop and silent browse feeder packs.\n\nCo-authored-by: Cursor <cursoragent@cursor.com>",
+  "priority": "NORMAL",
+  "createdAt": "2026-09-04T08:38:11.183Z",
+  "updatedAt": "2026-09-04T08:54:00.703Z",
+  "completedAt": "2026-09-04T08:54:00.395Z",
+  "expirationDate": "2026-10-04T08:38:11.343Z",
+  "isForIosSimulator": false,
+  "metrics": {
+    "buildWaitTime": 3958,
+    "buildQueueTime": 7712,
+    "buildDuration": 937542
+  }
+}

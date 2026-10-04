@@ -2,9 +2,14 @@
  * Glaubwürdige Handy-Lade-Orte — reine Policy (kein RN/Google).
  * DE: „laden“ = Geschäft → Places-Junk (Heimat-/Touristenläden) nie akzeptieren.
  * Nie „besser als nichts“: Tourist-Info, Broschüre, Spielstadt, unnamed Steckdose.
+ *
+ * Stufen:
+ * - powerbank / device / outlet = belegt / glaubwürdig
+ * - cafe = Soft (Steckdose oft, nicht garantiert)
+ * - bakery = Soft-Hinweis (beim Bäcker oft kurz möglich) — nie als garantierte Steckdose
  */
 
-export type ChargeKind = 'powerbank' | 'device' | 'outlet' | 'cafe';
+export type ChargeKind = 'powerbank' | 'device' | 'outlet' | 'cafe' | 'bakery';
 
 export type ChargePlaceLike = {
   name: string;
@@ -16,7 +21,7 @@ const POWERBANK_NAME_RE =
   /powerbank|power\s*bank|voozaa|cheetah|batterybar|rechargy|chargery|chargebar|candy\s*power|power\s*dot/i;
 const DEVICE_NAME_RE =
   /device\s*charg|ladestation|charging\s*station|usb\s*charg|handy\s*ladestat|phone\s*charg|smartphone\s*charg/i;
-const SOCKET_NAME_RE = /steckdose|socket|usb\s*outlet|power\s*outlet/i;
+const SOCKET_NAME_RE = /steckdose|socket|usb\s*outlet|power\s*outlet|socket:usb|socket:power/i;
 
 /**
  * Kein \\b vor heimat/broschüre — sonst rutscht „Heimatbroschüre“ durch.
@@ -29,12 +34,20 @@ const JUNK_TYPE_RE =
   /museum|tourist_attraction|tourist_information|place_of_worship|church|cemetery|school|movie_theater|art_gallery|amusement_park|aquarium|zoo|stadium|park|campground/i;
 
 const CAFE_HOST_TYPE_RE =
-  /^(cafe|bakery|restaurant|meal_takeaway|food|library|bar|book_store)$/i;
+  /^(cafe|restaurant|meal_takeaway|food|library|bar|book_store)$/i;
+
+const BAKERY_HOST_TYPE_RE = /^(bakery)$/i;
+
+/** Belegte Lade-Option (Powerbank / Station / OSM-Steckdose). */
+export function isGuaranteedChargeKind(kind: ChargeKind): boolean {
+  return kind === 'powerbank' || kind === 'device' || kind === 'outlet';
+}
 
 export function kindLabel(kind: ChargeKind): string {
   if (kind === 'powerbank') return 'Powerbank';
   if (kind === 'device') return 'Ladestation';
   if (kind === 'outlet') return 'Steckdose';
+  if (kind === 'bakery') return 'Bäckerei';
   return 'Café';
 }
 
@@ -77,20 +90,27 @@ function hasDeviceEvidence(place: ChargePlaceLike): boolean {
 function hasOutletEvidence(place: ChargePlaceLike): boolean {
   const blob = blobOf(place);
   if (SOCKET_NAME_RE.test(blob)) return true;
+  // OSM-Kanal „outlet_cafe“ = Suche mit socket=* — gilt als belegt.
   if (place.types.includes('outlet_cafe')) return true;
   return false;
 }
 
+export function isBakeryHost(place: ChargePlaceLike): boolean {
+  if (place.types.some((t) => BAKERY_HOST_TYPE_RE.test(t))) return true;
+  return /\b(bäckerei|baeckerei|bäcker|baecker|bakery)\b/i.test(place.name);
+}
+
 function isCafeHost(place: ChargePlaceLike): boolean {
   if (looksLikeChargeJunk(place)) return false;
+  if (isBakeryHost(place)) return true;
   if (place.types.some((t) => CAFE_HOST_TYPE_RE.test(t))) return true;
-  return /\b(café|cafe|kaffee|bäck|baeck|library|bibliothek)\b/i.test(place.name);
+  return /\b(café|cafe|kaffee|library|bibliothek)\b/i.test(place.name);
 }
 
 /**
  * Nur Orte mit glaubwürdiger Lade-Option. fromType = Suchkanal,
  * Label/Accept nur mit Evidenz (nie „Heimatladen“ als Powerbank).
- * Café/Steckdose nur wenn explizit offen — unbekannt/zu = raus.
+ * Café/Bäckerei nur Soft — nie als garantierte Steckdose.
  */
 export function acceptChargePlace(
   place: ChargePlaceLike,
@@ -105,22 +125,28 @@ export function acceptChargePlace(
   if (fromType === 'phone_charge') {
     if (hasPowerbankEvidence(place)) return 'powerbank';
     if (hasDeviceEvidence(place)) return 'device';
-    if (hasOutletEvidence(place) && isCafeHost(place) && place.openNow === true) {
+    // Belegte Steckdose nur mit Socket-Evidenz — Bäckerei nie als outlet.
+    if (
+      hasOutletEvidence(place) &&
+      isCafeHost(place) &&
+      !isBakeryHost(place) &&
+      place.openNow === true
+    ) {
       return 'outlet';
     }
     return null;
   }
   if (fromType === 'outlet_cafe') {
     if (place.openNow !== true) return null;
+    if (isBakeryHost(place)) return null;
     if (hasOutletEvidence(place) && isCafeHost(place)) return 'outlet';
-    if (place.types.includes('outlet_cafe') && isCafeHost(place)) {
-      return 'outlet';
-    }
     return null;
   }
   if (fromType === 'cafe') {
     if (place.openNow !== true) return null;
-    return isCafeHost(place) ? 'cafe' : null;
+    if (!isCafeHost(place)) return null;
+    if (isBakeryHost(place)) return 'bakery';
+    return 'cafe';
   }
   return null;
 }
@@ -128,7 +154,10 @@ export function acceptChargePlace(
 export function kindSpeechHint(kind: ChargeKind): string {
   if (kind === 'powerbank') return 'Powerbank-Automat';
   if (kind === 'device') return 'Handy-Ladestation';
-  if (kind === 'outlet') return 'belegte Steckdose';
+  if (kind === 'outlet') return 'Steckdose belegt';
+  if (kind === 'bakery') {
+    return 'beim Bäcker oft kurz laden möglich, nicht garantiert';
+  }
   return 'Café — Steckdose oft da, nicht garantiert';
 }
 
@@ -141,6 +170,9 @@ export function formatChargeBullet(opts: {
     opts.distanceM < 1000
       ? `${Math.round(opts.distanceM / 10) * 10} m`
       : `${(opts.distanceM / 1000).toFixed(1)} km`;
+  if (opts.kind === 'bakery') {
+    return `${opts.name} · Bäckerei · oft kurz laden · ${dist}`;
+  }
   if (opts.kind === 'cafe') {
     return `${opts.name} · Café · Steckdose oft · ${dist}`;
   }

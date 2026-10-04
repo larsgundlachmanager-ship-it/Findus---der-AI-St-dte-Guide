@@ -1,0 +1,1535 @@
+{
+  "version": 1,
+  "generatedFor": "yorro-reisebuero-inspiration-recharge",
+  "originHint": "DE",
+  "generatedAt": "2026-09-13",
+  "notes": "Follow-up G: Blog + Instagram/TikTok Harvest 2024–2026 verifiziert (Dupes, Slow Travel, Secondary Cities, Seasonal Spikes).",
+  "chapters": [
+    {
+      "vibe": "anti_party",
+      "title": "Blog & Social Harvest",
+      "intro": "Scan→Verify→Tipps; Social=Spur"
+    }
+  ],
+  "items": [
+    {
+      "id": "g-ksamil",
+      "destLabel": "Ksamil",
+      "region": "Albanische Riviera",
+      "countryCode": "AL",
+      "lat": 39.77,
+      "lng": 20,
+      "iata": "TIA",
+      "catalogVibes": [
+        "ultra_cheap",
+        "menstrip",
+        "anti_party"
+      ],
+      "tags": [
+        "social_trend",
+        "beach",
+        "deal",
+        "überhyped_soft",
+        "party"
+      ],
+      "seasonHint": "Mai–Jun, Sep (Aug meiden)",
+      "durationHint": "4–7 Nächte",
+      "whyFit": "Mykonos-Dupe: türkis + Meeresfrüchte-Muster — Reality: Aug überbaut/Liegen.",
+      "hook": "Ionisches Wasser, Budget-Riviera.",
+      "access": "Flug TIA + Transfer Süden",
+      "avoidIf": "August Peak",
+      "sourceKind": "social_trend",
+      "realityCheck": "Geheimtipp-Status verloren; Aug Infrastruktur am Limit.",
+      "socialAngle": "Mykonos Dupe / Maldives of Europe",
+      "confidence": "medium",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-vlora-saranda",
+      "destLabel": "Vlora / Saranda Riviera",
+      "region": "Albanien",
+      "countryCode": "AL",
+      "lat": 40.47,
+      "lng": 19.49,
+      "iata": "TIA",
+      "catalogVibes": [
+        "ultra_cheap",
+        "adventure"
+      ],
+      "tags": [
+        "social_trend",
+        "beach",
+        "roadtrip",
+        "deal"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "whyFit": "Amalfi-Dupe-Dramatik ohne IT-Preise — Infrastruktur noch rau.",
+      "hook": "Albanische Küstenstraße.",
+      "access": "TIA + Mietwagen",
+      "avoidIf": "Erwartung polierter Amalfi-Infra",
+      "sourceKind": "social_trend",
+      "realityCheck": "Kinderkrankheiten Infrastruktur.",
+      "socialAngle": "Amalfi Dupe",
+      "confidence": "medium",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-kotor",
+      "destLabel": "Kotor",
+      "region": "Montenegro",
+      "countryCode": "ME",
+      "lat": 42.42,
+      "lng": 18.77,
+      "iata": "TIV",
+      "altAirports": [
+        {
+          "iata": "DBV",
+          "note": "Dubrovnik + Transfer"
+        }
+      ],
+      "catalogVibes": [
+        "date",
+        "anti_party"
+      ],
+      "tags": [
+        "social_trend",
+        "blog_sourced",
+        "fjord",
+        "romance",
+        "überhyped_soft"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Dubrovnik-Dupe: venezianisch + Fjord — früh zur Festung.",
+      "hook": "Bucht von Kotor vor 8 Uhr.",
+      "access": "TIV/DBV",
+      "avoidIf": "Mittag Hochsommer Festungsaufstieg",
+      "sourceKind": "mixed",
+      "realityCheck": "Kreuzfahrt schon da; vor 8 Uhr San Giovanni.",
+      "socialAngle": "Dubrovnik Dupe",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-ljubljana-city",
+      "destLabel": "Ljubljana City",
+      "region": "Slowenien",
+      "countryCode": "SI",
+      "lat": 46.05,
+      "lng": 14.51,
+      "iata": "LJU",
+      "catalogVibes": [
+        "date",
+        "anti_party",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "social_trend",
+        "blog_sourced",
+        "city",
+        "slow"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Autofreies Zentrum — Schweiz-Feeling zu Drittel-Preisen.",
+      "hook": "Drachenbrücke + Flussufer.",
+      "access": "Flug LJU",
+      "avoidIf": "Bled nur Jul/Aug ohne Plan",
+      "sourceKind": "mixed",
+      "realityCheck": "Bled-Peak meiden; Stadt selbst entspannt.",
+      "socialAngle": "Swiss Alps City Dupe",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-milos",
+      "destLabel": "Milos",
+      "region": "Kykladen",
+      "countryCode": "GR",
+      "lat": 36.74,
+      "lng": 24.42,
+      "iata": "MLO",
+      "altAirports": [
+        {
+          "iata": "ATH",
+          "note": "Fähre/Flug via Athen"
+        }
+      ],
+      "catalogVibes": [
+        "date",
+        "anti_party",
+        "adventure"
+      ],
+      "tags": [
+        "social_trend",
+        "beach",
+        "volcano",
+        "geheim"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "4–7 Nächte",
+      "whyFit": "Santorini-Alternative: Sarakiniko, Tavernen, weniger Kreuzfahrt.",
+      "hook": "Weiße Vulkanfelsen ohne Oia-Schlange.",
+      "access": "ATH + Flug/Fähre Milos",
+      "avoidIf": "Nur 2 Nächte ohne Puffer",
+      "sourceKind": "social_trend",
+      "realityCheck": "Weniger Schiffe als Santorini, trotzdem Shoulder besser.",
+      "socialAngle": "Santorini Dupe",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-matera",
+      "destLabel": "Matera",
+      "region": "Basilikata",
+      "countryCode": "IT",
+      "lat": 40.67,
+      "lng": 16.6,
+      "iata": "BRI",
+      "catalogVibes": [
+        "date",
+        "adventure",
+        "anti_party"
+      ],
+      "tags": [
+        "social_trend",
+        "blog_sourced",
+        "culture",
+        "slow",
+        "architecture"
+      ],
+      "seasonHint": "Apr–Mai, Sep–Okt",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Sassi-Höhlenstadt — Slow Aesthetic; Treppen bei Hitze hart.",
+      "hook": "Archaische Steinlandschaft.",
+      "access": "Flug BRI + Transfer",
+      "avoidIf": "38C Juli ohne Fitness",
+      "sourceKind": "mixed",
+      "realityCheck": "Sommer-Treppen extrem fordernd.",
+      "socialAngle": "Cave Aesthetic Slow Travel",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-cefalu",
+      "destLabel": "Cefalu",
+      "region": "Sizilien",
+      "countryCode": "IT",
+      "lat": 38.04,
+      "lng": 14.02,
+      "iata": "PMO",
+      "catalogVibes": [
+        "date",
+        "family",
+        "anti_party"
+      ],
+      "tags": [
+        "blog_sourced",
+        "beach",
+        "culture",
+        "überhyped_alt"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Positano-Dupe: Normannendom + echter Sandstrand.",
+      "hook": "Sand statt nur Klippen-Selfie.",
+      "access": "Flug PMO",
+      "avoidIf": "Jul/Aug Hitze+Masse",
+      "sourceKind": "blog",
+      "realityCheck": "Sommer stark frequentiert; Shoulder ideal.",
+      "socialAngle": "Positano Dupe",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-gallipoli",
+      "destLabel": "Gallipoli Apulien",
+      "region": "Apulien",
+      "countryCode": "IT",
+      "lat": 40.06,
+      "lng": 17.99,
+      "iata": "BDS",
+      "altAirports": [
+        {
+          "iata": "BRI",
+          "note": "Bari"
+        }
+      ],
+      "catalogVibes": [
+        "date",
+        "ultra_cheap",
+        "anti_party"
+      ],
+      "tags": [
+        "blog_sourced",
+        "beach",
+        "food",
+        "geheim"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Unpoliertes Süditalien-Seafood ohne Amalfi-Aufschlag.",
+      "hook": "Altstadt auf der Insel + Meer.",
+      "access": "BDS/BRI + Auto",
+      "sourceKind": "blog",
+      "realityCheck": "Authentisch, nicht steril-luxuriös.",
+      "socialAngle": "Amalfi Budget Alternative",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-mostar",
+      "destLabel": "Mostar",
+      "region": "Herzegowina",
+      "countryCode": "BA",
+      "lat": 43.34,
+      "lng": 17.81,
+      "iata": "SJJ",
+      "catalogVibes": [
+        "adventure",
+        "date",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "blog_sourced",
+        "culture",
+        "roadtrip",
+        "under_radar"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "1–3 Nächte",
+      "whyFit": "Stari Most + osmanische Kulinarik — Roadtrip-Stop.",
+      "hook": "Alte Brücke ohne Westeuropa-Preise.",
+      "access": "SJJ + Auto/Bus",
+      "avoidIf": "Jul/Aug Talkessel-Hitze",
+      "sourceKind": "blog",
+      "realityCheck": "Juli/August gluehend heiss.",
+      "socialAngle": "Balkan Photography",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-ohrid",
+      "destLabel": "Ohrid",
+      "region": "Nordmazedonien",
+      "countryCode": "MK",
+      "lat": 41.12,
+      "lng": 20.8,
+      "iata": "OHD",
+      "altAirports": [
+        {
+          "iata": "SKP",
+          "note": "Skopje + Transfer"
+        }
+      ],
+      "catalogVibes": [
+        "date",
+        "anti_party",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "social_trend",
+        "blog_sourced",
+        "lake",
+        "culture",
+        "deal"
+      ],
+      "seasonHint": "Mai–Jun, Sep",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Comer-See-Dupe: byzantinisch + klarer See, extrem budgetfreundlich.",
+      "hook": "Jerusalem des Balkans am See.",
+      "access": "OHD/SKP",
+      "avoidIf": "Nur Westeuropa-Komfort erwarten",
+      "sourceKind": "mixed",
+      "realityCheck": "Bei Balkan-Touristen beliebt, fuer DE noch Value.",
+      "socialAngle": "Lake Como Dupe",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-brasov",
+      "destLabel": "Brasov",
+      "region": "Transsilvanien",
+      "countryCode": "RO",
+      "lat": 45.66,
+      "lng": 25.61,
+      "iata": "OTP",
+      "catalogVibes": [
+        "adventure",
+        "date",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "blog_sourced",
+        "under_radar",
+        "roadtrip",
+        "culture"
+      ],
+      "seasonHint": "Mai–Okt; Winter Ski Poiana",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Karpaten-Hub, mittelalterliche Gassen, Basis fuer Roadtrip.",
+      "hook": "Baerenwaelder vor der Stadt.",
+      "access": "OTP/CLJ + Zug/Auto",
+      "sourceKind": "blog",
+      "realityCheck": "Bran sehr touristisch — Stadt selbst besser.",
+      "socialAngle": "Transylvania Roadtrip",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-sibiu",
+      "destLabel": "Sibiu",
+      "region": "Transsilvanien",
+      "countryCode": "RO",
+      "lat": 45.8,
+      "lng": 24.15,
+      "iata": "SBZ",
+      "catalogVibes": [
+        "date",
+        "anti_party",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "blog_sourced",
+        "under_radar",
+        "culture",
+        "architecture"
+      ],
+      "seasonHint": "Mai–Okt",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Haeuser mit Augen — kompakte Altstadt, Bruchteil Westpreise.",
+      "hook": "Gotische Gauben-Aesthetic.",
+      "access": "Flug SBZ",
+      "sourceKind": "blog",
+      "realityCheck": "Kompakt und intakt.",
+      "socialAngle": "Hidden Medieval",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-tirana-city",
+      "destLabel": "Tirana City",
+      "region": "Albanien",
+      "countryCode": "AL",
+      "lat": 41.33,
+      "lng": 19.82,
+      "iata": "TIA",
+      "catalogVibes": [
+        "menstrip",
+        "ultra_cheap",
+        "date"
+      ],
+      "tags": [
+        "social_trend",
+        "city",
+        "party",
+        "culture",
+        "deal"
+      ],
+      "seasonHint": "Apr–Jun, Sep–Okt",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Junges Berlin-Feeling + Bunk Art — rau authentisch.",
+      "hook": "Bunte Fassaden und Rooftops.",
+      "access": "Flug TIA Secondary DE",
+      "avoidIf": "Polierte Metropole erwarten",
+      "sourceKind": "social_trend",
+      "realityCheck": "Infrastruktur chaotisch = Teil des Charmes.",
+      "socialAngle": "New Berlin Balkans",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-antwerpen",
+      "destLabel": "Antwerpen",
+      "region": "Flandern",
+      "countryCode": "BE",
+      "lat": 51.22,
+      "lng": 4.4,
+      "iata": "ANR",
+      "altAirports": [
+        {
+          "iata": "BRU",
+          "note": "Bruessel"
+        }
+      ],
+      "catalogVibes": [
+        "date",
+        "anti_party"
+      ],
+      "tags": [
+        "blog_sourced",
+        "social_trend",
+        "city",
+        "culture",
+        "food",
+        "train"
+      ],
+      "seasonHint": "ganzjaehrig; Dez Maerkte",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Paris/Amsterdam-Alternative: Mode, Bahnhof, Brauereien, kompakt.",
+      "hook": "Designstadt ohne Grachten-Gedraenge.",
+      "access": "Zug aus DE / BRU",
+      "sourceKind": "mixed",
+      "realityCheck": "Kompakt zu Fuss/Rad.",
+      "socialAngle": "Paris Dupe compact",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-nizza",
+      "destLabel": "Nizza",
+      "region": "Cote d Azur",
+      "countryCode": "FR",
+      "lat": 43.71,
+      "lng": 7.26,
+      "iata": "NCE",
+      "catalogVibes": [
+        "date",
+        "family"
+      ],
+      "tags": [
+        "social_trend",
+        "city",
+        "culture",
+        "beach"
+      ],
+      "seasonHint": "Apr–Jun, Sep–Okt",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Paris-Alternative mit Riviera — Museen + Promenade, Kieselstrand ehrlich.",
+      "hook": "Promenade des Anglais ohne Paris-Preise.",
+      "access": "Flug NCE / TGV",
+      "avoidIf": "Feinsand erwarten",
+      "sourceKind": "social_trend",
+      "realityCheck": "Strand = Kiesel; urban stark.",
+      "socialAngle": "Better Paris Riviera",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-granada",
+      "destLabel": "Granada",
+      "region": "Andalusien",
+      "countryCode": "ES",
+      "lat": 37.18,
+      "lng": -3.6,
+      "iata": "GRX",
+      "altAirports": [
+        {
+          "iata": "AGP",
+          "note": "Malaga"
+        }
+      ],
+      "catalogVibes": [
+        "date",
+        "ultra_cheap",
+        "family"
+      ],
+      "tags": [
+        "social_trend",
+        "food",
+        "culture",
+        "deal"
+      ],
+      "seasonHint": "Mar–Mai, Sep–Nov",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Sevilla-Alternative: kuehler, Tapas oft gratis zum Drink.",
+      "hook": "Alhambra + Free-Tapas-Kultur.",
+      "access": "GRX/AGP",
+      "avoidIf": "Nur Jul/Aug Hitze ohne Plan",
+      "sourceKind": "social_trend",
+      "realityCheck": "Alhambra Tickets vorab — LIVE.",
+      "socialAngle": "Sevilla Dupe cooler",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-gdansk",
+      "destLabel": "Danzig",
+      "region": "Ostsee PL",
+      "countryCode": "PL",
+      "lat": 54.35,
+      "lng": 18.65,
+      "iata": "GDN",
+      "catalogVibes": [
+        "date",
+        "family",
+        "ultra_cheap",
+        "anti_party"
+      ],
+      "tags": [
+        "blog_sourced",
+        "social_trend",
+        "culture",
+        "city",
+        "museum"
+      ],
+      "seasonHint": "Mai–Sep; Winter Museen",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Venedig-Hanse-Dupe: Wasserstrassen + Weltklasse-Museen.",
+      "hook": "Rechtstadt + WWII-Museum.",
+      "access": "Flug GDN Secondary",
+      "avoidIf": "Nur Badeurlaub Winter",
+      "sourceKind": "mixed",
+      "realityCheck": "Winter klirrend; Sommer lebendig.",
+      "socialAngle": "Venice of the North Dupe",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-poiana-brasov",
+      "destLabel": "Poiana-Brasov",
+      "region": "Karpaten",
+      "countryCode": "RO",
+      "lat": 45.59,
+      "lng": 25.55,
+      "iata": "OTP",
+      "catalogVibes": [
+        "adventure",
+        "ultra_cheap",
+        "family"
+      ],
+      "tags": [
+        "social_trend",
+        "ski",
+        "deal",
+        "under_radar"
+      ],
+      "seasonHint": "Dez–Marz",
+      "durationHint": "4–6 Nächte",
+      "whyFit": "St.-Moritz-Dupe sportlich: Lift unter 50 EUR Muster + deftige Kueche.",
+      "hook": "Karpaten-Ski ohne Jetset.",
+      "access": "OTP + Transfer",
+      "sourceKind": "social_trend",
+      "realityCheck": "Rauh authentisch, nicht CH-Politur.",
+      "socialAngle": "St Moritz Budget Dupe",
+      "confidence": "medium",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-tatranska-lomnica",
+      "destLabel": "Tatranska Lomnica",
+      "region": "Hohe Tatra",
+      "countryCode": "SK",
+      "lat": 49.16,
+      "lng": 20.28,
+      "iata": "TAT",
+      "catalogVibes": [
+        "adventure",
+        "anti_party"
+      ],
+      "tags": [
+        "blog_sourced",
+        "ski",
+        "hike",
+        "scenic"
+      ],
+      "seasonHint": "Dez–Marz Ski; Sommer Wander",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Lomnitzer Spitze — brutales Hochalpin-Panorama.",
+      "hook": "Seilbahn in die Hohe Tatra.",
+      "access": "TAT",
+      "sourceKind": "blog",
+      "realityCheck": "Wetter/Wind oben hart.",
+      "socialAngle": "High Tatras Drama",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-grandvalira",
+      "destLabel": "Grandvalira",
+      "region": "Andorra",
+      "countryCode": "AD",
+      "lat": 42.54,
+      "lng": 1.73,
+      "iata": "BCN",
+      "altAirports": [
+        {
+          "iata": "TLS",
+          "note": "Toulouse"
+        }
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap",
+        "adventure"
+      ],
+      "tags": [
+        "social_trend",
+        "ski",
+        "deal"
+      ],
+      "seasonHint": "Jan–Marz",
+      "durationHint": "5–7 Nächte",
+      "whyFit": "200+ Pistenkilometer Pyrenaeen + Duty-Free.",
+      "hook": "Groesstes Pyrenaeen-Gebiet.",
+      "access": "BCN/TLS Bus",
+      "avoidIf": "Authentisches Bergdorf-Only",
+      "sourceKind": "social_trend",
+      "realityCheck": "Tallagen oft Shopping-Vibe.",
+      "socialAngle": "Budget Mega Resort",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-motovun",
+      "destLabel": "Motovun",
+      "region": "Istrien",
+      "countryCode": "HR",
+      "lat": 45.34,
+      "lng": 13.83,
+      "iata": "PUY",
+      "catalogVibes": [
+        "date",
+        "adventure"
+      ],
+      "tags": [
+        "blog_sourced",
+        "food",
+        "under_radar",
+        "film"
+      ],
+      "seasonHint": "Sep–Nov Trueffel; Sommer Festival",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Trueffel-Bergdorf + Filmfestival — mystisch im Herbstnebel.",
+      "hook": "Istrien von oben.",
+      "access": "PUY + Auto",
+      "sourceKind": "blog",
+      "realityCheck": "Steil; Auto noetig.",
+      "socialAngle": "Truffle Hilltown",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-pula",
+      "destLabel": "Pula",
+      "region": "Istrien",
+      "countryCode": "HR",
+      "lat": 44.87,
+      "lng": 13.85,
+      "iata": "PUY",
+      "catalogVibes": [
+        "date",
+        "family",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "blog_sourced",
+        "culture",
+        "under_radar"
+      ],
+      "seasonHint": "Mai–Sep",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Roemisches Amphitheater — rauer Kultur-Hub.",
+      "hook": "Arena Pula.",
+      "access": "Flug PUY",
+      "sourceKind": "blog",
+      "realityCheck": "Industrieller als Rovinj — authentischer.",
+      "socialAngle": "Roman Istria",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-lauterbrunnen",
+      "destLabel": "Lauterbrunnen / Wengen",
+      "region": "Jungfrau",
+      "countryCode": "CH",
+      "lat": 46.59,
+      "lng": 7.91,
+      "iata": "ZRH",
+      "catalogVibes": [
+        "adventure",
+        "date",
+        "family"
+      ],
+      "tags": [
+        "blog_sourced",
+        "scenic",
+        "hike",
+        "train"
+      ],
+      "seasonHint": "Jun–Sep",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Interlaken nur Hub — Magie in Seitentaelern.",
+      "hook": "Wasserfall-Tal statt Transit-Dorf.",
+      "access": "Zug ab Interlaken",
+      "avoidIf": "Nur Interlaken-Dorf ohne Ausflug",
+      "sourceKind": "blog",
+      "realityCheck": "Schweizer Preise; Budget robust noetig.",
+      "socialAngle": "Swiss Nature beyond Interlaken",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-bergensbanen",
+      "destLabel": "Bergensbanen Oslo-Bergen",
+      "region": "Norwegen",
+      "countryCode": "NO",
+      "lat": 60.39,
+      "lng": 5.32,
+      "iata": "OSL",
+      "catalogVibes": [
+        "adventure",
+        "date"
+      ],
+      "tags": [
+        "social_trend",
+        "train",
+        "scenic",
+        "winter"
+      ],
+      "seasonHint": "ganzjaehrig; Winter Schnee-Wow",
+      "durationHint": "1 Tag Zug + Naechte",
+      "whyFit": "Spektakulaerste Bahn Nordeuropa — Window-View haelt.",
+      "hook": "Zug durch Schneewaende.",
+      "access": "OSL/BGO + Bahn",
+      "avoidIf": "Low Budget Norwegen",
+      "sourceKind": "social_trend",
+      "realityCheck": "Teuer aber Landschaft haelt Versprechen.",
+      "socialAngle": "Train Window Aesthetic",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-craiova-xmas",
+      "destLabel": "Craiova Weihnachten",
+      "region": "Walachei",
+      "countryCode": "RO",
+      "lat": 44.32,
+      "lng": 23.8,
+      "iata": "CRA",
+      "altAirports": [
+        {
+          "iata": "OTP",
+          "note": "Bukarest"
+        }
+      ],
+      "catalogVibes": [
+        "family",
+        "ultra_cheap",
+        "date"
+      ],
+      "tags": [
+        "social_spike",
+        "christmas",
+        "under_radar"
+      ],
+      "seasonHint": "Dezember",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Surreale Lichtinstallationen — Spike Dez; Restjahr wenig.",
+      "hook": "Weihnachtsmarkt-Hype Osteuropa.",
+      "access": "CRA/OTP",
+      "avoidIf": "Nur Kulturjahr ohne Lichter",
+      "sourceKind": "social_trend",
+      "realityCheck": "Ausserhalb Dez wenig fuer Internationals.",
+      "socialAngle": "Best Christmas Market Claim",
+      "confidence": "medium",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-dhermi",
+      "destLabel": "Dhermi",
+      "region": "Albanische Riviera",
+      "countryCode": "AL",
+      "lat": 40.15,
+      "lng": 19.64,
+      "iata": "TIA",
+      "catalogVibes": [
+        "ultra_cheap",
+        "menstrip",
+        "anti_party"
+      ],
+      "tags": [
+        "social_trend",
+        "beach",
+        "deal"
+      ],
+      "seasonHint": "Jun, Sep",
+      "durationHint": "4–6 Nächte",
+      "whyFit": "Riviera-Reveal neben Ksamil — Aug meiden.",
+      "hook": "Klippenstrand Budget.",
+      "access": "TIA + Auto",
+      "avoidIf": "August",
+      "sourceKind": "social_trend",
+      "realityCheck": "Kommerzialisierung zieht an; Shoulder.",
+      "socialAngle": "Albanian Riviera Reveal",
+      "confidence": "medium",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-valletta",
+      "destLabel": "Valletta",
+      "region": "Malta",
+      "countryCode": "MT",
+      "lat": 35.9,
+      "lng": 14.51,
+      "iata": "MLA",
+      "catalogVibes": [
+        "date",
+        "family",
+        "anti_party"
+      ],
+      "tags": [
+        "blog_sourced",
+        "winter",
+        "culture",
+        "architecture"
+      ],
+      "seasonHint": "Nov–Mar Sightseeing",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Wintersonne-Historie — Baden Jan–Mar nur Hartgesottene.",
+      "hook": "Ritterstadt mild.",
+      "access": "MLA",
+      "avoidIf": "Badeurlaub tiefster Winter",
+      "sourceKind": "blog",
+      "realityCheck": "Meer kalt Winter; Sightseeing perfekt.",
+      "socialAngle": "Winter Sun Culture",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-lissabon-winter",
+      "destLabel": "Lissabon Winter Surf",
+      "region": "Portugal",
+      "countryCode": "PT",
+      "lat": 38.72,
+      "lng": -9.14,
+      "iata": "LIS",
+      "catalogVibes": [
+        "adventure",
+        "date",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "blog_sourced",
+        "surf",
+        "winter",
+        "city"
+      ],
+      "seasonHint": "Nov–Mar",
+      "durationHint": "3–5 Nächte",
+      "whyFit": "Milde City + Surf Neopren — Airbnb oft ohne Heizung.",
+      "hook": "Atlantik-Winterflucht.",
+      "access": "LIS",
+      "avoidIf": "Warme Altbau-Wohnung ohne Check",
+      "sourceKind": "blog",
+      "realityCheck": "11–15C; Innenraeume klamm ohne Heizung.",
+      "socialAngle": "Winter Surf City",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-warsaw-winter-light",
+      "destLabel": "Warschau Winterlicht",
+      "region": "Polen",
+      "countryCode": "PL",
+      "lat": 52.23,
+      "lng": 21.01,
+      "iata": "WAW",
+      "catalogVibes": [
+        "date",
+        "ultra_cheap",
+        "family"
+      ],
+      "tags": [
+        "blog_sourced",
+        "winter",
+        "culture",
+        "museum"
+      ],
+      "seasonHint": "Dez–Feb",
+      "durationHint": "2–3 Nächte",
+      "whyFit": "Royal Route of Light + POLIN + Milchbars.",
+      "hook": "Illumination und Museen.",
+      "access": "WAW/WMI",
+      "avoidIf": "Empfindlich gegen Ostwind-Kaelte",
+      "sourceKind": "blog",
+      "realityCheck": "Scharfe Minusgrade moeglich.",
+      "socialAngle": "Winter City Lights",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-edinburgh-shoulder",
+      "destLabel": "Edinburgh Shoulder",
+      "region": "Schottland",
+      "countryCode": "GB",
+      "lat": 55.95,
+      "lng": -3.19,
+      "iata": "EDI",
+      "catalogVibes": [
+        "date",
+        "family"
+      ],
+      "tags": [
+        "blog_sourced",
+        "culture",
+        "city"
+      ],
+      "seasonHint": "Mai–Jun, Sep–Okt (nicht Aug Fringe)",
+      "durationHint": "3–4 Nächte",
+      "whyFit": "Fringe-Aug unbezahlbar — Shoulder = Magie ohne Kollaps.",
+      "hook": "Old Town ohne Festival-Preis.",
+      "access": "EDI",
+      "avoidIf": "August ohne Budget",
+      "sourceKind": "blog",
+      "realityCheck": "Aug restlos voll.",
+      "socialAngle": "Avoid Fringe Peak",
+      "confidence": "high",
+      "vibe": "blog_social",
+      "volatile": true
+    },
+    {
+      "id": "g-madrid-avoid-f1",
+      "destLabel": "Madrid ausser F1-Wochenende",
+      "region": "Spanien",
+      "countryCode": "ES",
+      "lat": 40.42,
+      "lng": -3.7,
+      "iata": "MAD",
+      "catalogVibes": [
+        "date",
+        "menstrip",
+        "ultra_cheap"
+      ],
+      "tags": [
+        "social_spike",
+        "city",
+        "avoid_window"
+      ],
+      "seasonHint": "ganzjaehrig; 11.–13. Sep 2026 F1 MEIDEN",
+      "durationHint": "2–4 Nächte",
+      "whyFit": "Stadt stark — F1 2026 Spike Hotels stark — LIVE.",
+      "hook": "Tapas-Stadt ohne Renn-Wochenende.",
+      "access": "MAD",
+      "avoidIf": "11–13 Sep 2026 Kulturtrip",
+      "sourceKind": "social_trend",
+      "realityCheck": "F1-Wochenende Extrembelastung — LIVE.",
+      "socialAngle": "F1 Urban Racing Spike",
+      "confidence": "medium",
+      "vibe": "blog_social",
+      "volatile": true
+    }
+  ],
+  "overhypedPairs": [
+    {
+      "hypedLabel": "Hallstatt",
+      "betterLabel": "Gosauseen oder Bohinj",
+      "sameVibe": "date",
+      "whyOverrated": "Selfie-Freilichtpark, Obergrenzen",
+      "whyBetter": "Gleiches Panorama / unberuehrterer See"
+    },
+    {
+      "hypedLabel": "Positano",
+      "betterLabel": "Cefalu oder Gallipoli",
+      "sameVibe": "beach",
+      "whyOverrated": "Verkehrskollaps und Preisabsurditaet",
+      "whyBetter": "Sand + Authentizitaet fair"
+    },
+    {
+      "hypedLabel": "Santorini Oia",
+      "betterLabel": "Milos",
+      "sameVibe": "beach",
+      "whyOverrated": "Sonnenuntergang-Schlangen",
+      "whyBetter": "Vulkan-Aesthetik ohne Kreuzfahrt-Druck"
+    },
+    {
+      "hypedLabel": "Dubrovnik",
+      "betterLabel": "Kotor",
+      "sameVibe": "date",
+      "whyOverrated": "GoT + Kreuzfahrt",
+      "whyBetter": "Fjord + venezianisch guenstiger"
+    },
+    {
+      "hypedLabel": "Cortina",
+      "betterLabel": "Bardonecchia / Sestriere",
+      "sameVibe": "ski",
+      "whyOverrated": "Olympia-High-Society-Aufschlag",
+      "whyBetter": "Olympia-Pisten ohne Elite"
+    },
+    {
+      "hypedLabel": "Zermatt",
+      "betterLabel": "Jasna",
+      "sameVibe": "ski",
+      "whyOverrated": "Ruinoese Preise",
+      "whyBetter": "Alpine Qualitaet zu Drittel"
+    },
+    {
+      "hypedLabel": "Paris City Break",
+      "betterLabel": "Antwerpen oder Nizza",
+      "sameVibe": "city",
+      "whyOverrated": "Preise und Ueberfuellung",
+      "whyBetter": "Kompakt Design oder Riviera"
+    },
+    {
+      "hypedLabel": "Venedig Konsum",
+      "betterLabel": "Danzig",
+      "sameVibe": "culture",
+      "whyOverrated": "Konsumkulisse",
+      "whyBetter": "Hanse-Wasserstrassen lebendig"
+    },
+    {
+      "hypedLabel": "Mykonos",
+      "betterLabel": "Ksamil / Dhermi",
+      "sameVibe": "party",
+      "whyOverrated": "Obzzoene Liegen-Preise",
+      "whyBetter": "Visuell aehnlich, noch guenstiger — Aug vorsichtig"
+    },
+    {
+      "hypedLabel": "Comer See",
+      "betterLabel": "Ohridsee",
+      "sameVibe": "date",
+      "whyOverrated": "Promi-Staus",
+      "whyBetter": "Byzanz + Budget-See"
+    },
+    {
+      "hypedLabel": "Sevilla Sommer",
+      "betterLabel": "Granada",
+      "sameVibe": "food",
+      "whyOverrated": "40C + poliert teuer",
+      "whyBetter": "Kuehler + Free Tapas"
+    },
+    {
+      "hypedLabel": "Chamonix",
+      "betterLabel": "Grand Tourmalet",
+      "sameVibe": "adventure",
+      "whyOverrated": "Mont-Blanc-Aufpreis",
+      "whyBetter": "Pic du Midi entspannter"
+    },
+    {
+      "hypedLabel": "St. Moritz",
+      "betterLabel": "Poiana-Brasov",
+      "sameVibe": "ski",
+      "whyOverrated": "Schaulaufen",
+      "whyBetter": "Karpaten unter 50 EUR Pass"
+    },
+    {
+      "hypedLabel": "Amsterdam Overload",
+      "betterLabel": "Ljubljana",
+      "sameVibe": "city",
+      "whyOverrated": "Anti-Tourismus-Regeln und Masse",
+      "whyBetter": "Autofrei gruen am Fluss"
+    },
+    {
+      "hypedLabel": "Rom Sommer",
+      "betterLabel": "Matera",
+      "sameVibe": "culture",
+      "whyOverrated": "Infrastruktur-Kollaps",
+      "whyBetter": "Steinlandschaft ohne Monument-Schlangen"
+    }
+  ],
+  "socialClusters": [
+    {
+      "cluster": "mediterranean_dupes",
+      "places": [
+        "Ksamil",
+        "Vlora/Saranda",
+        "Kotor",
+        "Ohrid",
+        "Cefalu",
+        "Milos"
+      ],
+      "watchOut": "Aug Peak zerstoert Value"
+    },
+    {
+      "cluster": "aesthetic_slow",
+      "places": [
+        "Matera",
+        "Bruegge abends",
+        "Dolomiten Rifugio",
+        "Sleeper",
+        "Lauterbrunnen"
+      ],
+      "watchOut": "Reservierungen Monate voraus"
+    },
+    {
+      "cluster": "alpine_budget_winter",
+      "places": [
+        "Bansko",
+        "Zakopane",
+        "Jasna",
+        "Tourmalet",
+        "Grandvalira",
+        "Poiana-Brasov"
+      ],
+      "watchOut": "Half-Term Feb Gondel-Warteschlangen"
+    },
+    {
+      "cluster": "secondary_cities",
+      "places": [
+        "Tirana",
+        "Danzig",
+        "Granada",
+        "Antwerpen",
+        "Nizza",
+        "Pula"
+      ],
+      "watchOut": "Nicht als Fake-Geheimnis verkaufen"
+    },
+    {
+      "cluster": "infra_hype_rail_road",
+      "places": [
+        "European Sleeper",
+        "Bergensbanen",
+        "Transsilvanien Roadtrip",
+        "Nightjet Wien"
+      ],
+      "watchOut": "Early Bird; Rumpeln; Pass-Aufpreise"
+    }
+  ],
+  "seasonSocialSpikes": [
+    {
+      "month": "Jan",
+      "spike": "Osteuropa-Ski",
+      "reality": "Half-Term = 2h Gondel — LIVE"
+    },
+    {
+      "month": "Feb",
+      "spike": "Budapest Thermal",
+      "reality": "07:00 oder Fast-Track"
+    },
+    {
+      "month": "Mar-Apr",
+      "spike": "Kappadokien Ballons",
+      "reality": "4–5 Naechte Puffer Wind"
+    },
+    {
+      "month": "Mai",
+      "spike": "Padel Andalusien",
+      "reality": "Courts Monate voraus"
+    },
+    {
+      "month": "Jun",
+      "spike": "Mallorca Secret Calas",
+      "reality": "vor 08:30 am Spot"
+    },
+    {
+      "month": "Jul-Aug",
+      "spike": "Nachtzug Aesthetic",
+      "reality": "Hitze alte Waggons"
+    },
+    {
+      "month": "Aug",
+      "spike": "Albanian Riviera",
+      "reality": "Aug meiden → Mitte Sep"
+    },
+    {
+      "month": "Sep",
+      "spike": "Madrid F1 2026",
+      "reality": "11–13 Sep Kultur meiden"
+    },
+    {
+      "month": "Okt",
+      "spike": "Dolomiten Herbst",
+      "reality": "Huetten schliessen; Schnee"
+    },
+    {
+      "month": "Nov",
+      "spike": "Venedig Acqua Alta",
+      "reality": "wasserdichte Schuhe"
+    },
+    {
+      "month": "Dez",
+      "spike": "Bruegge vs Antwerpen",
+      "reality": "Bruegge WE Albtraum"
+    },
+    {
+      "month": "Dez",
+      "spike": "Craiova Lights",
+      "reality": "nur Lichterachse stark"
+    }
+  ],
+  "top30Speakable": [
+    {
+      "destLabel": "Bansko",
+      "vibe": "adventure",
+      "oneLinerHook": "Budget-Ski — Half-Term meiden"
+    },
+    {
+      "destLabel": "Kotor",
+      "vibe": "date",
+      "oneLinerHook": "Fjord-Dubrovnik, Festung vor 8"
+    },
+    {
+      "destLabel": "Ljubljana",
+      "vibe": "anti_party",
+      "oneLinerHook": "Gruenes Slow-City-Wochenende"
+    },
+    {
+      "destLabel": "Ksamil",
+      "vibe": "ultra_cheap",
+      "oneLinerHook": "Mykonos-Look, Aug meiden"
+    },
+    {
+      "destLabel": "Danzig",
+      "vibe": "date",
+      "oneLinerHook": "Hanse + Weltklasse-Museen"
+    },
+    {
+      "destLabel": "Antwerpen",
+      "vibe": "date",
+      "oneLinerHook": "Paris-Alternative kompakt"
+    },
+    {
+      "destLabel": "Jasna",
+      "vibe": "adventure",
+      "oneLinerHook": "Tatra-Alpin zu Ost-Preisen"
+    },
+    {
+      "destLabel": "Valletta",
+      "vibe": "date",
+      "oneLinerHook": "Wintersonne-Historie"
+    },
+    {
+      "destLabel": "Matera",
+      "vibe": "date",
+      "oneLinerHook": "Sassi Slow Travel"
+    },
+    {
+      "destLabel": "Bruegge abends",
+      "vibe": "date",
+      "oneLinerHook": "Nostalgie nach Bus-Abfahrt"
+    },
+    {
+      "destLabel": "Tirana",
+      "vibe": "menstrip",
+      "oneLinerHook": "Neues Berlin Balkans"
+    },
+    {
+      "destLabel": "Brasov",
+      "vibe": "adventure",
+      "oneLinerHook": "Karpaten-Roadtrip-Hub"
+    },
+    {
+      "destLabel": "Cavtat",
+      "vibe": "date",
+      "oneLinerHook": "Dubrovnik ohne Kollaps"
+    },
+    {
+      "destLabel": "Sestriere",
+      "vibe": "adventure",
+      "oneLinerHook": "Via Lattea Schneesicher"
+    },
+    {
+      "destLabel": "Ohrid",
+      "vibe": "date",
+      "oneLinerHook": "Byzanz am Klarwasser-See"
+    },
+    {
+      "destLabel": "Nizza",
+      "vibe": "date",
+      "oneLinerHook": "Riviera statt Paris-Preis"
+    },
+    {
+      "destLabel": "Granada",
+      "vibe": "date",
+      "oneLinerHook": "Free Tapas + Alhambra"
+    },
+    {
+      "destLabel": "Zakopane",
+      "vibe": "ultra_cheap",
+      "oneLinerHook": "Tatra-Budget, Smog-Check"
+    },
+    {
+      "destLabel": "Milos",
+      "vibe": "anti_party",
+      "oneLinerHook": "Santorini ohne Schlange"
+    },
+    {
+      "destLabel": "Otepaa",
+      "vibe": "spa_value",
+      "oneLinerHook": "Padel im Baltikum-Wald"
+    },
+    {
+      "destLabel": "Belgrad",
+      "vibe": "menstrip",
+      "oneLinerHook": "Splavovi Sommer"
+    },
+    {
+      "destLabel": "Mostar",
+      "vibe": "adventure",
+      "oneLinerHook": "Bruecke + Roadtrip"
+    },
+    {
+      "destLabel": "Cefalu",
+      "vibe": "date",
+      "oneLinerHook": "Positano mit Sand"
+    },
+    {
+      "destLabel": "Grand Tourmalet",
+      "vibe": "family",
+      "oneLinerHook": "Pic du Midi unter 55 EUR"
+    },
+    {
+      "destLabel": "Kranjska Gora",
+      "vibe": "family",
+      "oneLinerHook": "Nordisch Slowenien"
+    },
+    {
+      "destLabel": "Evian",
+      "vibe": "spa_value",
+      "oneLinerHook": "Belle Epoque + Padel"
+    },
+    {
+      "destLabel": "Pula",
+      "vibe": "date",
+      "oneLinerHook": "Roemische Arena Istrien"
+    },
+    {
+      "destLabel": "Brezovica",
+      "vibe": "ultra_cheap",
+      "oneLinerHook": "Rauer Experten-Ski"
+    },
+    {
+      "destLabel": "Gallipoli",
+      "vibe": "date",
+      "oneLinerHook": "Apulien Seafood echt"
+    },
+    {
+      "destLabel": "Bergensbanen",
+      "vibe": "adventure",
+      "oneLinerHook": "Fensterbahn durch Schnee"
+    }
+  ],
+  "airports": [
+    {
+      "destLabel": "Tirana Albanien Gate",
+      "iata": "TIA",
+      "fromDeOftenCheap": [
+        "FKB",
+        "FMM",
+        "DTM",
+        "CGN"
+      ],
+      "transferNote": "Sueden Riviera lange Transfer/Mietwagen",
+      "seasonDealHint": "Mai–Jun, Sep"
+    },
+    {
+      "destLabel": "Tivat / Kotor",
+      "iata": "TIV",
+      "fromDeOftenCheap": [
+        "MUC",
+        "CGN",
+        "STR"
+      ],
+      "altAirports": [
+        {
+          "iata": "DBV",
+          "note": "Dubrovnik"
+        }
+      ],
+      "transferNote": "Kotor ~20–40 Min",
+      "seasonDealHint": "Mai–Jun, Sep"
+    },
+    {
+      "destLabel": "Danzig",
+      "iata": "GDN",
+      "fromDeOftenCheap": [
+        "BER",
+        "CGN",
+        "DTM",
+        "HHN",
+        "FMM"
+      ],
+      "transferNote": "Stadt nah",
+      "seasonDealHint": "Mai–Sep"
+    },
+    {
+      "destLabel": "Granada",
+      "iata": "GRX",
+      "fromDeOftenCheap": [
+        "FRA",
+        "MUC"
+      ],
+      "altAirports": [
+        {
+          "iata": "AGP",
+          "note": "Malaga ~2h"
+        }
+      ],
+      "transferNote": "Stadt/Bus",
+      "seasonDealHint": "Mar–Mai, Sep–Nov"
+    },
+    {
+      "destLabel": "Milos",
+      "iata": "MLO",
+      "fromDeOftenCheap": [],
+      "altAirports": [
+        {
+          "iata": "ATH",
+          "note": "via Athen"
+        }
+      ],
+      "transferNote": "Inselflug/Faehre ATH",
+      "seasonDealHint": "Mai–Jun, Sep"
+    },
+    {
+      "destLabel": "Bari Matera Gate",
+      "iata": "BRI",
+      "fromDeOftenCheap": [
+        "CGN",
+        "MUC",
+        "BER",
+        "STR"
+      ],
+      "transferNote": "Matera ~1–1,5h",
+      "seasonDealHint": "Apr–Mai, Sep–Okt"
+    }
+  ],
+  "trains": [
+    {
+      "name": "Bergensbanen",
+      "routeSummary": "Oslo → Bergen",
+      "countries": [
+        "NO"
+      ],
+      "special": "Window-View Social Hype — Landschaft haelt",
+      "durationHint": "Tagesfahrt",
+      "priceBandEur": "LIVE teuer",
+      "nearAirports": [
+        "OSL",
+        "BGO"
+      ],
+      "bookingSystemHint": "Vy"
+    }
+  ],
+  "flyRailCombos": [],
+  "dealPatterns": [
+    "Social Peak-Wochen meiden — Shoulder oft gleiche Aesthetic",
+    "Destination Duping: Value nur ausserhalb Aug/Half-Term",
+    "Nachtzug Early Bird > Flug bei Couchette wenn Monate voraus",
+    "Padel Andalusien: Court+Hotel synchron monatelang voraus",
+    "Secret Calas Mallorca: vor 08:30 oder Peak akzeptieren",
+    "Kappadokien Ballons: 4–5 Naechte Puffer",
+    "Madrid F1 Sep 2026: Kulturreisende meiden",
+    "Bruegge Dez-Wochenende → eher Antwerpen"
+  ]
+}

@@ -18,13 +18,34 @@ const places = [
 ];
 const houses = [{ lat: 53.676, lng: 9.805, n: '12', s: 'Heisterhoop' }];
 
+// Nah am Bahnhof, Hausnummer zu weit → Ort
 const toPlace = snapMapLongPress({
   lat: 53.6751,
   lng: 9.8041,
   places,
   houses,
 });
-assert(toPlace.kind === 'place' && toPlace.place.name.includes('Bahnhof'), 'Ort vor Adresse');
+assert(toPlace.kind === 'place' && toPlace.place.name.includes('Bahnhof'), 'Ort wenn nur Ort nah');
+
+// Hausnummer im 55-m-Kreis, Laden auch in 140 m → Adresse gewinnt
+const nearBoth = snapMapLongPress({
+  lat: 53.67601,
+  lng: 9.80501,
+  places: [
+    {
+      id: 99,
+      name: 'Friseur C. Jensen',
+      lat: 53.67605,
+      lng: 9.8051,
+      category: 'shop',
+    },
+  ],
+  houses,
+});
+assert(
+  nearBoth.kind === 'address' && nearBoth.name.includes('Heisterhoop'),
+  'Adresse vor nahem Laden',
+);
 
 const toHouse = snapMapLongPress({
   lat: 53.67602,

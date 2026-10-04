@@ -888,7 +888,7 @@ export async function runFlowBC_FullStory(ctx: NarrationContext): Promise<void> 
     store.setIsGenerating(false);
     const offline = extractOfflineGeneralInfo(poi);
     await speakTeaserOnly(
-      offline || `Schau mal — ${displayPoiName(poi)} liegt genau vor dir.`,
+      offline || `${displayPoiName(poi)} liegt genau vor dir.`,
       onQueuedPoi,
     );
     return;

@@ -82,8 +82,8 @@ export const REBOOT_MANAGER_MODULES: Record<
 /** Bridge: nur Call-1, nie Follow-up im selben topicId. */
 export const REBOOT_BRIDGE_RULES = {
   maxPerTurn: 1 as const,
-  /** Follow-up / continue Thread → bridgeOneLiner muss null sein. */
-  suppressOnThreadContinue: true,
+  /** Nur Mikro-Ack / Mehr-Historie → Bridge optional null; neuer Sub-Auftrag darf Bridge behalten. */
+  suppressOnThreadContinue: false,
   /** Amenity-Suche: kurze Fact-Ack erlaubt („guck kurz“), kein Motivations-Essay. */
   amenityStyle: 'fact_ack' as const,
 };

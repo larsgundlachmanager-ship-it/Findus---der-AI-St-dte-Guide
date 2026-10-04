@@ -18,6 +18,7 @@ export type Call1SituationFamily =
   | 'history_poi'
   | 'correction'
   | 'product_offer'
+  | 'cruise_quick'
   | 'generic';
 
 export type Call1AnswerContract = {
@@ -56,17 +57,18 @@ const FLIGHT_LEAVE_BY: Call1AnswerContract = {
     'access_oepnv_taxi',
   ],
   call2Tips: [
-    'GELÄNDER Flug Leave-by (Tipp): Staging — (1) Ziel würdigen in Bridge, keine Uhrzeit-Frage in Bridge. (2) Fehlt Abflug/Nummer → nur nachfragen, keine Actions. (3) Flug matchen (±45 Min) → Gepäck-Chips (Aufgabe/Hand) VOR Leave-by. (4) Timeline rückwärts + Terminal-Zeit → Puffer-Frage (mehr/weniger/passt). (5) Dann ÖPNV vs Taxi mit Startzeiten/Preis. (6) Taxi → Uber Deep-Link mit Abholzeit. Neues Essen-Thema = topicCut. Wortlaut frei.',
+    'GELÄNDER Flug Leave-by (Tipp): Staging — (1) Ziel würdigen in Bridge. Fehlt Abflugzeit/Nummer → sofort nur danach fragen, KEINE Abflugtafel-/Preis-Recherche vorher. (2) Mit Uhr/Nummer: Flug matchen (±45 Min) → Gepäck-Chips (Aufgabe/Hand) VOR Leave-by. (3) Timeline rückwärts + Terminal-Zeit → Puffer-Frage. (4) Dann ÖPNV vs Taxi. (5) Taxi → Uber Deep-Link. Explizites morgen/heute nicht überschreiben. Wortlaut frei.',
   ],
 };
 
 const WEATHER: Call1AnswerContract = {
   family: 'weather',
-  topicCut: false,
+  // Neuer Wetter-Opener ≠ Follow-up an Nav/Pitch-POI (Tennis-Sticky).
+  topicCut: true,
   neededSlots: ['temp_c', 'sky', 'rain_timing', 'clothing_hint'],
   researchSlots: ['weather_live'],
   call2Tips: [
-    'GELÄNDER Wetter: Himmel + Temperatur + Regen nur belegt, dann Kleidung. Stichpunkte mit Ziffern. Wortlaut frei.',
+    'GELÄNDER Wetter: Speech flüssig (Himmel + °C + Regen belegt), dann kurze Kleidung. Stichpunkte = FACT-CHIPS (z. B. „Wechselhaft · bis 24°“, „Heute kein Regen“) — nie Prosa-Sätze. Regen-Frage: zuerst nur Regen-Antwort. Strand/Tour-Frage: Slot beach_ok / rain_timing + Intent beantworten („passt für die Tour“). Nie Navigation starten. Kein Hilfe-Katalog, kein Abendplan/Sunset, kein Sticky-POI. Wortlaut frei.',
   ],
 };
 
@@ -128,8 +130,31 @@ const REISEBUERO: Call1AnswerContract = {
     'massive_live_backend',
   ],
   call2Tips: [
-    'GELÄNDER Reisebüro (Tipp): Sobald Reise = Flug und/oder Hotel-in-Zielstadt und/oder Wochenende/Woche/Urlaub mit Ziel und/oder unscharfes Ziel → execution=reisebuero. Reines Hotel+Amenity ohne Zielstadt = lokal pitch_module/Stay22, kein Funnel. Genanntes Produkt/Prospekt „im Angebot“ / Supermarkt-Preise = chat_lane + Knowledge-Research, nie Reisebüro. Call 1 denkt: was haben wir, was fehlt. Code fragt nur die genannte Lücke. Finale erste Auswahl = Gemini Pro + Live. Wortlaut frei.',
-    'Getrennt davon: Wenn Ort+Daten schon fest und User nur den Tag füllt (Highlights, Live-Musik Samstag) → nicht neu Reisebüro öffnen, sondern Timeline/Pitch/Events am bestehenden Aufenthalt (stay_day_interactive).',
+    'GELÄNDER Reisebüro (Tipp): Call 1 fragt sich: Geht’s um die REISE AN SICH (Flug/Hotel/Anreise/Inspiration/„was davor?“)? Dann execution=reisebuero — Board füllen, eine Lücke. Reines Hotel+Amenity ohne Zielstadt = lokal pitch_module/Stay22. Produkt „im Angebot“ = chat_lane, nie Reisebüro. Wortlaut frei.',
+    'Gegenpol (selbst erkennen): Ort/Fenster schon klar und Frage nur „was geht / was ist möglich“ → events_research bzw. stay_day_interactive — nicht Reisebüro nur wegen Datum+Stadt.',
+  ],
+};
+
+/** Kreuzfahrt-Schnellsuche — Top-Struktur + Partner-Links, kein Briefing-Marathon. */
+const CRUISE_QUICK: Call1AnswerContract = {
+  family: 'cruise_quick',
+  topicCut: true,
+  neededSlots: [
+    'when_or_month',
+    'embark_bias_or_port',
+    'pax',
+    'cabin_or_suite',
+    'amenities_party_family_spa',
+    'budget_or_cheapest',
+  ],
+  researchSlots: [
+    'cruise_search_brief',
+    'partner_links_check24_aida',
+    'top2_sailings_if_priced',
+    'optional_reisebuero_chip',
+  ],
+  call2Tips: [
+    'GELÄNDER Kreuzfahrt Quick: Wünsche (Pool/Rutsche/Laufbahn/Sauna/Kids/Teens/Party/Rentner) → 1–2 passende Schiffe + warum, sonst ehrliche Gap + Vergleichs-Links. Inklusiv-FAQ: belegte Inkl./Extra/Pakete. Kein Hotel-Briefing. Preise/Segeltermine nur belegt. Chip „Als Reise planen“ wenn Flug/Vornacht nötig. Wortlaut frei.',
   ],
 };
 
@@ -150,7 +175,7 @@ const STAY_DAY: Call1AnswerContract = {
     'timeline_insert',
   ],
   call2Tips: [
-    'GELÄNDER Aufenthalts-Tag (Tipp): User ist schon „in Lissabon / am Wochenende“ eingeplant. Step-by-step: Highlights, Tour-Vorschläge, Abend (Live-Musik etc.) in die Timeline. Pitch/Events/Tour — kein Flug/Hotel-Funnel. Wortlaut frei.',
+    'GELÄNDER Aufenthalts-Tag (Tipp): Ort/Fenster klar, Frage = was vor Ort möglich (Highlights, Events, Abend) — nicht die Reise buchen. Pitch/Events/Tour in Timeline. Call 1 erkennt die Absicht selbst. Wortlaut frei.',
   ],
 };
 
@@ -173,8 +198,8 @@ const DINING_COMPOUND: Call1AnswerContract = {
     'timeline_proximity',
   ],
   call2Tips: [
-    'GELÄNDER Compound-Abend (Tipp): Bridge war nur Verstehen. Hauptantwort = 2 Orte mit Warum (Kriterien erfüllt). Sonnenuntergang + Wetter kurz einweben. Call 2 darf unter Shortlist umranken (Preis-Leistung, Blick) — Begründung intern, Speech menschlich. Wortlaut frei.',
-    'Nach Wahl: jetzt Nav oder später Timeline + Leave-by — nicht beides erzwingen.',
+    'GELÄNDER Compound / Multi-Lane (Tipp): Bridge war nur Verstehen. Call 1 startet parallele Recherchen (z. B. Kino+Theater Genre, oder Fetch+Aussicht). Backend: Cascade Zwei-Strang Perfect+Backtrack — alle Hard-Musts parallel abhaken. Fetch→Spot: Fetch nah am Spot ranken; nach Wahl Multi-Stop + Speisekarte. Shortlist ~3–5 → Call-2 filtert hart → Speak Top-2 Must-Fit (ein Perfect reicht nicht). Soft leer → nachschärfen, kein Soft-Fill. Fehlende Slots in Speech weglassen (kein „leider keine Preise“). Call 3 = Speisekarte/Gerichtspreis. Nach Wahl: jetzt Nav oder später Timeline + Leave-by. Wortlaut frei.',
+    'Leer lokal: nächste gecachte Packs / Live-Expand / Discovery-Harvest / Radius wächst — weit gefunden → Distanz ehrlich nennen. Nie Fake-Treffer am Heimatdorf.',
   ],
 };
 
@@ -224,6 +249,16 @@ const CINEMA: Call1AnswerContract = {
   ],
 };
 
+const THEATRE: Call1AnswerContract = {
+  family: 'cinema',
+  topicCut: false,
+  neededSlots: ['venues', 'program_urls', 'show_times'],
+  researchSlots: ['cinema_program'],
+  call2Tips: [
+    'GELÄNDER Theater/Spielplan: Stücke/Vorstellungen zuerst (nicht Kino), 1–2 Häuser mit Uhrzeiten wenn belegt, Programm/Ticket-Buttons. Wortlaut frei.',
+  ],
+};
+
 const ALARM: Call1AnswerContract = {
   family: 'alarm_timer',
   topicCut: false,
@@ -236,11 +271,11 @@ const ALARM: Call1AnswerContract = {
 
 const NAV: Call1AnswerContract = {
   family: 'navigation',
-  topicCut: false,
+  topicCut: true,
   neededSlots: ['dest_name', 'eta_min', 'mode'],
   researchSlots: ['route_eta'],
   call2Tips: [
-    'GELÄNDER Nav: Ziel + ETA aus Backend. Keine Fake-Route. Wortlaut frei.',
+    'GELÄNDER Nav: Nur Zusagen + Ziel + ETA aus Backend. Keine Pack-/M1-Story, keine Historie, keine Fake-Route. Wortlaut frei.',
   ],
 };
 
@@ -295,7 +330,7 @@ const TRIVIA: Call1AnswerContract = {
   neededSlots: ['answer_fact'],
   researchSlots: ['knowledge_or_chat'],
   call2Tips: [
-    'GELÄNDER Trivia: Direkte Antwort zuerst (Zahl/Name). 1–2 kurze Fun-Facts nur belegt. Keine Regie/Stimm-Anweisungen. Stichpunkte: Alter/Name/Datum — keine nackten Gattungs-Labels. Wortlaut frei.',
+    'GELÄNDER Trivia/Kurzfakt: 1–2 knappe Sätze — Zahl/Name zuerst, optional eine Belegquelle. Kein Essay, keine Zusatz-Tour/Öffnungszeiten ungefragt. Stichpunkte: eine klare Zahl (z. B. ca. 2300 Einwohner) — deutsche Tausender nicht mit Punkt splitten. Rechenfragen: nur die Zahl. Wortlaut frei.',
   ],
 };
 
@@ -315,6 +350,28 @@ export function detectCall1Situation(
   } catch {
     /* soft */
   }
+  // Kreuzfahrt: Inklusiv-FAQ / Quick → chat_lane; Paket → Reisebüro
+  try {
+    const { looksLikeCruiseInclusionAsk } = require('../../planning/cruiseInclusionsFaq') as {
+      looksLikeCruiseInclusionAsk: (s: string) => boolean;
+    };
+    if (looksLikeCruiseInclusionAsk(t)) return 'cruise_quick';
+  } catch {
+    /* soft */
+  }
+  try {
+    const {
+      isCruisePackageHandoff,
+      isCruiseQuickPitch,
+    } = require('../../../reisebuero/handoff') as {
+      isCruisePackageHandoff: (s: string) => boolean;
+      isCruiseQuickPitch: (s: string) => boolean;
+    };
+    if (isCruisePackageHandoff(t)) return 'reisebuero_collect';
+    if (isCruiseQuickPitch(t)) return 'cruise_quick';
+  } catch {
+    /* soft */
+  }
   if (
     /\b(wann\s+(muss|soll)\s+ich\s+(los|aufbrechen|am\s+flughafen)|leave.?by|am\s+flughafen\s+sein)\b/iu.test(
       t,
@@ -324,15 +381,58 @@ export function detectCall1Situation(
   ) {
     return 'flight_leave_by';
   }
+  // Flug + Taxi vorbestellen = Leave-by-Kette, kein Reisebüro / Explore
+  try {
+    const { looksLikeTaxiWithFlight } = require('../../router/call1MobilityCompound') as {
+      looksLikeTaxiWithFlight: (s: string) => boolean;
+    };
+    if (looksLikeTaxiWithFlight(t)) return 'flight_leave_by';
+  } catch {
+    /* soft */
+  }
+  if (
+    /\b(flug|fliegen|flieger|flieg(?:e|st|t)?|abflug|flughafen)\b/iu.test(t) &&
+    /\b(taxi|uber|bolt)\b/iu.test(t)
+  ) {
+    return 'flight_leave_by';
+  }
   if (
     /\b(wecker|timer|erinner\s+mich|weck\s+mich)\b/iu.test(t)
   ) {
     return 'alarm_timer';
   }
-  if (/\b(navigier|führ\s+mich|bring\s+mich|route\s+nach)\b/iu.test(t)) {
+  if (/\b(navigier\w*|führ\s+mich|fuehr\s+mich|bring\s+mich|route\s+nach)\b/iu.test(t)) {
     return 'navigation';
   }
-  if (/\b(kino|filme?\s+laufen|kinoprogramm)\b/iu.test(t)) return 'cinema';
+  if (/\b(kino|filme?\s+laufen|kinoprogramm|open[\s-]?air|freiluftkino)\b/iu.test(t)) {
+    // Open-Air + Programm → Compound (Wetter-Gate parallel)
+    if (
+      /\b(open[\s-]?air|openair|freiluft|sommerkino|unter\s+freiem\s+himmel)\b/iu.test(
+        t,
+      )
+    ) {
+      return 'dining_compound';
+    }
+    // Kino + Theater in einem Satz → Multi-Lane or_either (nicht nur Kino)
+    if (
+      /\b(theater|theatre|schauspiel|musical|bühne|buehne|kabarett)\b/iu.test(t) &&
+      /\b(oder|bzw\.?|beziehungsweise|entweder|egal\s+ob|heute|gehen|möcht)\b/iu.test(
+        t,
+      )
+    ) {
+      return 'dining_compound';
+    }
+    return 'cinema';
+  }
+  // Theater/Schauspiel → Events (nicht Kino-Pitch)
+  if (
+    /\b(theater|theatre|theaterstück|theaterstueck|schauspiel|musical|bühne|buehne)\b/iu.test(
+      t,
+    ) &&
+    !/\b(kino|film|cinema)\b/iu.test(t)
+  ) {
+    return 'stay_day_interactive';
+  }
   if (
     /\b(wetter|anziehen|outfit|regnet|sonne|grad)\b/iu.test(t) &&
     !/\b(restaurant|essen|pannfisch|steak)\b/iu.test(t)
@@ -405,6 +505,19 @@ export function detectCall1Situation(
   } catch {
     /* soft */
   }
+  // Datumsspanne + was geht/Events in Stadt → Event-Recherche, kein Reisebüro
+  let dateWindowWhatsOn = false;
+  try {
+    const { looksLikeDateWindowWhatsOnAsk } = require('../../../services/concierge/eventDateWindow') as {
+      looksLikeDateWindowWhatsOnAsk: (s: string) => boolean;
+    };
+    dateWindowWhatsOn = looksLikeDateWindowWhatsOnAsk(t);
+  } catch {
+    dateWindowWhatsOn = false;
+  }
+  if (dateWindowWhatsOn) {
+    return 'stay_day_interactive';
+  }
   // Reisebüro: Wochenende/Woche/Urlaub, Flug+Hotel, offenes Ziel — nicht Solo-Flug Leave-by
   // Nacktes „irgendwo“ (z. B. „Bier irgendwo im Angebot“) ist KEIN offenes Reiseziel.
   const openTrip =
@@ -442,12 +555,21 @@ export function detectCall1Situation(
     return 'interest_activity';
   }
   const dining =
-    /\b(essen|restaurant|pannfisch|steak|döner|doener|pizza|sushi|imbiss)\b/iu.test(
+    /\b(essen|restaurant|pannfisch|steak|döner|doener|pizza|sushi|imbiss|abendessen|mittagessen|gastro|eis|gelato|eisdiele|eissalon|to[\s-]?go)\b/iu.test(
       t,
     );
   const compoundExtra =
-    /\b(sonnenuntergang|sunset|elbblick|meerblick|terrasse)\b/iu.test(t);
+    /\b(sonnenuntergang|sunset|elbblick|meerblick|hafen|hafenblic|aussicht|blick\s+auf|terrasse|live[\s-]?musik|live[\s-]?music|konzert|band|schön\s+sitzen|genießen|geniessen)\b/iu.test(
+      t,
+    );
+  // Essen + Live-Musik / Aussicht = Compound — beide Musts parallel abhaken
   if (dining && compoundExtra) return 'dining_compound';
+  if (
+    /\b(live[\s-]?musik|live[\s-]?music)\b/iu.test(t) &&
+    /\b(essen|restaurant|abend|gastro|kneipe|bar)\b/iu.test(t)
+  ) {
+    return 'dining_compound';
+  }
   if (dining) return 'dining_simple';
   return 'generic';
 }
@@ -477,6 +599,8 @@ export function getCall1AnswerContract(
       return DAY_PLAN;
     case 'reisebuero_collect':
       return REISEBUERO;
+    case 'cruise_quick':
+      return CRUISE_QUICK;
     case 'stay_day_interactive':
       return STAY_DAY;
     case 'dining_compound':
@@ -486,7 +610,11 @@ export function getCall1AnswerContract(
     case 'interest_activity':
       return INTEREST_ACTIVITY;
     case 'cinema':
-      return CINEMA;
+      return /\b(theater|theatre|theaterstück|theaterstueck|schauspiel|musical|bühne|buehne)\b/iu.test(
+        userText,
+      )
+        ? THEATRE
+        : CINEMA;
     case 'alarm_timer':
       return ALARM;
     case 'navigation':

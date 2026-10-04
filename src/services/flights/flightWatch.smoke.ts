@@ -508,11 +508,12 @@ const book = buildCheapFlightBookActions({
   airlineName: 'SunExpress',
 });
 assert(book.some((a) => a.type === 'SHOW_MORE' && /XQ123/.test(a.label)), 'ident chip');
+assert(book[0]?.type === 'OPEN_URL', 'price link is button 1');
 assert(
   book.some(
     (a) =>
       a.type === 'OPEN_URL' &&
-      a.label === 'Bei Kiwi buchen' &&
+      (/Preis|Kiwi|€/i.test(a.label)) &&
       /travelpayouts|kiwi\.com/i.test(a.payload.url ?? '') &&
       /ham/i.test(a.payload.url ?? '') &&
       /ayt/i.test(a.payload.url ?? ''),

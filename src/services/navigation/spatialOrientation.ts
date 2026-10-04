@@ -1,6 +1,8 @@
 /**
  * Human Co-Pilot voice: casual German, landmark-first, no robotic nav jargon.
  * Yorro speaks like a friend walking next to you — never "in X Metern links".
+ * Sprachkultur (FINDUS_SPEECH_CULTURE_BLOCK) nur an komplizierten Wegabelungen:
+ * fork/complex/Gasse/Kette weben. Einfache Abbiegung = Cache-Phrase.
  */
 
 import { relativeBearingDeg, shortestAngleDelta } from './bearing';
@@ -114,6 +116,66 @@ export function scrubRoboticNavSpeak(text: string): string {
     .trim();
 }
 
+/** Nur links/rechts/… — ohne „Gabelung“-Jargon, zum Weben. */
+export function navTurnSideWord(turn: string): string {
+  const t = (turn || '')
+    .toLowerCase()
+    .replace(/\s*an der gabelung\s*/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (/scharf\s*links|sharp[-_\s]*left/.test(t)) return 'scharf links';
+  if (/scharf\s*rechts|sharp[-_\s]*right/.test(t)) return 'scharf rechts';
+  if (/leicht\s*links|slight[-_\s]*left/.test(t)) return 'leicht links';
+  if (/leicht\s*rechts|slight[-_\s]*right/.test(t)) return 'leicht rechts';
+  if (/u-?turn|umdrehen|wenden/.test(t)) return 'umdrehen';
+  if (/kreisverkehr|roundabout/.test(t)) return 'in den Kreis';
+  if (/\blinks|left\b/.test(t)) return 'links';
+  if (/\brechts|right\b/.test(t)) return 'rechts';
+  if (/geradeaus|straight/.test(t)) return 'geradeaus';
+  return t || 'geradeaus';
+}
+
+export function navHoldPhrase(side: string): string {
+  if (side === 'geradeaus') return 'geh weiter geradeaus';
+  if (side === 'umdrehen') return 'dreh um';
+  if (side === 'in den Kreis') return 'in den Kreis';
+  return `halt dich ${side}`;
+}
+
+/**
+ * Komplizierte Wegabelung: Sichtbares + Richtung in einem Satz.
+ * Einfache Kurven gehören nicht hierher (Cache).
+ */
+export function weaveComplexNavCue(opts: {
+  kind: 'fork' | 'alley' | 'complex';
+  turn: string;
+  landmark?: string | null;
+}): string {
+  const side = navTurnSideWord(opts.turn);
+  const hold = navHoldPhrase(side);
+  const land = (opts.landmark || '').trim();
+  if (side === 'geradeaus' && !land) {
+    return scrubRoboticNavSpeak('Weiter geradeaus — du bist richtig.');
+  }
+  if (opts.kind === 'fork') {
+    return scrubRoboticNavSpeak(
+      land
+        ? `An ${land} teilt sich der Weg, ${hold}.`
+        : `Gleich teilt sich der Weg, ${hold}.`,
+    );
+  }
+  if (opts.kind === 'alley') {
+    return scrubRoboticNavSpeak(
+      land
+        ? `An ${land} geht’s durch die schmale Gasse, ${hold}.`
+        : `Gleich durch die schmale Gasse, ${hold}.`,
+    );
+  }
+  return scrubRoboticNavSpeak(
+    land ? `An ${land} ${hold}.` : `Gleich an der Kreuzung ${hold}.`,
+  );
+}
+
 /**
  * Landmark first, action second — max ~2 short sentences.
  */
@@ -147,22 +209,12 @@ export function buildLandmarkFirstCue(opts: {
 
   if (isTurn) {
     const kind = opts.visualKind;
-    if (kind === 'fork') {
-      return scrubRoboticNavSpeak(
-        `An ${land} teilt sich der Weg — nimm ${turn}.`,
-      );
+    if (kind === 'fork' || kind === 'alley' || kind === 'complex') {
+      return weaveComplexNavCue({ kind, turn, landmark: land });
     }
-    if (kind === 'alley') {
-      return scrubRoboticNavSpeak(
-        `Hinter ${land} durch die schmale Gasse ${turn}.`,
-      );
-    }
-    const alley =
-      turn.includes('links') || turn.includes('rechts')
-        ? ` Da musst du ${turn} durch.`
-        : '';
+    // Default „an“ — nie pauschal „hinter“ (Live: Ziel lag davor).
     return scrubRoboticNavSpeak(
-      `Hinter ${land} biegen wir gleich ${turn} ab.${alley}`,
+      `An ${land} ${navTurnSideWord(turn)} halten.`,
     );
   }
 
@@ -215,39 +267,15 @@ export function buildPredictiveTurnCue(opts: {
   void opts.roadName;
   const kind = opts.visualKind ?? null;
 
-  if (kind === 'fork' && turn !== 'geradeaus') {
-    if (land) {
-      return scrubRoboticNavSpeak(
-        `Gabelung an ${land} — nimm ${turn}.`,
-      );
+  if (kind === 'fork' || kind === 'alley' || kind === 'complex') {
+    if (turn !== 'geradeaus' || land) {
+      return weaveComplexNavCue({ kind, turn, landmark: land || null });
     }
-    return scrubRoboticNavSpeak(
-      `Gleich teilt sich der Weg — nimm ${turn}.`,
-    );
-  }
-  if (kind === 'alley' && turn !== 'geradeaus') {
-    return scrubRoboticNavSpeak(
-      land
-        ? `Durch die schmale Gasse ${turn}, an ${land}.`
-        : `Gleich durch die schmale Gasse ${turn}.`,
-    );
-  }
-  if (kind === 'complex' && turn !== 'geradeaus' && !land) {
-    return scrubRoboticNavSpeak(
-      `Unübersichtliche Kreuzung — ${turn} halten.`,
-    );
   }
 
   if (land && turn !== 'geradeaus') {
-    const open = look
-      ? `Schau nach ${look}. `
-      : turn.includes('links')
-        ? 'Schau nach links. '
-        : turn.includes('rechts')
-          ? 'Schau nach rechts. '
-          : 'Schau nach vorne. ';
     return scrubRoboticNavSpeak(
-      `${open}An ${land} ${turn} abbiegen.`.replace(/\s+/g, ' ').trim(),
+      `An ${land} ${navTurnSideWord(turn)} halten.`.replace(/\s+/g, ' ').trim(),
     );
   }
   if (land) {
@@ -259,19 +287,13 @@ export function buildPredictiveTurnCue(opts: {
     const { navTurnPhrase } = require('../tts/offlinePhraseBank') as {
       navTurnPhrase: (t: string, look?: string | null) => string;
     };
-    return scrubRoboticNavSpeak(navTurnPhrase(turn, look || null));
+    // look-Prefix („Schau nach …“) bewusst weglassen.
+    return scrubRoboticNavSpeak(navTurnPhrase(turn, null));
   } catch {
-    const open = look
-      ? `Schau nach ${look}. `
-      : turn.includes('links')
-        ? 'Schau nach links. '
-        : turn.includes('rechts')
-          ? 'Schau nach rechts. '
-          : 'Schau nach vorne. ';
     if (turn !== 'geradeaus') {
-      return scrubRoboticNavSpeak(`${open}Gleich ${turn} abbiegen.`);
+      return scrubRoboticNavSpeak(`Gleich ${turn} abbiegen.`);
     }
-    return scrubRoboticNavSpeak(`${open}Weiter geradeaus — du bist richtig.`);
+    return scrubRoboticNavSpeak(`Weiter geradeaus — du bist richtig.`);
   }
 }
 
@@ -379,15 +401,20 @@ export function buildStraightCue(): string {
   return 'Weiter geradeaus — du bist genau richtig.';
 }
 
-/** Turn without landmark — visual only, no street names (Feedback: zu viele Straßen). */
+/** Turn without landmark — feste Cache-Phrasen (Cartesia), kein Straßenlaber. */
 export function buildTurnWithoutLandmark(
   turn: string,
   _roadName?: string | null,
 ): string {
   void _roadName;
-  return scrubRoboticNavSpeak(
-    `Gleich ${turn} halten — schau nach einer klaren Abzweigung oder Gasse.`,
-  );
+  try {
+    const { navTurnPhrase } = require('../tts/offlinePhraseBank') as {
+      navTurnPhrase: (t: string, look?: string | null) => string;
+    };
+    return scrubRoboticNavSpeak(navTurnPhrase(turn, null));
+  } catch {
+    return scrubRoboticNavSpeak(`Jetzt musst du ${turn} abbiegen.`);
+  }
 }
 
 /**

@@ -242,6 +242,37 @@ function assert(cond: unknown, msg: string): void {
 }
 
 {
+  const croque =
+    'Ich habe Lust auf einen leckeren Croque. Wo kann ich da hingehen?';
+  assert(detectPitchKind(croque) === 'food', 'croque craving → food not generic/sight');
+  assert(
+    parseWishesFromText(croque).some(
+      (x) => x.kind === 'dish' && /croque/i.test(x.text) && x.hardness === 'must',
+    ),
+    'croque is must dish',
+  );
+  assert(
+    detectPitchKind('Ich habe Lust auf einen Dinosaurier') === 'sight',
+    'lust auf dinosaur stays sight',
+  );
+  assert(
+    detectPitchKind('Lust auf einen Croque ohne lecker-Adj') === 'food',
+    'lust auf croque without adj → food',
+  );
+  assert(
+    parseWishesFromText('Lust auf einen Croque ohne lecker-Adj').some(
+      (x) => x.kind === 'dish' && /croque/i.test(x.text),
+    ),
+    'lust auf croque extracts dish',
+  );
+  // Food-Kind + dish-Must → Pack-Sight Soft-Fill (Eisenbahnbrücke) ist raus
+  assert(
+    detectPitchKind(croque) !== 'generic' && detectPitchKind(croque) !== 'sight',
+    'croque never generic/sight pitch',
+  );
+}
+
+{
   const q = 'Empfehlung für das Herzstück';
   assert(detectPitchKind(q) === 'food', 'named venue → food');
   assert(

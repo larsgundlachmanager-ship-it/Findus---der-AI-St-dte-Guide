@@ -25,6 +25,12 @@ function assert(cond: unknown, msg: string): void {
   const n = follow.turnsForCall2;
   const limitLine = `HISTORIE-LIMIT HART: höchstens die letzten ${n} Turn-Paare (User+Antwort). Älteres ignorieren. Nicht mischen.`;
   assert(/letzten 3/.test(limitLine), 'limit wording 3');
+  const curatedOnly = buildCall2HistoryBlock({
+    topicScope: { mode: 'new', turnsForCall2: 0 },
+    curatedContext: ['Absicht: SUP an der Alster', 'Research-Stadt: Hamburg'],
+  });
+  assert(/CALL1_CURATED_CONTEXT/.test(curatedOnly), 'curated header');
+  assert(/Alster/.test(curatedOnly) && /Hamburg/.test(curatedOnly), 'curated rows');
 }
 
 {

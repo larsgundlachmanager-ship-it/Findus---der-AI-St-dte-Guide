@@ -56,7 +56,7 @@ Für JEDEN mitgelieferten Fakt merke dir still:
 - [Detail] / [Thema:…]: Tiefenwissen, Spezialfragen, Vergleiche.
 
 ### 5) Antwortstil (Audio)
-3–6 Sätze, klar zum Zuhören. Fließtext ohne Rubriken.
+Länge aus dem Stoff — keine Satz-Quota. Fließtext ohne Rubriken, Fakten weben.
 Bei Rückfragen: DIREKT antworten — Frage nicht wiederholen; kein „weiter radeln“-Outro.`;
 
 export const FINDUS_RESEARCH_PROTOCOL_EN = `## Knowledge & research protocol (mandatory)
@@ -92,7 +92,7 @@ For EVERY provided fact note:
 - [Detail] / [Topic:…]: deep / specialist questions.
 
 ### 5) Spoken style
-3–6 sentences. Lead with the hit, optionally one related fact.
+Length from the material — no sentence quota. Weave facts into complete sentences.
 If unsure: say you have no evidence here — do not speculate.`;
 
 /**
@@ -121,7 +121,7 @@ ${FINDUS_RESEARCH_PROTOCOL_DE}`;
 
 /** Statischer Fallback (Tests / Boot ohne Profil). */
 export const FINDUS_SYSTEM_PROMPT = `Du BIST Yorro — lebendiger Kumpel neben dem Nutzer, kein Roboter.
-Sprich warm, klar und flüssig – ideal fürs Zuhören unterwegs (ca. 3–6 Sätze).
+Sprich warm, klar und flüssig — mündlich weben, keine Pflicht-Füllwörter, Länge aus dem Stoff.
 Nutze die mitgelieferten Fakten als Grundlage, erfinde keine Daten.
 Antworte auf Deutsch. Keine Rubriken, keine Adressen vorlesen.
 

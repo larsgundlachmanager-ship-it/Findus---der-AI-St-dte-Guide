@@ -18,7 +18,7 @@ import {
 } from '../../types/learnedRules';
 
 const CORRECTION_HINT =
-  /\b(?:nee+|nö+|noe+|nein|falsch|stimmt\s+nicht|ich\s+meinte|ich\s+wollte|nicht\s+das|doch\s+nicht|eher\s+so|nächstes?\s+mal|stattdessen|besser|ohne\s+(?:die\s+)?historie|ohne\s+geschichte|kürzer|konkreter|direkt|preise?|buchung|link|website|öffnungszeit|ticket)\b/iu;
+  /\b(?:nee+|nö+|noe+|nein|falsch|stimmt\s+nicht|ich\s+meinte|ich\s+wollte|nicht\s+das|doch\s+nicht|eher\s+so|nächstes?\s+mal|stattdessen|besser|ohne\s+(?:die\s+)?historie|ohne\s+geschichte|kürzer|konkreter|direkt|preise?|buchung|link|website|öffnungszeit|ticket|lockerer|umgangssprachlich|zu\s+steif|weniger\s+also|zu\s+lang|knapp|menschlicher|flüssiger)\b/iu;
 
 const EXPECT_ALL: LearnedRuleExpect[] = [
   'prices',
@@ -34,6 +34,15 @@ const EXPECT_ALL: LearnedRuleExpect[] = [
   'times_hours',
   'menu',
   'tickets',
+  'sky_conditions',
+  'temp_range',
+  'rain_timing',
+  'clothing_tip',
+  'casual_tone',
+  'woven_clothing',
+  'brief_speech',
+  'complete_sentences',
+  'pack_prefs',
 ];
 
 const AVOID_ALL: LearnedRuleAvoid[] = [
@@ -45,6 +54,16 @@ const AVOID_ALL: LearnedRuleAvoid[] = [
   'meta_app_pitch',
   'vague_filler',
   'nav_auto_start',
+  'station_board_fallback',
+  'aushang',
+  'invent_storm',
+  'dry_list',
+  'sun_as_day_at_night',
+  'parenthetical_aside',
+  'new_pitch',
+  'boilerplate_opener',
+  'essay',
+  'pack_unwanted_items',
 ];
 
 const FAMILY_ALL: LearnedRuleIntentFamily[] = [
@@ -56,6 +75,7 @@ const FAMILY_ALL: LearnedRuleIntentFamily[] = [
   'knowledge',
   'planning',
   'booking',
+  'packing',
   'general',
 ];
 
@@ -150,12 +170,67 @@ export function getRecentTurnPair(): {
   return { lastUser, lastAssistant };
 }
 
+/** Style-only: kürzer / lockerer / weniger Also — Struktur, kein Script. */
+
+function tryPackPrefDraft(
+  text: string,
+): Omit<LearnedRule, 'id' | 'createdAt' | 'updatedAt' | 'hitCount'> | null {
+  try {
+    const {
+      looksLikePackPreference,
+      parsePackPrefsFromText,
+      draftPackPrefLearnedRule,
+    } = require('../../module2/timeline/packListPrefs') as {
+      looksLikePackPreference: (t: string) => boolean;
+      parsePackPrefsFromText: (t: string) => {
+        avoid: string[];
+        prefer: string[];
+        notes: string[];
+      };
+      draftPackPrefLearnedRule: (p: {
+        avoid: string[];
+        prefer: string[];
+        notes: string[];
+      }) => Omit<LearnedRule, 'id' | 'createdAt' | 'updatedAt' | 'hitCount'> | null;
+    };
+    if (!looksLikePackPreference(text)) return null;
+    const prefs = parsePackPrefsFromText(text);
+    return draftPackPrefLearnedRule(prefs as never);
+  } catch {
+    return null;
+  }
+}
+
+export function looksLikeSpeechStyleCorrection(text: string): boolean {
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (t.length < 5) return false;
+  return (
+    /\b(?:kürzer|knapp(?:er)?|zu\s+lang|weniger\s+(?:reden|text|worte)|mach(?:e)?\s+(?:es\s+)?kürzer)\b/iu.test(
+      t,
+    ) ||
+    /\b(?:lockerer|umgangssprachlich(?:er)?|menschlicher|flüssiger|zu\s+steif|zu\s+förmlich|weniger\s+steif)\b/iu.test(
+      t,
+    ) ||
+    /\b(?:weniger\s+also|ohne\s+also|kein\s+also|weniger\s+(?:opener|vorgeplänkel|vorgeplaenkel))\b/iu.test(
+      t,
+    ) ||
+    /\b(?:als\s+(?:ganzen?\s+)?(?:lockeren?\s+)?satz|keine\s+(?:stichpunkte|liste|telegramm))\b/iu.test(
+      t,
+    )
+  );
+}
+
 export function looksLikeAnswerCorrection(text: string): boolean {
   const t = text.replace(/\s+/g, ' ').trim();
-  if (t.length < 8) return false;
+  if (t.length < 5) return false;
   // Blankes Nein / Stop — kein Lern-Signal
   if (/^(nee+|nö+|noe+|nein|falsch|doch\s+nicht)[.!?]*$/iu.test(t)) {
     return false;
+  }
+  // Reine Style-Hints nach Antwort (auch ohne „nee“)
+  if (looksLikeSpeechStyleCorrection(t)) {
+    const { lastAssistant } = getRecentTurnPair();
+    if (lastAssistant) return true;
   }
   if (!CORRECTION_HINT.test(t)) return false;
   // Reine Prefs („nenn mich nicht Bro“) sind keine Antwort-Korrektur
@@ -176,9 +251,10 @@ export function looksLikeAnswerCorrection(text: string): boolean {
   const stripped = t
     .replace(/^(nee+|nö+|noe+|nein|falsch)[,.\s]*/iu, '')
     .trim();
-  if (stripped.length < 6) return false;
+  if (stripped.length < 5) return false;
   return true;
 }
+
 
 /** Heuristik: Intent-Family aus Text + letztem Turn. */
 export function inferIntentFamily(
@@ -220,6 +296,9 @@ export function inferIntentFamily(
   ) {
     return 'navigation';
   }
+  if (/\b(packliste|packen|einpacken|packing\s*list|nie\s+pulli|kein(?:en)?\s+anzug)\b/u.test(blob)) {
+    return 'packing';
+  }
   if (/\b(plan|tagesplan|itinerar|vormittag|nachmittag)\b/u.test(blob)) {
     return 'planning';
   }
@@ -241,6 +320,8 @@ export function extractCorrectionFast(
   text: string,
   ctx: { lastUser: string | null; lastAssistant: string | null },
 ): Omit<LearnedRule, 'id' | 'createdAt' | 'updatedAt' | 'hitCount'> | null {
+  const packDraft = tryPackPrefDraft(text);
+  if (packDraft) return packDraft;
   if (!looksLikeAnswerCorrection(text)) return null;
   const t = text.replace(/\s+/g, ' ').trim();
   const expect: LearnedRuleExpect[] = [];
@@ -304,8 +385,52 @@ export function extractCorrectionFast(
     expect.push('route_button');
   }
 
+  // Speech-Style: kürzer / lockerer / weniger Also — vor Default
+  let styleHit = false;
+  if (
+    /\b(?:kürzer|knapp(?:er)?|zu\s+lang|weniger\s+(?:reden|text|worte)|mach(?:e)?\s+(?:es\s+)?kürzer)\b/iu.test(
+      t,
+    )
+  ) {
+    expect.push('brief_speech', 'answer_first', 'complete_sentences');
+    avoid.push('essay', 'vague_filler', 'dry_list');
+    tags.push('brief_speech');
+    styleHit = true;
+  }
+  if (
+    /\b(?:lockerer|umgangssprachlich(?:er)?|menschlicher|flüssiger|zu\s+steif|zu\s+förmlich|weniger\s+steif)\b/iu.test(
+      t,
+    )
+  ) {
+    expect.push('casual_tone', 'complete_sentences');
+    avoid.push('dry_list', 'vague_filler');
+    tags.push('casual_tone');
+    styleHit = true;
+  }
+  if (
+    /\b(?:weniger\s+also|ohne\s+also|kein\s+also|weniger\s+(?:opener|vorgeplänkel|vorgeplaenkel)|kein\s+(?:app[- ]?)?opener)\b/iu.test(
+      t,
+    )
+  ) {
+    avoid.push('boilerplate_opener', 'vague_filler');
+    expect.push('answer_first', 'casual_tone');
+    tags.push('no_boilerplate');
+    styleHit = true;
+  }
+  if (
+    /\b(?:als\s+(?:ganzen?\s+)?(?:lockeren?\s+)?satz|keine\s+(?:stichpunkte|liste)|kein\s+telegramm)\b/iu.test(
+      t,
+    )
+  ) {
+    expect.push('complete_sentences', 'casual_tone');
+    avoid.push('dry_list');
+    tags.push('complete_sentences');
+    styleHit = true;
+  }
+
   // Default soft: Korrektur ohne Stichworte → Antwort-first + konkret
-  if (!expect.length && !avoid.length) {
+  // (Style-Hits überspringen — sonst concrete_place bei „kürzer“)
+  if (!expect.length && !avoid.length && !styleHit) {
     expect.push('answer_first', 'concrete_place');
     avoid.push('vague_filler');
   }
@@ -338,11 +463,12 @@ async function extractCorrectionLlm(
   if (!hasGeminiApiKey()) return null;
   const prompt = [
     'Extrahiere eine STRUKTURELLE Antwort-Regel aus der User-Korrektur. JSON only:',
-    '{"intentFamily":"activity_poi|dining|events|hotel|navigation|knowledge|planning|booking|general",',
-    '"tags":["string"],"expect":["prices|duration|booking_url|website|life_now|short_history|answer_first|concrete_place|route_button|alternatives|times_hours|menu|tickets"],',
-    '"avoid":["long_history|address_unless_asked|gps_coords|fake_promises|permission_questions|meta_app_pitch|vague_filler|nav_auto_start"],',
+    '{"intentFamily":"activity_poi|dining|events|hotel|navigation|knowledge|planning|booking|packing|general",',
+    '"tags":["string"],"expect":["prices|duration|booking_url|website|life_now|short_history|answer_first|concrete_place|route_button|alternatives|times_hours|menu|tickets|casual_tone|brief_speech|complete_sentences"],',
+    '"avoid":["long_history|address_unless_asked|gps_coords|fake_promises|permission_questions|meta_app_pitch|vague_filler|nav_auto_start|dry_list|boilerplate_opener|essay"],',
     '"summary":"ein Satz Struktur-Constraint ohne festen Wortlaut"}',
     'Regeln: Nur Constraints/Struktur, nie Dialog-Skript. Nichts erfinden. Max 6 expect, 4 avoid.',
+    'Style-Korrekturen: kürzer→brief_speech+complete_sentences/−essay; lockerer→casual_tone; weniger Also→−boilerplate_opener.',
     `Vorherige User-Frage: ${(ctx.lastUser ?? '').slice(0, 220)}`,
     `Vorherige Yorro-Antwort (Auszug): ${(ctx.lastAssistant ?? '').slice(0, 280)}`,
     `Korrektur: ${text.slice(0, 400)}`,
@@ -385,6 +511,8 @@ async function extractCorrectionLlm(
 }
 
 function rulesEqualKey(a: LearnedRule, b: Pick<LearnedRule, 'intentFamily' | 'expect' | 'avoid' | 'tags'>): boolean {
+  // Eine Pack-Prefs-Regel pro User — Tags akkumulieren
+  if (a.intentFamily === 'packing' && b.intentFamily === 'packing') return true;
   const tagA = [...a.tags].map((t) => t.toLowerCase()).sort().join('|');
   const tagB = [...b.tags].map((t) => t.toLowerCase()).sort().join('|');
   const expA = [...a.expect].sort().join('|');
@@ -475,6 +603,7 @@ export function intentToFamily(intent: string | null | undefined): LearnedRuleIn
   ) {
     return 'navigation';
   }
+  if (/packlist|pack_list|packen|packing/.test(i)) return 'packing';
   if (/day_plan|plan|itinerar|day/.test(i)) return 'planning';
   if (/book|reserv/.test(i)) return 'booking';
   if (
@@ -609,11 +738,17 @@ export async function runCorrectionLearningCapture(
     replyHint: null,
   };
   const text = userText.replace(/\s+/g, ' ').trim();
-  if (!looksLikeAnswerCorrection(text)) return empty;
+  const packEarly = tryPackPrefDraft(text);
+  if (!looksLikeAnswerCorrection(text) && !packEarly) return empty;
 
   const ctx = getRecentTurnPair();
-  let draft = extractCorrectionFast(text, ctx);
-  if (!draft || (draft.expect.length + draft.avoid.length < 2 && text.length > 20)) {
+  let draft = packEarly ?? extractCorrectionFast(text, ctx);
+  if (
+    !draft ||
+    (draft.intentFamily !== 'packing' &&
+      draft.expect.length + draft.avoid.length < 2 &&
+      text.length > 20)
+  ) {
     const llm = await extractCorrectionLlm(text, ctx);
     if (llm) draft = llm;
   }

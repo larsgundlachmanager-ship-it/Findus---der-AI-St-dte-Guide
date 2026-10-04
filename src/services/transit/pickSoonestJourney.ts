@@ -139,8 +139,8 @@ export function pickRichestSameRide(its: JourneyItinerary[]): JourneyItinerary[]
 }
 
 /**
- * Nächste Verbindung, die noch nicht weg ist. Knapp = tight (Sprint),
- * nicht automatisch die Folgefahrt.
+ * Nächste schaffbare Verbindung zuerst (comfort), sonst catchable, sonst
+ * noch nicht abgefahren. Knapp = tight nur wenn nichts Bequemeres da ist.
  * Mit aroundMs (gewünschte Uhr): ±45 Min ok, bei mehreren die nächste Zeit.
  */
 export function pickSoonestCatchable(
@@ -154,19 +154,28 @@ export function pickSoonestCatchable(
 } {
   const ranked = pickRichestSameRide(its).sort(rankSoonestThenFastest);
   const stillComing = ranked.filter((it) => hasNotDeparted(it, nowMs));
+  const catchable = ranked.filter((it) => isCatchable(it, nowMs));
+  const comfortable = ranked.filter((it) => isComfortable(it, nowMs));
   const around =
     opts?.aroundMs != null && Number.isFinite(opts.aroundMs)
       ? opts.aroundMs
       : null;
-  const pool = stillComing.length ? stillComing : ranked;
+  const preferPool =
+    comfortable.length > 0
+      ? comfortable
+      : catchable.length > 0
+        ? catchable
+        : stillComing.length > 0
+          ? stillComing
+          : ranked;
   const snapped =
     around != null
-      ? nextMsWithinWindow(pool, (it) => {
+      ? nextMsWithinWindow(preferPool, (it) => {
           const d = depMsOf(it);
           return Number.isFinite(d) ? d : null;
         }, around)
       : null;
-  const pick = (snapped ?? stillComing[0] ?? null) as JourneyItinerary | null;
+  const pick = (snapped ?? preferPool[0] ?? null) as JourneyItinerary | null;
   if (!pick) return { ordered: ranked, pick: null, tight: false };
   const rest = ranked.filter((it) => it !== pick);
   return {

@@ -1,0 +1,7 @@
+--------- beginning of main
+09-14 00:14:02.123 29162 29162 W unknown:BridgelessReact: ReactHost{0}.onHostPause(activity)
+09-14 00:14:02.123 29162 29162 W unknown:BridgelessReact: ReactContext.onHostPause()
+09-14 00:14:02.126 29162 29162 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+09-14 00:14:02.126 29162 29162 W unknown:BridgelessReact: ReactContext.onHostResume()
+09-14 00:14:02.171 29162 29193 I AudioManager: In setSpeakerphoneOn(), on: true, calling application: de.findus.app
+09-14 00:14:02.173 29162 29184 I ReactNativeJS: '[auth] handleRedirect', 'findus://ask?q=Wie%20gross%20ist%20ein%20Tennisplatz'

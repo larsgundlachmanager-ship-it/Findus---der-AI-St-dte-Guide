@@ -5,6 +5,7 @@ import {
   FIRST_HOOK_MAX_CHARS,
   extractStreamingChunks,
   splitTextToStreamingChunks,
+  streamingChunksFromTextStream,
 } from './punctuationChunker';
 
 function assert(cond: unknown, msg: string): void {
@@ -79,6 +80,31 @@ assert(
   `Adress-Hook: «${addrChunks[0]}»`,
 );
 
-console.log(
-  `[ok] punctuationChunker firstHook≤${FIRST_HOOK_MAX_CHARS} chunks=${chunks.length} «${chunks[0]}»`,
-);
+void (async () => {
+  const hung = (async function* () {
+    yield 'Klar, Stichpunkte da, dann weiter';
+    await new Promise<void>(() => {});
+  })();
+  const it = streamingChunksFromTextStream(hung);
+  const first = await it.next();
+  if (first.value !== 'Klar,') throw new Error('call1 hook ' + String(first.value));
+  const second = await Promise.race([
+    it.next(),
+    new Promise<string>((resolve) => setTimeout(() => resolve('timeout'), 80)),
+  ]);
+  const text = typeof second === 'string' ? second : second.value;
+  if (typeof text !== 'string' || !/Stichpunkte da/.test(text)) {
+    throw new Error('call1 rest must not wait for call2, got ' + String(text));
+  }
+  console.log(
+    '[ok] punctuationChunker firstHook<=' +
+      FIRST_HOOK_MAX_CHARS +
+      ' chunks=' +
+      chunks.length +
+      ' ' +
+      chunks[0],
+  );
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

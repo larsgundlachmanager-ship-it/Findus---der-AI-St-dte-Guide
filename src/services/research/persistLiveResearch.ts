@@ -39,6 +39,9 @@ export type LiveResearchVenue = {
     sourceUrl?: string | null;
     confidence: 'high' | 'medium' | 'low';
   }>;
+  /** perfect | near_miss | rejected — Pack-Learn inkl. Verworfene */
+  constraintFit?: 'perfect' | 'near_miss' | 'rejected';
+  rejectedReason?: string | null;
 };
 
 function pruneRecent() {
@@ -84,9 +87,16 @@ function categoryFor(
       return 'sight';
     }
   }
+  if (/basketball/.test(blob)) return 'basketball';
+  if (/tischtennis|ping[\s-]?pong/.test(blob)) return 'tischtennis';
+  if (/trinkwasser|trinkbrunnen|drinking.?water/.test(blob)) return 'trinkwasser';
+  if (/grillplatz|grillstelle|bbq|barbecue/.test(blob)) return 'grillplatz';
+  if (/picknick|picnic/.test(blob)) return 'picknick';
+  if (/\b(sup\b|stand[\s-]?up|paddle|verleih)/.test(blob)) return 'verleih';
   if (/cafe|café|bäck|baeck|bakery|coffee/.test(blob)) return 'cafe';
   if (kind === 'bar' || /\bbar\b|pub|biergarten/.test(blob)) return 'bar';
   if (kind === 'hotel') return 'hotel';
+  if (kind === 'generic') return 'ort';
   return 'restaurant';
 }
 
@@ -102,6 +112,10 @@ export function buildLiveResearchVenue(
     | 'websiteUrl'
   >,
   kind?: PitchRequest['kind'],
+  meta?: {
+    constraintFit?: LiveResearchVenue['constraintFit'];
+    rejectedReason?: string | null;
+  },
 ): LiveResearchVenue | null {
   const name = String(c.name || '').trim();
   if (name.length < 2) return null;
@@ -113,8 +127,29 @@ export function buildLiveResearchVenue(
     ...(c.hardEvidence ?? []),
   ].join(' ');
   const facets = inferGastroFacetTags(name, extra).filter((t) => !META.has(t));
+  const fit =
+    meta?.constraintFit ??
+    ((c.softTags ?? []).some((t) => /near_miss/i.test(t))
+      ? 'near_miss'
+      : 'perfect');
+  const rejectedReason =
+    meta?.rejectedReason ??
+    (c.hardEvidence ?? [])
+      .map((e) => e.replace(/^rejected:/i, '').trim())
+      .find((e) => e.length > 2 && /weekday|cuisine|ayce|asia|dienstag|tuesday/i.test(e)) ??
+    null;
+  const scheduleTag = (c.softTags ?? []).find((t) =>
+    /^ayce_schedule:/i.test(t),
+  );
+  const priceTag = (c.softTags ?? []).find((t) => /^ayce_price:/i.test(t));
   const tags = [
-    ...new Set(['review_facet', 'from_live_research', ...facets]),
+    ...new Set([
+      'review_facet',
+      'from_live_research',
+      ...(fit === 'near_miss' ? ['near_miss', 'constraint_near_miss'] : []),
+      ...(fit === 'rejected' ? ['constraint_rejected'] : []),
+      ...facets,
+    ]),
   ];
   const category = categoryFor(kind, name, extra);
   const facts: LiveResearchVenue['facts'] = [];
@@ -129,6 +164,24 @@ export function buildLiveResearchVenue(
       confidence: 'medium',
     });
   }
+  if (scheduleTag) {
+    facts.push({
+      text: `AYCE-Zeitfenster (Recherche): ${scheduleTag.replace(/^ayce_schedule:/i, '')}`,
+      confidence: 'medium',
+    });
+  }
+  if (priceTag) {
+    facts.push({
+      text: `AYCE-Preis-Hinweis (Recherche): ${priceTag.replace(/^ayce_price:/i, '')}`,
+      confidence: 'medium',
+    });
+  }
+  if (fit === 'near_miss' || fit === 'rejected') {
+    facts.push({
+      text: `Constraint-Fit: ${fit}${rejectedReason ? ` — ${rejectedReason}` : ''}. Für passende Tage/Avoids speichern, nicht soft-füllen.`,
+      confidence: 'high',
+    });
+  }
   const site = String(c.websiteUrl || '').trim();
   if (site.startsWith('http')) {
     facts.push({
@@ -137,25 +190,51 @@ export function buildLiveResearchVenue(
       confidence: 'medium',
     });
   }
-  return { name, lat: c.lat, lng: c.lng, category, tags, facts };
+  return {
+    name,
+    lat: c.lat,
+    lng: c.lng,
+    category,
+    tags,
+    facts,
+    constraintFit: fit,
+    rejectedReason,
+  };
 }
 
 /**
- * Shortlist aus Places/OSM → Pack schreiben (nicht Pack-Hits erneut).
- * Alle Pitch-Kinds außer Hotel; Weltwissen-Guard bleibt aktiv.
+ * Alle Pitch-Kinds inkl. Hotel (Stay22); Weltwissen-Guard bleibt aktiv.
+ * Near-Misses / ernsthafte Treffer → lokales Overlay + Spot-Inbox.
  */
-export async function persistLivePitchResearch(
+export function isPersistableLiveSource(
+  source: PitchCandidate['source'] | undefined,
+  kind: PitchRequest['kind'],
+): boolean {
+  if (source === 'places' || source === 'osm') return true;
+  if (kind === 'hotel' && source === 'stay22') return true;
+  return false;
+}
+
+/** Pure Plan-Stufe (Smoke ohne Persist/RN). */
+export function planLivePitchPersistDrafts(
   req: PitchRequest,
   venues: PitchCandidate[],
-): Promise<number> {
-  if (req.kind === 'hotel') return 0;
-  const cityId = cityIdOf(req);
-  if (!cityId) return 0;
-  pruneRecent();
-
-  const userText = `${req.title} ${req.context}`.trim();
-  const live = venues.filter((v) => v.source === 'places' || v.source === 'osm');
-  if (!live.length) return 0;
+  opts?: { includeNearMisses?: PitchCandidate[] },
+): LiveResearchVenue[] {
+  const live = [
+    ...venues.filter((v) => isPersistableLiveSource(v.source, req.kind)),
+    ...(opts?.includeNearMisses ?? []).filter((v) =>
+      isPersistableLiveSource(v.source, req.kind),
+    ),
+  ];
+  const seenNames = new Set<string>();
+  const unique = live.filter((v) => {
+    const k = v.name.toLowerCase();
+    if (seenNames.has(k)) return false;
+    seenNames.add(k);
+    return true;
+  });
+  if (!unique.length) return [];
 
   let policyFn: ((o: {
     userText: string;
@@ -172,8 +251,9 @@ export async function persistLivePitchResearch(
     policyFn = null;
   }
 
-  const drafts = live
-    .slice(0, 5)
+  const userText = `${req.title} ${req.context}`.trim();
+  return unique
+    .slice(0, 8)
     .map((v) => {
       if (policyFn) {
         const policy = policyFn({
@@ -187,8 +267,24 @@ export async function persistLivePitchResearch(
       return buildLiveResearchVenue(v, req.kind);
     })
     .filter((d): d is LiveResearchVenue => Boolean(d));
+}
+
+export async function persistLivePitchResearch(
+  req: PitchRequest,
+  venues: PitchCandidate[],
+  opts?: {
+    /** Auch Near-Misses / Verworfene aus Harvest mitschreiben */
+    includeNearMisses?: PitchCandidate[];
+  },
+): Promise<number> {
+  const cityId = cityIdOf(req);
+  if (!cityId) return 0;
+  pruneRecent();
+
+  const drafts = planLivePitchPersistDrafts(req, venues, opts);
   if (!drafts.length) return 0;
 
+  const userText = `${req.title} ${req.context}`.trim();
   let n = 0;
   try {
     const { persistDiscoveredPoiIntoDataset } = await import(
@@ -218,6 +314,79 @@ export async function persistLivePitchResearch(
     }
   } catch (err) {
     if (__DEV__) console.warn('[liveResearch] persist failed', err);
+  }
+  return n;
+}
+
+/** Activity/SUP-Verleiher → Spot-Inbox (auch nicht gewählte). */
+export async function persistActivitySportHits(opts: {
+  userText: string;
+  cityHint?: string | null;
+  venues: Array<{
+    name: string;
+    lat: number;
+    lng: number;
+    websiteUri?: string | null;
+    priceLabel?: string | null;
+  }>;
+}): Promise<number> {
+  const cityId = cityIdOf({ cityHint: opts.cityHint });
+  if (!cityId) return 0;
+  pruneRecent();
+  const venues = (opts.venues ?? [])
+    .filter(
+      (v) =>
+        String(v.name || '').trim().length >= 2 &&
+        Number.isFinite(v.lat) &&
+        Number.isFinite(v.lng),
+    )
+    .slice(0, 4);
+  if (!venues.length) return 0;
+
+  let n = 0;
+  try {
+    const { persistDiscoveredPoiIntoDataset } = await import(
+      './persistDiscoveredPoi'
+    );
+    for (const v of venues) {
+      const key = `${cityId}|${v.name.toLowerCase()}|${v.lat.toFixed(4)}|${v.lng.toFixed(4)}|verleih`;
+      const prev = recentKeys.get(key);
+      if (prev && Date.now() - prev < RECENT_TTL_MS) continue;
+      recentKeys.set(key, Date.now());
+      const facts: LiveResearchVenue['facts'] = [
+        {
+          text: `${v.name} — Verleih/Aktivität aus Live-Recherche.`,
+          sourceUrl: v.websiteUri ?? null,
+          confidence: 'medium',
+        },
+      ];
+      if (v.priceLabel) {
+        facts.push({
+          text: `Preis-Hinweis (belegt): ${v.priceLabel}`,
+          sourceUrl: v.websiteUri ?? null,
+          confidence: 'high',
+        });
+      }
+      await persistDiscoveredPoiIntoDataset(
+        {
+          name: v.name,
+          lat: v.lat,
+          lng: v.lng,
+          category: 'verleih',
+          cityId,
+          facts,
+          promptBlock: '',
+        },
+        {
+          skipWiki: true,
+          tags: ['from_live_research', 'activity', 'verleih'],
+          userText: opts.userText,
+        },
+      );
+      n += 1;
+    }
+  } catch (err) {
+    if (__DEV__) console.warn('[liveResearch] activity persist failed', err);
   }
   return n;
 }

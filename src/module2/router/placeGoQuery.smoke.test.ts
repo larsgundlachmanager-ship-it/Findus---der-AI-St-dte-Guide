@@ -34,6 +34,8 @@ assert(
   'beach not quick lookup',
 );
 assert(isQuickLookupQuery('Wie alt ist Mark Forster?'), 'trivia still quick');
+assert(isQuickLookupQuery('Wie heißt der Papst?'), 'wie heißt papst quick');
+assert(isQuickLookupQuery('Wer ist die aktuelle Königin von England?'), 'who is queen quick');
 
 assert(
   detectLiveInventoryKind(

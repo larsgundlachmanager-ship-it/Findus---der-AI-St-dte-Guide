@@ -12,7 +12,11 @@ export function hasSpecializedFoodFilter(req: PitchRequest): boolean {
   return req.wishes.some(
     (w) =>
       w.hardness === 'must' &&
-      (w.kind === 'dish' || w.kind === 'cuisine' || w.kind === 'vibe'),
+      (w.kind === 'dish' ||
+        w.kind === 'cuisine' ||
+        w.kind === 'vibe' ||
+        (w.kind === 'amenity' &&
+          /all_you_can_eat|ayce|buffet|schlemmer/i.test(w.text))),
   );
 }
 
@@ -22,6 +26,17 @@ function gastroOk(c: PitchCandidate): boolean {
 
 function keyOf(c: PitchCandidate): string {
   return (c.placeId || c.name).toLowerCase();
+}
+
+function packMatchesMust(c: PitchCandidate, req: PitchRequest): boolean {
+  const musts = req.wishes.filter(
+    (w) =>
+      w.hardness === 'must' &&
+      (w.kind === 'dish' || w.kind === 'cuisine' || w.kind === 'vibe' || w.kind === 'amenity'),
+  );
+  if (!musts.length) return true;
+  const blob = `${c.name} ${(c.softTags ?? []).join(' ')}`;
+  return musts.some((w) => scoreSpecializedFoodWish(blob, w) >= 3);
 }
 
 /**
@@ -49,20 +64,22 @@ export function mixLiveResearchSeed(
     out.push(c);
   };
 
-  const musts = req.wishes.filter(
-    (w) =>
-      w.hardness === 'must' &&
-      (w.kind === 'dish' || w.kind === 'cuisine' || w.kind === 'vibe'),
-  );
   for (const c of pool) {
     if (c.source !== 'pack') continue;
-    const blob = `${c.name} ${(c.softTags ?? []).join(' ')}`;
-    if (musts.some((w) => scoreSpecializedFoodWish(blob, w) >= 3)) push(c);
+    if (packMatchesMust(c, req)) push(c);
   }
   for (const c of pool) {
     if (c.source === 'places') push(c);
   }
-  for (const c of preTop) push(c);
-  for (const c of pool) push(c);
-  return (out.length ? out : fallback).slice(0, limit);
+  for (const c of preTop) {
+    if (c.source === 'pack' && !packMatchesMust(c, req)) continue;
+    push(c);
+  }
+  for (const c of pool) {
+    if (c.source === 'pack') continue;
+    push(c);
+  }
+  // Spezial-Wunsch: nie generische Pack-Restaurants als Fake-Steak/AYCE
+  if (!out.length) return [];
+  return out.slice(0, limit);
 }

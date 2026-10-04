@@ -1,0 +1,43 @@
+{
+  "at": "2026-09-18T07:41:15.492379+00:00",
+  "serial": "00143157P001105",
+  "device": "nothing_travel_explicit",
+  "scenarios": {
+    "A_warm_open4": {
+      "hint4": false,
+      "hint2": false,
+      "cards": 0,
+      "matches": 0,
+      "fenster": 0,
+      "weitere": false,
+      "option_est": 0,
+      "blob_snip": "Zurück zu Reisen\n\nirgendwohin warm und guenstig\nAkt 2\nSchließen\n\nPasst das so?\n&#128204;\nAbflug: Hamburg\n&#128204;\nReisezeit: 2026-10, Wochenende\n&#128204;\nAufenthalt: 2 Nächte, 3 Tage\n&#128204;\nReisende: 2 Erwachsene\n&#128204;\nBudget: 300 € pro Person\n&#128204;\nUnterkunft: Apartment oder Hotel\n&#128204;\nMust-Have: Pool\n&#128204;\nMust-Have: Party-Optionen\n&#128204;\nWunsch: warmes Wetter\n&#128204;\nZiel: offen, warm und günstig\n&#128204;\nÖPNV bevorzugt\n❓\nWelche warmen und günstigen Optionen gibt",
+      "brief_pct": null,
+      "ok": false
+    },
+    "B_prag_specific2": {
+      "hint4": false,
+      "hint2": false,
+      "cards": 0,
+      "matches": 0,
+      "fenster": 0,
+      "weitere": false,
+      "option_est": 0,
+      "blob_snip": "Zurück zu Reisen\n\nParty-Wochenende\nAkt 2\nSchließen\n\nPasst das so?\n&#128197;\nAnreise: 25.09.2026\n&#128716;\nDauer: 2 Nächte\n✈️\nAbflug: Hamburg\n&#128101;\nReisende: 2 Personen\n✈️\nReisemittel: Flug\n✅\nDirektflug gewünscht\n&#129523;\nHandgepäck: 1 Stück\n❌\nKein Aufgabegepäck\n&#128182;\nBudget: 400 € pro Person\n&#127968;\nUnterkunft: Apartment oder Hotel\n&#127976;\nHotel als Alternative\n&#127939;‍♂\nAktivurlaub bevorzugt\n&#128683;\nKein Pool oder Party\n&#128694;‍♂\nTransfer: zu Fuß bevorzugt\n&#128269;\nSchnäpp",
+      "brief_pct": null,
+      "ok": false
+    },
+    "C_long_dump": {
+      "ok": true,
+      "recap_or_gap": true,
+      "snip": "Zurück zu Reisen\n\nParty-Wochenende\nAkt 2\nSchließen\n\nPasst das so?\n&#128197;\nAnreise: 25.09.2026\n&#128716;\nDauer: 2 Nächte\n✈️\nAbflug: Hamburg\n&#128101;\nReisende: 2 Personen\n✈️\nReisemittel: Flug\n✅\nDirektflug gewünscht\n&#129523;\nHandgepäck: 1 Stück\n❌\nKein Aufgabegepäck\n&#128182;\nBudget: 400 € pro Person\n&#127968;\nUnterkunft: Apartment oder Hotel\n&#127976;\nHotel als Alternative\n&#127939;‍♂\nAktivurlaub bevorzugt\n&#128683;\nKein Pool oder Party\n&#128694;‍♂\nTransfer: zu Fuß bevorzugt\n&#128269;\nSchnäpp"
+    }
+  },
+  "askServer": true,
+  "pass": {
+    "A": false,
+    "B": false,
+    "C": true,
+    "all": false
+  }
+}

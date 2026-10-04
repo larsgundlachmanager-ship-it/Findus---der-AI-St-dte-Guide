@@ -23,6 +23,8 @@ import {
   isShortReplyToLastAsk,
   luggageFromLastAskReply,
   parseFlightTripSlots,
+  extractFlightRegionHint,
+  type FlightRegionHint,
   wantsFlightTaxiAccess,
 } from './flightTripIntent';
 import {
@@ -60,7 +62,7 @@ import {
   stepFlightBufferStyle,
 } from './flightBufferProfile';
 import { buildLeaveBySpeech, clockFromMs } from './flightLeaveBySpeech';
-import { upsertFlightTripTimeline, retargetFlightAccess, readFlightTripClocks, clearAllFlightTripStops } from './flightTimeline';
+import { upsertFlightTripTimeline, retargetFlightAccess, readFlightTripClocks, clearAllFlightTripStops, completePendingAirportTransfer, getPendingAirportTransfer } from './flightTimeline';
 import { requestPlanScroll } from '../../module2/timeline/planCalendarUiStore';
 import {
   hasCommittedFlightWatches,
@@ -84,6 +86,10 @@ import {
   setLastFlightCommit,
   type FlightCommitSnapshot,
 } from './flightTripSession';
+import {
+  flightOriginNeedsClarify,
+  pickPlausibleFlightOrigin,
+} from './flightOriginMismatch';
 
 export type FlightTripFollowUp = {
   speech: string;
@@ -258,34 +264,38 @@ function leaveByChips(
   gate?: string | null,
   extra?: QuickAction[],
   preferTaxi?: boolean,
+  /** Task-2 Deep-Link schon da — keine zweite Anreise-Frage als Chip */
+  skipModeAsk?: boolean,
 ): QuickAction[] {
   const mapLink = airportLageplanLink({ originIata, gate: gate ?? null });
-  // Immer beide Anreise-Optionen — preferTaxi nur Reihenfolge, kein Ausblenden
-  const modeChips: QuickAction[] = preferTaxi
-    ? [
-        {
-          type: 'SHOW_MORE',
-          label: 'Taxi / Uber',
-          payload: { textPrompt: 'Zum Flughafen mit dem Taxi' },
-        },
-        {
-          type: 'SHOW_MORE',
-          label: 'ÖPNV',
-          payload: { textPrompt: 'Zum Flughafen mit ÖPNV' },
-        },
-      ]
-    : [
-        {
-          type: 'SHOW_MORE',
-          label: 'ÖPNV',
-          payload: { textPrompt: 'Zum Flughafen mit ÖPNV' },
-        },
-        {
-          type: 'SHOW_MORE',
-          label: 'Taxi / Uber',
-          payload: { textPrompt: 'Zum Flughafen mit dem Taxi' },
-        },
-      ];
+  // preferTaxi nur Reihenfolge; skipModeAsk wenn Task 2 schon committed
+  const modeChips: QuickAction[] = skipModeAsk
+    ? []
+    : preferTaxi
+      ? [
+          {
+            type: 'SHOW_MORE',
+            label: 'Taxi / Uber',
+            payload: { textPrompt: 'Zum Flughafen mit dem Taxi' },
+          },
+          {
+            type: 'SHOW_MORE',
+            label: 'ÖPNV',
+            payload: { textPrompt: 'Zum Flughafen mit ÖPNV' },
+          },
+        ]
+      : [
+          {
+            type: 'SHOW_MORE',
+            label: 'ÖPNV',
+            payload: { textPrompt: 'Zum Flughafen mit ÖPNV' },
+          },
+          {
+            type: 'SHOW_MORE',
+            label: 'Taxi / Uber',
+            payload: { textPrompt: 'Zum Flughafen mit dem Taxi' },
+          },
+        ];
   const bufferChips: QuickAction[] = [
     {
       type: 'SHOW_MORE',
@@ -303,12 +313,10 @@ function leaveByChips(
       payload: { textPrompt: 'Puffer passt so' },
     },
   ];
-  // Founder-Staging: Puffer zuerst, dann Anreise — max 5 Chips.
-  const chips: QuickAction[] = [
-    ...(extra ?? []).slice(0, 1),
-    ...bufferChips,
-    ...modeChips,
-  ];
+  // Task 2: Uber/Deep-Link zuerst; sonst Founder-Staging Puffer → Anreise
+  const chips: QuickAction[] = skipModeAsk
+    ? [...(extra ?? []).slice(0, 2), ...bufferChips]
+    : [...(extra ?? []).slice(0, 1), ...bufferChips, ...modeChips];
   if (mapLink && chips.length < 5) {
     chips.push({
       type: 'OPEN_URL',
@@ -325,6 +333,61 @@ function leaveByChips(
     uniq.push(c);
   }
   return uniq.slice(0, 5);
+}
+
+/** Sticky Task-2: Taxi war Root (Satz oder Follow-through), auch wenn Follow-up nur „18 Uhr“ ist. */
+function stickyFlightTaxiWanted(userText: string): boolean {
+  const t = (userText || '').replace(/\s+/g, ' ').trim();
+  if (wantsFlightTaxiAccess(t) || /\b(taxi|uber)\b/iu.test(t)) return true;
+  try {
+    const { getFollowThroughGoals } = require('../../module2/router/missionFollowThrough') as {
+      getFollowThroughGoals: () => Array<{ kind: string }>;
+    };
+    if (getFollowThroughGoals().some((g) => g.kind === 'taxi_airport')) return true;
+  } catch {
+    /* soft */
+  }
+  return false;
+}
+
+/** Task 1 fertig → Task 2 Deep-Link mit Leave-by-Abholzeit (Just-Do-It). */
+function buildTask2TaxiDeepLink(
+  session: {
+    originLat: number | null;
+    originLng: number | null;
+    originName: string;
+  },
+  leaveMs: number,
+): QuickAction | null {
+  if (session.originLat == null || session.originLng == null) return null;
+  try {
+    const { buildUberRideAction } = require('../affiliate/affiliateService') as {
+      buildUberRideAction: (
+        lat: number,
+        lng: number,
+        name: string,
+        targetPoiId?: string | number,
+        extra?: {
+          dropoffFormattedAddress?: string | null;
+          pickupTimeLabel?: string;
+          pickupDateIso?: string;
+        },
+      ) => QuickAction;
+    };
+    return buildUberRideAction(
+      session.originLat,
+      session.originLng,
+      session.originName,
+      undefined,
+      {
+        dropoffFormattedAddress: session.originName,
+        pickupTimeLabel: clockFromMs(leaveMs),
+        pickupDateIso: dateKeyFromMs(leaveMs),
+      },
+    );
+  } catch {
+    return null;
+  }
 }
 
 function identMissing(ident: string | null | undefined): boolean {
@@ -564,10 +627,13 @@ function askWhen(sess: TripSlotState): FlightTripFollowUp {
   const day = sess.dateKey ? spokenDay(sess.dateKey) : '';
   stampPendingAsk(sess, 'when');
   return {
-    speech: `Um dir genau zu sagen, wann du am Flughafen sein sollst, brauche ich deine Abflugzeit oder die Flugnummer${city ? ` nach ${city}` : ''}${day ? ` (${day})` : ''}.`,
+    speech: day
+      ? `Für ${day} nach ${city}: um wie viel Uhr fliegst du — oder hast du die Flugnummer?`
+      : `Um dir genau zu sagen, wann du am Flughafen sein sollst, brauche ich deine Abflugzeit oder die Flugnummer${city ? ` nach ${city}` : ''}.`,
     bullets: [
       routePairBullet(sess.originIata, sess.destIata) || city,
-    ],
+      day || null,
+    ].filter(Boolean) as string[],
     quickActions: liveChips.slice(0, 5),
     cardTitle: 'Wann fliegst du?',
     reopenMic: true,
@@ -708,6 +774,97 @@ function askDest(sess: TripSlotState): FlightTripFollowUp {
   };
 }
 
+const REGION_DEST_OPTIONS: Record<
+  FlightRegionHint,
+  Array<{ city: string; iata: string }>
+> = {
+  south: [
+    { city: 'Barcelona', iata: 'BCN' },
+    { city: 'Palma', iata: 'PMI' },
+    { city: 'Athen', iata: 'ATH' },
+  ],
+  north: [
+    { city: 'Stockholm', iata: 'ARN' },
+    { city: 'Oslo', iata: 'OSL' },
+    { city: 'Kopenhagen', iata: 'CPH' },
+  ],
+  east: [
+    { city: 'Wien', iata: 'VIE' },
+    { city: 'Budapest', iata: 'BUD' },
+    { city: 'Warschau', iata: 'WAW' },
+  ],
+  west: [
+    { city: 'Lissabon', iata: 'LIS' },
+    { city: 'Dublin', iata: 'DUB' },
+    { city: 'Paris', iata: 'CDG' },
+  ],
+};
+
+function regionSpeechLabel(region: FlightRegionHint): string {
+  if (region === 'south') return 'Süden';
+  if (region === 'north') return 'Norden';
+  if (region === 'east') return 'Osten';
+  return 'Westen';
+}
+
+/** Offene Richtungssuche: 2–3 Städte + Ticket-Buttons, kein „Wohin?“-Stuck. */
+async function wishPitchRegion(
+  sess: TripSlotState,
+  region: FlightRegionHint,
+): Promise<FlightTripFollowUp> {
+  const from = sess.originCity || sess.originIata || 'hier';
+  const when = sess.dateKey ? spokenDay(sess.dateKey) : '';
+  const picks = REGION_DEST_OPTIONS[region].slice(0, 3);
+  const pair =
+    picks.length >= 2
+      ? `${picks[0]!.city} und ${picks[1]!.city}`
+      : picks[0]?.city || 'starke Ziele';
+  const speech = `Ab ${from} Richtung ${regionSpeechLabel(region)}${when ? `, ${when}` : ''}: ${pair} sind starke Optionen — Tickets kannst du direkt prüfen. Welches Ziel?`;
+  const bullets = [
+    `Richtung ${regionSpeechLabel(region)}`,
+    ...picks.map((p) => p.city),
+  ].slice(0, 3);
+  const chips: QuickAction[] = picks.map((p) => ({
+    type: 'SHOW_MORE',
+    label: p.city.slice(0, 22),
+    payload: { textPrompt: `Flug nach ${p.city}` },
+  }));
+  const bookDate = seedWishDateKey(sess);
+  const first = picks[0];
+  if (sess.originIata && first && bookDate) {
+    try {
+      const { buildCheapFlightBookActions } = await import('./cheapFlightBook');
+      const book = buildCheapFlightBookActions({
+        originIata: sess.originIata,
+        destIata: first.iata,
+        dateKey: bookDate,
+        userText: `Richtung ${regionSpeechLabel(region)}`,
+      });
+      for (const a of book) {
+        if (a.type === 'OPEN_URL' || /flug|kiwi|buchen|ticket/i.test(a.label || '')) {
+          chips.push(a);
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
+  if (!chips.some((a) => a.type === 'OPEN_URL') && sess.originIata && first) {
+    chips.push({
+      type: 'SHOW_MORE',
+      label: 'Flug suchen',
+      payload: { textPrompt: `Flug nach ${first.city}` },
+    });
+  }
+  return {
+    speech,
+    bullets,
+    quickActions: chips.slice(0, 5),
+    cardTitle: `Richtung ${regionSpeechLabel(region)}`,
+    reopenMic: true,
+  };
+}
+
 function askDestHotel(sess: { destCity?: string | null }): FlightTripFollowUp {
   const city = (sess.destCity || '').trim() || 'am Ziel';
   stampPendingAsk(sess as TripSlotState, 'hotel');
@@ -739,94 +896,170 @@ function seedWishDateKey(sess: TripSlotState, nowMs = Date.now()): string | null
   return null;
 }
 
-async function wishPitch(sess: TripSlotState): Promise<FlightTripFollowUp> {
+async function wishPitch(sess: TripSlotState, userText?: string | null): Promise<FlightTripFollowUp> {
   const from = sess.originCity || sess.originIata || 'hier';
   const to = sess.destCity || sess.destIata || 'dein Ziel';
+  let outboundKey = sess.dateKey;
+  let returnKey: string | null = null;
+  try {
+    const { parseEventDateWindow } = await import('../concierge/eventDateWindow');
+    const win = parseEventDateWindow(userText || '');
+    if (win?.fromIso) {
+      outboundKey = outboundKey || win.fromIso;
+      returnKey = win.toIso;
+      if (!sess.dateKey && win.fromIso) {
+        sess.dateKey = win.fromIso;
+        saveSlots(sess);
+      }
+    }
+  } catch {
+    /* soft */
+  }
   const when =
-    sess.dateFlex === 'month' && sess.monthIndex
-      ? 'im Zeitraum'
-      : sess.dateFlex === 'week'
-        ? 'die Woche'
-        : sess.dateFlex === 'cheapest'
-          ? 'zum günstigsten Preis'
-          : sess.dateKey
-            ? spokenDay(sess.dateKey)
-            : '';
-  const top = routeOptions.slice(0, 2);
-  let chips = top.map(pickChip);
-  const pair =
-    top.length >= 2
-      ? `${hitLabel(top[0]!)} und ${hitLabel(top[1]!)}`
-      : top.length === 1
-        ? hitLabel(top[0]!)
-        : null;
-  let speech = pair
-    ? `Ab ${from} nach ${to}${when ? `, ${when}` : ''}: ${pair}. Welcher spricht dich an?`
-    : `Ab ${from} nach ${to}${when ? ` ${when}` : ''} — ich such die sinnvollen Flieger. Uhrzeit oder tippen.`;
-  const bullets = [
+    outboundKey && returnKey
+      ? `${spokenDay(outboundKey)} bis ${spokenDay(returnKey)}`
+      : sess.dateFlex === 'month' && sess.monthIndex
+        ? 'im Zeitraum'
+        : sess.dateFlex === 'week'
+          ? 'die Woche'
+          : sess.dateFlex === 'cheapest'
+            ? 'zum günstigsten Preis'
+            : outboundKey || sess.dateKey
+              ? spokenDay(outboundKey || sess.dateKey!)
+              : '';
+
+  const bookDate =
+    outboundKey ||
+    seedWishDateKey(sess) ||
+    seedWishDateKey({ ...sess, dateFlex: 'cheapest' });
+
+  let chips: import('../../types/concierge').QuickAction[] = [];
+  let speech = `Ab ${from} nach ${to}${when ? `, ${when}` : ''} — unten die Preis-Links zu Kiwi und dem Vergleich, da siehst du die aktuellen Flieger.`;
+  let bullets: string[] = [
     routePairBullet(sess.originIata, sess.destIata) || `Ab ${from} nach ${to}`,
-    ...(top.length ? top.map(hitLabel) : [when || 'Zeitraum offen']),
+    ...(when ? [when] : []),
+    'Direkt oder 1 Stop bevorzugt',
   ].slice(0, 3);
 
-  let researchedIdent: string | null = null;
-  let researchedClock: string | null = null;
-  let researchedAirlineUrl: string | null = null;
-  let researchedAirline: string | null = null;
+  if (sess.originIata && sess.destIata) {
+    try {
+      const { runFlightWishTools } = await import('./tools/runFlightWishTools');
+      const toolOut = await runFlightWishTools({
+        originIata: sess.originIata,
+        destIata: sess.destIata,
+        outboundDateKey: bookDate,
+        returnDateKey: returnKey,
+        fromLabel: from,
+        toLabel: to,
+        whenLabel: when || null,
+        userText: userText || 'günstig vergleichen',
+      });
+      if (toolOut) {
+        if (toolOut.provisionActions.length) chips = toolOut.provisionActions;
+        if (toolOut.speech?.trim()) speech = toolOut.speech.trim();
+        if (toolOut.bullets.length) bullets = toolOut.bullets.slice(0, 3);
+        if (toolOut.bestOutboundDateKey && !sess.dateKey) {
+          sess.dateKey = toolOut.bestOutboundDateKey;
+          saveSlots(sess);
+        }
+      }
+    } catch {
+      /* tool belt optional */
+    }
+    if (!chips.length) {
+      try {
+        const { buildCheapFlightBookActions } = await import('./cheapFlightBook');
+        const dateForBook = bookDate || offsetDateKey(14);
+        chips = buildCheapFlightBookActions({
+          originIata: sess.originIata,
+          destIata: sess.destIata,
+          dateKey: dateForBook,
+          returnDateKey: returnKey,
+          userText: userText || 'günstig vergleichen',
+        });
+        if (!sess.dateKey && dateForBook) {
+          sess.dateKey = dateForBook;
+          saveSlots(sess);
+        }
+      } catch {
+        /* soft */
+      }
+    }
+  }
 
+  // Optionale Live-Anreicherung — hartes Timeout, sonst bleiben Kiwi-Links
   if (sess.originIata && sess.destIata && sess.originIata.toUpperCase() !== sess.destIata.toUpperCase()) {
     try {
       const { researchCheapFlights } = await import('./cheapFlightResearch');
-      const researched = await researchCheapFlights({
-        originIata: sess.originIata,
-        destIata: sess.destIata,
-        destCity: sess.destCity,
-        dateKey: sess.dateKey,
-        monthHint: when || null,
-      });
+      const researched = await Promise.race([
+        researchCheapFlights({
+          originIata: sess.originIata,
+          destIata: sess.destIata,
+          destCity: sess.destCity,
+          dateKey: outboundKey || sess.dateKey,
+          returnDateKey: returnKey,
+          monthHint: when || null,
+          userText: userText || (sess.dateFlex === 'cheapest' ? 'das günstigste' : undefined),
+        }),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 6500)),
+      ]);
       if (researched?.speech) {
         speech = researched.speech;
         if (researched.bullets.length) {
           bullets.splice(0, bullets.length, ...researched.bullets.slice(0, 3));
         }
-        researchedIdent = researched.ident;
-        researchedClock = researched.clockHm;
-        researchedAirlineUrl = researched.airlineUrl;
-        researchedAirline = researched.airline;
+        if (researched.actions?.length) {
+          // Preis-Links behalten, Recherche-Chips davor mergen
+          const urls = new Set(
+            chips.filter((a) => a.type === 'OPEN_URL').map((a) => a.payload.url),
+          );
+          const extra = researched.actions.filter(
+            (a) => a.type !== 'OPEN_URL' || !urls.has(a.payload.url),
+          );
+          chips = [...researched.actions.filter((a) => a.type === 'OPEN_URL'), ...extra, ...chips]
+            .filter((a, i, arr) => {
+              if (a.type !== 'OPEN_URL') return true;
+              const u = a.payload.url;
+              return arr.findIndex((x) => x.type === 'OPEN_URL' && x.payload.url === u) === i;
+            })
+            .slice(0, 5);
+        }
         if (researched.dateKey && (sess.dateFlex || !sess.dateKey)) {
           sess.dateKey = researched.dateKey;
           saveSlots(sess);
         }
       }
     } catch {
-      /* Search-Grounding optional */
+      /* Search-Grounding optional — Kiwi-Links bleiben */
     }
   }
 
-  const bookDate = seedWishDateKey(sess);
-  if (sess.originIata && sess.destIata && bookDate) {
-    const { buildCheapFlightBookActions } = await import('./cheapFlightBook');
-    const book = buildCheapFlightBookActions({
-      originIata: sess.originIata,
-      destIata: sess.destIata,
-      dateKey: bookDate,
-      ident: researchedIdent,
-      clockHm: researchedClock,
-      airlineUrl: researchedAirlineUrl,
-      airlineName: researchedAirline,
-      userText: sess.dateFlex === 'cheapest' ? 'das günstigste' : undefined,
+  if (!chips.some((a) => a.type === 'OPEN_URL') && sess.originIata && sess.destIata) {
+    const fallbackDate = bookDate || seedWishDateKey({ ...sess, dateFlex: 'cheapest' });
+    if (fallbackDate) {
+      const { buildCheapFlightBookActions } = await import('./cheapFlightBook');
+      const book = buildCheapFlightBookActions({
+        originIata: sess.originIata,
+        destIata: sess.destIata,
+        dateKey: fallbackDate,
+        returnDateKey: returnKey,
+        userText: 'günstig vergleichen',
+      });
+      if (book.length) chips = [...book, ...chips].slice(0, 5);
+    }
+  }
+
+  if (chips.some((a) => a.type === 'OPEN_URL')) {
+    chips.push({
+      type: 'SHOW_MORE',
+      label: 'Hotel auch?',
+      payload: { textPrompt: 'Such mir auch noch ein gutes Hotel dazu' },
     });
-    if (book.length) {
-      chips = book;
-    }
-  }
-
-  if (!chips.some((a) => a.type === 'OPEN_URL')) {
-    if (sess.luggage === 'unknown') chips.push(...luggageChips());
   }
 
   return {
     speech,
-    bullets,
+    bullets: bullets.slice(0, 3),
     quickActions: chips.slice(0, 5),
     cardTitle: 'Günstige Flieger',
   };
@@ -1021,11 +1254,17 @@ async function commitFlight(opts: {
       ? { lat: store.lastGpsLat, lng: store.lastGpsLng }
       : null;
 
+  const parsedLuggage = parseFlightTripSlots(opts.userText).luggage;
   const luggage =
     opts.session.luggage === 'checked' ||
+    parsedLuggage === 'checked' ||
     /\b(koffer|aufgabegepäck|aufgabegepaeck)\b/iu.test(opts.userText)
       ? 'checked'
-      : opts.session.luggage === 'carry'
+      : opts.session.luggage === 'carry' ||
+          parsedLuggage === 'carry' ||
+          /\b(handgepäck|handgepaeck|nur\s+handgepäck|nur\s+handgepaeck|nur\s+cabin|cabin\s*bag|ohne\s+koffer|ohne\s+aufgabe)\b/iu.test(
+            opts.userText,
+          )
         ? 'carry'
         : opts.session.leaveByAsk
           ? 'carry'
@@ -1326,8 +1565,62 @@ async function commitFlight(opts: {
       ? rawWake
       : null;
   const wakeClock = wakeProposal ? formatClockDe(wakeProposal.wakeAtMs) : null;
-  const taxiWanted =
-    wantsFlightTaxiAccess(opts.userText) || /\b(taxi|uber)\b/iu.test(opts.userText);
+  const taxiWanted = stickyFlightTaxiWanted(opts.userText);
+
+  let originMismatchAsk: {
+    speechBit: string;
+    chips: QuickAction[];
+  } | null = null;
+  try {
+    const {
+      detectOriginGpsMismatch,
+      originAccessChips,
+    } = require('./flightOriginMismatch') as {
+      detectOriginGpsMismatch: (o: {
+        gpsLat?: number | null;
+        gpsLng?: number | null;
+        originIata?: string | null;
+        originHint?: string | null;
+        userText?: string | null;
+      }) => {
+        mismatch: boolean;
+        gpsAirport: { city: string } | null;
+        statedAirport: { city: string; iata: string } | null;
+      };
+      originAccessChips: (city: string) => QuickAction[];
+    };
+    const storeGps = useFinnusStore.getState();
+    const mm = detectOriginGpsMismatch({
+      gpsLat: storeGps.lastGpsLat,
+      gpsLng: storeGps.lastGpsLng,
+      originIata: opts.session.originIata,
+      originHint: opts.session.originCity,
+      userText: opts.userText,
+    });
+    let accessDone = false;
+    try {
+      const { getFollowThroughGoal } = require('../../module2/router/missionFollowThrough') as {
+        getFollowThroughGoal: () => {
+          slots?: { accessLeg?: string | null };
+        } | null;
+      };
+      const leg = getFollowThroughGoal()?.slots?.accessLeg;
+      accessDone =
+        leg === 'already_there' || leg === 'hotel' || leg === 'train';
+    } catch {
+      accessDone = false;
+    }
+    if (mm.mismatch && mm.statedAirport && !accessDone) {
+      const stated = mm.statedAirport.city;
+      const gpsCity = mm.gpsAirport?.city || 'deinem Ort';
+      originMismatchAsk = {
+        speechBit: ` Du fliegst von ${stated} — GPS wirkt eher nach ${gpsCity}. Schon vor Ort in ${stated}, oder Bahn/Hotel dorthin?`,
+        chips: originAccessChips(stated),
+      };
+    }
+  } catch {
+    /* soft */
+  }
 
   const spoken = buildLeaveBySpeech({
     destCity: opts.session.destCity,
@@ -1341,6 +1634,8 @@ async function commitFlight(opts: {
     planAck: opts.planAck,
     transitLeaveMs: access?.transitLeaveMs ?? clocks?.leaveMs ?? null,
     accessRecommend: taxiWanted ? 'taxi' : access?.recommend ?? 'either',
+    // Anreise-Task offen → noch kein Taxi-Commit in der Speech
+    taxiCommitted: taxiWanted && !originMismatchAsk,
     taxiMin: access?.taxiMin ?? null,
     taxiPrice: access?.taxiPrice ?? null,
     wakeClock,
@@ -1352,6 +1647,7 @@ async function commitFlight(opts: {
         ? clockFromMs(pacing.checkinMs)
         : null,
   });
+
   stampPendingAsk(
     {
       ...opts.session,
@@ -1359,17 +1655,36 @@ async function commitFlight(opts: {
       clockHm: clockFromMs(depMs),
       luggage,
     },
-    taxiWanted ? (wakeClock ? 'wake' : 'hotel') : 'ride',
+    originMismatchAsk
+      ? 'origin_access'
+      : taxiWanted
+        ? wakeClock
+          ? 'wake'
+          : 'hotel'
+        : 'ride',
   );
+
   const extra: QuickAction[] = [];
-  if (access?.actions?.length) {
+  if (originMismatchAsk) {
+    extra.push(...originMismatchAsk.chips.slice(0, 3));
+  } else if (taxiWanted) {
+    const task2 = buildTask2TaxiDeepLink(opts.session, leaveMs);
+    if (task2) extra.push(task2);
+  }
+  if (access?.actions?.length && !originMismatchAsk) {
     const uberFirst = [
       ...access.actions.filter((a) => a.type === 'BOOK_UBER'),
       ...access.actions.filter((a) => a.type !== 'BOOK_UBER'),
     ];
-    extra.push(...(taxiWanted ? uberFirst.slice(0, 3) : access.actions.slice(0, 2)));
+    for (const a of taxiWanted ? uberFirst.slice(0, 2) : access.actions.slice(0, 2)) {
+      if (extra.some((e) => e.type === a.type && e.label === a.label)) continue;
+      if (taxiWanted && a.type === 'BOOK_UBER' && extra.some((e) => e.type === 'BOOK_UBER')) {
+        continue;
+      }
+      extra.push(a);
+    }
   }
-  if (wakeProposal && wakeClock) {
+  if (wakeProposal && wakeClock && !originMismatchAsk) {
     extra.push({
       type: 'SET_WAKE_ALARM',
       label: `Wecker ${wakeClock}?`,
@@ -1393,19 +1708,83 @@ async function commitFlight(opts: {
   } catch {
     /* soft */
   }
+  if (taxiWanted || originMismatchAsk) {
+    try {
+      const {
+        markTaxiAirportFlightResolved,
+        markTaxiAirportDeepLinkReady,
+      } = require('../../module2/router/missionFollowThrough') as {
+        markTaxiAirportFlightResolved: (o: {
+          flightTimeLabel: string;
+          originCity?: string | null;
+          gpsCity?: string | null;
+        }) => void;
+        markTaxiAirportDeepLinkReady: () => void;
+      };
+      const storeGps2 = useFinnusStore.getState();
+      let gpsCityLabel: string | null = null;
+      try {
+        const { nearestCommercialAirport } = require('./airportIata') as {
+          nearestCommercialAirport: (
+            lat: number,
+            lng: number,
+          ) => { city: string } | null;
+        };
+        if (storeGps2.lastGpsLat != null && storeGps2.lastGpsLng != null) {
+          gpsCityLabel =
+            nearestCommercialAirport(
+              storeGps2.lastGpsLat,
+              storeGps2.lastGpsLng,
+            )?.city ?? null;
+        }
+      } catch {
+        /* soft */
+      }
+      markTaxiAirportFlightResolved({
+        flightTimeLabel: clockFromMs(depMs),
+        originCity: opts.session.originCity,
+        gpsCity: gpsCityLabel,
+      });
+      if (
+        !originMismatchAsk &&
+        extra.some((a) => a.type === 'BOOK_UBER')
+      ) {
+        markTaxiAirportDeepLinkReady();
+      }
+    } catch {
+      /* soft */
+    }
+  }
+  const speechOut = originMismatchAsk
+    ? `${spoken.speech}${originMismatchAsk.speechBit}`
+    : spoken.speech;
+  const bulletsOut = originMismatchAsk
+    ? [
+        `Anreise nach ${opts.session.originCity || 'Abflugort'}`,
+        ...spoken.bullets,
+      ].slice(0, 4)
+    : spoken.bullets;
   return {
-    speech: spoken.speech,
-    bullets: spoken.bullets,
+    speech: speechOut,
+    bullets: bulletsOut,
     quickActions: leaveByChips(
       ident,
       opts.session.originIata,
       plan.flight.departureGate,
       extra,
       taxiWanted,
+      Boolean(
+        taxiWanted &&
+          !originMismatchAsk &&
+          extra.some((a) => a.type === 'BOOK_UBER'),
+      ),
     ),
-    cardTitle: publicFlightIdent(ident)
-      ? `Flug ${publicFlightIdent(ident)}`
-      : `Flug ${clockFromMs(depMs)}`,
+    cardTitle: originMismatchAsk
+      ? 'Anreise zum Abflug'
+      : publicFlightIdent(ident)
+        ? `Flug ${publicFlightIdent(ident)}`
+        : `Flug ${clockFromMs(depMs)}`,
+    reopenMic: Boolean(originMismatchAsk),
   };
 }
 
@@ -1419,10 +1798,13 @@ export function peekFlightBeat1Bridge(text: string): string | null {
   if (!dest) return null;
   const clock = slots.clockHm || prev?.clockHm;
   if (clock) {
-    return `${dest} — alles klar, ich schau Abflug und Leave-by nach.`;
+    return `${dest}, alles klar, ich schau Abflug und Leave-by nach.`;
   }
-  // Bridge = Verstehen/Zusagen; Uhrzeit/Nummer fragt der Advisor danach (kein Mix).
-  return `${dest} — starke Wahl, ich hole Abflug und Leave-by für dich.`;
+  // Ohne Uhr/Nummer: Zusage ohne Fake-Recherche-Versprechen — Call 2 fragt sofort die Zeit
+  if (slots.leaveByAsk || slots.isFlightTrip) {
+    return `${dest}, klar. Dafür brauche ich noch Abflugzeit oder Flugnummer.`;
+  }
+  return `${dest}, starke Wahl, ich hole Abflug und Leave-by für dich.`;
 }
 
 export type FlightTripCall1Hints = {
@@ -1439,6 +1821,73 @@ export async function prepareFlightTripFollowUp(
   const t = text.replace(/\s+/g, ' ').trim();
   if (!t) return null;
 
+  const slotsQuick = parseFlightTripSlots(t);
+  const call1ClockQuick =
+    typeof call1?.clockHm === 'string' &&
+    /^\d{2}:\d{2}$/.test(call1.clockHm.trim())
+      ? call1.clockHm.trim()
+      : null;
+  // Leave-by ohne Uhr/Nummer: sofort nachfragen — kein Board-/Cheap-Flight-Wait
+  if (
+    slotsQuick.leaveByAsk &&
+    !slotsQuick.clockHm &&
+    !call1ClockQuick &&
+    !slotsQuick.flightCode &&
+    (slotsQuick.destHint || slotsQuick.originHint)
+  ) {
+    await hydrateFlightTripSession();
+    const prevQuick = getFlightTripSession();
+    if (!prevQuick?.clockHm && !prevQuick?.selectedIdent) {
+      const destHint = slotsQuick.destHint || prevQuick?.destCity || null;
+      const destAp = destHint ? findAirportByCityHint(destHint) : null;
+      const store = useFinnusStore.getState();
+      const gps =
+        store.lastGpsLat != null && store.lastGpsLng != null
+          ? { lat: store.lastGpsLat, lng: store.lastGpsLng }
+          : null;
+      const originFromHint = slotsQuick.originHint
+        ? findAirportByCityHint(slotsQuick.originHint)
+        : null;
+      const originFromGps = gps
+        ? nearestCommercialAirport(gps.lat, gps.lng)
+        : airportByIata('HAM');
+      const destForPick = destAp;
+      const origin = pickPlausibleFlightOrigin({
+        originFromHint,
+        originFromGps,
+        prevOrigin: prevQuick?.originIata
+          ? airportByIata(prevQuick.originIata)
+          : null,
+        dest: destForPick,
+        userNamedOrigin: Boolean(slotsQuick.originHint),
+      });
+      const call1DateKey =
+        typeof call1?.dateKey === 'string' &&
+        /^\d{4}-\d{2}-\d{2}$/.test(call1.dateKey.trim())
+          ? call1.dateKey.trim()
+          : null;
+      const merged = saveSlots(
+        mergeTripSlots(prevQuick, {
+          nowMs: Date.now(),
+          destCity: destAp?.city ?? destHint ?? undefined,
+          destIata: destAp?.iata ?? prevQuick?.destIata,
+          originIata: origin?.iata,
+          originName: origin?.name,
+          originCity: origin?.city,
+          originLat: origin?.lat,
+          originLng: origin?.lng,
+          dateHint: slotsQuick.dateHint,
+          dateKeyExplicit: call1DateKey,
+          stance: 'booked',
+          leaveByAsk: true,
+          luggage: slotsQuick.luggage,
+        }),
+      );
+      stampPendingAsk(merged, 'when');
+      return withChips(askWhen(merged), 'time');
+    }
+  }
+
   await hydrateFlightTripSession();
   await hydrateFlightWatches();
 
@@ -1446,7 +1895,16 @@ export async function prepareFlightTripFollowUp(
     typeof call1?.dateKey === 'string' &&
     /^\d{4}-\d{2}-\d{2}$/.test(call1.dateKey.trim())
       ? call1.dateKey.trim()
-      : null;
+      : (() => {
+          try {
+            const { parseEventDateWindow } = require('../concierge/eventDateWindow') as {
+              parseEventDateWindow: (s: string, n?: number) => { fromIso: string } | null;
+            };
+            return parseEventDateWindow(t)?.fromIso ?? null;
+          } catch {
+            return null;
+          }
+        })();
   const call1Clock =
     typeof call1?.clockHm === 'string' &&
     /^\d{2}:\d{2}$/.test(call1.clockHm.trim())
@@ -1492,6 +1950,69 @@ export async function prepareFlightTripFollowUp(
   }
 
   const focus = getLastFlightCommit();
+  // Welcome-Pickups Prefill: Personen + Adresse bevor Link öffnet
+  if (
+    (prev?.pendingAsk === 'transfer' || getPendingAirportTransfer()) &&
+    (prev?.pendingAsk === 'transfer' || isShortReplyToLastAsk(t) || /\b\d+\s*personen?\b|\btransfer\s+für\b|\bvon\b/iu.test(t))
+  ) {
+    const paxM =
+      t.match(/\b(?:für\s+)?(\d{1,2})\s*personen?\b/iu) ||
+      t.match(/\btransfer\s+für\s+(\d{1,2})\b/iu) ||
+      t.match(/\b(\d{1,2})\s*(?:leute|köpfe)\b/iu);
+    const passengers = paxM ? Number(paxM[1]) : null;
+    let fromAddress: string | null = null;
+    const von = t.match(/\bvon\s+(.+)$/iu);
+    if (von?.[1] && !/\bpersonen?\b/iu.test(von[1])) {
+      fromAddress = von[1].replace(/[.?!]+$/, '').trim();
+    } else if (
+      !passengers &&
+      t.length >= 6 &&
+      !/\b(taxi|öpnv|oepnv|uber|transfer\s+für)\b/iu.test(t)
+    ) {
+      fromAddress = t.replace(/[.?!]+$/, '').trim();
+    }
+    const done = await completePendingAirportTransfer({
+      passengers: passengers != null && passengers > 0 ? passengers : null,
+      fromAddress,
+    });
+    if (done.speech) {
+      if (done.opened && focus) {
+        stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
+      } else if (prev) {
+        stampPendingAsk(prev, 'transfer');
+      }
+      return {
+        speech: done.speech,
+        bullets: done.bullets,
+        quickActions: done.opened
+          ? []
+          : [
+              {
+                type: 'SHOW_MORE',
+                label: '1 Person',
+                payload: { textPrompt: 'Transfer für 1 Person' },
+              },
+              {
+                type: 'SHOW_MORE',
+                label: '2 Personen',
+                payload: { textPrompt: 'Transfer für 2 Personen' },
+              },
+              {
+                type: 'SHOW_MORE',
+                label: '3 Personen',
+                payload: { textPrompt: 'Transfer für 3 Personen' },
+              },
+              {
+                type: 'SHOW_MORE',
+                label: '4 Personen',
+                payload: { textPrompt: 'Transfer für 4 Personen' },
+              },
+            ],
+        cardTitle: done.opened ? 'Transfer' : 'Transfer Prefill',
+        reopenMic: !done.opened,
+      };
+    }
+  }
   if (focus && isFlightIdentAsk(t)) {
     const pub = publicFlightIdent(focus.ident);
     if (pub) {
@@ -1552,6 +2073,169 @@ export async function prepareFlightTripFollowUp(
     stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
     return askDestHotel(sessionFromSnapshot(focus));
   }
+  if (focus && prev?.pendingAsk === 'origin_access') {
+    try {
+      const { parseOriginAccessReply } = require('./flightOriginMismatch') as {
+        parseOriginAccessReply: (
+          s: string,
+        ) => 'already_there' | 'hotel' | 'train' | 'needed' | 'unknown' | null;
+      };
+      const {
+        markTaxiAirportAccessLeg,
+      } = require('../../module2/router/missionFollowThrough') as {
+        markTaxiAirportAccessLeg: (
+          leg: 'already_there' | 'hotel' | 'train' | 'needed' | 'unknown',
+        ) => void;
+      };
+      const leg = parseOriginAccessReply(t) || 'needed';
+      markTaxiAirportAccessLeg(leg);
+      const clocks = readFlightTripClocks(focus.ident);
+      const leave = clocks?.leaveMs;
+      const city = focus.originCity || focus.originName || 'Abflugort';
+      if (leg === 'already_there' && leave != null) {
+        const taxiActions: QuickAction[] = [];
+        const built = buildTask2TaxiDeepLink(
+          {
+            originLat: focus.originLat,
+            originLng: focus.originLng,
+            originName: focus.originName,
+          },
+          leave,
+        );
+        if (built) taxiActions.push(built);
+        try {
+          const { markTaxiAirportDeepLinkReady } =
+            require('../../module2/router/missionFollowThrough') as {
+              markTaxiAirportDeepLinkReady: () => void;
+            };
+          if (built) markTaxiAirportDeepLinkReady();
+        } catch {
+          /* soft */
+        }
+        stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
+        return {
+          speech: `Alles klar — du bist schon in ${city}. Taxi mit Abholzeit ${clockFromMs(leave)} ist vorbereitet.`,
+          bullets: [`Taxi · ${clockFromMs(leave)}`, city],
+          quickActions: taxiActions.slice(0, 4),
+          cardTitle: 'Taxi vorbestellen',
+          reopenMic: false,
+        };
+      }
+      if (leg === 'hotel') {
+        stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
+        return {
+          speech: `Check — Hotel Vornacht in ${city}. Sag mir das Hotel oder die Gegend, dann trage ich Anreise und Taxi zum Flughafen ein.`,
+          bullets: [`Hotel in ${city}`, 'Dann Taxi zum Flughafen'],
+          quickActions: [],
+          cardTitle: 'Anreise Hotel',
+          reopenMic: true,
+        };
+      }
+      if (leg === 'train') {
+        stampPendingAsk(sessionFromSnapshot(focus), null);
+        return {
+          speech: `Alles klar — Bahn nach ${city}. Wann fährt dein Zug, oder soll ich eine sinnvolle Verbindung suchen?`,
+          bullets: [`Bahn → ${city}`, 'Dann Taxi zum Flughafen'],
+          quickActions: [
+            {
+              type: 'SHOW_MORE',
+              label: 'Verbindung suchen',
+              payload: { textPrompt: `Bahnverbindung nach ${city} suchen` },
+            },
+          ],
+          cardTitle: 'Anreise Bahn',
+          reopenMic: true,
+        };
+      }
+    } catch {
+      /* soft — fall through */
+    }
+  }
+
+  if (focus && prev?.pendingAsk === 'taxi_book' && isShortReplyToLastAsk(t)) {
+    const clocks = readFlightTripClocks(focus.ident);
+    const leave = clocks?.leaveMs;
+    const airportMs = clocks?.airportMs;
+    const yes = /^(ja|jo|jap|klar|bitte|mach|ok|okay|gerne|yes)\b/iu.test(t.trim());
+    if (!yes) {
+      stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
+      return askDestHotel(sessionFromSnapshot(focus));
+    }
+    const leaveClock = leave != null ? clockFromMs(leave) : null;
+    const airportClock = airportMs != null ? clockFromMs(airportMs) : null;
+    const taxiNote = (() => {
+      try {
+        const { useFuturePlanStore } = require('../../module2/timeline/futurePlanState') as {
+          useFuturePlanStore: {
+            getState: () => {
+              plan: { stops: Array<{ id: string; notes?: string | null }> };
+            };
+          };
+        };
+        const leaveStop = useFuturePlanStore
+          .getState()
+          .plan.stops.find((s) => s.id === `ft:${focus.ident}:leave`);
+        const m = leaveStop?.notes?.match(/·\s*(.+)$/);
+        return m?.[1]?.trim() || null;
+      } catch {
+        return null;
+      }
+    })();
+    const bits = [
+      airportClock ? `Spätestens ${airportClock} am Flughafen` : null,
+      leaveClock ? `Los um ${leaveClock}` : null,
+      taxiNote ? `Taxi ca. ${taxiNote}` : null,
+    ].filter(Boolean) as string[];
+    const speech =
+      bits.length > 0
+        ? `${bits.join(' — ')}. Uber-Button ist bereit — da kannst du die Fahrt vorbestellen.`
+        : `Alles klar — Uber-Button ist bereit zum Vorbestellen.`;
+    const taxiActions: QuickAction[] = [];
+    if (focus.originLat != null && focus.originLng != null) {
+      try {
+        const { buildUberRideAction } = require('../affiliate/affiliateService') as {
+          buildUberRideAction: (
+            lat: number,
+            lng: number,
+            name: string,
+            targetPoiId?: string | number,
+            extra?: {
+              dropoffFormattedAddress?: string | null;
+              pickupTimeLabel?: string;
+              pickupDateIso?: string;
+            },
+          ) => QuickAction;
+        };
+        taxiActions.push(
+          buildUberRideAction(
+            focus.originLat,
+            focus.originLng,
+            focus.originName,
+            undefined,
+            leave != null
+              ? {
+                  dropoffFormattedAddress: focus.originName,
+                  pickupTimeLabel: clockFromMs(leave),
+                  pickupDateIso: dateKeyFromMs(leave),
+                }
+              : { dropoffFormattedAddress: focus.originName },
+          ),
+        );
+      } catch {
+        /* soft */
+      }
+    }
+    stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
+    const hotel = askDestHotel(sessionFromSnapshot(focus));
+    return {
+      speech: `${speech} ${hotel.speech}`,
+      bullets: [...bits.slice(0, 2), ...hotel.bullets].filter(Boolean).slice(0, 3) as string[],
+      quickActions: [...taxiActions, ...hotel.quickActions].slice(0, 4),
+      cardTitle: 'Taxi vorbestellen',
+      reopenMic: true,
+    };
+  }
+
   if (
     focus &&
     prev?.pendingAsk === 'ride' &&
@@ -1586,28 +2270,42 @@ export async function prepareFlightTripFollowUp(
         ? 'transfer'
         : 'transit';
     if (mode === 'transfer') {
+      try {
+        const { resumeFlightAccessWish } = require('./flightTimeline') as {
+          resumeFlightAccessWish: (id: string) => Promise<boolean>;
+        };
+        await resumeFlightAccessWish(`ft:${focus.ident}:xferwp`);
+      } catch {
+        /* soft */
+      }
       return {
         speech:
-          'Transferservice zum Flughafen — zum Vergleichen öffne ich die Buchungsseite. ÖPNV und Taxi mit Uber bleiben Alternative.',
-        bullets: [focus.destCity, 'Transfer'],
+          'Transfer mit Welcome Pickups — zu wie vielen seid ihr, und von welcher Adresse soll das Auto abholen?',
+        bullets: [focus.destCity, 'Personen + Abholadresse'],
         quickActions: [
           {
-            type: 'OPEN_URL',
-            label: 'Transfer buchen',
-            payload: { url: 'https://kiwitaxi.tpx.li/IgZwaaAi' },
+            type: 'SHOW_MORE',
+            label: '1 Person',
+            payload: { textPrompt: 'Transfer für 1 Person' },
           },
           {
             type: 'SHOW_MORE',
-            label: 'ÖPNV',
-            payload: { textPrompt: 'Zum Flughafen mit ÖPNV' },
+            label: '2 Personen',
+            payload: { textPrompt: 'Transfer für 2 Personen' },
           },
           {
             type: 'SHOW_MORE',
-            label: 'Taxi',
-            payload: { textPrompt: 'Zum Flughafen mit dem Taxi' },
+            label: '3 Personen',
+            payload: { textPrompt: 'Transfer für 3 Personen' },
+          },
+          {
+            type: 'SHOW_MORE',
+            label: '4 Personen',
+            payload: { textPrompt: 'Transfer für 4 Personen' },
           },
         ],
-        cardTitle: 'Transfer',
+        cardTitle: 'Transfer Prefill',
+        reopenMic: true,
       };
     }
     try {
@@ -1621,55 +2319,56 @@ export async function prepareFlightTripFollowUp(
     const hotel = askDestHotel(sessionFromSnapshot(focus));
     stampPendingAsk(sessionFromSnapshot(focus), 'hotel');
     const rideBit = leave
-      ? `Alles klar, ${mode === 'taxi' ? 'Taxi mit Uber' : 'ÖPNV'} — Los um ${clockFromMs(leave)}. Die andere Option bleibt in der Timeline.`
-      : `Ich stell die Anreise auf ${mode === 'taxi' ? 'Taxi mit Uber' : 'ÖPNV'} um. Taxi und ÖPNV bleiben umwählbar.`;
+      ? mode === 'taxi'
+        ? `Alles klar, Taxi mit Uber — Los um ${clockFromMs(leave)}. Deep-Link steht bereit.`
+        : `Alles klar, ÖPNV — Los um ${clockFromMs(leave)}. Die Verbindung steht in der Timeline.`
+      : `Ich stell die Anreise auf ${mode === 'taxi' ? 'Taxi mit Uber' : 'ÖPNV'} um.`;
     const taxiActions: QuickAction[] = [];
-    if (mode === 'taxi' && focus.originLat != null && focus.originLng != null) {
-      try {
-        const { buildUberRideAction } = require('../affiliate/affiliateService') as {
-          buildUberRideAction: (
-            lat: number,
-            lng: number,
-            name: string,
-            addr?: string,
-            extra?: { pickupTimeLabel?: string },
-          ) => QuickAction;
-        };
-        taxiActions.push(
-          buildUberRideAction(
-            focus.originLat,
-            focus.originLng,
-            focus.originName,
-            undefined,
-            leave != null ? { pickupTimeLabel: clockFromMs(leave) } : undefined,
-          ),
-        );
-      } catch {
-        /* soft */
+    if (mode === 'taxi' && leave != null) {
+      const built = buildTask2TaxiDeepLink(
+        {
+          originLat: focus.originLat,
+          originLng: focus.originLng,
+          originName: focus.originName,
+        },
+        leave,
+      );
+      if (built) {
+        taxiActions.push(built);
+        try {
+          const { markTaxiAirportDeepLinkReady } =
+            require('../../module2/router/missionFollowThrough') as {
+              markTaxiAirportDeepLinkReady: () => void;
+            };
+          markTaxiAirportDeepLinkReady();
+        } catch {
+          /* soft */
+        }
       }
     }
-    const altModeChip: QuickAction =
-      mode === 'taxi'
-        ? {
-            type: 'SHOW_MORE',
-            label: 'ÖPNV',
-            payload: { textPrompt: 'Zum Flughafen mit ÖPNV' },
-          }
-        : {
-            type: 'SHOW_MORE',
-            label: 'Taxi / Uber',
-            payload: { textPrompt: 'Zum Flughafen mit dem Taxi' },
-          };
+    // Nach Wahl keine Rivalen-Chips mehr (ÖPNV bleibt nur auf explizite Nachfrage)
+    if (mode === 'taxi') {
+      return {
+        speech: rideBit,
+        bullets: [
+          'Taxi',
+          leave != null ? `Los ${clockFromMs(leave)}` : dest,
+        ].filter(Boolean) as string[],
+        quickActions: taxiActions.slice(0, 4),
+        cardTitle: 'Taxi zum Flughafen',
+        reopenMic: true,
+      };
+    }
     return {
       speech: `${rideBit} ${hotel.speech}`,
       bullets: [
-        dest,
-        leave ? `Los ${clockFromMs(leave)}` : mode === 'taxi' ? 'Taxi' : 'ÖPNV',
+        'ÖPNV',
+        leave != null ? `Los ${clockFromMs(leave)}` : dest,
         ...hotel.bullets,
-      ],
-      quickActions: [...taxiActions, altModeChip, ...hotel.quickActions].slice(0, 5),
-      cardTitle: 'Unterkunft?',
-      reopenMic: true,
+      ].filter(Boolean) as string[],
+      quickActions: [...taxiActions, ...hotel.quickActions].slice(0, 4),
+      cardTitle: 'ÖPNV zum Flughafen',
+      reopenMic: false,
     };
   }
 
@@ -1697,15 +2396,36 @@ export async function prepareFlightTripFollowUp(
   const originFromHint = slots.originHint
     ? findAirportByCityHint(slots.originHint)
     : null;
+  const userNamedOrigin = Boolean(slots.originHint?.trim());
 
-  let origin = originFromHint ?? originFromGps;
   let dest = destFromHint;
   if (slots.returning && originFromHint) {
-    dest = originFromGps ?? originFromHint;
-    origin = originFromHint;
+    // Rückflug: genannter Ort = Heimat/Abflug; GPS nur als Dest-Fallback wenn Sinn
+    const gpsOk =
+      originFromGps &&
+      originFromGps.iata.toUpperCase() !== originFromHint.iata.toUpperCase()
+        ? originFromGps
+        : null;
+    dest = gpsOk ?? destFromHint ?? null;
   }
   if (!dest && prev?.destIata) dest = airportByIata(prev.destIata);
-  if (!origin && prev?.originIata) origin = airportByIata(prev.originIata);
+
+  let origin = pickPlausibleFlightOrigin({
+    originFromHint,
+    originFromGps,
+    prevOrigin: prev?.originIata ? airportByIata(prev.originIata) : null,
+    dest,
+    userNamedOrigin,
+  });
+  if (slots.returning && originFromHint) {
+    origin = pickPlausibleFlightOrigin({
+      originFromHint,
+      originFromGps: null,
+      prevOrigin: null,
+      dest,
+      userNamedOrigin: true,
+    });
+  }
 
   const destChanged =
     Boolean(dest) && Boolean(prev?.destIata) && dest!.iata !== prev!.destIata;
@@ -1739,7 +2459,7 @@ export async function prepareFlightTripFollowUp(
   const dateChanged =
     Boolean(merged.dateKey) &&
     Boolean(prev?.dateKey) &&
-    merged.dateKey !== prev.dateKey;
+    merged.dateKey !== prev!.dateKey;
   if (destChanged || dateChanged) {
     routeOptions = [];
     setLastFlightCommit(null);
@@ -1750,10 +2470,70 @@ export async function prepareFlightTripFollowUp(
     }
   }
 
+  // Solo-Günstig A→B: sofort Kiwi-Pitch — nie Live-Board / Leave-by / „Live-Daten fehlen“
+  try {
+    const { isSoloFlightAbSearch } = require('./flightTripIntent') as {
+      isSoloFlightAbSearch: (s: string) => boolean;
+    };
+    const wishSolo =
+      !slots.leaveByAsk &&
+      !slots.alreadyBookedExplicit &&
+      (merged.stance === 'wish' ||
+        slots.stance === 'wish' ||
+        isSoloFlightAbSearch(t));
+    if (wishSolo && merged.originIata && merged.destIata) {
+      if (!merged.dateKey) {
+        try {
+          const { parseEventDateWindow } = require('../concierge/eventDateWindow') as {
+            parseEventDateWindow: (
+              s: string,
+              n?: number,
+            ) => { fromIso: string; toIso?: string } | null;
+          };
+          const win = parseEventDateWindow(t);
+          if (win?.fromIso) {
+            merged.dateKey = win.fromIso;
+            saveSlots(merged);
+          }
+        } catch {
+          /* soft */
+        }
+      }
+      stampPendingAsk(merged, null);
+      return withChips(await wishPitch(merged, t), 'search');
+    }
+  } catch {
+    /* soft */
+  }
+
+  if (
+    flightOriginNeedsClarify({
+      userNamedOrigin,
+      origin,
+      dest,
+      originHint: slots.originHint,
+    })
+  ) {
+    const hint = (slots.originHint || '').trim();
+    return withChips(
+      {
+        speech: hint
+          ? `Abflug „${hint}“ passt so nicht zum Ziel — von welchem Flughafen soll's wirklich losgehen?`
+          : 'Von welchem Flughafen soll der Flieger starten?',
+        bullets: ['Abflugort klären'],
+        quickActions: dateChips(),
+        cardTitle: 'Flug',
+      },
+      'date',
+    );
+  }
+
   if (!origin) {
     return withChips(
       {
-        speech: 'Vom nächsten Linienflughafen komme ich nicht ran. GPS kurz an.',
+        speech: userNamedOrigin
+          ? 'Den Abflugort finde ich so nicht — Stadt oder Flughafen-Kürzel reicht.'
+          : 'Vom nächsten Linienflughafen komme ich nicht ran. GPS kurz an.',
         bullets: ['Abflughafen'],
         quickActions: dateChips(),
         cardTitle: 'Flug',
@@ -1897,6 +2677,14 @@ export async function prepareFlightTripFollowUp(
 
   const gap = largestTripGap(merged);
   if (gap === 'dest') {
+    const region =
+      slots.regionHint ||
+      extractFlightRegionHint(t) ||
+      null;
+    if (region) {
+      stampPendingAsk(merged, null);
+      return withChips(await wishPitchRegion(merged, region), 'search');
+    }
     stampPendingAsk(merged, null);
     return withChips(askDest(merged), gap);
   }
@@ -1907,7 +2695,7 @@ export async function prepareFlightTripFollowUp(
 
   if (gap === 'search') {
     stampPendingAsk(merged, null);
-    return withChips(await wishPitch(merged), gap);
+    return withChips(await wishPitch(merged, t), gap);
   }
 
   if (gap === 'time') {

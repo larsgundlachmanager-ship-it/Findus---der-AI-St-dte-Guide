@@ -36,12 +36,33 @@ const EMPTY: GeoJsonFc = {
   features: [],
 };
 
-function closeLngLat(ring: Array<[number, number]>): Array<[number, number]> {
-  if (ring.length < 3) return ring;
-  const a = ring[0]!;
-  const b = ring[ring.length - 1]!;
-  if (a[0] === b[0] && a[1] === b[1]) return ring;
-  return ring.concat([a]);
+/**
+ * MapLibre/GeoJSON: geschlossener Ring braucht ≥4 Positionen (≥3 echte Ecken).
+ * Schon geschlossene 3-Punkt-Ringe (A→B→A) sonst → JNI „Polygon must be … 4 or more“.
+ */
+function closeLngLat(ring: Array<[number, number]>): Array<[number, number]> | null {
+  if (!ring || ring.length < 3) return null;
+  const cleaned: Array<[number, number]> = [];
+  for (const p of ring) {
+    if (!p || !Number.isFinite(p[0]) || !Number.isFinite(p[1])) continue;
+    const prev = cleaned[cleaned.length - 1];
+    if (prev && prev[0] === p[0] && prev[1] === p[1]) continue;
+    cleaned.push([p[0], p[1]]);
+  }
+  if (cleaned.length < 3) return null;
+  const a = cleaned[0]!;
+  const b = cleaned[cleaned.length - 1]!;
+  const closed =
+    a[0] === b[0] && a[1] === b[1] ? cleaned : cleaned.concat([[a[0], a[1]]]);
+  if (closed.length < 4) return null;
+  let unique = 1;
+  for (let i = 1; i < closed.length - 1; i += 1) {
+    const p = closed[i]!;
+    const prev = closed[i - 1]!;
+    if (p[0] !== prev[0] || p[1] !== prev[1]) unique += 1;
+  }
+  if (unique < 3) return null;
+  return closed;
 }
 
 /** Pack-Ring ist [lat, lng] → GeoJSON [lng, lat]. */
@@ -207,7 +228,7 @@ function streetLabelsFromHousenumbers(
   return { type: 'FeatureCollection', features };
 }
 
-/** core = Straßen/Wasser/Parks (erster Paint); full = +Gebäude/Hausnummern. */
+/** core = Hauptstraßen/Wasser/Parks (erster Paint); full = +Nebenstraßen/Gebäude/Hausnummern. */
 export type ExtractGeojsonPhase = 'core' | 'full';
 
 function yieldGeojson(): Promise<void> {
@@ -235,7 +256,13 @@ export function cityMapExtractToGeojson(
       hasRoads: false,
     };
   }
-  const roads = linesFromExtract(extract.roads, true);
+  // core = Outline: Hauptstraßen (k=0) + Wasser/Bahn/Parks — kein Nebenweg-Chaos.
+  const roadsAll = linesFromExtract(extract.roads, true);
+  const roadsCore: GeoJsonFc = {
+    type: 'FeatureCollection',
+    features: (roadsAll.features || []).filter((f) => Number(f.properties?.k ?? 1) === 0),
+  };
+  const roads = phase === 'core' ? roadsCore : roadsAll;
   const core: ExtractGeojsonBundle = {
     land: polygonsFromRings(extract.land),
     woods: polygonsFromRings(extract.woods),
@@ -246,7 +273,7 @@ export function cityMapExtractToGeojson(
     roads,
     housenumbers: EMPTY,
     streets: EMPTY,
-    hasRoads: (extract.roads?.length ?? 0) > 0,
+    hasRoads: (roads.features?.length ?? 0) > 0 || (extract.rails?.length ?? 0) > 0,
   };
   if (phase === 'core') return core;
 
@@ -281,9 +308,56 @@ export function cityMapExtractToGeojson(
   };
 }
 
+/** Gebäude→Polygon Chunk — Sync-Spike auf großen Extracts vermeiden. */
+export const EXTRACT_BUILDING_GEOJSON_CHUNK = 350;
+
+function chromeBusyForGeojson(): boolean {
+  try {
+    const {
+      isMicActive,
+      isOverlayBusy,
+    } = require('../boot/interactiveBootGate') as {
+      isMicActive: () => boolean;
+      isOverlayBusy: () => boolean;
+    };
+    return isMicActive() || isOverlayBusy();
+  } catch {
+    return false;
+  }
+}
+
+function yieldGeojsonChrome(): Promise<void> {
+  const ms = chromeBusyForGeojson() ? 32 : 0;
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function polygonsFromRingsAsync(
+  rings: Array<Array<[number, number]>> | undefined,
+  chunk = EXTRACT_BUILDING_GEOJSON_CHUNK,
+): Promise<GeoJsonFc> {
+  if (!rings?.length) return EMPTY;
+  const features: GeoJsonFeature[] = [];
+  for (let i = 0; i < rings.length; i += chunk) {
+    const end = Math.min(i + chunk, rings.length);
+    for (let j = i; j < end; j += 1) {
+      const coords = extractRingToLngLat(rings[j]!);
+      if (!coords) continue;
+      features.push({
+        type: 'Feature',
+        properties: {},
+        geometry: { type: 'Polygon', coordinates: [coords] },
+      });
+    }
+    if (end < rings.length) {
+      await yieldGeojsonChrome();
+    }
+  }
+  return { type: 'FeatureCollection', features };
+}
+
 /**
  * Wie cityMapExtractToGeojson, aber mit Main-Thread-Yields zwischen Layern —
- * Mic/Settings bleiben tippbar während Gebäude-GeoJSON gebaut wird.
+ * Mic/Settings bleiben tippbar; Gebäude-Polygone gestückelt + hinter Chrome.
  */
 export async function cityMapExtractToGeojsonAsync(
   extract: CityMapExtract | null | undefined,
@@ -307,9 +381,10 @@ export async function cityMapExtractToGeojsonAsync(
     streets: EMPTY,
     hasRoads: (extract.roads?.length ?? 0) > 0,
   };
-  await yieldGeojson();
-  const buildings = polygonsFromRings(extract.buildings);
-  await yieldGeojson();
+  // Gebäude bewusst nach Core + Chrome-Yield — nicht im selben Tick wie Straßen.
+  await yieldGeojsonChrome();
+  const buildings = await polygonsFromRingsAsync(extract.buildings);
+  await yieldGeojsonChrome();
   const hnFeatures: GeoJsonFeature[] = [];
   for (const n of extract.housenumbers || []) {
     if (typeof n.lat !== 'number' || typeof n.lng !== 'number') continue;

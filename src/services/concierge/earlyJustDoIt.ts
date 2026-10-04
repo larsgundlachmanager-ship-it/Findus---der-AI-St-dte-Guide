@@ -19,7 +19,19 @@ import {
 } from '../speech/ttsVolumePref';
 
 export type EarlyJustDoItResult = {
-  kind: 'wake' | 'timer' | 'reminder' | 'volume' | 'street_view' | 'parking' | 'transit' | 'charge' | 'flight' | 'playlist';
+  kind:
+    | 'wake'
+    | 'timer'
+    | 'reminder'
+    | 'volume'
+    | 'street_view'
+    | 'parking'
+    | 'transit'
+    | 'charge'
+    | 'flight'
+    | 'playlist'
+    | 'repeat'
+    | 'local_time';
   speech: string;
   bullets: string[];
   quickActions: QuickAction[];
@@ -151,21 +163,30 @@ async function runReminderJustDoIt(
   const { handleQuickAction } = await import('../actionHandlerService');
   const r = await handleQuickAction(action);
   const ok = r.ok !== false;
+  const item =
+    typeof action.payload.destName === 'string'
+      ? action.payload.destName
+      : null;
   return {
     kind: 'reminder',
     speech:
       r.message ||
       (ok
-        ? 'Erinnerung ist gestellt.'
+        ? item
+          ? `Alles klar — ich erinnere dich an ${item}.`
+          : 'Erinnerung ist gestellt.'
         : 'Erinnerung ging gerade nicht — nochmal versuchen.'),
     bullets: ok
       ? [
+          item ||
+            (action.payload.timeLabel
+              ? `⏰ ${action.payload.timeLabel}`
+              : 'Erinnerung aktiv'),
           action.payload.timeLabel
             ? `⏰ ${action.payload.timeLabel}`
-            : 'Erinnerung aktiv',
-          action.payload.destName
-            ? String(action.payload.destName)
-            : 'Zeitlicher Trigger',
+            : item
+              ? 'Mitnehmen-Todo'
+              : 'Zeitlicher Trigger',
         ].filter(Boolean)
       : ['Nicht gestellt'],
     quickActions: ok
@@ -230,14 +251,123 @@ export async function tryEarlyJustDoIt(
   const t = (text || '').replace(/\s+/g, ' ').trim();
   if (!t) return null;
 
+  // Timer zuerst — vor Pitch-Einplanen / Tagesplan / Transit.
+  try {
+    const { isTimerIntent, prepareTimerFollowUp } = require('../alarms/timerService') as {
+      isTimerIntent: (s: string) => boolean;
+      prepareTimerFollowUp: (s: string) => Promise<{
+        speech: string;
+        bullets: string[];
+        quickActions: import('../../types/concierge').QuickAction[];
+      } | null>;
+    };
+    if (isTimerIntent(t)) {
+      const timer = await prepareTimerFollowUp(t);
+      if (timer?.speech) {
+        return {
+          kind: 'timer',
+          speech: timer.speech,
+          bullets: timer.bullets,
+          quickActions: timer.quickActions,
+          cardTitle: 'Timer',
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // „Wie spät?“ — eine lokale Uhrzeit (kein UTC/Zeitzonen-Doppel).
+  try {
+    const { isLocalTimeAsk, prepareLocalTimeFollowUp } = require('../alarms/localTimeAsk') as {
+      isLocalTimeAsk: (s: string) => boolean;
+      prepareLocalTimeFollowUp: (s: string) => {
+        speech: string;
+        bullets: string[];
+        cardTitle: string;
+      } | null;
+    };
+    if (isLocalTimeAsk(t)) {
+      const local = prepareLocalTimeFollowUp(t);
+      if (local?.speech) {
+        return {
+          kind: 'local_time',
+          speech: local.speech,
+          bullets: local.bullets,
+          quickActions: [],
+          cardTitle: local.cardTitle,
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Letzte Antwort 1:1 wiederholen — vor Wecker/Volume/Pitch
+  try {
+    const {
+      isRepeatLastSpeechIntent,
+      buildRepeatLastSpeechResult,
+    } = require('../speech/lastReplayableSpeech') as {
+      isRepeatLastSpeechIntent: (s: string) => boolean;
+      buildRepeatLastSpeechResult: () => {
+        speech: string;
+        bullets: string[];
+        cardTitle: string;
+      };
+    };
+    if (isRepeatLastSpeechIntent(t)) {
+      const rep = buildRepeatLastSpeechResult();
+      return {
+        kind: 'repeat',
+        speech: rep.speech,
+        bullets: rep.bullets,
+        quickActions: [],
+        cardTitle: rep.cardTitle,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
+  // Pitch „Einplanen um …“ nach Timing-Fork
+  try {
+    const { tryCommitPitchEinplanenFromText } = require('../../module2/pitch/pitchTimingFork') as {
+      tryCommitPitchEinplanenFromText: (s: string) => Promise<{
+        speech: string;
+        bullets: string[];
+        quickActions: QuickAction[];
+        cardTitle: string;
+      } | null>;
+    };
+    const scheduled = await tryCommitPitchEinplanenFromText(t);
+    if (scheduled?.speech) {
+      return {
+        kind: 'reminder',
+        speech: scheduled.speech,
+        bullets: scheduled.bullets,
+        quickActions: scheduled.quickActions,
+        cardTitle: scheduled.cardTitle,
+      };
+    }
+  } catch {
+    /* soft */
+  }
+
   // Kein Flug hier. Uhrzeit/morgen/Session dürfen den Turn nicht vor dem Manager stehlen.
   // Wecker, Timer, Lautstärke, Parken, Erinnerung bleiben Just-Do-It —
   // außer der Satz ist ein Tagesplan (Wecker erst am Planende).
   try {
-    const { clockIntentYieldsToDayPlan } = require('../../module2/planning/planClockGuard') as {
-      clockIntentYieldsToDayPlan: (s: string) => boolean;
+    const { isTimerIntent } = require('../alarms/timerService') as {
+      isTimerIntent: (s: string) => boolean;
     };
-    if (clockIntentYieldsToDayPlan(t)) return null;
+    // Timer ist immer Just-Do-It — nie hinter Tagesplan schieben.
+    if (!isTimerIntent(t)) {
+      const { clockIntentYieldsToDayPlan } = require('../../module2/planning/planClockGuard') as {
+        clockIntentYieldsToDayPlan: (s: string) => boolean;
+      };
+      if (clockIntentYieldsToDayPlan(t)) return null;
+    }
   } catch {
     /* soft */
   }
@@ -261,10 +391,22 @@ export async function tryEarlyJustDoIt(
     }
   }
 
+  // Taxi/Uber-Vorbestellung: nicht als Transit/Leave-by abfangen
+  let taxiRide = false;
+  try {
+    const { wantsTaxiRide } = require('../mobility/taxiRideIntent') as {
+      wantsTaxiRide: (s: string) => boolean;
+    };
+    taxiRide = wantsTaxiRide(t);
+  } catch {
+    /* soft */
+  }
+
   // Bahn/Leave-by ± Wecker — vor reinem Clock-Pfad (sonst wird Abfahrt als Weckzeit gelesen)
   if (
-    care?.kind === 'compound_wake_transit' ||
-    care?.kind === 'transit_leave'
+    !taxiRide &&
+    (care?.kind === 'compound_wake_transit' ||
+      care?.kind === 'transit_leave')
   ) {
     try {
       const { executeTransitAndOptionalWake } = await import('./timeCareExecute');

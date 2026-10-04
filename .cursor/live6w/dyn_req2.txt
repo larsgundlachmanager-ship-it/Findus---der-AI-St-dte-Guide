@@ -1,0 +1,11 @@
+C:/Users/larsf/Findus 2.0/src/services/apkSlim.smoke.test.ts:72:`kein require(data/staedte/*) — hits: ${packRequireHits.join(', ') || 'none'}`,
+C:/Users/larsf/Findus 2.0/src/services/apkSlim.smoke.test.ts:76:`kein require(Stadt-Cover-PNG) — hits: ${coverRequireHits.join(', ') || 'none'}`,
+C:/Users/larsf/Findus 2.0/src/module2/chat/runChatLane.ts:485:const { hydrateFlightTripSession, hasFlightTripSession } = require(
+C:/Users/larsf/Findus 2.0/src/module2/planning/planHandoffGuard.ts:99:const { isVolumeIntent, isLookNearIntent } = require(
+C:/Users/larsf/Findus 2.0/src/module2/planning/runPlanningModule.ts:230:const { shouldYieldPlanWaitToFlight, isFlightTripQuery } = require(
+C:/Users/larsf/Findus 2.0/src/module2/planning/runPlanningModule.ts:350:const { tryResolveDateKeyFromUserText, todayDateKey } = require(
+C:/Users/larsf/Findus 2.0/src/module2/planning/runPlanningModule.ts:367:const { speakContextualBridgeFireAndForget } = require(
+C:/Users/larsf/Findus 2.0/src/module2/router/call1Dispatch.smoke.test.ts:91:const { setFlightTripSession, resetFlightTripSessionForTests } = require(
+C:/Users/larsf/Findus 2.0/src/module2/router/call1Dispatch.smoke.test.ts.bak:91:const { setFlightTripSession, resetFlightTripSessionForTests } = require(
+C:/Users/larsf/Findus 2.0/src/module2/router/choiceTurnContext.ts:61:const { noteLastLiveInventory, getLastLiveInventory } = require(
+C:/Users/larsf/Findus 2.0/src/module2/router/runConciergeTurn.ts:1516:const { shouldPreserveFlightTripSession, isFlightTripQuery } = require(

@@ -13,8 +13,10 @@ import {
   foldCityKey,
   slugCityHint,
 } from './landmarkAliases';
+import { packPlaceNameScore } from './packPlaceNameScore';
 
 export { canonicalizeLandmarkQuery, slugCityHint } from './landmarkAliases';
+export { packPlaceNameScore } from './packPlaceNameScore';
 
 const DOC = FileSystem.documentDirectory;
 const CITIES_DIR = DOC ? `${DOC}cities/` : null;
@@ -33,24 +35,105 @@ export async function listCachedCityPackIds(): Promise<string[]> {
   }
 }
 
+/** Pack-Mittelpunkt aus lat/lng oder Coverage — für Distanz-Cascade. */
+export function packGeoAnchor(pack: {
+  lat?: number;
+  lng?: number;
+  _coverage?: {
+    latMin?: number;
+    latMax?: number;
+    lngMin?: number;
+    lngMax?: number;
+  } | null;
+}): { lat: number; lng: number } | null {
+  if (
+    typeof pack.lat === 'number' &&
+    Number.isFinite(pack.lat) &&
+    typeof pack.lng === 'number' &&
+    Number.isFinite(pack.lng)
+  ) {
+    return { lat: pack.lat, lng: pack.lng };
+  }
+  const c = pack._coverage;
+  if (
+    c &&
+    typeof c.latMin === 'number' &&
+    typeof c.latMax === 'number' &&
+    typeof c.lngMin === 'number' &&
+    typeof c.lngMax === 'number'
+  ) {
+    return {
+      lat: (c.latMin + c.latMax) / 2,
+      lng: (c.lngMin + c.lngMax) / 2,
+    };
+  }
+  return null;
+}
+
+function haversineM(
+  aLat: number,
+  aLng: number,
+  bLat: number,
+  bLng: number,
+): number {
+  const R = 6371000;
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(bLat - aLat);
+  const dLng = toRad(bLng - aLng);
+  const s =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(aLat)) * Math.cos(toRad(bLat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(s)));
+}
+
+/**
+ * Gecachte Packs nach Distanz zum Anker (GPS/Metro), nächste zuerst.
+ * Packs ohne Koordinaten ans Ende (nur wenn Limit noch Platz).
+ */
+export async function listCachedCityPackIdsByDistance(
+  lat: number,
+  lng: number,
+  opts?: {
+    excludeIds?: string[] | null;
+    maxKm?: number | null;
+    limit?: number | null;
+  },
+): Promise<Array<{ id: string; distM: number }>> {
+  const exclude = new Set(
+    (opts?.excludeIds ?? []).map((x) => String(x || '').trim().toLowerCase()).filter(Boolean),
+  );
+  const maxM =
+    typeof opts?.maxKm === 'number' && opts.maxKm > 0
+      ? opts.maxKm * 1000
+      : 120_000;
+  const limit = Math.max(1, Math.min(12, opts?.limit ?? 6));
+  const ids = await listCachedCityPackIds();
+  const ranked: Array<{ id: string; distM: number }> = [];
+  const noGeo: string[] = [];
+  for (const id of ids) {
+    if (exclude.has(id)) continue;
+    const pack = await loadCachedCityPack(id);
+    if (!pack) continue;
+    const anchor = packGeoAnchor(pack);
+    if (!anchor) {
+      noGeo.push(id);
+      continue;
+    }
+    const distM = haversineM(lat, lng, anchor.lat, anchor.lng);
+    if (distM > maxM) continue;
+    ranked.push({ id, distM });
+  }
+  ranked.sort((a, b) => a.distM - b.distM);
+  const out = ranked.slice(0, limit);
+  for (const id of noGeo) {
+    if (out.length >= limit) break;
+    out.push({ id, distM: maxM + 1 });
+  }
+  return out;
+}
+
 function nameScore(poiName: string, subject: string): number {
-  const a = poiName.trim().toLowerCase();
-  const b = subject
-    .trim()
-    .toLowerCase()
-    .replace(/\bhamburg\b/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (!a || !b) return 0;
-  if (a === b) return 100;
-  if (a.includes(b) || b.includes(a)) return 85;
-  const at = a.split(/[^a-zäöüß0-9]+/i).filter((t) => t.length > 2);
-  const bt = b.split(/[^a-zäöüß0-9]+/i).filter((t) => t.length > 2);
-  let hit = 0;
-  for (const t of bt) if (at.some((x) => x.includes(t) || t.includes(x))) hit += 1;
-  if (!bt.length) return 0;
-  if (bt.length === 1 && hit === 1) return 90;
-  return Math.round((hit / bt.length) * 55);
+  return packPlaceNameScore(poiName, subject);
 }
 
 function spotCoords(spot: {
@@ -502,6 +585,35 @@ export async function resolvePlacePackOsmGoogle(opts: {
     cityHint: opts.cityHint ?? null,
   });
   if (!geo) return null;
+  try {
+    const { shouldRejectCityGeocodeForVenueQuery } = require('./sameNavDestination') as {
+      shouldRejectCityGeocodeForVenueQuery: (
+        q: string,
+        label: string | null | undefined,
+      ) => boolean;
+    };
+    if (shouldRejectCityGeocodeForVenueQuery(query, geo.label)) {
+      // Venue-Query (Tennis Club…) → Stadt-Mitte/Dorfkern verwerfen
+      if (canon.query && canon.query !== query) {
+        const packRetry = await lookupPlaceInCachedPack(
+          preferredFirst || aliasSlug || gpsSlug || '',
+          canon.query,
+        );
+        if (packRetry) {
+          return {
+            lat: packRetry.lat,
+            lng: packRetry.lng,
+            label: packRetry.name,
+            source: 'cached_pack',
+            cityId: packRetry.cityId,
+          };
+        }
+      }
+      return null;
+    }
+  } catch {
+    /* soft */
+  }
   return {
     lat: geo.lat,
     lng: geo.lng,

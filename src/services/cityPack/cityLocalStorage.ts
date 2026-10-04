@@ -64,19 +64,29 @@ export function formatLocalDatasetBytes(bytes: number): string {
   return `${mb.toFixed(mb < 10 ? 1 : 0).replace('.', ',')} MB`;
 }
 
+/** Spot-Key der Stadt? `prisdorf_bahnhof` / `prisdorf:…` / exakt `prisdorf`. */
+export function spotKeyBelongsToCity(
+  spotKey: string | null | undefined,
+  cityId: string | null | undefined,
+): boolean {
+  const id = String(cityId || '').trim().toLowerCase();
+  if (!id) return true;
+  const key = String(spotKey || '').trim().toLowerCase();
+  if (!key) return false;
+  return key === id || key.startsWith(`${id}_`) || key.startsWith(`${id}:`);
+}
+
 export function poisLookLikeCity(
   cityId: string,
   pois: Array<{ spot_key?: string | null }>,
 ): boolean {
   const id = cityId.trim().toLowerCase();
   if (!id || !pois.length) return false;
-  const prefix = `${id}_`;
-  const colon = `${id}:`;
-  const n = Math.min(pois.length, 48);
+  const n = Math.min(pois.length, 64);
   let hit = 0;
   for (let i = 0; i < n; i += 1) {
-    const k = (pois[i]?.spot_key || '').toLowerCase();
-    if (k.startsWith(prefix) || k.startsWith(colon)) hit += 1;
+    if (spotKeyBelongsToCity(pois[i]?.spot_key, id)) hit += 1;
   }
-  return hit >= Math.max(3, Math.ceil(n * 0.2));
+  // Mehrheit der Sample-POIs — 20 % ließ Danzig-Reste als „Prisdorf“ durch.
+  return hit >= Math.max(3, Math.ceil(n * 0.55));
 }

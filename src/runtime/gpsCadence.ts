@@ -1,5 +1,6 @@
 /**
- * GPS-Takt nach Tempo — Akku sparen, Puck flüssig per Dead Reckoning.
+ * GPS-Takt nach Tempo — Akku sparen.
+ * Puck flüssig: `gpsDeadReckoning.ts` (Extrapolieren zwischen Fixes).
  *
  * Unter 1 km/h → 15 s
  * bis 3 km/h → 8 s
@@ -39,25 +40,60 @@ export function gpsIntervalMsForSpeedKmh(kmh: number): number {
 }
 
 /**
- * GPS liefert oft speed=0/-1 obwohl man fährt → Track/EMA retten den Takt.
+ * GPS liefert oft speed=0/-1 obwohl man fährt → Track/EMA/Displacement retten den Takt.
  * Still (15 s) nur wenn ALLE Quellen stehen.
  */
 export function resolveEffectiveSpeedMs(
   reported: number | null | undefined,
   trackMs?: number | null,
   smoothedMs?: number | null,
+  displacementMs?: number | null,
 ): number | null {
   const ok = (v: number | null | undefined): v is number =>
     typeof v === 'number' && Number.isFinite(v) && v >= 0;
   if (ok(reported) && reported >= 0.45) return reported;
   if (ok(trackMs) && trackMs >= 0.45) return trackMs;
   if (ok(smoothedMs) && smoothedMs >= 0.45) return smoothedMs;
+  if (ok(displacementMs) && displacementMs >= 0.45) return displacementMs;
   const allStill =
     (!ok(reported) || reported < 0.45) &&
     (!ok(trackMs) || trackMs < 0.4) &&
-    (!ok(smoothedMs) || smoothedMs < 0.4);
+    (!ok(smoothedMs) || smoothedMs < 0.4) &&
+    (!ok(displacementMs) || displacementMs < 0.4);
   if (allStill && ok(reported)) return 0;
   return null;
+}
+
+/**
+ * Zug/Auto: Sensor-Speed oft 0 — Abstand/Zeit zwischen Fixes als Tempo nutzen.
+ * dt < 0.4 s oder > 90 s → unbrauchbar (Boot/Pause).
+ */
+export function speedMsFromDisplacement(
+  prevLat: number | null | undefined,
+  prevLng: number | null | undefined,
+  nextLat: number,
+  nextLng: number,
+  dtMs: number,
+): number | null {
+  if (
+    prevLat == null ||
+    prevLng == null ||
+    !Number.isFinite(prevLat) ||
+    !Number.isFinite(prevLng) ||
+    !Number.isFinite(nextLat) ||
+    !Number.isFinite(nextLng) ||
+    !Number.isFinite(dtMs) ||
+    dtMs < 400 ||
+    dtMs > 90_000
+  ) {
+    return null;
+  }
+  const dLat = (nextLat - prevLat) * 111_320;
+  const cos = Math.cos((nextLat * Math.PI) / 180);
+  const dLng = (nextLng - prevLng) * 111_320 * Math.max(0.2, cos);
+  const movedM = Math.sqrt(dLat * dLat + dLng * dLng);
+  if (movedM < 4) return null;
+  return movedM / (dtMs / 1000);
 }
 
 export function gpsIntervalMsForSpeedMs(
@@ -68,6 +104,28 @@ export function gpsIntervalMsForSpeedMs(
     return GPS_CADENCE.briskMs;
   }
   return gpsIntervalMsForSpeedKmh(kmhFromSpeedMs(speedMs));
+}
+
+/**
+ * Aktive Navigation: Cadence nutzen, aber Free-Roam-Stillstand (15 s) vermeiden
+ * und Rad nicht dauerhaft auf 0,5 s festnageln (lange Touren / Akku).
+ * - Fuß: 1 s in Bewegung (Puck/Cues), 2 s bei Stillstand — DR coaste nur ~2,8 s
+ * - Rad: Cadence, nie schärfer als 1 s; Still/Boarding max. 4 s
+ */
+export function gpsIntervalMsWhileNavigating(
+  speedMs: number | null | undefined,
+  opts?: { preferBike?: boolean },
+): number {
+  const raw = gpsIntervalMsForSpeedMs(speedMs);
+  if (opts?.preferBike) {
+    const slowest = GPS_CADENCE.walkMs; // 4 s Boarding
+    const fastest = 1_000;
+    if (raw >= GPS_CADENCE.stillMs) return slowest;
+    return Math.min(slowest, Math.max(fastest, raw));
+  }
+  // Fuß-Nav: 4 s Cadence + kurzer Coast = sichtbarer Lag hinter dem Gehenden.
+  if (raw >= GPS_CADENCE.stillMs) return GPS_CADENCE.briskMs; // 2 s
+  return 1_000;
 }
 
 export function gpsCadenceReason(kmh: number): string {

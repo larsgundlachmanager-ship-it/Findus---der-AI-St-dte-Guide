@@ -171,12 +171,13 @@ function asOffers(data: unknown, city?: string | null): VenueOfferItem[] {
 
 function affiliateKindFor(
   offerKind: VenueOfferKind,
-): 'museum' | 'tour' | 'attraction' | 'generic' {
+): 'museum' | 'tour' | 'attraction' | 'generic' | 'live_event' {
   if (offerKind === 'museum') return 'museum';
   if (offerKind === 'harbor' || offerKind === 'attraction_tour') return 'tour';
-  if (offerKind === 'sightseeing' || offerKind === 'concert_hall') {
-    return 'attraction';
+  if (offerKind === 'theater' || offerKind === 'concert_hall') {
+    return 'live_event';
   }
+  if (offerKind === 'sightseeing') return 'attraction';
   return 'generic';
 }
 
@@ -293,14 +294,49 @@ export function buildVenueOfferButtons(opts: {
       }).url ||
       ticketSearchUrl(ticketQ.trim(), kind === 'none' ? 'attraction_tour' : kind);
 
+    let finalTicketUrl = ticketUrl;
+    if (kind === 'theater' || kind === 'concert_hall') {
+      const rxOffer = offers.find(
+        (o) =>
+          o.ticketUrl &&
+          /(?:reservix|adticket)\.(de|at|ch)/i.test(o.ticketUrl),
+      );
+      if (rxOffer?.ticketUrl) {
+        try {
+          const { preferReservixFamilyAffiliateUrl } = require('../affiliate/reservixAffiliate') as {
+            preferReservixFamilyAffiliateUrl: (u: string) => string;
+          };
+          finalTicketUrl = preferReservixFamilyAffiliateUrl(rxOffer.ticketUrl);
+        } catch {
+          finalTicketUrl = rxOffer.ticketUrl;
+        }
+      } else if (
+        !finalTicketUrl ||
+        !/(?:reservix|adticket)\.(de|at|ch)/i.test(finalTicketUrl)
+      ) {
+        try {
+          const { getReservixUrl } = require('../affiliate/reservixAffiliate') as {
+            getReservixUrl: (d?: string | null, q?: string | null) => string;
+          };
+          finalTicketUrl = getReservixUrl(null, ticketQ.trim());
+        } catch {
+          /* keep preferTicketSource */
+        }
+      }
+    }
+
     buttons.push({
       id: 'venue_tickets_affiliate',
       label: shortenActionLabel(
-        hasBoat ? '⛴️ Touren buchen' : '🎟️ Tickets',
+        hasBoat
+          ? '⛴️ Touren buchen'
+          : kind === 'theater' || kind === 'concert_hall'
+            ? '🎫 Tickets'
+            : '🎟️ Tickets',
       ),
       payload: {
         kind: 'deep_link',
-        url: ticketUrl,
+        url: finalTicketUrl,
       },
     });
   }
@@ -381,7 +417,9 @@ export async function discoverVenueOffers(opts: {
     '- Was kann man HIER konkret machen? (Programm HEUTE/MORGEN, Touren, Tickets, Rundfahrten, Führungen)',
     '- Nur BELEGTE Angebote. Keine erfundenen Preise, keine Fake-URLs.',
     '- infoUrl = Detailseite des Angebots, nie nur die Stadt-Übersicht eines Kalenders.',
-    '- Partner-Portale (GetYourGuide, Viator, Musement, offizielle Venue-Seite) als Quellen ok.',
+    kind === 'theater' || kind === 'concert_hall'
+      ? '- Live-Venue (Theater/Konzert/Arena): ticketUrl ZUERST reservix.de / adticket.de Deep-Link (site:reservix.de / site:adticket.de). Sonst Eventim/Venue-Shop. GYG nur bei Touren/Führungen.'
+      : '- Partner-Portale (GetYourGuide, Viator, Musement, offizielle Venue-Seite) als Quellen ok.',
     '- Wenn nichts Belegtes: offers=[] und notes ehrlich.',
     '',
     'Antworte NUR JSON:',
@@ -449,6 +487,93 @@ export async function discoverVenueOffers(opts: {
       }
     }
 
+    // Gigsberg Direct: Venue/City-Suche → Deep-Link (höhere Provision bei Preis-Parität)
+    if (effectiveKind === 'theater' || effectiveKind === 'concert_hall') {
+      try {
+        const { findBestGigsbergTicket, GIGSBERG_SECONDARY_DISCLOSURE_DE } =
+          await import('../affiliate/gigsbergAffiliate');
+        const { pickAffiliateOffer } = await import(
+          '../affiliate/affiliatePickOffer'
+        );
+        const gb = await findBestGigsbergTicket({
+          subject,
+          venue: subject,
+          city: opts.city,
+          signal: opts.signal,
+        });
+        if (gb?.url) {
+          const tix = buttons.find((b) => b.id === 'venue_tickets_affiliate');
+          const currentUrl =
+            tix && tix.payload.kind === 'deep_link' ? tix.payload.url : null;
+          const candidates = [
+            currentUrl
+              ? {
+                  id: classifyTicketPartner(currentUrl).id,
+                  label: 'current',
+                  url: currentUrl,
+                  commissionScore: classifyTicketPartner(currentUrl)
+                    .commissionScore,
+                  deepLinkLevel: (ticketProductKey(currentUrl)
+                    ? 'deep'
+                    : 'search') as const,
+                  partnerPriceEur: null as number | null,
+                  identity: ticketIdentity({ url: currentUrl }),
+                }
+              : null,
+            {
+              id: 'gigsberg',
+              label: gb.title,
+              url: gb.url,
+              commissionScore: 90,
+              deepLinkLevel: 'deep' as const,
+              partnerPriceEur: gb.priceEur,
+              identity: ticketIdentity({ url: gb.url }) || `gigsberg:${gb.eventId}`,
+            },
+          ].filter(Boolean) as Array<{
+            id: string;
+            label: string;
+            url: string;
+            commissionScore: number;
+            deepLinkLevel: 'deep' | 'search';
+            partnerPriceEur: number | null;
+            identity: string | null;
+          }>;
+          const pick = pickAffiliateOffer(
+            candidates.filter((c) => c.deepLinkLevel === 'deep'),
+            { userWantsCheapest: userWantsCheapest(opts.userText) },
+          );
+          if (tix && tix.payload.kind === 'deep_link' && pick?.url) {
+            tix.payload.url = pick.url;
+            tix.label = shortenActionLabel(
+              /gigsberg/i.test(pick.url)
+                ? '🎫 Tickets bei Gigsberg'
+                : tix.label,
+            );
+          }
+          if (!offers.some((o) => o.ticketUrl === gb.url)) {
+            offers.unshift({
+              type: 'concert',
+              title: gb.title.slice(0, 80),
+              whenLabel: gb.whenLabel,
+              summary: [
+                gb.priceEur != null
+                  ? `ab ca. ${Math.round(gb.priceEur)} €`
+                  : '',
+                GIGSBERG_SECONDARY_DISCLOSURE_DE,
+              ]
+                .filter(Boolean)
+                .join(' · ')
+                .slice(0, 220),
+              infoUrl: gb.url,
+              ticketUrl: gb.url,
+            });
+          }
+        }
+      } catch {
+        /* soft */
+      }
+    }
+
     const promptBlock = [
       '=== VENUE-OFFERS (LIVE, PFLICHT wenn belegt) ===',
       `Ort: ${subject} · Kontext: ${city} · Typ: ${effectiveKind}`,
@@ -505,12 +630,12 @@ export async function discoverVenueOffers(opts: {
 /** Prompt-SSOT-Fragment für Knowledge / Maps-Pitch. */
 export const FINDUS_VENUE_OFFERS_BLOCK = `VENUE-OFFERS (SSOT — weltweit, kein Stadt-Datensatz):
 - Bei Theater/Oper/Konzertort/Hafen/Dungeon/Museum/Attraction IMMER live prüfen: was kann man HIER machen?
-- Theater → aktuelles Programm (heute/morgen) + Tickets.
-- Konzertort → Konzerte + Führungen/Touren wenn belegt.
+- Theater → aktuelles Programm (heute/morgen) + Tickets (Reservix/ADticket bevorzugen wenn belegt).
+- Konzertort/Arena → Konzerte/Shows + Tickets (Reservix/ADticket); Führungen/Touren wenn belegt.
 - Hafen → Rundfahrten/Fähren/Dampfer (Partner-Feeds).
 - Attraction/Dungeon → Tour-/Eintritts-Tickets (Partner-Feeds).
 - FLOW: kurz nennen → Action-Button „mehr wissen“ → dann Ticket-Button.
-- Partner (GetYourGuide / Viator / Musement) primär; offizielle Links sekundär.
+- Live-Events DE: Reservix/ADticket vor GYG; Gigsberg Direct wenn Deep-Link + Preis passt (höhere Provision bei Preis-Parität). Touren/Attraktionen: GYG/Viator/Musement.
 - VERBOTEN: feste Venue-Scripts, Fake-Preise, erfundene Programme.`;
 
 /** @deprecated — nur noch für Tests / Debug */

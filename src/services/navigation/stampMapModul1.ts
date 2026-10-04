@@ -1,7 +1,10 @@
 /**
  * Fog-/Stempelkarte: Erkunden-/Modul-1-Orte.
  * Homescreen: Story + Auto-Trigger. Directory/Ärzte/Apotheken ohne Story raus.
- * Farben: grün gesehen · violett Modul 1 · rot Story ohne Trigger · blau nur geplant.
+ *
+ * Gebäude-Fill (Display ≠ Persistenz) — SSOT `shouldPaintPlaceBuildingFill`:
+ *   visited → grün · Nav/Plan → blau · M1-Auto → lila · sonst kein Fill.
+ * Neutral-Rot (#C45B5B) nie als Idle-Massen-Fill. Rings speichern im Pack/SQLite.
  */
 
 import type { Poi } from '../../db/types';
@@ -22,6 +25,20 @@ import {
   resolvePlaceTiers,
   userWantsTouristic,
 } from '../../interests/placeTiers';
+import {
+  isMapIdleStoryFillPoi,
+  isPackStoryMapPoi,
+  isMapOpenAreaNoFillPoi,
+  NO_MODUL1_AUTO_BLOB_RE,
+} from './mapIdleStoryFill';
+
+export {
+  isMapIdleStoryFillPoi,
+  isMapOpenAreaNoFillPoi,
+  isMapEverydayBuildingFocusPoi,
+  isPackStoryMapPoi,
+  shouldPaintPlaceBuildingFill,
+} from './mapIdleStoryFill';
 
 /** Meta-Kategorie in der Stempel-Legende (kein Pack-Taxonomie-Wert). */
 export const MODUL1_MAP_CATEGORY = 'modul1' as const;
@@ -79,30 +96,55 @@ function isAreaLike(poi: Poi): boolean {
 
 type Modul1MapMode = 'auto' | 'visible';
 
-/** Pack-Story ohne Directory — auf der Homescreen-Karte halten. */
-export function isPackStoryMapPoi(poi: Poi): boolean {
+function blocksModul1AutoStory(poi: Poi): boolean {
+  if (isMustHavePoi(poi)) return false;
   const tags = parseTagsJson(poi.tags_json);
   if (
     tags.includes('directory') ||
-    tags.includes('amenity_skip') ||
-    tags.includes('tier4')
+    tags.includes('tier4') ||
+    tags.includes('offline_lookup') ||
+    tags.includes('amenity_skip')
   ) {
-    return false;
+    const blob = `${poi.name ?? ''} ${poi.category ?? ''} ${tags.join(' ')}`;
+    if (NO_MODUL1_AUTO_BLOB_RE.test(blob)) return true;
+    // Reine Directory ohne Story-Tag: kein Auto-Modul-1.
+    if (!tags.includes('story') && !tags.includes('story_enriched')) return true;
   }
-  return tags.includes('story') || tags.includes('story_enriched');
+  return NO_MODUL1_AUTO_BLOB_RE.test(
+    `${poi.name ?? ''} ${poi.category ?? ''} ${poi.tags_json ?? ''}`,
+  );
 }
 
 export { isNonStoryTouristNoisePoi };
 
 /**
  * Stadt-Orte für „X von Y erkundet“ —
- * nur Story-Orte (nicht Café/Salon/Directory), unabhängig von Prefs.
+ * nur echte Story-Stops (Reiseführer), keine Zonen/Verzeichnisse.
  */
 export function isCityExploreMapPoi(poi: Poi): boolean {
   if (!isAreaLike(poi)) return false;
+  // Approach/Sub nie — auch wenn kind in alter SQLite fehlt/legacy ist.
+  if (poi.parent_poi_id != null) return false;
   if (!Number.isFinite(poi.lat) || !Number.isFinite(poi.lng)) return false;
   if (isNonStoryTouristNoisePoi(poi)) return false;
-  return isPackStoryMapPoi(poi);
+  if (isMapOpenAreaNoFillPoi(poi)) return false;
+  if (!isPackStoryMapPoi(poi)) return false;
+  const tags = parseTagsJson(poi.tags_json);
+  const blob = `${poi.name ?? ''} ${poi.category ?? ''} ${tags.join(' ')}`;
+  const hard =
+    tags.includes('must_have') ||
+    tags.includes('landmark') ||
+    tags.includes('module1') ||
+    tags.includes('historical_core') ||
+    tags.includes('geschichte') ||
+    /\b(denkmal|museum|kirche|bahnhof|schule|brücke|bruecke|wartehäuschen|wartehaeuschen)\b/i.test(
+      blob,
+    );
+  if (hard) return true;
+  if (/\b(natur|moor|wald|angel|jagd|feldmark|park\b|garten|wanderung)\b/i.test(blob)) {
+    return false;
+  }
+  return true;
 }
 
 const UNWANTED_PERSONA = new Set([
@@ -149,9 +191,7 @@ function passesModul1MapGates(
   const tags = parseTagsJson(poi.tags_json);
   const packStory =
     (tags.includes('story') || tags.includes('story_enriched')) &&
-    !tags.includes('directory') &&
-    !tags.includes('amenity_skip') &&
-    !tags.includes('tier4');
+    !tags.includes('directory');
 
   const tiers = resolvePlaceTiers(poi);
   if (!mustHave && tiers.includes('touristic') && !userWantsTouristic(profile)) {
@@ -199,6 +239,7 @@ export function isModul1AutoTriggerMapPoi(
   poi: Poi,
   profile?: UserProfile | null,
 ): boolean {
+  if (blocksModul1AutoStory(poi)) return false;
   return passesModul1MapGates(poi, profile, 'auto');
 }
 

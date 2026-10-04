@@ -55,7 +55,11 @@ export const VOICES: VoiceDefinition[] = CARTESIA_VOICES.map(fromCartesia);
 export const VOICE_PROFILES = VOICES;
 
 export function getVoice(id: VoiceId): VoiceDefinition {
-  return VOICES.find((v) => v.id === id) ?? VOICES[0];
+  return (
+    VOICES.find((v) => v.id === id) ??
+    VOICES.find((v) => v.id === DEFAULT_VOICE_ID) ??
+    VOICES[0]
+  );
 }
 
 export function resolveTtsEngine(_voiceId?: VoiceId | null): TtsEngineId {

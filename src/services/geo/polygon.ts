@@ -136,6 +136,68 @@ export function isAxisAlignedBoxPolygon(polygon: GeoLatLng[]): boolean {
   return lats.size === 2 && lngs.size === 2;
 }
 
+/**
+ * Grobe Gebäude-Raute (auch gedreht): wenige Ecken, zwei Kantenrichtungen ~90°.
+ * Solche Pack-Ringe müssen auf den sichtbaren Basemap-Umrisse snappen.
+ */
+export function isNearRectanglePolygon(polygon: GeoLatLng[]): boolean {
+  if (!polygon || polygon.length < 4) return false;
+  if (isAxisAlignedBoxPolygon(polygon)) return true;
+  const pts: GeoLatLng[] = [];
+  const seen = new Set<string>();
+  for (const p of polygon) {
+    if (!Number.isFinite(p.latitude) || !Number.isFinite(p.longitude)) {
+      return false;
+    }
+    const key = `${p.latitude.toFixed(6)},${p.longitude.toFixed(6)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    pts.push(p);
+  }
+  if (pts.length < 4 || pts.length > 6) return false;
+
+  const lat0 = pts.reduce((s, p) => s + p.latitude, 0) / pts.length;
+  const mPerDegLat = 111_320;
+  const mPerDegLng = 111_320 * Math.cos((lat0 * Math.PI) / 180);
+  const xy = pts.map((p) => ({
+    x: p.longitude * mPerDegLng,
+    y: p.latitude * mPerDegLat,
+  }));
+
+  const angles: number[] = [];
+  for (let i = 0; i < xy.length; i++) {
+    const a = xy[i]!;
+    const b = xy[(i + 1) % xy.length]!;
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    if (Math.hypot(dx, dy) < 0.4) continue;
+    let deg = (Math.atan2(dy, dx) * 180) / Math.PI;
+    deg = ((deg % 180) + 180) % 180;
+    angles.push(deg);
+  }
+  if (angles.length < 4) return false;
+
+  const clusters: number[] = [];
+  for (const ang of angles) {
+    let placed = false;
+    for (let i = 0; i < clusters.length; i++) {
+      const c = clusters[i]!;
+      let d = Math.abs(ang - c);
+      if (d > 90) d = 180 - d;
+      if (d <= 18) {
+        clusters[i] = (c + ang) / 2;
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) clusters.push(ang);
+  }
+  if (clusters.length !== 2) return false;
+  let sep = Math.abs(clusters[0]! - clusters[1]!);
+  if (sep > 90) sep = 180 - sep;
+  return sep >= 70 && sep <= 110;
+}
+
 export function polygonToLatLngPairs(
   polygon: GeoLatLng[],
 ): Array<[number, number]> {

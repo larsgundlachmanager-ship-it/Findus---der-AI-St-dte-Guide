@@ -12,7 +12,7 @@ function assert(cond: unknown, msg: string): void {
 }
 
 const CLEAR_ROUTE_RE =
-  /\b((?:beende?|beenden|stopp(?:e|en)?|stop|abbrechen)\s+(?:bitte\s+)?(?:die\s+)?(?:navigation|navi|route)|(?:navigation|navi|route)\s+(?:bitte\s+)?(?:löschen|loeschen|abbrechen|beenden|aus|stopp|stoppen)|stopp\s+(?:die\s+)?(?:route|navigation)|navi\s+(?:aus|stopp|stop|beenden)|ziel\s+(?:löschen|loeschen|vergessen)|clear\s+route)\b/iu;
+  /\b((?:beende?|beenden|stopp(?:e|en)?|stop|abbrechen)\s+(?:bitte\s+)?(?:die\s+)?(?:navigation|navi|route)|(?:navigation|navi|route)\s+(?:bitte\s+)?(?:löschen|loeschen|abbrechen|beenden|aus|stopp|stoppen)|stopp\s+(?:die\s+)?(?:route|navigation)|navi\s+(?:aus|stopp|stop|beenden)|ziel\s+(?:löschen|loeschen|vergessen)|clear\s+route|(?:nein[,\s]+)?stopp(?:e|en)?\s+(?:die|das|es))\b/iu;
 
 const HARD_DEST_RE =
   /\b(?:bring\s+mich\s+(?:jetzt\s+)?(?:zum|zur|nach|zu)\s+|navigier(?:e|en|t)?\s+(?:mich\s+)?(?:jetzt\s+)?(?:zum|zur|nach|zu)\s+)\s*([A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']*(?:\s+[A-ZÄÖÜa-zäöüß0-9][\wÄÖÜäöüß\-&.']*){0,4})/iu;
@@ -78,7 +78,11 @@ const turn = fs.readFileSync(
 const resolve = fs.readFileSync(path.join(srcDir, 'resolveNavTarget.ts'), 'utf8');
 const navSvc = fs.readFileSync(path.join(srcDir, 'navigationService.ts'), 'utf8');
 
-assert(hard.includes('isPureStopNavigationIntent'), 'hardNav exports pure stop');
+assert(isPure('Stoppe die Navigation'), 'stoppe die navigation');
+assert(isPure('Stoppe die'), 'stoppe die kurz');
+assert(isPure('Nein, stoppe die'), 'nein stoppe die');
+assert(hard.includes('stopp(?:e|en)?\\s+(?:die|das|es)'), 'hardNav short stoppe die');
+
 assert(hard.includes('stripStopNavigationForContinue'), 'hardNav strip continue');
 assert(hard.includes('bumpNavCommitGeneration'), 'clear bumps commit gen');
 assert(voice.includes('isPureStopNavigationIntent'), 'voice early pure stop');

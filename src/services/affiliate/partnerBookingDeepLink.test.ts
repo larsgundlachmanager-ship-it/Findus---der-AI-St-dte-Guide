@@ -15,6 +15,7 @@ import {
   sanitizeKonfettiUrl,
   isKonfettiEventUrl,
   buildKiwiResultsPageUrl,
+  formatKiwiBags,
   buildAviasalesCompactSearchUrl,
   localPickupFormattedTime,
   buildAiraloCountryPageUrl,
@@ -75,16 +76,61 @@ assert(/client_id=TESTCLIENT/.test(now), 'uber client_id');
 assert(/drop%5B0%5D=/.test(now) || /drop\[0\]=/.test(now), 'uber drop json');
 assert(/Mittelweg/.test(decodeURIComponent(now)), 'uber pickup street');
 
+const futureDay = new Date(Date.now() + 36 * 60 * 60_000);
+const futureIso = `${futureDay.getFullYear()}-${String(futureDay.getMonth() + 1).padStart(2, '0')}-${String(futureDay.getDate()).padStart(2, '0')}`;
 const reserve = buildUberGoUrl({
   clientId: 'TESTCLIENT',
   dropoff: uberPlaceFromAddress(53.676, 9.848, 'Brummerackerweg, Tangstedt'),
   pickup: uberPlaceFromAddress(53.579, 9.993, 'Mittelweg 69'),
   pickupTimeHm: '11:51',
-  pickupDateIso: '2026-08-23',
+  pickupDateIso: futureIso,
 });
-assert(/\/go\/reserve\/select-time/.test(reserve), `uber reserve: ${reserve}`);
-assert(/pickup_formatted_time=2026-08-23T11%3A51%3A00/.test(reserve), 'uber reserve time');
-assert(localPickupFormattedTime('11:51', '2026-08-23') === '2026-08-23T11:51:00', 'local time');
+assert(/\/go\/reserve\?/.test(reserve), `uber future reserve: ${reserve}`);
+assert(
+  new RegExp(`pickup_time=${futureIso}T11%3A51%3A00`).test(reserve),
+  'uber reserve time',
+);
+assert(!/\/go\/reserve\/select-time/.test(reserve), 'no white-screen reserve path');
+assert(!/\/go\/product-selection/.test(reserve), 'future not immediate product-selection');
+assert(localPickupFormattedTime('11:51', futureIso) === `${futureIso}T11:51:00`, 'local time');
+
+// Taxi-before-flight: tomorrow 07:00 → HAM (reserve, not setPickup)
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const tomorrowIso = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+const hamReserve = buildUberGoUrl({
+  clientId: 'TESTCLIENT',
+  dropoff: uberPlaceFromAddress(
+    53.63,
+    9.99,
+    'Flughafen Hamburg, 22335 Hamburg',
+  ),
+  pickupMyLocation: true,
+  pickupTimeHm: '07:00',
+  pickupDateIso: tomorrowIso,
+});
+assert(/\/go\/reserve\?/.test(hamReserve), `ham future reserve: ${hamReserve}`);
+assert(!/setPickup|product-selection/.test(hamReserve), 'ham not setPickup/immediate');
+assert(
+  new RegExp(`pickup_time=${tomorrowIso}T07(?:%3A|:)00`).test(hamReserve),
+  'ham pickup_time 07:00',
+);
+assert(/client_id=TESTCLIENT/.test(hamReserve), 'ham client_id');
+assert(
+  /Flughafen Hamburg|22335|53\.63/.test(decodeURIComponent(hamReserve)),
+  'ham dropoff airport',
+);
+const hamSoonAt = new Date(Date.now() + 8 * 60_000);
+const hamSoon = buildUberGoUrl({
+  clientId: 'TESTCLIENT',
+  dropoff: uberPlaceFromAddress(53.63, 9.99, 'Flughafen Hamburg'),
+  pickupTimeHm: `${String(hamSoonAt.getHours()).padStart(2, '0')}:${String(hamSoonAt.getMinutes()).padStart(2, '0')}`,
+  pickupDateIso: `${hamSoonAt.getFullYear()}-${String(hamSoonAt.getMonth() + 1).padStart(2, '0')}-${String(hamSoonAt.getDate()).padStart(2, '0')}`,
+});
+assert(
+  /\/go\/product-selection\?/.test(hamSoon),
+  `<15min → product-selection: ${hamSoon}`,
+);
 
 const cars = buildDiscoverCarsSearchUrl({
   pickupIata: 'ATH',
@@ -157,10 +203,48 @@ const kiwi = buildKiwiResultsPageUrl({
   adults: 2,
   bagsPerAdult: '0.1',
 });
-assert(/kiwi\.com\/de\/search\/results\/ham\/ath\/2026-09-12\/no-return/.test(kiwi), kiwi);
+assert(/kiwi\.com\/deep/.test(kiwi), kiwi);
+assert(/from=HAM/.test(kiwi) && /to=ATH/.test(kiwi), 'kiwi iata');
+assert(/departure=2026-09-12/.test(kiwi), 'kiwi date');
+assert(/return=anytime/.test(kiwi), 'kiwi return anytime');
 assert(/adults=2/.test(kiwi), 'kiwi adults');
-assert(/bags=0\.1_0\.1/.test(kiwi), `kiwi bags: ${kiwi}`);
+assert(/bags=0\.1_0\.1-/.test(kiwi), `kiwi bags: ${kiwi}`);
 assert(!isHollowPartnerUrl(kiwi), 'kiwi results not hollow');
+
+const kiwiDirect = buildKiwiResultsPageUrl({
+  fromIata: 'HAM',
+  toIata: 'ATH',
+  dateKey: '2026-11-12',
+  adults: 2,
+  bagsPerAdult: '0.1',
+  directOnly: true,
+});
+assert(/stopNumber=0%7Etrue|stopNumber=0~true/.test(kiwiDirect), `kiwi direct: ${kiwiDirect}`);
+assert(/adults=2/.test(kiwiDirect), 'kiwi direct adults');
+assert(!isHollowPartnerUrl(kiwiDirect), 'kiwi direct not hollow');
+
+assert(formatKiwiBags({ adults: 3, cabinBags: 2, checkedBags: 2 }) === '1.1_1.1_0.0-', 'bags 2+2 on 3 adults');
+assert(formatKiwiBags({ adults: 2, bagsPerAdult: '1.0' }) === '1.0_1.0-', 'bags per adult cabin');
+assert(formatKiwiBags({ adults: 2, cabinBags: 0, checkedBags: 0 }) == null, 'no bags omit');
+
+const kiwiRound = buildKiwiResultsPageUrl({
+  fromIata: 'HAM',
+  toIata: 'ATH',
+  dateKey: '2026-11-12',
+  returnDateKey: '2026-11-14',
+  adults: 3,
+  infants: 1,
+  cabinBags: 2,
+  checkedBags: 2,
+  directOnly: true,
+});
+assert(/return=2026-11-14/.test(kiwiRound), `kiwi round return: ${kiwiRound}`);
+assert(/adults=3/.test(kiwiRound) && /infants=1/.test(kiwiRound), 'kiwi pax 3+infant');
+assert(/bags=1\.1_1\.1_0\.0-/.test(kiwiRound), `kiwi bags party: ${kiwiRound}`);
+assert(/stopNumber=0(%7E|~)true/.test(kiwiRound), 'kiwi direct round');
+assert(!/return=anytime/.test(kiwiRound), 'no anytime when return set');
+
+
 
 const avia = buildAviasalesCompactSearchUrl({
   fromIata: 'HAM',

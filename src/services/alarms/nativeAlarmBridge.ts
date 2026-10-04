@@ -4,8 +4,12 @@
  */
 
 import { NativeModules, Platform } from 'react-native';
-import { scheduleWakeAlarm } from '../notifications/notificationService';
 import { dateKeyFromMs } from '../../utils/dateKeys';
+import { scheduleWakeAlarm } from '../notifications/notificationService';
+import {
+  buildWakeConfirmSpeech,
+  type WakeVoiceStyle,
+} from './wakeConfirmSpeech';
 import {
   useFuturePlanStore,
   type FuturePlanStop,
@@ -35,6 +39,10 @@ type NativeAlarmModule = {
     requestCode?: number;
   }>;
   cancelAlarmAt?: (triggerAtMs: number) => Promise<boolean>;
+  dismissClockAlarmAt?: (
+    hour: number,
+    minute: number,
+  ) => Promise<{ ok?: boolean; clockDismissed?: boolean }>;
 };
 
 function formatClock(ms: number): string {
@@ -117,17 +125,15 @@ function failMessage(reason?: string, detail?: string): string {
   }
 }
 
-function speechForNativeStatus(
-  _status: string | undefined,
-  clock: string,
-): string {
-  return `Ich habe deinen Wecker auf ${clock} gestellt.`;
+function speechForNativeStatus(wakeAtMs: number, replaced = false): string {
+  return buildWakeConfirmSpeech({ wakeAtMs, ok: true, replaced });
 }
 
 export function recordWakeOnTimeline(opts: {
   wakeAtMs: number;
   reasonLabel: string;
   channel: 'native' | 'notification';
+  voiceStyle?: 'normal' | 'gentle';
   /** Alten Wecker-Stop am selben Tag ersetzen */
   replaceStopId?: string | null;
 }): void {
@@ -168,9 +174,10 @@ export function recordWakeOnTimeline(opts: {
     status: 'planned',
     emoji: '⏰',
     notes:
-      opts.channel === 'native'
+      (opts.channel === 'native'
         ? 'Android-Systemwecker · zeitlicher Trigger'
-        : 'Yorro-Mitteilung · zeitlicher Trigger',
+        : 'Yorro-Mitteilung · zeitlicher Trigger') +
+      (opts.voiceStyle === 'gentle' ? ' · sanfte Stimme' : ''),
     planPriority: 2,
     userFixedTime: true,
   };
@@ -199,12 +206,27 @@ export function recordWakeOnTimeline(opts: {
 }
 
 export async function cancelNativeWakeAt(wakeAtMs: number): Promise<void> {
+  if (!Number.isFinite(wakeAtMs)) return;
   const mod = nativeModule();
-  if (!mod?.cancelAlarmAt) return;
-  try {
-    await mod.cancelAlarmAt(wakeAtMs);
-  } catch {
-    /* soft */
+  const d = new Date(wakeAtMs);
+  const hour = d.getHours();
+  const minute = d.getMinutes();
+  // 1) Clock-Liste (DISMISS) — sonst bleibt der alte Eintrag bei „Aktualisieren“
+  if (Platform.OS === 'android' && typeof mod?.dismissClockAlarmAt === 'function') {
+    try {
+      const res = await mod.dismissClockAlarmAt(hour, minute);
+      console.warn('[nativeAlarmBridge] dismissClock', hour, minute, res);
+    } catch (err) {
+      console.warn('[nativeAlarmBridge] dismissClock failed:', err);
+    }
+  }
+  // 2) AlarmManager / Persistenz (cancelAlarmAt dismiss’t Clock zusätzlich serverseitig)
+  if (mod?.cancelAlarmAt) {
+    try {
+      await mod.cancelAlarmAt(wakeAtMs);
+    } catch {
+      /* soft */
+    }
   }
 }
 
@@ -274,6 +296,7 @@ export async function setWakeAlarmWithBridge(opts: {
   preferNative?: boolean;
   wakeMode?: 'add' | 'replace';
   replaceWakeAtMs?: number | null;
+  voiceStyle?: WakeVoiceStyle;
 }): Promise<NativeAlarmResult> {
   const preferNative = opts.preferNative !== false;
   const label = opts.reasonLabel.trim() || 'deinen Termin';
@@ -295,23 +318,63 @@ export async function setWakeAlarmWithBridge(opts: {
     Math.abs(existingMs - opts.wakeAtMs) < 2 * 60_000;
 
   if (existing && existingMs != null && !opts.wakeMode && !sameTime) {
-    const oldClock = formatClock(existingMs);
+    const { buildWakeChoiceSpeech } = await import('./wakeConfirmSpeech');
     return {
       ok: false,
       channel: 'failed',
       needsChoice: true,
       existingWakeAtMs: existingMs,
       wakeAtMs: opts.wakeAtMs,
-      message: `Schon ein Wecker um ${oldClock}. Neu wäre ${clock}.`,
+      message: buildWakeChoiceSpeech({
+        existingWakeAtMs: existingMs,
+        newWakeAtMs: opts.wakeAtMs,
+      }),
     };
   }
 
   if (sameTime && existing) {
-    // Idempotent: Timeline + Trigger trotzdem sichern (falls nur Speech vorher log)
+    // Timeline schon da — trotzdem Native/Clock nochmal syncen
+    // (früherer LLM-Fake-Stop darf keinen echten Wecker blockieren).
+    if (preferNative && Platform.OS === 'android') {
+      try {
+        const { setNativeAlarm } = await import('../alarmService');
+        const d = new Date(opts.wakeAtMs);
+        const native = await setNativeAlarm({
+          wakeAtMs: opts.wakeAtMs,
+          time: `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`,
+          label: `Yorro — ${label}`,
+        });
+        if (native.ok) {
+          const channel =
+            native.tier === 'notification' ? 'notification' : 'native';
+          recordWakeOnTimeline({
+            wakeAtMs: opts.wakeAtMs,
+            reasonLabel: label,
+            channel,
+            voiceStyle: opts.voiceStyle,
+            replaceStopId: existing.id,
+          });
+          wireWakeRhythm({
+            wakeAtMs: opts.wakeAtMs,
+            reasonLabel: label,
+            leaveByMs: opts.leaveByMs,
+          });
+          return {
+            ok: true,
+            channel,
+            wakeAtMs: opts.wakeAtMs,
+            message: speechForNativeStatus(opts.wakeAtMs),
+          };
+        }
+      } catch (err) {
+        console.warn('[nativeAlarmBridge] sameTime re-sync failed:', err);
+      }
+    }
     recordWakeOnTimeline({
       wakeAtMs: opts.wakeAtMs,
       reasonLabel: label,
       channel: 'native',
+      voiceStyle: opts.voiceStyle,
       replaceStopId: existing.id,
     });
     wireWakeRhythm({
@@ -323,22 +386,30 @@ export async function setWakeAlarmWithBridge(opts: {
       ok: true,
       channel: 'native',
       wakeAtMs: opts.wakeAtMs,
-      message: `Ich habe deinen Wecker auf ${clock} gestellt.`,
+      message: speechForNativeStatus(opts.wakeAtMs),
     };
   }
 
   let replaceStopId: string | null = null;
-  if (opts.wakeMode === 'replace' && existing) {
-    replaceStopId = existing.id;
-    if (existingMs != null) {
-      await cancelNativeWakeAt(existingMs);
-    }
-  } else if (opts.replaceWakeAtMs != null) {
-    await cancelNativeWakeAt(opts.replaceWakeAtMs);
-    const dayKey = dateKeyFromMs(opts.replaceWakeAtMs);
-    const old = listWakeStopsForDay(dayKey).find(
-      (s) => s.plannedStartMs === opts.replaceWakeAtMs,
-    );
+  // „Aktualisieren“ = Clock löschen (DISMISS) + neu stellen — kein Edit-API
+  const oldWakeMs =
+    opts.replaceWakeAtMs != null && Number.isFinite(opts.replaceWakeAtMs)
+      ? opts.replaceWakeAtMs
+      : opts.wakeMode === 'replace' && existingMs != null
+        ? existingMs
+        : null;
+  const didReplace = oldWakeMs != null;
+  if (didReplace) {
+    await cancelNativeWakeAt(oldWakeMs!);
+    // Clock braucht kurz Luft zwischen DISMISS und SET_ALARM
+    await new Promise((r) => setTimeout(r, 550));
+    const dayKey = dateKeyFromMs(oldWakeMs!);
+    const old =
+      listWakeStopsForDay(dayKey).find(
+        (s) =>
+          s.plannedStartMs != null &&
+          Math.abs(s.plannedStartMs - oldWakeMs!) < 2 * 60_000,
+      ) ?? (opts.wakeMode === 'replace' ? existing : null);
     replaceStopId = old?.id ?? null;
   }
 
@@ -358,6 +429,7 @@ export async function setWakeAlarmWithBridge(opts: {
         wakeAtMs: opts.wakeAtMs,
         reasonLabel: label,
         channel,
+        voiceStyle: opts.voiceStyle,
         replaceStopId,
       });
       wireWakeRhythm({
@@ -369,16 +441,7 @@ export async function setWakeAlarmWithBridge(opts: {
         ok: true,
         channel,
         wakeAtMs: opts.wakeAtMs,
-        message:
-          native.speech ||
-          (channel === 'notification'
-            ? `Ich habe deinen Wecker auf ${clock} gestellt.`
-            : speechForNativeStatus(
-                native.tier === 'intent_launcher'
-                  ? 'set_silent'
-                  : 'alarm_manager',
-                clock,
-              )),
+        message: speechForNativeStatus(opts.wakeAtMs, didReplace),
       };
     }
 
@@ -411,6 +474,7 @@ export async function setWakeAlarmWithBridge(opts: {
     wakeAtMs: opts.wakeAtMs,
     reasonLabel: label,
     channel: 'notification',
+    voiceStyle: opts.voiceStyle,
     replaceStopId,
   });
   wireWakeRhythm({
@@ -423,10 +487,7 @@ export async function setWakeAlarmWithBridge(opts: {
     ok: true,
     channel: 'notification',
     wakeAtMs: opts.wakeAtMs,
-    message:
-      Platform.OS === 'ios'
-        ? `Ich habe deinen Wecker auf ${clock} gestellt.`
-        : `Ich habe deinen Wecker auf ${clock} gestellt.`,
+    message: speechForNativeStatus(opts.wakeAtMs, didReplace),
   };
 }
 

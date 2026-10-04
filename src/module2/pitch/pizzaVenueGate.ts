@@ -13,6 +13,26 @@ export function isBeachLeisureWithoutPizza(blob: string): boolean {
   return !/\b(pizza|pizzeria)\b/.test(b);
 }
 
+/** Pension/Hotel ohne echtes Gastro-Signal — nie als Pizzeria. */
+export function isLodgingOnlyVenue(name: string, blob: string): boolean {
+  const n = String(name || '').toLowerCase();
+  const b = String(blob || '').toLowerCase();
+  const lodgingName =
+    /\b(pension|hotel|hostel|gasthof|gastehaus|gästehaus|apartment|ferienwohnung|airbnb)\b/.test(
+      n,
+    );
+  if (!lodgingName && !/\b(pension|hostel|hotel|lodging)\b/.test(b)) return false;
+  // Name ist klar Pizzeria/Restaurant → behalten
+  if (/\b(pizzeria|pizza|restaurant|trattoria|osteria|ristorante)\b/.test(n)) {
+    return false;
+  }
+  // Blob hat starkes Pizza-Signal im Angebot → behalten
+  if (/\b(pizzeria|pizza\s+oven|steinofen|pizza\s+napoletana)\b/.test(b)) {
+    return false;
+  }
+  return true;
+}
+
 /** Echtes Pizza-/Italien-Signal im Venue-Blob (Name, Types, Reviews). */
 export function hasPizzaVenueSignal(blob: string): boolean {
   return /\b(pizza|pizzeria|trattoria|osteria|italiener|italienisch)\b/.test(
@@ -20,8 +40,9 @@ export function hasPizzaVenueSignal(blob: string): boolean {
   );
 }
 
-export function isCrediblePizzaVenue(blob: string): boolean {
+export function isCrediblePizzaVenue(blob: string, name?: string): boolean {
   if (isBeachLeisureWithoutPizza(blob)) return false;
+  if (isLodgingOnlyVenue(name || '', blob)) return false;
   return hasPizzaVenueSignal(blob);
 }
 

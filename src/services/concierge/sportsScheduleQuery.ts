@@ -14,7 +14,7 @@ const NAMED_SUBJECT_RE =
   /\b(?:die|der|das)\s+[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,}\b|\b[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,}(?:\s+[A-ZÄÖÜ0-9][\wÄÖÜäöüß\-]{1,}){0,4}\b/u;
 
 const VENUE_ASK_RE =
-  /\b(?:halle|arena|stadion|park)\b/iu;
+  /\b(?:halle|arena|stadion|park|barclays|barclaycard|barley|katarina|inselpark)\b/iu;
 
 /**
  * User fragt nach Termin eines genannten Teams/Acts/Orts —
@@ -34,6 +34,68 @@ export function looksLikeNamedScheduleQuery(text: string): boolean {
   return false;
 }
 
+/**
+ * Genannte Team-/Act-Tokens aus der User-Frage (Hard-Match gegen Research).
+ * Stadt-agnostisch — keine Team-Liste, nur Eigennamen + Club-Prefix.
+ */
+export function extractNamedScheduleSubjects(text: string): string[] {
+  const t = text.replace(/\s+/g, ' ').trim();
+  if (!t) return [];
+  const out: string[] = [];
+  const seen = new Set<string>();
+  const push = (raw: string) => {
+    const s = raw.replace(/\s+/g, ' ').trim();
+    if (s.length < 3) return;
+    const key = s.toLowerCase();
+    if (seen.has(key)) return;
+    // Stopwords / reine Venue-Wörter nicht als Team
+    if (
+      /^(?:wann|spielt|spielen|nächstes|naechstes|spiel|heimspiel|ticket|arena|halle|stadion|heute|abend|saison|jahr)$/iu.test(
+        s,
+      )
+    ) {
+      return;
+    }
+    seen.add(key);
+    out.push(s);
+  };
+  const multi =
+    t.match(
+      /\b(?:die|der|das)\s+([A-ZÄÖÜ][\wÄÖÜäöüß\-]+(?:\s+[A-ZÄÖÜ0-9][\wÄÖÜäöüß\-]+){0,3})\b/gu,
+    ) || [];
+  for (const m of multi) {
+    push(m.replace(/^(?:die|der|das)\s+/iu, ''));
+  }
+  const caps =
+    t.match(/\b[A-ZÄÖÜ][\wÄÖÜäöüß\-]{2,}(?:\s+[A-ZÄÖÜ0-9][\wÄÖÜäöüß\-]{1,}){0,3}\b/gu) ||
+    [];
+  for (const m of caps) push(m);
+  return out.slice(0, 6);
+}
+
+/** Event passt zum genannten Team/Act — Konzert-Ersatz rausfiltern. */
+export function eventMatchesNamedScheduleSubject(
+  event: { title?: string | null; venue?: string | null; summary?: string | null },
+  subjects: string[],
+): boolean {
+  if (!subjects.length) return true;
+  const blob = `${event.title || ''} ${event.venue || ''} ${event.summary || ''}`.toLowerCase();
+  if (!blob.trim()) return false;
+  return subjects.some((s) => {
+    const needle = s.toLowerCase();
+    if (needle.length < 3) return false;
+    if (blob.includes(needle)) return true;
+    // „Hamburg Towers“ ↔ „Towers“
+    const parts = needle.split(/\s+/).filter((p) => p.length >= 4);
+    return parts.length > 0 && parts.every((p) => blob.includes(p));
+  });
+}
+
+/** @deprecated Alias — Call-Sites / Tests */
+export function isSportsScheduleQuery(text: string): boolean {
+  return looksLikeNamedScheduleQuery(text);
+}
+
 /** Follow-up (Tickets/Gegner) nach Spielplan-Turn. */
 export function looksLikeNamedScheduleFollowUp(
   text: string,
@@ -45,11 +107,6 @@ export function looksLikeNamedScheduleFollowUp(
   return /\b(?:ticket|preis|teuer|gegner|uhrzeit|wann|website|link|mehr)\b/iu.test(
     t,
   );
-}
-
-/** @deprecated Alias — Call-Sites / Tests */
-export function isSportsScheduleQuery(text: string): boolean {
-  return looksLikeNamedScheduleQuery(text);
 }
 
 export function isSportsScheduleFollowUp(

@@ -22,7 +22,7 @@ export const useMapExtractStore = create<MapExtractState>((set) => ({
   extract: null,
   clipCenter: null,
   status: 'idle',
-  // Extract behalten während Reload — sonst flackert die ganze Stadt weg (Pinneberg-Pan).
+  // Stadtwechsel: altes Extract behalten bis neues da — nie blank/Snap-Loch.
   setLoading: (cityId) =>
     set((s) => ({
       cityId,

@@ -17,8 +17,11 @@ import {
 } from './pendingDuration';
 import { startTourLiveSupervisor } from './tourLiveSupervisor';
 import { stashRestPool } from './restPool';
+import { packCityMismatchesDest } from './packCityGuard';
 import type { TourRequest, TourResult } from './types';
 import type { MultiStopTour } from '../../services/navigation/multiStopTour';
+
+export { packCityMismatchesDest } from './packCityGuard';
 
 function toMultiStop(req: TourRequest, result: TourResult): MultiStopTour {
   return {
@@ -50,30 +53,6 @@ function toMultiStop(req: TourRequest, result: TourResult): MultiStopTour {
       mobility: req.mobility,
     },
   };
-}
-
-/** Pack-Heimat ≠ genannte Zielstadt → kein 80-km-Dump aus dem falschen Pack. */
-function packCityMismatchesDest(req: TourRequest): boolean {
-  try {
-    const { readRucksackSync } = require('../rucksack/rucksackStore') as {
-      readRucksackSync: () => { cityHint?: string | null };
-    };
-    const pack = (readRucksackSync()?.cityHint || '').trim();
-    let dest = (req.areaHint || '').trim();
-    if (!dest) {
-      const { extractCityFromText } = require('../context/shortTermContext') as {
-        extractCityFromText: (s: string) => string | null;
-      };
-      dest = extractCityFromText(`${req.title} ${req.context}`) || '';
-    }
-    if (!pack || !dest) return false;
-    const { sameFoldedCity } = require('../planning/planDestinationCity') as {
-      sameFoldedCity: (a: string, b: string) => boolean;
-    };
-    return !sameFoldedCity(pack, dest);
-  } catch {
-    return false;
-  }
 }
 
 export async function runTourModule(req: TourRequest): Promise<TourResult> {
@@ -128,12 +107,21 @@ export async function runTourModule(req: TourRequest): Promise<TourResult> {
     radiusM: explore.radiusM,
   };
 
-  let pool = await collectTourCandidates(anchored);
-  if (pool.length < 4) {
+  // Zielstadt merken bevor Radius-Widen areaHint leert
+  const destCityKeep =
+    (anchored.cityHint || anchored.areaHint || '').trim() || null;
+  if (destCityKeep && !anchored.cityHint) {
+    anchored.cityHint = destCityKeep;
+  }
+
+  const foreignPack = packCityMismatchesDest(anchored);
+  let pool = foreignPack ? [] : await collectTourCandidates(anchored);
+  if (!foreignPack && pool.length < 4) {
     const wider: TourRequest = {
       ...anchored,
       radiusM: Math.max(explore.radiusM, 12_000),
       areaHint: null,
+      cityHint: destCityKeep ?? anchored.cityHint,
       categoryMust: [],
       visitedExclude: false,
     };
@@ -141,6 +129,7 @@ export async function runTourModule(req: TourRequest): Promise<TourResult> {
     Object.assign(anchored, {
       radiusM: wider.radiusM,
       areaHint: null,
+      cityHint: destCityKeep ?? anchored.cityHint,
       categoryMust: [],
       visitedExclude: false,
     });
@@ -156,6 +145,7 @@ export async function runTourModule(req: TourRequest): Promise<TourResult> {
       ...anchored,
       radiusM: 80_000,
       areaHint: null,
+      cityHint: destCityKeep ?? anchored.cityHint,
       categoryMust: [],
       visitedExclude: false,
     };
@@ -163,6 +153,7 @@ export async function runTourModule(req: TourRequest): Promise<TourResult> {
     Object.assign(anchored, {
       radiusM: cityWide.radiusM,
       areaHint: null,
+      cityHint: destCityKeep ?? anchored.cityHint,
       categoryMust: [],
       visitedExclude: false,
     });

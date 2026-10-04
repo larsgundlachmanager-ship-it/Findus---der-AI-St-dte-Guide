@@ -1,0 +1,2 @@
+09-08 23:11:39.095     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 1 (kgsl_hwsched-1128)
+09-08 23:11:42.995     0     0 W [    C3] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 3, moved it to CPU 1 (rcuog/4-50)

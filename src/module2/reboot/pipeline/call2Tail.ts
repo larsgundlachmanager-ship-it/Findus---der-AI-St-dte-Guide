@@ -2,7 +2,10 @@
  * Call-2 Tail JSON — parse + hybrid bullet clamp (RFC v2.1).
  */
 
-import { clampVisualBullets } from '../../../services/concierge/visualBullets';
+import {
+  clampVisualBullets,
+  rewriteBulletToFit,
+} from '../../../services/concierge/visualBullets';
 
 export type Call2TailV1 = {
   bullets: string[];
@@ -77,16 +80,30 @@ export function mergeCall2Bullets(opts: {
   speechText: string;
   bulletMaxChars: number;
   allowAddress?: boolean;
+  /** Call-1 Order.bulletBudget.max — Default 3 */
+  maxCount?: number;
+  /** Prefer Call-2/tail only; agent bullets nur Notfall wenn Tail leer */
+  preferCall2Only?: boolean;
 }): string[] {
+  const maxCount = Math.min(5, Math.max(1, opts.maxCount ?? 3));
   const primary =
-    opts.tailBullets.length > 0 ? opts.tailBullets : opts.agentBullets;
+    opts.preferCall2Only
+      ? opts.tailBullets.length > 0
+        ? opts.tailBullets
+        : opts.agentBullets
+      : opts.tailBullets.length > 0
+        ? opts.tailBullets
+        : opts.agentBullets;
   return clampVisualBullets(primary, {
     speechText: opts.speechText,
     allowAddress: Boolean(opts.allowAddress),
     surface: 'default',
-  }).slice(0, 3).map((b) =>
-    b.length > opts.bulletMaxChars ? b.slice(0, opts.bulletMaxChars - 1) + '…' : b,
-  );
+    maxChars: opts.bulletMaxChars,
+    maxCount,
+  })
+    .map((b) => rewriteBulletToFit(b, opts.bulletMaxChars))
+    .filter(Boolean)
+    .slice(0, maxCount);
 }
 
 export function buildCall2TailPrompt(opts: {
@@ -97,12 +114,12 @@ export function buildCall2TailPrompt(opts: {
 }): string {
   return [
     'Erzeuge NUR JSON (Call-2 Tail) nach dem gesprochenen Text.',
-    'Felder: bullets[] (max 3, je max bulletMaxChars, nur Fakten aus Speech),',
+    'Felder: bullets[] = FACT-CHIPS (Spickzettel fürs UI, parallel zur Speech — NIEMALS Speech paraphrasieren/zusammenfassen). 1–3 Chips, je max bulletMaxChars / ~2 UI-Zeilen, Telegramm ok, keine Prosa-Sätze, nie mit … abschneiden, Titel/Bridge nicht wiederholen.',
     'optional memory_extract[], shortAnswers[] (Tap-Chips, echte Gabeln),',
     'optional followUp {needed,reason,delegateTo,promptSeed}, uiHints, background_tasks.',
     `bulletMaxChars=${opts.bulletMaxChars}`,
     `USER: ${opts.userText.slice(0, 400)}`,
-    `SPEECH:\n${opts.speechText.slice(0, 2400)}`,
+    `SPEECH (nur Evidence-Quelle, nicht als Bullet-Vorlage):\n${opts.speechText.slice(0, 2400)}`,
     opts.agentBullets?.length
       ? `AGENT_BULLETS_FALLBACK: ${JSON.stringify(opts.agentBullets.slice(0, 3))}`
       : '',

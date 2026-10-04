@@ -36,6 +36,7 @@ import {
   stripLlmProsodyMarkers,
 } from './g2p/germanTtsProsodyRules';
 import { stripSpellTrapsAndMarkdownJunk } from './g2p/phoneticTransformer';
+import { stripInternalWorkerSpeech } from '../module2/speech/speechHumanOnly';
 import { applyGermanCartesiaProblemWords } from './tts/germanCartesiaProblemWords';
 import { sentencesFromFullText } from './ai/sentenceStream';
 import { scrubInventedVoiceNames, applyUserNameSpeechPolicy } from './ai/spokenNameGuard';
@@ -192,6 +193,24 @@ function isQuestionsBusyForNav(): boolean {
     /* ignore */
   }
   if (getCurrentSpeechPriority() === 'question') return true;
+  // Call-1/Call-2 fused: Nav darf Session nicht stehlen, auch wenn isGenerating schon false
+  try {
+    const { isFusedTurnLive } = require('../module2/speech/fusedTurnSpeech') as {
+      isFusedTurnLive: () => boolean;
+    };
+    if (isFusedTurnLive()) return true;
+  } catch {
+    /* ignore */
+  }
+  try {
+    const { isStreamingAudioQueueBusy } = require('./audio/streamingAudioQueueService') as {
+      isStreamingAudioQueueBusy: () => boolean;
+    };
+    if (isStreamingAudioQueueBusy()) return true;
+  } catch {
+    /* ignore */
+  }
+  if (activeTtsSessions > 0 || isAudiblyPlaying()) return true;
   return false;
 }
 
@@ -335,9 +354,32 @@ export async function probeHardwareAudible(): Promise<boolean> {
   }
 }
 
+/** Orphan expo-av Sound weg — ohne Generation-Bump (Watchdog/Reconcile). */
+async function unloadOrphanSounds(): Promise<void> {
+  hwProbeLastPos = -1;
+  hwProbeStalledSince = null;
+  const pair = [sound, suspendedSound];
+  sound = null;
+  suspendedSound = null;
+  for (const s of pair) {
+    if (!s) continue;
+    try {
+      await s.stopAsync();
+    } catch {
+      /* ignore */
+    }
+    try {
+      await s.unloadAsync();
+    } catch {
+      /* ignore */
+    }
+  }
+}
+
 /**
  * SSOT-Standby: wenn kein echtes Audio läuft → Kreis idle.
  * Idempotent, sicher aus Watchdog / finally aufrufbar.
+ * Orphan-Sound (isPlaying ohne TTS-Owner) darf Gelb nie wieder anmachen.
  */
 export async function reconcileSpeakingStandby(): Promise<{
   cleared: boolean;
@@ -365,9 +407,19 @@ export async function reconcileSpeakingStandby(): Promise<{
       return false;
     }
   })();
+  const ownersIdle = sessions === 0 && !queueBusy && !streamBusy;
   const hw = await probeHardwareAudible();
 
-  // Echtes Audio → nichts räumen
+  // Hardware „spielt“, aber kein TTS-Owner → Android-Zombie / Rest-Sound
+  if (hw && ownersIdle) {
+    await unloadOrphanSounds();
+    markAudiblePlayback(false);
+    store.setIsPlayingAudio(false);
+    store.setIsAudiblySpeaking(false);
+    return { cleared: true, reason: 'orphan_hardware' };
+  }
+
+  // Echtes Audio mit Owner → UI syncen
   if (hw) {
     if (!store.isAudiblySpeaking) markAudiblePlayback(true);
     return { cleared: false, reason: null };
@@ -384,7 +436,7 @@ export async function reconcileSpeakingStandby(): Promise<{
   }
 
   // Keine Session, keine Queue, kein Stream → kompletter Standby
-  if (sessions === 0 && !queueBusy && !streamBusy) {
+  if (ownersIdle) {
     if (store.isPlayingAudio || store.isAudiblySpeaking) {
       store.setIsPlayingAudio(false);
       store.setIsAudiblySpeaking(false);
@@ -430,6 +482,7 @@ export function releaseSpeakingUiIfIdle(): boolean {
  * Hard-Standby: hängendes „Ich erzähle“ / Session-Counter resetten.
  * Nur Watchdog / User-Interrupt — nicht mitten in aktivem Speech.
  * isAudiblySpeaking wird immer über markAudiblePlayback(false) geleert.
+ * Orphan-Sound mit unloaden — sonst reaktiviert der Reconciler Gelb erneut.
  */
 export function forceClearSpeakingUi(): void {
   activeTtsSessions = 0;
@@ -437,6 +490,7 @@ export function forceClearSpeakingUi(): void {
   const store = useFinnusStore.getState();
   store.setIsPlayingAudio(false);
   store.setSubtitleText(null);
+  void unloadOrphanSounds();
   void import('../runtime/runtimeSync').then((m) => m.notifyRuntimeSpeechEnded());
 }
 let restoreEpoch = 0;
@@ -450,9 +504,16 @@ const tempAudioUris = new Set<string>();
  */
 async function applyTtsExclusiveAudioMode(): Promise<void> {
   restoreEpoch += 1;
+  // Mic/STT darf Playback nicht blockieren (sonst Call-2 stumm nach Mic-Release).
+  recordingModeArmed = false;
   // Finish any in-flight restore so audio is re-enabled before we take focus again
   if (restoreAmbientPromise) {
     await restoreAmbientPromise.catch(() => undefined);
+  }
+  try {
+    await Audio.setIsEnabledAsync(true);
+  } catch {
+    /* soft */
   }
   await Audio.setAudioModeAsync({
     allowsRecordingIOS: false,
@@ -483,7 +544,20 @@ const AMBIENT_AUDIO_MODE = {
  */
 let recordingModeArmed = false;
 
+function navKeepsBackgroundAudio(): boolean {
+  try {
+    const { useFinnusStore } = require('../store/useFinnusStore') as {
+      useFinnusStore: { getState: () => { navActive?: boolean } };
+    };
+    return useFinnusStore.getState().navActive === true;
+  } catch {
+    return false;
+  }
+}
+
 async function restoreAmbientAudioMode(): Promise<void> {
+  // STT hält Aufnahme-Modus — Ambient-Restore hier = Android vol=-2 / leere Transkripte
+  if (recordingModeArmed) return;
   if (activeTtsSessions > 0) return;
   if (restoreAmbientPromise) return restoreAmbientPromise;
 
@@ -491,24 +565,28 @@ async function restoreAmbientAudioMode(): Promise<void> {
 
   restoreAmbientPromise = (async () => {
     const aborted = () =>
-      activeTtsSessions > 0 || epoch !== restoreEpoch;
+      recordingModeArmed ||
+      activeTtsSessions > 0 ||
+      epoch !== restoreEpoch;
 
     try {
       if (aborted()) return;
 
-      await Audio.setAudioModeAsync({ ...AMBIENT_AUDIO_MODE });
+      // Hands-free Nav (Hosentasche / Standby): Background-Audio nicht abschalten.
+      const ambient = navKeepsBackgroundAudio()
+        ? { ...AMBIENT_AUDIO_MODE, staysActiveInBackground: true }
+        : { ...AMBIENT_AUDIO_MODE };
+      await Audio.setAudioModeAsync(ambient);
 
       if (aborted()) return;
 
-      // Focus freigeben — Spotify & Co. können fortsetzen
-      await Audio.setIsEnabledAsync(false);
-      await new Promise((r) => setTimeout(r, 100));
-      // Immer wieder aktivieren, sonst schlägt nächstes TTS fehl
+      // Nothing/OEM: setIsEnabledAsync(false) lässt Audio oft tot
+      // („Cannot complete operation because audio is not enabled“) → keine TTS-Antwort.
+      // DuckOthers reicht für Spotify; Fokus nicht hart killen.
       await Audio.setIsEnabledAsync(true);
 
       if (aborted()) return;
 
-      await Audio.setAudioModeAsync({ ...AMBIENT_AUDIO_MODE });
       recordingModeArmed = false;
       if (__DEV__) {
         console.log('[voice] ambient audio restored (Spotify darf weiter)');
@@ -531,18 +609,26 @@ async function restoreAmbientAudioMode(): Promise<void> {
 /** Für STT / andere Caller: Ambient-Modus nach Mikrofon-Nutzung. */
 export async function restoreAmbientAudioAfterSpeech(): Promise<void> {
   if (activeTtsSessions > 0) return;
+  recordingModeArmed = false;
   await restoreAmbientAudioMode();
+  try {
+    await Audio.setIsEnabledAsync(true);
+  } catch {
+    /* soft */
+  }
 }
 
 async function setRecordingAudioMode(): Promise<void> {
+  // DoNotMix: nach TTS braucht SpeechRecognizer exklusiven Mic-Fokus.
+  // DuckOthers ließ Android oft bei vol=-2 (tot) trotz „recognition started“.
   await Audio.setAudioModeAsync({
     allowsRecordingIOS: true,
     playsInSilentModeIOS: true,
     staysActiveInBackground: false,
-    shouldDuckAndroid: true,
+    shouldDuckAndroid: false,
     playThroughEarpieceAndroid: false,
-    interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
-    interruptionModeIOS: InterruptionModeIOS.MixWithOthers,
+    interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+    interruptionModeIOS: InterruptionModeIOS.DoNotMix,
   });
   recordingModeArmed = true;
 }
@@ -559,22 +645,67 @@ export async function warmAudioModeForMicrophone(): Promise<void> {
 }
 
 /**
- * Vor STT: TTS-Exklusivfokus abgeben, dann Aufnahme-Modus.
- * Sonst bekommt SpeechRecognizer Stille (vol=-2).
- * Wenn Mode schon warm: nur TTS stoppen.
+ * Vor STT: TTS hart stoppen, Ambient-Restore abbrechen, Aufnahme-Modus setzen.
+ * Wichtig: kein restoreAmbientAudioMode hier — der setzt Playback-only +
+ * setIsEnabledAsync(false/true) und lässt Android-STT oft bei vol=-2.
  */
 export async function prepareAudioForMicrophone(): Promise<void> {
+  restoreEpoch += 1;
   try {
-    await stopSpeakingInternal();
+    clearSpeechJobQueue();
+    void stopExpoSpeech();
+    pendingNavCue = null;
+    await haltCurrentPlayback();
+    markAudiblePlayback(false);
+    useFinnusStore.getState().setIsPlayingAudio(false);
+    useFinnusStore.getState().setIsAudiblySpeaking(false);
+    activeTtsSessions = 0;
   } catch {
     /* Fokus trotzdem umstellen */
   }
-  if (recordingModeArmed) return;
+  try {
+    await Audio.setIsEnabledAsync(true);
+  } catch {
+    /* soft */
+  }
   try {
     await setRecordingAudioMode();
+    // Android braucht kurz, bis AudioRecord nach Mode-Wechsel greift.
+    await new Promise((r) => setTimeout(r, 80));
   } catch (err) {
     console.warn('[voice] prepareAudioForMicrophone failed:', err);
   }
+}
+
+/**
+ * TTS weg für Mic — ohne Ambient-Restore (sonst killt setIsEnabledAsync den STT-Kanal).
+ * @returns true wenn pausierbar geparkt wurde.
+ */
+export async function softStopSpeakingForMic(): Promise<boolean> {
+  try {
+    const paused = await pauseSpeakingForNav();
+    if (paused) {
+      useFinnusStore.getState().setIsPlayingAudio(false);
+      useFinnusStore.getState().setIsAudiblySpeaking(false);
+      return true;
+    }
+  } catch {
+    /* soft */
+  }
+  restoreEpoch += 1;
+  try {
+    clearSpeechJobQueue();
+    void stopExpoSpeech();
+    pendingNavCue = null;
+    await haltCurrentPlayback();
+    markAudiblePlayback(false);
+    useFinnusStore.getState().setIsPlayingAudio(false);
+    useFinnusStore.getState().setIsAudiblySpeaking(false);
+    activeTtsSessions = 0;
+  } catch {
+    /* ignore */
+  }
+  return false;
 }
 
 /** Stoppt aktuelles Sound-Objekt und invalidiert die Playback-Generation (ohne Restore). */
@@ -638,33 +769,84 @@ export async function resumeSpeakingAfterNav(): Promise<void> {
   }
   sound = suspendedSound;
   suspendedSound = null;
+  const resumed = sound;
   activeTtsSessions += 1;
   try {
     useFinnusStore.getState().setIsPlayingAudio(true);
     markAudiblePlayback(true);
-    await sound.playAsync();
-    // Wait until finished
+    await resumed.playAsync();
+    // Stall/End wie playWav — didJustFinish allein klebt auf Android
     await new Promise<void>((resolve) => {
-      const s = sound;
+      const s = resumed;
       if (!s) {
         resolve();
         return;
       }
+      let settled = false;
+      const startedAt = Date.now();
+      let lastPos = -1;
+      let stalledSince: number | null = null;
+      let sawPlaying = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        clearInterval(tick);
+        resolve();
+      };
+      const tick = setInterval(() => {
+        void s
+          .getStatusAsync()
+          .then((status) => {
+            if (settled || !status.isLoaded) return;
+            const dur = status.durationMillis ?? 0;
+            const pos = status.positionMillis ?? 0;
+            if (dur > 0 && pos >= Math.max(0, dur - 50)) {
+              finish();
+              return;
+            }
+            if (status.isPlaying) {
+              sawPlaying = true;
+              if (pos === lastPos) {
+                if (stalledSince == null) stalledSince = Date.now();
+                else if (Date.now() - stalledSince >= 1500) finish();
+              } else {
+                lastPos = pos;
+                stalledSince = null;
+              }
+              return;
+            }
+            if (status.didJustFinish || (sawPlaying && !status.isPlaying)) {
+              finish();
+              return;
+            }
+            const capMs = (dur > 0 ? dur : 30_000) + 2500;
+            if (Date.now() - startedAt >= capMs) finish();
+          })
+          .catch(() => undefined);
+      }, 80);
       s.setOnPlaybackStatusUpdate((status) => {
-        if (!status.isLoaded) return;
-        if (status.didJustFinish) resolve();
+        if (settled || !status.isLoaded) return;
+        if (status.isPlaying) sawPlaying = true;
+        if (status.didJustFinish) finish();
       });
     });
   } catch (err) {
     console.warn('[voice] resume after nav failed:', err);
-    try {
-      await sound.unloadAsync();
-    } catch {
-      /* ignore */
-    }
-    sound = null;
   } finally {
     markAudiblePlayback(false);
+    if (sound === resumed) {
+      try {
+        await resumed.stopAsync();
+      } catch {
+        /* ignore */
+      }
+      try {
+        await resumed.unloadAsync();
+      } catch {
+        /* ignore */
+      }
+      if (sound === resumed) sound = null;
+    }
     activeTtsSessions = Math.max(0, activeTtsSessions - 1);
     if (activeTtsSessions === 0) {
       useFinnusStore.getState().setIsPlayingAudio(false);
@@ -727,11 +909,8 @@ export function enqueueNavSpeechCue(
 }
 
 function withNavYieldLead(text: string): string {
-  const t = text.trim();
-  if (!t) return t;
-  if (/unterbrech/i.test(t) || /^\s*sorry\b/i.test(t)) return t;
-  const body = t.charAt(0).toLowerCase() + t.slice(1);
-  return `Sorry, dass ich kurz unterbreche — ${body}`;
+  // Kein „Sorry, dass ich unterbreche“ — Cue direkt (Live-Test: nervt stark).
+  return text.trim();
 }
 
 export function hasPendingNavSpeechCue(): boolean {
@@ -975,6 +1154,16 @@ export async function playCachedNavCueWav(
   const display = prepareDisplayText(text);
   if (!display || !uri) return false;
 
+  try {
+    const info = await FileSystem.getInfoAsync(uri);
+    if (!info.exists) {
+      if (__DEV__) console.warn('[voice] cached nav cue missing:', uri);
+      return false;
+    }
+  } catch {
+    return false;
+  }
+
   const maySpeak = await requestSpeechDelivery({
     text: display,
     voiceOptions,
@@ -1087,12 +1276,26 @@ function isModelUnavailableError(error: unknown): boolean {
 }
 
 /**
- * Untertitel / Anzeige: Originalorthografie.
- * Keine Aussprache-Umschreibungen (vibe bleibt vibe, guide bleibt guide).
- * Nur Whitespace + LLM-Regie-Marker entfernen.
+ * Untertitel / Anzeige: Originalorthografie, aber € immer als „Euro“
+ * (Gerätefont/Cartesia rendern/sprechen Roh-€ sonst als „O“).
  */
+/** €/EUR → Euro (UI + TTS). Roh-€ wird sonst als „O“ angezeigt/gesprochen. */
+export function expandEuroCurrencySymbols(text: string): string {
+  let t = text;
+  if (!t) return t;
+  t = t.replace(/\b(\d+(?:[.,]\d+)?)\s*[-–—]?\s*\u20ac/g, '$1 Euro');
+  t = t.replace(/\u20ac\s*(\d+(?:[.,]\d+)?)/g, '$1 Euro');
+  t = t.replace(/\b(\d+(?:[.,]\d+)?)\s*EUR\b/gi, '$1 Euro');
+  t = t.replace(/\u20ac/g, ' Euro');
+  t = t.replace(/\bEUR\b/gi, 'Euro');
+  t = t.replace(/\bEuro(?:\s+Euro)+\b/gi, 'Euro');
+  t = t.replace(/\bEuro\s*[Oo]\b/g, 'Euro');
+  return t.replace(/\s+/g, ' ').trim();
+}
+
 export function prepareDisplayText(text: string): string {
-  let out = stripLlmProsodyMarkers(
+  let out = stripInternalWorkerSpeech(
+    stripLlmProsodyMarkers(
     text
       .replace(/\s+/g, ' ')
       .replace(/\u00a0/g, ' ')
@@ -1106,7 +1309,14 @@ export function prepareDisplayText(text: string): string {
       .replace(/\bWegweiser\b/gi, '') // MASTERBOOK V5: Wort „Wegweiser“ nie aussprechen.
       .replace(/\s{2,}/g, ' ')
       .trim(),
+    ),
   );
+  // Font/Cartesia: € → Latein-O — Untertitel immer „Euro“
+  out = expandEuroCurrencySymbols(out);
+  // Call-1 Lead + Call-2 Zahl: nie „ist40“ / „ergibt10“
+  out = out.replace(/([A-Za-zÄÖÜäöüß])(\d)/gu, '$1 $2');
+  out = out.replace(/(\d)([A-Za-zÄÖÜäöüß])/gu, '$1 $2');
+  out = out.replace(/\s{2,}/g, ' ').trim();
   try {
     if (!isUserNamePolicySkipped()) {
       const firstName = getCachedUserProfile()?.firstName?.trim() || null;
@@ -1165,9 +1375,34 @@ export function prepareAudioText(
   if (!t) return '';
   t = stripSpellTrapsAndMarkdownJunk(t);
   t = t.replace(/[·•]/g, ' ');
+  // Abkürzungen für Speech (Live: BF → Bahnhof)
+  t = t.replace(/\b[Hh][Bb][Ff]\.\b/g, 'Hauptbahnhof');
+  t = t.replace(/\b[Hh][Bb][Ff]\b/g, 'Hauptbahnhof');
+  t = t.replace(/\b[Bb][Ff]\.\b/g, 'Bahnhof');
+  t = t.replace(/\b[Bb][Ff]\b/g, 'Bahnhof');
+  // Uhrzeiten + Ordinalziffern aussprechen (01:19 → ein Uhr neunzehn, 1. → erster)
+  try {
+    const {
+      transformClockTimes,
+      transformNumericDotDates,
+      transformOrdinalDates,
+      transformBareOrdinals,
+    } = require('./g2p/germanNumberSpeech') as {
+      transformClockTimes: (s: string) => string;
+      transformNumericDotDates: (s: string) => string;
+      transformOrdinalDates: (s: string) => string;
+      transformBareOrdinals: (s: string) => string;
+    };
+    t = transformClockTimes(t);
+    t = transformNumericDotDates(t);
+    t = transformOrdinalDates(t);
+    t = transformBareOrdinals(t);
+  } catch {
+    /* soft */
+  }
   // Jahreszahlen ausgeschrieben — Cartesia liest „1883“ sonst oft falsch
   try {
-    const { numberToGermanWords } = require('./g2p/phoneticTransformer') as {
+    const { numberToGermanWords } = require('./g2p/germanNumberSpeech') as {
       numberToGermanWords: (
         n: number,
         o?: { yearStyle?: boolean },
@@ -1191,7 +1426,18 @@ export function prepareAudioText(
   } catch {
     /* soft */
   }
+  // Römische Regentenzahlen: Leo XIV. → Leo der Vierzehnte (nur Audio)
+  try {
+    const { expandRomanNumeralsForSpeech } = require('./g2p/romanNumeralsSpeech') as {
+      expandRomanNumeralsForSpeech: (s: string) => string;
+    };
+    t = expandRomanNumeralsForSpeech(t);
+  } catch {
+    /* soft */
+  }
   t = applyVoicePronunciation(t);
+  // Defense-in-depth: nach Scrub/Ortho kein Roh-€ mehr (Cartesia → „O“)
+  t = expandEuroCurrencySymbols(t);
   try {
     if (!isUserNamePolicySkipped()) {
       const profile = getCachedUserProfile();
@@ -1537,7 +1783,7 @@ export async function warmupTtsEngine(
       : undefined;
 
   const voiceId =
-    options?.voiceId ?? getCachedUserProfile()?.voiceId ?? 'alina';
+    options?.voiceId ?? getCachedUserProfile()?.voiceId ?? 'sebastian';
 
   // Cartesia-only product path — no local TTS/ONNX warmup.
   onProgress?.('Stimme vorbereiten');
@@ -1677,28 +1923,28 @@ async function playWav(
   },
 ): Promise<void> {
   const gen = playbackGeneration;
-  try {
-    if (sound) {
-      try {
-        await sound.stopAsync();
-        await sound.unloadAsync();
-      } catch {
-        // ignore
-      }
-      sound = null;
+  if (sound) {
+    try {
+      await sound.stopAsync();
+      await sound.unloadAsync();
+    } catch {
+      // ignore
     }
-    const { sound: created } = await Audio.Sound.createAsync(
-      { uri },
-      {
-        shouldPlay: true,
-        rate: options.playbackRate ?? 1,
-        shouldCorrectPitch: true,
-        progressUpdateIntervalMillis: 40,
-      },
-    );
-    sound = created;
-    markAudiblePlayback(true);
-    let sawPlaying = false;
+    sound = null;
+  }
+  const { sound: created } = await Audio.Sound.createAsync(
+    { uri },
+    {
+      shouldPlay: true,
+      rate: options.playbackRate ?? 1,
+      shouldCorrectPitch: true,
+      progressUpdateIntervalMillis: 40,
+    },
+  );
+  sound = created;
+  markAudiblePlayback(true);
+  let sawPlaying = false;
+  try {
     await new Promise<void>((resolve, reject) => {
       let settled = false;
       const startedAt = Date.now();
@@ -1809,6 +2055,20 @@ async function playWav(
     });
   } finally {
     markAudiblePlayback(false);
+    // Sound unloaden — sonst hält Android isPlaying und der Reconciler macht Gelb wieder an
+    if (sound === created) {
+      try {
+        await created.stopAsync();
+      } catch {
+        /* ignore */
+      }
+      try {
+        await created.unloadAsync();
+      } catch {
+        /* ignore */
+      }
+      if (sound === created) sound = null;
+    }
     if (options.deleteAfter) {
       void cleanupTempAudio([uri]);
     }

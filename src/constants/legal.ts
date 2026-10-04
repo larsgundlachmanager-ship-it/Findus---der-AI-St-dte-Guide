@@ -239,7 +239,7 @@ export const LEGAL_CHAPTERS: LegalChapter[] = [
 ];
 
 const PARTNER_URL_RE =
-  /getyourguide\.com|musement\.com|viator\.com|tripadvisor\.com|m\.uber\.com|uber\.com|tui\.com|economybookings\.com|discovercars\.com|bounce\.com|stay22\.com|expedia\.com|expedia\.de|airalo\.com|travsim\.com|camping\.info|solmar\.de|\bweg\.de\b|cj\.com|anrdoezrs\.net|tpx\.li|c111\.travelpayouts\.com|kiwi\.com|klook\.com|tiqets\.com|kkday\.com|wegotrip\.com|gocity\.com|saily\.com|yesim\.|drimsim\.|welcomepickups\.com|gettransfer\.com|kiwitaxi\.com|intui\.travel|localrent\.com|getrentacar\.com|autoeurope\.|bikesbooking\.com|radicalstorage\.com|aviasales\.|airhelp\.com|compensair\.com|ektatraveling\.com|qeeq\.com|awin1\.com|travelsecure\.de|gokonfetti\.com|check24\.(de|net)|ab-in-den-urlaub\.(de|at|ch)/i;
+  /getyourguide\.com|musement\.com|viator\.com|tripadvisor\.com|m\.uber\.com|uber\.com|tui\.com|economybookings\.com|discovercars\.com|bounce\.com|stay22\.com|expedia\.com|expedia\.de|airalo\.com|travsim\.com|camping\.info|solmar\.de|\bweg\.de\b|cj\.com|anrdoezrs\.net|tpx\.li|c111\.travelpayouts\.com|kiwi\.com|klook\.com|tiqets\.com|kkday\.com|wegotrip\.com|gocity\.com|saily\.com|yesim\.|drimsim\.|welcomepickups\.com|gettransfer\.com|kiwitaxi\.com|intui\.travel|localrent\.com|getrentacar\.com|autoeurope\.|bikesbooking\.com|radicalstorage\.com|aviasales\.|airhelp\.com|compensair\.com|ektatraveling\.com|qeeq\.com|awin1\.com|travelsecure\.de|gokonfetti\.com|check24\.(de|net)|ab-in-den-urlaub\.(de|at|ch)|reservix\.(de|at|ch)|adticket\.de/i;
 
 /** True, wenn die Action einen Affiliate-/Partner-Kanal öffnet. */
 export function isPartnerAffiliateAction(action: QuickAction): boolean {

@@ -5,10 +5,12 @@ export { SubtitlesSlot } from './SubtitlesSlot';
 export {
   LiveStage,
   HOME_DOCK_BAR_H,
+  HOME_MIC_BTN,
   HOME_MIC_CLEARANCE,
   HOME_MIC_DOCK_GAP,
   HOME_MIC_HINT_RESERVE,
   HOME_MIC_HIT_PAD,
   homeMicClearancePx,
+  homeMapBottomChromePx,
 } from './LiveStage';
 export { STAGE_LAYOUT, SUBTITLE_SLOT_H } from './stageTransitions';

@@ -9,12 +9,15 @@ import { getCachedUserProfile } from '../userProfileService';
 import { isCityExploreMapPoi } from '../navigation/stampMapModul1';
 import { computeAreaCoverage } from './areaCoverageService';
 import {
+  cityContainsPoint,
+  pointInCityBounds,
   resolveCityCoverageBoundsSync,
 } from './cityCoverageBounds';
 import {
   isCityExplorePlaceSeen,
 } from './cityExploreVisitMatch';
 import type { WalkTrackPoint } from './walkTrackService';
+import { spotKeyBelongsToCity } from '../cityPack/cityLocalStorage';
 
 export {
   CITY_EXPLORE_VISIT_MATCH_M,
@@ -32,6 +35,59 @@ export type CityExploreProgress = {
   line: string;
 };
 
+/**
+ * Story-POI gehört zur aktiven Stadt.
+ * 1) spot_key-Prefix (Danzig-Reste zählen nie zu Prisdorf)
+ * 2) sonst Coverage-Bounds (ältere Keys ohne Stadt-Prefix)
+ */
+function poiInActiveCity(
+  p: Poi,
+  cityId: string | null,
+  bounds: ReturnType<typeof resolveCityCoverageBoundsSync>,
+): boolean {
+  const key = String(p.spot_key ?? '').trim().toLowerCase();
+  if (cityId && key) {
+    return spotKeyBelongsToCity(p.spot_key, cityId);
+  }
+  if (!bounds) return true;
+  // Polygon wenn da, sonst BBox — leicht gepaddet für Rand-Stories.
+  if (bounds.polygon && bounds.polygon.length >= 3) {
+    if (cityContainsPoint(p.lat, p.lng, bounds)) return true;
+    // ~400 m Pad: Arboretum o. ä. knapp außerhalb der Verwaltungsgrenze.
+    const padLat = 400 / 111_320;
+    const padLng =
+      400 / (111_320 * Math.max(0.2, Math.cos((p.lat * Math.PI) / 180)));
+    return (
+      p.lat >= bounds.latMin - padLat &&
+      p.lat <= bounds.latMax + padLat &&
+      p.lng >= bounds.lngMin - padLng &&
+      p.lng <= bounds.lngMax + padLng
+    );
+  }
+  return pointInCityBounds(p.lat, p.lng, bounds);
+}
+
+
+/** Wenn Profile-cityId fehlt: Mehrheit der Spot-Key-Prefixe (prisdorf_…). */
+function inferCityIdFromPois(pois: Poi[]): string | null {
+  const counts = new Map<string, number>();
+  for (const p of pois) {
+    const k = String(p.spot_key ?? '').trim().toLowerCase();
+    const m = /^([a-z][a-z0-9]*)[_:]/.exec(k);
+    if (!m) continue;
+    counts.set(m[1], (counts.get(m[1]) || 0) + 1);
+  }
+  let best: string | null = null;
+  let bestN = 0;
+  for (const [id, n] of counts) {
+    if (n > bestN) {
+      best = id;
+      bestN = n;
+    }
+  }
+  return bestN >= 5 ? best : null;
+}
+
 export function computeCityExploreProgress(opts: {
   pois: Poi[];
   /** Bevorzugt: volle Stempelhistorie (stadt-scoped Matching). */
@@ -43,14 +99,19 @@ export function computeCityExploreProgress(opts: {
   cityId?: string | null;
 }): CityExploreProgress {
   const profile = getCachedUserProfile();
+  const fromOpts = (opts.cityId ?? '').trim().toLowerCase();
+  const fromProfile = (profile?.cityId ?? '').trim().toLowerCase();
+  // Profile/Opts zuerst — sonst Prefix aus Store (verhindert 94 Danzig bei leerem cityId).
   const cityId =
-    (opts.cityId ?? profile?.cityId ?? '').toLowerCase() || null;
+    fromOpts ||
+    fromProfile ||
+    inferCityIdFromPois(opts.pois) ||
+    null;
   const bounds = resolveCityCoverageBoundsSync(cityId);
 
-  const explore = opts.pois.filter((p) => isCityExploreMapPoi(p));
-  // Alle Story-Orte der geladenen Stadt zählen — auch Ausreißer außerhalb
-  // der Coverage-Box (z. B. Arboretum / Pinneberg bei Prisdorf).
-  // Bounds nur für Besuch-Matching (siehe isCityExplorePlaceSeen).
+  const explore = opts.pois.filter(
+    (p) => isCityExploreMapPoi(p) && poiInActiveCity(p, cityId, bounds),
+  );
 
   const totalPlaces = explore.length;
   const history = opts.visitedHistory;

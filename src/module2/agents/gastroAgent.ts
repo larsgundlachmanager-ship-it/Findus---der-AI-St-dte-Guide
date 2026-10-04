@@ -484,6 +484,7 @@ export const gastroAgent: Module2Agent = {
       return researchPitchAsAgentResult({
         userText: task.rewrittenText,
         requestId: `gastro_${task.id ?? Date.now()}`,
+        call1DestCity: task.city ?? null,
       });
     }
 

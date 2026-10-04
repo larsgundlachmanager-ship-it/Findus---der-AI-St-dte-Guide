@@ -37,7 +37,8 @@ function haversine(
   return 2 * R * Math.asin(Math.sqrt(a));
 }
 
-async function ensureLandmarkCacheTable(): Promise<void> {
+/** Ensure SQLite tables exist (also used by nightlyCacheSync before SELECT). */
+export async function ensureLandmarkCacheTable(): Promise<void> {
   if (tableReady) return tableReady;
   tableReady = (async () => {
     const db = await getDatabase();

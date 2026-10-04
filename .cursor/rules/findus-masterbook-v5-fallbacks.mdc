@@ -7,16 +7,18 @@ alwaysApply: true
 
 ## Survival Mode (Battery)
 
-Akku unter 20%: proaktiv Audio-first + **konkrete** Ladeoptionen suchen (stadt-agnostisch):
+Akku unter 20%: still GPS-Economy (Akku schonen) — **keine** ungefragten Lade-Vorschläge / Speech.
+Powerbank / Steckdose **nur wenn der User danach fragt** (`phoneChargeDiscovery`):
 
 1. Powerbank-Automat / Sharing (OSM + Nearby) — nur mit Evidenz (Name/Brand/OSM-Tag)
 2. Handy-Ladestation — nur mit Evidenz
-3. Café / Ort mit Steckdose — OSM `socket=*` oder ehrlich als „Café, Steckdose oft da“
+3. Café / Bibliothek mit belegter Steckdose — OSM `socket=*`
+4. Soft-Fallback Café/Bäckerei nur ohne Belegtes — ehrlich „oft möglich, nicht garantiert“ (Bäckerei: „beim Bäcker oft kurz laden“)
 
 **Nie:** Heimatmuseum / Tourist-Info / Broschürenladen / Spielstadt als Lade-Spot — auch nicht „besser als nichts“.
 DE-Keyword „laden“ = Geschäft → in Places-Suche **vermeiden**.
 Speech · Stichpunkte · Route-Buttons = **dieselben** 1–2 Orte (Just-Do-It).
-SSOT: `survivalMode.ts` · `phoneChargeDiscovery.ts`
+SSOT: `survivalMode.ts` · `chargePlacePolicy.ts` · `phoneChargeDiscovery.ts`
 
 ## Manual Mode Override & Auto-Recheck
 

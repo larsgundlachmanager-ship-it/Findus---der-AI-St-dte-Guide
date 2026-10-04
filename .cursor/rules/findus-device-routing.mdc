@@ -1,0 +1,25 @@
+---
+description: Zwei-Handy-Routing — Live-QA vs. Unterwegs-APK
+alwaysApply: true
+---
+
+# Findus — Geräte-Routing (zwei Handys)
+
+## Rollen
+
+| Rolle | Gerät | Serial | Nutzung |
+|---|---|---|---|
+| **QA / Live-Tests** | Neues Handy (Desktop-Testgerät) | `FINDUS_QA_SERIAL` (Env) bzw. SSOT unten | Ask-Server, adb reverse, Tippfeld, Screenshots, UI-Dump, Night-QA, Retests |
+| **Unterwegs** | Nothing Phone | `FINDUS_TRAVEL_SERIAL` = `00143157P001105` (A059 / Asteroids) | Nur frische APK installieren (`install -r`), App starten — **keine** Live-QA / keine Asks |
+
+## Pflicht für den Agenten
+
+1. **Live-QA / Device-Tests** immer mit `-s <QA-Serial>` — nie „erstes adb-Gerät“, nie Nothing.
+2. **„APK aufs Nothing“ / Unterwegstest** → nur Travel-Serial; Build + `adb install -r -d`, dann fertig. Keine Asks, kein UI-Dump dort.
+3. Beide verbunden: trotzdem strikt trennen. Ohne QA-Gerät: stoppen und User bitten anzuschließen — nicht still auf Nothing ausweichen.
+4. Scripts: `ANDROID_SERIAL` / `FINDUS_QA_SERIAL` für QA setzen; Install-Scripts für Travel explizit `-Serial 00143157P001105`.
+
+## Serial-SSOT (aktualisieren wenn neues Gerät kommt)
+
+- **Travel (Nothing):** `00143157P001105`
+- **QA (Galaxy S7):** `ce12171cccf9c0810c` — SSOT `scripts/deviceQa/_device_ids.py` / Env `FINDUS_QA_SERIAL`

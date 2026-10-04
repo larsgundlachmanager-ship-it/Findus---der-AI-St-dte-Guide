@@ -15,6 +15,8 @@ assert.equal(
   'geboren am 27. März 1986',
 );
 assert.equal(compactBulletDigits('neununddreißig Jahre alt'), '39 Jahre');
+assert.equal(compactBulletDigits('siebzehn Grad'), '17°');
+assert.equal(compactBulletDigits('heute siebzehn'), 'heute 17');
 assert.ok(
   speechHasBulletDigit('siebenundzwanzigster März', '27'),
   'speech words match digit',

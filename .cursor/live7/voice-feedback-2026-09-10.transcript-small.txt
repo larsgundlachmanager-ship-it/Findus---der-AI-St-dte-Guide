@@ -1,0 +1,346 @@
+[51.1-56.0] Es ist 23 Uhr 16
+[56.0-61.2] Ich hab mal ein Yoros Reisebüro geöffnet
+[61.2-64.2] Das ist ja langsam auf jeden Fall die Startin einer neuen Reise
+[64.2-68.2] Dann soll auf jeden Fall kommen, wie kann ich dir heute helfen Lars?
+[68.2-71.2] Also mit dem richtigen Namen
+[71.2-74.2] Hey, was steht auf dem Plan?
+[74.2-76.2] Oder sowas, aber es ist wochselange
+[76.2-80.2] Also, äh, sorry, wir möchten gerne eine Männerwochenende machen
+[80.2-83.2] Ähm, 16. Oktober, wann wir starten
+[83.2-86.2] Und dann irgendwie drei bis sechs Tage unterwegs sein
+[86.2-89.2] Budget ist 400 Euro pro Person
+[89.2-93.2] Und wollen auf jeden Fall richtig geil das Schattenmännerwochenende machen, ne?
+[93.2-107.7] Oder wollen auf jeden Fall richtig schön Party und Abfahrt machen
+[107.7-113.7] Hallo, ok, lass sie aufgangen
+[113.7-115.7] Mikrofon, dann geh ich noch irgendwie an
+[115.7-119.7] Aber er hört nicht auf, dann selber zu antworten
+[119.7-124.9] Der Live Chat ist da, was kaputt
+[124.9-128.9] Und er hat auch drei bis sechs Nächte gesagt, ne?
+[128.9-134.4] Wie sagt er zwei Tage, ah, ok, passt, ok, sorry
+[134.4-140.1] Ähm, gutes Wetter, wann wir haben
+[140.1-147.1] Solides Budget für ein Wochenende
+[147.1-150.1] Bist du allein unterwegs oder sind noch Leute dabei?
+[150.1-158.7] Wir sind drei Personen
+[158.7-161.7] Alles klar, startet ihr von Christoph aus
+[161.7-163.7] Oder trefft ihr euch woanders?
+[163.7-165.7] Nee, von Christoph
+[165.7-169.4] Christoph
+[169.4-171.4] Prisdorf
+[171.4-174.4] Alles klar, den Startort hab ich nicht erkannt
+[174.4-176.4] Welcher Ort?
+[176.4-178.4] Oder von Christoph aus?
+[178.4-180.4] Ja, von Christoph aus
+[180.4-188.1] Alles klar, was schlägt euch bei der Unterkunft vor?
+[188.1-191.1] Eher Hotel, Ferienhaus oder Apartment?
+[191.1-194.4] Das ist uns eigentlich ziemlich egal
+[194.4-198.4] Wir hatten überlegt gehabt, eventuell so ein Ordentlichloseflot zu machen
+[198.4-201.4] Wichtig ist dafür, wenn man es nur, wenn es auch Alkohol gibt
+[201.4-206.4] Aber ist auch Wunschstärke wahrscheinlich für 400 Euro auch extrem teuer
+[206.4-214.6] Ich hab das schon mit der Egerung gespakt
+[214.6-216.6] Mikrofon ist irgendwie jetzt aus
+[216.6-231.6] Obwohl er sagt, Mikrofon ist an, ah, jetzt ist er wieder an
+[231.6-234.6] Also auch richtig geil flüssig, läuft das ja auch nicht
+[234.6-237.6] Immer wieder bricht das Mikrofon da irgendwie ab
+[237.6-239.6] Hängt sich da auf
+[239.6-256.6] Jetzt geht es schon wieder gar nicht
+[256.6-261.8] Also die gesamte UI hier gerade aufgehangen
+[261.8-264.8] So richtig gut testen konnte ich jetzt nicht
+[264.8-278.6] Bitte egal, egal ist man
+[278.6-281.6] Also dieses All-Inclusive-Ding
+[281.6-285.0] Hallo?
+[285.0-288.0] Also auch hier die Stiftpunkt, also jetzt haben wir es nicht hier an, was ich sage gerade
+[288.0-294.8] Wieso spackt der jetzt hier so rum?
+[294.8-296.8] Das war kacke
+[296.8-298.8] Wieso geht das hier nicht flüssig?
+[298.8-307.2] Also es muss nicht All-Inclusive sein
+[307.2-310.2] Wäre nicht cool, wenn das ein Budget mehr drin wäre
+[310.2-313.2] Aber wir können es auch selber verpflegen natürlich
+[313.2-316.2] Ansonsten ist die Unterkunft uns eigentlich ziemlich egal
+[316.2-319.2] Es kann dann RBB sein, Ferienwohnung, Hotel
+[319.2-321.2] Hostel vielleicht nicht, aber
+[321.2-327.0] Ja, irgendwas cooles wäre auf jeden Fall nice
+[327.0-329.0] Kein, kein Hostel
+[329.0-337.5] Das hat er dann im Plan sonst Hostel eingetragen
+[337.5-340.5] Das ist auch kacke, das sah er ja nicht
+[340.5-344.5] Und das All-Inclusive nur ein richtig schönes Wunschdenken ist
+[344.5-349.3] Hat er auch nicht hinzugefügt
+[349.3-351.3] Und auch hier wieder bei den Livechatten nicht
+[351.3-353.3] Wieso nicht? Wieso antwortet er nicht?
+[353.3-355.3] Wieso ist ein Löcher so richtig gut funktioniert?
+[355.3-362.1] Jetzt spackt er wieder kaum platt rum
+[362.1-364.1] Solides Budget für einen Wochenende
+[364.1-366.1] Was soll euer Highlight werden?
+[366.1-369.1] Die eine Sache, die sitzen muss
+[369.1-371.1] Günstiges Bier auf jeden Fall
+[371.1-381.8] Wenn wir da Alkohol trinken möchten, dann möchten wir nicht unmengend dafür ausgeben
+[381.8-383.8] Günstiges Bier, klar
+[383.8-385.8] Wie wollt ihr hinkommen?
+[385.8-387.8] Flug, Bahn oder Auto?
+[387.8-389.8] Das ist uns eigentlich ziemlich egal
+[389.8-392.8] Wir wollen eigentlich nicht länger als 5 Stunden mit dem Auto fahren
+[392.8-394.8] Maximal 6 Stunden mit der Bahn
+[394.8-399.8] Und maximal 6 Stunden mit dem Flieger unterwegs an
+[399.8-408.8] Alles klar, vor Ort
+[408.8-412.8] Eher zu Fuß und ÖPNV oder lieber Mietwagen?
+[412.8-421.0] Ja, am besten ÖPNV und zu Fuß
+[421.0-424.0] Alles klar, feiert ihr eher privat unter euch
+[424.0-426.0] Oder eher Bars und Clubs?
+[426.0-429.0] Und dann sich war man im Club, im Parlament
+[429.0-431.0] Das war sehr, sehr geil
+[431.0-434.0] Aber wir kamen auch klar super im eigenen Apartment oder Hotel
+[434.0-437.0] Das ein Party machen, da sind wir ziemlich frei
+[437.0-450.6] Alles klar, habt ihr eine Richtung im Kopf?
+[450.6-452.6] Oder ist der Ort noch egal?
+[452.6-460.3] Hauptsache, es ist irgendwie noch warm im Oktober
+[460.3-462.3] Alles klar, bei Flug oder Bahn?
+[462.3-464.3] Direkt wichtig, Max
+[464.3-467.3] Umsteigezeit oder Nachtfahrt, okay?
+[467.3-470.3] Ja, wir können auch über Nacht fliegen
+[470.3-474.3] Da ich möchte nicht länger als 2 Stunden am Flughafen sein
+[474.3-478.3] Also maximal 1 Stop, maximal 1 Stunde Zwischenstop
+[478.3-480.3] Ansonsten liebst du mit der Dreckflug
+[480.3-489.5] Alles klar, für Sparpreise der Bahn
+[489.5-491.5] Ungefähr das Alter der Mitreisenden
+[491.5-494.5] Und habt jemand eine Bahnkarte?
+[494.5-497.5] Ich habe eine Bahnkarte als einziger
+[497.5-507.4] Alles klar, Lage
+[507.4-511.4] eher zentral, ruhig draußen oder nah an einem bestimmten Spot
+[511.4-514.4] Das ist uns eigentlich ziemlich egal
+[514.4-517.4] Wenn wir bis nah da sind, soll es vielleicht nicht jeden Dreck stören
+[517.4-520.4] Aber wir sind da ziemlich frei eigentlich
+[520.4-538.4] Alles klar, vom Flughafen oder Bahnhof zum Hotel
+[538.4-542.4] eher Taxi, ÖPNV oder Transfer in einer Pauschale
+[542.4-546.7] So wie es am günstigsten ist
+[546.7-557.0] Günstig? Okay
+[557.0-560.0] Wenn ihr noch Fortbewegung vor Ort oder Lageanker sagt
+[560.0-561.0] wird der Plan noch härter
+[561.0-563.0] Sonst einfach Suche tippen
+[563.0-568.3] Noch was präzisieren?
+[568.3-570.3] Also ich habe mal jetzt kurz ein Screenshot gemacht
+[570.3-572.3] von dem was er mal aufgeschrieben hat
+[572.3-575.3] Also manchmal sind wir hier jetzt einfach so Dreckflug eingetragen
+[575.3-577.3] Ich habe gesagt es ist ja 1-2 Stops
+[577.3-579.3] wären ja okay
+[579.3-582.3] Alter wäre okay, Maximal 2 ist schon auf dem Halt
+[582.3-584.3] Ansonsten den liebsten Dreckflug
+[584.3-586.3] Auch das kann ein bisschen präzisieren
+[586.3-588.3] Oder ich habe auch gesagt
+[588.3-590.3] Flugabbriefe darf man da keinen Sinn
+[590.3-592.3] Flugab Hamburg wäre das dann theoretisch ja
+[595.6-598.6] Dann auch 2 Mal das Budget eingetragen
+[598.6-601.6] Wie unterwegs ein Budget
+[601.6-603.6] Dann auch Apartment sonst
+[603.6-605.6] Hotel
+[605.6-607.6] War am Sonne
+[607.6-609.6] Hat auch das irgendwie zusammen eingetragen
+[609.6-611.6] Part wie billigreichlich
+[611.6-615.6] Manchmal hat sich die Stichpunkte nicht so ganz perfekt präzise
+[615.6-617.6] Weißt du
+[617.6-619.6] Wenn wir fliegen sollten
+[619.6-621.6] Dann können wir auch gerne von
+[621.6-623.6] Berlin, Bremen oder Hamburg fliegen
+[623.6-625.6] Da sind wir eigentlich relativ frei
+[625.6-635.7] Alles klar
+[635.7-637.7] Wenn ihr noch Fortbewegung vor Ort oder Lageanker sagt
+[637.7-639.7] Wird der Plan noch härter
+[639.7-641.7] Sonst einfach Suche tippen
+[641.7-643.7] Noch was präzisieren
+[643.7-645.7] Also nicht 2-mal sagen
+[645.7-647.7] Wir sind 3-5 Besucher
+[647.7-649.7] Ich muss aber nicht
+[649.7-651.7] Soll ich nicht immer sagen
+[651.7-653.7] Das fehlt jetzt noch
+[653.7-655.7] Ich kann einfach sagen
+[655.7-657.7] Dann hört es auf
+[657.7-659.7] Auch dieses All-in-Close
+[659.7-661.7] Das ist nur ein Wunschdenken
+[661.7-663.7] Das ist das Optimalfall
+[663.7-665.7] Wenn das klappen könnte
+[665.7-667.7] Auch dafür muss es eine eigene Kategorie geben
+[667.7-669.7] Dass All-in-Close ist aber vernünftig drin ist
+[669.7-671.7] Ja
+[671.7-678.7] Find ich da
+[678.7-680.7] Wir haben ein bisschen richtig gut
+[680.7-682.7] Ich starte mal auf jeden Fall die Suche
+[682.7-684.7] Ja, ist das jetzt hier
+[684.7-686.7] Euer Männerwochenende
+[686.7-688.7] Ihr wollt am 16. Oktober los
+[688.7-690.7] 3-6 Nächte
+[690.7-692.7] 3 Leute
+[692.7-694.7] Party, klar, eher Clubs
+[694.7-696.7] Künstiges Bier im Weg
+[696.7-698.7] Apartment, sonst Hotel
+[698.7-700.7] Inclusive
+[700.7-702.7] Nice, Apartment, Hotel
+[702.7-704.7] Party, warm
+[704.7-706.7] Start Hamburg, Schrägstrich Bremen, Schrägstrich Berlin
+[706.7-708.7] Flug, Max
+[708.7-710.7] 2 Stunden Anfahrt
+[710.7-712.7] Budget so um die 400€ pro Person
+[712.7-714.7] Bei der Suche schaue ich extra nach
+[714.7-716.7] Preisfehlern und Hits
+[716.7-718.7] Vielleicht findet sich da eine richtig gute Möglichkeit
+[718.7-720.7] Ansonsten noch wichtig
+[720.7-722.7] Richtung Hauptsache ist es irgendwie noch warm
+[722.7-724.7] Hast das so?
+[724.7-726.7] Das war ja, wenn ich grottig schlecht
+[726.7-728.7] Was er vorgelesen hat, cool da gewesen
+[728.7-730.7] Alles klar
+[730.7-732.7] Ihr wollt ein Männerwochenende machen
+[732.7-734.7] Vom 16.10. am Zutritt
+[734.7-736.7] Ungefähr 3-6 Nächte
+[736.7-738.7] Budget ist bei
+[738.7-740.7] 400€ pro Person
+[740.7-742.7] Richtig richtig cool
+[742.7-744.7] Wär das auf jeden Fall, wenn ihr
+[744.7-746.7] All inclusive bekommen würdet
+[746.7-748.7] Aber es wäre auch okay, wenn ihr
+[748.7-750.7] Einfach in einem hotel, Apartment
+[750.7-752.7] Oder Ferien werten
+[752.7-754.7] Wird auf jeden Fall irgendwo hin, wo es warm ist
+[754.7-756.7] Staaten tun wir jetzt hier in Priestorf
+[756.7-758.7] Fliegen würden wir auch
+[758.7-760.7] Ja
+[760.7-762.7] Genau, wenn wir doch bereit
+[762.7-764.7] Zu fliegen oder mit der Bahn zu fahren
+[766.7-768.7] Wichtig ist auf jeden Fall
+[768.7-770.7] Dass das Bier
+[770.7-772.7] Günstig ist
+[772.7-774.7] Habe ich irgendwas
+[774.7-778.0] Vergessen
+[778.0-780.0] Oder soll ich die Suche jetzt
+[780.0-782.0] Direkt starten
+[782.0-784.0] Auch hier wäre gut gewesen, wenn am end des Tages
+[784.0-786.0] Live das Mikrofon wieder aktiviert
+[786.0-788.0] Falls ich mir diese Gäste haben sollte
+[788.0-790.0] Wo ich sie auch sagen kann
+[790.0-792.0] Starte die Suche
+[792.0-794.0] Weil wir auch immer anderen haben, dass er dann die Suche startet
+[794.0-796.0] Gut, für mich passt es einfach so
+[796.0-798.0] Ja, der Suche
+[798.0-836.4] Ja, ok, jetzt mal los
+[836.4-838.4] Ich finde es ein bisschen komisch jetzt hier
+[838.4-840.4] Ah ja
+[840.4-842.4] Das finde ich aber geil, dass er jetzt anzeigt
+[842.4-844.4] Hamor, Palma, den ganzen Ortenanzeigen
+[844.4-846.4] Im Rennen
+[846.4-848.4] Das finde ich ganz geil eigentlich
+[848.4-850.4] Dann auch hier live
+[850.4-852.4] Das finde ich geil, das finde ich cool
+[852.4-854.4] Ein bisschen schnell teilweise
+[854.4-856.4] Im Anfang noch was gemacht, jetzt vergleichte ich
+[856.4-858.4] Auch hier Double Check
+[858.4-860.4] Die Sprünge sind ziemlich groß und schnell
+[860.4-862.4] Auch bei warm
+[862.4-864.4] Wunsch warm, wo es ist
+[864.4-866.4] Da habe ich es eigentlich cool gewesen
+[866.4-868.4] Aber finde ich cool eigentlich, dass es jetzt hier ist
+[868.4-870.4] Antalya, Türkei-Wohnung
+[870.4-872.4] Hotel und Party
+[872.4-874.4] Das ist die Variante, die euer Brief trifft
+[874.4-876.4] Antalya, Türkei
+[876.4-878.4] Mit dem Feeling, das ihr wolltet
+[878.4-880.4] Dazu die Momente
+[880.4-882.4] Antalya, Tereya, Ecos, Faustol
+[882.4-884.4] Transfer zur Unterkunft
+[884.4-886.4] 22 Euro für die Gruppe
+[886.4-888.4] Am Ende liegt ihr bei 145 Euro
+[888.4-890.4] OPP bei drei Personen
+[890.4-892.4] Flug, Stay und Transfer
+[892.4-894.4] Zusammen gerechnet
+[894.4-896.4] Scroll durch den Plan, check die Momente
+[896.4-898.4] Und bucht die Links unten, wenn es klebt
+[900.4-902.4] Also erstmal, so zielt werden nach
+[902.4-907.2] Match
+[907.2-909.2] Ich habe auch drei mit 99%
+[909.2-911.2] Matchen, 1, 90%
+[911.2-913.2] Zum 90% soll das auf wenigsten sein
+[913.2-915.2] Dann, also kannst du nicht erzählen
+[915.2-917.2] Das sind viel 50 Euro Personen
+[917.2-919.2] Was richtig wäre
+[919.2-921.2] Die Bilder fehlen hier auch komplett
+[921.2-923.2] Und diese Zusammenfassung
+[923.2-925.2] Wer auch in wird
+[925.2-927.2] Ja, meine Suche fürs Männerwochenende beendet
+[927.2-929.2] Meine Wahl wäre auf jeden Fall
+[929.2-931.2] Das ist Top-Ding
+[931.2-933.2] Nach Budapest zu fliegen
+[933.2-935.2] In einem richtig schicken Apartment
+[935.2-937.2] Und dann geht das so und so
+[937.2-941.1] Das wäre natürlich Traumaufgebildung
+[941.1-943.1] Aber ich klicke es mal auf Budapest noch auf
+[943.1-945.1] Das erste mit 99%
+[945.1-947.1] Budapest-Wohnung, Hotel und Paten
+[947.1-949.1] Das ist die Variante, wie euer Brief trifft
+[949.1-951.1] Budapest
+[951.1-953.1] Mit dem Feeling, das ihr wolltet
+[953.1-955.1] Das sind die Momente, das hört
+[955.1-957.1] Transfer zur Unterkunft
+[957.1-959.1] 22 Euro für die Gruppe
+[959.1-961.1] Am Ende liegt ihr bei 54 Euro
+[961.1-963.1] OPP bei drei Personen
+[963.1-965.1] Flug, Stay und Transfer
+[965.1-967.1] Zusammengerechnet
+[967.1-969.1] Scroll durch den Plan
+[969.1-971.1] Check die Momente und buch die Links unten
+[971.1-973.1] Wenn es klingt
+[973.1-975.1] Also auch hier, das hat was so ein Kacke
+[975.1-981.7] Ja, muss viel viel
+[981.7-983.7] Ja, wie sagt man
+[983.7-988.0] Muss viel viel
+[988.0-990.0] Lockerer sein
+[994.0-996.0] Das wäre die Variante für Budapest
+[996.0-998.0] Es sieht auch gar nicht so aus
+[998.0-1000.0] Wie du es mir auf dem Bild präsentiert hast
+[1000.0-1002.0] Es sieht scheiße aus
+[1002.0-1004.0] Ich kann nicht hier ewig weiter runter scrollen
+[1004.0-1006.0] Es hat da oben die Optionen
+[1006.0-1008.0] Aber das möchte ich gar nicht, dass da oben
+[1008.0-1010.0] alle Optionen sind
+[1010.0-1012.0] Aber diese Person ist zu breit
+[1012.0-1014.0] Bitte hör auf zu reden
+[1014.0-1016.0] Aber hier steht kein Informationen drin
+[1016.0-1018.0] Ich kann keine Sachen buchen
+[1018.0-1020.0] Es ist ja wirklich grauenvoll
+[1020.0-1022.0] Ich weiß nicht, wie teuer das ist
+[1022.0-1024.0] Es ist hier keine Preise
+[1024.0-1026.0] Ich kann hier nicht scrollen
+[1026.0-1028.0] Die ganzen Bilder fehlen
+[1028.0-1030.0] Was du mir gezeigt hast
+[1030.0-1032.0] In dem Chat
+[1032.0-1034.0] In dem Agent
+[1034.0-1036.0] Ja
+[1036.0-1038.0] Kann ich jetzt hier nicht so
+[1038.0-1040.0] 1 zu 1 widerspiegeln
+[1040.0-1042.0] Das wäre total schade
+[1042.0-1044.0] Ich kann jetzt hier nichts buchen
+[1044.0-1046.0] Ich habe keine Links, keine Andespunkte
+[1046.0-1048.0] Er sagt teilweise auch hier
+[1048.0-1050.0] Atelier, Türkei, Wohnung, Hotel
+[1050.0-1052.0] und Party
+[1052.0-1054.0] Also irgendwie habe ich eine Wohnung
+[1054.0-1056.0] Oder ich habe ein Hotel
+[1056.0-1058.0] Ja auch
+[1058.0-1060.0] Nicht so perfekt passend
+[1060.0-1062.0] Das muss man ganz klar zu sagen
+[1062.0-1064.0] 145 Euro finde ich für Atelier
+[1064.0-1066.0] Mit Flieger
+[1066.0-1068.0] Prope so unfassbar günstig
+[1068.0-1070.0] Mir fehlt auch hier ein Datum
+[1070.0-1072.0] Auch das fehlt
+[1072.0-1074.0] Günstiges Bier und warm
+[1074.0-1076.0] finde ich scheiße, dass das eingezahlt wird
+[1076.0-1078.0] Möchte lieber einen geilen Titel haben
+[1078.0-1080.0] Atelier-Party
+[1080.0-1082.0] Für 145 Euro zum Beispiel
+[1082.0-1084.0] Dieses Deal
+[1084.0-1086.0] Macht das überall
+[1086.0-1088.0] Macht auch keinen Sinn
+[1088.0-1090.0] Sondern wir genau den Ort sagen
+[1090.0-1092.0] Genau die Reisodaten nochmal sagen
+[1092.0-1094.0] Ja
+[1094.0-1096.0] Da muss auf jeden Fall noch einiges
+[1096.0-1098.0] Es ist wirklich noch einiges
+[1098.0-1100.0] Optimiert werden
+[1100.0-1102.0] Damit wir da hinkommen
+[1102.0-1104.0] Dass die Leute auch Reise buchen können

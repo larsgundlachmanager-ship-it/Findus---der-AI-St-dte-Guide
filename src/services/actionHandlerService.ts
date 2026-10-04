@@ -61,6 +61,11 @@ import {
   getPendingWakeProposal,
   setPendingWakeProposal,
 } from './alarms/wakeAlarmAdvisor';
+import {
+  buildWakeConfirmSpeech,
+  parseWakeVoiceStyle,
+  wakeVoiceSpeakOptions,
+} from './alarms/wakeConfirmSpeech';
 import { presentAutoReservationFollowUp } from './concierge/autoReservationFollowUp';
 import { runContextualDiscovery, presentDiscoveryAsConcierge } from './navigation/contextualDiscovery';
 import { getDeviceHeadingDeg, getMovementBearingDeg } from './navigation/navigationService';
@@ -459,7 +464,11 @@ export async function handleQuickAction(
       if (
         !action.payload.replaceRoute &&
         !action.payload.addStop &&
-        !(action.payload.multiStop && action.payload.multiStop.length >= 2)
+        !(action.payload.multiStop && action.payload.multiStop.length >= 2) &&
+        action.payload.preferWalk !== true &&
+        action.payload.preferTransit !== true &&
+        action.payload.preferBike !== true &&
+        action.payload.journeyNav !== true
       ) {
         const { shouldOfferNavRetarget, presentNavRetargetChoice } = await import(
           './navigation/navRetargetChoice'
@@ -1035,9 +1044,24 @@ export async function handleQuickAction(
         };
       }
 
+      const pickupDateIsoRaw =
+        (typeof (action.payload as { pickupDateIso?: unknown }).pickupDateIso ===
+        'string'
+          ? (action.payload as { pickupDateIso?: string }).pickupDateIso
+          : null) ||
+        (typeof action.payload.dateIso === 'string' ? action.payload.dateIso : null) ||
+        '';
+      const pickupDateIso = pickupDateIsoRaw.trim() || null;
       const ok = await (async () => {
         const direct = action.payload.url?.trim();
-        if (direct && /uber\.com/i.test(direct)) {
+        const directHasSchedule =
+          Boolean(direct) && /pickup_time=/i.test(direct || '');
+        // Zukunft: frisch mit Datum/Uhr bauen statt stale Sofort-URL
+        if (
+          direct &&
+          /uber\.com/i.test(direct) &&
+          (directHasSchedule || !pickupTimeLabel)
+        ) {
           try {
             // canOpenURL auf Android oft falsch-negativ bei dropoff[latitude]
             await openExternalUrl(encodeUriBrackets(direct));
@@ -1049,7 +1073,7 @@ export async function handleQuickAction(
         return openUberRide(lat, lng, name || 'Ziel', null, {
           dropoffFormattedAddress: dropAddr || name || 'Ziel',
           pickupTimeLabel: pickupTimeLabel || null,
-          pickupDateIso: action.payload.dateIso || null,
+          pickupDateIso,
         });
       })();
       if (ok) {
@@ -1444,6 +1468,14 @@ export async function handleQuickAction(
         );
         if (isRainDontCareUtterance(prompt)) {
           useFinnusStore.getState().setActiveConciergeCard(null);
+          try {
+            const { markRainDontCareUntilMorning } = await import(
+              './weather/rainWarnSessionGate'
+            );
+            markRainDontCareUntilMorning();
+          } catch {
+            /* soft */
+          }
           const ack = 'Alles klar — dann bleiben wir beim Plan.';
           try {
             const { speakAssistantText, getVoiceSettingsForTour } = await import(
@@ -1641,6 +1673,63 @@ export async function handleQuickAction(
       return { ok: true };
     }
 
+    case 'OPEN_PACK_LIST': {
+      const listId = action.payload.packListId?.trim() || null;
+      try {
+        const { usePackListStore } = require('../store/usePackListStore') as {
+          usePackListStore: {
+            getState: () => { openOverlay: (id?: string | null) => void };
+          };
+        };
+        usePackListStore.getState().openOverlay(listId);
+        useFinnusStore.getState().setActiveConciergeCard(null);
+        return { ok: true };
+      } catch {
+        return { ok: false, message: 'Packliste konnte nicht geöffnet werden.' };
+      }
+    }
+
+    case 'TOGGLE_PACK_ITEM': {
+      const listId = action.payload.packListId?.trim();
+      const itemId = action.payload.packItemId?.trim();
+      if (!listId || !itemId) {
+        return { ok: false, message: 'Packlisten-Punkt fehlt.' };
+      }
+      try {
+        const { usePackListStore } = require('../store/usePackListStore') as {
+          usePackListStore: {
+            getState: () => {
+              toggleItem: (listId: string, itemId: string) => void;
+              getList: (id: string) => {
+                items: Array<{ id: string; label: string; done: boolean }>;
+              } | null;
+              openOverlay: (id?: string | null) => void;
+            };
+          };
+        };
+        const store = usePackListStore.getState();
+        store.toggleItem(listId, itemId);
+        store.openOverlay(listId);
+        const list = store.getList(listId);
+        const item = list?.items.find((i) => i.id === itemId);
+        try {
+          const voice = await getVoiceSettingsForTour();
+          const speech = item?.done
+            ? `Erledigt: ${item.label}.`
+            : `Wieder offen: ${item?.label || 'Punkt'}.`;
+          void speakAssistantText(speech, {
+            voiceId: voice.voiceId,
+            speechRate: voice.speechRate,
+          });
+        } catch {
+          /* soft */
+        }
+        return { ok: true };
+      } catch {
+        return { ok: false, message: 'Konnte den Punkt nicht abhaken.' };
+      }
+    }
+
     case 'SET_TIMER': {
       const prompt = action.payload.textPrompt?.trim() ?? '';
       if (/timer\s+(aus|stopp|stop|abbrechen)|stopp?\s+(den\s+)?timer/i.test(prompt)) {
@@ -1755,6 +1844,11 @@ export async function handleQuickAction(
         action.payload.destName?.trim() ||
         pending?.reasonLabel ||
         'deinen Termin';
+      const voiceStyle = parseWakeVoiceStyle(
+        action.payload.textPrompt?.trim() ||
+          pending?.reasonLabel ||
+          reason,
+      );
       const result = await setWakeAlarmWithBridge({
         wakeAtMs,
         reasonLabel: reason,
@@ -1764,19 +1858,19 @@ export async function handleQuickAction(
         wakeMode:
           wakeMode === 'replace' || wakeMode === 'add' ? wakeMode : 'add',
         replaceWakeAtMs: action.payload.replaceWakeAtMs ?? null,
+        voiceStyle,
       });
       useFinnusStore.getState().setActiveConciergeCard(null);
       setPendingWakeProposal(null);
       const speech =
         result.message ||
-        (result.ok
-          ? `Ich habe deinen Wecker auf ${formatClockDe(wakeAtMs)} gestellt.`
-          : 'Wecker lässt sich gerade nicht stellen.');
+        buildWakeConfirmSpeech({ wakeAtMs, ok: result.ok });
       try {
         const voice = await getVoiceSettingsForTour();
         void speakAssistantText(speech, {
           voiceId: voice.voiceId,
           speechRate: voice.speechRate,
+          ...wakeVoiceSpeakOptions(voiceStyle),
         });
       } catch {
         /* ignore */
@@ -1814,7 +1908,7 @@ export async function handleQuickAction(
     }
 
     case 'SET_DEPARTURE_REMINDER': {
-      // Pitch „Später einplanen“: still Timeline + Speech
+      // Pitch „Einplanen“: erst Uhrzeit fragen — noch nicht in Timeline schreiben
       if ((action.payload as { pitchTiming?: string }).pitchTiming === 'later') {
         try {
           const { useLivePitchStore } = require('../module2/pitch/publishPitchUi') as {
@@ -1841,18 +1935,6 @@ export async function handleQuickAction(
           const opt =
             live.options.find((o) => o.id === live.selectedOptionId) ||
             live.options[0];
-          if (opt && live.requestId) {
-            const { mirrorLivePitchChoiceToTimeline } = require('../module2/pitch/mirrorLivePitchToTimeline') as {
-              mirrorLivePitchChoiceToTimeline: (o: unknown) => void;
-            };
-            mirrorLivePitchChoiceToTimeline({
-              requestId: live.requestId,
-              option: opt,
-              visitAtMs: live.visitAtMs,
-              pitchKind: live.pitchKind,
-              pitchContext: live.pitchContext,
-            });
-          }
           const { pitchTimingLaterSpeech } = require('../module2/pitch/pitchTimingFork') as {
             pitchTimingLaterSpeech: (n: string) => string;
           };
@@ -1861,10 +1943,50 @@ export async function handleQuickAction(
           };
           const name =
             action.payload.destName?.trim() || opt?.name || 'den Ort';
+          // Sticky: nächste Uhrzeit-Antwort bindet an diesen Ort
+          try {
+            const { usePlanCalendarUiStore } = require('../module2/timeline/planCalendarUiStore') as {
+              usePlanCalendarUiStore: {
+                getState: () => {
+                  setShortAnswers: (
+                    a: Array<{
+                      id: string;
+                      label: string;
+                      action: 'prompt';
+                      prompt: string;
+                    }>,
+                  ) => void;
+                  setPendingChoice?: (c: unknown) => void;
+                };
+              };
+            };
+            usePlanCalendarUiStore.getState().setShortAnswers([
+              {
+                id: 'plan_t_18',
+                label: '18 Uhr',
+                action: 'prompt',
+                prompt: `Einplanen ${name} um 18 Uhr`,
+              },
+              {
+                id: 'plan_t_19',
+                label: '19 Uhr',
+                action: 'prompt',
+                prompt: `Einplanen ${name} um 19 Uhr`,
+              },
+              {
+                id: 'plan_t_20',
+                label: '20 Uhr',
+                action: 'prompt',
+                prompt: `Einplanen ${name} um 20 Uhr`,
+              },
+            ]);
+          } catch {
+            /* soft */
+          }
           enqueueSpeech({
             kind: 'main',
             text: pitchTimingLaterSpeech(name),
-            turnId: `pitch_later_${Date.now()}`,
+            turnId: `pitch_later_ask_${Date.now()}`,
           });
           return { ok: true, keepCard: true };
         } catch {
@@ -1881,9 +2003,70 @@ export async function handleQuickAction(
       const hasTime =
         Number.isFinite(leaveByMs) && leaveByMs >= Date.now() + 20_000;
 
-      // Nur Ort, keine Uhrzeit → Geo-Erinnerung (am Ort erinnern)
+      // Pack-Item ohne Uhr → Todo-/Zeit-Erinnerung (nicht Geo-Geocode)
       if (!hasTime) {
         const destName = action.payload.destName?.trim();
+        try {
+          const {
+            isPackItemReminderAnchor,
+            defaultPackItemReminderMs,
+          } = require('./concierge/timeCareIntent') as {
+            isPackItemReminderAnchor: (s: string | null | undefined) => boolean;
+            defaultPackItemReminderMs: (n?: number) => number;
+          };
+          if (destName && isPackItemReminderAnchor(destName)) {
+            const fireAt = defaultPackItemReminderMs();
+            const { registerTimeReminder } = await import(
+              './logistics/logisticsTriggerEngine'
+            );
+            registerTimeReminder({
+              title: destName,
+              fireAtMs: fireAt,
+              detail: action.payload.textPrompt ?? `Mitnehmen: ${destName}`,
+              eventId: `pack-${fireAt}`,
+            });
+            try {
+              const { useShoppingTaskStore } = require('../store/useShoppingTaskStore') as {
+                useShoppingTaskStore: {
+                  getState: () => {
+                    addTask: (t: {
+                      itemLabel: string;
+                      placeTypes: string[];
+                      anchor: string;
+                      dueAtMs: number | null;
+                    }) => void;
+                  };
+                };
+              };
+              useShoppingTaskStore.getState().addTask({
+                itemLabel: destName,
+                placeTypes: ['drugstore', 'supermarket'],
+                anchor: 'store',
+                dueAtMs: fireAt,
+              });
+            } catch {
+              /* soft */
+            }
+            useFinnusStore.getState().setActiveConciergeCard(null);
+            const clock = `${new Date(fireAt).getHours()}:${String(
+              new Date(fireAt).getMinutes(),
+            ).padStart(2, '0')}`;
+            const msg = `Alles klar — ${destName} steht als Erinnerung (ca. ${clock} Uhr) und auf der Mitnehmen-Liste.`;
+            try {
+              const voice = await getVoiceSettingsForTour();
+              void speakAssistantText(msg, {
+                voiceId: voice.voiceId,
+                speechRate: voice.speechRate,
+              });
+            } catch {
+              /* soft */
+            }
+            return { ok: true, message: msg };
+          }
+        } catch {
+          /* soft → geo path */
+        }
+        // Nur Ort, keine Uhrzeit → Geo-Erinnerung (am Ort erinnern)
         if (!destName) {
           return {
             ok: false,

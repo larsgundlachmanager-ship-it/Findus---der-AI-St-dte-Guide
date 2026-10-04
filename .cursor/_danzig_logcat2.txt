@@ -1,0 +1,16 @@
+﻿--------- beginning of main
+09-23 11:28:27.386 24442 24442 D ViewRootImpl: Skipping stats log for color mode
+09-23 11:28:27.392 24442 24442 W unknown:BridgelessReact: ReactHost{0}.onHostResume(activity)
+09-23 11:28:27.392 24442 24442 W unknown:BridgelessReact: ReactContext.onHostResume()
+--------- beginning of system
+09-23 11:28:27.522 24442 24442 D NtViewRootImpl: mPopUpViewOffsets: offset=(0.0, 0.0), scale=(1.0, 1.0)
+09-23 11:28:27.567 24442 24442 D InsetsController: hide(ime(), fromIme=false)
+09-23 11:28:27.568 24442 24442 I ImeTracker: de.findus.app:8b9be450: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+09-23 11:28:29.898 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.898 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.899 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.899 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.899 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.899 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.899 24442 24457 W System  : A resource failed to call close. 
+09-23 11:28:29.899 24442 24457 W System  : A resource failed to call close. 

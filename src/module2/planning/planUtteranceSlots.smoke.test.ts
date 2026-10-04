@@ -166,17 +166,47 @@ assert(
     'Um 9:00 Uhr los nach Hamburg, typisch hamburgerisch frühstücken, abends Pannfisch mit Elbblick zum Sonnenuntergang, den Michel rauf, in der Zwischenzeit Hamburg erkunden.';
   const walkSlots = extractUtteranceSlots(walkUtt);
   assert(
+    walkSlots.filter((s) => s.kind === 'breakfast').length === 1,
+    `exactly one breakfast slot, got ${walkSlots.filter((s) => s.kind === 'breakfast').length}`,
+  );
+  assert(
     walkSlots.some((s) => s.kind === 'explore'),
     `explore kept: ${walkSlots.map((s) => s.kind).join(',')}`,
+  );
+  assert(
+    !walkSlots.some((s) => /sonnenuntergang|sunset/i.test(s.title)),
+    `no sibling sunset slot when meal present: ${walkSlots.map((s) => s.title).join('|')}`,
+  );
+  const mealSlot = walkSlots.find((s) => s.kind === 'meal');
+  assert(Boolean(mealSlot), 'meal slot present');
+  assert(
+    /pannfisch/i.test(mealSlot!.title + mealSlot!.context) &&
+      /elbblick/i.test(mealSlot!.context) &&
+      /sonnenuntergang|sunset/i.test(mealSlot!.context),
+    `meal context has pannfisch/elbblick/sunset: ${mealSlot!.context}`,
   );
   const walkPlan = mergeUtteranceSlotsIntoPlan(
     emptyPlan([]),
     walkUtt,
   );
+  const breakfasts = walkPlan.openWishesQueue.filter((w) =>
+    /frühstück|fruehstueck/i.test(w.title),
+  );
+  assert(breakfasts.length === 1, `one breakfast wish, got ${breakfasts.length}`);
   const meal = walkPlan.openWishesQueue.find((w) =>
-    /pannfisch|essen|elbblick/i.test(`${w.title} ${w.context}`),
+    /pannfisch|essen/i.test(w.title),
   );
   assert(meal?.estimatedTime === '19:30', `sunset dinner ${meal?.estimatedTime}`);
+  assert(/pannfisch/i.test(meal?.title || ''), `pannfisch title ${meal?.title}`);
+  assert(
+    /elbblick/i.test(meal?.context || '') &&
+      /sonnenuntergang|sunset/i.test(meal?.context || ''),
+    `meal context criteria: ${meal?.context}`,
+  );
+  const sunset = walkPlan.openWishesQueue.find((w) =>
+    /sonnenuntergang/i.test(w.title),
+  );
+  assert(!sunset, 'no separate sunset wish when meal present');
   const michel = walkPlan.openWishesQueue.find((w) => /michel/i.test(w.title));
   assert(Boolean(michel), 'michel slot');
   assert(
@@ -196,6 +226,22 @@ assert(
   assert(
     !extractUtteranceSlots(sunsetOnly).some((s) => s.kind === 'explore'),
     'sunset meal does not invent a tour',
+  );
+  assert(
+    !extractUtteranceSlots(sunsetOnly).some((s) =>
+      /sonnenuntergang/i.test(s.title),
+    ),
+    'sunset folds into meal context',
+  );
+}
+
+{
+  const dupBf =
+    'Frühstück, typisch hamburgerisch frühstücken, nochmal frühstücken.';
+  const bfSlots = extractUtteranceSlots(dupBf);
+  assert(
+    bfSlots.filter((s) => s.kind === 'breakfast').length === 1,
+    `breakfast title variants merge to one, got ${bfSlots.map((s) => s.title).join('|')}`,
   );
 }
 

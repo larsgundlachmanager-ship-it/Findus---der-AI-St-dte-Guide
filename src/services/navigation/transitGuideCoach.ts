@@ -24,18 +24,23 @@ import {
   type TransitVehicleKind,
 } from './transitGuideSpeech';
 
-const HALT_NEAR_M = 48;
-const VEHICLE_SOON_SEC = 70;
+const HALT_NEAR_M = 15;
+const VEHICLE_SOON_SEC = 30;
 const CUE_GAP_MS = 8_000;
 
 let spoken = new Set<string>();
 let lastSpeakAt = 0;
 let lastPhase: NavPhase | null = null;
+/** Board-Index → schon Live-Gleis nachgezogen (oder leer versucht). */
+let platformLookupTried = new Set<number>();
+let platformLookupInflight = false;
 
 export function resetTransitGuideCoach(): void {
   spoken = new Set();
   lastSpeakAt = 0;
   lastPhase = null;
+  platformLookupTried = new Set();
+  platformLookupInflight = false;
 }
 
 export function wasTransitGuideSpoken(key: string): boolean {
@@ -135,19 +140,25 @@ function factsFromTour(opts: {
   };
 }
 
-async function speakKey(key: string, text: string): Promise<void> {
-  if (!text.trim()) return;
-  if (spoken.has(key)) return;
+async function speakKey(
+  key: string,
+  text: string,
+  opts?: { force?: boolean },
+): Promise<boolean> {
+  if (!text.trim()) return false;
+  if (spoken.has(key)) return true;
   const now = Date.now();
-  if (now - lastSpeakAt < CUE_GAP_MS) return;
+  if (!opts?.force && now - lastSpeakAt < CUE_GAP_MS) return false;
   const store = useFinnusStore.getState();
-  if (store.isPlayingAudio || store.isGenerating) return;
+  if (!opts?.force && (store.isPlayingAudio || store.isGenerating)) return false;
   spoken.add(key);
   lastSpeakAt = now;
   try {
     await speakAssistantText(text.trim());
+    return true;
   } catch {
     spoken.delete(key);
+    return false;
   }
 }
 
@@ -190,7 +201,9 @@ export async function onTransitGuidePhaseChange(opts: {
     if (n != null && n >= 1) {
       noteTransitGuideSpoken(`stops:${n}`);
     }
-    await speakKey('onboard', onboardSpeech(facts));
+    // Phase-Flip: Ride-Start muss durch — Gap/Busy nicht schlucken.
+    const ok = await speakKey('onboard', onboardSpeech(facts), { force: true });
+    if (!ok) spoken.delete('onboard');
   }
   if (
     opts.next === 'post_transit_walk' &&
@@ -244,6 +257,16 @@ export function tickTransitGuide(opts: {
       destName: opts.destName,
       mode: opts.transportMode,
     });
+  } else if (phase === 'in_transit' && !spoken.has('onboard')) {
+    // Retry wenn Board-Speech beim Flip wegen Busy verpasst wurde.
+    void onTransitGuidePhaseChange({
+      prev: 'walk_to_stop',
+      next: 'in_transit',
+      remainingStops: opts.remainingStations,
+      destWalkM: opts.distanceToDestinationM,
+      destName: opts.destName,
+      mode: opts.transportMode,
+    });
   } else if (phase) {
     lastPhase = phase;
   }
@@ -268,16 +291,90 @@ export function tickTransitGuide(opts: {
   const depMs = board.vehicleStartMs ?? upcomingAlight(tour)?.startMs ?? null;
   const waitSec = waitSecFrom(depMs, now);
 
+  // Gleis am Halt: einmal Live-Tafel (Failover) — fehlt oder korrigiert.
+  if (
+    dHalt <= HALT_NEAR_M + 40 &&
+    (board.line || '').trim() &&
+    !platformLookupTried.has(tour.currentIndex) &&
+    !platformLookupInflight
+  ) {
+    platformLookupTried.add(tour.currentIndex);
+    platformLookupInflight = true;
+    void (async () => {
+      try {
+        const { lookupPlatformForBoard } = await import(
+          '../transit/enrichJourneyPlatforms'
+        );
+        const plat = await lookupPlatformForBoard({
+          stationName: board.name,
+          line: board.line ?? null,
+          headsign: board.headsign ?? null,
+          depMs,
+          lat: board.lat,
+          lng: board.lng,
+          currentPlatform: board.platform ?? null,
+        });
+        if (!plat) return;
+        const st = useFinnusStore.getState();
+        const t = st.multiStopTour;
+        if (!t?.stops?.length) return;
+        const idx = t.currentIndex ?? 0;
+        let boardIdx = -1;
+        for (let i = idx; i >= Math.max(0, idx - 1); i -= 1) {
+          const s = t.stops[i];
+          if (
+            s &&
+            (s.role === 'walk' || s.role === 'transfer' || s.role === 'board')
+          ) {
+            boardIdx = i;
+            break;
+          }
+        }
+        if (boardIdx < 0) boardIdx = idx;
+        const curPlat = (t.stops[boardIdx]?.platform || '').trim().toLowerCase();
+        if (curPlat === plat.trim().toLowerCase()) return;
+        const patched = t.stops.map((s, i) =>
+          i === boardIdx ? { ...s, platform: plat } : s,
+        );
+        st.setMultiStopTour({ ...t, stops: patched });
+        // Halt-Speech nur echt nah (nicht schon bei Lookup-Radius +40).
+        const dNow = distanceMeters(
+          opts.userLat,
+          opts.userLng,
+          board.lat,
+          board.lng,
+        );
+        if (!spoken.has('halt') && dNow <= HALT_NEAR_M) {
+          const refreshed = factsFromTour({
+            remainingStops: opts.remainingStations,
+            destWalkM: opts.distanceToDestinationM,
+            destName: opts.destName,
+            mode: opts.transportMode,
+            nowMs: Date.now(),
+          });
+          if (refreshed) {
+            await speakKey('halt', haltArrivedSpeech(refreshed));
+          }
+        }
+      } catch {
+        /* soft */
+      } finally {
+        platformLookupInflight = false;
+      }
+    })();
+  }
+
   if (dHalt <= HALT_NEAR_M && (facts.line || facts.platform)) {
     void speakKey('halt', haltArrivedSpeech(facts));
   }
 
+  // „Steig ein“ erst am Halt + Fahrzeug wirklich nah (Live: zu früh).
   if (
     spoken.has('halt') &&
     waitSec != null &&
     waitSec <= VEHICLE_SOON_SEC &&
     waitSec >= -20 &&
-    dHalt <= HALT_NEAR_M + 25
+    dHalt <= HALT_NEAR_M
   ) {
     void speakKey('soon', vehicleSoonSpeech(facts));
   }

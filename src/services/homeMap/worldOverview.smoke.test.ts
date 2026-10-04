@@ -58,6 +58,7 @@ assert(view.includes('id="world-roads-mid"'), 'dichteres Straßennetz bis Extrac
 assert(view.includes('id="cities-line-dash"'), 'gestrichelte Pack-Grenze nur wenn dashed');
 assert(view.includes('id="cities-label"'), 'Pack-Stadtname auf Rubbelfläche');
 assert(view.includes('id="world-regions-label"'), 'Gebirgs-/Landschaftsnamen');
+assert(view.includes('id="world-countries-label"'), 'Ländernamen bei Weit-Zoom');
 assert(w.admin1.features.length > 80, 'Europa-Regionen / Bundesländer');
 assert(w.admin1De.features.length >= 16, '16 deutsche Bundesländer');
 let sh = false;
@@ -155,6 +156,28 @@ assert(
   (labels.regions?.features.length ?? 0) >= 10,
   'Gebirge/Landschaften im Welt-Paket',
 );
+assert(
+  (labels.countries?.features.length ?? 0) >= 15,
+  'Ländernamen im Welt-Paket',
+);
+{
+  const names = new Set(
+    (labels.countries?.features ?? []).map((f) =>
+      String((f.properties as { n?: string } | null)?.n ?? ''),
+    ),
+  );
+  assert(names.has('Frankreich'), 'Frankreich-Label');
+  assert(names.has('Spanien'), 'Spanien-Label');
+  assert(names.has('Deutschland'), 'Deutschland-Label');
+}
+{
+  const lod = readFileSync(
+    join(process.cwd(), 'src/services/homeMap/homeMapStyle.ts'),
+    'utf8',
+  );
+  assert(lod.includes('countriesFrom: 1.4'), 'Länder ab Weit-Zoom');
+  assert(lod.includes('countriesUntil: 5.6'), 'Länder aus bevor Straßen dicht');
+}
 assert(w.lakes.features.length >= 700, `Seen dichter (${w.lakes.features.length})`);
 
 console.log('worldOverview.smoke.test.ts OK');

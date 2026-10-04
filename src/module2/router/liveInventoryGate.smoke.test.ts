@@ -43,6 +43,11 @@ assert(ja.kind === 'hotel', 'ja kind hotel');
 assert(/hotel/i.test(ja.text), 'ja expands to hotel query');
 assert(mustSkipChatLane('ja'), 'ja skips chat while hotel pending');
 
+assert(
+  isInventoryFollowUp('Hat das erste Hotel wirklich einen Pool?'),
+  'hotel pool verify is follow-up',
+);
+
 const price = resolveLiveInventoryUserText('wie teuer ist das');
 assert(price.inherited, 'wie teuer inherits');
 assert(mustSkipChatLane('wie teuer ist das'), 'price follow-up skips chat');
@@ -269,5 +274,30 @@ assert(
 const neuerInv = resolveLiveInventoryUserText('Wie alt ist Manuel Neuer?');
 assert(!neuerInv.inherited, 'person age does not inherit towers query');
 assert(!/Towers/i.test(neuerInv.text), 'person age text stays clean of towers');
+
+clearLastLiveInventory();
+noteLastLiveInventory({
+  kind: 'hotel',
+  query: 'Hotel Freitag bis Sonntag mit Pool in Amsterdam unter 200 Euro',
+});
+assert(
+  isInventoryFollowUp(
+    'Kannst du nochmal ganz konkret nach einem Hotel mit Pool bitte suchen?',
+  ),
+  'Amsterdam hotel retry is inventory follow-up',
+);
+const hotelRetry = resolveLiveInventoryUserText(
+  'Kannst du nochmal ganz konkret nach einem Hotel mit Pool bitte suchen?',
+);
+assert(hotelRetry.inherited, 'hotel retry inherits');
+assert(/Amsterdam/i.test(hotelRetry.text), 'hotel retry keeps Amsterdam');
+assert(hotelRetry.kind === 'hotel', 'hotel retry kind');
+
+assert(
+  classifyJob(
+    'Ich möchte heute Abend ins Kino gehen. Welche Filme laufen heute Abend?',
+  ).jobId === 'tonight_live',
+  'kino filme laufen → tonight_live',
+);
 
 console.log('liveInventoryGate.smoke.test.ts OK');

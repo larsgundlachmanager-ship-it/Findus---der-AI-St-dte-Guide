@@ -13,8 +13,9 @@ export const UI_LAYER = {
    * Ort-Popup auf der Karte — über Map-Inhalt, unter Chrome.
    * Nie über Dock/Mic/Header: sonst frisst das absoluteFill alle Taps
    * (Settings/Timeline/Mic tot, Karte „flüssig aber tot“).
+   * Elevation muss gegen MapLibre-TextureView bestehen (Android).
    */
-  placePopup: 120,
+  placePopup: 180,
   /** Dock, Header, Explore-Chip, Kompass — immer über Place-Popup */
   hud: 200,
   /** Mic-Float / Sheets — über HUD */

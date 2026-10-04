@@ -97,6 +97,8 @@ const DEFAULT_LOOKAHEAD = 1;
 const DEFAULT_LOOKAHEAD_MAX = 6;
 /** Parallel Cartesia: während Satz 3 spielt → Satz 5 und 6 schon in Arbeit (4 liegt bereit). */
 const MAX_SYNTH_INFLIGHT = 2;
+/** Call 1 aus, Call 2 noch nicht da: kurze Pause. Sonst gapless. TTS_SENTENCE_PIPELINE_LOCK */
+const CALL2_JOIN_GAP_MS = 2000;
 
 type SessionState = {
   id: number;
@@ -110,6 +112,8 @@ type SessionState = {
   /** Aktuelles Prefetch-Ziel (wächst mit abgespielten Chunks). */
   lookaheadTarget: number;
   lookaheadMax: number;
+  /** Pump wartet auf naechste Aeusserung (Call 2). */
+  betweenUtterances: boolean;
 };
 
 let sessionCounter = 0;
@@ -461,6 +465,7 @@ export async function playStreamingAudioQueue(
     producerDone: false,
     lookaheadTarget: lookaheadMin,
     lookaheadMax,
+    betweenUtterances: false,
   };
   activeSession = session;
 
@@ -518,9 +523,12 @@ export async function playStreamingAudioQueue(
     }
     for await (const c of streamingChunksFromTextStream(
       (async function* () {
+        session.betweenUtterances = true;
         for await (const piece of textSource) {
+          session.betweenUtterances = false;
           const d = displayOf(piece);
           if (d) yield d;
+          session.betweenUtterances = true;
         }
       })(),
     )) {
@@ -765,11 +773,43 @@ export async function playStreamingAudioQueue(
       feed.showFinal();
       subtitleCarry = mergeSubtitleCarry(subtitleCarry, current.text);
 
-      const next = isActive() ? await nextPromise : null;
+      const call2NotReady =
+        nextResolved === undefined &&
+        session.betweenUtterances &&
+        synthInflight === 0;
+      let next: PrefetchBufferItem | null = null;
+      if (call2NotReady && isActive()) {
+        const waitedFrom = Date.now();
+        const arrived = await nextPromise;
+        if (arrived && isActive()) {
+          const elapsed = Date.now() - waitedFrom;
+          const pad = CALL2_JOIN_GAP_MS - elapsed;
+          if (elapsed >= 350 && pad > 0) {
+            await new Promise((r) => setTimeout(r, pad));
+          }
+        }
+        next = arrived;
+      } else {
+        next = isActive() ? await nextPromise : null;
+      }
       if (!next) setAudible(false);
       const navWantsGap = Boolean(options.peekChunkGap?.() || false);
 
-      if (navWantsGap) {
+      // Call-1 fertig, Call-2 noch nicht im Puffer: Nav-Cue NICHT einfügen —
+      // sonst current=null → Session tot, Call-2 stumm (Fitnessfabrik/Hotel-Abort).
+      if (navWantsGap && !next && !session.producerDone && isActive()) {
+        void unloadSound(playing);
+        if (session.activeSound === playing) {
+          session.activeSound = null;
+          options.bindActiveSound?.(null);
+        }
+        void deleteCartesiaTempAudio(current.uri);
+        current = await takeReady(session);
+        alreadyPlaying = false;
+        continue;
+      }
+
+      if (navWantsGap && (next || session.producerDone)) {
         // Satzgrenze: aktuellen Clip weg, Navi dazwischen, Rest bleibt bereit
         await unloadSound(playing);
         if (session.activeSound === playing) {
@@ -783,7 +823,7 @@ export async function playStreamingAudioQueue(
         } catch (err) {
           console.warn('[stream-queue] nav gap insert failed:', err);
         }
-        current = next;
+        current = next ?? (isActive() ? await takeReady(session) : null);
         alreadyPlaying = false;
         continue;
       }

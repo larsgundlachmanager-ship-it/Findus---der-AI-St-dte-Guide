@@ -2,7 +2,7 @@
  * Search-Brief + Ranking smoke.
  * Run: npx --yes --package tsx@4.19.4 tsx src/module2/pitch/searchBrief.smoke.test.ts
  */
-import { buildPitchSearchBrief, wishesFromMustHaves, isAtmosphereVibeLabel, broadenDiningPitchRequest } from './searchBrief';
+import { buildPitchSearchBrief, wishesFromMustHaves, isAtmosphereVibeLabel, broadenDiningPitchRequest, DINING_LIVE_EXPAND_RINGS_M, withLiveExpandRadius } from './searchBrief';
 import { rankCandidatesForUser, shortlistTopN } from './candidateRank';
 import { parseWishesFromText, detectPitchKind } from './parentBrief';
 import type { PitchCandidate, PitchRequest } from './types';
@@ -46,6 +46,10 @@ function assert(cond: unknown, msg: string): void {
     broadened.wishes.some((w) => w.kind === 'cuisine' && /indisch/i.test(w.text)),
     'retry keeps cuisine',
   );
+  assert(DINING_LIVE_EXPAND_RINGS_M[0] === 25_000, 'expand ring 25km');
+  const expanded = withLiveExpandRadius(broadened, 40_000);
+  assert(expanded.liveExpandRadiusM === 40_000, 'live expand radius set');
+  assert(expanded.searchMode === 'city_best', 'expand city_best');
 }
 
 {

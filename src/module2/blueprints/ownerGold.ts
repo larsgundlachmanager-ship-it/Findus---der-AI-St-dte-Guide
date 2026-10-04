@@ -21,6 +21,7 @@ const FAMILIES: LearnedRuleIntentFamily[] = [
   'knowledge',
   'planning',
   'booking',
+  'packing',
   'general',
 ];
 
@@ -38,6 +39,15 @@ const EXPECT: LearnedRuleExpect[] = [
   'times_hours',
   'menu',
   'tickets',
+  'sky_conditions',
+  'temp_range',
+  'rain_timing',
+  'clothing_tip',
+  'casual_tone',
+  'woven_clothing',
+  'brief_speech',
+  'complete_sentences',
+  'pack_prefs',
 ];
 
 const AVOID: LearnedRuleAvoid[] = [
@@ -49,6 +59,16 @@ const AVOID: LearnedRuleAvoid[] = [
   'meta_app_pitch',
   'vague_filler',
   'nav_auto_start',
+  'station_board_fallback',
+  'aushang',
+  'invent_storm',
+  'dry_list',
+  'sun_as_day_at_night',
+  'parenthetical_aside',
+  'new_pitch',
+  'boilerplate_opener',
+  'essay',
+  'pack_unwanted_items',
 ];
 
 export function situationKeyFromParts(b: {
@@ -82,7 +102,7 @@ function filterAvoid(raw: unknown): LearnedRuleAvoid[] {
 
 export function validateOwnerGoldSummary(summary: string): boolean {
   const s = summary.replace(/\s+/g, ' ').trim();
-  if (s.length < 12 || s.length > 200) return false;
+  if (s.length < 12 || s.length > 280) return false;
   if (/^(sag genau|du musst sagen|wortlaut:)/i.test(s)) return false;
   if (/\b(prisdorf|wangerooge|laboe|lübeck|luebeck)\b/i.test(s)) return false;
   return true;
@@ -99,7 +119,7 @@ export function normalizeOwnerGoldBlueprint(
   const summary = String(o.summary ?? '')
     .replace(/\s+/g, ' ')
     .trim()
-    .slice(0, 200);
+    .slice(0, 280);
   if (!expect.length && !avoid.length && !summary) return null;
   if (summary && !validateOwnerGoldSummary(summary)) return null;
   const tags = Array.isArray(o.tags)
@@ -132,7 +152,7 @@ export function getOwnerGoldBlueprints(): SituationBlueprint[] {
     seen.add(b.situationKey);
     out.push(b);
   }
-  return out.slice(0, 40);
+  return out.slice(0, 160);
 }
 
 /** Downloaded pack + Owner-Gold. Gold gewinnt bei gleichem Key. */

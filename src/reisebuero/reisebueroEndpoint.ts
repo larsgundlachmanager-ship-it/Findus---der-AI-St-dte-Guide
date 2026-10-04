@@ -1,5 +1,6 @@
 /**
- * Brainstorming-Endpoint — Denkpausen und Gruppengespräch, nicht Live-Chat-Speed.
+ * Reisebüro Endpoint — Gesprächstempo.
+ * Kurzantworten schnell; Monologe (Akt 1 Dump) geduldig.
  */
 
 const SHORT_ACK =
@@ -21,16 +22,16 @@ export function reisebueroEndpointDelayMs(
   const t = text.replace(/\s+/g, ' ').trim();
   const words = t.split(/\s+/).filter(Boolean).length;
   const short = isShortClosedAnswer(t);
-  const hanging = /\b(und|aber|oder|dass|weil|also|mit|vom|von|bis|zum|der|die|das|ein|eine)$/iu.test(t);
+  const hanging = /\b(und|aber|oder|dass|weil|also|mit|vom|von|bis|zum|dann|noch)$/iu.test(t);
 
-  if (hanging) return words >= 12 ? 5200 : 4000;
-  if (ctx.turnIndex < 2) return short ? 2000 : words >= 16 ? 4800 : 3600;
-  if (words >= 18) return 5000;
-  if (words >= 10) return 3800;
-  if (ctx.lastAskOpen && !short) return 3000;
-  if (ctx.lastAskOpen && short && words <= 2) return 2000;
-  if (short) return 1600;
-  return 2600;
+  if (hanging) return 1100;
+  if (short) return 550;
+  // Langer Plan-Dump — nicht mitten im Satz abschneiden.
+  if (words >= 40) return 1400;
+  if (words >= 22) return 1100;
+  if (words >= 12) return 850;
+  if (ctx.turnIndex < 2 && ctx.lastAskOpen) return 800;
+  return 650;
 }
 
 export function isOpenAskKey(key: string | null | undefined): boolean {
@@ -60,6 +61,11 @@ export function isOpenAskKey(key: string | null | undefined): boolean {
     key === 'wrap_up' ||
     key === 'origin' ||
     key === 'directFlight' ||
-    key === 'departWindow'
+    key === 'departWindow' ||
+    key === 'partyGrain' ||
+    key === 'ready_announce' ||
+    key === 'transfer' ||
+    key === 'bookedBits' ||
+    key === 'rentalCar'
   );
 }

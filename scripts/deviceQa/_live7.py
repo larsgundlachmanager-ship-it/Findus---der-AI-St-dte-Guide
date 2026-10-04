@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Live QA on the connected phone: yorro://ask, screenshot, UI dump, logcat slice."""
 from __future__ import annotations
 
@@ -7,10 +7,11 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from _device_ids import require_qa_serial
 from urllib.parse import quote
 
 ADB = r"C:\Users\larsf\AppData\Local\Android\Sdk\platform-tools\adb.exe"
-SERIAL = "00143157P001105"
+SERIAL = require_qa_serial()
 PKG = "de.findus.app"
 OUT = Path(r"C:\Users\larsf\Findus 2.0\.cursor\live7")
 XML = OUT / "ui.xml"

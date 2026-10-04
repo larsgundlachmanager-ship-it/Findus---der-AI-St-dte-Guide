@@ -14,6 +14,11 @@ const CITY_COUNTRY: Record<string, { countryCode: string; countryName: string }>
     lissabon: { countryCode: 'pt', countryName: 'Portugal' },
     lisbon: { countryCode: 'pt', countryName: 'Portugal' },
     amsterdam: { countryCode: 'nl', countryName: 'Netherlands' },
+    danzig: { countryCode: 'pl', countryName: 'Poland' },
+    gdansk: { countryCode: 'pl', countryName: 'Poland' },
+    roenne: { countryCode: 'dk', countryName: 'Denmark' },
+    ronne: { countryCode: 'dk', countryName: 'Denmark' },
+    bornholm: { countryCode: 'dk', countryName: 'Denmark' },
   };
 
 function stripCountrySuffix(name: string): string {
@@ -31,6 +36,9 @@ export function isBerlinCityPackId(cityId: string): boolean {
 const OSM_ADMIN_NAME_BY_ID: Record<string, string> = {
   halle_saale: 'Halle (Saale)',
   amsterdam: 'Amsterdam',
+  roenne: 'Rønne',
+  ronne: 'Rønne',
+  bornholm: 'Bornholm',
   berlin_zentral: 'Berlin',
   berlin_umland: 'Berlin',
   frankfurt_am_main: 'Frankfurt am Main',
@@ -86,6 +94,15 @@ function fromCoords(
       displayName: alreadyQualified(rawName)
         ? rawName
         : `${rawName}, United Kingdom`,
+    };
+  }
+  // Bornholm / Ost-DK vor DE (sonst falsche DE-Grenze)
+  if (lat >= 54.85 && lat <= 55.4 && lng >= 14.55 && lng <= 15.3) {
+    return {
+      countryCode: 'dk',
+      displayName: alreadyQualified(rawName)
+        ? rawName
+        : `${rawName}, Denmark`,
     };
   }
   if (lat >= 47.2 && lat <= 55.15 && lng >= 5.8 && lng <= 15.1) {

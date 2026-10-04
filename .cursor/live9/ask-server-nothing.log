@@ -1,0 +1,5 @@
+[askServer] http://127.0.0.1:8791  POST /ask  GET /next
+[askServer] queued: Oeffne Yorros Reisebuero (n=1)
+[askServer] delivered: Oeffne Yorros Reisebuero
+[askServer] queued: Oeffne Yorros Reisebuero (n=1)
+[askServer] delivered: Oeffne Yorros Reisebuero

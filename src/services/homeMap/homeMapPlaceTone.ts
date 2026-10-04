@@ -1,6 +1,7 @@
 /**
  * Farbpriorität Homescreen-Karte = Orte-Einstellungen:
- * grün besucht → blau geplant → lila Auslösen → rot kein Auto-Trigger.
+ * grün besucht → blau geplant/Nav → lila M1-Auslösen → rot nur Rest-Punkt (kein Idle-Fill).
+ * Gebäude-Fill nur via `shouldPaintPlaceBuildingFill` (mapIdleStoryFill) — Speichern ≠ Anzeigen.
  * Typ-Chips filtern nur, sie färben nicht.
  */
 

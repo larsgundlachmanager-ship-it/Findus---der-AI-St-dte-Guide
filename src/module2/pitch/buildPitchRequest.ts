@@ -87,18 +87,41 @@ export function buildPitchRequestFromText(opts: {
     dateKey?: string | null;
     label?: string | null;
   }> | null;
+  /** Call-1 Order-Ticket (search/need/ui/bulletBudget) */
+  call1Order?: {
+    must?: string[];
+    avoid?: string[];
+    search?: {
+      mode?: string;
+      stages?: Array<'pack' | 'neighbor' | 'metro' | 'web' | 'verify'>;
+      maxRadiusKm?: number;
+      forbidSoftFill?: boolean;
+    };
+    need?: PitchRequest['orderNeed'];
+    ui?: PitchRequest['orderUi'];
+    bulletBudget?: PitchRequest['bulletBudget'];
+  } | null;
 }): { request: PitchRequest; bridge: string } {
+  let text = opts.text || '';
+  try {
+    const { normalizeAyceStt } = require('./ayceIntent') as {
+      normalizeAyceStt: (s: string) => string;
+    };
+    text = normalizeAyceStt(text);
+  } catch {
+    /* soft */
+  }
   const bag = readRucksackSync();
   const anchor = anchorCoords(bag);
   const route = activeNavRoute();
   const calendarOpen = usePlanCalendarUiStore.getState().calendarVisible;
   const navActive = useFinnusStore.getState().navActive === true;
   const searchMode = resolveSearchMode({
-    text: opts.text,
+    text,
     hasActiveNav: navActive || Boolean(route),
     hasTimelineNext: calendarOpen,
   });
-  let visitAtMs = resolveVisitAtMs(opts.text);
+  let visitAtMs = resolveVisitAtMs(text);
   try {
     const { visitAtMsFromCall1When } = require('./call1Criteria') as {
       visitAtMsFromCall1When: (
@@ -113,16 +136,6 @@ export function buildPitchRequestFromText(opts: {
   } catch {
     /* soft */
   }
-  const short = (() => {
-    try {
-      const { getShortTerm } = require('../context/shortTermContext') as {
-        getShortTerm: () => { lastMentionedCity?: string | null };
-      };
-      return getShortTerm();
-    } catch {
-      return { lastMentionedCity: null as string | null };
-    }
-  })();
   const packCity = (() => {
     try {
       const id = String((bag as { cityId?: string; cityHint?: string }).cityId || '')
@@ -138,12 +151,23 @@ export function buildPitchRequestFromText(opts: {
       const { extractCityFromText } = require('../context/shortTermContext') as {
         extractCityFromText: (s: string) => string | null;
       };
-      return extractCityFromText(opts.text);
+      return extractCityFromText(text);
     } catch {
       return null as string | null;
     }
   })();
-  const rawCity = (explicitCity || short.lastMentionedCity || packCity || '').trim();
+  // Partition wie Stadt-Chat: fremder Sticky (London) fällt bei neuer Suche zugunsten Active/Pack.
+  const scopeCity = (() => {
+    try {
+      const { resolveCityChatScope } = require('../context/placeContext') as {
+        resolveCityChatScope: (t?: string | null) => { cityHint: string | null };
+      };
+      return (resolveCityChatScope(text).cityHint || '').trim();
+    } catch {
+      return '';
+    }
+  })();
+  const rawCity = (explicitCity || scopeCity || packCity || '').trim();
   const cityHint =
     rawCity &&
     !/\d/.test(rawCity) &&
@@ -153,14 +177,137 @@ export function buildPitchRequestFromText(opts: {
   // Explizite Stadt in der Frage schlägt Sticky/Pack und GPS-Anker-Label
   const effectiveSearchMode =
     explicitCity && searchMode === 'here_now' ? 'city_best' : searchMode;
-  const kind = detectPitchKind(opts.text);
-  const prefs = buildPrefSliceForPitch(opts.text);
-  const baseWishes = mergeProfileDietIntoWishes(
-    parseWishesFromText(opts.text),
+  let kind = detectPitchKind(text);
+  // Phase 5a: Amenity-Ort (Whitelist) ODER Open-Find/Erlebnis → Pitch
+  let amenityMusts: string[] = [];
+  let themeMusts: string[] = [];
+  let regionalOpenPlace = false;
+  try {
+    const {
+      isAmenityPlaceFindQuery,
+      amenityPlaceMustLabels,
+    } = require('../mission/amenityPlaceFind') as {
+      isAmenityPlaceFindQuery: (s: string) => boolean;
+      amenityPlaceMustLabels: (s: string) => string[];
+    };
+    const {
+      isRegionalOpenPlaceFind,
+      isOpenPlaceFindQuery,
+      isOpenExperienceQuery,
+      extractOpenThemeNeed,
+    } = require('../mission/openPlaceFind') as {
+      isRegionalOpenPlaceFind: (
+        s: string,
+        musts: string[],
+        o?: { fromWhitelist?: boolean },
+      ) => boolean;
+      isOpenPlaceFindQuery: (s: string) => boolean;
+      isOpenExperienceQuery: (s: string) => boolean;
+      extractOpenThemeNeed: (s: string) => string | null;
+    };
+    if (isAmenityPlaceFindQuery(text)) {
+      const labels = amenityPlaceMustLabels(text);
+      const theme = extractOpenThemeNeed(text);
+      if (theme && labels.includes(theme)) {
+        themeMusts = [theme];
+        if (
+          kind !== 'food' &&
+          kind !== 'hotel' &&
+          kind !== 'cinema' &&
+          kind !== 'bar'
+        ) {
+          kind = 'sight';
+        }
+      } else {
+        amenityMusts = labels;
+        kind = 'generic';
+      }
+      regionalOpenPlace = isRegionalOpenPlaceFind(
+        text,
+        [...amenityMusts, ...themeMusts],
+        {
+          fromWhitelist: !isOpenPlaceFindQuery(text) && !isOpenExperienceQuery(text),
+        },
+      );
+    }
+  } catch {
+    /* soft */
+  }
+  // Specialty-Food (Croque/…) nie als Sight/Generic — sonst Pack-Brücken als „Zwei Optionen“
+  try {
+    const { looksLikeSpecialtyFoodAsk } = require('./specializedFoodMatch') as {
+      looksLikeSpecialtyFoodAsk: (s: string) => boolean;
+    };
+    if (
+      looksLikeSpecialtyFoodAsk(text) &&
+      kind !== 'food' &&
+      kind !== 'bar' &&
+      kind !== 'hotel' &&
+      kind !== 'cinema'
+    ) {
+      kind = 'food';
+      amenityMusts = [];
+    }
+  } catch {
+    /* soft */
+  }
+  const prefs = buildPrefSliceForPitch(text);
+  let baseWishes = mergeProfileDietIntoWishes(
+    parseWishesFromText(text),
     prefs,
     kind,
-    opts.text,
+    text,
   );
+  // Amenity-Musts + Theme-Musts (Open-Erlebnis) + Hotel-Constraints aus Mission mergen
+  for (const label of amenityMusts) {
+    if (!baseWishes.some((w) => w.text.toLowerCase() === label.toLowerCase())) {
+      baseWishes.push({
+        text: label,
+        hardness: 'must',
+        kind: 'amenity',
+        weight: 36,
+      });
+    }
+  }
+  for (const label of themeMusts) {
+    if (!baseWishes.some((w) => w.text.toLowerCase() === label.toLowerCase())) {
+      baseWishes.push({
+        text: label,
+        hardness: 'must',
+        kind: 'theme',
+        weight: 40,
+      });
+    }
+  }
+  if (kind === 'hotel') {
+    try {
+      const { buildMissionChecklist } = require('../mission/buildMissionChecklist') as {
+        buildMissionChecklist: (o: { userText: string }) => {
+          must: string[];
+          factsToProve: Array<{ id: string; value?: string | null }>;
+        };
+      };
+      const mission = buildMissionChecklist({ userText: text });
+      for (const m of mission.must) {
+        if (!baseWishes.some((w) => w.text.toLowerCase() === m.toLowerCase())) {
+          const amenity =
+            /pool|sauna|spa|tischtennis|frühstück|fruehstueck|parkplatz/i.test(m);
+          baseWishes.push({
+            text: m,
+            hardness: 'must',
+            kind: amenity ? 'amenity' : 'generic',
+            weight: 28,
+          });
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
+  const mergedMustHaves = [
+    ...(opts.call1MustHaves ?? []),
+    ...amenityMusts,
+  ];
   const { buildPitchSearchBrief } = require('./searchBrief') as {
     buildPitchSearchBrief: (o: {
       userText: string;
@@ -175,11 +322,12 @@ export function buildPitchRequestFromText(opts: {
       criteria: import('./call1Criteria').Call1Criterion[];
       authorIntent: string | null;
       shortlistSize: number;
+      avoidFromCall1: string[];
     };
   };
   // Compound: Sonnenuntergang → visitAt nahe Sunset (Puffer −45 Min für Ankommen)
   if (
-    /\b(sonnenuntergang|sunset)\b/iu.test(opts.text) &&
+    /\b(sonnenuntergang|sunset)\b/iu.test(text) &&
     (kind === 'food' || kind === 'bar' || kind === 'sight')
   ) {
     try {
@@ -196,49 +344,263 @@ export function buildPitchRequestFromText(opts: {
   }
 
   const brief = buildPitchSearchBrief({
-    userText: opts.text,
+    userText: text,
     kind,
     baseWishes,
-    call1MustHaves: opts.call1MustHaves,
+    call1MustHaves: mergedMustHaves.length ? mergedMustHaves : opts.call1MustHaves,
     call1Criteria: opts.call1Criteria,
     authorIntent: opts.authorIntent,
   });
+  try {
+    const { diningDishNeedFromText } = require('./diningHarden') as {
+      diningDishNeedFromText: (s: string) => string | null;
+    };
+    const dishNeed = diningDishNeedFromText(text);
+    if (
+      dishNeed &&
+      (kind === 'food' || kind === 'bar') &&
+      !brief.wishes.some(
+        (w) =>
+          w.kind === 'dish' &&
+          w.text.toLowerCase() === dishNeed.toLowerCase(),
+      )
+    ) {
+      brief.wishes.push({
+        text: dishNeed,
+        hardness: 'must',
+        kind: 'dish',
+        weight: 28,
+      });
+      if (!brief.mustHaves.some((m) => m.toLowerCase() === dishNeed.toLowerCase())) {
+        brief.mustHaves.push(dishNeed);
+      }
+    }
+  } catch {
+    /* soft */
+  }
+  // Call-1-Ablehnungen („kein Asiatisch“) → Avoid, nicht Hard-Must-Text
+  if (brief.avoidFromCall1?.length) {
+    prefs.avoidCategories = [
+      ...new Set([...(prefs.avoidCategories ?? []), ...brief.avoidFromCall1]),
+    ];
+  }
+  // Expliziter Cuisine-Wunsch schlägt Avoid derselben Familie (User override)
+  const mustCuisine = brief.wishes
+    .filter((w) => w.hardness === 'must' && w.kind === 'cuisine')
+    .map((w) => w.text.toLowerCase());
+  if (mustCuisine.length && prefs.avoidCategories?.length) {
+    prefs.avoidCategories = prefs.avoidCategories.filter((a) => {
+      const al = a.toLowerCase();
+      return !mustCuisine.some(
+        (c) =>
+          al.includes(c) ||
+          c.includes(al) ||
+          (/asiatisch|asian|sushi|thai|indisch|japan|china|vietnam|korea/.test(c) &&
+            /asiatisch|asian|sushi|thai|indisch|japan|china|vietnam|korea|ramen|poke/.test(
+              al,
+            )),
+      );
+    });
+  }
   // Compound topic-cut: authorIntent markieren
   try {
     const { detectCall1Situation } = require('../reboot/pipeline/call1AnswerContract') as {
       detectCall1Situation: (t: string) => string;
     };
-    if (detectCall1Situation(opts.text) === 'dining_compound' && !brief.authorIntent) {
+    if (detectCall1Situation(text) === 'dining_compound' && !brief.authorIntent) {
       brief.authorIntent =
         'Compound-Abend: Gericht + Blick/Sunset — Top-2 nach Kriterien, kein alter Chat-Faden.';
     }
   } catch {
     /* soft */
   }
+  // Multi-Lane Plan an Request hängen
+  let multiLane: import('../router/call1MultiLane').MultiLanePlan | null = null;
+  try {
+    const {
+      detectMultiLanePlan,
+      multiLaneAuthorIntent,
+    } = require('../router/call1MultiLane') as {
+      detectMultiLanePlan: (
+        t: string,
+      ) => import('../router/call1MultiLane').MultiLanePlan | null;
+      multiLaneAuthorIntent: (
+        p: import('../router/call1MultiLane').MultiLanePlan,
+      ) => string;
+    };
+    multiLane = detectMultiLanePlan(text);
+    if (multiLane) {
+      brief.authorIntent = multiLaneAuthorIntent(multiLane);
+      if (multiLane.kind === 'fetch_then_spot') {
+        kind = 'food';
+        for (const label of multiLane.lanes[0]?.mustLabels ?? []) {
+          if (
+            !brief.wishes.some(
+              (w) => w.text.toLowerCase() === label.toLowerCase(),
+            )
+          ) {
+            brief.wishes.push({
+              text: label,
+              hardness: 'must',
+              kind: /eis|to_go|pizza/i.test(label) ? 'dish' : 'amenity',
+              weight: 30,
+            });
+          }
+        }
+      }
+      if (multiLane.kind === 'or_either' || multiLane.kind === 'outdoor_program_weather') {
+        kind = 'cinema';
+        for (const label of multiLane.sharedMust) {
+          if (
+            !brief.wishes.some(
+              (w) => w.text.toLowerCase() === label.toLowerCase(),
+            )
+          ) {
+            brief.wishes.push({
+              text: label,
+              hardness: 'must',
+              kind: 'theme',
+              weight: 32,
+            });
+          }
+        }
+      }
+    }
+  } catch {
+    multiLane = null;
+  }
   const call1City = (opts.call1DestCity || '').replace(/\s+/g, ' ').trim();
+  // Specialty (Gericht+Blick o. ä.): nicht am Dorf-GPS stecken — Metro-Datensatz
+  let searchModeOut = effectiveSearchMode;
+  let cityHintOut: string | null = call1City || explicitCity || cityHint;
+  // Hotel-Follow-up ohne neue Stadt: Sticky-Ziel (Amsterdam) schlägt GPS-Heimat
+  if (kind === 'hotel' && !explicitCity) {
+    let mentioned: string | null = null;
+    try {
+      const { getLastMentionedCity } = require('../context/shortTermContext') as {
+        getLastMentionedCity: () => string | null;
+      };
+      mentioned = getLastMentionedCity();
+    } catch {
+      mentioned = null;
+    }
+    const sticky =
+      call1City ||
+      mentioned ||
+      (cityHint && cityHint !== packCity ? cityHint : null);
+    if (sticky) {
+      cityHintOut = sticky;
+      if (searchModeOut === 'here_now') searchModeOut = 'city_best';
+    }
+  }
+  if (kind === 'food' || kind === 'bar') {
+    try {
+      const { resolveSpecialtyResearchCity } = require('./specialtyResearchCity') as {
+        resolveSpecialtyResearchCity: (o: {
+          text: string;
+          lat: number;
+          lng: number;
+          explicitCity?: string | null;
+          call1DestCity?: string | null;
+          wishes?: typeof brief.wishes;
+          mustHaves?: string[] | null;
+          criteria?: typeof brief.criteria;
+        }) => { city: string; promoted: boolean } | null;
+      };
+      const promo = resolveSpecialtyResearchCity({
+        text: text,
+        lat: anchor.lat,
+        lng: anchor.lng,
+        explicitCity,
+        call1DestCity: call1City,
+        wishes: brief.wishes,
+        mustHaves: brief.mustHaves,
+        criteria: brief.criteria,
+      });
+      if (promo?.city) {
+        cityHintOut = promo.city;
+        if (
+          searchModeOut === 'here_now' ||
+          searchModeOut === 'future_place'
+        ) {
+          searchModeOut = 'city_best';
+        }
+      }
+    } catch {
+      /* soft */
+    }
+  }
+  const ayceMust = brief.wishes.some(
+    (w) =>
+      w.hardness === 'must' &&
+      w.kind === 'amenity' &&
+      /all_you_can_eat|ayce|buffet|schlemmer/i.test(w.text),
+  );
+  if (ayceMust && searchModeOut === 'here_now') {
+    searchModeOut = 'city_best';
+  }
+  const steakMust = brief.wishes.some(
+    (w) =>
+      w.hardness === 'must' &&
+      (w.kind === 'dish' || w.kind === 'cuisine') &&
+      /steak/i.test(w.text),
+  );
+  if (steakMust && searchModeOut === 'here_now') {
+    searchModeOut = 'city_best';
+  }
   const request: PitchRequest = {
     requestId: opts.requestId ?? `pitch_${Date.now()}`,
-    title: opts.text.slice(0, 80),
-    context: opts.text,
+    title: text.slice(0, 80),
+    context: text,
     kind,
-    searchMode: effectiveSearchMode,
+    searchMode: searchModeOut,
     visitAtMs,
     wishes: brief.wishes,
     prefs,
     anchor: { lat: anchor.lat, lng: anchor.lng },
-    cityHint: call1City || explicitCity || cityHint,
+    cityHint: cityHintOut,
     route:
-      effectiveSearchMode === 'on_route' || effectiveSearchMode === 'between_stops'
+      searchModeOut === 'on_route' || searchModeOut === 'between_stops'
         ? route
         : null,
     landmark: null,
-    uiLayout:
-      opts.uiLayout ??
-      (looksLikePicnicQuery(opts.text)
-        ? 'live_split'
-        : calendarOpen
-          ? 'timeline_stack'
-          : 'live_split'),
+    uiLayout: (() => {
+      try {
+        const { resolvePitchUiLayout } = require('./pitchAmenityUi') as {
+          resolvePitchUiLayout: (o: {
+            kind: typeof kind;
+            text: string;
+            mustHaves?: string[] | null;
+            requested?: 'live_split' | 'timeline_stack' | null;
+            orderOpenCalendar?: boolean;
+            orderOpenTimeline?: boolean;
+          }) => 'live_split' | 'timeline_stack';
+        };
+        return resolvePitchUiLayout({
+          kind,
+          text,
+          mustHaves: brief.mustHaves,
+          requested:
+            opts.uiLayout ??
+            (looksLikePicnicQuery(text) || ayceMust
+              ? 'live_split'
+              : calendarOpen
+                ? 'timeline_stack'
+                : 'live_split'),
+          orderOpenCalendar: Boolean(opts.call1Order?.ui?.openCalendar),
+          orderOpenTimeline: Boolean(opts.call1Order?.ui?.openTimeline),
+        });
+      } catch {
+        return (
+          opts.uiLayout ??
+          (looksLikePicnicQuery(text) || ayceMust
+            ? 'live_split'
+            : calendarOpen
+              ? 'timeline_stack'
+              : 'live_split')
+        );
+      }
+    })(),
     bridgeAlreadySpoken: true,
     continueFromBridge: (opts.continueFromBridge || '').trim() || null,
     signal: opts.signal,
@@ -246,6 +608,45 @@ export function buildPitchRequestFromText(opts: {
     call1MustHaves: brief.mustHaves,
     call1Criteria: brief.criteria,
     shortlistSize: brief.shortlistSize,
+    // Order.search oder AYCE: erste Suche schon Metro-Radius
+    ...((): Partial<PitchRequest> => {
+      const order = opts.call1Order;
+      const maxKm =
+        typeof order?.search?.maxRadiusKm === 'number' &&
+        Number.isFinite(order.search.maxRadiusKm)
+          ? Math.min(120, Math.max(5, order.search.maxRadiusKm))
+          : regionalOpenPlace
+            ? 100
+            : null;
+      const forbid =
+        order?.search?.forbidSoftFill === true ||
+        String(order?.search?.mode || '').toLowerCase() === 'hard' ||
+        ayceMust;
+      // Open-Find: sofort 25 km, Mission-Stages bis 100 km — nicht am 2-km-Dorf-Ring hängen
+      const radiusM = maxKm
+        ? Math.round(
+            regionalOpenPlace && !order?.search?.maxRadiusKm
+              ? Math.min(maxKm, 25) * 1000
+              : maxKm * 1000,
+          )
+        : ayceMust
+          ? 55_000
+          : undefined;
+      return {
+        ...(radiusM ? { liveExpandRadiusM: radiusM } : {}),
+        ...(forbid ? { forbidSoftFill: true } : {}),
+        ...(maxKm ? { maxRadiusKm: maxKm } : {}),
+        ...(order?.search?.stages?.length
+          ? { searchStages: order.search.stages }
+          : {}),
+        ...(order?.need ? { orderNeed: order.need } : {}),
+        ...(order?.ui ? { orderUi: order.ui } : {}),
+        ...(order?.bulletBudget
+          ? { bulletBudget: order.bulletBudget }
+          : {}),
+      };
+    })(),
+    ...(multiLane ? { multiLane } : {}),
   };
   const bridge = (opts.continueFromBridge || '').replace(/\s+/g, ' ').trim();
   return { request, bridge };
@@ -256,10 +657,22 @@ export function buildPitchRequestFromWish(
   opts?: { signal?: AbortSignal; uiLayout?: PitchRequest['uiLayout'] },
 ): { request: PitchRequest; bridge: string } {
   const blob = `${wish.title} ${wish.context}`;
+  let wishLayout: 'live_split' | 'timeline_stack' =
+    opts?.uiLayout ?? 'timeline_stack';
+  try {
+    const { isAmenitySinglePlacePitch } = require('./pitchAmenityUi') as {
+      isAmenitySinglePlacePitch: (o: { text: string }) => boolean;
+    };
+    if (isAmenitySinglePlacePitch({ text: blob })) {
+      wishLayout = 'live_split';
+    }
+  } catch {
+    /* soft */
+  }
   const built = buildPitchRequestFromText({
     text: blob,
     requestId: wish.id ?? `wish_${Date.now()}`,
-    uiLayout: opts?.uiLayout ?? 'timeline_stack',
+    uiLayout: wishLayout,
     signal: opts?.signal,
   });
   if (wish.estimatedTime) {

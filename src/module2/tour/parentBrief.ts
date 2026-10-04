@@ -204,8 +204,17 @@ export function resolveStartMode(text: string): TourStartMode {
 }
 
 export function resolveMobility(text: string): TourMobility {
-  if (/\b(nur\s+)?(zu\s+)?fu(ss|ß)|laufen|wandern|joggen\b/iu.test(text) && !/\b(bus|bahn|öpnv|oepnv|rad|fahrrad)\b/iu.test(text)) {
-    if (/\b(joggen|wandern|laufen)\b/iu.test(text)) return 'walk';
+  // „Filme laufen“ ≠ zu Fuß / joggen
+  if (/\b(kino|filmtheater|kinoprogramm)\b/iu.test(text)) return 'transit_ok';
+  if (/\bfilme?\s+laufen\b/iu.test(text) || /\bwelche\s+filme\b/iu.test(text)) {
+    return 'transit_ok';
+  }
+  const scrubbed = text.replace(/\bfilme?\s+laufen\b/giu, ' ');
+  if (
+    /\b(nur\s+)?(zu\s+)?fu(ss|ß)|laufen|wandern|joggen\b/iu.test(scrubbed) &&
+    !/\b(bus|bahn|öpnv|oepnv|rad|fahrrad)\b/iu.test(scrubbed)
+  ) {
+    if (/\b(joggen|wandern|laufen)\b/iu.test(scrubbed)) return 'walk';
   }
   if (/\b(fahrrad|radtour|radeln|bike)\b/iu.test(text)) return 'bike';
   if (/\b(nur\s+)?(zu\s+)?fu(ss|ß)\b/iu.test(text)) return 'walk';

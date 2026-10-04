@@ -11,6 +11,7 @@ import {
   requestOpenPlanCalendar,
   usePlanCalendarUiStore,
 } from '../timeline/planCalendarUiStore';
+import { isPlanPromptLeak } from '../timeline/plannedJourneyGroup';
 import {
   useFuturePlanStore,
   type FuturePlanStop,
@@ -45,9 +46,16 @@ import {
 } from './planPlacesResearch';
 import { isBreakfastWish, isGenericDayStartWish, isTravelToDestWish } from './planDestinationCity';
 import { calculateNavigation } from './planMobilityEngine';
-import { runFinalTimelineOptimization } from './planConflictResolve';
-import { sanitizePlanSpeech, humanizePlanTitle } from './planSpeechSanitize';
+import {
+  resolveOverlapsQuietly,
+  runFinalTimelineOptimization,
+} from './planConflictResolve';
+import { sanitizePlanSpeech, humanizePlanTitle, sanitizeWishNotes } from './planSpeechSanitize';
 import { pitchWalkRank } from './planWalkOrder';
+
+function sanitizeWishNotesForStop(raw: string | null | undefined): string {
+  return sanitizeWishNotes(raw);
+}
 import {
   canMergeBreakfastIntoCafe,
   enrichWishWithPrefs,
@@ -73,6 +81,7 @@ import {
   findFreeSlotStartMs,
   hardIntervalsFromStops,
   msToHmLabel,
+  softTimedIntervalsFromStops,
 } from './planHardLock';
 
 function sleepMs(ms: number): Promise<void> {
@@ -177,8 +186,8 @@ function insertGeoAnchor(
 ): void {
   const bag = readRucksackSync();
   const gps = anchorCoords(bag);
-  const lat = anchor.lat ?? gps.lat;
-  const lng = anchor.lng ?? gps.lng;
+  let lat: number | undefined = anchor.lat ?? gps.lat;
+  let lng: number | undefined = anchor.lng ?? gps.lng;
   const isToday = dayKey === todayDateKey();
   const dest = (destCity || '').trim();
   const rawName = (anchor.name || '').trim();
@@ -204,6 +213,53 @@ function insertGeoAnchor(
         : /hotel|pension|ferien/i.test(label)
           ? 'hotel'
           : 'home';
+
+  // Zielstadt ≠ GPS-Pack: Tag-Basis = Dest-Geocode, nicht Heimat-GPS (Pinneberg→HH)
+  let destForeign = false;
+  try {
+    const packCity = (bag.cityHint || '').trim();
+    const { sameFoldedCity } = require('./planDestinationCity') as {
+      sameFoldedCity: (a: string, b: string) => boolean;
+    };
+    destForeign = Boolean(
+      dest && packCity && !sameFoldedCity(dest, packCity),
+    );
+  } catch {
+    destForeign = Boolean(dest && !isToday);
+  }
+  if (destForeign && !isToday) {
+    const anchorFar =
+      anchor.lat != null &&
+      anchor.lng != null &&
+      Number.isFinite(anchor.lat) &&
+      Number.isFinite(anchor.lng) &&
+      Math.hypot(anchor.lat - gps.lat, anchor.lng - gps.lng) > 0.02;
+    if (anchorFar) {
+      lat = anchor.lat!;
+      lng = anchor.lng!;
+    } else {
+      lat = undefined;
+      lng = undefined;
+    }
+    void (async () => {
+      try {
+        const { geocodePlaceName } = await import(
+          '../../services/navigation/googleMapsNav'
+        );
+        const geo = await geocodePlaceName(dest, { cityHint: dest });
+        if (geo && Number.isFinite(geo.lat) && Number.isFinite(geo.lng)) {
+          useFuturePlanStore.getState().setDayBase(dayKey, {
+            label,
+            kind: kind as 'home' | 'hotel' | 'gps' | 'other',
+            lat: geo.lat,
+            lng: geo.lng,
+          });
+        }
+      } catch {
+        /* soft */
+      }
+    })();
+  }
 
   // Basis oben in der UI — kein Fake-„08:00 Hamburg-Start“ als Timeline-Stop
   useFuturePlanStore.getState().setDayBase(dayKey, {
@@ -244,7 +300,7 @@ function insertGeoAnchor(
       minAheadMs: 20 * 60_000,
     }) ?? Date.now() + 20 * 60_000;
   const stop: FuturePlanStop = {
-    id: `anchor_${dayKey}_start`,
+id: `anchor_${dayKey}_start`,
     title: label.slice(0, 48),
     lat,
     lng,
@@ -277,6 +333,7 @@ function insertTimeline(fixedNodes: IngestFixedNode[], dayKey: string): void {
       ? null
       : durationMinFromHmRange(n.time, n.endTime) ??
         (n.priority <= 2 ? 60 : 60);
+    if (isPlanPromptLeak(n.title) || isPlanPromptLeak(n.location) || isPlanPromptLeak(n.address)) continue;
     const stop: FuturePlanStop = {
       id,
       title: (humanizePlanTitle(n.title) || n.title).slice(0, 48),
@@ -321,16 +378,20 @@ function insertOpenBands(wishes: IngestOpenWish[], dayKey: string): void {
       const stops = useFuturePlanStore.getState().getPlanForDay(dayKey).stops;
       startMs = hotelCheckInMs(w, dayKey, stops);
     }
-    // Soft-Wünsche: um feste Termine herum legen (Mittag ≠ Bewerbungsgespräch)
+    // Soft-Wünsche: um feste Termine UND andere soft-timed Bänder herum legen
     if (!hotelBand) {
       const dayStops = useFuturePlanStore.getState().getPlanForDay(dayKey).stops;
       const hard = hardIntervalsFromStops(dayStops);
+      const soft = softTimedIntervalsFromStops(
+        dayStops.filter((s) => s.id !== id),
+      );
       const durMin =
         durationMinFromHmRange(w.estimatedTime, w.endTime) ?? 45;
       const free = findFreeSlotStartMs({
         preferredStartMs: startMs,
         durationMs: durMin * 60_000,
         hardIntervals: hard,
+        extraIntervals: soft,
         dayStartMs: bounds.start,
         dayEndMs: bounds.end,
         nowFloorMs: isToday ? nowMs + 15 * 60_000 : bounds.start,
@@ -347,6 +408,7 @@ function insertOpenBands(wishes: IngestOpenWish[], dayKey: string): void {
           : durationMinFromHmRange(w.estimatedTime, w.endTime) ?? 45;
     // Nur echte User-Fixzeiten (Prio ≤2) — LLM-Schätzzeit für Soft ≠ userFixed
     const softFixed = w.priority <= 2 && Boolean(w.estimatedTime);
+    if (isPlanPromptLeak(w.title) || isPlanPromptLeak(w.context)) return;
     const stop: FuturePlanStop = {
       id,
       title: (humanizePlanTitle(w.title) || w.title || 'Offener Punkt').slice(0, 48),
@@ -365,10 +427,10 @@ function insertOpenBands(wishes: IngestOpenWish[], dayKey: string): void {
       openOrder: w.priority === 6 ? 900 + i : i,
       notes:
         startMs != null && w.estimatedTime && msToHmLabel(startMs) !== w.estimatedTime
-          ? [w.context, `Slot ${msToHmLabel(startMs)} (um Fixtermine)`]
+          ? [sanitizeWishNotesForStop(w.context), `Slot ${msToHmLabel(startMs)} (um Fixtermine)`]
               .filter(Boolean)
               .join('\n')
-          : w.context,
+          : sanitizeWishNotesForStop(w.context),
       emoji: w.priority === 6 ? '✨' : '🔵',
       userFixedTime: softFixed,
       planTaskId: id,
@@ -480,6 +542,12 @@ export function applyMasterTimeline(plan: IngestedPlan): void {
   }
   try {
     applyGapFillTravelLegs();
+  } catch {
+    /* soft */
+  }
+  // Soft-Overlaps vor erstem Paint still lösen — Banner nur als Rest
+  try {
+    resolveOverlapsQuietly({ speakIfStuck: false });
   } catch {
     /* soft */
   }
@@ -843,8 +911,12 @@ async function waitForPickOrAdvance(timeoutMs = 180_000): Promise<void> {
   let hadChoice = Boolean(usePlanCalendarUiStore.getState().pendingChoice);
   while (Date.now() - start < timeoutMs) {
     const ui = usePlanCalendarUiStore.getState();
-    if (hadChoice && !ui.pendingChoice) return;
-    if (getActiveTaskOverride()) return;
+    const repitching = Boolean(
+      usePlanSessionStore.getState().repitchingStepKey,
+    );
+    // Reject/Re-Pitch: pending kurz null — nicht als „gewählt“ werten
+    if (hadChoice && !ui.pendingChoice && !repitching) return;
+    if (getActiveTaskOverride() && !repitching) return;
     const phase = usePlanSessionStore.getState().phase;
     if (phase === 'idle' || phase === 'final') return;
     // Kein Reminder-Speak — User entscheidet selbst, wann weiter
@@ -964,7 +1036,7 @@ function mergePlans(base: IngestedPlan, patched: IngestedPlan): IngestedPlan {
 }
 
 function selectionQueue(plan: IngestedPlan): IngestOpenWish[] {
-  // Steps: Frühstück → Abend/Sunset → Landmarke Q&A/Ticket → Rest. Timeline chronologisch.
+  // Steps: Frühstück → Landmarke Q&A/Ticket → Abend/Sunset-Meal → Rest/Tour. Timeline chronologisch.
   return plan.openWishesQueue
     .filter(
       (w) =>
@@ -1739,6 +1811,16 @@ export async function runPlanSession(
             else concreteQueue.splice(currentTaskIndex + 1, 0, w);
             insertOpenBands([w], ingestedPlan.targetDate);
           }
+        }
+        try {
+          applyGapFillTravelLegs();
+        } catch {
+          /* soft */
+        }
+        try {
+          resolveOverlapsQuietly({ speakIfStuck: false });
+        } catch {
+          /* soft */
         }
         try {
           const { repackExploreStopsOnDay } = await import(

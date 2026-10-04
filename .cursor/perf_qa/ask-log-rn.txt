@@ -1,0 +1,4 @@
+--------- beginning of main
+--------- beginning of system
+09-12 15:40:35.931 11042 11061 I ReactNativeJS: [cityPronunciation] prisdorf: 18 Einträge gecacht (4319 Textquellen)
+09-12 15:40:38.772 11042 11061 I ReactNativeJS: [cityScanner] prisdorf: 531 Anomalien, 0 neue Mappings → Master (4319 Textquellen)

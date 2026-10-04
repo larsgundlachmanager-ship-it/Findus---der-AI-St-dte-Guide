@@ -13,6 +13,9 @@ import type { ConciergeCardState } from '../../types/concierge';
 import { dismissConciergeCard } from '../../services/actionHandlerService';
 import {
   estimateBulletMaxChars,
+  isProgramBulletCard,
+  MAX_PROGRAM_LIST_BULLETS,
+  MAX_VISUAL_BULLETS,
   rewriteBulletToFit,
 } from '../../services/concierge/parseConciergeResponse';
 import {
@@ -25,31 +28,39 @@ type Props = {
 };
 
 const BULLET_FONT = 14;
+/** Masterbook: je Stichpunkt bis 2 Zeilen — nie UI-Ellipse. */
 const BULLET_LINES = 2;
 
 /**
  * Stichpunkte im Bottom-Dock.
  * Länge kommt aus echter Layout-Breite — nie UI-Ellipse („Pogo…“).
+ * Hardfacts: max 3. Programm-Liste: max 7.
  */
 export const BulletsSlot = React.memo(function BulletsSlot({ card }: Props) {
   const [contentW, setContentW] = useState(0);
+  const programList = isProgramBulletCard(card.cardTitle);
+  const maxBullets = programList
+    ? MAX_PROGRAM_LIST_BULLETS
+    : MAX_VISUAL_BULLETS;
 
   const maxChars = useMemo(() => {
-    if (contentW <= 0) return 64;
+    // Vor Messung: eng, damit erster Paint nie „…“ zeigt
+    if (contentW <= 0) return 48;
     return estimateBulletMaxChars({
       widthPx: contentW,
       fontSize: BULLET_FONT,
       lines: BULLET_LINES,
+      bulletPrefixPx: 22,
     });
   }, [contentW]);
 
   const bullets = useMemo(
     () =>
       card.visualBullets
-        .slice(0, 3)
+        .slice(0, maxBullets)
         .map((b) => rewriteBulletToFit(b, maxChars))
         .filter(Boolean),
-    [card.visualBullets, maxChars],
+    [card.visualBullets, maxBullets, maxChars],
   );
 
   const onBulletsLayout = (e: LayoutChangeEvent) => {
@@ -74,9 +85,20 @@ export const BulletsSlot = React.memo(function BulletsSlot({ card }: Props) {
         <View style={styles.headerRow}>
           <View style={styles.titleBlock}>
             <Text style={styles.title} numberOfLines={1}>
-              {card.cardTitle?.trim() || 'Spickzettel'}
+              {(() => {
+                const raw = card.cardTitle?.trim() ?? '';
+                if (!raw || /^[\[\]{}]+$/u.test(raw)) {
+                  const wake = card.visualBullets?.some((b) =>
+                    /\bwecker\b|⏰/iu.test(b),
+                  );
+                  return wake ? 'Wecker' : 'Spickzettel';
+                }
+                return raw;
+              })()}
             </Text>
-            {card.cardSubtitle?.trim() ? (
+            {card.cardSubtitle?.trim() &&
+            card.cardSubtitle.trim().toLowerCase() !==
+              (card.cardTitle || '').trim().toLowerCase() ? (
               <Text style={styles.subtitle} numberOfLines={1}>
                 {card.cardSubtitle.trim()}
               </Text>
@@ -97,6 +119,7 @@ export const BulletsSlot = React.memo(function BulletsSlot({ card }: Props) {
               key={`${i}-${b.slice(0, 12)}`}
               style={styles.bullet}
               numberOfLines={BULLET_LINES}
+              ellipsizeMode="clip"
             >
               • {b}
             </Text>

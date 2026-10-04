@@ -80,7 +80,20 @@ export function nameMentionsCity(blob: string, city: string): boolean {
   const b = norm(blob);
   const c = norm(city);
   if (!b || !c || c.length < 3) return false;
-  return b.includes(c);
+  if (b.includes(c)) return true;
+  // STT: „prisodrf“ ≈ Prisdorf
+  try {
+    const { fuzzyResolveCityName } = require('./fuzzyCityResolve') as {
+      fuzzyResolveCityName: (s: string) => string | null;
+    };
+    for (const tok of b.split(/\s+/).filter((w) => w.length >= 5)) {
+      const hit = fuzzyResolveCityName(tok);
+      if (hit && norm(hit) === c) return true;
+    }
+  } catch {
+    /* soft */
+  }
+  return false;
 }
 
 /** Anzeigename inkl. Stadt — damit „Ja“ Verify passiert. */

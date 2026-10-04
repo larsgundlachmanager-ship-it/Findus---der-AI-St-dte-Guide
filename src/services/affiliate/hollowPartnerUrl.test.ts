@@ -7,6 +7,7 @@ import {
   isHollowPartnerUrl,
   looksLikePartnerBookClaim,
   mayShowAsPartnerBookAction,
+  unwrapPartnerLandingUrl,
 } from './hollowPartnerUrl';
 
 function assert(cond: boolean, msg: string): void {
@@ -20,9 +21,37 @@ assert(isHollowPartnerUrl('https://www.viator.com/'), 'viator home');
 assert(isHollowPartnerUrl('https://www.klook.com/'), 'klook home');
 assert(isHollowPartnerUrl('https://www.expedia.de/'), 'expedia home');
 assert(isHollowPartnerUrl('https://www.stay22.com/'), 'stay22 home');
+assert(isHollowPartnerUrl('https://www.airbnb.de/'), 'airbnb home');
+assert(isHollowPartnerUrl('https://www.airbnb.com/'), 'airbnb.com home');
+assert(
+  !isHollowPartnerUrl('https://www.airbnb.de/s/Berlin/homes?checkin=2026-08-01'),
+  'airbnb search',
+);
+assert(
+  !isHollowPartnerUrl('https://www.airbnb.de/rooms/12345'),
+  'airbnb rooms',
+);
 assert(isHollowPartnerUrl('https://www.solmar.de/'), 'solmar home');
 assert(isHollowPartnerUrl('https://www.travelsecure.de/'), 'travelsecure home');
 assert(isHollowPartnerUrl('https://urlaub.check24.de/'), 'check24 home');
+assert(isHollowPartnerUrl('https://www.lidl-reisen.de/'), 'lidl home hollow');
+assert(
+  !isHollowPartnerUrl('https://www.lidl-reisen.de/?q=Antalya'),
+  'lidl search not hollow',
+);
+assert(
+  isHollowPartnerUrl('https://www.lidl-reisen.de/?dateFrom=2026-10-16'),
+  'lidl date-only hollow',
+);
+assert(
+  !isHollowPartnerUrl('https://www.lidl-reisen.de/kreuzfahrten'),
+  'lidl cruise path not hollow',
+);
+assert(isHollowPartnerUrl('https://www.aida.de/'), 'aida home hollow');
+assert(
+  !isHollowPartnerUrl('https://www.aida.de/aida-cruises'),
+  'aida path not hollow',
+);
 assert(isHollowPartnerUrl('https://www.weg.de/'), 'weg.de home');
 assert(
   isHollowPartnerUrl('https://www.ab-in-den-urlaub.de/'),
@@ -87,6 +116,12 @@ assert(
 );
 assert(
   !isHollowPartnerUrl(
+    'https://www.expedia.de/Athens-Hotels-X.h106254548.Hotel-Beschreibung?chkin=2026-09-30&chkout=2026-10-01',
+  ),
+  'expedia Hotel-Beschreibung',
+);
+assert(
+  !isHollowPartnerUrl(
     'https://www.expedia.de/Hotel-Search?destination=Hotel%20Atlantic&selected=12345678&chkin=2026-08-20',
   ),
   'expedia search with selected property',
@@ -134,5 +169,45 @@ assert(
   }),
   'allow honest search',
 );
+
+{
+  const { softenHollowPartnerBookAction } = require('./hollowPartnerUrl') as {
+    softenHollowPartnerBookAction: (a: {
+      type: string;
+      label: string;
+      payload?: { url?: string };
+    }) => { label: string };
+  };
+  const soft = softenHollowPartnerBookAction({
+    type: 'OPEN_URL',
+    label: '🏨 Zimmer buchen',
+    payload: {
+      url: 'https://www.expedia.de/Hotel-Search?destination=Athen',
+    },
+  });
+  assert(/suchen/i.test(soft.label), 'soften hotel search label');
+  assert(
+    !looksLikePartnerBookClaim(soft.label) || /suchen/i.test(soft.label),
+    'softened not book claim',
+  );
+}
+
+
+{
+  const kiwiTracked =
+    'https://c111.travelpayouts.com/click?shmarker=760293.cheapflight&promo_id=3791&source_type=customlink&type=click&custom_url=' +
+    encodeURIComponent(
+      'https://www.kiwi.com/deep?from=HAM&to=ATH&departure=2026-11-12&return=anytime&adults=2&children=0&infants=0&bags=0.1_0.1-&stopNumber=0~true&lang=de',
+    );
+  const unwrappedKiwi = unwrapPartnerLandingUrl(kiwiTracked);
+  assert(
+    /stopNumber=0(~|%7E)true/.test(unwrappedKiwi),
+    `custom_url keeps stopNumber: ${unwrappedKiwi}`,
+  );
+  assert(
+    /adults=2/.test(unwrappedKiwi) && /bags=0\.1_0\.1/.test(unwrappedKiwi),
+    `custom_url keeps pax/bags: ${unwrappedKiwi}`,
+  );
+}
 
 console.log('hollowPartnerUrl.test.ts OK');

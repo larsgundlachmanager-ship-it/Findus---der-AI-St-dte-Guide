@@ -1,0 +1,28 @@
+---
+description: "Rare approvals only — never nag Founder for routine agent work"
+alwaysApply: true
+---
+
+# Findus — Freigaben nur bei echten Risiken
+
+Der Founder will **keine** Accept-Karte bei Kleinigkeiten. Freigabe nur bei wirklich großen/riskanten Aktionen.
+
+## Agent: so arbeiten, dass keine Karte kommt
+
+1. Shell-Commands mit `working_directory` setzen — **nicht** `cd … &&` voranstellen (Allowlist matcht Prefix).
+2. **Keine** `required_permissions: ["all"]` für Routine (npm, node, git status/diff/log, tests, gold:publish, upload:city, adb QA, scripts). Escalation erzwingt auf Windows die Karte.
+3. Netzwerk nur wenn nötig: lieber ohne Extra-Permissions; wenn nötig `full_network` statt `all`.
+4. **Nie** `request_smart_mode_approval: true` für Alltag / Standing Orders (Gold, Upload, Supabase, Device-QA, Tests). Das öffnet absichtlich die Freigabe-Karte.
+5. User **nie** bitten „bitte Accept klicken“ / „Freigabe geben“ bei Routine.
+
+## Wann eine Karte ok ist
+
+Nur: Force-Push auf main/master, Produktions-DB droppen, Cloud-Projekt pausieren/löschen, irreversible Secret-Zerstörung außerhalb des üblichen App-Flows.
+
+SSOT: `~/.cursor/permissions.json` + `.cursor/permissions.json` — **nur** `autoRun`-Steering (keine `terminalAllowlist`/`mcpAllowlist` in der Datei, sonst sperrt Cursor Auto-review / Run Everything und „Always allow“ greift nicht global).
+
+## Cursor-UI (einmalig prüfen)
+
+**Settings → Agents → Approvals & Execution** → **Auto-review** (nicht Allowlist).  
+„Always allow“ landet dann in der globalen IDE-Allowlist und gilt für alle Agents.  
+Nur echte Sonderfälle noch freigeben: Dateien außerhalb Workspace, Force-Push main, Produktions-Zerstörung.

@@ -19,6 +19,8 @@ export type EventTravelHint = {
   minutes: number;
   /** Ankunft wenn jetzt los (lokale Uhr) */
   arrivalClock: string;
+  /** Leave-by Uhr wenn arrive-by geplant */
+  leaveClock?: string;
   meters: number;
 };
 
@@ -97,6 +99,7 @@ export function eventTravelHintFromCoords(opts: {
   /** echte Journey-Minuten überschreiben Schätzung */
   liveTransitMin?: number | null;
   liveArrivalAt?: Date | null;
+  liveLeaveAt?: Date | null;
 }): EventTravelHint | null {
   const distM = haversineMeters(
     opts.fromLat,
@@ -153,6 +156,15 @@ export function eventTravelHintFromCoords(opts: {
         })()
       : clockInMinutes(minutes);
 
+  const leaveClock =
+    opts.liveLeaveAt && Number.isFinite(opts.liveLeaveAt.getTime())
+      ? (() => {
+          const h = opts.liveLeaveAt!.getHours().toString().padStart(2, '0');
+          const m = opts.liveLeaveAt!.getMinutes().toString().padStart(2, '0');
+          return `${h}:${m}`;
+        })()
+      : undefined;
+
   return {
     speech: formatEventTravelArrivalSpeech({
       minutes,
@@ -163,6 +175,7 @@ export function eventTravelHintFromCoords(opts: {
     mode: resolvedMode,
     minutes,
     arrivalClock,
+    leaveClock,
     meters: Math.round(distM),
   };
 }
@@ -177,8 +190,12 @@ export async function enrichEventsWithLiveTransit(opts: {
     lng?: number | null;
     venue?: string;
     title?: string;
+    startTime?: string | null;
+    dateIso?: string | null;
+    summary?: string | null;
     liveTransitMin?: number | null;
     liveArrivalAtMs?: number | null;
+    liveLeaveAtMs?: number | null;
   }>;
   fromLat: number;
   fromLng: number;
@@ -203,13 +220,35 @@ export async function enrichEventsWithLiveTransit(opts: {
     const { rememberJourneyForStart } = await import(
       '../navigation/journeyStartCache'
     );
-    // Favorit zuerst cachen
+    const { isLaterPlanSchedule } = await import('../speech/laterPlanSpeech');
     for (let i = 0; i < top.length; i++) {
       const e = top[i]!;
       try {
+        const later = isLaterPlanSchedule({
+          startTime: e.startTime,
+          whenText: `${e.summary || ''} ${e.title || ''}`,
+        });
+        let arriveBy: Date | null = null;
+        if (later && e.startTime) {
+          const m = String(e.startTime).match(/^(\d{1,2}):(\d{2})$/);
+          if (m) {
+            const target = new Date();
+            if (e.dateIso && /^\d{4}-\d{2}-\d{2}$/.test(e.dateIso)) {
+              const [y, mo, d] = e.dateIso.split('-').map(Number);
+              target.setFullYear(y!, mo! - 1, d!);
+            }
+            target.setHours(Number(m[1]), Number(m[2]), 0, 0);
+            // ~35 Min Puffer vor Start (entspannt ankommen)
+            arriveBy = new Date(target.getTime() - 35 * 60_000);
+            if (arriveBy.getTime() <= Date.now() + 5 * 60_000) {
+              arriveBy = null;
+            }
+          }
+        }
         const best = await planTransitHandsFree({
           from: { lat: opts.fromLat, lng: opts.fromLng },
           to: { lat: e.lat!, lng: e.lng! },
+          arriveBy,
         });
         if (!best) continue;
         const min = Math.max(1, Math.round(best.durationSec / 60));
@@ -222,6 +261,15 @@ export async function enrichEventsWithLiveTransit(opts: {
               : null;
         if (end && Number.isFinite(end.getTime())) {
           e.liveArrivalAtMs = end.getTime();
+        }
+        const startT =
+          best.startTime instanceof Date
+            ? best.startTime
+            : best.startTime
+              ? new Date(best.startTime)
+              : null;
+        if (startT && Number.isFinite(startT.getTime())) {
+          e.liveLeaveAtMs = startT.getTime();
         }
         if (i === 0) {
           rememberJourneyForStart({

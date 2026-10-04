@@ -28,6 +28,10 @@ import {
 } from './google.mjs';
 import { fetchOsmDirectory } from '../geo/osm.mjs';
 import { runQualityGate } from './qualityGate.mjs';
+import {
+  citySizeHint,
+  suggestedDiscoveryRadius,
+} from './placeCategoryPolicy.mjs';
 
 loadEnvFile();
 
@@ -53,9 +57,16 @@ const MAP_POINT_CATS = new Set([
   'toilette',
   'trinkwasser',
   'briefkasten',
+  'packstation',
   'atm',
   'aussicht',
   'haltestelle',
+  'parkplatz',
+  'ladestation',
+  'gepaeck',
+  'picnic',
+  'fahrradverleih',
+  'radwerkstatt',
 ]);
 
 function isMapPointDirectory(place, category) {
@@ -63,6 +74,9 @@ function isMapPointDirectory(place, category) {
   if (place.highway === 'bus_stop') return true;
   if (place.amenity === 'post_box' || place.amenity === 'toilets') return true;
   if (place.amenity === 'drinking_water' || place.amenity === 'atm') return true;
+  if (place.amenity === 'left_luggage' || place.amenity === 'locker') return true;
+  if (place.amenity === 'parking' || place.amenity === 'charging_station') return true;
+  if (place.amenity === 'parcel_locker' || place.amenity === 'bicycle_rental') return true;
   return false;
 }
 
@@ -90,6 +104,40 @@ function buildDirectoryBullets(place, category) {
     bullets.push('Trinkwasser');
   } else if (category === 'aussicht') {
     bullets.push('Aussichtspunkt');
+  } else if (category === 'gepaeck') {
+    bullets.push('Gepäckaufbewahrung / Schließfach');
+    if (tags.fee === 'yes') bullets.push('Kostenpflichtig');
+    else if (tags.fee === 'no') bullets.push('Kostenlos');
+  } else if (category === 'waschsalon') {
+    bullets.push('Waschsalon');
+  } else if (category === 'parkplatz') {
+    bullets.push('Parkplatz');
+    if (tags.fee === 'yes') bullets.push('Kostenpflichtig');
+    else if (tags.fee === 'no') bullets.push('Kostenlos');
+  } else if (category === 'ladestation') {
+    bullets.push('E-Ladestation');
+  } else if (category === 'fahrradverleih') {
+    bullets.push('Fahrradverleih');
+  } else if (category === 'autoverleih') {
+    bullets.push('Autoverleih / Carsharing');
+  } else if (category === 'rollerverleih') {
+    bullets.push('Roller- / Scooterverleih');
+  } else if (category === 'bootsverleih') {
+    bullets.push('Bootsverleih');
+  } else if (category === 'camping') {
+    bullets.push('Camping- / Wohnmobilstellplatz');
+  } else if (category === 'strand') {
+    bullets.push('Strand');
+  } else if (category === 'wechselstube') {
+    bullets.push('Wechselstube');
+  } else if (category === 'packstation') {
+    bullets.push('Packstation / Paketautomat');
+  } else if (category === 'picnic') {
+    bullets.push('Picknickplatz');
+  } else if (category === 'eisdiele') {
+    bullets.push('Eisdiele');
+  } else if (category === 'coworking') {
+    bullets.push('Coworking');
   } else {
     if (tags.cuisine) bullets.push(String(tags.cuisine).replace(/;/g, ', '));
     else if (tags.brand) bullets.push(String(tags.brand));
@@ -347,7 +395,7 @@ function buildOfflineQa(pack, research) {
   );
   push(
     'Was kann ich hier machen / wo finde ich Orte offline?',
-    'Im Stadt-Pack: Story-Orte plus Offline-Katalog (Supermarkt, Apotheke, Gastro, Hotel, Freizeit, Natur). Frag nach Kategorie oder Namen — LIVE nur für Zeiten/Preise.',
+    'Im Stadt-Pack: Story-Orte plus Offline-Katalog (Supermarkt, WC, Gepäck, Verleih, Parken, Apotheke, Gastro, Hotel, Strand, Camping …). Frag nach Kategorie oder Namen — LIVE nur für Zeiten/Preise.',
     ['orientierung', 'directory'],
   );
 
@@ -371,6 +419,24 @@ function buildOfflineQa(pack, research) {
     ['natur', 'Welche Parks / Naturziele sind im Pack?', 'natur'],
     ['tankstelle', 'Wo sind Tankstellen?', 'service'],
     ['gesundheit', 'Wo ist medizinische Hilfe / Klinik?', 'notfall'],
+    ['toilette', 'Wo sind öffentliche Toiletten?', 'friction'],
+    ['trinkwasser', 'Wo gibt es Trinkwasser?', 'friction'],
+    ['gepaeck', 'Wo kann ich Gepäck aufbewahren?', 'friction'],
+    ['waschsalon', 'Wo ist ein Waschsalon?', 'friction'],
+    ['fahrradverleih', 'Wo kann ich ein Fahrrad mieten?', 'mobilitaet'],
+    ['autoverleih', 'Wo kann ich ein Auto mieten?', 'mobilitaet'],
+    ['rollerverleih', 'Wo kann ich einen Roller mieten?', 'mobilitaet'],
+    ['bootsverleih', 'Wo kann ich ein Boot mieten?', 'mobilitaet'],
+    ['parkplatz', 'Wo kann ich parken?', 'mobilitaet'],
+    ['ladestation', 'Wo sind E-Ladestationen?', 'mobilitaet'],
+    ['atm', 'Wo sind Geldautomaten?', 'friction'],
+    ['wechselstube', 'Wo kann ich Geld wechseln?', 'friction'],
+    ['camping', 'Wo gibt es Campingplätze?', 'camping'],
+    ['strand', 'Wo ist ein Strand?', 'strand'],
+    ['eisdiele', 'Wo gibt es Eisdielen?', 'familie'],
+    ['picnic', 'Wo sind Picknickplätze?', 'familie'],
+    ['packstation', 'Wo sind Packstationen?', 'service'],
+    ['tourist_info', 'Wo ist die Touristeninformation?', 'orientierung'],
   ];
   for (const [cat, q, tag] of catQuestions) {
     const names = byCat.get(cat) || [];
@@ -408,7 +474,12 @@ function buildOfflineQa(pack, research) {
 
 async function main() {
   requireGoogleKey();
-  const cityId = slugify(arg('city') || '');
+  // IDs wie berlin-zentral behalten (kein slugify → Unterstrich).
+  const cityId = String(arg('city') || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9_-]+/g, '_')
+    .replace(/^_|_$/g, '');
   if (!cityId) {
     console.error(
       'Usage: node scripts/cityPack/expandCityDirectory.mjs --city <id> [--radius 7000] --apply',
@@ -417,58 +488,71 @@ async function main() {
   }
   const pack = loadPack(cityId);
   if (!pack) throw new Error(`Pack missing: ${cityId}`);
-  const radiusM = Number(arg('radius') || 7000);
+  const sizeHint = citySizeHint(pack);
+  const defaultR = suggestedDiscoveryRadius(pack);
+  const radiusM = Number(arg('radius') || defaultR);
   const center = { lat: pack.lat, lng: pack.lng };
-  const stats = { added: 0, skippedNear: 0, skippedDup: 0, extras: 0 };
+  const stats = { added: 0, skippedNear: 0, skippedDup: 0, extras: 0, osm: 0 };
 
   const cheap = packCostIsCheap();
   console.log(
-    `[dir] discover directory around ${cityId} mode=${cheap ? 'cheap/OSM' : 'full/Places'}`,
+    `[dir] discover directory around ${cityId} size=${sizeHint} r=${radiusM}m mode=${cheap ? 'cheap/OSM+dining' : 'full/Places'}`,
   );
-  if (cheap) {
-    try {
-      const osmHits = await fetchOsmDirectory(center.lat, center.lng, radiusM);
-      console.log(`[dir] OSM hits ${osmHits.length}`);
-      for (const hit of osmHits) {
-        if (distM(center, { lat: hit.lat, lng: hit.lng }) > radiusM + 1200) continue;
-        addDirectorySpot(pack, hit, stats);
+
+  // OSM immer — Gastro/Museen sind kostenlos und füllen die Karte.
+  try {
+    const osmHits = await fetchOsmDirectory(center.lat, center.lng, radiusM);
+    console.log(`[dir] OSM hits ${osmHits.length}`);
+    for (const hit of osmHits) {
+      if (distM(center, { lat: hit.lat, lng: hit.lng }) > radiusM + 1200) continue;
+      const before = stats.added;
+      addDirectorySpot(pack, hit, stats);
+      if (stats.added > before) stats.osm += 1;
+    }
+  } catch (e) {
+    console.warn(`[dir] OSM directory failed: ${e.message}`);
+    if (cheap) {
+      console.warn('[dir] cheap mode — skip Places after OSM fail');
+    }
+  }
+
+  if (!cheap) {
+    for (const dq of DIRECTORY_QUERIES) {
+      const query = `${dq.q} ${pack.name || cityId}`;
+      console.log(`[dir] ${query}`);
+      let results = [];
+      try {
+        const data = await placesText(query, {
+          lat: center.lat,
+          lng: center.lng,
+          radiusM,
+        });
+        results = data.results || [];
+      } catch (e) {
+        console.warn(`[dir] fail ${query}: ${e.message}`);
+        continue;
       }
-    } catch (e) {
-      console.warn(`[dir] OSM directory failed — skip Places in cheap mode: ${e.message}`);
-    }
-  } else
-  for (const dq of DIRECTORY_QUERIES) {
-    const query = `${dq.q} ${pack.name || cityId}`;
-    console.log(`[dir] ${query}`);
-    let results = [];
-    try {
-      const data = await placesText(query, {
-        lat: center.lat,
-        lng: center.lng,
-        radiusM,
-      });
-      results = data.results || [];
-    } catch (e) {
-      console.warn(`[dir] fail ${query}: ${e.message}`);
-      continue;
-    }
-    for (const r of results.slice(0, 10)) {
-      const loc = r.geometry?.location;
-      if (!loc) continue;
-      if (distM(center, loc) > radiusM + 1200) continue;
-      addDirectorySpot(
-        pack,
-        {
-          name: r.name,
-          lat: loc.lat,
-          lng: loc.lng,
-          address: r.formatted_address || r.vicinity || null,
-          types: r.types || [],
-          category: dq.categoryHint,
-          place_id: r.place_id || null,
-        },
-        stats,
-      );
+      const take = /restaurant|cafe|museum/i.test(dq.categoryHint || '')
+        ? 20
+        : 10;
+      for (const r of results.slice(0, take)) {
+        const loc = r.geometry?.location;
+        if (!loc) continue;
+        if (distM(center, loc) > radiusM + 1200) continue;
+        addDirectorySpot(
+          pack,
+          {
+            name: r.name,
+            lat: loc.lat,
+            lng: loc.lng,
+            address: r.formatted_address || r.vicinity || null,
+            types: r.types || [],
+            category: dq.categoryHint,
+            place_id: r.place_id || null,
+          },
+          stats,
+        );
+      }
     }
   }
 
@@ -560,21 +644,31 @@ async function main() {
     }
   }
 
-  // Also re-add classic optional dining/hotels if thin
-  for (const dq of [
+  // Gastro/Museen nachziehen — auch im cheap-Modus (Karten-Dichte).
+  const diningQueries = [
     { q: 'Restaurant', categoryHint: 'restaurant' },
-    { q: 'Café OR Cafe', categoryHint: 'cafe' },
-    { q: 'Hotel OR Pension', categoryHint: 'hotel' },
-  ]) {
+    { q: 'Café OR Cafe OR Bäckerei', categoryHint: 'cafe' },
+    { q: 'Museum OR Galerie', categoryHint: 'museum' },
+  ];
+  if (sizeHint === 'metro' || sizeHint === 'city') {
+    diningQueries.push(
+      { q: 'Pizza OR Burger OR Sushi', categoryHint: 'restaurant' },
+      { q: 'Brauhaus OR Gasthaus OR Wirtshaus', categoryHint: 'restaurant' },
+    );
+  }
+  const diningRadius = Math.min(Math.max(radiusM, defaultR), 20000);
+  const diningTake = sizeHint === 'metro' ? 20 : sizeHint === 'city' ? 16 : 12;
+  for (const dq of diningQueries) {
     try {
       const data = await placesText(`${dq.q} ${pack.name || cityId}`, {
         lat: center.lat,
         lng: center.lng,
-        radiusM: Math.min(radiusM, 5000),
+        radiusM: diningRadius,
       });
-      for (const r of (data.results || []).slice(0, 12)) {
+      for (const r of (data.results || []).slice(0, diningTake)) {
         const loc = r.geometry?.location;
         if (!loc) continue;
+        if (distM(center, loc) > diningRadius + 1500) continue;
         addDirectorySpot(
           pack,
           {
@@ -584,12 +678,101 @@ async function main() {
             address: r.formatted_address || r.vicinity,
             types: r.types || [],
             category: dq.categoryHint,
+            place_id: r.place_id || null,
           },
           stats,
         );
       }
     } catch {
       /* ignore */
+    }
+  }
+
+  // Touristen-Friction auch im cheap-Modus (OSM oft dünn: Gepäck, Waschen, Verleih).
+  const frictionQueries = [
+    { q: 'Gepäckaufbewahrung OR Luggage storage OR Schließfach OR Bounce', categoryHint: 'gepaeck', take: 12 },
+    { q: 'Waschsalon OR Laundry OR Laundromat', categoryHint: 'waschsalon', take: 8 },
+    { q: 'Fahrradverleih OR Bike rental OR Mietrad', categoryHint: 'fahrradverleih', take: 10 },
+    { q: 'Autoverleih OR Car rental', categoryHint: 'autoverleih', take: 8 },
+    { q: 'Wechselstube OR Currency exchange', categoryHint: 'wechselstube', take: 6 },
+    { q: 'Tourist Information OR Touristeninformation', categoryHint: 'tourist_info', take: 4 },
+  ];
+  for (const fq of frictionQueries) {
+    try {
+      console.log(`[dir] friction ${fq.categoryHint}`);
+      const data = await placesText(`${fq.q} ${pack.name || cityId}`, {
+        lat: center.lat,
+        lng: center.lng,
+        radiusM: diningRadius,
+      });
+      for (const r of (data.results || []).slice(0, fq.take)) {
+        const loc = r.geometry?.location;
+        if (!loc) continue;
+        if (distM(center, loc) > diningRadius + 1500) continue;
+        addDirectorySpot(
+          pack,
+          {
+            name: r.name,
+            lat: loc.lat,
+            lng: loc.lng,
+            address: r.formatted_address || r.vicinity,
+            types: r.types || [],
+            category: fq.categoryHint,
+            place_id: r.place_id || null,
+          },
+          stats,
+        );
+      }
+    } catch (e) {
+      console.warn(`[dir] friction ${fq.categoryHint} failed:`, e?.message || e);
+    }
+  }
+
+  // Metro: zusätzliche Bias-Punkte im Coverage-BBox (Google max 20/Query).
+  if (sizeHint === 'metro' && pack._coverage) {
+    const c = pack._coverage;
+    const midLat = (c.latMin + c.latMax) / 2;
+    const midLng = (c.lngMin + c.lngMax) / 2;
+    const grid = [
+      { lat: midLat, lng: midLng },
+      { lat: c.latMin + (c.latMax - c.latMin) * 0.28, lng: midLng },
+      { lat: c.latMin + (c.latMax - c.latMin) * 0.72, lng: midLng },
+      { lat: midLat, lng: c.lngMin + (c.lngMax - c.lngMin) * 0.28 },
+      { lat: midLat, lng: c.lngMin + (c.lngMax - c.lngMin) * 0.72 },
+    ];
+    for (const cell of grid) {
+      for (const dq of [
+        { q: 'Restaurant', categoryHint: 'restaurant' },
+        { q: 'Museum', categoryHint: 'museum' },
+      ]) {
+        try {
+          const data = await placesText(dq.q, {
+            lat: cell.lat,
+            lng: cell.lng,
+            radiusM: 4500,
+          });
+          for (const r of (data.results || []).slice(0, 20)) {
+            const loc = r.geometry?.location;
+            if (!loc) continue;
+            if (distM(center, loc) > diningRadius + 2000) continue;
+            addDirectorySpot(
+              pack,
+              {
+                name: r.name,
+                lat: loc.lat,
+                lng: loc.lng,
+                address: r.formatted_address || r.vicinity,
+                types: r.types || [],
+                category: dq.categoryHint,
+                place_id: r.place_id || null,
+              },
+              stats,
+            );
+          }
+        } catch {
+          /* ignore */
+        }
+      }
     }
   }
 
@@ -618,7 +801,7 @@ async function main() {
     }
     if (
       !s.pack_role &&
-      /^(restaurant|cafe|hotel|supermarket|apotheke|gesundheit|tankstelle)$/i.test(
+      /^(restaurant|cafe|hotel|supermarket|apotheke|gesundheit|tankstelle|museum)$/i.test(
         s.category || '',
       )
     ) {
@@ -660,7 +843,7 @@ async function main() {
     gate,
   });
   console.log(
-    `[dir] added=${stats.added} extras=${stats.extras} near=${stats.skippedNear} dup=${stats.skippedDup} total=${pack.spots.length} story=${pack._pack_index.story} directory=${pack._pack_index.directory} qa=${qaN}`,
+    `[dir] added=${stats.added} osm=${stats.osm} extras=${stats.extras} near=${stats.skippedNear} dup=${stats.skippedDup} total=${pack.spots.length} story=${pack._pack_index.story} directory=${pack._pack_index.directory} qa=${qaN}`,
   );
   console.log(
     `[dir] gate ok=${gate.ok} err=${gate.errors.length} warn=${gate.warnings.length}`,

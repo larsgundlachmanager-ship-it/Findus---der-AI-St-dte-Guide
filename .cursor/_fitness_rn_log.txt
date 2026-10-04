@@ -1,0 +1,44 @@
+﻿--------- beginning of main
+09-14 11:07:36.942  8442  8522 W ReactNativeJS: 'MapLibre warning', 'Request failed due to a permanent error: stream was reset: CANCEL ', { level: 'warning',
+09-14 11:07:36.942  8442  8522 W ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:07:36.942  8442  8522 W ReactNativeJS:   message: 'Request failed due to a permanent error: stream was reset: CANCEL ' }
+09-14 11:07:36.942  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:07:36.942  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:07:36.942  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:07:36.944  8442  8522 W ReactNativeJS: 'MapLibre warning', 'Request failed due to a permanent error: stream was reset: CANCEL ', { level: 'warning',
+09-14 11:07:36.944  8442  8522 W ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:07:36.944  8442  8522 W ReactNativeJS:   message: 'Request failed due to a permanent error: stream was reset: CANCEL ' }
+09-14 11:07:36.945  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:07:36.945  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:07:36.945  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:07:37.537  8442  8522 I ReactNativeJS: '[places] new-text', 'Arena OR Stadion OR Theater OR Konzertha', 12
+09-14 11:07:39.833  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:07:39.833  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:07:39.833  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:07:42.476  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:07:42.476  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:07:42.476  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:07:52.691  8442  8522 W ReactNativeJS: [cityCatalog] public fetch rellingen.json: HTTP 400
+09-14 11:07:52.949  8442  8522 W ReactNativeJS: '[cityCatalog] download rellingen.json:', 'Object not found'
+09-14 11:07:52.949  8442  8522 W ReactNativeJS: '[cityCatalog] Browse-Pack rellingen fehlgeschlagen:', 'Error: Stadt-Datei nicht ladbar: rellingen.json (fetch HTTP 400 | FS HTTP 400 | sdk: Object not found)'
+09-14 11:07:58.326  8442  8522 W ReactNativeJS: [cityCatalog] public fetch rellingen.json: HTTP 400
+09-14 11:07:58.716  8442  8522 W ReactNativeJS: '[cityCatalog] download rellingen.json:', 'Object not found'
+09-14 11:07:58.716  8442  8522 W ReactNativeJS: '[cityCatalog] Browse-Pack rellingen fehlgeschlagen:', 'Error: Stadt-Datei nicht ladbar: rellingen.json (fetch HTTP 400 | FS HTTP 400 | sdk: Object not found)'
+09-14 11:08:18.222  8442  8522 W ReactNativeJS: [cityCatalog] public fetch rellingen.json: HTTP 400
+09-14 11:08:18.473  8442  8522 W ReactNativeJS: '[cityCatalog] download rellingen.json:', 'Object not found'
+09-14 11:08:18.474  8442  8522 W ReactNativeJS: '[cityCatalog] Browse-Pack rellingen fehlgeschlagen:', 'Error: Stadt-Datei nicht ladbar: rellingen.json (fetch HTTP 400 | FS HTTP 400 | sdk: Object not found)'
+09-14 11:08:25.759  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:08:25.759  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:08:25.759  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:08:25.759  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:08:25.759  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:08:25.759  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:08:35.315  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:08:35.315  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:08:35.315  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:08:35.315  8442  8522 I ReactNativeJS: 'MapLibre [info]', 'Request failed due to a permanent error: Canceled ', { level: 'warning',
+09-14 11:08:35.315  8442  8522 I ReactNativeJS:   tag: 'Mbgl-HttpRequest',
+09-14 11:08:35.315  8442  8522 I ReactNativeJS:   message: 'Request failed due to a permanent error: Canceled ' }
+09-14 11:08:36.210  8442  8522 W ReactNativeJS: [cityCatalog] public fetch rellingen.json: HTTP 400
+09-14 11:08:36.938  8442  8522 W ReactNativeJS: '[cityCatalog] download rellingen.json:', 'Object not found'
+09-14 11:08:36.938  8442  8522 W ReactNativeJS: '[cityCatalog] Browse-Pack rellingen fehlgeschlagen:', 'Error: Stadt-Datei nicht ladbar: rellingen.json (fetch HTTP 400 | FS HTTP 400 | sdk: Object not found)'

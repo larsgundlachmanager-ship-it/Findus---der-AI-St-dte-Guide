@@ -2,6 +2,11 @@
  * Expo SDK 52: lädt .env (via Expo CLI) und stellt EXPO_PUBLIC_* in
  * process.env + extra bereit – damit Dev Client / Metro sie zuverlässig sehen.
  */
+try {
+  require('dotenv').config();
+} catch {
+  /* optional */
+}
 const appJson = require('./app.json');
 
 module.exports = () => {
@@ -93,6 +98,20 @@ module.exports = () => {
           process.env.EXPO_PUBLIC_OPENTABLE_AFFILIATE_ID ?? '',
         EXPO_PUBLIC_QUANDOO_PARTNER_ID:
           process.env.EXPO_PUBLIC_QUANDOO_PARTNER_ID ?? '',
+        EXPO_PUBLIC_MAP_VECTOR_TILES:
+          process.env.EXPO_PUBLIC_MAP_VECTOR_TILES ?? '1',
+        EXPO_PUBLIC_MAP_TILES_URL:
+          process.env.EXPO_PUBLIC_MAP_TILES_URL ?? '',
+        EXPO_PUBLIC_MAP_PMTILES_URL:
+          process.env.EXPO_PUBLIC_MAP_PMTILES_URL ?? '',
+        EXPO_PUBLIC_PROTOMAPS_API_KEY:
+          process.env.EXPO_PUBLIC_PROTOMAPS_API_KEY ?? '',
+        EXPO_PUBLIC_PROTOMAPS_THEME:
+          process.env.EXPO_PUBLIC_PROTOMAPS_THEME ?? 'dark',
+        EXPO_PUBLIC_PROTOMAPS_LANG:
+          process.env.EXPO_PUBLIC_PROTOMAPS_LANG ?? 'de',
+        EXPO_PUBLIC_MAP_LAYER_DEBUG:
+          process.env.EXPO_PUBLIC_MAP_LAYER_DEBUG ?? '0',
       },
     },
   };

@@ -26,6 +26,19 @@ assert(
   catalogSrc.includes('registerCoverageFromLocalPacks'),
   'Offline-Packs registrieren Coverage ohne Modul-1-Switch',
 );
+assert(
+  catalogSrc.includes('hydrateCityCoverageBounds'),
+  'Coverage-Register hydratisiert Disk-Cache vor Pack-Parse',
+);
+assert(catalogSrc.includes('yieldEvery'), 'Coverage-Register mit Yield');
+assert(
+  catalogSrc.includes('allowFullPackParse'),
+  'Coverage Full-Pack opt-in',
+);
+assert(
+  catalogSrc.includes('scheduleCoverageFullParseWhenIdle'),
+  'Coverage Full-Pack hinter mapIdle',
+);
 const homeMapSrc = readFileSync(
   join(process.cwd(), 'src/components/homeMap/HomePresenceMap.tsx'),
   'utf8',
@@ -37,6 +50,15 @@ assert(
 assert(
   homeMapSrc.includes('localOfflineCityIdsRef'),
   'Offline-Städte immer in City-Fills',
+);
+assert(
+  homeMapSrc.includes('runMapIdleWhenFree') &&
+    homeMapSrc.includes('poisGrew'),
+  'Coverage-Rest idle + Places nachziehen wenn POIs wachsen',
+);
+assert(
+  homeMapSrc.includes('allowFullPackParse: true'),
+  'Idle-Coverage darf Full-Pack',
 );
 
 for (const id of ['prisdorf', 'tornesch', 'pinneberg'] as const) {

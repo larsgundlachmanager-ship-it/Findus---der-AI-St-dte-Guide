@@ -9,6 +9,7 @@ import { getDatabase } from '../../db/database';
 import { getCachedUserProfile } from '../userProfileService';
 import { env } from '../../config/env';
 import { collectStreetViewDelta } from '../navigation/streetViewCache';
+import { ensureLandmarkCacheTable } from '../navigation/landmarkCache';
 
 const META_PATH = `${FileSystem.documentDirectory}findus-nightly-cache-sync.json`;
 
@@ -85,6 +86,7 @@ async function collectCacheDelta(sinceMs: number): Promise<{
   geocodes: Array<Record<string, unknown>>;
   streetViews: Array<Record<string, unknown>>;
 }> {
+  await ensureLandmarkCacheTable();
   const db = await getDatabase();
   const landmarks = await db.getAllAsync<Record<string, unknown>>(
     `SELECT kind, place_id, name, lat, lng, types_json, rating, open_now, geohash, query_key, fetched_at_ms

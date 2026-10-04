@@ -40,6 +40,7 @@ export type PlanChoiceCard = {
   bullets?: string[];
   mapsUrl: string;
   menuUrl?: string | null;
+  websiteUrl?: string | null;
   walkMinFromPrev?: number | null;
   placeId?: string | null;
   rating?: number | null;
@@ -146,6 +147,16 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
   routeComputingIds: {},
   requestOpen: () => {
     try {
+      const {
+        noteOverlayBusy,
+      } = require('../../services/boot/interactiveBootGate') as {
+        noteOverlayBusy: (busy: boolean) => void;
+      };
+      noteOverlayBusy(true);
+    } catch {
+      /* soft */
+    }
+    try {
       const { useHomeMapUiStore } = require('../../store/useHomeMapUiStore') as {
         useHomeMapUiStore: {
           getState: () => {
@@ -173,6 +184,8 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
         noteOverlayBusy: (busy: boolean) => void;
       };
       if (calendarVisible) {
+        // Busy vor Popup-Dismiss — Map-Lane bleibt pausiert.
+        noteOverlayBusy(true);
         try {
           const {
             useHomeMapUiStore,
@@ -190,7 +203,6 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
         } catch {
           /* soft */
         }
-        noteOverlayBusy(true);
       } else {
         // Settings kann parallel offen sein
         try {
@@ -220,7 +232,17 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
   markCalendarHidden: () => set({ calendarHiddenAtMs: Date.now() }),
   clearCalendarHidden: () => set({ calendarHiddenAtMs: null }),
   setHeadlessPlanning: (headlessPlanning) => set({ headlessPlanning }),
-  setShortAnswers: (shortAnswers) => set({ shortAnswers }),
+  setShortAnswers: (answers) => {
+    // Dedupe by action+label — verhindert doppeltes „Neu suchen“ L+R am Mic.
+    const seen = new Set<string>();
+    const shortAnswers = answers.filter((a) => {
+      const key = `${a.action}::${(a.label || '').trim().toLowerCase()}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+    set({ shortAnswers });
+  },
   clearShortAnswers: () => set({ shortAnswers: [] }),
   setMirroredActions: (mirroredActions) => set({ mirroredActions }),
   clearMirroredActions: () => set({ mirroredActions: [] }),
@@ -230,7 +252,14 @@ export const usePlanCalendarUiStore = create<Store>((set) => ({
     set({ scrollTarget, scrollTargetAtMs: Date.now() }),
   clearScrollTarget: () => set({ scrollTarget: null }),
   requestDayKey: (dayKey) =>
-    set({ requestedDayKey: dayKey, requestedDayAtMs: Date.now() }),
+    set({
+      requestedDayKey: dayKey,
+      requestedDayAtMs: Date.now(),
+      // Sticky-Choice einer anderen Stadt/Tages nicht mitnehmen
+      pendingChoice: null,
+      shortAnswers: [],
+      mirroredActions: [],
+    }),
   clearRequestedDayKey: () => set({ requestedDayKey: null }),
   setFocusedStopId: (focusedStopId: string | null) => set({ focusedStopId }),
   touchPlanInteraction: () => set({ lastPlanInteractionAtMs: Date.now() }),

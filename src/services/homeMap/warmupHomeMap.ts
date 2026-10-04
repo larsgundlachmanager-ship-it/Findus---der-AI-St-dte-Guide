@@ -1,6 +1,6 @@
 /**
  * Native-only Homescreen-Karte — MapLibre Native (kein WebView-HTML mehr).
- * Warmup: Display-Extract + GPS. CDN/MapLibre-JS nur noch für Disk-Cache-Tools.
+ * Warmup: Protomaps-Style unter Splash; Legacy-Extract nur wenn Vector aus.
  */
 
 import { hydrateLastKnownMapGps, seedMapCameraGps } from '../location/lastKnownMapGps';
@@ -19,6 +19,14 @@ import {
   markHomeMapBoot,
   markHomeMapBootStart,
 } from './homeMapBootMetrics';
+import { isVectorBasemapEnabled } from './mapTileConfig';
+import {
+  awaitYorroProtomapsStyleWarm,
+  beginYorroProtomapsStyleWarm,
+} from './yorroProtomapsBasemapStyle';
+
+/** Splash-Overlap: Style so lange mitnehmen, bis Peek warm oder Budget um. */
+export const PROTOMAPS_STYLE_SPLASH_BUDGET_MS = 2_400;
 
 let inflight: Promise<void> | null = null;
 let cameraWarmUntilMs = 0;
@@ -85,18 +93,29 @@ export function warmupHomeMapDuringIntro(): Promise<void> {
     markHomeMapBootStart();
     noteSplashStarted();
     noteSplashMapWarmup(4_000);
-    // Display-Snapshot sofort — Straßen sollen vor Places im RAM sein.
-    const extractWarm = warmupCityExtract();
-    // Nur Last-Known GPS blockiert kurz — Extract läuft parallel.
-    await Promise.race([
+
+    const gpsWarm = Promise.race([
       hydrateLastKnownMapGps(),
-      new Promise((resolve) => setTimeout(resolve, 350)),
+      new Promise<void>((resolve) => setTimeout(resolve, 350)),
     ]);
-    // Native: Extract bis 2 s ausholen — kritisches Pfadstück für ≤5 s.
-    await Promise.race([
-      extractWarm,
-      new Promise((resolve) => setTimeout(resolve, 2_000)),
-    ]);
+
+    // Vector-Default: Protomaps unter Splash — kein GeoJSON-Extract im Kaltstart.
+    if (isVectorBasemapEnabled()) {
+      beginYorroProtomapsStyleWarm();
+      await Promise.all([
+        awaitYorroProtomapsStyleWarm(PROTOMAPS_STYLE_SPLASH_BUDGET_MS),
+        gpsWarm,
+      ]);
+    } else {
+      // Legacy Extract: Display-Snapshot parallel zu GPS.
+      const extractWarm = warmupCityExtract();
+      await gpsWarm;
+      await Promise.race([
+        extractWarm,
+        new Promise<void>((resolve) => setTimeout(resolve, 2_000)),
+      ]);
+    }
+
     try {
       const { warmupGpsDuringIntro } = await import('../locationService');
       void warmupGpsDuringIntro();

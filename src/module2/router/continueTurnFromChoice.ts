@@ -76,6 +76,26 @@ export async function continueTurnFromChoice(
   }
   enqueueSpeech({ kind: 'main', text: ack, turnId });
 
+  // Compound: nach Entscheidung nächsten Block natürlich (kein „soll ich…“)
+  try {
+    const { completeActiveAndPeekNatural } = require('./intentQueue') as {
+      completeActiveAndPeekNatural: () => {
+        next: { brief?: string; lane?: string } | null;
+        softBrief: string | null;
+      };
+    };
+    const { softBrief } = completeActiveAndPeekNatural();
+    if (softBrief && input.slotKey === 'pitch_option') {
+      enqueueSpeech({
+        kind: 'main',
+        text: softBrief,
+        turnId: `${turnId}_next`,
+      });
+    }
+  } catch {
+    /* soft */
+  }
+
   applyChoiceInventoryPatch(input.inventoryPatch);
 
   armChoiceFastPath({

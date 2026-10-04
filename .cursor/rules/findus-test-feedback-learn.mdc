@@ -26,7 +26,7 @@ Live-Tests sollen Yorro **besser antworten lassen**, ohne Modul-2/Kernel jedes M
 
 - Nur `intentFamily`, `expect[]`, `avoid[]`, `summary` (ein Satz Struktur, **kein** Dialog).
 - Keine Ortsnamen, keine „Sag genau …“.
-- Danach: `npm run gold:publish` (Supabase, Live-APK holt beim nächsten App-Öffnen).
+- Danach: `npm run gold:publish` (Supabase, Live-APK holt beim nächsten App-Öffnen) — **sofort, ohne Freigabe/Nachfrage** (Standing Order `findus-gold-publish-no-confirm`).
 - Dev-Reload reicht fürs Bundle; APK ohne Rebuild braucht Publish + App in den Vordergrund.
 
 SSOT: `ownerGold.ts` · `correctionLearning.ts` · `collectiveLearning.ts` · Doktrin.

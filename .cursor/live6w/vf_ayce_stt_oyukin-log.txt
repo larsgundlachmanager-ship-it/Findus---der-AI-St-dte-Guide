@@ -1,0 +1,596 @@
+--------- beginning of main
+09-12 11:51:51.238  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.auth.GetTokenare :1
+09-12 11:51:51.238  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.google.android.gms.persistentare :10
+09-12 11:51:51.249  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.gms/.chimera.PersistentApiService and for client com.google.android.gms.persistent
+09-12 11:51:51.249  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.gms/.chimera.PersistentApiServiceare :69
+09-12 11:51:51.249  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : com.google.android.gms.persistentare :10
+09-12 11:51:51.268  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A154209E13 hal_ts 93351379133891 lux=17.651 Channel0-5=1194.0,561.0,28.0,536.0,118.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:51.277  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.gms/.clearcut.uploader.QosUploaderService and for client com.google.android.gms.persistent
+09-12 11:51:51.277  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.clearcut.uploader.QosUploaderServiceafter removal is 0
+09-12 11:51:51.277  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.google.android.gms.persistentafter removal is 9
+09-12 11:51:51.277  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.clearcut.uploader.QosUploaderService
+09-12 11:51:51.278  3775 14394 I NetworkScheduler.Stats: (REDACTED) Task %s/%s finished executing. cause:%s result: %s elapsed_millis: %s uptime_millis: %s exec_start_elapsed_seconds: %s
+09-12 11:51:51.285  1974  3888 D StNfcHal: (#05357) Rx 6f 02 27 (hidden)
+09-12 11:51:51.285  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:51.290  3775 15247 E jumw    : *~*~*~ Previous channel {0} was garbage collected without being shut down! ~*~*~*
+09-12 11:51:51.290  3775 15247 E jumw    :     Make sure to call shutdown()/shutdownNow()
+09-12 11:51:51.290  3775 15247 E jumw    : java.lang.RuntimeException: ManagedChannel allocation site
+09-12 11:51:51.290  3775 15247 E jumw    : 	at jumv.<init>(:com.google.android.gms@263234035@26.32.34 (260400-968093310):21)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at jumw.<init>(:com.google.android.gms@263234035@26.32.34 (260400-968093310):10)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at jumu.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):300)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at jtul.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):5)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at dixu.f(:com.google.android.gms@263234035@26.32.34 (260400-968093310):144)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at iarc.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):177)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at hnyt.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):17)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at hwyb.a(:com.google.android.gms@263234035@26.32.34 (260400-968093310):3)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at hwxc.run(:com.google.android.gms@263234035@26.32.34 (260400-968093310):19)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at hwyd.run(:com.google.android.gms@263234035@26.32.34 (260400-968093310):5)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at bnli.d(:com.google.android.gms@263234035@26.32.34 (260400-968093310):50)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at bnli.c(:com.google.android.gms@263234035@26.32.34 (260400-968093310):6)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at bnli.run(:com.google.android.gms@263234035@26.32.34 (260400-968093310):33)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1100)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at bnri.run(:com.google.android.gms@263234035@26.32.34 (260400-968093310):8)
+09-12 11:51:51.290  3775 15247 E jumw    : 	at java.lang.Thread.run(Thread.java:1572)
+09-12 11:51:51.349  2573  3476 D NtGnssRecord: MaxCN0:0
+09-12 11:51:51.359 15275 15372 D ProfileInstaller: Skipping profile installation for com.urbandroid.sleep
+09-12 11:51:51.378  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A15440DFDA hal_ts 93351489237589 lux=15.463 Channel0-5=1046.0,495.0,23.0,475.0,100.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:51.392  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:51:51.393  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:51:51.393  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={10136} in 1ms
+09-12 11:51:51.488  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1546111F7 hal_ts 93351599132433 lux=14.162 Channel0-5=958.0,458.0,20.0,437.0,92.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:51.602  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A154814BF0 hal_ts 93351709132069 lux=15.493 Channel0-5=1048.0,496.0,24.0,475.0,101.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:51.609  1974  3888 D StNfcHal: (#05358) Rx 6f 02 0f (hidden)
+09-12 11:51:51.609  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:51.708  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A154A18607 hal_ts 93351819133266 lux=15.759 Channel0-5=1066.0,503.0,25.0,483.0,104.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:51.770  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.gms/.chimera.GmsIntentOperationService
+09-12 11:51:51.819  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A154C1C01D hal_ts 93351929134412 lux=17.193 Channel0-5=1163.0,545.0,28.0,523.0,114.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:51.876  1974  3888 D StNfcHal: (#05359) Rx 6f 02 27 (hidden)
+09-12 11:51:51.876  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:51.896  3775  7178 I cn_CronetUrlRequestContext: destroyNativeStreamLocked org.chromium.net.impl.CronetBidirectionalStream@3a79800
+--------- beginning of system
+09-12 11:51:51.919  2573  3477 W AppOps  : Noting op not finished: uid 10146 pkg com.google.android.gms code 113 startTime of in progress event=1789204884420
+09-12 11:51:51.928  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A154E1FA22 hal_ts 93352039134673 lux=19.100 Channel0-5=1292.0,603.0,32.0,577.0,128.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.038  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A15502343A hal_ts 93352149135923 lux=20.785 Channel0-5=1406.0,656.0,34.0,623.0,143.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.055  3775 15206 I NearbyMediums: Found Fast Ble Advertisements :
+09-12 11:51:52.055  3775 15206 I NearbyMediums: BleAdvertisement { version=2, socketVersion=2, isFast=true, serviceIdHash=null, data=[ 0x23 0x4e 0x4a 0x50 0x47 0x11 0x32 0x0d 0x26 0x14 0x12 0xdd 0x29 0x7c 0x32 0xca 0x65 0xb9 0x77 0x00 0x73 0xc8 0xa4 ], deviceToken=[ 0x42 0xe7 ], rxAdvertisement=[ 0xa0 0x17 0x47 0x0e 0x3d 0xaa 0x2d 0x13 0xc9 0x3e 0x34 0x7f 0xfd 0xfb 0x34 0xb0 0xb8 0xe7 0x8d 0x34 0x48 0x98 0x2b 0xc3 0x86 0xcf 0xad 0x62 0x46 0x57 0xf5 0x28 0x22 0x46 0x84 0x15 0x05 0x7f 0x00 0x00 0x84 0x15 0x06 0x61 0x00 0x00 0x84 0x15 0x04 0x7f 0x00 0x00 0x83 0x15 0x01 0x15 0xcc ] } : 2 times.
+09-12 11:51:52.055  3775 15206 I NearbyMediums: Total 2 fast advertisements from 1 unique advertisers.
+09-12 11:51:52.055  3775 15206 I NearbyMediums: Current Tracked Scanning Clients are : {NearbyConnections.EnvironmentMonitor, NearbySharing}
+09-12 11:51:52.149  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A155226DF6 hal_ts 93352259132381 lux=22.086 Channel0-5=1494.0,695.0,36.0,659.0,153.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.167  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:51:52.169  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:51:52.169  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={10204} in 5ms
+09-12 11:51:52.172  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:51:52.174  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:51:52.174  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={20204} in 4ms
+09-12 11:51:52.186  3985  3985 W dataInfoSend: type=1400 audit(0.0:126454589): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:52.186  3985  3985 W dataInfoSend: type=1400 audit(0.0:126454590): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:52.186  3985  3985 W dataInfoSend: type=1400 audit(0.0:126454591): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:52.186  3985  3985 W dataInfoSend: type=1400 audit(0.0:126454592): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+09-12 11:51:52.186  3985  3985 W dataInfoSend: type=1400 audit(0.0:126454593): avc:  denied  { bpf } for  capability=39  scontext=u:r:bpfloader:s0 tcontext=u:r:bpfloader:s0 tclass=capability2 permissive=0
+--------- beginning of kernel
+09-12 11:51:51.882 23561 23561 W audit   : audit_lost=126215070 audit_rate_limit=5 audit_backlog_limit=64
+09-12 11:51:51.882 23561 23561 E audit   : rate limit exceeded
+09-12 11:51:52.199  1974  3888 D StNfcHal: (#0535A) Rx 6f 02 0f (hidden)
+09-12 11:51:52.200  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:51.910     0     0 W [    C0] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 0, moved it to CPU 2 (rcuog/4-50)
+09-12 11:51:52.258  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A15542A7F6 hal_ts 93352369132381 lux=22.973 Channel0-5=1554.0,723.0,38.0,684.0,159.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.350  2573  3477 D NtGnssRecord: MaxCN0:0
+09-12 11:51:52.368  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A15562E215 hal_ts 93352479133996 lux=24.925 Channel0-5=1686.0,782.0,41.0,739.0,177.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.112 10283 10283 I [binder][0x1a1558c36f9][09:51:52.418189] qca6750: [10283:I:HDD] __wlan_hdd_cfg80211_get_logger_supp_feature: Ring buffer disable
+09-12 11:51:52.421  2573  3155 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+09-12 11:51:52.421  2573  4732 D NtSmartWifiMonitor: get rssi = -62, frequecy=5580, datastall=0, current state=6
+09-12 11:51:52.422  2573  4732 D NtSmartWifiMonitor: 5G Wifi rssi queue: sufficient rssi=-70[-62]
+09-12 11:51:52.467  1974  3888 D StNfcHal: (#0535B) Rx 6f 02 27 (hidden)
+09-12 11:51:52.467  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:52.478  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A155831C03 hal_ts 93352589133058 lux=26.551 Channel0-5=1796.0,831.0,44.0,785.0,190.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.588  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A155A35645 hal_ts 93352699136496 lux=28.413 Channel0-5=1922.0,886.0,47.0,839.0,208.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.655  2331  2331 I adbd    : adbd service requested 'shell,v2,TERM=dumb,raw:am force-stop com.google.android.googlequicksearchbox'
+09-12 11:51:52.663  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.apps.photos/com.google.android.libraries.social.async.BackgroundTaskJobService and for client system
+09-12 11:51:52.663  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.apps.photos/com.google.android.libraries.social.async.BackgroundTaskJobServiceafter removal is 0
+09-12 11:51:52.663  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 37
+09-12 11:51:52.664  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.apps.photos/com.google.android.libraries.social.async.BackgroundTaskJobService
+09-12 11:51:52.665  2573  4026 D NtMemoryManager: not set com.google.android.apps.photos adj to 801
+09-12 11:51:52.674  2573  4026 D NtMemoryManager: set com.google.android.apps.photos adj to 801
+09-12 11:51:52.684  3775  6206 W Settings: Setting airplane_mode_on has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+09-12 11:51:52.687  3775 13963 W SystemServiceRegistry: No service published for: wifirtt
+09-12 11:51:52.701  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A155C38FFF hal_ts 93352809132850 lux=30.010 Channel0-5=2030.0,934.0,48.0,885.0,220.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.403 10330 10330 I [schedu][0x1a155e164d1][09:51:52.708934] qca6750: [10330:I:OSIF] scan start scan id 43887
+09-12 11:51:52.724  2573  4026 I ActivityManager: Force stopping com.google.android.googlequicksearchbox appid=10152 user=0: from pid 15375
+09-12 11:51:52.724  2573  4026 I WindowManager:   Force removing ActivityRecord{178983836 u0 com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.surfaces.voice.robin.main.MainActivity t23625}
+09-12 11:51:52.731   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.732  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.732  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.739  3828  3828 D RecentsView: onTaskRemoved: 23625, not handling task stack changes
+09-12 11:51:52.741  3828  3828 D RecentsView: onTaskRemoved: 23625, not handling task stack changes
+09-12 11:51:52.747  2573  4026 I ActivityManager: Killing 12371:com.google.android.googlequicksearchbox:search/u0a152 (adj 700): stop com.google.android.googlequicksearchbox due to from pid 15375
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: killProcess is called for pid : 12371
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 12371 is service
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.google.android.googlequicksearchbox:interactorafter removal is 1
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 12371 is client
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.googlequicksearchbox/com.google.frameworks.client.data.android.server.tiktok.assistant.InteractorProcessEndpointServiceafter removal is 0
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.googlequicksearchbox/androidx.room.MultiInstanceInvalidationServiceafter removal is 0
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: removing client with pid 12371process namecom.google.android.googlequicksearchbox:search
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/androidx.room.MultiInstanceInvalidationService
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.frameworks.client.data.android.server.tiktok.assistant.InteractorProcessEndpointService
+09-12 11:51:52.749  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.android.libraries.search.assistant.invocation.android.voiceinteraction.sessionservice.assemblies.agsa.AgsaApaRemoteVoiceInteractionSessionService
+09-12 11:51:52.750  2573  4026 W ActivityTaskManager: Force removing ActivityRecord{268153026 u0 com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.surfaces.voice.robin.ui.floaty.activity.FloatyActivity t23667 f}}: app died, no saved state
+09-12 11:51:52.750  3298  3373 D CaptionWindowDecorViewModel: Destroying window decoration for task 23625, decoration=null, callers=com.android.wm.shell.windowdecor.CaptionWindowDecorViewModel.onTaskVanished:234 com.android.wm.shell.fullscreen.FullscreenTaskListener.lambda$onTaskVanished$2:173 com.android.wm.shell.fullscreen.FullscreenTaskListener$$ExternalSyntheticLambda1.accept:0 java.util.Optional.ifPresent:178 com.android.wm.shell.fullscreen.FullscreenTaskListener.onTaskVanished:173 
+09-12 11:51:52.751   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.751  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.751  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.752   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.752  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.752  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.753  2573  3070 W UsageStatsService: Unexpected activity event reported! (com.google.android.googlequicksearchbox/com.google.android.apps.search.assistant.surfaces.voice.robin.ui.floaty.activity.FloatyActivity event : 23 instanceId : 56104718)
+09-12 11:51:52.753   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.753  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.753  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.756  2573  4026 I ActivityManager: Killing 32748:com.google.android.googlequicksearchbox:googleapp/u0a152 (adj 900): stop com.google.android.googlequicksearchbox due to from pid 15375
+09-12 11:51:52.756  3828  3828 D RecentsView: onTaskRemoved: 23667, not handling task stack changes
+09-12 11:51:52.756  3828  3828 D RecentsView: onTaskRemoved: 23667, not handling task stack changes
+09-12 11:51:52.758  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: killProcess is called for pid : 32748
+09-12 11:51:52.758  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 32748 is service
+09-12 11:51:52.758  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: com.nothing.launcherafter removal is 5
+09-12 11:51:52.758  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 32748 is client
+09-12 11:51:52.758  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: removing client with pid 32748process namecom.google.android.googlequicksearchbox:googleapp
+09-12 11:51:52.758  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService
+09-12 11:51:52.758  2573  4026 W ActivityTaskManager: Force removing ActivityRecord{62175433 u0 com.google.android.googlequicksearchbox/.InternalGoogleAppActivityEntrypoint t23634 f}}: app died, no saved state
+09-12 11:51:52.759   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.759  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.759  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.759   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.760  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.760  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.760   789   789 I hwservicemanager: getTransport: Cannot find entry vendor.qti.hardware.servicetracker@1.2::IServicetracker/default in either framework or device VINTF manifest.
+09-12 11:51:52.760  2573  4026 W ActivityTaskManager: servicetracker HIDL not available
+09-12 11:51:52.760  2573  4026 E ActivityTaskManager: Unable to get servicetracker HAL instance
+09-12 11:51:52.461     0     0 W [    C3] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 3, moved it to CPU 1 (lmkd-783)
+09-12 11:51:52.763  2573  4026 I ActivityManager: Killing 5310:com.google.android.googlequicksearchbox:interactor/u0a152 (adj 100): stop com.google.android.googlequicksearchbox due to from pid 15375
+09-12 11:51:52.764  2573  2739 I SensorService: checkAndReportAmbientLightSensorStateChangeLocked new 1 old 1 force 0
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: killProcess is called for pid : 5310
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 5310 is service
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 5310 is service
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 36
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 5310 is service
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 35
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: process with pid 5310 is client
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of service connections for service: com.google.android.gms/.chimera.PersistentApiServiceafter removal is 68
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: removing client with pid 5310process namecom.google.android.googlequicksearchbox:interactor
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaVoiceInteractionSessionService
+09-12 11:51:52.766  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 34
+09-12 11:51:52.767  4813  4833 V OsAgent : broadcastSystemEvent - 7
+09-12 11:51:52.767  2573  4026 D NtMemoryManager: set com.snapchat.android adj to 801
+09-12 11:51:52.767  2573  4026 D NtMemoryManager: set com.google.android.apps.photos adj to 801
+09-12 11:51:52.768  3298  3373 D CaptionWindowDecorViewModel: Destroying window decoration for task 23667, decoration=null, callers=com.android.wm.shell.windowdecor.CaptionWindowDecorViewModel.onTaskVanished:234 com.android.wm.shell.fullscreen.FullscreenTaskListener.lambda$onTaskVanished$2:173 com.android.wm.shell.fullscreen.FullscreenTaskListener$$ExternalSyntheticLambda1.accept:0 java.util.Optional.ifPresent:178 com.android.wm.shell.fullscreen.FullscreenTaskListener.onTaskVanished:173 
+09-12 11:51:52.768  3298  3373 D CaptionWindowDecorViewModel: Destroying window decoration for task 23634, decoration=null, callers=com.android.wm.shell.windowdecor.CaptionWindowDecorViewModel.onTaskVanished:234 com.android.wm.shell.fullscreen.FullscreenTaskListener.lambda$onTaskVanished$2:173 com.android.wm.shell.fullscreen.FullscreenTaskListener$$ExternalSyntheticLambda1.accept:0 java.util.Optional.ifPresent:178 com.android.wm.shell.fullscreen.FullscreenTaskListener.onTaskVanished:173 
+09-12 11:51:52.769  2573  3070 W UsageStatsService: Unexpected activity event reported! (com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.activity.GoogleAppActivity event : 23 instanceId : 242334792)
+09-12 11:51:52.769  2573  2573 V HotwordDetectionConnection: cancelLocked
+09-12 11:51:52.769  2573  2573 W AttentionManagerService: Cannot stop a non-current callback
+09-12 11:51:52.769  2573  4026 W ProcessStats: Tracking association SourceState{4873191 system/1000 BFgs #273083} whose proc state 4 is better than process ProcessState{83d9838 com.google.android.tts/10161 pkg=com.google.android.tts} proc state 15 (15 skipped)
+09-12 11:51:52.770  2573  4026 I ActivityManager:   Force stopping service ServiceRecord{b44c686 u0 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.hotword.hotworddetectionservice.GsaHotwordDetectionService:hotword_detector_0 c:android}
+09-12 11:51:52.770  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: destroyService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.hotword.hotworddetectionservice.GsaHotwordDetectionService:hotword_detector_0
+09-12 11:51:52.770  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: size of client connections for client: systemafter removal is 33
+09-12 11:51:52.771  2573  4026 I AppsFilter: interaction: PackageSetting{6eb366b com.android.microdroid.empty_payload/10256} -> PackageSetting{5d078f6 com.google.android.googlequicksearchbox/10152} BLOCKED
+09-12 11:51:52.772  2573  4026 I AppsFilter: interaction: PackageSetting{ec7c661 com.fitnessapp.app/10465} -> PackageSetting{5d078f6 com.google.android.googlequicksearchbox/10152} BLOCKED
+09-12 11:51:52.773  1691  3491 D NativePermissionController: updatePackagesForUid, UidPackageState{uid: 99002, packageNames: []}
+09-12 11:51:52.774  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.hotword.hotworddetectionservice.GsaHotwordDetectionService:hotword_detector_0 and for client system
+09-12 11:51:52.774  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbind service com.google.android.googlequicksearchbox/com.google.android.apps.gsa.hotword.hotworddetectionservice.GsaHotwordDetectionService:hotword_detector_0not found
+09-12 11:51:52.774  2573  8965 W ServiceConnector.Impl: mayInterruptIfRunning not supported - ignoring
+09-12 11:51:52.775  2573  2741 I ActivityManager: Killing 9127:com.google.android.googlequicksearchbox:trusted_disable_art_image_:com.google.android.apps.gsa.hotword.hotworddetectionservice.GsaHotwordDetectionService:hotword_detector_0/u0a152i2 (adj 999): empty #31
+09-12 11:51:52.778  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayService and for client com.nothing.launcher
+09-12 11:51:52.779  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbind service com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nowoverlayservice.DrawerOverlayServicenot found
+09-12 11:51:52.780  3828  3828 D RecentsView: onTaskRemoved: 23634, not handling task stack changes
+09-12 11:51:52.780  3828  3828 D RecentsView: onTaskRemoved: 23634, not handling task stack changes
+09-12 11:51:52.493  1042  1042 D [FTS_TS]fts_panel_notifier_callback: Notification type:4, early_trigger:1, esd_recoverying:0
+09-12 11:51:52.493  1042  1042 D [FTS_TS]fts_panel_notifier_callback: shashank:Received fps change old fps:60 new fps:90
+09-12 11:51:52.493  1042  1042 I goodix_fp: [info] goodix_panel_state_chg_callback go to the goodix_fb_state_chg_callback type = 4
+09-12 11:51:52.493  1042  1042 I goodix_fp: goodix_panel_state_chg_callback defalut
+09-12 11:51:52.493  1042  1042 I [drm:dsi_display_set_mode [msm_drm]] [msm-dsi-info]: mdp_transfer_time=0, hactive=1080, vactive=2392, fps=90, clk_rate=0
+09-12 11:51:52.493  1042  1042 I [drm:send_refreshrate_cmd [msm_drm]] [msm-dsi-info]: send fps cmd, fps = 90, last_fps = 60
+09-12 11:51:52.496 11786 11786 W binder_debug: 207 callbacks suppressed
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35625957, process died.
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35625958, process died.
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35625960, process died.
+09-12 11:51:52.782  2573  2573 D VoiceInteractionServiceManager: onBindingDied to ComponentInfo{com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService}
+09-12 11:51:52.782  2573  3162 D InetDiagMessage: Destroyed 5 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:51:52.783  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:51:52.783  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={10152} in 6ms
+09-12 11:51:52.785  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: No Video Codec Entry for Application[pid(10346): uid(10152)]
+09-12 11:51:52.785  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: Concurrent Codec Usage Report for the Process[pid(10346): uid(10152)] is Peak { AudioDec[ SW: 2 ] } Peak Pixels: 0
+09-12 11:51:52.785  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: No Video Codec Entry for Application[pid(12371): uid(10152)]
+09-12 11:51:52.785  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: Concurrent Codec Usage Report for the Process[pid(12371): uid(10152)] is Peak { AudioDec[ SW: 1 ] } Peak Pixels: 0
+09-12 11:51:52.786  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: Concurrent Codec Usage Report for the Process[pid(13802): uid(10152)] is Peak { VideoDec[ HW: 4 ] } Peak Pixels: 921600
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35625955, process died.
+09-12 11:51:52.786  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: Concurrent Codec Usage Report for the Process[pid(23081): uid(10152)] is Peak { VideoDec[ HW: 1 ] } Peak Pixels: 230400
+09-12 11:51:52.786  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: No Video Codec Entry for Application[pid(26801): uid(10152)]
+09-12 11:51:52.786  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: Concurrent Codec Usage Report for the Process[pid(26801): uid(10152)] is Peak { AudioDec[ SW: 1 ] } Peak Pixels: 0
+09-12 11:51:52.786  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: No Video Codec Entry for Application[pid(26976): uid(10152)]
+09-12 11:51:52.786  2052  3378 I ResourceManagerMetrics: pushConcurrentUsageReport: Concurrent Codec Usage Report for the Process[pid(26976): uid(10152)] is Peak { AudioDec[ SW: 1 ] } Peak Pixels: 0
+09-12 11:51:52.786  1691  8081 V audio_utils::mutex: mutex_impl: audio_mutex initialized: ret:0  order:6
+09-12 11:51:52.787  2573  2573 V NotificationListeners: 0 notification listener connection lost: ComponentInfo{com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService}
+09-12 11:51:52.787  2573  2573 W NotificationListeners: 0 notification listener binding died: ComponentInfo{com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService}
+09-12 11:51:52.788  2573  3191 D AppWidgetServiceImpl: Trying to notify widget update for package android with widget id: 8
+09-12 11:51:52.788  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService and for client system
+09-12 11:51:52.788  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbind service com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerServicenot found
+09-12 11:51:52.788  2573  3162 D QuicConnectionCloser: Close QUIC socket for QuicConnectionCloseInfo{uid: 10152, netId: 136, cookie: 401462, src: /192.168.178.160:36066, dst: /142.251.154.1:443, payload length: 72}, destroySocket=true
+09-12 11:51:52.789  1974  3888 D StNfcHal: (#0535C) Rx 6f 02 0f (hidden)
+09-12 11:51:52.789  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:52.789  3616  3616 D CarrierSvcBindHelper: onHandleForceStop: [com.google.android.googlequicksearchbox]
+09-12 11:51:52.790  1699  1933 D DisplayModeController: setDesiredMode 4630946978939328130 {mode={fps=90.00 Hz, modePtr={id=1, vsyncRate=90.00 Hz, peakRefreshRate=90.00 Hz}}, emitEvent=true, force=false}
+09-12 11:51:52.792  3616  3616 D CarrierSvcBindHelper: No carrier app for: 1
+09-12 11:51:52.792  1512  2487 D STHAL: SoundTriggerSession: RegisterHalEvent: 652: [c1] ST_EVENT_SESSION_DEREGISTER capture_handle 70
+09-12 11:51:52.797  1638  1638 W SDM     : HWDeviceDRM::GetSupportedBitClkRate: Requested rate not supported: 0
+09-12 11:51:52.797  1638  1638 I SDM     : HWDeviceDRM::UpdateMixerAttributes: Mixer WxH 1080x2392-0 for Peripheral
+09-12 11:51:52.797  1638  1638 I SDM     : HWCDisplay::SubmitDisplayConfig: Active configuration changed from config 2 to 1
+09-12 11:51:52.801  1512  2487 I PAL: API: pal_stream_stop: 404: Enter. Stream handle :0xb4000072cd0e1010K
+09-12 11:51:52.802  2573  5482 V ActivityManager: Got obituary of 5310:com.google.android.googlequicksearchbox:interactor
+09-12 11:51:52.802  2573  5481 D NotificationListeners: Removing active service ComponentInfo{com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService}
+09-12 11:51:52.802  2573  2711 E AppOps  : Bad call made by uid 1000. Package "com.google.android.googlequicksearchbox" does not belong to uid 1000.
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35625962, process died.
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35626137, process died.
+09-12 11:51:52.496 11786 11786 I binder  : undelivered transaction 35626180, process died.
+09-12 11:51:52.802  2573  2711 W BinderNative: Uncaught exception from death notification
+09-12 11:51:52.802  2573  2711 W BinderNative: java.lang.SecurityException: Specified package "com.google.android.googlequicksearchbox" under uid 1000 but it is not
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5284)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5147)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5121)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5111)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.stopWatchingAsyncNoted(AppOpsService.java:3962)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.lambda$startWatchingAsyncNoted$8(AppOpsService.java:3938)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService.$r8$lambda$8-LvphSu5hQo1Pm8R22O3seI00E(AppOpsService.java:0)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at com.android.server.appop.AppOpsService$$ExternalSyntheticLambda1.onInterfaceDied(R8$$SyntheticClass:0)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at android.os.RemoteCallbackList$Builder$1.onCallbackDied(RemoteCallbackList.java:337)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at android.os.RemoteCallbackList$Interface.binderDied(RemoteCallbackList.java:229)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at android.os.IBinder$DeathRecipient.binderDied(IBinder.java:340)
+09-12 11:51:52.802  2573  2711 W BinderNative: 	at android.os.BinderProxy.sendDeathNotice(BinderProxy.java:787)
+09-12 11:51:52.802  3828  5702 I othing.launcher: AssetManager2(0xb400007ac56646b8) locale list changing from [] to [de-DE]
+09-12 11:51:52.805  1512  2487 I PAL: StreamSoundTrigger: stop: 358: Enter, stream direction 2
+09-12 11:51:52.805  1512  2487 I PAL: StreamSoundTrigger: ProcessEvent: 2465: StActive: handle event 5 for stream instance 1
+09-12 11:51:52.806  1512  2487 E PAL: ResourceManager: updateECDeviceMap: 6000: Cannot reset as ec ref not present
+09-12 11:51:52.806  1512  2487 I PAL: StreamSoundTrigger: setECRef_l: 664: Enter, enable 0, cached rx device Null, requested rx device Null
+09-12 11:51:52.806  1512  2487 I PAL: StreamSoundTrigger: setECRef_l: 667: No need to set ec ref
+09-12 11:51:52.806  1512  2487 I PAL: StreamSoundTrigger: setECRef_l: 691: Exit, status 0
+09-12 11:51:52.807  2573  4028 W SoundTriggerService: DETACH       ERROR: Client died for: com.google.android.googlequicksearchbox
+09-12 11:51:52.808  1422  1422 I Zygote  : Process 5310 exited due to signal 9 (Killed)
+09-12 11:51:52.808  2573  4062 W SoundTriggerService: DETACH       ERROR: Client died for: com.google.android.googlequicksearchbox
+09-12 11:51:52.809  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A155E3C9F0 hal_ts 93352919132069 lux=30.217 Channel0-5=2044.0,939.0,49.0,891.0,223.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.809  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaVoiceInteractionSessionService and for client system
+09-12 11:51:52.809  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbind service com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaVoiceInteractionSessionServicenot found
+09-12 11:51:52.505  1042  1042 D [FTS_TS]fts_panel_notifier_callback: Notification type:4, early_trigger:0, esd_recoverying:0
+09-12 11:51:52.505  1042  1042 D [FTS_TS]fts_panel_notifier_callback: shashank:Received fps change old fps:60 new fps:90
+09-12 11:51:52.809  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaVoiceInteractionSessionService and for client system
+09-12 11:51:52.809  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbind service com.google.android.googlequicksearchbox/com.google.android.apps.gsa.nga.engine.viss.NgaVoiceInteractionSessionServicenot found
+09-12 11:51:52.809  3828  5702 I othing.launcher: AssetManager2(0xb400007ac5641a78) locale list changing from [] to [de-DE]
+09-12 11:51:52.810  1512  2487 I PAL: SoundTriggerEngineGsl: StopRecognition: 1194: Enter
+09-12 11:51:52.811  2573  2747 I VoiceInteractionManager: Force stopping current voice interactor: ComponentInfo{com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService}
+09-12 11:51:52.812  1512  2487 D PAL: HotwordInterface: SetParameter: 167: Unsupported param id 2
+09-12 11:51:52.813  1512  2487 I PAL: SoundTriggerEngineGsl: ProcessStopRecognition: 1161: Enter
+09-12 11:51:52.813  1512  2487 I PAL: ResourceManager: acquireWakeLock: 1312: Acquiring wake lock audio_pal_wl
+09-12 11:51:52.813  1512  2487 I PAL: SoundTriggerEngineGsl: UpdateSessionPayload: 1804: Enter, param : 4
+09-12 11:51:52.813  1512  2487 E PAL: HotwordInterface: GetParameter: 233: Unsupported param id 30
+09-12 11:51:52.813  1512  2487 I PAL: PayloadBuilder: payloadSVAConfig: 1915: PID 0x8001051, payload 0xb4000073bd125cf0K size 16
+09-12 11:51:52.815  2573  4028 I SoundTriggerMiddlewareLogging: DETACH ()
+09-12 11:51:52.820  1512  2487 D AGM: graph: graph_set_config: 1111 entry graph_handle 0x147534c
+09-12 11:51:52.822  1691 21178 V AudioFlinger: 5310 died, releasing its sessions
+09-12 11:51:52.822  1691 21178 V AudioFlinger:  pid 3616 @ 0
+09-12 11:51:52.822  1691 21178 V AudioFlinger:  pid 16314 @ 1
+09-12 11:51:52.822  1691 21178 V AudioFlinger:  pid 16314 @ 2
+09-12 11:51:52.822  1691 21178 V AudioFlinger:  pid 2573 @ 3
+09-12 11:51:52.822  1691 21178 V AudioFlinger:  pid 13281 @ 4
+09-12 11:51:52.825  1512  2487 D AGM: graph: graph_set_config: 1119 exit, graph handle 0x147534c, ret 0
+09-12 11:51:52.826  1512  2487 D AGM: graph: graph_stop: 928 entry graph_handle 0x147534c
+09-12 11:51:52.826  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+09-12 11:51:52.827  2573  3162 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+09-12 11:51:52.827  2573  3162 D InetDiagMessage: Destroyed live tcp sockets for uids={20152} in 1ms
+09-12 11:51:52.523  2487  2487 I adsp_sleepmon: Audio: num_sessions=0,num_lpi_sessions=0,timer_pending=1
+09-12 11:51:52.828  1512  2487 D AGM: graph: graph_stop: 976 exit, ret 0
+09-12 11:51:52.829  1512  2487 I PAL: ResourceManager: voteSleepMonitor: 2142: Unvoting done for lpi use case, lpi votes 0, nlpi votes : 0
+09-12 11:51:52.832  1512  2487 I PAL: SoundTriggerEngineGsl: UpdateState: 585: Engine state transitioned from 2 to 1
+09-12 11:51:52.832  1512  2487 I PAL: ResourceManager: releaseWakeLock: 1334: Releasing wake lock audio_pal_wl
+09-12 11:51:52.832  1512  2487 I PAL: SoundTriggerEngineGsl: ProcessStopRecognition: 1184: Exit, status = 0
+09-12 11:51:52.832  1512  2487 I PAL: SoundTriggerEngineGsl: StopRecognition: 1229: Exit, status = 0
+09-12 11:51:52.832  1512  2487 I PAL: StreamSoundTrigger: ProcessEvent: 2526: Stop device 40-PAL_DEVICE_IN_HANDSET_VA_MIC
+09-12 11:51:52.832  1512  2487 I PAL: StreamSoundTrigger: ProcessEvent: 2532: Close device 40-PAL_DEVICE_IN_HANDSET_VA_MIC
+09-12 11:51:52.832  1512  2487 I PAL: Device: close: 555: Enter. deviceCount 1 for device id 40 (PAL_DEVICE_IN_HANDSET_VA_MIC)
+09-12 11:51:52.842  2573  2573 V NotificationListeners: enabling notification listener for 0: ComponentInfo{com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService}
+09-12 11:51:52.842  3828  5702 I othing.launcher: AssetManager2(0xb400007ac56abb58) locale list changing from [] to [de-DE]
+09-12 11:51:52.842  2573  2573 V NotificationListeners: binding: Intent { act=android.service.notification.NotificationListenerService cmp=com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService (has extras) }
+09-12 11:51:52.842  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService and for client system
+09-12 11:51:52.843  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerServiceare :1
+09-12 11:51:52.843  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : systemare :34
+09-12 11:51:52.539  2748  2748 I binder  : 2748:2573 cannot find target node
+09-12 11:51:52.539  2748  2748 I binder  : 2573:2748 transaction async to 0:0 failed 35626320/29189/-22, code 9 size 136-0 line 3359
+09-12 11:51:52.844  1512  2487 I PAL: Device: close: 569: Exit. deviceCount 0 for device id 40 (PAL_DEVICE_IN_HANDSET_VA_MIC), exit status 0
+09-12 11:51:52.844  1512  2487 I PAL: StreamSoundTrigger: TransitTo: 1783: Stream instance 1: state transitioned from ST_STATE_ACTIVE to ST_STATE_LOADED
+09-12 11:51:52.844  1512  2487 I PAL: StreamSoundTrigger: stop: 374: Exit, status 0
+09-12 11:51:52.844  1512  2487 I PAL: API: pal_stream_stop: 442: Exit. status 0
+09-12 11:51:52.845  2573  2748 I SoundTriggerMiddlewareLogging: STOP_RECOGNITION (1)
+09-12 11:51:52.845  2573  2748 E IPCThreadState: Binder transaction failure. id: 35626320, BR_*: 29189, error: -22 (Invalid argument)
+09-12 11:51:52.845  2573  2748 W ActivityManager: pid 2573 system sent binder code 9 with flags 1 to frozen apps and got error -32
+09-12 11:51:52.845  2573  2748 W SoundTriggerHelper: PAUSE                     ERROR: RemoteException for: 7438e7db-113e-4aff-b9f8-d5b5b2d2ca86
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: forceStopAndUnloadModel
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: android.os.DeadObjectException
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.BinderProxy.transactNative(Native Method)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.BinderProxy.transact(BinderProxy.java:599)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.internal.app.IHotwordRecognitionStatusCallback$Stub$Proxy.onRecognitionPaused(IHotwordRecognitionStatusCallback.java:508)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.voiceinteraction.HotwordDetectionConnection$SoundTriggerCallback.onRecognitionPaused(HotwordDetectionConnection.java:770)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.soundtrigger.SoundTriggerHelper.stopRecognitionLocked(SoundTriggerHelper.java:1322)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.soundtrigger.SoundTriggerHelper.updateRecognitionLocked(SoundTriggerHelper.java:1000)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.soundtrigger.SoundTriggerHelper.updateAllRecognitionsLocked(SoundTriggerHelper.java:980)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.soundtrigger.SoundTriggerHelper.onAppOpStateChanged(SoundTriggerHelper.java:625)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.soundtrigger.SoundTriggerService$LocalSoundTriggerService$SessionImpl$$ExternalSyntheticLambda2.accept(R8$$SyntheticClass:0)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.soundtrigger.SoundTriggerService$MyAppOpsListener.onOpChanged(SoundTriggerService.java:393)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.app.AppOpsManager$OnOpChangedListener.onOpChanged(AppOpsManager.java:8035)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.app.AppOpsManager$OnOpChangedListener.onOpChanged(AppOpsManager.java:8059)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.app.AppOpsManager$3.opChanged(AppOpsManager.java:9014)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.appop.AppOpsService$ModeCallback.onOpModeChanged(AppOpsService.java:855)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.appop.AppOpsService.notifyOpChanged(AppOpsService.java:2636)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.appop.AppOpsService.$r8$lambda$xAhQeGPgXGiSjmtMzzdf_avZ1GE(AppOpsService.java:0)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.appop.AppOpsService$$ExternalSyntheticLambda11.accept(R8$$SyntheticClass:0)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.internal.util.function.pooled.PooledLambdaImpl.doInvoke(PooledLambdaImpl.java:345)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.internal.util.function.pooled.PooledLambdaImpl.invoke(PooledLambdaImpl.java:204)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.internal.util.function.pooled.OmniFunction.run(OmniFunction.java:87)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.Handler.handleCallback(Handler.java:995)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.Looper.loopOnce(Looper.java:283)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.Looper.loop(Looper.java:392)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at android.os.HandlerThread.run(HandlerThread.java:94)
+09-12 11:51:52.845  2573  2748 E SoundTriggerHelper: 	at com.android.server.ServiceThread.run(ServiceThread.java:49)
+09-12 11:51:52.845  2573  2748 D SoundTriggerHelper: Unloading previously loaded dangling model 1
+09-12 11:51:52.846  2573  2573 I AppsFilter: interaction: PackageSetting{6eb366b com.android.microdroid.empty_payload/10256} -> PackageSetting{b59e97e com.google.android.googlequicksearchbox/10152} BLOCKED
+09-12 11:51:52.846  2573  2573 I AppsFilter: interaction: PackageSetting{ec7c661 com.fitnessapp.app/10465} -> PackageSetting{b59e97e com.google.android.googlequicksearchbox/10152} BLOCKED
+09-12 11:51:52.846  2573  3208 D BackgroundInstallControlService: Package event received: 0
+09-12 11:51:52.846  2573  2573 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@abd098df does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+09-12 11:51:52.552 12742 12742 I binder  : undelivered transaction 35626134, process died.
+09-12 11:51:52.859  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: killProcess is called for pid : 9127
+09-12 11:51:52.859  1691  8081 V AudioFlinger: 9127 died, releasing its sessions
+09-12 11:51:52.860  1691  8081 V AudioFlinger:  pid 3616 @ 0
+09-12 11:51:52.860  1691  8081 V AudioFlinger:  pid 16314 @ 1
+09-12 11:51:52.860  1691  8081 V AudioFlinger:  pid 16314 @ 2
+09-12 11:51:52.860  1691  8081 V AudioFlinger:  pid 2573 @ 3
+09-12 11:51:52.860  1691  8081 V AudioFlinger:  pid 13281 @ 4
+09-12 11:51:52.860  2573  2739 I SensorService: checkAndReportAmbientLightSensorStateChangeLocked new 1 old 1 force 0
+09-12 11:51:52.866  1422  1422 D Zygote  : Forked child process 15381
+09-12 11:51:52.867  1422  1422 I Zygote  : Process 9127 exited due to signal 9 (Killed)
+09-12 11:51:52.868  3828  5702 W HWUI    : Image decoding logging dropped!
+09-12 11:51:52.869  2573  2749 I ActivityManager: Start proc 15381:com.google.android.googlequicksearchbox:interactor/u0a152 for service {com.google.android.googlequicksearchbox/com.google.android.apps.gsa.notificationlistener.GsaNotificationListenerService}
+09-12 11:51:52.869  2573  2749 I ActivityManager: ProcessObserver broadcast disabled
+09-12 11:51:52.870  1512  2487 I PAL: API: pal_stream_close: 285: Enter. Stream handle :0xb4000072cd0e1010K
+09-12 11:51:52.870  1512  2487 I PAL: StreamSoundTrigger: close: 308: Enter, stream direction 2
+09-12 11:51:52.870  1512  2487 I PAL: StreamSoundTrigger: ProcessEvent: 2053: StLoaded: handle event 1 for stream instance 1
+09-12 11:51:52.870  1512  2487 I PAL: StreamSoundTrigger: UnloadSoundModel: 1206: Enter
+09-12 11:51:52.870  1512  2487 I PAL: StreamSoundTrigger: UnloadSoundModel: 1209: Unload engine 1
+09-12 11:51:52.870  1512  2487 I PAL: SoundTriggerEngineGsl: UnloadSoundModel: 802: Enter
+09-12 11:51:52.870  1512  2487 D PAL: HotwordInterface: SetParameter: 167: Unsupported param id 4
+09-12 11:51:52.870  1512  2487 I AGM: API: agm_session_aif_connect: 625 disconnecting aifid:11 with session id=115
+09-12 11:51:52.870  1512  2487 D AGM: graph: graph_stop: 928 entry graph_handle 0x147534c
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 80 GKV size:5
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 83 key:0xbc000000, value:0xbc000002 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 83 key:0xb1000000, value:0xb1000003 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 83 key:0xab000000, value:0x1 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 83 key:0xa3000000, value:0xa3000006 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 83 key:0xad000000, value:0xad00000c 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 87 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: CKV count:2
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 90 key:0xd4000000, value:0x1 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 90 key:0xa9000000, value:0x1 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 92 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 95 property count:3
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 102 
+09-12 11:51:52.870  1512  2487 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:51:52.870  1512  2487 D AGM: metadata: 
+09-12 11:51:52.875  1512  2487 D AGM: graph: graph_stop: 976 exit, ret 0
+09-12 11:51:52.875  1512  2487 I AGM: device: device_set_metadata: 708 Setting device metadata for CODEC_DMA-LPAIF_VA-TX-0
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 80 GKV size:0
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 87 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: CKV count:0
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 92 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 95 property count:2
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 100 0x2 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 100 0x5 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 102 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:51:52.875  1512  2487 D AGM: metadata: 
+09-12 11:51:52.875  1512  2487 I AGM: session: session_obj_set_sess_aif_metadata: 1856 Setting metadata for sess_id 115, aif id 11
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 79 *************************Metadata*************************
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 80 GKV size:0
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 87 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: CKV count:0
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 92 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 94 Property ID:134217744
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 95 property count:1
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 98 Property Values: 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 100 0x3 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 102 
+09-12 11:51:52.875  1512  2487 D AGM: metadata: metadata_print: 103 ****************Metadata Done***************************
+09-12 11:51:52.875  1512  2487 D AGM: metadata: 
+09-12 11:51:52.875  1512  2487 I AGM: session: session_obj_set_sess_aif_metadata: 1861 Exit
+09-12 11:51:52.875  1512  2487 E AGM: session: session_stop: 1260 session not in STARTED state, current state:4
+09-12 11:51:52.875  1512  2487 D AGM: session: session_close: 1328 enter
+09-12 11:51:52.875  1512  2487 D AGM: graph: graph_close: 762 entry handle 0x147534c
+09-12 11:51:52.877  2573  3124 I system_server: AssetManager2(0xb400007ac5694db8) locale list changing from [] to [de-DE]
+09-12 11:51:52.878  1512  2487 D AGM: graph: graph_close: 783 exit, ret 0
+09-12 11:51:52.878  1512  2487 D AGM: session: session_close: 1379 exit, ret 0
+09-12 11:51:52.878  4813  4833 V OsAgent : broadcastSystemEvent - 7
+09-12 11:51:52.879  1512  2487 I PAL: ResourceManager: freeFrontEndIds: 7339: stream type 17, freeing 115
+09-12 11:51:52.881  1512  2487 I PAL: SoundTriggerEngineGsl: UpdateState: 585: Engine state transitioned from 1 to 0
+09-12 11:51:52.881  1512  2487 I PAL: SoundTriggerEngineGsl: UnloadSoundModel: 835: Exit, status = 0
+09-12 11:51:52.881  1512  2487 I PAL: SoundTriggerEngineGsl: ~SoundTriggerEngineGsl: 549: Enter
+09-12 11:51:52.881  1512 10324 I PAL: SoundTriggerEngineGsl: ProcessEventTask: 90: done waiting on cond
+09-12 11:51:52.881  1512 10324 I PAL: SoundTriggerEngineGsl: ProcessEventTask: 141: Exit
+09-12 11:51:52.882  3828  3828 I NT-IHotseatDiffCalculator: updateDsbHeight: current dsbHeight is 137,  inv.mHSBarStyle = GOOGLE_BAR realWidthHeight is -1
+09-12 11:51:52.883  1512  2487 I PAL: SoundTriggerEngineGsl: ~SoundTriggerEngineGsl: 558: Thread joined
+09-12 11:51:52.883  1512  2487 I PAL: SoundTriggerEngineGsl: ~SoundTriggerEngineGsl: 579: Exit
+09-12 11:51:52.885  1512  2487 D PAL: HotwordInterface: ~HotwordInterface: 114: Enter
+09-12 11:51:52.885  1512  2487 D PAL: HotwordInterface: ~HotwordInterface: 119: Exit
+09-12 11:51:52.886  1512  2487 I PAL: StreamSoundTrigger: UnloadSoundModel: 1248: Exit, status 0
+09-12 11:51:52.886  1512  2487 I PAL: StreamSoundTrigger: TransitTo: 1783: Stream instance 1: state transitioned from ST_STATE_LOADED to ST_STATE_IDLE
+09-12 11:51:52.886  1512  2487 I PAL: StreamSoundTrigger: close: 321: Exit, status 0
+09-12 11:51:52.886  1512  2487 I PAL: ResourceManager: GetConcurrencyInfo: 5502: stream type 17 Tx conc 0, Rx conc 0, concurrency allowed
+09-12 11:51:52.886  1512  2487 I PAL: ResourceManager: GetConcurrencyInfo: 5502: stream type 17 Tx conc 0, Rx conc 0, concurrency allowed
+09-12 11:51:52.886  1512  2487 I PAL: ResourceManager: GetConcurrencyInfo: 5502: stream type 17 Tx conc 0, Rx conc 0, concurrency allowed
+09-12 11:51:52.886  1512  2487 I PAL: StreamSoundTrigger: ~StreamSoundTrigger: 246: Join timer thread
+09-12 11:51:52.886  1512 10315 I PAL: StreamSoundTrigger: TimerThread: 940: Exit
+09-12 11:51:52.887  1512  2487 I PAL: ResourceManager: deregisterStream: 3703: stream type 17
+09-12 11:51:52.887  1512  2487 I PAL: StreamSoundTrigger: ~StreamSoundTrigger: 302: Exit
+09-12 11:51:52.887  1512  2487 I PAL: API: pal_stream_close: 324: Exit. status 0
+09-12 11:51:52.888  2573  2748 I SoundTriggerMiddlewareLogging: UNLOAD_MODEL (1)
+09-12 11:51:52.888  2573  2748 W ActivityManager: pid 2573 system sent binder code 1 with flags 1 to frozen apps and got error -32
+09-12 11:51:52.888  2573  2748 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+09-12 11:51:52.890  2573  2747 W VoiceInteractionManager: Failed to unload keyphrase 101:-2147483648
+09-12 11:51:52.893  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbindService is called for service : com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService and for client system
+09-12 11:51:52.893  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: unbind service com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionServicenot found
+09-12 11:51:52.894 15381 15381 I hbox:interactor: Using generational CollectorTypeCMC GC.
+09-12 11:51:52.895  2573  4062 I SoundTriggerMiddlewareLogging: DETACH ()
+09-12 11:51:52.892  2573  3191 D AppWidgetServiceImpl: Trying to notify widget update for package com.google.android.googlequicksearchbox with widget id: 8
+09-12 11:51:52.902 15381 15381 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+09-12 11:51:52.906  2573  2748 W ActivityManager: ProcessRecord{2b79515 0:com.google.android.googlequicksearchbox:googleapp/u0a152} is attached to a previous process 32748
+09-12 11:51:52.907  2573  2748 V GrammaticalInflectionUtils: AttributionSource: android.content.AttributionSource@abd098df does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+09-12 11:51:52.910  2573  2751 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10152/pid_12371
+09-12 11:51:52.910  1422  1422 I Zygote  : Process 12371 exited due to signal 9 (Killed)
+09-12 11:51:52.913  3828  5638 I othing.launcher: AssetManager2(0xb400007ac566c098) locale list changing from [] to [de-DE]
+09-12 11:51:52.918  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A1560404F5 hal_ts 93353029145662 lux=31.045 Channel0-5=2100.0,963.0,50.0,916.0,231.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:52.919  2573  2750 D ActivityManager: uid = 10152, pid = 15381, processName = com.google.android.googlequicksearchbox:interactor is not top app, set nt foreground
+09-12 11:51:52.925  2573  3124 I system_server: AssetManager2(0xb400007ac5676f98) locale list changing from [] to [de-DE]
+09-12 11:51:52.927  2573  3476 E AppOps  : Bad call made by uid 1000. Package "com.google.android.googlequicksearchbox" does not belong to uid 1000.
+09-12 11:51:52.927  2573  3476 W BinderNative: Uncaught exception from death notification
+09-12 11:51:52.927  2573  3476 W BinderNative: java.lang.SecurityException: Specified package "com.google.android.googlequicksearchbox" under uid 1000 but it is not
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5284)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5147)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5121)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5111)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.stopWatchingAsyncNoted(AppOpsService.java:3962)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.lambda$startWatchingAsyncNoted$8(AppOpsService.java:3938)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService.$r8$lambda$8-LvphSu5hQo1Pm8R22O3seI00E(AppOpsService.java:0)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at com.android.server.appop.AppOpsService$$ExternalSyntheticLambda1.onInterfaceDied(R8$$SyntheticClass:0)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at android.os.RemoteCallbackList$Builder$1.onCallbackDied(RemoteCallbackList.java:337)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at android.os.RemoteCallbackList$Interface.binderDied(RemoteCallbackList.java:229)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at android.os.IBinder$DeathRecipient.binderDied(IBinder.java:340)
+09-12 11:51:52.927  2573  3476 W BinderNative: 	at android.os.BinderProxy.sendDeathNotice(BinderProxy.java:787)
+09-12 11:51:52.927  2573  4040 W WindowManager: Cannot find window which accessibility connection is added to
+09-12 11:51:52.927  1691 21178 V AudioFlinger: 12371 died, releasing its sessions
+09-12 11:51:52.927  1691 21178 V AudioFlinger:  pid 3616 @ 0
+09-12 11:51:52.927  1691 21178 V AudioFlinger:  pid 16314 @ 1
+09-12 11:51:52.927  1691 21178 V AudioFlinger:  pid 16314 @ 2
+09-12 11:51:52.927  1691 21178 V AudioFlinger:  pid 2573 @ 3
+09-12 11:51:52.927  1691 21178 V AudioFlinger:  pid 13281 @ 4
+09-12 11:51:52.927  2573  2741 W ActivityManager: setHasOverlayUi called on unknown pid: 12371
+09-12 11:51:52.928  2573  3162 D ConnectivityService: releasing NetworkRequest [ REQUEST id=12852, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10152 RequestorUid: 10152 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+09-12 11:51:52.928  2573  3162 D ConnectivityService: releasing NetworkRequest [ REQUEST id=12856, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10152 RequestorUid: 10152 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+09-12 11:51:52.933  2573  5483 D CompatibilityInfo: mCompatibilityFlags - 0
+09-12 11:51:52.933  2573  5483 D CompatibilityInfo: applicationDensity - 420
+09-12 11:51:52.933  2573  5483 D CompatibilityInfo: applicationScale - 1.0
+09-12 11:51:52.934  2573  5483 D OomAdjuster: process : com.google.android.googlequicksearchbox:interactor, pid = 15381, isTop = false, uid = 10152, hasActivity = false
+09-12 11:51:52.934  2573  5483 D OomAdjuster: process : com.google.android.googlequicksearchbox:interactor is not top!
+09-12 11:51:52.939  2573  3277 V ActivityManager: Got obituary of 12371:com.google.android.googlequicksearchbox:search
+09-12 11:51:52.941  2148 24156 D BufferPoolAccessor2.0: bufferpool2 0xb400006e6b5d4558 : 0(0 size) total buffers - 0(0 size) used buffers - 576/581 (recycle/alloc) - 6/581 (fetch/transfer)
+09-12 11:51:52.941  2148 24156 D BufferPoolAccessor2.0: Destruction - bufferpool2 0xb400006e6b5d4558 cached: 0/0M, 0/0% in use; allocs: 581, 99% recycled; transfers: 581, 99% unfetched
+09-12 11:51:52.952  4813  4833 V OsAgent : broadcastSystemEvent - 7
+09-12 11:51:52.955 15381 15381 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-12 11:51:52.958  3828  3828 I NT-IHotseatDiffCalculator: updateDsbHeight: current dsbHeight is 137,  inv.mHSBarStyle = GOOGLE_BAR realWidthHeight is 147
+09-12 11:51:52.959 15381 15381 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/org.apache.http.legacy.jar
+09-12 11:51:52.961 15381 15381 D nativeloader: Configuring clns-9 for other apk /system_ext/framework/com.android.extensions.appfunctions.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/lib/arm64:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/base.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_config.xxhdpi.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_feature_module.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_play_ml_module.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_tclib_native_feature_module.apk!/lib/arm64-v8a, permitted_
+09-12 11:51:52.961 15381 15381 D nativeloader: Extending system_exposed_libraries: libbinauralrenderer_wrapper.qti.so:libhoaeffects.qti.so:libupdateprof.qti.so:libthermalclient.qti.so:libdiag_system.qti.so:libqape.qti.so:libqesdk_ndk_platform.qti.so:liblistenjni.qti.so
+09-12 11:51:52.962 15381 15381 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+09-12 11:51:52.962 15381 15381 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+09-12 11:51:52.965  2573  3124 I system_server: AssetManager2(0xb400007ac5693af8) locale list changing from [] to [de-DE]
+09-12 11:51:52.972  2573  5483 V ActivityManager: Got obituary of 32748:com.google.android.googlequicksearchbox:googleapp
+09-12 11:51:52.972  2573  3162 D ConnectivityService: releasing NetworkRequest [ REQUEST id=11431, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10152 RequestorUid: 10152 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+09-12 11:51:52.972  2573  3162 D ConnectivityService: releasing NetworkRequest [ REQUEST id=11454, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10152 RequestorUid: 10152 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+09-12 11:51:52.973  2573  2749 W ActivityManager: Slow operation: 66ms so far, now at startProcess: asking zygote to start proc
+09-12 11:51:52.973  2573  3056 W WindowManager: Cannot find window which accessibility connection is added to
+09-12 11:51:52.973  2573  3282 E AppOps  : Bad call made by uid 1000. Package "com.google.android.googlequicksearchbox" does not belong to uid 1000.
+09-12 11:51:52.973  2573  3162 D ConnectivityService: releasing NetworkRequest [ REQUEST id=11476, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10152 RequestorUid: 10152 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+09-12 11:51:52.973  2573  2741 W ActivityManager: setHasOverlayUi called on unknown pid: 32748
+09-12 11:51:52.974  2573  3282 W BinderNative: Uncaught exception from death notification
+09-12 11:51:52.974  2573  3282 W BinderNative: java.lang.SecurityException: Specified package "com.google.android.googlequicksearchbox" under uid 1000 but it is not
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5284)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5147)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5121)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:5111)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.stopWatchingAsyncNoted(AppOpsService.java:3962)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.lambda$startWatchingAsyncNoted$8(AppOpsService.java:3938)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService.$r8$lambda$8-LvphSu5hQo1Pm8R22O3seI00E(AppOpsService.java:0)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at com.android.server.appop.AppOpsService$$ExternalSyntheticLambda1.onInterfaceDied(R8$$SyntheticClass:0)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at android.os.RemoteCallbackList$Builder$1.onCallbackDied(RemoteCallbackList.java:337)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at android.os.RemoteCallbackList$Interface.binderDied(RemoteCallbackList.java:229)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at android.os.IBinder$DeathRecipient.binderDied(IBinder.java:340)
+09-12 11:51:52.974  2573  3282 W BinderNative: 	at android.os.BinderProxy.sendDeathNotice(BinderProxy.java:787)
+09-12 11:51:52.988  1422  1422 D Zygote  : Forked child process 15392
+09-12 11:51:52.988  2573  2749 W ActivityManager: Slow operation: 82ms so far, now at startProcess: returned from zygote!
+09-12 11:51:52.988  2573  2749 W ActivityManager: Slow operation: 82ms so far, now at startProcess: done updating battery stats
+09-12 11:51:52.988  2573  2749 W ActivityManager: Slow operation: 82ms so far, now at startProcess: building log message
+09-12 11:51:52.988  2573  2749 I ActivityManager: Start proc 15392:com.google.android.googlequicksearchbox:googleapp/u0a152 for broadcast {com.google.android.googlequicksearchbox/com.google.android.googlequicksearchbox.SearchWidgetProvider}
+09-12 11:51:52.988  2573  2749 W ActivityManager: Slow operation: 82ms so far, now at startProcess: starting to update pids map
+09-12 11:51:52.989  2573  2749 I ActivityManager: ProcessObserver broadcast disabled
+09-12 11:51:52.989  2573  2749 W ActivityManager: Slow operation: 82ms so far, now at startProcess: done updating pids map
+09-12 11:51:52.992  2573  2751 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10152/pid_32748
+09-12 11:51:52.992  1422  1422 I Zygote  : Process 32748 exited due to signal 9 (Killed)
+09-12 11:51:52.993  2573  2751 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10152/pid_5310
+09-12 11:51:52.995  2573  2751 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_99002/pid_9127
+09-12 11:51:53.001  2030  2030 I CNSS    : /sys/wifi/dump_in_progress doesn't exist
+09-12 11:51:53.002  2030  2030 I CNSS    : /sys/wifi/max_chipset_log_size doesn't exist
+09-12 11:51:53.003 15381 15381 W hbox:interactor: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.005 15381 15381 W hbox:interactor: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.008 15381 15381 W hbox:interactor: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.009 15381 15381 W hbox:interactor: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.009 15392 15392 I chbox:googleapp: Using generational CollectorTypeCMC GC.
+09-12 11:51:53.010 15381 15381 D nativeloader: Configuring clns-10 for other apk /data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/base.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_config.xxhdpi.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_feature_module.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_play_ml_module.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_tclib_native_feature_module.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/lib/arm64:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/base.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37Dh
+09-12 11:51:53.010  2573  2747 I system_server: AssetManager2(0xb400007ac564fb78) locale list changing from [] to [de-DE]
+09-12 11:51:52.706     0     0 W [    C3] [rt_task_fixup][725]: RT task was runnable for more than 200000 ns on CPU 3, moved it to CPU 0 (crtc_commit:146-1042)
+09-12 11:51:53.016 15381 15381 I hbox:interactor: AssetManager2(0xb400007ac55de0b8) locale list changing from [] to [de-DE]
+09-12 11:51:53.017 15392 15392 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+09-12 11:51:53.017  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: bindService is called for service : com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService and for client system
+09-12 11:51:53.018  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for service : com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionServiceare :1
+09-12 11:51:53.018  1659  1659 I vendor.qti.hardware.servicetrackeraidl-service: total connections for client : systemare :35
+09-12 11:51:53.018  2573  3208 D BackgroundInstallControlService: Package event received: 0
+09-12 11:51:53.019 15381 15381 I Perf    : Connecting to perf service.
+09-12 11:51:53.022  2573  5482 D CompatibilityInfo: mCompatibilityFlags - 0
+09-12 11:51:53.023  2573  5482 D CompatibilityInfo: applicationDensity - 420
+09-12 11:51:53.023  2573  5482 D CompatibilityInfo: applicationScale - 1.0
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment: Currently set values for:
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[com.android.angle, com.linecorp.b612.android, com.campmobile.snow, com.google.android.apps.tachyon]
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment:   angle_gl_driver_selection_values=[angle, native, native, native]
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment: com.google.android.googlequicksearchbox is not listed in per-application setting
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment: ANGLE allowlist from config: 
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment: com.google.android.googlequicksearchbox is not listed in ANGLE allowlist or settings, returning default
+09-12 11:51:53.023 15381 15381 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+09-12 11:51:53.023  2573  5482 D OomAdjuster: process : com.google.android.googlequicksearchbox:googleapp, pid = 15392, isTop = false, uid = 10152, hasActivity = false
+09-12 11:51:53.023  2573  5482 D OomAdjuster: process : com.google.android.googlequicksearchbox:googleapp is not top!
+09-12 11:51:53.027 15392 15392 D NtScrollerManagerImpl: init NtScrollerManagerImpl
+09-12 11:51:53.028  1540  3243 I sensors-hal: handle_sns_std_sensor_event:160, ambient_light_event: ssc_ts 0x1A156243EA0 hal_ts 93353139141235 lux=32.612 Channel0-5=2206.0,1010.0,53.0,960.0,244.0 gain=128.0,4.0 scale=0.07880 lcd_type 0x13
+09-12 11:51:53.030 15392 15392 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/org.apache.http.legacy.jar
+09-12 11:51:53.032 15392 15392 D nativeloader: Configuring clns-9 for other apk /system_ext/framework/com.android.extensions.appfunctions.jar. target_sdk_version=37, uses_libraries=ALL, library_path=/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/lib/arm64:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/base.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_config.xxhdpi.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_feature_module.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_play_ml_module.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_tclib_native_feature_module.apk!/lib/arm64-v8a, permitted_
+09-12 11:51:53.032 15392 15392 D nativeloader: Extending system_exposed_libraries: libbinauralrenderer_wrapper.qti.so:libhoaeffects.qti.so:libupdateprof.qti.so:libthermalclient.qti.so:libdiag_system.qti.so:libqape.qti.so:libqesdk_ndk_platform.qti.so:liblistenjni.qti.so
+09-12 11:51:53.032 15392 15392 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+09-12 11:51:53.032 15392 15392 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+09-12 11:51:53.033  2331  2331 I adbd    : adbd service requested 'shell,v2,TERM=dumb:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-t' '500''
+09-12 11:51:53.039  2573  2750 D ActivityManager: uid = 10152, pid = 15392, processName = com.google.android.googlequicksearchbox:googleapp is not top app, set nt foreground
+09-12 11:51:53.050 15392 15392 W chbox:googleapp: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.051 15392 15392 W chbox:googleapp: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.051 15392 15392 W chbox:googleapp: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.051 15392 15392 W chbox:googleapp: Failed to find entry 'classes.dex': Entry not found
+09-12 11:51:53.052 15392 15392 D nativeloader: Configuring clns-10 for other apk /data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/base.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_config.xxhdpi.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_feature_module.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_lens_ondevice_engine_play_ml_module.apk:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/split_tclib_native_feature_module.apk. target_sdk_version=37, uses_libraries=, library_path=/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/lib/arm64:/data/app/~~PJbhu8lb37DhHJjslq4D7Q==/com.google.android.googlequicksearchbox-D11YGOQcmyII1t2QS6Kj6w==/base.apk!/lib/arm64-v8a:/data/app/~~PJbhu8lb37Dh
+09-12 11:51:53.056  1974  3888 D StNfcHal: (#0535D) Rx 6f 02 27 (hidden)
+09-12 11:51:53.056  1974  3887 D StNfcHal: HalStopTimer 
+09-12 11:51:53.057 15392 15392 I chbox:googleapp: AssetManager2(0xb400007ac55de0b8) locale list changing from [] to [de-DE]
+09-12 11:51:53.059 15392 15392 I Perf    : Connecting to perf service.
+09-12 11:51:53.063 15392 15392 V GraphicsEnvironment: Currently set values for:
+09-12 11:51:53.064 15392 15392 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[com.android.angle, com.linecorp.b612.android, com.campmobile.snow, com.google.android.apps.tachyon]
+09-12 11:51:53.064 15392 15392 V GraphicsEnvironment:   angle_gl_driver_selection_values=[angle, native, native, native]
+09-12 11:51:53.064 15392 15392 V GraphicsEnvironment: com.google.android.googlequicksearchbox is not listed in per-application setting
+09-12 11:51:53.064 15392 15392 V GraphicsEnvironment: ANGLE allowlist from config: 
+09-12 11:51:53.064 15392 15392 V GraphicsEnvironment: com.google.android.googlequicksearchbox is not listed in ANGLE allowlist or settings, returning default
+09-12 11:51:53.064 15392 15392 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.

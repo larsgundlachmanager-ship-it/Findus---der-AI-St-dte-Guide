@@ -18,8 +18,11 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-ADB = r"C:\Users\larsf\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 ROOT = Path(r"c:\Users\larsf\Findus 2.0")
+sys.path.insert(0, str(ROOT / "scripts" / "deviceQa"))
+from _device_ids import require_qa_serial  # noqa: E402
+
+ADB = r"C:\Users\larsf\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 OUT = ROOT / ".cursor" / "live12"
 EXTRACT = ROOT / ".cursor" / "extract_ui.py"
 PKG = "de.findus.app"
@@ -546,7 +549,9 @@ SCENARIOS: list[dict] = [
 
 
 def adb(*args: str) -> subprocess.CompletedProcess:
-    return subprocess.run([ADB, *args], capture_output=True, text=True)
+    return subprocess.run(
+        [ADB, "-s", require_qa_serial(), *args], capture_output=True, text=True
+    )
 
 
 def dump() -> str:
@@ -594,13 +599,15 @@ def extract(tag: str, xml: str) -> str:
 
 
 def dismiss() -> None:
-    for _ in range(5):
+    # Spickzettel / Nav / Timeline / Tippfeld zu — inkl. X auf Nav-Banner
+    for _ in range(8):
         xml = dump()
         hit = None
         for n in nodes(xml):
             if not n["click"]:
                 continue
-            blob = (n["desc"] + " " + n["text"]).lower()
+            blob = (n["desc"] + " " + n["text"]).lower().strip()
+            text = (n["text"] or "").strip()
             if any(
                 k in blob
                 for k in (
@@ -610,11 +617,19 @@ def dismiss() -> None:
                     "timeline schließen",
                     "tippfeld schließen",
                     "abbrechen",
+                    "aktionen schließen",
+                    "navigation beenden",
+                    "nav beenden",
                 )
             ) and "karte schließen" not in blob:
                 hit = n
                 break
+            if text in ("✕", "×", "x", "X") or blob in ("✕", "×"):
+                hit = n
+                break
         if not hit:
+            adb("shell", "input", "keyevent", "4")
+            time.sleep(0.35)
             return
         tap(hit["cx"], hit["cy"], 0.55)
 
@@ -776,18 +791,16 @@ def ask_and_capture(tag: str, text: str, wait_s: float) -> tuple[str, str]:
     except Exception as e:
         print("ASK_FAIL", tag, e, flush=True)
         return "", f"ask_fail:{e}"
-    # Poller ~900ms; wait for answer
-    time.sleep(max(10.0, wait_s))
-    # Mid capture + final
+    # Poller ~900ms; wait for answer — Spickzettel NICHT vor Capture schliessen
+    time.sleep(max(12.0, wait_s))
     shot(f"{tag}-mid")
-    time.sleep(min(8.0, max(2.0, wait_s * 0.25)))
-    dismiss()  # close overlays that block reading? careful — only if tippfeld
-    # Don't dismiss Spickzettel yet — capture first
+    time.sleep(min(10.0, max(3.0, wait_s * 0.3)))
     xml = dump()
     shot(tag)
     txt = extract(tag, xml)
     logs = grab_logcat(tag)
     return txt, logs
+
 
 
 def parse_args(argv: list[str]):

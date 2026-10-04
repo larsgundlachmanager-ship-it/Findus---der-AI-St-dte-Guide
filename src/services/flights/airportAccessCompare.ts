@@ -11,11 +11,12 @@ import { buildUberRideAction } from '../affiliate/affiliateService';
 import { taxiDurationWithRushHour } from '../affiliate/partnerDeepPrefill';
 import { estimateDrivingEta } from '../navigation/drivingEta';
 import { haversineMeters } from '../../db/database';
-import { isSaneAirportAccessTransit } from './airportAccessSane';
+import { pickBestAirportAccessTransit } from './airportAccessSane';
 import {
   buildGetTransferNewUrl,
   buildWelcomePickupsTransferUrl,
 } from '../affiliate/partnerTpxDeepLink';
+import { dateKeyFromMs } from '../../utils/dateKeys';
 
 export type AirportAccessCompare = {
   transit: JourneyItinerary | null;
@@ -90,16 +91,14 @@ export async function compareAirportAccess(opts: {
         to: { lat: opts.airport.lat, lng: opts.airport.lng },
         travelMode: 'transit',
         arriveBy: opts.arriveBy,
-        numItineraries: 2,
+        numItineraries: 6,
       });
-      const cand = (plan.itineraries ?? []).find((it) =>
-        isSaneAirportAccessTransit(it, {
+      transit =
+        pickBestAirportAccessTransit(plan.itineraries ?? [], {
           arriveByMs,
           taxiMin,
           nowMs: now,
-        }),
-      );
-      transit = cand ?? null;
+        }) ?? null;
     }
   } catch {
     transit = null;
@@ -136,6 +135,7 @@ export async function compareAirportAccess(opts: {
   actions.push(
     buildUberRideAction(opts.airport.lat, opts.airport.lng, opts.airport.name, undefined, {
       pickupTimeLabel: clock(new Date(taxiLeaveMs)),
+      pickupDateIso: dateKeyFromMs(taxiLeaveMs),
     }),
   );
   if (transit) {

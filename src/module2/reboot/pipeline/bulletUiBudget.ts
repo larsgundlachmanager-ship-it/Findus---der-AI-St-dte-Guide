@@ -26,6 +26,8 @@ const DEFAULT: BulletUiBudget = {
   screenWidthPx: 0,
 };
 
+let memBudget: BulletUiBudget | null = null;
+
 function isSameDay(a: string, b: Date): boolean {
   if (!a) return false;
   const d = new Date(a);
@@ -36,27 +38,37 @@ function isSameDay(a: string, b: Date): boolean {
   );
 }
 
+/** Sync Peek — Call-1 nicht hinter AsyncStorage warten. */
+export function peekBulletUiBudget(): BulletUiBudget {
+  return memBudget ?? { ...DEFAULT };
+}
+
 export async function loadBulletUiBudget(): Promise<BulletUiBudget> {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (!raw) return { ...DEFAULT, measuredAt: new Date().toISOString() };
+    if (!raw) {
+      memBudget = { ...DEFAULT, measuredAt: new Date().toISOString() };
+      return memBudget;
+    }
     const parsed = JSON.parse(raw) as BulletUiBudget;
     if (
       typeof parsed.bulletMaxChars === 'number' &&
       parsed.bulletMaxChars >= 22
     ) {
-      return {
+      memBudget = {
         bulletMaxChars: parsed.bulletMaxChars,
         bulletLines: 2,
         bulletCount: 3,
         measuredAt: parsed.measuredAt || '',
         screenWidthPx: parsed.screenWidthPx || 0,
       };
+      return memBudget;
     }
   } catch {
     /* soft */
   }
-  return { ...DEFAULT, measuredAt: new Date().toISOString() };
+  memBudget = { ...DEFAULT, measuredAt: new Date().toISOString() };
+  return memBudget;
 }
 
 export async function noteBulletUiMeasurement(opts: {
@@ -89,5 +101,6 @@ export async function noteBulletUiMeasurement(opts: {
   } catch {
     /* soft */
   }
+  memBudget = next;
   return next;
 }

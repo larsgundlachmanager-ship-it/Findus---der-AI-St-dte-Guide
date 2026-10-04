@@ -510,18 +510,147 @@ async function fillTransit(
 
 async function fillActivity(
   input: DeepFillInput,
-  _missing: Set<string>,
+  missing: Set<string>,
 ): Promise<DeepFillResult> {
-  const { researchActivitySport } = await import(
-    '../../services/research/activitySportResearch'
+  const wantPrice =
+    needs(missing, ['price_eur']) ||
+    /\b(sup|stand[\s-]?up|paddle|verleih|miete|surf(?:brett)?|kajak|kanu|fahrradverleih|bike\s*rental)\b/i.test(
+      input.userText,
+    );
+
+  // Call-3 Preis-only wenn Websites schon da (wie Gastro-Menü-Deep)
+  if (wantPrice) {
+    const venues =
+      (input.meta?.venues as Array<{
+        name?: string;
+        websiteUrl?: string | null;
+        websiteUri?: string | null;
+      }>) ?? [];
+    const urls: Array<{ name: string; url: string }> = [];
+    for (const v of venues) {
+      const url = String(v.websiteUrl || v.websiteUri || '').trim();
+      if (/^https?:\/\//i.test(url)) {
+        urls.push({ name: String(v.name || 'Verleih').trim(), url });
+      }
+    }
+    const buttonsMeta =
+      (input.meta?.buttons as Array<{
+        label?: string;
+        url?: string;
+        href?: string;
+      }>) ?? [];
+    for (const b of buttonsMeta) {
+      const url = String(b.url || b.href || '').trim();
+      if (/^https?:\/\//i.test(url) && urls.length < 4) {
+        urls.push({
+          name: String(b.label || 'Website').replace(/^🌐\s*/, '').trim(),
+          url,
+        });
+      }
+    }
+    if (urls.length) {
+      try {
+        const { fetchRentalPriceFromWebsite } = await import(
+          '../../services/research/rentalPriceFromWebsite'
+        );
+        const hits = await Promise.all(
+          urls.slice(0, 2).map(async (u) => {
+            const hit = await fetchRentalPriceFromWebsite({
+              url: u.url,
+              signal: input.signal,
+            });
+            return hit ? { ...u, hit } : null;
+          }),
+        );
+        const ok = hits.filter(Boolean) as Array<{
+          name: string;
+          url: string;
+          hit: { label: string; amountEur: number };
+        }>;
+        if (ok.length) {
+          const bullets = ok.map((o) => `${o.name}: ${o.hit.label}`);
+          const draft = ok.map((o) => `${o.name} — ${o.hit.label}`).join('. ');
+          const buttons: Module2ActionButton[] = ok.map((o, i) => ({
+            id: `rental_price_${i}`,
+            label: shortenActionLabel(`🌐 ${o.name}`),
+            payload: { kind: 'deep_link', url: o.url },
+          }));
+          const priceEur = ok[0]!.hit.amountEur;
+          return {
+            filled: true,
+            agentResult: {
+              agent: 'deep_research',
+              ok: true,
+              draftText: `Verleih-Preise (belegt): ${draft}.`,
+              bullets,
+              buttons,
+              money: [
+                {
+                  amount: priceEur,
+                  currency: 'EUR',
+                  amountEur: priceEur,
+                },
+              ],
+              meta: {
+                activityFit: true,
+                price_eur: priceEur,
+                rental_prices: true,
+                spokenExtra: `Kurz zu den Preisen: ${draft}.`,
+                silent: false,
+              },
+            },
+          };
+        }
+      } catch {
+        /* soft → full research */
+      }
+    }
+  }
+
+  const { researchActivitySportCached } = await import(
+    '../../services/research/activityPrefetch'
   );
-  const research = await researchActivitySport({
+  let researchBundle = await researchActivitySportCached({
     userText: input.userText,
     lat: input.lat,
     lng: input.lng,
     cityHint: input.city,
     signal: input.signal,
+    preferPrefetchWithoutPriceWait: false,
   });
+  let research = researchBundle.result;
+  try {
+    const { getLastLiveInventory } = require('../context/shortTermContext') as {
+      getLastLiveInventory: () => {
+        activityRejects?: string[];
+      } | null;
+    };
+    const rejects = (getLastLiveInventory()?.activityRejects ?? []).map((r) =>
+      r.toLowerCase(),
+    );
+    if (rejects.length && research.primary) {
+      const isRejected = (name: string) =>
+        rejects.some(
+          (r) => name.toLowerCase().includes(r) || r.includes(name.toLowerCase()),
+        );
+      if (isRejected(research.primary.name)) {
+        research = {
+          ...research,
+          primary: research.alternative,
+          alternative: null,
+          alternativeOffered: false,
+        };
+      } else if (research.alternative && isRejected(research.alternative.name)) {
+        research = {
+          ...research,
+          alternative: null,
+          alternativeOffered: false,
+        };
+      }
+    }
+  } catch {
+    /* soft */
+  }
   return {
     filled: research.activityFit,
     agentResult: {
@@ -530,10 +659,22 @@ async function fillActivity(
       draftText: research.promptBlock,
       bullets: research.bullets,
       buttons: research.buttons,
+      money:
+        research.priceEur != null && Number.isFinite(research.priceEur)
+          ? [
+              {
+                amount: research.priceEur,
+                currency: 'EUR',
+                amountEur: research.priceEur,
+              },
+            ]
+          : undefined,
       meta: {
         activityFit: research.activityFit,
         alternative: research.alternativeOffered,
         spokenExtra: research.spokenDraft,
+        price_eur: research.priceEur ?? null,
+        fromPrefetch: researchBundle.fromPrefetch,
         silent: false,
       },
     },

@@ -17,7 +17,9 @@ export type SensorStoreState = {
 };
 
 const EPS_DEG = 0.000008;
-const HEADING_MIN_DELTA = 0.5;
+/** Accuracy-only refresh must not churn map puck / camera. */
+const ACC_EPS_M = 8;
+const HEADING_MIN_DELTA = 0.25;
 
 function normDeg(deg: number): number {
   return ((deg % 360) + 360) % 360;
@@ -40,6 +42,11 @@ export const useSensorStore = create<SensorStoreState>((set, get) => ({
     const nextAcc =
       typeof fix.accuracy === 'number' ? fix.accuracy : prev.accuracyM;
     if (samePos) {
+      const prevAcc = prev.accuracyM;
+      const accMeaningful =
+        typeof nextAcc === 'number' &&
+        (prevAcc == null || Math.abs(prevAcc - nextAcc) >= ACC_EPS_M);
+      if (!accMeaningful) return;
       set({ gpsAtMs: Date.now(), accuracyM: nextAcc });
       return;
     }

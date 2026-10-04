@@ -5,12 +5,30 @@
 
 import type { FuturePlanStop } from '../timeline/futurePlanState';
 
+function isTransitLike(s: FuturePlanStop): boolean {
+  if (s.transport === 'transit') return true;
+  if (s.groupId === 'live_journey') return true;
+  if (/^live_journey_/i.test(s.id) || /^live_nav_/i.test(s.id)) return true;
+  if (/^\d+\s*·/.test(s.title)) return true;
+  if (/\b(RB|RE|S|U|Bus|Bahn|zu Fuß|END)\b/i.test(s.title)) return true;
+  return false;
+}
+
+/** Punkt-Stops (Umstieg/END) ohne Endzeit: nicht 45 Min blocken — sonst Fake-Konflikt mit Dinner. */
+function intervalEndMs(s: FuturePlanStop): number {
+  const a0 = s.plannedStartMs!;
+  if (s.plannedEndMs != null && s.plannedEndMs > a0) return s.plannedEndMs;
+  if (isTransitLike(s)) return a0 + 2 * 60_000;
+  if (s.kind === 'nav_leg') return a0 + 5 * 60_000;
+  return a0 + 45 * 60_000;
+}
+
 function intervalsOverlap(a: FuturePlanStop, b: FuturePlanStop): boolean {
   const a0 = a.plannedStartMs;
   const b0 = b.plannedStartMs;
   if (a0 == null || b0 == null) return false;
-  const a1 = a.plannedEndMs ?? a0 + 45 * 60_000;
-  const b1 = b.plannedEndMs ?? b0 + 45 * 60_000;
+  const a1 = intervalEndMs(a);
+  const b1 = intervalEndMs(b);
   return a0 < b1 && b0 < a1;
 }
 
@@ -23,7 +41,18 @@ function isCalendarConflictCandidate(s: FuturePlanStop): boolean {
 
 function samePlanGroup(a: FuturePlanStop, b: FuturePlanStop): boolean {
   const g = a.groupId?.trim();
-  return Boolean(g) && g === b.groupId;
+  if (g && g === b.groupId) return true;
+  // ÖPNV-Akkordeon ohne groupId: nur Kette (Überlapp oder ≤20 Min Lücke), nicht jede Bahn am Tag
+  if (isTransitLike(a) && isTransitLike(b)) {
+    const a0 = a.plannedStartMs!;
+    const b0 = b.plannedStartMs!;
+    const a1 = intervalEndMs(a);
+    const b1 = intervalEndMs(b);
+    if (a0 < b1 && b0 < a1) return true;
+    const gap = Math.min(Math.abs(a1 - b0), Math.abs(b1 - a0));
+    if (gap <= 20 * 60_000) return true;
+  }
+  return false;
 }
 
 export function planStopsOverlap(stops: FuturePlanStop[]): boolean {

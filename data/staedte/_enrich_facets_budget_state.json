@@ -1,0 +1,266 @@
+{
+  "startedAt": "2026-09-04T08:37:52.749Z",
+  "done": {
+    "prisdorf": {
+      "ok": true,
+      "at": "2026-09-04T08:39:06.493Z",
+      "ms": 12856,
+      "version": 94,
+      "spendUsd": 0
+    },
+    "wangerooge": {
+      "ok": true,
+      "at": "2026-09-04T08:39:21.573Z",
+      "ms": 15074,
+      "version": 72,
+      "spendUsd": 0
+    },
+    "tornesch": {
+      "ok": true,
+      "at": "2026-09-04T08:39:35.027Z",
+      "ms": 13449,
+      "version": 61,
+      "spendUsd": 0
+    },
+    "pinneberg": {
+      "ok": true,
+      "at": "2026-09-04T08:39:50.386Z",
+      "ms": 15353,
+      "version": 73,
+      "spendUsd": 0
+    },
+    "chorin": {
+      "ok": true,
+      "at": "2026-09-04T08:41:52.251Z",
+      "ms": 6976,
+      "version": 39,
+      "spendUsd": 0
+    },
+    "rheinsberg": {
+      "ok": true,
+      "at": "2026-09-04T08:42:10.274Z",
+      "ms": 18014,
+      "version": 40,
+      "spendUsd": 0
+    },
+    "bad_saarow": {
+      "ok": true,
+      "at": "2026-09-04T08:42:26.606Z",
+      "ms": 16322,
+      "version": 53,
+      "spendUsd": 0.15
+    },
+    "finsterwalde": {
+      "ok": true,
+      "at": "2026-09-04T08:42:37.304Z",
+      "ms": 10693,
+      "version": 32,
+      "spendUsd": 0.15
+    },
+    "wandlitz": {
+      "ok": true,
+      "at": "2026-09-04T08:42:46.123Z",
+      "ms": 8817,
+      "version": 42,
+      "spendUsd": 0.15
+    },
+    "beelitz": {
+      "ok": true,
+      "at": "2026-09-04T08:42:56.652Z",
+      "ms": 10527,
+      "version": 41,
+      "spendUsd": 0.175
+    },
+    "spreewald": {
+      "ok": true,
+      "at": "2026-09-04T08:43:06.627Z",
+      "ms": 9974,
+      "version": 43,
+      "spendUsd": 0.2
+    },
+    "hechingen": {
+      "ok": true,
+      "at": "2026-09-04T08:43:12.728Z",
+      "ms": 6099,
+      "version": 53,
+      "spendUsd": 0.2
+    },
+    "laboe": {
+      "ok": true,
+      "at": "2026-09-04T08:43:20.373Z",
+      "ms": 7642,
+      "version": 57,
+      "spendUsd": 0.2
+    },
+    "korbach": {
+      "ok": true,
+      "at": "2026-09-04T08:43:26.981Z",
+      "ms": 6606,
+      "version": 44,
+      "spendUsd": 0.2
+    },
+    "tettnang": {
+      "ok": true,
+      "at": "2026-09-04T08:43:36.734Z",
+      "ms": 9747,
+      "version": 49,
+      "spendUsd": 0.2
+    },
+    "oranienburg": {
+      "ok": true,
+      "at": "2026-09-04T08:43:55.059Z",
+      "ms": 18323,
+      "version": 40,
+      "spendUsd": 0.4
+    },
+    "lissabon": {
+      "ok": true,
+      "at": "2026-09-04T08:44:47.292Z",
+      "ms": 52227,
+      "version": 68,
+      "spendUsd": 1.85
+    },
+    "werder": {
+      "ok": true,
+      "at": "2026-09-04T08:45:13.814Z",
+      "ms": 26519,
+      "version": 44,
+      "spendUsd": 2.2
+    },
+    "bremen": {
+      "ok": true,
+      "at": "2026-09-04T08:45:33.891Z",
+      "ms": 20075,
+      "version": 26,
+      "spendUsd": 2.5
+    },
+    "kiel": {
+      "ok": true,
+      "at": "2026-09-04T08:46:00.607Z",
+      "ms": 26711,
+      "version": 28,
+      "spendUsd": 2.925
+    },
+    "berlin-zentral": {
+      "ok": true,
+      "at": "2026-09-04T08:47:04.860Z",
+      "ms": 64248,
+      "version": 27,
+      "spendUsd": 4.5
+    },
+    "dresden": {
+      "ok": true,
+      "at": "2026-09-04T08:48:35.270Z",
+      "ms": 90406,
+      "version": 41,
+      "spendUsd": 6.975
+    },
+    "koeln": {
+      "ok": true,
+      "at": "2026-09-04T08:50:06.554Z",
+      "ms": 91276,
+      "version": 38,
+      "spendUsd": 9.175
+    },
+    "hamburg": {
+      "ok": true,
+      "at": "2026-09-04T08:51:10.182Z",
+      "ms": 63627,
+      "version": 80,
+      "spendUsd": 10.8
+    },
+    "hochheim_am_main": {
+      "ok": true,
+      "at": "2026-09-04T08:51:47.809Z",
+      "ms": 37625,
+      "version": 36,
+      "spendUsd": 11.55
+    },
+    "brandenburg_havel": {
+      "ok": true,
+      "at": "2026-09-04T08:52:20.896Z",
+      "ms": 33086,
+      "version": 45,
+      "spendUsd": 12.1
+    },
+    "london": {
+      "ok": true,
+      "at": "2026-09-04T08:54:07.866Z",
+      "ms": 106969,
+      "version": 68,
+      "spendUsd": 14.7
+    },
+    "amsterdam": {
+      "ok": true,
+      "at": "2026-09-04T08:55:28.553Z",
+      "ms": 80678,
+      "version": 39,
+      "spendUsd": 16.475
+    },
+    "flensburg": {
+      "ok": true,
+      "at": "2026-09-04T08:55:38.391Z",
+      "ms": 9836,
+      "version": 54,
+      "spendUsd": 16.475
+    },
+    "halle_saale": {
+      "ok": true,
+      "at": "2026-09-04T08:56:50.425Z",
+      "ms": 72033,
+      "version": 29,
+      "spendUsd": 18.175
+    },
+    "luebeck": {
+      "ok": true,
+      "at": "2026-09-04T08:58:23.019Z",
+      "ms": 10416,
+      "version": 60,
+      "spendUsd": 20.15
+    },
+    "stuttgart": {
+      "ok": true,
+      "at": "2026-09-04T09:00:02.795Z",
+      "ms": 99775,
+      "version": 39,
+      "spendUsd": 22.725
+    },
+    "duesseldorf": {
+      "ok": true,
+      "at": "2026-09-04T09:01:22.266Z",
+      "ms": 79460,
+      "version": 41,
+      "spendUsd": 24.575
+    },
+    "frankfurt_am_main": {
+      "ok": true,
+      "at": "2026-09-04T09:01:41.727Z",
+      "ms": 19460,
+      "version": 34,
+      "spendUsd": 25
+    },
+    "potsdam": {
+      "ok": true,
+      "at": "2026-09-04T09:09:54.774Z",
+      "ms": 46625,
+      "version": 36,
+      "spendUsd": 0
+    },
+    "muenchen": {
+      "ok": true,
+      "at": "2026-09-04T09:11:33.757Z",
+      "ms": 98972,
+      "version": 32,
+      "spendUsd": 2.7
+    },
+    "berlin-umland": {
+      "ok": true,
+      "at": "2026-09-04T09:12:54.050Z",
+      "ms": 80289,
+      "version": 41,
+      "spendUsd": 3.675
+    }
+  },
+  "failed": {},
+  "budgetStop": true
+}

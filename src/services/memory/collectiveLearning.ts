@@ -13,7 +13,11 @@ import { getCachedUserProfile } from '../userProfileService';
 import { getOrCreateContributorHash } from './betaSituationQueue';
 import type { LearnedRuleIntentFamily } from '../../types/learnedRules';
 
-export type CollectiveSignalKind = 'followup' | 'error_avoid' | 'cohort_style';
+export type CollectiveSignalKind =
+  | 'followup'
+  | 'error_avoid'
+  | 'cohort_style'
+  | 'pace_bridge';
 
 export type DiscoveredPlace = {
   placeKey: string;
@@ -283,6 +287,16 @@ export function contributePlacesFromResearchResult(input: {
     if (name.length < 3) return;
     const key = name.toLowerCase();
     if (seen.has(key)) return;
+    // Trust-Gate: URL und/oder Geo + Mindest-Trust — kein Halluzinations-Schreiben.
+    const url = (opts.sourceUrl || '').trim();
+    const hasUrl = /^https?:\/\//i.test(url);
+    const hasGeo =
+      typeof opts.lat === 'number' &&
+      typeof opts.lng === 'number' &&
+      Number.isFinite(opts.lat) &&
+      Number.isFinite(opts.lng);
+    const trust = opts.sourceTrust ?? 0.45;
+    if ((!hasUrl && !hasGeo) || trust < 0.4) return;
     seen.add(key);
     void contributeDiscoveredPlace({
       name,
@@ -536,6 +550,35 @@ export async function contributeCohortStyleSignal(opts: {
   });
 }
 
+/** Autonomy Reboot: Bridge↔Latency Pace für alle User (stadt-agnostisch). */
+export async function contributePaceBridgeSignal(opts: {
+  paceKey: string;
+  bridgeMs: number;
+  call2ReadyMs: number;
+  gapAfterBridgeMs: number;
+  usedCall3: boolean;
+  sampleCount: number;
+  readyP50Ms: number;
+  call3Rate: number;
+}): Promise<void> {
+  const key = (opts.paceKey || '').trim().slice(0, 120);
+  if (!key.startsWith('pace::')) return;
+  await pushSignal({
+    kind: 'pace_bridge',
+    intentFamily: 'general',
+    signalKey: key,
+    payload: {
+      bridgeMs: Math.round(opts.bridgeMs),
+      call2ReadyMs: Math.round(opts.call2ReadyMs),
+      gapAfterBridgeMs: Math.round(opts.gapAfterBridgeMs),
+      usedCall3: opts.usedCall3,
+      sampleCount: opts.sampleCount,
+      readyP50Ms: Math.round(opts.readyP50Ms),
+      call3Rate: Math.round(opts.call3Rate * 1000) / 1000,
+    },
+  });
+}
+
 export async function pullCollectiveLearning(opts?: {
   cityHint?: string | null;
 }): Promise<{ places: number; promoted: number }> {
@@ -606,6 +649,23 @@ export async function pullCollectiveLearning(opts?: {
       }));
       promotedN = cachedPromoted.length;
       await writeJson(PROMOTED_PATH, { items: cachedPromoted });
+      try {
+        const { ingestPromotedPaceBudgets } = require('./paceBridgeLearning') as {
+          ingestPromotedPaceBudgets: (
+            items: Array<{
+              signalKey: string;
+              payload: Record<string, unknown>;
+            }>,
+          ) => void;
+        };
+        ingestPromotedPaceBudgets(
+          cachedPromoted
+            .filter((p) => p.signalKind === 'pace_bridge')
+            .map((p) => ({ signalKey: p.signalKey, payload: p.payload })),
+        );
+      } catch {
+        /* soft */
+      }
     }
   } catch (err) {
     if (__DEV__) console.warn('[collective] promoted pull', err);
@@ -686,7 +746,18 @@ export function collectiveLearningPromptBlock(opts?: {
     }
   }
 
-  const places = getCachedCommunityPlacesSync().slice(0, 8);
+  const places = getCachedCommunityPlacesSync()
+    .filter((p) => {
+      // Trust-Gate Call-2: nur belegte Orte (URL oder Geo + Trust)
+      const hasUrl = /^https?:\/\//i.test(p.sourceUrl || '');
+      const hasGeo =
+        typeof p.lat === 'number' &&
+        typeof p.lng === 'number' &&
+        Number.isFinite(p.lat) &&
+        Number.isFinite(p.lng);
+      return (hasUrl || hasGeo) && (p.sourceTrust ?? 0) >= 0.4;
+    })
+    .slice(0, 8);
   if (places.length) {
     lines.push('COMMUNITY-ORTE (Recherche anderer User, nur nutzen wenn thematisch passt):');
     for (const p of places) {

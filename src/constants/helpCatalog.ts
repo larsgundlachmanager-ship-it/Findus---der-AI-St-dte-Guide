@@ -488,10 +488,10 @@ export const HELP_TOPIC_GROUPS: HelpTopicGroup[] = [
       ),
       entry(
         'battery',
-        'Akku unter 15 %',
-        'Yorro schaltet auf Audio-first und sucht Powerbank-Automaten oder Steckdosen in der Nähe.',
-        'Automatischer Survival-Hinweis — konkrete Route-Buttons wenn GPS da ist.',
-        'Powerbank-Automat oder Café mit Steckdose annehmen wenn angeboten.',
+        'Akku / Handy laden',
+        'Yorro sucht Powerbank, Ladestation oder belegte Steckdose nur wenn du danach fragst — keine Auto-Vorschläge bei niedrigem Akku.',
+        'Sag z. B. „Steckdose“ oder „Powerbank“. Soft-Orte (Café/Bäckerei) nur ohne Belegtes und ehrlich als „oft, nicht garantiert“.',
+        'Bei niedrigem Akku ggf. sparsameres GPS — Lade-Orte kommen erst auf Nachfrage.',
         ['akku', 'battery', 'survival', 'laden', 'powerbank', 'steckdose'],
       ),
     ],
@@ -503,7 +503,7 @@ export const HELP_TOPIC_GROUPS: HelpTopicGroup[] = [
       entry(
         'setup-menu',
         'Einstellungen-Menü',
-        'Stadtauswahl → Aktuelle Reise → Yorro Reisebüro. Dann Persönlich, Allgemein, Speicher. Danach Trigger, Erklärungen und Datenschutz, Feedback, intern.',
+        'Stadtauswahl → Aktuelle Reise → Yorros Reisebüro. Dann Persönlich, Allgemein, Speicher. Danach Trigger, Erklärungen und Datenschutz, Feedback, intern.',
         'Zahnrad: Kacheln in Gruppen. Offene Kachel sitzt oben fest — nichts bleibt darüber. Runterwischen zeigt die restlichen Kacheln. Unterkacheln (Kontakt, Charakter…) pinnen genauso.',
         'Nach Ortswechsel zuerst Stadtauswahl + Aktuelle Reise; Stimme und Charakter unter Persönlich.',
         ['einstellungen', 'einrichtung', 'stadt', 'kontakt', 'aktuelle reise'],
@@ -636,20 +636,66 @@ function normalizeHelpQuery(input: string): string {
 export function searchHelpEntries(query: string, limit = 3): HelpEntry[] {
   const q = normalizeHelpQuery(query);
   if (!q) return [];
-  const tokens = q.split(' ').filter((t) => t.length >= 2);
+  // Stopwörter — sonst matched „wie“ / „abend“ jeden Katalog-Eintrag
+  const STOP = new Set([
+    'wie',
+    'was',
+    'wer',
+    'wo',
+    'wann',
+    'der',
+    'die',
+    'das',
+    'den',
+    'dem',
+    'ein',
+    'eine',
+    'einer',
+    'und',
+    'oder',
+    'ich',
+    'mir',
+    'mich',
+    'du',
+    'heute',
+    'abend',
+    'morgen',
+    'wird',
+    'ist',
+    'sind',
+    'hat',
+    'für',
+    'fuer',
+    'mit',
+    'ohne',
+    'noch',
+    'mal',
+    'bitte',
+  ]);
+  const tokens = q
+    .split(' ')
+    .filter((t) => t.length >= 3 && !STOP.has(t));
+  if (!tokens.length) return [];
   const scored = allHelpEntries()
     .map((e) => {
       const blob = normalizeHelpQuery(helpEntrySearchBlob(e));
       let score = 0;
-      if (blob.includes(q)) score += 12;
+      if (blob.includes(q) && q.length >= 8) score += 12;
       for (const t of tokens) {
         if (blob.includes(t)) score += 3;
-        if (e.keywords.some((k) => normalizeHelpQuery(k).includes(t))) score += 4;
+        if (
+          e.keywords.some((k) => {
+            const nk = normalizeHelpQuery(k);
+            return nk === t || (nk.length >= 4 && nk.includes(t));
+          })
+        ) {
+          score += 4;
+        }
         if (normalizeHelpQuery(e.title).includes(t)) score += 5;
       }
       return { e, score };
     })
-    .filter((x) => x.score > 0)
+    .filter((x) => x.score >= 6)
     .sort((a, b) => b.score - a.score);
   return scored.slice(0, limit).map((x) => x.e);
 }

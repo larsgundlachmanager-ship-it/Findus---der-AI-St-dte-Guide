@@ -55,4 +55,15 @@ assert.equal(
   'gleiche Linie +3 Min nach Abfahrt ist nicht die nächste echte Fahrt im Classifier — Caller holt ≥10 Min später',
 );
 
+const earlierDep = Date.parse('2026-08-19T21:40:00+02:00');
+assert.equal(
+  classifyTransitSlip({
+    nowMs: nowBefore,
+    armedDepMs: armed,
+    nextDepMs: earlierDep,
+  }),
+  'earlier_available',
+  'frühere erreichbare Abfahrt → Plan still vorziehen',
+);
+
 console.log('transitSlipPolicy.smoke.test.ts OK');

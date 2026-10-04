@@ -1,21 +1,25 @@
 ﻿/**
- * MapLibre-Camera mit lebendigem native defaultStop.
+ * MapLibre-Camera — Google-Maps-Verfassung.
  *
- * Stock-Camera friert defaultSettings einmal per useState ein. Wenn die native
- * Camera neu an die Map gehÃ¤ngt wird, springt setInitialCamera auf Boot-GPS.
+ * Boot-defaultStop genau einmal (React-Mount). Danach nie wieder defaultStop
+ * anfassen — setNativeProps(defaultStop) = setInitialCamera auf Android →
+ * Pan/Rotate springt auf Boot-GPS zurück.
  *
- * Hier: defaultStop folgt der User-View (setNativeProps + React-Prop), damit
- * Re-Attach unsichtbar bleibt â€” kein GPS-RÃ¼cksprung.
+ * Zentrum nur über setCamera/stop von applyCenterMove (Boot / Recenter / Nav / Follow).
+ * syncDefaultStop = NO-OP.
  */
 
 import { featureCollection, point } from '@turf/helpers';
 import {
   forwardRef,
   memo,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
+// React defaultStop nur einmal (Mount). Spätere setState-Updates an defaultStop
+// wenden auf Android oft setInitialCamera an → Zoom/Pan-Snap nach Idle.
 import type { HostComponent, ViewProps } from 'react-native';
 import '@maplibre/maplibre-react-native';
 import type { CameraRef } from '@maplibre/maplibre-react-native';
@@ -129,27 +133,27 @@ export const YorroHomeCamera = memo(
       null,
     );
     /**
-     * Wichtig: nicht nur useState-Freeze. Bei Native-Remount liest Android den
-     * React-Prop defaultStop â€” der muss die aktuelle User-View sein, sonst
-     * Boot-GPS-Snap. setNativeProps allein reicht nicht (stirbt mit alter View).
+     * Mount: React-Prop defaultStop einmal für Boot-Kamera.
+     * Danach Prop weg — sonst re-committed Boot-GPS = setInitialCamera.
+     * Nie setNativeProps(defaultStop) — das ist derselbe Android-Snap.
      */
-    const [defaultStop, setDefaultStop] = useState(() =>
-      makeNativeStop(defaultSettings),
-    );
-    const lastReactSyncAt = useRef(0);
-    const pendingReactStop = useRef<Record<string, unknown> | null>(null);
-    const reactSyncTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-    const flushReactDefaultStop = () => {
-      reactSyncTimer.current = null;
-      const pending = pendingReactStop.current;
-      if (!pending) return;
-      pendingReactStop.current = null;
-      lastReactSyncAt.current = Date.now();
-      setDefaultStop(pending);
-    };
+    const [bootStop] = useState(() => makeNativeStop(defaultSettings));
+    const [passBootStop, setPassBootStop] = useState(true);
+    useEffect(() => {
+      setPassBootStop(false);
+    }, []);
 
     const setCamera = (config: StopIn | { stops: StopIn[] } = {}) => {
+      // Leerer Stop = pending Camera-Command abbrechen (Finger gewinnt, wie Google).
+      if (
+        config &&
+        typeof config === 'object' &&
+        !('stops' in config) &&
+        Object.keys(config as object).length === 0
+      ) {
+        nativeRef.current?.setNativeProps({ stop: {} });
+        return;
+      }
       if ('stops' in config && Array.isArray(config.stops)) {
         nativeRef.current?.setNativeProps({
           stop: {
@@ -215,22 +219,9 @@ export const YorroHomeCamera = memo(
         });
       },
       syncDefaultStop(stop) {
-        const native = makeNativeStop({
-          ...stop,
-          animationDuration: 0,
-          animationMode: 'moveTo',
-        });
-        if (!native) return;
-        // Sofort auf lebende Native-View â€” Ã¼berlebt Gesten ohne Re-Render.
-        nativeRef.current?.setNativeProps({ defaultStop: native });
-        // React-Prop nachziehen (Remount liest das) â€” gedrosselt.
-        pendingReactStop.current = null;
-        if (reactSyncTimer.current) {
-          clearTimeout(reactSyncTimer.current);
-          reactSyncTimer.current = null;
-        }
-        lastReactSyncAt.current = Date.now();
-        setDefaultStop(native);
+        // NO-OP nach Boot: setNativeProps(defaultStop) = setInitialCamera auf Android
+        // → Pan/Rotate springt zurück. Google: Finger-Position bleibt, kein Re-Pin.
+        void stop;
       },
     }));
 
@@ -239,7 +230,7 @@ export const YorroHomeCamera = memo(
         // @ts-expect-error native ref
         ref={nativeRef}
         testID="Camera"
-        defaultStop={defaultStop}
+        {...(passBootStop && bootStop ? { defaultStop: bootStop } : {})}
       />
     );
   }),
